@@ -5,6 +5,7 @@ import 'serialization_util.dart';
 import '../backend.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +13,8 @@ import '../../index.dart';
 import '../../main.dart';
 
 class PushNotificationsHandler extends StatefulWidget {
-  const PushNotificationsHandler(
-      {Key key, this.handlePushNotification, this.child})
-      : super(key: key);
+  const PushNotificationsHandler({Key key, this.child}) : super(key: key);
 
-  final Function(BuildContext) handlePushNotification;
   final Widget child;
 
   @override
@@ -28,6 +26,10 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
   bool _loading = false;
 
   Future handleOpenedPushNotification() async {
+    if (isWeb) {
+      return;
+    }
+
     final notification = await FirebaseMessaging.instance.getInitialMessage();
     if (notification != null) {
       await _handlePushNotification(notification);
@@ -63,12 +65,12 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 
   @override
   Widget build(BuildContext context) => _loading
-      ? Center(
-          child: SizedBox(
-            width: 50,
-            height: 50,
-            child: CircularProgressIndicator(
-              color: FlutterFlowTheme.of(context).primaryColor,
+      ? Container(
+          color: Colors.transparent,
+          child: Builder(
+            builder: (context) => Image.asset(
+              'assets/images/3.webp',
+              fit: BoxFit.cover,
             ),
           ),
         )
@@ -76,7 +78,48 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 }
 
 final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
-  'HomePage': (data) async => HomePageWidget(),
+  'Login': (data) async => LoginWidget(),
+  'OnboardingView': (data) async => OnboardingViewWidget(),
+  'ConfirmOTP': (data) async => ConfirmOTPWidget(),
+  'Profile': (data) async => NavBarPage(initialPage: 'Profile'),
+  'AddingInformation': (data) async => AddingInformationWidget(),
+  'TermsConditions': (data) async => TermsConditionsWidget(),
+  'EditPersonallInfo': (data) async => EditPersonallInfoWidget(),
+  'EditMobileNumber': (data) async => EditMobileNumberWidget(),
+  'ConfirmNewNumberOTP': (data) async => ConfirmNewNumberOTPWidget(),
+  'Filter': (data) async => FilterWidget(),
+  'MyProperties': (data) async => NavBarPage(initialPage: 'MyProperties'),
+  'Notifications': (data) async => NotificationsWidget(),
+  'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
+        city: getParameter(data, 'city'),
+      ),
+  'searchResults': (data) async => SearchResultsWidget(
+        city: getParameter(data, 'city'),
+      ),
+  'PropertyDetails': (data) async => PropertyDetailsWidget(
+        propertyId: getParameter(data, 'propertyId'),
+        propertyLocation: await getDocumentParameter(
+            data, 'propertyLocation', PropertyLocationRecord.serializer),
+      ),
+  'bankDetails': (data) async => BankDetailsWidget(
+        bankId: getParameter(data, 'bankId'),
+        propertyId: getParameter(data, 'propertyId'),
+      ),
+  'ReservationConfirmation': (data) async => ReservationConfirmationWidget(
+        propertyId: getParameter(data, 'propertyId'),
+      ),
+  'Confirmation': (data) async => ConfirmationWidget(
+        propertyId: getParameter(data, 'propertyId'),
+        paymentMethod: getParameter(data, 'paymentMethod'),
+      ),
+  'OrderDetails': (data) async => OrderDetailsWidget(
+        propertId: getParameter(data, 'propertId'),
+      ),
+  'KYC': (data) async => KycWidget(),
+  'AbsherVerification': (data) async => AbsherVerificationWidget(),
+  'ConfirmAbsher': (data) async => ConfirmAbsherWidget(),
+  'PersonalEmploymentDetails': (data) async =>
+      PersonalEmploymentDetailsWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>
