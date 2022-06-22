@@ -131,16 +131,25 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        't1oedq2h' /* terms & conditions & privacy p... */,
+                    InkWell(
+                      onTap: () async {
+                        logFirebaseEvent(
+                            'ADDING_INFORMATION_PAGE_terms_ON_TAP');
+                        // termsAndConditions
+                        logFirebaseEvent('terms_termsAndConditions');
+                        context.goNamed('TermsConditions');
+                      },
+                      child: Text(
+                        FFLocalizations.of(context).getText(
+                          't1oedq2h' /* terms & conditions & privacy p... */,
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: false,
+                            ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            fontWeight: FontWeight.w500,
-                            useGoogleFonts: false,
-                          ),
                     ),
                   ],
                 ),

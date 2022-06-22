@@ -184,7 +184,7 @@ your f... */
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(163, 18, 164, 47),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 18, 0, 0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,

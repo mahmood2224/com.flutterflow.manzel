@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -177,27 +178,44 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                       onPressed: () async {
                         logFirebaseEvent(
                             'EDIT_MOBILE_NUMBER_PAGE_sendOTP_ON_TAP');
-                        // sendOTP
-                        logFirebaseEvent('sendOTP_sendOTP');
-                        final phoneNumberVal = mobileNumberController.text;
-                        if (phoneNumberVal == null ||
-                            phoneNumberVal.isEmpty ||
-                            !phoneNumberVal.startsWith('+')) {
+                        if (functions.checkPhoneNumberFormat(
+                            mobileNumberController.text)) {
+                          // sendOTP
+                          logFirebaseEvent('sendOTP_sendOTP');
+                          final phoneNumberVal = mobileNumberController.text;
+                          if (phoneNumberVal == null ||
+                              phoneNumberVal.isEmpty ||
+                              !phoneNumberVal.startsWith('+')) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    'Phone Number is required and has to start with +.'),
+                              ),
+                            );
+                            return;
+                          }
+                          await beginPhoneAuth(
+                            context: context,
+                            phoneNumber: phoneNumberVal,
+                            onCodeSent: () async {
+                              context.goNamedAuth('ConfirmOTP', mounted);
+                            },
+                          );
+                        } else {
+                          // Invalid_phone_number_action
+                          logFirebaseEvent(
+                              'sendOTP_Invalid_phone_number_action');
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                  'Phone Number is required and has to start with +.'),
+                                'The phone number format should be +966123456789',
+                                style: FlutterFlowTheme.of(context).subtitle1,
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor: Color(0xFF777777),
                             ),
                           );
-                          return;
                         }
-                        await beginPhoneAuth(
-                          context: context,
-                          phoneNumber: phoneNumberVal,
-                          onCodeSent: () async {
-                            context.goNamedAuth('ConfirmOTP', mounted);
-                          },
-                        );
                       },
                       text: FFLocalizations.of(context).getText(
                         'v8y7fwba' /* Continue */,

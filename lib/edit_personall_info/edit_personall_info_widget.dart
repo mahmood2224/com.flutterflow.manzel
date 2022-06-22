@@ -200,18 +200,26 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             useGoogleFonts: false,
                           ),
                     ),
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        'lbyulmrk' /* Edit */,
+                    InkWell(
+                      onTap: () async {
+                        logFirebaseEvent(
+                            'EDIT_PERSONALL_INFO_editMobile_ON_TAP');
+                        logFirebaseEvent('editMobile_Navigate-To');
+                        context.goNamed('EditMobileNumber');
+                      },
+                      child: Text(
+                        FFLocalizations.of(context).getText(
+                          'lbyulmrk' /* Edit */,
+                        ),
+                        style: FlutterFlowTheme.of(context).subtitle1.override(
+                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              color: Color(0xFF2971FB),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              decoration: TextDecoration.underline,
+                              useGoogleFonts: false,
+                            ),
                       ),
-                      style: FlutterFlowTheme.of(context).subtitle1.override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
-                            color: Color(0xFF2971FB),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            decoration: TextDecoration.underline,
-                            useGoogleFonts: false,
-                          ),
                     ),
                   ],
                 ),
@@ -237,7 +245,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 360, 16, 30),
+                padding: EdgeInsetsDirectional.fromSTEB(16, 330, 16, 30),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,

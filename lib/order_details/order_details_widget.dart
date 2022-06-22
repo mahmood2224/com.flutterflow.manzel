@@ -34,84 +34,87 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-        automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 0,
-          borderWidth: 0,
-          buttonSize: 60,
-          fillColor: Colors.transparent,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Colors.white,
-            size: 30,
-          ),
-          onPressed: () async {
-            logFirebaseEvent('ORDER_DETAILS_arrow_back_rounded_ICN_ON_');
-            // back
-            logFirebaseEvent('IconButton_back');
-            context.pop();
-          },
-        ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            'zjjmxmej' /* Almajdiah Apartment */,
-          ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Sofia Pro By Khuzaimah',
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                useGoogleFonts: false,
-              ),
-        ),
-        actions: [
-          FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30,
-            borderWidth: 1,
-            buttonSize: 60,
-            icon: Icon(
-              Icons.keyboard_control_outlined,
-              color: Colors.white,
-              size: 30,
-            ),
-            onPressed: () {
-              print('IconButton pressed ...');
-            },
-          ),
-        ],
-        centerTitle: true,
-        elevation: 2,
+    return FutureBuilder<ApiCallResponse>(
+      future: PropertyCall.call(
+        propertyId: widget.propertId,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: FutureBuilder<ApiCallResponse>(
-            future: PropertyCall.call(
-              propertyId: widget.propertId,
+      builder: (context, snapshot) {
+        // Customize what your widget looks like when it's loading.
+        if (!snapshot.hasData) {
+          return Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: SpinKitRipple(
+                color: Color(0xFF2971FB),
+                size: 50,
+              ),
             ),
-            builder: (context, snapshot) {
-              // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
-                return Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitRipple(
-                      color: Color(0xFF2971FB),
-                      size: 50,
-                    ),
+          );
+        }
+        final orderDetailsPropertyResponse = snapshot.data;
+        return Scaffold(
+          key: scaffoldKey,
+          appBar: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+            automaticallyImplyLeading: false,
+            leading: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 0,
+              borderWidth: 0,
+              buttonSize: 60,
+              fillColor: Colors.transparent,
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                color: Colors.white,
+                size: 30,
+              ),
+              onPressed: () async {
+                logFirebaseEvent('ORDER_DETAILS_arrow_back_rounded_ICN_ON_');
+                // back
+                logFirebaseEvent('IconButton_back');
+                context.pop();
+              },
+            ),
+            title: Text(
+              valueOrDefault<String>(
+                PropertyCall.propertyName(
+                  (orderDetailsPropertyResponse?.jsonBody ?? ''),
+                ).toString(),
+                'Un-Known',
+              ),
+              style: FlutterFlowTheme.of(context).title2.override(
+                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    useGoogleFonts: false,
                   ),
-                );
-              }
-              final columnPropertyResponse = snapshot.data;
-              return SingleChildScrollView(
+            ),
+            actions: [
+              FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.keyboard_control_outlined,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: () {
+                  print('IconButton pressed ...');
+                },
+              ),
+            ],
+            centerTitle: true,
+            elevation: 2,
+          ),
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          body: SafeArea(
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -148,7 +151,8 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                         borderRadius: BorderRadius.circular(6),
                                         child: Image.network(
                                           PropertyCall.propertyImg(
-                                            (columnPropertyResponse?.jsonBody ??
+                                            (orderDetailsPropertyResponse
+                                                    ?.jsonBody ??
                                                 ''),
                                           ),
                                           width: 80,
@@ -175,7 +179,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                               child: Text(
                                                 valueOrDefault<String>(
                                                   PropertyCall.propertyName(
-                                                    (columnPropertyResponse
+                                                    (orderDetailsPropertyResponse
                                                             ?.jsonBody ??
                                                         ''),
                                                   ).toString(),
@@ -244,7 +248,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                               String>(
                                                             PropertyCall
                                                                 .propertyBedrooms(
-                                                              (columnPropertyResponse
+                                                              (orderDetailsPropertyResponse
                                                                       ?.jsonBody ??
                                                                   ''),
                                                             ).toString(),
@@ -292,7 +296,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                               String>(
                                                             PropertyCall
                                                                 .propertyBathrooms(
-                                                              (columnPropertyResponse
+                                                              (orderDetailsPropertyResponse
                                                                       ?.jsonBody ??
                                                                   ''),
                                                             ).toString(),
@@ -331,7 +335,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                         valueOrDefault<String>(
                                                           PropertyCall
                                                               .propertySize(
-                                                            (columnPropertyResponse
+                                                            (orderDetailsPropertyResponse
                                                                     ?.jsonBody ??
                                                                 ''),
                                                           ).toString(),
@@ -701,11 +705,11 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                     ),
                   ],
                 ),
-              );
-            },
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

@@ -327,8 +327,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           BorderRadius.circular(
                                                                               30),
                                                                       child: Image
-                                                                          .asset(
-                                                                        'assets/images/3.webp',
+                                                                          .network(
+                                                                        PropertyCall
+                                                                            .companyLogo(
+                                                                          (columnPropertyResponse?.jsonBody ??
+                                                                              ''),
+                                                                        ),
                                                                         width:
                                                                             46,
                                                                         height:
@@ -790,7 +794,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                                   ),
                                                                                   Text(
                                                                                     FFLocalizations.of(context).getText(
-                                                                                      '7xi05192' /*  years */,
+                                                                                      '7xi05192' /*  Years */,
                                                                                     ),
                                                                                     style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                           fontFamily: 'Sofia Pro By Khuzaimah',
@@ -1266,14 +1270,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         'bankDetails',
                                                                         queryParams:
                                                                             {
+                                                                          'propertyId': serializeParam(
+                                                                              widget.propertyId,
+                                                                              ParamType.int),
                                                                           'bankId': serializeParam(
                                                                               getJsonField(
                                                                                 banksItem,
-                                                                                r'''$..id''',
+                                                                                r'''$.id''',
                                                                               ),
-                                                                              ParamType.int),
-                                                                          'propertyId': serializeParam(
-                                                                              widget.propertyId,
                                                                               ParamType.int),
                                                                         }.withoutNulls,
                                                                       );
@@ -1321,7 +1325,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               child: Image.network(
                                                                                 getJsonField(
                                                                                   banksItem,
-                                                                                  r'''$..logo''',
+                                                                                  r'''$..bank_logo..alternativeText''',
                                                                                 ),
                                                                                 width: 111,
                                                                                 height: 80,
@@ -1340,17 +1344,19 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               mainAxisSize: MainAxisSize.max,
                                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                                               children: [
-                                                                                Text(
-                                                                                  getJsonField(
-                                                                                    banksItem,
-                                                                                    r'''$..name''',
-                                                                                  ).toString(),
-                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                        fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                        fontSize: 12,
-                                                                                        fontWeight: FontWeight.bold,
-                                                                                        useGoogleFonts: false,
-                                                                                      ),
+                                                                                Expanded(
+                                                                                  child: Text(
+                                                                                    getJsonField(
+                                                                                      banksItem,
+                                                                                      r'''$..bank_name''',
+                                                                                    ).toString(),
+                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                          fontSize: 12,
+                                                                                          fontWeight: FontWeight.bold,
+                                                                                          useGoogleFonts: false,
+                                                                                        ),
+                                                                                  ),
                                                                                 ),
                                                                               ],
                                                                             ),
@@ -1501,7 +1507,19 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       List<
                                                           PropertyLocationRecord>>(
                                                     stream:
-                                                        queryPropertyLocationRecord(),
+                                                        queryPropertyLocationRecord(
+                                                      queryBuilder: (propertyLocationRecord) =>
+                                                          propertyLocationRecord
+                                                              .where('name',
+                                                                  isEqualTo:
+                                                                      PropertyCall
+                                                                          .propertyName(
+                                                                    (columnPropertyResponse
+                                                                            ?.jsonBody ??
+                                                                        ''),
+                                                                  ).toString()),
+                                                      singleRecord: true,
+                                                    ),
                                                     builder:
                                                         (context, snapshot) {
                                                       // Customize what your widget looks like when it's loading.
@@ -1522,6 +1540,17 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       List<PropertyLocationRecord>
                                                           googleMapPropertyLocationRecordList =
                                                           snapshot.data;
+                                                      // Return an empty Container when the document does not exist.
+                                                      if (snapshot
+                                                          .data.isEmpty) {
+                                                        return Container();
+                                                      }
+                                                      final googleMapPropertyLocationRecord =
+                                                          googleMapPropertyLocationRecordList
+                                                                  .isNotEmpty
+                                                              ? googleMapPropertyLocationRecordList
+                                                                  .first
+                                                              : null;
                                                       return FlutterFlowGoogleMap(
                                                         controller:
                                                             googleMapsController,
@@ -1534,20 +1563,17 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 widget
                                                                     .propertyLocation
                                                                     .location,
-                                                        markers:
-                                                            (googleMapPropertyLocationRecordList ??
-                                                                    [])
-                                                                .map(
-                                                                  (googleMapPropertyLocationRecord) =>
-                                                                      FlutterFlowMarker(
-                                                                    googleMapPropertyLocationRecord
-                                                                        .reference
-                                                                        .path,
-                                                                    googleMapPropertyLocationRecord
-                                                                        .location,
-                                                                  ),
-                                                                )
-                                                                .toList(),
+                                                        markers: [
+                                                          if (googleMapPropertyLocationRecord !=
+                                                              null)
+                                                            FlutterFlowMarker(
+                                                              googleMapPropertyLocationRecord
+                                                                  .reference
+                                                                  .path,
+                                                              googleMapPropertyLocationRecord
+                                                                  .location,
+                                                            ),
+                                                        ],
                                                         markerColor:
                                                             GoogleMarkerColor
                                                                 .violet,
@@ -1802,10 +1828,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                               Expanded(
                                 child: Builder(
                                   builder: (context) {
-                                    final images = getJsonField(
+                                    final images = PropertyCall.propertyImages(
                                           (columnPropertyResponse?.jsonBody ??
                                               ''),
-                                          r'''$..images.data..alternativeText''',
                                         )?.toList() ??
                                         [];
                                     return Container(

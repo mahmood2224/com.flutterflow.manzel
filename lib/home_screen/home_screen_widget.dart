@@ -1,3 +1,4 @@
+import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -236,45 +237,48 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(327, 58, 28, 304),
-                      child: InkWell(
-                        onTap: () async {
-                          logFirebaseEvent(
-                              'HOME_SCREEN_notificationsBadge_ON_TAP');
-                          logFirebaseEvent('notificationsBadge_Navigate-To');
-                          context.pushNamed('Notifications');
-                        },
-                        child: Badge(
-                          badgeContent: Text(
-                            FFLocalizations.of(context).getText(
-                              'waavnvd4' /* 1 */,
+                    if (loggedIn ?? true)
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(327, 58, 28, 304),
+                        child: InkWell(
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'HOME_SCREEN_notificationsBadge_ON_TAP');
+                            logFirebaseEvent('notificationsBadge_Navigate-To');
+                            context.pushNamed('Notifications');
+                          },
+                          child: Badge(
+                            badgeContent: Text(
+                              FFLocalizations.of(context).getText(
+                                'waavnvd4' /* 1 */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.normal,
+                                    useGoogleFonts: false,
+                                  ),
                             ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
-                                      useGoogleFonts: false,
-                                    ),
-                          ),
-                          showBadge: true,
-                          shape: BadgeShape.circle,
-                          badgeColor: Color(0xFFD05C5C),
-                          elevation: 4,
-                          padding: EdgeInsetsDirectional.fromSTEB(7, 7, 7, 7),
-                          position: BadgePosition.topEnd(),
-                          animationType: BadgeAnimationType.scale,
-                          toAnimate: true,
-                          child: Icon(
-                            Icons.notifications_none,
-                            color: Colors.white,
-                            size: 27,
+                            showBadge: true,
+                            shape: BadgeShape.circle,
+                            badgeColor: Color(0xFFD05C5C),
+                            elevation: 4,
+                            padding: EdgeInsetsDirectional.fromSTEB(7, 7, 7, 7),
+                            position: BadgePosition.topEnd(),
+                            animationType: BadgeAnimationType.scale,
+                            toAnimate: true,
+                            child: Icon(
+                              Icons.notifications_none,
+                              color: Colors.white,
+                              size: 27,
+                            ),
                           ),
                         ),
                       ),
-                    ),
                   ],
                 ),
               ),
@@ -337,7 +341,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       child: CachedNetworkImage(
                                         imageUrl: getJsonField(
                                           propertiesItem,
-                                          r'''$..images.data[0].attributes.name''',
+                                          r'''$..property_images.data[0].attributes.name''',
                                         ),
                                         width: 343,
                                         height: 250,
@@ -353,10 +357,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            getJsonField(
-                                              propertiesItem,
-                                              r'''$.data.attributes.banks..name''',
-                                            ).toString(),
+                                            FFLocalizations.of(context).getText(
+                                              '998is2ya' /* Installment starting from */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .title3
                                                 .override(
@@ -367,44 +370,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   fontWeight: FontWeight.w500,
                                                   useGoogleFonts: false,
                                                 ),
-                                          ),
-                                          Expanded(
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 8, 0),
-                                                  child: Container(
-                                                    width: 20,
-                                                    height: 20,
-                                                    clipBehavior:
-                                                        Clip.antiAlias,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: Image.network(
-                                                      'https://companiesmarketcap.com/img/company-logos/512/1120.SR.png',
-                                                      fit: BoxFit.contain,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: 22,
-                                                  height: 22,
-                                                  clipBehavior: Clip.antiAlias,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: Image.network(
-                                                    'https://companiesmarketcap.com/img/company-logos/512/1120.SR.png',
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
                                           ),
                                         ],
                                       ),
@@ -420,7 +385,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           Text(
                                             getJsonField(
                                               propertiesItem,
-                                              r'''$..initial_installment''',
+                                              r'''$..property_initial_installment''',
                                             ).toString(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
@@ -461,7 +426,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             child: Text(
                                               getJsonField(
                                                 propertiesItem,
-                                                r'''$.attributes.name''',
+                                                r'''$.attributes.property_name''',
                                               ).toString(),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -493,7 +458,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           Text(
                                             getJsonField(
                                               propertiesItem,
-                                              r'''$..city''',
+                                              r'''$..property_city''',
                                             ).toString(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
@@ -522,7 +487,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           Text(
                                             getJsonField(
                                               propertiesItem,
-                                              r'''$..district''',
+                                              r'''$..property_district''',
                                             ).toString(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1

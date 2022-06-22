@@ -138,13 +138,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Payment & Cards',
       'ar': 'الدفع والبطاقات',
     },
+    'vjemd3mv': {
+      'en': 'Login',
+      'ar': 'تسجيل الدخول',
+    },
     'f0scnkco': {
       'en': 'Help & Support',
       'ar': 'المساعدة و الدعم',
     },
     '6mgqpd1r': {
       'en': 'Language',
-      'ar': 'الغة',
+      'ar': 'اللغة',
     },
     'u8ivo1rr': {
       'en': 'FAQ',
@@ -321,9 +325,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '1',
       'ar': '1',
     },
+    '998is2ya': {
+      'en': 'Installment starting from',
+      'ar': 'القسط يبدأ من',
+    },
     'l38if619': {
       'en': ' SAR/Monthly',
-      'ar': 'ريال سعودي / شهري',
+      'ar': ' ريال سعودي / شهري',
     },
     'efcxmcgl': {
       'en': ', ',
@@ -334,15 +342,35 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'اكتشف',
     },
   },
+  // Notifications
+  {
+    'azq2kgbb': {
+      'en':
+          'A new proposal received from  Al Rajhi Bank to your booking  “Almajdiah Apartment“',
+      'ar': 'تم استلام عرض جديد من مصرف الراجحي لحجزك \"شقة الماجدية\" ',
+    },
+    'muysw2pl': {
+      'en': 'Today',
+      'ar': 'اليوم',
+    },
+    'nm3bcvix': {
+      'en': 'Notifications',
+      'ar': 'إشعارات',
+    },
+    'mvocppdr': {
+      'en': 'Home',
+      'ar': 'الصفحة الرئيسية',
+    },
+  },
   // Filter
   {
     'h84toi7e': {
       'en': 'Reset',
-      'ar': 'إعادة ضبط',
+      'ar': 'إعادة',
     },
     'hy8565b9': {
       'en': 'Filter',
-      'ar': 'منقي',
+      'ar': 'فرز',
     },
     'b8bqw4hw': {
       'en': 'City',
@@ -402,7 +430,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'skyj7jpv': {
       'en': 'Un-Furnishing',
-      'ar': 'غير مفروش',
+      'ar': 'غير مفروشة',
     },
     '7fpsv2qy': {
       'en': 'All',
@@ -423,9 +451,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'My Properties',
       'ar': 'ممتلكاتي',
     },
+    '6silbaqf': {
+      'en': 'Login',
+      'ar': 'تسجيل الدخول',
+    },
     'gl02050s': {
       'en': 'Booked',
-      'ar': 'حجز',
+      'ar': 'محجوز',
     },
     'tu9ytzrl': {
       'en': 'Booking ref: ',
@@ -441,7 +473,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'kdwkp7d8': {
       'en': ' ,',
-      'ar': 'و',
+      'ar': ' ،',
     },
     'a2yvcqcr': {
       'en': 'View Details',
@@ -449,7 +481,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'mt7pfmk1': {
       'en': 'Reserved',
-      'ar': 'محجوز',
+      'ar': 'حجز',
     },
     'kw0dempb': {
       'en': 'Booking ref: ',
@@ -465,7 +497,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'tjiw2bkf': {
       'en': ' ,',
-      'ar': 'و',
+      'ar': ' ،',
     },
     'zypmgjph': {
       'en': 'View Details',
@@ -473,35 +505,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '4uvlncbs': {
       'en': 'Saved',
-      'ar': 'أنقذ',
+      'ar': 'مفضلة',
     },
     'j1mv6jzk': {
       'en': ' ,',
-      'ar': 'و',
+      'ar': ' ،',
     },
     'lhqoha7d': {
       'en': 'My Properties',
       'ar': 'ممتلكاتي',
-    },
-  },
-  // Notifications
-  {
-    'azq2kgbb': {
-      'en':
-          'A new proposal received from  Al Rajhi Bank to your booking  “Almajdiah Apartment“',
-      'ar': 'تم استلام عرض جديد من مصرف الراجحي لحجزك &quot;شقة الماجدية&quot;',
-    },
-    'muysw2pl': {
-      'en': 'Today',
-      'ar': 'اليوم',
-    },
-    'nm3bcvix': {
-      'en': 'Notifications',
-      'ar': 'إشعارات',
-    },
-    'mvocppdr': {
-      'en': 'Home',
-      'ar': 'الصفحة الرئيسية',
     },
   },
   // WhereAreYouLooking
@@ -531,7 +543,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'b85wyjy3': {
       'en': 'SAR/Monthly',
-      'ar': 'ريال سعودي / شهري',
+      'ar': ' ريال سعودي / شهري',
     },
     'mrcd2183': {
       'en': ',',
@@ -573,7 +585,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الحمامات',
     },
     '7xi05192': {
-      'en': ' years',
+      'en': ' Years',
       'ar': 'سنوات',
     },
     'u0xq15h6': {
@@ -590,7 +602,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ku7u4p9w': {
       'en': 'Floors',
-      'ar': 'طوابق',
+      'ar': 'عدد الطوابق',
     },
     'vrdckjrg': {
       'en': 'Furnishing type',
@@ -622,7 +634,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'mgi2d0o9': {
       'en': 'SAR/Monthly',
-      'ar': 'ريال سعودي / شهري',
+      'ar': ' ريال سعودي / شهري',
     },
     'dpmrt150': {
       'en': 'Reserve',
@@ -633,11 +645,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'fohz964z': {
       'en': 'Close',
-      'ar': 'قريب',
+      'ar': 'اغلق',
     },
     'ng6azmpt': {
       'en': 'Home',
-      'ar': 'مسكن',
+      'ar': 'الصفحة الرئيسية',
     },
   },
   // ReservationConfirmation
@@ -657,8 +669,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تكلفة الحجز',
     },
     'lrvnkupp': {
-      'en': '10,000.00 SAR',
-      'ar': '10،000.00 ريال سعودي',
+      'en': ' SAR',
+      'ar': 'ريال سعودي',
     },
     'a57p0brt': {
       'en': 'Note: Reservation cost is non-refundable ',
@@ -701,7 +713,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '8ptcdhhd': {
       'en': 'Property details',
-      'ar': 'تفاصيل اوضح',
+      'ar': 'تفاصيل الملكية ',
     },
     '4qmvz3gw': {
       'en': ' ,',
@@ -713,7 +725,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'g7t2uz7u': {
       'en': 'Transaction Ref.',
-      'ar': 'المرجع المعاملة.',
+      'ar': 'مرجع المعاملة.',
     },
     '48t9kq7r': {
       'en': '#29877de2887',
@@ -725,7 +737,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xihd37di': {
       'en': 'Amount',
-      'ar': 'مقدار',
+      'ar': 'المبلغ',
     },
     'twrer5tb': {
       'en': '10,000.00 SAR',
@@ -753,15 +765,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'jdsnk395': {
       'en': 'Home',
-      'ar': 'مسكن',
+      'ar': 'الصفحة الرئيسية',
     },
   },
   // OrderDetails
   {
-    'zjjmxmej': {
-      'en': 'Almajdiah Apartment',
-      'ar': 'شقة الماجدية',
-    },
     'obc5bmtb': {
       'en': 'Riyadh, Alyasmeen',
       'ar': 'الرياض الياسمين',
@@ -772,7 +780,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6on06i4j': {
       'en': 'Order Process',
-      'ar': 'عملية الطلب',
+      'ar': 'مراحل الطلب',
     },
     'nkd2c7wt': {
       'en': 'Reservation & Payment Confirmed',

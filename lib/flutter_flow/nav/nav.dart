@@ -139,6 +139,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
             ),
             FFRoute(
+              name: 'Notifications',
+              path: 'notifications',
+              builder: (context, params) => NotificationsWidget(),
+            ),
+            FFRoute(
               name: 'Filter',
               path: 'filter',
               builder: (context, params) => FilterWidget(),
@@ -149,11 +154,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'MyProperties')
                   : MyPropertiesWidget(),
-            ),
-            FFRoute(
-              name: 'Notifications',
-              path: 'notifications',
-              builder: (context, params) => NotificationsWidget(),
             ),
             FFRoute(
               name: 'WhereAreYouLooking',

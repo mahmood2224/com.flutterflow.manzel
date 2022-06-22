@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../auth/firebase_user_provider.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -36,124 +37,178 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 30, 0, 0),
-                  child: Row(
+                if (loggedIn ?? true)
+                  Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      AuthUserStreamWidget(
-                        child: Text(
-                          currentUserDisplayName,
-                          style: FlutterFlowTheme.of(context).title1.override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
-                                fontSize: 25,
-                                fontWeight: FontWeight.w800,
-                                useGoogleFonts: false,
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 30, 0, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            AuthUserStreamWidget(
+                              child: Text(
+                                currentUserDisplayName,
+                                style: FlutterFlowTheme.of(context)
+                                    .title1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w800,
+                                      useGoogleFonts: false,
+                                    ),
                               ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 10, 216, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      AuthUserStreamWidget(
-                        child: Text(
-                          currentPhoneNumber,
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 216, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            AuthUserStreamWidget(
+                              child: Text(
+                                currentPhoneNumber,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w300,
+                                      useGoogleFonts: false,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 40, 282, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(
+                              FFLocalizations.of(context).getText(
+                                'zpi4cs66' /* Account */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
                                     fontFamily: 'Sofia Pro By Khuzaimah',
-                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontSize: 20,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 40, 282, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        FFLocalizations.of(context).getText(
-                          'zpi4cs66' /* Account */,
-                        ),
-                        style: FlutterFlowTheme.of(context).subtitle1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w300,
-                              useGoogleFonts: false,
                             ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
-                  child: InkWell(
-                    onTap: () async {
-                      logFirebaseEvent('PROFILE_PAGE_Row_ekepkdfw_ON_TAP');
-                      // editPersonalInfo
-                      logFirebaseEvent('Row_editPersonalInfo');
-                      context.goNamed('EditPersonallInfo');
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            '9iofccrl' /* Personal info */,
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
+                        child: InkWell(
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'PROFILE_PAGE_Row_ekepkdfw_ON_TAP');
+                            // editPersonalInfo
+                            logFirebaseEvent('Row_editPersonalInfo');
+                            context.goNamed('EditPersonallInfo');
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  '9iofccrl' /* Personal info */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: Colors.black,
+                                size: 20,
+                              ),
+                            ],
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              FFLocalizations.of(context).getText(
+                                '0qus6h1d' /* Payment & Cards */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
                                     fontFamily: 'Sofia Pro By Khuzaimah',
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
                                   ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Colors.black,
+                              size: 20,
+                            ),
+                          ],
                         ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: Colors.black,
-                          size: 20,
+                      ),
+                    ],
+                  ),
+                if (!(loggedIn) ?? true)
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FFButtonWidget(
+                          onPressed: () async {
+                            logFirebaseEvent('PROFILE_PAGE_logIn_ON_TAP');
+                            // login
+                            logFirebaseEvent('logIn_login');
+                            context.goNamed('Login');
+                          },
+                          text: FFLocalizations.of(context).getText(
+                            'vjemd3mv' /* Login */,
+                          ),
+                          options: FFButtonOptions(
+                            width: 335,
+                            height: 48,
+                            color: Colors.white,
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 1,
+                            ),
+                            borderRadius: 12,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        FFLocalizations.of(context).getText(
-                          '0qus6h1d' /* Payment & Cards */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: Colors.black,
-                        size: 20,
-                      ),
-                    ],
-                  ),
-                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 50, 217, 0),
                   child: Row(
@@ -326,46 +381,47 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FFButtonWidget(
-                        onPressed: () async {
-                          logFirebaseEvent('PROFILE_PAGE_logout_ON_TAP');
-                          // Logout
-                          logFirebaseEvent('logout_Logout');
-                          GoRouter.of(context).prepareAuthEvent();
-                          await signOut();
-                          context.goNamedAuth('OnboardingView', mounted);
-                        },
-                        text: FFLocalizations.of(context).getText(
-                          '2csoqw0t' /* Logout */,
-                        ),
-                        options: FFButtonOptions(
-                          width: 335,
-                          height: 48,
-                          color: Colors.white,
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 1,
+                if (loggedIn ?? true)
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FFButtonWidget(
+                          onPressed: () async {
+                            logFirebaseEvent('PROFILE_PAGE_logout_ON_TAP');
+                            // Logout
+                            logFirebaseEvent('logout_Logout');
+                            GoRouter.of(context).prepareAuthEvent();
+                            await signOut();
+                            context.goNamedAuth('OnboardingView', mounted);
+                          },
+                          text: FFLocalizations.of(context).getText(
+                            '2csoqw0t' /* Logout */,
                           ),
-                          borderRadius: 12,
+                          options: FFButtonOptions(
+                            width: 335,
+                            height: 48,
+                            color: Colors.white,
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 1,
+                            ),
+                            borderRadius: 12,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 15, 0, 0),
                   child: Row(

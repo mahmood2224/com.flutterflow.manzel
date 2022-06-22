@@ -8,7 +8,8 @@ class PropertiesCall {
   static Future<ApiCallResponse> call() {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
-      apiUrl: 'https://strapi-dev.manzel.app/api/properties/?populate=*',
+      apiUrl:
+          'https://strapi-dev.manzel.app/api/properties/?populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -29,7 +30,7 @@ class PropertyCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Property',
       apiUrl:
-          'https://strapi-dev.manzel.app/api/properties/${propertyId}/?populate=*',
+          'https://strapi-dev.manzel.app/api/properties/${propertyId}/?populate=*,banks.bank_logo,managed_by.prob_company_logo, property_images',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -43,11 +44,11 @@ class PropertyCall {
       );
   static dynamic propertyId(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.property_id''',
+        r'''$.data.attributes.property_reference''',
       );
   static dynamic propertyStatus(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.status''',
+        r'''$.data.attributes.property_status''',
       );
   static dynamic propertyUpdatedAt(dynamic response) => getJsonField(
         response,
@@ -55,59 +56,59 @@ class PropertyCall {
       );
   static dynamic propertyName(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.name''',
+        r'''$.data.attributes.property_name''',
       );
   static dynamic propertyCity(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.city''',
+        r'''$.data.attributes.property_city''',
       );
   static dynamic propertyDistrict(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.district''',
+        r'''$.data.attributes.property_district''',
       );
   static dynamic propertyDescription(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.description''',
+        r'''$.data.attributes.property_description''',
       );
   static dynamic propertyBedrooms(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.bedrooms''',
+        r'''$.data.attributes.property_bedrooms''',
       );
   static dynamic propertyBathrooms(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.bathrooms''',
+        r'''$.data.attributes.property_bathrooms''',
       );
   static dynamic propertySize(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.size''',
+        r'''$.data.attributes.property_size''',
       );
   static dynamic propertyBuiltIn(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.built_in''',
+        r'''$.data.attributes.property_built_in''',
       );
   static dynamic propertyLivingrooms(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.livingroom''',
+        r'''$.data.attributes.property_livingroom''',
       );
   static dynamic propertyFloors(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.floors''',
+        r'''$.data.attributes.property_floors''',
       );
   static dynamic propertyFurnishingType(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.furnishing_type''',
+        r'''$.data.attributes.property_furnishing_type''',
       );
   static dynamic propertyStreetWidth(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.price''',
+        r'''$.data.attributes.property_street_width''',
       );
   static dynamic propertyPrice(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.price''',
+        r'''$.data.attributes.property_price''',
       );
   static dynamic propertyEntranceDirection(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.entrance_direction''',
+        r'''$.data.attributes.property_entrance_direction''',
       );
   static dynamic propertyType(dynamic response) => getJsonField(
         response,
@@ -115,23 +116,23 @@ class PropertyCall {
       );
   static dynamic propertyInitialInstallment(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.initial_installment''',
+        r'''$.data.attributes.property_initial_installment''',
       );
   static dynamic propertyFloorNumber(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.floor_number''',
+        r'''$.data.attributes.property_floor_number''',
       );
   static dynamic propertyLat(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.lat''',
+        r'''$.data.attributes.property_lat''',
       );
   static dynamic propertylng(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.lng''',
+        r'''$.data.attributes.property_lng''',
       );
   static dynamic propertyCoordinates(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.coordinates''',
+        r'''$.data.attributes.property_coordinates''',
       );
   static dynamic banks(dynamic response) => getJsonField(
         response,
@@ -139,7 +140,7 @@ class PropertyCall {
       );
   static dynamic bankName(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.banks.data..name''',
+        r'''$.data.attributes.banks.data..bank_name''',
       );
   static dynamic bankDescription(dynamic response) => getJsonField(
         response,
@@ -151,11 +152,23 @@ class PropertyCall {
       );
   static dynamic mangedBy(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.managed_by.data.attributes.name''',
+        r'''$.data.attributes.managed_by.data.attributes.prob_company_name''',
       );
   static dynamic propertyImg(dynamic response) => getJsonField(
         response,
-        r'''$..images.data[0].attributes.name''',
+        r'''$..property_images.data[0].attributes.name''',
+      );
+  static dynamic companyLogo(dynamic response) => getJsonField(
+        response,
+        r'''$.data.attributes.managed_by.data.attributes.prob_company_logo..alternativeText''',
+      );
+  static dynamic reservationsCost(dynamic response) => getJsonField(
+        response,
+        r'''$.data.attributes.property_reservation_cost''',
+      );
+  static dynamic propertyImages(dynamic response) => getJsonField(
+        response,
+        r'''$.data.attributes.property_images.data..alternativeText''',
       );
 }
 
@@ -196,4 +209,36 @@ class InitiateOrderCall {
       returnBody: true,
     );
   }
+}
+
+class BankDetailsCall {
+  static Future<ApiCallResponse> call({
+    int bankId,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'BankDetails',
+      apiUrl: 'https://strapi-dev.manzel.app/api/banks/${bankId}?populate=*',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+    );
+  }
+
+  static dynamic bankName(dynamic response) => getJsonField(
+        response,
+        r'''$.data.attributes.bank_name''',
+      );
+  static dynamic bankDescription(dynamic response) => getJsonField(
+        response,
+        r'''$.data.attributes.bank_description''',
+      );
+  static dynamic bankRules(dynamic response) => getJsonField(
+        response,
+        r'''$.data.attributes.bank_rules''',
+      );
+  static dynamic bankLogo(dynamic response) => getJsonField(
+        response,
+        r'''$.data.attributes.bank_logo.data.attributes.name''',
+      );
 }

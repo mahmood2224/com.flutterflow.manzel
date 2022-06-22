@@ -172,57 +172,53 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    if (/* NOT RECOMMENDED */ enterOTPController.text ==
-                            'true' ??
-                        true)
-                      FFButtonWidget(
-                        onPressed: () async {
-                          logFirebaseEvent(
-                              'CONFIRM_O_T_P_PAGE_verifyOTP_ON_TAP');
-                          // verifyOTP
-                          logFirebaseEvent('verifyOTP_verifyOTP');
-                          GoRouter.of(context).prepareAuthEvent();
-                          final smsCodeVal = enterOTPController.text;
-                          if (smsCodeVal == null || smsCodeVal.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Enter SMS verification code.'),
-                              ),
-                            );
-                            return;
-                          }
-                          final phoneVerifiedUser = await verifySmsCode(
-                            context: context,
-                            smsCode: smsCodeVal,
+                    FFButtonWidget(
+                      onPressed: () async {
+                        logFirebaseEvent('CONFIRM_O_T_P_PAGE_verifyOTP_ON_TAP');
+                        // verifyOTP
+                        logFirebaseEvent('verifyOTP_verifyOTP');
+                        GoRouter.of(context).prepareAuthEvent();
+                        final smsCodeVal = enterOTPController.text;
+                        if (smsCodeVal == null || smsCodeVal.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Enter SMS verification code.'),
+                            ),
                           );
-                          if (phoneVerifiedUser == null) {
-                            return;
-                          }
+                          return;
+                        }
+                        final phoneVerifiedUser = await verifySmsCode(
+                          context: context,
+                          smsCode: smsCodeVal,
+                        );
+                        if (phoneVerifiedUser == null) {
+                          return;
+                        }
 
-                          context.goNamedAuth('HomeScreen', mounted);
-                        },
-                        text: FFLocalizations.of(context).getText(
-                          'lbqhlsdp' /* Continue */,
-                        ),
-                        options: FFButtonOptions(
-                          width: 343,
-                          height: 56,
-                          color: Color(0xFF2971FB),
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w800,
-                                    useGoogleFonts: false,
-                                  ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          ),
-                          borderRadius: 12,
-                        ),
+                        context.goNamedAuth('HomeScreen', mounted);
+                      },
+                      text: FFLocalizations.of(context).getText(
+                        'lbqhlsdp' /* Continue */,
                       ),
+                      options: FFButtonOptions(
+                        width: 343,
+                        height: 56,
+                        color: Color(0xFF2971FB),
+                        textStyle:
+                            FlutterFlowTheme.of(context).subtitle2.override(
+                                  fontFamily: 'Sofia Pro By Khuzaimah',
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w800,
+                                  useGoogleFonts: false,
+                                ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: 12,
+                      ),
+                    ),
                   ],
                 ),
               ),
