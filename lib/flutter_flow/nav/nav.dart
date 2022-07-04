@@ -386,8 +386,8 @@ class FFRoute {
                   color: Colors.transparent,
                   child: Builder(
                     builder: (context) => Image.asset(
-                      'assets/images/Group_4.svg',
-                      fit: BoxFit.scaleDown,
+                      'assets/images/Group_4.png',
+                      fit: BoxFit.none,
                     ),
                   ),
                 )
