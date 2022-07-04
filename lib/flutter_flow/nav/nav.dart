@@ -157,13 +157,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : MyPropertiesWidget(),
             ),
             FFRoute(
-              name: 'searchResults',
-              path: 'searchResults',
-              builder: (context, params) => SearchResultsWidget(
-                city: params.getParam('city', ParamType.String),
-              ),
-            ),
-            FFRoute(
               name: 'WhereAreYouLooking',
               path: 'whereAreYouLooking',
               builder: (context, params) => WhereAreYouLookingWidget(

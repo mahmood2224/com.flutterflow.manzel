@@ -53,15 +53,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
           'We\'ll send a verification code to your number so \nyou can login or create an account',
       'ar': 'سنرسل رمز التحقق إلى رقمك حتى تتمكن من تسجيل الدخول أو إنشاء حساب',
     },
-    '6mvzq4jw': {
+    '4m2r1iwr': {
       'en': 'Mobile Number',
       'ar': 'رقم الهاتف المحمول',
     },
-    'a1hlirda': {
+    'f4tpckti': {
       'en': '+966',
       'ar': '+966',
     },
-    'h9hsxvqf': {
+    '11ilbwge': {
       'en': '+966',
       'ar': '+966',
     },
@@ -70,7 +70,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بالنقر فوق متابعة ، فإنك توافق على',
     },
     '5t0jhzug': {
-      'en': 'terms & conditions & privacy policy',
+      'en': 'terms & conditions',
+      'ar': 'الشروط والأحكام وسياسة الخصوصية',
+    },
+    '5ard5tmn': {
+      'en': ' & ',
+      'ar': 'الشروط والأحكام وسياسة الخصوصية',
+    },
+    'irbrz9hi': {
+      'en': 'privacy policy',
       'ar': 'الشروط والأحكام وسياسة الخصوصية',
     },
     'l3ozn1az': {
@@ -506,45 +514,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'lhqoha7d': {
       'en': 'My Properties',
       'ar': 'ممتلكاتي',
-    },
-  },
-  // searchResults
-  {
-    's7qse5kw': {
-      'en': 'Installment starting from',
-      'ar': 'القسط يبدأ من',
-    },
-    'k7v4n43t': {
-      'en': '2,325.00 ',
-      'ar': '2،325.00',
-    },
-    'b85wyjy3': {
-      'en': 'SAR/Monthly',
-      'ar': ' ريال سعودي / شهري',
-    },
-    '3c0n6z5n': {
-      'en': 'Almajdiah Apartment',
-      'ar': '',
-    },
-    'aonk74vb': {
-      'en': 'Riyadh, Alyasmeen',
-      'ar': '',
-    },
-    'mrcd2183': {
-      'en': ',',
-      'ar': '،',
-    },
-    'kby4ssi0': {
-      'en': 'Hello World',
-      'ar': '',
-    },
-    'pv8bh37f': {
-      'en': 'Search Result For: ',
-      'ar': 'نتيجة البحث',
-    },
-    'u65dazl0': {
-      'en': 'Home',
-      'ar': 'الصفحة الرئيسية',
     },
   },
   // WhereAreYouLooking

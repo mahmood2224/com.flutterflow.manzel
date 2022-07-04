@@ -17,7 +17,6 @@ export 'home_screen/home_screen_widget.dart' show HomeScreenWidget;
 export 'notifications/notifications_widget.dart' show NotificationsWidget;
 export 'filter/filter_widget.dart' show FilterWidget;
 export 'my_properties/my_properties_widget.dart' show MyPropertiesWidget;
-export 'search_results/search_results_widget.dart' show SearchResultsWidget;
 export 'where_are_you_looking/where_are_you_looking_widget.dart'
     show WhereAreYouLookingWidget;
 export 'property_details/property_details_widget.dart'
