@@ -4,11 +4,12 @@ import 'index.dart';
 import 'serializers.dart';
 import 'package:built_value/built_value.dart';
 
-part 'booked_record.g.dart';
+part 'user_saved_record.g.dart';
 
-abstract class BookedRecord
-    implements Built<BookedRecord, BookedRecordBuilder> {
-  static Serializer<BookedRecord> get serializer => _$bookedRecordSerializer;
+abstract class UserSavedRecord
+    implements Built<UserSavedRecord, UserSavedRecordBuilder> {
+  static Serializer<UserSavedRecord> get serializer =>
+      _$userSavedRecordSerializer;
 
   @nullable
   @BuiltValueField(wireName: 'u_id')
@@ -22,36 +23,36 @@ abstract class BookedRecord
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
-  static void _initializeBuilder(BookedRecordBuilder builder) =>
+  static void _initializeBuilder(UserSavedRecordBuilder builder) =>
       builder..pId = 0;
 
   static CollectionReference get collection =>
-      FirebaseFirestore.instance.collection('Booked');
+      FirebaseFirestore.instance.collection('userSaved');
 
-  static Stream<BookedRecord> getDocument(DocumentReference ref) => ref
+  static Stream<UserSavedRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
-  static Future<BookedRecord> getDocumentOnce(DocumentReference ref) => ref
+  static Future<UserSavedRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
       .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
-  BookedRecord._();
-  factory BookedRecord([void Function(BookedRecordBuilder) updates]) =
-      _$BookedRecord;
+  UserSavedRecord._();
+  factory UserSavedRecord([void Function(UserSavedRecordBuilder) updates]) =
+      _$UserSavedRecord;
 
-  static BookedRecord getDocumentFromData(
+  static UserSavedRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
           {...mapFromFirestore(data), kDocumentReferenceField: reference});
 }
 
-Map<String, dynamic> createBookedRecordData({
+Map<String, dynamic> createUserSavedRecordData({
   DocumentReference uId,
   int pId,
 }) =>
     serializers.toFirestore(
-        BookedRecord.serializer,
-        BookedRecord((b) => b
+        UserSavedRecord.serializer,
+        UserSavedRecord((u) => u
           ..uId = uId
           ..pId = pId));

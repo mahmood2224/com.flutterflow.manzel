@@ -95,7 +95,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
         ],
         centerTitle: false,
-        elevation: 2,
+        elevation: 0,
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -166,6 +166,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                           hintText: FFLocalizations.of(context).getText(
                             'a1hlirda' /* +966 */,
                           ),
+                          hintStyle:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.black,

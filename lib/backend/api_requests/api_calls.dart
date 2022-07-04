@@ -42,7 +42,7 @@ class PropertyCall {
         response,
         r'''$.data''',
       );
-  static dynamic propertyId(dynamic response) => getJsonField(
+  static dynamic propertyRef(dynamic response) => getJsonField(
         response,
         r'''$.data.attributes.property_reference''',
       );
@@ -170,6 +170,10 @@ class PropertyCall {
         response,
         r'''$.data.attributes.property_images.data..alternativeText''',
       );
+  static dynamic propertyId(dynamic response) => getJsonField(
+        response,
+        r'''$.data.id''',
+      );
 }
 
 class FilterCall {
@@ -241,4 +245,26 @@ class BankDetailsCall {
         response,
         r'''$.data.attributes.bank_logo.data.attributes.name''',
       );
+}
+
+class StartInstanceCall {
+  static Future<ApiCallResponse> call({
+    String userID = '',
+    int propertyID,
+    int orderID,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Start Instance',
+      apiUrl:
+          'https://us-central1-manzel-prod.cloudfunctions.net/booking-process-best-case-scenario-test',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'userID': userID,
+        'propertyID': propertyID,
+        'orderID': orderID,
+      },
+      returnBody: true,
+    );
+  }
 }

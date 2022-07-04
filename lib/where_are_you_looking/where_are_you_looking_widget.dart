@@ -22,7 +22,7 @@ class WhereAreYouLookingWidget extends StatefulWidget {
 }
 
 class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
-  List<ProperityRecord> algoliaSearchResults = [];
+  List<PropertyRecord> algoliaSearchResults = [];
   TextEditingController searchController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -91,11 +91,11 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                 ),
                 onFieldSubmitted: (_) async {
                   logFirebaseEvent('WHERE_ARE_YOU_LOOKING_search_ON_TEXTFIEL');
-                  // search
-                  logFirebaseEvent('search_search');
+                  // CitySearch
+                  logFirebaseEvent('search_CitySearch');
                   setState(() => algoliaSearchResults = null);
-                  await ProperityRecord.search(
-                    term: searchController.text,
+                  await PropertyRecord.search(
+                    term: widget.city,
                   )
                       .then((r) => algoliaSearchResults = r)
                       .onError((_, __) => algoliaSearchResults = [])
@@ -152,13 +152,9 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                  child: FutureBuilder<List<ProperityRecord>>(
-                    future: ProperityRecord.search(
-                      term: searchController.text,
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
+                  child: Builder(
+                    builder: (context) {
+                      if (algoliaSearchResults == null) {
                         return Center(
                           child: SizedBox(
                             width: 50,
@@ -170,9 +166,8 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                           ),
                         );
                       }
-                      List<ProperityRecord> searchResultProperityRecordList =
-                          snapshot.data;
-                      if (searchResultProperityRecordList.isEmpty) {
+                      final cities = algoliaSearchResults?.toList() ?? [];
+                      if (cities.isEmpty) {
                         return Center(
                           child: NotFoundPageWidget(),
                         );
@@ -180,11 +175,9 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         scrollDirection: Axis.vertical,
-                        itemCount: searchResultProperityRecordList.length,
-                        itemBuilder: (context, searchResultIndex) {
-                          final searchResultProperityRecord =
-                              searchResultProperityRecordList[
-                                  searchResultIndex];
+                        itemCount: cities.length,
+                        itemBuilder: (context, citiesIndex) {
+                          final citiesItem = cities[citiesIndex];
                           return Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                             child: Container(
@@ -238,8 +231,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(12, 0, 0, 0),
                                               child: Text(
-                                                searchResultProperityRecord
-                                                    .city,
+                                                citiesItem.propertyCity,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .subtitle1

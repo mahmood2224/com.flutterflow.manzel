@@ -118,7 +118,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                         tabs: [
                           Tab(
                             text: FFLocalizations.of(context).getText(
-                              'gl02050s' /* Booked */,
+                              'gl02050s' /* Purchased */,
                             ),
                           ),
                           Tab(
@@ -136,11 +136,14 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                       Expanded(
                         child: TabBarView(
                           children: [
-                            StreamBuilder<List<BookedRecord>>(
-                              stream: queryBookedRecord(
-                                queryBuilder: (bookedRecord) =>
-                                    bookedRecord.where('u_id',
-                                        isEqualTo: currentUserReference),
+                            StreamBuilder<List<UserPropertiesRecord>>(
+                              stream: queryUserPropertiesRecord(
+                                queryBuilder: (userPropertiesRecord) =>
+                                    userPropertiesRecord
+                                        .where('u_id',
+                                            isEqualTo: currentUserReference)
+                                        .where('status',
+                                            isEqualTo: 'purchased'),
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -156,20 +159,22 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     ),
                                   );
                                 }
-                                List<BookedRecord>
-                                    propertiesListBookedRecordList =
+                                List<UserPropertiesRecord>
+                                    propertiesListUserPropertiesRecordList =
                                     snapshot.data;
-                                if (propertiesListBookedRecordList.isEmpty) {
+                                if (propertiesListUserPropertiesRecordList
+                                    .isEmpty) {
                                   return NotFoundPageWidget();
                                 }
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
                                   scrollDirection: Axis.vertical,
                                   itemCount:
-                                      propertiesListBookedRecordList.length,
+                                      propertiesListUserPropertiesRecordList
+                                          .length,
                                   itemBuilder: (context, propertiesListIndex) {
-                                    final propertiesListBookedRecord =
-                                        propertiesListBookedRecordList[
+                                    final propertiesListUserPropertiesRecord =
+                                        propertiesListUserPropertiesRecordList[
                                             propertiesListIndex];
                                     return Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -177,7 +182,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       child: FutureBuilder<ApiCallResponse>(
                                         future: PropertyCall.call(
                                           propertyId:
-                                              propertiesListBookedRecord.pId,
+                                              propertiesListUserPropertiesRecord
+                                                  .pId,
                                         ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
@@ -293,33 +299,117 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                         9,
                                                                         0,
                                                                         4),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Row(
+                                                            child: StreamBuilder<
+                                                                List<
+                                                                    OrdersRecord>>(
+                                                              stream:
+                                                                  queryOrdersRecord(
+                                                                queryBuilder: (ordersRecord) => ordersRecord
+                                                                    .where(
+                                                                        'u_id',
+                                                                        isEqualTo:
+                                                                            currentUserReference)
+                                                                    .where(
+                                                                        'p_id',
+                                                                        isEqualTo:
+                                                                            PropertyCall.propertyId(
+                                                                          (containerPropertyResponse?.jsonBody ??
+                                                                              ''),
+                                                                        )),
+                                                                singleRecord:
+                                                                    true,
+                                                              ),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
+                                                                    child:
+                                                                        SizedBox(
+                                                                      width: 50,
+                                                                      height:
+                                                                          50,
+                                                                      child:
+                                                                          SpinKitRipple(
+                                                                        color: Color(
+                                                                            0xFF2971FB),
+                                                                        size:
+                                                                            50,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                }
+                                                                List<OrdersRecord>
+                                                                    rowOrdersRecordList =
+                                                                    snapshot
+                                                                        .data;
+                                                                // Return an empty Container when the document does not exist.
+                                                                if (snapshot
+                                                                    .data
+                                                                    .isEmpty) {
+                                                                  return Container();
+                                                                }
+                                                                final rowOrdersRecord =
+                                                                    rowOrdersRecordList
+                                                                            .isNotEmpty
+                                                                        ? rowOrdersRecordList
+                                                                            .first
+                                                                        : null;
+                                                                return Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
                                                                           .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
                                                                   children: [
+                                                                    Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'tu9ytzrl' /* Booking ref:  */,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText2
+                                                                              .override(
+                                                                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                color: Color(0xFF6B6B6B),
+                                                                                fontSize: 13,
+                                                                                fontWeight: FontWeight.w300,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                        Text(
+                                                                          rowOrdersRecord
+                                                                              .orderId
+                                                                              .toString(),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText2
+                                                                              .override(
+                                                                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                fontSize: 12,
+                                                                                fontWeight: FontWeight.w300,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                     Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'tu9ytzrl' /* Booking ref:  */,
-                                                                      ),
+                                                                      dateTimeFormat(
+                                                                          'MMMMEEEEd',
+                                                                          rowOrdersRecord
+                                                                              .createdAt),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyText2
                                                                           .override(
                                                                             fontFamily:
                                                                                 'Sofia Pro By Khuzaimah',
-                                                                            color:
-                                                                                Color(0xFF6B6B6B),
                                                                             fontSize:
                                                                                 13,
                                                                             fontWeight:
@@ -328,49 +418,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 false,
                                                                           ),
                                                                     ),
-                                                                    Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        '5exi2z5h' /* 23456 */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText2
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
-                                                                            fontSize:
-                                                                                12,
-                                                                            fontWeight:
-                                                                                FontWeight.w300,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
-                                                                    ),
                                                                   ],
-                                                                ),
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'afrujkkk' /* 12 May. 2022 */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText2
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        fontSize:
-                                                                            13,
-                                                                        fontWeight:
-                                                                            FontWeight.w300,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                              ],
+                                                                );
+                                                              },
                                                             ),
                                                           ),
                                                           Padding(
@@ -519,11 +569,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 context.goNamed(
                                                                   'PropertyDetails',
                                                                   queryParams: {
-                                                                    'propertyId': serializeParam(
-                                                                        propertiesListBookedRecord
-                                                                            .pId,
-                                                                        ParamType
-                                                                            .int),
+                                                                    'propertyId':
+                                                                        serializeParam(
+                                                                            PropertyCall.propertyId(
+                                                                              (containerPropertyResponse?.jsonBody ?? ''),
+                                                                            ),
+                                                                            ParamType.int),
                                                                   }.withoutNulls,
                                                                 );
                                                               },
@@ -592,11 +643,13 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                 );
                               },
                             ),
-                            StreamBuilder<List<ReservedRecord>>(
-                              stream: queryReservedRecord(
-                                queryBuilder: (reservedRecord) =>
-                                    reservedRecord.where('u_id',
-                                        isEqualTo: currentUserReference),
+                            StreamBuilder<List<UserPropertiesRecord>>(
+                              stream: queryUserPropertiesRecord(
+                                queryBuilder: (userPropertiesRecord) =>
+                                    userPropertiesRecord
+                                        .where('u_id',
+                                            isEqualTo: currentUserReference)
+                                        .where('status', isEqualTo: 'reserved'),
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -612,20 +665,22 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     ),
                                   );
                                 }
-                                List<ReservedRecord>
-                                    propertiesListReservedRecordList =
+                                List<UserPropertiesRecord>
+                                    propertiesListUserPropertiesRecordList =
                                     snapshot.data;
-                                if (propertiesListReservedRecordList.isEmpty) {
+                                if (propertiesListUserPropertiesRecordList
+                                    .isEmpty) {
                                   return NotFoundPageWidget();
                                 }
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
                                   scrollDirection: Axis.vertical,
                                   itemCount:
-                                      propertiesListReservedRecordList.length,
+                                      propertiesListUserPropertiesRecordList
+                                          .length,
                                   itemBuilder: (context, propertiesListIndex) {
-                                    final propertiesListReservedRecord =
-                                        propertiesListReservedRecordList[
+                                    final propertiesListUserPropertiesRecord =
+                                        propertiesListUserPropertiesRecordList[
                                             propertiesListIndex];
                                     return Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -633,7 +688,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       child: FutureBuilder<ApiCallResponse>(
                                         future: PropertyCall.call(
                                           propertyId:
-                                              propertiesListReservedRecord.pId,
+                                              propertiesListUserPropertiesRecord
+                                                  .pId,
                                         ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
@@ -749,33 +805,117 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                         9,
                                                                         0,
                                                                         4),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Row(
+                                                            child: StreamBuilder<
+                                                                List<
+                                                                    OrdersRecord>>(
+                                                              stream:
+                                                                  queryOrdersRecord(
+                                                                queryBuilder: (ordersRecord) => ordersRecord
+                                                                    .where(
+                                                                        'u_id',
+                                                                        isEqualTo:
+                                                                            currentUserReference)
+                                                                    .where(
+                                                                        'p_id',
+                                                                        isEqualTo:
+                                                                            PropertyCall.propertyId(
+                                                                          (containerPropertyResponse?.jsonBody ??
+                                                                              ''),
+                                                                        )),
+                                                                singleRecord:
+                                                                    true,
+                                                              ),
+                                                              builder: (context,
+                                                                  snapshot) {
+                                                                // Customize what your widget looks like when it's loading.
+                                                                if (!snapshot
+                                                                    .hasData) {
+                                                                  return Center(
+                                                                    child:
+                                                                        SizedBox(
+                                                                      width: 50,
+                                                                      height:
+                                                                          50,
+                                                                      child:
+                                                                          SpinKitRipple(
+                                                                        color: Color(
+                                                                            0xFF2971FB),
+                                                                        size:
+                                                                            50,
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                }
+                                                                List<OrdersRecord>
+                                                                    rowOrdersRecordList =
+                                                                    snapshot
+                                                                        .data;
+                                                                // Return an empty Container when the document does not exist.
+                                                                if (snapshot
+                                                                    .data
+                                                                    .isEmpty) {
+                                                                  return Container();
+                                                                }
+                                                                final rowOrdersRecord =
+                                                                    rowOrdersRecordList
+                                                                            .isNotEmpty
+                                                                        ? rowOrdersRecordList
+                                                                            .first
+                                                                        : null;
+                                                                return Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
                                                                           .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
                                                                   children: [
+                                                                    Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'ry827uul' /* Booking ref:  */,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText2
+                                                                              .override(
+                                                                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                color: Color(0xFF6B6B6B),
+                                                                                fontSize: 13,
+                                                                                fontWeight: FontWeight.w300,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                        Text(
+                                                                          rowOrdersRecord
+                                                                              .orderId
+                                                                              .toString(),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText2
+                                                                              .override(
+                                                                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                fontSize: 12,
+                                                                                fontWeight: FontWeight.w300,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                     Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'kw0dempb' /* Booking ref:  */,
-                                                                      ),
+                                                                      dateTimeFormat(
+                                                                          'MMMMEEEEd',
+                                                                          rowOrdersRecord
+                                                                              .createdAt),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyText2
                                                                           .override(
                                                                             fontFamily:
                                                                                 'Sofia Pro By Khuzaimah',
-                                                                            color:
-                                                                                Color(0xFF6B6B6B),
                                                                             fontSize:
                                                                                 13,
                                                                             fontWeight:
@@ -784,49 +924,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 false,
                                                                           ),
                                                                     ),
-                                                                    Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        '7rsv3llf' /* 67687697 */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText2
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
-                                                                            fontSize:
-                                                                                12,
-                                                                            fontWeight:
-                                                                                FontWeight.w300,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
-                                                                    ),
                                                                   ],
-                                                                ),
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    '05925rg2' /* 12 May. 2022 */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText2
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        fontSize:
-                                                                            13,
-                                                                        fontWeight:
-                                                                            FontWeight.w300,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                              ],
+                                                                );
+                                                              },
                                                             ),
                                                           ),
                                                           Padding(
@@ -975,11 +1075,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 context.goNamed(
                                                                   'PropertyDetails',
                                                                   queryParams: {
-                                                                    'propertyId': serializeParam(
-                                                                        propertiesListReservedRecord
-                                                                            .pId,
-                                                                        ParamType
-                                                                            .int),
+                                                                    'propertyId':
+                                                                        serializeParam(
+                                                                            PropertyCall.propertyId(
+                                                                              (containerPropertyResponse?.jsonBody ?? ''),
+                                                                            ),
+                                                                            ParamType.int),
                                                                   }.withoutNulls,
                                                                 );
                                                               },
@@ -1048,10 +1149,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                 );
                               },
                             ),
-                            StreamBuilder<List<SavedRecord>>(
-                              stream: querySavedRecord(
-                                queryBuilder: (savedRecord) =>
-                                    savedRecord.where('u_id',
+                            StreamBuilder<List<UserSavedRecord>>(
+                              stream: queryUserSavedRecord(
+                                queryBuilder: (userSavedRecord) =>
+                                    userSavedRecord.where('u_id',
                                         isEqualTo: currentUserReference),
                               ),
                               builder: (context, snapshot) {
@@ -1068,20 +1169,20 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     ),
                                   );
                                 }
-                                List<SavedRecord>
-                                    propertiesListSavedRecordList =
+                                List<UserSavedRecord>
+                                    propertiesListUserSavedRecordList =
                                     snapshot.data;
-                                if (propertiesListSavedRecordList.isEmpty) {
+                                if (propertiesListUserSavedRecordList.isEmpty) {
                                   return NotFoundPageWidget();
                                 }
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
                                   scrollDirection: Axis.vertical,
                                   itemCount:
-                                      propertiesListSavedRecordList.length,
+                                      propertiesListUserSavedRecordList.length,
                                   itemBuilder: (context, propertiesListIndex) {
-                                    final propertiesListSavedRecord =
-                                        propertiesListSavedRecordList[
+                                    final propertiesListUserSavedRecord =
+                                        propertiesListUserSavedRecordList[
                                             propertiesListIndex];
                                     return Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -1089,7 +1190,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       child: FutureBuilder<ApiCallResponse>(
                                         future: PropertyCall.call(
                                           propertyId:
-                                              propertiesListSavedRecord.pId,
+                                              propertiesListUserSavedRecord.pId,
                                         ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
@@ -1118,8 +1219,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                 'PropertyDetails',
                                                 queryParams: {
                                                   'propertyId': serializeParam(
-                                                      propertiesListSavedRecord
-                                                          .pId,
+                                                      PropertyCall.propertyId(
+                                                        (containerPropertyResponse
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                      ),
                                                       ParamType.int),
                                                 }.withoutNulls,
                                               );

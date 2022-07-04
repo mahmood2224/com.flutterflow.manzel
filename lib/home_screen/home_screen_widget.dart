@@ -95,6 +95,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               FFLocalizations.of(context).getText(
                                 'td57ofdl' /* Browse our featured properties... */,
                               ),
+                              maxLines: 2,
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
@@ -103,6 +104,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     fontSize: 30,
                                     fontWeight: FontWeight.w800,
                                     useGoogleFonts: false,
+                                    lineHeight: 1.06,
                                   ),
                             ),
                           ),
@@ -138,7 +140,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   onFieldSubmitted: (_) async {
                                     logFirebaseEvent(
                                         'HOME_SCREEN_search_ON_TEXTFIELD_SUBMIT');
-                                    logFirebaseEvent('search_Navigate-To');
+                                    // citySearch
+                                    logFirebaseEvent('search_citySearch');
                                     context.goNamed(
                                       'WhereAreYouLooking',
                                       queryParams: {
@@ -182,6 +185,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         width: 0,
                                       ),
                                       borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    prefixIcon: Icon(
+                                      Icons.search_rounded,
+                                      color: Color(0xFF57636C),
+                                      size: 20,
                                     ),
                                   ),
                                   style: FlutterFlowTheme.of(context)

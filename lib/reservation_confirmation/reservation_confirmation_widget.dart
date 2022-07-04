@@ -1,9 +1,12 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/random_data_util.dart' as random_data;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,6 +27,7 @@ class ReservationConfirmationWidget extends StatefulWidget {
 class _ReservationConfirmationWidgetState
     extends State<ReservationConfirmationWidget> {
   ApiCallResponse initiateOrder;
+  OrdersRecord createOrder;
   String paymentMethodsValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -117,9 +121,16 @@ class _ReservationConfirmationWidgetState
                                           onTap: () async {
                                             logFirebaseEvent(
                                                 'RESERVATION_CONFIRMATION_Icon_n0mpifh9_O');
-                                            // back
-                                            logFirebaseEvent('Icon_back');
-                                            context.pop();
+                                            logFirebaseEvent(
+                                                'Icon_Navigate-To');
+                                            context.pushNamed(
+                                              'PropertyDetails',
+                                              queryParams: {
+                                                'propertyId': serializeParam(
+                                                    widget.propertyId,
+                                                    ParamType.int),
+                                              }.withoutNulls,
+                                            );
                                           },
                                           child: Icon(
                                             Icons.close,
@@ -210,47 +221,44 @@ class _ReservationConfirmationWidgetState
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 5, 20, 0),
+                                      0, 5, 0, 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Expanded(
-                                        child: Text(
-                                          valueOrDefault<String>(
-                                            PropertyCall.reservationsCost(
-                                              (reservationConfirmationPropertyResponse
-                                                      ?.jsonBody ??
-                                                  ''),
-                                            ).toString(),
-                                            '?',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                useGoogleFonts: false,
-                                              ),
+                                      Text(
+                                        valueOrDefault<String>(
+                                          PropertyCall.reservationsCost(
+                                            (reservationConfirmationPropertyResponse
+                                                    ?.jsonBody ??
+                                                ''),
+                                          ).toString(),
+                                          '?',
                                         ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  'Sofia Pro By Khuzaimah',
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.bold,
+                                              useGoogleFonts: false,
+                                            ),
                                       ),
-                                      Expanded(
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            'lrvnkupp' /*  SAR */,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
-                                                fontSize: 40,
-                                                fontWeight: FontWeight.bold,
-                                                useGoogleFonts: false,
-                                              ),
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          'lrvnkupp' /*  SAR */,
                                         ),
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  'Sofia Pro By Khuzaimah',
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.bold,
+                                              useGoogleFonts: false,
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -315,9 +323,6 @@ class _ReservationConfirmationWidgetState
                                           ),
                                           FFLocalizations.of(context).getText(
                                             '54vch0v9' /* ApplePay */,
-                                          ),
-                                          FFLocalizations.of(context).getText(
-                                            'm3qqnauq' /* Sadad */,
                                           )
                                         ].toList(),
                                         onChanged: (value) {
@@ -369,71 +374,99 @@ class _ReservationConfirmationWidgetState
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      FFButtonWidget(
-                                        onPressed: () async {
-                                          logFirebaseEvent(
-                                              'RESERVATION_CONFIRMATION_PAGE_pay_ON_TAP');
-                                          var _shouldSetState = false;
-                                          // InitiateOrder
-                                          logFirebaseEvent('pay_InitiateOrder');
-                                          initiateOrder =
-                                              await InitiateOrderCall.call(
-                                            propertyID:
-                                                widget.propertyId.toString(),
-                                            userID: currentUserUid,
-                                          );
-                                          _shouldSetState = true;
-                                          if ((initiateOrder?.succeeded ??
-                                              true)) {
-                                            // OrderConfirmed
+                                      if ((paymentMethodsValue != null) &&
+                                          (paymentMethodsValue != ''))
+                                        FFButtonWidget(
+                                          onPressed: () async {
                                             logFirebaseEvent(
-                                                'pay_OrderConfirmed');
-                                            context.goNamed(
-                                              'Confirmation',
-                                              queryParams: {
-                                                'propertyId': serializeParam(
-                                                    widget.propertyId,
-                                                    ParamType.int),
-                                                'paymentMethod': serializeParam(
-                                                    paymentMethodsValue,
-                                                    ParamType.String),
-                                              }.withoutNulls,
+                                                'RESERVATION_CONFIRMATION_PAGE_pay_ON_TAP');
+                                            var _shouldSetState = false;
+                                            // CreateOrder
+                                            logFirebaseEvent('pay_CreateOrder');
+
+                                            final ordersCreateData =
+                                                createOrdersRecordData(
+                                              orderId: random_data
+                                                  .randomInteger(0, 1000000),
+                                              uId: currentUserReference,
+                                              pId: widget.propertyId,
+                                              createdAt: getCurrentTimestamp,
+                                              status: 'order is created',
+                                              updatedAt: getCurrentTimestamp,
                                             );
-                                          } else {
+                                            var ordersRecordReference =
+                                                OrdersRecord.collection.doc();
+                                            await ordersRecordReference
+                                                .set(ordersCreateData);
+                                            createOrder = OrdersRecord
+                                                .getDocumentFromData(
+                                                    ordersCreateData,
+                                                    ordersRecordReference);
+                                            _shouldSetState = true;
+                                            // InitiateOrder
+                                            logFirebaseEvent(
+                                                'pay_InitiateOrder');
+                                            initiateOrder =
+                                                await InitiateOrderCall.call(
+                                              propertyID:
+                                                  widget.propertyId.toString(),
+                                              userID: currentUserUid,
+                                            );
+                                            _shouldSetState = true;
+                                            if ((initiateOrder?.succeeded ??
+                                                true)) {
+                                              // OrderConfirmed
+                                              logFirebaseEvent(
+                                                  'pay_OrderConfirmed');
+                                              context.goNamed(
+                                                'Confirmation',
+                                                queryParams: {
+                                                  'propertyId': serializeParam(
+                                                      widget.propertyId,
+                                                      ParamType.int),
+                                                  'paymentMethod':
+                                                      serializeParam(
+                                                          paymentMethodsValue,
+                                                          ParamType.String),
+                                                }.withoutNulls,
+                                              );
+                                            } else {
+                                              if (_shouldSetState)
+                                                setState(() {});
+                                              return;
+                                            }
+
                                             if (_shouldSetState)
                                               setState(() {});
-                                            return;
-                                          }
-
-                                          if (_shouldSetState) setState(() {});
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          '8j5d0340' /* Pay */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          width: 335,
-                                          height: 52,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
-                                                    color: Colors.white,
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w800,
-                                                    useGoogleFonts: false,
-                                                  ),
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
+                                          },
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            '8j5d0340' /* Pay */,
                                           ),
-                                          borderRadius: 12,
+                                          options: FFButtonOptions(
+                                            width: 335,
+                                            height: 52,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily:
+                                                          'Sofia Pro By Khuzaimah',
+                                                      color: Colors.white,
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      useGoogleFonts: false,
+                                                    ),
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1,
+                                            ),
+                                            borderRadius: 12,
+                                          ),
                                         ),
-                                      ),
                                     ],
                                   ),
                                 ),
