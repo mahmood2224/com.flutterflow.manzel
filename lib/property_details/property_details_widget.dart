@@ -1,18 +1,21 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
-import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
+import '../flutter_flow/flutter_flow_static_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/lat_lng.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:map_launcher/map_launcher.dart' as $ml;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mapbox_search/mapbox_search.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -20,21 +23,17 @@ class PropertyDetailsWidget extends StatefulWidget {
   const PropertyDetailsWidget({
     Key key,
     this.propertyId,
-    this.propertyLocation,
   }) : super(key: key);
 
   final int propertyId;
-  final PropertyLocationRecord propertyLocation;
 
   @override
   _PropertyDetailsWidgetState createState() => _PropertyDetailsWidgetState();
 }
 
 class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
-  LatLng googleMapsCenter;
-  final googleMapsController = Completer<GoogleMapController>();
   PageController pageViewController;
-  SavedRecord saveProperty;
+  UserSavedRecord saveProperty;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -48,7 +47,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      resizeToAvoidBottomInset: false,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
@@ -140,7 +138,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               valueOrDefault<
                                                                   String>(
                                                                 PropertyCall
-                                                                    .propertyId(
+                                                                    .propertyRef(
                                                                   (columnPropertyResponse
                                                                           ?.jsonBody ??
                                                                       ''),
@@ -930,7 +928,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     ),
                                                     Text(
                                                       valueOrDefault<String>(
-                                                        PropertyCall.propertyId(
+                                                        PropertyCall
+                                                            .propertyRef(
                                                           (columnPropertyResponse
                                                                   ?.jsonBody ??
                                                               ''),
@@ -1503,95 +1502,81 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   decoration: BoxDecoration(
                                                     color: Color(0xFFEEEEEE),
                                                   ),
-                                                  child: StreamBuilder<
-                                                      List<
-                                                          PropertyLocationRecord>>(
-                                                    stream:
-                                                        queryPropertyLocationRecord(
-                                                      queryBuilder: (propertyLocationRecord) =>
-                                                          propertyLocationRecord
-                                                              .where('name',
-                                                                  isEqualTo:
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Expanded(
+                                                        child: InkWell(
+                                                          onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'PROPERTY_DETAILS_StaticMap_xhp2s348_ON_T');
+                                                            // OpenMap
+                                                            logFirebaseEvent(
+                                                                'StaticMap_OpenMap');
+                                                            await launchMap(
+                                                              mapType: $ml
+                                                                  .MapType
+                                                                  .google,
+                                                              location: functions
+                                                                  .propertyLocation(
                                                                       PropertyCall
-                                                                          .propertyName(
-                                                                    (columnPropertyResponse
-                                                                            ?.jsonBody ??
-                                                                        ''),
-                                                                  ).toString()),
-                                                      singleRecord: true,
-                                                    ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child:
-                                                                SpinKitRipple(
-                                                              color: Color(
-                                                                  0xFF2971FB),
-                                                              size: 50,
-                                                            ),
+                                                                          .propertyLat(
+                                                                        (columnPropertyResponse?.jsonBody ??
+                                                                            ''),
+                                                                      ),
+                                                                      PropertyCall
+                                                                          .propertylng(
+                                                                        (columnPropertyResponse?.jsonBody ??
+                                                                            ''),
+                                                                      )),
+                                                              title: PropertyCall
+                                                                  .propertyName(
+                                                                (columnPropertyResponse
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                              ).toString(),
+                                                            );
+                                                          },
+                                                          child:
+                                                              FlutterFlowStaticMap(
+                                                            location: functions
+                                                                .propertyLocation(
+                                                                    PropertyCall
+                                                                        .propertyLat(
+                                                                      (columnPropertyResponse
+                                                                              ?.jsonBody ??
+                                                                          ''),
+                                                                    ),
+                                                                    PropertyCall
+                                                                        .propertylng(
+                                                                      (columnPropertyResponse
+                                                                              ?.jsonBody ??
+                                                                          ''),
+                                                                    )),
+                                                            apiKey:
+                                                                'pk.eyJ1IjoibWFuemVsIiwiYSI6ImNsNTB0NjI3YjA3OXQzYm9sdWNvM2Rrc2kifQ.zAYcxr9ozMoZfe4pEfxv7A',
+                                                            style: MapBoxStyle
+                                                                .Streets,
+                                                            width: 300,
+                                                            height: 300,
+                                                            fit: BoxFit.cover,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            markerColor:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .alternate,
+                                                            cached: true,
+                                                            zoom: 14,
+                                                            tilt: 0,
+                                                            rotation: 0,
                                                           ),
-                                                        );
-                                                      }
-                                                      List<PropertyLocationRecord>
-                                                          googleMapPropertyLocationRecordList =
-                                                          snapshot.data;
-                                                      // Return an empty Container when the document does not exist.
-                                                      if (snapshot
-                                                          .data.isEmpty) {
-                                                        return Container();
-                                                      }
-                                                      final googleMapPropertyLocationRecord =
-                                                          googleMapPropertyLocationRecordList
-                                                                  .isNotEmpty
-                                                              ? googleMapPropertyLocationRecordList
-                                                                  .first
-                                                              : null;
-                                                      return FlutterFlowGoogleMap(
-                                                        controller:
-                                                            googleMapsController,
-                                                        onCameraIdle: (latLng) =>
-                                                            setState(() =>
-                                                                googleMapsCenter =
-                                                                    latLng),
-                                                        initialLocation:
-                                                            googleMapsCenter ??=
-                                                                widget
-                                                                    .propertyLocation
-                                                                    .location,
-                                                        markers: [
-                                                          if (googleMapPropertyLocationRecord !=
-                                                              null)
-                                                            FlutterFlowMarker(
-                                                              googleMapPropertyLocationRecord
-                                                                  .reference
-                                                                  .path,
-                                                              googleMapPropertyLocationRecord
-                                                                  .location,
-                                                            ),
-                                                        ],
-                                                        markerColor:
-                                                            GoogleMarkerColor
-                                                                .violet,
-                                                        mapType: MapType.normal,
-                                                        style: GoogleMapStyle
-                                                            .standard,
-                                                        initialZoom: 1,
-                                                        allowInteraction: true,
-                                                        allowZoom: true,
-                                                        showZoomControls: true,
-                                                        showLocation: true,
-                                                        showCompass: false,
-                                                        showMapToolbar: true,
-                                                        showTraffic: false,
-                                                        centerMapOnMarkerTap:
-                                                            true,
-                                                      );
-                                                    },
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
@@ -1984,20 +1969,19 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           // save
                                           logFirebaseEvent('IconButton_save');
 
-                                          final savedCreateData =
-                                              createSavedRecordData(
-                                            pId: widget.propertyId,
+                                          final userSavedCreateData =
+                                              createUserSavedRecordData(
                                             uId: currentUserReference,
-                                            isSaved: true,
+                                            pId: widget.propertyId,
                                           );
-                                          var savedRecordReference =
-                                              SavedRecord.collection.doc();
-                                          await savedRecordReference
-                                              .set(savedCreateData);
-                                          saveProperty =
-                                              SavedRecord.getDocumentFromData(
-                                                  savedCreateData,
-                                                  savedRecordReference);
+                                          var userSavedRecordReference =
+                                              UserSavedRecord.collection.doc();
+                                          await userSavedRecordReference
+                                              .set(userSavedCreateData);
+                                          saveProperty = UserSavedRecord
+                                              .getDocumentFromData(
+                                                  userSavedCreateData,
+                                                  userSavedRecordReference);
 
                                           setState(() {});
                                         },

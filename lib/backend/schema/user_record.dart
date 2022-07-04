@@ -43,6 +43,9 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
   String get photoUrl;
 
   @nullable
+  String get ststus;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -54,7 +57,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
     ..employmentStatus = ''
     ..bank = ''
     ..monthlyIncome = ''
-    ..photoUrl = '';
+    ..photoUrl = ''
+    ..ststus = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('User');
@@ -86,6 +90,7 @@ Map<String, dynamic> createUserRecordData({
   String bank,
   String monthlyIncome,
   String photoUrl,
+  String ststus,
 }) =>
     serializers.toFirestore(
         UserRecord.serializer,
@@ -98,4 +103,5 @@ Map<String, dynamic> createUserRecordData({
           ..employmentStatus = employmentStatus
           ..bank = bank
           ..monthlyIncome = monthlyIncome
-          ..photoUrl = photoUrl));
+          ..photoUrl = photoUrl
+          ..ststus = ststus));

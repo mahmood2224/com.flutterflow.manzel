@@ -8,35 +8,35 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    match /Properity/{document} {
+    match /orders/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
       allow delete: if false;
     }
 
-    match /Saved/{document} {
+    match /userProperties/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
       allow delete: if false;
     }
 
-    match /Booked/{document} {
+    match /userSaved/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
       allow delete: if false;
     }
 
-    match /Reserved/{document} {
+    match /Property/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;
       allow delete: if false;
     }
 
-    match /propertyLocation/{document} {
+    match /notifications/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if false;

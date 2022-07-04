@@ -53,15 +53,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
           'We\'ll send a verification code to your number so \nyou can login or create an account',
       'ar': 'سنرسل رمز التحقق إلى رقمك حتى تتمكن من تسجيل الدخول أو إنشاء حساب',
     },
-    '6mvzq4jw': {
+    '4m2r1iwr': {
       'en': 'Mobile Number',
       'ar': 'رقم الهاتف المحمول',
     },
-    'a1hlirda': {
+    'f4tpckti': {
       'en': '+966',
       'ar': '+966',
     },
-    'h9hsxvqf': {
+    '11ilbwge': {
       'en': '+966',
       'ar': '+966',
     },
@@ -70,7 +70,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بالنقر فوق متابعة ، فإنك توافق على',
     },
     '5t0jhzug': {
-      'en': 'terms & conditions & privacy policy',
+      'en': 'terms & conditions',
+      'ar': 'الشروط والأحكام وسياسة الخصوصية',
+    },
+    '5ard5tmn': {
+      'en': ' & ',
+      'ar': 'الشروط والأحكام وسياسة الخصوصية',
+    },
+    'irbrz9hi': {
+      'en': 'privacy policy',
       'ar': 'الشروط والأحكام وسياسة الخصوصية',
     },
     'l3ozn1az': {
@@ -84,12 +92,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // OnboardingView
   {
-    'wwmwvzg6': {
+    '0rkg3m44': {
       'en': 'The perfect choice for \nyour future home',
       'ar': 'الخيار الأمثل لمنزلك المستقبلي',
     },
-    'j4op9rku': {
-      'en': 'Get Started',
+    'bl6z0bqv': {
+      'en': 'The perfect choice for \nyour future home',
+      'ar': 'الخيار الأمثل لمنزلك المستقبلي',
+    },
+    't9rvb8ym': {
+      'en': 'The perfect choice for \nyour future home',
+      'ar': 'الخيار الأمثل لمنزلك المستقبلي',
+    },
+    'bgkoinqg': {
+      'en': 'Get Started ',
       'ar': 'البدء',
     },
     'ua0lzucz': {
@@ -456,20 +472,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تسجيل الدخول',
     },
     'gl02050s': {
-      'en': 'Booked',
+      'en': 'Purchased',
       'ar': 'محجوز',
     },
     'tu9ytzrl': {
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز:',
-    },
-    '5exi2z5h': {
-      'en': '23456',
-      'ar': '23456',
-    },
-    'afrujkkk': {
-      'en': '12 May. 2022',
-      'ar': '12 مايو. 2022',
     },
     'kdwkp7d8': {
       'en': ' ,',
@@ -483,17 +491,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Reserved',
       'ar': 'حجز',
     },
-    'kw0dempb': {
+    'ry827uul': {
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز:',
-    },
-    '7rsv3llf': {
-      'en': '67687697',
-      'ar': '6774-07-05 T21: 00: 00Z',
-    },
-    '05925rg2': {
-      'en': '12 May. 2022',
-      'ar': '12 مايو. 2022',
     },
     'tjiw2bkf': {
       'en': ' ,',
@@ -527,33 +527,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'أين تبحث؟',
     },
     'fce9ky0f': {
-      'en': 'Home',
-      'ar': 'الصفحة الرئيسية',
-    },
-  },
-  // searchResults
-  {
-    's7qse5kw': {
-      'en': 'Installment starting from',
-      'ar': 'القسط يبدأ من',
-    },
-    'k7v4n43t': {
-      'en': '2,325.00 ',
-      'ar': '2،325.00',
-    },
-    'b85wyjy3': {
-      'en': 'SAR/Monthly',
-      'ar': ' ريال سعودي / شهري',
-    },
-    'mrcd2183': {
-      'en': ',',
-      'ar': '،',
-    },
-    'pv8bh37f': {
-      'en': 'Search Result',
-      'ar': 'نتيجة البحث',
-    },
-    'u65dazl0': {
       'en': 'Home',
       'ar': 'الصفحة الرئيسية',
     },
@@ -688,10 +661,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'ApplePay',
       'ar': 'ApplePay',
     },
-    'm3qqnauq': {
-      'en': 'Sadad',
-      'ar': 'سداد',
-    },
     '8j5d0340': {
       'en': 'Pay',
       'ar': 'ادفع',
@@ -707,9 +676,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Your Booking Confirmed',
       'ar': 'تم تأكيد حجزك',
     },
-    'zuueriah': {
-      'en': 'Booking Ref. : 277621515',
-      'ar': 'مرجع الحجز. : 277621515',
+    'is83qb7v': {
+      'en': 'Booking ref: ',
+      'ar': 'مرجع الحجز:',
     },
     '8ptcdhhd': {
       'en': 'Property details',
@@ -739,17 +708,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Amount',
       'ar': 'المبلغ',
     },
-    'twrer5tb': {
-      'en': '10,000.00 SAR',
-      'ar': '10،000.00 ريال سعودي',
-    },
     's1mfpoki': {
       'en': 'Date & Time',
       'ar': 'التاريخ والوقت',
-    },
-    'dkby0f6z': {
-      'en': '1 Jun 2022  01:00 PM',
-      'ar': '1 يونيو 2022 01:00 مساءً',
     },
     'a5vxpwan': {
       'en': 'View Receipt Transaction',

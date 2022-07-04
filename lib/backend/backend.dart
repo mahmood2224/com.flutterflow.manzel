@@ -5,11 +5,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/user_record.dart';
-import 'schema/properity_record.dart';
-import 'schema/saved_record.dart';
-import 'schema/booked_record.dart';
-import 'schema/reserved_record.dart';
-import 'schema/property_location_record.dart';
+import 'schema/orders_record.dart';
+import 'schema/user_properties_record.dart';
+import 'schema/user_saved_record.dart';
+import 'schema/property_record.dart';
+import 'schema/notifications_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -18,11 +18,11 @@ export 'schema/index.dart';
 export 'schema/serializers.dart';
 
 export 'schema/user_record.dart';
-export 'schema/properity_record.dart';
-export 'schema/saved_record.dart';
-export 'schema/booked_record.dart';
-export 'schema/reserved_record.dart';
-export 'schema/property_location_record.dart';
+export 'schema/orders_record.dart';
+export 'schema/user_properties_record.dart';
+export 'schema/user_saved_record.dart';
+export 'schema/property_record.dart';
+export 'schema/notifications_record.dart';
 
 /// Functions to query UserRecords (as a Stream and as a Future).
 Stream<List<UserRecord>> queryUserRecord({
@@ -66,216 +66,215 @@ Future<FFFirestorePage<UserRecord>> queryUserRecordPage({
       isStream: isStream,
     );
 
-/// Functions to query ProperityRecords (as a Stream and as a Future).
-Stream<List<ProperityRecord>> queryProperityRecord({
+/// Functions to query OrdersRecords (as a Stream and as a Future).
+Stream<List<OrdersRecord>> queryOrdersRecord({
   Query Function(Query) queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      ProperityRecord.collection,
-      ProperityRecord.serializer,
+      OrdersRecord.collection,
+      OrdersRecord.serializer,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<ProperityRecord>> queryProperityRecordOnce({
+Future<List<OrdersRecord>> queryOrdersRecordOnce({
   Query Function(Query) queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      ProperityRecord.collection,
-      ProperityRecord.serializer,
+      OrdersRecord.collection,
+      OrdersRecord.serializer,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<FFFirestorePage<ProperityRecord>> queryProperityRecordPage({
+Future<FFFirestorePage<OrdersRecord>> queryOrdersRecordPage({
   Query Function(Query) queryBuilder,
   DocumentSnapshot nextPageMarker,
   int pageSize,
   bool isStream,
 }) =>
     queryCollectionPage(
-      ProperityRecord.collection,
-      ProperityRecord.serializer,
+      OrdersRecord.collection,
+      OrdersRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
       isStream: isStream,
     );
 
-/// Functions to query SavedRecords (as a Stream and as a Future).
-Stream<List<SavedRecord>> querySavedRecord({
+/// Functions to query UserPropertiesRecords (as a Stream and as a Future).
+Stream<List<UserPropertiesRecord>> queryUserPropertiesRecord({
   Query Function(Query) queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      SavedRecord.collection,
-      SavedRecord.serializer,
+      UserPropertiesRecord.collection,
+      UserPropertiesRecord.serializer,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<SavedRecord>> querySavedRecordOnce({
+Future<List<UserPropertiesRecord>> queryUserPropertiesRecordOnce({
   Query Function(Query) queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      SavedRecord.collection,
-      SavedRecord.serializer,
+      UserPropertiesRecord.collection,
+      UserPropertiesRecord.serializer,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<FFFirestorePage<SavedRecord>> querySavedRecordPage({
+Future<FFFirestorePage<UserPropertiesRecord>> queryUserPropertiesRecordPage({
   Query Function(Query) queryBuilder,
   DocumentSnapshot nextPageMarker,
   int pageSize,
   bool isStream,
 }) =>
     queryCollectionPage(
-      SavedRecord.collection,
-      SavedRecord.serializer,
+      UserPropertiesRecord.collection,
+      UserPropertiesRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
       isStream: isStream,
     );
 
-/// Functions to query BookedRecords (as a Stream and as a Future).
-Stream<List<BookedRecord>> queryBookedRecord({
+/// Functions to query UserSavedRecords (as a Stream and as a Future).
+Stream<List<UserSavedRecord>> queryUserSavedRecord({
   Query Function(Query) queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      BookedRecord.collection,
-      BookedRecord.serializer,
+      UserSavedRecord.collection,
+      UserSavedRecord.serializer,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<BookedRecord>> queryBookedRecordOnce({
+Future<List<UserSavedRecord>> queryUserSavedRecordOnce({
   Query Function(Query) queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      BookedRecord.collection,
-      BookedRecord.serializer,
+      UserSavedRecord.collection,
+      UserSavedRecord.serializer,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<FFFirestorePage<BookedRecord>> queryBookedRecordPage({
+Future<FFFirestorePage<UserSavedRecord>> queryUserSavedRecordPage({
   Query Function(Query) queryBuilder,
   DocumentSnapshot nextPageMarker,
   int pageSize,
   bool isStream,
 }) =>
     queryCollectionPage(
-      BookedRecord.collection,
-      BookedRecord.serializer,
+      UserSavedRecord.collection,
+      UserSavedRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
       isStream: isStream,
     );
 
-/// Functions to query ReservedRecords (as a Stream and as a Future).
-Stream<List<ReservedRecord>> queryReservedRecord({
+/// Functions to query PropertyRecords (as a Stream and as a Future).
+Stream<List<PropertyRecord>> queryPropertyRecord({
   Query Function(Query) queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      ReservedRecord.collection,
-      ReservedRecord.serializer,
+      PropertyRecord.collection,
+      PropertyRecord.serializer,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<ReservedRecord>> queryReservedRecordOnce({
+Future<List<PropertyRecord>> queryPropertyRecordOnce({
   Query Function(Query) queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      ReservedRecord.collection,
-      ReservedRecord.serializer,
+      PropertyRecord.collection,
+      PropertyRecord.serializer,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<FFFirestorePage<ReservedRecord>> queryReservedRecordPage({
+Future<FFFirestorePage<PropertyRecord>> queryPropertyRecordPage({
   Query Function(Query) queryBuilder,
   DocumentSnapshot nextPageMarker,
   int pageSize,
   bool isStream,
 }) =>
     queryCollectionPage(
-      ReservedRecord.collection,
-      ReservedRecord.serializer,
+      PropertyRecord.collection,
+      PropertyRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
       isStream: isStream,
     );
 
-/// Functions to query PropertyLocationRecords (as a Stream and as a Future).
-Stream<List<PropertyLocationRecord>> queryPropertyLocationRecord({
+/// Functions to query NotificationsRecords (as a Stream and as a Future).
+Stream<List<NotificationsRecord>> queryNotificationsRecord({
   Query Function(Query) queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      PropertyLocationRecord.collection,
-      PropertyLocationRecord.serializer,
+      NotificationsRecord.collection,
+      NotificationsRecord.serializer,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<PropertyLocationRecord>> queryPropertyLocationRecordOnce({
+Future<List<NotificationsRecord>> queryNotificationsRecordOnce({
   Query Function(Query) queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      PropertyLocationRecord.collection,
-      PropertyLocationRecord.serializer,
+      NotificationsRecord.collection,
+      NotificationsRecord.serializer,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<FFFirestorePage<PropertyLocationRecord>>
-    queryPropertyLocationRecordPage({
+Future<FFFirestorePage<NotificationsRecord>> queryNotificationsRecordPage({
   Query Function(Query) queryBuilder,
   DocumentSnapshot nextPageMarker,
   int pageSize,
   bool isStream,
 }) =>
-        queryCollectionPage(
-          PropertyLocationRecord.collection,
-          PropertyLocationRecord.serializer,
-          queryBuilder: queryBuilder,
-          nextPageMarker: nextPageMarker,
-          pageSize: pageSize,
-          isStream: isStream,
-        );
+    queryCollectionPage(
+      NotificationsRecord.collection,
+      NotificationsRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
 
 Stream<List<T>> queryCollection<T>(Query collection, Serializer<T> serializer,
     {Query Function(Query) queryBuilder,

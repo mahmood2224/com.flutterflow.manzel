@@ -69,8 +69,8 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
           color: Colors.transparent,
           child: Builder(
             builder: (context) => Image.asset(
-              'assets/images/3.webp',
-              fit: BoxFit.cover,
+              'assets/images/Group_4.svg',
+              fit: BoxFit.scaleDown,
             ),
           ),
         )
@@ -93,13 +93,8 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
         city: getParameter(data, 'city'),
       ),
-  'searchResults': (data) async => SearchResultsWidget(
-        city: getParameter(data, 'city'),
-      ),
   'PropertyDetails': (data) async => PropertyDetailsWidget(
         propertyId: getParameter(data, 'propertyId'),
-        propertyLocation: await getDocumentParameter(
-            data, 'propertyLocation', PropertyLocationRecord.serializer),
       ),
   'bankDetails': (data) async => BankDetailsWidget(
         bankId: getParameter(data, 'bankId'),

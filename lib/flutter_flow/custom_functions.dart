@@ -27,13 +27,6 @@ int calculate(String builtIn) {
   return result.toInt();
 }
 
-LatLng getPropertyLocation(LatLng coordinates) {
-  if (coordinates.latitude == 0 && coordinates.longitude == 0) {
-    return LatLng(21.496661, 39.173354);
-  }
-  return coordinates;
-}
-
 LatLng latLngFronJson(dynamic latLngJson) {
   if (latLngJson == null) {
     return null;

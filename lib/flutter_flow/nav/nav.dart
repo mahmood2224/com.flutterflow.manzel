@@ -151,6 +151,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'MyProperties',
               path: 'myProperties',
+              requireAuth: true,
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'MyProperties')
                   : MyPropertiesWidget(),
@@ -163,23 +164,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'searchResults',
-              path: 'searchResults',
-              builder: (context, params) => SearchResultsWidget(
-                city: params.getParam('city', ParamType.String),
-              ),
-            ),
-            FFRoute(
               name: 'PropertyDetails',
               path: 'propertyDetails',
-              asyncParams: {
-                'propertyLocation': getDoc(
-                    'propertyLocation', PropertyLocationRecord.serializer),
-              },
               builder: (context, params) => PropertyDetailsWidget(
                 propertyId: params.getParam('propertyId', ParamType.int),
-                propertyLocation:
-                    params.getParam('propertyLocation', ParamType.Document),
               ),
             ),
             FFRoute(
@@ -398,8 +386,8 @@ class FFRoute {
                   color: Colors.transparent,
                   child: Builder(
                     builder: (context) => Image.asset(
-                      'assets/images/3.webp',
-                      fit: BoxFit.cover,
+                      'assets/images/Group_4.svg',
+                      fit: BoxFit.scaleDown,
                     ),
                   ),
                 )

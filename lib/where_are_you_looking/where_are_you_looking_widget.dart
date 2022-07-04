@@ -22,7 +22,7 @@ class WhereAreYouLookingWidget extends StatefulWidget {
 }
 
 class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
-  List<ProperityRecord> algoliaSearchResults = [];
+  List<PropertyRecord> algoliaSearchResults = [];
   TextEditingController searchController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -91,11 +91,11 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                 ),
                 onFieldSubmitted: (_) async {
                   logFirebaseEvent('WHERE_ARE_YOU_LOOKING_search_ON_TEXTFIEL');
-                  // search
-                  logFirebaseEvent('search_search');
+                  // CitySearch
+                  logFirebaseEvent('search_CitySearch');
                   setState(() => algoliaSearchResults = null);
-                  await ProperityRecord.search(
-                    term: searchController.text,
+                  await PropertyRecord.search(
+                    term: widget.city,
                   )
                       .then((r) => algoliaSearchResults = r)
                       .onError((_, __) => algoliaSearchResults = [])
@@ -152,13 +152,9 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                  child: FutureBuilder<List<ProperityRecord>>(
-                    future: ProperityRecord.search(
-                      term: searchController.text,
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
+                  child: Builder(
+                    builder: (context) {
+                      if (algoliaSearchResults == null) {
                         return Center(
                           child: SizedBox(
                             width: 50,
@@ -170,9 +166,8 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                           ),
                         );
                       }
-                      List<ProperityRecord> searchResultProperityRecordList =
-                          snapshot.data;
-                      if (searchResultProperityRecordList.isEmpty) {
+                      final cities = algoliaSearchResults?.toList() ?? [];
+                      if (cities.isEmpty) {
                         return Center(
                           child: NotFoundPageWidget(),
                         );
@@ -180,11 +175,9 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         scrollDirection: Axis.vertical,
-                        itemCount: searchResultProperityRecordList.length,
-                        itemBuilder: (context, searchResultIndex) {
-                          final searchResultProperityRecord =
-                              searchResultProperityRecordList[
-                                  searchResultIndex];
+                        itemCount: cities.length,
+                        itemBuilder: (context, citiesIndex) {
+                          final citiesItem = cities[citiesIndex];
                           return Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                             child: Container(
@@ -203,67 +196,53 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                               child: Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                                child: InkWell(
-                                  onTap: () async {
-                                    logFirebaseEvent(
-                                        'WHERE_ARE_YOU_LOOKING_Row_704ctcja_ON_TA');
-                                    logFirebaseEvent('Row_Navigate-To');
-                                    context.goNamed(
-                                      'searchResults',
-                                      queryParams: {
-                                        'city': serializeParam(
-                                            widget.city, ParamType.String),
-                                      }.withoutNulls,
-                                    );
-                                  },
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(5),
-                                        child: Image.network(
-                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo9GLsm5WZzkjlUGXhbKPV_LYIKhKLqJQX9WW7nXrZEzaQ0gbELk9yZtv5Ak27YxlKpBw&usqp=CAU',
-                                          width: 60,
-                                          height: 60,
-                                          fit: BoxFit.cover,
-                                        ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(5),
+                                      child: Image.network(
+                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo9GLsm5WZzkjlUGXhbKPV_LYIKhKLqJQX9WW7nXrZEzaQ0gbELk9yZtv5Ak27YxlKpBw&usqp=CAU',
+                                        width: 60,
+                                        height: 60,
+                                        fit: BoxFit.cover,
                                       ),
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 0, 0, 0),
-                                              child: Text(
-                                                searchResultProperityRecord
-                                                    .city,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12, 0, 0, 0),
+                                            child: Text(
+                                              citiesItem.propertyCity,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Sofia Pro By Khuzaimah',
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        useGoogleFonts: false,
+                                                      ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
-                                      Icon(
-                                        Icons.navigate_next_rounded,
-                                        color: Colors.black,
-                                        size: 24,
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                    Icon(
+                                      Icons.navigate_next_rounded,
+                                      color: Colors.black,
+                                      size: 24,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
