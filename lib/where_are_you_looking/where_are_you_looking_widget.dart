@@ -1,5 +1,4 @@
 import '../backend/backend.dart';
-import '../components/not_found_page_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -152,104 +151,77 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                  child: Builder(
-                    builder: (context) {
-                      if (algoliaSearchResults == null) {
-                        return Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: SpinKitRipple(
-                              color: Color(0xFF2971FB),
-                              size: 50,
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                        child: Container(
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 0,
+                                color: FlutterFlowTheme.of(context).lineColor,
+                                offset: Offset(0, 1),
+                              )
+                            ],
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.network(
+                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo9GLsm5WZzkjlUGXhbKPV_LYIKhKLqJQX9WW7nXrZEzaQ0gbELk9yZtv5Ak27YxlKpBw&usqp=CAU',
+                                    width: 60,
+                                    height: 60,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            12, 0, 0, 0),
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'nu1b6t0o' /* Riyadh */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .subtitle1
+                                              .override(
+                                                fontFamily:
+                                                    'Sofia Pro By Khuzaimah',
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                useGoogleFonts: false,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.navigate_next_rounded,
+                                  color: Colors.black,
+                                  size: 24,
+                                ),
+                              ],
                             ),
                           ),
-                        );
-                      }
-                      final cities = algoliaSearchResults?.toList() ?? [];
-                      if (cities.isEmpty) {
-                        return Center(
-                          child: NotFoundPageWidget(),
-                        );
-                      }
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        scrollDirection: Axis.vertical,
-                        itemCount: cities.length,
-                        itemBuilder: (context, citiesIndex) {
-                          final citiesItem = cities[citiesIndex];
-                          return Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                            child: Container(
-                              width: 100,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 0,
-                                    color:
-                                        FlutterFlowTheme.of(context).lineColor,
-                                    offset: Offset(0, 1),
-                                  )
-                                ],
-                              ),
-                              child: Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Image.network(
-                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo9GLsm5WZzkjlUGXhbKPV_LYIKhKLqJQX9WW7nXrZEzaQ0gbELk9yZtv5Ak27YxlKpBw&usqp=CAU',
-                                        width: 60,
-                                        height: 60,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    12, 0, 0, 0),
-                                            child: Text(
-                                              citiesItem.propertyCity,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.navigate_next_rounded,
-                                      color: Colors.black,
-                                      size: 24,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

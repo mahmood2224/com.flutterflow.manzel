@@ -268,3 +268,30 @@ class StartInstanceCall {
     );
   }
 }
+
+class CityListCall {
+  static Future<ApiCallResponse> call() {
+    return ApiManager.instance.makeApiCall(
+      callName: 'cityList',
+      apiUrl: 'https://strapi-dev.manzel.app/api/cities/?locale=en',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+    );
+  }
+}
+
+class FilterParamsCall {
+  static Future<ApiCallResponse> call() {
+    return ApiManager.instance.makeApiCall(
+      callName: 'filterParams',
+      apiUrl:
+          'https://strapi-dev.manzel.app/api/properties/?locale=en&populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+    );
+  }
+}
