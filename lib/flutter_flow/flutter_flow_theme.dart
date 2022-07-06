@@ -57,13 +57,13 @@ abstract class FlutterFlowTheme {
   TextStyle get bodyText1 => TextStyle(
         fontFamily: 'Sofia Pro By Khuzaimah',
         color: Colors.black,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w300,
         fontSize: 14,
       );
   TextStyle get bodyText2 => TextStyle(
         fontFamily: 'Sofia Pro By Khuzaimah',
         color: secondaryText,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.normal,
         fontSize: 14,
       );
 }

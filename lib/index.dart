@@ -32,3 +32,4 @@ export 'absher_verification/absher_verification_widget.dart'
 export 'confirm_absher/confirm_absher_widget.dart' show ConfirmAbsherWidget;
 export 'personal_employment_details/personal_employment_details_widget.dart'
     show PersonalEmploymentDetailsWidget;
+export 'filter_copy/filter_copy_widget.dart' show FilterCopyWidget;

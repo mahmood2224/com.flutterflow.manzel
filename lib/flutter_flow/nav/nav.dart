@@ -220,6 +220,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'PersonalEmploymentDetails',
               path: 'personalEmploymentDetails',
               builder: (context, params) => PersonalEmploymentDetailsWidget(),
+            ),
+            FFRoute(
+              name: 'FilterCopy',
+              path: 'filterCopy',
+              builder: (context, params) => FilterCopyWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

@@ -325,33 +325,41 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // HomeScreen
   {
-    'qe91inbs': {
-      'en': '+100 Real Estates ',
-      'ar': '+100 عقار',
-    },
-    'td57ofdl': {
-      'en': 'Browse our featured properties to own',
-      'ar': 'تصفح خصائصنا المميزة للامتلاك',
-    },
-    'n2rs891m': {
-      'en': 'Search here...',
-      'ar': 'أين تبحث؟',
-    },
     'waavnvd4': {
       'en': '1',
       'ar': '1',
+    },
+    'qnr0o42y': {
+      'en': 'Where are you looking?',
+      'ar': 'أين تنظر؟',
+    },
+    'fei6w05f': {
+      'en': 'Sort By',
+      'ar': '',
+    },
+    '29sok3od': {
+      'en': 'Near to me',
+      'ar': '',
+    },
+    'etpebw43': {
+      'en': 'Approved Banks',
+      'ar': '',
+    },
+    'efcxmcgl': {
+      'en': ', ',
+      'ar': '،',
     },
     '998is2ya': {
       'en': 'Installment starting from',
       'ar': 'القسط يبدأ من',
     },
+    'gqe4w739': {
+      'en': 'Total property price',
+      'ar': 'القسط يبدأ من',
+    },
     'l38if619': {
       'en': ' SAR/Monthly',
       'ar': ' ريال سعودي / شهري',
-    },
-    'efcxmcgl': {
-      'en': ', ',
-      'ar': '،',
     },
     'd9p577jz': {
       'en': 'Explore',
@@ -380,14 +388,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Filter
   {
-    'h84toi7e': {
-      'en': 'Reset',
-      'ar': 'إعادة',
-    },
-    'hy8565b9': {
-      'en': 'Filter',
-      'ar': 'فرز',
-    },
     'b8bqw4hw': {
       'en': 'City',
       'ar': 'مدينة',
@@ -456,6 +456,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Show  Properties',
       'ar': 'إظهار الخصائص',
     },
+    'h84toi7e': {
+      'en': 'Reset',
+      'ar': 'إعادة',
+    },
+    'hy8565b9': {
+      'en': 'Filter',
+      'ar': 'فرز',
+    },
     '5wfrx94q': {
       'en': 'Home',
       'ar': 'مسكن',
@@ -521,6 +529,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'o5kmjt96': {
       'en': 'Where are you looking?',
       'ar': 'أين تبحث؟',
+    },
+    'nu1b6t0o': {
+      'en': 'Riyadh',
+      'ar': '',
     },
     '8po9ixlq': {
       'en': 'Where are you looking?',
@@ -991,6 +1003,89 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'r2cco6t4': {
       'en': 'Home',
       'ar': 'الصفحة الرئيسية',
+    },
+  },
+  // FilterCopy
+  {
+    'bfc0jvhc': {
+      'en': 'City',
+      'ar': 'مدينة',
+    },
+    '1snf3qye': {
+      'en': 'Riyadh',
+      'ar': 'الرياض',
+    },
+    '5kec6c0m': {
+      'en': 'Select City',
+      'ar': 'اختر مدينة',
+    },
+    '1xtsbq2y': {
+      'en': 'Type',
+      'ar': 'نوع',
+    },
+    'rnc35lnt': {
+      'en': 'All',
+      'ar': 'الجميع',
+    },
+    'ducpx83i': {
+      'en': 'House',
+      'ar': 'منزل',
+    },
+    'fqnjkv6g': {
+      'en': 'Apartment',
+      'ar': 'شقة',
+    },
+    '0pjvwkk1': {
+      'en': 'Flat',
+      'ar': 'مسطحة',
+    },
+    'qhz0rrjr': {
+      'en': 'All',
+      'ar': 'الجميع',
+    },
+    'f872j8ol': {
+      'en': 'All',
+      'ar': 'الجميع',
+    },
+    '6xt16jt5': {
+      'en': 'Installment Range',
+      'ar': 'نطاق التقسيط',
+    },
+    '8ozjkl8w': {
+      'en': 'Furnishing',
+      'ar': 'مفروشة',
+    },
+    'o1h78xn1': {
+      'en': 'All',
+      'ar': 'الجميع',
+    },
+    '5sipykmn': {
+      'en': 'Furnishing',
+      'ar': 'مفروشة',
+    },
+    'emup7poc': {
+      'en': 'Un-Furnishing',
+      'ar': 'غير مفروشة',
+    },
+    'kgidgtfz': {
+      'en': 'All',
+      'ar': 'الجميع',
+    },
+    '3tmmjthp': {
+      'en': 'Show  Properties',
+      'ar': 'إظهار الخصائص',
+    },
+    '9wjco7f5': {
+      'en': 'Reset',
+      'ar': 'إعادة',
+    },
+    '4r6li7uf': {
+      'en': 'Filter',
+      'ar': 'فرز',
+    },
+    '9xztb8ua': {
+      'en': 'Home',
+      'ar': 'مسكن',
     },
   },
   // NotFoundPage
