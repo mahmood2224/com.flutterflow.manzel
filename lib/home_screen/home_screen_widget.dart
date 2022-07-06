@@ -261,54 +261,46 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 8, 0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          logFirebaseEvent(
-                                              'HOME_SCREEN_PAGE_propertyFilter_ON_TAP');
-                                          logFirebaseEvent(
-                                              'propertyFilter_Navigate-To');
-                                          context.pushNamed(
-                                            'Filter',
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType
-                                                        .bottomToTop,
-                                              ),
-                                            },
-                                          );
-                                        },
-                                        text: '',
-                                        icon: Icon(
-                                          Icons.filter_list_rounded,
-                                          color: Colors.black,
-                                          size: 16,
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'HOME_SCREEN_PAGE_propertyFilter_ON_TAP');
+                                        logFirebaseEvent(
+                                            'propertyFilter_Navigate-To');
+                                        context.pushNamed(
+                                          'Filter',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType: PageTransitionType
+                                                  .bottomToTop,
+                                            ),
+                                          },
+                                        );
+                                      },
+                                      text: '',
+                                      icon: Icon(
+                                        Icons.filter_list_rounded,
+                                        color: Colors.black,
+                                        size: 16,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 36,
+                                        height: 36,
+                                        color: Colors.white,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Colors.white,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                        borderSide: BorderSide(
+                                          color: Color(0xFFF4F4F4),
+                                          width: 1,
                                         ),
-                                        options: FFButtonOptions(
-                                          width: 36,
-                                          height: 36,
-                                          color: Colors.white,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Lexend Deca',
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
-                                          borderSide: BorderSide(
-                                            color: Color(0xFFF4F4F4),
-                                            width: 1,
-                                          ),
-                                          borderRadius: 18,
-                                        ),
+                                        borderRadius: 18,
                                       ),
                                     ),
                                   ],
@@ -361,7 +353,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           height: 30,
                           color: Color(0x1A2971FB),
                           textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
+                              FlutterFlowTheme.of(context).bodyText2.override(
                                     fontFamily: 'Sofia Pro By Khuzaimah',
                                     color: Color(0xFF2971FB),
                                     fontSize: 13,
