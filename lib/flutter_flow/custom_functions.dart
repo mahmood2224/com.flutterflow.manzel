@@ -43,3 +43,9 @@ LatLng propertyLocation(
   }
   return LatLng(lat, lng);
 }
+
+String formatAmount(String amount) {
+  var format = NumberFormat('###,###', 'en_US');
+  double value = double.parse(amount);
+  return format.format(value);
+}

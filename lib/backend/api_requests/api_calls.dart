@@ -9,11 +9,9 @@ class PropertiesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
       apiUrl:
-          'https://strapi-dev.manzel.app/api/properties/?populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images',
+          'https://strapi-dev.manzel.app/api/properties/?populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city,localizations',
       callType: ApiCallType.GET,
-      headers: {
-        'pagination[page]': '',
-      },
+      headers: {},
       params: {},
       returnBody: true,
     );
