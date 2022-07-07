@@ -60,7 +60,8 @@
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 
-
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>In order to search nearby, this app requires access to your current location.</string>
     <key>UIBackgroundModes</key>
     <array>
         <string>fetch</string>

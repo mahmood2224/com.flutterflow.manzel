@@ -209,7 +209,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   color: Colors
                                                                       .transparent,
                                                                 ),
-                                                                borderRadius: 7,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            7),
                                                               ),
                                                               showLoadingIndicator:
                                                                   false,
@@ -1766,7 +1769,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                                 1,
                                                                           ),
                                                                           borderRadius:
-                                                                              12,
+                                                                              BorderRadius.circular(12),
                                                                         ),
                                                                       ),
                                                                     ],

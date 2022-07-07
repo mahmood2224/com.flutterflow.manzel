@@ -236,7 +236,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                           color: Colors.transparent,
                           width: 1,
                         ),
-                        borderRadius: 12,
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                   ],

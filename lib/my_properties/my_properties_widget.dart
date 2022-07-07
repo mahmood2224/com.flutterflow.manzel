@@ -89,7 +89,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                           color: Colors.black,
                           width: 1,
                         ),
-                        borderRadius: 12,
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                   ],
@@ -288,7 +288,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     .transparent,
                                                                 width: 1,
                                                               ),
-                                                              borderRadius: 7,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          7),
                                                             ),
                                                           ),
                                                           Padding(
@@ -794,7 +797,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     .transparent,
                                                                 width: 1,
                                                               ),
-                                                              borderRadius: 7,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          7),
                                                             ),
                                                           ),
                                                           Padding(

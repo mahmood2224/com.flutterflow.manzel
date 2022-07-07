@@ -216,7 +216,7 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
                           color: Colors.transparent,
                           width: 1,
                         ),
-                        borderRadius: 12,
+                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                   ],
