@@ -52,7 +52,9 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
-	<key>FlutterDeepLinkingEnabled</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>In order to search nearby, this app requires access to your current location.</string>
+    <key>FlutterDeepLinkingEnabled</key>
 	<true/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>

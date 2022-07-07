@@ -11,7 +11,9 @@ class PropertiesCall {
       apiUrl:
           'https://strapi-dev.manzel.app/api/properties/?populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'pagination[page]': '',
+      },
       params: {},
       returnBody: true,
     );

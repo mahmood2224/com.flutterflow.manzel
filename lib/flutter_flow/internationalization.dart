@@ -424,10 +424,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'All',
       'ar': 'الجميع',
     },
-    'icjyjnup': {
-      'en': 'All',
-      'ar': 'الجميع',
-    },
     '4mz2rd2p': {
       'en': 'Installment Range',
       'ar': 'نطاق التقسيط',
