@@ -18,8 +18,8 @@ class FilterWidget extends StatefulWidget {
 
 class _FilterWidgetState extends State<FilterWidget> {
   List<String> isFurnishingValues;
-  List<String> propertyTypeListValues;
   String citiesListValue;
+  String propertyTypeListValue;
   double installmentSliderValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -136,16 +136,23 @@ class _FilterWidgetState extends State<FilterWidget> {
                             }
                             final citiesListCityListResponse = snapshot.data;
                             return FlutterFlowDropDown(
-                              options: (getJsonField(
-                                (citiesListCityListResponse?.jsonBody ?? ''),
-                                r'''$.attributes.city_name''',
-                              ) as List)
-                                  .map<String>((s) => s.toString())
-                                  .toList()
-                                  .toList(),
+                              options: [
+                                FFLocalizations.of(context).getText(
+                                  '1cqnd28g' /* Riyadh */,
+                                ),
+                                FFLocalizations.of(context).getText(
+                                  'ka7r97er' /* Jeddah */,
+                                ),
+                                FFLocalizations.of(context).getText(
+                                  'fwphp18w' /* Mecca */,
+                                ),
+                                FFLocalizations.of(context).getText(
+                                  'xagmgkfm' /* Dubai */,
+                                )
+                              ],
                               onChanged: (val) =>
                                   setState(() => citiesListValue = val),
-                              width: 335,
+                              width: double.infinity,
                               height: 55,
                               textStyle: FlutterFlowTheme.of(context)
                                   .bodyText1
@@ -195,99 +202,99 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Wrap(
-                        spacing: 0,
-                        runSpacing: 0,
-                        alignment: WrapAlignment.start,
-                        crossAxisAlignment: WrapCrossAlignment.start,
-                        direction: Axis.horizontal,
-                        runAlignment: WrapAlignment.start,
-                        verticalDirection: VerticalDirection.down,
-                        clipBehavior: Clip.none,
-                        children: [
-                          FutureBuilder<ApiCallResponse>(
-                            future: FilterParamsCall.call(),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: SpinKitRipple(
-                                      color: Color(0xFF2971FB),
-                                      size: 50,
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            FutureBuilder<ApiCallResponse>(
+                              future: FilterParamsCall.call(),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: SpinKitRipple(
+                                        color: Color(0xFF2971FB),
+                                        size: 50,
+                                      ),
                                     ),
+                                  );
+                                }
+                                final propertyTypeListFilterParamsResponse =
+                                    snapshot.data;
+                                return FlutterFlowChoiceChips(
+                                  initiallySelected: propertyTypeListValue !=
+                                          null
+                                      ? [propertyTypeListValue]
+                                      : [
+                                          FFLocalizations.of(context).getText(
+                                            '2jdd174j' /* All */,
+                                          )
+                                        ],
+                                  options: ((getJsonField(
+                                            (propertyTypeListFilterParamsResponse
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.meta.property_type''',
+                                          ) as List)
+                                              .map<String>((s) => s.toString())
+                                              .toList() ??
+                                          [])
+                                      .map((label) => ChipData(label))
+                                      .toList(),
+                                  onChanged: (val) => setState(
+                                      () => propertyTypeListValue = val.first),
+                                  selectedChipStyle: ChipStyle(
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal,
+                                          useGoogleFonts: false,
+                                        ),
+                                    iconColor: Colors.white,
+                                    iconSize: 0,
+                                    elevation: 2,
                                   ),
+                                  unselectedChipStyle: ChipStyle(
+                                    backgroundColor: Colors.white,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
+                                    iconColor: Color(0xFF323B45),
+                                    iconSize: 0,
+                                    elevation: 1,
+                                  ),
+                                  chipSpacing: 8,
+                                  multiselect: false,
+                                  initialized: propertyTypeListValue != null,
+                                  alignment: WrapAlignment.center,
                                 );
-                              }
-                              final propertyTypeListFilterParamsResponse =
-                                  snapshot.data;
-                              return FlutterFlowChoiceChips(
-                                initiallySelected:
-                                    propertyTypeListValues != null
-                                        ? propertyTypeListValues
-                                        : [],
-                                options: ((getJsonField(
-                                          (propertyTypeListFilterParamsResponse
-                                                  ?.jsonBody ??
-                                              ''),
-                                          r'''$.property_type''',
-                                        ) as List)
-                                            .map<String>((s) => s.toString())
-                                            .toList() ??
-                                        [])
-                                    .map((label) => ChipData(label))
-                                    .toList(),
-                                onChanged: (val) => setState(
-                                    () => propertyTypeListValues = val),
-                                selectedChipStyle: ChipStyle(
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.normal,
-                                        useGoogleFonts: false,
-                                      ),
-                                  iconColor: Colors.white,
-                                  iconSize: 0,
-                                  elevation: 2,
-                                ),
-                                unselectedChipStyle: ChipStyle(
-                                  backgroundColor: Colors.white,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                  iconColor: Color(0xFF323B45),
-                                  iconSize: 0,
-                                  elevation: 1,
-                                ),
-                                chipSpacing: 8,
-                                multiselect: true,
-                                initialized: propertyTypeListValues != null,
-                                alignment: WrapAlignment.center,
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -425,7 +432,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                             (isFurnishingFilterParamsResponse
                                                     ?.jsonBody ??
                                                 ''),
-                                            r'''$.furnishing_type''',
+                                            r'''$.meta.furnishing_type''',
                                           ) as List)
                                               .map<String>((s) => s.toString())
                                               .toList() ??

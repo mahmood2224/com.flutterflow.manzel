@@ -359,7 +359,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'l38if619': {
       'en': ' SAR/Monthly',
-      'ar': ' ريال سعودي / شهري',
+      'ar': 'ريال سعودي / شهري',
+    },
+    'dhoik8q5': {
+      'en': ' SAR',
+      'ar': 'ريال سعودي',
     },
     'd9p577jz': {
       'en': 'Explore',
@@ -396,6 +400,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Riyadh',
       'ar': 'الرياض',
     },
+    'ka7r97er': {
+      'en': 'Jeddah',
+      'ar': '',
+    },
+    'fwphp18w': {
+      'en': 'Mecca',
+      'ar': '',
+    },
+    'xagmgkfm': {
+      'en': 'Dubai',
+      'ar': '',
+    },
     'le1j7gvf': {
       'en': 'Select City',
       'ar': 'اختر مدينة',
@@ -420,6 +436,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Flat',
       'ar': 'مسطحة',
     },
+    '9c20unp8': {
+      'en': 'Town house',
+      'ar': '',
+    },
+    '378fpsns': {
+      'en': 'Mansion',
+      'ar': '',
+    },
     '2jdd174j': {
       'en': 'All',
       'ar': 'الجميع',
@@ -443,6 +467,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'skyj7jpv': {
       'en': 'Un-Furnishing',
       'ar': 'غير مفروشة',
+    },
+    '8x7rkqnv': {
+      'en': 'Semi-Furnished',
+      'ar': '',
     },
     '7fpsv2qy': {
       'en': 'All',
