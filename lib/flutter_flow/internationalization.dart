@@ -444,13 +444,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Mansion',
       'ar': '',
     },
-    '2jdd174j': {
-      'en': 'All',
-      'ar': 'الجميع',
-    },
     '4mz2rd2p': {
       'en': 'Installment Range',
       'ar': 'نطاق التقسيط',
+    },
+    't4hfmdic': {
+      'en': '2,500 - 9,000 SAR',
+      'ar': '',
     },
     '2m2ni5iy': {
       'en': 'Furnishing',
@@ -471,10 +471,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '8x7rkqnv': {
       'en': 'Semi-Furnished',
       'ar': '',
-    },
-    '7fpsv2qy': {
-      'en': 'All',
-      'ar': 'الجميع',
     },
     'dgzjfbdt': {
       'en': 'Show  Properties',

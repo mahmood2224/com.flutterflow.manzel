@@ -2,7 +2,6 @@ import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -216,103 +215,60 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 10, 0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            logFirebaseEvent(
-                                                'HOME_SCREEN_PAGE_propertyFilter_ON_TAP');
-                                            logFirebaseEvent(
-                                                'propertyFilter_Navigate-To');
-                                            context.pushNamed(
-                                              'Filter',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType
-                                                          .bottomToTop,
-                                                ),
-                                              },
-                                            );
-                                          },
-                                          text: '',
-                                          icon: Icon(
-                                            Icons.map_outlined,
-                                            color: FlutterFlowTheme.of(context)
-                                                .textColor,
-                                            size: 16,
-                                          ),
-                                          options: FFButtonOptions(
-                                            width: 36,
-                                            height: 36,
+                                        child: Container(
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
                                             color: Colors.white,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Colors.white,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
-                                            borderSide: BorderSide(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
                                               color: Color(0xFFF4F4F4),
                                               width: 1,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(18),
+                                          ),
+                                          child: Image.asset(
+                                            'assets/images/map.png',
+                                            width: 100,
+                                            height: 100,
+                                            fit: BoxFit.none,
                                           ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 8, 0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            logFirebaseEvent(
-                                                'HOME_SCREEN_PAGE_propertyFilter_ON_TAP');
-                                            logFirebaseEvent(
-                                                'propertyFilter_Navigate-To');
-                                            context.pushNamed(
-                                              'Filter',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType
-                                                          .bottomToTop,
-                                                ),
-                                              },
-                                            );
-                                          },
-                                          text: '',
-                                          icon: Icon(
-                                            Icons.filter_list_rounded,
-                                            color: Colors.black,
-                                            size: 16,
-                                          ),
-                                          options: FFButtonOptions(
-                                            width: 36,
-                                            height: 36,
+                                      InkWell(
+                                        onTap: () async {
+                                          logFirebaseEvent(
+                                              'HOME_SCREEN_Container_13mjruev_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Container_Navigate-To');
+                                          context.pushNamed(
+                                            'Filter',
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType
+                                                        .bottomToTop,
+                                              ),
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
                                             color: Colors.white,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Colors.white,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.normal,
-                                                    ),
-                                            borderSide: BorderSide(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
                                               color: Color(0xFFF4F4F4),
                                               width: 1,
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(18),
+                                          ),
+                                          child: Image.asset(
+                                            'assets/images/Filter.png',
+                                            width: 100,
+                                            height: 100,
+                                            fit: BoxFit.none,
                                           ),
                                         ),
                                       ),
