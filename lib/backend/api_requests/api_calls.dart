@@ -5,14 +5,28 @@ import 'api_manager.dart';
 export 'api_manager.dart' show ApiCallResponse;
 
 class PropertiesCall {
-  static Future<ApiCallResponse> call() {
+  static Future<ApiCallResponse> call({
+    String city = '',
+    String furnishingType = '',
+    String propertyType = '',
+    int pageNumber,
+    int pageSize,
+    String locale = 'en',
+  }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
       apiUrl:
           'https://strapi-dev.manzel.app/api/properties/?populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city,localizations',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'city': city,
+        'furnishing_type': furnishingType,
+        'property_type': propertyType,
+        'page_number': pageNumber,
+        'page_size': pageSize,
+        'locale': locale,
+      },
       returnBody: true,
     );
   }
