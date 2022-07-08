@@ -190,12 +190,12 @@ your f... */
                   logFirebaseEvent('ONBOARDING_VIEW_PAGE_getStarted_ON_TAP');
                   currentUserLocationValue = await getCurrentUserLocation(
                       defaultLocation: LatLng(0.0, 0.0));
-                  logFirebaseEvent('getStarted_Update-Local-State');
-                  setState(() =>
-                      FFAppState().coordinates = currentUserLocationValue);
                   // GoTohome
                   logFirebaseEvent('getStarted_GoTohome');
                   context.goNamed('HomeScreen');
+                  logFirebaseEvent('getStarted_Update-Local-State');
+                  setState(() =>
+                      FFAppState().coordinates = currentUserLocationValue);
                 },
                 text: FFLocalizations.of(context).getText(
                   'bgkoinqg' /* Get Started  */,

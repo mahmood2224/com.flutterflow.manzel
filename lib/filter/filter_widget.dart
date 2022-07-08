@@ -495,7 +495,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                   onPressed: () async {
                     logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
                     logFirebaseEvent('apllyFilter_Update-Local-State');
-                    setState(() => FFAppState().filterCity = '\"null\"');
+                    setState(() => FFAppState().filterCity = '');
                     logFirebaseEvent('apllyFilter_Update-Local-State');
                     setState(
                         () => FFAppState().filterCity = valueOrDefault<String>(
@@ -503,8 +503,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               'null',
                             ));
                     logFirebaseEvent('apllyFilter_Update-Local-State');
-                    setState(
-                        () => FFAppState().filterFurnishingType = '\"null\"');
+                    setState(() => FFAppState().filterFurnishingType = '');
                     logFirebaseEvent('apllyFilter_Update-Local-State');
                     setState(() => FFAppState().filterFurnishingType =
                             valueOrDefault<String>(
@@ -512,8 +511,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           'null',
                         ));
                     logFirebaseEvent('apllyFilter_Update-Local-State');
-                    setState(
-                        () => FFAppState().filterPropertyType = '\"null\"');
+                    setState(() => FFAppState().filterPropertyType = '');
                     logFirebaseEvent('apllyFilter_Update-Local-State');
                     setState(() => FFAppState().filterPropertyType =
                             valueOrDefault<String>(
