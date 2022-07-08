@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +20,6 @@ class FilterWidget extends StatefulWidget {
 class _FilterWidgetState extends State<FilterWidget> {
   String citiesListValue;
   String propertyTypeListValue;
-  double installmentSliderValue;
   String isFurnishingValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -27,7 +27,6 @@ class _FilterWidgetState extends State<FilterWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Filter'});
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -39,17 +38,28 @@ class _FilterWidgetState extends State<FilterWidget> {
         automaticallyImplyLeading: false,
         leading: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(6, 18, 0, 0),
-          child: Text(
-            FFLocalizations.of(context).getText(
-              'h84toi7e' /* Reset */,
+          child: InkWell(
+            onTap: () async {
+              logFirebaseEvent('FILTER_PAGE_Text_re50sdm2_ON_TAP');
+              logFirebaseEvent('Text_Update-Local-State');
+              setState(() => FFAppState().filterCity = '');
+              logFirebaseEvent('Text_Update-Local-State');
+              setState(() => FFAppState().filterPropertyType = '');
+              logFirebaseEvent('Text_Update-Local-State');
+              setState(() => FFAppState().filterFurnishingType = '');
+            },
+            child: Text(
+              FFLocalizations.of(context).getText(
+                'h84toi7e' /* Reset */,
+              ),
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).bodyText1.override(
+                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    useGoogleFonts: false,
+                  ),
             ),
-            textAlign: TextAlign.center,
-            style: FlutterFlowTheme.of(context).bodyText1.override(
-                  fontFamily: 'Sofia Pro By Khuzaimah',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  useGoogleFonts: false,
-                ),
           ),
         ),
         title: Text(
@@ -136,6 +146,11 @@ class _FilterWidgetState extends State<FilterWidget> {
                             }
                             final citiesListCityListResponse = snapshot.data;
                             return FlutterFlowDropDown(
+                              initialOption: citiesListValue ??=
+                                  valueOrDefault<String>(
+                                FFAppState().filterCity,
+                                'null',
+                              ),
                               options: [
                                 FFLocalizations.of(context).getText(
                                   '1cqnd28g' /* Riyadh */,
@@ -232,14 +247,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 final propertyTypeListFilterParamsResponse =
                                     snapshot.data;
                                 return FlutterFlowChoiceChips(
-                                  initiallySelected: propertyTypeListValue !=
-                                          null
-                                      ? [propertyTypeListValue]
-                                      : [
-                                          FFLocalizations.of(context).getText(
-                                            '2jdd174j' /* All */,
-                                          )
-                                        ],
+                                  initiallySelected:
+                                      propertyTypeListValue != null
+                                          ? [propertyTypeListValue]
+                                          : [
+                                              valueOrDefault<String>(
+                                                FFAppState().filterPropertyType,
+                                                'null',
+                                              )
+                                            ],
                                   options: ((getJsonField(
                                             (propertyTypeListFilterParamsResponse
                                                     ?.jsonBody ??
@@ -317,9 +333,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                           ),
                     ),
                     Text(
-                      valueOrDefault<String>(
-                        installmentSliderValue.toString(),
-                        '0',
+                      FFLocalizations.of(context).getText(
+                        't4hfmdic' /* 2,500 - 9,000 SAR */,
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Sofia Pro By Khuzaimah',
@@ -340,26 +355,52 @@ class _FilterWidgetState extends State<FilterWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: SliderTheme(
-                          data: SliderThemeData(
-                            showValueIndicator: ShowValueIndicator.always,
-                          ),
-                          child: Container(
-                            width: 335,
-                            child: Slider(
-                              activeColor:
-                                  FlutterFlowTheme.of(context).primaryColor,
-                              inactiveColor: Color(0xFF9E9E9E),
-                              min: 0,
-                              max: 9000,
-                              value: installmentSliderValue ??= 1,
-                              label: installmentSliderValue.toString(),
-                              onChanged: (newValue) {
-                                setState(
-                                    () => installmentSliderValue = newValue);
-                              },
-                            ),
-                          ),
+                        child: FutureBuilder<ApiCallResponse>(
+                          future: FilterParamsCall.call(),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: SpinKitRipple(
+                                    color: Color(0xFF2971FB),
+                                    size: 50,
+                                  ),
+                                ),
+                              );
+                            }
+                            final customRangeSliderFilterParamsResponse =
+                                snapshot.data;
+                            return Container(
+                              width: double.infinity,
+                              height: MediaQuery.of(context).size.height * 0.07,
+                              child: custom_widgets.CustomRangeSlider(
+                                width: double.infinity,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.07,
+                                minRange: valueOrDefault<int>(
+                                  getJsonField(
+                                    (customRangeSliderFilterParamsResponse
+                                            ?.jsonBody ??
+                                        ''),
+                                    r'''$.meta.min_price''',
+                                  ),
+                                  0,
+                                ),
+                                maxRange: valueOrDefault<int>(
+                                  getJsonField(
+                                    (customRangeSliderFilterParamsResponse
+                                            ?.jsonBody ??
+                                        ''),
+                                    r'''$.meta.max_price''',
+                                  ),
+                                  1,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -428,8 +469,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   initiallySelected: isFurnishingValue != null
                                       ? [isFurnishingValue]
                                       : [
-                                          FFLocalizations.of(context).getText(
-                                            '7fpsv2qy' /* All */,
+                                          valueOrDefault<String>(
+                                            FFAppState().filterFurnishingType,
+                                            'null',
                                           )
                                         ],
                                   options: ((getJsonField(
