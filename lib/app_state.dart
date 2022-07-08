@@ -26,11 +26,11 @@ class FFAppState {
   dynamic filter = jsonDecode(
       '{\"city\":null,\" furnishing_type\":null,\"property_type\":null,\"minimum_price\":null,\"mximum_price\":null}');
 
-  String filterCity = '\"null\"';
+  String filterCity = '';
 
-  String filterPropertyType = '\"null\"';
+  String filterPropertyType = '';
 
-  String filterFurnishingType = '\"null\"';
+  String filterFurnishingType = '';
 
   int filterMaximumPrice = 0;
 

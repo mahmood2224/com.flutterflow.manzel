@@ -6,20 +6,22 @@ export 'api_manager.dart' show ApiCallResponse;
 
 class PropertiesCall {
   static Future<ApiCallResponse> call({
+    String populate =
+        '*,banks.bank_logo,managed_by.prob_company_logo,property_images,city,localizations',
     String city = '',
     String furnishingType = '',
     String propertyType = '',
-    int pageNumber,
-    int pageSize,
+    String pageNumber = '',
+    String pageSize = '',
     String locale = 'en',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
-      apiUrl:
-          'https://strapi-dev.manzel.app/api/properties/?populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city,localizations',
+      apiUrl: 'https://strapi-dev.manzel.app/api/properties/',
       callType: ApiCallType.GET,
       headers: {},
       params: {
+        'populate': populate,
         'city': city,
         'furnishing_type': furnishingType,
         'property_type': propertyType,
