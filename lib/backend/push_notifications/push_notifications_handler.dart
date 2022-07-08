@@ -65,13 +65,12 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 
   @override
   Widget build(BuildContext context) => _loading
-      ? Center(
-          child: SizedBox(
-            width: 50,
-            height: 50,
-            child: SpinKitRipple(
-              color: Color(0xFF2971FB),
-              size: 50,
+      ? Container(
+          color: Color(0xFFE5E5E5),
+          child: Builder(
+            builder: (context) => Image.asset(
+              'assets/images/Group_4.png',
+              fit: BoxFit.none,
             ),
           ),
         )

@@ -17,10 +17,10 @@ class FilterWidget extends StatefulWidget {
 }
 
 class _FilterWidgetState extends State<FilterWidget> {
-  List<String> isFurnishingValues;
   String citiesListValue;
   String propertyTypeListValue;
   double installmentSliderValue;
+  String isFurnishingValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -425,9 +425,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 final isFurnishingFilterParamsResponse =
                                     snapshot.data;
                                 return FlutterFlowChoiceChips(
-                                  initiallySelected: isFurnishingValues != null
-                                      ? isFurnishingValues
-                                      : [],
+                                  initiallySelected: isFurnishingValue != null
+                                      ? [isFurnishingValue]
+                                      : [
+                                          FFLocalizations.of(context).getText(
+                                            '7fpsv2qy' /* All */,
+                                          )
+                                        ],
                                   options: ((getJsonField(
                                             (isFurnishingFilterParamsResponse
                                                     ?.jsonBody ??
@@ -439,8 +443,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                                           [])
                                       .map((label) => ChipData(label))
                                       .toList(),
-                                  onChanged: (val) =>
-                                      setState(() => isFurnishingValues = val),
+                                  onChanged: (val) => setState(
+                                      () => isFurnishingValue = val.first),
                                   selectedChipStyle: ChipStyle(
                                     backgroundColor:
                                         FlutterFlowTheme.of(context)
@@ -472,8 +476,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     elevation: 2,
                                   ),
                                   chipSpacing: 8,
-                                  multiselect: true,
-                                  initialized: isFurnishingValues != null,
+                                  multiselect: false,
+                                  initialized: isFurnishingValue != null,
                                   alignment: WrapAlignment.center,
                                 );
                               },
@@ -488,8 +492,36 @@ class _FilterWidgetState extends State<FilterWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 220, 0, 30),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('apllyFilter pressed ...');
+                  onPressed: () async {
+                    logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
+                    logFirebaseEvent('apllyFilter_Update-Local-State');
+                    setState(() => FFAppState().filterCity = '\"null\"');
+                    logFirebaseEvent('apllyFilter_Update-Local-State');
+                    setState(
+                        () => FFAppState().filterCity = valueOrDefault<String>(
+                              citiesListValue,
+                              'null',
+                            ));
+                    logFirebaseEvent('apllyFilter_Update-Local-State');
+                    setState(
+                        () => FFAppState().filterFurnishingType = '\"null\"');
+                    logFirebaseEvent('apllyFilter_Update-Local-State');
+                    setState(() => FFAppState().filterFurnishingType =
+                            valueOrDefault<String>(
+                          isFurnishingValue,
+                          'null',
+                        ));
+                    logFirebaseEvent('apllyFilter_Update-Local-State');
+                    setState(
+                        () => FFAppState().filterPropertyType = '\"null\"');
+                    logFirebaseEvent('apllyFilter_Update-Local-State');
+                    setState(() => FFAppState().filterPropertyType =
+                            valueOrDefault<String>(
+                          propertyTypeListValue,
+                          'null',
+                        ));
+                    logFirebaseEvent('apllyFilter_Navigate-Back');
+                    context.pop();
                   },
                   text: FFLocalizations.of(context).getText(
                     'dgzjfbdt' /* Show  Properties */,

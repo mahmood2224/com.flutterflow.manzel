@@ -337,7 +337,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Sort By',
       'ar': '',
     },
-    '29sok3od': {
+    'jxwg61ha': {
       'en': 'Near to me',
       'ar': '',
     },

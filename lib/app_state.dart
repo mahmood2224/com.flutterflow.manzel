@@ -22,6 +22,19 @@ class FFAppState {
   dynamic property;
 
   LatLng coordinates;
+
+  dynamic filter = jsonDecode(
+      '{\"city\":null,\" furnishing_type\":null,\"property_type\":null,\"minimum_price\":null,\"mximum_price\":null}');
+
+  String filterCity = '\"null\"';
+
+  String filterPropertyType = '\"null\"';
+
+  String filterFurnishingType = '\"null\"';
+
+  int filterMaximumPrice = 0;
+
+  int filterMinimumPrice = 0;
 }
 
 LatLng _latLngFromString(String val) {
