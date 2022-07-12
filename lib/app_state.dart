@@ -15,6 +15,7 @@ class FFAppState {
 
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
+    _isInitailLaunch = prefs.getBool('ff_isInitailLaunch') ?? _isInitailLaunch;
   }
 
   SharedPreferences prefs;
@@ -35,6 +36,13 @@ class FFAppState {
   int filterMaximumPrice = 0;
 
   int filterMinimumPrice = 0;
+
+  bool _isInitailLaunch = false;
+  bool get isInitailLaunch => _isInitailLaunch;
+  set isInitailLaunch(bool _value) {
+    _isInitailLaunch = _value;
+    prefs.setBool('ff_isInitailLaunch', _value);
+  }
 }
 
 LatLng _latLngFromString(String val) {

@@ -2,6 +2,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -21,6 +22,23 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+      logFirebaseEvent('ONBOARDING_VIEW_OnboardingView_ON_LOAD');
+      if (!(FFAppState().isInitailLaunch)) {
+        logFirebaseEvent('OnboardingView_Navigate-To');
+        context.pushNamed(
+          'HomeScreen',
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.leftToRight,
+            ),
+          },
+        );
+      }
+    });
+
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'OnboardingView'});
   }
@@ -196,6 +214,8 @@ your f... */
                   logFirebaseEvent('getStarted_Update-Local-State');
                   setState(() =>
                       FFAppState().coordinates = currentUserLocationValue);
+                  logFirebaseEvent('getStarted_Update-Local-State');
+                  setState(() => FFAppState().isInitailLaunch = false);
                 },
                 text: FFLocalizations.of(context).getText(
                   'bgkoinqg' /* Get Started  */,
@@ -225,6 +245,8 @@ your f... */
                 // Go to Login
                 logFirebaseEvent('goToLogin_GotoLogin');
                 context.goNamed('Login');
+                logFirebaseEvent('goToLogin_Update-Local-State');
+                setState(() => FFAppState().isInitailLaunch = false);
               },
               child: Text(
                 FFLocalizations.of(context).getText(
