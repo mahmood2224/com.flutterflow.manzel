@@ -69,13 +69,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, _) =>
-          appStateNotifier.loggedIn ? NavBarPage() : OnboardingViewWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : OnboardingViewWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : LoginWidget(),
           routes: [
             FFRoute(
               name: 'Login',
@@ -374,7 +374,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/onboardingView';
+            return '/login';
           }
           return null;
         },
@@ -387,13 +387,12 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: SpinKitRipple(
-                      color: Color(0xFF2971FB),
-                      size: 50,
+              ? Container(
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  child: Builder(
+                    builder: (context) => Image.asset(
+                      'assets/images/Group_4_(2).png',
+                      fit: BoxFit.scaleDown,
                     ),
                   ),
                 )

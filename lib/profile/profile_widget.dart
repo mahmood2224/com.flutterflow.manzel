@@ -395,7 +395,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             logFirebaseEvent('logout_Logout');
                             GoRouter.of(context).prepareAuthEvent();
                             await signOut();
-                            context.goNamedAuth('OnboardingView', mounted);
+                            context.goNamedAuth('Login', mounted);
                           },
                           text: FFLocalizations.of(context).getText(
                             '2csoqw0t' /* Logout */,

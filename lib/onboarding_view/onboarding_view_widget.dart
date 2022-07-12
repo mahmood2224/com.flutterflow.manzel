@@ -51,10 +51,10 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(0),
                             child: Image.asset(
-                              'assets/images/ufpbn_1.jpg',
+                              'assets/images/onboardingImageCompressed.png',
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.64,
-                              fit: BoxFit.fitHeight,
+                              fit: BoxFit.cover,
                             ),
                           ),
                           Padding(
@@ -87,10 +87,10 @@ your f... */
                           ClipRRect(
                             borderRadius: BorderRadius.circular(0),
                             child: Image.asset(
-                              'assets/images/2.webp',
+                              'assets/images/onboardingImageCompressed.png',
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.64,
-                              fit: BoxFit.fitHeight,
+                              fit: BoxFit.cover,
                             ),
                           ),
                           Padding(
@@ -123,10 +123,10 @@ your f... */
                           ClipRRect(
                             borderRadius: BorderRadius.circular(0),
                             child: Image.asset(
-                              'assets/images/3.webp',
+                              'assets/images/onboardingImageCompressed.png',
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.64,
-                              fit: BoxFit.fitHeight,
+                              fit: BoxFit.cover,
                             ),
                           ),
                           Padding(

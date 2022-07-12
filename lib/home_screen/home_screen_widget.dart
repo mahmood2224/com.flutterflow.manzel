@@ -71,20 +71,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               spreadRadius: 0,
                             )
                           ],
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
-                            topLeft: Radius.circular(0),
-                            topRight: Radius.circular(0),
-                          ),
+                          borderRadius: BorderRadius.circular(0),
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
-                            topLeft: Radius.circular(0),
-                            topRight: Radius.circular(0),
-                          ),
+                          borderRadius: BorderRadius.circular(0),
                           child: Image.asset(
                             'assets/images/home_background.png',
                             width: double.infinity,
