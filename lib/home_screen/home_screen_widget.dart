@@ -58,7 +58,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       );
       final newItems = getJsonField(
         (apiResponse?.jsonBody ?? ''),
-        r'''$''',
+        r'''$.data''',
       )?.toList() ??
           [];
       final isLastPage = newItems.length < _pageSize;
@@ -66,9 +66,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         _pagingController.appendLastPage(newItems);
       } else {
         // 3.1 Use this for offset based pagination
-        final nextPageKey = pageKey + newItems.length;
+       // final nextPageKey = pageKey + newItems.length;
         // 3.2 Use this for page based pagination
-        //final nextPageKey = ++pageKey;
+        final nextPageKey = ++pageKey;
         _pagingController.appendPage(newItems, nextPageKey);
       }
     } catch (error) {
@@ -85,6 +85,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
+            physics: ScrollPhysics(),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -373,34 +374,35 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     ],
                   ),
                 ),
-                FutureBuilder<ApiCallResponse>(
-                  future: PropertiesCall.call(
-                    city: FFAppState().filterCity,
-                    furnishingType: FFAppState().filterFurnishingType,
-                    propertyType: FFAppState().filterPropertyType,
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: SpinKitRipple(
-                            color: Color(0xFF2971FB),
-                            size: 50,
-                          ),
-                        ),
-                      );
-                    }
-                    final listViewPropertiesResponse = snapshot.data;
-                    return Builder(
-                      builder: (context) {
-                        final properties = PropertiesCall.properties(
-                              (listViewPropertiesResponse?.jsonBody ?? ''),
-                            )?.toList() ??
-                            [];
-                        return PagedListView<int, dynamic>(
+                // FutureBuilder<ApiCallResponse>(
+                //   future: PropertiesCall.call(
+                //     city: FFAppState().filterCity,
+                //     furnishingType: FFAppState().filterFurnishingType,
+                //     propertyType: FFAppState().filterPropertyType,
+                //   ),
+                //   builder: (context, snapshot) {
+                //     // Customize what your widget looks like when it's loading.
+                //     if (!snapshot.hasData) {
+                //       return Center(
+                //         child: SizedBox(
+                //           width: 50,
+                //           height: 50,
+                //           child: SpinKitRipple(
+                //             color: Color(0xFF2971FB),
+                //             size: 50,
+                //           ),
+                //         ),
+                //       );
+                //     }
+                  //  final listViewPropertiesResponse = snapshot.data;
+                  //   return Builder(
+                  //     builder: (context) {
+                  //       final properties = PropertiesCall.properties(
+                  //             (listViewPropertiesResponse?.jsonBody ?? ''),
+                  //           )?.toList() ??
+                  //           [];
+                        PagedListView<int, dynamic>(
+                          physics: NeverScrollableScrollPhysics(),
                           pagingController: _pagingController,
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
@@ -908,11 +910,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               ),
                             ),
                         //  },
-                        ),);
-                      },
-                    );
-                  },
-                ),
+
+
+                   // );
+                //  },
+  ),),
               ],
             ),
           ),
