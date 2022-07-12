@@ -410,7 +410,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ka7r97er': {
       'en': 'Jeddah',
-      'ar': '',
+      'ar': 'جدة',
     },
     'fwphp18w': {
       'en': 'Mecca',
@@ -427,14 +427,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'n51panna': {
       'en': 'Type',
       'ar': 'نوع',
-    },
-    'yp8g09l2': {
-      'en': ' - ',
-      'ar': '',
-    },
-    'rcv1rm7m': {
-      'en': ' SAR',
-      'ar': '',
     },
     'rtp5z5fb': {
       'en': 'All',
@@ -464,11 +456,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Installment Range',
       'ar': 'نطاق التقسيط',
     },
-    'c1tfggn3': {
+    'k57fhygg': {
+      'en': ' - ',
+      'ar': '',
+    },
+    'krfzs4ot': {
+      'en': ' SAR',
+      'ar': '',
+    },
+    'q62w4vtf': {
       'en': 'Minimum intsallment',
       'ar': '',
     },
-    'nbyhxpst': {
+    'wlsjihmj': {
       'en': 'Maximum Installment',
       'ar': '',
     },
@@ -1129,6 +1129,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Miscellaneous
   {
+    'qr81nfm0': {
+      'en': '',
+      'ar': '',
+    },
     'uc1oksun': {
       'en': '',
       'ar': '',

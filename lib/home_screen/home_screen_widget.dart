@@ -364,6 +364,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             [];
                         return ListView.builder(
                           padding: EdgeInsets.zero,
+                          primary: false,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           itemCount: properties.length,
@@ -538,18 +539,29 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0, 12, 15, 0),
-                                              child: Container(
-                                                width: 40,
-                                                height: 40,
-                                                decoration: BoxDecoration(
-                                                  color: Color(0x4D000000),
-                                                  image: DecorationImage(
-                                                    fit: BoxFit.none,
-                                                    image: Image.asset(
-                                                      'assets/images/Heart.png',
-                                                    ).image,
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                                  if (!(currentUserEmailVerified)) {
+                                                    logFirebaseEvent(
+                                                        'Container_Navigate-To');
+                                                    context.pushNamed('Login');
+                                                  }
+                                                },
+                                                child: Container(
+                                                  width: 40,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0x4D000000),
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.none,
+                                                      image: Image.asset(
+                                                        'assets/images/Heart.png',
+                                                      ).image,
+                                                    ),
+                                                    shape: BoxShape.circle,
                                                   ),
-                                                  shape: BoxShape.circle,
                                                 ),
                                               ),
                                             ),
