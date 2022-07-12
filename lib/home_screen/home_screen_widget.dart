@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
 
 class HomeScreenWidget extends StatefulWidget {
   const HomeScreenWidget({
@@ -32,10 +34,46 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   PageController pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  static const _pageSize = 20;
+  final PagingController<int, dynamic> _pagingController =
+  PagingController(firstPageKey: 0);
+
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetchPage(pageKey);
+    });
+  }
+
+  Future<void> _fetchPage(int pageKey) async {
+    try {
+      final apiResponse = await PropertiesCall.call(
+        city: FFAppState().filterCity,
+        furnishingType: FFAppState().filterFurnishingType,
+        propertyType: FFAppState().filterPropertyType,
+        pageNumber: pageKey.toString(),
+        pageSize: _pageSize.toString(),
+      );
+      final newItems = getJsonField(
+        (apiResponse?.jsonBody ?? ''),
+        r'''$''',
+      )?.toList() ??
+          [];
+      final isLastPage = newItems.length < _pageSize;
+      if (isLastPage) {
+        _pagingController.appendLastPage(newItems);
+      } else {
+        // 3.1 Use this for offset based pagination
+        final nextPageKey = pageKey + newItems.length;
+        // 3.2 Use this for page based pagination
+        //final nextPageKey = ++pageKey;
+        _pagingController.appendPage(newItems, nextPageKey);
+      }
+    } catch (error) {
+      _pagingController.error = error;
+    }
   }
 
   @override
@@ -362,14 +400,23 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               (listViewPropertiesResponse?.jsonBody ?? ''),
                             )?.toList() ??
                             [];
-                        return ListView.builder(
+                        return PagedListView<int, dynamic>(
+                          pagingController: _pagingController,
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
-                          itemCount: properties.length,
-                          itemBuilder: (context, propertiesIndex) {
-                            final propertiesItem = properties[propertiesIndex];
-                            return Padding(
+                          builderDelegate: PagedChildBuilderDelegate<dynamic>(
+                            itemBuilder: (context, propertiesItem, propertiesIndex) =>
+
+                          // ListView.builder(
+                          // padding: EdgeInsets.zero,
+                          // shrinkWrap: true,
+                          // scrollDirection: Axis.vertical,
+                          // itemCount: properties.length,
+                          // itemBuilder: (context, propertiesIndex) {
+                          //   final propertiesItem = properties[propertiesIndex];
+                          //   return
+                              Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12, 12, 12, 12),
                               child: InkWell(
@@ -859,9 +906,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   ],
                                 ),
                               ),
-                            );
-                          },
-                        );
+                            ),
+                        //  },
+                        ),);
                       },
                     );
                   },
@@ -872,5 +919,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
   }
 }
