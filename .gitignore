@@ -70,6 +70,7 @@ schemas
 **/ios/**/profile
 **/ios/**/xcuserdata
 **/ios/.generated/
+/Runner.xcworkspace/contents.xcworkspacedata
 #**/ios/Flutter/App.framework
 **/ios/Flutter/Flutter.framework
 **/ios/Flutter/Generated.xcconfig
