@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,6 +19,8 @@ class FilterWidget extends StatefulWidget {
 class _FilterWidgetState extends State<FilterWidget> {
   String citiesListValue;
   String propertyTypeListValue;
+  double sliderValue1;
+  double sliderValue2;
   String isFurnishingValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -27,6 +28,7 @@ class _FilterWidgetState extends State<FilterWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Filter'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -152,84 +154,82 @@ class _FilterWidgetState extends State<FilterWidget> {
                       ),
                     ],
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: FutureBuilder<ApiCallResponse>(
-                              future: CityListCall.call(),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitRipple(
-                                        color: Color(0xFF2971FB),
-                                        size: 50,
-                                      ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: FutureBuilder<ApiCallResponse>(
+                            future: CityListCall.call(),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: SpinKitRipple(
+                                      color: Color(0xFF2971FB),
+                                      size: 50,
                                     ),
-                                  );
-                                }
-                                final citiesListCityListResponse =
-                                    snapshot.data;
-                                return FlutterFlowDropDown(
-                                  initialOption: citiesListValue ??=
-                                      FFAppState().filterCity,
-                                  options: [
-                                    FFLocalizations.of(context).getText(
-                                      '1cqnd28g' /* Riyadh */,
-                                    ),
-                                    FFLocalizations.of(context).getText(
-                                      'ka7r97er' /* Jeddah */,
-                                    ),
-                                    FFLocalizations.of(context).getText(
-                                      'fwphp18w' /* Mecca */,
-                                    ),
-                                    FFLocalizations.of(context).getText(
-                                      'xagmgkfm' /* Dubai */,
-                                    )
-                                  ],
-                                  onChanged: (val) =>
-                                      setState(() => citiesListValue = val),
-                                  width: double.infinity,
-                                  height: 55,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                  hintText: FFLocalizations.of(context).getText(
-                                    'le1j7gvf' /* Select City */,
                                   ),
-                                  fillColor: Colors.white,
-                                  elevation: 2,
-                                  borderColor: Color(0xFFA5A5A5),
-                                  borderWidth: 1,
-                                  borderRadius: 8,
-                                  margin: EdgeInsetsDirectional.fromSTEB(
-                                      12, 4, 12, 4),
-                                  hidesUnderline: true,
                                 );
-                              },
-                            ),
+                              }
+                              final citiesListCityListResponse = snapshot.data;
+                              return FlutterFlowDropDown(
+                                initialOption: citiesListValue ??=
+                                    FFAppState().filterCity,
+                                options: [
+                                  FFLocalizations.of(context).getText(
+                                    '1cqnd28g' /* Riyadh */,
+                                  ),
+                                  FFLocalizations.of(context).getText(
+                                    'ka7r97er' /* Jeddah */,
+                                  ),
+                                  FFLocalizations.of(context).getText(
+                                    'fwphp18w' /* Mecca */,
+                                  ),
+                                  FFLocalizations.of(context).getText(
+                                    'xagmgkfm' /* Dubai */,
+                                  )
+                                ],
+                                onChanged: (val) =>
+                                    setState(() => citiesListValue = val),
+                                width: double.infinity,
+                                height: 55,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                                hintText: FFLocalizations.of(context).getText(
+                                  'le1j7gvf' /* Select City */,
+                                ),
+                                fillColor: Colors.white,
+                                elevation: 2,
+                                borderColor: Color(0xFFA5A5A5),
+                                borderWidth: 1,
+                                borderRadius: 8,
+                                margin: EdgeInsetsDirectional.fromSTEB(
+                                    12, 4, 12, 4),
+                                hidesUnderline: true,
+                              );
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 26, 0, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           FFLocalizations.of(context).getText(
@@ -244,83 +244,106 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     useGoogleFonts: false,
                                   ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
+                        Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                FlutterFlowChoiceChips(
-                                  initiallySelected:
-                                      propertyTypeListValue != null
-                                          ? [propertyTypeListValue]
-                                          : [FFAppState().filterPropertyType],
-                                  options: ((getJsonField(
-                                            (columnFilterParamsResponse
-                                                    ?.jsonBody ??
-                                                ''),
-                                            r'''$.meta.property_type''',
-                                          ) as List)
-                                              .map<String>((s) => s.toString())
-                                              .toList() ??
-                                          [])
-                                      .map((label) => ChipData(label))
-                                      .toList(),
-                                  onChanged: (val) => setState(
-                                      () => propertyTypeListValue = val.first),
-                                  selectedChipStyle: ChipStyle(
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: false,
-                                        ),
-                                    iconColor: Colors.white,
-                                    iconSize: 0,
-                                    elevation: 2,
-                                  ),
-                                  unselectedChipStyle: ChipStyle(
-                                    backgroundColor: Colors.white,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
-                                    iconColor: Color(0xFF323B45),
-                                    iconSize: 0,
-                                    elevation: 1,
-                                  ),
-                                  chipSpacing: 8,
-                                  multiselect: false,
-                                  initialized: propertyTypeListValue != null,
-                                  alignment: WrapAlignment.center,
-                                ),
-                              ],
+                            Text(
+                              valueOrDefault<String>(
+                                sliderValue1.toString(),
+                                '0',
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                            ),
+                            Text(
+                              ' - ',
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                            ),
+                            Text(
+                              valueOrDefault<String>(
+                                sliderValue2.toString(),
+                                '1',
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1,
+                            ),
+                            Text(
+                              ' SAR',
+                              style: FlutterFlowTheme.of(context).bodyText1,
                             ),
                           ],
                         ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              FlutterFlowChoiceChips(
+                                initiallySelected: propertyTypeListValue != null
+                                    ? [propertyTypeListValue]
+                                    : [FFAppState().filterPropertyType],
+                                options: ((getJsonField(
+                                          (columnFilterParamsResponse
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.meta.property_type''',
+                                        ) as List)
+                                            .map<String>((s) => s.toString())
+                                            .toList() ??
+                                        [])
+                                    .map((label) => ChipData(label))
+                                    .toList(),
+                                onChanged: (val) => setState(
+                                    () => propertyTypeListValue = val.first),
+                                selectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal,
+                                        useGoogleFonts: false,
+                                      ),
+                                  iconColor: Colors.white,
+                                  iconSize: 0,
+                                  elevation: 2,
+                                ),
+                                unselectedChipStyle: ChipStyle(
+                                  backgroundColor: Colors.white,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
+                                      ),
+                                  iconColor: Color(0xFF323B45),
+                                  iconSize: 0,
+                                  elevation: 1,
+                                ),
+                                chipSpacing: 8,
+                                multiselect: false,
+                                initialized: propertyTypeListValue != null,
+                                alignment: WrapAlignment.center,
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 26, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -338,159 +361,174 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     useGoogleFonts: false,
                                   ),
                         ),
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            't4hfmdic' /* 2,500 - 9,000 SAR */,
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                useGoogleFonts: false,
-                              ),
-                        ),
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              width: double.infinity,
-                              height: MediaQuery.of(context).size.height * 0.07,
-                              child: custom_widgets.CustomRangeSlider(
-                                width: double.infinity,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.07,
-                                minRange: valueOrDefault<int>(
-                                  getJsonField(
-                                    (columnFilterParamsResponse?.jsonBody ??
-                                        ''),
-                                    r'''$.meta.min_price''',
-                                  ),
-                                  0,
-                                ),
-                                maxRange: valueOrDefault<int>(
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Minimum intsallment',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontWeight: FontWeight.normal,
+                                      useGoogleFonts: false,
+                                    ),
+                              ),
+                              Slider(
+                                activeColor:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                inactiveColor: Color(0xFF9E9E9E),
+                                min: 0,
+                                max: 0,
+                                value: sliderValue1 ??= valueOrDefault<double>(
                                   getJsonField(
                                     (columnFilterParamsResponse?.jsonBody ??
                                         ''),
                                     r'''$.meta.max_price''',
                                   ),
-                                  1,
+                                  1.0,
                                 ),
+                                onChanged: (newValue) {
+                                  setState(() => sliderValue1 = newValue);
+                                },
                               ),
-                            ),
+                              Text(
+                                'Maximum Installment',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontWeight: FontWeight.normal,
+                                      useGoogleFonts: false,
+                                    ),
+                              ),
+                              Slider(
+                                activeColor:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                inactiveColor: Color(0xFF9E9E9E),
+                                min: 0,
+                                max: 0,
+                                value: sliderValue2 ??= valueOrDefault<double>(
+                                  getJsonField(
+                                    (columnFilterParamsResponse?.jsonBody ??
+                                        ''),
+                                    r'''$.meta.max_price''',
+                                  ),
+                                  1.0,
+                                ),
+                                onChanged: (newValue) {
+                                  setState(() => sliderValue2 = newValue);
+                                },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 26, 0, 0),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 26, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            '2m2ni5iy' /* Furnishing */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).subtitle1.override(
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              '2m2ni5iy' /* Furnishing */,
-                            ),
-                            style:
-                                FlutterFlowTheme.of(context).subtitle1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: false,
-                                    ),
+                          Wrap(
+                            spacing: 0,
+                            runSpacing: 0,
+                            alignment: WrapAlignment.start,
+                            crossAxisAlignment: WrapCrossAlignment.start,
+                            direction: Axis.horizontal,
+                            runAlignment: WrapAlignment.start,
+                            verticalDirection: VerticalDirection.down,
+                            clipBehavior: Clip.none,
+                            children: [
+                              FlutterFlowChoiceChips(
+                                initiallySelected: isFurnishingValue != null
+                                    ? [isFurnishingValue]
+                                    : [FFAppState().filterFurnishingType],
+                                options: ((getJsonField(
+                                          (columnFilterParamsResponse
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.meta.furnishing_type''',
+                                        ) as List)
+                                            .map<String>((s) => s.toString())
+                                            .toList() ??
+                                        [])
+                                    .map((label) => ChipData(label))
+                                    .toList(),
+                                onChanged: (val) => setState(
+                                    () => isFurnishingValue = val.first),
+                                selectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.normal,
+                                        useGoogleFonts: false,
+                                      ),
+                                  iconColor: Colors.white,
+                                  iconSize: 0,
+                                  elevation: 1,
+                                ),
+                                unselectedChipStyle: ChipStyle(
+                                  backgroundColor: Colors.white,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
+                                      ),
+                                  iconColor: Color(0xFF323B45),
+                                  iconSize: 0,
+                                  elevation: 2,
+                                ),
+                                chipSpacing: 8,
+                                multiselect: false,
+                                initialized: isFurnishingValue != null,
+                                alignment: WrapAlignment.center,
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Wrap(
-                              spacing: 0,
-                              runSpacing: 0,
-                              alignment: WrapAlignment.start,
-                              crossAxisAlignment: WrapCrossAlignment.start,
-                              direction: Axis.horizontal,
-                              runAlignment: WrapAlignment.start,
-                              verticalDirection: VerticalDirection.down,
-                              clipBehavior: Clip.none,
-                              children: [
-                                FlutterFlowChoiceChips(
-                                  initiallySelected: isFurnishingValue != null
-                                      ? [isFurnishingValue]
-                                      : [FFAppState().filterFurnishingType],
-                                  options: ((getJsonField(
-                                            (columnFilterParamsResponse
-                                                    ?.jsonBody ??
-                                                ''),
-                                            r'''$.meta.furnishing_type''',
-                                          ) as List)
-                                              .map<String>((s) => s.toString())
-                                              .toList() ??
-                                          [])
-                                      .map((label) => ChipData(label))
-                                      .toList(),
-                                  onChanged: (val) => setState(
-                                      () => isFurnishingValue = val.first),
-                                  selectedChipStyle: ChipStyle(
-                                    backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: false,
-                                        ),
-                                    iconColor: Colors.white,
-                                    iconSize: 0,
-                                    elevation: 1,
-                                  ),
-                                  unselectedChipStyle: ChipStyle(
-                                    backgroundColor: Colors.white,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
-                                    iconColor: Color(0xFF323B45),
-                                    iconSize: 0,
-                                    elevation: 2,
-                                  ),
-                                  chipSpacing: 8,
-                                  multiselect: false,
-                                  initialized: isFurnishingValue != null,
-                                  alignment: WrapAlignment.center,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                   ),

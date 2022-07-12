@@ -146,7 +146,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Filter',
               path: 'filter',
-              builder: (context, params) => FilterWidget(),
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Filter')
+                  : FilterWidget(),
             ),
             FFRoute(
               name: 'MyProperties',

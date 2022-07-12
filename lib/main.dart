@@ -116,6 +116,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'HomeScreen': HomeScreenWidget(),
       'MyProperties': MyPropertiesWidget(),
       'Profile': ProfileWidget(),
+      'Filter': FilterWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -157,6 +158,16 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             label: FFLocalizations.of(context).getText(
               'umgvt8b8' /* Profile */,
+            ),
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
+              size: 24,
+            ),
+            label: FFLocalizations.of(context).getText(
+              '5wfrx94q' /* Home */,
             ),
             tooltip: '',
           )
