@@ -262,12 +262,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   initiallySelected:
                                       propertyTypeListValue != null
                                           ? [propertyTypeListValue]
-                                          : [
-                                              valueOrDefault<String>(
-                                                FFAppState().filterPropertyType,
-                                                'null',
-                                              )
-                                            ],
+                                          : [FFAppState().filterPropertyType],
                                   options: ((getJsonField(
                                             (columnFilterParamsResponse
                                                     ?.jsonBody ??
@@ -443,12 +438,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 FlutterFlowChoiceChips(
                                   initiallySelected: isFurnishingValue != null
                                       ? [isFurnishingValue]
-                                      : [
-                                          valueOrDefault<String>(
-                                            FFAppState().filterFurnishingType,
-                                            'null',
-                                          )
-                                        ],
+                                      : [FFAppState().filterFurnishingType],
                                   options: ((getJsonField(
                                             (columnFilterParamsResponse
                                                     ?.jsonBody ??
