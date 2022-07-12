@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -435,11 +436,12 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   inactiveColor: Color(0xFF9E9E9E),
                                   min: 0,
                                   max: 4000,
-                                  value: sliderValue1 ??= getJsonField(
+                                  value: sliderValue1 ??=
+                                      functions.formattedDouble(getJsonField(
                                     (columnFilterParamsResponse?.jsonBody ??
                                         ''),
                                     r'''$.meta.max_price''',
-                                  ),
+                                  )),
                                   onChanged: (newValue) {
                                     setState(() => sliderValue1 = newValue);
                                   },
