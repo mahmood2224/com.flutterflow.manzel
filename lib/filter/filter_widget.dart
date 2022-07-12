@@ -179,10 +179,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     snapshot.data;
                                 return FlutterFlowDropDown(
                                   initialOption: citiesListValue ??=
-                                      valueOrDefault<String>(
-                                    FFAppState().filterCity,
-                                    'null',
-                                  ),
+                                      FFAppState().filterCity,
                                   options: [
                                     FFLocalizations.of(context).getText(
                                       '1cqnd28g' /* Riyadh */,
