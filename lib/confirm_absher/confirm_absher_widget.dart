@@ -206,7 +206,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                               return;
                             }
 
-                            context.goNamedAuth('MyProperties', mounted);
+                            context.goNamedAuth('HomeScreen', mounted);
                           },
                           autofocus: true,
                           obscureText: false,
