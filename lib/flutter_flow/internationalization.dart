@@ -392,6 +392,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Filter
   {
+    'h84toi7e': {
+      'en': 'Reset',
+      'ar': 'إعادة',
+    },
+    'hy8565b9': {
+      'en': 'Filter',
+      'ar': 'فرز',
+    },
     'b8bqw4hw': {
       'en': 'City',
       'ar': 'مدينة',
@@ -419,6 +427,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'n51panna': {
       'en': 'Type',
       'ar': 'نوع',
+    },
+    'yp8g09l2': {
+      'en': ' - ',
+      'ar': '',
+    },
+    'rcv1rm7m': {
+      'en': ' SAR',
+      'ar': '',
     },
     'rtp5z5fb': {
       'en': 'All',
@@ -448,8 +464,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Installment Range',
       'ar': 'نطاق التقسيط',
     },
-    't4hfmdic': {
-      'en': '2,500 - 9,000 SAR',
+    'c1tfggn3': {
+      'en': 'Minimum intsallment',
+      'ar': '',
+    },
+    'nbyhxpst': {
+      'en': 'Maximum Installment',
       'ar': '',
     },
     '2m2ni5iy': {
@@ -475,14 +495,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'dgzjfbdt': {
       'en': 'Show  Properties',
       'ar': 'إظهار الخصائص',
-    },
-    'h84toi7e': {
-      'en': 'Reset',
-      'ar': 'إعادة',
-    },
-    'hy8565b9': {
-      'en': 'Filter',
-      'ar': 'فرز',
     },
     '5wfrx94q': {
       'en': 'Home',

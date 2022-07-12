@@ -296,6 +296,11 @@ class CityListCall {
       returnBody: true,
     );
   }
+
+  static dynamic cityNames(dynamic response) => getJsonField(
+        response,
+        r'''$.data..attributes.city_name''',
+      );
 }
 
 class FilterParamsCall {
