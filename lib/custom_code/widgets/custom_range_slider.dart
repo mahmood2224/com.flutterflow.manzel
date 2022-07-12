@@ -29,14 +29,16 @@ class CustomRangeSlider extends StatefulWidget {
 class _CustomRangeSliderState extends State<CustomRangeSlider> {
   RangeValues currentRangeValues;
   void initState() {
-    currentRangeValues =
-        RangeValues(widget.minRange ?? 0, widget.maxRange ?? 1);
+    currentRangeValues = RangeValues(
+        widget.minRange.toDouble() ?? 0, widget.maxRange.toDouble() ?? 1);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: widget.height,
+      width: widget.width,
       child: SliderTheme(
         data: SliderThemeData(
           trackHeight: 2.0,

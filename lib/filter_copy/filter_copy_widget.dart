@@ -1,3 +1,4 @@
+import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -117,34 +118,54 @@ class _FilterCopyWidgetState extends State<FilterCopyWidget> {
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
-                      child: FlutterFlowDropDown(
-                        options: [
-                          FFLocalizations.of(context).getText(
-                            '1snf3qye' /* Riyadh */,
-                          )
-                        ],
-                        onChanged: (val) =>
-                            setState(() => citiesListValue = val),
-                        width: 335,
-                        height: 55,
-                        textStyle:
-                            FlutterFlowTheme.of(context).bodyText1.override(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: false,
+                      child: FutureBuilder<ApiCallResponse>(
+                        future: CityListCall.call(),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: SpinKitRipple(
+                                  color: Color(0xFF2971FB),
+                                  size: 50,
                                 ),
-                        hintText: FFLocalizations.of(context).getText(
-                          '5kec6c0m' /* Select City */,
-                        ),
-                        fillColor: Colors.white,
-                        elevation: 2,
-                        borderColor: Color(0xFFA5A5A5),
-                        borderWidth: 1,
-                        borderRadius: 8,
-                        margin: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
-                        hidesUnderline: true,
+                              ),
+                            );
+                          }
+                          final citiesListCityListResponse = snapshot.data;
+                          return FlutterFlowDropDown(
+                            options: [
+                              FFLocalizations.of(context).getText(
+                                '1snf3qye' /* Riyadh */,
+                              )
+                            ],
+                            onChanged: (val) =>
+                                setState(() => citiesListValue = val),
+                            width: 335,
+                            height: 55,
+                            textStyle:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                            hintText: FFLocalizations.of(context).getText(
+                              '5kec6c0m' /* Select City */,
+                            ),
+                            fillColor: Colors.white,
+                            elevation: 2,
+                            borderColor: Color(0xFFA5A5A5),
+                            borderWidth: 1,
+                            borderRadius: 8,
+                            margin:
+                                EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+                            hidesUnderline: true,
+                          );
+                        },
                       ),
                     ),
                   ],
