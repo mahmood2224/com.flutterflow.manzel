@@ -27,7 +27,7 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
       logFirebaseEvent('ONBOARDING_VIEW_OnboardingView_ON_LOAD');
       if (!(FFAppState().isInitailLaunch)) {
         logFirebaseEvent('OnboardingView_Navigate-To');
-        context.pushNamed('Login');
+        context.pushNamed('HomeScreen');
       }
     });
 
