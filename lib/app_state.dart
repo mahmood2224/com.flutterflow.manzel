@@ -37,7 +37,7 @@ class FFAppState {
 
   int filterMinimumPrice = 0;
 
-  bool _isInitailLaunch = false;
+  bool _isInitailLaunch = true;
   bool get isInitailLaunch => _isInitailLaunch;
   set isInitailLaunch(bool _value) {
     _isInitailLaunch = _value;
