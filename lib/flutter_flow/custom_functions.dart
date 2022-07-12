@@ -49,3 +49,9 @@ String formatAmount(String amount) {
   double value = double.parse(amount);
   return format.format(value);
 }
+
+double formattedDouble(int maxRange) {
+  // Add your function code here!
+  double value = maxRange.toDouble();
+  return value;
+}

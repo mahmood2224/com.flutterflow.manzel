@@ -43,6 +43,8 @@ class FFAppState {
     _isInitailLaunch = _value;
     prefs.setBool('ff_isInitailLaunch', _value);
   }
+
+  String locale = '';
 }
 
 LatLng _latLngFromString(String val) {

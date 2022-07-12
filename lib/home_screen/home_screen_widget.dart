@@ -405,6 +405,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           physics: NeverScrollableScrollPhysics(),
                           pagingController: _pagingController,
                           padding: EdgeInsets.zero,
+                          primary: false,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           builderDelegate: PagedChildBuilderDelegate<dynamic>(
