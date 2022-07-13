@@ -541,7 +541,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                             clipBehavior: Clip.none,
                             children: [
                               FlutterFlowChoiceChips(
-                                initiallySelected: [isFurnishingValue],
+                                initiallySelected: isFurnishingValue != null
+                                    ? [isFurnishingValue]
+                                    : [FFAppState().filterFurnishingType],
                                 options: [
                                   ChipData(FFLocalizations.of(context).getText(
                                     'jrw6qvww' /* Furnishied */,
@@ -586,6 +588,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 ),
                                 chipSpacing: 8,
                                 multiselect: false,
+                                initialized: isFurnishingValue != null,
                                 alignment: WrapAlignment.center,
                               ),
                             ],
