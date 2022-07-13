@@ -539,20 +539,18 @@ class _FilterWidgetState extends State<FilterWidget> {
                             clipBehavior: Clip.none,
                             children: [
                               FlutterFlowChoiceChips(
-                                initiallySelected: isFurnishingValue != null
-                                    ? [isFurnishingValue]
-                                    : [FFAppState().filterFurnishingType],
-                                options: ((getJsonField(
-                                          (columnFilterParamsResponse
-                                                  ?.jsonBody ??
-                                              ''),
-                                          r'''$.meta.furnishing_type''',
-                                        ) as List)
-                                            .map<String>((s) => s.toString())
-                                            .toList() ??
-                                        [])
-                                    .map((label) => ChipData(label))
-                                    .toList(),
+                                initiallySelected: [isFurnishingValue],
+                                options: [
+                                  ChipData(FFLocalizations.of(context).getText(
+                                    'jrw6qvww' /* Furnishied */,
+                                  )),
+                                  ChipData(FFLocalizations.of(context).getText(
+                                    'skyj7jpv' /* Un-Furnishied */,
+                                  )),
+                                  ChipData(FFLocalizations.of(context).getText(
+                                    '8x7rkqnv' /* Semi-Furnished */,
+                                  ))
+                                ],
                                 onChanged: (val) => setState(
                                     () => isFurnishingValue = val.first),
                                 selectedChipStyle: ChipStyle(
@@ -586,7 +584,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 ),
                                 chipSpacing: 8,
                                 multiselect: false,
-                                initialized: isFurnishingValue != null,
                                 alignment: WrapAlignment.center,
                               ),
                             ],
