@@ -74,10 +74,11 @@ class _FilterWidgetState extends State<FilterWidget> {
               FFLocalizations.of(context).getText(
                 'h84toi7e' /* Reset */,
               ),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
+              maxLines: 1,
               style: FlutterFlowTheme.of(context).bodyText1.override(
                     fontFamily: 'Sofia Pro By Khuzaimah',
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
                     useGoogleFonts: false,
                   ),
@@ -431,7 +432,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             children: [
                               Text(
                                 FFLocalizations.of(context).getText(
-                                  'q62w4vtf' /* Minimum intsallment */,
+                                  'q62w4vtf' /* Minimum */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
@@ -464,7 +465,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               ),
                               Text(
                                 FFLocalizations.of(context).getText(
-                                  'wlsjihmj' /* Maximum Installment */,
+                                  'wlsjihmj' /* Maximum */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1

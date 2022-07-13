@@ -465,12 +465,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'q62w4vtf': {
-      'en': 'Minimum intsallment',
-      'ar': '',
+      'en': 'Minimum',
+      'ar': 'الحد الأدنى',
     },
     'wlsjihmj': {
-      'en': 'Maximum Installment',
-      'ar': '',
+      'en': 'Maximum',
+      'ar': 'أقصى',
     },
     '2m2ni5iy': {
       'en': 'Furnishing',
