@@ -254,11 +254,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             width: 1,
                                           ),
                                         ),
-                                        child: Image.asset(
-                                          'assets/images/map.png',
-                                          width: 100,
-                                          height: 100,
-                                          fit: BoxFit.none,
+                                        child: Icon(
+                                          Icons.map_outlined,
+                                          color: Colors.black,
+                                          size: 14,
                                         ),
                                       ),
                                     ),
@@ -290,11 +289,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             width: 1,
                                           ),
                                         ),
-                                        child: Image.asset(
-                                          'assets/images/Filter.png',
-                                          width: 100,
-                                          height: 100,
-                                          fit: BoxFit.none,
+                                        child: Icon(
+                                          Icons.filter_list_rounded,
+                                          color: Colors.black,
+                                          size: 16,
                                         ),
                                       ),
                                     ),
