@@ -13,8 +13,8 @@ export 'edit_mobile_number/edit_mobile_number_widget.dart'
     show EditMobileNumberWidget;
 export 'confirm_new_number_o_t_p/confirm_new_number_o_t_p_widget.dart'
     show ConfirmNewNumberOTPWidget;
-export 'notifications/notifications_widget.dart' show NotificationsWidget;
 export 'home_screen/home_screen_widget.dart' show HomeScreenWidget;
+export 'notifications/notifications_widget.dart' show NotificationsWidget;
 export 'filter/filter_widget.dart' show FilterWidget;
 export 'my_properties/my_properties_widget.dart' show MyPropertiesWidget;
 export 'where_are_you_looking/where_are_you_looking_widget.dart'

@@ -116,8 +116,8 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'HomeScreen': HomeScreenWidget(),
       'MyProperties': MyPropertiesWidget(),
-      'Filter': FilterWidget(),
       'Profile': ProfileWidget(),
+      'Filter': FilterWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -153,22 +153,22 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(
-              FontAwesomeIcons.commentDots,
-              size: 24,
-            ),
-            label: FFLocalizations.of(context).getText(
-              '5wfrx94q' /* Offers */,
-            ),
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(
               Icons.person_outline_outlined,
               size: 24,
             ),
             label: FFLocalizations.of(context).getText(
               'umgvt8b8' /* Account */,
+            ),
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.commentDots,
+              size: 24,
+            ),
+            label: FFLocalizations.of(context).getText(
+              '5wfrx94q' /* Offers */,
             ),
             tooltip: '',
           )

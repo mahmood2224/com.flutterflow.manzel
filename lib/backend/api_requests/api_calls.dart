@@ -7,15 +7,15 @@ export 'api_manager.dart' show ApiCallResponse;
 class PropertiesCall {
   static Future<ApiCallResponse> call({
     String populate =
-        '*,banks.bank_logo,managed_by.prob_company_logo,property_images,city,localizations',
+        '*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
     String city = '',
     String furnishingType = '',
     String propertyType = '',
     String pageNumber = '',
     String pageSize = '',
     String locale = 'en',
-    int minimumPrice,
-    int maximumPrice,
+    String minimumPrice = '',
+    String maximumPrice = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
