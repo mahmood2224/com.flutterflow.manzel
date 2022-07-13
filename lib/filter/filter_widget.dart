@@ -318,87 +318,106 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            '4mz2rd2p' /* Installment Range */,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              '4mz2rd2p' /* Installment Range */,
+                            ),
+                            style:
+                                FlutterFlowTheme.of(context).subtitle1.override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).subtitle1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(30, 0, 0, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  valueOrDefault<String>(
+                                    functions.formattedSliderOutput(
+                                        valueOrDefault<double>(
+                                      sliderValue1,
+                                      1.0,
+                                    )),
+                                    '1',
                                   ),
-                        ),
-                        Expanded(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                functions.formattedSliderOutput(sliderValue1),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: false,
-                                    ),
-                              ),
-                              Text(
-                                FFLocalizations.of(context).getText(
-                                  'k57fhygg' /*  -  */,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: false,
+                                      ),
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: false,
-                                    ),
-                              ),
-                              Text(
-                                functions.formattedSliderOutput(sliderValue2),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: false,
-                                    ),
-                              ),
-                              Text(
-                                FFLocalizations.of(context).getText(
-                                  'krfzs4ot' /*  SAR */,
+                                Text(
+                                  FFLocalizations.of(context).getText(
+                                    'k57fhygg' /*  -  */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: false,
+                                      ),
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: false,
-                                    ),
-                              ),
-                            ],
+                                Text(
+                                  valueOrDefault<String>(
+                                    functions.formattedSliderOutput(
+                                        valueOrDefault<double>(
+                                      sliderValue2,
+                                      1.0,
+                                    )),
+                                    '1',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: false,
+                                      ),
+                                ),
+                                Text(
+                                  FFLocalizations.of(context).getText(
+                                    'krfzs4ot' /*  SAR */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: false,
+                                      ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
@@ -424,24 +443,26 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       useGoogleFonts: false,
                                     ),
                               ),
-                              Container(
-                                width: 4000,
-                                child: Slider(
-                                  activeColor:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  inactiveColor: Color(0xFF9E9E9E),
-                                  min: 0,
-                                  max: 4000,
-                                  value: sliderValue1 ??=
-                                      functions.formattedDouble(getJsonField(
-                                    (columnFilterParamsResponse?.jsonBody ??
-                                        ''),
-                                    r'''$.meta.max_price''',
+                              Slider(
+                                activeColor:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                inactiveColor: Color(0xFF9E9E9E),
+                                min: 0,
+                                max: 200000,
+                                value: sliderValue1 ??= valueOrDefault<double>(
+                                  functions.formattedDouble(valueOrDefault<int>(
+                                    getJsonField(
+                                      (columnFilterParamsResponse?.jsonBody ??
+                                          ''),
+                                      r'''$.meta.max_price''',
+                                    ),
+                                    1,
                                   )),
-                                  onChanged: (newValue) {
-                                    setState(() => sliderValue1 = newValue);
-                                  },
+                                  1.0,
                                 ),
+                                onChanged: (newValue) {
+                                  setState(() => sliderValue1 = newValue);
+                                },
                               ),
                               Text(
                                 FFLocalizations.of(context).getText(
@@ -460,10 +481,17 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     FlutterFlowTheme.of(context).primaryColor,
                                 inactiveColor: Color(0xFF9E9E9E),
                                 min: 0,
-                                max: 0,
-                                value: sliderValue2 ??= getJsonField(
-                                  (columnFilterParamsResponse?.jsonBody ?? ''),
-                                  r'''$.meta.max_price''',
+                                max: 200000,
+                                value: sliderValue2 ??= valueOrDefault<double>(
+                                  functions.formattedDouble(valueOrDefault<int>(
+                                    getJsonField(
+                                      (columnFilterParamsResponse?.jsonBody ??
+                                          ''),
+                                      r'''$.meta.max_price''',
+                                    ),
+                                    1,
+                                  )),
+                                  1.0,
                                 ),
                                 onChanged: (newValue) {
                                   setState(() => sliderValue2 = newValue);
@@ -571,7 +599,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 220, 0, 30),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 80, 0, 10),
                     child: FFButtonWidget(
                       onPressed: () async {
                         logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');

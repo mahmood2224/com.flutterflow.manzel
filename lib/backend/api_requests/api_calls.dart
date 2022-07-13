@@ -14,8 +14,8 @@ class PropertiesCall {
     String pageNumber = '',
     String pageSize = '',
     String locale = 'en',
-    int minimumPrice,
-    int maximumPrice,
+    String minimumPrice = '',
+    String maximumPrice = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
