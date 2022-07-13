@@ -50,9 +50,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   Future<void> _fetchPage(int pageKey) async {
     try {
       final apiResponse = await PropertiesCall.call(
-        city: FFAppState().filterCity,
-        furnishingType: FFAppState().filterFurnishingType,
-        propertyType: FFAppState().filterPropertyType,
+        // city: FFAppState().filterCity,
+        // furnishingType: FFAppState().filterFurnishingType,
+        // propertyType: FFAppState().filterPropertyType,
         pageNumber: pageKey.toString(),
         pageSize: _pageSize.toString(),
         locale: FFAppState().locale,
