@@ -335,72 +335,68 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     useGoogleFonts: false,
                                   ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Text(
-                              valueOrDefault<String>(
-                                sliderValue1.toString(),
-                                '0',
+                        Expanded(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                functions.formattedSliderOutput(sliderValue1),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
-                                  ),
-                            ),
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                'k57fhygg' /*  -  */,
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  'k57fhygg' /*  -  */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
-                                  ),
-                            ),
-                            Text(
-                              valueOrDefault<String>(
-                                sliderValue2.toString(),
-                                '1',
+                              Text(
+                                functions.formattedSliderOutput(sliderValue2),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
-                                  ),
-                            ),
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                'krfzs4ot' /*  SAR */,
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  'krfzs4ot' /*  SAR */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
-                                  ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
