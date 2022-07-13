@@ -29,6 +29,9 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
         logFirebaseEvent('OnboardingView_Navigate-To');
         context.goNamed('HomeScreen');
       }
+      logFirebaseEvent('OnboardingView_Update-Local-State');
+      setState(
+          () => FFAppState().locale = FFLocalizations.of(context).languageCode);
     });
 
     logFirebaseEvent('screen_view',
