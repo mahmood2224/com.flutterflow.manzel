@@ -52,6 +52,10 @@ class _FilterWidgetState extends State<FilterWidget> {
               setState(() => FFAppState().filterFurnishingType = '');
               logFirebaseEvent('Text_Update-Local-State');
               setState(() => FFAppState().filterCity = '');
+              logFirebaseEvent('Text_Update-Local-State');
+              setState(() => FFAppState().filterMinPrice = '');
+              logFirebaseEvent('Text_Update-Local-State');
+              setState(() => FFAppState().filterMaxPrice = '');
               logFirebaseEvent('Text_Navigate-Back');
               context.pop();
               logFirebaseEvent('Text_Navigate-To');
@@ -181,20 +185,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                               return FlutterFlowDropDown(
                                 initialOption: citiesListValue ??=
                                     FFAppState().filterCity,
-                                options: [
-                                  FFLocalizations.of(context).getText(
-                                    '1cqnd28g' /* Riyadh */,
-                                  ),
-                                  FFLocalizations.of(context).getText(
-                                    'ka7r97er' /* Jeddah */,
-                                  ),
-                                  FFLocalizations.of(context).getText(
-                                    'fwphp18w' /* Mecca */,
-                                  ),
-                                  FFLocalizations.of(context).getText(
-                                    'xagmgkfm' /* Dubai */,
-                                  )
-                                ],
+                                options: (getJsonField(
+                                  (citiesListCityListResponse?.jsonBody ?? ''),
+                                  r'''$.cities''',
+                                ) as List)
+                                    .map<String>((s) => s.toString())
+                                    .toList()
+                                    .toList(),
                                 onChanged: (val) =>
                                     setState(() => citiesListValue = val),
                                 width: double.infinity,
@@ -606,27 +603,31 @@ class _FilterWidgetState extends State<FilterWidget> {
                         logFirebaseEvent('apllyFilter_Update-Local-State');
                         setState(() => FFAppState().filterCity = '');
                         logFirebaseEvent('apllyFilter_Update-Local-State');
-                        setState(() =>
-                            FFAppState().filterCity = valueOrDefault<String>(
-                              citiesListValue,
-                              'null',
-                            ));
+                        setState(
+                            () => FFAppState().filterCity = citiesListValue);
                         logFirebaseEvent('apllyFilter_Update-Local-State');
                         setState(() => FFAppState().filterFurnishingType = '');
                         logFirebaseEvent('apllyFilter_Update-Local-State');
                         setState(() => FFAppState().filterFurnishingType =
-                                valueOrDefault<String>(
-                              isFurnishingValue,
-                              'null',
-                            ));
+                            isFurnishingValue);
                         logFirebaseEvent('apllyFilter_Update-Local-State');
                         setState(() => FFAppState().filterPropertyType = '');
                         logFirebaseEvent('apllyFilter_Update-Local-State');
                         setState(() => FFAppState().filterPropertyType =
+                            propertyTypeListValue);
+                        logFirebaseEvent('apllyFilter_Update-Local-State');
+                        setState(() => FFAppState().filterMinPrice = '');
+                        logFirebaseEvent('apllyFilter_Update-Local-State');
+                        setState(() => FFAppState().filterMinPrice =
                                 valueOrDefault<String>(
-                              propertyTypeListValue,
-                              'null',
+                              functions.sliderToApi(sliderValue1),
+                              '0',
                             ));
+                        logFirebaseEvent('apllyFilter_Update-Local-State');
+                        setState(() => FFAppState().filterMaxPrice = '');
+                        logFirebaseEvent('apllyFilter_Update-Local-State');
+                        setState(() => FFAppState().filterMaxPrice =
+                            functions.sliderToApi(sliderValue2));
                         logFirebaseEvent('apllyFilter_Navigate-Back');
                         context.pop();
                       },

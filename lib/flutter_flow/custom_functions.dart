@@ -59,5 +59,14 @@ double formattedDouble(int maxRange) {
 String formattedSliderOutput(double rawSliderValue) {
   // Add your function code here!
   double val = double.parse(rawSliderValue.toStringAsFixed(0));
+  String amount = val.toString();
+  var format = NumberFormat('###,###', 'en_US');
+  double value = double.parse(amount);
+  return format.format(value);
+}
+
+String sliderToApi(double sliderValue) {
+  // Add your function code here!
+  double val = double.parse(sliderValue.toStringAsFixed(0));
   return val.toString();
 }
