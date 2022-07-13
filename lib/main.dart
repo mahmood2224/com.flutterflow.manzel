@@ -9,6 +9,7 @@ import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
@@ -116,6 +117,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'HomeScreen': HomeScreenWidget(),
       'MyProperties': MyPropertiesWidget(),
       'Profile': ProfileWidget(),
+      'Filter': FilterWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -156,7 +158,17 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: FFLocalizations.of(context).getText(
-              'umgvt8b8' /* Profile */,
+              'umgvt8b8' /* Account */,
+            ),
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.commentDots,
+              size: 24,
+            ),
+            label: FFLocalizations.of(context).getText(
+              '5wfrx94q' /* Offers */,
             ),
             tooltip: '',
           )

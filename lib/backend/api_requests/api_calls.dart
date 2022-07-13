@@ -7,13 +7,15 @@ export 'api_manager.dart' show ApiCallResponse;
 class PropertiesCall {
   static Future<ApiCallResponse> call({
     String populate =
-        '*,banks.bank_logo,managed_by.prob_company_logo,property_images,city,localizations',
+        '*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
     String city = '',
     String furnishingType = '',
     String propertyType = '',
     String pageNumber = '',
     String pageSize = '',
     String locale = 'en',
+    String minimumPrice = '',
+    String maximumPrice = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
@@ -28,6 +30,8 @@ class PropertiesCall {
         'page_number': pageNumber,
         'page_size': pageSize,
         'locale': locale,
+        'minimum_price': minimumPrice,
+        'maximum_price': maximumPrice,
       },
       returnBody: true,
     );
@@ -296,6 +300,11 @@ class CityListCall {
       returnBody: true,
     );
   }
+
+  static dynamic cityNames(dynamic response) => getJsonField(
+        response,
+        r'''$.data..attributes.city_name''',
+      );
 }
 
 class FilterParamsCall {

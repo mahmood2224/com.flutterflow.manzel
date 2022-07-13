@@ -33,16 +33,18 @@ class FFAppState {
 
   String filterFurnishingType = '';
 
-  int filterMaximumPrice = 0;
-
-  int filterMinimumPrice = 0;
-
   bool _isInitailLaunch = true;
   bool get isInitailLaunch => _isInitailLaunch;
   set isInitailLaunch(bool _value) {
     _isInitailLaunch = _value;
     prefs.setBool('ff_isInitailLaunch', _value);
   }
+
+  String locale = '';
+
+  String filterMinPrice = '';
+
+  String filterMaxPrice = '';
 }
 
 LatLng _latLngFromString(String val) {

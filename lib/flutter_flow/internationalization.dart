@@ -191,7 +191,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مجمع التطبيق 2.1.1 (231)',
     },
     'umgvt8b8': {
-      'en': 'Profile',
+      'en': 'Account',
       'ar': 'الملف الشخصي',
     },
   },
@@ -392,6 +392,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Filter
   {
+    'h84toi7e': {
+      'en': 'Reset',
+      'ar': 'إعادة',
+    },
+    'hy8565b9': {
+      'en': 'Filter',
+      'ar': 'فرز',
+    },
     'b8bqw4hw': {
       'en': 'City',
       'ar': 'مدينة',
@@ -402,7 +410,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ka7r97er': {
       'en': 'Jeddah',
-      'ar': '',
+      'ar': 'جدة',
     },
     'fwphp18w': {
       'en': 'Mecca',
@@ -448,44 +456,44 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Installment Range',
       'ar': 'نطاق التقسيط',
     },
-    't4hfmdic': {
-      'en': '2,500 - 9,000 SAR',
+    'k57fhygg': {
+      'en': ' - ',
       'ar': '',
+    },
+    'krfzs4ot': {
+      'en': ' SAR',
+      'ar': '',
+    },
+    'q62w4vtf': {
+      'en': 'Minimum',
+      'ar': 'الحد الأدنى',
+    },
+    'wlsjihmj': {
+      'en': 'Maximum',
+      'ar': 'أقصى',
     },
     '2m2ni5iy': {
       'en': 'Furnishing',
       'ar': 'مفروشة',
     },
-    'p4ffui1h': {
-      'en': 'All',
-      'ar': 'الجميع',
-    },
     'jrw6qvww': {
-      'en': 'Furnishing',
+      'en': 'Furnishied',
       'ar': 'مفروشة',
     },
     'skyj7jpv': {
-      'en': 'Un-Furnishing',
+      'en': 'Un-Furnishied',
       'ar': 'غير مفروشة',
     },
     '8x7rkqnv': {
       'en': 'Semi-Furnished',
-      'ar': '',
+      'ar': 'نصف مفروش أو نصف مجهز أو شبه مفروش',
     },
     'dgzjfbdt': {
       'en': 'Show  Properties',
       'ar': 'إظهار الخصائص',
     },
-    'h84toi7e': {
-      'en': 'Reset',
-      'ar': 'إعادة',
-    },
-    'hy8565b9': {
-      'en': 'Filter',
-      'ar': 'فرز',
-    },
     '5wfrx94q': {
-      'en': 'Home',
+      'en': 'Offers',
       'ar': 'مسكن',
     },
   },
@@ -1117,6 +1125,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Miscellaneous
   {
+    'qr81nfm0': {
+      'en': '',
+      'ar': '',
+    },
     'uc1oksun': {
       'en': '',
       'ar': '',
