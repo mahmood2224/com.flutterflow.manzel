@@ -81,11 +81,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            physics: ScrollPhysics(),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SingleChildScrollView(
+          physics: ScrollPhysics(),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -125,256 +124,251 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       Align(
                         alignment: AlignmentDirectional(0, -0.7),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 3, 16, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                'assets/images/Logo.png',
-                                width: 43,
-                                height: 31,
-                                fit: BoxFit.none,
-                              ),
-                              if (currentUserEmailVerified ?? true)
-                                AuthUserStreamWidget(
-                                  child: InkWell(
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'HOME_SCREEN_notificationsBadge_ON_TAP');
-                                      logFirebaseEvent(
-                                          'notificationsBadge_Navigate-To');
-                                      context.pushNamed('Notifications');
-                                    },
-                                    child: Badge(
-                                      badgeContent: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'waavnvd4' /* 1 */,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal,
-                                              useGoogleFonts: false,
-                                            ),
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              'assets/images/Logo.png',
+                              width: 43,
+                              height: 31,
+                              fit: BoxFit.none,
+                            ),
+                            if (currentUserEmailVerified ?? true)
+                              AuthUserStreamWidget(
+                                child: InkWell(
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_SCREEN_notificationsBadge_ON_TAP');
+                                    logFirebaseEvent(
+                                        'notificationsBadge_Navigate-To');
+                                    context.pushNamed('Notifications');
+                                  },
+                                  child: Badge(
+                                    badgeContent: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'waavnvd4' /* 1 */,
                                       ),
-                                      showBadge: true,
-                                      shape: BadgeShape.circle,
-                                      badgeColor: Color(0xFFD05C5C),
-                                      elevation: 4,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          7, 7, 7, 7),
-                                      position: BadgePosition.topEnd(),
-                                      animationType: BadgeAnimationType.scale,
-                                      toAnimate: true,
-                                      child: Icon(
-                                        Icons.notifications_none,
-                                        color: Colors.white,
-                                        size: 26,
-                                      ),
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily:
+                                                'Sofia Pro By Khuzaimah',
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                            useGoogleFonts: false,
+                                          ),
+                                    ),
+                                    showBadge: true,
+                                    shape: BadgeShape.circle,
+                                    badgeColor: Color(0xFFD05C5C),
+                                    elevation: 4,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        7, 7, 7, 7),
+                                    position: BadgePosition.topEnd(),
+                                    animationType: BadgeAnimationType.scale,
+                                    toAnimate: true,
+                                    child: Icon(
+                                      Icons.notifications_none,
+                                      color: Colors.white,
+                                      size: 26,
                                     ),
                                   ),
                                 ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional(0, 0.75),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(14, 0, 14, 0),
-                          child: Container(
-                            width: double.infinity,
-                            height: 54,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 5,
-                                  color: Color(0x41000000),
-                                  offset: Offset(0, 3),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(8),
-                              shape: BoxShape.rectangle,
-                            ),
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(23, 0, 12, 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
-                                      logFirebaseEvent('Text_Navigate-To');
-                                      context.pushNamed(
-                                        'WhereAreYouLooking',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.bottomToTop,
-                                          ),
-                                        },
-                                      );
-                                    },
-                                    child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'qnr0o42y' /* Where are you looking? */,
-                                      ),
-                                      textAlign: TextAlign.start,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 10, 0),
-                                        child: Container(
-                                          width: 36,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color: Color(0xFFF4F4F4),
-                                              width: 1,
-                                            ),
-                                          ),
-                                          child: Image.asset(
-                                            'assets/images/map.png',
-                                            width: 100,
-                                            height: 100,
-                                            fit: BoxFit.none,
-                                          ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () async {
-                                          logFirebaseEvent(
-                                              'HOME_SCREEN_Container_13mjruev_ON_TAP');
-                                          logFirebaseEvent(
-                                              'Container_Navigate-To');
-                                          context.pushNamed(
-                                            'Filter',
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType
-                                                        .bottomToTop,
-                                              ),
-                                            },
-                                          );
-                                        },
-                                        child: Container(
-                                          width: 36,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color: Color(0xFFF4F4F4),
-                                              width: 1,
-                                            ),
-                                          ),
-                                          child: Image.asset(
-                                            'assets/images/Filter.png',
-                                            width: 100,
-                                            height: 100,
-                                            fit: BoxFit.none,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
                               ),
-                            ),
-                          ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(15, 15, 16, 3),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Image.asset(
-                        'assets/images/Swap.png',
-                        width: 20,
-                        height: 20,
-                        fit: BoxFit.cover,
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(7, 0, 0, 0),
-                        child: Text(
-                          FFLocalizations.of(context).getText(
-                            'fei6w05f' /* Sort By */,
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyText2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0, 0.75),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(14, 0, 14, 0),
                         child: Container(
-                          width: 101,
-                          height: 30,
+                          width: double.infinity,
+                          height: 54,
                           decoration: BoxDecoration(
-                            color: Color(0x192971FB),
-                            borderRadius: BorderRadius.circular(100),
-                            border: Border.all(
-                              color: Color(0xFF2971FB),
-                              width: 1,
-                            ),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 5,
+                                color: Color(0x41000000),
+                                offset: Offset(0, 3),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(8),
+                            shape: BoxShape.rectangle,
                           ),
+                          alignment: AlignmentDirectional(0, 0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                'jxwg61ha' /* Near to me */,
-                              ),
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Color(0xFF2971FB),
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(23, 0, 12, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
+                                    logFirebaseEvent('Text_Navigate-To');
+                                    context.pushNamed(
+                                      'WhereAreYouLooking',
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.bottomToTop,
+                                        ),
+                                      },
+                                    );
+                                  },
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'qnr0o42y' /* Where are you looking? */,
+                                    ),
+                                    textAlign: TextAlign.start,
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 10, 0),
+                                      child: Container(
+                                        width: 36,
+                                        height: 36,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Color(0xFFF4F4F4),
+                                            width: 1,
+                                          ),
+                                        ),
+                                        child: Image.asset(
+                                          'assets/images/map.png',
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.none,
+                                        ),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'HOME_SCREEN_Container_13mjruev_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Container_Navigate-To');
+                                        context.pushNamed(
+                                          'Filter',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType: PageTransitionType
+                                                  .bottomToTop,
+                                            ),
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                        width: 36,
+                                        height: 36,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Color(0xFFF4F4F4),
+                                            width: 1,
+                                          ),
+                                        ),
+                                        child: Image.asset(
+                                          'assets/images/Filter.png',
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                // FutureBuilder<ApiCallResponse>(
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(15, 15, 16, 3),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Image.asset(
+                      'assets/images/Swap.png',
+                      width: 20,
+                      height: 20,
+                      fit: BoxFit.cover,
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(7, 0, 0, 0),
+                      child: Text(
+                        FFLocalizations.of(context).getText(
+                          'fei6w05f' /* Sort By */,
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyText2.override(
+                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: false,
+                            ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                      child: Container(
+                        width: 101,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: Color(0x192971FB),
+                          borderRadius: BorderRadius.circular(100),
+                          border: Border.all(
+                            color: Color(0xFF2971FB),
+                            width: 1,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              'jxwg61ha' /* Near to me */,
+                            ),
+                            textAlign: TextAlign.center,
+                            style:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Color(0xFF2971FB),
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // FutureBuilder<ApiCallResponse>(
                 //   future: PropertiesCall.call(
                 //     city: FFAppState().filterCity,
                 //     furnishingType: FFAppState().filterFurnishingType,
@@ -404,9 +398,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         PagedListView<int, dynamic>(
                           physics: NeverScrollableScrollPhysics(),
                           pagingController: _pagingController,
-                          padding: EdgeInsets.zero,
-                          primary: false,
-                          shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        primary: false,
+                        shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           builderDelegate: PagedChildBuilderDelegate<dynamic>(
                             itemBuilder: (context, propertiesItem, propertiesIndex) =>
@@ -564,30 +558,41 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             alignment:
                                                 AlignmentDirectional(1, 1),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 18, 18),
-                                              child: Container(
-                                                width: 50,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  color: Color(0xFFEEEEEE),
-                                                  image: DecorationImage(
-                                                    fit: BoxFit.cover,
-                                                    image: Image.asset(
-                                                      'assets/images/Ellipse_12.png',
-                                                    ).image,
-                                                  ),
-                                                  shape: BoxShape.circle,
+                                              padding: EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 18, 18),
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              decoration: BoxDecoration(
+                                                color: Color(0xFFEEEEEE),
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: Image.asset(
+                                                    'assets/images/Ellipse_12.png',
+                                                  ).image,
                                                 ),
+                                                shape: BoxShape.circle,
                                               ),
                                             ),
                                           ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(1, -1),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 12, 15, 0),
+                                        ),
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(1, -1),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 12, 15, 0),
+                                            child: InkWell(
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                                if (!(currentUserEmailVerified)) {
+                                                  logFirebaseEvent(
+                                                      'Container_Navigate-To');
+                                                  context.pushNamed('Login');
+                                                }
+                                              },
                                               child: Container(
                                                 width: 40,
                                                 height: 40,
@@ -604,112 +609,78 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               ),
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          4, 14, 0, 0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            getJsonField(
-                                              propertiesItem,
-                                              r'''$.attributes.property_name''',
-                                            ).toString(),
-                                            maxLines: 1,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        4, 14, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          getJsonField(
+                                            propertiesItem,
+                                            r'''$.attributes.property_name''',
+                                          ).toString(),
+                                          maxLines: 1,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    'Sofia Pro By Khuzaimah',
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
+                                              ),
+                                        ),
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'etpebw43' /* Approved Banks */,
                                           ),
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'etpebw43' /* Approved Banks */,
+                                          textAlign: TextAlign.end,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    'Sofia Pro By Khuzaimah',
+                                                color: Color(0xFF474747),
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        4, 1, 0, 14),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              Icons.location_on_outlined,
+                                              color: Color(0xFF130F26),
+                                              size: 11,
                                             ),
-                                            textAlign: TextAlign.end,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
-                                                  color: Color(0xFF474747),
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          4, 1, 0, 14),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(
-                                                Icons.location_on_outlined,
-                                                color: Color(0xFF130F26),
-                                                size: 11,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(4, 0, 0, 0),
-                                                child: Text(
-                                                  getJsonField(
-                                                    propertiesItem,
-                                                    r'''$..attributes.city.data.attributes.city_name''',
-                                                  ).toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                                ),
-                                              ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'efcxmcgl' /* ,  */,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                              Text(
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(4, 0, 0, 0),
+                                              child: Text(
                                                 getJsonField(
                                                   propertiesItem,
-                                                  r'''$..property_district''',
+                                                  r'''$..attributes.city.data.attributes.city_name''',
                                                 ).toString(),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -723,100 +694,156 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           useGoogleFonts: false,
                                                         ),
                                               ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Image.asset(
-                                                'assets/images/Ellipse_9.png',
+                                            ),
+                                            Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'efcxmcgl' /* ,  */,
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Sofia Pro By Khuzaimah',
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                            ),
+                                            Text(
+                                              getJsonField(
+                                                propertiesItem,
+                                                r'''$..property_district''',
+                                              ).toString(),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Sofia Pro By Khuzaimah',
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Image.asset(
+                                              'assets/images/Ellipse_9.png',
+                                              width: 22,
+                                              height: 22,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(8, 0, 0, 0),
+                                              child: Image.asset(
+                                                'assets/images/Inma.png',
                                                 width: 22,
                                                 height: 22,
                                                 fit: BoxFit.cover,
                                               ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(8, 0, 0, 0),
-                                                child: Image.asset(
-                                                  'assets/images/Inma.png',
-                                                  width: 22,
-                                                  height: 22,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(8, 0, 0, 0),
-                                                child: Image.asset(
-                                                  'assets/images/Albilad.png',
-                                                  width: 22,
-                                                  height: 22,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          4, 0, 0, 0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              '998is2ya' /* Installment starting from */,
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .title3
-                                                .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
-                                                  color: Color(0xFF2971FB),
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'gqe4w739' /* Total property price */,
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(8, 0, 0, 0),
+                                              child: Image.asset(
+                                                'assets/images/Albilad.png',
+                                                width: 22,
+                                                height: 22,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
-                                                  color: Color(0xFF474747),
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          4, 1, 0, 20),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                functions
-                                                    .formatAmount(getJsonField(
-                                                  propertiesItem,
-                                                  r'''$..property_initial_installment''',
-                                                ).toString()),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        4, 0, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            '998is2ya' /* Installment starting from */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .title3
+                                              .override(
+                                                fontFamily:
+                                                    'Sofia Pro By Khuzaimah',
+                                                color: Color(0xFF2971FB),
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
+                                              ),
+                                        ),
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'gqe4w739' /* Total property price */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily:
+                                                    'Sofia Pro By Khuzaimah',
+                                                color: Color(0xFF474747),
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        4, 1, 0, 20),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              functions
+                                                  .formatAmount(getJsonField(
+                                                propertiesItem,
+                                                r'''$..property_initial_installment''',
+                                              ).toString()),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily:
+                                                        'Sofia Pro By Khuzaimah',
+                                                    color: Color(0xFF2971FB),
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.bold,
+                                                    useGoogleFonts: false,
+                                                  ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(5, 10, 0, 0),
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'l38if619' /*  SAR/Monthly */,
+                                                ),
+                                                textAlign: TextAlign.start,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText1
@@ -825,99 +852,75 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                               'Sofia Pro By Khuzaimah',
                                                           color:
                                                               Color(0xFF2971FB),
-                                                          fontSize: 24,
+                                                          fontSize: 12,
                                                           fontWeight:
-                                                              FontWeight.bold,
+                                                              FontWeight.w500,
                                                           useGoogleFonts: false,
                                                         ),
                                               ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(5, 10, 0, 0),
-                                                child: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'l38if619' /*  SAR/Monthly */,
-                                                  ),
-                                                  textAlign: TextAlign.start,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              functions
+                                                  .formatAmount(getJsonField(
+                                                propertiesItem,
+                                                r'''$..property_price''',
+                                              ).toString()),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2
                                                       .override(
                                                         fontFamily:
                                                             'Sofia Pro By Khuzaimah',
-                                                        color:
-                                                            Color(0xFF2971FB),
-                                                        fontSize: 12,
+                                                        color: Colors.black,
+                                                        fontSize: 16,
                                                         fontWeight:
-                                                            FontWeight.w500,
+                                                            FontWeight.bold,
                                                         useGoogleFonts: false,
                                                       ),
-                                                ),
+                                            ),
+                                            Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'dhoik8q5' /*  SAR */,
                                               ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                functions
-                                                    .formatAmount(getJsonField(
-                                                  propertiesItem,
-                                                  r'''$..property_price''',
-                                                ).toString()),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'dhoik8q5' /*  SAR */,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            'Sofia Pro By Khuzaimah',
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                    Divider(
-                                      thickness: 1,
-                                      color: Color(0xFFECECEC),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  Divider(
+                                    thickness: 1,
+                                    color: Color(0xFFECECEC),
+                                  ),
+                                ],
                               ),
                             ),
+                          ),
                         //  },
 
 
                    // );
                 //  },
   ),),
-              ],
-            ),
+            ],
           ),
         ),
       ),

@@ -55,3 +55,9 @@ double formattedDouble(int maxRange) {
   double value = maxRange.toDouble();
   return value;
 }
+
+String formattedSliderOutput(double rawSliderValue) {
+  // Add your function code here!
+  double val = double.parse(rawSliderValue.toStringAsFixed(0));
+  return val.toString();
+}
