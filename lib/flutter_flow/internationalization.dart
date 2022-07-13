@@ -191,7 +191,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مجمع التطبيق 2.1.1 (231)',
     },
     'umgvt8b8': {
-      'en': 'Profile',
+      'en': 'Account',
       'ar': 'الملف الشخصي',
     },
   },
@@ -323,6 +323,26 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الصفحة الرئيسية',
     },
   },
+  // Notifications
+  {
+    'azq2kgbb': {
+      'en':
+          'A new proposal received from  Al Rajhi Bank to your booking  “Almajdiah Apartment“',
+      'ar': 'تم استلام عرض جديد من مصرف الراجحي لحجزك \"شقة الماجدية\" ',
+    },
+    'muysw2pl': {
+      'en': 'Today',
+      'ar': 'اليوم',
+    },
+    'nm3bcvix': {
+      'en': 'Notifications',
+      'ar': 'إشعارات',
+    },
+    'mvocppdr': {
+      'en': 'Home',
+      'ar': 'الصفحة الرئيسية',
+    },
+  },
   // HomeScreen
   {
     'waavnvd4': {
@@ -368,26 +388,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'd9p577jz': {
       'en': 'Explore',
       'ar': 'اكتشف',
-    },
-  },
-  // Notifications
-  {
-    'azq2kgbb': {
-      'en':
-          'A new proposal received from  Al Rajhi Bank to your booking  “Almajdiah Apartment“',
-      'ar': 'تم استلام عرض جديد من مصرف الراجحي لحجزك \"شقة الماجدية\" ',
-    },
-    'muysw2pl': {
-      'en': 'Today',
-      'ar': 'اليوم',
-    },
-    'nm3bcvix': {
-      'en': 'Notifications',
-      'ar': 'إشعارات',
-    },
-    'mvocppdr': {
-      'en': 'Home',
-      'ar': 'الصفحة الرئيسية',
     },
   },
   // Filter
@@ -497,7 +497,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'إظهار الخصائص',
     },
     '5wfrx94q': {
-      'en': 'Home',
+      'en': 'Offers',
       'ar': 'مسكن',
     },
   },
