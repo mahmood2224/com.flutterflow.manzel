@@ -217,7 +217,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         child: Icon(
                                           Icons.map_outlined,
                                           color: Colors.black,
-                                          size: 14,
+                                          size: 18,
                                         ),
                                       ),
                                     ),
@@ -252,7 +252,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         child: Icon(
                                           Icons.filter_list_rounded,
                                           color: Colors.black,
-                                          size: 16,
+                                          size: 18,
                                         ),
                                       ),
                                     ),
@@ -332,6 +332,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   city: FFAppState().filterCity,
                   furnishingType: FFAppState().filterFurnishingType,
                   propertyType: FFAppState().filterPropertyType,
+                  minimumPrice: FFAppState().filterMinPrice,
+                  maximumPrice: FFAppState().filterMaxPrice,
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.

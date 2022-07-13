@@ -488,10 +488,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Semi-Furnished',
       'ar': 'نصف مفروش أو نصف مجهز أو شبه مفروش',
     },
-    '7fpsv2qy': {
-      'en': '',
-      'ar': 'الجميع',
-    },
     'dgzjfbdt': {
       'en': 'Show  Properties',
       'ar': 'إظهار الخصائص',
