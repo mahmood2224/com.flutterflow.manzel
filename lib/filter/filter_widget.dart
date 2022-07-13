@@ -74,7 +74,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               FFLocalizations.of(context).getText(
                 'h84toi7e' /* Reset */,
               ),
-              textAlign: TextAlign.start,
+              textAlign: TextAlign.center,
               maxLines: 1,
               style: FlutterFlowTheme.of(context).bodyText1.override(
                     fontFamily: 'Sofia Pro By Khuzaimah',
