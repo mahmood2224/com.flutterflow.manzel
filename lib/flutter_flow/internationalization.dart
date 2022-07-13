@@ -476,21 +476,21 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Furnishing',
       'ar': 'مفروشة',
     },
-    'p4ffui1h': {
-      'en': 'All',
-      'ar': 'الجميع',
-    },
     'jrw6qvww': {
-      'en': 'Furnishing',
+      'en': 'Furnishied',
       'ar': 'مفروشة',
     },
     'skyj7jpv': {
-      'en': 'Un-Furnishing',
+      'en': 'Un-Furnishied',
       'ar': 'غير مفروشة',
     },
     '8x7rkqnv': {
       'en': 'Semi-Furnished',
-      'ar': '',
+      'ar': 'نصف مفروش أو نصف مجهز أو شبه مفروش',
+    },
+    '7fpsv2qy': {
+      'en': '',
+      'ar': 'الجميع',
     },
     'dgzjfbdt': {
       'en': 'Show  Properties',
