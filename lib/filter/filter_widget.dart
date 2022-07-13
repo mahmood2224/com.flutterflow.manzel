@@ -432,7 +432,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             children: [
                               Text(
                                 FFLocalizations.of(context).getText(
-                                  'q62w4vtf' /* Minimum intsallment */,
+                                  'q62w4vtf' /* Minimum */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
@@ -465,7 +465,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               ),
                               Text(
                                 FFLocalizations.of(context).getText(
-                                  'wlsjihmj' /* Maximum Installment */,
+                                  'wlsjihmj' /* Maximum */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
