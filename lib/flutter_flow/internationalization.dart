@@ -554,17 +554,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // WhereAreYouLooking
   {
-    'o5kmjt96': {
-      'en': 'Where are you looking?',
-      'ar': 'أين تبحث؟',
-    },
-    'nu1b6t0o': {
-      'en': 'Riyadh',
+    'qlysszro': {
+      'en': 'Where are you  looking ?',
       'ar': '',
-    },
-    '8po9ixlq': {
-      'en': 'Where are you looking?',
-      'ar': 'أين تبحث؟',
     },
     'fce9ky0f': {
       'en': 'Home',

@@ -116,8 +116,8 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'HomeScreen': HomeScreenWidget(),
       'MyProperties': MyPropertiesWidget(),
-      'Profile': ProfileWidget(),
       'Filter': FilterWidget(),
+      'Profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -127,7 +127,7 @@ class _NavBarPageState extends State<NavBarPage> {
         onTap: (i) => setState(() => _currentPage = tabs.keys.toList()[i]),
         backgroundColor: Colors.white,
         selectedItemColor: Color(0xFF2971FB),
-        unselectedItemColor: Color(0x8A000000),
+        unselectedItemColor: Colors.black,
         showSelectedLabels: true,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
@@ -153,22 +153,22 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outline_outlined,
-              size: 24,
-            ),
-            label: FFLocalizations.of(context).getText(
-              'umgvt8b8' /* Account */,
-            ),
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
             icon: FaIcon(
               FontAwesomeIcons.commentDots,
               size: 24,
             ),
             label: FFLocalizations.of(context).getText(
               '5wfrx94q' /* Offers */,
+            ),
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person_outline_outlined,
+              size: 24,
+            ),
+            label: FFLocalizations.of(context).getText(
+              'umgvt8b8' /* Account */,
             ),
             tooltip: '',
           )
