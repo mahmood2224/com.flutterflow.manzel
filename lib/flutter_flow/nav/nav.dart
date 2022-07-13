@@ -127,6 +127,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ConfirmNewNumberOTPWidget(),
             ),
             FFRoute(
+              name: 'Notifications',
+              path: 'notifications',
+              builder: (context, params) => NotificationsWidget(),
+            ),
+            FFRoute(
               name: 'HomeScreen',
               path: 'homeScreen',
               builder: (context, params) => params.isEmpty
@@ -139,11 +144,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                       furnishing:
                           params.getParam('furnishing', ParamType.String),
                     ),
-            ),
-            FFRoute(
-              name: 'Notifications',
-              path: 'notifications',
-              builder: (context, params) => NotificationsWidget(),
             ),
             FFRoute(
               name: 'Filter',

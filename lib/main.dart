@@ -9,6 +9,7 @@ import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
@@ -115,8 +116,8 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'HomeScreen': HomeScreenWidget(),
       'MyProperties': MyPropertiesWidget(),
-      'Profile': ProfileWidget(),
       'Filter': FilterWidget(),
+      'Profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -152,22 +153,22 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outline_outlined,
+            icon: FaIcon(
+              FontAwesomeIcons.commentDots,
               size: 24,
             ),
             label: FFLocalizations.of(context).getText(
-              'umgvt8b8' /* Profile */,
+              '5wfrx94q' /* Offers */,
             ),
             tooltip: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_outlined,
+              Icons.person_outline_outlined,
               size: 24,
             ),
             label: FFLocalizations.of(context).getText(
-              '5wfrx94q' /* Home */,
+              'umgvt8b8' /* Account */,
             ),
             tooltip: '',
           )
