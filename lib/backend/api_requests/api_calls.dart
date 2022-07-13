@@ -320,3 +320,30 @@ class FilterParamsCall {
     );
   }
 }
+
+class SearchPageCitiesCall {
+  static Future<ApiCallResponse> call() {
+    return ApiManager.instance.makeApiCall(
+      callName: 'searchPageCities',
+      apiUrl:
+          'https://strapi-dev.manzel.app/api/property/search?locale=en&populate=city',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+    );
+  }
+
+  static dynamic cityName(dynamic response) => getJsonField(
+        response,
+        r'''$.results..name''',
+      );
+  static dynamic numberOfProperties(dynamic response) => getJsonField(
+        response,
+        r'''$.results..count''',
+      );
+  static dynamic cityImage(dynamic response) => getJsonField(
+        response,
+        r'''$.results..image''',
+      );
+}

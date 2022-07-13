@@ -70,3 +70,12 @@ String sliderToApi(double sliderValue) {
   double val = double.parse(sliderValue.toStringAsFixed(0));
   return val.toString();
 }
+
+String searchPagePropertyText(int count) {
+  // Add your function code here!
+  if (count > 1) {
+    return "${count.toString()} properties available";
+  } else {
+    return "${count.toString()} property available";
+  }
+}
