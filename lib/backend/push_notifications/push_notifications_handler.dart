@@ -87,7 +87,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EditPersonallInfo': (data) async => EditPersonallInfoWidget(),
   'EditMobileNumber': (data) async => EditMobileNumberWidget(),
   'ConfirmNewNumberOTP': (data) async => ConfirmNewNumberOTPWidget(),
-  'Notifications': (data) async => NotificationsWidget(),
   'HomeScreen': (data) async => hasMatchingParameters(
           data, {'city', 'type', 'installmentRange', 'furnishing'})
       ? HomeScreenWidget(
@@ -97,6 +96,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
           furnishing: getParameter(data, 'furnishing'),
         )
       : NavBarPage(initialPage: 'HomeScreen'),
+  'Notifications': (data) async => NotificationsWidget(),
   'Filter': (data) async => NavBarPage(initialPage: 'Filter'),
   'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
         city: getParameter(data, 'city'),
