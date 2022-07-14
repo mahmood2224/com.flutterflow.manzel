@@ -19,6 +19,8 @@ export 'filter/filter_widget.dart' show FilterWidget;
 export 'my_properties/my_properties_widget.dart' show MyPropertiesWidget;
 export 'where_are_you_looking/where_are_you_looking_widget.dart'
     show WhereAreYouLookingWidget;
+export 'search_city_result/search_city_result_widget.dart'
+    show SearchCityResultWidget;
 export 'property_details/property_details_widget.dart'
     show PropertyDetailsWidget;
 export 'bank_details/bank_details_widget.dart' show BankDetailsWidget;

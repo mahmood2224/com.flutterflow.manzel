@@ -166,6 +166,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
+              name: 'searchCityResult',
+              path: 'searchCityResult',
+              builder: (context, params) => SearchCityResultWidget(),
+            ),
+            FFRoute(
               name: 'PropertyDetails',
               path: 'propertyDetails',
               builder: (context, params) => PropertyDetailsWidget(
