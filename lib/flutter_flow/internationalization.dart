@@ -575,6 +575,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الصفحة الرئيسية',
     },
   },
+  // searchCityResult
+  {
+    'ntrpmj08': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
   // PropertyDetails
   {
     'ak0ss5un': {
@@ -589,7 +596,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ', ',
       'ar': '،',
     },
-    '1g1c2vdl': {
+    'regy8zap': {
       'en': 'View on map',
       'ar': '',
     },
@@ -597,21 +604,21 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' Bedrooms',
       'ar': 'غرف نوم',
     },
-    'swyvkhf5': {
-      'en': ' sqm',
-      'ar': 'متر مربع',
-    },
     'gqq478h5': {
       'en': ' Bathrooms',
       'ar': 'الحمامات',
     },
-    '7xi05192': {
-      'en': ' Years',
-      'ar': 'سنوات',
+    'swyvkhf5': {
+      'en': ' sqm',
+      'ar': 'متر مربع',
     },
     'u0xq15h6': {
       'en': ' Livingrooms',
       'ar': 'غرف المعيشة',
+    },
+    '7xi05192': {
+      'en': ' Years',
+      'ar': 'سنوات',
     },
     'nq19lw60': {
       'en': 'Features and Amenities',
