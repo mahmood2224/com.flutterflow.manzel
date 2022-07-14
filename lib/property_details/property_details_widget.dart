@@ -128,14 +128,13 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             curve: Curves.ease,
                                           );
                                         },
-                                        effect: ExpandingDotsEffect(
-                                          expansionFactor: 2,
+                                        effect: SlideEffect(
                                           spacing: 8,
                                           radius: 16,
-                                          dotWidth: 8,
-                                          dotHeight: 8,
+                                          dotWidth: 6,
+                                          dotHeight: 6,
                                           dotColor: Color(0xFF9E9E9E),
-                                          activeDotColor: Color(0xFF3F51B5),
+                                          activeDotColor: Colors.white,
                                           paintStyle: PaintingStyle.fill,
                                         ),
                                       ),

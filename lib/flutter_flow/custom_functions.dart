@@ -80,7 +80,7 @@ String searchPagePropertyText(int count) {
   }
 }
 
-bool validateSliderRange(
+bool validateInstallmentRange(
   double minIntallmentRange,
   double maxInstallmentRange,
 ) {
@@ -99,7 +99,7 @@ List<String> cityListBuilder(List<String> cityListApiResponse) {
   return finalList;
 }
 
-List<String> propertyTypeBuilder(List<String> propertyTypeApiResponse) {
+List<String> propertTypeBuilder(List<String> propertyTypeApiResponse) {
   // Add your function code here!
   var finalList = ["All"];
   finalList.addAll(propertyTypeApiResponse);

@@ -279,7 +279,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         propertyTypeListValue != null
                                             ? [propertyTypeListValue]
                                             : [FFAppState().filterPropertyType],
-                                    options: (functions.propertyTypeBuilder(
+                                    options: (functions.propertTypeBuilder(
                                                 (getJsonField(
                                               (columnFilterParamsResponse
                                                       ?.jsonBody ??
@@ -680,7 +680,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           logFirebaseEvent('apllyFilter_Update-Local-State');
                           setState(() => FFAppState().filterMaxPrice =
                               functions.sliderToApi(sliderValue2));
-                          if (functions.validateSliderRange(
+                          if (functions.validateInstallmentRange(
                               sliderValue1, sliderValue2)) {
                             logFirebaseEvent('apllyFilter_Navigate-Back');
                             context.pop();
@@ -689,7 +689,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Please select valid Installment Range',
+                                  'Please Enter Valid Installment Range',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(

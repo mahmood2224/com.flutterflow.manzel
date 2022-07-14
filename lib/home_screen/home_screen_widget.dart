@@ -328,13 +328,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 ),
               ),
               FutureBuilder<ApiCallResponse>(
-                future: PropertiesCall.call(
-                  city: FFAppState().filterCity,
-                  furnishingType: FFAppState().filterFurnishingType,
-                  propertyType: FFAppState().filterPropertyType,
-                  minimumPrice: FFAppState().filterMinPrice,
-                  maximumPrice: FFAppState().filterMaxPrice,
-                ),
+                future: PropertiesCall.call(),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
                   if (!snapshot.hasData) {
