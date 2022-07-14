@@ -29,7 +29,7 @@ class _BankDetailsBottomSheetWidgetState
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: FlutterFlowTheme.of(context).primaryText,
+                color: Color(0x80000000),
                 offset: Offset(0, 1),
               )
             ],
@@ -96,8 +96,8 @@ class _BankDetailsBottomSheetWidgetState
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(20, 12, 0, 0),
           child: Container(
-            width: MediaQuery.of(context).size.width * 0.35,
-            height: MediaQuery.of(context).size.height * 0.17,
+            width: 130,
+            height: 93,
             decoration: BoxDecoration(
               color: Color(0xFFEEEEEE),
             ),

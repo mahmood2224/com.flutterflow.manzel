@@ -172,7 +172,7 @@ class PropertyCall {
       );
   static dynamic mangedBy(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.managed_by.data.attributes.prob_company_name''',
+        r'''$.data.attributes.managed_by.data.attributes.company_name''',
       );
   static dynamic propertyImg(dynamic response) => getJsonField(
         response,
@@ -180,7 +180,7 @@ class PropertyCall {
       );
   static dynamic companyLogo(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.managed_by.data.attributes.prob_company_logo..alternativeText''',
+        r'''$.data.attributes.managed_by.data.attributes.company_logo.data.attributes.name''',
       );
   static dynamic reservationsCost(dynamic response) => getJsonField(
         response,
