@@ -577,11 +577,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // searchCityResult
   {
-    'ihh020cb': {
-      'en': 'Page Title',
-      'ar': '',
-    },
-    'eyy2grzg': {
+    'ntrpmj08': {
       'en': 'Home',
       'ar': '',
     },

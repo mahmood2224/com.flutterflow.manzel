@@ -684,53 +684,62 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   color: Colors.black,
                                                   size: 24,
                                                 ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      valueOrDefault<String>(
-                                                        PropertyCall
-                                                            .propertyBedrooms(
-                                                          (columnPropertyResponse
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                        ).toString(),
-                                                        'Un-Known',
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 8, 0, 0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        valueOrDefault<String>(
+                                                          PropertyCall
+                                                              .propertyBedrooms(
+                                                            (columnPropertyResponse
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                          ).toString(),
+                                                          'Un-Known',
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro By Khuzaimah',
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
                                                       ),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyText1
-                                                          .override(
-                                                            fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
-                                                            fontWeight:
-                                                                FontWeight.w300,
-                                                            useGoogleFonts:
-                                                                false,
-                                                          ),
-                                                    ),
-                                                    Text(
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        'd1l98zzs' /*  Bedrooms */,
+                                                      Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'd1l98zzs' /*  Bedrooms */,
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro By Khuzaimah',
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
                                                       ),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyText1
-                                                          .override(
-                                                            fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
-                                                            fontWeight:
-                                                                FontWeight.w300,
-                                                            useGoogleFonts:
-                                                                false,
-                                                          ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -746,7 +755,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 12, 0, 0),
+                                                      .fromSTEB(0, 8, 0, 0),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -816,7 +825,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 12, 0, 0),
+                                                      .fromSTEB(0, 8, 0, 0),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -885,7 +894,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 12, 0, 0),
+                                                      .fromSTEB(0, 8, 0, 0),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -954,7 +963,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 12, 0, 0),
+                                                      .fromSTEB(0, 8, 0, 0),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,

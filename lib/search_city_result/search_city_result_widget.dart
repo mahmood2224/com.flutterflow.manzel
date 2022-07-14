@@ -36,6 +36,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
               width: 34,
               height: 34,
               decoration: BoxDecoration(
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Color(0xFFF3F2F2),
@@ -48,19 +49,11 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                 ),
               ),
               child: Icon(
-                Icons.settings_outlined,
+                Icons.arrow_back_outlined,
                 color: Colors.black,
-                size: 24,
+                size: 20,
               ),
             ),
-          ),
-          flexibleSpace: Text(
-            'Page Title',
-            style: FlutterFlowTheme.of(context).title2.override(
-                  fontFamily: 'Sofia Pro',
-                  color: Colors.black,
-                  fontSize: 22,
-                ),
           ),
           actions: [],
           elevation: 2,
