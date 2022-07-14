@@ -50,7 +50,7 @@ class PropertyCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Property',
       apiUrl:
-          'https://strapi-dev.manzel.app/api/properties/${propertyId}/?populate=*,banks.bank_logo,managed_by.prob_company_logo, property_images',
+          'https://strapi-dev.manzel.app/api/properties/${propertyId}/?populate=*,banks.bank_logo,managed_by.company_logo, property_images',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -322,14 +322,19 @@ class FilterParamsCall {
 }
 
 class SearchPageCitiesCall {
-  static Future<ApiCallResponse> call() {
+  static Future<ApiCallResponse> call({
+    String locale = 'en',
+    String populate = 'city',
+  }) {
     return ApiManager.instance.makeApiCall(
       callName: 'searchPageCities',
-      apiUrl:
-          'https://strapi-dev.manzel.app/api/property/search?locale=en&populate=city',
+      apiUrl: 'https://strapi-dev.manzel.app/api/property/search',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'locale': locale,
+        'populate': populate,
+      },
       returnBody: true,
     );
   }

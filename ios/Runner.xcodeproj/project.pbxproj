@@ -435,8 +435,8 @@
 		6436409C27A31CD800820AF7 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6436409827A31CDA00820AF7 /* en */,
-				6436409D27A31CD500820AF7 /* ar */,
+				6436409527A31CD300820AF7 /* en */,
+				6436409627A31CD700820AF7 /* ar */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

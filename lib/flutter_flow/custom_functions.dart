@@ -79,3 +79,29 @@ String searchPagePropertyText(int count) {
     return "${count.toString()} property available";
   }
 }
+
+bool validateInstallmentRange(
+  double minIntallmentRange,
+  double maxInstallmentRange,
+) {
+  if (minIntallmentRange < maxInstallmentRange) {
+    return true;
+  } else {
+    return false;
+  }
+  // Add your function code here!
+}
+
+List<String> cityListBuilder(List<String> cityListApiResponse) {
+  // Add your function code here!
+  var finalList = ["All"];
+  finalList.addAll(cityListApiResponse);
+  return finalList;
+}
+
+List<String> propertTypeBuilder(List<String> propertyTypeApiResponse) {
+  // Add your function code here!
+  var finalList = ["All"];
+  finalList.addAll(propertyTypeApiResponse);
+  return finalList;
+}

@@ -33,7 +33,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -51,7 +51,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 17,
-                        color: Color(0x40D7D7D7),
+                        color: Color(0x0BD7D7D7),
                         offset: Offset(0, 3),
                         spreadRadius: 0,
                       )
@@ -114,9 +114,12 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 33, 25, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 25, 0),
                   child: FutureBuilder<ApiCallResponse>(
-                    future: SearchPageCitiesCall.call(),
+                    future: SearchPageCitiesCall.call(
+                      locale: FFAppState().locale,
+                      populate: 'city',
+                    ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -149,11 +152,10 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                               final citiesItem = cities[citiesIndex];
                               return Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 25),
+                                    EdgeInsetsDirectional.fromSTEB(0, 33, 0, 0),
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.07,
+                                  height: 46,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                   ),
@@ -173,19 +175,12 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.18,
-                                                height: 100,
+                                                width: 46,
+                                                height: 46,
                                                 decoration: BoxDecoration(
                                                   color: Color(0xFFEEEEEE),
                                                   borderRadius:
                                                       BorderRadius.circular(5),
-                                                  border: Border.all(
-                                                    color: Colors.black,
-                                                    width: 1,
-                                                  ),
                                                 ),
                                                 child: ClipRRect(
                                                   borderRadius:
@@ -201,8 +196,8 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width *
-                                                            0.18,
-                                                    height: 100,
+                                                            0.46,
+                                                    height: 46,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
