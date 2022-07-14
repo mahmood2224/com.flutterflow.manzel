@@ -477,16 +477,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مفروشة',
     },
     'jrw6qvww': {
-      'en': 'Furnishied',
+      'en': 'All',
       'ar': 'مفروشة',
     },
     'skyj7jpv': {
-      'en': 'Un-Furnishied',
+      'en': 'Furnishied',
       'ar': 'غير مفروشة',
     },
     '8x7rkqnv': {
-      'en': 'Semi-Furnished',
+      'en': 'Un-Furnishied',
       'ar': 'نصف مفروش أو نصف مجهز أو شبه مفروش',
+    },
+    'mhyiav30': {
+      'en': 'Semi-Furnished',
+      'ar': '',
     },
     'dgzjfbdt': {
       'en': 'Show  Properties',
@@ -1113,6 +1117,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'gmbuwmld': {
       'en': 'No Result Found',
       'ar': 'لم يتم العثور على نتائج',
+    },
+  },
+  // bankDetailsBottomSheet
+  {
+    'qb244g7f': {
+      'en': 'Bank Details',
+      'ar': '',
+    },
+    'ua6uqn3o': {
+      'en': 'Button',
+      'ar': '',
     },
   },
   // Miscellaneous
