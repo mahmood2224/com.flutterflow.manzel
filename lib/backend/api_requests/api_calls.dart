@@ -80,7 +80,7 @@ class PropertyCall {
       );
   static dynamic propertyCity(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.property_city''',
+        r'''$.data.attributes.city.data.attributes.city_name''',
       );
   static dynamic propertyDistrict(dynamic response) => getJsonField(
         response,

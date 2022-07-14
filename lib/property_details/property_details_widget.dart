@@ -86,8 +86,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   [];
                               return Container(
                                 width: double.infinity,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.42,
+                                height: 300,
                                 child: Stack(
                                   children: [
                                     PageView.builder(
@@ -264,7 +263,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                       Align(
                         alignment: AlignmentDirectional(0, 0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 320, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 280, 0, 0),
                           child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -604,22 +603,55 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     1, 0, 0, 0),
-                                            child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'regy8zap' /* View on map */,
+                                            child: InkWell(
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'PROPERTY_DETAILS_Text_ytdaqx1p_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Text_Launch-Map');
+                                                await launchMap(
+                                                  mapType: $ml.MapType.google,
+                                                  location: functions
+                                                      .propertyLocation(
+                                                          PropertyCall
+                                                              .propertyLat(
+                                                            (columnPropertyResponse
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                          ),
+                                                          PropertyCall
+                                                              .propertylng(
+                                                            (columnPropertyResponse
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                          )),
+                                                  title:
+                                                      PropertyCall.propertyName(
+                                                    (columnPropertyResponse
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  ).toString(),
+                                                );
+                                              },
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'regy8zap' /* View on map */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          color:
+                                                              Color(0xFF2971FB),
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          useGoogleFonts: false,
+                                                        ),
                                               ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
-                                                    color: Color(0xFF2971FB),
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.bold,
-                                                    useGoogleFonts: false,
-                                                  ),
                                             ),
                                           ),
                                         ],
@@ -669,6 +701,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             mainAxisSpacing: 10,
                                             childAspectRatio: 1.4,
                                           ),
+                                          primary: false,
                                           shrinkWrap: true,
                                           scrollDirection: Axis.vertical,
                                           children: [
@@ -1097,7 +1130,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 17, 16, 0),
+                                          16, 15, 16, 0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -1141,7 +1174,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 17, 16, 0),
+                                          16, 15, 16, 0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -1186,7 +1219,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 17, 16, 0),
+                                          16, 15, 16, 0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -1230,7 +1263,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 17, 16, 32),
+                                          16, 15, 16, 32),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -1251,14 +1284,15 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 ),
                                           ),
                                           Text(
-                                            valueOrDefault<String>(
+                                            functions.formatAmount(
+                                                valueOrDefault<String>(
                                               PropertyCall.propertyPrice(
                                                 (columnPropertyResponse
                                                         ?.jsonBody ??
                                                     ''),
                                               ).toString(),
-                                              'Un-Known',
-                                            ),
+                                              '0.00',
+                                            )),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
@@ -1302,7 +1336,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 19, 16, 30),
+                                          0, 19, 0, 30),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
@@ -1336,8 +1370,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       return Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    2, 2, 2, 2),
+                                                                .fromSTEB(16, 0,
+                                                                    0, 0),
                                                         child: InkWell(
                                                           onTap: () async {
                                                             logFirebaseEvent(
@@ -1368,8 +1402,16 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             );
                                                           },
                                                           child: Container(
-                                                            width: 123,
-                                                            height: 177,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.328,
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height *
+                                                                0.18,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color:
@@ -1396,7 +1438,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                       .max,
                                                               mainAxisAlignment:
                                                                   MainAxisAlignment
-                                                                      .spaceEvenly,
+                                                                      .start,
                                                               children: [
                                                                 Padding(
                                                                   padding: EdgeInsetsDirectional
@@ -1416,110 +1458,78 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         banksItem,
                                                                         r'''$..bank_logo..alternativeText''',
                                                                       ),
-                                                                      width:
-                                                                          111,
-                                                                      height:
-                                                                          80,
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          0.29,
+                                                                      height: MediaQuery.of(context)
+                                                                              .size
+                                                                              .height *
+                                                                          0.1,
                                                                       fit: BoxFit
                                                                           .cover,
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          9,
-                                                                          0,
-                                                                          9,
-                                                                          2),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceBetween,
-                                                                    children: [
-                                                                      Expanded(
-                                                                        child:
-                                                                            Text(
+                                                                Expanded(
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            9,
+                                                                            0,
+                                                                            9,
+                                                                            0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
                                                                           getJsonField(
                                                                             banksItem,
-                                                                            r'''$..bank_name''',
+                                                                            r'''$..Bank_name''',
                                                                           ).toString(),
+                                                                          maxLines:
+                                                                              2,
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyText1
                                                                               .override(
                                                                                 fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                fontSize: 12,
+                                                                                fontSize: 14,
                                                                                 fontWeight: FontWeight.bold,
                                                                                 useGoogleFonts: false,
                                                                               ),
                                                                         ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          9,
-                                                                          1,
-                                                                          9,
-                                                                          0),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Expanded(
-                                                                        child:
-                                                                            Text(
-                                                                          getJsonField(
-                                                                            banksItem,
-                                                                            r'''$..bank_description''',
-                                                                          ).toString(),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                fontSize: 12,
-                                                                                fontWeight: FontWeight.w300,
-                                                                                useGoogleFonts: false,
-                                                                              ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          9,
-                                                                          9,
-                                                                          9,
-                                                                          0),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          '1v1r516t' /* More Details */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                              color: FlutterFlowTheme.of(context).primaryColor,
-                                                                              fontSize: 11,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: false,
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0,
+                                                                              0,
+                                                                              0,
+                                                                              17),
+                                                                          child:
+                                                                              Text(
+                                                                            FFLocalizations.of(context).getText(
+                                                                              '1v1r516t' /* More Details */,
                                                                             ),
-                                                                      ),
-                                                                    ],
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                  fontSize: 11,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ],
@@ -1597,8 +1607,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 7, 16, 16),
                                       child: Container(
-                                        width: 343,
-                                        height: 219,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.27,
                                         decoration: BoxDecoration(
                                           color: Color(0xFFEEEEEE),
                                         ),
@@ -1655,8 +1668,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   apiKey:
                                                       'pk.eyJ1IjoibWFuemVsIiwiYSI6ImNsNTB0NjI3YjA3OXQzYm9sdWNvM2Rrc2kifQ.zAYcxr9ozMoZfe4pEfxv7A',
                                                   style: MapBoxStyle.Streets,
-                                                  width: 300,
-                                                  height: 300,
+                                                  width: double.infinity,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.27,
                                                   fit: BoxFit.cover,
                                                   borderRadius:
                                                       BorderRadius.circular(8),
@@ -1665,7 +1681,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               context)
                                                           .alternate,
                                                   cached: true,
-                                                  zoom: 14,
+                                                  zoom: 10,
                                                   tilt: 0,
                                                   rotation: 0,
                                                 ),
@@ -1683,7 +1699,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       ),
                                       child: Container(
                                         width: double.infinity,
-                                        height: 90,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.12,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           boxShadow: [
@@ -1703,28 +1721,99 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 16, 16, 0),
                                           child: Row(
-                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Expanded(
                                                 child: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 0, 150, 0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Text(
+                                                    Text(
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'i17ddd6l' /* Installment starting from */,
+                                                      ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro By Khuzaimah',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                fontSize: 10,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        AutoSizeText(
+                                                          functions
+                                                              .formatAmount(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                PropertyCall
+                                                                    .propertyInitialInstallment(
+                                                                  (columnPropertyResponse
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                ).toString(),
+                                                                '0.00',
+                                                              ))
+                                                              .maybeHandleOverflow(
+                                                                  maxChars: 10),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          maxLines: 1,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro By Khuzaimah',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                fontSize: 24,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 5, 0),
+                                                          child: Text(
                                                             FFLocalizations.of(
                                                                     context)
                                                                 .getText(
-                                                              'i17ddd6l' /* Installment starting from */,
+                                                              'mgi2d0o9' /*  SAR/Monthly */,
                                                             ),
+                                                            textAlign:
+                                                                TextAlign.start,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1
@@ -1734,7 +1823,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryColor,
-                                                                  fontSize: 10,
+                                                                  fontSize: 11,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
@@ -1742,151 +1831,58 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                       false,
                                                                 ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(0, 10,
-                                                                    0, 0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Expanded(
-                                                              child:
-                                                                  AutoSizeText(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  PropertyCall
-                                                                      .propertyInitialInstallment(
-                                                                    (columnPropertyResponse
-                                                                            ?.jsonBody ??
-                                                                        ''),
-                                                                  ).toString(),
-                                                                  'Un-Known',
-                                                                ).maybeHandleOverflow(
-                                                                    maxChars:
-                                                                        10),
-                                                                maxLines: 1,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                      fontSize:
-                                                                          24,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          40,
-                                                                          0),
-                                                              child: Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'mgi2d0o9' /* SAR/Monthly */,
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                      fontSize:
-                                                                          11,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                logFirebaseEvent(
-                                                                    'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
-                                                                // reserve
-                                                                logFirebaseEvent(
-                                                                    'reserved_reserve');
-                                                                context.goNamed(
-                                                                  'ReservationConfirmation',
-                                                                  queryParams: {
-                                                                    'propertyId': serializeParam(
-                                                                        widget
-                                                                            .propertyId,
-                                                                        ParamType
-                                                                            .int),
-                                                                  }.withoutNulls,
-                                                                );
-                                                              },
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                'dpmrt150' /* Reserve */,
-                                                              ),
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                width: 140,
-                                                                height: 56,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          18,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w800,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                  width: 1,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12),
-                                                              ),
-                                                            ),
-                                                          ],
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
                                                   ],
+                                                ),
+                                              ),
+                                              FFButtonWidget(
+                                                onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
+                                                  // reserve
+                                                  logFirebaseEvent(
+                                                      'reserved_reserve');
+                                                  context.goNamed(
+                                                    'ReservationConfirmation',
+                                                    queryParams: {
+                                                      'propertyId':
+                                                          serializeParam(
+                                                              widget.propertyId,
+                                                              ParamType.int),
+                                                    }.withoutNulls,
+                                                  );
+                                                },
+                                                text:
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                  'dpmrt150' /* Reserve */,
+                                                ),
+                                                options: FFButtonOptions(
+                                                  width: 140,
+                                                  height: 56,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily:
+                                                            'Sofia Pro By Khuzaimah',
+                                                        color: Colors.white,
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
                                                 ),
                                               ),
                                             ],

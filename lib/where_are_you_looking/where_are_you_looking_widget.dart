@@ -155,133 +155,162 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                               return Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 33, 0, 0),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 46,
-                                  decoration: BoxDecoration(),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          width: 100,
-                                          height: 100,
-                                          decoration: BoxDecoration(),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Container(
-                                                width: 46,
-                                                height: 46,
-                                                decoration: BoxDecoration(
-                                                  color: Color(0xFFEEEEEE),
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  child: Image.network(
-                                                    valueOrDefault<String>(
-                                                      getJsonField(
-                                                        citiesItem,
-                                                        r'''$.image''',
+                                child: InkWell(
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'WHERE_ARE_YOU_LOOKING_Container_errzn6go');
+                                    logFirebaseEvent('Container_Navigate-To');
+                                    context.pushNamed(
+                                      'SearchCityResult',
+                                      queryParams: {
+                                        'cityName': serializeParam(
+                                            getJsonField(
+                                              citiesItem,
+                                              r'''$.name''',
+                                            ).toString(),
+                                            ParamType.String),
+                                        'peropertiesAvailable': serializeParam(
+                                            getJsonField(
+                                              citiesItem,
+                                              r'''$.count''',
+                                            ),
+                                            ParamType.int),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 46,
+                                    decoration: BoxDecoration(),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            width: 100,
+                                            height: 100,
+                                            decoration: BoxDecoration(),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Container(
+                                                  width: 46,
+                                                  height: 46,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xFFEEEEEE),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    child: Image.network(
+                                                      valueOrDefault<String>(
+                                                        getJsonField(
+                                                          citiesItem,
+                                                          r'''$.image''',
+                                                        ),
+                                                        'https://cdn.pixabay.com/photo/2020/01/27/14/38/bedroom-4797364_1280.jpg',
                                                       ),
-                                                      'https://cdn.pixabay.com/photo/2020/01/27/14/38/bedroom-4797364_1280.jpg',
-                                                    ),
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.46,
-                                                    height: 46,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(10, 0, 0, 0),
-                                                  child: Container(
-                                                    width: 100,
-                                                    height: 100,
-                                                    decoration: BoxDecoration(),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          getJsonField(
-                                                            citiesItem,
-                                                            r'''$.name''',
-                                                          ).toString(),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText2
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Sofia Pro By Khuzaimah',
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                              ),
-                                                        ),
-                                                        Text(
-                                                          functions
-                                                              .searchPagePropertyText(
-                                                                  getJsonField(
-                                                            citiesItem,
-                                                            r'''$.count''',
-                                                          )),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText2
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Sofia Pro By Khuzaimah',
-                                                                color: Color(
-                                                                    0xFF6B6B6B),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                                lineHeight: 1,
-                                                              ),
-                                                        ),
-                                                      ],
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.46,
+                                                      height: 46,
+                                                      fit: BoxFit.cover,
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                10, 0, 0, 0),
+                                                    child: Container(
+                                                      width: 100,
+                                                      height: 100,
+                                                      decoration:
+                                                          BoxDecoration(),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            getJsonField(
+                                                              citiesItem,
+                                                              r'''$.name''',
+                                                            ).toString(),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro By Khuzaimah',
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                          ),
+                                                          Text(
+                                                            functions
+                                                                .searchPagePropertyText(
+                                                                    getJsonField(
+                                                              citiesItem,
+                                                              r'''$.count''',
+                                                            )),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro By Khuzaimah',
+                                                                  color: Color(
+                                                                      0xFF6B6B6B),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                  lineHeight: 1,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Container(
-                                        width: 20,
-                                        height: 20,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
+                                        Container(
+                                          width: 20,
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                          ),
+                                          child: Icon(
+                                            Icons.arrow_forward_ios_outlined,
+                                            color: Colors.black,
+                                            size: 20,
+                                          ),
                                         ),
-                                        child: Icon(
-                                          Icons.arrow_forward_ios_outlined,
-                                          color: Colors.black,
-                                          size: 20,
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
