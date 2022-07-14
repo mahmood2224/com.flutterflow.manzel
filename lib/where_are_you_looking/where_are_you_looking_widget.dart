@@ -51,15 +51,12 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 17,
-                        color: Color(0x0BD7D7D7),
+                        color: Color(0x0B000000),
                         offset: Offset(0, 3),
                         spreadRadius: 0,
                       )
                     ],
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: Colors.white,
-                    ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -86,7 +83,12 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                           width: 36,
                           height: 36,
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).primaryBtnText,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 9,
+                                color: Color(0x06000000),
+                              )
+                            ],
                             shape: BoxShape.circle,
                             border: Border.all(
                               color: Color(0xFFF4F4F4),
@@ -156,9 +158,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 46,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                  ),
+                                  decoration: BoxDecoration(),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -168,9 +168,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                         child: Container(
                                           width: 100,
                                           height: 100,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                          ),
+                                          decoration: BoxDecoration(),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
@@ -209,9 +207,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                   child: Container(
                                                     width: 100,
                                                     height: 100,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                    ),
+                                                    decoration: BoxDecoration(),
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -232,12 +228,12 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                                     'Sofia Pro By Khuzaimah',
                                                                 color: Colors
                                                                     .black,
+                                                                fontSize: 16,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold,
                                                                 useGoogleFonts:
                                                                     false,
-                                                                lineHeight: 2,
                                                               ),
                                                         ),
                                                         Text(
@@ -257,7 +253,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                                     0xFF6B6B6B),
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .normal,
+                                                                        .w300,
                                                                 useGoogleFonts:
                                                                     false,
                                                                 lineHeight: 1,
@@ -276,8 +272,6 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                         width: 20,
                                         height: 20,
                                         decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBtnText,
                                           shape: BoxShape.rectangle,
                                         ),
                                         child: Icon(

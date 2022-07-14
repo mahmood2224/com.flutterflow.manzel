@@ -19,11 +19,11 @@ class FilterWidget extends StatefulWidget {
 }
 
 class _FilterWidgetState extends State<FilterWidget> {
+  List<String> isFurnishingValues;
+  List<String> propertyTypeListValues;
   String citiesListValue;
-  String propertyTypeListValue;
   double sliderValue1;
   double sliderValue2;
-  String isFurnishingValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -48,9 +48,9 @@ class _FilterWidgetState extends State<FilterWidget> {
               logFirebaseEvent('Text_Update-Local-State');
               setState(() => FFAppState().filterCity = '');
               logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterPropertyType = '');
+              setState(() => FFAppState().filterPropertyType = []);
               logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterFurnishingType = '');
+              setState(() => FFAppState().filterFurnishingType = []);
               logFirebaseEvent('Text_Update-Local-State');
               setState(() => FFAppState().filterCity = '');
               logFirebaseEvent('Text_Update-Local-State');
@@ -276,9 +276,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       20, 0, 0, 0),
                                   child: FlutterFlowChoiceChips(
                                     initiallySelected:
-                                        propertyTypeListValue != null
-                                            ? [propertyTypeListValue]
-                                            : [FFAppState().filterPropertyType],
+                                        propertyTypeListValues != null
+                                            ? propertyTypeListValues
+                                            : FFAppState().filterPropertyType,
                                     options: (functions.propertTypeBuilder(
                                                 (getJsonField(
                                               (columnFilterParamsResponse
@@ -292,8 +292,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                                             [])
                                         .map((label) => ChipData(label))
                                         .toList(),
-                                    onChanged: (val) => setState(() =>
-                                        propertyTypeListValue = val.first),
+                                    onChanged: (val) => setState(
+                                        () => propertyTypeListValues = val),
                                     selectedChipStyle: ChipStyle(
                                       backgroundColor:
                                           FlutterFlowTheme.of(context)
@@ -328,8 +328,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       elevation: 1,
                                     ),
                                     chipSpacing: 8,
-                                    multiselect: false,
-                                    initialized: propertyTypeListValue != null,
+                                    multiselect: true,
+                                    initialized: propertyTypeListValues != null,
                                     alignment: WrapAlignment.center,
                                   ),
                                 ),
@@ -579,9 +579,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       20, 0, 0, 0),
                                   child: FlutterFlowChoiceChips(
-                                    initiallySelected: isFurnishingValue != null
-                                        ? [isFurnishingValue]
-                                        : [FFAppState().filterFurnishingType],
+                                    initiallySelected:
+                                        isFurnishingValues != null
+                                            ? isFurnishingValues
+                                            : FFAppState().filterFurnishingType,
                                     options: [
                                       ChipData(
                                           FFLocalizations.of(context).getText(
@@ -601,7 +602,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       ))
                                     ],
                                     onChanged: (val) => setState(
-                                        () => isFurnishingValue = val.first),
+                                        () => isFurnishingValues = val),
                                     selectedChipStyle: ChipStyle(
                                       backgroundColor:
                                           FlutterFlowTheme.of(context)
@@ -635,8 +636,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       elevation: 2,
                                     ),
                                     chipSpacing: 8,
-                                    multiselect: false,
-                                    initialized: isFurnishingValue != null,
+                                    multiselect: true,
+                                    initialized: isFurnishingValues != null,
                                     alignment: WrapAlignment.center,
                                   ),
                                 ),
@@ -651,37 +652,35 @@ class _FilterWidgetState extends State<FilterWidget> {
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
-                          logFirebaseEvent('apllyFilter_Update-Local-State');
-                          setState(() => FFAppState().filterCity = '');
-                          logFirebaseEvent('apllyFilter_Update-Local-State');
-                          setState(
-                              () => FFAppState().filterCity = citiesListValue);
-                          logFirebaseEvent('apllyFilter_Update-Local-State');
-                          setState(
-                              () => FFAppState().filterFurnishingType = '');
-                          logFirebaseEvent('apllyFilter_Update-Local-State');
-                          setState(() => FFAppState().filterFurnishingType =
-                              isFurnishingValue);
-                          logFirebaseEvent('apllyFilter_Update-Local-State');
-                          setState(() => FFAppState().filterPropertyType = '');
-                          logFirebaseEvent('apllyFilter_Update-Local-State');
-                          setState(() => FFAppState().filterPropertyType =
-                              propertyTypeListValue);
-                          logFirebaseEvent('apllyFilter_Update-Local-State');
-                          setState(() => FFAppState().filterMinPrice = '');
-                          logFirebaseEvent('apllyFilter_Update-Local-State');
-                          setState(() => FFAppState().filterMinPrice =
-                                  valueOrDefault<String>(
-                                functions.sliderToApi(sliderValue1),
-                                '0',
-                              ));
-                          logFirebaseEvent('apllyFilter_Update-Local-State');
-                          setState(() => FFAppState().filterMaxPrice = '');
-                          logFirebaseEvent('apllyFilter_Update-Local-State');
-                          setState(() => FFAppState().filterMaxPrice =
-                              functions.sliderToApi(sliderValue2));
                           if (functions.validateInstallmentRange(
                               sliderValue1, sliderValue2)) {
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(() => FFAppState().filterCity = '');
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(() =>
+                                FFAppState().filterCity = citiesListValue);
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(
+                                () => FFAppState().filterPropertyType = []);
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(() => FFAppState().filterPropertyType =
+                                propertyTypeListValues.toList());
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(
+                                () => FFAppState().filterFurnishingType = []);
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(() => FFAppState().filterFurnishingType =
+                                isFurnishingValues.toList());
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(() => FFAppState().filterMinPrice = '');
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(() => FFAppState().filterMaxPrice = '');
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(() => FFAppState().filterMinPrice =
+                                functions.sliderToApi(sliderValue1));
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(() => FFAppState().filterMaxPrice =
+                                functions.sliderToApi(sliderValue2));
                             logFirebaseEvent('apllyFilter_Navigate-Back');
                             context.pop();
                           } else {
