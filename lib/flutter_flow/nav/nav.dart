@@ -151,6 +151,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : FilterWidget(),
             ),
             FFRoute(
+              name: 'filterResults',
+              path: 'filterResults',
+              builder: (context, params) => FilterResultsWidget(),
+            ),
+            FFRoute(
               name: 'MyProperties',
               path: 'myProperties',
               requireAuth: true,

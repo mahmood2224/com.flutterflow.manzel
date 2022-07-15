@@ -101,7 +101,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         return CachedNetworkImage(
                                           imageUrl: getJsonField(
                                             imagesItem,
-                                            r'''$''',
+                                            r'''$.attributes.name''',
                                           ),
                                           width: double.infinity,
                                           height: double.infinity,
@@ -689,7 +689,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 20, 16, 0),
+                                          16, 35, 16, 0),
                                       child: Container(
                                         decoration: BoxDecoration(),
                                         child: GridView(
