@@ -141,26 +141,19 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                     filteredParametesValues != null
                                         ? filteredParametesValues
                                         : [],
-                                options: [
-                                  ChipData(FFLocalizations.of(context).getText(
-                                    '7egi5iad' /* All */,
-                                  )),
-                                  ChipData(FFLocalizations.of(context).getText(
-                                    'ujth28u8' /* House */,
-                                  )),
-                                  ChipData(FFLocalizations.of(context).getText(
-                                    'n3j4w46j' /* Apartment */,
-                                  )),
-                                  ChipData(FFLocalizations.of(context).getText(
-                                    'e97m1en4' /* Flat */,
-                                  )),
-                                  ChipData(FFLocalizations.of(context).getText(
-                                    'tkhi1190' /* Town house */,
-                                  )),
-                                  ChipData(FFLocalizations.of(context).getText(
-                                    '30rthsk2' /* Mansion */,
-                                  ))
-                                ],
+                                options:
+                                    (functions.filteredResultChioceChipsBuilder(
+                                                FFAppState().filterCity,
+                                                FFAppState()
+                                                    .filterPropertyType
+                                                    .toList(),
+                                                FFAppState()
+                                                    .filterFurnishingType
+                                                    .toList(),
+                                                FFAppState().locale) ??
+                                            [])
+                                        .map((label) => ChipData(label))
+                                        .toList(),
                                 onChanged: (val) => setState(
                                     () => filteredParametesValues = val),
                                 selectedChipStyle: ChipStyle(

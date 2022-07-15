@@ -105,3 +105,38 @@ List<String> propertTypeBuilder(List<String> propertyTypeApiResponse) {
   finalList.addAll(propertyTypeApiResponse);
   return finalList;
 }
+
+List<String> filteredResultChioceChipsBuilder(
+  String filteredCity,
+  List<String> filteredPropertyType,
+  List<String> filteredFurnishingType,
+  String locale,
+) {
+  var results = [];
+  if (locale == "en") {
+    if (filteredCity != '') {
+      results.add("City: ${filteredCity} ");
+    }
+    if (filteredPropertyType.length != 0) {
+      String properties = filteredPropertyType.join(',');
+      results.add("Type: ${properties}");
+    }
+    if (filteredFurnishingType.length != 0) {
+      String furnishing = filteredFurnishingType.join(',');
+      results.add("Furnishing: ${furnishing}");
+    }
+  } else {
+    if (filteredCity != '') {
+      results.add("المدينة: ${filteredCity} ");
+    }
+    if (filteredPropertyType.length != 0) {
+      String properties = filteredPropertyType.join(',');
+      results.add("يكتب: ${properties} ");
+    }
+    if (filteredFurnishingType.length != 0) {
+      String furnishing = filteredFurnishingType.join(',');
+      results.add("تأثيث: ${furnishing} ");
+    }
+  }
+  return results;
+}

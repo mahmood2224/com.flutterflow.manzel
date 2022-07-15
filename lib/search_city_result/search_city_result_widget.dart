@@ -163,7 +163,10 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 14, 0, 0),
                   child: FutureBuilder<ApiCallResponse>(
-                    future: PropertiesCall.call(),
+                    future: PropertiesCall.call(
+                      city: widget.cityName,
+                      locale: FFAppState().locale,
+                    ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {

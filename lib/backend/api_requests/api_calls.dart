@@ -290,13 +290,17 @@ class StartInstanceCall {
 }
 
 class CityListCall {
-  static Future<ApiCallResponse> call() {
+  static Future<ApiCallResponse> call({
+    String locale = 'en',
+  }) {
     return ApiManager.instance.makeApiCall(
       callName: 'cityList',
-      apiUrl: 'https://strapi-dev.manzel.app/api/cities/?locale=en',
+      apiUrl: 'https://strapi-dev.manzel.app/api/cities/?',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'locale': locale,
+      },
       returnBody: true,
     );
   }

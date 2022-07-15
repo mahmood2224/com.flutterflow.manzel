@@ -759,6 +759,34 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Location',
       'ar': 'موقع',
     },
+    '67qymqb4': {
+      'en': 'Similar Properties',
+      'ar': 'خصائص مماثلة',
+    },
+    'dw0ntbtl': {
+      'en': 'Approved Banks',
+      'ar': '',
+    },
+    'daq1tb18': {
+      'en': ', ',
+      'ar': '،',
+    },
+    '5fi3eht5': {
+      'en': 'Installment starting from',
+      'ar': 'القسط يبدأ من',
+    },
+    'asvlp34j': {
+      'en': 'Total property price',
+      'ar': 'القسط يبدأ من',
+    },
+    'vfqf83co': {
+      'en': ' SAR/Monthly',
+      'ar': 'ريال سعودي / شهري',
+    },
+    'o3rzhl0v': {
+      'en': ' SAR',
+      'ar': 'ريال سعودي',
+    },
     'i17ddd6l': {
       'en': 'Installment starting from',
       'ar': 'القسط يبدأ من',
