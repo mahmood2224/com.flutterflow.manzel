@@ -54,25 +54,28 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                 width: 1,
               ),
             ),
-            child: InkWell(
-              onTap: () async {
-                logFirebaseEvent('SEARCH_CITY_RESULT_Icon_uhxori33_ON_TAP');
-                logFirebaseEvent('Icon_Navigate-To');
-                context.pushNamed(
-                  'HomeScreen',
-                  extra: <String, dynamic>{
-                    kTransitionInfoKey: TransitionInfo(
-                      hasTransition: true,
-                      transitionType: PageTransitionType.fade,
-                      duration: Duration(milliseconds: 0),
-                    ),
-                  },
-                );
-              },
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-                size: 20,
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+              child: InkWell(
+                onTap: () async {
+                  logFirebaseEvent('SEARCH_CITY_RESULT_Icon_uhxori33_ON_TAP');
+                  logFirebaseEvent('Icon_Navigate-To');
+                  context.pushNamed(
+                    'HomeScreen',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
+                      ),
+                    },
+                  );
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                  size: 20,
+                ),
               ),
             ),
           ),
@@ -87,7 +90,9 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    'Search results ',
+                    FFLocalizations.of(context).getText(
+                      'cv6ymemd' /* Search results  */,
+                    ),
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Sofia Pro By Khuzaimah',
@@ -97,7 +102,9 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                         ),
                   ),
                   Text(
-                    '\"',
+                    FFLocalizations.of(context).getText(
+                      'i7hby2rh' /* " */,
+                    ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Sofia Pro By Khuzaimah',
                           color: Color(0xFF2971FB),
@@ -117,7 +124,9 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                         ),
                   ),
                   Text(
-                    '\"',
+                    FFLocalizations.of(context).getText(
+                      '6gnj1yz7' /* " */,
+                    ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Sofia Pro By Khuzaimah',
                           color: Color(0xFF2971FB),

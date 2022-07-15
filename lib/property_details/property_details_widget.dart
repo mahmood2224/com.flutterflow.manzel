@@ -1395,7 +1395,18 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                             .height *
                                                                         0.72,
                                                                     child:
-                                                                        BankDetailsBottomSheetWidget(),
+                                                                        BankDetailsBottomSheetWidget(
+                                                                      bankId:
+                                                                          getJsonField(
+                                                                        banksItem,
+                                                                        r'''$.id''',
+                                                                      ),
+                                                                      bankJSON:
+                                                                          getJsonField(
+                                                                        banksItem,
+                                                                        r'''$.attributes''',
+                                                                      ),
+                                                                    ),
                                                                   ),
                                                                 );
                                                               },
@@ -1721,7 +1732,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 16, 16, 0),
                                           child: Row(
-                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [

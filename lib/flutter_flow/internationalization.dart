@@ -568,7 +568,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'qlysszro': {
       'en': 'Where are you  looking ?',
-      'ar': '',
+      'ar': 'أين تنظر ؟',
     },
     'fce9ky0f': {
       'en': 'Home',
@@ -601,15 +601,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' SAR',
       'ar': 'ريال سعودي',
     },
-    'lcco6pr2': {
+    'cv6ymemd': {
       'en': 'Search results ',
-      'ar': '',
+      'ar': 'نتائج البحث',
     },
-    '73zp36np': {
+    'i7hby2rh': {
       'en': '\"',
       'ar': '',
     },
-    'unxho6x7': {
+    '6gnj1yz7': {
       'en': '\"',
       'ar': '',
     },
@@ -1181,7 +1181,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'ua6uqn3o': {
-      'en': 'Button',
+      'en': 'Close',
       'ar': '',
     },
   },
