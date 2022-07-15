@@ -148,24 +148,38 @@ class _BankDetailsBottomSheetWidgetState
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
-                child: Html(
-                  data: getJsonField(
-                    widget.bankJSON,
-                    r'''$.bank_description''',
-                  ).toString(),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
+                      child: Html(
+                        data: getJsonField(
+                          widget.bankJSON,
+                          r'''$.bank_description''',
+                        ).toString(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 17, 20, 0),
-                child: Html(
-                  data: getJsonField(
-                    widget.bankJSON,
-                    r'''$.bank_rules''',
-                  ).toString(),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 17, 20, 0),
+                      child: Html(
+                        data: getJsonField(
+                          widget.bankJSON,
+                          r'''$.bank_rules''',
+                        ).toString(),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
