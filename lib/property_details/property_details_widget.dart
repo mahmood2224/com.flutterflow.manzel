@@ -1187,54 +1187,118 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ],
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 15, 16, 0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'ku7u4p9w' /* Floors */,
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                                ),
-                                                Text(
-                                                  PropertyCall.propertyFloors(
+                                          if (functions.propertyTypeCheckHouse(
+                                                  PropertyCall.propertyType(
                                                     (columnPropertyResponse
                                                             ?.jsonBody ??
                                                         ''),
                                                   ).toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                                ),
-                                              ],
+                                                  FFAppState().locale) ??
+                                              true)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 15, 16, 0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'ku7u4p9w' /* Floors */,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    PropertyCall.propertyFloors(
+                                                      (columnPropertyResponse
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    ).toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
+                                          if (functions
+                                                  .propertyTypeCheckApartment(
+                                                      PropertyCall.propertyType(
+                                                        (columnPropertyResponse
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                      ).toString(),
+                                                      FFAppState().locale) ??
+                                              true)
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 15, 16, 0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'bidhdd2g' /* Floor Number */,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                  ),
+                                                  Text(
+                                                    PropertyCall
+                                                        .propertyFloorNumber(
+                                                      (columnPropertyResponse
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    ).toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(

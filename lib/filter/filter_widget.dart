@@ -683,17 +683,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterMaxPrice =
                                 functions.sliderToApi(sliderValue2));
-                            logFirebaseEvent('apllyFilter_Navigate-To');
-                            context.pushNamed(
-                              'filterResults',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.fade,
-                                  duration: Duration(milliseconds: 0),
-                                ),
-                              },
-                            );
+                            logFirebaseEvent('apllyFilter_Navigate-Back');
+                            context.pop();
                           } else {
                             logFirebaseEvent('apllyFilter_Show-Snack-Bar');
                             ScaffoldMessenger.of(context).showSnackBar(

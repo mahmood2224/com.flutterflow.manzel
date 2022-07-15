@@ -739,6 +739,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Floors',
       'ar': 'عدد الطوابق',
     },
+    'bidhdd2g': {
+      'en': 'Floor Number',
+      'ar': 'عدد الطوابق',
+    },
     'vrdckjrg': {
       'en': 'Furnishing type',
       'ar': 'نوع التأثيث',

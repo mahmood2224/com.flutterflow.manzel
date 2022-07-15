@@ -159,3 +159,43 @@ String listToApiParameters(List<String> paramList) {
   var param = paramList.join(',');
   return param;
 }
+
+bool propertyTypeCheckHouse(
+  String propertyType,
+  String locale,
+) {
+  // Add your function code here!
+  if (locale == "en") {
+    if (propertyType == "House") {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    if (propertyType == "منزل") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+bool propertyTypeCheckApartment(
+  String propertyType,
+  String locale,
+) {
+  if (locale == "en") {
+    if (propertyType == "Apartment") {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    if (propertyType == "شقة") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  // Add your function code here!
+}
