@@ -229,7 +229,16 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 14, 0, 0),
                   child: FutureBuilder<ApiCallResponse>(
-                    future: PropertyCall.call(),
+                    future: PropertiesCall.call(
+                      locale: FFAppState().locale,
+                      city: FFAppState().filterCity,
+                      furnishingType: functions.listToApiParameters(
+                          FFAppState().filterFurnishingType.toList()),
+                      propertyType: functions.listToApiParameters(
+                          FFAppState().filterPropertyType.toList()),
+                      minimumPrice: FFAppState().filterMinPrice,
+                      maximumPrice: FFAppState().filterMaxPrice,
+                    ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -244,11 +253,11 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                           ),
                         );
                       }
-                      final listViewPropertyResponse = snapshot.data;
+                      final listViewPropertiesResponse = snapshot.data;
                       return Builder(
                         builder: (context) {
-                          final properties = PropertyCall.property(
-                                (listViewPropertyResponse?.jsonBody ?? ''),
+                          final properties = PropertiesCall.properties(
+                                (listViewPropertiesResponse?.jsonBody ?? ''),
                               )?.toList() ??
                               [];
                           return ListView.builder(

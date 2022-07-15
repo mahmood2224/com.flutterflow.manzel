@@ -153,3 +153,9 @@ String countJsonData(
   }
   // Add your function code here!
 }
+
+String listToApiParameters(List<String> paramList) {
+  // Add your function code here!
+  var param = paramList.join(',');
+  return param;
+}
