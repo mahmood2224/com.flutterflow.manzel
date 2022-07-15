@@ -173,16 +173,20 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                   elevation: 2,
                                 ),
                                 unselectedChipStyle: ChipStyle(
-                                  backgroundColor: Colors.white,
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
                                         fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBtnText,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                         useGoogleFonts: false,
                                       ),
-                                  iconColor: Color(0xFF323B45),
+                                  iconColor: FlutterFlowTheme.of(context)
+                                      .primaryBtnText,
                                   iconSize: 0,
                                   elevation: 1,
                                 ),
@@ -201,7 +205,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 14, 0, 0),
                   child: FutureBuilder<ApiCallResponse>(
-                    future: PropertiesCall.call(),
+                    future: PropertyCall.call(),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -216,11 +220,11 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                           ),
                         );
                       }
-                      final listViewPropertiesResponse = snapshot.data;
+                      final listViewPropertyResponse = snapshot.data;
                       return Builder(
                         builder: (context) {
-                          final properties = PropertiesCall.properties(
-                                (listViewPropertiesResponse?.jsonBody ?? ''),
+                          final properties = PropertyCall.property(
+                                (listViewPropertyResponse?.jsonBody ?? ''),
                               )?.toList() ??
                               [];
                           return ListView.builder(
