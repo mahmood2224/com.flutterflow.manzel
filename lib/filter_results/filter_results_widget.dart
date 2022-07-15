@@ -98,15 +98,39 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                   ),
                 ],
               ),
-              Text(
-                FFLocalizations.of(context).getText(
-                  'g79qjz5w' /* Hello World */,
+              FutureBuilder<ApiCallResponse>(
+                future: PropertiesCall.call(
+                  city: FFAppState().filterCity,
                 ),
-                style: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'Sofia Pro By Khuzaimah',
-                      color: Color(0xFF6B6B6B),
-                      useGoogleFonts: false,
-                    ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: SpinKitRipple(
+                          color: Color(0xFF2971FB),
+                          size: 50,
+                        ),
+                      ),
+                    );
+                  }
+                  final textPropertiesResponse = snapshot.data;
+                  return Text(
+                    functions.countJsonData(
+                        FFAppState().locale,
+                        getJsonField(
+                          (textPropertiesResponse?.jsonBody ?? ''),
+                          r'''$''',
+                        )),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Color(0xFF6B6B6B),
+                          useGoogleFonts: false,
+                        ),
+                  );
+                },
               ),
             ],
           ),
