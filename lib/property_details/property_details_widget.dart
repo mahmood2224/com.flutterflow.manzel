@@ -415,15 +415,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           ),
                                                     ),
                                                     Text(
-                                                      PropertyCall
-                                                              .propertyUpdatedAt(
-                                                        (columnPropertyResponse
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                      )
-                                                          .toString()
-                                                          .maybeHandleOverflow(
-                                                              maxChars: 10),
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'j3vqe4np' /* 2 days ago */,
+                                                      ),
                                                       maxLines: 2,
                                                       style: FlutterFlowTheme
                                                               .of(context)
@@ -1065,14 +1061,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .center,
                                                           children: [
                                                             Text(
-                                                              functions
-                                                                  .calculate(functions
-                                                                      .calculate(PropertyCall.propertyBuiltIn(
-                                                                        (columnPropertyResponse?.jsonBody ??
-                                                                            ''),
-                                                                      ).toString())
-                                                                      .toString())
-                                                                  .toString(),
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                '0lrdaepm' /* Age 1 yr. */,
+                                                              ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyText1

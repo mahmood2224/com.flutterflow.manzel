@@ -691,6 +691,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Updated: ',
       'ar': 'محدث:',
     },
+    'j3vqe4np': {
+      'en': '2 days ago',
+      'ar': '',
+    },
     'kqc4ney0': {
       'en': 'Property manage by ',
       'ar': 'إدارة الممتلكات عن طريق',
@@ -718,6 +722,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'u0xq15h6': {
       'en': ' Livingrooms',
       'ar': 'غرف المعيشة',
+    },
+    '0lrdaepm': {
+      'en': 'Age 1 yr.',
+      'ar': 'العمر 1 سنة.',
     },
     '7xi05192': {
       'en': ' Years',
