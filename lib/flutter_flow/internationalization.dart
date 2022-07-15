@@ -568,15 +568,51 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'qlysszro': {
       'en': 'Where are you  looking ?',
-      'ar': '',
+      'ar': 'أين تنظر ؟',
     },
     'fce9ky0f': {
       'en': 'Home',
       'ar': 'الصفحة الرئيسية',
     },
   },
-  // searchCityResult
+  // SearchCityResult
   {
+    'e79vodsv': {
+      'en': 'Approved Banks',
+      'ar': '',
+    },
+    'gy69xtp8': {
+      'en': ', ',
+      'ar': '،',
+    },
+    'empqxlrl': {
+      'en': 'Installment starting from',
+      'ar': 'القسط يبدأ من',
+    },
+    'mfhnajvu': {
+      'en': 'Total property price',
+      'ar': 'القسط يبدأ من',
+    },
+    'f7cyc6fo': {
+      'en': ' SAR/Monthly',
+      'ar': 'ريال سعودي / شهري',
+    },
+    '7yb51krb': {
+      'en': ' SAR',
+      'ar': 'ريال سعودي',
+    },
+    'cv6ymemd': {
+      'en': 'Search results ',
+      'ar': 'نتائج البحث',
+    },
+    'i7hby2rh': {
+      'en': '\"',
+      'ar': '',
+    },
+    '6gnj1yz7': {
+      'en': '\"',
+      'ar': '',
+    },
     'ntrpmj08': {
       'en': 'Home',
       'ar': '',
@@ -661,7 +697,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'القسط يبدأ من',
     },
     'mgi2d0o9': {
-      'en': 'SAR/Monthly',
+      'en': ' SAR/Monthly',
       'ar': ' ريال سعودي / شهري',
     },
     'dpmrt150': {
@@ -1145,7 +1181,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'ua6uqn3o': {
-      'en': 'Button',
+      'en': 'Close',
       'ar': '',
     },
   },

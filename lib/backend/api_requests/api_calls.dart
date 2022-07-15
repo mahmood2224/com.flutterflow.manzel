@@ -7,7 +7,7 @@ export 'api_manager.dart' show ApiCallResponse;
 class PropertiesCall {
   static Future<ApiCallResponse> call({
     String populate =
-        '*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
+        '*,banks.bank_logo,managed_by.company_logo,property_images,city',
     String city = '',
     String furnishingType = '',
     String propertyType = '',
@@ -80,7 +80,7 @@ class PropertyCall {
       );
   static dynamic propertyCity(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.property_city''',
+        r'''$.data.attributes.city.data.attributes.city_name''',
       );
   static dynamic propertyDistrict(dynamic response) => getJsonField(
         response,
@@ -241,7 +241,7 @@ class BankDetailsCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'BankDetails',
-      apiUrl: 'https://strapi-dev.manzel.app/api/banks/${bankId}?populate=*',
+      apiUrl: 'https://strapi-dev.manzel.app/api/banks/${bankId}?',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
