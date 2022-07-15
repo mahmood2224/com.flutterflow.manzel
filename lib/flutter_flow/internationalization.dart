@@ -509,6 +509,73 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مسكن',
     },
   },
+  // filterResults
+  {
+    'kmjdnh1c': {
+      'en': 'Filter results ',
+      'ar': 'نتائج البحث',
+    },
+    'g79qjz5w': {
+      'en': 'Hello World',
+      'ar': '',
+    },
+    '7egi5iad': {
+      'en': 'All',
+      'ar': 'الجميع',
+    },
+    'ujth28u8': {
+      'en': 'House',
+      'ar': 'منزل',
+    },
+    'n3j4w46j': {
+      'en': 'Apartment',
+      'ar': 'شقة',
+    },
+    'e97m1en4': {
+      'en': 'Flat',
+      'ar': 'مسطحة',
+    },
+    'tkhi1190': {
+      'en': 'Town house',
+      'ar': '',
+    },
+    '30rthsk2': {
+      'en': 'Mansion',
+      'ar': '',
+    },
+    'sn4q62fr': {
+      'en': 'All',
+      'ar': 'الجميع',
+    },
+    'y61ahqus': {
+      'en': 'Approved Banks',
+      'ar': '',
+    },
+    'n8poxzbo': {
+      'en': ', ',
+      'ar': '،',
+    },
+    '4ib4fmbw': {
+      'en': 'Installment starting from',
+      'ar': 'القسط يبدأ من',
+    },
+    'df86lsot': {
+      'en': 'Total property price',
+      'ar': 'القسط يبدأ من',
+    },
+    'xk3izs5s': {
+      'en': ' SAR/Monthly',
+      'ar': 'ريال سعودي / شهري',
+    },
+    '66rkg6uk': {
+      'en': ' SAR',
+      'ar': 'ريال سعودي',
+    },
+    'wcatvw4s': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
   // MyProperties
   {
     '21gpsvgr': {
@@ -577,27 +644,27 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // SearchCityResult
   {
-    'e79vodsv': {
+    '5s0m6vc5': {
       'en': 'Approved Banks',
       'ar': '',
     },
-    'gy69xtp8': {
+    'f2n56efp': {
       'en': ', ',
       'ar': '،',
     },
-    'empqxlrl': {
+    'by2cxdfu': {
       'en': 'Installment starting from',
       'ar': 'القسط يبدأ من',
     },
-    'mfhnajvu': {
+    'e3d13l9e': {
       'en': 'Total property price',
       'ar': 'القسط يبدأ من',
     },
-    'f7cyc6fo': {
+    'bm7ytrkl': {
       'en': ' SAR/Monthly',
       'ar': 'ريال سعودي / شهري',
     },
-    '7yb51krb': {
+    's8nfdgfe': {
       'en': ' SAR',
       'ar': 'ريال سعودي',
     },
@@ -691,6 +758,34 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '8fdy3f5a': {
       'en': 'Location',
       'ar': 'موقع',
+    },
+    '67qymqb4': {
+      'en': 'Similar Properties',
+      'ar': 'خصائص مماثلة',
+    },
+    'dw0ntbtl': {
+      'en': 'Approved Banks',
+      'ar': '',
+    },
+    'daq1tb18': {
+      'en': ', ',
+      'ar': '،',
+    },
+    '5fi3eht5': {
+      'en': 'Installment starting from',
+      'ar': 'القسط يبدأ من',
+    },
+    'asvlp34j': {
+      'en': 'Total property price',
+      'ar': 'القسط يبدأ من',
+    },
+    'vfqf83co': {
+      'en': ' SAR/Monthly',
+      'ar': 'ريال سعودي / شهري',
+    },
+    'o3rzhl0v': {
+      'en': ' SAR',
+      'ar': 'ريال سعودي',
     },
     'i17ddd6l': {
       'en': 'Installment starting from',

@@ -176,7 +176,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                               child: FutureBuilder<ApiCallResponse>(
-                                future: CityListCall.call(),
+                                future: CityListCall.call(
+                                  locale: FFAppState().locale,
+                                ),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {
@@ -681,8 +683,17 @@ class _FilterWidgetState extends State<FilterWidget> {
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterMaxPrice =
                                 functions.sliderToApi(sliderValue2));
-                            logFirebaseEvent('apllyFilter_Navigate-Back');
-                            context.pop();
+                            logFirebaseEvent('apllyFilter_Navigate-To');
+                            context.pushNamed(
+                              'filterResults',
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 0),
+                                ),
+                              },
+                            );
                           } else {
                             logFirebaseEvent('apllyFilter_Show-Snack-Bar');
                             ScaffoldMessenger.of(context).showSnackBar(

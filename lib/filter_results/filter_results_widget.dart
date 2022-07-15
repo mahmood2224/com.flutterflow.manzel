@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -9,21 +10,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class SearchCityResultWidget extends StatefulWidget {
-  const SearchCityResultWidget({
-    Key key,
-    this.cityName,
-    this.peropertiesAvailable,
-  }) : super(key: key);
-
-  final String cityName;
-  final int peropertiesAvailable;
+class FilterResultsWidget extends StatefulWidget {
+  const FilterResultsWidget({Key key}) : super(key: key);
 
   @override
-  _SearchCityResultWidgetState createState() => _SearchCityResultWidgetState();
+  _FilterResultsWidgetState createState() => _FilterResultsWidgetState();
 }
 
-class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
+class _FilterResultsWidgetState extends State<FilterResultsWidget> {
+  List<String> filteredParametesValues;
   PageController pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -31,7 +26,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'SearchCityResult'});
+        parameters: {'screen_name': 'filterResults'});
   }
 
   @override
@@ -58,7 +53,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
               child: InkWell(
                 onTap: () async {
-                  logFirebaseEvent('SEARCH_CITY_RESULT_Icon_uhxori33_ON_TAP');
+                  logFirebaseEvent('FILTER_RESULTS_PAGE_Icon_n6g5zub7_ON_TAP');
                   logFirebaseEvent('Icon_Navigate-To');
                   context.pushNamed(
                     'HomeScreen',
@@ -91,7 +86,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                 children: [
                   Text(
                     FFLocalizations.of(context).getText(
-                      'cv6ymemd' /* Search results  */,
+                      'kmjdnh1c' /* Filter results  */,
                     ),
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -101,44 +96,12 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                           useGoogleFonts: false,
                         ),
                   ),
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'i7hby2rh' /* " */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
-                          color: Color(0xFF2971FB),
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: false,
-                        ),
-                  ),
-                  Text(
-                    widget.cityName,
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
-                          color: Color(0xFF2971FB),
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: false,
-                        ),
-                  ),
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      '6gnj1yz7' /* " */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
-                          color: Color(0xFF2971FB),
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: false,
-                        ),
-                  ),
                 ],
               ),
               Text(
-                functions.searchPagePropertyText(widget.peropertiesAvailable),
+                FFLocalizations.of(context).getText(
+                  'g79qjz5w' /* Hello World */,
+                ),
                 style: FlutterFlowTheme.of(context).bodyText1.override(
                       fontFamily: 'Sofia Pro By Khuzaimah',
                       color: Color(0xFF6B6B6B),
@@ -161,12 +124,84 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                              child: FlutterFlowChoiceChips(
+                                initiallySelected:
+                                    filteredParametesValues != null
+                                        ? filteredParametesValues
+                                        : [],
+                                options:
+                                    (functions.filteredResultChioceChipsBuilder(
+                                                FFAppState().filterCity,
+                                                FFAppState()
+                                                    .filterPropertyType
+                                                    .toList(),
+                                                FFAppState()
+                                                    .filterFurnishingType
+                                                    .toList(),
+                                                FFAppState().locale) ??
+                                            [])
+                                        .map((label) => ChipData(label))
+                                        .toList(),
+                                onChanged: (val) => setState(
+                                    () => filteredParametesValues = val),
+                                selectedChipStyle: ChipStyle(
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal,
+                                        useGoogleFonts: false,
+                                      ),
+                                  iconColor: Colors.white,
+                                  iconSize: 0,
+                                  elevation: 2,
+                                ),
+                                unselectedChipStyle: ChipStyle(
+                                  backgroundColor: Colors.white,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
+                                      ),
+                                  iconColor: Color(0xFF323B45),
+                                  iconSize: 0,
+                                  elevation: 1,
+                                ),
+                                chipSpacing: 8,
+                                multiselect: true,
+                                initialized: filteredParametesValues != null,
+                                alignment: WrapAlignment.center,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 14, 0, 0),
                   child: FutureBuilder<ApiCallResponse>(
-                    future: PropertiesCall.call(
-                      city: widget.cityName,
-                      locale: FFAppState().locale,
-                    ),
+                    future: PropertiesCall.call(),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -203,7 +238,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                 child: InkWell(
                                   onTap: () async {
                                     logFirebaseEvent(
-                                        'SEARCH_CITY_RESULT_propertyCard_ON_TAP');
+                                        'FILTER_RESULTS_PAGE_propertyCard_ON_TAP');
                                     // propertyDetails
                                     logFirebaseEvent(
                                         'propertyCard_propertyDetails');
@@ -352,7 +387,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                 child: InkWell(
                                                   onTap: () async {
                                                     logFirebaseEvent(
-                                                        'SEARCH_CITY_RESULT_Container_0oy6ukkp_ON');
+                                                        'FILTER_RESULTS_Container_kslgg6qy_ON_TAP');
                                                     if (!(currentUserEmailVerified)) {
                                                       logFirebaseEvent(
                                                           'Container_Navigate-To');
@@ -443,7 +478,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                             Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                '5s0m6vc5' /* Approved Banks */,
+                                                'y61ahqus' /* Approved Banks */,
                                               ),
                                               textAlign: TextAlign.end,
                                               style: FlutterFlowTheme.of(
@@ -501,7 +536,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                 Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    'f2n56efp' /* ,  */,
+                                                    'n8poxzbo' /* ,  */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -599,7 +634,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                             Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'by2cxdfu' /* Installment starting from */,
+                                                '4ib4fmbw' /* Installment starting from */,
                                               ),
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -616,7 +651,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                             Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'e3d13l9e' /* Total property price */,
+                                                'df86lsot' /* Total property price */,
                                               ),
                                               style: FlutterFlowTheme.of(
                                                       context)
@@ -670,7 +705,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                      'bm7ytrkl' /*  SAR/Monthly */,
+                                                      'xk3izs5s' /*  SAR/Monthly */,
                                                     ),
                                                     textAlign: TextAlign.start,
                                                     style: FlutterFlowTheme.of(
@@ -715,7 +750,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                 Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    's8nfdgfe' /*  SAR */,
+                                                    '66rkg6uk' /*  SAR */,
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
