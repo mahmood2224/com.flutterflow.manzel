@@ -758,16 +758,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       .fromSTEB(0, 0, 8, 0),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(0),
-                                                      bottomRight:
-                                                          Radius.circular(0),
-                                                      topLeft:
-                                                          Radius.circular(11),
-                                                      topRight:
-                                                          Radius.circular(0),
-                                                    ),
+                                                        BorderRadius.circular(
+                                                            11),
                                                     child: Image.network(
                                                       getJsonField(
                                                         banksItem,

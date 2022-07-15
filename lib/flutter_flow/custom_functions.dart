@@ -140,3 +140,16 @@ List<String> filteredResultChioceChipsBuilder(
   }
   return results;
 }
+
+String countJsonData(
+  String locale,
+  dynamic jsonResponse,
+) {
+  var len = jsonResponse.length;
+  if (locale == "en") {
+    return "${len} properties found";
+  } else {
+    return "ملكيات ${len} تم العثور على";
+  }
+  // Add your function code here!
+}

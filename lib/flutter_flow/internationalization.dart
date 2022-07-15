@@ -515,10 +515,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Filter results ',
       'ar': 'نتائج البحث',
     },
-    'g79qjz5w': {
-      'en': 'Hello World',
-      'ar': '',
-    },
     '7egi5iad': {
       'en': 'All',
       'ar': 'الجميع',
