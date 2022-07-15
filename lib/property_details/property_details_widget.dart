@@ -1866,7 +1866,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   final propertyImages =
                                                                       getJsonField(
                                                                             propertiesItem,
-                                                                            r'''$.property_images.data''',
+                                                                            r'''$.property_images''',
                                                                           )?.toList() ??
                                                                           [];
                                                                   return Container(
@@ -2032,7 +2032,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           .network(
                                                                         getJsonField(
                                                                           propertiesItem,
-                                                                          r'''$.managed_by.company_logo.data.name''',
+                                                                          r'''$.managed_by.company_logo.name''',
                                                                         ),
                                                                         fit: BoxFit
                                                                             .cover,
