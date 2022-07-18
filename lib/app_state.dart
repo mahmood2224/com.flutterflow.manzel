@@ -38,13 +38,13 @@ class FFAppState {
 
   String locale = '';
 
-  String filterMinPrice = '';
-
-  String filterMaxPrice = '';
-
   List<String> filterPropertyType = [];
 
   List<String> filterFurnishingType = [];
+
+  int filterMinPrice = 0;
+
+  int filterMaxPrice = 0;
 }
 
 LatLng _latLngFromString(String val) {

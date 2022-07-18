@@ -485,15 +485,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مفروشة',
     },
     'skyj7jpv': {
-      'en': 'Furnishied',
+      'en': 'Furnished',
       'ar': 'غير مفروشة',
     },
     '8x7rkqnv': {
-      'en': 'Un-Furnishied',
+      'en': 'Un-furnished',
       'ar': 'نصف مفروش أو نصف مجهز أو شبه مفروش',
     },
     'mhyiav30': {
-      'en': 'Semi-Furnished',
+      'en': 'Semi-furnished',
       'ar': '',
     },
     '7fpsv2qy': {

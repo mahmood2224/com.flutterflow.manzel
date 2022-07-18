@@ -122,7 +122,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                         FFAppState().locale,
                         getJsonField(
                           (textPropertiesResponse?.jsonBody ?? ''),
-                          r'''$''',
+                          r'''$.data''',
                         )),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Sofia Pro By Khuzaimah',
@@ -236,8 +236,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                           FFAppState().filterFurnishingType.toList()),
                       propertyType: functions.listToApiParameters(
                           FFAppState().filterPropertyType.toList()),
-                      minimumPrice: FFAppState().filterMinPrice,
-                      maximumPrice: FFAppState().filterMaxPrice,
+                      minimumPrice: FFAppState().filterMinPrice.toString(),
+                      maximumPrice: FFAppState().filterMaxPrice.toString(),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.

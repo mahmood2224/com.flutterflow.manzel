@@ -65,10 +65,11 @@ String formattedSliderOutput(double rawSliderValue) {
   return format.format(value);
 }
 
-String sliderToApi(double sliderValue) {
+int sliderToApi(double sliderValue) {
   // Add your function code here!
   double val = double.parse(sliderValue.toStringAsFixed(0));
-  return val.toString();
+  int res = val.toInt();
+  return res;
 }
 
 String searchPagePropertyText(int count) {
@@ -112,7 +113,7 @@ List<String> filteredResultChioceChipsBuilder(
   List<String> filteredFurnishingType,
   String locale,
 ) {
-  var results = [];
+  List<String> results = [];
   if (locale == "en") {
     if (filteredCity != '') {
       results.add("City: ${filteredCity} ");

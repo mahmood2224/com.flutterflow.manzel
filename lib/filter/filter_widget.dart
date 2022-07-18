@@ -54,9 +54,9 @@ class _FilterWidgetState extends State<FilterWidget> {
               logFirebaseEvent('Text_Update-Local-State');
               setState(() => FFAppState().filterCity = '');
               logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterMinPrice = '');
+              setState(() => FFAppState().filterMinPrice = 0);
               logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterMaxPrice = '');
+              setState(() => FFAppState().filterMaxPrice = 0);
               logFirebaseEvent('Text_Navigate-Back');
               context.pop();
               logFirebaseEvent('Text_Navigate-To');
@@ -592,15 +592,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       )),
                                       ChipData(
                                           FFLocalizations.of(context).getText(
-                                        'skyj7jpv' /* Furnishied */,
+                                        'skyj7jpv' /* Furnished */,
                                       )),
                                       ChipData(
                                           FFLocalizations.of(context).getText(
-                                        '8x7rkqnv' /* Un-Furnishied */,
+                                        '8x7rkqnv' /* Un-furnished */,
                                       )),
                                       ChipData(
                                           FFLocalizations.of(context).getText(
-                                        'mhyiav30' /* Semi-Furnished */,
+                                        'mhyiav30' /* Semi-furnished */,
                                       ))
                                     ],
                                     onChanged: (val) => setState(
@@ -674,17 +674,26 @@ class _FilterWidgetState extends State<FilterWidget> {
                             setState(() => FFAppState().filterFurnishingType =
                                 isFurnishingValues.toList());
                             logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterMinPrice = '');
+                            setState(() => FFAppState().filterMinPrice = 0);
                             logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterMaxPrice = '');
+                            setState(() => FFAppState().filterMaxPrice = 0);
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterMinPrice =
                                 functions.sliderToApi(sliderValue1));
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterMaxPrice =
                                 functions.sliderToApi(sliderValue2));
-                            logFirebaseEvent('apllyFilter_Navigate-Back');
-                            context.pop();
+                            logFirebaseEvent('apllyFilter_Navigate-To');
+                            context.pushNamed(
+                              'filterResults',
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 0),
+                                ),
+                              },
+                            );
                           } else {
                             logFirebaseEvent('apllyFilter_Show-Snack-Bar');
                             ScaffoldMessenger.of(context).showSnackBar(
