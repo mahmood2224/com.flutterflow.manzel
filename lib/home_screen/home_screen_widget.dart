@@ -553,28 +553,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               );
                                             },
                                           ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(1, 1),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 18, 18),
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                color: Color(0xFFEEEEEE),
-                                                image: DecorationImage(
-                                                  fit: BoxFit.cover,
-                                                  image: Image.asset(
-                                                    'assets/images/Ellipse_12.png',
-                                                  ).image,
-                                                ),
-                                                shape: BoxShape.circle,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+
                                         Align(
                                           alignment:
                                               AlignmentDirectional(1, -1),
@@ -604,6 +583,37 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     ).image,
                                                   ),
                                                   shape: BoxShape.circle,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: AlignmentDirectional(1, 1),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 18, 18),
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              decoration: BoxDecoration(
+                                                color: Color(0x80F3F1F1),
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color: Color(0x80F3F1F1),
+                                                  width: 2,
+                                                ),
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                child: Image.network(
+                                                  getJsonField(
+                                                    propertiesItem,
+                                                    r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.name''',
+                                                  ),
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
@@ -730,36 +740,40 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             ),
                                           ],
                                         ),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Image.asset(
-                                              'assets/images/Ellipse_9.png',
-                                              width: 22,
-                                              height: 22,
-                                              fit: BoxFit.cover,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8, 0, 0, 0),
-                                              child: Image.asset(
-                                                'assets/images/Inma.png',
-                                                width: 22,
-                                                height: 22,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8, 0, 0, 0),
-                                              child: Image.asset(
-                                                'assets/images/Albilad.png',
-                                                width: 22,
-                                                height: 22,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ],
+                                        Builder(
+                                          builder: (context) {
+                                            final banks = getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.banks.data''',
+                                                )?.toList() ??
+                                                [];
+                                            return Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: List.generate(
+                                                  banks.length, (banksIndex) {
+                                                final banksItem =
+                                                    banks[banksIndex];
+                                                return Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 8, 0),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            11),
+                                                    child: Image.network(
+                                                      getJsonField(
+                                                        banksItem,
+                                                        r'''$.attributes.bank_logo.data.attributes.name''',
+                                                      ),
+                                                      width: 22,
+                                                      height: 22,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                            );
+                                          },
                                         ),
                                       ],
                                     ),

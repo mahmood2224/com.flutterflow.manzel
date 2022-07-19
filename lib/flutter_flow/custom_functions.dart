@@ -79,3 +79,123 @@ String searchPagePropertyText(int count) {
     return "${count.toString()} property available";
   }
 }
+
+bool validateInstallmentRange(
+  double minIntallmentRange,
+  double maxInstallmentRange,
+) {
+  if (minIntallmentRange < maxInstallmentRange) {
+    return true;
+  } else {
+    return false;
+  }
+  // Add your function code here!
+}
+
+List<String> cityListBuilder(List<String> cityListApiResponse) {
+  // Add your function code here!
+  var finalList = ["All"];
+  finalList.addAll(cityListApiResponse);
+  return finalList;
+}
+
+List<String> propertTypeBuilder(List<String> propertyTypeApiResponse) {
+  // Add your function code here!
+  var finalList = ["All"];
+  finalList.addAll(propertyTypeApiResponse);
+  return finalList;
+}
+
+List<String> filteredResultChioceChipsBuilder(
+  String filteredCity,
+  List<String> filteredPropertyType,
+  List<String> filteredFurnishingType,
+  String locale,
+) {
+  var results = [];
+  if (locale == "en") {
+    if (filteredCity != '') {
+      results.add("City: ${filteredCity} ");
+    }
+    if (filteredPropertyType.length != 0) {
+      String properties = filteredPropertyType.join(',');
+      results.add("Type: ${properties}");
+    }
+    if (filteredFurnishingType.length != 0) {
+      String furnishing = filteredFurnishingType.join(',');
+      results.add("Furnishing: ${furnishing}");
+    }
+  } else {
+    if (filteredCity != '') {
+      results.add("المدينة: ${filteredCity} ");
+    }
+    if (filteredPropertyType.length != 0) {
+      String properties = filteredPropertyType.join(',');
+      results.add("يكتب: ${properties} ");
+    }
+    if (filteredFurnishingType.length != 0) {
+      String furnishing = filteredFurnishingType.join(',');
+      results.add("تأثيث: ${furnishing} ");
+    }
+  }
+  return results;
+}
+
+String countJsonData(
+  String locale,
+  dynamic jsonResponse,
+) {
+  var len = jsonResponse.length;
+  if (locale == "en") {
+    return "${len} properties found";
+  } else {
+    return "ملكيات ${len} تم العثور على";
+  }
+  // Add your function code here!
+}
+
+String listToApiParameters(List<String> paramList) {
+  // Add your function code here!
+  var param = paramList.join(',');
+  return param;
+}
+
+bool propertyTypeCheckHouse(
+  String propertyType,
+  String locale,
+) {
+  // Add your function code here!
+  if (locale == "en") {
+    if (propertyType == "House") {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    if (propertyType == "منزل") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+bool propertyTypeCheckApartment(
+  String propertyType,
+  String locale,
+) {
+  if (locale == "en") {
+    if (propertyType == "Apartment") {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    if (propertyType == "شقة") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  // Add your function code here!
+}

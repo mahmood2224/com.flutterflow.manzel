@@ -452,6 +452,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Mansion',
       'ar': '',
     },
+    '2jdd174j': {
+      'en': 'All',
+      'ar': 'الجميع',
+    },
     '4mz2rd2p': {
       'en': 'Installment Range',
       'ar': 'نطاق التقسيط',
@@ -477,16 +481,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مفروشة',
     },
     'jrw6qvww': {
-      'en': 'Furnishied',
+      'en': 'All',
       'ar': 'مفروشة',
     },
     'skyj7jpv': {
-      'en': 'Un-Furnishied',
+      'en': 'Furnishied',
       'ar': 'غير مفروشة',
     },
     '8x7rkqnv': {
-      'en': 'Semi-Furnished',
+      'en': 'Un-Furnishied',
       'ar': 'نصف مفروش أو نصف مجهز أو شبه مفروش',
+    },
+    'mhyiav30': {
+      'en': 'Semi-Furnished',
+      'ar': '',
+    },
+    '7fpsv2qy': {
+      'en': '',
+      'ar': 'الجميع',
     },
     'dgzjfbdt': {
       'en': 'Show  Properties',
@@ -495,6 +507,69 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '5wfrx94q': {
       'en': 'Offers',
       'ar': 'مسكن',
+    },
+  },
+  // filterResults
+  {
+    'kmjdnh1c': {
+      'en': 'Filter results ',
+      'ar': 'نتائج البحث',
+    },
+    '7egi5iad': {
+      'en': 'All',
+      'ar': 'الجميع',
+    },
+    'ujth28u8': {
+      'en': 'House',
+      'ar': 'منزل',
+    },
+    'n3j4w46j': {
+      'en': 'Apartment',
+      'ar': 'شقة',
+    },
+    'e97m1en4': {
+      'en': 'Flat',
+      'ar': 'مسطحة',
+    },
+    'tkhi1190': {
+      'en': 'Town house',
+      'ar': '',
+    },
+    '30rthsk2': {
+      'en': 'Mansion',
+      'ar': '',
+    },
+    'sn4q62fr': {
+      'en': 'All',
+      'ar': 'الجميع',
+    },
+    'y61ahqus': {
+      'en': 'Approved Banks',
+      'ar': '',
+    },
+    'n8poxzbo': {
+      'en': ', ',
+      'ar': '،',
+    },
+    '4ib4fmbw': {
+      'en': 'Installment starting from',
+      'ar': 'القسط يبدأ من',
+    },
+    'df86lsot': {
+      'en': 'Total property price',
+      'ar': 'القسط يبدأ من',
+    },
+    'xk3izs5s': {
+      'en': ' SAR/Monthly',
+      'ar': 'ريال سعودي / شهري',
+    },
+    '66rkg6uk': {
+      'en': ' SAR',
+      'ar': 'ريال سعودي',
+    },
+    'wcatvw4s': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // MyProperties
@@ -556,11 +631,54 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'qlysszro': {
       'en': 'Where are you  looking ?',
-      'ar': '',
+      'ar': 'أين تنظر ؟',
     },
     'fce9ky0f': {
       'en': 'Home',
       'ar': 'الصفحة الرئيسية',
+    },
+  },
+  // SearchCityResult
+  {
+    '5s0m6vc5': {
+      'en': 'Approved Banks',
+      'ar': '',
+    },
+    'f2n56efp': {
+      'en': ', ',
+      'ar': '،',
+    },
+    'by2cxdfu': {
+      'en': 'Installment starting from',
+      'ar': 'القسط يبدأ من',
+    },
+    'e3d13l9e': {
+      'en': 'Total property price',
+      'ar': 'القسط يبدأ من',
+    },
+    'bm7ytrkl': {
+      'en': ' SAR/Monthly',
+      'ar': 'ريال سعودي / شهري',
+    },
+    's8nfdgfe': {
+      'en': ' SAR',
+      'ar': 'ريال سعودي',
+    },
+    'cv6ymemd': {
+      'en': 'Search results ',
+      'ar': 'نتائج البحث',
+    },
+    'i7hby2rh': {
+      'en': '\"',
+      'ar': '',
+    },
+    '6gnj1yz7': {
+      'en': '\"',
+      'ar': '',
+    },
+    'ntrpmj08': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // PropertyDetails
@@ -568,6 +686,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'ak0ss5un': {
       'en': 'Updated: ',
       'ar': 'محدث:',
+    },
+    'j3vqe4np': {
+      'en': '2 days ago',
+      'ar': '',
     },
     'kqc4ney0': {
       'en': 'Property manage by ',
@@ -577,25 +699,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ', ',
       'ar': '،',
     },
+    'regy8zap': {
+      'en': 'View on map',
+      'ar': '',
+    },
     'd1l98zzs': {
       'en': ' Bedrooms',
       'ar': 'غرف نوم',
-    },
-    'swyvkhf5': {
-      'en': ' sqm',
-      'ar': 'متر مربع',
     },
     'gqq478h5': {
       'en': ' Bathrooms',
       'ar': 'الحمامات',
     },
-    '7xi05192': {
-      'en': ' Years',
-      'ar': 'سنوات',
+    'swyvkhf5': {
+      'en': ' sqm',
+      'ar': 'متر مربع',
     },
     'u0xq15h6': {
       'en': ' Livingrooms',
       'ar': 'غرف المعيشة',
+    },
+    '0lrdaepm': {
+      'en': 'Age 1 yr.',
+      'ar': 'العمر 1 سنة.',
+    },
+    '7xi05192': {
+      'en': ' Years',
+      'ar': 'سنوات',
     },
     'nq19lw60': {
       'en': 'Features and Amenities',
@@ -607,6 +737,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ku7u4p9w': {
       'en': 'Floors',
+      'ar': 'عدد الطوابق',
+    },
+    'bidhdd2g': {
+      'en': 'Floor Number',
       'ar': 'عدد الطوابق',
     },
     'vrdckjrg': {
@@ -633,12 +767,40 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Location',
       'ar': 'موقع',
     },
+    '67qymqb4': {
+      'en': 'Similar Properties',
+      'ar': 'خصائص مماثلة',
+    },
+    'dw0ntbtl': {
+      'en': 'Approved Banks',
+      'ar': '',
+    },
+    'daq1tb18': {
+      'en': ', ',
+      'ar': '،',
+    },
+    '5fi3eht5': {
+      'en': 'Installment starting from',
+      'ar': 'القسط يبدأ من',
+    },
+    'asvlp34j': {
+      'en': 'Total property price',
+      'ar': 'القسط يبدأ من',
+    },
+    'vfqf83co': {
+      'en': ' SAR/Monthly',
+      'ar': 'ريال سعودي / شهري',
+    },
+    'o3rzhl0v': {
+      'en': ' SAR',
+      'ar': 'ريال سعودي',
+    },
     'i17ddd6l': {
       'en': 'Installment starting from',
       'ar': 'القسط يبدأ من',
     },
     'mgi2d0o9': {
-      'en': 'SAR/Monthly',
+      'en': ' SAR/Monthly',
       'ar': ' ريال سعودي / شهري',
     },
     'dpmrt150': {
@@ -1113,6 +1275,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'gmbuwmld': {
       'en': 'No Result Found',
       'ar': 'لم يتم العثور على نتائج',
+    },
+  },
+  // bankDetailsBottomSheet
+  {
+    'qb244g7f': {
+      'en': 'Bank Details',
+      'ar': '',
+    },
+    'ua6uqn3o': {
+      'en': 'Close',
+      'ar': '',
     },
   },
   // Miscellaneous

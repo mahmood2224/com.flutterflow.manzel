@@ -153,6 +153,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : FilterWidget(),
             ),
             FFRoute(
+              name: 'filterResults',
+              path: 'filterResults',
+              builder: (context, params) => FilterResultsWidget(),
+            ),
+            FFRoute(
               name: 'MyProperties',
               path: 'myProperties',
               requireAuth: true,
@@ -165,6 +170,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'whereAreYouLooking',
               builder: (context, params) => WhereAreYouLookingWidget(
                 city: params.getParam('city', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'SearchCityResult',
+              path: 'searchCityResult',
+              builder: (context, params) => SearchCityResultWidget(
+                cityName: params.getParam('cityName', ParamType.String),
+                peropertiesAvailable:
+                    params.getParam('peropertiesAvailable', ParamType.int),
               ),
             ),
             FFRoute(

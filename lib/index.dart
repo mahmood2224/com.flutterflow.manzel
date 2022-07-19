@@ -16,9 +16,12 @@ export 'confirm_new_number_o_t_p/confirm_new_number_o_t_p_widget.dart'
 export 'home_screen/home_screen_widget.dart' show HomeScreenWidget;
 export 'notifications/notifications_widget.dart' show NotificationsWidget;
 export 'filter/filter_widget.dart' show FilterWidget;
+export 'filter_results/filter_results_widget.dart' show FilterResultsWidget;
 export 'my_properties/my_properties_widget.dart' show MyPropertiesWidget;
 export 'where_are_you_looking/where_are_you_looking_widget.dart'
     show WhereAreYouLookingWidget;
+export 'search_city_result/search_city_result_widget.dart'
+    show SearchCityResultWidget;
 export 'property_details/property_details_widget.dart'
     show PropertyDetailsWidget;
 export 'bank_details/bank_details_widget.dart' show BankDetailsWidget;

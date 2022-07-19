@@ -7,7 +7,7 @@ export 'api_manager.dart' show ApiCallResponse;
 class PropertiesCall {
   static Future<ApiCallResponse> call({
     String populate =
-        '*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
+        '*,banks.bank_logo,managed_by.company_logo,property_images,city',
     String city = '',
     String furnishingType = '',
     String propertyType = '',
@@ -50,7 +50,7 @@ class PropertyCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Property',
       apiUrl:
-          'https://strapi-dev.manzel.app/api/properties/${propertyId}/?populate=*,banks.bank_logo,managed_by.prob_company_logo, property_images',
+          'https://strapi-dev.manzel.app/api/properties/${propertyId}/?populate=*,banks.bank_logo,managed_by.company_logo, property_images',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -80,7 +80,7 @@ class PropertyCall {
       );
   static dynamic propertyCity(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.property_city''',
+        r'''$.data.attributes.city.data.attributes.city_name''',
       );
   static dynamic propertyDistrict(dynamic response) => getJsonField(
         response,
@@ -172,7 +172,7 @@ class PropertyCall {
       );
   static dynamic mangedBy(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.managed_by.data.attributes.prob_company_name''',
+        r'''$.data.attributes.managed_by.data.attributes.company_name''',
       );
   static dynamic propertyImg(dynamic response) => getJsonField(
         response,
@@ -180,7 +180,7 @@ class PropertyCall {
       );
   static dynamic companyLogo(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.managed_by.data.attributes.prob_company_logo..alternativeText''',
+        r'''$.data.attributes.managed_by.data.attributes.company_logo.data.attributes.name''',
       );
   static dynamic reservationsCost(dynamic response) => getJsonField(
         response,
@@ -188,7 +188,7 @@ class PropertyCall {
       );
   static dynamic propertyImages(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.property_images.data..alternativeText''',
+        r'''$.data.attributes.property_images.data''',
       );
   static dynamic propertyId(dynamic response) => getJsonField(
         response,
@@ -241,7 +241,7 @@ class BankDetailsCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'BankDetails',
-      apiUrl: 'https://strapi-dev.manzel.app/api/banks/${bankId}?populate=*',
+      apiUrl: 'https://strapi-dev.manzel.app/api/banks/${bankId}?',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -290,13 +290,17 @@ class StartInstanceCall {
 }
 
 class CityListCall {
-  static Future<ApiCallResponse> call() {
+  static Future<ApiCallResponse> call({
+    String locale = 'en',
+  }) {
     return ApiManager.instance.makeApiCall(
       callName: 'cityList',
-      apiUrl: 'https://strapi-dev.manzel.app/api/cities/?locale=en',
+      apiUrl: 'https://strapi-dev.manzel.app/api/cities/?',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'locale': locale,
+      },
       returnBody: true,
     );
   }
@@ -322,14 +326,19 @@ class FilterParamsCall {
 }
 
 class SearchPageCitiesCall {
-  static Future<ApiCallResponse> call() {
+  static Future<ApiCallResponse> call({
+    String locale = 'en',
+    String populate = 'city',
+  }) {
     return ApiManager.instance.makeApiCall(
       callName: 'searchPageCities',
-      apiUrl:
-          'https://strapi-dev.manzel.app/api/property/search?locale=en&populate=city',
+      apiUrl: 'https://strapi-dev.manzel.app/api/property/search',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'locale': locale,
+        'populate': populate,
+      },
       returnBody: true,
     );
   }
