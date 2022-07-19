@@ -12,7 +12,7 @@ import '../../auth/auth_util.dart';
 
 bool checkPhoneNumberFormat(String phoneNumber) {
   // Add your function code here
-  if (phoneNumber.length != 13 || !phoneNumber.startsWith('+')) {
+  if (phoneNumber.length < 9 && phoneNumber.length > 10) {
     return false;
   } else {
     return true;
@@ -214,10 +214,9 @@ String noResultsCityName(
 }
 
 String getFormattedMobileNumber(String mobileNumber) {
-  if (mobileNumber.startsWith('+966') && mobileNumber[4] == '0') {
-    String number = mobileNumber.substring(0, 4) +
-        mobileNumber.substring(5, (mobileNumber.length));
+  if (mobileNumber.startsWith('0')) {
+    String number = '+966' + mobileNumber.substring(1, (mobileNumber.length));
     return number;
   }
-  return mobileNumber;
+  return '+966' + mobileNumber;
 }

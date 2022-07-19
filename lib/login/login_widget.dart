@@ -26,10 +26,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Login'});
-    phoneNumberController = TextEditingController(
-        text: FFLocalizations.of(context).getText(
-      '11ilbwge' /* +966 */,
-    ));
+    phoneNumberController = TextEditingController();
   }
 
   @override
@@ -175,9 +172,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
-                              hintText: FFLocalizations.of(context).getText(
-                                'f4tpckti' /* +966 */,
-                              ),
                               hintStyle: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
