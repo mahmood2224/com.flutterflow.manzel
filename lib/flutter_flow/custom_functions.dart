@@ -212,3 +212,12 @@ String noResultsCityName(
     return "لا توجد نتائج بحث عن “ ${cityName}”. جرب بحث جديد";
   }
 }
+
+String getFormattedMobileNumber(String mobileNumber) {
+  if (mobileNumber.startsWith('+966') && mobileNumber[4] == '0') {
+    String number = mobileNumber.substring(0, 4) +
+        mobileNumber.substring(5, (mobileNumber.length));
+    return number;
+  }
+  return mobileNumber;
+}

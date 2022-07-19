@@ -1621,7 +1621,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               Image.network(
                                                                             getJsonField(
                                                                               banksItem,
-                                                                              r'''$..bank_logo..name''',
+                                                                              r'''$..bank_logo..alternativeText''',
                                                                             ),
                                                                             width:
                                                                                 MediaQuery.of(context).size.width * 0.29,
@@ -1652,7 +1652,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               Text(
                                                                                 getJsonField(
                                                                                   banksItem,
-                                                                                  r'''$..bank_name''',
+                                                                                  r'''$..Bank_name''',
                                                                                 ).toString(),
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(

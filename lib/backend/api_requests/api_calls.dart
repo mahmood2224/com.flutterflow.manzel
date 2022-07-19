@@ -7,7 +7,7 @@ export 'api_manager.dart' show ApiCallResponse;
 class PropertiesCall {
   static Future<ApiCallResponse> call({
     String populate =
-        '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
+        '*,banks.bank_logo,managed_by.company_logo,property_images,city',
     String city = '',
     String furnishingType = '',
     String propertyType = '',
