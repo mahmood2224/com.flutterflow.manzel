@@ -1865,23 +1865,32 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    '67qymqb4' /* Similar Properties */,
+                                                if (functions
+                                                        .isSimilarPropertyAvailable(
+                                                            getJsonField(
+                                                      (columnPropertyResponse
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                      r'''$.data.attributes.similar_properties''',
+                                                    )) ??
+                                                    true)
+                                                  Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      '67qymqb4' /* Similar Properties */,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          useGoogleFonts: false,
+                                                        ),
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                                ),
                                               ],
                                             ),
                                           ),
