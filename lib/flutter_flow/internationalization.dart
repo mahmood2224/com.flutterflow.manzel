@@ -50,7 +50,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '364dhoh3': {
       'en':
-          'We\'ll send a verification code to your number so \nyou can login or create an account',
+          'We\'ll send a verification code to your number so you can login or create an account',
       'ar': 'سنرسل رمز التحقق إلى رقمك حتى تتمكن من تسجيل الدخول أو إنشاء حساب',
     },
     '4m2r1iwr': {
