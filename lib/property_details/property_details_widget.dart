@@ -415,11 +415,15 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           ),
                                                     ),
                                                     Text(
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        'j3vqe4np' /* 2 days ago */,
-                                                      ),
+                                                      PropertyCall
+                                                              .propertyUpdatedAt(
+                                                        (columnPropertyResponse
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                      )
+                                                          .toString()
+                                                          .maybeHandleOverflow(
+                                                              maxChars: 10),
                                                       maxLines: 2,
                                                       style: FlutterFlowTheme
                                                               .of(context)
@@ -1489,7 +1493,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 Expanded(
                                                   child: Container(
                                                     width: double.infinity,
-                                                    height: 200,
+                                                    height: 170,
                                                     decoration: BoxDecoration(
                                                       color: Colors.white,
                                                     ),
@@ -1574,7 +1578,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               context)
                                                                           .size
                                                                           .height *
-                                                                      0.18,
+                                                                      0.14,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     color: Colors
@@ -1617,7 +1621,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               Image.network(
                                                                             getJsonField(
                                                                               banksItem,
-                                                                              r'''$..bank_logo..alternativeText''',
+                                                                              r'''$..bank_logo..name''',
                                                                             ),
                                                                             width:
                                                                                 MediaQuery.of(context).size.width * 0.29,
@@ -1648,7 +1652,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               Text(
                                                                                 getJsonField(
                                                                                   banksItem,
-                                                                                  r'''$..Bank_name''',
+                                                                                  r'''$..bank_name''',
                                                                                 ).toString(),
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -2654,12 +2658,19 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
                                   // reserve
                                   logFirebaseEvent('reserved_reserve');
-                                  context.goNamed(
+                                  context.pushNamed(
                                     'ReservationConfirmation',
                                     queryParams: {
                                       'propertyId': serializeParam(
                                           widget.propertyId, ParamType.int),
                                     }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 0),
+                                      ),
+                                    },
                                   );
                                 },
                                 text: FFLocalizations.of(context).getText(

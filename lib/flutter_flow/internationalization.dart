@@ -485,15 +485,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مفروشة',
     },
     'skyj7jpv': {
-      'en': 'Furnishied',
+      'en': 'Furnished',
       'ar': 'غير مفروشة',
     },
     '8x7rkqnv': {
-      'en': 'Un-Furnishied',
+      'en': 'Un-furnished',
       'ar': 'نصف مفروش أو نصف مجهز أو شبه مفروش',
     },
     'mhyiav30': {
-      'en': 'Semi-Furnished',
+      'en': 'Semi-furnished',
       'ar': '',
     },
     '7fpsv2qy': {
@@ -583,7 +583,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تسجيل الدخول',
     },
     'gl02050s': {
-      'en': 'Purchased',
+      'en': 'Bookes',
       'ar': 'محجوز',
     },
     'tu9ytzrl': {
@@ -598,24 +598,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'View Details',
       'ar': 'عرض التفاصيل',
     },
-    'mt7pfmk1': {
-      'en': 'Reserved',
-      'ar': 'حجز',
-    },
-    'ry827uul': {
-      'en': 'Booking ref: ',
-      'ar': 'مرجع الحجز:',
-    },
-    'tjiw2bkf': {
-      'en': ' ,',
-      'ar': ' ،',
-    },
-    'zypmgjph': {
-      'en': 'View Details',
-      'ar': 'عرض التفاصيل',
-    },
     '4uvlncbs': {
-      'en': 'Saved',
+      'en': 'Favorite',
       'ar': 'مفضلة',
     },
     'j1mv6jzk': {
@@ -638,58 +622,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الصفحة الرئيسية',
     },
   },
-  // SearchCityResult
-  {
-    '5s0m6vc5': {
-      'en': 'Approved Banks',
-      'ar': '',
-    },
-    'f2n56efp': {
-      'en': ', ',
-      'ar': '،',
-    },
-    'by2cxdfu': {
-      'en': 'Installment starting from',
-      'ar': 'القسط يبدأ من',
-    },
-    'e3d13l9e': {
-      'en': 'Total property price',
-      'ar': 'القسط يبدأ من',
-    },
-    'bm7ytrkl': {
-      'en': ' SAR/Monthly',
-      'ar': 'ريال سعودي / شهري',
-    },
-    's8nfdgfe': {
-      'en': ' SAR',
-      'ar': 'ريال سعودي',
-    },
-    'cv6ymemd': {
-      'en': 'Search results ',
-      'ar': 'نتائج البحث',
-    },
-    'i7hby2rh': {
-      'en': '\"',
-      'ar': '',
-    },
-    '6gnj1yz7': {
-      'en': '\"',
-      'ar': '',
-    },
-    'ntrpmj08': {
-      'en': 'Home',
-      'ar': '',
-    },
-  },
   // PropertyDetails
   {
     'ak0ss5un': {
       'en': 'Updated: ',
       'ar': 'محدث:',
-    },
-    'j3vqe4np': {
-      'en': '2 days ago',
-      'ar': '',
     },
     'kqc4ney0': {
       'en': 'Property manage by ',
@@ -806,6 +743,49 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'dpmrt150': {
       'en': 'Reserve',
       'ar': 'محجوز',
+    },
+  },
+  // SearchCityResult
+  {
+    '5s0m6vc5': {
+      'en': 'Approved Banks',
+      'ar': '',
+    },
+    'f2n56efp': {
+      'en': ', ',
+      'ar': '،',
+    },
+    'by2cxdfu': {
+      'en': 'Installment starting from',
+      'ar': 'القسط يبدأ من',
+    },
+    'e3d13l9e': {
+      'en': 'Total property price',
+      'ar': 'القسط يبدأ من',
+    },
+    'bm7ytrkl': {
+      'en': ' SAR/Monthly',
+      'ar': 'ريال سعودي / شهري',
+    },
+    's8nfdgfe': {
+      'en': ' SAR',
+      'ar': 'ريال سعودي',
+    },
+    'cv6ymemd': {
+      'en': 'Search results ',
+      'ar': 'نتائج البحث',
+    },
+    'i7hby2rh': {
+      'en': '\"',
+      'ar': '',
+    },
+    '6gnj1yz7': {
+      'en': '\"',
+      'ar': '',
+    },
+    'ntrpmj08': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // bankDetails
@@ -1187,89 +1167,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الصفحة الرئيسية',
     },
   },
-  // FilterCopy
-  {
-    'bfc0jvhc': {
-      'en': 'City',
-      'ar': 'مدينة',
-    },
-    '1snf3qye': {
-      'en': 'Riyadh',
-      'ar': 'الرياض',
-    },
-    '5kec6c0m': {
-      'en': 'Select City',
-      'ar': 'اختر مدينة',
-    },
-    '1xtsbq2y': {
-      'en': 'Type',
-      'ar': 'نوع',
-    },
-    'rnc35lnt': {
-      'en': 'All',
-      'ar': 'الجميع',
-    },
-    'ducpx83i': {
-      'en': 'House',
-      'ar': 'منزل',
-    },
-    'fqnjkv6g': {
-      'en': 'Apartment',
-      'ar': 'شقة',
-    },
-    '0pjvwkk1': {
-      'en': 'Flat',
-      'ar': 'مسطحة',
-    },
-    'qhz0rrjr': {
-      'en': 'All',
-      'ar': 'الجميع',
-    },
-    'f872j8ol': {
-      'en': 'All',
-      'ar': 'الجميع',
-    },
-    '6xt16jt5': {
-      'en': 'Installment Range',
-      'ar': 'نطاق التقسيط',
-    },
-    '8ozjkl8w': {
-      'en': 'Furnishing',
-      'ar': 'مفروشة',
-    },
-    'o1h78xn1': {
-      'en': 'All',
-      'ar': 'الجميع',
-    },
-    '5sipykmn': {
-      'en': 'Furnishing',
-      'ar': 'مفروشة',
-    },
-    'emup7poc': {
-      'en': 'Un-Furnishing',
-      'ar': 'غير مفروشة',
-    },
-    'kgidgtfz': {
-      'en': 'All',
-      'ar': 'الجميع',
-    },
-    '3tmmjthp': {
-      'en': 'Show  Properties',
-      'ar': 'إظهار الخصائص',
-    },
-    '9wjco7f5': {
-      'en': 'Reset',
-      'ar': 'إعادة',
-    },
-    '4r6li7uf': {
-      'en': 'Filter',
-      'ar': 'فرز',
-    },
-    '9xztb8ua': {
-      'en': 'Home',
-      'ar': 'مسكن',
-    },
-  },
   // NotFoundPage
   {
     'gmbuwmld': {
@@ -1285,6 +1182,65 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ua6uqn3o': {
       'en': 'Close',
+      'ar': '',
+    },
+  },
+  // NoResultsFound
+  {
+    '1yep0j1q': {
+      'en': 'Explore our properties',
+      'ar': '',
+    },
+  },
+  // reservationBottomSheet
+  {
+    'jaefs5yd': {
+      'en': 'Reservation confirmation',
+      'ar': 'تأكيد الحجز',
+    },
+    'pdty4a6r': {
+      'en':
+          'To confirm the reservation, you need to pay an administration fee. By confirming payment, you ',
+      'ar': 'لتأكيد الحجز ، يتعين عليك دفع رسوم إدارية. بتأكيد الدفع ، أنت',
+    },
+    'njswqwdn': {
+      'en': 'agree to our ',
+      'ar': 'توافق على',
+    },
+    '0gizrv8a': {
+      'en': 'terms & conditions ',
+      'ar': 'البنود و الظروف',
+    },
+    'iyjhj02m': {
+      'en': 'Reservation cost',
+      'ar': '',
+    },
+    'ovajaogv': {
+      'en': '.00',
+      'ar': '',
+    },
+    'wqlgaavg': {
+      'en': 'SAR',
+      'ar': '',
+    },
+    'sohxgusa': {
+      'en': 'Note: Reservation cost is non-refundable ',
+      'ar': '',
+    },
+    'p0n3wi8y': {
+      'en': 'Select Payment Method',
+      'ar': '',
+    },
+    '0pkqdf0l': {
+      'en': 'Mada/Visa',
+      'ar': '',
+    },
+    'icwlzrr6': {
+      'en': 'ApplePay',
+      'ar': '',
+    },
+    'p50ponkb': {
+      'en': 'Button',
       'ar': '',
     },
   },

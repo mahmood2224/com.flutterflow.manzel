@@ -102,12 +102,12 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
         city: getParameter(data, 'city'),
       ),
+  'PropertyDetails': (data) async => PropertyDetailsWidget(
+        propertyId: getParameter(data, 'propertyId'),
+      ),
   'SearchCityResult': (data) async => SearchCityResultWidget(
         cityName: getParameter(data, 'cityName'),
         peropertiesAvailable: getParameter(data, 'peropertiesAvailable'),
-      ),
-  'PropertyDetails': (data) async => PropertyDetailsWidget(
-        propertyId: getParameter(data, 'propertyId'),
       ),
   'bankDetails': (data) async => BankDetailsWidget(
         bankId: getParameter(data, 'bankId'),
@@ -128,7 +128,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'ConfirmAbsher': (data) async => ConfirmAbsherWidget(),
   'PersonalEmploymentDetails': (data) async =>
       PersonalEmploymentDetailsWidget(),
-  'FilterCopy': (data) async => FilterCopyWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

@@ -29,7 +29,7 @@ class FFAppState {
 
   String filterCity = '';
 
-  bool _isInitailLaunch = true;
+  bool _isInitailLaunch = false;
   bool get isInitailLaunch => _isInitailLaunch;
   set isInitailLaunch(bool _value) {
     _isInitailLaunch = _value;
@@ -38,13 +38,13 @@ class FFAppState {
 
   String locale = '';
 
-  String filterMinPrice = '';
-
-  String filterMaxPrice = '';
-
   List<String> filterPropertyType = [];
 
   List<String> filterFurnishingType = [];
+
+  int filterMinPrice = 0;
+
+  int filterMaxPrice = 0;
 }
 
 LatLng _latLngFromString(String val) {

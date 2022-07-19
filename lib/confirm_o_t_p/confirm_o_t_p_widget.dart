@@ -16,14 +16,14 @@ class ConfirmOTPWidget extends StatefulWidget {
 }
 
 class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
-  TextEditingController enterOTPController;
+  TextEditingController phoneNumberController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    enterOTPController = TextEditingController();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'ConfirmOTP'});
+    phoneNumberController = TextEditingController();
   }
 
   @override
@@ -128,9 +128,9 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
                   children: [
                     Expanded(
                       child: TextFormField(
-                        controller: enterOTPController,
+                        controller: phoneNumberController,
                         onChanged: (_) => EasyDebounce.debounce(
-                          'enterOTPController',
+                          'phoneNumberController',
                           Duration(milliseconds: 2000),
                           () => setState(() {}),
                         ),
@@ -178,7 +178,7 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
                         // verifyOTP
                         logFirebaseEvent('verifyOTP_verifyOTP');
                         GoRouter.of(context).prepareAuthEvent();
-                        final smsCodeVal = enterOTPController.text;
+                        final smsCodeVal = phoneNumberController.text;
                         if (smsCodeVal == null || smsCodeVal.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
