@@ -7,7 +7,7 @@ export 'api_manager.dart' show ApiCallResponse;
 class PropertiesCall {
   static Future<ApiCallResponse> call({
     String populate =
-        '*,banks.bank_logo,managed_by.company_logo,property_images,city',
+        '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
     String city = '',
     String furnishingType = '',
     String propertyType = '',
@@ -46,14 +46,16 @@ class PropertiesCall {
 class PropertyCall {
   static Future<ApiCallResponse> call({
     int propertyId,
+    String locale = 'en',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Property',
-      apiUrl:
-          'https://strapi-dev.manzel.app/api/properties/${propertyId}/?populate=*,banks.Bank_logo,managed_by.Company_logo, property_images',
+      apiUrl: 'https://strapi-dev.manzel.app/api/properties/${propertyId}',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'locale': locale,
+      },
       returnBody: true,
     );
   }
@@ -128,7 +130,7 @@ class PropertyCall {
       );
   static dynamic propertyEntranceDirection(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.property_entrance_direction''',
+        r'''$.data.attributes.property_address''',
       );
   static dynamic propertyType(dynamic response) => getJsonField(
         response,

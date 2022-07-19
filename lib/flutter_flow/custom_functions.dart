@@ -220,3 +220,7 @@ String getFormattedMobileNumber(String mobileNumber) {
   }
   return '+966' + mobileNumber;
 }
+
+bool isSimilarPropertyAvailable(List<dynamic> similarProperties) {
+  return similarProperties.isNotEmpty;
+}
