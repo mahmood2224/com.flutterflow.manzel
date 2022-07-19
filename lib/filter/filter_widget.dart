@@ -124,7 +124,11 @@ class _FilterWidgetState extends State<FilterWidget> {
         child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
           child: FutureBuilder<ApiCallResponse>(
-            future: FilterParamsCall.call(),
+            future: PropertiesCall.call(
+              populate:
+                  'populate=*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
+              locale: FFAppState().locale,
+            ),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
@@ -139,7 +143,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ),
                 );
               }
-              final columnFilterParamsResponse = snapshot.data;
+              final columnPropertiesResponse = snapshot.data;
               return SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -283,7 +287,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                             : FFAppState().filterPropertyType,
                                     options: (functions.propertTypeBuilder(
                                                 (getJsonField(
-                                              (columnFilterParamsResponse
+                                              (columnPropertiesResponse
                                                       ?.jsonBody ??
                                                   ''),
                                               r'''$.meta.property_type''',
@@ -483,8 +487,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       functions
                                           .formattedDouble(valueOrDefault<int>(
                                         getJsonField(
-                                          (columnFilterParamsResponse
-                                                  ?.jsonBody ??
+                                          (columnPropertiesResponse?.jsonBody ??
                                               ''),
                                           r'''$.meta.max_price''',
                                         ),
@@ -519,8 +522,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       functions
                                           .formattedDouble(valueOrDefault<int>(
                                         getJsonField(
-                                          (columnFilterParamsResponse
-                                                  ?.jsonBody ??
+                                          (columnPropertiesResponse?.jsonBody ??
                                               ''),
                                           r'''$.meta.max_price''',
                                         ),
