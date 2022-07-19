@@ -20,10 +20,10 @@ export 'filter_results/filter_results_widget.dart' show FilterResultsWidget;
 export 'my_properties/my_properties_widget.dart' show MyPropertiesWidget;
 export 'where_are_you_looking/where_are_you_looking_widget.dart'
     show WhereAreYouLookingWidget;
-export 'search_city_result/search_city_result_widget.dart'
-    show SearchCityResultWidget;
 export 'property_details/property_details_widget.dart'
     show PropertyDetailsWidget;
+export 'search_city_result/search_city_result_widget.dart'
+    show SearchCityResultWidget;
 export 'bank_details/bank_details_widget.dart' show BankDetailsWidget;
 export 'reservation_confirmation/reservation_confirmation_widget.dart'
     show ReservationConfirmationWidget;
@@ -35,4 +35,3 @@ export 'absher_verification/absher_verification_widget.dart'
 export 'confirm_absher/confirm_absher_widget.dart' show ConfirmAbsherWidget;
 export 'personal_employment_details/personal_employment_details_widget.dart'
     show PersonalEmploymentDetailsWidget;
-export 'filter_copy/filter_copy_widget.dart' show FilterCopyWidget;

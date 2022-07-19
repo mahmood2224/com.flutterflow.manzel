@@ -25,6 +25,11 @@ abstract class FlutterFlowTheme {
   Color tertiary400;
   Color textColor;
   Color lineColor;
+  Color btnText;
+  Color customColor3;
+  Color customColor4;
+  Color white;
+  Color background;
 
   String get title1Family => typography.title1Family;
   TextStyle get title1 => typography.title1;
@@ -62,6 +67,11 @@ class LightModeTheme extends FlutterFlowTheme {
   Color tertiary400 = Color(0xFF39D2C0);
   Color textColor = Color(0xFF1E2429);
   Color lineColor = Color(0xFFE0E3E7);
+  Color btnText = Color(0xFFFFFFFF);
+  Color customColor3 = Color(0xFFDF3F3F);
+  Color customColor4 = Color(0xFF090F13);
+  Color white = Color(0xFFFFFFFF);
+  Color background = Color(0xFF1D2429);
 }
 
 abstract class Typography {

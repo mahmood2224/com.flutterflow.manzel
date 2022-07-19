@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +95,20 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                       List<NotificationsRecord>
                           notificationsListNotificationsRecordList =
                           snapshot.data;
+                      if (notificationsListNotificationsRecordList.isEmpty) {
+                        return Center(
+                          child: Container(
+                            width: 280,
+                            height: 169,
+                            child: NoResultsFoundWidget(
+                              titleText: 'No notifications yet',
+                              subtitleText: ' ',
+                              isBottonVisible: false,
+                              screenName: 'Notification',
+                            ),
+                          ),
+                        );
+                      }
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         scrollDirection: Axis.vertical,

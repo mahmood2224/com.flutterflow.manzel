@@ -25,10 +25,6 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
     // On page load action.
     SchedulerBinding.instance?.addPostFrameCallback((_) async {
       logFirebaseEvent('ONBOARDING_VIEW_OnboardingView_ON_LOAD');
-      if (!(FFAppState().isInitailLaunch)) {
-        logFirebaseEvent('OnboardingView_Navigate-To');
-        context.goNamed('HomeScreen');
-      }
       logFirebaseEvent('OnboardingView_Update-Local-State');
       setState(
           () => FFAppState().locale = FFLocalizations.of(context).languageCode);
@@ -239,7 +235,7 @@ your f... */
                 logFirebaseEvent('ONBOARDING_VIEW_PAGE_goToLogin_ON_TAP');
                 // Go to Login
                 logFirebaseEvent('goToLogin_GotoLogin');
-                context.goNamed('Login');
+                context.pushNamed('Login');
                 logFirebaseEvent('goToLogin_Update-Local-State');
                 setState(() => FFAppState().isInitailLaunch = false);
               },

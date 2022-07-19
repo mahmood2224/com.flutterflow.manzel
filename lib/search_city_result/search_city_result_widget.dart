@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -59,17 +60,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
               child: InkWell(
                 onTap: () async {
                   logFirebaseEvent('SEARCH_CITY_RESULT_Icon_uhxori33_ON_TAP');
-                  logFirebaseEvent('Icon_Navigate-To');
-                  context.pushNamed(
-                    'HomeScreen',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                        duration: Duration(milliseconds: 0),
-                      ),
-                    },
-                  );
+                  logFirebaseEvent('Icon_Navigate-Back');
+                  context.pop();
                 },
                 child: Icon(
                   Icons.arrow_back,
@@ -188,6 +180,17 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                 (listViewPropertiesResponse?.jsonBody ?? ''),
                               )?.toList() ??
                               [];
+                          if (properties.isEmpty) {
+                            return Center(
+                              child: NoResultsFoundWidget(
+                                titleText: 'No results found',
+                                subtitleText: functions.noResultsCityName(
+                                    widget.cityName, FFAppState().locale),
+                                isBottonVisible: false,
+                                screenName: 'Result',
+                              ),
+                            );
+                          }
                           return ListView.builder(
                             padding: EdgeInsets.zero,
                             primary: false,
@@ -556,20 +559,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                   0, 0, 8, 0),
                                                       child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius.only(
-                                                          bottomLeft:
-                                                              Radius.circular(
-                                                                  0),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  0),
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  11),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  0),
-                                                        ),
+                                                            BorderRadius
+                                                                .circular(11),
                                                         child: Image.network(
                                                           getJsonField(
                                                             banksItem,

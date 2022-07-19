@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -75,7 +76,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(0),
                         child: Image.asset(
-                          'assets/images/home_background.png',
+                          'assets/images/home_bg.png',
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,
@@ -350,6 +351,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             (listViewPropertiesResponse?.jsonBody ?? ''),
                           )?.toList() ??
                           [];
+                      if (properties.isEmpty) {
+                        return Center(
+                          child: NoResultsFoundWidget(
+                            titleText: 'No results found',
+                            subtitleText: '',
+                            isBottonVisible: false,
+                            screenName: 'Results',
+                          ),
+                        );
+                      }
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         primary: false,

@@ -119,11 +119,11 @@ List<String> filteredResultChioceChipsBuilder(
       results.add("City: ${filteredCity} ");
     }
     if (filteredPropertyType.length != 0) {
-      String properties = filteredPropertyType.join(',');
+      String properties = filteredPropertyType.join(', ');
       results.add("Type: ${properties}");
     }
     if (filteredFurnishingType.length != 0) {
-      String furnishing = filteredFurnishingType.join(',');
+      String furnishing = filteredFurnishingType.join(', ');
       results.add("Furnishing: ${furnishing}");
     }
   } else {
@@ -131,11 +131,11 @@ List<String> filteredResultChioceChipsBuilder(
       results.add("المدينة: ${filteredCity} ");
     }
     if (filteredPropertyType.length != 0) {
-      String properties = filteredPropertyType.join(',');
+      String properties = filteredPropertyType.join(', ');
       results.add("يكتب: ${properties} ");
     }
     if (filteredFurnishingType.length != 0) {
-      String furnishing = filteredFurnishingType.join(',');
+      String furnishing = filteredFurnishingType.join(', ');
       results.add("تأثيث: ${furnishing} ");
     }
   }
@@ -199,4 +199,16 @@ bool propertyTypeCheckApartment(
     }
   }
   // Add your function code here!
+}
+
+String noResultsCityName(
+  String cityName,
+  String locale,
+) {
+  // Add your function code here!
+  if (locale == "en") {
+    return "No search results for “${cityName}”. Try a new search";
+  } else {
+    return "لا توجد نتائج بحث عن “ ${cityName}”. جرب بحث جديد";
+  }
 }

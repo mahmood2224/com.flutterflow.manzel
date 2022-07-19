@@ -171,19 +171,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
+              name: 'PropertyDetails',
+              path: 'propertyDetails',
+              builder: (context, params) => PropertyDetailsWidget(
+                propertyId: params.getParam('propertyId', ParamType.int),
+              ),
+            ),
+            FFRoute(
               name: 'SearchCityResult',
               path: 'searchCityResult',
               builder: (context, params) => SearchCityResultWidget(
                 cityName: params.getParam('cityName', ParamType.String),
                 peropertiesAvailable:
                     params.getParam('peropertiesAvailable', ParamType.int),
-              ),
-            ),
-            FFRoute(
-              name: 'PropertyDetails',
-              path: 'propertyDetails',
-              builder: (context, params) => PropertyDetailsWidget(
-                propertyId: params.getParam('propertyId', ParamType.int),
               ),
             ),
             FFRoute(
@@ -236,11 +236,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'PersonalEmploymentDetails',
               path: 'personalEmploymentDetails',
               builder: (context, params) => PersonalEmploymentDetailsWidget(),
-            ),
-            FFRoute(
-              name: 'FilterCopy',
-              path: 'filterCopy',
-              builder: (context, params) => FilterCopyWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

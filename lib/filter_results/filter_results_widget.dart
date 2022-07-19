@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -260,6 +261,20 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                 (listViewPropertiesResponse?.jsonBody ?? ''),
                               )?.toList() ??
                               [];
+                          if (properties.isEmpty) {
+                            return Center(
+                              child: Container(
+                                width: 280,
+                                height: 269,
+                                child: NoResultsFoundWidget(
+                                  titleText: 'No result found',
+                                  subtitleText: '          ',
+                                  isBottonVisible: false,
+                                  screenName: 'Result',
+                                ),
+                              ),
+                            );
+                          }
                           return ListView.builder(
                             padding: EdgeInsets.zero,
                             primary: false,
@@ -628,20 +643,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                   0, 0, 8, 0),
                                                       child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius.only(
-                                                          bottomLeft:
-                                                              Radius.circular(
-                                                                  0),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  0),
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  11),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  0),
-                                                        ),
+                                                            BorderRadius
+                                                                .circular(11),
                                                         child: Image.network(
                                                           getJsonField(
                                                             banksItem,
