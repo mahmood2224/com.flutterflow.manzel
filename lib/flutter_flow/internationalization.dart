@@ -58,7 +58,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'رقم الهاتف المحمول',
     },
     'f4tpckti': {
-      'en': '',
+      'en': '+966',
       'ar': '+966',
     },
     'gr1za5xy': {
