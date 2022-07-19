@@ -308,7 +308,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                               phoneNumberController.text)) {
                             // sendOTP
                             logFirebaseEvent('sendOTP_sendOTP');
-                            final phoneNumberVal = phoneNumberController.text;
+                            final phoneNumberVal =
+                                functions.getFormattedMobileNumber(
+                                    phoneNumberController.text);
                             if (phoneNumberVal == null ||
                                 phoneNumberVal.isEmpty ||
                                 !phoneNumberVal.startsWith('+')) {
