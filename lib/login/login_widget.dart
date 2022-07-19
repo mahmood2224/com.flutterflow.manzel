@@ -172,6 +172,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
+                              hintText: FFLocalizations.of(context).getText(
+                                'f4tpckti' /* +966 */,
+                              ),
                               hintStyle: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
