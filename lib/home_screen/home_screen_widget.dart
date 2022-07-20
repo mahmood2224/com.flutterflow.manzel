@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -566,7 +567,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               onTap: () async {
                                                 logFirebaseEvent(
                                                     'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                                if (!(currentUserEmailVerified)) {
+                                                if (!(loggedIn)) {
                                                   logFirebaseEvent(
                                                       'Container_Navigate-To');
                                                   context.pushNamed('Login');

@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../components/bank_details_bottom_sheet_widget.dart';
@@ -2055,7 +2056,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           () async {
                                                                         logFirebaseEvent(
                                                                             'PROPERTY_DETAILS_Container_8jf58tla_ON_T');
-                                                                        if (!(currentUserEmailVerified)) {
+                                                                        if (!(loggedIn)) {
                                                                           logFirebaseEvent(
                                                                               'Container_Navigate-To');
                                                                           context

@@ -1,4 +1,4 @@
-import '../auth/auth_util.dart';
+import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
@@ -440,7 +440,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                   onTap: () async {
                                                     logFirebaseEvent(
                                                         'FILTER_RESULTS_Container_kslgg6qy_ON_TAP');
-                                                    if (!(currentUserEmailVerified)) {
+                                                    if (!(loggedIn)) {
                                                       logFirebaseEvent(
                                                           'Container_Navigate-To');
                                                       context
