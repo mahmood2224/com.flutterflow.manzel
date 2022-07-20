@@ -194,7 +194,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                           return;
                         }
 
-                        context.goNamedAuth('MyProperties', mounted);
+                        context.goNamedAuth('HomeScreen', mounted);
                       },
                       text: FFLocalizations.of(context).getText(
                         'f1zsgncf' /* Continue */,

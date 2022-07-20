@@ -12,7 +12,7 @@ import '../../auth/auth_util.dart';
 
 bool checkPhoneNumberFormat(String phoneNumber) {
   // Add your function code here
-  if (phoneNumber.length < 9 && phoneNumber.length > 10) {
+  if (phoneNumber.length < 9 || phoneNumber.length > 10) {
     return false;
   } else {
     return true;
