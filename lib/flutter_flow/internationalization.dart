@@ -197,9 +197,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Add your information',
       'ar': 'أضف معلوماتك',
     },
-    'yi3j31m9': {
+    '2xw55n00': {
       'en': 'Full name',
       'ar': 'الاسم الكامل',
+    },
+    'iegnrogi': {
+      'en': ' ',
+      'ar': '+966',
     },
     'dr5dq8mr': {
       'en': 'By clicking continue, you agree to our',
@@ -858,7 +862,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز:',
     },
-    'qfm6d5vp': {
+    'helm66q2': {
       'en': 'Order Process',
       'ar': '',
     },
@@ -866,7 +870,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Reservation & Payment Confirmed',
       'ar': 'تأكيد الحجز والدفع',
     },
-    '5799z1qh': {
+    '6o7gmqky': {
       'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
       'ar': '',
     },
@@ -874,7 +878,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Send deal to Banks',
       'ar': 'تأكيد الحجز والدفع',
     },
-    'xnwzz31k': {
+    'qqhhg2ru': {
       'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
       'ar': '',
     },
@@ -882,7 +886,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Completing Documents',
       'ar': 'تأكيد الحجز والدفع',
     },
-    '4shifojk': {
+    'o23wj00g': {
       'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
       'ar': '',
     },
@@ -894,7 +898,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Get banks proposals',
       'ar': 'تأكيد الحجز والدفع',
     },
-    'e88q2w8x': {
+    '3ywj0my8': {
       'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
       'ar': '',
     },
