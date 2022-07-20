@@ -404,7 +404,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                     child: Image.network(
                                                       getJsonField(
                                                         propertiesItem,
-                                                        r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.name''',
+                                                        r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
                                                       ),
                                                       fit: BoxFit.cover,
                                                     ),
@@ -564,7 +564,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                         child: Image.network(
                                                           getJsonField(
                                                             banksItem,
-                                                            r'''$.attributes.bank_logo.data.attributes.name''',
+                                                            r'''$.attributes.bank_logo.data.attributes.url''',
                                                           ),
                                                           width: 22,
                                                           height: 22,

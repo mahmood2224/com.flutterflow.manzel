@@ -182,7 +182,7 @@ class PropertyCall {
       );
   static dynamic companyLogo(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.managed_by.data.attributes.company_logo.data.attributes.name''',
+        r'''$.data.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
       );
   static dynamic reservationsCost(dynamic response) => getJsonField(
         response,

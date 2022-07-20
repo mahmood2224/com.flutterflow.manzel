@@ -80,26 +80,29 @@ class _ReservationBottomSheetWidgetState
                   ),
                 ),
                 Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 22, 40, 0),
-                        child: Text(
-                          FFLocalizations.of(context).getText(
-                            'jaefs5yd' /* Reservation confirmation */,
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 40, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 22, 0, 0),
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              'jaefs5yd' /* Reservation confirmation */,
+                            ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                      useGoogleFonts: false,
+                                    ),
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: false,
-                                  ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
