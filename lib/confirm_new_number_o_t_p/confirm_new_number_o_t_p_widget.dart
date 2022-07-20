@@ -142,7 +142,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                     children: [
                       AuthUserStreamWidget(
                         child: Text(
-                          widget.phoneNumber,
+                          widget.phoneNumber ?? '1234567890',
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Sofia Pro By Khuzaimah',
                             fontSize: 17,
