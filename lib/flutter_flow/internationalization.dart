@@ -67,15 +67,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '5t0jhzug': {
       'en': 'terms & conditions',
-      'ar': 'الشروط والأحكام وسياسة الخصوصية',
+      'ar': 'البنود و الظروف',
     },
     '5ard5tmn': {
       'en': ' & ',
-      'ar': 'الشروط والأحكام وسياسة الخصوصية',
+      'ar': '&amp;',
     },
     'irbrz9hi': {
       'en': 'privacy policy',
-      'ar': 'الشروط والأحكام وسياسة الخصوصية',
+      'ar': 'سياسة الخصوصية',
     },
     'l3ozn1az': {
       'en': 'Continue',

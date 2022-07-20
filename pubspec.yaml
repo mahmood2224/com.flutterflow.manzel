@@ -25,7 +25,6 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  algolia: 1.0.3
   auto_size_text: 3.0.0
   badges: 2.0.2
   built_collection: 5.1.1
@@ -63,7 +62,7 @@ dependencies:
   mime_type: 1.0.0
   page_transition: 2.0.4
   percent_indicator: 4.0.0
-  rxdart: 0.26.0
+  rxdart: 0.27.4
   share_plus: 2.1.4
   shared_preferences: 2.0.11
   sign_in_with_apple:
