@@ -365,7 +365,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                               imageUrl:
                                                                   getJsonField(
                                                                 propertyImagesItem,
-                                                                r'''$.attributes.name''',
+                                                                r'''$.attributes.url''',
                                                               ),
                                                               width:
                                                                   MediaQuery.of(

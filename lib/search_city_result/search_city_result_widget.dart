@@ -281,7 +281,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                               imageUrl:
                                                                   getJsonField(
                                                                 propertyImagesItem,
-                                                                r'''$.attributes.name''',
+                                                                r'''$.attributes.url''',
                                                               ),
                                                               width:
                                                                   MediaQuery.of(

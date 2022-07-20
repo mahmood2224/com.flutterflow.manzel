@@ -111,7 +111,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               return CachedNetworkImage(
                                                 imageUrl: getJsonField(
                                                   imagesItem,
-                                                  r'''$.attributes.name''',
+                                                  r'''$.attributes.url''',
                                                 ),
                                                 width: double.infinity,
                                                 height: double.infinity,
@@ -1997,7 +1997,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                                 child: CachedNetworkImage(
                                                                                   imageUrl: getJsonField(
                                                                                     propertyImagesItem,
-                                                                                    r'''$.name''',
+                                                                                    r'''$.url''',
                                                                                   ),
                                                                                   width: MediaQuery.of(context).size.width,
                                                                                   height: MediaQuery.of(context).size.height * 0.3,

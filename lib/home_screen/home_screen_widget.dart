@@ -445,7 +445,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           imageUrl:
                                                               getJsonField(
                                                             propertyImagesItem,
-                                                            r'''$.attributes.name''',
+                                                            r'''$.attributes.url''',
                                                           ),
                                                           width: MediaQuery.of(
                                                                   context)
