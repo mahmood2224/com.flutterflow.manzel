@@ -136,7 +136,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                   child: Container(
                     width: double.infinity,
-                    height: 60,
+                    height: 65,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primaryBtnText,
                       borderRadius: BorderRadius.circular(8),
