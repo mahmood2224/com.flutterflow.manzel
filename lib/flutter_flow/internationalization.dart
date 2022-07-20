@@ -206,7 +206,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بالنقر فوق متابعة ، فإنك توافق على',
     },
     't1oedq2h': {
-      'en': 'terms & conditions & privacy policy',
+      'en': 'terms & conditions ',
+      'ar': 'الشروط والأحكام وسياسة الخصوصية',
+    },
+    'uzfzq8tl': {
+      'en': '& ',
+      'ar': 'الشروط والأحكام وسياسة الخصوصية',
+    },
+    'c1o6ckwl': {
+      'en': 'privacy policy',
       'ar': 'الشروط والأحكام وسياسة الخصوصية',
     },
     'fnkwu8bx': {
