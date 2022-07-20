@@ -195,7 +195,7 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
                           return;
                         }
 
-                        context.goNamedAuth('MyProperties', mounted);
+                        context.goNamedAuth('HomeScreen', mounted);
                       },
                       text: FFLocalizations.of(context).getText(
                         'lbqhlsdp' /* Continue */,
