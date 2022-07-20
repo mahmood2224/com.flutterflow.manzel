@@ -210,7 +210,9 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 0, 21),
                                       child: Text(
-                                        'Order Process',
+                                        FFLocalizations.of(context).getText(
+                                          'helm66q2' /* Order Process */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -264,7 +266,10 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                         ),
                                                   ),
                                                   Text(
-                                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      '6o7gmqky' /* Lorem ipsum dolor sit amet, co... */,
+                                                    ),
                                                     maxLines: 2,
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -300,46 +305,45 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                             ),
                                           ),
                                           Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 0, 0, 0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'czklypuv' /* Send deal to Banks */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'czklypuv' /* Send deal to Banks */,
                                                   ),
-                                                  Text(
-                                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
-                                                    maxLines: 2,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 12,
-                                                          useGoogleFonts: false,
-                                                        ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Sofia Pro By Khuzaimah',
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'qqhhg2ru' /* Lorem ipsum dolor sit amet, co... */,
                                                   ),
-                                                ],
-                                              ),
+                                                  maxLines: 2,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Sofia Pro By Khuzaimah',
+                                                        fontSize: 12,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ],
@@ -375,57 +379,54 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                         ),
                                                       ),
                                                       Expanded(
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(12,
-                                                                      0, 0, 0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'cie1ckkw' /* Completing Documents */,
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      fontSize:
-                                                                          16,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'cie1ckkw' /* Completing Documents */,
                                                               ),
-                                                              Text(
-                                                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
-                                                                maxLines: 2,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      fontSize:
-                                                                          12,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sofia Pro By Khuzaimah',
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            ),
+                                                            Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'o23wj00g' /* Lorem ipsum dolor sit amet, co... */,
                                                               ),
-                                                            ],
-                                                          ),
+                                                              maxLines: 2,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sofia Pro By Khuzaimah',
+                                                                    fontSize:
+                                                                        12,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
                                                     ],
@@ -553,46 +554,45 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                             ),
                                           ),
                                           Expanded(
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 0, 0, 0),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'zrzv4hu9' /* Get banks proposals */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'zrzv4hu9' /* Get banks proposals */,
                                                   ),
-                                                  Text(
-                                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
-                                                    maxLines: 2,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 12,
-                                                          useGoogleFonts: false,
-                                                        ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Sofia Pro By Khuzaimah',
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    '3ywj0my8' /* Lorem ipsum dolor sit amet, co... */,
                                                   ),
-                                                ],
-                                              ),
+                                                  maxLines: 2,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Sofia Pro By Khuzaimah',
+                                                        fontSize: 12,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ],
@@ -1156,7 +1156,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 0, 20, 0),
+                                    20, 0, 20, 162),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [

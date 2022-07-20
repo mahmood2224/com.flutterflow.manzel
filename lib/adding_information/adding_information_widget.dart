@@ -70,43 +70,80 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
-                        child: TextFormField(
-                          controller: fullNameController,
-                          onChanged: (_) => EasyDebounce.debounce(
-                            'fullNameController',
-                            Duration(milliseconds: 2000),
-                            () => setState(() {}),
-                          ),
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: FFLocalizations.of(context).getText(
-                              'yi3j31m9' /* Full name */,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
+                        child: Container(
+                          width: double.infinity,
+                          height: 65,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).primaryBtnText,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              width: 1,
                             ),
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12, 0, 0, 0),
+                                  child: TextFormField(
+                                    controller: fullNameController,
+                                    onChanged: (_) => EasyDebounce.debounce(
+                                      'fullNameController',
+                                      Duration(milliseconds: 2000),
+                                      () => setState(() {}),
+                                    ),
+                                    autofocus: true,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText:
+                                          FFLocalizations.of(context).getText(
+                                        '2xw55n00' /* Full name */,
+                                      ),
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily:
+                                                'Sofia Pro By Khuzaimah',
+                                            color: Colors.black,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w300,
+                                            useGoogleFonts: false,
+                                          ),
+                                      hintText:
+                                          FFLocalizations.of(context).getText(
+                                        'iegnrogi' /*   */,
+                                      ),
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily:
+                                                'Sofia Pro By Khuzaimah',
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
+                                      enabledBorder: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
+                                    maxLines: 1,
+                                    keyboardType: TextInputType.name,
                                   ),
-                          keyboardType: TextInputType.name,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
