@@ -263,8 +263,25 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               displayName: fullNameController.text,
                             );
                             await currentUserReference.update(userUpdateData);
-                            logFirebaseEvent('submitInfo_Navigate-To');
-                            context.goNamed('HomeScreen');
+                            if ((fullNameController.text) == '\"\"') {
+                              logFirebaseEvent('submitInfo_Show-Snack-Bar');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Please enter full name',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor: Color(0x00000000),
+                                ),
+                              );
+                            } else {
+                              logFirebaseEvent('submitInfo_Navigate-To');
+                              context.goNamed('HomeScreen');
+                            }
                           },
                           text: FFLocalizations.of(context).getText(
                             'fnkwu8bx' /* Continue */,

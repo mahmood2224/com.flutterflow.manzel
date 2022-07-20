@@ -111,7 +111,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               return CachedNetworkImage(
                                                 imageUrl: getJsonField(
                                                   imagesItem,
-                                                  r'''$.attributes.name''',
+                                                  r'''$.attributes.url''',
                                                 ),
                                                 width: double.infinity,
                                                 height: double.infinity,
@@ -1623,7 +1623,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               Image.network(
                                                                             getJsonField(
                                                                               banksItem,
-                                                                              r'''$..bank_logo..name''',
+                                                                              r'''$..bank_logo..url''',
                                                                             ),
                                                                             width:
                                                                                 MediaQuery.of(context).size.width * 0.29,
@@ -1997,7 +1997,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                                 child: CachedNetworkImage(
                                                                                   imageUrl: getJsonField(
                                                                                     propertyImagesItem,
-                                                                                    r'''$.name''',
+                                                                                    r'''$.url''',
                                                                                   ),
                                                                                   width: MediaQuery.of(context).size.width,
                                                                                   height: MediaQuery.of(context).size.height * 0.3,
@@ -2128,7 +2128,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                             .network(
                                                                           getJsonField(
                                                                             propertiesItem,
-                                                                            r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.name''',
+                                                                            r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
                                                                           ),
                                                                           fit: BoxFit
                                                                               .cover,
@@ -2332,7 +2332,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                                 Image.network(
                                                                               getJsonField(
                                                                                 banksItem,
-                                                                                r'''$.attributes.bank_logo.data.attributes.name''',
+                                                                                r'''$.attributes.bank_logo.data.attributes.url''',
                                                                               ),
                                                                               width: 22,
                                                                               height: 22,

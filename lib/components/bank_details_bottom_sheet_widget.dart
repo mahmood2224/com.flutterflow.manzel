@@ -69,7 +69,7 @@ class _BankDetailsBottomSheetWidgetState
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(16.04, 22, 0, 0),
@@ -99,26 +99,31 @@ class _BankDetailsBottomSheetWidgetState
                     ),
                   ),
                   Expanded(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 22, 75, 0),
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              'qb244g7f' /* Bank Details */,
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 40, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 22, 0, 0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'qb244g7f' /* Bank Details */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: false,
+                                  ),
                             ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: false,
-                                    ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
