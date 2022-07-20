@@ -14,7 +14,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ConfirmNewNumberOTPWidget extends StatefulWidget {
-  const ConfirmNewNumberOTPWidget({Key key}) : super(key: key);
+  final String phoneNumber;
+  const ConfirmNewNumberOTPWidget({Key key,this.phoneNumber}) : super(key: key);
 
   @override
   _ConfirmNewNumberOTPWidgetState createState() =>
@@ -31,7 +32,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
 
   void resendOTP() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: currentPhoneNumber,
+      phoneNumber: widget.phoneNumber,
       timeout: Duration(seconds: 5),
       verificationCompleted: (phoneAuthCredential) async {
         await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
@@ -141,7 +142,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                     children: [
                       AuthUserStreamWidget(
                         child: Text(
-                          currentPhoneNumber,
+                          widget.phoneNumber,
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Sofia Pro By Khuzaimah',
                             fontSize: 17,
