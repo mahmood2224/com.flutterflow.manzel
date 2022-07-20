@@ -173,11 +173,27 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               _showOtpError.value = "You entered OTP incorrect";
                               return;
                             }
-                            if(phoneVerifiedUser.displayName == null){
-                              context.goNamedAuth('AddingInformation', mounted);
-                            }else {
-                              context.goNamedAuth('HomeScreen', mounted);
-                            }
+                            Future.delayed(const Duration(milliseconds: 500), () {
+
+                              if(currentUserDisplayName.isEmpty){
+                                context.goNamedAuth('AddingInformation', mounted);
+                              }else {
+                                context.goNamedAuth('HomeScreen', mounted);
+                              }
+
+                            });
+
+
+                            // FirebaseFirestore.instance
+                            //     .collection('User')
+                            //     .doc()
+                            //     .get()
+                            //     .then((DocumentSnapshot documentSnapshot) {
+                            //   if (documentSnapshot.exists) {
+                            //     print('Document exists on the database');
+                            //   }
+                            // });
+
                           },
                           autofocus: true,
                           length: 6,
