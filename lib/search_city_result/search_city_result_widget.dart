@@ -1,4 +1,4 @@
-import '../auth/auth_util.dart';
+import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -356,7 +356,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                   onTap: () async {
                                                     logFirebaseEvent(
                                                         'SEARCH_CITY_RESULT_Container_0oy6ukkp_ON');
-                                                    if (!(currentUserEmailVerified)) {
+                                                    if (!(loggedIn)) {
                                                       logFirebaseEvent(
                                                           'Container_Navigate-To');
                                                       context

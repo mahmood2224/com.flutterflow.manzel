@@ -858,6 +858,46 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز:',
     },
+    'qfm6d5vp': {
+      'en': 'Order Process',
+      'ar': '',
+    },
+    '4b2ze33a': {
+      'en': 'Reservation & Payment Confirmed',
+      'ar': 'تأكيد الحجز والدفع',
+    },
+    '5799z1qh': {
+      'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
+      'ar': '',
+    },
+    'czklypuv': {
+      'en': 'Send deal to Banks',
+      'ar': 'تأكيد الحجز والدفع',
+    },
+    'xnwzz31k': {
+      'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
+      'ar': '',
+    },
+    'cie1ckkw': {
+      'en': 'Completing Documents',
+      'ar': 'تأكيد الحجز والدفع',
+    },
+    '4shifojk': {
+      'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
+      'ar': '',
+    },
+    'ee9tj9d6': {
+      'en': 'Upload Documents',
+      'ar': 'تحميل المستندات',
+    },
+    'zrzv4hu9': {
+      'en': 'Get banks proposals',
+      'ar': 'تأكيد الحجز والدفع',
+    },
+    'e88q2w8x': {
+      'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
+      'ar': '',
+    },
     '8ptcdhhd': {
       'en': 'Property details',
       'ar': 'تفاصيل الملكية ',
@@ -894,13 +934,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'View Receipt Transaction',
       'ar': 'عرض إيصال المعاملة',
     },
-    '4s4pqyjw': {
-      'en': 'View Booking Details',
-      'ar': 'عرض تفاصيل الحجز',
-    },
-    'dla66jhs': {
+    'qlfkupzn': {
       'en': 'Back to Home',
-      'ar': 'العودة إلى الصفحة الرئيسية',
+      'ar': 'عرض تفاصيل الحجز',
     },
     'jdsnk395': {
       'en': 'Home',
