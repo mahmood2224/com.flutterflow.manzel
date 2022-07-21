@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
+import 'package:manzel/backend/backend.dart';
 
 import '../auth/auth_util.dart';
 import '../common_widgets/timer_widget.dart';
@@ -38,9 +39,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
         await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
       },
       verificationFailed: (e) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Error: ${e.message}'),
-        ));
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        //   content: Text('Error: ${e.message}'),
+       // ));
       },
       codeSent: (verificationId, _) {
         _phoneAuthVerificationCode = verificationId;
@@ -155,7 +156,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 58, 16, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -174,14 +175,26 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               _showOtpError.value = "You entered OTP incorrect";
                               return;
                             }
-                            Future.delayed(const Duration(milliseconds: 500), () {
-
-                              if(currentUserDisplayName.isEmpty){
-                                context.goNamedAuth('AddingInformation', mounted);
-                              }else {
-                                context.goNamedAuth('HomeScreen', mounted);
+                            Future.delayed(const Duration(milliseconds: 500), () async{
+                              if(currentUserDocument.status.isEmpty || currentUserDocument.status == 'active') {
+                                final userUpdateData = createUserRecordData(
+                                  status: 'active',
+                                );
+                                await currentUserReference.update(userUpdateData);
+                                if (currentUserDisplayName.isEmpty &&
+                                    currentUserDocument.name.isEmpty) {
+                                  context.goNamedAuth(
+                                      'AddingInformation', mounted);
+                                } else {
+                                  context.goNamedAuth(
+                                      'HomeScreen', mounted);
+                                }
                               }
-
+                              else{
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text('Your account is not active. Kindly connect to support for more information.'),
+                                ));
+                              }
                             });
 
 
@@ -290,7 +303,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                 child: GestureDetector(
                                   onTap: resendOTP,
                                   child: Text(
-                                    'Resend Otp',
+                                    'Resend Code',
                                     style: TextStyle(
                                         decoration: TextDecoration.underline,
                                         fontFamily: 'Sofia Pro By Khuzaimah',

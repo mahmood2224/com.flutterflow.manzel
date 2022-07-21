@@ -137,9 +137,9 @@ Future beginPhoneAuth({
       // );
     },
     verificationFailed: (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Error: ${e.message}'),
-      ));
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //   content: Text('Error: ${e.message}'),
+      // ));
     },
     codeSent: (verificationId, _) {
       _phoneAuthVerificationCode = verificationId;
