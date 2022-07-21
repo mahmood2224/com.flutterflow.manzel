@@ -28,6 +28,7 @@ class _ReservationConfirmationWidgetState
     extends State<ReservationConfirmationWidget> {
   ApiCallResponse initiateOrder;
   OrdersRecord createOrder;
+  TransactionsRecord transactionData;
   String paymentMethodsValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -430,12 +431,46 @@ class _ReservationConfirmationWidgetState
                                                           ParamType.String),
                                                 }.withoutNulls,
                                               );
+                                              logFirebaseEvent(
+                                                  'pay_Backend-Call');
+
+                                              final transactionsCreateData =
+                                                  createTransactionsRecordData(
+                                                userId: currentUserReference,
+                                                orderId: createOrder.orderId,
+                                                transactionMethod:
+                                                    paymentMethodsValue,
+                                                createdAt: getCurrentTimestamp,
+                                                updatedAt: getCurrentTimestamp,
+                                              );
+                                              var transactionsRecordReference =
+                                                  TransactionsRecord.collection
+                                                      .doc();
+                                              await transactionsRecordReference
+                                                  .set(transactionsCreateData);
+                                              transactionData = TransactionsRecord
+                                                  .getDocumentFromData(
+                                                      transactionsCreateData,
+                                                      transactionsRecordReference);
+                                              _shouldSetState = true;
                                             } else {
                                               if (_shouldSetState)
                                                 setState(() {});
                                               return;
                                             }
 
+                                            logFirebaseEvent('pay_Navigate-To');
+                                            context.pushNamed(
+                                              'Confirmation',
+                                              queryParams: {
+                                                'propertyId': serializeParam(
+                                                    widget.propertyId,
+                                                    ParamType.int),
+                                                'paymentMethod': serializeParam(
+                                                    paymentMethodsValue,
+                                                    ParamType.String),
+                                              }.withoutNulls,
+                                            );
                                             if (_shouldSetState)
                                               setState(() {});
                                           },
