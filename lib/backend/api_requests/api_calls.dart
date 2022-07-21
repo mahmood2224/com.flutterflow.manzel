@@ -358,3 +358,23 @@ class SearchPageCitiesCall {
         r'''$.results..image''',
       );
 }
+
+class PropertStatusCall {
+  static Future<ApiCallResponse> call({
+    int propertyId,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'propertStatus',
+      apiUrl: 'https://strapi-dev.manzel.app/api/property/status/${propertyId}',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+    );
+  }
+
+  static dynamic propertyStatus(dynamic response) => getJsonField(
+        response,
+        r'''$.status.property_status''',
+      );
+}
