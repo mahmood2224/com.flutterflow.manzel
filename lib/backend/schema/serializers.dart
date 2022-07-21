@@ -6,9 +6,11 @@ import 'user_properties_record.dart';
 import 'user_saved_record.dart';
 import 'property_record.dart';
 import 'notifications_record.dart';
+import 'transactions_record.dart';
 
 import 'index.dart';
 
+export '../algolia/algolia_manager.dart';
 export 'index.dart';
 
 part 'serializers.g.dart';
@@ -22,6 +24,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   UserSavedRecord,
   PropertyRecord,
   NotificationsRecord,
+  TransactionsRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

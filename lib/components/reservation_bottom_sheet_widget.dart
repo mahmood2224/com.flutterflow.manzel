@@ -343,7 +343,7 @@ class _ReservationBottomSheetWidgetState
                   print('Button pressed ...');
                 },
                 text: FFLocalizations.of(context).getText(
-                  'p50ponkb' /* Button */,
+                  'p50ponkb' /* Pay */,
                 ),
                 options: FFButtonOptions(
                   width: 130,
@@ -352,6 +352,7 @@ class _ReservationBottomSheetWidgetState
                   textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                         fontFamily: 'Sofia Pro By Khuzaimah',
                         color: Colors.white,
+                        fontSize: 18,
                         useGoogleFonts: false,
                       ),
                   borderSide: BorderSide(

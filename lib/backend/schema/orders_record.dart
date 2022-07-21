@@ -15,13 +15,6 @@ abstract class OrdersRecord
   int get orderId;
 
   @nullable
-  @BuiltValueField(wireName: 'u_id')
-  DocumentReference get uId;
-
-  @nullable
-  String get status;
-
-  @nullable
   @BuiltValueField(wireName: 'created_at')
   DateTime get createdAt;
 
@@ -30,8 +23,32 @@ abstract class OrdersRecord
   DateTime get updatedAt;
 
   @nullable
-  @BuiltValueField(wireName: 'p_id')
-  int get pId;
+  @BuiltValueField(wireName: 'user_id')
+  DocumentReference get userId;
+
+  @nullable
+  @BuiltValueField(wireName: 'property_id')
+  int get propertyId;
+
+  @nullable
+  @BuiltValueField(wireName: 'order_status')
+  String get orderStatus;
+
+  @nullable
+  @BuiltValueField(wireName: 'booking_expiry_date')
+  DateTime get bookingExpiryDate;
+
+  @nullable
+  @BuiltValueField(wireName: 'reservation_amount')
+  String get reservationAmount;
+
+  @nullable
+  @BuiltValueField(wireName: 'deposit_receipt')
+  String get depositReceipt;
+
+  @nullable
+  @BuiltValueField(wireName: 'cammunda_instance_id')
+  String get cammundaInstanceId;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -39,8 +56,11 @@ abstract class OrdersRecord
 
   static void _initializeBuilder(OrdersRecordBuilder builder) => builder
     ..orderId = 0
-    ..status = ''
-    ..pId = 0;
+    ..propertyId = 0
+    ..orderStatus = ''
+    ..reservationAmount = ''
+    ..depositReceipt = ''
+    ..cammundaInstanceId = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('orders');
@@ -65,18 +85,26 @@ abstract class OrdersRecord
 
 Map<String, dynamic> createOrdersRecordData({
   int orderId,
-  DocumentReference uId,
-  String status,
   DateTime createdAt,
   DateTime updatedAt,
-  int pId,
+  DocumentReference userId,
+  int propertyId,
+  String orderStatus,
+  DateTime bookingExpiryDate,
+  String reservationAmount,
+  String depositReceipt,
+  String cammundaInstanceId,
 }) =>
     serializers.toFirestore(
         OrdersRecord.serializer,
         OrdersRecord((o) => o
           ..orderId = orderId
-          ..uId = uId
-          ..status = status
           ..createdAt = createdAt
           ..updatedAt = updatedAt
-          ..pId = pId));
+          ..userId = userId
+          ..propertyId = propertyId
+          ..orderStatus = orderStatus
+          ..bookingExpiryDate = bookingExpiryDate
+          ..reservationAmount = reservationAmount
+          ..depositReceipt = depositReceipt
+          ..cammundaInstanceId = cammundaInstanceId));

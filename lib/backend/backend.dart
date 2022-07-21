@@ -10,6 +10,7 @@ import 'schema/user_properties_record.dart';
 import 'schema/user_saved_record.dart';
 import 'schema/property_record.dart';
 import 'schema/notifications_record.dart';
+import 'schema/transactions_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -23,6 +24,7 @@ export 'schema/user_properties_record.dart';
 export 'schema/user_saved_record.dart';
 export 'schema/property_record.dart';
 export 'schema/notifications_record.dart';
+export 'schema/transactions_record.dart';
 
 /// Functions to query UserRecords (as a Stream and as a Future).
 Stream<List<UserRecord>> queryUserRecord({
@@ -270,6 +272,48 @@ Future<FFFirestorePage<NotificationsRecord>> queryNotificationsRecordPage({
     queryCollectionPage(
       NotificationsRecord.collection,
       NotificationsRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query TransactionsRecords (as a Stream and as a Future).
+Stream<List<TransactionsRecord>> queryTransactionsRecord({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      TransactionsRecord.collection,
+      TransactionsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<TransactionsRecord>> queryTransactionsRecordOnce({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      TransactionsRecord.collection,
+      TransactionsRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<TransactionsRecord>> queryTransactionsRecordPage({
+  Query Function(Query) queryBuilder,
+  DocumentSnapshot nextPageMarker,
+  int pageSize,
+  bool isStream,
+}) =>
+    queryCollectionPage(
+      TransactionsRecord.collection,
+      TransactionsRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
