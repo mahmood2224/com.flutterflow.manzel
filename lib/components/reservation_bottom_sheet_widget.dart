@@ -386,37 +386,57 @@ class _ReservationBottomSheetWidgetState
                           .isPropertyAvailable(PropertStatusCall.propertyStatus(
                         (propertyStatus?.jsonBody ?? ''),
                       ).toString())) {
-                        if (functions.queryCollectionHasValue(
-                            buttonOrdersRecordList.toList())) {
-                          if (_shouldSetState) setState(() {});
-                          return;
-                        }
+                        if (!(functions.queryCollectionHasValue(
+                            buttonOrdersRecordList.toList()))) {
+                          logFirebaseEvent('Button_Backend-Call');
 
+                          final ordersCreateData = createOrdersRecordData(
+                            orderId: random_data.randomInteger(0, 1000000),
+                            createdAt: getCurrentTimestamp,
+                            updatedAt: getCurrentTimestamp,
+                            userId: currentUserReference,
+                            propertyId: widget.propertyId,
+                            orderStatus: 'Booked',
+                            reservationAmount: getJsonField(
+                              widget.propertyJSON,
+                              r'''$.data.attributes.property_reservation_cost''',
+                            ).toString(),
+                          );
+                          var ordersRecordReference =
+                              OrdersRecord.collection.doc();
+                          await ordersRecordReference.set(ordersCreateData);
+                          createOrder = OrdersRecord.getDocumentFromData(
+                              ordersCreateData, ordersRecordReference);
+                          _shouldSetState = true;
+                        }
                         logFirebaseEvent('Button_Backend-Call');
 
-                        final ordersCreateData = createOrdersRecordData(
-                          orderId: random_data.randomInteger(0, 1000000),
+                        final transactionsCreateData =
+                            createTransactionsRecordData(
+                          userId: currentUserReference,
+                          orderId: createOrder.orderId,
+                          transactionMethod: paymentMethodValue,
                           createdAt: getCurrentTimestamp,
                           updatedAt: getCurrentTimestamp,
-                          userId: currentUserReference,
-                          propertyId: widget.propertyId,
-                          orderStatus: 'Booked',
-                          reservationAmount: getJsonField(
-                            widget.propertyJSON,
-                            r'''$.data.attributes.property_reservation_cost''',
-                          ).toString(),
                         );
-                        var ordersRecordReference =
-                            OrdersRecord.collection.doc();
-                        await ordersRecordReference.set(ordersCreateData);
-                        createOrder = OrdersRecord.getDocumentFromData(
-                            ordersCreateData, ordersRecordReference);
-                        _shouldSetState = true;
+                        await TransactionsRecord.collection
+                            .doc()
+                            .set(transactionsCreateData);
                       } else {
                         if (_shouldSetState) setState(() {});
                         return;
                       }
 
+                      logFirebaseEvent('Button_Navigate-To');
+                      context.pushNamed(
+                        'Confirmation',
+                        queryParams: {
+                          'propertyId':
+                              serializeParam(widget.propertyId, ParamType.int),
+                          'paymentMethod': serializeParam(
+                              paymentMethodValue, ParamType.String),
+                        }.withoutNulls,
+                      );
                       if (_shouldSetState) setState(() {});
                     },
                     text: FFLocalizations.of(context).getText(

@@ -164,11 +164,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                         ),
                                                   ),
                                                   Text(
-                                                    valueOrDefault<String>(
-                                                      columnOrdersRecord.orderId
-                                                          .toString(),
-                                                      'Un-Known',
-                                                    ),
+                                                    columnOrdersRecord.orderId
+                                                        .toString(),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText2
