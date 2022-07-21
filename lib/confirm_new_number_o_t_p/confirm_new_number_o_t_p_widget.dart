@@ -206,9 +206,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               shape: BoxShape.circle,
                               color: Color(0xffD7D7D7),
                             ),
-                            textStyle: TextStyle(fontSize: 0),
-                            height: 12,
-                            width: 12,
+                            textStyle: TextStyle(fontSize: 30),
+                            height: 45,
+                            width: 18,
                           ),
                           focusedPinTheme: PinTheme(
                             decoration: BoxDecoration(
@@ -216,8 +216,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               color: Color(0xffD7D7D7),
                             ),
                             textStyle: TextStyle(fontSize: 0),
-                            height: 12,
-                            width: 12,
+                            height: 45,
+                            width: 18,
                           ),
                           submittedPinTheme: PinTheme(
                             height: 45,

@@ -35,13 +35,19 @@ class AppStateNotifier extends ChangeNotifier {
   //bool get loading => user == null || showSplashImage;
   //Comment : To hide the black loading screen we have to set loading to false
   bool get loading => false;
+
   bool get loggedIn => user?.loggedIn ?? false;
+
   bool get initiallyLoggedIn => initialUser?.loggedIn ?? false;
+
   bool get shouldRedirect => loggedIn && _redirectLocation != null;
 
   String getRedirectLocation() => _redirectLocation;
+
   bool hasRedirect() => _redirectLocation != null;
+
   void setRedirectLocationIfUnset(String loc) => _redirectLocation ??= loc;
+
   void clearRedirectLocation() => _redirectLocation = null;
 
   /// Mark as not needing to notify on a sign in / out when we intend
@@ -124,7 +130,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'ConfirmNewNumberOTP',
               path: 'confirmNewNumberOTP',
-              builder: (context, params) => ConfirmNewNumberOTPWidget(),
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'ConfirmNewNumberOTPWidget')
+                  : ConfirmNewNumberOTPWidget(
+                      phoneNumber:
+                          params.getParam('phoneNumber', ParamType.String)),
             ),
             FFRoute(
               name: 'HomeScreen',
@@ -288,12 +298,15 @@ extension NavigationExtensions on BuildContext {
 extension GoRouterExtensions on GoRouter {
   AppStateNotifier get appState =>
       (routerDelegate.refreshListenable as AppStateNotifier);
+
   void prepareAuthEvent([bool ignoreRedirect = false]) =>
       appState.hasRedirect() && !ignoreRedirect
           ? null
           : appState.updateNotifyOnAuthChange(false);
+
   bool shouldRedirect(bool ignoreRedirect) =>
       !ignoreRedirect && appState.hasRedirect();
+
   void setRedirectLocationIfUnset(String location) =>
       (routerDelegate.refreshListenable as AppStateNotifier)
           .updateNotifyOnAuthChange(false);
@@ -302,10 +315,12 @@ extension GoRouterExtensions on GoRouter {
 extension _GoRouterStateExtensions on GoRouterState {
   Map<String, dynamic> get extraMap =>
       extra != null ? extra as Map<String, dynamic> : {};
+
   Map<String, dynamic> get allParams => <String, dynamic>{}
     ..addAll(params)
     ..addAll(queryParams)
     ..addAll(extraMap);
+
   TransitionInfo get transitionInfo => extraMap.containsKey(kTransitionInfoKey)
       ? extraMap[kTransitionInfoKey] as TransitionInfo
       : TransitionInfo.appDefault();
@@ -320,9 +335,12 @@ class FFParameters {
   Map<String, dynamic> futureParamValues = {};
 
   bool get isEmpty => state.allParams.isEmpty;
+
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
+
   bool get hasFutures => state.allParams.entries.any(isAsyncParam);
+
   Future<bool> completeFutures() => Future.wait(
         state.allParams.entries.where(isAsyncParam).map(
           (param) async {
