@@ -26,21 +26,6 @@ class _$OrdersRecordSerializer implements StructuredSerializer<OrdersRecord> {
         ..add('order_id')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.uId;
-    if (value != null) {
-      result
-        ..add('u_id')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
-    }
-    value = object.status;
-    if (value != null) {
-      result
-        ..add('status')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.createdAt;
     if (value != null) {
       result
@@ -55,11 +40,54 @@ class _$OrdersRecordSerializer implements StructuredSerializer<OrdersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
-    value = object.pId;
+    value = object.userId;
     if (value != null) {
       result
-        ..add('p_id')
+        ..add('user_id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType(Object)])));
+    }
+    value = object.propertyId;
+    if (value != null) {
+      result
+        ..add('property_id')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.orderStatus;
+    if (value != null) {
+      result
+        ..add('order_status')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.bookingExpiryDate;
+    if (value != null) {
+      result
+        ..add('booking_expiry_date')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
+    value = object.reservationAmount;
+    if (value != null) {
+      result
+        ..add('reservation_amount')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.depositReceipt;
+    if (value != null) {
+      result
+        ..add('deposit_receipt')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.cammundaInstanceId;
+    if (value != null) {
+      result
+        ..add('cammunda_instance_id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.reference;
     if (value != null) {
@@ -87,16 +115,6 @@ class _$OrdersRecordSerializer implements StructuredSerializer<OrdersRecord> {
           result.orderId = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
-        case 'u_id':
-          result.uId = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
-          break;
-        case 'status':
-          result.status = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
         case 'created_at':
           result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
@@ -105,9 +123,35 @@ class _$OrdersRecordSerializer implements StructuredSerializer<OrdersRecord> {
           result.updatedAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
           break;
-        case 'p_id':
-          result.pId = serializers.deserialize(value,
+        case 'user_id':
+          result.userId = serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      DocumentReference, const [const FullType(Object)]))
+              as DocumentReference<Object>;
+          break;
+        case 'property_id':
+          result.propertyId = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
+          break;
+        case 'order_status':
+          result.orderStatus = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'booking_expiry_date':
+          result.bookingExpiryDate = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'reservation_amount':
+          result.reservationAmount = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'deposit_receipt':
+          result.depositReceipt = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'cammunda_instance_id':
+          result.cammundaInstanceId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
@@ -126,15 +170,23 @@ class _$OrdersRecord extends OrdersRecord {
   @override
   final int orderId;
   @override
-  final DocumentReference<Object> uId;
-  @override
-  final String status;
-  @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
   @override
-  final int pId;
+  final DocumentReference<Object> userId;
+  @override
+  final int propertyId;
+  @override
+  final String orderStatus;
+  @override
+  final DateTime bookingExpiryDate;
+  @override
+  final String reservationAmount;
+  @override
+  final String depositReceipt;
+  @override
+  final String cammundaInstanceId;
   @override
   final DocumentReference<Object> reference;
 
@@ -143,11 +195,15 @@ class _$OrdersRecord extends OrdersRecord {
 
   _$OrdersRecord._(
       {this.orderId,
-      this.uId,
-      this.status,
       this.createdAt,
       this.updatedAt,
-      this.pId,
+      this.userId,
+      this.propertyId,
+      this.orderStatus,
+      this.bookingExpiryDate,
+      this.reservationAmount,
+      this.depositReceipt,
+      this.cammundaInstanceId,
       this.reference})
       : super._();
 
@@ -163,11 +219,15 @@ class _$OrdersRecord extends OrdersRecord {
     if (identical(other, this)) return true;
     return other is OrdersRecord &&
         orderId == other.orderId &&
-        uId == other.uId &&
-        status == other.status &&
         createdAt == other.createdAt &&
         updatedAt == other.updatedAt &&
-        pId == other.pId &&
+        userId == other.userId &&
+        propertyId == other.propertyId &&
+        orderStatus == other.orderStatus &&
+        bookingExpiryDate == other.bookingExpiryDate &&
+        reservationAmount == other.reservationAmount &&
+        depositReceipt == other.depositReceipt &&
+        cammundaInstanceId == other.cammundaInstanceId &&
         reference == other.reference;
   }
 
@@ -177,11 +237,21 @@ class _$OrdersRecord extends OrdersRecord {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, orderId.hashCode), uId.hashCode),
-                        status.hashCode),
-                    createdAt.hashCode),
-                updatedAt.hashCode),
-            pId.hashCode),
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc(
+                                        $jc($jc(0, orderId.hashCode),
+                                            createdAt.hashCode),
+                                        updatedAt.hashCode),
+                                    userId.hashCode),
+                                propertyId.hashCode),
+                            orderStatus.hashCode),
+                        bookingExpiryDate.hashCode),
+                    reservationAmount.hashCode),
+                depositReceipt.hashCode),
+            cammundaInstanceId.hashCode),
         reference.hashCode));
   }
 
@@ -189,11 +259,15 @@ class _$OrdersRecord extends OrdersRecord {
   String toString() {
     return (newBuiltValueToStringHelper('OrdersRecord')
           ..add('orderId', orderId)
-          ..add('uId', uId)
-          ..add('status', status)
           ..add('createdAt', createdAt)
           ..add('updatedAt', updatedAt)
-          ..add('pId', pId)
+          ..add('userId', userId)
+          ..add('propertyId', propertyId)
+          ..add('orderStatus', orderStatus)
+          ..add('bookingExpiryDate', bookingExpiryDate)
+          ..add('reservationAmount', reservationAmount)
+          ..add('depositReceipt', depositReceipt)
+          ..add('cammundaInstanceId', cammundaInstanceId)
           ..add('reference', reference))
         .toString();
   }
@@ -207,14 +281,6 @@ class OrdersRecordBuilder
   int get orderId => _$this._orderId;
   set orderId(int orderId) => _$this._orderId = orderId;
 
-  DocumentReference<Object> _uId;
-  DocumentReference<Object> get uId => _$this._uId;
-  set uId(DocumentReference<Object> uId) => _$this._uId = uId;
-
-  String _status;
-  String get status => _$this._status;
-  set status(String status) => _$this._status = status;
-
   DateTime _createdAt;
   DateTime get createdAt => _$this._createdAt;
   set createdAt(DateTime createdAt) => _$this._createdAt = createdAt;
@@ -223,9 +289,37 @@ class OrdersRecordBuilder
   DateTime get updatedAt => _$this._updatedAt;
   set updatedAt(DateTime updatedAt) => _$this._updatedAt = updatedAt;
 
-  int _pId;
-  int get pId => _$this._pId;
-  set pId(int pId) => _$this._pId = pId;
+  DocumentReference<Object> _userId;
+  DocumentReference<Object> get userId => _$this._userId;
+  set userId(DocumentReference<Object> userId) => _$this._userId = userId;
+
+  int _propertyId;
+  int get propertyId => _$this._propertyId;
+  set propertyId(int propertyId) => _$this._propertyId = propertyId;
+
+  String _orderStatus;
+  String get orderStatus => _$this._orderStatus;
+  set orderStatus(String orderStatus) => _$this._orderStatus = orderStatus;
+
+  DateTime _bookingExpiryDate;
+  DateTime get bookingExpiryDate => _$this._bookingExpiryDate;
+  set bookingExpiryDate(DateTime bookingExpiryDate) =>
+      _$this._bookingExpiryDate = bookingExpiryDate;
+
+  String _reservationAmount;
+  String get reservationAmount => _$this._reservationAmount;
+  set reservationAmount(String reservationAmount) =>
+      _$this._reservationAmount = reservationAmount;
+
+  String _depositReceipt;
+  String get depositReceipt => _$this._depositReceipt;
+  set depositReceipt(String depositReceipt) =>
+      _$this._depositReceipt = depositReceipt;
+
+  String _cammundaInstanceId;
+  String get cammundaInstanceId => _$this._cammundaInstanceId;
+  set cammundaInstanceId(String cammundaInstanceId) =>
+      _$this._cammundaInstanceId = cammundaInstanceId;
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
@@ -240,11 +334,15 @@ class OrdersRecordBuilder
     final $v = _$v;
     if ($v != null) {
       _orderId = $v.orderId;
-      _uId = $v.uId;
-      _status = $v.status;
       _createdAt = $v.createdAt;
       _updatedAt = $v.updatedAt;
-      _pId = $v.pId;
+      _userId = $v.userId;
+      _propertyId = $v.propertyId;
+      _orderStatus = $v.orderStatus;
+      _bookingExpiryDate = $v.bookingExpiryDate;
+      _reservationAmount = $v.reservationAmount;
+      _depositReceipt = $v.depositReceipt;
+      _cammundaInstanceId = $v.cammundaInstanceId;
       _reference = $v.reference;
       _$v = null;
     }
@@ -267,11 +365,15 @@ class OrdersRecordBuilder
     final _$result = _$v ??
         new _$OrdersRecord._(
             orderId: orderId,
-            uId: uId,
-            status: status,
             createdAt: createdAt,
             updatedAt: updatedAt,
-            pId: pId,
+            userId: userId,
+            propertyId: propertyId,
+            orderStatus: orderStatus,
+            bookingExpiryDate: bookingExpiryDate,
+            reservationAmount: reservationAmount,
+            depositReceipt: depositReceipt,
+            cammundaInstanceId: cammundaInstanceId,
             reference: reference);
     replace(_$result);
     return _$result;

@@ -38,6 +38,29 @@ abstract class PropertyRecord
       .get()
       .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static PropertyRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
+      PropertyRecord(
+        (c) => c
+          ..pId = snapshot.data['p_id']?.round()
+          ..propertyCity = snapshot.data['property_city']
+          ..reference = PropertyRecord.collection.doc(snapshot.objectID),
+      );
+
+  static Future<List<PropertyRecord>> search(
+          {String term,
+          FutureOr<LatLng> location,
+          int maxResults,
+          double searchRadiusMeters}) =>
+      FFAlgoliaManager.instance
+          .algoliaQuery(
+            index: 'Property',
+            term: term,
+            maxResults: maxResults,
+            location: location,
+            searchRadiusMeters: searchRadiusMeters,
+          )
+          .then((r) => r.map(fromAlgolia).toList());
+
   PropertyRecord._();
   factory PropertyRecord([void Function(PropertyRecordBuilder) updates]) =
       _$PropertyRecord;

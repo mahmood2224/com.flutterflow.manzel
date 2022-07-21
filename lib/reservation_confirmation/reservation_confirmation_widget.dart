@@ -388,11 +388,11 @@ class _ReservationConfirmationWidgetState
                                                 createOrdersRecordData(
                                               orderId: random_data
                                                   .randomInteger(0, 1000000),
-                                              uId: currentUserReference,
-                                              pId: widget.propertyId,
                                               createdAt: getCurrentTimestamp,
-                                              status: 'order is created',
                                               updatedAt: getCurrentTimestamp,
+                                              userId: currentUserReference,
+                                              propertyId: widget.propertyId,
+                                              orderStatus: 'Booked',
                                             );
                                             var ordersRecordReference =
                                                 OrdersRecord.collection.doc();

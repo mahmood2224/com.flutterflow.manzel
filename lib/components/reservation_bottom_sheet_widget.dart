@@ -1,7 +1,13 @@
+import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/random_data_util.dart' as random_data;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,9 +16,13 @@ class ReservationBottomSheetWidget extends StatefulWidget {
   const ReservationBottomSheetWidget({
     Key key,
     this.reservationCost,
+    this.propertyJSON,
+    this.propertyId,
   }) : super(key: key);
 
   final int reservationCost;
+  final dynamic propertyJSON;
+  final int propertyId;
 
   @override
   _ReservationBottomSheetWidgetState createState() =>
@@ -21,6 +31,8 @@ class ReservationBottomSheetWidget extends StatefulWidget {
 
 class _ReservationBottomSheetWidgetState
     extends State<ReservationBottomSheetWidget> {
+  ApiCallResponse propertyStatus;
+  OrdersRecord createOrder;
   String paymentMethodValue;
 
   @override
@@ -338,28 +350,97 @@ class _ReservationBottomSheetWidgetState
           if ((paymentMethodValue != null && paymentMethodValue != ''))
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(20, 100, 20, 20),
-              child: FFButtonWidget(
-                onPressed: () {
-                  print('Button pressed ...');
-                },
-                text: FFLocalizations.of(context).getText(
-                  'p50ponkb' /* Button */,
+              child: StreamBuilder<List<OrdersRecord>>(
+                stream: queryOrdersRecord(
+                  queryBuilder: (ordersRecord) => ordersRecord
+                      .where('property_id', isEqualTo: widget.propertyId)
+                      .where('order_status', isEqualTo: 'Booked'),
+                  limit: 2,
                 ),
-                options: FFButtonOptions(
-                  width: 130,
-                  height: 52,
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
-                        color: Colors.white,
-                        useGoogleFonts: false,
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: SpinKitRipple(
+                          color: Color(0xFF2971FB),
+                          size: 50,
+                        ),
                       ),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+                    );
+                  }
+                  List<OrdersRecord> buttonOrdersRecordList = snapshot.data;
+                  return FFButtonWidget(
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'RESERVATION_BOTTOM_SHEET_PAY_BTN_ON_TAP');
+                      var _shouldSetState = false;
+                      logFirebaseEvent('Button_Backend-Call');
+                      propertyStatus = await PropertStatusCall.call(
+                        propertyId: widget.propertyId,
+                      );
+                      _shouldSetState = true;
+                      if (functions
+                          .isPropertyAvailable(PropertStatusCall.propertyStatus(
+                        (propertyStatus?.jsonBody ?? ''),
+                      ).toString())) {
+                        if (functions.queryCollectionHasValue(
+                            buttonOrdersRecordList.toList())) {
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        }
+
+                        logFirebaseEvent('Button_Backend-Call');
+
+                        final ordersCreateData = createOrdersRecordData(
+                          orderId: random_data.randomInteger(0, 1000000),
+                          createdAt: getCurrentTimestamp,
+                          updatedAt: getCurrentTimestamp,
+                          userId: currentUserReference,
+                          propertyId: widget.propertyId,
+                          orderStatus: 'Booked',
+                          reservationAmount: getJsonField(
+                            widget.propertyJSON,
+                            r'''$.data.attributes.property_reservation_cost''',
+                          ).toString(),
+                        );
+                        var ordersRecordReference =
+                            OrdersRecord.collection.doc();
+                        await ordersRecordReference.set(ordersCreateData);
+                        createOrder = OrdersRecord.getDocumentFromData(
+                            ordersCreateData, ordersRecordReference);
+                        _shouldSetState = true;
+                      } else {
+                        if (_shouldSetState) setState(() {});
+                        return;
+                      }
+
+                      if (_shouldSetState) setState(() {});
+                    },
+                    text: FFLocalizations.of(context).getText(
+                      'p50ponkb' /* Pay */,
+                    ),
+                    options: FFButtonOptions(
+                      width: 130,
+                      height: 52,
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      textStyle:
+                          FlutterFlowTheme.of(context).subtitle2.override(
+                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                color: Colors.white,
+                                fontSize: 18,
+                                useGoogleFonts: false,
+                              ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  );
+                },
               ),
             ),
         ],

@@ -696,9 +696,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Street width',
       'ar': 'عرض الشارع',
     },
+    'ntqkfyop': {
+      'en': ' m',
+      'ar': '30 م',
+    },
     'e52iigjz': {
       'en': 'Total Price',
       'ar': 'السعر الكلي',
+    },
+    've2ud2ws': {
+      'en': ' SAR',
+      'ar': '',
     },
     'fobsike6': {
       'en': 'Supported Banks',
@@ -1284,7 +1292,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'p50ponkb': {
-      'en': 'Button',
+      'en': 'Pay',
       'ar': '',
     },
   },

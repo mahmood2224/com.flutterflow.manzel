@@ -3,6 +3,7 @@ import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../components/bank_details_bottom_sheet_widget.dart';
+import '../components/reservation_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_static_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -1381,24 +1382,50 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         useGoogleFonts: false,
                                                       ),
                                                 ),
-                                                Text(
-                                                  PropertyCall
-                                                      .propertyStreetWidth(
-                                                    (columnPropertyResponse
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  ).toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        useGoogleFonts: false,
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      PropertyCall
+                                                          .propertyStreetWidth(
+                                                        (columnPropertyResponse
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                      ).toString(),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Sofia Pro By Khuzaimah',
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            useGoogleFonts:
+                                                                false,
+                                                          ),
+                                                    ),
+                                                    Text(
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'ntqkfyop' /*  m */,
                                                       ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Sofia Pro By Khuzaimah',
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            useGoogleFonts:
+                                                                false,
+                                                          ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
@@ -1430,25 +1457,51 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         useGoogleFonts: false,
                                                       ),
                                                 ),
-                                                Text(
-                                                  functions.formatAmount(
-                                                      PropertyCall
-                                                          .propertyPrice(
-                                                    (columnPropertyResponse
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  ).toString()),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        useGoogleFonts: false,
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      functions.formatAmount(
+                                                          PropertyCall
+                                                              .propertyPrice(
+                                                        (columnPropertyResponse
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                      ).toString()),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Sofia Pro By Khuzaimah',
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            useGoogleFonts:
+                                                                false,
+                                                          ),
+                                                    ),
+                                                    Text(
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        've2ud2ws' /*  SAR */,
                                                       ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Sofia Pro By Khuzaimah',
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            useGoogleFonts:
+                                                                false,
+                                                          ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
@@ -1495,7 +1548,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 Expanded(
                                                   child: Container(
                                                     width: double.infinity,
-                                                    height: 170,
+                                                    height: 160,
                                                     decoration: BoxDecoration(
                                                       color: Colors.white,
                                                     ),
@@ -2619,7 +2672,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.end,
+                                          CrossAxisAlignment.center,
                                       children: [
                                         AutoSizeText(
                                           functions
@@ -2649,7 +2702,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 5, 0),
+                                                  0, 13, 5, 0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'mgi2d0o9' /*  SAR/Monthly */,
@@ -2680,18 +2733,26 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
                                   // reserve
                                   logFirebaseEvent('reserved_reserve');
-                                  context.pushNamed(
-                                    'ReservationConfirmation',
-                                    queryParams: {
-                                      'propertyId': serializeParam(
-                                          widget.propertyId, ParamType.int),
-                                    }.withoutNulls,
-                                    extra: <String, dynamic>{
-                                      kTransitionInfoKey: TransitionInfo(
-                                        hasTransition: true,
-                                        transitionType: PageTransitionType.fade,
-                                        duration: Duration(milliseconds: 0),
-                                      ),
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.of(context).viewInsets,
+                                        child: ReservationBottomSheetWidget(
+                                          reservationCost:
+                                              PropertyCall.reservationsCost(
+                                            (columnPropertyResponse?.jsonBody ??
+                                                ''),
+                                          ),
+                                          propertyJSON: (columnPropertyResponse
+                                                  ?.jsonBody ??
+                                              ''),
+                                          propertyId: widget.propertyId,
+                                        ),
+                                      );
                                     },
                                   );
                                 },

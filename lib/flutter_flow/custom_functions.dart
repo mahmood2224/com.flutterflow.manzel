@@ -224,3 +224,32 @@ String getFormattedMobileNumber(String mobileNumber) {
 bool isSimilarPropertyAvailable(List<dynamic> similarProperties) {
   return similarProperties.isNotEmpty;
 }
+
+bool isPropertyAvailable(String currentProprtyStatus) {
+  // Add your function code here!
+  if (currentProprtyStatus == "Available") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool queryCollectionHasValue(List<OrdersRecord> queryDocuments) {
+  // Add your function code here!
+  if (queryDocuments.length != 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+int orderIdGenerator(int randomNumber) {
+  // Add your function code here!
+  String timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
+  int randomNumberLength = randomNumber.toString().length;
+  int requiredDigits = 10 - randomNumberLength;
+  String generatedId = timeStamp.substring(timeStamp.length - requiredDigits) +
+      randomNumber.toString();
+  int orderId = int.parse(generatedId);
+  return orderId;
+}

@@ -4,7 +4,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -89,11 +88,6 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                       12, 0, 0, 0),
                                   child: TextFormField(
                                     controller: fullNameController,
-                                    onChanged: (_) => EasyDebounce.debounce(
-                                      'fullNameController',
-                                      Duration(milliseconds: 2000),
-                                      () => setState(() {}),
-                                    ),
                                     autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -277,7 +271,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               logFirebaseEvent('submitInfo_submitInfo');
 
                               final userUpdateData = createUserRecordData(
-                                displayName: fullNameController.text,
+                                name: fullNameController.text,
                               );
                               await currentUserReference.update(userUpdateData);
                               logFirebaseEvent('submitInfo_Navigate-To');

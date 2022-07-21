@@ -399,18 +399,6 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     OrdersRecord>>(
                                                               stream:
                                                                   queryOrdersRecord(
-                                                                queryBuilder: (ordersRecord) => ordersRecord
-                                                                    .where(
-                                                                        'u_id',
-                                                                        isEqualTo:
-                                                                            currentUserReference)
-                                                                    .where(
-                                                                        'p_id',
-                                                                        isEqualTo:
-                                                                            PropertyCall.propertyId(
-                                                                          (containerPropertyResponse?.jsonBody ??
-                                                                              ''),
-                                                                        )),
                                                                 singleRecord:
                                                                     true,
                                                               ),

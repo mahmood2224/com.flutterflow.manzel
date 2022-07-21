@@ -260,8 +260,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
 
                         final userUpdateData = createUserRecordData(
                           email: emailController.text,
-                          displayName: fullNameController.text,
                           phoneNumber: currentPhoneNumber,
+                          name: fullNameController.text,
                         );
                         await currentUserReference.update(userUpdateData);
                         logFirebaseEvent('updatePersonalInfo_Navigate-To');

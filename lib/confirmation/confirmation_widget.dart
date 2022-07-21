@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
@@ -68,9 +67,6 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
                     child: StreamBuilder<List<OrdersRecord>>(
                       stream: queryOrdersRecord(
-                        queryBuilder: (ordersRecord) => ordersRecord
-                            .where('u_id', isEqualTo: currentUserReference)
-                            .where('p_id', isEqualTo: widget.propertyId),
                         singleRecord: true,
                       ),
                       builder: (context, snapshot) {
@@ -1291,13 +1287,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                               // BookingDetails
                               logFirebaseEvent(
                                   'viewBookingDetails_BookingDetails');
-                              context.goNamed(
-                                'OrderDetails',
-                                queryParams: {
-                                  'propertId': serializeParam(
-                                      widget.propertyId, ParamType.int),
-                                }.withoutNulls,
-                              );
+                              context.pushNamed('HomeScreen');
                             },
                             text: FFLocalizations.of(context).getText(
                               'qlfkupzn' /* Back to Home */,
