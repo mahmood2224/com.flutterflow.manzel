@@ -36,7 +36,7 @@ class _BankDetailsBottomSheetWidgetState
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Color(0x80000000),
+                color: Color(0xFFECECEC),
                 offset: Offset(0, 1),
               )
             ],
@@ -45,6 +45,9 @@ class _BankDetailsBottomSheetWidgetState
               bottomRight: Radius.circular(0),
               topLeft: Radius.circular(17),
               topRight: Radius.circular(17),
+            ),
+            border: Border.all(
+              color: Color(0xFFECECEC),
             ),
           ),
           child: Row(
@@ -121,7 +124,7 @@ class _BankDetailsBottomSheetWidgetState
               child: Image.network(
                 getJsonField(
                   widget.bankJSON,
-                  r'''$.bank_logo..alternativeText''',
+                  r'''$.bank_logo..url''',
                 ),
                 width: double.infinity,
                 height: double.infinity,

@@ -1,8 +1,13 @@
+import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/random_data_util.dart' as random_data;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,6 +31,8 @@ class ReservationBottomSheetWidget extends StatefulWidget {
 
 class _ReservationBottomSheetWidgetState
     extends State<ReservationBottomSheetWidget> {
+  ApiCallResponse propertyStatus;
+  OrdersRecord createOrder;
   String paymentMethodValue;
 
   @override
@@ -366,8 +373,51 @@ class _ReservationBottomSheetWidgetState
                   }
                   List<OrdersRecord> buttonOrdersRecordList = snapshot.data;
                   return FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'RESERVATION_BOTTOM_SHEET_PAY_BTN_ON_TAP');
+                      var _shouldSetState = false;
+                      logFirebaseEvent('Button_Backend-Call');
+                      propertyStatus = await PropertStatusCall.call(
+                        propertyId: widget.propertyId,
+                      );
+                      _shouldSetState = true;
+                      if (functions
+                          .isPropertyAvailable(PropertStatusCall.propertyStatus(
+                        (propertyStatus?.jsonBody ?? ''),
+                      ).toString())) {
+                        if (functions.queryCollectionHasValue(
+                            buttonOrdersRecordList.toList())) {
+                          if (_shouldSetState) setState(() {});
+                          return;
+                        }
+
+                        logFirebaseEvent('Button_Backend-Call');
+
+                        final ordersCreateData = createOrdersRecordData(
+                          orderId: random_data.randomInteger(0, 1000000),
+                          createdAt: getCurrentTimestamp,
+                          updatedAt: getCurrentTimestamp,
+                          userId: currentUserReference,
+                          propertyId: widget.propertyId,
+                          orderStatus: 'Booked',
+                          reservationAmount: getJsonField(
+                            widget.propertyJSON,
+                            r'''$.data.attributes.property_reservation_cost''',
+                          ).toString(),
+                        );
+                        var ordersRecordReference =
+                            OrdersRecord.collection.doc();
+                        await ordersRecordReference.set(ordersCreateData);
+                        createOrder = OrdersRecord.getDocumentFromData(
+                            ordersCreateData, ordersRecordReference);
+                        _shouldSetState = true;
+                      } else {
+                        if (_shouldSetState) setState(() {});
+                        return;
+                      }
+
+                      if (_shouldSetState) setState(() {});
                     },
                     text: FFLocalizations.of(context).getText(
                       'p50ponkb' /* Pay */,

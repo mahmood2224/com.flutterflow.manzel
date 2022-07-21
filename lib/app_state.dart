@@ -45,6 +45,8 @@ class FFAppState {
   int filterMinPrice = 0;
 
   int filterMaxPrice = 0;
+
+  String propertyStatus = '';
 }
 
 LatLng _latLngFromString(String val) {

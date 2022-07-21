@@ -242,3 +242,14 @@ bool queryCollectionHasValue(List<OrdersRecord> queryDocuments) {
     return false;
   }
 }
+
+int orderIdGenerator(int randomNumber) {
+  // Add your function code here!
+  String timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
+  int randomNumberLength = randomNumber.toString().length;
+  int requiredDigits = 10 - randomNumberLength;
+  String generatedId = timeStamp.substring(timeStamp.length - requiredDigits) +
+      randomNumber.toString();
+  int orderId = int.parse(generatedId);
+  return orderId;
+}
