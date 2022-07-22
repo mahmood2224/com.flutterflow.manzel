@@ -1068,11 +1068,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .center,
                                                           children: [
                                                             Text(
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .getText(
-                                                                '0lrdaepm' /* Age 1 yr. */,
-                                                              ),
+                                                              PropertyCall
+                                                                  .propertyBuiltIn(
+                                                                (columnPropertyResponse
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                              ).toString(),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyText1
@@ -2702,7 +2703,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0, 13, 5, 0),
+                                                  0, 11, 5, 0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'mgi2d0o9' /*  SAR/Monthly */,

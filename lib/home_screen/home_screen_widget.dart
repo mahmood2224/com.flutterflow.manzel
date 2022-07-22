@@ -8,6 +8,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -43,6 +44,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+      logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
+      logFirebaseEvent('HomeScreen_Update-Local-State');
+      setState(
+          () => FFAppState().locale = FFLocalizations.of(context).languageCode);
+    });
+
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
