@@ -253,3 +253,10 @@ int orderIdGenerator(int randomNumber) {
   int orderId = int.parse(generatedId);
   return orderId;
 }
+
+String formatDateTime(DateTime inputTimeStamp) {
+  // Add your function code here!
+  String formattedResult =
+      '${DateFormat.d().format(inputTimeStamp)} ${DateFormat.MMM().format(inputTimeStamp)} ${DateFormat.y().format(inputTimeStamp)}  ${DateFormat.jm().format(inputTimeStamp)}';
+  return formattedResult;
+}

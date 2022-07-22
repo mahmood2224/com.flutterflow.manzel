@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -977,6 +978,55 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                   ],
                                 ),
                               ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          20, 15, 20, 25),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          logFirebaseEvent(
+                                              'CONFIRMATION_PAGE_VIEW_MORE_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_Navigate-To');
+                                          context.pushNamed(
+                                            'PropertyDetails',
+                                            queryParams: {
+                                              'propertyId': serializeParam(
+                                                  widget.propertyId,
+                                                  ParamType.int),
+                                            }.withoutNulls,
+                                          );
+                                        },
+                                        text: 'View More',
+                                        options: FFButtonOptions(
+                                          width: 130,
+                                          height: 40,
+                                          color: Colors.white,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily:
+                                                        'Sofia Pro By Khuzaimah',
+                                                    color: Color(0xFF2971FB),
+                                                    fontWeight: FontWeight.w800,
+                                                    useGoogleFonts: false,
+                                                  ),
+                                          borderSide: BorderSide(
+                                            color: Color(0xFF2971FB),
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               Divider(
                                 thickness: 1,
                                 indent: 20,
@@ -1182,53 +1232,19 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                   ),
                                             ),
                                           ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                dateTimeFormat(
-                                                    'yMMMd',
-                                                    columnTransactionsRecord
-                                                        .createdAt),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'p4jmetji' /*    */,
+                                          Text(
+                                            functions.formatDateTime(
+                                                columnTransactionsRecord
+                                                    .createdAt),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      'Sofia Pro By Khuzaimah',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts: false,
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
-                                              ),
-                                              Text(
-                                                dateTimeFormat(
-                                                    'jm',
-                                                    columnTransactionsRecord
-                                                        .createdAt),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                            ],
                                           ),
                                         ],
                                       ),
