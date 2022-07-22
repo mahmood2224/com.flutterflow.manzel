@@ -36,14 +36,14 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   void resendOTP() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: widget.phoneNumber,
-      timeout: Duration(seconds: 5),
+      timeout: Duration(seconds: 60),
       verificationCompleted: (phoneAuthCredential) async {
         await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
       },
       verificationFailed: (e) {
-        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        //   content: Text('Error: ${e.message}'),
-       // ));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Error: ${e.message}'),
+       ));
       },
       codeSent: (verificationId, _) {
         _phoneAuthVerificationCode = verificationId;
@@ -181,7 +181,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               return;
                             }
                             Future.delayed(const Duration(milliseconds: 500), () async{
-                              if(currentUserDocument.status.isEmpty || currentUserDocument.status == 'active') {
+                              if(currentUserDocument.status.isEmpty || currentUserDocument.status.toLowerCase() == 'active') {
                                 final userUpdateData = createUserRecordData(
                                   status: 'active',
                                 );

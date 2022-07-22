@@ -125,7 +125,7 @@ Future beginPhoneAuth({
   // * Finally modify verificationCompleted below as instructed.
   await FirebaseAuth.instance.verifyPhoneNumber(
     phoneNumber: phoneNumber,
-    timeout: Duration(seconds: 5),
+    timeout: Duration(seconds: 60),
     verificationCompleted: (phoneAuthCredential) async {
       await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
       // If you've implemented auto-verification, navigate to home page or
@@ -137,9 +137,9 @@ Future beginPhoneAuth({
       // );
     },
     verificationFailed: (e) {
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //   content: Text('Error: ${e.message}'),
-      // ));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Error: ${e.message}'),
+      ));
     },
     codeSent: (verificationId, _) {
       _phoneAuthVerificationCode = verificationId;

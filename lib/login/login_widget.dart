@@ -326,12 +326,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                               );
                               return;
                             }
-                            entry = showOverlay(context);
+                            //entry = showOverlay(context);
                             await beginPhoneAuth(
                               context: context,
                               phoneNumber: phoneNumberVal,
                               onCodeSent: () async {
-                                entry.remove();
+                            //    entry.remove();
                                 context.goNamedAuth('ConfirmNewNumberOTP', mounted,queryParams:{'phoneNumber': phoneNumberVal});
                                 },
                               );
