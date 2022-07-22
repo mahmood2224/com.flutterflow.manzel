@@ -14,10 +14,12 @@ class ConfirmationWidget extends StatefulWidget {
     Key key,
     this.propertyId,
     this.paymentMethod,
+    this.orderId,
   }) : super(key: key);
 
   final int propertyId;
   final String paymentMethod;
+  final int orderId;
 
   @override
   _ConfirmationWidgetState createState() => _ConfirmationWidgetState();
@@ -65,8 +67,10 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                 Expanded(
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
-                    child: StreamBuilder<List<OrdersRecord>>(
-                      stream: queryOrdersRecord(
+                    child: StreamBuilder<List<TransactionsRecord>>(
+                      stream: queryTransactionsRecord(
+                        queryBuilder: (transactionsRecord) => transactionsRecord
+                            .where('order_id', isEqualTo: widget.orderId),
                         singleRecord: true,
                       ),
                       builder: (context, snapshot) {
@@ -83,15 +87,15 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                             ),
                           );
                         }
-                        List<OrdersRecord> columnOrdersRecordList =
+                        List<TransactionsRecord> columnTransactionsRecordList =
                             snapshot.data;
                         // Return an empty Container when the document does not exist.
                         if (snapshot.data.isEmpty) {
                           return Container();
                         }
-                        final columnOrdersRecord =
-                            columnOrdersRecordList.isNotEmpty
-                                ? columnOrdersRecordList.first
+                        final columnTransactionsRecord =
+                            columnTransactionsRecordList.isNotEmpty
+                                ? columnTransactionsRecordList.first
                                 : null;
                         return SingleChildScrollView(
                           child: Column(
@@ -164,7 +168,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                         ),
                                                   ),
                                                   Text(
-                                                    columnOrdersRecord.orderId
+                                                    columnTransactionsRecord
+                                                        .orderId
                                                         .toString(),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -1038,9 +1043,9 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                             ),
                                           ),
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              '48t9kq7r' /* #29877de2887 */,
-                                            ),
+                                            columnTransactionsRecord
+                                                .transactionId
+                                                .toString(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
@@ -1082,7 +1087,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                             ),
                                           ),
                                           Text(
-                                            widget.paymentMethod,
+                                            columnTransactionsRecord
+                                                .transactionMethod,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
@@ -1135,14 +1141,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                             ),
                                           ),
                                           Text(
-                                            valueOrDefault<String>(
-                                              PropertyCall.reservationsCost(
-                                                (confirmationPropertyResponse
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ).toString(),
-                                              'Un-Known',
-                                            ),
+                                            columnTransactionsRecord.paidAmount,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
@@ -1183,21 +1182,53 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                   ),
                                             ),
                                           ),
-                                          Text(
-                                            valueOrDefault<String>(
-                                              dateTimeFormat('MMMMEEEEd',
-                                                  columnOrdersRecord.createdAt),
-                                              'Un-Known',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Text(
+                                                dateTimeFormat(
+                                                    'yMMMd',
+                                                    columnTransactionsRecord
+                                                        .createdAt),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                              ),
+                                              Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'p4jmetji' /*    */,
                                                 ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                              Text(
+                                                dateTimeFormat(
+                                                    'jm',
+                                                    columnTransactionsRecord
+                                                        .createdAt),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),

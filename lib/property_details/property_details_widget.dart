@@ -3,6 +3,7 @@ import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../components/bank_details_bottom_sheet_widget.dart';
+import '../components/reservation_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_static_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -2730,15 +2731,39 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                 onPressed: () async {
                                   logFirebaseEvent(
                                       'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
-                                  // reserve
-                                  logFirebaseEvent('reserved_reserve');
-                                  context.pushNamed(
-                                    'ReservationConfirmation',
-                                    queryParams: {
-                                      'propertyId': serializeParam(
-                                          widget.propertyId, ParamType.int),
-                                    }.withoutNulls,
-                                  );
+                                  if (loggedIn) {
+                                    logFirebaseEvent('reserved_Bottom-Sheet');
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.white,
+                                      context: context,
+                                      builder: (context) {
+                                        return Padding(
+                                          padding:
+                                              MediaQuery.of(context).viewInsets,
+                                          child: Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.7,
+                                            child: ReservationBottomSheetWidget(
+                                              reservationCost:
+                                                  PropertyCall.reservationsCost(
+                                                (columnPropertyResponse
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ),
+                                              propertyJSON:
+                                                  (columnPropertyResponse
+                                                          ?.jsonBody ??
+                                                      ''),
+                                              propertyId: widget.propertyId,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  }
                                 },
                                 text: FFLocalizations.of(context).getText(
                                   'dpmrt150' /* Reserve */,

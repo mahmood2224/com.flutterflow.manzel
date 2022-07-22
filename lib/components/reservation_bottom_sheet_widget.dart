@@ -32,7 +32,8 @@ class ReservationBottomSheetWidget extends StatefulWidget {
 class _ReservationBottomSheetWidgetState
     extends State<ReservationBottomSheetWidget> {
   ApiCallResponse propertyStatus;
-  OrdersRecord createOrder;
+  OrdersRecord orderDetails;
+  TransactionsRecord transactionDetails;
   String paymentMethodValue;
 
   @override
@@ -290,7 +291,7 @@ class _ReservationBottomSheetWidgetState
                       onChanged: (value) {
                         setState(() => paymentMethodValue = value);
                       },
-                      optionHeight: 25,
+                      optionHeight: 56,
                       textStyle:
                           FlutterFlowTheme.of(context).bodyText1.override(
                                 fontFamily: 'Sofia Pro By Khuzaimah',
@@ -327,10 +328,13 @@ class _ReservationBottomSheetWidgetState
                     Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Image.asset(
-                          'assets/images/visa:mada.png',
-                          height: 20,
-                          fit: BoxFit.cover,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                          child: Image.asset(
+                            'assets/images/visa:mada.png',
+                            height: 20,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
@@ -386,57 +390,73 @@ class _ReservationBottomSheetWidgetState
                           .isPropertyAvailable(PropertStatusCall.propertyStatus(
                         (propertyStatus?.jsonBody ?? ''),
                       ).toString())) {
-                        if (!(functions.queryCollectionHasValue(
-                            buttonOrdersRecordList.toList()))) {
-                          logFirebaseEvent('Button_Backend-Call');
-
-                          final ordersCreateData = createOrdersRecordData(
-                            orderId: random_data.randomInteger(0, 1000000),
-                            createdAt: getCurrentTimestamp,
-                            updatedAt: getCurrentTimestamp,
-                            userId: currentUserReference,
-                            propertyId: widget.propertyId,
-                            orderStatus: 'Booked',
-                            reservationAmount: getJsonField(
-                              widget.propertyJSON,
-                              r'''$.data.attributes.property_reservation_cost''',
-                            ).toString(),
-                          );
-                          var ordersRecordReference =
-                              OrdersRecord.collection.doc();
-                          await ordersRecordReference.set(ordersCreateData);
-                          createOrder = OrdersRecord.getDocumentFromData(
-                              ordersCreateData, ordersRecordReference);
-                          _shouldSetState = true;
+                        if (functions.queryCollectionHasValue(
+                            buttonOrdersRecordList.toList())) {
+                          if (_shouldSetState) setState(() {});
+                          return;
                         }
+
+                        logFirebaseEvent('Button_Backend-Call');
+
+                        final ordersCreateData = createOrdersRecordData(
+                          orderId: functions.orderIdGenerator(
+                              random_data.randomInteger(0, 1000000)),
+                          createdAt: getCurrentTimestamp,
+                          updatedAt: getCurrentTimestamp,
+                          userId: currentUserReference,
+                          reservationAmount: getJsonField(
+                            widget.propertyJSON,
+                            r'''$.data.attributes.property_reservation_cost''',
+                          ).toString(),
+                          propertyId: widget.propertyId,
+                          orderStatus: 'Booked',
+                          bookingExpiryDate: random_data.randomDate(),
+                          cammundaInstanceId: 'cammunda_id',
+                          depositReceipt: 'on the process',
+                        );
+                        var ordersRecordReference =
+                            OrdersRecord.collection.doc();
+                        await ordersRecordReference.set(ordersCreateData);
+                        orderDetails = OrdersRecord.getDocumentFromData(
+                            ordersCreateData, ordersRecordReference);
+                        _shouldSetState = true;
                         logFirebaseEvent('Button_Backend-Call');
 
                         final transactionsCreateData =
                             createTransactionsRecordData(
                           userId: currentUserReference,
-                          orderId: createOrder.orderId,
+                          orderId: orderDetails.orderId,
                           transactionMethod: paymentMethodValue,
                           createdAt: getCurrentTimestamp,
                           updatedAt: getCurrentTimestamp,
+                          paidAmount: '100000',
+                          transactionType: 'Installment',
+                          transactionId: functions.orderIdGenerator(
+                              random_data.randomInteger(0, 1000000)),
+                          transactionStatus: 'Ongiong',
                         );
-                        await TransactionsRecord.collection
-                            .doc()
+                        var transactionsRecordReference =
+                            TransactionsRecord.collection.doc();
+                        await transactionsRecordReference
                             .set(transactionsCreateData);
-                      } else {
-                        if (_shouldSetState) setState(() {});
-                        return;
+                        transactionDetails =
+                            TransactionsRecord.getDocumentFromData(
+                                transactionsCreateData,
+                                transactionsRecordReference);
+                        _shouldSetState = true;
+                        logFirebaseEvent('Button_Navigate-To');
+                        context.pushNamed(
+                          'Confirmation',
+                          queryParams: {
+                            'propertyId': serializeParam(
+                                widget.propertyId, ParamType.int),
+                            'paymentMethod': serializeParam(
+                                paymentMethodValue, ParamType.String),
+                            'orderId': serializeParam(
+                                orderDetails.orderId, ParamType.int),
+                          }.withoutNulls,
+                        );
                       }
-
-                      logFirebaseEvent('Button_Navigate-To');
-                      context.pushNamed(
-                        'Confirmation',
-                        queryParams: {
-                          'propertyId':
-                              serializeParam(widget.propertyId, ParamType.int),
-                          'paymentMethod': serializeParam(
-                              paymentMethodValue, ParamType.String),
-                        }.withoutNulls,
-                      );
                       if (_shouldSetState) setState(() {});
                     },
                     text: FFLocalizations.of(context).getText(

@@ -926,10 +926,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Transaction Ref.',
       'ar': 'مرجع المعاملة.',
     },
-    '48t9kq7r': {
-      'en': '#29877de2887',
-      'ar': '# 29877de2887',
-    },
     'nfajktl1': {
       'en': 'Payment Method',
       'ar': 'طريقة الدفع او السداد',
@@ -941,6 +937,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     's1mfpoki': {
       'en': 'Date & Time',
       'ar': 'التاريخ والوقت',
+    },
+    'p4jmetji': {
+      'en': '  ',
+      'ar': '',
     },
     'a5vxpwan': {
       'en': 'View Receipt Transaction',
