@@ -198,49 +198,46 @@ class _ReservationBottomSheetWidgetState
           ),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    widget.reservationCost.toString(),
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: false,
-                        ),
-                  ),
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'ovajaogv' /* .00 */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: false,
-                        ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                    child: Text(
-                      FFLocalizations.of(context).getText(
-                        'wqlgaavg' /* SAR */,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  widget.reservationCost.toString(),
+                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        useGoogleFonts: false,
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            useGoogleFonts: false,
-                          ),
-                    ),
+                ),
+                Text(
+                  FFLocalizations.of(context).getText(
+                    'ovajaogv' /* .00 */,
                   ),
-                ],
-              ),
+                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        useGoogleFonts: false,
+                      ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'wqlgaavg' /* SAR */,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          useGoogleFonts: false,
+                        ),
+                  ),
+                ),
+              ],
             ),
           ),
           Text(

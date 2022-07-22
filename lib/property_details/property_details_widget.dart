@@ -2745,7 +2745,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             height: MediaQuery.of(context)
                                                     .size
                                                     .height *
-                                                0.7,
+                                                0.9,
                                             child: ReservationBottomSheetWidget(
                                               reservationCost:
                                                   PropertyCall.reservationsCost(
