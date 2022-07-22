@@ -914,6 +914,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' ,',
       'ar': 'و',
     },
+    'yqyaqecf': {
+      'en': 'View More',
+      'ar': '',
+    },
     '514bcidn': {
       'en': 'Transaction details',
       'ar': 'تفاصيل الصفقه',
@@ -933,10 +937,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     's1mfpoki': {
       'en': 'Date & Time',
       'ar': 'التاريخ والوقت',
-    },
-    'p4jmetji': {
-      'en': '  ',
-      'ar': '',
     },
     'a5vxpwan': {
       'en': 'View Receipt Transaction',
