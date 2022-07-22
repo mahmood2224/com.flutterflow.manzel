@@ -2764,6 +2764,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         );
                                       },
                                     );
+                                  } else {
+                                    logFirebaseEvent('reserved_Navigate-To');
+                                    context.pushNamed('Login');
                                   }
                                 },
                                 text: FFLocalizations.of(context).getText(
