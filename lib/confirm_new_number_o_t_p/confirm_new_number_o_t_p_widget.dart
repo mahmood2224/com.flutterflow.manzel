@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:manzel/backend/backend.dart';
 
 import '../auth/auth_util.dart';
+import '../common_widgets/overlay.dart';
 import '../common_widgets/timer_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -30,6 +31,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   String _phoneAuthVerificationCode = '';
   ValueNotifier<String> _showOtpError = ValueNotifier('');
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  OverlayEntry entry;
 
   void resendOTP() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
@@ -167,10 +169,13 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                             // if (otp.length == 6) {
                             //   _showOtpError.value = "Working";
                             // }
+
+                            entry = showOverlay(context);
                             final phoneVerifiedUser = await verifySmsCode(
                               context: context,
                               smsCode: otp,
                             );
+                            entry.remove();
                             if (phoneVerifiedUser == null) {
                               _showOtpError.value = "You entered OTP incorrect";
                               return;
@@ -324,4 +329,15 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
       ),
     );
   }
+
+  OverlayEntry showOverlay(BuildContext context) {
+    var overlayState = Overlay.of(context);
+    var overlayEntry = OverlayEntry(
+      builder: (context) => CircularProgressOverlay(),
+    );
+    overlayState?.insert(overlayEntry);
+    return overlayEntry;
+  }
 }
+
+

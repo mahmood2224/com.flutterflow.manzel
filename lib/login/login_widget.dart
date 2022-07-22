@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../common_widgets/overlay.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -21,6 +22,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   TextEditingController phoneNumberController;
   bool changeLanguage;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  OverlayEntry entry;
 
   @override
   void initState() {
@@ -324,10 +326,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                               );
                               return;
                             }
+                            entry = showOverlay(context);
                             await beginPhoneAuth(
                               context: context,
                               phoneNumber: phoneNumberVal,
                               onCodeSent: () async {
+                                entry.remove();
                                 context.goNamedAuth('ConfirmNewNumberOTP', mounted,queryParams:{'phoneNumber': phoneNumberVal});
                                 },
                               );
@@ -378,5 +382,13 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
       ),
     );
+  }
+  OverlayEntry showOverlay(BuildContext context) {
+    var overlayState = Overlay.of(context);
+    var overlayEntry = OverlayEntry(
+      builder: (context) => CircularProgressOverlay(),
+    );
+    overlayState?.insert(overlayEntry);
+    return overlayEntry;
   }
 }
