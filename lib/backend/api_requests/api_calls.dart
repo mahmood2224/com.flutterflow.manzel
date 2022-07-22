@@ -378,3 +378,20 @@ class PropertStatusCall {
         r'''$.status.property_status''',
       );
 }
+
+class ChangePropertyStatusCall {
+  static Future<ApiCallResponse> call() {
+    final body = '''
+{"data": {"property_status": "Booked"}}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ChangePropertyStatus',
+      apiUrl: 'https://strapi-dev.manzel.app/api/properties/42',
+      callType: ApiCallType.PUT,
+      headers: {},
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
