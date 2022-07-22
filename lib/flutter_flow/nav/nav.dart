@@ -220,6 +220,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 propertyId: params.getParam('propertyId', ParamType.int),
                 paymentMethod:
                     params.getParam('paymentMethod', ParamType.String),
+                orderId: params.getParam('orderId', ParamType.int),
               ),
             ),
             FFRoute(
