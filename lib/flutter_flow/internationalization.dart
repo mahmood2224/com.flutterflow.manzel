@@ -664,10 +664,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' Livingrooms',
       'ar': 'غرف المعيشة',
     },
-    '0lrdaepm': {
-      'en': 'Age 1 yr.',
-      'ar': 'العمر 1 سنة.',
-    },
     '7xi05192': {
       'en': ' Years',
       'ar': 'سنوات',

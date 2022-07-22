@@ -426,7 +426,7 @@ class _ReservationBottomSheetWidgetState
                           transactionMethod: paymentMethodValue,
                           createdAt: getCurrentTimestamp,
                           updatedAt: getCurrentTimestamp,
-                          paidAmount: '100000',
+                          paidAmount: widget.reservationCost.toString(),
                           transactionType: 'Installment',
                           transactionId: functions.orderIdGenerator(
                               random_data.randomInteger(0, 1000000)),
