@@ -379,13 +379,15 @@ class PropertStatusCall {
       );
 }
 
-class ChangePropertyStatusCall {
-  static Future<ApiCallResponse> call() {
+class PropertyBookingStatusCall {
+  static Future<ApiCallResponse> call({
+    int propertyId,
+  }) {
     final body = '''
 {"data": {"property_status": "Booked"}}''';
     return ApiManager.instance.makeApiCall(
-      callName: 'ChangePropertyStatus',
-      apiUrl: 'https://strapi-dev.manzel.app/api/properties/42',
+      callName: 'propertyBookingStatus',
+      apiUrl: 'https://strapi-dev.manzel.app/api/properties/${propertyId}',
       callType: ApiCallType.PUT,
       headers: {},
       params: {},

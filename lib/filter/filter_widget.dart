@@ -110,8 +110,8 @@ class _FilterWidgetState extends State<FilterWidget> {
               ),
               onPressed: () async {
                 logFirebaseEvent('FILTER_PAGE_close_rounded_ICN_ON_TAP');
-                logFirebaseEvent('IconButton_Navigate-Back');
-                context.pop();
+                logFirebaseEvent('IconButton_Close-Dialog,-Drawer,-Etc');
+                Navigator.pop(context);
               },
             ),
           ),

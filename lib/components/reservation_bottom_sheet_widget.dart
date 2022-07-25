@@ -31,6 +31,7 @@ class ReservationBottomSheetWidget extends StatefulWidget {
 
 class _ReservationBottomSheetWidgetState
     extends State<ReservationBottomSheetWidget> {
+  ApiCallResponse bookingStatus;
   ApiCallResponse propertyStatus;
   OrdersRecord orderDetails;
   TransactionsRecord transactionDetails;
@@ -389,58 +390,80 @@ class _ReservationBottomSheetWidgetState
                       ).toString())) {
                         if (functions.queryCollectionHasValue(
                             buttonOrdersRecordList.toList())) {
+                          logFirebaseEvent('Button_Show-Snack-Bar');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'This property is not avaiable currently',
+                                style: TextStyle(
+                                  fontFamily: 'Sofia Pro By Khuzaimah',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor: Color(0xFFFF0000),
+                            ),
+                          );
                           if (_shouldSetState) setState(() {});
                           return;
+                        } else {
+                          logFirebaseEvent('Button_Backend-Call');
+
+                          final ordersCreateData = createOrdersRecordData(
+                            orderId: functions.orderIdGenerator(
+                                random_data.randomInteger(0, 1000000)),
+                            createdAt: getCurrentTimestamp,
+                            updatedAt: getCurrentTimestamp,
+                            userId: currentUserReference,
+                            reservationAmount: getJsonField(
+                              widget.propertyJSON,
+                              r'''$.data.attributes.property_reservation_cost''',
+                            ).toString(),
+                            propertyId: widget.propertyId,
+                            orderStatus: 'Booked',
+                            bookingExpiryDate: random_data.randomDate(),
+                            cammundaInstanceId: 'cammunda_id',
+                            depositReceipt: 'on the process',
+                          );
+                          var ordersRecordReference =
+                              OrdersRecord.collection.doc();
+                          await ordersRecordReference.set(ordersCreateData);
+                          orderDetails = OrdersRecord.getDocumentFromData(
+                              ordersCreateData, ordersRecordReference);
+                          _shouldSetState = true;
+                          logFirebaseEvent('Button_Backend-Call');
+                          bookingStatus = await PropertStatusCall.call(
+                            propertyId: widget.propertyId,
+                          );
+                          _shouldSetState = true;
+                          logFirebaseEvent('Button_Backend-Call');
+
+                          final transactionsCreateData =
+                              createTransactionsRecordData(
+                            userId: currentUserReference,
+                            orderId: orderDetails.orderId,
+                            transactionMethod: paymentMethodValue,
+                            createdAt: getCurrentTimestamp,
+                            updatedAt: getCurrentTimestamp,
+                            paidAmount: widget.reservationCost.toString(),
+                            transactionType: 'Installment',
+                            transactionId: functions.orderIdGenerator(
+                                random_data.randomInteger(0, 1000000)),
+                            transactionStatus: 'Ongiong',
+                          );
+                          var transactionsRecordReference =
+                              TransactionsRecord.collection.doc();
+                          await transactionsRecordReference
+                              .set(transactionsCreateData);
+                          transactionDetails =
+                              TransactionsRecord.getDocumentFromData(
+                                  transactionsCreateData,
+                                  transactionsRecordReference);
+                          _shouldSetState = true;
                         }
 
-                        logFirebaseEvent('Button_Backend-Call');
-
-                        final ordersCreateData = createOrdersRecordData(
-                          orderId: functions.orderIdGenerator(
-                              random_data.randomInteger(0, 1000000)),
-                          createdAt: getCurrentTimestamp,
-                          updatedAt: getCurrentTimestamp,
-                          userId: currentUserReference,
-                          reservationAmount: getJsonField(
-                            widget.propertyJSON,
-                            r'''$.data.attributes.property_reservation_cost''',
-                          ).toString(),
-                          propertyId: widget.propertyId,
-                          orderStatus: 'Booked',
-                          bookingExpiryDate: random_data.randomDate(),
-                          cammundaInstanceId: 'cammunda_id',
-                          depositReceipt: 'on the process',
-                        );
-                        var ordersRecordReference =
-                            OrdersRecord.collection.doc();
-                        await ordersRecordReference.set(ordersCreateData);
-                        orderDetails = OrdersRecord.getDocumentFromData(
-                            ordersCreateData, ordersRecordReference);
-                        _shouldSetState = true;
-                        logFirebaseEvent('Button_Backend-Call');
-
-                        final transactionsCreateData =
-                            createTransactionsRecordData(
-                          userId: currentUserReference,
-                          orderId: orderDetails.orderId,
-                          transactionMethod: paymentMethodValue,
-                          createdAt: getCurrentTimestamp,
-                          updatedAt: getCurrentTimestamp,
-                          paidAmount: widget.reservationCost.toString(),
-                          transactionType: 'Installment',
-                          transactionId: functions.orderIdGenerator(
-                              random_data.randomInteger(0, 1000000)),
-                          transactionStatus: 'Ongiong',
-                        );
-                        var transactionsRecordReference =
-                            TransactionsRecord.collection.doc();
-                        await transactionsRecordReference
-                            .set(transactionsCreateData);
-                        transactionDetails =
-                            TransactionsRecord.getDocumentFromData(
-                                transactionsCreateData,
-                                transactionsRecordReference);
-                        _shouldSetState = true;
                         logFirebaseEvent('Button_Navigate-To');
                         context.pushNamed(
                           'Confirmation',
@@ -453,7 +476,27 @@ class _ReservationBottomSheetWidgetState
                                 orderDetails.orderId, ParamType.int),
                           }.withoutNulls,
                         );
+                      } else {
+                        logFirebaseEvent('Button_Show-Snack-Bar');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'This property is not avaiable currently',
+                              style: TextStyle(
+                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor: Color(0xFFFF0000),
+                          ),
+                        );
+                        if (_shouldSetState) setState(() {});
+                        return;
                       }
+
                       if (_shouldSetState) setState(() {});
                     },
                     text: FFLocalizations.of(context).getText(

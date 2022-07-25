@@ -1000,7 +1000,10 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                             }.withoutNulls,
                                           );
                                         },
-                                        text: 'View More',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          '6rsjfq97' /* View More */,
+                                        ),
                                         options: FFButtonOptions(
                                           width: 130,
                                           height: 40,
