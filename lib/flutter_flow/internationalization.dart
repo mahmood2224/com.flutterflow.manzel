@@ -664,6 +664,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' Livingrooms',
       'ar': 'غرف المعيشة',
     },
+    '7xi05192': {
+      'en': ' Years',
+      'ar': 'سنوات',
+    },
     'nq19lw60': {
       'en': 'Features and Amenities',
       'ar': 'الميزات والمرافق',
@@ -910,7 +914,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' ,',
       'ar': 'و',
     },
-    '69nrpdhe': {
+    '6rsjfq97': {
       'en': 'View More',
       'ar': '',
     },

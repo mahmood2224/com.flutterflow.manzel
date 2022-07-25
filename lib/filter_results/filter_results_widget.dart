@@ -55,17 +55,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
               child: InkWell(
                 onTap: () async {
                   logFirebaseEvent('FILTER_RESULTS_PAGE_Icon_n6g5zub7_ON_TAP');
-                  logFirebaseEvent('Icon_Navigate-To');
-                  context.pushNamed(
-                    'HomeScreen',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                        duration: Duration(milliseconds: 0),
-                      ),
-                    },
-                  );
+                  logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+                  Navigator.pop(context);
                 },
                 child: Icon(
                   Icons.arrow_back,
@@ -82,26 +73,22 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'kmjdnh1c' /* Filter results  */,
-                    ),
-                    textAlign: TextAlign.start,
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: false,
-                        ),
-                  ),
-                ],
-              ),
               FutureBuilder<ApiCallResponse>(
                 future: PropertiesCall.call(
                   city: FFAppState().filterCity,
+                  furnishingType: functions.listToApiParameters(
+                      FFAppState().filterFurnishingType.toList()),
+                  propertyType: functions.listToApiParameters(
+                      FFAppState().filterPropertyType.toList()),
+                  locale: FFAppState().locale,
+                  minimumPrice: functions
+                      .sliderToApi(FFAppState().filterMinPrice.toDouble())
+                      .toString(),
+                  maximumPrice: functions
+                      .sliderToApi(FFAppState().filterMaxPrice.toDouble())
+                      .toString(),
+                  populate:
+                      '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -132,6 +119,23 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                         ),
                   );
                 },
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    FFLocalizations.of(context).getText(
+                      'kmjdnh1c' /* Filter results  */,
+                    ),
+                    textAlign: TextAlign.start,
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          useGoogleFonts: false,
+                        ),
+                  ),
+                ],
               ),
             ],
           ),
