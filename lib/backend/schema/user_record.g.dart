@@ -26,13 +26,6 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.displayName;
-    if (value != null) {
-      result
-        ..add('display_name')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
     value = object.uid;
     if (value != null) {
       result
@@ -82,10 +75,45 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.ststus;
+    value = object.status;
     if (value != null) {
       result
-        ..add('ststus')
+        ..add('status')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.name;
+    if (value != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.countryCode;
+    if (value != null) {
+      result
+        ..add('country_code')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.roleId;
+    if (value != null) {
+      result
+        ..add('role_id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.gender;
+    if (value != null) {
+      result
+        ..add('gender')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.displayName;
+    if (value != null) {
+      result
+        ..add('display_name')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
@@ -113,10 +141,6 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
       switch (key) {
         case 'email':
           result.email = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
-        case 'display_name':
-          result.displayName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
         case 'uid':
@@ -147,8 +171,28 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.photoUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'ststus':
-          result.ststus = serializers.deserialize(value,
+        case 'status':
+          result.status = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'country_code':
+          result.countryCode = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'role_id':
+          result.roleId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'gender':
+          result.gender = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'display_name':
+          result.displayName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
         case 'Document__Reference__Field':
@@ -168,8 +212,6 @@ class _$UserRecord extends UserRecord {
   @override
   final String email;
   @override
-  final String displayName;
-  @override
   final String uid;
   @override
   final DateTime createdTime;
@@ -184,7 +226,17 @@ class _$UserRecord extends UserRecord {
   @override
   final String photoUrl;
   @override
-  final String ststus;
+  final String status;
+  @override
+  final String name;
+  @override
+  final String countryCode;
+  @override
+  final String roleId;
+  @override
+  final String gender;
+  @override
+  final String displayName;
   @override
   final DocumentReference<Object> reference;
 
@@ -193,7 +245,6 @@ class _$UserRecord extends UserRecord {
 
   _$UserRecord._(
       {this.email,
-      this.displayName,
       this.uid,
       this.createdTime,
       this.phoneNumber,
@@ -201,7 +252,12 @@ class _$UserRecord extends UserRecord {
       this.bank,
       this.monthlyIncome,
       this.photoUrl,
-      this.ststus,
+      this.status,
+      this.name,
+      this.countryCode,
+      this.roleId,
+      this.gender,
+      this.displayName,
       this.reference})
       : super._();
 
@@ -217,7 +273,6 @@ class _$UserRecord extends UserRecord {
     if (identical(other, this)) return true;
     return other is UserRecord &&
         email == other.email &&
-        displayName == other.displayName &&
         uid == other.uid &&
         createdTime == other.createdTime &&
         phoneNumber == other.phoneNumber &&
@@ -225,7 +280,12 @@ class _$UserRecord extends UserRecord {
         bank == other.bank &&
         monthlyIncome == other.monthlyIncome &&
         photoUrl == other.photoUrl &&
-        ststus == other.ststus &&
+        status == other.status &&
+        name == other.name &&
+        countryCode == other.countryCode &&
+        roleId == other.roleId &&
+        gender == other.gender &&
+        displayName == other.displayName &&
         reference == other.reference;
   }
 
@@ -240,16 +300,26 @@ class _$UserRecord extends UserRecord {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, email.hashCode),
-                                            displayName.hashCode),
-                                        uid.hashCode),
-                                    createdTime.hashCode),
-                                phoneNumber.hashCode),
-                            employmentStatus.hashCode),
-                        bank.hashCode),
-                    monthlyIncome.hashCode),
-                photoUrl.hashCode),
-            ststus.hashCode),
+                                        $jc(
+                                            $jc(
+                                                $jc(
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(0,
+                                                                email.hashCode),
+                                                            uid.hashCode),
+                                                        createdTime.hashCode),
+                                                    phoneNumber.hashCode),
+                                                employmentStatus.hashCode),
+                                            bank.hashCode),
+                                        monthlyIncome.hashCode),
+                                    photoUrl.hashCode),
+                                status.hashCode),
+                            name.hashCode),
+                        countryCode.hashCode),
+                    roleId.hashCode),
+                gender.hashCode),
+            displayName.hashCode),
         reference.hashCode));
   }
 
@@ -257,7 +327,6 @@ class _$UserRecord extends UserRecord {
   String toString() {
     return (newBuiltValueToStringHelper('UserRecord')
           ..add('email', email)
-          ..add('displayName', displayName)
           ..add('uid', uid)
           ..add('createdTime', createdTime)
           ..add('phoneNumber', phoneNumber)
@@ -265,7 +334,12 @@ class _$UserRecord extends UserRecord {
           ..add('bank', bank)
           ..add('monthlyIncome', monthlyIncome)
           ..add('photoUrl', photoUrl)
-          ..add('ststus', ststus)
+          ..add('status', status)
+          ..add('name', name)
+          ..add('countryCode', countryCode)
+          ..add('roleId', roleId)
+          ..add('gender', gender)
+          ..add('displayName', displayName)
           ..add('reference', reference))
         .toString();
   }
@@ -277,10 +351,6 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   String _email;
   String get email => _$this._email;
   set email(String email) => _$this._email = email;
-
-  String _displayName;
-  String get displayName => _$this._displayName;
-  set displayName(String displayName) => _$this._displayName = displayName;
 
   String _uid;
   String get uid => _$this._uid;
@@ -312,9 +382,29 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   String get photoUrl => _$this._photoUrl;
   set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
 
-  String _ststus;
-  String get ststus => _$this._ststus;
-  set ststus(String ststus) => _$this._ststus = ststus;
+  String _status;
+  String get status => _$this._status;
+  set status(String status) => _$this._status = status;
+
+  String _name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
+
+  String _countryCode;
+  String get countryCode => _$this._countryCode;
+  set countryCode(String countryCode) => _$this._countryCode = countryCode;
+
+  String _roleId;
+  String get roleId => _$this._roleId;
+  set roleId(String roleId) => _$this._roleId = roleId;
+
+  String _gender;
+  String get gender => _$this._gender;
+  set gender(String gender) => _$this._gender = gender;
+
+  String _displayName;
+  String get displayName => _$this._displayName;
+  set displayName(String displayName) => _$this._displayName = displayName;
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
@@ -329,7 +419,6 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
     final $v = _$v;
     if ($v != null) {
       _email = $v.email;
-      _displayName = $v.displayName;
       _uid = $v.uid;
       _createdTime = $v.createdTime;
       _phoneNumber = $v.phoneNumber;
@@ -337,7 +426,12 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _bank = $v.bank;
       _monthlyIncome = $v.monthlyIncome;
       _photoUrl = $v.photoUrl;
-      _ststus = $v.ststus;
+      _status = $v.status;
+      _name = $v.name;
+      _countryCode = $v.countryCode;
+      _roleId = $v.roleId;
+      _gender = $v.gender;
+      _displayName = $v.displayName;
       _reference = $v.reference;
       _$v = null;
     }
@@ -360,7 +454,6 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
     final _$result = _$v ??
         new _$UserRecord._(
             email: email,
-            displayName: displayName,
             uid: uid,
             createdTime: createdTime,
             phoneNumber: phoneNumber,
@@ -368,7 +461,12 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
             bank: bank,
             monthlyIncome: monthlyIncome,
             photoUrl: photoUrl,
-            ststus: ststus,
+            status: status,
+            name: name,
+            countryCode: countryCode,
+            roleId: roleId,
+            gender: gender,
+            displayName: displayName,
             reference: reference);
     replace(_$result);
     return _$result;

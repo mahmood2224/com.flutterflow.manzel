@@ -8,6 +8,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyPropertiesWidget extends StatefulWidget {
@@ -98,7 +99,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
             if (loggedIn ?? true)
               Expanded(
                 child: DefaultTabController(
-                  length: 3,
+                  length: 2,
                   initialIndex: 0,
                   child: Column(
                     children: [
@@ -118,17 +119,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                         tabs: [
                           Tab(
                             text: FFLocalizations.of(context).getText(
-                              'gl02050s' /* Purchased */,
+                              'gl02050s' /* Bookes */,
                             ),
                           ),
                           Tab(
                             text: FFLocalizations.of(context).getText(
-                              'mt7pfmk1' /* Reserved */,
-                            ),
-                          ),
-                          Tab(
-                            text: FFLocalizations.of(context).getText(
-                              '4uvlncbs' /* Saved */,
+                              '4uvlncbs' /* Favorite */,
                             ),
                           ),
                         ],
@@ -220,6 +216,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                   .fromSTEB(0, 0, 0, 20),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   ClipRRect(
                                                     borderRadius:
@@ -249,25 +247,29 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          FFButtonWidget(
-                                                            onPressed: () {
-                                                              print(
-                                                                  'status pressed ...');
-                                                            },
-                                                            text: PropertyCall
-                                                                .propertyStatus(
-                                                              (containerPropertyResponse
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                            ).toString(),
-                                                            options:
-                                                                FFButtonOptions(
-                                                              width: 68,
-                                                              height: 23,
-                                                              color: Color(
-                                                                  0xFF389688),
-                                                              textStyle:
-                                                                  FlutterFlowTheme.of(
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              FFButtonWidget(
+                                                                onPressed: () {
+                                                                  print(
+                                                                      'status pressed ...');
+                                                                },
+                                                                text: PropertyCall
+                                                                    .propertyStatus(
+                                                                  (containerPropertyResponse
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                ).toString(),
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  width: 82,
+                                                                  height: 23,
+                                                                  color: Color(
+                                                                      0xFF389688),
+                                                                  textStyle: FlutterFlowTheme.of(
                                                                           context)
                                                                       .subtitle2
                                                                       .override(
@@ -282,17 +284,107 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                         useGoogleFonts:
                                                                             false,
                                                                       ),
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: Colors
-                                                                    .transparent,
-                                                                width: 1,
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              7),
+                                                                ),
                                                               ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          7),
-                                                            ),
+                                                              FFButtonWidget(
+                                                                onPressed: () {
+                                                                  print(
+                                                                      'Button pressed ...');
+                                                                },
+                                                                text: PropertyCall
+                                                                    .propertyStatus(
+                                                                  (containerPropertyResponse
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                ).toString(),
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  width: 82,
+                                                                  height: 23,
+                                                                  color: Color(
+                                                                      0xFFF04337),
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle2
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Sofia Pro By Khuzaimah',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              7),
+                                                                ),
+                                                              ),
+                                                              FFButtonWidget(
+                                                                onPressed: () {
+                                                                  print(
+                                                                      'Button pressed ...');
+                                                                },
+                                                                text: PropertyCall
+                                                                    .propertyStatus(
+                                                                  (containerPropertyResponse
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                ).toString(),
+                                                                options:
+                                                                    FFButtonOptions(
+                                                                  width: 82,
+                                                                  height: 23,
+                                                                  color: Color(
+                                                                      0xFFF0A637),
+                                                                  textStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle2
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Sofia Pro By Khuzaimah',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            12,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Colors
+                                                                        .transparent,
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              7),
+                                                                ),
+                                                              ),
+                                                            ],
                                                           ),
                                                           Padding(
                                                             padding:
@@ -307,18 +399,6 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     OrdersRecord>>(
                                                               stream:
                                                                   queryOrdersRecord(
-                                                                queryBuilder: (ordersRecord) => ordersRecord
-                                                                    .where(
-                                                                        'u_id',
-                                                                        isEqualTo:
-                                                                            currentUserReference)
-                                                                    .where(
-                                                                        'p_id',
-                                                                        isEqualTo:
-                                                                            PropertyCall.propertyId(
-                                                                          (containerPropertyResponse?.jsonBody ??
-                                                                              ''),
-                                                                        )),
                                                                 singleRecord:
                                                                     true,
                                                               ),
@@ -646,515 +726,6 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                 );
                               },
                             ),
-                            StreamBuilder<List<UserPropertiesRecord>>(
-                              stream: queryUserPropertiesRecord(
-                                queryBuilder: (userPropertiesRecord) =>
-                                    userPropertiesRecord
-                                        .where('u_id',
-                                            isEqualTo: currentUserReference)
-                                        .where('status', isEqualTo: 'reserved'),
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitRipple(
-                                        color: Color(0xFF2971FB),
-                                        size: 50,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<UserPropertiesRecord>
-                                    propertiesListUserPropertiesRecordList =
-                                    snapshot.data;
-                                if (propertiesListUserPropertiesRecordList
-                                    .isEmpty) {
-                                  return NotFoundPageWidget();
-                                }
-                                return ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount:
-                                      propertiesListUserPropertiesRecordList
-                                          .length,
-                                  itemBuilder: (context, propertiesListIndex) {
-                                    final propertiesListUserPropertiesRecord =
-                                        propertiesListUserPropertiesRecordList[
-                                            propertiesListIndex];
-                                    return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 23, 16, 1),
-                                      child: FutureBuilder<ApiCallResponse>(
-                                        future: PropertyCall.call(
-                                          propertyId:
-                                              propertiesListUserPropertiesRecord
-                                                  .pId,
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50,
-                                                height: 50,
-                                                child: SpinKitRipple(
-                                                  color: Color(0xFF2971FB),
-                                                  size: 50,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          final containerPropertyResponse =
-                                              snapshot.data;
-                                          return Container(
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 0,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .lineColor,
-                                                  offset: Offset(0, 1),
-                                                )
-                                              ],
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 0, 20),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    child: Image.network(
-                                                      PropertyCall.propertyImg(
-                                                        (containerPropertyResponse
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                      ),
-                                                      width: 80,
-                                                      height: 75,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  13, 0, 0, 0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          FFButtonWidget(
-                                                            onPressed: () {
-                                                              print(
-                                                                  'status pressed ...');
-                                                            },
-                                                            text: PropertyCall
-                                                                .propertyStatus(
-                                                              (containerPropertyResponse
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                            ).toString(),
-                                                            options:
-                                                                FFButtonOptions(
-                                                              width: 68,
-                                                              height: 23,
-                                                              color: Color(
-                                                                  0xFF389688),
-                                                              textStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .subtitle2
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontSize:
-                                                                            12,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: Colors
-                                                                    .transparent,
-                                                                width: 1,
-                                                              ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          7),
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        9,
-                                                                        0,
-                                                                        4),
-                                                            child: StreamBuilder<
-                                                                List<
-                                                                    OrdersRecord>>(
-                                                              stream:
-                                                                  queryOrdersRecord(
-                                                                queryBuilder: (ordersRecord) => ordersRecord
-                                                                    .where(
-                                                                        'u_id',
-                                                                        isEqualTo:
-                                                                            currentUserReference)
-                                                                    .where(
-                                                                        'p_id',
-                                                                        isEqualTo:
-                                                                            PropertyCall.propertyId(
-                                                                          (containerPropertyResponse?.jsonBody ??
-                                                                              ''),
-                                                                        )),
-                                                                singleRecord:
-                                                                    true,
-                                                              ),
-                                                              builder: (context,
-                                                                  snapshot) {
-                                                                // Customize what your widget looks like when it's loading.
-                                                                if (!snapshot
-                                                                    .hasData) {
-                                                                  return Center(
-                                                                    child:
-                                                                        SizedBox(
-                                                                      width: 50,
-                                                                      height:
-                                                                          50,
-                                                                      child:
-                                                                          SpinKitRipple(
-                                                                        color: Color(
-                                                                            0xFF2971FB),
-                                                                        size:
-                                                                            50,
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                }
-                                                                List<OrdersRecord>
-                                                                    rowOrdersRecordList =
-                                                                    snapshot
-                                                                        .data;
-                                                                // Return an empty Container when the document does not exist.
-                                                                if (snapshot
-                                                                    .data
-                                                                    .isEmpty) {
-                                                                  return Container();
-                                                                }
-                                                                final rowOrdersRecord =
-                                                                    rowOrdersRecordList
-                                                                            .isNotEmpty
-                                                                        ? rowOrdersRecordList
-                                                                            .first
-                                                                        : null;
-                                                                return Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceBetween,
-                                                                  children: [
-                                                                    Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Text(
-                                                                          FFLocalizations.of(context)
-                                                                              .getText(
-                                                                            'ry827uul' /* Booking ref:  */,
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText2
-                                                                              .override(
-                                                                                fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                color: Color(0xFF6B6B6B),
-                                                                                fontSize: 13,
-                                                                                fontWeight: FontWeight.w300,
-                                                                                useGoogleFonts: false,
-                                                                              ),
-                                                                        ),
-                                                                        Text(
-                                                                          rowOrdersRecord
-                                                                              .orderId
-                                                                              .toString(),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText2
-                                                                              .override(
-                                                                                fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                fontSize: 12,
-                                                                                fontWeight: FontWeight.w300,
-                                                                                useGoogleFonts: false,
-                                                                              ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Text(
-                                                                      dateTimeFormat(
-                                                                          'MMMMEEEEd',
-                                                                          rowOrdersRecord
-                                                                              .createdAt),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText2
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
-                                                                            fontSize:
-                                                                                13,
-                                                                            fontWeight:
-                                                                                FontWeight.w300,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
-                                                                    ),
-                                                                  ],
-                                                                );
-                                                              },
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        4,
-                                                                        0,
-                                                                        2),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    PropertyCall
-                                                                        .propertyName(
-                                                                      (containerPropertyResponse
-                                                                              ?.jsonBody ??
-                                                                          ''),
-                                                                    ).toString(),
-                                                                    'Un-Known',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        fontSize:
-                                                                            16,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Icon(
-                                                                Icons
-                                                                    .location_on_outlined,
-                                                                color: Colors
-                                                                    .black,
-                                                                size: 12,
-                                                              ),
-                                                              Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  PropertyCall
-                                                                      .propertyCity(
-                                                                    (containerPropertyResponse
-                                                                            ?.jsonBody ??
-                                                                        ''),
-                                                                  ).toString(),
-                                                                  'Un-Known',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      fontSize:
-                                                                          12,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'tjiw2bkf' /*  , */,
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      fontSize:
-                                                                          12,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  PropertyCall
-                                                                      .propertyDistrict(
-                                                                    (containerPropertyResponse
-                                                                            ?.jsonBody ??
-                                                                        ''),
-                                                                  ).toString(),
-                                                                  'Un-Known',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      fontSize:
-                                                                          12,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0,
-                                                                        23,
-                                                                        130,
-                                                                        0),
-                                                            child: InkWell(
-                                                              onTap: () async {
-                                                                logFirebaseEvent(
-                                                                    'MY_PROPERTIES_PAGE_Row_w6uilgsq_ON_TAP');
-                                                                // propertyDetails
-                                                                logFirebaseEvent(
-                                                                    'Row_propertyDetails');
-                                                                context.goNamed(
-                                                                  'PropertyDetails',
-                                                                  queryParams: {
-                                                                    'propertyId':
-                                                                        serializeParam(
-                                                                            PropertyCall.propertyId(
-                                                                              (containerPropertyResponse?.jsonBody ?? ''),
-                                                                            ),
-                                                                            ParamType.int),
-                                                                  }.withoutNulls,
-                                                                );
-                                                              },
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            5,
-                                                                            0),
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .sticky_note_2_outlined,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
-                                                                      size: 15,
-                                                                    ),
-                                                                  ),
-                                                                  Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'zypmgjph' /* View Details */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryColor,
-                                                                          fontSize:
-                                                                              15,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            ),
                             StreamBuilder<List<UserSavedRecord>>(
                               stream: queryUserSavedRecord(
                                 queryBuilder: (userSavedRecord) =>
@@ -1287,6 +858,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                             mainAxisSize:
                                                                 MainAxisSize
                                                                     .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
                                                             children: [
                                                               Padding(
                                                                 padding:
@@ -1414,109 +988,89 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               0,
                                                                               0),
                                                                       child:
-                                                                          Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0,
-                                                                                0,
-                                                                                9,
-                                                                                0),
-                                                                            child:
-                                                                                Icon(
-                                                                              Icons.single_bed,
-                                                                              color: Colors.black,
-                                                                              size: 24,
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0,
-                                                                                0,
-                                                                                20,
-                                                                                0),
-                                                                            child:
-                                                                                Text(
-                                                                              valueOrDefault<String>(
-                                                                                PropertyCall.propertyBedrooms(
-                                                                                  (containerPropertyResponse?.jsonBody ?? ''),
-                                                                                ).toString(),
-                                                                                '?',
+                                                                          SingleChildScrollView(
+                                                                        scrollDirection:
+                                                                            Axis.horizontal,
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 9, 0),
+                                                                              child: Icon(
+                                                                                Icons.single_bed,
+                                                                                color: Colors.black,
+                                                                                size: 24,
                                                                               ),
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                    color: Colors.black,
-                                                                                    fontSize: 14,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
                                                                             ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0,
-                                                                                0,
-                                                                                9,
-                                                                                0),
-                                                                            child:
-                                                                                Icon(
-                                                                              Icons.bathtub_outlined,
-                                                                              color: Colors.black,
-                                                                              size: 24,
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0,
-                                                                                0,
-                                                                                20,
-                                                                                0),
-                                                                            child:
-                                                                                Text(
-                                                                              valueOrDefault<String>(
-                                                                                PropertyCall.propertyBathrooms(
-                                                                                  (containerPropertyResponse?.jsonBody ?? ''),
-                                                                                ).toString(),
-                                                                                '?',
-                                                                              ),
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                    color: Colors.black,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0,
-                                                                                0,
-                                                                                9,
-                                                                                0),
-                                                                            child:
-                                                                                Icon(
-                                                                              Icons.design_services_outlined,
-                                                                              color: Colors.black,
-                                                                              size: 24,
-                                                                            ),
-                                                                          ),
-                                                                          Text(
-                                                                            valueOrDefault<String>(
-                                                                              PropertyCall.propertySize(
-                                                                                (containerPropertyResponse?.jsonBody ?? ''),
-                                                                              ).toString(),
-                                                                              '?',
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                  color: Colors.black,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: false,
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                                                                              child: Text(
+                                                                                valueOrDefault<String>(
+                                                                                  PropertyCall.propertyBedrooms(
+                                                                                    (containerPropertyResponse?.jsonBody ?? ''),
+                                                                                  ).toString(),
+                                                                                  '?',
                                                                                 ),
-                                                                          ),
-                                                                        ],
+                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                      color: Colors.black,
+                                                                                      fontSize: 14,
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                      useGoogleFonts: false,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 9, 0),
+                                                                              child: Icon(
+                                                                                Icons.bathtub_outlined,
+                                                                                color: Colors.black,
+                                                                                size: 24,
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                                                                              child: Text(
+                                                                                valueOrDefault<String>(
+                                                                                  PropertyCall.propertyBathrooms(
+                                                                                    (containerPropertyResponse?.jsonBody ?? ''),
+                                                                                  ).toString(),
+                                                                                  '?',
+                                                                                ),
+                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                      color: Colors.black,
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                      useGoogleFonts: false,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 9, 0),
+                                                                              child: FaIcon(
+                                                                                FontAwesomeIcons.rulerCombined,
+                                                                                color: Colors.black,
+                                                                                size: 24,
+                                                                              ),
+                                                                            ),
+                                                                            Text(
+                                                                              valueOrDefault<String>(
+                                                                                PropertyCall.propertySize(
+                                                                                  (containerPropertyResponse?.jsonBody ?? ''),
+                                                                                ).toString(),
+                                                                                '?',
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                    color: Colors.black,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                  ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ],

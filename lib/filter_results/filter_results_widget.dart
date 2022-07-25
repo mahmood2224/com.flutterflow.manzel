@@ -1,5 +1,6 @@
-import '../auth/auth_util.dart';
+import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -54,17 +55,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
               child: InkWell(
                 onTap: () async {
                   logFirebaseEvent('FILTER_RESULTS_PAGE_Icon_n6g5zub7_ON_TAP');
-                  logFirebaseEvent('Icon_Navigate-To');
-                  context.pushNamed(
-                    'HomeScreen',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                        duration: Duration(milliseconds: 0),
-                      ),
-                    },
-                  );
+                  logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+                  Navigator.pop(context);
                 },
                 child: Icon(
                   Icons.arrow_back,
@@ -81,26 +73,22 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'kmjdnh1c' /* Filter results  */,
-                    ),
-                    textAlign: TextAlign.start,
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts: false,
-                        ),
-                  ),
-                ],
-              ),
               FutureBuilder<ApiCallResponse>(
                 future: PropertiesCall.call(
                   city: FFAppState().filterCity,
+                  furnishingType: functions.listToApiParameters(
+                      FFAppState().filterFurnishingType.toList()),
+                  propertyType: functions.listToApiParameters(
+                      FFAppState().filterPropertyType.toList()),
+                  locale: FFAppState().locale,
+                  minimumPrice: functions
+                      .sliderToApi(FFAppState().filterMinPrice.toDouble())
+                      .toString(),
+                  maximumPrice: functions
+                      .sliderToApi(FFAppState().filterMaxPrice.toDouble())
+                      .toString(),
+                  populate:
+                      '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -122,7 +110,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                         FFAppState().locale,
                         getJsonField(
                           (textPropertiesResponse?.jsonBody ?? ''),
-                          r'''$''',
+                          r'''$.data''',
                         )),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Sofia Pro By Khuzaimah',
@@ -131,6 +119,23 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                         ),
                   );
                 },
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    FFLocalizations.of(context).getText(
+                      'kmjdnh1c' /* Filter results  */,
+                    ),
+                    textAlign: TextAlign.start,
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          useGoogleFonts: false,
+                        ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -236,8 +241,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                           FFAppState().filterFurnishingType.toList()),
                       propertyType: functions.listToApiParameters(
                           FFAppState().filterPropertyType.toList()),
-                      minimumPrice: FFAppState().filterMinPrice,
-                      maximumPrice: FFAppState().filterMaxPrice,
+                      minimumPrice: FFAppState().filterMinPrice.toString(),
+                      maximumPrice: FFAppState().filterMaxPrice.toString(),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -260,6 +265,20 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                 (listViewPropertiesResponse?.jsonBody ?? ''),
                               )?.toList() ??
                               [];
+                          if (properties.isEmpty) {
+                            return Center(
+                              child: Container(
+                                width: 280,
+                                height: 269,
+                                child: NoResultsFoundWidget(
+                                  titleText: 'No result found',
+                                  subtitleText: '          ',
+                                  isBottonVisible: false,
+                                  screenName: 'Result',
+                                ),
+                              ),
+                            );
+                          }
                           return ListView.builder(
                             padding: EdgeInsets.zero,
                             primary: false,
@@ -350,7 +369,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                               imageUrl:
                                                                   getJsonField(
                                                                 propertyImagesItem,
-                                                                r'''$.attributes.name''',
+                                                                r'''$.attributes.url''',
                                                               ),
                                                               width:
                                                                   MediaQuery.of(
@@ -425,7 +444,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                   onTap: () async {
                                                     logFirebaseEvent(
                                                         'FILTER_RESULTS_Container_kslgg6qy_ON_TAP');
-                                                    if (!(currentUserEmailVerified)) {
+                                                    if (!(loggedIn)) {
                                                       logFirebaseEvent(
                                                           'Container_Navigate-To');
                                                       context
@@ -473,7 +492,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                     child: Image.network(
                                                       getJsonField(
                                                         propertiesItem,
-                                                        r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.name''',
+                                                        r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
                                                       ),
                                                       fit: BoxFit.cover,
                                                     ),
@@ -628,24 +647,12 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                   0, 0, 8, 0),
                                                       child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius.only(
-                                                          bottomLeft:
-                                                              Radius.circular(
-                                                                  0),
-                                                          bottomRight:
-                                                              Radius.circular(
-                                                                  0),
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  11),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  0),
-                                                        ),
+                                                            BorderRadius
+                                                                .circular(11),
                                                         child: Image.network(
                                                           getJsonField(
                                                             banksItem,
-                                                            r'''$.attributes.bank_logo.data.attributes.name''',
+                                                            r'''$.attributes.bank_logo.data.attributes.url''',
                                                           ),
                                                           width: 22,
                                                           height: 22,

@@ -87,27 +87,19 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EditPersonallInfo': (data) async => EditPersonallInfoWidget(),
   'EditMobileNumber': (data) async => EditMobileNumberWidget(),
   'ConfirmNewNumberOTP': (data) async => ConfirmNewNumberOTPWidget(),
-  'HomeScreen': (data) async => hasMatchingParameters(
-          data, {'city', 'type', 'installmentRange', 'furnishing'})
-      ? HomeScreenWidget(
-          city: getParameter(data, 'city'),
-          type: getParameter(data, 'type'),
-          installmentRange: getParameter(data, 'installmentRange'),
-          furnishing: getParameter(data, 'furnishing'),
-        )
-      : NavBarPage(initialPage: 'HomeScreen'),
   'Notifications': (data) async => NotificationsWidget(),
   'Filter': (data) async => NavBarPage(initialPage: 'Filter'),
   'filterResults': (data) async => FilterResultsWidget(),
+  'MyProperties': (data) async => NavBarPage(initialPage: 'MyProperties'),
   'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
         city: getParameter(data, 'city'),
+      ),
+  'PropertyDetails': (data) async => PropertyDetailsWidget(
+        propertyId: getParameter(data, 'propertyId'),
       ),
   'SearchCityResult': (data) async => SearchCityResultWidget(
         cityName: getParameter(data, 'cityName'),
         peropertiesAvailable: getParameter(data, 'peropertiesAvailable'),
-      ),
-  'PropertyDetails': (data) async => PropertyDetailsWidget(
-        propertyId: getParameter(data, 'propertyId'),
       ),
   'bankDetails': (data) async => BankDetailsWidget(
         bankId: getParameter(data, 'bankId'),
@@ -119,6 +111,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Confirmation': (data) async => ConfirmationWidget(
         propertyId: getParameter(data, 'propertyId'),
         paymentMethod: getParameter(data, 'paymentMethod'),
+        orderId: getParameter(data, 'orderId'),
       ),
   'OrderDetails': (data) async => OrderDetailsWidget(
         propertId: getParameter(data, 'propertId'),
@@ -128,7 +121,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'ConfirmAbsher': (data) async => ConfirmAbsherWidget(),
   'PersonalEmploymentDetails': (data) async =>
       PersonalEmploymentDetailsWidget(),
-  'FilterCopy': (data) async => FilterCopyWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

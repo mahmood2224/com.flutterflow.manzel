@@ -54,9 +54,9 @@ class _FilterWidgetState extends State<FilterWidget> {
               logFirebaseEvent('Text_Update-Local-State');
               setState(() => FFAppState().filterCity = '');
               logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterMinPrice = '');
+              setState(() => FFAppState().filterMinPrice = 0);
               logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterMaxPrice = '');
+              setState(() => FFAppState().filterMaxPrice = 0);
               logFirebaseEvent('Text_Navigate-Back');
               context.pop();
               logFirebaseEvent('Text_Navigate-To');
@@ -110,8 +110,8 @@ class _FilterWidgetState extends State<FilterWidget> {
               ),
               onPressed: () async {
                 logFirebaseEvent('FILTER_PAGE_close_rounded_ICN_ON_TAP');
-                logFirebaseEvent('IconButton_Navigate-Back');
-                context.pop();
+                logFirebaseEvent('IconButton_Close-Dialog,-Drawer,-Etc');
+                Navigator.pop(context);
               },
             ),
           ),
@@ -124,7 +124,11 @@ class _FilterWidgetState extends State<FilterWidget> {
         child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
           child: FutureBuilder<ApiCallResponse>(
-            future: FilterParamsCall.call(),
+            future: PropertiesCall.call(
+              populate:
+                  'populate=*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
+              locale: FFAppState().locale,
+            ),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
@@ -139,7 +143,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ),
                 );
               }
-              final columnFilterParamsResponse = snapshot.data;
+              final columnPropertiesResponse = snapshot.data;
               return SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -283,7 +287,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                             : FFAppState().filterPropertyType,
                                     options: (functions.propertTypeBuilder(
                                                 (getJsonField(
-                                              (columnFilterParamsResponse
+                                              (columnPropertiesResponse
                                                       ?.jsonBody ??
                                                   ''),
                                               r'''$.meta.property_type''',
@@ -483,8 +487,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       functions
                                           .formattedDouble(valueOrDefault<int>(
                                         getJsonField(
-                                          (columnFilterParamsResponse
-                                                  ?.jsonBody ??
+                                          (columnPropertiesResponse?.jsonBody ??
                                               ''),
                                           r'''$.meta.max_price''',
                                         ),
@@ -519,8 +522,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       functions
                                           .formattedDouble(valueOrDefault<int>(
                                         getJsonField(
-                                          (columnFilterParamsResponse
-                                                  ?.jsonBody ??
+                                          (columnPropertiesResponse?.jsonBody ??
                                               ''),
                                           r'''$.meta.max_price''',
                                         ),
@@ -592,15 +594,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       )),
                                       ChipData(
                                           FFLocalizations.of(context).getText(
-                                        'skyj7jpv' /* Furnishied */,
+                                        'skyj7jpv' /* Furnished */,
                                       )),
                                       ChipData(
                                           FFLocalizations.of(context).getText(
-                                        '8x7rkqnv' /* Un-Furnishied */,
+                                        '8x7rkqnv' /* Un-furnished */,
                                       )),
                                       ChipData(
                                           FFLocalizations.of(context).getText(
-                                        'mhyiav30' /* Semi-Furnished */,
+                                        'mhyiav30' /* Semi-furnished */,
                                       ))
                                     ],
                                     onChanged: (val) => setState(
@@ -674,17 +676,26 @@ class _FilterWidgetState extends State<FilterWidget> {
                             setState(() => FFAppState().filterFurnishingType =
                                 isFurnishingValues.toList());
                             logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterMinPrice = '');
+                            setState(() => FFAppState().filterMinPrice = 0);
                             logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterMaxPrice = '');
+                            setState(() => FFAppState().filterMaxPrice = 0);
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterMinPrice =
                                 functions.sliderToApi(sliderValue1));
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterMaxPrice =
                                 functions.sliderToApi(sliderValue2));
-                            logFirebaseEvent('apllyFilter_Navigate-Back');
-                            context.pop();
+                            logFirebaseEvent('apllyFilter_Navigate-To');
+                            context.pushNamed(
+                              'filterResults',
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 0),
+                                ),
+                              },
+                            );
                           } else {
                             logFirebaseEvent('apllyFilter_Show-Snack-Bar');
                             ScaffoldMessenger.of(context).showSnackBar(

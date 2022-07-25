@@ -239,7 +239,7 @@ your f... */
                 logFirebaseEvent('ONBOARDING_VIEW_PAGE_goToLogin_ON_TAP');
                 // Go to Login
                 logFirebaseEvent('goToLogin_GotoLogin');
-                context.goNamed('Login');
+                context.pushNamed('Login');
                 logFirebaseEvent('goToLogin_Update-Local-State');
                 setState(() => FFAppState().isInitailLaunch = false);
               },

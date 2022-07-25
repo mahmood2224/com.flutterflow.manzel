@@ -12,6 +12,7 @@ export 'anonymous_auth.dart';
 export 'apple_auth.dart';
 export 'email_auth.dart';
 export 'google_auth.dart';
+export 'jwt_token_auth.dart';
 
 /// Tries to sign in or create an account using Firebase Auth.
 /// Returns the User object if sign in was successful.
@@ -124,7 +125,7 @@ Future beginPhoneAuth({
   // * Finally modify verificationCompleted below as instructed.
   await FirebaseAuth.instance.verifyPhoneNumber(
     phoneNumber: phoneNumber,
-    timeout: Duration(seconds: 5),
+    timeout: Duration(seconds: 60),
     verificationCompleted: (phoneAuthCredential) async {
       await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
       // If you've implemented auto-verification, navigate to home page or

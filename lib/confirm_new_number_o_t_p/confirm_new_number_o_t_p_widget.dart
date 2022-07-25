@@ -1,15 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
+import 'package:manzel/backend/backend.dart';
+
 import '../auth/auth_util.dart';
+import '../common_widgets/overlay.dart';
+import '../common_widgets/timer_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:pinput/pinput.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ConfirmNewNumberOTPWidget extends StatefulWidget {
-  const ConfirmNewNumberOTPWidget({Key key}) : super(key: key);
+  final String phoneNumber;
+  const ConfirmNewNumberOTPWidget({Key key,this.phoneNumber}) : super(key: key);
 
   @override
   _ConfirmNewNumberOTPWidgetState createState() =>
@@ -18,7 +26,35 @@ class ConfirmNewNumberOTPWidget extends StatefulWidget {
 
 class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   TextEditingController enterOTPController;
+  int _otpResendTimes = 3;
+  final ValueNotifier<bool> _showResendOtp = ValueNotifier(false);
+  String _phoneAuthVerificationCode = '';
+  ValueNotifier<String> _showOtpError = ValueNotifier('');
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  OverlayEntry entry;
+
+  void resendOTP() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: widget.phoneNumber,
+      timeout: Duration(seconds: 60),
+      verificationCompleted: (phoneAuthCredential) async {
+        await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+      },
+      verificationFailed: (e) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Error: ${e.message}'),
+       ));
+      },
+      codeSent: (verificationId, _) {
+        _phoneAuthVerificationCode = verificationId;
+      },
+      codeAutoRetrievalTimeout: (_) {},
+    );
+    if (_otpResendTimes > 0) {
+      _showResendOtp.value = false;
+      _otpResendTimes--;
+    }
+  }
 
   @override
   void initState() {
@@ -49,7 +85,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
             logFirebaseEvent('CONFIRM_NEW_NUMBER_O_T_P_back_ON_TAP');
             // Back to login
             logFirebaseEvent('back_Backtologin');
-            context.pushNamed('EditMobileNumber');
+            context.pop();
           },
         ),
         actions: [],
@@ -60,171 +96,248 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 20, 24, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        'nzqyszrd' /* Confirm your mobile number */,
-                      ),
-                      style: FlutterFlowTheme.of(context).title1.override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
-                            fontSize: 25,
-                            fontWeight: FontWeight.w800,
-                            useGoogleFonts: false,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        '0qmluaen' /* We've sent you a 6 digital cod... */,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
-                            fontSize: 16,
-                            fontWeight: FontWeight.w300,
-                            useGoogleFonts: false,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    AuthUserStreamWidget(
-                      child: Text(
-                        currentPhoneNumber,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: false,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: enterOTPController,
-                        onChanged: (_) => EasyDebounce.debounce(
-                          'enterOTPController',
-                          Duration(milliseconds: 2000),
-                          () => setState(() {}),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 20, 24, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        FFLocalizations.of(context).getText(
+                          'nzqyszrd' /* Confirm your mobile number */,
                         ),
-                        autofocus: true,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: FFLocalizations.of(context).getText(
-                            '3c5hrl5f' /* Enter the OTP number */,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
+                        style: FlutterFlowTheme.of(context).title1.override(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontSize: 25,
+                          fontWeight: FontWeight.w800,
+                          useGoogleFonts: false,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        FFLocalizations.of(context).getText(
+                          '0qmluaen' /* We've sent you a 6 digital cod... */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              fontWeight: FontWeight.normal,
-                              useGoogleFonts: false,
-                            ),
-                        keyboardType: TextInputType.number,
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                          useGoogleFonts: false,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 160, 16, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    FFButtonWidget(
-                      onPressed: () async {
-                        logFirebaseEvent(
-                            'CONFIRM_NEW_NUMBER_O_T_P_verifyOTP_ON_TA');
-                        // verifyOTP
-                        logFirebaseEvent('verifyOTP_verifyOTP');
-                        GoRouter.of(context).prepareAuthEvent();
-                        final smsCodeVal = enterOTPController.text;
-                        if (smsCodeVal == null || smsCodeVal.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Enter SMS verification code.'),
-                            ),
-                          );
-                          return;
-                        }
-                        final phoneVerifiedUser = await verifySmsCode(
-                          context: context,
-                          smsCode: smsCodeVal,
-                        );
-                        if (phoneVerifiedUser == null) {
-                          return;
-                        }
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      AuthUserStreamWidget(
+                        child: Text(
+                          widget.phoneNumber ?? '1234567890',
+                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Sofia Pro By Khuzaimah',
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            useGoogleFonts: false,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 58, 16, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: Pinput(
+                          onCompleted: (String otp) async {
+                            // print(otp);
+                            // if (otp.length == 6) {
+                            //   _showOtpError.value = "Working";
+                            // }
 
-                        context.goNamedAuth('MyProperties', mounted);
-                      },
-                      text: FFLocalizations.of(context).getText(
-                        'f1zsgncf' /* Continue */,
-                      ),
-                      options: FFButtonOptions(
-                        width: 343,
-                        height: 56,
-                        color: Color(0xFF2971FB),
-                        textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800,
-                                  useGoogleFonts: false,
-                                ),
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1,
+                            entry = showOverlay(context);
+                            final phoneVerifiedUser = await verifySmsCode(
+                              context: context,
+                              smsCode: otp,
+                            );
+                            entry.remove();
+                            if (phoneVerifiedUser == null) {
+                              _showOtpError.value = "You entered OTP incorrect";
+                              return;
+                            }
+                            Future.delayed(const Duration(milliseconds: 500), () async{
+                              if(currentUserDocument.status.isEmpty || currentUserDocument.status.toLowerCase() == 'active') {
+                                final userUpdateData = createUserRecordData(
+                                  status: 'active',
+                                );
+                                await currentUserReference.update(userUpdateData);
+                                if (currentUserDisplayName.isEmpty &&
+                                    currentUserDocument.name.isEmpty) {
+                                  context.goNamedAuth(
+                                      'AddingInformation', mounted);
+                                } else {
+                                  context.goNamedAuth(
+                                      'HomeScreen', mounted);
+                                }
+                              }
+                              else{
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text('Your account is not active. Kindly connect to support for more information.'),
+                                ));
+                              }
+                            });
+
+
+                            // FirebaseFirestore.instance
+                            //     .collection('User')
+                            //     .doc()
+                            //     .get()
+                            //     .then((DocumentSnapshot documentSnapshot) {
+                            //   if (documentSnapshot.exists) {
+                            //     print('Document exists on the database');
+                            //   }
+                            // });
+
+                          },
+                          autofocus: true,
+                          length: 6,
+                          useNativeKeyboard: true,
+                          keyboardType: TextInputType.number,
+                          controller: enterOTPController,
+                          defaultPinTheme: PinTheme(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xffD7D7D7),
+                            ),
+                            textStyle: TextStyle(fontSize: 30),
+                            height: 45,
+                            width: 18,
+                          ),
+                          focusedPinTheme: PinTheme(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xffD7D7D7),
+                            ),
+                            textStyle: TextStyle(fontSize: 0),
+                            height: 45,
+                            width: 18,
+                          ),
+                          submittedPinTheme: PinTheme(
+                            height: 45,
+                            width: 18,
+                            textStyle: TextStyle(
+                                fontSize: 30,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w300,
+                                fontStyle: FontStyle.normal,
+                                fontFamily: 'Sofia Pro By Khuzaimah'),
+                          ),
+                          preFilledWidget: Container(
+                            height: 12,
+                            width: 12,
+                            decoration: BoxDecoration(
+                              color: Color(0xffD7D7D7),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(12),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(93, 19, 16, 0),
+                ),
+                ValueListenableBuilder(
+                  valueListenable: _showOtpError,
+                  builder: (context, String value, child) {
+                    return Text(
+                      "${value}",
+                      style: TextStyle(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontWeight: FontWeight.w300,
+                          fontSize: 16,
+                          color: Color(0xffdc5d5c)),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 160, 16, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: ValueListenableBuilder(
+                            valueListenable: _showResendOtp,
+                            builder: (context, bool value, _) {
+                              return Visibility(
+                                visible: value,
+                                replacement: TimerWidget(
+                                    duration: Duration(seconds: 40),
+                                    onComplete: (VoidCallback restart) {
+                                      _showResendOtp.value = true;
+                                    }),
+                                // child: RichText(
+                                //   text: TextSpan(
+                                //     recognizer: TapGestureRecognizer()
+                                //       ..onTap = resendOTP,
+                                //     text: 'Resend Otp',
+                                //     style: TextStyle(
+                                //         decoration: TextDecoration.underline,
+                                //         fontFamily: 'Sofia Pro By Khuzaimah',
+                                //         fontSize: 16,
+                                //         fontWeight: FontWeight.w700),
+                                //   ),
+                                // ),
+                                child: GestureDetector(
+                                  onTap: resendOTP,
+                                  child: Text(
+                                    'Resend Code',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+
+  OverlayEntry showOverlay(BuildContext context) {
+    var overlayState = Overlay.of(context);
+    var overlayEntry = OverlayEntry(
+      builder: (context) => CircularProgressOverlay(),
+    );
+    overlayState?.insert(overlayEntry);
+    return overlayEntry;
+  }
 }
+
+

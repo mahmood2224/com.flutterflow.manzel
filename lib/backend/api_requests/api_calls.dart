@@ -7,7 +7,7 @@ export 'api_manager.dart' show ApiCallResponse;
 class PropertiesCall {
   static Future<ApiCallResponse> call({
     String populate =
-        '*,banks.bank_logo,managed_by.company_logo,property_images,city',
+        '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
     String city = '',
     String furnishingType = '',
     String propertyType = '',
@@ -46,14 +46,16 @@ class PropertiesCall {
 class PropertyCall {
   static Future<ApiCallResponse> call({
     int propertyId,
+    String locale = 'en',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Property',
-      apiUrl:
-          'https://strapi-dev.manzel.app/api/properties/${propertyId}/?populate=*,banks.bank_logo,managed_by.company_logo, property_images',
+      apiUrl: 'https://strapi-dev.manzel.app/api/properties/${propertyId}',
       callType: ApiCallType.GET,
       headers: {},
-      params: {},
+      params: {
+        'locale': locale,
+      },
       returnBody: true,
     );
   }
@@ -128,7 +130,7 @@ class PropertyCall {
       );
   static dynamic propertyEntranceDirection(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.property_entrance_direction''',
+        r'''$.data.attributes.property_address''',
       );
   static dynamic propertyType(dynamic response) => getJsonField(
         response,
@@ -180,7 +182,7 @@ class PropertyCall {
       );
   static dynamic companyLogo(dynamic response) => getJsonField(
         response,
-        r'''$.data.attributes.managed_by.data.attributes.company_logo.data.attributes.name''',
+        r'''$.data.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
       );
   static dynamic reservationsCost(dynamic response) => getJsonField(
         response,
@@ -355,4 +357,43 @@ class SearchPageCitiesCall {
         response,
         r'''$.results..image''',
       );
+}
+
+class PropertStatusCall {
+  static Future<ApiCallResponse> call({
+    int propertyId,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'propertStatus',
+      apiUrl: 'https://strapi-dev.manzel.app/api/property/status/${propertyId}',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+    );
+  }
+
+  static dynamic propertyStatus(dynamic response) => getJsonField(
+        response,
+        r'''$.status.property_status''',
+      );
+}
+
+class PropertyBookingStatusCall {
+  static Future<ApiCallResponse> call({
+    int propertyId,
+  }) {
+    final body = '''
+{"data": {"property_status": "Booked"}}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'propertyBookingStatus',
+      apiUrl: 'https://strapi-dev.manzel.app/api/properties/${propertyId}',
+      callType: ApiCallType.PUT,
+      headers: {},
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
 }

@@ -13,10 +13,6 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
   String get email;
 
   @nullable
-  @BuiltValueField(wireName: 'display_name')
-  String get displayName;
-
-  @nullable
   String get uid;
 
   @nullable
@@ -43,7 +39,25 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
   String get photoUrl;
 
   @nullable
-  String get ststus;
+  String get status;
+
+  @nullable
+  String get name;
+
+  @nullable
+  @BuiltValueField(wireName: 'country_code')
+  String get countryCode;
+
+  @nullable
+  @BuiltValueField(wireName: 'role_id')
+  String get roleId;
+
+  @nullable
+  String get gender;
+
+  @nullable
+  @BuiltValueField(wireName: 'display_name')
+  String get displayName;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -51,14 +65,18 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
 
   static void _initializeBuilder(UserRecordBuilder builder) => builder
     ..email = ''
-    ..displayName = ''
     ..uid = ''
     ..phoneNumber = ''
     ..employmentStatus = ''
     ..bank = ''
     ..monthlyIncome = ''
     ..photoUrl = ''
-    ..ststus = '';
+    ..status = ''
+    ..name = ''
+    ..countryCode = ''
+    ..roleId = ''
+    ..gender = ''
+    ..displayName = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('User');
@@ -82,7 +100,6 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
 
 Map<String, dynamic> createUserRecordData({
   String email,
-  String displayName,
   String uid,
   DateTime createdTime,
   String phoneNumber,
@@ -90,13 +107,17 @@ Map<String, dynamic> createUserRecordData({
   String bank,
   String monthlyIncome,
   String photoUrl,
-  String ststus,
+  String status,
+  String name,
+  String countryCode,
+  String roleId,
+  String gender,
+  String displayName,
 }) =>
     serializers.toFirestore(
         UserRecord.serializer,
         UserRecord((u) => u
           ..email = email
-          ..displayName = displayName
           ..uid = uid
           ..createdTime = createdTime
           ..phoneNumber = phoneNumber
@@ -104,4 +125,9 @@ Map<String, dynamic> createUserRecordData({
           ..bank = bank
           ..monthlyIncome = monthlyIncome
           ..photoUrl = photoUrl
-          ..ststus = ststus));
+          ..status = status
+          ..name = name
+          ..countryCode = countryCode
+          ..roleId = roleId
+          ..gender = gender
+          ..displayName = displayName));

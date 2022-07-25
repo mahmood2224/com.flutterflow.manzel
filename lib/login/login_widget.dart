@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../common_widgets/overlay.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -21,15 +22,13 @@ class _LoginWidgetState extends State<LoginWidget> {
   TextEditingController phoneNumberController;
   bool changeLanguage;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  OverlayEntry entry;
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Login'});
-    phoneNumberController = TextEditingController(
-        text: FFLocalizations.of(context).getText(
-      '11ilbwge' /* +966 */,
-    ));
+    phoneNumberController = TextEditingController();
   }
 
   @override
@@ -51,9 +50,8 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           onPressed: () async {
             logFirebaseEvent('LOGIN_PAGE_back_ON_TAP');
-            // Back to onboarding view
-            logFirebaseEvent('back_Backtoonboardingview');
-            context.pushNamed('OnboardingView');
+            logFirebaseEvent('back_Navigate-Back');
+            context.pop();
           },
         ),
         actions: [
@@ -101,68 +99,72 @@ class _LoginWidgetState extends State<LoginWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 20, 24, 0),
-                child: Text(
-                  FFLocalizations.of(context).getText(
-                    'cp1d00ba' /* Enter your mobile number */,
-                  ),
-                  style: FlutterFlowTheme.of(context).title1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w800,
-                        useGoogleFonts: false,
-                      ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 5, 24, 0),
-                child: Text(
-                  FFLocalizations.of(context).getText(
-                    '364dhoh3' /* We'll send a verification code... */,
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w300,
-                        useGoogleFonts: false,
-                      ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                child: Container(
-                  width: double.infinity,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryBtnText,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      width: 1,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 20, 24, 0),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'cp1d00ba' /* Enter your mobile number */,
                     ),
+                    style: FlutterFlowTheme.of(context).title1.override(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Colors.black,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w800,
+                          useGoogleFonts: false,
+                        ),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                          child: TextFormField(
-                            controller: phoneNumberController,
-                            onChanged: (_) => EasyDebounce.debounce(
-                              'phoneNumberController',
-                              Duration(milliseconds: 2000),
-                              () => setState(() {}),
-                            ),
-                            autofocus: true,
-                            obscureText: false,
-                            decoration: InputDecoration(
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 5, 24, 0),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      '364dhoh3' /* We'll send a verification code... */,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w300,
+                          useGoogleFonts: false,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                  child: Container(
+                    width: double.infinity,
+                    height: 65,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBtnText,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        width: 1,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                            child: TextFormField(
+                              controller: phoneNumberController,
+                              onChanged: (_) => EasyDebounce.debounce(
+                                'phoneNumberController',
+                                Duration(milliseconds: 2000),
+                                () => setState(() {}),
+                              ),
+                              autofocus: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                prefixText: FFLocalizations.of(context).getText(
+                                  'f4tpckti' /* +966 */,),
                               labelText: FFLocalizations.of(context).getText(
                                 '4m2r1iwr' /* Mobile Number */,
                               ),
@@ -175,9 +177,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
-                              hintText: FFLocalizations.of(context).getText(
-                                'f4tpckti' /* +966 */,
-                              ),
+                              // hintText: FFLocalizations.of(context).getText(
+                              //   'f4tpckti' /* +966 */,
+                              // ),
                               hintStyle: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
@@ -311,7 +313,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                               phoneNumberController.text)) {
                             // sendOTP
                             logFirebaseEvent('sendOTP_sendOTP');
-                            final phoneNumberVal = phoneNumberController.text;
+                            final phoneNumberVal =   functions.getFormattedMobileNumber(
+                                phoneNumberController.text);
                             if (phoneNumberVal == null ||
                                 phoneNumberVal.isEmpty ||
                                 !phoneNumberVal.startsWith('+')) {
@@ -323,57 +326,69 @@ class _LoginWidgetState extends State<LoginWidget> {
                               );
                               return;
                             }
+                            //entry = showOverlay(context);
                             await beginPhoneAuth(
                               context: context,
                               phoneNumber: phoneNumberVal,
                               onCodeSent: () async {
-                                context.goNamedAuth('ConfirmOTP', mounted);
-                              },
-                            );
-                          } else {
-                            // Invalid_phone_number_action
-                            logFirebaseEvent(
-                                'sendOTP_Invalid_phone_number_action');
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'The phone number format should be +966123456789',
-                                  style: FlutterFlowTheme.of(context).subtitle1,
-                                ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor: Color(0xFF777777),
-                              ),
-                            );
-                          }
-                        },
-                        text: FFLocalizations.of(context).getText(
-                          'l3ozn1az' /* Continue */,
-                        ),
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 56,
-                          color: Color(0xFF2971FB),
-                          textStyle:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.white,
-                                    useGoogleFonts: false,
+                            //    entry.remove();
+                                context.goNamedAuth('ConfirmNewNumberOTP', mounted,queryParams:{'phoneNumber': phoneNumberVal});
+                                },
+                              );
+                            } else {
+                              // Invalid_phone_number_action
+                              logFirebaseEvent(
+                                  'sendOTP_Invalid_phone_number_action');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'The phone number format should be +966123456789',
+                                    style:
+                                        FlutterFlowTheme.of(context).subtitle1,
                                   ),
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor: Color(0xFF777777),
+                                ),
+                              );
+                            }
+                          },
+                          text: FFLocalizations.of(context).getText(
+                            'l3ozn1az' /* Continue */,
                           ),
-                          borderRadius: BorderRadius.circular(12),
+                          options: FFButtonOptions(
+                            width: double.infinity,
+                            height: 56,
+                            color: Color(0xFF2971FB),
+                            textStyle:
+                                FlutterFlowTheme.of(context).subtitle2.override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.white,
+                                      useGoogleFonts: false,
+                                    ),
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+  OverlayEntry showOverlay(BuildContext context) {
+    var overlayState = Overlay.of(context);
+    var overlayEntry = OverlayEntry(
+      builder: (context) => CircularProgressOverlay(),
+    );
+    overlayState?.insert(overlayEntry);
+    return overlayEntry;
   }
 }

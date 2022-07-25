@@ -1,11 +1,14 @@
 import '../auth/auth_util.dart';
+import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -41,6 +44,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+      logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
+      logFirebaseEvent('HomeScreen_Update-Local-State');
+      setState(
+          () => FFAppState().locale = FFLocalizations.of(context).languageCode);
+    });
+
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});
     _pagingController.addPageRequestListener((pageKey) {
       _fetchPage(pageKey);
@@ -115,7 +126,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(0),
                           child: Image.asset(
-                            'assets/images/home_background.png',
+                            'assets/images/home_bg.png',
                             width: double.infinity,
                             height: double.infinity,
                             fit: BoxFit.cover,
@@ -489,7 +500,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                             imageUrl:
                                                                 getJsonField(
                                                               propertyImagesItem,
-                                                              r'''$.attributes.name''',
+                                                              r'''$.attributes.url''',
                                                             ),
                                                             width:
                                                                 MediaQuery.of(
@@ -553,7 +564,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               );
                                             },
                                           ),
-
                                         Align(
                                           alignment:
                                               AlignmentDirectional(1, -1),
@@ -565,7 +575,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               onTap: () async {
                                                 logFirebaseEvent(
                                                     'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                                if (!(currentUserEmailVerified)) {
+                                                if (!(loggedIn)) {
                                                   logFirebaseEvent(
                                                       'Container_Navigate-To');
                                                   context.pushNamed('Login');
@@ -611,7 +621,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 child: Image.network(
                                                   getJsonField(
                                                     propertiesItem,
-                                                    r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.name''',
+                                                    r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
                                                   ),
                                                   fit: BoxFit.cover,
                                                 ),
@@ -763,7 +773,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     child: Image.network(
                                                       getJsonField(
                                                         banksItem,
-                                                        r'''$.attributes.bank_logo.data.attributes.name''',
+                                                        r'''$.attributes.bank_logo.data.attributes.url''',
                                                       ),
                                                       width: 22,
                                                       height: 22,
