@@ -404,17 +404,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Offers',
       'ar': 'عروض',
     },
-    '4ghy4kmr': {
-      'en': 'You have ',
-      'ar': '',
-    },
-    '521vpxn5': {
-      'en': '4 offers active',
-      'ar': '',
-    },
-    'ub390s0b': {
-      'en': '   ',
-      'ar': '',
+    '9vu1q7ed': {
+      'en': 'Search here ....',
+      'ar': 'ابحث هنا ....',
     },
     'vw6fpdxx': {
       'en': 'New offer',
@@ -496,92 +488,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Starting Chatting',
       'ar': 'بدء الدردشة',
     },
-    '4oms1107': {
-      'en': 'Completed or canceled offers',
-      'ar': '',
-    },
     'km9ey405': {
       'en': 'Offers',
       'ar': 'عروض',
-    },
-  },
-  // PastOffers
-  {
-    'ymx4faji': {
-      'en': 'Past & canceled offers',
-      'ar': '',
-    },
-    'k184ugzk': {
-      'en': 'Canceled',
-      'ar': 'عرض جديد',
-    },
-    'ab9stsag': {
-      'en': 'Completed',
-      'ar': 'في انتظار الموافقة',
-    },
-    'h1pdgprq': {
-      'en': 'AlRajhi Bank',
-      'ar': '',
-    },
-    '62oup0ja': {
-      'en': 'Offers for booking #',
-      'ar': 'عروض للحجز #',
-    },
-    '04ih41cs': {
-      'en': '277621515',
-      'ar': '',
-    },
-    'ouo6purn': {
-      'en': 'Initial installment',
-      'ar': 'القسط الأولي',
-    },
-    '8p81man2': {
-      'en': '.00',
-      'ar': '',
-    },
-    'j7pxtydh': {
-      'en': 'SAR',
-      'ar': '',
-    },
-    '9wxdibvx': {
-      'en': 'Installment period',
-      'ar': 'فترة التقسيط',
-    },
-    'ilrpu63z': {
-      'en': '24',
-      'ar': '24',
-    },
-    'vbp74j7q': {
-      'en': 'Month',
-      'ar': 'شهر',
-    },
-    'smib0s0p': {
-      'en': 'Total price',
-      'ar': 'السعر الكلي',
-    },
-    'xapf7no7': {
-      'en': '.00',
-      'ar': '',
-    },
-    'y3w6e54a': {
-      'en': 'SAR',
-      'ar': '',
-    },
-    'egfiu8kl': {
-      'en': 'Agent Name',
-      'ar': 'اسم العميل',
-    },
-    '4113f9wk': {
-      'en': 'Abdullah Ahmed',
-      'ar': 'Apple Pay',
-    },
-    'nuogan1d': {
-      'en': 'View offer details',
-      'ar': 'قبول',
-    },
-    'e8zoyq8c': {
-      'en': 'Home',
-      'ar': '',
     },
   },
   // Filter
@@ -849,10 +758,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'u0xq15h6': {
       'en': ' Livingrooms',
       'ar': 'غرف المعيشة',
-    },
-    '7xi05192': {
-      'en': ' Years',
-      'ar': 'سنوات',
     },
     'nq19lw60': {
       'en': 'Features and Amenities',
@@ -1190,11 +1095,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AddCardDetails
   {
-    '2y2bqxxp': {
+    'iyifknni': {
       'en': 'Add your credit card',
       'ar': '',
     },
-    '9x8ntsbh': {
+    'tr9qavut': {
       'en': 'Please fill in the fields below to submit your booking',
       'ar': '',
     },
@@ -1215,26 +1120,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '+966',
     },
     'r8lh7z72': {
-      'en': 'CVV',
+      'en': 'Expiry Date',
       'ar': 'رقم الهاتف المحمول',
     },
     'u48o2mqd': {
-      'en': '0000',
+      'en': 'MM/YY',
       'ar': '+966',
     },
-    'aecvo7l3': {
-      'en': 'Cardhoder name',
-      'ar': 'رقم الهاتف المحمول',
-    },
-    '3ud350pw': {
-      'en': ' ',
-      'ar': '+966',
-    },
-    '78h98qwp': {
-      'en': 'Submit',
-      'ar': '',
-    },
-    'h1fh1jhf': {
+    'wtnoh3hk': {
       'en': 'Home',
       'ar': '',
     },

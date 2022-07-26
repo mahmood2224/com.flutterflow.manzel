@@ -212,7 +212,10 @@ class FilterCall {
       callName: 'filter',
       apiUrl: 'https://strapi-dev.manzel.app/api/properties/?city=${city}',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
       params: {},
       returnBody: true,
     );
@@ -251,7 +254,10 @@ class BankDetailsCall {
       callName: 'BankDetails',
       apiUrl: 'https://strapi-dev.manzel.app/api/banks/${bankId}?',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
       params: {},
       returnBody: true,
     );
@@ -305,7 +311,10 @@ class CityListCall {
       callName: 'cityList',
       apiUrl: 'https://strapi-dev.manzel.app/api/cities/?',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
       params: {
         'locale': locale,
       },
@@ -326,7 +335,10 @@ class FilterParamsCall {
       apiUrl:
           'https://strapi-dev.manzel.app/api/properties/?locale=en&populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
       params: {},
       returnBody: true,
     );
@@ -342,7 +354,10 @@ class SearchPageCitiesCall {
       callName: 'searchPageCities',
       apiUrl: 'https://strapi-dev.manzel.app/api/property/search',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
       params: {
         'locale': locale,
         'populate': populate,
@@ -373,7 +388,10 @@ class PropertStatusCall {
       callName: 'propertStatus',
       apiUrl: 'https://strapi-dev.manzel.app/api/property/status/${propertyId}',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
       params: {},
       returnBody: true,
     );
@@ -395,7 +413,10 @@ class PropertyBookingStatusCall {
       callName: 'propertyBookingStatus',
       apiUrl: 'https://strapi-dev.manzel.app/api/properties/${propertyId}',
       callType: ApiCallType.PUT,
-      headers: {},
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
       params: {},
       body: body,
       bodyType: BodyType.JSON,

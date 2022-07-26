@@ -17,7 +17,6 @@ class OnboardingViewWidget extends StatefulWidget {
 class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
   PageController pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  LatLng currentUserLocationValue;
 
   @override
   void initState() {
@@ -201,14 +200,9 @@ your f... */
               child: FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('ONBOARDING_VIEW_PAGE_getStarted_ON_TAP');
-                  currentUserLocationValue = await getCurrentUserLocation(
-                      defaultLocation: LatLng(0.0, 0.0));
                   // GoTohome
                   logFirebaseEvent('getStarted_GoTohome');
                   context.goNamed('HomeScreen');
-                  logFirebaseEvent('getStarted_Update-Local-State');
-                  setState(() =>
-                      FFAppState().coordinates = currentUserLocationValue);
                   logFirebaseEvent('getStarted_Update-Local-State');
                   setState(() => FFAppState().isInitailLaunch = false);
                 },
