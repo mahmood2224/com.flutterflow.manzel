@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -17,6 +18,7 @@ class OffersWidget extends StatefulWidget {
 }
 
 class _OffersWidgetState extends State<OffersWidget> {
+  TextEditingController textController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -53,6 +55,7 @@ class _OffersWidgetState extends State<OffersWidget> {
     });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Offers'});
+    textController = TextEditingController();
   }
 
   @override
@@ -68,86 +71,71 @@ class _OffersWidgetState extends State<OffersWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 17, 16, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(20, 15, 0, 0),
+                child: Text(
+                  FFLocalizations.of(context).getText(
+                    'mthnzz7x' /* Offers */,
+                  ),
+                  style: FlutterFlowTheme.of(context).title2.override(
+                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        color: Colors.black,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w800,
+                        useGoogleFonts: false,
+                      ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16, 15, 16, 0),
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              'mthnzz7x' /* Offers */,
-                            ),
-                            style: FlutterFlowTheme.of(context).title2.override(
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Color(0xFFF1F1F1),
+                      width: 1,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 6, 16, 6),
+                    child: TextFormField(
+                      controller: textController,
+                      onChanged: (_) => EasyDebounce.debounce(
+                        'textController',
+                        Duration(milliseconds: 100),
+                        () => setState(() {}),
+                      ),
+                      autofocus: true,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        hintText: FFLocalizations.of(context).getText(
+                          '9vu1q7ed' /* Search here .... */,
+                        ),
+                        hintStyle:
+                            FlutterFlowTheme.of(context).bodyText2.override(
                                   fontFamily: 'Sofia Pro By Khuzaimah',
                                   color: Colors.black,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w800,
                                   useGoogleFonts: false,
                                 ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0x00000000),
+                            width: 1,
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 3, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        'You have ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
-                                      ),
-                                      Text(
-                                        '4 offers active',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              fontWeight: FontWeight.bold,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Text(
-                                  '   ',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).white,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Color(0x1A626262),
-                          ),
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Icon(
-                          Icons.filter_list,
-                          color: Colors.black,
-                          size: 18,
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0x00000000),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                    ],
+                      style: FlutterFlowTheme.of(context).bodyText1,
+                    ),
                   ),
                 ),
               ),
@@ -167,15 +155,15 @@ class _OffersWidgetState extends State<OffersWidget> {
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
-                              blurRadius: 15,
-                              color: Color(0x06000000),
-                              offset: Offset(0, 8),
+                              blurRadius: 4,
+                              color: Color(0x40000000),
+                              offset: Offset(0, 4),
                               spreadRadius: 0,
                             )
                           ],
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                            color: Color(0xFFF1F1F1),
+                            color: Color(0x40000000),
                           ),
                         ),
                         child: Column(
@@ -765,56 +753,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                       ),
                     ),
                   ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 0),
-                child: Container(
-                  width: double.infinity,
-                  height: 52,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).white,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 8,
-                        color: Color(0x06000000),
-                        offset: Offset(0, 15),
-                        spreadRadius: 0,
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Color(0xFFF1F1F1),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(18, 0, 0, 0),
-                        child: Text(
-                          'Completed or canceled offers',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Color(0xFF474747),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 17, 0),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.black,
-                          size: 18,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
             ],

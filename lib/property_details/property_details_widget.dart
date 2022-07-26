@@ -1087,25 +1087,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         false,
                                                                   ),
                                                             ),
-                                                            Text(
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .getText(
-                                                                '7xi05192' /*  Years */,
-                                                              ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
-                                                            ),
                                                           ],
                                                         ),
                                                       ),
