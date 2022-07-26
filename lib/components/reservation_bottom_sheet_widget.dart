@@ -94,7 +94,7 @@ class _ReservationBottomSheetWidgetState
           // Save Card Switch
           isUserAllowedToSaveCard: false,
           // Enable/Disable 3DSecure
-          isRequires3DSecure: false,
+          isRequires3DSecure: true,
           // Receipt SMS/Email
           receipt: Receipt(true, false),
           // Authorize Action [Capture - Void]
@@ -529,11 +529,11 @@ class _ReservationBottomSheetWidgetState
                         propertyId: widget.propertyId,
                       );
                       _shouldSetState = true;
-                      // if (functions
-                      //     .isPropertyAvailable(PropertStatusCall.propertyStatus(
-                      //   (propertyStatus?.jsonBody ?? ''),
-                      // ).toString())) {
-                          if(true){
+                      if (functions
+                          .isPropertyAvailable(PropertStatusCall.propertyStatus(
+                        (propertyStatus?.jsonBody ?? ''),
+                      ).toString())) {
+                      //     if(true){
                         if (functions.queryCollectionHasValue(
                             buttonOrdersRecordList.toList())) {
                           logFirebaseEvent('Button_Bottom-Sheet');
