@@ -205,7 +205,7 @@ class _ReservationBottomSheetWidgetState
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  widget.reservationCost.toString(),
+                  functions.formatAmount(widget.reservationCost.toString()),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Sofia Pro By Khuzaimah',
                         fontSize: 40,
@@ -390,6 +390,8 @@ class _ReservationBottomSheetWidgetState
                       ).toString())) {
                         if (functions.queryCollectionHasValue(
                             buttonOrdersRecordList.toList())) {
+                          logFirebaseEvent('Button_Bottom-Sheet');
+                          Navigator.pop(context);
                           logFirebaseEvent('Button_Show-Snack-Bar');
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -399,11 +401,11 @@ class _ReservationBottomSheetWidgetState
                                   fontFamily: 'Sofia Pro By Khuzaimah',
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 14,
+                                  fontSize: 18,
                                 ),
                               ),
                               duration: Duration(milliseconds: 4000),
-                              backgroundColor: Color(0xFFFF0000),
+                              backgroundColor: Color(0xFF777777),
                             ),
                           );
                           if (_shouldSetState) setState(() {});
@@ -477,6 +479,8 @@ class _ReservationBottomSheetWidgetState
                           }.withoutNulls,
                         );
                       } else {
+                        logFirebaseEvent('Button_Bottom-Sheet');
+                        Navigator.pop(context);
                         logFirebaseEvent('Button_Show-Snack-Bar');
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -486,11 +490,11 @@ class _ReservationBottomSheetWidgetState
                                 fontFamily: 'Sofia Pro By Khuzaimah',
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 14,
+                                fontSize: 18,
                               ),
                             ),
                             duration: Duration(milliseconds: 4000),
-                            backgroundColor: Color(0xFFFF0000),
+                            backgroundColor: Color(0xFF777777),
                           ),
                         );
                         if (_shouldSetState) setState(() {});

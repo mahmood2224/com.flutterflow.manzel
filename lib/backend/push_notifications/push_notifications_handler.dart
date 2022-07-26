@@ -88,7 +88,9 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EditMobileNumber': (data) async => EditMobileNumberWidget(),
   'ConfirmNewNumberOTP': (data) async => ConfirmNewNumberOTPWidget(),
   'Notifications': (data) async => NotificationsWidget(),
-  'Filter': (data) async => NavBarPage(initialPage: 'Filter'),
+  'Offers': (data) async => NavBarPage(initialPage: 'Offers'),
+  'PastOffers': (data) async => PastOffersWidget(),
+  'Filter': (data) async => FilterWidget(),
   'filterResults': (data) async => FilterResultsWidget(),
   'MyProperties': (data) async => NavBarPage(initialPage: 'MyProperties'),
   'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
@@ -116,6 +118,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'OrderDetails': (data) async => OrderDetailsWidget(
         propertId: getParameter(data, 'propertId'),
       ),
+  'AddCardDetails': (data) async => AddCardDetailsWidget(),
   'KYC': (data) async => KycWidget(),
   'AbsherVerification': (data) async => AbsherVerificationWidget(),
   'ConfirmAbsher': (data) async => ConfirmAbsherWidget(),

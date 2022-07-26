@@ -77,8 +77,8 @@ class _LoginWidgetState extends State<LoginWidget> {
               },
               child: Text(
                 FFLocalizations.of(context).getVariableText(
-                  enText: 'English',
-                  arText: 'العربية',
+                  enText: 'العربية',
+                  arText: 'English',
                 ),
                 textAlign: TextAlign.end,
                 style: FlutterFlowTheme.of(context).title1.override(
