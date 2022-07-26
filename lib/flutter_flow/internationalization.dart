@@ -404,15 +404,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Offers',
       'ar': 'عروض',
     },
-    '9xaoenk8': {
+    '4ghy4kmr': {
       'en': 'You have ',
       'ar': '',
     },
-    'q9hsawc6': {
+    '521vpxn5': {
       'en': '4 offers active',
       'ar': '',
     },
-    'c96rs9m0': {
+    'ub390s0b': {
       'en': '   ',
       'ar': '',
     },
@@ -496,7 +496,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Starting Chatting',
       'ar': 'بدء الدردشة',
     },
-    'waxsp59h': {
+    '4oms1107': {
       'en': 'Completed or canceled offers',
       'ar': '',
     },
@@ -507,7 +507,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PastOffers
   {
-    'd5ijl4so': {
+    'ymx4faji': {
       'en': 'Past & canceled offers',
       'ar': '',
     },
@@ -579,7 +579,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'View offer details',
       'ar': 'قبول',
     },
-    'pr66hdml': {
+    'e8zoyq8c': {
       'en': 'Home',
       'ar': '',
     },
@@ -1190,11 +1190,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AddCardDetails
   {
-    'o5mj64gp': {
+    '2y2bqxxp': {
       'en': 'Add your credit card',
       'ar': '',
     },
-    '08nmkylp': {
+    '9x8ntsbh': {
       'en': 'Please fill in the fields below to submit your booking',
       'ar': '',
     },
@@ -1230,11 +1230,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' ',
       'ar': '+966',
     },
-    'flfo5hv7': {
+    '78h98qwp': {
       'en': 'Submit',
       'ar': '',
     },
-    'visk7zzn': {
+    'h1fh1jhf': {
       'en': 'Home',
       'ar': '',
     },
