@@ -71,7 +71,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '5ard5tmn': {
       'en': ' & ',
-      'ar': '&amp;',
+      'ar': '&',
     },
     'irbrz9hi': {
       'en': 'privacy policy',
@@ -347,7 +347,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'jxwg61ha': {
       'en': 'Near to me',
-      'ar': '',
+      'ar': 'بالقرب مني',
     },
     'etpebw43': {
       'en': 'Approved Banks',
@@ -396,6 +396,192 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'mvocppdr': {
       'en': 'Home',
       'ar': 'الصفحة الرئيسية',
+    },
+  },
+  // Offers
+  {
+    'mthnzz7x': {
+      'en': 'Offers',
+      'ar': 'عروض',
+    },
+    '9xaoenk8': {
+      'en': 'You have ',
+      'ar': '',
+    },
+    'q9hsawc6': {
+      'en': '4 offers active',
+      'ar': '',
+    },
+    'c96rs9m0': {
+      'en': '   ',
+      'ar': '',
+    },
+    'vw6fpdxx': {
+      'en': 'New offer',
+      'ar': 'عرض جديد',
+    },
+    'jmco7dzk': {
+      'en': 'Await approval',
+      'ar': 'في انتظار الموافقة',
+    },
+    'k2gp95dp': {
+      'en': 'Sent, waiting for reply',
+      'ar': 'تم الإرسال ، في انتظار الرد',
+    },
+    'gtkb9quu': {
+      'en': 'AlRajhi Bank',
+      'ar': '',
+    },
+    't2kwojss': {
+      'en': 'Offers for booking #',
+      'ar': 'عروض للحجز #',
+    },
+    '9qrfxvvc': {
+      'en': '277621515',
+      'ar': '',
+    },
+    'ksabd4y2': {
+      'en': '5 min ago',
+      'ar': 'قبل 5 دقائق',
+    },
+    'ez8wbssn': {
+      'en': 'Initial installment',
+      'ar': 'القسط الأولي',
+    },
+    'ldwv6qbd': {
+      'en': '.00',
+      'ar': '',
+    },
+    'z7x7wv59': {
+      'en': 'SAR',
+      'ar': '',
+    },
+    '4ha591ne': {
+      'en': 'Installment period',
+      'ar': 'فترة التقسيط',
+    },
+    'bm6xbs4z': {
+      'en': '24',
+      'ar': '24',
+    },
+    'b1jmmlnc': {
+      'en': 'Month',
+      'ar': 'شهر',
+    },
+    '2kxnix92': {
+      'en': 'Total price',
+      'ar': 'السعر الكلي',
+    },
+    'c0ty6rbh': {
+      'en': '.00',
+      'ar': '',
+    },
+    'h47bvnhi': {
+      'en': 'SAR',
+      'ar': '',
+    },
+    'wxex1r7b': {
+      'en': 'Agent Name',
+      'ar': 'اسم العميل',
+    },
+    'g9lopb8b': {
+      'en': 'Abdullah Ahmed',
+      'ar': 'Apple Pay',
+    },
+    'i1uf8h4b': {
+      'en': 'Accept',
+      'ar': 'قبول',
+    },
+    '0ipnoq80': {
+      'en': 'Starting Chatting',
+      'ar': 'بدء الدردشة',
+    },
+    'waxsp59h': {
+      'en': 'Completed or canceled offers',
+      'ar': '',
+    },
+    'km9ey405': {
+      'en': 'Offers',
+      'ar': 'عروض',
+    },
+  },
+  // PastOffers
+  {
+    'd5ijl4so': {
+      'en': 'Past & canceled offers',
+      'ar': '',
+    },
+    'k184ugzk': {
+      'en': 'Canceled',
+      'ar': 'عرض جديد',
+    },
+    'ab9stsag': {
+      'en': 'Completed',
+      'ar': 'في انتظار الموافقة',
+    },
+    'h1pdgprq': {
+      'en': 'AlRajhi Bank',
+      'ar': '',
+    },
+    '62oup0ja': {
+      'en': 'Offers for booking #',
+      'ar': 'عروض للحجز #',
+    },
+    '04ih41cs': {
+      'en': '277621515',
+      'ar': '',
+    },
+    'ouo6purn': {
+      'en': 'Initial installment',
+      'ar': 'القسط الأولي',
+    },
+    '8p81man2': {
+      'en': '.00',
+      'ar': '',
+    },
+    'j7pxtydh': {
+      'en': 'SAR',
+      'ar': '',
+    },
+    '9wxdibvx': {
+      'en': 'Installment period',
+      'ar': 'فترة التقسيط',
+    },
+    'ilrpu63z': {
+      'en': '24',
+      'ar': '24',
+    },
+    'vbp74j7q': {
+      'en': 'Month',
+      'ar': 'شهر',
+    },
+    'smib0s0p': {
+      'en': 'Total price',
+      'ar': 'السعر الكلي',
+    },
+    'xapf7no7': {
+      'en': '.00',
+      'ar': '',
+    },
+    'y3w6e54a': {
+      'en': 'SAR',
+      'ar': '',
+    },
+    'egfiu8kl': {
+      'en': 'Agent Name',
+      'ar': 'اسم العميل',
+    },
+    '4113f9wk': {
+      'en': 'Abdullah Ahmed',
+      'ar': 'Apple Pay',
+    },
+    'nuogan1d': {
+      'en': 'View offer details',
+      'ar': 'قبول',
+    },
+    'pr66hdml': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // Filter
@@ -926,6 +1112,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Transaction Ref.',
       'ar': 'مرجع المعاملة.',
     },
+    '5czybu2h': {
+      'en': '#',
+      'ar': '',
+    },
     'nfajktl1': {
       'en': 'Payment Method',
       'ar': 'طريقة الدفع او السداد',
@@ -933,6 +1123,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'xihd37di': {
       'en': 'Amount',
       'ar': 'المبلغ',
+    },
+    'tgi826z8': {
+      'en': '.00 SAR',
+      'ar': '',
     },
     's1mfpoki': {
       'en': 'Date & Time',
@@ -992,6 +1186,57 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '07sk94co': {
       'en': 'Home',
       'ar': 'الصفحة الرئيسية',
+    },
+  },
+  // AddCardDetails
+  {
+    'o5mj64gp': {
+      'en': 'Add your credit card',
+      'ar': '',
+    },
+    '08nmkylp': {
+      'en': 'Please fill in the fields below to submit your booking',
+      'ar': '',
+    },
+    '192j9655': {
+      'en': 'Card Number',
+      'ar': 'رقم الهاتف المحمول',
+    },
+    's7o0t1vo': {
+      'en': '0000 0000 0000 0000',
+      'ar': '+966',
+    },
+    'i8uaihjd': {
+      'en': 'Expiry Date',
+      'ar': 'رقم الهاتف المحمول',
+    },
+    '6xvwrsr6': {
+      'en': 'MM/YY',
+      'ar': '+966',
+    },
+    'r8lh7z72': {
+      'en': 'CVV',
+      'ar': 'رقم الهاتف المحمول',
+    },
+    'u48o2mqd': {
+      'en': '0000',
+      'ar': '+966',
+    },
+    'aecvo7l3': {
+      'en': 'Cardhoder name',
+      'ar': 'رقم الهاتف المحمول',
+    },
+    '3ud350pw': {
+      'en': ' ',
+      'ar': '+966',
+    },
+    'flfo5hv7': {
+      'en': 'Submit',
+      'ar': '',
+    },
+    'visk7zzn': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // KYC

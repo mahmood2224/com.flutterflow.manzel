@@ -21,7 +21,10 @@ class PropertiesCall {
       callName: 'Properties',
       apiUrl: 'https://strapi-dev.manzel.app/api/properties/',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
       params: {
         'populate': populate,
         'city': city,
@@ -52,7 +55,10 @@ class PropertyCall {
       callName: 'Property',
       apiUrl: 'https://strapi-dev.manzel.app/api/properties/${propertyId}',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
       params: {
         'locale': locale,
       },

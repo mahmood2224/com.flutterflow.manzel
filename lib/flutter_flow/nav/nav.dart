@@ -156,11 +156,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => NotificationsWidget(),
             ),
             FFRoute(
+              name: 'Offers',
+              path: 'offers',
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Offers')
+                  : OffersWidget(),
+            ),
+            FFRoute(
+              name: 'PastOffers',
+              path: 'pastOffers',
+              builder: (context, params) => PastOffersWidget(),
+            ),
+            FFRoute(
               name: 'Filter',
               path: 'filter',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Filter')
-                  : FilterWidget(),
+              builder: (context, params) => FilterWidget(),
             ),
             FFRoute(
               name: 'filterResults',
@@ -229,6 +239,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => OrderDetailsWidget(
                 propertId: params.getParam('propertId', ParamType.int),
               ),
+            ),
+            FFRoute(
+              name: 'AddCardDetails',
+              path: 'addCardDetails',
+              builder: (context, params) => AddCardDetailsWidget(),
             ),
             FFRoute(
               name: 'KYC',

@@ -707,13 +707,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       .override(
                                         fontFamily: 'Sofia Pro By Khuzaimah',
                                         color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
                                         useGoogleFonts: false,
                                       ),
                                 ),
                                 duration: Duration(milliseconds: 4000),
-                                backgroundColor: Color(0xFFFF0000),
+                                backgroundColor: Color(0xFF777777),
                               ),
                             );
                           }

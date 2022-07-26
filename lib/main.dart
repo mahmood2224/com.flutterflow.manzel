@@ -116,7 +116,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'HomeScreen': HomeScreenWidget(),
       'MyProperties': MyPropertiesWidget(),
-      'Filter': FilterWidget(),
+      'Offers': OffersWidget(),
       'Profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
@@ -158,7 +158,7 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: FFLocalizations.of(context).getText(
-              '5wfrx94q' /* Offers */,
+              'km9ey405' /* Offers */,
             ),
             tooltip: '',
           ),

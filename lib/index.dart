@@ -15,6 +15,8 @@ export 'confirm_new_number_o_t_p/confirm_new_number_o_t_p_widget.dart'
     show ConfirmNewNumberOTPWidget;
 export 'home_screen/home_screen_widget.dart' show HomeScreenWidget;
 export 'notifications/notifications_widget.dart' show NotificationsWidget;
+export 'offers/offers_widget.dart' show OffersWidget;
+export 'past_offers/past_offers_widget.dart' show PastOffersWidget;
 export 'filter/filter_widget.dart' show FilterWidget;
 export 'filter_results/filter_results_widget.dart' show FilterResultsWidget;
 export 'my_properties/my_properties_widget.dart' show MyPropertiesWidget;
@@ -29,6 +31,8 @@ export 'reservation_confirmation/reservation_confirmation_widget.dart'
     show ReservationConfirmationWidget;
 export 'confirmation/confirmation_widget.dart' show ConfirmationWidget;
 export 'order_details/order_details_widget.dart' show OrderDetailsWidget;
+export 'add_card_details/add_card_details_widget.dart'
+    show AddCardDetailsWidget;
 export 'kyc/kyc_widget.dart' show KycWidget;
 export 'absher_verification/absher_verification_widget.dart'
     show AbsherVerificationWidget;
