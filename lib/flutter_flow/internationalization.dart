@@ -1048,6 +1048,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز:',
     },
+    '1mxd9jcp': {
+      'en': '#',
+      'ar': '',
+    },
     'helm66q2': {
       'en': 'Order Process',
       'ar': '',
@@ -1104,18 +1108,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Transaction details',
       'ar': 'تفاصيل الصفقه',
     },
-    'g7t2uz7u': {
-      'en': 'Transaction Ref.',
-      'ar': 'مرجع المعاملة.',
-    },
-    '5czybu2h': {
-      'en': '#',
-      'ar': '',
-    },
-    'nfajktl1': {
-      'en': 'Payment Method',
-      'ar': 'طريقة الدفع او السداد',
-    },
     'xihd37di': {
       'en': 'Amount',
       'ar': 'المبلغ',
@@ -1127,6 +1119,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     's1mfpoki': {
       'en': 'Date & Time',
       'ar': 'التاريخ والوقت',
+    },
+    'g7t2uz7u': {
+      'en': 'Transaction Ref.',
+      'ar': 'مرجع المعاملة.',
+    },
+    '5czybu2h': {
+      'en': '#',
+      'ar': '',
+    },
+    'nfajktl1': {
+      'en': 'Payment Method',
+      'ar': 'طريقة الدفع او السداد',
     },
     'a5vxpwan': {
       'en': 'View Receipt Transaction',
