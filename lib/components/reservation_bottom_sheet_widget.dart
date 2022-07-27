@@ -37,7 +37,7 @@ class _ReservationBottomSheetWidgetState
   ApiCallResponse transactionApiResponse;
   String paymentMethodValue;
   Map<dynamic, dynamic> tapSDKResult;
-  int orderId;
+  String orderId;
 
   Future<void> setupSDKSession(int paymentType) async {
     try {
@@ -85,7 +85,7 @@ class _ReservationBottomSheetWidgetState
           // },
           // Payment Reference
           // paymentReference: Reference(
-          //     acquirer: "acquirer", gateway: "gateway", payment: "payment", track: "track", transaction: "trans_910101", order: "order_262625"),
+          //      payment: "payment", order: orderId),
           // payment Descriptor
          // paymentStatementDescriptor: "paymentStatementDescriptor",
           // Save Card Switch
@@ -123,42 +123,80 @@ class _ReservationBottomSheetWidgetState
     });
   }
 
-  Future<void> startSDK(BuildContext context, Map<String, String> query) async {
+  Future<void> startSDK(BuildContext context, Map<String, String> query,) async {
 
 
     tapSDKResult = await GoSellSdkFlutter.startPaymentSDK;
 
 
     print('>>>> ${tapSDKResult['sdk_result']}');
-    setState(() {
-      switch (tapSDKResult['sdk_result']) {
-        case "SUCCESS":
-          // sdkStatus = "SUCCESS";
-          // handleSDKResult();
-          context.pushNamed(
-            'Confirmation',
-            queryParams: query
-          );
-          break;
-        case "FAILED":
-          // sdkStatus = "FAILED";
-          // handleSDKResult();
+    switch (tapSDKResult['sdk_result']) {
+      case "SUCCESS":
+      // sdkStatus = "SUCCESS";
+      // handleSDKResult();
+      // context.pushNamed(
+      //   'Confirmation',
+      //   queryParams: query
+      // );
+
+        transactionApiResponse = await AddTransactionCall.call(
+          amountPaid: widget.reservationCost.toString(),
+          transactionMethod: paymentMethodValue,
+          orderId: int.parse(orderId),
+          userId: currentUserReference.id,
+          transactionStatus: 'Completed',
+          transactionId: tapSDKResult['charge_id'],
+        );
+
+        if (((transactionApiResponse?.statusCode ?? 200)) ==
+            200) {
+          logFirebaseEvent('Button_Bottom-Sheet');
           Navigator.pop(context);
-          logFirebaseEvent('Button_Show-Snack-Bar');
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Payment Failed',
-                  style: TextStyle(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                  ),
+          logFirebaseEvent('Button_Navigate-To');
+          context.goNamed(
+            'Confirmation',
+            queryParams: {
+              'propertyId': serializeParam(
+                  widget.propertyId, ParamType.int),
+              'orderId': serializeParam(
+                  int.parse(orderId),
+                  ParamType.int),
+              'paymentMethod': serializeParam(
+                  paymentMethodValue, ParamType.String),
+              'transactionId':
+              serializeParam(tapSDKResult['charge_id'], ParamType.String),
+            }.withoutNulls,
+          );
+        }
+        break;
+      case "FAILED":
+        transactionApiResponse = await AddTransactionCall.call(
+          amountPaid: widget.reservationCost.toString(),
+          transactionMethod: paymentMethodValue,
+          orderId: int.parse(orderId),
+          userId: currentUserReference.id,
+          transactionStatus: 'Failed',
+          transactionId: tapSDKResult['charge_id'],
+        );
+        if (((transactionApiResponse?.statusCode ?? 200)) ==
+            200) {
+        Navigator.pop(context);
+        logFirebaseEvent('Button_Show-Snack-Bar');
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Payment Failed',
+                style: TextStyle(
+                  fontFamily: 'Sofia Pro By Khuzaimah',
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
                 ),
-                duration: Duration(milliseconds: 4000),
-                backgroundColor: Color(0xFF777777),
-              ));
+              ),
+              duration: Duration(milliseconds: 4000),
+              backgroundColor: Color(0xFF777777),
+            ));
+    }
           break;
         case "SDK_ERROR":
           print('sdk error............');
@@ -175,7 +213,7 @@ class _ReservationBottomSheetWidgetState
         //  sdkStatus = "NOT_IMPLEMENTED";
           break;
       }
-    });
+
   }
 
   @override
@@ -522,7 +560,7 @@ class _ReservationBottomSheetWidgetState
                       var _shouldSetState = false;
                       logFirebaseEvent('Button_Backend-Call');
                       addOrderApiResponse = await AddOrderCall.call(
-                        propertyId: widget.propertyId.toString(),userId: '6TCZMQHGHJYXZEycWKX89PT4cwp1',
+                        propertyId: widget.propertyId.toString(),userId: currentUserReference.id,
                       );
                       _shouldSetState = true;
                       if (((addOrderApiResponse?.statusCode ?? 200)) == 200) {
@@ -539,41 +577,7 @@ class _ReservationBottomSheetWidgetState
                               paymentMethodValue, ParamType.String),
                           'orderId': serializeParam(orderId, ParamType.int),
                         }.withoutNulls);
-                        transactionApiResponse = await AddTransactionCall.call(
-                          amountPaid: widget.reservationCost.toString(),
-                          transactionMethod: paymentMethodValue,
-                          orderId: getJsonField(
-                            (addOrderApiResponse?.jsonBody ?? ''),
-                            r'''$.result''',
-                          ),
-                          userId: '6TCZMQHGHJYXZEycWKX89PT4cwp1',
-                          transactionStatus: 'Completed',
-                          transactionId: '6436464',
-                        );
-                        _shouldSetState = true;
-                        if (((transactionApiResponse?.statusCode ?? 200)) ==
-                            200) {
-                          logFirebaseEvent('Button_Bottom-Sheet');
-                          Navigator.pop(context);
-                          logFirebaseEvent('Button_Navigate-To');
-                          context.pushNamed(
-                            'Confirmation',
-                            queryParams: {
-                              'propertyId': serializeParam(
-                                  widget.propertyId, ParamType.int),
-                              'orderId': serializeParam(
-                                  getJsonField(
-                                    (addOrderApiResponse?.jsonBody ?? ''),
-                                    r'''$.result''',
-                                  ),
-                                  ParamType.int),
-                              'paymentMethod': serializeParam(
-                                  paymentMethodValue, ParamType.String),
-                              'transactionId':
-                                  serializeParam('', ParamType.String),
-                            }.withoutNulls,
-                          );
-                        }
+
                       } else {
                         logFirebaseEvent('Button_Bottom-Sheet');
                         Navigator.pop(context);
