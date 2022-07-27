@@ -37,6 +37,7 @@ class _ReservationBottomSheetWidgetState
   ApiCallResponse transactionApiResponse;
   String paymentMethodValue;
   Map<dynamic, dynamic> tapSDKResult;
+  int orderId;
 
   Future<void> setupSDKSession(int paymentType) async {
     try {
@@ -522,18 +523,20 @@ class _ReservationBottomSheetWidgetState
                       logFirebaseEvent('Button_Backend-Call');
                       addOrderApiResponse = await AddOrderCall.call(
                         propertyId: widget.propertyId.toString(),);
-                      setupSDKSession(paymentMethodValue.toLowerCase() == 'mada/visa' ? 0 : 1);
-
                       _shouldSetState = true;
                       if (((addOrderApiResponse?.statusCode ?? 200)) == 200) {
                         logFirebaseEvent('Button_Backend-Call');
+                        setupSDKSession(paymentMethodValue.toLowerCase() == 'mada/visa' ? 0 : 1);
+                        orderId = getJsonField(
+                          (addOrderApiResponse?.jsonBody ?? ''),
+                          r'''$.result''',
+                        );
                         startSDK(context, {
                           'propertyId': serializeParam(
                               widget.propertyId, ParamType.int),
                           'paymentMethod': serializeParam(
                               paymentMethodValue, ParamType.String),
-                          'orderId': serializeParam(
-                              orderDetails.orderId, ParamType.int),
+                          'orderId': serializeParam(orderId, ParamType.int),
                         }.withoutNulls);
                         transactionApiResponse = await AddTransactionCall.call(
                           amountPaid: widget.reservationCost.toString(),
