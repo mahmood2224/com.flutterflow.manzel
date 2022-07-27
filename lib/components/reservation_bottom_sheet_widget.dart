@@ -377,6 +377,7 @@ class _ReservationBottomSheetWidgetState
                       logFirebaseEvent('Button_Backend-Call');
                       addOrderApiResponse = await AddOrderCall.call(
                         propertyId: widget.propertyId.toString(),
+                        userId: '6TCZMQHGHJYXZEycWKX89PT4cwp1',
                       );
                       _shouldSetState = true;
                       if (((addOrderApiResponse?.statusCode ?? 200)) == 200) {
@@ -388,6 +389,9 @@ class _ReservationBottomSheetWidgetState
                             (addOrderApiResponse?.jsonBody ?? ''),
                             r'''$.result''',
                           ),
+                          userId: '6TCZMQHGHJYXZEycWKX89PT4cwp1',
+                          transactionStatus: 'Completed',
+                          transactionId: '6436464',
                         );
                         _shouldSetState = true;
                         if (((transactionApiResponse?.statusCode ?? 200)) ==
