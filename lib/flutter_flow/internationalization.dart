@@ -404,15 +404,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Offers',
       'ar': 'عروض',
     },
-    'kds1yom4': {
+    '2idl77yn': {
       'en': 'You have ',
       'ar': '',
     },
-    'l2vagwca': {
+    'hgyo4tyg': {
       'en': '4 offers active',
       'ar': '',
     },
-    'jrag61ae': {
+    'y8tdckwf': {
       'en': '     ',
       'ar': '',
     },
@@ -496,7 +496,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Starting Chatting',
       'ar': 'بدء الدردشة',
     },
-    'jk7d3p9n': {
+    'f27oe5pi': {
       'en': 'Completed or canceled offers',
       'ar': '',
     },
