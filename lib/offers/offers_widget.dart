@@ -106,7 +106,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        'You have ',
+                                        FFLocalizations.of(context).getText(
+                                          'r282eka0' /* You have  */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -117,7 +119,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             ),
                                       ),
                                       Text(
-                                        '4 offers active',
+                                        FFLocalizations.of(context).getText(
+                                          '9i2we2yx' /* 4 offers active */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -132,7 +136,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                   ),
                                 ),
                                 Text(
-                                  '     ',
+                                  FFLocalizations.of(context).getText(
+                                    'eiivr9zt' /*       */,
+                                  ),
                                   style: FlutterFlowTheme.of(context).bodyText1,
                                 ),
                               ],
@@ -157,6 +163,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                           border: Border.all(
                             color: Color(0xFFF4F4F4),
                           ),
+                        ),
+                        child: Icon(
+                          Icons.filter_list,
+                          color: Colors.black,
+                          size: 18,
                         ),
                       ),
                     ],
@@ -821,7 +832,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(18, 0, 0, 0),
                           child: Text(
-                            'Completed or canceled offers',
+                            FFLocalizations.of(context).getText(
+                              '5gvwuuh2' /* Completed or canceled offers */,
+                            ),
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Sofia Pro By Khuzaimah',

@@ -404,15 +404,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Offers',
       'ar': 'عروض',
     },
-    '2idl77yn': {
+    'r282eka0': {
       'en': 'You have ',
-      'ar': '',
+      'ar': 'عندك',
     },
-    'hgyo4tyg': {
+    '9i2we2yx': {
       'en': '4 offers active',
-      'ar': '',
+      'ar': '4 عروض نشطة',
     },
-    'y8tdckwf': {
+    'eiivr9zt': {
       'en': '     ',
       'ar': '',
     },
@@ -496,9 +496,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Starting Chatting',
       'ar': 'بدء الدردشة',
     },
-    'f27oe5pi': {
+    '5gvwuuh2': {
       'en': 'Completed or canceled offers',
-      'ar': '',
+      'ar': 'العروض المكتملة أو الملغاة',
     },
     'km9ey405': {
       'en': 'Offers',
@@ -509,15 +509,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'qvv3lsb7': {
       'en': 'Past & canceled offers',
-      'ar': '',
+      'ar': 'العروض السابقة والملغاة',
     },
     '4ur7plxi': {
       'en': 'Canceled',
-      'ar': 'عرض جديد',
+      'ar': 'ألغيت',
     },
     '4znz79dz': {
       'en': 'Completed',
-      'ar': 'في انتظار الموافقة',
+      'ar': 'مكتمل',
     },
     'znd07o80': {
       'en': 'AlRajhi Bank',
@@ -577,7 +577,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '09p93shu': {
       'en': 'View offer details',
-      'ar': 'قبول',
+      'ar': 'مشاهدة تفاصيل العرض',
     },
     'kct7wk1t': {
       'en': 'Home',

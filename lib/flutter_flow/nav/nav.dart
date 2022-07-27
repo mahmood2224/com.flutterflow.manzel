@@ -219,6 +219,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 paymentMethod:
                     params.getParam('paymentMethod', ParamType.String),
                 orderId: params.getParam('orderId', ParamType.int),
+                transactionId:
+                    params.getParam('transactionId', ParamType.String),
               ),
             ),
             FFRoute(

@@ -114,6 +114,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         propertyId: getParameter(data, 'propertyId'),
         paymentMethod: getParameter(data, 'paymentMethod'),
         orderId: getParameter(data, 'orderId'),
+        transactionId: getParameter(data, 'transactionId'),
       ),
   'OrderDetails': (data) async => OrderDetailsWidget(
         propertId: getParameter(data, 'propertId'),

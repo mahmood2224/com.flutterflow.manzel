@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
@@ -6,8 +5,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import '../flutter_flow/random_data_util.dart' as random_data;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,10 +28,8 @@ class ReservationBottomSheetWidget extends StatefulWidget {
 
 class _ReservationBottomSheetWidgetState
     extends State<ReservationBottomSheetWidget> {
-  ApiCallResponse bookingStatus;
-  ApiCallResponse propertyStatus;
-  OrdersRecord orderDetails;
-  TransactionsRecord transactionDetails;
+  ApiCallResponse addOrderApiResponse;
+  ApiCallResponse transactionApiResponse;
   String paymentMethodValue;
 
   @override
@@ -380,104 +375,44 @@ class _ReservationBottomSheetWidgetState
                           'RESERVATION_BOTTOM_SHEET_PAY_BTN_ON_TAP');
                       var _shouldSetState = false;
                       logFirebaseEvent('Button_Backend-Call');
-                      propertyStatus = await PropertStatusCall.call(
-                        propertyId: widget.propertyId,
+                      addOrderApiResponse = await AddOrderCall.call(
+                        propertyId: widget.propertyId.toString(),
                       );
                       _shouldSetState = true;
-                      if (functions
-                          .isPropertyAvailable(PropertStatusCall.propertyStatus(
-                        (propertyStatus?.jsonBody ?? ''),
-                      ).toString())) {
-                        if (functions.queryCollectionHasValue(
-                            buttonOrdersRecordList.toList())) {
+                      if (((addOrderApiResponse?.statusCode ?? 200)) == 200) {
+                        logFirebaseEvent('Button_Backend-Call');
+                        transactionApiResponse = await AddTransactionCall.call(
+                          amountPaid: widget.reservationCost.toString(),
+                          transactionMethod: paymentMethodValue,
+                          orderId: getJsonField(
+                            (addOrderApiResponse?.jsonBody ?? ''),
+                            r'''$.result''',
+                          ),
+                        );
+                        _shouldSetState = true;
+                        if (((transactionApiResponse?.statusCode ?? 200)) ==
+                            200) {
                           logFirebaseEvent('Button_Bottom-Sheet');
                           Navigator.pop(context);
-                          logFirebaseEvent('Button_Show-Snack-Bar');
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'This property is not avaiable currently',
-                                style: TextStyle(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor: Color(0xFF777777),
-                            ),
+                          logFirebaseEvent('Button_Navigate-To');
+                          context.pushNamed(
+                            'Confirmation',
+                            queryParams: {
+                              'propertyId': serializeParam(
+                                  widget.propertyId, ParamType.int),
+                              'orderId': serializeParam(
+                                  getJsonField(
+                                    (addOrderApiResponse?.jsonBody ?? ''),
+                                    r'''$.result''',
+                                  ),
+                                  ParamType.int),
+                              'paymentMethod': serializeParam(
+                                  paymentMethodValue, ParamType.String),
+                              'transactionId':
+                                  serializeParam('', ParamType.String),
+                            }.withoutNulls,
                           );
-                          if (_shouldSetState) setState(() {});
-                          return;
-                        } else {
-                          logFirebaseEvent('Button_Backend-Call');
-
-                          final ordersCreateData = createOrdersRecordData(
-                            orderId: functions.orderIdGenerator(
-                                random_data.randomInteger(0, 1000000)),
-                            createdAt: getCurrentTimestamp,
-                            updatedAt: getCurrentTimestamp,
-                            userId: currentUserReference,
-                            reservationAmount: getJsonField(
-                              widget.propertyJSON,
-                              r'''$.data.attributes.property_reservation_cost''',
-                            ).toString(),
-                            propertyId: widget.propertyId,
-                            orderStatus: 'Booked',
-                            bookingExpiryDate: random_data.randomDate(),
-                            cammundaInstanceId: 'cammunda_id',
-                            depositReceipt: 'on the process',
-                          );
-                          var ordersRecordReference =
-                              OrdersRecord.collection.doc();
-                          await ordersRecordReference.set(ordersCreateData);
-                          orderDetails = OrdersRecord.getDocumentFromData(
-                              ordersCreateData, ordersRecordReference);
-                          _shouldSetState = true;
-                          logFirebaseEvent('Button_Backend-Call');
-                          bookingStatus = await PropertStatusCall.call(
-                            propertyId: widget.propertyId,
-                          );
-                          _shouldSetState = true;
-                          logFirebaseEvent('Button_Backend-Call');
-
-                          final transactionsCreateData =
-                              createTransactionsRecordData(
-                            userId: currentUserReference,
-                            orderId: orderDetails.orderId,
-                            transactionMethod: paymentMethodValue,
-                            createdAt: getCurrentTimestamp,
-                            updatedAt: getCurrentTimestamp,
-                            paidAmount: widget.reservationCost.toString(),
-                            transactionType: 'Installment',
-                            transactionId: functions.orderIdGenerator(
-                                random_data.randomInteger(0, 1000000)),
-                            transactionStatus: 'Ongiong',
-                          );
-                          var transactionsRecordReference =
-                              TransactionsRecord.collection.doc();
-                          await transactionsRecordReference
-                              .set(transactionsCreateData);
-                          transactionDetails =
-                              TransactionsRecord.getDocumentFromData(
-                                  transactionsCreateData,
-                                  transactionsRecordReference);
-                          _shouldSetState = true;
                         }
-
-                        logFirebaseEvent('Button_Navigate-To');
-                        context.pushNamed(
-                          'Confirmation',
-                          queryParams: {
-                            'propertyId': serializeParam(
-                                widget.propertyId, ParamType.int),
-                            'paymentMethod': serializeParam(
-                                paymentMethodValue, ParamType.String),
-                            'orderId': serializeParam(
-                                orderDetails.orderId, ParamType.int),
-                          }.withoutNulls,
-                        );
                       } else {
                         logFirebaseEvent('Button_Bottom-Sheet');
                         Navigator.pop(context);
@@ -485,16 +420,13 @@ class _ReservationBottomSheetWidgetState
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'This property is not avaiable currently',
+                              'The property is already booked',
                               style: TextStyle(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18,
+                                color: Color(0xFFA5A5A5),
                               ),
                             ),
                             duration: Duration(milliseconds: 4000),
-                            backgroundColor: Color(0xFF777777),
+                            backgroundColor: Color(0x00000000),
                           ),
                         );
                         if (_shouldSetState) setState(() {});
