@@ -1119,8 +1119,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                               ),
                                               Text(
                                                 columnTransactionsRecord
-                                                    .transactionId
-                                                    .toString(),
+                                                    .transactionId,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText1

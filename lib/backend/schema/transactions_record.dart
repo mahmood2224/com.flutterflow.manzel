@@ -32,10 +32,6 @@ abstract class TransactionsRecord
   String get transactionMethod;
 
   @nullable
-  @BuiltValueField(wireName: 'transaction_id')
-  int get transactionId;
-
-  @nullable
   @BuiltValueField(wireName: 'transaction_status')
   String get transactionStatus;
 
@@ -48,6 +44,10 @@ abstract class TransactionsRecord
   DateTime get updatedAt;
 
   @nullable
+  @BuiltValueField(wireName: 'transaction_id')
+  String get transactionId;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -56,8 +56,8 @@ abstract class TransactionsRecord
     ..paidAmount = ''
     ..transactionType = ''
     ..transactionMethod = ''
-    ..transactionId = 0
-    ..transactionStatus = '';
+    ..transactionStatus = ''
+    ..transactionId = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Transactions');
@@ -87,10 +87,10 @@ Map<String, dynamic> createTransactionsRecordData({
   String paidAmount,
   String transactionType,
   String transactionMethod,
-  int transactionId,
   String transactionStatus,
   DateTime createdAt,
   DateTime updatedAt,
+  String transactionId,
 }) =>
     serializers.toFirestore(
         TransactionsRecord.serializer,
@@ -100,7 +100,7 @@ Map<String, dynamic> createTransactionsRecordData({
           ..paidAmount = paidAmount
           ..transactionType = transactionType
           ..transactionMethod = transactionMethod
-          ..transactionId = transactionId
           ..transactionStatus = transactionStatus
           ..createdAt = createdAt
-          ..updatedAt = updatedAt));
+          ..updatedAt = updatedAt
+          ..transactionId = transactionId));

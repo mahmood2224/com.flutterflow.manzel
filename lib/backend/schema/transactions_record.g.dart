@@ -56,12 +56,6 @@ class _$TransactionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.transactionId;
-    if (value != null) {
-      result
-        ..add('transaction_id')
-        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
     value = object.transactionStatus;
     if (value != null) {
       result
@@ -82,6 +76,13 @@ class _$TransactionsRecordSerializer
         ..add('updated_at')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
+    }
+    value = object.transactionId;
+    if (value != null) {
+      result
+        ..add('transaction_id')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.reference;
     if (value != null) {
@@ -128,10 +129,6 @@ class _$TransactionsRecordSerializer
           result.transactionMethod = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'transaction_id':
-          result.transactionId = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
-          break;
         case 'transaction_status':
           result.transactionStatus = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -143,6 +140,10 @@ class _$TransactionsRecordSerializer
         case 'updated_at':
           result.updatedAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'transaction_id':
+          result.transactionId = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
@@ -169,13 +170,13 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final String transactionMethod;
   @override
-  final int transactionId;
-  @override
   final String transactionStatus;
   @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
+  @override
+  final String transactionId;
   @override
   final DocumentReference<Object> reference;
 
@@ -189,10 +190,10 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.paidAmount,
       this.transactionType,
       this.transactionMethod,
-      this.transactionId,
       this.transactionStatus,
       this.createdAt,
       this.updatedAt,
+      this.transactionId,
       this.reference})
       : super._();
 
@@ -214,10 +215,10 @@ class _$TransactionsRecord extends TransactionsRecord {
         paidAmount == other.paidAmount &&
         transactionType == other.transactionType &&
         transactionMethod == other.transactionMethod &&
-        transactionId == other.transactionId &&
         transactionStatus == other.transactionStatus &&
         createdAt == other.createdAt &&
         updatedAt == other.updatedAt &&
+        transactionId == other.transactionId &&
         reference == other.reference;
   }
 
@@ -236,10 +237,10 @@ class _$TransactionsRecord extends TransactionsRecord {
                                     paidAmount.hashCode),
                                 transactionType.hashCode),
                             transactionMethod.hashCode),
-                        transactionId.hashCode),
-                    transactionStatus.hashCode),
-                createdAt.hashCode),
-            updatedAt.hashCode),
+                        transactionStatus.hashCode),
+                    createdAt.hashCode),
+                updatedAt.hashCode),
+            transactionId.hashCode),
         reference.hashCode));
   }
 
@@ -251,10 +252,10 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('paidAmount', paidAmount)
           ..add('transactionType', transactionType)
           ..add('transactionMethod', transactionMethod)
-          ..add('transactionId', transactionId)
           ..add('transactionStatus', transactionStatus)
           ..add('createdAt', createdAt)
           ..add('updatedAt', updatedAt)
+          ..add('transactionId', transactionId)
           ..add('reference', reference))
         .toString();
   }
@@ -286,10 +287,6 @@ class TransactionsRecordBuilder
   set transactionMethod(String transactionMethod) =>
       _$this._transactionMethod = transactionMethod;
 
-  int _transactionId;
-  int get transactionId => _$this._transactionId;
-  set transactionId(int transactionId) => _$this._transactionId = transactionId;
-
   String _transactionStatus;
   String get transactionStatus => _$this._transactionStatus;
   set transactionStatus(String transactionStatus) =>
@@ -302,6 +299,11 @@ class TransactionsRecordBuilder
   DateTime _updatedAt;
   DateTime get updatedAt => _$this._updatedAt;
   set updatedAt(DateTime updatedAt) => _$this._updatedAt = updatedAt;
+
+  String _transactionId;
+  String get transactionId => _$this._transactionId;
+  set transactionId(String transactionId) =>
+      _$this._transactionId = transactionId;
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
@@ -320,10 +322,10 @@ class TransactionsRecordBuilder
       _paidAmount = $v.paidAmount;
       _transactionType = $v.transactionType;
       _transactionMethod = $v.transactionMethod;
-      _transactionId = $v.transactionId;
       _transactionStatus = $v.transactionStatus;
       _createdAt = $v.createdAt;
       _updatedAt = $v.updatedAt;
+      _transactionId = $v.transactionId;
       _reference = $v.reference;
       _$v = null;
     }
@@ -350,10 +352,10 @@ class TransactionsRecordBuilder
             paidAmount: paidAmount,
             transactionType: transactionType,
             transactionMethod: transactionMethod,
-            transactionId: transactionId,
             transactionStatus: transactionStatus,
             createdAt: createdAt,
             updatedAt: updatedAt,
+            transactionId: transactionId,
             reference: reference);
     replace(_$result);
     return _$result;
