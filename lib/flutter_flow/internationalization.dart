@@ -404,9 +404,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Offers',
       'ar': 'عروض',
     },
-    '9vu1q7ed': {
-      'en': 'Search here ....',
-      'ar': 'ابحث هنا ....',
+    'r282eka0': {
+      'en': 'You have ',
+      'ar': 'عندك',
+    },
+    '9i2we2yx': {
+      'en': '4 offers active',
+      'ar': '4 عروض نشطة',
+    },
+    'eiivr9zt': {
+      'en': '     ',
+      'ar': '',
     },
     'vw6fpdxx': {
       'en': 'New offer',
@@ -488,9 +496,92 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Starting Chatting',
       'ar': 'بدء الدردشة',
     },
+    '5gvwuuh2': {
+      'en': 'Completed or canceled offers',
+      'ar': 'العروض المكتملة أو الملغاة',
+    },
     'km9ey405': {
       'en': 'Offers',
       'ar': 'عروض',
+    },
+  },
+  // PastOffers
+  {
+    'qvv3lsb7': {
+      'en': 'Past & canceled offers',
+      'ar': 'العروض السابقة والملغاة',
+    },
+    '4ur7plxi': {
+      'en': 'Canceled',
+      'ar': 'ألغيت',
+    },
+    '4znz79dz': {
+      'en': 'Completed',
+      'ar': 'مكتمل',
+    },
+    'znd07o80': {
+      'en': 'AlRajhi Bank',
+      'ar': '',
+    },
+    'teuph71w': {
+      'en': 'Offers for booking #',
+      'ar': 'عروض للحجز #',
+    },
+    '6dew42uj': {
+      'en': '277621515',
+      'ar': '',
+    },
+    'kjkjohaa': {
+      'en': 'Initial installment',
+      'ar': 'القسط الأولي',
+    },
+    'j6dalma3': {
+      'en': '.00',
+      'ar': '',
+    },
+    'mrfh58sm': {
+      'en': 'SAR',
+      'ar': '',
+    },
+    'yyqumocq': {
+      'en': 'Installment period',
+      'ar': 'فترة التقسيط',
+    },
+    '8n63p9dr': {
+      'en': '24',
+      'ar': '24',
+    },
+    'hthrdjdb': {
+      'en': 'Month',
+      'ar': 'شهر',
+    },
+    '70pmpq1u': {
+      'en': 'Total price',
+      'ar': 'السعر الكلي',
+    },
+    'pgt5z6lh': {
+      'en': '.00',
+      'ar': '',
+    },
+    'b18q23iu': {
+      'en': 'SAR',
+      'ar': '',
+    },
+    'gwx9s6qp': {
+      'en': 'Agent Name',
+      'ar': 'اسم العميل',
+    },
+    'jjstzf0m': {
+      'en': 'Abdullah Ahmed',
+      'ar': 'عبدالله احمد',
+    },
+    '09p93shu': {
+      'en': 'View offer details',
+      'ar': 'مشاهدة تفاصيل العرض',
+    },
+    'kct7wk1t': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // Filter
@@ -1095,11 +1186,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AddCardDetails
   {
-    'iyifknni': {
+    'f861qahz': {
       'en': 'Add your credit card',
       'ar': '',
     },
-    'tr9qavut': {
+    'ijpogm7i': {
       'en': 'Please fill in the fields below to submit your booking',
       'ar': '',
     },
@@ -1127,7 +1218,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'MM/YY',
       'ar': '+966',
     },
-    'wtnoh3hk': {
+    'vcwtqv1r': {
       'en': 'Home',
       'ar': '',
     },

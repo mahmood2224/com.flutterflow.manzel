@@ -80,7 +80,9 @@ class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      'Add your credit card',
+                      FFLocalizations.of(context).getText(
+                        'f861qahz' /* Add your credit card */,
+                      ),
                       textAlign: TextAlign.start,
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Sofia Pro By Khuzaimah',
@@ -98,7 +100,9 @@ class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Text(
-                      'Please fill in the fields below to submit your booking',
+                      FFLocalizations.of(context).getText(
+                        'ijpogm7i' /* Please fill in the fields belo... */,
+                      ),
                       textAlign: TextAlign.start,
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Sofia Pro By Khuzaimah',

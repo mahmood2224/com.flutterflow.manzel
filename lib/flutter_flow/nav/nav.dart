@@ -163,6 +163,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : OffersWidget(),
             ),
             FFRoute(
+              name: 'PastOffers',
+              path: 'pastOffers',
+              builder: (context, params) => PastOffersWidget(),
+            ),
+            FFRoute(
               name: 'Filter',
               path: 'filter',
               builder: (context, params) => FilterWidget(),
@@ -226,6 +231,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 paymentMethod:
                     params.getParam('paymentMethod', ParamType.String),
                 orderId: params.getParam('orderId', ParamType.int),
+                transactionId:
+                    params.getParam('transactionId', ParamType.String),
               ),
             ),
             FFRoute(

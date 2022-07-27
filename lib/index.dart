@@ -16,6 +16,7 @@ export 'confirm_new_number_o_t_p/confirm_new_number_o_t_p_widget.dart'
 export 'home_screen/home_screen_widget.dart' show HomeScreenWidget;
 export 'notifications/notifications_widget.dart' show NotificationsWidget;
 export 'offers/offers_widget.dart' show OffersWidget;
+export 'past_offers/past_offers_widget.dart' show PastOffersWidget;
 export 'filter/filter_widget.dart' show FilterWidget;
 export 'filter_results/filter_results_widget.dart' show FilterResultsWidget;
 export 'my_properties/my_properties_widget.dart' show MyPropertiesWidget;

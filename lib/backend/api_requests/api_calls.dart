@@ -424,3 +424,74 @@ class PropertyBookingStatusCall {
     );
   }
 }
+
+class AddOrderCall {
+  static Future<ApiCallResponse> call({
+    String userId = '',
+    String propertyId = '',
+  }) {
+    final body = '''
+{
+  "userID": "${userId}",
+  "propertyID": "${propertyId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'addOrder',
+      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/addOrder',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
+      params: {
+        'userId': userId,
+        'propertyId': propertyId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
+class AddTransactionCall {
+  static Future<ApiCallResponse> call({
+    int orderId,
+    String userId = '',
+    String amountPaid = '',
+    String transactionMethod = '',
+    String transactionStatus = '',
+    String transactionId = '',
+  }) {
+    final body = '''
+{
+  "orderId": ${orderId},
+  "userId": "${userId}",
+  "transactionID": "${transactionId}",
+  "amountPaid": "${amountPaid}",
+  "transactionMethod": "${transactionMethod}",
+  "transactionStatus": "${transactionStatus}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'addTransaction',
+      apiUrl:
+          'https://us-central1-manzel-prod.cloudfunctions.net/addTransaction',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
+      },
+      params: {
+        'orderId': orderId,
+        'userId': userId,
+        'amountPaid': amountPaid,
+        'transactionMethod': transactionMethod,
+        'transactionStatus': transactionStatus,
+        'transactionId': transactionId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}

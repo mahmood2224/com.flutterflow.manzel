@@ -16,11 +16,13 @@ class ConfirmationWidget extends StatefulWidget {
     this.propertyId,
     this.paymentMethod,
     this.orderId,
+    this.transactionId,
   }) : super(key: key);
 
   final int propertyId;
   final String paymentMethod;
   final int orderId;
+  final String transactionId;
 
   @override
   _ConfirmationWidgetState createState() => _ConfirmationWidgetState();

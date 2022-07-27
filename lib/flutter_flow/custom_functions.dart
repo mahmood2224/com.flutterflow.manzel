@@ -260,3 +260,11 @@ String formatDateTime(DateTime inputTimeStamp) {
       '${DateFormat.d().format(inputTimeStamp)} ${DateFormat.MMM().format(inputTimeStamp)} ${DateFormat.y().format(inputTimeStamp)}  ${DateFormat.jm().format(inputTimeStamp)}';
   return formattedResult;
 }
+
+String pastOfferScreenDateTime(DateTime inputDateTime) {
+  // Add your function code here!
+  String formattedResult =
+      '${DateFormat.d().format(inputDateTime).toString().padLeft(2, "0")}/${DateFormat.M().format(inputDateTime).toString().padLeft(2, "0")}/${DateFormat.y().format(inputDateTime)} - ${DateFormat.jm().format(inputDateTime)}';
+
+  return formattedResult;
+}
