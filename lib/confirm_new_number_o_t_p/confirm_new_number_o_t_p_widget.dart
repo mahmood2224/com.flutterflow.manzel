@@ -183,7 +183,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                             Future.delayed(const Duration(milliseconds: 500), () async{
                               if(currentUserDocument.status.isEmpty || currentUserDocument.status.toLowerCase() == 'active') {
                                 final userUpdateData = createUserRecordData(
-                                  status: 'active',
+                                  status: 'Active',
                                 );
                                 await currentUserReference.update(userUpdateData);
                                 if (currentUserDisplayName.isEmpty &&
@@ -196,9 +196,29 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                 }
                               }
                               else{
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                  content: Text('Your account is not active. Kindly connect to support for more information.'),
-                                ));
+                                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                //   content: Text('Your account is not active. Kindly connect to support for more information.'),
+                                // ));
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Blocked'),
+                                      content: Text(
+                                          'Your account is not active. Kindly connect to support for more information.'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () async{
+                                            await signOut();
+                                            Navigator.pop(alertDialogContext);
+                                            context.pop();
+                                            },
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               }
                             });
 

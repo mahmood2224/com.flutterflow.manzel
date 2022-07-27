@@ -332,7 +332,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               phoneNumber: phoneNumberVal,
                               onCodeSent: () async {
                             //    entry.remove();
-                                context.goNamedAuth('ConfirmNewNumberOTP', mounted,queryParams:{'phoneNumber': phoneNumberVal});
+                                context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberVal});
                                 },
                               );
                             } else {
