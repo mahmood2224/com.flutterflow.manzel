@@ -575,7 +575,6 @@ class _ReservationBottomSheetWidgetState
                               widget.propertyId, ParamType.int),
                           'paymentMethod': serializeParam(
                               paymentMethodValue, ParamType.String),
-                          'orderId': serializeParam(orderId, ParamType.int),
                         }.withoutNulls);
 
                       } else {
