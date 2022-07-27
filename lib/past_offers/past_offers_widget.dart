@@ -1,58 +1,25 @@
-import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class OffersWidget extends StatefulWidget {
-  const OffersWidget({Key key}) : super(key: key);
+class PastOffersWidget extends StatefulWidget {
+  const PastOffersWidget({Key key}) : super(key: key);
 
   @override
-  _OffersWidgetState createState() => _OffersWidgetState();
+  _PastOffersWidgetState createState() => _PastOffersWidgetState();
 }
 
-class _OffersWidgetState extends State<OffersWidget> {
+class _PastOffersWidgetState extends State<PastOffersWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    // On page load action.
-    SchedulerBinding.instance?.addPostFrameCallback((_) async {
-      logFirebaseEvent('OFFERS_PAGE_Offers_ON_PAGE_LOAD');
-      if ((valueOrDefault(currentUserDocument?.status, '')) == 'Active') {
-        return;
-      }
-
-      logFirebaseEvent('Offers_Alert-Dialog');
-      await showDialog(
-        context: context,
-        builder: (alertDialogContext) {
-          return AlertDialog(
-            title: Text('Please get your account activated'),
-            content: Text(
-                'You are not an active user please connect admin for further details on ok logout user '),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(alertDialogContext),
-                child: Text('Ok'),
-              ),
-            ],
-          );
-        },
-      );
-      logFirebaseEvent('Offers_Auth');
-      GoRouter.of(context).prepareAuthEvent();
-      await signOut();
-      context.goNamedAuth('OnboardingView', mounted);
-    });
-
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Offers'});
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'PastOffers'});
   }
 
   @override
@@ -65,113 +32,63 @@ class _OffersWidgetState extends State<OffersWidget> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 15, 16, 0),
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              'mthnzz7x' /* Offers */,
-                            ),
-                            style: FlutterFlowTheme.of(context).title2.override(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                  color: Colors.black,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w800,
-                                  useGoogleFonts: false,
-                                ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 3, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).white,
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        'You have ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              fontSize: 16,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                      Text(
-                                        '4 offers active',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Text(
-                                  '     ',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        width: 34,
-                        height: 34,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).white,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 20,
-                              color: Color(0x06000000),
-                              offset: Offset(0, 9),
-                              spreadRadius: 0,
-                            )
-                          ],
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Color(0xFFF4F4F4),
-                          ),
+                padding: EdgeInsetsDirectional.fromSTEB(18, 0, 18, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      width: 34,
+                      height: 34,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).white,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Color(0xFFF3F2F2),
                         ),
                       ),
-                    ],
-                  ),
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                        size: 24,
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 34, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Past & canceled offers',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: false,
+                                    lineHeight: 2,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(16, 17, 16, 0),
                 child: ListView(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                       child: Container(
                         width: double.infinity,
                         height: MediaQuery.of(context).size.height * 0.44,
@@ -205,7 +122,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 6, 0),
                                     child: Container(
-                                      width: 82,
+                                      width: 83,
                                       height: 25,
                                       decoration: BoxDecoration(
                                         color: Color(0xFFD05C5C),
@@ -216,7 +133,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             0, 3, 0, 3),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
-                                            'vw6fpdxx' /* New offer */,
+                                            '4ur7plxi' /* Canceled */,
                                           ),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -239,10 +156,10 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 6, 0),
                                     child: Container(
-                                      width: 108,
+                                      width: 91,
                                       height: 25,
                                       decoration: BoxDecoration(
-                                        color: Color(0xFF41566C),
+                                        color: Color(0xFF43B6A5),
                                         borderRadius: BorderRadius.circular(5),
                                       ),
                                       child: Padding(
@@ -250,7 +167,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             0, 3, 0, 3),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
-                                            'jmco7dzk' /* Await approval */,
+                                            '4znz79dz' /* Completed */,
                                           ),
                                           textAlign: TextAlign.center,
                                           style: FlutterFlowTheme.of(context)
@@ -266,36 +183,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                 useGoogleFonts: false,
                                               ),
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    width: 149,
-                                    height: 25,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFF0A637),
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 2, 0, 2),
-                                      child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'k2gp95dp' /* Sent, waiting for reply */,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .white,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              useGoogleFonts: false,
-                                            ),
                                       ),
                                     ),
                                   ),
@@ -324,7 +211,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'gtkb9quu' /* AlRajhi Bank */,
+                                            'znd07o80' /* AlRajhi Bank */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -342,7 +229,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                't2kwojss' /* Offers for booking # */,
+                                                'teuph71w' /* Offers for booking # */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -351,7 +238,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                '9qrfxvvc' /* 277621515 */,
+                                                '6dew42uj' /* 277621515 */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -361,7 +248,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                         ),
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'ksabd4y2' /* 5 min ago */,
+                                            '2zkfgdqc' /* 5 min ago */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -408,7 +295,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'ez8wbssn' /* Initial installment */,
+                                            'kjkjohaa' /* Initial installment */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -442,7 +329,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'ldwv6qbd' /* .00 */,
+                                                'j6dalma3' /* .00 */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -462,7 +349,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  'z7x7wv59' /* SAR */,
+                                                  'mrfh58sm' /* SAR */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -490,7 +377,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            '4ha591ne' /* Installment period */,
+                                            'yyqumocq' /* Installment period */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -510,7 +397,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'bm6xbs4z' /* 24 */,
+                                                '8n63p9dr' /* 24 */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -530,7 +417,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  'b1jmmlnc' /* Month */,
+                                                  'hthrdjdb' /* Month */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -569,7 +456,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            '2kxnix92' /* Total price */,
+                                            '70pmpq1u' /* Total price */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -603,7 +490,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'c0ty6rbh' /* .00 */,
+                                                'pgt5z6lh' /* .00 */,
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
@@ -623,7 +510,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  'h47bvnhi' /* SAR */,
+                                                  'b18q23iu' /* SAR */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -651,7 +538,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'wxex1r7b' /* Agent Name */,
+                                            'gwx9s6qp' /* Agent Name */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -665,7 +552,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                         ),
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'g9lopb8b' /* Abdullah Ahmed */,
+                                            'jjstzf0m' /* Abdullah Ahmed */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
@@ -693,7 +580,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         logFirebaseEvent(
-                                            'OFFERS_PAGE_ACCEPT_BTN_ON_TAP');
+                                            'PAST_OFFERS_VIEW_OFFER_DETAILS_BTN_ON_TA');
                                         logFirebaseEvent('Button_Alert-Dialog');
                                         await showDialog(
                                           context: context,
@@ -715,7 +602,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                         );
                                       },
                                       text: FFLocalizations.of(context).getText(
-                                        'i1uf8h4b' /* Accept */,
+                                        '09p93shu' /* View offer details */,
                                       ),
                                       options: FFButtonOptions(
                                         width: 130,
@@ -738,37 +625,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8, 0, 0, 0),
-                                    child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
-                                      },
-                                      text: FFLocalizations.of(context).getText(
-                                        '0ipnoq80' /* Starting Chatting */,
-                                      ),
-                                      options: FFButtonOptions(
-                                        width: 173,
-                                        height: 38,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              color: Colors.white,
-                                              useGoogleFonts: false,
-                                            ),
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -777,72 +633,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                       ),
                     ),
                   ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 0),
-                child: Container(
-                  width: double.infinity,
-                  height: 52,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).white,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 15,
-                        color: Color(0x06000000),
-                        offset: Offset(0, 8),
-                        spreadRadius: 0,
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Color(0xFFF1F1F1),
-                    ),
-                  ),
-                  child: InkWell(
-                    onTap: () async {
-                      logFirebaseEvent('OFFERS_PAGE_Row_w1xydhtz_ON_TAP');
-                      logFirebaseEvent('Row_Navigate-To');
-                      context.pushNamed(
-                        'PastOffers',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.fade,
-                            duration: Duration(milliseconds: 0),
-                          ),
-                        },
-                      );
-                    },
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(18, 0, 0, 0),
-                          child: Text(
-                            'Completed or canceled offers',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      color: Color(0xFF474747),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 17, 0),
-                          child: Icon(
-                            Icons.keyboard_arrow_right,
-                            color: Colors.black,
-                            size: 24,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ),
             ],
