@@ -404,15 +404,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Offers',
       'ar': 'عروض',
     },
-    'lw2j0g4i': {
+    'kds1yom4': {
       'en': 'You have ',
       'ar': '',
     },
-    '2qq8v2m7': {
+    'l2vagwca': {
       'en': '4 offers active',
       'ar': '',
     },
-    '1pf6fwb2': {
+    'jrag61ae': {
       'en': '     ',
       'ar': '',
     },
@@ -496,7 +496,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Starting Chatting',
       'ar': 'بدء الدردشة',
     },
-    '7mkxj7sa': {
+    'jk7d3p9n': {
       'en': 'Completed or canceled offers',
       'ar': '',
     },
@@ -507,7 +507,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PastOffers
   {
-    '0yblqyti': {
+    'qvv3lsb7': {
       'en': 'Past & canceled offers',
       'ar': '',
     },
@@ -530,10 +530,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '6dew42uj': {
       'en': '277621515',
       'ar': '',
-    },
-    '2zkfgdqc': {
-      'en': '5 min ago',
-      'ar': 'قبل 5 دقائق',
     },
     'kjkjohaa': {
       'en': 'Initial installment',
@@ -577,13 +573,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'jjstzf0m': {
       'en': 'Abdullah Ahmed',
-      'ar': 'Apple Pay',
+      'ar': 'عبدالله احمد',
     },
     '09p93shu': {
       'en': 'View offer details',
       'ar': 'قبول',
     },
-    '0d6g4rzc': {
+    'kct7wk1t': {
       'en': 'Home',
       'ar': '',
     },

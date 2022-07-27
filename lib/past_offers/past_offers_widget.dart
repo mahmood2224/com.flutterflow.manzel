@@ -48,10 +48,20 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                           color: Color(0xFFF3F2F2),
                         ),
                       ),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: Colors.black,
-                        size: 24,
+                      child: InkWell(
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'PAST_OFFERS_PAGE_Icon_x76ofvg0_ON_TAP');
+                          logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+                          Navigator.pop(context);
+                          logFirebaseEvent('Icon_Navigate-To');
+                          context.pushNamed('HomeScreen');
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                          size: 24,
+                        ),
                       ),
                     ),
                     Expanded(
@@ -62,7 +72,9 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Past & canceled offers',
+                              FFLocalizations.of(context).getText(
+                                'qvv3lsb7' /* Past & canceled offers */,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
@@ -247,9 +259,8 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                           ],
                                         ),
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            '2zkfgdqc' /* 5 min ago */,
-                                          ),
+                                          functions.pastOfferScreenDateTime(
+                                              getCurrentTimestamp),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
