@@ -306,3 +306,8 @@ String offerScreenTime(
     }
   }
 }
+
+String offerPageChips() {
+  // Add your function code here!
+  return "false";
+}
