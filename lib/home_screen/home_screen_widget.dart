@@ -39,7 +39,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   void initState() {
     super.initState();
     // On page load action.
-    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
       logFirebaseEvent('HomeScreen_Update-Local-State');
       setState(
@@ -108,7 +108,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               height: 31,
                               fit: BoxFit.none,
                             ),
-                            if (currentUserEmailVerified ?? true)
+                            if (currentUserEmailVerified)
                               AuthUserStreamWidget(
                                 child: InkWell(
                                   onTap: () async {
@@ -358,14 +358,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   return Builder(
                     builder: (context) {
                       final properties = PropertiesCall.properties(
-                            (listViewPropertiesResponse?.jsonBody ?? ''),
-                          )?.toList() ??
-                          [];
+                        listViewPropertiesResponse.jsonBody,
+                      ).toList();
                       if (properties.isEmpty) {
                         return Center(
                           child: NoResultsFoundWidget(
                             titleText: 'No results found',
-                            subtitleText: '',
+                            subtitleText: '     abc',
                             isBottonVisible: false,
                             screenName: 'Results',
                           ),
@@ -414,10 +413,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         Builder(
                                           builder: (context) {
                                             final propertyImages = getJsonField(
-                                                  propertiesItem,
-                                                  r'''$..property_images.data''',
-                                                )?.toList() ??
-                                                [];
+                                              propertiesItem,
+                                              r'''$..property_images.data''',
+                                            ).toList();
                                             return Container(
                                               width: MediaQuery.of(context)
                                                   .size
@@ -526,7 +524,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               onTap: () async {
                                                 logFirebaseEvent(
                                                     'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                                if (!(loggedIn)) {
+                                                if (!loggedIn) {
                                                   logFirebaseEvent(
                                                       'Container_Navigate-To');
                                                   context.pushNamed('Login');
@@ -704,10 +702,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         Builder(
                                           builder: (context) {
                                             final banks = getJsonField(
-                                                  propertiesItem,
-                                                  r'''$.attributes.banks.data''',
-                                                )?.toList() ??
-                                                [];
+                                              propertiesItem,
+                                              r'''$.attributes.banks.data''',
+                                            ).toList();
                                             return Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: List.generate(

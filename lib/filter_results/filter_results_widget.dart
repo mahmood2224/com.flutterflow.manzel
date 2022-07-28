@@ -73,53 +73,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              FutureBuilder<ApiCallResponse>(
-                future: PropertiesCall.call(
-                  city: FFAppState().filterCity,
-                  furnishingType: functions.listToApiParameters(
-                      FFAppState().filterFurnishingType.toList()),
-                  propertyType: functions.listToApiParameters(
-                      FFAppState().filterPropertyType.toList()),
-                  locale: FFAppState().locale,
-                  minimumPrice: functions
-                      .sliderToApi(FFAppState().filterMinPrice.toDouble())
-                      .toString(),
-                  maximumPrice: functions
-                      .sliderToApi(FFAppState().filterMaxPrice.toDouble())
-                      .toString(),
-                  populate:
-                      '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: SpinKitRipple(
-                          color: Color(0xFF2971FB),
-                          size: 50,
-                        ),
-                      ),
-                    );
-                  }
-                  final textPropertiesResponse = snapshot.data;
-                  return Text(
-                    functions.countJsonData(
-                        FFAppState().locale,
-                        getJsonField(
-                          (textPropertiesResponse?.jsonBody ?? ''),
-                          r'''$.data''',
-                        )),
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
-                          color: Color(0xFF6B6B6B),
-                          useGoogleFonts: false,
-                        ),
-                  );
-                },
-              ),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -132,6 +85,65 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                           fontFamily: 'Sofia Pro By Khuzaimah',
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
+                          useGoogleFonts: false,
+                        ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  FutureBuilder<ApiCallResponse>(
+                    future: PropertiesCall.call(
+                      city: FFAppState().filterCity,
+                      furnishingType: functions.listToApiParameters(
+                          FFAppState().filterFurnishingType.toList()),
+                      propertyType: functions.listToApiParameters(
+                          FFAppState().filterPropertyType.toList()),
+                      locale: FFAppState().locale,
+                      minimumPrice: functions
+                          .sliderToApi(FFAppState().filterMinPrice.toDouble())
+                          .toString(),
+                      maximumPrice: functions
+                          .sliderToApi(FFAppState().filterMaxPrice.toDouble())
+                          .toString(),
+                      populate:
+                          '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: SpinKitRipple(
+                              color: Color(0xFF2971FB),
+                              size: 50,
+                            ),
+                          ),
+                        );
+                      }
+                      final textPropertiesResponse = snapshot.data;
+                      return Text(
+                        functions.countJsonData(PropertiesCall.properties(
+                          textPropertiesResponse.jsonBody,
+                        )),
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              color: Color(0xFF6B6B6B),
+                              useGoogleFonts: false,
+                            ),
+                      );
+                    },
+                  ),
+                  Text(
+                    FFLocalizations.of(context).getText(
+                      'wpcx1tpl' /*  properties found */,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Color(0xFF6B6B6B),
                           useGoogleFonts: false,
                         ),
                   ),
@@ -262,9 +274,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                       return Builder(
                         builder: (context) {
                           final properties = PropertiesCall.properties(
-                                (listViewPropertiesResponse?.jsonBody ?? ''),
-                              )?.toList() ??
-                              [];
+                            listViewPropertiesResponse.jsonBody,
+                          ).toList();
                           if (properties.isEmpty) {
                             return Center(
                               child: Container(
@@ -327,10 +338,9 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                               builder: (context) {
                                                 final propertyImages =
                                                     getJsonField(
-                                                          propertiesItem,
-                                                          r'''$..property_images.data''',
-                                                        )?.toList() ??
-                                                        [];
+                                                  propertiesItem,
+                                                  r'''$..property_images.data''',
+                                                ).toList();
                                                 return Container(
                                                   width: MediaQuery.of(context)
                                                       .size
@@ -444,7 +454,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                   onTap: () async {
                                                     logFirebaseEvent(
                                                         'FILTER_RESULTS_Container_kslgg6qy_ON_TAP');
-                                                    if (!(loggedIn)) {
+                                                    if (!loggedIn) {
                                                       logFirebaseEvent(
                                                           'Container_Navigate-To');
                                                       context
@@ -628,10 +638,9 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                             Builder(
                                               builder: (context) {
                                                 final banks = getJsonField(
-                                                      propertiesItem,
-                                                      r'''$.attributes.banks.data''',
-                                                    )?.toList() ??
-                                                    [];
+                                                  propertiesItem,
+                                                  r'''$.attributes.banks.data''',
+                                                ).toList();
                                                 return Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,

@@ -140,7 +140,10 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                         ),
                                               ),
                                               Text(
-                                                '#',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '67mealxd' /* # */,
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText1
@@ -690,9 +693,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                     Text(
                                       valueOrDefault<String>(
                                         PropertyCall.propertyName(
-                                          (confirmationPropertyResponse
-                                                  ?.jsonBody ??
-                                              ''),
+                                          confirmationPropertyResponse.jsonBody,
                                         ).toString(),
                                         'Un-Known',
                                       ),
@@ -721,9 +722,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                           child: Text(
                                             valueOrDefault<String>(
                                               PropertyCall.propertyCity(
-                                                (confirmationPropertyResponse
-                                                        ?.jsonBody ??
-                                                    ''),
+                                                confirmationPropertyResponse
+                                                    .jsonBody,
                                               ).toString(),
                                               'Un-known',
                                             ),
@@ -764,9 +764,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                           child: Text(
                                             valueOrDefault<String>(
                                               PropertyCall.propertyDistrict(
-                                                (confirmationPropertyResponse
-                                                        ?.jsonBody ??
-                                                    ''),
+                                                confirmationPropertyResponse
+                                                    .jsonBody,
                                               ).toString(),
                                               'Un-Known',
                                             ),
@@ -819,9 +818,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                       valueOrDefault<String>(
                                                         PropertyCall
                                                             .propertyBedrooms(
-                                                          (confirmationPropertyResponse
-                                                                  ?.jsonBody ??
-                                                              ''),
+                                                          confirmationPropertyResponse
+                                                              .jsonBody,
                                                         ).toString(),
                                                         '?',
                                                       ),
@@ -867,9 +865,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                       valueOrDefault<String>(
                                                         PropertyCall
                                                             .propertyBathrooms(
-                                                          (confirmationPropertyResponse
-                                                                  ?.jsonBody ??
-                                                              ''),
+                                                          confirmationPropertyResponse
+                                                              .jsonBody,
                                                         ).toString(),
                                                         '?',
                                                       ),
@@ -909,9 +906,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                   Text(
                                                     valueOrDefault<String>(
                                                       PropertyCall.propertySize(
-                                                        (confirmationPropertyResponse
-                                                                ?.jsonBody ??
-                                                            ''),
+                                                        confirmationPropertyResponse
+                                                            .jsonBody,
                                                       ).toString(),
                                                       '?',
                                                     ),

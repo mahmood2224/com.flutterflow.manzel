@@ -191,7 +191,7 @@ class _$OrdersRecord extends OrdersRecord {
   final DocumentReference<Object> reference;
 
   factory _$OrdersRecord([void Function(OrdersRecordBuilder) updates]) =>
-      (new OrdersRecordBuilder()..update(updates)).build();
+      (new OrdersRecordBuilder()..update(updates))._build();
 
   _$OrdersRecord._(
       {this.orderId,
@@ -257,7 +257,7 @@ class _$OrdersRecord extends OrdersRecord {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('OrdersRecord')
+    return (newBuiltValueToStringHelper(r'OrdersRecord')
           ..add('orderId', orderId)
           ..add('createdAt', createdAt)
           ..add('updatedAt', updatedAt)
@@ -361,7 +361,9 @@ class OrdersRecordBuilder
   }
 
   @override
-  _$OrdersRecord build() {
+  OrdersRecord build() => _build();
+
+  _$OrdersRecord _build() {
     final _$result = _$v ??
         new _$OrdersRecord._(
             orderId: orderId,
@@ -380,4 +382,4 @@ class OrdersRecordBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,no_leading_underscores_for_local_identifiers,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new,unnecessary_lambdas

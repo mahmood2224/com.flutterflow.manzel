@@ -200,7 +200,7 @@ class _ReservationBottomSheetWidgetState
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  functions.formatAmount(widget.reservationCost.toString()),
+                  functions.formatAmount(widget.reservationCost?.toString()),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Sofia Pro By Khuzaimah',
                         fontSize: 40,
@@ -376,14 +376,14 @@ class _ReservationBottomSheetWidgetState
                       var _shouldSetState = false;
                       logFirebaseEvent('Button_Backend-Call');
                       addOrderApiResponse = await AddOrderCall.call(
-                        propertyId: widget.propertyId.toString(),
+                        propertyId: widget.propertyId?.toString(),
                         userId: '6TCZMQHGHJYXZEycWKX89PT4cwp1',
                       );
                       _shouldSetState = true;
-                      if (((addOrderApiResponse?.statusCode ?? 200)) == 200) {
+                      if ((addOrderApiResponse?.statusCode ?? 200) == 200) {
                         logFirebaseEvent('Button_Backend-Call');
                         transactionApiResponse = await AddTransactionCall.call(
-                          amountPaid: widget.reservationCost.toString(),
+                          amountPaid: widget.reservationCost?.toString(),
                           transactionMethod: paymentMethodValue,
                           orderId: getJsonField(
                             (addOrderApiResponse?.jsonBody ?? ''),
@@ -394,7 +394,7 @@ class _ReservationBottomSheetWidgetState
                           transactionId: '6436464',
                         );
                         _shouldSetState = true;
-                        if (((transactionApiResponse?.statusCode ?? 200)) ==
+                        if ((transactionApiResponse?.statusCode ?? 200) ==
                             200) {
                           logFirebaseEvent('Button_Bottom-Sheet');
                           Navigator.pop(context);

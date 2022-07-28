@@ -250,8 +250,8 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           onPressed: () async {
                             logFirebaseEvent(
                                 'ADDING_INFORMATION_submitInfo_ON_TAP');
-                            if ((fullNameController.text == null ||
-                                fullNameController.text == '')) {
+                            if (fullNameController.text == null ||
+                                fullNameController.text == '') {
                               logFirebaseEvent('submitInfo_Show-Snack-Bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

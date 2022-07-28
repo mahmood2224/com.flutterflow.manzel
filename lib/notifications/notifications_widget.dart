@@ -102,7 +102,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                             height: 169,
                             child: NoResultsFoundWidget(
                               titleText: 'No notifications yet',
-                              subtitleText: ' ',
+                              subtitleText: '               ',
                               isBottonVisible: false,
                               screenName: 'Notification',
                             ),

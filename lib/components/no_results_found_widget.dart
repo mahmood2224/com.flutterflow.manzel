@@ -34,7 +34,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if ((widget.screenName) == 'Result')
+            if ((widget.screenName == 'Result'))
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 3, 0, 0),
                 child: Image.asset(
@@ -44,7 +44,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
                   fit: BoxFit.contain,
                 ),
               ),
-            if ((widget.screenName) == 'Notification')
+            if ((widget.screenName == 'Notification'))
               Image.asset(
                 'assets/images/NoNotificationFound.png',
                 width: 38,
@@ -91,7 +91,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
             ],
           ),
         ),
-        if ((widget.isBottonVisible) == true)
+        if ((widget.isBottonVisible == true))
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
             child: FFButtonWidget(
