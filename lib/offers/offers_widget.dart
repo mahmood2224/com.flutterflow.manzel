@@ -1070,6 +1070,10 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                 r'''$.id''',
                                                               ).toString(),
                                                             );
+                                                            if(mounted){
+                                                              setState(() {
+                                                              });
+                                                            }
                                                           }
                                                         },
                                                         text:
