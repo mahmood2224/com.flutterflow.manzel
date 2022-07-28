@@ -36,7 +36,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   void resendOTP() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: widget.phoneNumber,
-      timeout: Duration(seconds: 60),
+      timeout: Duration(seconds: 40),
       verificationCompleted: (phoneAuthCredential) async {
         await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
       },

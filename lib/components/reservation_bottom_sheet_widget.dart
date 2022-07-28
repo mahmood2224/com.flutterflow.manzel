@@ -105,11 +105,11 @@ class _ReservationBottomSheetWidgetState
           applePayMerchantID: "merchant.com.flutterflow.manzel",
           allowsToSaveSameCardMoreThanOnce: false,
           // pass the card holder name to the SDK
-          cardHolderName: "Card Holder NAME",
+          //cardHolderName: "Card Holder NAME",
           // disable changing the card holder name by the user
           allowsToEditCardHolderName: true,
           // select payments you need to show [Default is all, and you can choose between WEB-CARD-APPLEPAY ]
-          paymentType: paymentType == 0 ? PaymentType.CARD : PaymentType.APPLE_PAY,
+          paymentType: paymentType == 0 ? PaymentType.CARD : PaymentType.DEVICE,
           // Transaction mode
           sdkMode: SDKMode.Sandbox);
     } on PlatformException {
