@@ -101,7 +101,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
       ),
   'SearchCityResult': (data) async => SearchCityResultWidget(
         cityName: getParameter(data, 'cityName'),
-        peropertiesAvailable: getParameter(data, 'peropertiesAvailable'),
+        propertiesAvailable: getParameter(data, 'propertiesAvailable'),
       ),
   'bankDetails': (data) async => BankDetailsWidget(
         bankId: getParameter(data, 'bankId'),

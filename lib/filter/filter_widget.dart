@@ -204,9 +204,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         FFAppState().filterCity,
                                     options: functions
                                         .cityListBuilder((getJsonField(
-                                          (citiesListCityListResponse
-                                                  ?.jsonBody ??
-                                              ''),
+                                          citiesListCityListResponse.jsonBody,
                                           r'''$.cities''',
                                         ) as List)
                                             .map<String>((s) => s.toString())
@@ -287,9 +285,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                             : FFAppState().filterPropertyType,
                                     options: (functions.propertTypeBuilder(
                                                 (getJsonField(
-                                              (columnPropertiesResponse
-                                                      ?.jsonBody ??
-                                                  ''),
+                                              columnPropertiesResponse.jsonBody,
                                               r'''$.meta.property_type''',
                                             ) as List)
                                                     .map<String>(
@@ -487,8 +483,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       functions
                                           .formattedDouble(valueOrDefault<int>(
                                         getJsonField(
-                                          (columnPropertiesResponse?.jsonBody ??
-                                              ''),
+                                          columnPropertiesResponse.jsonBody,
                                           r'''$.meta.max_price''',
                                         ),
                                         1,
@@ -522,8 +517,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       functions
                                           .formattedDouble(valueOrDefault<int>(
                                         getJsonField(
-                                          (columnPropertiesResponse?.jsonBody ??
-                                              ''),
+                                          columnPropertiesResponse.jsonBody,
                                           r'''$.meta.max_price''',
                                         ),
                                         1,

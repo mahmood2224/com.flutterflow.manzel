@@ -229,9 +229,8 @@ class _ReservationConfirmationWidgetState
                                       Text(
                                         valueOrDefault<String>(
                                           PropertyCall.reservationsCost(
-                                            (reservationConfirmationPropertyResponse
-                                                    ?.jsonBody ??
-                                                ''),
+                                            reservationConfirmationPropertyResponse
+                                                .jsonBody,
                                           ).toString(),
                                           '?',
                                         ),

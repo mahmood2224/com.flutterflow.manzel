@@ -56,7 +56,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            if (!(loggedIn) ?? true)
+            if (!loggedIn)
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 260, 0, 0),
                 child: Row(
@@ -96,7 +96,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                   ],
                 ),
               ),
-            if (loggedIn ?? true)
+            if (loggedIn)
               Expanded(
                 child: DefaultTabController(
                   length: 2,
@@ -225,9 +225,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                             5),
                                                     child: Image.network(
                                                       PropertyCall.propertyImg(
-                                                        (containerPropertyResponse
-                                                                ?.jsonBody ??
-                                                            ''),
+                                                        containerPropertyResponse
+                                                            .jsonBody,
                                                       ),
                                                       width: 80,
                                                       height: 75,
@@ -259,9 +258,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 },
                                                                 text: PropertyCall
                                                                     .propertyStatus(
-                                                                  (containerPropertyResponse
-                                                                          ?.jsonBody ??
-                                                                      ''),
+                                                                  containerPropertyResponse
+                                                                      .jsonBody,
                                                                 ).toString(),
                                                                 options:
                                                                     FFButtonOptions(
@@ -303,9 +301,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 },
                                                                 text: PropertyCall
                                                                     .propertyStatus(
-                                                                  (containerPropertyResponse
-                                                                          ?.jsonBody ??
-                                                                      ''),
+                                                                  containerPropertyResponse
+                                                                      .jsonBody,
                                                                 ).toString(),
                                                                 options:
                                                                     FFButtonOptions(
@@ -347,9 +344,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 },
                                                                 text: PropertyCall
                                                                     .propertyStatus(
-                                                                  (containerPropertyResponse
-                                                                          ?.jsonBody ??
-                                                                      ''),
+                                                                  containerPropertyResponse
+                                                                      .jsonBody,
                                                                 ).toString(),
                                                                 options:
                                                                     FFButtonOptions(
@@ -524,9 +520,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       String>(
                                                                     PropertyCall
                                                                         .propertyName(
-                                                                      (containerPropertyResponse
-                                                                              ?.jsonBody ??
-                                                                          ''),
+                                                                      containerPropertyResponse
+                                                                          .jsonBody,
                                                                     ).toString(),
                                                                     'Un-Known',
                                                                   ),
@@ -564,9 +559,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     String>(
                                                                   PropertyCall
                                                                       .propertyCity(
-                                                                    (containerPropertyResponse
-                                                                            ?.jsonBody ??
-                                                                        ''),
+                                                                    containerPropertyResponse
+                                                                        .jsonBody,
                                                                   ).toString(),
                                                                   'Un-Known',
                                                                 ),
@@ -611,9 +605,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     String>(
                                                                   PropertyCall
                                                                       .propertyDistrict(
-                                                                    (containerPropertyResponse
-                                                                            ?.jsonBody ??
-                                                                        ''),
+                                                                    containerPropertyResponse
+                                                                        .jsonBody,
                                                                   ).toString(),
                                                                   'Un-Known',
                                                                 ),
@@ -655,7 +648,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     'propertyId':
                                                                         serializeParam(
                                                                             PropertyCall.propertyId(
-                                                                              (containerPropertyResponse?.jsonBody ?? ''),
+                                                                              containerPropertyResponse.jsonBody,
                                                                             ),
                                                                             ParamType.int),
                                                                   }.withoutNulls,
@@ -797,9 +790,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                 queryParams: {
                                                   'propertyId': serializeParam(
                                                       PropertyCall.propertyId(
-                                                        (containerPropertyResponse
-                                                                ?.jsonBody ??
-                                                            ''),
+                                                        containerPropertyResponse
+                                                            .jsonBody,
                                                       ),
                                                       ParamType.int),
                                                 }.withoutNulls,
@@ -837,9 +829,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                   Image.network(
                                                                 PropertyCall
                                                                     .propertyImg(
-                                                                  (containerPropertyResponse
-                                                                          ?.jsonBody ??
-                                                                      ''),
+                                                                  containerPropertyResponse
+                                                                      .jsonBody,
                                                                 ),
                                                                 width: 103,
                                                                 height: 75,
@@ -896,7 +887,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               Text(
                                                                             valueOrDefault<String>(
                                                                               PropertyCall.propertyName(
-                                                                                (containerPropertyResponse?.jsonBody ?? ''),
+                                                                                containerPropertyResponse.jsonBody,
                                                                               ).toString(),
                                                                               'Un-Known',
                                                                             ),
@@ -934,7 +925,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           valueOrDefault<
                                                                               String>(
                                                                             PropertyCall.propertyCity(
-                                                                              (containerPropertyResponse?.jsonBody ?? ''),
+                                                                              containerPropertyResponse.jsonBody,
                                                                             ).toString(),
                                                                             'Un-Known',
                                                                           ),
@@ -965,7 +956,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           valueOrDefault<
                                                                               String>(
                                                                             PropertyCall.propertyDistrict(
-                                                                              (containerPropertyResponse?.jsonBody ?? ''),
+                                                                              containerPropertyResponse.jsonBody,
                                                                             ).toString(),
                                                                             'Un-Known',
                                                                           ),
@@ -1009,7 +1000,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               child: Text(
                                                                                 valueOrDefault<String>(
                                                                                   PropertyCall.propertyBedrooms(
-                                                                                    (containerPropertyResponse?.jsonBody ?? ''),
+                                                                                    containerPropertyResponse.jsonBody,
                                                                                   ).toString(),
                                                                                   '?',
                                                                                 ),
@@ -1035,7 +1026,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               child: Text(
                                                                                 valueOrDefault<String>(
                                                                                   PropertyCall.propertyBathrooms(
-                                                                                    (containerPropertyResponse?.jsonBody ?? ''),
+                                                                                    containerPropertyResponse.jsonBody,
                                                                                   ).toString(),
                                                                                   '?',
                                                                                 ),
@@ -1058,7 +1049,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             Text(
                                                                               valueOrDefault<String>(
                                                                                 PropertyCall.propertySize(
-                                                                                  (containerPropertyResponse?.jsonBody ?? ''),
+                                                                                  containerPropertyResponse.jsonBody,
                                                                                 ).toString(),
                                                                                 '?',
                                                                               ),

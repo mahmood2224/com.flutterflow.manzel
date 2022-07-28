@@ -79,7 +79,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
             title: Text(
               valueOrDefault<String>(
                 PropertyCall.propertyName(
-                  (orderDetailsPropertyResponse?.jsonBody ?? ''),
+                  orderDetailsPropertyResponse.jsonBody,
                 ).toString(),
                 'Un-Known',
               ),
@@ -151,9 +151,8 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                         borderRadius: BorderRadius.circular(6),
                                         child: Image.network(
                                           PropertyCall.propertyImg(
-                                            (orderDetailsPropertyResponse
-                                                    ?.jsonBody ??
-                                                ''),
+                                            orderDetailsPropertyResponse
+                                                .jsonBody,
                                           ),
                                           width: 80,
                                           height: 75,
@@ -179,9 +178,8 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                               child: Text(
                                                 valueOrDefault<String>(
                                                   PropertyCall.propertyName(
-                                                    (orderDetailsPropertyResponse
-                                                            ?.jsonBody ??
-                                                        ''),
+                                                    orderDetailsPropertyResponse
+                                                        .jsonBody,
                                                   ).toString(),
                                                   'Un-Known',
                                                 ),
@@ -248,9 +246,8 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                               String>(
                                                             PropertyCall
                                                                 .propertyBedrooms(
-                                                              (orderDetailsPropertyResponse
-                                                                      ?.jsonBody ??
-                                                                  ''),
+                                                              orderDetailsPropertyResponse
+                                                                  .jsonBody,
                                                             ).toString(),
                                                             '?',
                                                           ),
@@ -296,9 +293,8 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                               String>(
                                                             PropertyCall
                                                                 .propertyBathrooms(
-                                                              (orderDetailsPropertyResponse
-                                                                      ?.jsonBody ??
-                                                                  ''),
+                                                              orderDetailsPropertyResponse
+                                                                  .jsonBody,
                                                             ).toString(),
                                                             '?',
                                                           ),
@@ -335,9 +331,8 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                         valueOrDefault<String>(
                                                           PropertyCall
                                                               .propertySize(
-                                                            (orderDetailsPropertyResponse
-                                                                    ?.jsonBody ??
-                                                                ''),
+                                                            orderDetailsPropertyResponse
+                                                                .jsonBody,
                                                           ).toString(),
                                                           '?',
                                                         ),

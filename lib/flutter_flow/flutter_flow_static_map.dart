@@ -64,7 +64,7 @@ class FlutterFlowStaticMap extends StatelessWidget {
 String getStaticMapImageURL(
   LatLng location,
   String apiKey,
-  MapBoxStyle style,
+  MapBoxStyle mapStyle,
   int width,
   int height,
   Color markerColor,
@@ -80,7 +80,6 @@ String getStaticMapImageURL(
   final finalRotation = rotation.clamp(-180, 180).round();
   final finalTilt = tilt.clamp(0, 60).round();
   final finalZoom = zoom.clamp(0, 22).round();
-  final mapStyle = style ?? MapBoxStyle.Light;
   final image = StaticImage(apiKey: apiKey);
   if (markerColor == null && (markerURL == null || markerURL.trim().isEmpty)) {
     return image.getStaticUrlWithoutMarker(

@@ -210,9 +210,8 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                           child: Text(
                                             valueOrDefault<String>(
                                               BankDetailsCall.bankName(
-                                                (columnBankDetailsResponse
-                                                        ?.jsonBody ??
-                                                    ''),
+                                                columnBankDetailsResponse
+                                                    .jsonBody,
                                               ).toString(),
                                               'Un-Known',
                                             ),
@@ -245,9 +244,7 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                       children: [
                                         Image.network(
                                           BankDetailsCall.bankLogo(
-                                            (columnBankDetailsResponse
-                                                    ?.jsonBody ??
-                                                ''),
+                                            columnBankDetailsResponse.jsonBody,
                                           ),
                                           width: 130,
                                           height: 94,
@@ -266,9 +263,8 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                           child: Text(
                                             valueOrDefault<String>(
                                               BankDetailsCall.bankDescription(
-                                                (columnBankDetailsResponse
-                                                        ?.jsonBody ??
-                                                    ''),
+                                                columnBankDetailsResponse
+                                                    .jsonBody,
                                               ).toString(),
                                               'Un-Known',
                                             ),
@@ -296,9 +292,8 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                           child: Text(
                                             valueOrDefault<String>(
                                               BankDetailsCall.bankRules(
-                                                (columnBankDetailsResponse
-                                                        ?.jsonBody ??
-                                                    ''),
+                                                columnBankDetailsResponse
+                                                    .jsonBody,
                                               ).toString(),
                                               'Un-Known',
                                             ),

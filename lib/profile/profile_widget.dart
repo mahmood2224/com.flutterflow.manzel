@@ -37,7 +37,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                if (loggedIn ?? true)
+                if (loggedIn)
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -170,7 +170,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                     ],
                   ),
-                if (!(loggedIn) ?? true)
+                if (!loggedIn)
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                     child: Row(
@@ -381,7 +381,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ],
                   ),
                 ),
-                if (loggedIn ?? true)
+                if (loggedIn)
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 0),
                     child: Row(

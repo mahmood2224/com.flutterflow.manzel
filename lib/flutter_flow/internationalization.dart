@@ -409,7 +409,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'عندك',
     },
     '9i2we2yx': {
-      'en': '4 offers active',
+      'en': ' offers active',
       'ar': '4 عروض نشطة',
     },
     'eiivr9zt': {
@@ -428,21 +428,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Sent, waiting for reply',
       'ar': 'تم الإرسال ، في انتظار الرد',
     },
-    'gtkb9quu': {
-      'en': 'AlRajhi Bank',
-      'ar': '',
-    },
     't2kwojss': {
       'en': 'Offers for booking #',
       'ar': 'عروض للحجز #',
-    },
-    '9qrfxvvc': {
-      'en': '277621515',
-      'ar': '',
-    },
-    'ksabd4y2': {
-      'en': '5 min ago',
-      'ar': 'قبل 5 دقائق',
     },
     'ez8wbssn': {
       'en': 'Initial installment',
@@ -459,10 +447,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '4ha591ne': {
       'en': 'Installment period',
       'ar': 'فترة التقسيط',
-    },
-    'bm6xbs4z': {
-      'en': '24',
-      'ar': '24',
     },
     'b1jmmlnc': {
       'en': 'Month',
@@ -483,10 +467,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'wxex1r7b': {
       'en': 'Agent Name',
       'ar': 'اسم العميل',
-    },
-    'g9lopb8b': {
-      'en': 'Abdullah Ahmed',
-      'ar': 'Apple Pay',
     },
     'i1uf8h4b': {
       'en': 'Accept',
@@ -519,17 +499,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Completed',
       'ar': 'مكتمل',
     },
-    'znd07o80': {
-      'en': 'AlRajhi Bank',
-      'ar': '',
-    },
     'teuph71w': {
       'en': 'Offers for booking #',
       'ar': 'عروض للحجز #',
-    },
-    '6dew42uj': {
-      'en': '277621515',
-      'ar': '',
     },
     'kjkjohaa': {
       'en': 'Initial installment',
@@ -546,10 +518,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'yyqumocq': {
       'en': 'Installment period',
       'ar': 'فترة التقسيط',
-    },
-    '8n63p9dr': {
-      'en': '24',
-      'ar': '24',
     },
     'hthrdjdb': {
       'en': 'Month',
@@ -570,10 +538,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'gwx9s6qp': {
       'en': 'Agent Name',
       'ar': 'اسم العميل',
-    },
-    'jjstzf0m': {
-      'en': 'Abdullah Ahmed',
-      'ar': 'عبدالله احمد',
     },
     '09p93shu': {
       'en': 'View offer details',
@@ -709,6 +673,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Filter results ',
       'ar': 'نتائج البحث',
     },
+    'wpcx1tpl': {
+      'en': ' properties found',
+      'ar': 'وجدت خصائص',
+    },
     '7egi5iad': {
       'en': 'All',
       'ar': 'الجميع',
@@ -810,6 +778,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'qlysszro': {
       'en': 'Where are you  looking ?',
       'ar': 'أين تنظر ؟',
+    },
+    'wptanz77': {
+      'en': ' properties available',
+      'ar': '',
     },
     'fce9ky0f': {
       'en': 'Home',
@@ -977,6 +949,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '\"',
       'ar': '',
     },
+    'nukctvmg': {
+      'en': ' properties found',
+      'ar': 'وجدت خصائص',
+    },
     'ntrpmj08': {
       'en': 'Home',
       'ar': '',
@@ -1048,7 +1024,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز:',
     },
-    '1mxd9jcp': {
+    '67mealxd': {
       'en': '#',
       'ar': '',
     },

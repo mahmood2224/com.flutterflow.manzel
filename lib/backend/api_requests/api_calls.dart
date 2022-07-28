@@ -495,3 +495,96 @@ class AddTransactionCall {
     );
   }
 }
+
+class GetOffersCall {
+  static Future<ApiCallResponse> call({
+    String userId = '',
+    String offerType = '',
+  }) {
+    final body = '''
+{
+  "userID": "${userId}",
+  "status": "${offerType}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getOffers',
+      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/getOffers',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'userId': userId,
+        'offerType': offerType,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+
+  static dynamic bankLogo(dynamic response) => getJsonField(
+        response,
+        r'''$.result..bank_logo''',
+      );
+  static dynamic bankName(dynamic response) => getJsonField(
+        response,
+        r'''$.result..bank_name''',
+      );
+  static dynamic orderId(dynamic response) => getJsonField(
+        response,
+        r'''$.result..order_id''',
+      );
+  static dynamic installmentAmount(dynamic response) => getJsonField(
+        response,
+        r'''$.result..offered_installment_amount''',
+      );
+  static dynamic installmentPeriod(dynamic response) => getJsonField(
+        response,
+        r'''$.result..offered_installment_period''',
+      );
+  static dynamic agentName(dynamic response) => getJsonField(
+        response,
+        r'''$.result..agent_name''',
+      );
+  static dynamic updatedAt(dynamic response) => getJsonField(
+        response,
+        r'''$.result..updated_at._seconds''',
+      );
+  static dynamic createdAt(dynamic response) => getJsonField(
+        response,
+        r'''$.result..created_at''',
+      );
+  static dynamic offerStatus(dynamic response) => getJsonField(
+        response,
+        r'''$.result..status''',
+      );
+  static dynamic result(dynamic response) => getJsonField(
+        response,
+        r'''$.result''',
+      );
+}
+
+class AcceptOfferCall {
+  static Future<ApiCallResponse> call({
+    String userId = '',
+    String offerId = '',
+  }) {
+    final body = '''
+{
+  "userID": "${userId}",
+  "offerID": "${offerId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'acceptOffer',
+      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/acceptOffer',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'userId': userId,
+        'offerId': offerId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}

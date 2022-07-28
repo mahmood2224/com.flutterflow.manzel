@@ -2,7 +2,6 @@ import '../backend/api_requests/api_calls.dart';
 import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -141,11 +140,9 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                       return Builder(
                         builder: (context) {
                           final cities = getJsonField(
-                                (listViewSearchPageCitiesResponse?.jsonBody ??
-                                    ''),
-                                r'''$.results''',
-                              )?.toList() ??
-                              [];
+                            listViewSearchPageCitiesResponse.jsonBody,
+                            r'''$.results''',
+                          ).toList();
                           if (cities.isEmpty) {
                             return Center(
                               child: Container(
@@ -184,7 +181,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                               r'''$.name''',
                                             ).toString(),
                                             ParamType.String),
-                                        'peropertiesAvailable': serializeParam(
+                                        'propertiesAvailable': serializeParam(
                                             getJsonField(
                                               citiesItem,
                                               r'''$.count''',
@@ -280,28 +277,52 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                                       false,
                                                                 ),
                                                           ),
-                                                          Text(
-                                                            functions
-                                                                .searchPagePropertyText(
-                                                                    getJsonField(
-                                                              citiesItem,
-                                                              r'''$.count''',
-                                                            )),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText2
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
-                                                                  color: Color(
-                                                                      0xFF6B6B6B),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w300,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                  lineHeight: 1,
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Text(
+                                                                getJsonField(
+                                                                  citiesItem,
+                                                                  r'''$.count''',
+                                                                ).toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Sofia Pro By Khuzaimah',
+                                                                      color: Color(
+                                                                          0xFF6B6B6B),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                      lineHeight:
+                                                                          1,
+                                                                    ),
+                                                              ),
+                                                              Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'wptanz77' /*  properties available */,
                                                                 ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Sofia Pro By Khuzaimah',
+                                                                      color: Color(
+                                                                          0xFF676767),
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                            ],
                                                           ),
                                                         ],
                                                       ),

@@ -14,11 +14,11 @@ class SearchCityResultWidget extends StatefulWidget {
   const SearchCityResultWidget({
     Key key,
     this.cityName,
-    this.peropertiesAvailable,
+    this.propertiesAvailable,
   }) : super(key: key);
 
   final String cityName;
-  final int peropertiesAvailable;
+  final int propertiesAvailable;
 
   @override
   _SearchCityResultWidgetState createState() => _SearchCityResultWidgetState();
@@ -129,13 +129,28 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                   ),
                 ],
               ),
-              Text(
-                functions.searchPagePropertyText(widget.peropertiesAvailable),
-                style: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'Sofia Pro By Khuzaimah',
-                      color: Color(0xFF6B6B6B),
-                      useGoogleFonts: false,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    widget.propertiesAvailable.toString(),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Color(0xFF6B6B6B),
+                          useGoogleFonts: false,
+                        ),
+                  ),
+                  Text(
+                    FFLocalizations.of(context).getText(
+                      'nukctvmg' /*  properties found */,
                     ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Color(0xFF6B6B6B),
+                          useGoogleFonts: false,
+                        ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -177,9 +192,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                       return Builder(
                         builder: (context) {
                           final properties = PropertiesCall.properties(
-                                (listViewPropertiesResponse?.jsonBody ?? ''),
-                              )?.toList() ??
-                              [];
+                            listViewPropertiesResponse.jsonBody,
+                          ).toList();
                           if (properties.isEmpty) {
                             return Center(
                               child: NoResultsFoundWidget(
@@ -239,10 +253,9 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                               builder: (context) {
                                                 final propertyImages =
                                                     getJsonField(
-                                                          propertiesItem,
-                                                          r'''$..property_images.data''',
-                                                        )?.toList() ??
-                                                        [];
+                                                  propertiesItem,
+                                                  r'''$..property_images.data''',
+                                                ).toList();
                                                 return Container(
                                                   width: MediaQuery.of(context)
                                                       .size
@@ -356,7 +369,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                   onTap: () async {
                                                     logFirebaseEvent(
                                                         'SEARCH_CITY_RESULT_Container_0oy6ukkp_ON');
-                                                    if (!(loggedIn)) {
+                                                    if (!loggedIn) {
                                                       logFirebaseEvent(
                                                           'Container_Navigate-To');
                                                       context
@@ -540,10 +553,9 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                             Builder(
                                               builder: (context) {
                                                 final banks = getJsonField(
-                                                      propertiesItem,
-                                                      r'''$.attributes.banks.data''',
-                                                    )?.toList() ??
-                                                    [];
+                                                  propertiesItem,
+                                                  r'''$.attributes.banks.data''',
+                                                ).toList();
                                                 return Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,

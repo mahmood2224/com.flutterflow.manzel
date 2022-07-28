@@ -142,16 +142,9 @@ List<String> filteredResultChioceChipsBuilder(
   return results;
 }
 
-String countJsonData(
-  String locale,
-  dynamic jsonResponse,
-) {
+String countJsonData(dynamic jsonResponse) {
   var len = jsonResponse.length;
-  if (locale == "en") {
-    return "${len} properties found";
-  } else {
-    return "ملكيات ${len} تم العثور على";
-  }
+  return len;
   // Add your function code here!
 }
 
@@ -261,10 +254,55 @@ String formatDateTime(DateTime inputTimeStamp) {
   return formattedResult;
 }
 
-String pastOfferScreenDateTime(DateTime inputDateTime) {
+String pastOfferScreenDateTime(int inputDateTime) {
   // Add your function code here!
+  DateTime offerTime =
+      DateTime.fromMillisecondsSinceEpoch(inputDateTime * 1000);
   String formattedResult =
-      '${DateFormat.d().format(inputDateTime).toString().padLeft(2, "0")}/${DateFormat.M().format(inputDateTime).toString().padLeft(2, "0")}/${DateFormat.y().format(inputDateTime)} - ${DateFormat.jm().format(inputDateTime)}';
+      '${DateFormat.d().format(offerTime).toString().padLeft(2, "0")}/${DateFormat.M().format(offerTime).toString().padLeft(2, "0")}/${DateFormat.y().format(offerTime)} - ${DateFormat.jm().format(offerTime)}';
 
   return formattedResult;
+}
+
+bool pastOfferAcceptedStatusConditionalVisibilty(String offerStatus) {
+  // Add your function code here!
+  if (offerStatus == 'accepted') {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+String offerScreenTime(
+  int secondsTime,
+  String locale,
+) {
+  DateTime offerTime = DateTime.fromMillisecondsSinceEpoch(secondsTime * 1000);
+  // Add your function code here!
+  Duration diff = DateTime.now().difference(offerTime);
+  int dayDiffrence = diff.inDays;
+  int hrsDiffrence = diff.inHours;
+  int minuteDiffrence = diff.inMinutes;
+  int secondDiffence = diff.inSeconds;
+  if (locale == "en") {
+    if (dayDiffrence > 0) {
+      return "${dayDiffrence} Days ago";
+    } else if (hrsDiffrence > 0) {
+      return "${hrsDiffrence} hrs ago";
+    } else if (minuteDiffrence > 0) {
+      return "${minuteDiffrence} min ago";
+    } else {
+      return "${secondDiffence} sec ago";
+    }
+  } else {
+    if (dayDiffrence > 0) {
+      return "قبل ${dayDiffrence} أيام";
+    } else if (hrsDiffrence > 0) {
+      return "قبل ${hrsDiffrence} ساعات";
+    } else if (minuteDiffrence > 0) {
+      return "قبل ${minuteDiffrence} دقائق";
+    } else {
+      return "قبل ${secondDiffence} ثوان";
+    }
+  }
 }

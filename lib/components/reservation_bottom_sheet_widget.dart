@@ -384,7 +384,7 @@ class _ReservationBottomSheetWidgetState
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  functions.formatAmount(widget.reservationCost.toString()),
+                  functions.formatAmount(widget.reservationCost?.toString()),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Sofia Pro By Khuzaimah',
                         fontSize: 40,
@@ -560,10 +560,10 @@ class _ReservationBottomSheetWidgetState
                       var _shouldSetState = false;
                       logFirebaseEvent('Button_Backend-Call');
                       addOrderApiResponse = await AddOrderCall.call(
-                        propertyId: widget.propertyId.toString(),userId: currentUserReference.id,
+                        propertyId: widget.propertyId?.toString(),userId: currentUserReference.id,
                       );
                       _shouldSetState = true;
-                      if (((addOrderApiResponse?.statusCode ?? 200)) == 200) {
+                      if ((addOrderApiResponse?.statusCode ?? 200) == 200) {
                         logFirebaseEvent('Button_Backend-Call');
                         setupSDKSession(paymentMethodValue.toLowerCase() == 'mada/visa' ? 0 : 1);
                         orderId = getJsonField(

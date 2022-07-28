@@ -204,8 +204,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'searchCityResult',
               builder: (context, params) => SearchCityResultWidget(
                 cityName: params.getParam('cityName', ParamType.String),
-                peropertiesAvailable:
-                    params.getParam('peropertiesAvailable', ParamType.int),
+                propertiesAvailable:
+                    params.getParam('propertiesAvailable', ParamType.int),
               ),
             ),
             FFRoute(
