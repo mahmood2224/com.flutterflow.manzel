@@ -414,10 +414,14 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                     Text(
                                                       valueOrDefault<String>(
                                                         functions.formatAmount(
-                                                            getJsonField(
-                                                          allOffersItem,
-                                                          r'''$.offered_installment_amount''',
-                                                        ).toString()),
+                                                            valueOrDefault<
+                                                                String>(
+                                                          getJsonField(
+                                                            allOffersItem,
+                                                            r'''$.offered_installment_amount''',
+                                                          ).toString(),
+                                                          '0',
+                                                        )),
                                                         '0',
                                                       ),
                                                       style: FlutterFlowTheme
