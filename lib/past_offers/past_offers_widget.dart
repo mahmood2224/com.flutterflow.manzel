@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -121,6 +122,17 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                         final allOffers = GetOffersCall.result(
                           listViewGetOffersResponse.jsonBody,
                         ).toList();
+                        if (allOffers.isEmpty) {
+                          return Center(
+                            child: NoResultsFoundWidget(
+                              titleText: 'No Offers Yet',
+                              subtitleText:
+                                  'please contact admin for further details',
+                              isBottonVisible: false,
+                              screenName: 'Results',
+                            ),
+                          );
+                        }
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
@@ -400,11 +412,14 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                       CrossAxisAlignment.end,
                                                   children: [
                                                     Text(
-                                                      functions.formatAmount(
-                                                          getJsonField(
-                                                        allOffersItem,
-                                                        r'''$.offered_installment_amount''',
-                                                      ).toString()),
+                                                      valueOrDefault<String>(
+                                                        functions.formatAmount(
+                                                            getJsonField(
+                                                          allOffersItem,
+                                                          r'''$.offered_installment_amount''',
+                                                        ).toString()),
+                                                        '0',
+                                                      ),
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyText1
@@ -500,10 +515,13 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                       CrossAxisAlignment.end,
                                                   children: [
                                                     Text(
-                                                      getJsonField(
-                                                        allOffersItem,
-                                                        r'''$.offered_installment_period''',
-                                                      ).toString(),
+                                                      valueOrDefault<String>(
+                                                        getJsonField(
+                                                          allOffersItem,
+                                                          r'''$.offered_installment_period''',
+                                                        ).toString(),
+                                                        '0',
+                                                      ),
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyText1
@@ -682,10 +700,13 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                       ),
                                                 ),
                                                 Text(
-                                                  getJsonField(
-                                                    allOffersItem,
-                                                    r'''$.agent_name''',
-                                                  ).toString(),
+                                                  valueOrDefault<String>(
+                                                    getJsonField(
+                                                      allOffersItem,
+                                                      r'''$.agent_name''',
+                                                    ).toString(),
+                                                    'null',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1

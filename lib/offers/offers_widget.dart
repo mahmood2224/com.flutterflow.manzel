@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -79,7 +80,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -94,123 +95,96 @@ class _OffersWidgetState extends State<OffersWidget> {
                                   useGoogleFonts: false,
                                 ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 3, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).white,
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          'r282eka0' /* You have  */,
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              fontSize: 16,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                      FutureBuilder<ApiCallResponse>(
-                                        future: GetOffersCall.call(
-                                          userId:
-                                              '6TCZMQHGHJYXZEycWKX89PT4cwp1',
-                                          offerType: 'sent',
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50,
-                                                height: 50,
-                                                child: SpinKitRipple(
-                                                  color: Color(0xFF2971FB),
-                                                  size: 50,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          final textGetOffersResponse =
-                                              snapshot.data;
-                                          return Text(
-                                            functions
-                                                .countJsonData(getJsonField(
-                                              textGetOffersResponse.jsonBody,
-                                              r'''$.result''',
-                                            )),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          );
-                                        },
-                                      ),
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          '9i2we2yx' /*  offers active */,
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                    ],
-                                  ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  'r282eka0' /* You have  */,
                                 ),
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'eiivr9zt' /*       */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontSize: 16,
+                                      useGoogleFonts: false,
+                                    ),
+                              ),
+                              FutureBuilder<ApiCallResponse>(
+                                future: GetOffersCall.call(
+                                  userId: '6TCZMQHGHJYXZEycWKX89PT4cwp1',
+                                  offerType: 'sent',
                                 ),
-                              ],
-                            ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: SpinKitRipple(
+                                          color: Color(0xFF2971FB),
+                                          size: 50,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  final textGetOffersResponse = snapshot.data;
+                                  return Text(
+                                    functions.countJsonData(getJsonField(
+                                      textGetOffersResponse.jsonBody,
+                                      r'''$.result''',
+                                    )),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: false,
+                                        ),
+                                  );
+                                },
+                              ),
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  '9i2we2yx' /*  offers active */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                      Expanded(
-                        child: Container(
-                          width: 34,
-                          height: 34,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).white,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 20,
-                                color: Color(0x06000000),
-                                offset: Offset(0, 9),
-                                spreadRadius: 0,
-                              )
-                            ],
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Color(0xFFF4F4F4),
-                            ),
+                      Container(
+                        width: 34,
+                        height: 34,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).white,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 20,
+                              color: Color(0x06000000),
+                              offset: Offset(0, 9),
+                              spreadRadius: 0,
+                            )
+                          ],
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Color(0xFFF4F4F4),
                           ),
-                          child: Icon(
-                            Icons.filter_list,
-                            color: Colors.black,
-                            size: 18,
-                          ),
+                        ),
+                        child: Icon(
+                          Icons.filter_list,
+                          color: Colors.black,
+                          size: 18,
                         ),
                       ),
                     ],
@@ -221,7 +195,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                 child: FutureBuilder<ApiCallResponse>(
                   future: GetOffersCall.call(
-                    userId: '6TCZMQHGHJYXZEycWKX89PT4cwp1',
+                    userId: currentUserUid,
                     offerType: 'sent',
                   ),
                   builder: (context, snapshot) {
@@ -244,6 +218,17 @@ class _OffersWidgetState extends State<OffersWidget> {
                         final activeOffers = GetOffersCall.result(
                           listViewGetOffersResponse.jsonBody,
                         ).toList();
+                        if (activeOffers.isEmpty) {
+                          return Center(
+                            child: NoResultsFoundWidget(
+                              titleText: 'No Results Found',
+                              subtitleText:
+                                  'Please contact admin for further details',
+                              isBottonVisible: false,
+                              screenName: 'Results',
+                            ),
+                          );
+                        }
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
@@ -375,17 +360,67 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 6, 0),
-                                                    child: Container(
-                                                      width: 108,
+                                                  if ((functions
+                                                          .offerPageChips() ==
+                                                      'false'))
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 6, 0),
+                                                      child: Container(
+                                                        width: 108,
+                                                        height: 25,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              Color(0xFF41566C),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      3, 0, 3),
+                                                          child: Text(
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'jmco7dzk' /* Await approval */,
+                                                            ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro By Khuzaimah',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .white,
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  if ((functions
+                                                          .offerPageChips() ==
+                                                      'false'))
+                                                    Container(
+                                                      width: 149,
                                                       height: 25,
                                                       decoration: BoxDecoration(
                                                         color:
-                                                            Color(0xFF41566C),
+                                                            Color(0xFFF0A637),
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(5),
@@ -394,12 +429,12 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                         padding:
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
-                                                                    0, 3, 0, 3),
+                                                                    0, 2, 0, 2),
                                                         child: Text(
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'jmco7dzk' /* Await approval */,
+                                                            'k2gp95dp' /* Sent, waiting for reply */,
                                                           ),
                                                           textAlign:
                                                               TextAlign.center,
@@ -422,49 +457,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Container(
-                                                    width: 149,
-                                                    height: 25,
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0xFFF0A637),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 2, 0, 2),
-                                                      child: Text(
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .getText(
-                                                          'k2gp95dp' /* Sent, waiting for reply */,
-                                                        ),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .white,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -1069,39 +1061,39 @@ class _OffersWidgetState extends State<OffersWidget> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 0),
-                child: Container(
-                  width: double.infinity,
-                  height: 52,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).white,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 15,
-                        color: Color(0x06000000),
-                        offset: Offset(0, 8),
-                        spreadRadius: 0,
-                      )
-                    ],
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Color(0xFFF1F1F1),
+                child: InkWell(
+                  onTap: () async {
+                    logFirebaseEvent('OFFERS_PAGE_Container_kc3eke2v_ON_TAP');
+                    logFirebaseEvent('Container_Navigate-To');
+                    context.pushNamed(
+                      'PastOffers',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.fade,
+                          duration: Duration(milliseconds: 0),
+                        ),
+                      },
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 52,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).white,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 15,
+                          color: Color(0x06000000),
+                          offset: Offset(0, 8),
+                          spreadRadius: 0,
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Color(0xFFF1F1F1),
+                      ),
                     ),
-                  ),
-                  child: InkWell(
-                    onTap: () async {
-                      logFirebaseEvent('OFFERS_PAGE_Row_w1xydhtz_ON_TAP');
-                      logFirebaseEvent('Row_Navigate-To');
-                      context.pushNamed(
-                        'PastOffers',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.fade,
-                            duration: Duration(milliseconds: 0),
-                          ),
-                        },
-                      );
-                    },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
