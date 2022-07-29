@@ -57,8 +57,6 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                               'PAST_OFFERS_PAGE_Icon_x76ofvg0_ON_TAP');
                           logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
                           Navigator.pop(context);
-                          logFirebaseEvent('Icon_Navigate-To');
-                          context.pushNamed('HomeScreen');
                         },
                         child: Icon(
                           Icons.arrow_back,
