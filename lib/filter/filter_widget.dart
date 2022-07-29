@@ -282,7 +282,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     initiallySelected:
                                         propertyTypeListValues != null
                                             ? propertyTypeListValues
-                                            : FFAppState().filterPropertyType,
+                                            : functions.choicechipUnselected(
+                                                FFAppState()
+                                                    .filterPropertyType
+                                                    .toList()),
                                     options: (functions.propertTypeBuilder(
                                                 (getJsonField(
                                               columnPropertiesResponse.jsonBody,
@@ -580,7 +583,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     initiallySelected:
                                         isFurnishingValues != null
                                             ? isFurnishingValues
-                                            : FFAppState().filterFurnishingType,
+                                            : functions.choicechipUnselected(
+                                                FFAppState()
+                                                    .filterFurnishingType
+                                                    .toList()),
                                     options: [
                                       ChipData(
                                           FFLocalizations.of(context).getText(
@@ -662,13 +668,19 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 () => FFAppState().filterPropertyType = []);
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterPropertyType =
-                                propertyTypeListValues.toList());
+                                functions
+                                    .choicechipUnselected(
+                                        propertyTypeListValues.toList())
+                                    .toList());
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(
                                 () => FFAppState().filterFurnishingType = []);
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterFurnishingType =
-                                isFurnishingValues.toList());
+                                functions
+                                    .choicechipUnselected(
+                                        isFurnishingValues.toList())
+                                    .toList());
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterMinPrice = 0);
                             logFirebaseEvent('apllyFilter_Update-Local-State');
