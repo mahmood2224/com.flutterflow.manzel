@@ -133,28 +133,26 @@ class _BankDetailsBottomSheetWidgetState
             ),
           ),
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
-                  child: Html(
-                    data: getJsonField(
-                      widget.bankJSON,
-                      r'''$.bank_description''',
-                    ).toString(),
-                  ),
+        SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
+                child: Html(
+                  data: getJsonField(
+                    widget.bankJSON,
+                    r'''$.bank_description''',
+                  ).toString(),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 17, 20, 0),
@@ -170,7 +168,7 @@ class _BankDetailsBottomSheetWidgetState
           ),
         ),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(20.5, 10, 20.5, 10),
+          padding: EdgeInsetsDirectional.fromSTEB(20.5, 15, 20.5, 20),
           child: FFButtonWidget(
             onPressed: () async {
               logFirebaseEvent('BANK_DETAILS_BOTTOM_SHEET_CLOSE_BTN_ON_T');
