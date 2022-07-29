@@ -1032,25 +1032,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Reservation & Payment Confirmed',
       'ar': 'تأكيد الحجز والدفع',
     },
-    '6o7gmqky': {
-      'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
-      'ar': '',
-    },
     'czklypuv': {
       'en': 'Send deal to Banks',
       'ar': 'تأكيد الحجز والدفع',
     },
-    'qqhhg2ru': {
-      'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
-      'ar': '',
-    },
     'cie1ckkw': {
       'en': 'Completing Documents',
       'ar': 'تأكيد الحجز والدفع',
-    },
-    'o23wj00g': {
-      'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
-      'ar': '',
     },
     'ee9tj9d6': {
       'en': 'Upload Documents',
@@ -1059,10 +1047,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'zrzv4hu9': {
       'en': 'Get banks proposals',
       'ar': 'تأكيد الحجز والدفع',
-    },
-    '3ywj0my8': {
-      'en': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ..',
-      'ar': '',
     },
     '8ptcdhhd': {
       'en': 'Property details',

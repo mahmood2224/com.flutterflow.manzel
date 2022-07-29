@@ -136,7 +136,7 @@ class _BankDetailsBottomSheetWidgetState
         Expanded(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
