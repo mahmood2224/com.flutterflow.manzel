@@ -144,8 +144,6 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: Container(
                                   width: double.infinity,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.44,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     boxShadow: [
@@ -303,10 +301,13 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    getJsonField(
-                                                      allOffersItem,
-                                                      r'''$.bank_name''',
-                                                    ).toString(),
+                                                    valueOrDefault<String>(
+                                                      getJsonField(
+                                                        allOffersItem,
+                                                        r'''$.bank_name''',
+                                                      ).toString(),
+                                                      'null',
+                                                    ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1
@@ -335,10 +336,13 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                 .bodyText1,
                                                       ),
                                                       Text(
-                                                        getJsonField(
-                                                          allOffersItem,
-                                                          r'''$.order_id''',
-                                                        ).toString(),
+                                                        valueOrDefault<String>(
+                                                          getJsonField(
+                                                            allOffersItem,
+                                                            r'''$.order_id''',
+                                                          ).toString(),
+                                                          '0000000000',
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -347,12 +351,19 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                     ],
                                                   ),
                                                   Text(
-                                                    functions
-                                                        .pastOfferScreenDateTime(
-                                                            getJsonField(
-                                                      allOffersItem,
-                                                      r'''$.created_at._seconds''',
-                                                    )),
+                                                    valueOrDefault<String>(
+                                                      functions
+                                                          .pastOfferScreenDateTime(
+                                                              valueOrDefault<
+                                                                  int>(
+                                                        getJsonField(
+                                                          allOffersItem,
+                                                          r'''$.created_at._seconds''',
+                                                        ),
+                                                        0,
+                                                      )),
+                                                      'null',
+                                                    ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1
