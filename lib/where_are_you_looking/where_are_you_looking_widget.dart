@@ -192,7 +192,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                   },
                                   child: Container(
                                     width: MediaQuery.of(context).size.width,
-                                    height: 46,
+                                    height: 52,
                                     decoration: BoxDecoration(),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
