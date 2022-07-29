@@ -311,3 +311,12 @@ String offerPageChips() {
   // Add your function code here!
   return "false";
 }
+
+List<String> choicechipUnselected(List<String> choicechipValue) {
+  // Add your function code here!
+  if (choicechipValue.length == 0) {
+    return ["All"];
+  } else {
+    return choicechipValue;
+  }
+}
