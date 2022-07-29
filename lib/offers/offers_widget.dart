@@ -19,6 +19,7 @@ class OffersWidget extends StatefulWidget {
 }
 
 class _OffersWidgetState extends State<OffersWidget> {
+  ApiCallResponse acceptOfferResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -1060,8 +1061,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                           if (confirmDialogResponse) {
                                                             logFirebaseEvent(
                                                                 'Button_Backend-Call');
-                                                            await AcceptOfferCall
-                                                                .call(
+                                                            acceptOfferResponse =
+                                                                await AcceptOfferCall
+                                                                    .call(
                                                               userId:
                                                                   currentUserUid,
                                                               offerId:
@@ -1075,6 +1077,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                               });
                                                             }
                                                           }
+
+                                                          setState(() {});
                                                         },
                                                         text:
                                                             FFLocalizations.of(
@@ -1176,7 +1180,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 20, 16, 10),
                         child: InkWell(
                           onTap: () async {
                             logFirebaseEvent(
