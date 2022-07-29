@@ -226,11 +226,13 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                               size: 28,
                                             ),
                                           ),
-                                          Icon(
-                                            Icons.radio_button_off,
-                                            color: Colors.black,
-                                            size: 28,
-                                          ),
+                                          if ((functions.offerPageChips() ==
+                                              'processed'))
+                                            Icon(
+                                              Icons.radio_button_off,
+                                              color: Colors.black,
+                                              size: 28,
+                                            ),
                                         ],
                                       ),
                                       Expanded(
@@ -260,22 +262,6 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                           useGoogleFonts: false,
                                                         ),
                                               ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  '6o7gmqky' /* Lorem ipsum dolor sit amet, co... */,
-                                                ),
-                                                maxLines: 2,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 12,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
                                             ],
                                           ),
                                         ),
@@ -292,16 +278,17 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                       Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 0, 5),
-                                            child: Icon(
-                                              Icons.check_circle_rounded,
-                                              color: Color(0xFF7FC15F),
-                                              size: 28,
+                                          if ((functions.offerPageChips() ==
+                                              'unprocessed'))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 5),
+                                              child: Icon(
+                                                Icons.check_circle_rounded,
+                                                color: Color(0xFF7FC15F),
+                                                size: 28,
+                                              ),
                                             ),
-                                          ),
                                           Icon(
                                             Icons.radio_button_off,
                                             color: Colors.black,
@@ -336,22 +323,6 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                           useGoogleFonts: false,
                                                         ),
                                               ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'qqhhg2ru' /* Lorem ipsum dolor sit amet, co... */,
-                                                ),
-                                                maxLines: 2,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 12,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
                                             ],
                                           ),
                                         ),
@@ -380,19 +351,22 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0, 0, 0, 5),
-                                                        child: Icon(
-                                                          Icons
-                                                              .check_circle_rounded,
-                                                          color:
-                                                              Color(0xFF7FC15F),
-                                                          size: 28,
+                                                      if ((functions
+                                                              .offerPageChips() ==
+                                                          'unprocessed'))
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 0, 5),
+                                                          child: Icon(
+                                                            Icons
+                                                                .check_circle_rounded,
+                                                            color: Color(
+                                                                0xFF7FC15F),
+                                                            size: 28,
+                                                          ),
                                                         ),
-                                                      ),
                                                       Icon(
                                                         Icons.radio_button_off,
                                                         color: Colors.black,
@@ -429,24 +403,6 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                          ),
-                                                          Text(
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                              'o23wj00g' /* Lorem ipsum dolor sit amet, co... */,
-                                                            ),
-                                                            maxLines: 2,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
-                                                                  fontSize: 12,
                                                                   useGoogleFonts:
                                                                       false,
                                                                 ),
@@ -566,16 +522,17 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                       Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 0, 5),
-                                            child: Icon(
-                                              Icons.check_circle_rounded,
-                                              color: Color(0xFF7FC15F),
-                                              size: 28,
+                                          if ((functions.offerPageChips() ==
+                                              'unprocessed'))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 5),
+                                              child: Icon(
+                                                Icons.check_circle_rounded,
+                                                color: Color(0xFF7FC15F),
+                                                size: 28,
+                                              ),
                                             ),
-                                          ),
                                           Icon(
                                             Icons.radio_button_off,
                                             color: Colors.black,
@@ -607,22 +564,6 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                           fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  '3ywj0my8' /* Lorem ipsum dolor sit amet, co... */,
-                                                ),
-                                                maxLines: 2,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 12,
                                                           useGoogleFonts: false,
                                                         ),
                                               ),
@@ -1058,6 +999,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             child: Column(
@@ -1189,6 +1132,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             child: Column(
@@ -1399,10 +1344,9 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                             onPressed: () async {
                               logFirebaseEvent(
                                   'CONFIRMATION_viewBookingDetails_ON_TAP');
-                              // BookingDetails
                               logFirebaseEvent(
-                                  'viewBookingDetails_BookingDetails');
-                              context.pushNamed('HomeScreen');
+                                  'viewBookingDetails_Close-Dialog,-Drawer,');
+                              Navigator.pop(context);
                             },
                             text: FFLocalizations.of(context).getText(
                               'qlfkupzn' /* Back to Home */,
