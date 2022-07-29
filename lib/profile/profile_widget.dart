@@ -272,7 +272,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Sofia Pro By Khuzaimah',
-                                    fontSize: 16,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
