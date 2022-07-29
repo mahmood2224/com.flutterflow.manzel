@@ -170,7 +170,7 @@ class _BankDetailsBottomSheetWidgetState
           ),
         ),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(20.5, 69, 20.5, 30.57),
+          padding: EdgeInsetsDirectional.fromSTEB(20.5, 10, 20.5, 10),
           child: FFButtonWidget(
             onPressed: () async {
               logFirebaseEvent('BANK_DETAILS_BOTTOM_SHEET_CLOSE_BTN_ON_T');

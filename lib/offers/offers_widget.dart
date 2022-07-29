@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -28,31 +29,51 @@ class _OffersWidgetState extends State<OffersWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('OFFERS_PAGE_Offers_ON_PAGE_LOAD');
-      if (valueOrDefault(currentUserDocument?.status, '') == 'Active') {
-        return;
-      }
+      if (loggedIn) {
+        if (valueOrDefault(currentUserDocument?.status, '') == 'Active') {
+          return;
+        }
 
-      logFirebaseEvent('Offers_Alert-Dialog');
-      await showDialog(
-        context: context,
-        builder: (alertDialogContext) {
-          return AlertDialog(
-            title: Text('Please get your account activated'),
-            content: Text(
-                'You are not an active user please connect admin for further details on ok logout user '),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(alertDialogContext),
-                child: Text('Ok'),
-              ),
-            ],
-          );
-        },
-      );
-      logFirebaseEvent('Offers_Auth');
-      GoRouter.of(context).prepareAuthEvent();
-      await signOut();
-      context.goNamedAuth('OnboardingView', mounted);
+        logFirebaseEvent('Offers_Alert-Dialog');
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Please get your account activated'),
+              content: Text(
+                  'You are not an active user please connect admin for further details on ok logout user '),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+        logFirebaseEvent('Offers_Auth');
+        GoRouter.of(context).prepareAuthEvent();
+        await signOut();
+      } else {
+        logFirebaseEvent('Offers_Alert-Dialog');
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Please login'),
+              content: Text('Please login with your credentials'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+        logFirebaseEvent('Offers_Navigate-To');
+        context.pushNamedAuth('Login', mounted);
+      }
     });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Offers'});
@@ -80,89 +101,93 @@ class _OffersWidgetState extends State<OffersWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              'mthnzz7x' /* Offers */,
-                            ),
-                            style: FlutterFlowTheme.of(context).title2.override(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                  color: Colors.black,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w800,
-                                  useGoogleFonts: false,
-                                ),
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                FFLocalizations.of(context).getText(
-                                  'r282eka0' /* You have  */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      fontSize: 16,
-                                      useGoogleFonts: false,
-                                    ),
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              FFLocalizations.of(context).getText(
+                                'mthnzz7x' /* Offers */,
                               ),
-                              FutureBuilder<ApiCallResponse>(
-                                future: GetOffersCall.call(
-                                  userId: currentUserUid,
-                                  offerType: 'sent',
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: SpinKitRipple(
-                                          color: Color(0xFF2971FB),
-                                          size: 50,
-                                        ),
+                              style:
+                                  FlutterFlowTheme.of(context).title2.override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: Colors.black,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w800,
+                                        useGoogleFonts: false,
                                       ),
-                                    );
-                                  }
-                                  final textGetOffersResponse = snapshot.data;
-                                  return Text(
-                                    functions.countJsonData(getJsonField(
-                                      textGetOffersResponse.jsonBody,
-                                      r'''$.result''',
-                                    )),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          useGoogleFonts: false,
-                                        ),
-                                  );
-                                },
-                              ),
-                              Text(
-                                FFLocalizations.of(context).getText(
-                                  '9i2we2yx' /*  offers active */,
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  FFLocalizations.of(context).getText(
+                                    'r282eka0' /* You have  */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontSize: 16,
+                                        useGoogleFonts: false,
+                                      ),
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts: false,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ],
+                                FutureBuilder<ApiCallResponse>(
+                                  future: GetOffersCall.call(
+                                    userId: currentUserUid,
+                                    offerType: 'sent',
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: SpinKitRipple(
+                                            color: Color(0xFF2971FB),
+                                            size: 50,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    final textGetOffersResponse = snapshot.data;
+                                    return Text(
+                                      functions.countJsonData(getJsonField(
+                                        textGetOffersResponse.jsonBody,
+                                        r'''$.result''',
+                                      )),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily:
+                                                'Sofia Pro By Khuzaimah',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            useGoogleFonts: false,
+                                          ),
+                                    );
+                                  },
+                                ),
+                                Text(
+                                  FFLocalizations.of(context).getText(
+                                    '9i2we2yx' /*  offers active */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: false,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         width: 34,
@@ -249,9 +274,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                           0, 0, 0, 12),
                                       child: Container(
                                         width: double.infinity,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.44,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
                                           boxShadow: [
@@ -521,83 +543,106 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            getJsonField(
-                                                              activeOffersItem,
-                                                              r'''$.bank_name''',
-                                                            ).toString(),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
-                                                                  fontSize: 18,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                          ),
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  't2kwojss' /* Offers for booking # */,
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1,
-                                                              ),
-                                                              Text(
+                                                      Expanded(
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              valueOrDefault<
+                                                                  String>(
                                                                 getJsonField(
                                                                   activeOffersItem,
-                                                                  r'''$.order_id''',
+                                                                  r'''$.bank_name''',
                                                                 ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1,
+                                                                'null',
                                                               ),
-                                                            ],
-                                                          ),
-                                                          Text(
-                                                            functions
-                                                                .offerScreenTime(
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sofia Pro By Khuzaimah',
+                                                                    fontSize:
+                                                                        18,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            ),
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    't2kwojss' /* Offers for booking # */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1,
+                                                                ),
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
                                                                     getJsonField(
                                                                       activeOffersItem,
-                                                                      r'''$.created_at._seconds''',
-                                                                    ),
-                                                                    FFAppState()
-                                                                        .locale),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
-                                                                  color: Color(
-                                                                      0xFF2971FB),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  useGoogleFonts:
-                                                                      false,
+                                                                      r'''$.order_id''',
+                                                                    ).toString(),
+                                                                    '0000000000',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1,
                                                                 ),
-                                                          ),
-                                                        ],
+                                                              ],
+                                                            ),
+                                                            Text(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                functions
+                                                                    .offerScreenTime(
+                                                                        valueOrDefault<
+                                                                            int>(
+                                                                          getJsonField(
+                                                                            activeOffersItem,
+                                                                            r'''$.created_at._seconds''',
+                                                                          ),
+                                                                          0,
+                                                                        ),
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          FFAppState()
+                                                                              .locale,
+                                                                          'en',
+                                                                        )),
+                                                                '0',
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sofia Pro By Khuzaimah',
+                                                                    color: Color(
+                                                                        0xFF2971FB),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                       ClipRRect(
                                                         borderRadius:
@@ -626,7 +671,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                     .fromSTEB(16, 15, 26, 0),
                                                 child: Row(
                                                   mainAxisSize:
-                                                      MainAxisSize.min,
+                                                      MainAxisSize.max,
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
                                                           .spaceBetween,
@@ -669,12 +714,19 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                     .end,
                                                             children: [
                                                               Text(
-                                                                functions
-                                                                    .formatAmount(
-                                                                        getJsonField(
-                                                                  activeOffersItem,
-                                                                  r'''$.offered_installment_amount''',
-                                                                ).toString()),
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  functions.formatAmount(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                    getJsonField(
+                                                                      activeOffersItem,
+                                                                      r'''$.offered_installment_amount''',
+                                                                    ).toString(),
+                                                                    '0',
+                                                                  )),
+                                                                  '0',
+                                                                ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1
@@ -783,10 +835,14 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                     .end,
                                                             children: [
                                                               Text(
-                                                                getJsonField(
-                                                                  activeOffersItem,
-                                                                  r'''$.offered_installment_period''',
-                                                                ).toString(),
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  getJsonField(
+                                                                    activeOffersItem,
+                                                                    r'''$.offered_installment_period''',
+                                                                  ).toString(),
+                                                                  '0',
+                                                                ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1
@@ -990,10 +1046,14 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                 ),
                                                           ),
                                                           Text(
-                                                            getJsonField(
-                                                              activeOffersItem,
-                                                              r'''$.agent_name''',
-                                                            ).toString(),
+                                                            valueOrDefault<
+                                                                String>(
+                                                              getJsonField(
+                                                                activeOffersItem,
+                                                                r'''$.agent_name''',
+                                                              ).toString(),
+                                                              'null',
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1
@@ -1022,6 +1082,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                       MainAxisSize.max,
                                                   children: [
                                                     Expanded(
+                                                      flex: 1,
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
                                                           logFirebaseEvent(
@@ -1072,9 +1133,71 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                 r'''$.id''',
                                                               ).toString(),
                                                             );
-                                                            if(mounted){
-                                                              setState(() {
-                                                              });
+                                                            if ((acceptOfferResponse
+                                                                        ?.statusCode ??
+                                                                    200) ==
+                                                                200) {
+                                                              logFirebaseEvent(
+                                                                  'Button_Show-Snack-Bar');
+                                                              if(mounted){
+                                                                setState(() {
+                                                                });
+                                                              }
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'Offer accepted successfully',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      fontSize:
+                                                                          18,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      Color(
+                                                                          0xFF777777),
+                                                                ),
+                                                              );
+                                                            } else {
+                                                              logFirebaseEvent(
+                                                                  'Button_Show-Snack-Bar');
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'Something went wrong',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      fontSize:
+                                                                          18,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      Color(
+                                                                          0xFF777777),
+                                                                ),
+                                                              );
                                                             }
                                                           }
 
@@ -1088,7 +1211,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                         ),
                                                         options:
                                                             FFButtonOptions(
-                                                          width: 130,
                                                           height: 38,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
@@ -1117,50 +1239,52 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                         ),
                                                       ),
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  8, 0, 0, 0),
-                                                      child: FFButtonWidget(
-                                                        onPressed: () {
-                                                          print(
-                                                              'Button pressed ...');
-                                                        },
-                                                        text:
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                          '0ipnoq80' /* Starting Chatting */,
-                                                        ),
-                                                        options:
-                                                            FFButtonOptions(
-                                                          width: 173,
-                                                          height: 38,
-                                                          color: FlutterFlowTheme
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    8, 0, 0, 0),
+                                                        child: FFButtonWidget(
+                                                          onPressed: () {
+                                                            print(
+                                                                'Button pressed ...');
+                                                          },
+                                                          text: FFLocalizations
                                                                   .of(context)
-                                                              .primaryColor,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .subtitle2
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
-                                                                    color: Colors
-                                                                        .white,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 1,
+                                                              .getText(
+                                                            '0ipnoq80' /* Starting Chatting */,
                                                           ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
+                                                          options:
+                                                              FFButtonOptions(
+                                                            height: 38,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Sofia Pro By Khuzaimah',
+                                                                      color: Colors
+                                                                          .white,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              width: 1,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
