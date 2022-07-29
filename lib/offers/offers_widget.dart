@@ -1133,10 +1133,10 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                   200) {
                                                                 logFirebaseEvent(
                                                                     'Button_Show-Snack-Bar');
-                                                                if(mounted){
-                                                                setState(() {
-                                                                });
-                                                              }
+                                                              //   if(mounted){
+                                                              //   setState(() {
+                                                              //   });
+                                                              // }
                                                               ScaffoldMessenger.of(
                                                                         context)
                                                                     .showSnackBar(
