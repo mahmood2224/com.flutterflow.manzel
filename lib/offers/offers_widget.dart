@@ -1072,6 +1072,68 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                 r'''$.id''',
                                                               ).toString(),
                                                             );
+                                                            if ((acceptOfferResponse
+                                                                        ?.statusCode ??
+                                                                    200) ==
+                                                                200) {
+                                                              logFirebaseEvent(
+                                                                  'Button_Show-Snack-Bar');
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'Offer accepted successfully',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      fontSize:
+                                                                          18,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      Color(
+                                                                          0xFF777777),
+                                                                ),
+                                                              );
+                                                            } else {
+                                                              logFirebaseEvent(
+                                                                  'Button_Show-Snack-Bar');
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'Something went wrong',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      fontSize:
+                                                                          18,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      Color(
+                                                                          0xFF777777),
+                                                                ),
+                                                              );
+                                                            }
                                                           }
 
                                                           setState(() {});

@@ -1241,22 +1241,26 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                                 false,
                                                           ),
                                                     ),
-                                                    AutoSizeText(
-                                                      containerTransactionsRecord
-                                                          .transactionId,
-                                                      maxLines: 2,
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyText1
-                                                          .override(
-                                                            fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            useGoogleFonts:
-                                                                false,
-                                                          ),
+                                                    Expanded(
+                                                      child: AutoSizeText(
+                                                        containerTransactionsRecord
+                                                            .transactionId,
+                                                        maxLines: 2,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro By Khuzaimah',
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
