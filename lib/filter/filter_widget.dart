@@ -57,15 +57,16 @@ class _FilterWidgetState extends State<FilterWidget> {
               setState(() => FFAppState().filterMinPrice = 0);
               logFirebaseEvent('Text_Update-Local-State');
               setState(() => FFAppState().filterMaxPrice = 0);
-              logFirebaseEvent('Text_Navigate-Back');
-              context.pop();
+              logFirebaseEvent('Text_Close-Dialog,-Drawer,-Etc');
+              Navigator.pop(context);
               logFirebaseEvent('Text_Navigate-To');
               context.pushNamed(
                 'Filter',
                 extra: <String, dynamic>{
                   kTransitionInfoKey: TransitionInfo(
                     hasTransition: true,
-                    transitionType: PageTransitionType.bottomToTop,
+                    transitionType: PageTransitionType.fade,
+                    duration: Duration(milliseconds: 0),
                   ),
                 },
               );
