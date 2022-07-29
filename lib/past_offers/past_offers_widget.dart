@@ -37,7 +37,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(18, 0, 18, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(18, 9, 18, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
