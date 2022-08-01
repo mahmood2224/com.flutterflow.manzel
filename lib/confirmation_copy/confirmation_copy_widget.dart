@@ -1,16 +1,18 @@
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
+import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ConfirmationWidget extends StatefulWidget {
-  const ConfirmationWidget({
+class ConfirmationCopyWidget extends StatefulWidget {
+  const ConfirmationCopyWidget({
     Key key,
     this.propertyId,
     this.paymentMethod,
@@ -24,17 +26,18 @@ class ConfirmationWidget extends StatefulWidget {
   final String transactionId;
 
   @override
-  _ConfirmationWidgetState createState() => _ConfirmationWidgetState();
+  _ConfirmationCopyWidgetState createState() => _ConfirmationCopyWidgetState();
 }
 
-class _ConfirmationWidgetState extends State<ConfirmationWidget> {
+class _ConfirmationCopyWidgetState extends State<ConfirmationCopyWidget> {
+  String uploadedFileUrl = '';
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'Confirmation'});
+        parameters: {'screen_name': 'ConfirmationCopy'});
   }
 
   @override
@@ -57,7 +60,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
             ),
           );
         }
-        final confirmationPropertyResponse = snapshot.data;
+        final confirmationCopyPropertyResponse = snapshot.data;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: Colors.white,
@@ -93,7 +96,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                           0, 19, 0, 0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
-                                          'fnewib0l' /* Your Booking Confirmed */,
+                                          '0xg5ak0c' /* Your Booking Confirmed */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
@@ -120,7 +123,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                               Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  'is83qb7v' /* Booking ref:  */,
+                                                  'po473uxs' /* Booking ref:  */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -139,7 +142,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                               Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
-                                                  '67mealxd' /* # */,
+                                                  'ibxbamt4' /* # */,
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -179,19 +182,414 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           ),
                           Divider(
                             thickness: 1,
-                            indent: 2,
-                            endIndent: 2,
-                            color: Color(0xFFE5E5E5),
+                            color: Color(0xFFECECEC),
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 25, 20, 12),
+                                EdgeInsetsDirectional.fromSTEB(20, 21, 20, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 21),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'eqp37ji0' /* Order Process */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontSize: 18,
+                                          useGoogleFonts: false,
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 40),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 5),
+                                            child: Icon(
+                                              Icons.check_circle_rounded,
+                                              color: Color(0xFF7FC15F),
+                                              size: 28,
+                                            ),
+                                          ),
+                                          if ((functions.offerPageChips() ==
+                                              'processed'))
+                                            Icon(
+                                              Icons.radio_button_off,
+                                              color: Colors.black,
+                                              size: 28,
+                                            ),
+                                        ],
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 0, 0, 0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '34ystwc5' /* Reservation & Payment Confirme... */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 40),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          if ((functions.offerPageChips() ==
+                                              'unprocessed'))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 5),
+                                              child: Icon(
+                                                Icons.check_circle_rounded,
+                                                color: Color(0xFF7FC15F),
+                                                size: 28,
+                                              ),
+                                            ),
+                                          Icon(
+                                            Icons.radio_button_off,
+                                            color: Colors.black,
+                                            size: 28,
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 0, 0, 0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '5zw920uf' /* Send deal to Banks */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 15, 0, 15),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 40),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      if ((functions
+                                                              .offerPageChips() ==
+                                                          'unprocessed'))
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 0, 5),
+                                                          child: Icon(
+                                                            Icons
+                                                                .check_circle_rounded,
+                                                            color: Color(
+                                                                0xFF7FC15F),
+                                                            size: 28,
+                                                          ),
+                                                        ),
+                                                      Icon(
+                                                        Icons.radio_button_off,
+                                                        color: Colors.black,
+                                                        size: 28,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  12, 0, 0, 0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'ygyid06c' /* Completing Documents */,
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro By Khuzaimah',
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(40, 10, 0, 0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    FFButtonWidget(
+                                                      onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'CONFIRMATION_COPY_uploadDocuments_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'uploadDocuments_Upload-File');
+                                                        final selectedFile =
+                                                            await selectFile(
+                                                                allowedExtensions: [
+                                                              'pdf'
+                                                            ]);
+                                                        if (selectedFile !=
+                                                            null) {
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Uploading file...',
+                                                            showLoading: true,
+                                                          );
+                                                          final downloadUrl =
+                                                              await uploadData(
+                                                                  selectedFile
+                                                                      .storagePath,
+                                                                  selectedFile
+                                                                      .bytes);
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .hideCurrentSnackBar();
+                                                          if (downloadUrl !=
+                                                              null) {
+                                                            setState(() =>
+                                                                uploadedFileUrl =
+                                                                    downloadUrl);
+                                                            showUploadMessage(
+                                                              context,
+                                                              'Success!',
+                                                            );
+                                                          } else {
+                                                            showUploadMessage(
+                                                              context,
+                                                              'Failed to upload file',
+                                                            );
+                                                            return;
+                                                          }
+                                                        }
+                                                      },
+                                                      text: FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'bjbfj5fm' /* Upload Documents */,
+                                                      ),
+                                                      options: FFButtonOptions(
+                                                        width: 200,
+                                                        height: 44,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .subtitle2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro By Khuzaimah',
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 14,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                        borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 30),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          if ((functions.offerPageChips() ==
+                                              'unprocessed'))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 5),
+                                              child: Icon(
+                                                Icons.check_circle_rounded,
+                                                color: Color(0xFF7FC15F),
+                                                size: 28,
+                                              ),
+                                            ),
+                                          Icon(
+                                            Icons.radio_button_off,
+                                            color: Colors.black,
+                                            size: 28,
+                                          ),
+                                        ],
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 0, 0, 0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'vujpj6gn' /* Get banks proposals */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Sofia Pro By Khuzaimah',
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(
+                                  thickness: 1,
+                                  color: Color(0xFFECECEC),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 20, 0, 17),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
                                   FFLocalizations.of(context).getText(
-                                    '8ptcdhhd' /* Property details */,
+                                    'hsj5h2tz' /* Property details */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
@@ -207,7 +605,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 15),
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 25),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -236,7 +634,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                     Text(
                                       valueOrDefault<String>(
                                         PropertyCall.propertyName(
-                                          confirmationPropertyResponse.jsonBody,
+                                          confirmationCopyPropertyResponse
+                                              .jsonBody,
                                         ).toString(),
                                         'Un-Known',
                                       ),
@@ -265,7 +664,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                           child: Text(
                                             valueOrDefault<String>(
                                               PropertyCall.propertyCity(
-                                                confirmationPropertyResponse
+                                                confirmationCopyPropertyResponse
                                                     .jsonBody,
                                               ).toString(),
                                               'Un-known',
@@ -287,7 +686,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                   0, 3, 0, 0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
-                                              '4qmvz3gw' /*  , */,
+                                              'v82m6eg8' /*  , */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
@@ -307,7 +706,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                           child: Text(
                                             valueOrDefault<String>(
                                               PropertyCall.propertyDistrict(
-                                                confirmationPropertyResponse
+                                                confirmationCopyPropertyResponse
                                                     .jsonBody,
                                               ).toString(),
                                               'Un-Known',
@@ -361,7 +760,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                       valueOrDefault<String>(
                                                         PropertyCall
                                                             .propertyBedrooms(
-                                                          confirmationPropertyResponse
+                                                          confirmationCopyPropertyResponse
                                                               .jsonBody,
                                                         ).toString(),
                                                         '?',
@@ -408,7 +807,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                       valueOrDefault<String>(
                                                         PropertyCall
                                                             .propertyBathrooms(
-                                                          confirmationPropertyResponse
+                                                          confirmationCopyPropertyResponse
                                                               .jsonBody,
                                                         ).toString(),
                                                         '?',
@@ -449,7 +848,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                   Text(
                                                     valueOrDefault<String>(
                                                       PropertyCall.propertySize(
-                                                        confirmationPropertyResponse
+                                                        confirmationCopyPropertyResponse
                                                             .jsonBody,
                                                       ).toString(),
                                                       '?',
@@ -480,73 +879,68 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 15, 0, 25),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 20, 0),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        logFirebaseEvent(
-                                            'CONFIRMATION_PAGE_VIEW_MORE_BTN_ON_TAP');
-                                        logFirebaseEvent('Button_Navigate-To');
-                                        context.pushNamed(
-                                          'PropertyDetails',
-                                          queryParams: {
-                                            'propertyId': serializeParam(
-                                                widget.propertyId,
-                                                ParamType.int),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                      text: FFLocalizations.of(context).getText(
-                                        '6rsjfq97' /* View More */,
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      20, 15, 20, 25),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      logFirebaseEvent(
+                                          'CONFIRMATION_COPY_VIEW_MORE_BTN_ON_TAP');
+                                      logFirebaseEvent('Button_Navigate-To');
+                                      context.pushNamed(
+                                        'PropertyDetails',
+                                        queryParams: {
+                                          'propertyId': serializeParam(
+                                              widget.propertyId, ParamType.int),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                    text: FFLocalizations.of(context).getText(
+                                      'z92qnypa' /* View More */,
+                                    ),
+                                    options: FFButtonOptions(
+                                      width: 130,
+                                      height: 40,
+                                      color: Colors.white,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily:
+                                                'Sofia Pro By Khuzaimah',
+                                            color: Color(0xFF2971FB),
+                                            fontWeight: FontWeight.w800,
+                                            useGoogleFonts: false,
+                                          ),
+                                      borderSide: BorderSide(
+                                        color: Color(0xFF2971FB),
+                                        width: 1,
                                       ),
-                                      options: FFButtonOptions(
-                                        width: 130,
-                                        height: 40,
-                                        color: Colors.white,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              color: Color(0xFF2971FB),
-                                              fontWeight: FontWeight.w800,
-                                              useGoogleFonts: false,
-                                            ),
-                                        borderSide: BorderSide(
-                                          color: Color(0xFF2971FB),
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                           Divider(
                             thickness: 1,
-                            indent: 2,
-                            endIndent: 2,
+                            indent: 20,
+                            endIndent: 20,
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 25, 20, 20),
+                                EdgeInsetsDirectional.fromSTEB(20, 25, 20, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Expanded(
                                   child: Text(
                                     FFLocalizations.of(context).getText(
-                                      '514bcidn' /* Transaction details */,
+                                      'yhfiq32r' /* Transaction details */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
@@ -601,7 +995,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 0, 20, 12),
+                                          20, 0, 20, 22),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -621,7 +1015,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                      'xihd37di' /* Amount */,
+                                                      'sc36o4f3' /* Amount */,
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -662,7 +1056,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                       FFLocalizations.of(
                                                               context)
                                                           .getText(
-                                                        'tgi826z8' /* .00 SAR */,
+                                                        'eh499534' /* .00 SAR */,
                                                       ),
                                                       style: FlutterFlowTheme
                                                               .of(context)
@@ -694,7 +1088,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                      's1mfpoki' /* Date & Time */,
+                                                      '8wz1y8t7' /* Date & Time */,
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -754,7 +1148,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                      'g7t2uz7u' /* Transaction Ref. */,
+                                                      'x5lafimu' /* Transaction Ref. */,
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -778,7 +1172,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                       FFLocalizations.of(
                                                               context)
                                                           .getText(
-                                                        '5czybu2h' /* # */,
+                                                        'vqq6omug' /* # */,
                                                       ),
                                                       style: FlutterFlowTheme
                                                               .of(context)
@@ -831,7 +1225,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                   child: Text(
                                                     FFLocalizations.of(context)
                                                         .getText(
-                                                      'nfajktl1' /* Payment Method */,
+                                                      '8zwuakkr' /* Payment Method */,
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -876,42 +1270,47 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 22, 20, 30),
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 162),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                FFButtonWidget(
-                                  onPressed: () {
-                                    print('receipt pressed ...');
-                                  },
-                                  text: FFLocalizations.of(context).getText(
-                                    'a5vxpwan' /* View Receipt Transaction */,
-                                  ),
-                                  icon: Icon(
-                                    Icons.sticky_note_2_outlined,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    size: 20,
-                                  ),
-                                  options: FFButtonOptions(
-                                    width: 230,
-                                    height: 45,
-                                    color: Colors.white,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
-                                    borderSide: BorderSide(
-                                      color: Color(0x1A2971FB),
-                                      width: 1,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 12, 0, 0),
+                                  child: FFButtonWidget(
+                                    onPressed: () {
+                                      print('receipt pressed ...');
+                                    },
+                                    text: FFLocalizations.of(context).getText(
+                                      '5yfslitr' /* View Receipt Transaction */,
                                     ),
-                                    borderRadius: BorderRadius.circular(12),
+                                    icon: Icon(
+                                      Icons.sticky_note_2_outlined,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      size: 20,
+                                    ),
+                                    options: FFButtonOptions(
+                                      width: 230,
+                                      height: 45,
+                                      color: Colors.white,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily:
+                                                'Sofia Pro By Khuzaimah',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
+                                      borderSide: BorderSide(
+                                        color: Color(0x1A2971FB),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -945,13 +1344,13 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           child: FFButtonWidget(
                             onPressed: () async {
                               logFirebaseEvent(
-                                  'CONFIRMATION_viewBookingDetails_ON_TAP');
+                                  'CONFIRMATION_COPY_viewBookingDetails_ON_');
                               logFirebaseEvent(
                                   'viewBookingDetails_Close-Dialog,-Drawer,');
                               Navigator.pop(context);
                             },
                             text: FFLocalizations.of(context).getText(
-                              'qlfkupzn' /* Back to Home */,
+                              'oemx8z02' /* Back to Home */,
                             ),
                             options: FFButtonOptions(
                               width: 335,

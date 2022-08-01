@@ -1,5 +1,5 @@
 import '../backend/api_requests/api_calls.dart';
-import '../components/no_results_found_widget.dart';
+import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -148,11 +148,9 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                               child: Container(
                                 width: 280,
                                 height: 169,
-                                child: NoResultsFoundWidget(
+                                child: NoResultWidget(
                                   titleText: 'No cities found',
-                                  subtitleText: '                      ',
-                                  isBottonVisible: false,
-                                  screenName: 'Result',
+                                  screenName: 'result',
                                 ),
                               ),
                             );

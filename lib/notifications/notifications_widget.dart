@@ -1,6 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/no_results_found_widget.dart';
+import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -98,13 +98,11 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                       if (notificationsListNotificationsRecordList.isEmpty) {
                         return Center(
                           child: Container(
-                            width: 280,
-                            height: 169,
-                            child: NoResultsFoundWidget(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.7,
+                            child: NoResultWidget(
                               titleText: 'No notifications yet',
-                              subtitleText: '               ',
-                              isBottonVisible: false,
-                              screenName: 'Notification',
+                              screenName: 'notification',
                             ),
                           ),
                         );

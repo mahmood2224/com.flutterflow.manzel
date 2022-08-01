@@ -1,10 +1,9 @@
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
-import '../components/no_results_found_widget.dart';
+import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -256,12 +255,16 @@ class _OffersWidgetState extends State<OffersWidget> {
                                   ).toList();
                                   if (activeOffers.isEmpty) {
                                     return Center(
-                                      child: NoResultsFoundWidget(
-                                        titleText: 'No Results Found',
-                                        subtitleText:
-                                            'Please contact admin for further details',
-                                        isBottonVisible: false,
-                                        screenName: 'Results',
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.6,
+                                        child: NoResultWidget(
+                                          titleText: 'No offers added yet',
+                                          screenName: 'offer',
+                                        ),
                                       ),
                                     );
                                   }
@@ -340,197 +343,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(16,
-                                                                    15, 16, 0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          6,
-                                                                          0),
-                                                              child: Container(
-                                                                width: 82,
-                                                                height: 25,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Color(
-                                                                      0xFFD05C5C),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          3,
-                                                                          0,
-                                                                          3),
-                                                                  child: Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'vw6fpdxx' /* New offer */,
-                                                                    ),
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).white,
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            if ((functions
-                                                                    .offerPageChips() ==
-                                                                'true'))
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            6,
-                                                                            0),
-                                                                child:
-                                                                    Container(
-                                                                  width: 108,
-                                                                  height: 25,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: Color(
-                                                                        0xFF41566C),
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            3,
-                                                                            0,
-                                                                            3),
-                                                                    child: Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'jmco7dzk' /* Await approval */,
-                                                                      ),
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .center,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).white,
-                                                                            fontSize:
-                                                                                12,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            if ((functions
-                                                                    .offerPageChips() ==
-                                                                'true'))
-                                                              Container(
-                                                                width: 149,
-                                                                height: 25,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Color(
-                                                                      0xFFF0A637),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0,
-                                                                          2,
-                                                                          0,
-                                                                          2),
-                                                                  child: Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'k2gp95dp' /* Sent, waiting for reply */,
-                                                                    ),
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).white,
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16, 5, 16, 14),
+                                                      .fromSTEB(16, 16, 16, 16),
                                                   child: Container(
                                                     width: double.infinity,
                                                     decoration: BoxDecoration(
@@ -548,6 +363,28 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 8, 0),
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        43),
+                                                            child:
+                                                                Image.network(
+                                                              getJsonField(
+                                                                activeOffersItem,
+                                                                r'''$.bank_logo''',
+                                                              ),
+                                                              width: 43,
+                                                              height: 43,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ),
+                                                        ),
                                                         Expanded(
                                                           child: Column(
                                                             mainAxisSize:
@@ -557,6 +394,52 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      't2kwojss' /* Offers # */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          fontSize:
+                                                                              12,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                  Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      getJsonField(
+                                                                        activeOffersItem,
+                                                                        r'''$.order_id''',
+                                                                      ).toString(),
+                                                                      '0000000000',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          fontSize:
+                                                                              12,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                               Text(
                                                                 valueOrDefault<
                                                                     String>(
@@ -573,12 +456,14 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                       fontFamily:
                                                                           'Sofia Pro By Khuzaimah',
                                                                       fontSize:
-                                                                          18,
+                                                                          20,
                                                                       fontWeight:
                                                                           FontWeight
                                                                               .bold,
                                                                       useGoogleFonts:
                                                                           false,
+                                                                      lineHeight:
+                                                                          1.5,
                                                                     ),
                                                               ),
                                                               Row(
@@ -590,78 +475,158 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                     FFLocalizations.of(
                                                                             context)
                                                                         .getText(
-                                                                      't2kwojss' /* Offers for booking # */,
+                                                                      'n5d3s79r' /* Last update:  */,
                                                                     ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .bodyText1,
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryColor,
+                                                                          fontSize:
+                                                                              10,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
                                                                   ),
                                                                   Text(
                                                                     valueOrDefault<
                                                                         String>(
-                                                                      getJsonField(
-                                                                        activeOffersItem,
-                                                                        r'''$.order_id''',
-                                                                      ).toString(),
-                                                                      '0000000000',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  functions
-                                                                      .offerScreenTime(
-                                                                          valueOrDefault<
-                                                                              int>(
+                                                                      functions.offerScreenTime(
+                                                                          valueOrDefault<int>(
                                                                             getJsonField(
                                                                               activeOffersItem,
                                                                               r'''$.created_at._seconds''',
                                                                             ),
                                                                             0,
                                                                           ),
-                                                                          valueOrDefault<
-                                                                              String>(
+                                                                          valueOrDefault<String>(
                                                                             FFAppState().locale,
                                                                             'en',
                                                                           )),
-                                                                  '0',
+                                                                      '0',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          color:
+                                                                              Color(0xFF2971FB),
+                                                                          fontSize:
+                                                                              10,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                              child: Container(
+                                                                width: 74,
+                                                                height: 22,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Color(
+                                                                      0xFFD05C5C),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
                                                                 ),
+                                                                child: Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'lre09mx2' /* New Offer */,
+                                                                  ),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Sofia Pro By Khuzaimah',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .white,
+                                                                        fontSize:
+                                                                            11,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                        lineHeight:
+                                                                            2,
+                                                                      ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: 74,
+                                                              height: 22,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: Color(
+                                                                    0xFFF0A637),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                              ),
+                                                              child: Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'nu7aeeks' /* Pending */,
+                                                                ),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
                                                                           'Sofia Pro By Khuzaimah',
-                                                                      color: Color(
-                                                                          0xFF2971FB),
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .white,
+                                                                      fontSize:
+                                                                          11,
                                                                       fontWeight:
                                                                           FontWeight
-                                                                              .bold,
+                                                                              .w500,
                                                                       useGoogleFonts:
                                                                           false,
+                                                                      lineHeight:
+                                                                          2,
                                                                     ),
                                                               ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(43),
-                                                          child: Image.network(
-                                                            getJsonField(
-                                                              activeOffersItem,
-                                                              r'''$.bank_logo''',
                                                             ),
-                                                            width: 43,
-                                                            height: 43,
-                                                            fit: BoxFit.cover,
-                                                          ),
+                                                          ],
                                                         ),
                                                       ],
                                                     ),
@@ -673,7 +638,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16, 15, 26, 0),
+                                                      .fromSTEB(16, 18, 26, 16),
                                                   child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -696,339 +661,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                               FFLocalizations.of(
                                                                       context)
                                                                   .getText(
-                                                                'ez8wbssn' /* Initial installment */,
-                                                              ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
-                                                                    color: Color(
-                                                                        0xFF6B6B6B),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
-                                                            ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    functions.formatAmount(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                      getJsonField(
-                                                                        activeOffersItem,
-                                                                        r'''$.offered_installment_amount''',
-                                                                      ).toString(),
-                                                                      '0',
-                                                                    )),
-                                                                    '0',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'ldwv6qbd' /* .00 */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          4,
-                                                                          0,
-                                                                          0,
-                                                                          4),
-                                                                  child: Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'z7x7wv59' /* SAR */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
-                                                                          fontSize:
-                                                                              10,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .getText(
-                                                                '4ha591ne' /* Installment period */,
-                                                              ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
-                                                                    color: Color(
-                                                                        0xFF6B6B6B),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
-                                                            ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    getJsonField(
-                                                                      activeOffersItem,
-                                                                      r'''$.offered_installment_period''',
-                                                                    ).toString(),
-                                                                    '0',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          4,
-                                                                          0,
-                                                                          0,
-                                                                          4),
-                                                                  child: Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'b1jmmlnc' /* Month */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
-                                                                          fontSize:
-                                                                              10,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16, 0, 16, 18),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Expanded(
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .getText(
-                                                                '2kxnix92' /* Total price */,
-                                                              ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
-                                                                    color: Color(
-                                                                        0xFF6B6B6B),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
-                                                            ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                Text(
-                                                                  functions
-                                                                      .formatAmount(
-                                                                          '790000'),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'c0ty6rbh' /* .00 */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          4,
-                                                                          0,
-                                                                          0,
-                                                                          4),
-                                                                  child: Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'h47bvnhi' /* SAR */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
-                                                                          fontSize:
-                                                                              10,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .getText(
-                                                                'wxex1r7b' /* Agent Name */,
+                                                                'np7vw75o' /* Property */,
                                                               ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -1048,11 +681,16 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                             Text(
                                                               valueOrDefault<
                                                                   String>(
-                                                                getJsonField(
-                                                                  activeOffersItem,
-                                                                  r'''$.agent_name''',
-                                                                ).toString(),
-                                                                'null',
+                                                                functions.formatAmount(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  getJsonField(
+                                                                    activeOffersItem,
+                                                                    r'''$.offered_installment_amount''',
+                                                                  ).toString(),
+                                                                  '0',
+                                                                )),
+                                                                '0',
                                                               ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -1072,215 +710,746 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                           ],
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16, 0, 16, 18),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
                                                       Expanded(
-                                                        flex: 1,
-                                                        child: FFButtonWidget(
-                                                          onPressed: () async {
-                                                            logFirebaseEvent(
-                                                                'OFFERS_PAGE_ACCEPT_BTN_ON_TAP');
-                                                            logFirebaseEvent(
-                                                                'Button_Alert-Dialog');
-                                                            var confirmDialogResponse =
-                                                                await showDialog<
-                                                                        bool>(
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (alertDialogContext) {
-                                                                        return AlertDialog(
-                                                                          title:
-                                                                              Text('Accept Offer'),
-                                                                          content:
-                                                                              Text('On accepting this offer other offers will get rejected.'),
-                                                                          actions: [
-                                                                            TextButton(
-                                                                              onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                              child: Text('Cancel'),
-                                                                            ),
-                                                                            TextButton(
-                                                                              onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                              child: Text('Confirm'),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      },
-                                                                    ) ??
-                                                                    false;
-                                                            if (confirmDialogResponse) {
-                                                              logFirebaseEvent(
-                                                                  'Button_Backend-Call');
-                                                              acceptOfferResponse =
-                                                                  await AcceptOfferCall
-                                                                      .call(
-                                                                userId:
-                                                                    currentUserUid,
-                                                                offerId:
-                                                                    getJsonField(
-                                                                  activeOffersItem,
-                                                                  r'''$.id''',
-                                                                ).toString(),
-                                                              );
-                                                              if ((acceptOfferResponse
-                                                                          ?.statusCode ??
-                                                                      200) ==
-                                                                  200) {
-                                                                logFirebaseEvent(
-                                                                    'Button_Show-Snack-Bar');
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      'Offer accepted successfully',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                        fontSize:
-                                                                            18,
-                                                                      ),
-                                                                    ),
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            4000),
-                                                                    backgroundColor:
-                                                                        Color(
-                                                                            0xFF777777),
-                                                                  ),
-                                                                );
-                                                              } else {
-                                                                logFirebaseEvent(
-                                                                    'Button_Show-Snack-Bar');
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      'Something went wrong',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.w600,
-                                                                        fontSize:
-                                                                            18,
-                                                                      ),
-                                                                    ),
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            4000),
-                                                                    backgroundColor:
-                                                                        Color(
-                                                                            0xFF777777),
-                                                                  ),
-                                                                );
-                                                              }
-                                                            }
-
-                                                            setState(() {});
-                                                          },
-                                                          text: FFLocalizations
-                                                                  .of(context)
-                                                              .getText(
-                                                            'i1uf8h4b' /* Accept */,
-                                                          ),
-                                                          options:
-                                                              FFButtonOptions(
-                                                            height: 38,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryBtnText,
-                                                            textStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      color: Color(
-                                                                          0xFF2971FB),
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Color(
-                                                                  0xFF2971FB),
-                                                              width: 1,
-                                                            ),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(8,
-                                                                      0, 0, 0),
-                                                          child: FFButtonWidget(
-                                                            onPressed: () {
-                                                              print(
-                                                                  'Button pressed ...');
-                                                            },
-                                                            text: FFLocalizations
-                                                                    .of(context)
-                                                                .getText(
-                                                              '0ipnoq80' /* Starting Chatting */,
-                                                            ),
-                                                            options:
-                                                                FFButtonOptions(
-                                                              height: 38,
-                                                              color: FlutterFlowTheme
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'vs0xmudi' /* Booking Ref. */,
+                                                              ),
+                                                              style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .primaryColor,
-                                                              textStyle:
-                                                                  FlutterFlowTheme.of(
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Sofia Pro By Khuzaimah',
+                                                                    color: Color(
+                                                                        0xFF6B6B6B),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w300,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            ),
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  FFLocalizations.of(
                                                                           context)
-                                                                      .subtitle2
+                                                                      .getText(
+                                                                    '2bmjizhc' /* # */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
                                                                       .override(
                                                                         fontFamily:
                                                                             'Sofia Pro By Khuzaimah',
-                                                                        color: Colors
-                                                                            .white,
+                                                                        fontSize:
+                                                                            16,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
                                                                         useGoogleFonts:
                                                                             false,
                                                                       ),
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: Colors
-                                                                    .transparent,
-                                                                width: 1,
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      getJsonField(
+                                                                        activeOffersItem,
+                                                                        r'''$.id''',
+                                                                      ).toString(),
+                                                                      '0',
+                                                                    ),
+                                                                    maxLines: 2,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          fontSize:
+                                                                              16,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(16, 0,
+                                                                  16, 16),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'ez8wbssn' /* Initial installment */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Sofia Pro By Khuzaimah',
+                                                                        color: Color(
+                                                                            0xFF6B6B6B),
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        functions
+                                                                            .formatAmount(valueOrDefault<String>(
+                                                                          getJsonField(
+                                                                            activeOffersItem,
+                                                                            r'''$.offered_installment_amount''',
+                                                                          ).toString(),
+                                                                          '0',
+                                                                        )),
+                                                                        '0',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Sofia Pro By Khuzaimah',
+                                                                            fontSize:
+                                                                                20,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                    Text(
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        'ldwv6qbd' /* .00 */,
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Sofia Pro By Khuzaimah',
+                                                                            fontSize:
+                                                                                20,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              4,
+                                                                              0,
+                                                                              0,
+                                                                              4),
+                                                                      child:
+                                                                          Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'z7x7wv59' /* SAR */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                              fontSize: 10,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '4ha591ne' /* Installment period */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Sofia Pro By Khuzaimah',
+                                                                        color: Color(
+                                                                            0xFF6B6B6B),
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          activeOffersItem,
+                                                                          r'''$.offered_installment_period''',
+                                                                        ).toString(),
+                                                                        '0',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Sofia Pro By Khuzaimah',
+                                                                            fontSize:
+                                                                                20,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              4,
+                                                                              0,
+                                                                              0,
+                                                                              4),
+                                                                      child:
+                                                                          Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'b1jmmlnc' /* Month */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                              fontSize: 10,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(16, 0,
+                                                                  16, 18),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '2kxnix92' /* Total price */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Sofia Pro By Khuzaimah',
+                                                                        color: Color(
+                                                                            0xFF6B6B6B),
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      functions
+                                                                          .formatAmount(
+                                                                              '790000'),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Sofia Pro By Khuzaimah',
+                                                                            fontSize:
+                                                                                20,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                    Text(
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        'c0ty6rbh' /* .00 */,
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Sofia Pro By Khuzaimah',
+                                                                            fontSize:
+                                                                                20,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              4,
+                                                                              0,
+                                                                              0,
+                                                                              4),
+                                                                      child:
+                                                                          Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'h47bvnhi' /* SAR */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                              fontSize: 10,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'wxex1r7b' /* Agent Name */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Sofia Pro By Khuzaimah',
+                                                                        color: Color(
+                                                                            0xFF6B6B6B),
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    getJsonField(
+                                                                      activeOffersItem,
+                                                                      r'''$.agent_name''',
+                                                                    ).toString(),
+                                                                    'null',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Sofia Pro By Khuzaimah',
+                                                                        fontSize:
+                                                                            16,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(16, 0,
+                                                                  16, 20),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .stretch,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        0,
+                                                                        8),
+                                                            child: Container(
+                                                              width: 100,
+                                                              height: 42,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
                                                               ),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'pasrxjal' /* Chat with  */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).white,
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                  Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      getJsonField(
+                                                                        activeOffersItem,
+                                                                        r'''$.agent_name''',
+                                                                      ).toString(),
+                                                                      'null',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).white,
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Container(
+                                                            width: 100,
+                                                            height: 42,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .white,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
                                                                           8),
+                                                              border:
+                                                                  Border.all(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                              ),
+                                                            ),
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'OFFERS_PAGE_Row_k1bql2go_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'Row_Alert-Dialog');
+                                                                var confirmDialogResponse =
+                                                                    await showDialog<
+                                                                            bool>(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (alertDialogContext) {
+                                                                            return AlertDialog(
+                                                                              title: Text('Accept offer'),
+                                                                              content: Text('Are you sure you want to accept the offer? we will reject all other offers if you accepted'),
+                                                                              actions: [
+                                                                                TextButton(
+                                                                                  onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                  child: Text('No'),
+                                                                                ),
+                                                                                TextButton(
+                                                                                  onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                  child: Text('Accept'),
+                                                                                ),
+                                                                              ],
+                                                                            );
+                                                                          },
+                                                                        ) ??
+                                                                        false;
+                                                                if (confirmDialogResponse) {
+                                                                  logFirebaseEvent(
+                                                                      'Row_Backend-Call');
+                                                                  acceptOfferResponse =
+                                                                      await AcceptOfferCall
+                                                                          .call(
+                                                                    userId:
+                                                                        currentUserUid,
+                                                                    offerId:
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                      getJsonField(
+                                                                        activeOffersItem,
+                                                                        r'''$.id''',
+                                                                      ).toString(),
+                                                                      'null',
+                                                                    ),
+                                                                  );
+                                                                  if ((acceptOfferResponse
+                                                                              ?.statusCode ??
+                                                                          200) ==
+                                                                      200) {
+                                                                    logFirebaseEvent(
+                                                                        'Row_Show-Snack-Bar');
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'Offer accepted',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).white,
+                                                                            fontWeight:
+                                                                                FontWeight.w800,
+                                                                            fontSize:
+                                                                                18,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            Color(0xFFA5A5A5),
+                                                                      ),
+                                                                    );
+                                                                  } else {
+                                                                    logFirebaseEvent(
+                                                                        'Row_Show-Snack-Bar');
+                                                                    ScaffoldMessenger.of(
+                                                                            context)
+                                                                        .showSnackBar(
+                                                                      SnackBar(
+                                                                        content:
+                                                                            Text(
+                                                                          'An error has occured',
+                                                                          style:
+                                                                              TextStyle(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).white,
+                                                                            fontWeight:
+                                                                                FontWeight.w800,
+                                                                            fontSize:
+                                                                                18,
+                                                                          ),
+                                                                        ),
+                                                                        duration:
+                                                                            Duration(milliseconds: 4000),
+                                                                        backgroundColor:
+                                                                            Color(0xFFA5A5A5),
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                }
+
+                                                                setState(() {});
+                                                              },
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'n6rgv2jr' /* Accept offer */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryColor,
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
-                                                        ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),

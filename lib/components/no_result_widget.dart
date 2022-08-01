@@ -1,29 +1,24 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NoResultsFoundWidget extends StatefulWidget {
-  const NoResultsFoundWidget({
+class NoResultWidget extends StatefulWidget {
+  const NoResultWidget({
     Key key,
     this.titleText,
-    this.subtitleText,
-    this.isButtonVisible,
     this.screenName,
   }) : super(key: key);
 
   final String titleText;
-  final String subtitleText;
-  final bool isButtonVisible;
   final String screenName;
 
   @override
-  _NoResultsFoundWidgetState createState() => _NoResultsFoundWidgetState();
+  _NoResultWidgetState createState() => _NoResultWidgetState();
 }
 
-class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
+class _NoResultWidgetState extends State<NoResultWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,7 +29,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if ((widget.screenName == 'Result'))
+            if ((widget.screenName == 'result'))
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 3, 0, 0),
                 child: Image.asset(
@@ -44,12 +39,19 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
                   fit: BoxFit.contain,
                 ),
               ),
-            if ((widget.screenName == 'Notification'))
+            if ((widget.screenName == 'notification'))
               Image.asset(
                 'assets/images/NoNotificationFound.png',
                 width: 38,
                 height: 37,
                 fit: BoxFit.contain,
+              ),
+            if ((widget.screenName == 'offer'))
+              Image.asset(
+                'assets/images/offerScreenNoResult.png',
+                width: 38,
+                height: 37,
+                fit: BoxFit.cover,
               ),
           ],
         ),
@@ -75,49 +77,6 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
             ],
           ),
         ),
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Text(
-                  widget.subtitleText,
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).bodyText2,
-                ),
-              ),
-            ],
-          ),
-        ),
-        if ((widget.isButtonVisible == true))
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-            child: FFButtonWidget(
-              onPressed: () {
-                print('Button pressed ...');
-              },
-              text: FFLocalizations.of(context).getText(
-                '1yep0j1q' /* Explore our properties */,
-              ),
-              options: FFButtonOptions(
-                width: 215,
-                height: 46,
-                color: FlutterFlowTheme.of(context).primaryColor,
-                textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                      fontFamily: 'Sofia Pro By Khuzaimah',
-                      color: Colors.white,
-                      useGoogleFonts: false,
-                    ),
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-          ),
       ],
     );
   }
