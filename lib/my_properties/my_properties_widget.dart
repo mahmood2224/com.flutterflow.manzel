@@ -2,10 +2,11 @@ import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
-import '../components/not_found_page_widget.dart';
+import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -166,7 +167,13 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.6,
-                                      child: NotFoundPageWidget(),
+                                      child: NoResultsFoundWidget(
+                                        titleText: 'No properties booked yet',
+                                        subtitleText:
+                                            'Your booking list is empty. Let\'s explore our properties',
+                                        isButtonVisible: true,
+                                        screenName: 'myPropertiesBooked',
+                                      ),
                                     ),
                                   );
                                 }
@@ -593,8 +600,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             ],
                                                                           ),
                                                                           Text(
-                                                                            dateTimeFormat('MMMMEEEEd',
-                                                                                rowOrdersRecord.createdAt),
+                                                                            functions.myPropertiesFormatDate(rowOrdersRecord.createdAt),
                                                                             style: FlutterFlowTheme.of(context).bodyText2.override(
                                                                                   fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                   fontSize: 13,
@@ -949,7 +955,21 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     propertiesListUserSavedRecordList =
                                     snapshot.data;
                                 if (propertiesListUserSavedRecordList.isEmpty) {
-                                  return NotFoundPageWidget();
+                                  return Center(
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.4,
+                                      child: NoResultsFoundWidget(
+                                        titleText: 'No properties favorite yet',
+                                        subtitleText:
+                                            'Your save list is empty. Let\'s exploring our properties',
+                                        isButtonVisible: true,
+                                        screenName: 'myPropertiesFavorite',
+                                      ),
+                                    ),
+                                  );
                                 }
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,

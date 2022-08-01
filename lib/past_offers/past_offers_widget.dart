@@ -359,9 +359,8 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                     .override(
                                                                       fontFamily:
                                                                           'Sofia Pro By Khuzaimah',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryColor,
+                                                                      color: Color(
+                                                                          0xFF8C8C8C),
                                                                       fontSize:
                                                                           10,
                                                                       fontWeight:
@@ -398,7 +397,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                       fontFamily:
                                                                           'Sofia Pro By Khuzaimah',
                                                                       color: Color(
-                                                                          0xFF2971FB),
+                                                                          0xFF8C8C8C),
                                                                       fontSize:
                                                                           10,
                                                                       fontWeight:

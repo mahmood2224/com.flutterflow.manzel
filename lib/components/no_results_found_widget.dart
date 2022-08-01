@@ -51,6 +51,20 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
                 height: 37,
                 fit: BoxFit.contain,
               ),
+            if ((widget.screenName == 'myPropertiesBooked'))
+              Image.asset(
+                'assets/images/myPropertiesBooked.png',
+                width: 37,
+                height: 36,
+                fit: BoxFit.cover,
+              ),
+            if ((widget.screenName == 'myPropertiesFavorite'))
+              Image.asset(
+                'assets/images/myPropertiesFavorite.png',
+                width: 37,
+                height: 36,
+                fit: BoxFit.cover,
+              ),
           ],
         ),
         Padding(

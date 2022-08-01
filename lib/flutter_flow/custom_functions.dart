@@ -320,3 +320,8 @@ List<String> choicechipUnselected(List<String> choicechipValue) {
     return choicechipValue;
   }
 }
+
+String myPropertiesFormatDate(DateTime inputTimeStamp) {
+  // Add your function code here!
+  return '${DateFormat.d().format(inputTimeStamp)} ${DateFormat.MMMM().format(inputTimeStamp)}. ${DateFormat.y().format(inputTimeStamp)}';
+}
