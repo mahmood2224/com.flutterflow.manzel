@@ -1316,6 +1316,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                     ),
                                                   ),
                                                   Divider(
+                                                    thickness: 1,
                                                     color: Color(0xFFECECEC),
                                                   ),
                                                 ],
