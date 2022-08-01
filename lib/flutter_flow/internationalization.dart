@@ -1446,18 +1446,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // ConfirmationCopy
   {
-    '0xg5ak0c': {
-      'en': 'Your Booking Confirmed',
-      'ar': 'تم تأكيد حجزك',
-    },
-    'po473uxs': {
-      'en': 'Booking ref: ',
-      'ar': 'مرجع الحجز:',
-    },
-    'ibxbamt4': {
-      'en': '#',
-      'ar': '',
-    },
     'eqp37ji0': {
       'en': 'Order Process',
       'ar': '',
@@ -1526,9 +1514,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'View Receipt Transaction',
       'ar': 'عرض إيصال المعاملة',
     },
-    'oemx8z02': {
-      'en': 'Back to Home',
-      'ar': 'عرض تفاصيل الحجز',
+    '6kh2e3aq': {
+      'en': 'Booking Ref. : ',
+      'ar': '',
     },
     'vrsc3lt4': {
       'en': 'Home',
@@ -1609,6 +1597,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'p50ponkb': {
       'en': 'Pay',
+      'ar': '',
+    },
+  },
+  // cancelReserveBottomSheet
+  {
+    '3f0lpjat': {
+      'en': 'Cancel Reserve',
+      'ar': '',
+    },
+    '6lylhsmr': {
+      'en': 'Cancel',
       'ar': '',
     },
   },

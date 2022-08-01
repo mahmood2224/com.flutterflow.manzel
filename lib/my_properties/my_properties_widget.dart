@@ -590,6 +590,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               ),
                                                                               Text(
                                                                                 rowOrdersRecord.orderId.toString(),
+                                                                                maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyText2.override(
                                                                                       fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                       fontSize: 12,
