@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -133,14 +134,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                       Expanded(
                         child: TabBarView(
                           children: [
-                            StreamBuilder<List<UserPropertiesRecord>>(
-                              stream: queryUserPropertiesRecord(
-                                queryBuilder: (userPropertiesRecord) =>
-                                    userPropertiesRecord
-                                        .where('u_id',
-                                            isEqualTo: currentUserReference)
-                                        .where('status',
-                                            isEqualTo: 'purchased'),
+                            FutureBuilder<ApiCallResponse>(
+                              future: BookedPropertiesCall.call(
+                                userId: currentUserUid,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -156,63 +152,49 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     ),
                                   );
                                 }
-                                List<UserPropertiesRecord>
-                                    propertiesListUserPropertiesRecordList =
+                                final propertiesListBookedPropertiesResponse =
                                     snapshot.data;
-                                if (propertiesListUserPropertiesRecordList
-                                    .isEmpty) {
-                                  return Center(
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height:
-                                          MediaQuery.of(context).size.height *
+                                return Builder(
+                                  builder: (context) {
+                                    final bookedProperties =
+                                        BookedPropertiesCall.result(
+                                      propertiesListBookedPropertiesResponse
+                                          .jsonBody,
+                                    ).toList();
+                                    if (bookedProperties.isEmpty) {
+                                      return Center(
+                                        child: Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
                                               0.6,
-                                      child: NoResultsFoundWidget(
-                                        titleText: 'No properties booked yet',
-                                        subtitleText:
-                                            'Your booking list is empty. Let\'s explore our properties',
-                                        isButtonVisible: true,
-                                        screenName: 'myPropertiesBooked',
-                                      ),
-                                    ),
-                                  );
-                                }
-                                return ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount:
-                                      propertiesListUserPropertiesRecordList
-                                          .length,
-                                  itemBuilder: (context, propertiesListIndex) {
-                                    final propertiesListUserPropertiesRecord =
-                                        propertiesListUserPropertiesRecordList[
-                                            propertiesListIndex];
-                                    return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 23, 16, 1),
-                                      child: FutureBuilder<ApiCallResponse>(
-                                        future: PropertyCall.call(
-                                          propertyId:
-                                              propertiesListUserPropertiesRecord
-                                                  .pId,
+                                          child: NoResultsFoundWidget(
+                                            titleText:
+                                                'No properties booked yet',
+                                            subtitleText:
+                                                'Your booking list is empty. Let\'s explore our properties',
+                                            isButtonVisible: true,
+                                            screenName: 'myPropertiesBooked',
+                                          ),
                                         ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50,
-                                                height: 50,
-                                                child: SpinKitRipple(
-                                                  color: Color(0xFF2971FB),
-                                                  size: 50,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          final containerPropertyResponse =
-                                              snapshot.data;
-                                          return Container(
+                                      );
+                                    }
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: bookedProperties.length,
+                                      itemBuilder:
+                                          (context, bookedPropertiesIndex) {
+                                        final bookedPropertiesItem =
+                                            bookedProperties[
+                                                bookedPropertiesIndex];
+                                        return Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 23, 16, 1),
+                                          child: Container(
                                             width: 100,
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -249,10 +231,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                               BorderRadius
                                                                   .circular(5),
                                                           child: Image.network(
-                                                            PropertyCall
-                                                                .propertyImg(
-                                                              containerPropertyResponse
-                                                                  .jsonBody,
+                                                            random_data
+                                                                .randomImageUrl(
+                                                              0,
+                                                              0,
                                                             ),
                                                             width: 80,
                                                             height: 75,
@@ -589,7 +571,13 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                     ),
                                                                               ),
                                                                               Text(
-                                                                                rowOrdersRecord.orderId.toString(),
+                                                                                valueOrDefault<String>(
+                                                                                  getJsonField(
+                                                                                    bookedPropertiesItem,
+                                                                                    r'''$.order_id''',
+                                                                                  ).toString(),
+                                                                                  'null',
+                                                                                ),
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyText2.override(
                                                                                       fontFamily: 'Sofia Pro By Khuzaimah',
@@ -601,7 +589,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             ],
                                                                           ),
                                                                           Text(
-                                                                            functions.myPropertiesFormatDate(rowOrdersRecord.createdAt),
+                                                                            functions.myPropertiesFormatDate(getJsonField(
+                                                                              bookedPropertiesItem,
+                                                                              r'''$.created_at._seconds''',
+                                                                            )),
                                                                             style: FlutterFlowTheme.of(context).bodyText2.override(
                                                                                   fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                   fontSize: 13,
@@ -629,11 +620,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       Text(
                                                                         valueOrDefault<
                                                                             String>(
-                                                                          PropertyCall
-                                                                              .propertyName(
-                                                                            containerPropertyResponse.jsonBody,
+                                                                          getJsonField(
+                                                                            bookedPropertiesItem,
+                                                                            r'''$.property_name''',
                                                                           ).toString(),
-                                                                          'Un-Known',
+                                                                          'null',
                                                                         ),
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyText1
@@ -670,14 +661,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        PropertyCall
-                                                                            .propertyCity(
-                                                                          containerPropertyResponse
-                                                                              .jsonBody,
-                                                                        ).toString(),
-                                                                        'Un-Known',
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        '7wnud4bn' /* Riyadh */,
                                                                       ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
@@ -697,7 +684,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       FFLocalizations.of(
                                                                               context)
                                                                           .getText(
-                                                                        'kdwkp7d8' /*  , */,
+                                                                        'kdwkp7d8' /* ,  */,
                                                                       ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
@@ -714,14 +701,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           ),
                                                                     ),
                                                                     Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        PropertyCall
-                                                                            .propertyDistrict(
-                                                                          containerPropertyResponse
-                                                                              .jsonBody,
-                                                                        ).toString(),
-                                                                        'Un-Known',
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        'z5aanp7e' /* Alyasmeen */,
                                                                       ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
@@ -870,63 +853,73 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: [
-                                                      Expanded(
-                                                        child: FFButtonWidget(
-                                                          onPressed: () {
-                                                            print(
-                                                                'Button pressed ...');
-                                                          },
-                                                          text: FFLocalizations
-                                                                  .of(context)
-                                                              .getText(
-                                                            '6pr2fkpk' /* Pay now */,
-                                                          ),
-                                                          options:
-                                                              FFButtonOptions(
-                                                            width:
-                                                                double.infinity,
-                                                            height: 38,
-                                                            color: FlutterFlowTheme
+                                                      if (!functions
+                                                          .conditionalVisibility(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                getJsonField(
+                                                                  bookedPropertiesItem,
+                                                                  r'''$.order_status''',
+                                                                ).toString(),
+                                                                'null',
+                                                              ),
+                                                              'payment_received'))
+                                                        Expanded(
+                                                          child: FFButtonWidget(
+                                                            onPressed: () {
+                                                              print(
+                                                                  'Button pressed ...');
+                                                            },
+                                                            text: FFLocalizations
                                                                     .of(context)
-                                                                .primaryColor,
-                                                            textStyle:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          15,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Colors
-                                                                  .transparent,
-                                                              width: 1,
+                                                                .getText(
+                                                              '6pr2fkpk' /* Pay now */,
                                                             ),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
+                                                            options:
+                                                                FFButtonOptions(
+                                                              width: double
+                                                                  .infinity,
+                                                              height: 38,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryColor,
+                                                              textStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .subtitle2
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Sofia Pro By Khuzaimah',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            15,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                width: 1,
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
                                                     ],
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                          );
-                                        },
-                                      ),
+                                          ),
+                                        );
+                                      },
                                     );
                                   },
                                 );

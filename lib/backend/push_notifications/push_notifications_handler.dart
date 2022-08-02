@@ -88,7 +88,11 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EditMobileNumber': (data) async => EditMobileNumberWidget(),
   'ConfirmNewNumberOTP': (data) async => ConfirmNewNumberOTPWidget(),
   'Notifications': (data) async => NotificationsWidget(),
-  'Offers': (data) async => NavBarPage(initialPage: 'Offers'),
+  'Offers': (data) async => hasMatchingParameters(data, {'propertyId'})
+      ? OffersWidget(
+          propertyId: getParameter(data, 'propertyId'),
+        )
+      : NavBarPage(initialPage: 'Offers'),
   'PastOffers': (data) async => PastOffersWidget(),
   'Filter': (data) async => FilterWidget(),
   'filterResults': (data) async => FilterResultsWidget(),

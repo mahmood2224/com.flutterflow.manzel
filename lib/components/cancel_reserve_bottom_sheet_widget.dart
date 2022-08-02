@@ -28,7 +28,9 @@ class _CancelReserveBottomSheetWidgetState
             onPressed: () {
               print('Button pressed ...');
             },
-            text: 'Cancel Reserve',
+            text: FFLocalizations.of(context).getText(
+              'wb43h3r4' /* Cancel Reserve */,
+            ),
             options: FFButtonOptions(
               width: double.infinity,
               height: 42,
@@ -52,7 +54,9 @@ class _CancelReserveBottomSheetWidgetState
             onPressed: () {
               print('Button pressed ...');
             },
-            text: 'Cancel',
+            text: FFLocalizations.of(context).getText(
+              't7s7qd09' /* Cancel */,
+            ),
             options: FFButtonOptions(
               width: 130,
               height: 42,

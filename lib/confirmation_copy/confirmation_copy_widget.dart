@@ -79,7 +79,9 @@ class _ConfirmationCopyWidgetState extends State<ConfirmationCopyWidget> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Booking Ref. : ',
+                  FFLocalizations.of(context).getText(
+                    'trw95gom' /* Booking Ref. :  */,
+                  ),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Sofia Pro By Khuzaimah',
                         color: FlutterFlowTheme.of(context).white,
@@ -168,8 +170,9 @@ class _ConfirmationCopyWidgetState extends State<ConfirmationCopyWidget> {
                                             size: 28,
                                           ),
                                         ),
-                                        if ((functions.offerPageChips() ==
-                                            'processed'))
+                                        if ((functions.conditionalVisibility(
+                                                'pending', 'processed') ==
+                                            true))
                                           Icon(
                                             Icons.radio_button_off,
                                             color: Colors.black,
@@ -219,8 +222,9 @@ class _ConfirmationCopyWidgetState extends State<ConfirmationCopyWidget> {
                                     Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        if ((functions.offerPageChips() ==
-                                            'unprocessed'))
+                                        if ((functions.conditionalVisibility(
+                                                'processed', 'processed') ==
+                                            false))
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -292,8 +296,10 @@ class _ConfirmationCopyWidgetState extends State<ConfirmationCopyWidget> {
                                                       MainAxisSize.max,
                                                   children: [
                                                     if ((functions
-                                                            .offerPageChips() ==
-                                                        'unprocessed'))
+                                                            .conditionalVisibility(
+                                                                'processed',
+                                                                'processed') ==
+                                                        false))
                                                       Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
@@ -461,8 +467,9 @@ class _ConfirmationCopyWidgetState extends State<ConfirmationCopyWidget> {
                                     Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        if ((functions.offerPageChips() ==
-                                            'unprocessed'))
+                                        if ((functions.conditionalVisibility(
+                                                'processed', 'processed') ==
+                                            false))
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(

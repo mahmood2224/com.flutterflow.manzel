@@ -804,9 +804,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز:',
     },
+    '7wnud4bn': {
+      'en': 'Riyadh',
+      'ar': 'الرياض الياسمين',
+    },
     'kdwkp7d8': {
-      'en': ' ,',
+      'en': ', ',
       'ar': ' ،',
+    },
+    'z5aanp7e': {
+      'en': 'Alyasmeen',
+      'ar': '',
     },
     'j1l9ymld': {
       'en': 'View Details',
@@ -1514,7 +1522,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'View Receipt Transaction',
       'ar': 'عرض إيصال المعاملة',
     },
-    '6kh2e3aq': {
+    'trw95gom': {
       'en': 'Booking Ref. : ',
       'ar': '',
     },
@@ -1602,11 +1610,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // cancelReserveBottomSheet
   {
-    '3f0lpjat': {
+    'wb43h3r4': {
       'en': 'Cancel Reserve',
       'ar': '',
     },
-    '6lylhsmr': {
+    't7s7qd09': {
       'en': 'Cancel',
       'ar': '',
     },

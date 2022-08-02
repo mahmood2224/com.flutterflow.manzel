@@ -277,7 +277,12 @@ String offerScreenTime(
   int secondsTime,
   String locale,
 ) {
-  DateTime offerTime = DateTime.fromMillisecondsSinceEpoch(secondsTime * 1000);
+  DateTime offerTime;
+  if (secondsTime.toString().length > 7) {
+    offerTime = DateTime.fromMillisecondsSinceEpoch(secondsTime * 1000);
+  } else {
+    offerTime = DateTime.fromMillisecondsSinceEpoch(secondsTime * 10000000);
+  }
   // Add your function code here!
   Duration diff = DateTime.now().difference(offerTime);
   int dayDiffrence = diff.inDays;
@@ -307,9 +312,16 @@ String offerScreenTime(
   }
 }
 
-String offerPageChips() {
-  // Add your function code here!
-  return "false";
+bool conditionalVisibility(
+  String apiResponseState,
+  String desiredWidgetState,
+) {
+  if (apiResponseState == desiredWidgetState) {
+    return true;
+  } else {
+    // Add your function code here!
+    return false;
+  }
 }
 
 List<String> choicechipUnselected(List<String> choicechipValue) {
@@ -321,7 +333,18 @@ List<String> choicechipUnselected(List<String> choicechipValue) {
   }
 }
 
-String myPropertiesFormatDate(DateTime inputTimeStamp) {
+String myPropertiesFormatDate(int inputTimeStamp) {
   // Add your function code here!
-  return '${DateFormat.d().format(inputTimeStamp)} ${DateFormat.MMMM().format(inputTimeStamp)}. ${DateFormat.y().format(inputTimeStamp)}';
+  DateTime bookingTime =
+      DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+  return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime)}. ${DateFormat.y().format(bookingTime)}';
+}
+
+String offerScreenPropertyIdisNull(String propertyId) {
+  // Add your function code here!
+  if (propertyId != null || propertyId != "null") {
+    return propertyId;
+  } else {
+    return "";
+  }
 }

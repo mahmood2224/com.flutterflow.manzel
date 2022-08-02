@@ -148,7 +148,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'offers',
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'Offers')
-                  : OffersWidget(),
+                  : OffersWidget(
+                      propertyId:
+                          params.getParam('propertyId', ParamType.String),
+                    ),
             ),
             FFRoute(
               name: 'PastOffers',
