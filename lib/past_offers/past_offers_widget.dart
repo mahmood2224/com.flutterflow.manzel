@@ -165,19 +165,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                     child: Container(
                                       width: double.infinity,
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 15,
-                                            color: Color(0x06000000),
-                                            offset: Offset(0, 8),
-                                            spreadRadius: 0,
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: Color(0xFFF1F1F1),
-                                        ),
+                                        borderRadius: BorderRadius.circular(0),
                                       ),
                                       child: InkWell(
                                         onTap: () async {
@@ -370,25 +358,22 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                     ),
                                                               ),
                                                               Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  functions
-                                                                      .offerScreenTime(
-                                                                          valueOrDefault<
-                                                                              int>(
-                                                                            getJsonField(
-                                                                              allOffersItem,
-                                                                              r'''$.created_at.seconds''',
-                                                                            ),
-                                                                            0,
+                                                                functions
+                                                                    .offerScreenTime(
+                                                                        valueOrDefault<
+                                                                            int>(
+                                                                          getJsonField(
+                                                                            allOffersItem,
+                                                                            r'''$.created_at._seconds''',
                                                                           ),
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            FFAppState().locale,
-                                                                            'en',
-                                                                          )),
-                                                                  '0',
-                                                                ),
+                                                                          0,
+                                                                        ),
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          FFAppState()
+                                                                              .locale,
+                                                                          'en',
+                                                                        )),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1
@@ -446,34 +431,40 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                         .circular(
                                                                             5),
                                                               ),
-                                                              child: Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  '7r7omofu' /* Accepted */,
-                                                                ),
-                                                                textAlign:
-                                                                    TextAlign
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
                                                                         .center,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .white,
-                                                                      fontSize:
-                                                                          11,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                      lineHeight:
-                                                                          2,
+                                                                children: [
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      '7r7omofu' /* Accepted */,
                                                                     ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).white,
+                                                                          fontSize:
+                                                                              11,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                             ),
                                                           ),
@@ -508,34 +499,40 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                         .circular(
                                                                             5),
                                                               ),
-                                                              child: Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'ftvaehka' /* Expired */,
-                                                                ),
-                                                                textAlign:
-                                                                    TextAlign
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
                                                                         .center,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .white,
-                                                                      fontSize:
-                                                                          11,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                      lineHeight:
-                                                                          2,
+                                                                children: [
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'ftvaehka' /* Expired */,
                                                                     ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).white,
+                                                                          fontSize:
+                                                                              11,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                             ),
                                                           ),
@@ -570,34 +567,40 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                         .circular(
                                                                             5),
                                                               ),
-                                                              child: Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'y5epausm' /* Rejected */,
-                                                                ),
-                                                                textAlign:
-                                                                    TextAlign
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
                                                                         .center,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .white,
-                                                                      fontSize:
-                                                                          11,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                      lineHeight:
-                                                                          2,
+                                                                children: [
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'y5epausm' /* Rejected */,
                                                                     ),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).white,
+                                                                          fontSize:
+                                                                              11,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                             ),
                                                           ),
@@ -624,34 +627,40 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                       .circular(
                                                                           5),
                                                             ),
-                                                            child: Text(
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .getText(
-                                                                'dzlim6kq' /* Disqualified */,
-                                                              ),
-                                                              textAlign:
-                                                                  TextAlign
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
                                                                       .center,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .white,
-                                                                    fontSize:
-                                                                        11,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                    lineHeight:
-                                                                        2,
+                                                              children: [
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'dzlim6kq' /* Disqualified */,
                                                                   ),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Sofia Pro By Khuzaimah',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .white,
+                                                                        fontSize:
+                                                                            11,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
                                                       ],

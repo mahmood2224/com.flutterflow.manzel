@@ -342,7 +342,7 @@ String myPropertiesFormatDate(int inputTimeStamp) {
 
 String offerScreenPropertyIdisNull(String propertyId) {
   // Add your function code here!
-  if (propertyId != null || propertyId != "null") {
+  if (propertyId != null && propertyId != "null") {
     return propertyId;
   } else {
     return "";
