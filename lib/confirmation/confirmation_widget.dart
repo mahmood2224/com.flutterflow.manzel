@@ -1,10 +1,8 @@
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
-import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/upload_media.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +28,6 @@ class ConfirmationWidget extends StatefulWidget {
 }
 
 class _ConfirmationWidgetState extends State<ConfirmationWidget> {
-  String uploadedFileUrl = '';
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -182,408 +179,13 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           ),
                           Divider(
                             thickness: 1,
-                            color: Color(0xFFECECEC),
+                            indent: 2,
+                            endIndent: 2,
+                            color: Color(0xFFE5E5E5),
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 21, 20, 0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 21),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'helm66q2' /* Order Process */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
-                                          fontSize: 18,
-                                          useGoogleFonts: false,
-                                        ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 40),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 0, 5),
-                                            child: Icon(
-                                              Icons.check_circle_rounded,
-                                              color: Color(0xFF7FC15F),
-                                              size: 28,
-                                            ),
-                                          ),
-                                          if ((functions.offerPageChips() ==
-                                              'processed'))
-                                            Icon(
-                                              Icons.radio_button_off,
-                                              color: Colors.black,
-                                              size: 28,
-                                            ),
-                                        ],
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12, 0, 0, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  '4b2ze33a' /* Reservation & Payment Confirme... */,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 40),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          if ((functions.offerPageChips() ==
-                                              'unprocessed'))
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 0, 5),
-                                              child: Icon(
-                                                Icons.check_circle_rounded,
-                                                color: Color(0xFF7FC15F),
-                                                size: 28,
-                                              ),
-                                            ),
-                                          Icon(
-                                            Icons.radio_button_off,
-                                            color: Colors.black,
-                                            size: 28,
-                                          ),
-                                        ],
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12, 0, 0, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'czklypuv' /* Send deal to Banks */,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 15, 0, 15),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 40),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      if ((functions
-                                                              .offerPageChips() ==
-                                                          'unprocessed'))
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      0, 0, 5),
-                                                          child: Icon(
-                                                            Icons
-                                                                .check_circle_rounded,
-                                                            color: Color(
-                                                                0xFF7FC15F),
-                                                            size: 28,
-                                                          ),
-                                                        ),
-                                                      Icon(
-                                                        Icons.radio_button_off,
-                                                        color: Colors.black,
-                                                        size: 28,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  12, 0, 0, 0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                              'cie1ckkw' /* Completing Documents */,
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(40, 10, 0, 0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    FFButtonWidget(
-                                                      onPressed: () async {
-                                                        logFirebaseEvent(
-                                                            'CONFIRMATION_PAGE_uploadDocuments_ON_TAP');
-                                                        logFirebaseEvent(
-                                                            'uploadDocuments_Upload-File');
-                                                        final selectedFile =
-                                                            await selectFile(
-                                                                allowedExtensions: [
-                                                              'pdf'
-                                                            ]);
-                                                        if (selectedFile !=
-                                                            null) {
-                                                          showUploadMessage(
-                                                            context,
-                                                            'Uploading file...',
-                                                            showLoading: true,
-                                                          );
-                                                          final downloadUrl =
-                                                              await uploadData(
-                                                                  selectedFile
-                                                                      .storagePath,
-                                                                  selectedFile
-                                                                      .bytes);
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .hideCurrentSnackBar();
-                                                          if (downloadUrl !=
-                                                              null) {
-                                                            setState(() =>
-                                                                uploadedFileUrl =
-                                                                    downloadUrl);
-                                                            showUploadMessage(
-                                                              context,
-                                                              'Success!',
-                                                            );
-                                                          } else {
-                                                            showUploadMessage(
-                                                              context,
-                                                              'Failed to upload file',
-                                                            );
-                                                            return;
-                                                          }
-                                                        }
-                                                      },
-                                                      text: FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        'ee9tj9d6' /* Upload Documents */,
-                                                      ),
-                                                      options: FFButtonOptions(
-                                                        width: 200,
-                                                        height: 44,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        textStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .subtitle2
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w800,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                        borderSide: BorderSide(
-                                                          color: Colors
-                                                              .transparent,
-                                                          width: 1,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 30),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          if ((functions.offerPageChips() ==
-                                              'unprocessed'))
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 0, 5),
-                                              child: Icon(
-                                                Icons.check_circle_rounded,
-                                                color: Color(0xFF7FC15F),
-                                                size: 28,
-                                              ),
-                                            ),
-                                          Icon(
-                                            Icons.radio_button_off,
-                                            color: Colors.black,
-                                            size: 28,
-                                          ),
-                                        ],
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12, 0, 0, 0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'zrzv4hu9' /* Get banks proposals */,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Divider(
-                                  thickness: 1,
-                                  color: Color(0xFFECECEC),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 20, 0, 17),
+                                EdgeInsetsDirectional.fromSTEB(20, 25, 20, 12),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -605,7 +207,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 25),
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 15),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -878,61 +480,66 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                               ],
                             ),
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      20, 15, 20, 25),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'CONFIRMATION_PAGE_VIEW_MORE_BTN_ON_TAP');
-                                      logFirebaseEvent('Button_Navigate-To');
-                                      context.pushNamed(
-                                        'PropertyDetails',
-                                        queryParams: {
-                                          'propertyId': serializeParam(
-                                              widget.propertyId, ParamType.int),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                    text: FFLocalizations.of(context).getText(
-                                      '6rsjfq97' /* View More */,
-                                    ),
-                                    options: FFButtonOptions(
-                                      width: 130,
-                                      height: 40,
-                                      color: Colors.white,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
-                                            color: Color(0xFF2971FB),
-                                            fontWeight: FontWeight.w800,
-                                            useGoogleFonts: false,
-                                          ),
-                                      borderSide: BorderSide(
-                                        color: Color(0xFF2971FB),
-                                        width: 1,
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 15, 0, 25),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'CONFIRMATION_PAGE_VIEW_MORE_BTN_ON_TAP');
+                                        logFirebaseEvent('Button_Navigate-To');
+                                        context.pushNamed(
+                                          'PropertyDetails',
+                                          queryParams: {
+                                            'propertyId': serializeParam(
+                                                widget.propertyId,
+                                                ParamType.int),
+                                          }.withoutNulls,
+                                        );
+                                      },
+                                      text: FFLocalizations.of(context).getText(
+                                        '6rsjfq97' /* View More */,
                                       ),
-                                      borderRadius: BorderRadius.circular(8),
+                                      options: FFButtonOptions(
+                                        width: 130,
+                                        height: 40,
+                                        color: Colors.white,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily:
+                                                  'Sofia Pro By Khuzaimah',
+                                              color: Color(0xFF2971FB),
+                                              fontWeight: FontWeight.w800,
+                                              useGoogleFonts: false,
+                                            ),
+                                        borderSide: BorderSide(
+                                          color: Color(0xFF2971FB),
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           Divider(
                             thickness: 1,
-                            indent: 20,
-                            endIndent: 20,
+                            indent: 2,
+                            endIndent: 2,
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 25, 20, 0),
+                                EdgeInsetsDirectional.fromSTEB(20, 25, 20, 20),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -994,7 +601,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          20, 0, 20, 22),
+                                          20, 0, 20, 12),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -1269,47 +876,42 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 162),
+                                EdgeInsetsDirectional.fromSTEB(20, 22, 20, 30),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 12, 0, 0),
-                                  child: FFButtonWidget(
-                                    onPressed: () {
-                                      print('receipt pressed ...');
-                                    },
-                                    text: FFLocalizations.of(context).getText(
-                                      'a5vxpwan' /* View Receipt Transaction */,
+                                FFButtonWidget(
+                                  onPressed: () {
+                                    print('receipt pressed ...');
+                                  },
+                                  text: FFLocalizations.of(context).getText(
+                                    'a5vxpwan' /* View Receipt Transaction */,
+                                  ),
+                                  icon: Icon(
+                                    Icons.sticky_note_2_outlined,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    size: 20,
+                                  ),
+                                  options: FFButtonOptions(
+                                    width: 230,
+                                    height: 45,
+                                    color: Colors.white,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Color(0x1A2971FB),
+                                      width: 1,
                                     ),
-                                    icon: Icon(
-                                      Icons.sticky_note_2_outlined,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      size: 20,
-                                    ),
-                                    options: FFButtonOptions(
-                                      width: 230,
-                                      height: 45,
-                                      color: Colors.white,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts: false,
-                                          ),
-                                      borderSide: BorderSide(
-                                        color: Color(0x1A2971FB),
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
                                 ),
                               ],

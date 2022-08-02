@@ -160,7 +160,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'offers',
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'Offers')
-                  : OffersWidget(),
+                  : OffersWidget(
+                      propertyId:
+                          params.getParam('propertyId', ParamType.String),
+                    ),
             ),
             FFRoute(
               name: 'PastOffers',
@@ -266,6 +269,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'PersonalEmploymentDetails',
               path: 'personalEmploymentDetails',
               builder: (context, params) => PersonalEmploymentDetailsWidget(),
+            ),
+            FFRoute(
+              name: 'ConfirmationCopy',
+              path: 'confirmationCopy',
+              builder: (context, params) => ConfirmationCopyWidget(
+                propertyId: params.getParam('propertyId', ParamType.int),
+                paymentMethod:
+                    params.getParam('paymentMethod', ParamType.String),
+                orderId: params.getParam('orderId', ParamType.int),
+                transactionId:
+                    params.getParam('transactionId', ParamType.String),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

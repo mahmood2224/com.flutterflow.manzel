@@ -412,21 +412,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' offers active',
       'ar': '4 عروض نشطة',
     },
-    'vw6fpdxx': {
-      'en': 'New offer',
-      'ar': 'عرض جديد',
-    },
-    'jmco7dzk': {
-      'en': 'Await approval',
-      'ar': 'في انتظار الموافقة',
-    },
-    'k2gp95dp': {
-      'en': 'Sent, waiting for reply',
-      'ar': 'تم الإرسال ، في انتظار الرد',
-    },
     't2kwojss': {
-      'en': 'Offers for booking #',
+      'en': 'Offers #',
       'ar': 'عروض للحجز #',
+    },
+    'n5d3s79r': {
+      'en': 'Last update: ',
+      'ar': '',
+    },
+    'lre09mx2': {
+      'en': 'New Offer',
+      'ar': '',
+    },
+    'nu7aeeks': {
+      'en': 'Pending',
+      'ar': '',
+    },
+    'np7vw75o': {
+      'en': 'Property',
+      'ar': 'القسط الأولي',
+    },
+    'vs0xmudi': {
+      'en': 'Booking Ref.',
+      'ar': 'فترة التقسيط',
+    },
+    '2bmjizhc': {
+      'en': '#',
+      'ar': '',
     },
     'ez8wbssn': {
       'en': 'Initial installment',
@@ -464,13 +476,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Agent Name',
       'ar': 'اسم العميل',
     },
-    'i1uf8h4b': {
-      'en': 'Accept',
-      'ar': 'قبول',
+    'pasrxjal': {
+      'en': 'Chat with ',
+      'ar': '',
     },
-    '0ipnoq80': {
-      'en': 'Starting Chatting',
-      'ar': 'بدء الدردشة',
+    'n6rgv2jr': {
+      'en': 'Accept offer',
+      'ar': '',
     },
     '5gvwuuh2': {
       'en': 'Completed or canceled offers',
@@ -487,57 +499,77 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Past & canceled offers',
       'ar': 'العروض السابقة والملغاة',
     },
-    '4ur7plxi': {
-      'en': 'Canceled',
-      'ar': 'ألغيت',
-    },
-    '4znz79dz': {
-      'en': 'Completed',
-      'ar': 'مكتمل',
-    },
-    'teuph71w': {
-      'en': 'Offers for booking #',
+    '3pqboynr': {
+      'en': 'Offers #',
       'ar': 'عروض للحجز #',
     },
-    'kjkjohaa': {
+    'mne0k69i': {
+      'en': 'Last update: ',
+      'ar': '',
+    },
+    '7r7omofu': {
+      'en': 'Accepted',
+      'ar': '',
+    },
+    'ftvaehka': {
+      'en': 'Expired',
+      'ar': '',
+    },
+    'y5epausm': {
+      'en': 'Rejected',
+      'ar': '',
+    },
+    'dzlim6kq': {
+      'en': 'Disqualified',
+      'ar': '',
+    },
+    '6e3dl9a5': {
+      'en': 'Property',
+      'ar': 'القسط الأولي',
+    },
+    'dcv75stq': {
+      'en': 'Booking Ref.',
+      'ar': 'فترة التقسيط',
+    },
+    '0kssv8ii': {
+      'en': '#',
+      'ar': '',
+    },
+    'tpwleczh': {
       'en': 'Initial installment',
       'ar': 'القسط الأولي',
     },
-    'j6dalma3': {
+    '6yumrre4': {
       'en': '.00',
       'ar': '',
     },
-    'mrfh58sm': {
+    '2szdgt5y': {
       'en': 'SAR',
       'ar': '',
     },
-    'yyqumocq': {
+    'yv9roric': {
       'en': 'Installment period',
       'ar': 'فترة التقسيط',
     },
-    'hthrdjdb': {
+    '3v67jmtb': {
       'en': 'Month',
       'ar': 'شهر',
     },
-    '70pmpq1u': {
+    '3htsv7vx': {
       'en': 'Total price',
       'ar': 'السعر الكلي',
     },
-    'pgt5z6lh': {
+    '3q0s7kis': {
       'en': '.00',
       'ar': '',
     },
-    'b18q23iu': {
+    'k4nw3frq': {
       'en': 'SAR',
       'ar': '',
     },
-    'gwx9s6qp': {
+    '4x5ij9es': {
       'en': 'Agent Name',
       'ar': 'اسم العميل',
-    },
-    '09p93shu': {
-      'en': 'View offer details',
-      'ar': 'مشاهدة تفاصيل العرض',
     },
     'kct7wk1t': {
       'en': 'Home',
@@ -741,20 +773,60 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تسجيل الدخول',
     },
     'gl02050s': {
-      'en': 'Bookes',
+      'en': 'Booked',
       'ar': 'محجوز',
+    },
+    'jkmt974f': {
+      'en': 'Reserved',
+      'ar': 'حالة',
+    },
+    '6z2yyj95': {
+      'en': 'Cancel',
+      'ar': '',
+    },
+    'opccxe31': {
+      'en': 'Pending Payment',
+      'ar': '',
+    },
+    'zbrr21s6': {
+      'en': 'Completed',
+      'ar': 'حالة',
+    },
+    'qoxbngvy': {
+      'en': 'Collect Offer',
+      'ar': '',
+    },
+    '497ft75g': {
+      'en': 'Wait for customer acceptance',
+      'ar': '',
     },
     'tu9ytzrl': {
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز:',
     },
+    '7wnud4bn': {
+      'en': 'Riyadh',
+      'ar': 'الرياض الياسمين',
+    },
     'kdwkp7d8': {
-      'en': ' ,',
+      'en': ', ',
       'ar': ' ،',
     },
-    'a2yvcqcr': {
+    'z5aanp7e': {
+      'en': 'Alyasmeen',
+      'ar': '',
+    },
+    'j1l9ymld': {
       'en': 'View Details',
-      'ar': 'عرض التفاصيل',
+      'ar': '',
+    },
+    'o7mo3ne7': {
+      'en': 'View Offers',
+      'ar': '',
+    },
+    '6pr2fkpk': {
+      'en': 'Pay now',
+      'ar': '',
     },
     '4uvlncbs': {
       'en': 'Favorite',
@@ -1023,30 +1095,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '67mealxd': {
       'en': '#',
       'ar': '',
-    },
-    'helm66q2': {
-      'en': 'Order Process',
-      'ar': '',
-    },
-    '4b2ze33a': {
-      'en': 'Reservation & Payment Confirmed',
-      'ar': 'تأكيد الحجز والدفع',
-    },
-    'czklypuv': {
-      'en': 'Send deal to Banks',
-      'ar': 'تأكيد الحجز والدفع',
-    },
-    'cie1ckkw': {
-      'en': 'Completing Documents',
-      'ar': 'تأكيد الحجز والدفع',
-    },
-    'ee9tj9d6': {
-      'en': 'Upload Documents',
-      'ar': 'تحميل المستندات',
-    },
-    'zrzv4hu9': {
-      'en': 'Get banks proposals',
-      'ar': 'تأكيد الحجز والدفع',
     },
     '8ptcdhhd': {
       'en': 'Property details',
@@ -1404,6 +1452,85 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الصفحة الرئيسية',
     },
   },
+  // ConfirmationCopy
+  {
+    'eqp37ji0': {
+      'en': 'Order Process',
+      'ar': '',
+    },
+    '34ystwc5': {
+      'en': 'Reservation & Payment Confirmed',
+      'ar': 'تأكيد الحجز والدفع',
+    },
+    '5zw920uf': {
+      'en': 'Send deal to Banks',
+      'ar': 'تأكيد الحجز والدفع',
+    },
+    'ygyid06c': {
+      'en': 'Completing Documents',
+      'ar': 'تأكيد الحجز والدفع',
+    },
+    'bjbfj5fm': {
+      'en': 'Upload Documents',
+      'ar': 'تحميل المستندات',
+    },
+    'vujpj6gn': {
+      'en': 'Get banks proposals',
+      'ar': 'تأكيد الحجز والدفع',
+    },
+    'hsj5h2tz': {
+      'en': 'Property details',
+      'ar': 'تفاصيل الملكية ',
+    },
+    'v82m6eg8': {
+      'en': ' ,',
+      'ar': 'و',
+    },
+    'z92qnypa': {
+      'en': 'View More',
+      'ar': '',
+    },
+    'yhfiq32r': {
+      'en': 'Transaction details',
+      'ar': 'تفاصيل الصفقه',
+    },
+    'sc36o4f3': {
+      'en': 'Amount',
+      'ar': 'المبلغ',
+    },
+    'eh499534': {
+      'en': '.00 SAR',
+      'ar': '',
+    },
+    '8wz1y8t7': {
+      'en': 'Date & Time',
+      'ar': 'التاريخ والوقت',
+    },
+    'x5lafimu': {
+      'en': 'Transaction Ref.',
+      'ar': 'مرجع المعاملة.',
+    },
+    'vqq6omug': {
+      'en': '#',
+      'ar': '',
+    },
+    '8zwuakkr': {
+      'en': 'Payment Method',
+      'ar': 'طريقة الدفع او السداد',
+    },
+    '5yfslitr': {
+      'en': 'View Receipt Transaction',
+      'ar': 'عرض إيصال المعاملة',
+    },
+    'trw95gom': {
+      'en': 'Booking Ref. : ',
+      'ar': '',
+    },
+    'vrsc3lt4': {
+      'en': 'Home',
+      'ar': 'الصفحة الرئيسية',
+    },
+  },
   // NotFoundPage
   {
     'gmbuwmld': {
@@ -1478,6 +1605,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'p50ponkb': {
       'en': 'Pay',
+      'ar': '',
+    },
+  },
+  // cancelReserveBottomSheet
+  {
+    'wb43h3r4': {
+      'en': 'Cancel Reserve',
+      'ar': '',
+    },
+    't7s7qd09': {
+      'en': 'Cancel',
       'ar': '',
     },
   },

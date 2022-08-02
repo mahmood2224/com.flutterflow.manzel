@@ -173,6 +173,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                     future: PropertiesCall.call(
                       city: widget.cityName,
                       locale: FFAppState().locale,
+                      populate:
+                          '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -196,12 +198,17 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                           ).toList();
                           if (properties.isEmpty) {
                             return Center(
-                              child: NoResultsFoundWidget(
-                                titleText: 'No results found',
-                                subtitleText: functions.noResultsCityName(
-                                    widget.cityName, FFAppState().locale),
-                                isBottonVisible: false,
-                                screenName: 'Result',
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.6,
+                                child: NoResultsFoundWidget(
+                                  titleText: 'No results found',
+                                  subtitleText: functions.noResultsCityName(
+                                      widget.cityName, FFAppState().locale),
+                                  screenName: 'Result',
+                                  isButtonVisible: false,
+                                ),
                               ),
                             );
                           }

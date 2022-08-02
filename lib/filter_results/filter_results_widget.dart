@@ -1,6 +1,6 @@
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
-import '../components/no_results_found_widget.dart';
+import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -279,13 +279,12 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                           if (properties.isEmpty) {
                             return Center(
                               child: Container(
-                                width: 280,
-                                height: 269,
-                                child: NoResultsFoundWidget(
-                                  titleText: 'No result found',
-                                  subtitleText: '          ',
-                                  isBottonVisible: false,
-                                  screenName: 'Result',
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.5,
+                                child: NoResultWidget(
+                                  titleText: 'No results found',
+                                  screenName: 'result',
                                 ),
                               ),
                             );

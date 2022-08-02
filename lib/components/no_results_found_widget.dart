@@ -10,13 +10,13 @@ class NoResultsFoundWidget extends StatefulWidget {
     Key key,
     this.titleText,
     this.subtitleText,
-    this.isBottonVisible,
+    this.isButtonVisible,
     this.screenName,
   }) : super(key: key);
 
   final String titleText;
   final String subtitleText;
-  final bool isBottonVisible;
+  final bool isButtonVisible;
   final String screenName;
 
   @override
@@ -50,6 +50,20 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
                 width: 38,
                 height: 37,
                 fit: BoxFit.contain,
+              ),
+            if ((widget.screenName == 'myPropertiesBooked'))
+              Image.asset(
+                'assets/images/myPropertiesBooked.png',
+                width: 37,
+                height: 36,
+                fit: BoxFit.cover,
+              ),
+            if ((widget.screenName == 'myPropertiesFavorite'))
+              Image.asset(
+                'assets/images/myPropertiesFavorite.png',
+                width: 37,
+                height: 36,
+                fit: BoxFit.cover,
               ),
           ],
         ),
@@ -91,7 +105,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
             ],
           ),
         ),
-        if ((widget.isBottonVisible == true))
+        if ((widget.isButtonVisible == true))
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
             child: FFButtonWidget(

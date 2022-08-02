@@ -79,8 +79,8 @@ class _FilterWidgetState extends State<FilterWidget> {
               maxLines: 1,
               style: FlutterFlowTheme.of(context).bodyText1.override(
                     fontFamily: 'Sofia Pro By Khuzaimah',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w800,
                     useGoogleFonts: false,
                   ),
             ),

@@ -499,21 +499,22 @@ class AddTransactionCall {
 class GetOffersCall {
   static Future<ApiCallResponse> call({
     String userId = '',
-    String offerType = '',
+    String propertyId = '',
   }) {
     final body = '''
 {
   "userID": "${userId}",
-  "status": "${offerType}"
+  "propertyID": "${propertyId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getOffers',
-      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/getOffers',
+      apiUrl:
+          'https://us-central1-manzel-prod.cloudfunctions.net/getActiveOffers',
       callType: ApiCallType.POST,
       headers: {},
       params: {
         'userId': userId,
-        'offerType': offerType,
+        'propertyId': propertyId,
       },
       body: body,
       bodyType: BodyType.JSON,
@@ -555,7 +556,7 @@ class GetOffersCall {
       );
   static dynamic offerStatus(dynamic response) => getJsonField(
         response,
-        r'''$.result..status''',
+        r'''$.result..property_id''',
       );
   static dynamic result(dynamic response) => getJsonField(
         response,
@@ -587,4 +588,62 @@ class AcceptOfferCall {
       returnBody: true,
     );
   }
+}
+
+class ArchivedOffersCall {
+  static Future<ApiCallResponse> call({
+    String userId = '',
+  }) {
+    final body = '''
+{
+  "userID": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'archivedOffers',
+      apiUrl:
+          'https://us-central1-manzel-prod.cloudfunctions.net/getArchivedOffers',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'userId': userId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+
+  static dynamic result(dynamic response) => getJsonField(
+        response,
+        r'''$.result''',
+      );
+}
+
+class BookedPropertiesCall {
+  static Future<ApiCallResponse> call({
+    String userId = '',
+  }) {
+    final body = '''
+{
+  "userID": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'bookedProperties',
+      apiUrl:
+          'https://us-central1-manzel-prod.cloudfunctions.net/getBookedProperties',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'userId': userId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+
+  static dynamic result(dynamic response) => getJsonField(
+        response,
+        r'''$.result''',
+      );
 }
