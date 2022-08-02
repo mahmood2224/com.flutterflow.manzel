@@ -216,7 +216,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                               EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                           child: FutureBuilder<ApiCallResponse>(
                             future: GetOffersCall.call(
-                              userId: '6TCZMQHGHJYXZEycWKX89PT4cwp1',
+                              userId: currentUserUid,
                               propertyId: functions.offerScreenPropertyIdisNull(
                                   widget.propertyId),
                             ),
@@ -481,22 +481,19 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         ),
                                                                   ),
                                                                   Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      functions.offerScreenTime(
-                                                                          valueOrDefault<int>(
-                                                                            getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$.created_at._seconds''',
-                                                                            ),
-                                                                            0,
+                                                                    functions.offerScreenTime(
+                                                                        valueOrDefault<int>(
+                                                                          getJsonField(
+                                                                            activeOffersItem,
+                                                                            r'''$.created_at._seconds''',
                                                                           ),
-                                                                          valueOrDefault<String>(
-                                                                            FFAppState().locale,
-                                                                            'en',
-                                                                          )),
-                                                                      '0',
-                                                                    ),
+                                                                          0,
+                                                                        ),
+                                                                        valueOrDefault<String>(
+                                                                          FFAppState()
+                                                                              .locale,
+                                                                          'en',
+                                                                        )),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyText1
@@ -553,32 +550,32 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         BorderRadius
                                                                             .circular(5),
                                                                   ),
-                                                                  child: Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'lre09mx2' /* New Offer */,
-                                                                    ),
-                                                                    textAlign:
-                                                                        TextAlign
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
                                                                             .center,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).white,
-                                                                          fontSize:
-                                                                              11,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                          lineHeight:
-                                                                              2,
+                                                                    children: [
+                                                                      Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'lre09mx2' /* New Offer */,
                                                                         ),
+                                                                        textAlign:
+                                                                            TextAlign.center,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                              color: FlutterFlowTheme.of(context).white,
+                                                                              fontSize: 11,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ),
                                                               ),
@@ -605,32 +602,40 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           .circular(
                                                                               5),
                                                                 ),
-                                                                child: Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'nu7aeeks' /* Pending */,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
                                                                           .center,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .white,
-                                                                        fontSize:
-                                                                            11,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                        lineHeight:
-                                                                            2,
+                                                                  children: [
+                                                                    Text(
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        'nu7aeeks' /* Pending */,
                                                                       ),
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .center,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Sofia Pro By Khuzaimah',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).white,
+                                                                            fontSize:
+                                                                                11,
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ),
                                                           ],
@@ -1069,8 +1074,12 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             .end,
                                                                     children: [
                                                                       Text(
-                                                                        functions
-                                                                            .formatAmount('790000'),
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          functions
+                                                                              .formatAmount('0'),
+                                                                          '0',
+                                                                        ),
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyText1
                                                                             .override(
