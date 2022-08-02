@@ -47,12 +47,12 @@ class _ReservationBottomSheetWidgetState
           amount: widget.reservationCost.toString(),
           customer: Customer(
               customerId: "", // customer id is important to retrieve cards saved for this customer
-              email: "test@test.com",
-              isdNumber: "965",
-              number: "00000000",
-              firstName: "test",
-              middleName: "test",
-              lastName: "test",
+              email: currentUserDocument.email ?? '',
+              isdNumber: "+966",
+              number: '123456789',
+              firstName: currentUserDocument.name,
+              middleName: "",
+              lastName: "",
               metaData: null),
           // paymentItems: <PaymentItem>[
           //   PaymentItem(
