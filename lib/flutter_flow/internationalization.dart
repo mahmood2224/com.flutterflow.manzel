@@ -1478,11 +1478,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Collect offers',
       'ar': 'استكمال المستندات',
     },
-    'am6p2x4m': {
+    'b21jlid1': {
       'en': '0',
       'ar': '',
     },
-    'sff4hkxh': {
+    'mls6x5hy': {
       'en': '/3',
       'ar': '',
     },

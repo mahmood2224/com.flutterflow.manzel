@@ -674,3 +674,29 @@ class OrderDetailsCall {
     );
   }
 }
+
+class BookmarkPropertyCall {
+  static Future<ApiCallResponse> call({
+    String userId = '',
+    String propertyId = '',
+  }) {
+    final body = '''
+{
+  "userID": "${userId}",
+  "propertyID": "${propertyId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'bookmarkProperty',
+      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/bookmark',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'userId': userId,
+        'propertyId': propertyId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}

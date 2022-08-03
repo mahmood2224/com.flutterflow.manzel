@@ -385,7 +385,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                       MainAxisSize.max,
                                                   children: [
                                                     Text(
-                                                      '0',
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'b21jlid1' /* 0 */,
+                                                      ),
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyText1
@@ -400,7 +404,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                           ),
                                                     ),
                                                     Text(
-                                                      '/3',
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'mls6x5hy' /* /3 */,
+                                                      ),
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyText1

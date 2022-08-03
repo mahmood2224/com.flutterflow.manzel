@@ -351,11 +351,11 @@ String offerScreenPropertyIdisNull(String propertyId) {
   }
 }
 
-bool myyPropertiesViewDetialsVisibility(String status) {
+bool myPropertiesViewDetialsVisibility(String status) {
   // Add your function code here!
-  if (status == "Cancel" ||
-      status == "Completed" ||
-      status == "Wait for customer acceptance") {
+  if (status == "cancelled" ||
+      status == "ownership_transferred" ||
+      status == "waiting_offer_acceptance") {
     return true;
   } else {
     return false;
@@ -475,4 +475,20 @@ bool offerStatusPaymentCompletedCheck(String transactionId) {
   } else {
     return false;
   }
+}
+
+String myPropertiesBookedStatus(
+  String transactionId,
+  String status,
+) {
+  if ((transactionId == null || transactionId == "null") &&
+      status == "reserved") {
+    return "pending_payment";
+  } else if ((transactionId != null || transactionId != "null") &&
+      status == "reserved") {
+    return "reserved";
+  } else {
+    return status;
+  }
+  // Add your function code here!
 }

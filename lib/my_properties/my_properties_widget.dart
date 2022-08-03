@@ -267,13 +267,15 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             .max,
                                                                     children: [
                                                                       if (functions.conditionalVisibility(
-                                                                          valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              bookedPropertiesItem,
-                                                                              r'''$.order_status''',
-                                                                            ).toString(),
-                                                                            'null',
-                                                                          ),
+                                                                          functions.myPropertiesBookedStatus(
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.transaction_id''',
+                                                                              ).toString(),
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_status''',
+                                                                              ).toString()),
                                                                           'Reserved'))
                                                                         FFButtonWidget(
                                                                           onPressed:
@@ -351,13 +353,15 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           ),
                                                                         ),
                                                                       if (functions.conditionalVisibility(
-                                                                          valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              bookedPropertiesItem,
-                                                                              r'''$.order_status''',
-                                                                            ).toString(),
-                                                                            'null',
-                                                                          ),
+                                                                          functions.myPropertiesBookedStatus(
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.transaction_id''',
+                                                                              ).toString(),
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_status''',
+                                                                              ).toString()),
                                                                           'Pending Payment'))
                                                                         FFButtonWidget(
                                                                           onPressed:
@@ -400,7 +404,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             ).toString(),
                                                                             'null',
                                                                           ),
-                                                                          'Completed'))
+                                                                          'accepted'))
                                                                         FFButtonWidget(
                                                                           onPressed:
                                                                               () {
@@ -442,7 +446,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             ).toString(),
                                                                             'null',
                                                                           ),
-                                                                          'Collect Offer'))
+                                                                          'collect_offers'))
                                                                         FFButtonWidget(
                                                                           onPressed:
                                                                               () {
@@ -484,7 +488,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             ).toString(),
                                                                             'null',
                                                                           ),
-                                                                          'Wait for customer acceptance'))
+                                                                          'waiting_offer_acceptance'))
                                                                         FFButtonWidget(
                                                                           onPressed:
                                                                               () {
@@ -753,13 +757,19 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                       ],
                                                     ),
                                                   ),
-                                                  if (functions
+                                                  if (!functions
                                                       .conditionalVisibility(
-                                                          getJsonField(
-                                                            bookedPropertiesItem,
-                                                            r'''$.order_status''',
-                                                          ).toString(),
-                                                          'payment_received'))
+                                                          functions
+                                                              .myPropertiesBookedStatus(
+                                                                  getJsonField(
+                                                                    bookedPropertiesItem,
+                                                                    r'''$.transaction_id''',
+                                                                  ).toString(),
+                                                                  getJsonField(
+                                                                    bookedPropertiesItem,
+                                                                    r'''$.order_status''',
+                                                                  ).toString()),
+                                                          'pending_payment'))
                                                     Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -818,16 +828,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                        if (functions
-                                                            .myyPropertiesViewDetialsVisibility(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                          getJsonField(
-                                                            bookedPropertiesItem,
-                                                            r'''$.order_status''',
-                                                          ).toString(),
-                                                          'null',
-                                                        )))
+                                                        if (!functions
+                                                            .myPropertiesViewDetialsVisibility(
+                                                                getJsonField(
+                                                          bookedPropertiesItem,
+                                                          r'''$.order_status''',
+                                                        ).toString()))
                                                           Expanded(
                                                             child: Padding(
                                                               padding:
@@ -914,17 +920,18 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: [
-                                                      if (!functions
+                                                      if (functions
                                                           .conditionalVisibility(
-                                                              valueOrDefault<
-                                                                  String>(
-                                                                getJsonField(
-                                                                  bookedPropertiesItem,
-                                                                  r'''$.order_status''',
-                                                                ).toString(),
-                                                                'null',
-                                                              ),
-                                                              'payment_received'))
+                                                              functions.myPropertiesBookedStatus(
+                                                                  getJsonField(
+                                                                    bookedPropertiesItem,
+                                                                    r'''$.transaction_id''',
+                                                                  ).toString(),
+                                                                  getJsonField(
+                                                                    bookedPropertiesItem,
+                                                                    r'''$.order_status''',
+                                                                  ).toString()),
+                                                              'pending_payment'))
                                                         Expanded(
                                                           child: FFButtonWidget(
                                                             onPressed: () {

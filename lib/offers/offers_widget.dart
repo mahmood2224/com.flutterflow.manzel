@@ -519,7 +519,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
-                                                            if (!functions
+                                                            if (functions
                                                                 .conditionalVisibility(
                                                                     valueOrDefault<
                                                                         String>(
@@ -529,7 +529,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                       ).toString(),
                                                                       'null',
                                                                     ),
-                                                                    'pending'))
+                                                                    'new'))
                                                               Padding(
                                                                 padding:
                                                                     EdgeInsetsDirectional
