@@ -527,6 +527,9 @@ String myPropertiesBookedStatus(
 
 int bookinPagePropertyIdToInt(String propertyId) {
   // Add your function code here!
+  if (propertyId == "null") {
+    return 0;
+  }
   int res = int.parse(propertyId);
   return res;
 }

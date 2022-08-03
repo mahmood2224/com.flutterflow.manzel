@@ -422,19 +422,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'lre09mx2': {
       'en': 'New Offer',
-      'ar': '',
+      'ar': 'عرض جديد',
     },
     'nu7aeeks': {
       'en': 'Pending',
-      'ar': '',
+      'ar': 'قيد الانتظار',
     },
     'np7vw75o': {
       'en': 'Property',
-      'ar': 'القسط الأولي',
+      'ar': 'ملكية',
     },
     'vs0xmudi': {
       'en': 'Booking Ref.',
-      'ar': 'فترة التقسيط',
+      'ar': 'مرجع الحجز.',
     },
     '2bmjizhc': {
       'en': '#',
@@ -478,11 +478,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'pasrxjal': {
       'en': 'Chat with ',
-      'ar': '',
+      'ar': 'الدردشة مع',
     },
     'n6rgv2jr': {
       'en': 'Accept offer',
-      'ar': '',
+      'ar': 'اقبل العرض',
     },
     '5gvwuuh2': {
       'en': 'Completed or canceled offers',
@@ -509,27 +509,27 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '7r7omofu': {
       'en': 'Accepted',
-      'ar': '',
+      'ar': 'وافقت',
     },
     'ftvaehka': {
       'en': 'Expired',
-      'ar': '',
+      'ar': 'منتهي الصلاحية',
     },
     'y5epausm': {
       'en': 'Rejected',
-      'ar': '',
+      'ar': 'مرفوض',
     },
     'dzlim6kq': {
       'en': 'Disqualified',
-      'ar': '',
+      'ar': 'غير مؤهل',
     },
     '6e3dl9a5': {
       'en': 'Property',
-      'ar': 'القسط الأولي',
+      'ar': 'ملكية',
     },
     'dcv75stq': {
       'en': 'Booking Ref.',
-      'ar': 'فترة التقسيط',
+      'ar': 'مرجع الحجز.',
     },
     '0kssv8ii': {
       'en': '#',
@@ -774,35 +774,35 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'gl02050s': {
       'en': 'Booked',
-      'ar': 'محجوز',
+      'ar': 'حجز',
     },
-    'mskonp1p': {
+    'sfs0xn10': {
       'en': 'Offer Accepted',
-      'ar': '',
+      'ar': 'عرض قبول',
     },
-    'izb2c809': {
+    '55a9qb7p': {
       'en': 'Wait for customer acceptance',
-      'ar': '',
+      'ar': 'انتظر قبول العميل',
     },
-    '8ojtmouj': {
+    'hv5vj04i': {
       'en': 'Collect Offer',
-      'ar': '',
+      'ar': 'جمع العرض',
     },
-    'ijscc2vh': {
+    'r3xdvf7i': {
       'en': 'Completed',
-      'ar': '',
+      'ar': 'مكتمل',
     },
-    'yg4au3oa': {
+    '0pgvkbhl': {
       'en': 'Pending Payment',
-      'ar': '',
+      'ar': 'في انتظار الدفع',
     },
-    'stzhaz72': {
+    'cwzirftq': {
       'en': 'Cancel',
-      'ar': '',
+      'ar': 'يلغي',
     },
-    'k6llbm0y': {
+    'ksi1ofk3': {
       'en': 'Reserved',
-      'ar': '',
+      'ar': 'محجوز',
     },
     'tu9ytzrl': {
       'en': 'Booking ref: ',
@@ -810,15 +810,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'j1l9ymld': {
       'en': 'View Details',
-      'ar': '',
+      'ar': 'عرض التفاصيل',
     },
     'o7mo3ne7': {
       'en': 'View Offers',
-      'ar': '',
+      'ar': 'مشاهدة العروض',
     },
     '6pr2fkpk': {
       'en': 'Pay now',
-      'ar': '',
+      'ar': 'ادفع الآن',
     },
     '4uvlncbs': {
       'en': 'Favorite',
@@ -970,9 +970,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Reserve',
       'ar': 'محجوز',
     },
-    '5n69gvll': {
+    'wzirx8i7': {
       'en': 'Booked',
-      'ar': '',
+      'ar': 'حجز',
     },
   },
   // SearchCityResult
@@ -1094,7 +1094,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'qlfkupzn': {
       'en': 'Show booking details',
-      'ar': 'عرض تفاصيل الحجز',
+      'ar': 'إظهار تفاصيل الحجز',
     },
     'jdsnk395': {
       'en': 'Home',
@@ -1416,15 +1416,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'w2795v66': {
       'en': 'Property Reserved',
-      'ar': 'تأكيد الحجز والدفع',
+      'ar': 'الملكية محفوظة',
     },
     'm30m3lz9': {
       'en': 'Payment Confirmed',
-      'ar': 'أرسل الصفقة إلى البنوك',
+      'ar': 'تم تأكيد عملية الدفع',
     },
     'zpv0x3sj': {
       'en': 'Collect offers',
-      'ar': 'استكمال المستندات',
+      'ar': 'جمع العروض',
     },
     'b21jlid1': {
       'en': '0',
@@ -1436,23 +1436,23 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '3a3j0qu5': {
       'en': 'Waitng for Offer Acceptance',
-      'ar': 'استكمال المستندات',
+      'ar': 'انتظار قبول العرض',
     },
     'oqathjmt': {
       'en': 'Offer Accepted',
-      'ar': 'استكمال المستندات',
+      'ar': 'عرض قبول',
     },
     'nhrc354h': {
       'en': 'Transferring Ownership to you ',
-      'ar': 'استكمال المستندات',
+      'ar': 'نقل الملكية إليك',
     },
     'dd079ljk': {
       'en': 'Cancelled',
-      'ar': 'استكمال المستندات',
+      'ar': 'ألغيت',
     },
     'nxmc61bl': {
       'en': 'Property details',
-      'ar': 'تفاصيل الملكية ',
+      'ar': 'تفاصيل اوضح',
     },
     'sfe2y1t7': {
       'en': ', ',
@@ -1460,7 +1460,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6cg0ue0u': {
       'en': 'View More',
-      'ar': '',
+      'ar': 'عرض المزيد',
     },
     'qkoz8020': {
       'en': 'Transaction details',
@@ -1468,7 +1468,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'qxs4ycvd': {
       'en': 'Transaction Ref.',
-      'ar': 'مرجع المعاملة.',
+      'ar': 'المرجع المعاملة.',
     },
     'snmoyj94': {
       'en': '#',
