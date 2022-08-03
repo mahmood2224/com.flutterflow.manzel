@@ -776,32 +776,32 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Booked',
       'ar': 'محجوز',
     },
-    'jkmt974f': {
-      'en': 'Reserved',
-      'ar': 'حالة',
-    },
-    '6z2yyj95': {
-      'en': 'Cancel',
+    'kqxjjuim': {
+      'en': 'Offer Accepted',
       'ar': '',
     },
-    'opccxe31': {
-      'en': 'Pending Payment',
-      'ar': '',
-    },
-    'zbrr21s6': {
-      'en': 'Completed',
-      'ar': 'حالة',
-    },
-    'qoxbngvy': {
-      'en': 'Collect Offer',
-      'ar': '',
-    },
-    '497ft75g': {
+    'b7ik6cqj': {
       'en': 'Wait for customer acceptance',
       'ar': '',
     },
-    'yzv2yezn': {
-      'en': 'Offer Accepted',
+    '5xyu05ij': {
+      'en': 'Collect Offer',
+      'ar': '',
+    },
+    '5w8h4jp8': {
+      'en': 'Completed',
+      'ar': '',
+    },
+    'w0dbwmaq': {
+      'en': 'Pending Payment',
+      'ar': '',
+    },
+    'mql4d65o': {
+      'en': 'Cancel',
+      'ar': '',
+    },
+    '6isfvzs1': {
+      'en': 'Reserved',
       'ar': '',
     },
     'tu9ytzrl': {
@@ -969,6 +969,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'dpmrt150': {
       'en': 'Reserve',
       'ar': 'محجوز',
+    },
+    'odoad6kk': {
+      'en': 'Booked',
+      'ar': '',
     },
   },
   // SearchCityResult

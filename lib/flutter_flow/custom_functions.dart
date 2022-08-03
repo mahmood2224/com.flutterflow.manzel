@@ -435,6 +435,24 @@ bool orderProcessStatus(
       }
       // do something else
       break;
+    case "offer_accepted":
+      if ((processStage == "reserved" ||
+              processStage == "collect_offers" ||
+              processStage == "waiting_offer_acceptance" ||
+              processStage == "accepted") &&
+          setType == "checked") {
+        return true;
+      } else if ((processStage != "reserved" ||
+              processStage != "collect_offers" ||
+              processStage != "waiting_offer_acceptance" ||
+              processStage != "accepted") &&
+          setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      // do something else
+      break;
     case "ownership_transferred":
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
@@ -465,12 +483,23 @@ bool orderProcessStatus(
         return false;
       }
       break;
+    default:
+      if (setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      break;
   }
 }
 
-bool offerStatusPaymentCompletedCheck(String transactionId) {
+bool offerStatusPaymentCompletedCheck(
+  String transactionId,
+  String status,
+) {
   // Add your function code here!
-  if (transactionId != null || transactionId != "null") {
+  if ((transactionId != null || transactionId != "null") &&
+      (status != "cancelled")) {
     return true;
   } else {
     return false;
@@ -491,4 +520,10 @@ String myPropertiesBookedStatus(
     return status;
   }
   // Add your function code here!
+}
+
+int bookinPagePropertyIdToInt(String propertyId) {
+  // Add your function code here!
+  int res = int.parse(propertyId);
+  return res;
 }
