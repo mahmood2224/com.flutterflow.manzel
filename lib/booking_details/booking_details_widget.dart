@@ -195,14 +195,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ).toString(),
                                       'reserved',
                                       'checked'))
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 5),
-                                      child: Icon(
-                                        Icons.check_circle_rounded,
-                                        color: Color(0xFF7FC15F),
-                                        size: 28,
-                                      ),
+                                    Icon(
+                                      Icons.check_circle_rounded,
+                                      color: Color(0xFF7FC15F),
+                                      size: 28,
                                     ),
                                   if (functions.orderProcessStatus(
                                       getJsonField(
@@ -264,14 +260,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 .jsonBody,
                                             r'''$.result.order_status''',
                                           ).toString()))
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 5),
-                                      child: Icon(
-                                        Icons.check_circle_rounded,
-                                        color: Color(0xFF7FC15F),
-                                        size: 28,
-                                      ),
+                                    Icon(
+                                      Icons.check_circle_rounded,
+                                      color: Color(0xFF7FC15F),
+                                      size: 28,
                                     ),
                                   if (!functions
                                       .offerStatusPaymentCompletedCheck(
@@ -345,14 +337,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                   ).toString(),
                                                   'collect_offers',
                                                   'checked'))
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 0, 5),
-                                                  child: Icon(
-                                                    Icons.check_circle_rounded,
-                                                    color: Color(0xFF7FC15F),
-                                                    size: 28,
-                                                  ),
+                                                Icon(
+                                                  Icons.check_circle_rounded,
+                                                  color: Color(0xFF7FC15F),
+                                                  size: 28,
                                                 ),
                                               if (functions.orderProcessStatus(
                                                   getJsonField(
@@ -474,14 +462,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ).toString(),
                                       'waiting_offer_acceptance',
                                       'checked'))
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 5),
-                                      child: Icon(
-                                        Icons.check_circle_rounded,
-                                        color: Color(0xFF7FC15F),
-                                        size: 28,
-                                      ),
+                                    Icon(
+                                      Icons.check_circle_rounded,
+                                      color: Color(0xFF7FC15F),
+                                      size: 28,
                                     ),
                                   if (functions.orderProcessStatus(
                                       getJsonField(
@@ -539,14 +523,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ).toString(),
                                       'accepted',
                                       'checked'))
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 5),
-                                      child: Icon(
-                                        Icons.check_circle_rounded,
-                                        color: Color(0xFF7FC15F),
-                                        size: 28,
-                                      ),
+                                    Icon(
+                                      Icons.check_circle_rounded,
+                                      color: Color(0xFF7FC15F),
+                                      size: 28,
                                     ),
                                   if (functions.orderProcessStatus(
                                       getJsonField(
@@ -604,14 +584,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ).toString(),
                                       'ownership_transferred',
                                       'checked'))
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 5),
-                                      child: Icon(
-                                        Icons.check_circle_rounded,
-                                        color: Color(0xFF7FC15F),
-                                        size: 28,
-                                      ),
+                                    Icon(
+                                      Icons.check_circle_rounded,
+                                      color: Color(0xFF7FC15F),
+                                      size: 28,
                                     ),
                                   if (functions.orderProcessStatus(
                                       getJsonField(

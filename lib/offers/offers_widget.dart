@@ -203,8 +203,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                             ],
                           ),
                         ),
-                        if ((widget.propertyId == null ||
-                            widget.propertyId == ''))
+                        if ((widget.propertyId != null &&
+                            widget.propertyId != ''))
                           FlutterFlowIconButton(
                             borderColor: Colors.transparent,
                             borderRadius: 25,

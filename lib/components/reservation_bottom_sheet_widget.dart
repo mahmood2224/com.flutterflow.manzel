@@ -406,8 +406,8 @@ class _ReservationBottomSheetWidgetState
                                   getJsonField(
                                     (addOrderApiResponse?.jsonBody ?? ''),
                                     r'''$.result''',
-                                  ),
-                                  ParamType.int),
+                                  ).toString(),
+                                  ParamType.String),
                               'paymentMethod': serializeParam(
                                   paymentMethodValue, ParamType.String),
                               'transactionId':

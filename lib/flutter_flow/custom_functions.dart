@@ -45,6 +45,9 @@ LatLng propertyLocation(
 }
 
 String formatAmount(String amount) {
+  if (amount == "null") {
+    return '0';
+  }
   var format = NumberFormat('###,###', 'en_US');
   double value = double.parse(amount);
   return format.format(value);
@@ -393,7 +396,7 @@ bool orderProcessStatus(
       if ((processStage == "reserved" || processStage == "collect_offers") &&
           setType == "checked") {
         return true;
-      } else if ((processStage != "reserved" ||
+      } else if ((processStage != "reserved" &&
               processStage != "collect_offers") &&
           setType == "unchecked") {
         return true;
@@ -408,8 +411,8 @@ bool orderProcessStatus(
               processStage == "waiting_offer_acceptance") &&
           setType == "checked") {
         return true;
-      } else if ((processStage != "reserved" ||
-              processStage != "collect_offers" ||
+      } else if ((processStage != "reserved" &&
+              processStage != "collect_offers" &&
               processStage != "waiting_offer_acceptance") &&
           setType == "unchecked") {
         return true;
@@ -424,9 +427,9 @@ bool orderProcessStatus(
               processStage == "accepted") &&
           setType == "checked") {
         return true;
-      } else if ((processStage != "reserved" ||
-              processStage != "collect_offers" ||
-              processStage != "waiting_offer_acceptance" ||
+      } else if ((processStage != "reserved" &&
+              processStage != "collect_offers" &&
+              processStage != "waiting_offer_acceptance" &&
               processStage != "accepted") &&
           setType == "unchecked") {
         return true;
@@ -442,9 +445,9 @@ bool orderProcessStatus(
               processStage == "accepted") &&
           setType == "checked") {
         return true;
-      } else if ((processStage != "reserved" ||
-              processStage != "collect_offers" ||
-              processStage != "waiting_offer_acceptance" ||
+      } else if ((processStage != "reserved" &&
+              processStage != "collect_offers" &&
+              processStage != "waiting_offer_acceptance" &&
               processStage != "accepted") &&
           setType == "unchecked") {
         return true;
@@ -461,10 +464,10 @@ bool orderProcessStatus(
               processStage == "ownership_transferred") &&
           setType == "checked") {
         return true;
-      } else if ((processStage != "reserved" ||
-              processStage != "collect_offers" ||
-              processStage != "waiting_offer_acceptance" ||
-              processStage != "accepted" ||
+      } else if ((processStage != "reserved" &&
+              processStage != "collect_offers" &&
+              processStage != "waiting_offer_acceptance" &&
+              processStage != "accepted" &&
               processStage != "ownership_transferred") &&
           setType == "unchecked") {
         return true;
