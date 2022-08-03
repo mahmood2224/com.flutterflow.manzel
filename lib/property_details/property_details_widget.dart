@@ -2673,66 +2673,103 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   ],
                                 ),
                               ),
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
-                                  if (loggedIn) {
-                                    logFirebaseEvent('reserved_Bottom-Sheet');
-                                    await configurePaymentSdk();
+                              if (functions.conditionalVisibility(
+                                  PropertyCall.propertyStatus(
+                                    columnPropertyResponse.jsonBody,
+                                  ).toString(),
+                                  'Available'))
+                                FFButtonWidget(
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
+                                    if (loggedIn) {
+                                      logFirebaseEvent('reserved_Bottom-Sheet');
+                                      await configurePaymentSdk();
                                     await showModalBottomSheet(
-                                      isScrollControlled: true,
-                                      backgroundColor: Colors.white,
-                                      context: context,
-                                      builder: (context) {
-                                        return Padding(
-                                          padding:
-                                              MediaQuery.of(context).viewInsets,
-                                          child: Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.9,
-                                            child: ReservationBottomSheetWidget(
-                                              reservationCost:
-                                                  PropertyCall.reservationsCost(
-                                                columnPropertyResponse.jsonBody,
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.white,
+                                        context: context,
+                                        builder: (context) {
+                                          return Padding(
+                                            padding: MediaQuery.of(context)
+                                                .viewInsets,
+                                            child: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.9,
+                                              child:
+                                                  ReservationBottomSheetWidget(
+                                                reservationCost: PropertyCall
+                                                    .reservationsCost(
+                                                  columnPropertyResponse
+                                                      .jsonBody,
+                                                ),
+                                                propertyId: widget.propertyId,
                                               ),
-                                              propertyId: widget.propertyId,
                                             ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  } else {
-                                    logFirebaseEvent('reserved_Navigate-To');
-                                    context.pushNamed('Login');
-                                  }
-                                },
-                                text: FFLocalizations.of(context).getText(
-                                  'dpmrt150' /* Reserve */,
-                                ),
-                                options: FFButtonOptions(
-                                  width: 140,
-                                  height: 56,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w800,
-                                        useGoogleFonts: false,
-                                      ),
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      logFirebaseEvent('reserved_Navigate-To');
+                                      context.pushNamed('Login');
+                                    }
+                                  },
+                                  text: FFLocalizations.of(context).getText(
+                                    'dpmrt150' /* Reserve */,
                                   ),
-                                  borderRadius: BorderRadius.circular(12),
+                                  options: FFButtonOptions(
+                                    width: 140,
+                                    height: 56,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w800,
+                                          useGoogleFonts: false,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                 ),
-                              ),
+                              if (!functions.conditionalVisibility(
+                                  PropertyCall.propertyStatus(
+                                    columnPropertyResponse.jsonBody,
+                                  ).toString(),
+                                  'Available'))
+                                FFButtonWidget(
+                                  onPressed: () {
+                                    print('Button pressed ...');
+                                  },
+                                  text: 'Booked',
+                                  options: FFButtonOptions(
+                                    width: 140,
+                                    height: 56,
+                                    color: Color(0xFF8C8C8C),
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w800,
+                                          useGoogleFonts: false,
+                                        ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
                             ],
                           ),
                         ),

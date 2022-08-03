@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_result_widget.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -202,6 +203,22 @@ class _OffersWidgetState extends State<OffersWidget> {
                             ],
                           ),
                         ),
+                        if ((widget.propertyId == null ||
+                            widget.propertyId == ''))
+                          FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 25,
+                            borderWidth: 1,
+                            buttonSize: 60,
+                            icon: Icon(
+                              Icons.clear,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 25,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
+                          ),
                       ],
                     ),
                   ),

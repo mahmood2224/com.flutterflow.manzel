@@ -776,32 +776,32 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Booked',
       'ar': 'محجوز',
     },
-    'jkmt974f': {
-      'en': 'Reserved',
-      'ar': 'حالة',
-    },
-    '6z2yyj95': {
-      'en': 'Cancel',
+    '7vs8olik': {
+      'en': 'Offer Accepted',
       'ar': '',
     },
-    'opccxe31': {
-      'en': 'Pending Payment',
-      'ar': '',
-    },
-    'zbrr21s6': {
-      'en': 'Completed',
-      'ar': 'حالة',
-    },
-    'qoxbngvy': {
-      'en': 'Collect Offer',
-      'ar': '',
-    },
-    '497ft75g': {
+    'q3ms55tm': {
       'en': 'Wait for customer acceptance',
       'ar': '',
     },
-    'tsl0um0g': {
-      'en': 'Offer Accepted',
+    'zab7e9xm': {
+      'en': 'Collect Offer',
+      'ar': '',
+    },
+    'bl2jpyg7': {
+      'en': 'Completed',
+      'ar': '',
+    },
+    'akd26c3v': {
+      'en': 'Pending Payment',
+      'ar': '',
+    },
+    '30ipz7gs': {
+      'en': 'Cancel',
+      'ar': '',
+    },
+    'zz7d6q0a': {
+      'en': 'Reserved',
       'ar': '',
     },
     'tu9ytzrl': {
@@ -970,6 +970,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Reserve',
       'ar': 'محجوز',
     },
+    'fei05zw5': {
+      'en': 'Booked',
+      'ar': '',
+    },
   },
   // SearchCityResult
   {
@@ -1088,56 +1092,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '#',
       'ar': '',
     },
-    '8ptcdhhd': {
-      'en': 'Property details',
-      'ar': 'تفاصيل الملكية ',
-    },
-    '4qmvz3gw': {
-      'en': ' ,',
-      'ar': 'و',
-    },
-    '6rsjfq97': {
-      'en': 'View More',
-      'ar': '',
-    },
-    '514bcidn': {
-      'en': 'Transaction details',
-      'ar': 'تفاصيل الصفقه',
-    },
-    'xihd37di': {
-      'en': 'Amount',
-      'ar': 'المبلغ',
-    },
-    'tgi826z8': {
-      'en': '.00 SAR',
-      'ar': '',
-    },
-    's1mfpoki': {
-      'en': 'Date & Time',
-      'ar': 'التاريخ والوقت',
-    },
-    'dkby0f6z': {
-      'en': '1 Jun 2022  01:00 PM',
-      'ar': '1 يونيو 2022 01:00 مساءً',
-    },
-    'g7t2uz7u': {
-      'en': 'Transaction Ref.',
-      'ar': 'مرجع المعاملة.',
-    },
-    '5czybu2h': {
-      'en': '#',
-      'ar': '',
-    },
-    'nfajktl1': {
-      'en': 'Payment Method',
-      'ar': 'طريقة الدفع او السداد',
-    },
-    'a5vxpwan': {
-      'en': 'View Receipt Transaction',
-      'ar': 'عرض إيصال المعاملة',
-    },
     'qlfkupzn': {
-      'en': 'Back to Home',
+      'en': 'Show booking details',
       'ar': 'عرض تفاصيل الحجز',
     },
     'jdsnk395': {
