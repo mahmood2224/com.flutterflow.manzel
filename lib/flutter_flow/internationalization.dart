@@ -776,31 +776,31 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Booked',
       'ar': 'محجوز',
     },
-    'p8wttghu': {
+    'mskonp1p': {
       'en': 'Offer Accepted',
       'ar': '',
     },
-    '95xrfgmr': {
+    'izb2c809': {
       'en': 'Wait for customer acceptance',
       'ar': '',
     },
-    'exhxbgoo': {
+    '8ojtmouj': {
       'en': 'Collect Offer',
       'ar': '',
     },
-    'fmq63cg8': {
+    'ijscc2vh': {
       'en': 'Completed',
       'ar': '',
     },
-    '29hom22c': {
+    'yg4au3oa': {
       'en': 'Pending Payment',
       'ar': '',
     },
-    '58m47g14': {
+    'stzhaz72': {
       'en': 'Cancel',
       'ar': '',
     },
-    'up5mzc1q': {
+    'k6llbm0y': {
       'en': 'Reserved',
       'ar': '',
     },
@@ -970,7 +970,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Reserve',
       'ar': 'محجوز',
     },
-    '9vglsv6t': {
+    '5n69gvll': {
       'en': 'Booked',
       'ar': '',
     },
