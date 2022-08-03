@@ -800,21 +800,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Wait for customer acceptance',
       'ar': '',
     },
+    'ntnvc58k': {
+      'en': 'Offer Accepted',
+      'ar': '',
+    },
     'tu9ytzrl': {
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز:',
-    },
-    '7wnud4bn': {
-      'en': 'Riyadh',
-      'ar': 'الرياض الياسمين',
-    },
-    'kdwkp7d8': {
-      'en': ', ',
-      'ar': ' ،',
-    },
-    'z5aanp7e': {
-      'en': 'Alyasmeen',
-      'ar': '',
     },
     'j1l9ymld': {
       'en': 'View Details',

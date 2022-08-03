@@ -13,12 +13,10 @@ class ReservationBottomSheetWidget extends StatefulWidget {
   const ReservationBottomSheetWidget({
     Key key,
     this.reservationCost,
-    this.propertyJSON,
     this.propertyId,
   }) : super(key: key);
 
   final int reservationCost;
-  final dynamic propertyJSON;
   final int propertyId;
 
   @override

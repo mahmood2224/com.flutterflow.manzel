@@ -2686,9 +2686,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   PropertyCall.reservationsCost(
                                                 columnPropertyResponse.jsonBody,
                                               ),
-                                              propertyJSON:
-                                                  columnPropertyResponse
-                                                      .jsonBody,
                                               propertyId: widget.propertyId,
                                             ),
                                           ),
