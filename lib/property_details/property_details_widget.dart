@@ -2749,7 +2749,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   onPressed: () {
                                     print('Button pressed ...');
                                   },
-                                  text: 'Booked',
+                                  text: FFLocalizations.of(context).getText(
+                                    'wzirx8i7' /* Booked */,
+                                  ),
                                   options: FFButtonOptions(
                                     width: 140,
                                     height: 56,

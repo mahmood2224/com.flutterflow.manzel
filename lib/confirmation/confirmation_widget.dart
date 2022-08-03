@@ -17,7 +17,7 @@ class ConfirmationWidget extends StatefulWidget {
 
   final int propertyId;
   final String paymentMethod;
-  final int orderId;
+  final String orderId;
   final String transactionId;
 
   @override
@@ -118,7 +118,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                           ),
                                     ),
                                     Text(
-                                      widget.orderId.toString(),
+                                      widget.orderId,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText2
                                           .override(
@@ -155,8 +155,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                     'BookingDetails',
                                     queryParams: {
                                       'orderId': serializeParam(
-                                          widget.orderId?.toString(),
-                                          ParamType.String),
+                                          widget.orderId, ParamType.String),
                                     }.withoutNulls,
                                   );
                                 },

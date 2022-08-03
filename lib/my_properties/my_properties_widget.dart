@@ -292,7 +292,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
                                                                                 Text(
-                                                                                  'Offer Accepted',
+                                                                                  FFLocalizations.of(context).getText(
+                                                                                    'sfs0xn10' /* Offer Accepted */,
+                                                                                  ),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                         color: FlutterFlowTheme.of(context).white,
@@ -326,7 +328,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
                                                                                 Text(
-                                                                                  'Wait for customer acceptance',
+                                                                                  FFLocalizations.of(context).getText(
+                                                                                    '55a9qb7p' /* Wait for customer acceptance */,
+                                                                                  ),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                         color: FlutterFlowTheme.of(context).white,
@@ -360,7 +364,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
                                                                                 Text(
-                                                                                  'Collect Offer',
+                                                                                  FFLocalizations.of(context).getText(
+                                                                                    'hv5vj04i' /* Collect Offer */,
+                                                                                  ),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                         color: FlutterFlowTheme.of(context).white,
@@ -394,7 +400,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
                                                                                 Text(
-                                                                                  'Completed',
+                                                                                  FFLocalizations.of(context).getText(
+                                                                                    'r3xdvf7i' /* Completed */,
+                                                                                  ),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                         color: FlutterFlowTheme.of(context).white,
@@ -433,7 +441,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
                                                                                 Text(
-                                                                                  'Pending Payment',
+                                                                                  FFLocalizations.of(context).getText(
+                                                                                    '0pgvkbhl' /* Pending Payment */,
+                                                                                  ),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                         color: FlutterFlowTheme.of(context).white,
@@ -467,7 +477,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
                                                                                 Text(
-                                                                                  'Cancel',
+                                                                                  FFLocalizations.of(context).getText(
+                                                                                    'cwzirftq' /* Cancel */,
+                                                                                  ),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                         color: FlutterFlowTheme.of(context).white,
@@ -506,7 +518,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
                                                                                 Text(
-                                                                                  'Reserved',
+                                                                                  FFLocalizations.of(context).getText(
+                                                                                    'ksi1ofk3' /* Reserved */,
+                                                                                  ),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                         color: FlutterFlowTheme.of(context).white,

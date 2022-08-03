@@ -33,7 +33,7 @@ class _CancelReserveBottomSheetWidgetState
             ),
             options: FFButtonOptions(
               width: double.infinity,
-              height: 42,
+              height: 61,
               color: Color(0xB2F5F5F5),
               textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                     fontFamily: 'Sofia Pro By Khuzaimah',
@@ -49,7 +49,7 @@ class _CancelReserveBottomSheetWidgetState
           ),
         ),
         Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(8, 9, 8, 18),
+          padding: EdgeInsetsDirectional.fromSTEB(8, 9, 8, 50),
           child: FFButtonWidget(
             onPressed: () {
               print('Button pressed ...');
@@ -59,7 +59,7 @@ class _CancelReserveBottomSheetWidgetState
             ),
             options: FFButtonOptions(
               width: 130,
-              height: 42,
+              height: 61,
               color: Color(0xFFF5F5F5),
               textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                     fontFamily: 'Sofia Pro By Khuzaimah',
