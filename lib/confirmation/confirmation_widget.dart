@@ -711,9 +711,10 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  functions.formatDateTime(
-                                                      containerTransactionsRecord
-                                                          .createdAt),
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'dkby0f6z' /* 1 Jun 2022  01:00 PM */,
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1

@@ -259,15 +259,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => PersonalEmploymentDetailsWidget(),
             ),
             FFRoute(
-              name: 'ConfirmationCopy',
-              path: 'confirmationCopy',
-              builder: (context, params) => ConfirmationCopyWidget(
-                propertyId: params.getParam('propertyId', ParamType.int),
-                paymentMethod:
-                    params.getParam('paymentMethod', ParamType.String),
+              name: 'BookingDetails',
+              path: 'bookingDetails',
+              builder: (context, params) => BookingDetailsWidget(
                 orderId: params.getParam('orderId', ParamType.int),
-                transactionId:
-                    params.getParam('transactionId', ParamType.String),
               ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
