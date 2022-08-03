@@ -148,7 +148,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 41),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,7 +213,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 41),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -284,7 +284,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 41),
+                                          0, 0, 0, 21),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
@@ -415,7 +415,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 41),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -480,7 +480,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 41),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -545,7 +545,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 41),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -610,7 +610,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
