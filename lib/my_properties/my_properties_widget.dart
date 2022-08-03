@@ -3,6 +3,7 @@ import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../components/no_results_found_widget.dart';
+import '../components/reservation_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -258,271 +259,288 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                   CrossAxisAlignment
                                                                       .start,
                                                               children: [
-                                                                SingleChildScrollView(
-                                                                  scrollDirection:
-                                                                      Axis.horizontal,
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      if (functions.conditionalVisibility(
-                                                                          functions.myPropertiesBookedStatus(
-                                                                              getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.transaction_id''',
-                                                                              ).toString(),
-                                                                              getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.order_status''',
-                                                                              ).toString()),
-                                                                          'Reserved'))
-                                                                        FFButtonWidget(
-                                                                          onPressed:
-                                                                              () {
-                                                                            print('status pressed ...');
-                                                                          },
-                                                                          text:
-                                                                              FFLocalizations.of(context).getText(
-                                                                            'jkmt974f' /* Reserved */,
-                                                                          ),
-                                                                          options:
-                                                                              FFButtonOptions(
-                                                                            width:
-                                                                                82,
-                                                                            height:
-                                                                                23,
-                                                                            color:
-                                                                                Color(0xFF389688),
-                                                                            textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 12,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: Colors.transparent,
-                                                                              width: 1,
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          2),
+                                                                  child:
+                                                                      SingleChildScrollView(
+                                                                    scrollDirection:
+                                                                        Axis.horizontal,
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        if (functions.conditionalVisibility(
+                                                                            functions.myPropertiesBookedStatus(
+                                                                                getJsonField(
+                                                                                  bookedPropertiesItem,
+                                                                                  r'''$.transaction_id''',
+                                                                                ).toString(),
+                                                                                getJsonField(
+                                                                                  bookedPropertiesItem,
+                                                                                  r'''$.order_status''',
+                                                                                ).toString()),
+                                                                            'Reserved'))
+                                                                          FFButtonWidget(
+                                                                            onPressed:
+                                                                                () {
+                                                                              print('status pressed ...');
+                                                                            },
+                                                                            text:
+                                                                                FFLocalizations.of(context).getText(
+                                                                              'jkmt974f' /* Reserved */,
                                                                             ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(7),
-                                                                          ),
-                                                                        ),
-                                                                      if (functions.conditionalVisibility(
-                                                                          valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              bookedPropertiesItem,
-                                                                              r'''$.order_status''',
-                                                                            ).toString(),
-                                                                            'null',
-                                                                          ),
-                                                                          'cancelled'))
-                                                                        FFButtonWidget(
-                                                                          onPressed:
-                                                                              () {
-                                                                            print('Button pressed ...');
-                                                                          },
-                                                                          text:
-                                                                              FFLocalizations.of(context).getText(
-                                                                            '6z2yyj95' /* Cancel */,
-                                                                          ),
-                                                                          options:
-                                                                              FFButtonOptions(
-                                                                            width:
-                                                                                74,
-                                                                            height:
-                                                                                23,
-                                                                            color:
-                                                                                Color(0xFFA5A5A5),
-                                                                            textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 12,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: Colors.transparent,
-                                                                              width: 1,
+                                                                            options:
+                                                                                FFButtonOptions(
+                                                                              width: 82,
+                                                                              height: 23,
+                                                                              color: Color(0xFF389688),
+                                                                              textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                    color: Colors.white,
+                                                                                    fontSize: 12,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                    lineHeight: 2,
+                                                                                  ),
+                                                                              borderSide: BorderSide(
+                                                                                color: Colors.transparent,
+                                                                                width: 1,
+                                                                              ),
+                                                                              borderRadius: BorderRadius.circular(7),
                                                                             ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(7),
                                                                           ),
-                                                                        ),
-                                                                      if (functions.conditionalVisibility(
-                                                                          functions.myPropertiesBookedStatus(
-                                                                              getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.transaction_id''',
-                                                                              ).toString(),
+                                                                        if (functions.conditionalVisibility(
+                                                                            valueOrDefault<String>(
                                                                               getJsonField(
                                                                                 bookedPropertiesItem,
                                                                                 r'''$.order_status''',
-                                                                              ).toString()),
-                                                                          'Pending Payment'))
-                                                                        FFButtonWidget(
-                                                                          onPressed:
-                                                                              () {
-                                                                            print('Button pressed ...');
-                                                                          },
-                                                                          text:
-                                                                              FFLocalizations.of(context).getText(
-                                                                            'opccxe31' /* Pending Payment */,
-                                                                          ),
-                                                                          options:
-                                                                              FFButtonOptions(
-                                                                            width:
-                                                                                125,
-                                                                            height:
-                                                                                23,
-                                                                            color:
-                                                                                Color(0xFFF0A637),
-                                                                            textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 12,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: Colors.transparent,
-                                                                              width: 1,
+                                                                              ).toString(),
+                                                                              'null',
                                                                             ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(7),
+                                                                            'cancelled'))
+                                                                          FFButtonWidget(
+                                                                            onPressed:
+                                                                                () {
+                                                                              print('Button pressed ...');
+                                                                            },
+                                                                            text:
+                                                                                FFLocalizations.of(context).getText(
+                                                                              '6z2yyj95' /* Cancel */,
+                                                                            ),
+                                                                            options:
+                                                                                FFButtonOptions(
+                                                                              width: 74,
+                                                                              height: 23,
+                                                                              color: Color(0xFFA5A5A5),
+                                                                              textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                    color: Colors.white,
+                                                                                    fontSize: 12,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                    lineHeight: 2,
+                                                                                  ),
+                                                                              borderSide: BorderSide(
+                                                                                color: Colors.transparent,
+                                                                                width: 1,
+                                                                              ),
+                                                                              borderRadius: BorderRadius.circular(7),
+                                                                            ),
                                                                           ),
-                                                                        ),
-                                                                      if (functions.conditionalVisibility(
-                                                                          valueOrDefault<String>(
+                                                                        if (functions.conditionalVisibility(
+                                                                            functions.myPropertiesBookedStatus(
+                                                                                getJsonField(
+                                                                                  bookedPropertiesItem,
+                                                                                  r'''$.transaction_id''',
+                                                                                ).toString(),
+                                                                                getJsonField(
+                                                                                  bookedPropertiesItem,
+                                                                                  r'''$.order_status''',
+                                                                                ).toString()),
+                                                                            'Pending Payment'))
+                                                                          FFButtonWidget(
+                                                                            onPressed:
+                                                                                () {
+                                                                              print('Button pressed ...');
+                                                                            },
+                                                                            text:
+                                                                                FFLocalizations.of(context).getText(
+                                                                              'opccxe31' /* Pending Payment */,
+                                                                            ),
+                                                                            options:
+                                                                                FFButtonOptions(
+                                                                              width: 125,
+                                                                              height: 23,
+                                                                              color: Color(0xFFF0A637),
+                                                                              textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                    color: Colors.white,
+                                                                                    fontSize: 12,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                    lineHeight: 2,
+                                                                                  ),
+                                                                              borderSide: BorderSide(
+                                                                                color: Colors.transparent,
+                                                                                width: 1,
+                                                                              ),
+                                                                              borderRadius: BorderRadius.circular(7),
+                                                                            ),
+                                                                          ),
+                                                                        if (functions.conditionalVisibility(
+                                                                            valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_status''',
+                                                                              ).toString(),
+                                                                              'null',
+                                                                            ),
+                                                                            'accepted'))
+                                                                          FFButtonWidget(
+                                                                            onPressed:
+                                                                                () {
+                                                                              print('status pressed ...');
+                                                                            },
+                                                                            text:
+                                                                                FFLocalizations.of(context).getText(
+                                                                              'zbrr21s6' /* Completed */,
+                                                                            ),
+                                                                            options:
+                                                                                FFButtonOptions(
+                                                                              width: 89,
+                                                                              height: 23,
+                                                                              color: Color(0xFF81D05C),
+                                                                              textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                    color: Colors.white,
+                                                                                    fontSize: 12,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                    lineHeight: 2,
+                                                                                  ),
+                                                                              borderSide: BorderSide(
+                                                                                color: Colors.transparent,
+                                                                                width: 1,
+                                                                              ),
+                                                                              borderRadius: BorderRadius.circular(7),
+                                                                            ),
+                                                                          ),
+                                                                        if (functions.conditionalVisibility(
+                                                                            valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_status''',
+                                                                              ).toString(),
+                                                                              'null',
+                                                                            ),
+                                                                            'collect_offers'))
+                                                                          FFButtonWidget(
+                                                                            onPressed:
+                                                                                () {
+                                                                              print('Button pressed ...');
+                                                                            },
+                                                                            text:
+                                                                                FFLocalizations.of(context).getText(
+                                                                              'qoxbngvy' /* Collect Offer */,
+                                                                            ),
+                                                                            options:
+                                                                                FFButtonOptions(
+                                                                              width: 98,
+                                                                              height: 23,
+                                                                              color: Color(0xFF41566C),
+                                                                              textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                    color: Colors.white,
+                                                                                    fontSize: 12,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                    lineHeight: 2,
+                                                                                  ),
+                                                                              borderSide: BorderSide(
+                                                                                color: Colors.transparent,
+                                                                                width: 1,
+                                                                              ),
+                                                                              borderRadius: BorderRadius.circular(7),
+                                                                            ),
+                                                                          ),
+                                                                        if (functions.conditionalVisibility(
+                                                                            valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_status''',
+                                                                              ).toString(),
+                                                                              'null',
+                                                                            ),
+                                                                            'waiting_offer_acceptance'))
+                                                                          FFButtonWidget(
+                                                                            onPressed:
+                                                                                () {
+                                                                              print('Button pressed ...');
+                                                                            },
+                                                                            text:
+                                                                                FFLocalizations.of(context).getText(
+                                                                              '497ft75g' /* Wait for customer acceptance */,
+                                                                            ),
+                                                                            options:
+                                                                                FFButtonOptions(
+                                                                              width: 192,
+                                                                              height: 23,
+                                                                              color: Color(0xFFF0A637),
+                                                                              textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                    color: Colors.white,
+                                                                                    fontSize: 12,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                    lineHeight: 2,
+                                                                                  ),
+                                                                              borderSide: BorderSide(
+                                                                                color: Colors.transparent,
+                                                                                width: 1,
+                                                                              ),
+                                                                              borderRadius: BorderRadius.circular(7),
+                                                                            ),
+                                                                          ),
+                                                                        if (functions.conditionalVisibility(
                                                                             getJsonField(
                                                                               bookedPropertiesItem,
                                                                               r'''$.order_status''',
                                                                             ).toString(),
-                                                                            'null',
-                                                                          ),
-                                                                          'accepted'))
-                                                                        FFButtonWidget(
-                                                                          onPressed:
-                                                                              () {
-                                                                            print('status pressed ...');
-                                                                          },
-                                                                          text:
-                                                                              FFLocalizations.of(context).getText(
-                                                                            'zbrr21s6' /* Completed */,
-                                                                          ),
-                                                                          options:
-                                                                              FFButtonOptions(
-                                                                            width:
-                                                                                89,
-                                                                            height:
-                                                                                23,
-                                                                            color:
-                                                                                Color(0xFF81D05C),
-                                                                            textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 12,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: Colors.transparent,
-                                                                              width: 1,
+                                                                            'offer_accepted'))
+                                                                          FFButtonWidget(
+                                                                            onPressed:
+                                                                                () {
+                                                                              print('Button pressed ...');
+                                                                            },
+                                                                            text:
+                                                                                'Offer Accepted',
+                                                                            options:
+                                                                                FFButtonOptions(
+                                                                              width: 130,
+                                                                              height: 23,
+                                                                              color: Color(0xFF328B0B),
+                                                                              textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                    color: Colors.white,
+                                                                                    fontSize: 12,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                  ),
+                                                                              borderSide: BorderSide(
+                                                                                color: Colors.transparent,
+                                                                                width: 1,
+                                                                              ),
+                                                                              borderRadius: BorderRadius.circular(7),
                                                                             ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(7),
                                                                           ),
-                                                                        ),
-                                                                      if (functions.conditionalVisibility(
-                                                                          valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              bookedPropertiesItem,
-                                                                              r'''$.order_status''',
-                                                                            ).toString(),
-                                                                            'null',
-                                                                          ),
-                                                                          'collect_offers'))
-                                                                        FFButtonWidget(
-                                                                          onPressed:
-                                                                              () {
-                                                                            print('Button pressed ...');
-                                                                          },
-                                                                          text:
-                                                                              FFLocalizations.of(context).getText(
-                                                                            'qoxbngvy' /* Collect Offer */,
-                                                                          ),
-                                                                          options:
-                                                                              FFButtonOptions(
-                                                                            width:
-                                                                                98,
-                                                                            height:
-                                                                                23,
-                                                                            color:
-                                                                                Color(0xFF41566C),
-                                                                            textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 12,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: Colors.transparent,
-                                                                              width: 1,
-                                                                            ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(7),
-                                                                          ),
-                                                                        ),
-                                                                      if (functions.conditionalVisibility(
-                                                                          valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              bookedPropertiesItem,
-                                                                              r'''$.order_status''',
-                                                                            ).toString(),
-                                                                            'null',
-                                                                          ),
-                                                                          'waiting_offer_acceptance'))
-                                                                        FFButtonWidget(
-                                                                          onPressed:
-                                                                              () {
-                                                                            print('Button pressed ...');
-                                                                          },
-                                                                          text:
-                                                                              FFLocalizations.of(context).getText(
-                                                                            '497ft75g' /* Wait for customer acceptance */,
-                                                                          ),
-                                                                          options:
-                                                                              FFButtonOptions(
-                                                                            width:
-                                                                                192,
-                                                                            height:
-                                                                                23,
-                                                                            color:
-                                                                                Color(0xFFF0A637),
-                                                                            textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 12,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                            borderSide:
-                                                                                BorderSide(
-                                                                              color: Colors.transparent,
-                                                                              width: 1,
-                                                                            ),
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(7),
-                                                                          ),
-                                                                        ),
-                                                                    ],
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ),
                                                                 Padding(
@@ -532,105 +550,65 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           9,
                                                                           0,
                                                                           4),
-                                                                  child: StreamBuilder<
-                                                                      List<
-                                                                          OrdersRecord>>(
-                                                                    stream:
-                                                                        queryOrdersRecord(
-                                                                      singleRecord:
-                                                                          true,
-                                                                    ),
-                                                                    builder:
-                                                                        (context,
-                                                                            snapshot) {
-                                                                      // Customize what your widget looks like when it's loading.
-                                                                      if (!snapshot
-                                                                          .hasData) {
-                                                                        return Center(
-                                                                          child:
-                                                                              SizedBox(
-                                                                            width:
-                                                                                50,
-                                                                            height:
-                                                                                50,
-                                                                            child:
-                                                                                SpinKitRipple(
-                                                                              color: Color(0xFF2971FB),
-                                                                              size: 50,
-                                                                            ),
-                                                                          ),
-                                                                        );
-                                                                      }
-                                                                      List<OrdersRecord>
-                                                                          rowOrdersRecordList =
-                                                                          snapshot
-                                                                              .data;
-                                                                      // Return an empty Container when the document does not exist.
-                                                                      if (snapshot
-                                                                          .data
-                                                                          .isEmpty) {
-                                                                        return Container();
-                                                                      }
-                                                                      final rowOrdersRecord = rowOrdersRecordList
-                                                                              .isNotEmpty
-                                                                          ? rowOrdersRecordList
-                                                                              .first
-                                                                          : null;
-                                                                      return Row(
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Row(
                                                                         mainAxisSize:
                                                                             MainAxisSize.max,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
                                                                         children: [
-                                                                          Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            children: [
-                                                                              Text(
-                                                                                FFLocalizations.of(context).getText(
-                                                                                  'tu9ytzrl' /* Booking ref:  */,
-                                                                                ),
-                                                                                style: FlutterFlowTheme.of(context).bodyText2.override(
-                                                                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                      color: Color(0xFF6B6B6B),
-                                                                                      fontSize: 13,
-                                                                                      fontWeight: FontWeight.w300,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
-                                                                              ),
-                                                                              Text(
-                                                                                valueOrDefault<String>(
-                                                                                  getJsonField(
-                                                                                    bookedPropertiesItem,
-                                                                                    r'''$.order_id''',
-                                                                                  ).toString(),
-                                                                                  'null',
-                                                                                ),
-                                                                                maxLines: 2,
-                                                                                style: FlutterFlowTheme.of(context).bodyText2.override(
-                                                                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                      fontSize: 12,
-                                                                                      fontWeight: FontWeight.w300,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
                                                                           Text(
-                                                                            functions.myPropertiesFormatDate(getJsonField(
-                                                                              bookedPropertiesItem,
-                                                                              r'''$.created_at._seconds''',
-                                                                            )),
+                                                                            FFLocalizations.of(context).getText(
+                                                                              'tu9ytzrl' /* Booking ref:  */,
+                                                                            ),
                                                                             style: FlutterFlowTheme.of(context).bodyText2.override(
                                                                                   fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                  color: Color(0xFF6B6B6B),
                                                                                   fontSize: 13,
                                                                                   fontWeight: FontWeight.w300,
                                                                                   useGoogleFonts: false,
                                                                                 ),
                                                                           ),
+                                                                          Text(
+                                                                            valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_id''',
+                                                                              ).toString(),
+                                                                              'null',
+                                                                            ),
+                                                                            maxLines:
+                                                                                2,
+                                                                            style: FlutterFlowTheme.of(context).bodyText2.override(
+                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                  fontSize: 12,
+                                                                                  fontWeight: FontWeight.w300,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
+                                                                          ),
                                                                         ],
-                                                                      );
-                                                                    },
+                                                                      ),
+                                                                      Text(
+                                                                        functions
+                                                                            .myPropertiesFormatDate(getJsonField(
+                                                                          bookedPropertiesItem,
+                                                                          r'''$.created_at._seconds''',
+                                                                        )),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText2
+                                                                            .override(
+                                                                              fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                              fontSize: 13,
+                                                                              fontWeight: FontWeight.w300,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ),
                                                                 Padding(
@@ -689,50 +667,13 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       ),
                                                                     ),
                                                                     Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        '7wnud4bn' /* Riyadh */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
-                                                                            fontSize:
-                                                                                12,
-                                                                            fontWeight:
-                                                                                FontWeight.w300,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
-                                                                    ),
-                                                                    Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'kdwkp7d8' /* ,  */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
-                                                                            fontSize:
-                                                                                12,
-                                                                            fontWeight:
-                                                                                FontWeight.w300,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
-                                                                    ),
-                                                                    Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'z5aanp7e' /* Alyasmeen */,
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          bookedPropertiesItem,
+                                                                          r'''$.property_address''',
+                                                                        ).toString(),
+                                                                        'null',
                                                                       ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
@@ -794,37 +735,57 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     .primaryColor,
                                                               ),
                                                             ),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'j1l9ymld' /* View Details */,
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'MY_PROPERTIES_PAGE_Row_od4ycs47_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'Row_Navigate-To');
+                                                                context
+                                                                    .pushNamed(
+                                                                  'BookingDetails',
+                                                                  queryParams: {
+                                                                    'orderId': serializeParam(
+                                                                        getJsonField(
+                                                                          bookedPropertiesItem,
+                                                                          r'''$.order_id''',
+                                                                        ),
+                                                                        ParamType.int),
+                                                                  }.withoutNulls,
+                                                                );
+                                                              },
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'j1l9ymld' /* View Details */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Sofia Pro By Khuzaimah',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryColor,
+                                                                          fontSize:
+                                                                              15,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
                                                                   ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryColor,
-                                                                        fontSize:
-                                                                            15,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                              ],
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -934,9 +895,50 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                               'pending_payment'))
                                                         Expanded(
                                                           child: FFButtonWidget(
-                                                            onPressed: () {
-                                                              print(
-                                                                  'Button pressed ...');
+                                                            onPressed:
+                                                                () async {
+                                                              logFirebaseEvent(
+                                                                  'MY_PROPERTIES_PAGE_PAY_NOW_BTN_ON_TAP');
+                                                              logFirebaseEvent(
+                                                                  'Button_Bottom-Sheet');
+                                                              await showModalBottomSheet(
+                                                                isScrollControlled:
+                                                                    true,
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .white,
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return Padding(
+                                                                    padding: MediaQuery.of(
+                                                                            context)
+                                                                        .viewInsets,
+                                                                    child:
+                                                                        Container(
+                                                                      height: MediaQuery.of(context)
+                                                                              .size
+                                                                              .height *
+                                                                          0.8,
+                                                                      child:
+                                                                          ReservationBottomSheetWidget(
+                                                                        reservationCost:
+                                                                            getJsonField(
+                                                                          bookedPropertiesItem,
+                                                                          r'''$.reservation_amount''',
+                                                                        ),
+                                                                        propertyId:
+                                                                            getJsonField(
+                                                                          bookedPropertiesItem,
+                                                                          r'''$.property_id''',
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              );
                                                             },
                                                             text: FFLocalizations
                                                                     .of(context)
