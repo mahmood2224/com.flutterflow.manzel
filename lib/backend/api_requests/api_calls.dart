@@ -700,3 +700,53 @@ class BookmarkPropertyCall {
     );
   }
 }
+
+class GetBookMarkedPropertiesCall {
+  static Future<ApiCallResponse> call({
+    String userId = '',
+  }) {
+    final body = '''
+{
+  "userID": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getBookMarkedProperties',
+      apiUrl:
+          'https://us-central1-manzel-prod.cloudfunctions.net/getBookMarkedProperties',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'userId': userId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
+class CancelOrderCall {
+  static Future<ApiCallResponse> call({
+    String orderId = '',
+    String userId = '',
+  }) {
+    final body = '''
+{
+  "orderID": "${orderId}",
+  "userID": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'cancelOrder',
+      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/cancelOrder',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'orderId': orderId,
+        'userId': userId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
