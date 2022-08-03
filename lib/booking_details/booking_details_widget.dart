@@ -104,32 +104,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                   alignment: AlignmentDirectional(0, -0.75),
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 10, 20.33, 0),
-                    child: FutureBuilder<ApiCallResponse>(
-                      future: OrderDetailsCall.call(
-                        userid: currentUserUid,
-                        orderId: widget.orderId?.toString(),
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: SpinKitRipple(
-                                color: Color(0xFF2971FB),
-                                size: 50,
-                              ),
-                            ),
-                          );
-                        }
-                        final iconOrderDetailsResponse = snapshot.data;
-                        return FaIcon(
-                          FontAwesomeIcons.ellipsisH,
-                          color: FlutterFlowTheme.of(context).white,
-                          size: 30,
-                        );
-                      },
+                    child: FaIcon(
+                      FontAwesomeIcons.ellipsisH,
+                      color: FlutterFlowTheme.of(context).white,
+                      size: 30,
                     ),
                   ),
                 ),
