@@ -800,7 +800,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Wait for customer acceptance',
       'ar': '',
     },
-    'ntnvc58k': {
+    'tsl0um0g': {
       'en': 'Offer Accepted',
       'ar': '',
     },
