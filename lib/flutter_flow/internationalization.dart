@@ -776,31 +776,31 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Booked',
       'ar': 'محجوز',
     },
-    'kqxjjuim': {
+    'z2gx7m7a': {
       'en': 'Offer Accepted',
       'ar': '',
     },
-    'b7ik6cqj': {
+    'fvy3la4v': {
       'en': 'Wait for customer acceptance',
       'ar': '',
     },
-    '5xyu05ij': {
+    '3yuo9d02': {
       'en': 'Collect Offer',
       'ar': '',
     },
-    '5w8h4jp8': {
+    'mjwz6l2o': {
       'en': 'Completed',
       'ar': '',
     },
-    'w0dbwmaq': {
+    'gdlhk5cv': {
       'en': 'Pending Payment',
       'ar': '',
     },
-    'mql4d65o': {
+    'xpv53is3': {
       'en': 'Cancel',
       'ar': '',
     },
-    '6isfvzs1': {
+    '8u096i31': {
       'en': 'Reserved',
       'ar': '',
     },
@@ -970,7 +970,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Reserve',
       'ar': 'محجوز',
     },
-    'odoad6kk': {
+    'k5bprvbg': {
       'en': 'Booked',
       'ar': '',
     },
@@ -1092,56 +1092,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '#',
       'ar': '',
     },
-    '8ptcdhhd': {
-      'en': 'Property details',
-      'ar': 'تفاصيل الملكية ',
-    },
-    '4qmvz3gw': {
-      'en': ' ,',
-      'ar': 'و',
-    },
-    '6rsjfq97': {
-      'en': 'View More',
-      'ar': '',
-    },
-    '514bcidn': {
-      'en': 'Transaction details',
-      'ar': 'تفاصيل الصفقه',
-    },
-    'xihd37di': {
-      'en': 'Amount',
-      'ar': 'المبلغ',
-    },
-    'tgi826z8': {
-      'en': '.00 SAR',
-      'ar': '',
-    },
-    's1mfpoki': {
-      'en': 'Date & Time',
-      'ar': 'التاريخ والوقت',
-    },
-    'dkby0f6z': {
-      'en': '1 Jun 2022  01:00 PM',
-      'ar': '1 يونيو 2022 01:00 مساءً',
-    },
-    'g7t2uz7u': {
-      'en': 'Transaction Ref.',
-      'ar': 'مرجع المعاملة.',
-    },
-    '5czybu2h': {
-      'en': '#',
-      'ar': '',
-    },
-    'nfajktl1': {
-      'en': 'Payment Method',
-      'ar': 'طريقة الدفع او السداد',
-    },
-    'a5vxpwan': {
-      'en': 'View Receipt Transaction',
-      'ar': 'عرض إيصال المعاملة',
-    },
     'qlfkupzn': {
-      'en': 'Back to Home',
+      'en': 'Show booking details',
       'ar': 'عرض تفاصيل الحجز',
     },
     'jdsnk395': {
