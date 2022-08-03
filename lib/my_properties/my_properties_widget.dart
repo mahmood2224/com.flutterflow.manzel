@@ -8,7 +8,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -232,11 +231,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                               BorderRadius
                                                                   .circular(5),
                                                           child: Image.network(
-                                                            random_data
-                                                                .randomImageUrl(
-                                                              0,
-                                                              0,
-                                                            ),
+                                                            'https://media.istockphoto.com/photos/luxurious-beautiful-modern-villa-with-front-yard-garden-picture-id1283532143?b=1&k=20&m=1283532143&s=170667a&w=0&h=Vd_WTUbHxnc_NZNwMr1UnS0xVW1FjtUxKJUtCoL4Fgk=',
                                                             width: 80,
                                                             height: 75,
                                                             fit: BoxFit.cover,
