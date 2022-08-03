@@ -109,8 +109,10 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
             child: FFButtonWidget(
-              onPressed: () {
-                print('Button pressed ...');
+              onPressed: () async {
+                logFirebaseEvent('NO_RESULTS_FOUND_EXPLORE_OUR_PROPERTIES_');
+                logFirebaseEvent('Button_Navigate-To');
+                context.pushNamed('HomeScreen');
               },
               text: FFLocalizations.of(context).getText(
                 '1yep0j1q' /* Explore our properties */,

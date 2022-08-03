@@ -406,215 +406,243 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 32, 16, 0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              '6on06i4j' /* Order Process */,
-                            ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w300,
-                                      useGoogleFonts: false,
-                                    ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 15, 16, 0),
+                    Container(
+                      decoration: BoxDecoration(),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
+                                EdgeInsetsDirectional.fromSTEB(16, 32, 16, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 12, 5),
-                                  child: Icon(
-                                    Icons.check_circle_rounded,
-                                    color: Color(0xFF7FC15F),
-                                    size: 28,
-                                  ),
-                                ),
                                 Text(
                                   FFLocalizations.of(context).getText(
-                                    'nkd2c7wt' /* Reservation & Payment Confirme... */,
+                                    '6on06i4j' /* Order Process */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
                                         fontFamily: 'Sofia Pro By Khuzaimah',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w300,
                                         useGoogleFonts: false,
                                       ),
                                 ),
                               ],
                             ),
                           ),
-                          Divider(
-                            thickness: 1,
-                            color: Color(0xFFECECEC),
-                          ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
-                            child: Row(
+                                EdgeInsetsDirectional.fromSTEB(16, 15, 16, 0),
+                            child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 12, 5),
-                                  child: Icon(
-                                    Icons.radio_button_off,
-                                    color: Colors.black,
-                                    size: 28,
-                                  ),
-                                ),
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'l5s89kan' /* Send deal to Banks */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            thickness: 1,
-                            color: Color(0xFFECECEC),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Column(
+                                      0, 0, 0, 15),
+                                  child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 12, 5),
-                                            child: Icon(
-                                              Icons.radio_button_off_outlined,
-                                              color: Colors.black,
-                                              size: 28,
-                                            ),
-                                          ),
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'mll46yo8' /* Completing Documents */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            40, 10, 0, 0),
-                                        child: Row(
+                                            0, 0, 12, 5),
+                                        child: Icon(
+                                          Icons.check_circle_rounded,
+                                          color: Color(0xFF7FC15F),
+                                          size: 28,
+                                        ),
+                                      ),
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          'nkd2c7wt' /* Reservation & Payment Confirme... */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  'Sofia Pro By Khuzaimah',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(
+                                  thickness: 1,
+                                  color: Color(0xFFECECEC),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 15, 0, 15),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 12, 5),
+                                        child: Icon(
+                                          Icons.radio_button_off,
+                                          color: Colors.black,
+                                          size: 28,
+                                        ),
+                                      ),
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          'l5s89kan' /* Send deal to Banks */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  'Sofia Pro By Khuzaimah',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(
+                                  thickness: 1,
+                                  color: Color(0xFFECECEC),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 15, 0, 15),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            FFButtonWidget(
-                                              onPressed: () async {
-                                                logFirebaseEvent(
-                                                    'ORDER_DETAILS_uploadDocuments_ON_TAP');
-                                                logFirebaseEvent(
-                                                    'uploadDocuments_Upload-File');
-                                                final selectedFile =
-                                                    await selectFile(
-                                                        allowedExtensions: [
-                                                      'pdf'
-                                                    ]);
-                                                if (selectedFile != null) {
-                                                  showUploadMessage(
-                                                    context,
-                                                    'Uploading file...',
-                                                    showLoading: true,
-                                                  );
-                                                  final downloadUrl =
-                                                      await uploadData(
-                                                          selectedFile
-                                                              .storagePath,
-                                                          selectedFile.bytes);
-                                                  ScaffoldMessenger.of(context)
-                                                      .hideCurrentSnackBar();
-                                                  if (downloadUrl != null) {
-                                                    setState(() =>
-                                                        uploadedFileUrl =
-                                                            downloadUrl);
-                                                    showUploadMessage(
-                                                      context,
-                                                      'Success!',
-                                                    );
-                                                  } else {
-                                                    showUploadMessage(
-                                                      context,
-                                                      'Failed to upload file',
-                                                    );
-                                                    return;
-                                                  }
-                                                }
-                                              },
-                                              text: FFLocalizations.of(context)
-                                                  .getText(
-                                                'dm8dxmsv' /* Upload Documents */,
-                                              ),
-                                              options: FFButtonOptions(
-                                                width: 200,
-                                                height: 44,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w800,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                                borderSide: BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 12, 5),
+                                                  child: Icon(
+                                                    Icons
+                                                        .radio_button_off_outlined,
+                                                    color: Colors.black,
+                                                    size: 28,
+                                                  ),
                                                 ),
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'mll46yo8' /* Completing Documents */,
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Sofia Pro By Khuzaimah',
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(40, 10, 0, 0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  FFButtonWidget(
+                                                    onPressed: () async {
+                                                      logFirebaseEvent(
+                                                          'ORDER_DETAILS_uploadDocuments_ON_TAP');
+                                                      logFirebaseEvent(
+                                                          'uploadDocuments_Upload-File');
+                                                      final selectedFile =
+                                                          await selectFile(
+                                                              allowedExtensions: [
+                                                            'pdf'
+                                                          ]);
+                                                      if (selectedFile !=
+                                                          null) {
+                                                        showUploadMessage(
+                                                          context,
+                                                          'Uploading file...',
+                                                          showLoading: true,
+                                                        );
+                                                        final downloadUrl =
+                                                            await uploadData(
+                                                                selectedFile
+                                                                    .storagePath,
+                                                                selectedFile
+                                                                    .bytes);
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .hideCurrentSnackBar();
+                                                        if (downloadUrl !=
+                                                            null) {
+                                                          setState(() =>
+                                                              uploadedFileUrl =
+                                                                  downloadUrl);
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Success!',
+                                                          );
+                                                        } else {
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Failed to upload file',
+                                                          );
+                                                          return;
+                                                        }
+                                                      }
+                                                    },
+                                                    text: FFLocalizations.of(
+                                                            context)
+                                                        .getText(
+                                                      'dm8dxmsv' /* Upload Documents */,
+                                                    ),
+                                                    options: FFButtonOptions(
+                                                      width: 200,
+                                                      height: 44,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro By Khuzaimah',
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w800,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent,
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ],
@@ -623,75 +651,77 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                     ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            thickness: 1,
-                            color: Color(0xFFECECEC),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
+                                Divider(
+                                  thickness: 1,
+                                  color: Color(0xFFECECEC),
+                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 12, 5),
-                                  child: Icon(
-                                    Icons.radio_button_off_outlined,
-                                    color: Colors.black,
-                                    size: 28,
-                                  ),
-                                ),
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'hojjvz6d' /* Get banks proposals */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
+                                      0, 15, 0, 15),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 12, 5),
+                                        child: Icon(
+                                          Icons.radio_button_off_outlined,
+                                          color: Colors.black,
+                                          size: 28,
+                                        ),
                                       ),
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          'hojjvz6d' /* Get banks proposals */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  'Sofia Pro By Khuzaimah',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            thickness: 1,
-                            color: Color(0xFFECECEC),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
+                                Divider(
+                                  thickness: 1,
+                                  color: Color(0xFFECECEC),
+                                ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 12, 5),
-                                  child: Icon(
-                                    Icons.radio_button_off_outlined,
-                                    color: Colors.black,
-                                    size: 28,
-                                  ),
-                                ),
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'oqjt6apm' /* Close Deal */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
+                                      0, 15, 0, 15),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 12, 5),
+                                        child: Icon(
+                                          Icons.radio_button_off_outlined,
+                                          color: Colors.black,
+                                          size: 28,
+                                        ),
                                       ),
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          'oqjt6apm' /* Close Deal */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily:
+                                                  'Sofia Pro By Khuzaimah',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),

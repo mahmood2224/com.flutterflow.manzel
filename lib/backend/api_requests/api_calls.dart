@@ -647,3 +647,56 @@ class BookedPropertiesCall {
         r'''$.result''',
       );
 }
+
+class OrderDetailsCall {
+  static Future<ApiCallResponse> call({
+    String orderId = '',
+    String userid = '',
+  }) {
+    final body = '''
+{
+  "orderId": "${orderId}",
+  "userId": "${userid}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'orderDetails',
+      apiUrl:
+          'https://us-central1-manzel-prod.cloudfunctions.net/getOrderDetail',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'orderId': orderId,
+        'userid': userid,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
+class BookmarkPropertyCall {
+  static Future<ApiCallResponse> call({
+    String userId = '',
+    String propertyId = '',
+  }) {
+    final body = '''
+{
+  "userID": "${userId}",
+  "propertyID": "${propertyId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'bookmarkProperty',
+      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/bookmark',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'userId': userId,
+        'propertyId': propertyId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}

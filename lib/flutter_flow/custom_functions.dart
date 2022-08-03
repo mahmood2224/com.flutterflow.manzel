@@ -247,10 +247,12 @@ int orderIdGenerator(int randomNumber) {
   return orderId;
 }
 
-String formatDateTime(DateTime inputTimeStamp) {
+String formatDateTime(int inputTimeStamp) {
   // Add your function code here!
+  DateTime bookingTime =
+      DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
   String formattedResult =
-      '${DateFormat.d().format(inputTimeStamp)} ${DateFormat.MMM().format(inputTimeStamp)} ${DateFormat.y().format(inputTimeStamp)}  ${DateFormat.jm().format(inputTimeStamp)}';
+      '${DateFormat.d().format(bookingTime)} ${DateFormat.MMM().format(bookingTime)} ${DateFormat.y().format(bookingTime)}  ${DateFormat.jm().format(bookingTime)}';
   return formattedResult;
 }
 
@@ -347,4 +349,146 @@ String offerScreenPropertyIdisNull(String propertyId) {
   } else {
     return "";
   }
+}
+
+bool myPropertiesViewDetialsVisibility(String status) {
+  // Add your function code here!
+  if (status == "cancelled" ||
+      status == "ownership_transferred" ||
+      status == "waiting_offer_acceptance") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool cancelReverveButtonVisibility(String bookingStatus) {
+  // Add your function code here!
+  if (bookingStatus == "reserved" ||
+      bookingStatus == "collect_offers" ||
+      bookingStatus == "waiting_offer_acceptance") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool orderProcessStatus(
+  String apiResponse,
+  String processStage,
+  String setType,
+) {
+  switch (apiResponse) {
+    case "reserved":
+      if ((processStage == "reserved") && setType == "checked") {
+        return true;
+      } else if ((processStage != "reserved") && setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      // do something
+      break;
+    case "collect_offers":
+      if ((processStage == "reserved" || processStage == "collect_offers") &&
+          setType == "checked") {
+        return true;
+      } else if ((processStage != "reserved" ||
+              processStage != "collect_offers") &&
+          setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      // do something else
+      break;
+    case "waiting_offer_acceptance":
+      if ((processStage == "reserved" ||
+              processStage == "collect_offers" ||
+              processStage == "waiting_offer_acceptance") &&
+          setType == "checked") {
+        return true;
+      } else if ((processStage != "reserved" ||
+              processStage != "collect_offers" ||
+              processStage != "waiting_offer_acceptance") &&
+          setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      break;
+    case "accepted":
+      if ((processStage == "reserved" ||
+              processStage == "collect_offers" ||
+              processStage == "waiting_offer_acceptance" ||
+              processStage == "accepted") &&
+          setType == "checked") {
+        return true;
+      } else if ((processStage != "reserved" ||
+              processStage != "collect_offers" ||
+              processStage != "waiting_offer_acceptance" ||
+              processStage != "accepted") &&
+          setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      // do something else
+      break;
+    case "ownership_transferred":
+      if ((processStage == "reserved" ||
+              processStage == "collect_offers" ||
+              processStage == "waiting_offer_acceptance" ||
+              processStage == "accepted" ||
+              processStage == "ownership_transferred") &&
+          setType == "checked") {
+        return true;
+      } else if ((processStage != "reserved" ||
+              processStage != "collect_offers" ||
+              processStage != "waiting_offer_acceptance" ||
+              processStage != "accepted" ||
+              processStage != "ownership_transferred") &&
+          setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      // do something else
+      break;
+    case "cancelled":
+      // do something else
+      if (processStage == "cancelled" && setType == "checked") {
+        return true;
+      } else if (processStage != "cancelled" && setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      break;
+  }
+}
+
+bool offerStatusPaymentCompletedCheck(String transactionId) {
+  // Add your function code here!
+  if (transactionId != null || transactionId != "null") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+String myPropertiesBookedStatus(
+  String transactionId,
+  String status,
+) {
+  if ((transactionId == null || transactionId == "null") &&
+      status == "reserved") {
+    return "pending_payment";
+  } else if ((transactionId != null || transactionId != "null") &&
+      status == "reserved") {
+    return "reserved";
+  } else {
+    return status;
+  }
+  // Add your function code here!
 }

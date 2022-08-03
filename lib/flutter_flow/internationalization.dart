@@ -1124,6 +1124,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Date & Time',
       'ar': 'التاريخ والوقت',
     },
+    'dkby0f6z': {
+      'en': '1 Jun 2022  01:00 PM',
+      'ar': '1 يونيو 2022 01:00 مساءً',
+    },
     'g7t2uz7u': {
       'en': 'Transaction Ref.',
       'ar': 'مرجع المعاملة.',
@@ -1452,79 +1456,95 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الصفحة الرئيسية',
     },
   },
-  // ConfirmationCopy
+  // BookingDetails
   {
-    'eqp37ji0': {
-      'en': 'Order Process',
-      'ar': '',
-    },
-    '34ystwc5': {
-      'en': 'Reservation & Payment Confirmed',
-      'ar': 'تأكيد الحجز والدفع',
-    },
-    '5zw920uf': {
-      'en': 'Send deal to Banks',
-      'ar': 'تأكيد الحجز والدفع',
-    },
-    'ygyid06c': {
-      'en': 'Completing Documents',
-      'ar': 'تأكيد الحجز والدفع',
-    },
-    'bjbfj5fm': {
-      'en': 'Upload Documents',
-      'ar': 'تحميل المستندات',
-    },
-    'vujpj6gn': {
-      'en': 'Get banks proposals',
-      'ar': 'تأكيد الحجز والدفع',
-    },
-    'hsj5h2tz': {
-      'en': 'Property details',
-      'ar': 'تفاصيل الملكية ',
-    },
-    'v82m6eg8': {
-      'en': ' ,',
-      'ar': 'و',
-    },
-    'z92qnypa': {
-      'en': 'View More',
-      'ar': '',
-    },
-    'yhfiq32r': {
-      'en': 'Transaction details',
-      'ar': 'تفاصيل الصفقه',
-    },
-    'sc36o4f3': {
-      'en': 'Amount',
-      'ar': 'المبلغ',
-    },
-    'eh499534': {
-      'en': '.00 SAR',
-      'ar': '',
-    },
-    '8wz1y8t7': {
-      'en': 'Date & Time',
-      'ar': 'التاريخ والوقت',
-    },
-    'x5lafimu': {
-      'en': 'Transaction Ref.',
-      'ar': 'مرجع المعاملة.',
-    },
-    'vqq6omug': {
-      'en': '#',
-      'ar': '',
-    },
-    '8zwuakkr': {
-      'en': 'Payment Method',
-      'ar': 'طريقة الدفع او السداد',
-    },
-    '5yfslitr': {
-      'en': 'View Receipt Transaction',
-      'ar': 'عرض إيصال المعاملة',
-    },
     'trw95gom': {
       'en': 'Booking Ref. : ',
       'ar': '',
+    },
+    '8eahonhl': {
+      'en': 'Order Process',
+      'ar': 'مراحل الطلب',
+    },
+    'w2795v66': {
+      'en': 'Property Reserved',
+      'ar': 'تأكيد الحجز والدفع',
+    },
+    'm30m3lz9': {
+      'en': 'Payment Confirmed',
+      'ar': 'أرسل الصفقة إلى البنوك',
+    },
+    'zpv0x3sj': {
+      'en': 'Collect offers',
+      'ar': 'استكمال المستندات',
+    },
+    'b21jlid1': {
+      'en': '0',
+      'ar': '',
+    },
+    'mls6x5hy': {
+      'en': '/3',
+      'ar': '',
+    },
+    '3a3j0qu5': {
+      'en': 'Waitng for Offer Acceptance',
+      'ar': 'استكمال المستندات',
+    },
+    'oqathjmt': {
+      'en': 'Offer Accepted',
+      'ar': 'استكمال المستندات',
+    },
+    'nhrc354h': {
+      'en': 'Transferring Ownership to you ',
+      'ar': 'استكمال المستندات',
+    },
+    'dd079ljk': {
+      'en': 'Cancelled',
+      'ar': 'استكمال المستندات',
+    },
+    'nxmc61bl': {
+      'en': 'Property details',
+      'ar': 'تفاصيل الملكية ',
+    },
+    'sfe2y1t7': {
+      'en': ', ',
+      'ar': 'و',
+    },
+    '6cg0ue0u': {
+      'en': 'View More',
+      'ar': '',
+    },
+    'qkoz8020': {
+      'en': 'Transaction details',
+      'ar': 'تفاصيل الصفقه',
+    },
+    'qxs4ycvd': {
+      'en': 'Transaction Ref.',
+      'ar': 'مرجع المعاملة.',
+    },
+    'snmoyj94': {
+      'en': '#',
+      'ar': '',
+    },
+    '0ck5hck8': {
+      'en': 'Payment Method',
+      'ar': 'طريقة الدفع او السداد',
+    },
+    'zagvs0yx': {
+      'en': 'Amount',
+      'ar': 'المبلغ',
+    },
+    '17eaou67': {
+      'en': '.00 SAR',
+      'ar': '',
+    },
+    'x0ed6u9h': {
+      'en': 'Date & Time',
+      'ar': 'التاريخ والوقت',
+    },
+    'i7w1em00': {
+      'en': 'View Receipt Transaction',
+      'ar': 'عرض إيصال المعاملة',
     },
     'vrsc3lt4': {
       'en': 'Home',
