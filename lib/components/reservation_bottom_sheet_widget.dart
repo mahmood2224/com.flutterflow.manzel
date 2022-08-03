@@ -142,7 +142,7 @@ class _ReservationBottomSheetWidgetState
           transactionMethod: paymentMethodValue,
           orderId: int.parse(orderId),
           userId: currentUserReference.id,
-          transactionStatus: 'Completed',
+          transactionStatus: 'completed',
           transactionId: tapSDKResult['charge_id'],
         );
 
@@ -173,7 +173,7 @@ class _ReservationBottomSheetWidgetState
           transactionMethod: paymentMethodValue,
           orderId: int.parse(orderId),
           userId: currentUserReference.id,
-          transactionStatus: 'Failed',
+          transactionStatus: 'failed',
           transactionId: tapSDKResult['charge_id'],
         );
         if (((transactionApiResponse?.statusCode ?? 200)) ==
