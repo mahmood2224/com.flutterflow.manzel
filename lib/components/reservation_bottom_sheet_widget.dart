@@ -342,7 +342,7 @@ class _ReservationBottomSheetWidgetState
               ],
             ),
           ),
-          if ((paymentMethodValue != null && paymentMethodValue != ''))
+          if (paymentMethodValue != null && paymentMethodValue != '')
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(20, 100, 20, 20),
               child: StreamBuilder<List<OrdersRecord>>(

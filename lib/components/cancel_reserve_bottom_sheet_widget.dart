@@ -1,3 +1,5 @@
+import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -6,7 +8,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CancelReserveBottomSheetWidget extends StatefulWidget {
-  const CancelReserveBottomSheetWidget({Key key}) : super(key: key);
+  const CancelReserveBottomSheetWidget({
+    Key key,
+    this.orderId,
+  }) : super(key: key);
+
+  final String orderId;
 
   @override
   _CancelReserveBottomSheetWidgetState createState() =>
@@ -15,6 +22,8 @@ class CancelReserveBottomSheetWidget extends StatefulWidget {
 
 class _CancelReserveBottomSheetWidgetState
     extends State<CancelReserveBottomSheetWidget> {
+  ApiCallResponse cancelOrder;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,8 +34,83 @@ class _CancelReserveBottomSheetWidgetState
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
           child: FFButtonWidget(
-            onPressed: () {
-              print('Button pressed ...');
+            onPressed: () async {
+              logFirebaseEvent('CANCEL_RESERVE_BOTTOM_SHEET_CANCEL_RESER');
+              logFirebaseEvent('Button_Alert-Dialog');
+              var confirmDialogResponse = await showDialog<bool>(
+                    context: context,
+                    builder: (alertDialogContext) {
+                      return AlertDialog(
+                        title: Text('Cancel Reserve'),
+                        content: Text(
+                            'Are you sure you want to cancel your reservation?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.pop(alertDialogContext, false),
+                            child: Text('No'),
+                          ),
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.pop(alertDialogContext, true),
+                            child: Text('Yes'),
+                          ),
+                        ],
+                      );
+                    },
+                  ) ??
+                  false;
+              if (confirmDialogResponse) {
+                logFirebaseEvent('Button_Backend-Call');
+                cancelOrder = await CancelOrderCall.call(
+                  orderId: widget.orderId,
+                  userId: currentUserUid,
+                );
+                if ((cancelOrder?.statusCode ?? 200) == 200) {
+                  logFirebaseEvent('Button_Bottom-Sheet');
+                  Navigator.pop(context);
+                  logFirebaseEvent('Button_Show-Snack-Bar');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Offer cancelled successfully',
+                        style: TextStyle(
+                          color: FlutterFlowTheme.of(context).white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          height: 2,
+                        ),
+                      ),
+                      duration: Duration(milliseconds: 4000),
+                      backgroundColor: Color(0xFF676767),
+                    ),
+                  );
+                } else {
+                  logFirebaseEvent('Button_Bottom-Sheet');
+                  Navigator.pop(context);
+                  logFirebaseEvent('Button_Show-Snack-Bar');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Some error has occured ',
+                        style: TextStyle(
+                          color: FlutterFlowTheme.of(context).white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          height: 2,
+                        ),
+                      ),
+                      duration: Duration(milliseconds: 4000),
+                      backgroundColor: Color(0xFF676767),
+                    ),
+                  );
+                }
+              } else {
+                logFirebaseEvent('Button_Bottom-Sheet');
+                Navigator.pop(context);
+              }
+
+              setState(() {});
             },
             text: FFLocalizations.of(context).getText(
               'wb43h3r4' /* Cancel Reserve */,
@@ -51,8 +135,10 @@ class _CancelReserveBottomSheetWidgetState
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(8, 9, 8, 50),
           child: FFButtonWidget(
-            onPressed: () {
-              print('Button pressed ...');
+            onPressed: () async {
+              logFirebaseEvent('CANCEL_RESERVE_BOTTOM_SHEET_CANCEL_BTN_O');
+              logFirebaseEvent('Button_Bottom-Sheet');
+              Navigator.pop(context);
             },
             text: FFLocalizations.of(context).getText(
               't7s7qd09' /* Cancel */,

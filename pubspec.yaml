@@ -132,7 +132,7 @@ flutter:
     - assets/rive_animations/
     - assets/pdfs/
   fonts:
-    - family: Sofia Pro By Khuzaimah
+    - family: 'Sofia Pro By Khuzaimah'
       fonts:
         - asset: assets/fonts/Mostardesign_-_Sofia_Pro_Light.otf
           weight: 300

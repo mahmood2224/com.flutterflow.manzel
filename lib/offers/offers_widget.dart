@@ -93,7 +93,7 @@ class _OffersWidgetState extends State<OffersWidget> {
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Visibility(
-            visible: (loggedIn == true),
+            visible: loggedIn == true,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,8 +203,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                             ],
                           ),
                         ),
-                        if ((widget.propertyId != null &&
-                            widget.propertyId != ''))
+                        if (widget.propertyId != null &&
+                            widget.propertyId != '')
                           FlutterFlowIconButton(
                             borderColor: Colors.transparent,
                             borderRadius: 25,
@@ -215,8 +215,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 25,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              logFirebaseEvent('OFFERS_PAGE_clear_ICN_ON_TAP');
+                              logFirebaseEvent(
+                                  'IconButton_Close-Dialog,-Drawer,-Etc');
+                              Navigator.pop(context);
                             },
                           ),
                       ],

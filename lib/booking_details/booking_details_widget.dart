@@ -127,7 +127,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                               padding: MediaQuery.of(context).viewInsets,
                               child: Container(
                                 height: MediaQuery.of(context).size.height * 1,
-                                child: CancelReserveBottomSheetWidget(),
+                                child: CancelReserveBottomSheetWidget(
+                                  orderId: widget.orderId,
+                                ),
                               ),
                             );
                           },
@@ -308,7 +310,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -318,7 +320,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 21),
+                                          0, 0, 0, 2),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
