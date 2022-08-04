@@ -69,22 +69,10 @@ class _CancelReserveBottomSheetWidgetState
                 if ((cancelOrder?.statusCode ?? 200) == 200) {
                   logFirebaseEvent('Button_Bottom-Sheet');
                   Navigator.pop(context);
-                  logFirebaseEvent('Button_Show-Snack-Bar');
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        'Offer cancelled successfully',
-                        style: TextStyle(
-                          color: FlutterFlowTheme.of(context).white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          height: 2,
-                        ),
-                      ),
-                      duration: Duration(milliseconds: 4000),
-                      backgroundColor: Color(0xFF676767),
-                    ),
-                  );
+                  logFirebaseEvent('Button_Close-Dialog,-Drawer,-Etc');
+                  Navigator.pop(context);
+                  logFirebaseEvent('Button_Navigate-To');
+                  context.pushNamed('MyProperties');
                 } else {
                   logFirebaseEvent('Button_Bottom-Sheet');
                   Navigator.pop(context);
