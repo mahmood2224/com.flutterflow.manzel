@@ -34,7 +34,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if ((widget.screenName == 'Result'))
+            if (widget.screenName == 'Result')
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 3, 0, 0),
                 child: Image.asset(
@@ -44,21 +44,21 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
                   fit: BoxFit.contain,
                 ),
               ),
-            if ((widget.screenName == 'Notification'))
+            if (widget.screenName == 'Notification')
               Image.asset(
                 'assets/images/NoNotificationFound.png',
                 width: 38,
                 height: 37,
                 fit: BoxFit.contain,
               ),
-            if ((widget.screenName == 'myPropertiesBooked'))
+            if (widget.screenName == 'myPropertiesBooked')
               Image.asset(
                 'assets/images/myPropertiesBooked.png',
                 width: 37,
                 height: 36,
                 fit: BoxFit.cover,
               ),
-            if ((widget.screenName == 'myPropertiesFavorite'))
+            if (widget.screenName == 'myPropertiesFavorite')
               Image.asset(
                 'assets/images/myPropertiesFavorite.png',
                 width: 37,
@@ -105,7 +105,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
             ],
           ),
         ),
-        if ((widget.isButtonVisible == true))
+        if (widget.isButtonVisible == true)
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
             child: FFButtonWidget(

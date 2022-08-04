@@ -29,7 +29,7 @@ class _NoResultWidgetState extends State<NoResultWidget> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if ((widget.screenName == 'result'))
+            if (widget.screenName == 'result')
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 3, 0, 0),
                 child: Image.asset(
@@ -39,14 +39,14 @@ class _NoResultWidgetState extends State<NoResultWidget> {
                   fit: BoxFit.contain,
                 ),
               ),
-            if ((widget.screenName == 'notification'))
+            if (widget.screenName == 'notification')
               Image.asset(
                 'assets/images/NoNotificationFound.png',
                 width: 38,
                 height: 37,
                 fit: BoxFit.contain,
               ),
-            if ((widget.screenName == 'offer'))
+            if (widget.screenName == 'offer')
               Image.asset(
                 'assets/images/offerScreenNoResult.png',
                 width: 38,

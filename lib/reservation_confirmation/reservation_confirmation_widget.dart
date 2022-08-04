@@ -373,8 +373,8 @@ class _ReservationConfirmationWidgetState
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      if ((paymentMethodsValue != null &&
-                                          paymentMethodsValue != ''))
+                                      if (paymentMethodsValue != null &&
+                                          paymentMethodsValue != '')
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(

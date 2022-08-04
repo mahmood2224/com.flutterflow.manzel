@@ -127,7 +127,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                               padding: MediaQuery.of(context).viewInsets,
                               child: Container(
                                 height: MediaQuery.of(context).size.height * 1,
-                                child: CancelReserveBottomSheetWidget(),
+                                child: CancelReserveBottomSheetWidget(
+                                  orderId: widget.orderId,
+                                ),
                               ),
                             );
                           },
@@ -308,7 +310,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 15),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -318,7 +320,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 21),
+                                          0, 0, 0, 2),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
@@ -736,279 +738,274 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
-                    child: FutureBuilder<ApiCallResponse>(
-                      future: PropertyCall.call(
-                        propertyId:
-                            functions.bookinPagePropertyIdToInt(getJsonField(
-                          bookingDetailsOrderDetailsResponse.jsonBody,
-                          r'''$.result.property_id''',
-                        ).toString()),
-                        locale: FFAppState().locale,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: SpinKitRipple(
-                                color: Color(0xFF2971FB),
-                                size: 50,
-                              ),
-                            ),
-                          );
-                        }
-                        final rowPropertyResponse = snapshot.data;
-                        return Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(6),
-                                    child: Image.asset(
-                                      'assets/images/2.webp',
-                                      width: 80,
-                                      height: 75,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.network(
                                   valueOrDefault<String>(
-                                    PropertyCall.propertyName(
-                                      rowPropertyResponse.jsonBody,
-                                    ).toString(),
-                                    'null',
+                                    getJsonField(
+                                      bookingDetailsOrderDetailsResponse
+                                          .jsonBody,
+                                      r'''$.result.property_data.data.attributes.property_images.data[0].attributes.url''',
+                                    ),
+                                    'https://media.istockphoto.com/photos/house-in-dubai-picture-id490348444?k=20&m=490348444&s=612x612&w=0&h=HAhcenCKgOe5WQR3Ko514qWAkzHX3ugvlMpeKmUiStc=',
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        useGoogleFonts: false,
-                                      ),
+                                  width: 80,
+                                  height: 75,
+                                  fit: BoxFit.cover,
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Icon(
-                                      Icons.location_on_outlined,
-                                      color: Colors.black,
-                                      size: 18,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 3, 0, 0),
-                                      child: Text(
-                                        valueOrDefault<String>(
-                                          PropertyCall.propertyCity(
-                                            rowPropertyResponse.jsonBody,
-                                          ).toString(),
-                                          'null',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 3, 0, 0),
-                                      child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'sfe2y1t7' /* ,  */,
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 3, 0, 0),
-                                      child: Text(
-                                        valueOrDefault<String>(
-                                          PropertyCall.propertyDistrict(
-                                            rowPropertyResponse.jsonBody,
-                                          ).toString(),
-                                          'null',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              valueOrDefault<String>(
+                                getJsonField(
+                                  bookingDetailsOrderDetailsResponse.jsonBody,
+                                  r'''$.result.property_name''',
+                                ).toString(),
+                                'null',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: false,
+                                  ),
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(
+                                  Icons.location_on_outlined,
+                                  color: Colors.black,
+                                  size: 18,
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 15, 0, 0),
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 9, 0),
-                                                child: Icon(
-                                                  Icons.single_bed,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  size: 24,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 20, 0),
-                                                child: Text(
-                                                  valueOrDefault<String>(
-                                                    PropertyCall
-                                                        .propertyBedrooms(
-                                                      rowPropertyResponse
-                                                          .jsonBody,
-                                                    ).toString(),
-                                                    '0',
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 9, 0),
-                                                child: Icon(
-                                                  Icons.bathtub_outlined,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  size: 24,
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 20, 0),
-                                                child: Text(
-                                                  valueOrDefault<String>(
-                                                    PropertyCall
-                                                        .propertyBathrooms(
-                                                      rowPropertyResponse
-                                                          .jsonBody,
-                                                    ).toString(),
-                                                    '0',
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 9, 0),
-                                                child: Icon(
-                                                  Icons
-                                                      .design_services_outlined,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  size: 24,
-                                                ),
-                                              ),
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  PropertyCall.propertySize(
-                                                    rowPropertyResponse
-                                                        .jsonBody,
-                                                  ).toString(),
-                                                  '0',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryColor,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                                      0, 3, 0, 0),
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      getJsonField(
+                                        bookingDetailsOrderDetailsResponse
+                                            .jsonBody,
+                                        r'''$.result.property_data.data.attributes.city.data.attributes.city_name''',
+                                      ).toString(),
+                                      'null',
                                     ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          useGoogleFonts: false,
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 3, 0, 0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'sfe2y1t7' /* ,  */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          useGoogleFonts: false,
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 3, 0, 0),
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      getJsonField(
+                                        bookingDetailsOrderDetailsResponse
+                                            .jsonBody,
+                                        r'''$.result.property_data.data.attributes.property_district''',
+                                      ).toString(),
+                                      'null',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w300,
+                                          useGoogleFonts: false,
+                                        ),
                                   ),
                                 ),
                               ],
                             ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 9, 0),
+                                            child: Icon(
+                                              Icons.single_bed,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 24,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 20, 0),
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                getJsonField(
+                                                  bookingDetailsOrderDetailsResponse
+                                                      .jsonBody,
+                                                  r'''$.result.property_data.data.attributes.property_bedrooms''',
+                                                ).toString(),
+                                                '0',
+                                              ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily:
+                                                        'Sofia Pro By Khuzaimah',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
+                                                  ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 9, 0),
+                                            child: Icon(
+                                              Icons.bathtub_outlined,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 24,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 20, 0),
+                                            child: Text(
+                                              valueOrDefault<String>(
+                                                getJsonField(
+                                                  bookingDetailsOrderDetailsResponse
+                                                      .jsonBody,
+                                                  r'''$.result.property_data.data.attributes.property_bathrooms''',
+                                                ).toString(),
+                                                '0',
+                                              ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily:
+                                                        'Sofia Pro By Khuzaimah',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
+                                                  ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 9, 0),
+                                            child: Icon(
+                                              Icons.design_services_outlined,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 24,
+                                            ),
+                                          ),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              getJsonField(
+                                                bookingDetailsOrderDetailsResponse
+                                                    .jsonBody,
+                                                r'''$.result.property_data.data.attributes.property_size''',
+                                              ).toString(),
+                                              '0',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      'Sofia Pro By Khuzaimah',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts: false,
+                                                ),
+                                          ),
+                                          Text(
+                                            ' sqm',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      'Sofia Pro By Khuzaimah',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts: false,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
-                        );
-                      },
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
