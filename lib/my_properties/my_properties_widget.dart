@@ -1273,7 +1273,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               valueOrDefault<String>(
                                                                                 getJsonField(
                                                                                   bookmarkedPropertiesItem,
-                                                                                  r'''$.result..property_data.data.attributes.property_bedrooms''',
+                                                                                  r'''$.property_data.data.attributes.property_bedrooms''',
                                                                                 ).toString(),
                                                                                 '0',
                                                                               ),
