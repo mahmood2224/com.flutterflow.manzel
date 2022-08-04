@@ -723,6 +723,11 @@ class GetBookMarkedPropertiesCall {
       returnBody: true,
     );
   }
+
+  static dynamic result(dynamic response) => getJsonField(
+        response,
+        r'''$.result''',
+      );
 }
 
 class CancelOrderCall {
