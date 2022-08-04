@@ -89,7 +89,7 @@ class _CancelReserveBottomSheetWidgetState
                         ),
                       ),
                       duration: Duration(milliseconds: 4000),
-                      backgroundColor: Color(0xFF676767),
+                      backgroundColor: Color(0xFF777777),
                     ),
                   );
                 }
