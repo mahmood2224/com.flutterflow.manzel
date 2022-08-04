@@ -828,7 +828,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ', ',
       'ar': ' ،',
     },
-    'lurr19mm': {
+    'qsvkss0x': {
       'en': ' sqm',
       'ar': '',
     },
@@ -1462,7 +1462,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ', ',
       'ar': 'و',
     },
-    'rddw2zpd': {
+    'x91g5vu9': {
       'en': ' sqm',
       'ar': '',
     },
