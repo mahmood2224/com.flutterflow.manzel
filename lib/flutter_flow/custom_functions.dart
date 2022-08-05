@@ -340,8 +340,11 @@ List<String> choicechipUnselected(List<String> choicechipValue) {
 
 String myPropertiesFormatDate(int inputTimeStamp) {
   // Add your function code here!
-  DateTime bookingTime =
-      DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+  DateTime bookingTime;
+  if (inputTimeStamp.toString().isEmpty) {
+    bookingTime = DateTime.now();
+  }
+  bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
   return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime)}. ${DateFormat.y().format(bookingTime)}';
 }
 
