@@ -1253,62 +1253,73 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             0,
                                                                             0,
                                                                             8),
-                                                                child:
-                                                                    Container(
-                                                                  width: 100,
-                                                                  height: 42,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryColor,
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(8),
-                                                                  ),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'pasrxjal' /* Chat with  */,
+                                                                child: InkWell(
+                                                                  onTap:
+                                                                      () async {
+                                                                    logFirebaseEvent(
+                                                                        'OFFERS_PAGE_Container_4zrbybz6_ON_TAP');
+                                                                    logFirebaseEvent(
+                                                                        'Container_Navigate-To');
+                                                                    context.pushNamed(
+                                                                        'Chat');
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    width: 100,
+                                                                    height: 42,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'pasrxjal' /* Chat with  */,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 15,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
                                                                         ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                              color: FlutterFlowTheme.of(context).white,
-                                                                              fontSize: 15,
-                                                                              fontWeight: FontWeight.w500,
-                                                                              useGoogleFonts: false,
-                                                                            ),
-                                                                      ),
-                                                                      Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          getJsonField(
-                                                                            activeOffersItem,
-                                                                            r'''$.agent_name''',
-                                                                          ).toString(),
-                                                                          'null',
+                                                                        Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$.agent_name''',
+                                                                            ).toString(),
+                                                                            'null',
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 15,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
                                                                         ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                              color: FlutterFlowTheme.of(context).white,
-                                                                              fontSize: 15,
-                                                                              fontWeight: FontWeight.w500,
-                                                                              useGoogleFonts: false,
-                                                                            ),
-                                                                      ),
-                                                                    ],
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),

@@ -150,14 +150,11 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                   logFirebaseEvent(
                                       'CONFIRMATION_viewBookingDetails_ON_TAP');
                                   logFirebaseEvent(
+                                      'viewBookingDetails_Close-Dialog,-Drawer,');
+                                  Navigator.pop(context);
+                                  logFirebaseEvent(
                                       'viewBookingDetails_Navigate-To');
-                                  context.goNamed(
-                                    'BookingDetails',
-                                    queryParams: {
-                                      'orderId': serializeParam(
-                                          widget.orderId, ParamType.String),
-                                    }.withoutNulls,
-                                  );
+                                  context.goNamed('MyProperties');
                                 },
                                 text: FFLocalizations.of(context).getText(
                                   'qlfkupzn' /* Show booking details */,
