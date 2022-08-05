@@ -526,7 +526,22 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               onTap: () async {
                                                 logFirebaseEvent(
                                                     'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                                if (!loggedIn) {
+                                                if (loggedIn) {
+                                                  logFirebaseEvent(
+                                                      'Container_Backend-Call');
+                                                  await BookmarkPropertyCall
+                                                      .call(
+                                                    userId: currentUserUid,
+                                                    propertyId:
+                                                        valueOrDefault<String>(
+                                                      getJsonField(
+                                                        propertiesItem,
+                                                        r'''$.id''',
+                                                      ).toString(),
+                                                      '0',
+                                                    ),
+                                                  );
+                                                } else {
                                                   logFirebaseEvent(
                                                       'Container_Navigate-To');
                                                   context.pushNamed('Login');
