@@ -461,19 +461,19 @@ bool orderProcessStatus(
       }
       // do something else
       break;
-    case "ownership_transferred":
+    case "ownership_transfered":
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
               processStage == "waiting_offer_acceptance" ||
               processStage == "accepted" ||
-              processStage == "ownership_transferred") &&
+              processStage == "ownership_transfered") &&
           setType == "checked") {
         return true;
       } else if ((processStage != "reserved" &&
               processStage != "collect_offers" &&
               processStage != "waiting_offer_acceptance" &&
               processStage != "accepted" &&
-              processStage != "ownership_transferred") &&
+              processStage != "ownership_transfered") &&
           setType == "unchecked") {
         return true;
       } else {
