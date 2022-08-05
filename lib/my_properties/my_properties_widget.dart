@@ -390,7 +390,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               bookedPropertiesItem,
                                                                               r'''$.order_status''',
                                                                             ).toString(),
-                                                                            'ownership_transfered'))
+                                                                            'ownership_transferred'))
                                                                           Container(
                                                                             width:
                                                                                 89,
