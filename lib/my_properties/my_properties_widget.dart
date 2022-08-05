@@ -1,3 +1,5 @@
+import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
+
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
@@ -28,6 +30,15 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'MyProperties'});
+  }
+
+  Future<void> configurePaymentSdk() async {
+
+    GoSellSdkFlutter.configureApp(
+      bundleId: 'com.flutterflow.manzel',
+      productionSecreteKey: 'pk_test_2uo7Ohby3CnEpLejT5BAVzmW',
+      sandBoxsecretKey: 'sk_test_2r5JvPVafKxklSn6LRpqWycQ',
+      lang: FFAppState().locale,);
   }
 
   @override
@@ -894,6 +905,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                   'MY_PROPERTIES_PAGE_PAY_NOW_BTN_ON_TAP');
                                                               logFirebaseEvent(
                                                                   'Button_Bottom-Sheet');
+                                                              await configurePaymentSdk();
                                                               await showModalBottomSheet(
                                                                 isScrollControlled:
                                                                     true,
