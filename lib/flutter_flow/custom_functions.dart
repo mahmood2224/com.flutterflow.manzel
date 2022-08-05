@@ -362,7 +362,7 @@ bool myPropertiesViewOffersVisibility(String status) {
   if (status == "cancelled" ||
       status == "completed" ||
       status == "offer_accepted" ||
-      status == "ownership_transfered" ||
+      status == "ownership_transferred" ||
       status == "accepted") {
     return true;
   } else {
