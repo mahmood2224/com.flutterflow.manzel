@@ -797,7 +797,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'عرض قبول',
     },
     '55a9qb7p': {
-      'en': 'Wait for customer acceptance',
+      'en': 'Waiting for customer acceptance',
       'ar': 'انتظر قبول العميل',
     },
     'hv5vj04i': {
@@ -813,7 +813,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'في انتظار الدفع',
     },
     'cwzirftq': {
-      'en': 'Cancel',
+      'en': 'Cancelled',
       'ar': 'يلغي',
     },
     'ksi1ofk3': {
@@ -1447,7 +1447,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'جمع العروض',
     },
     '3a3j0qu5': {
-      'en': 'Waitng for Offer Acceptance',
+      'en': 'Waiting for Offer Acceptance',
       'ar': 'انتظار قبول العرض',
     },
     'oqathjmt': {
@@ -1517,11 +1517,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Chat
   {
-    'en571nq8': {
+    'jql5y8qs': {
       'en': 'Chat',
       'ar': '',
     },
-    'irsaglck': {
+    'ci13l8h0': {
       'en': 'Home',
       'ar': '',
     },
