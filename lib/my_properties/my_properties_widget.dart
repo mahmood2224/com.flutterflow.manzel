@@ -347,7 +347,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               children: [
                                                                                 Text(
                                                                                   FFLocalizations.of(context).getText(
-                                                                                    '55a9qb7p' /* Wait for customer acceptance */,
+                                                                                    '55a9qb7p' /* Waiting for customer acceptanc... */,
                                                                                   ),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'Sofia Pro By Khuzaimah',
@@ -486,7 +486,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 23,
                                                                             decoration:
                                                                                 BoxDecoration(
-                                                                              color: Color(0xFFA5A5A5),
+                                                                              color: Color(0xFFFF0000),
                                                                               borderRadius: BorderRadius.circular(7),
                                                                             ),
                                                                             child:
@@ -496,7 +496,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               children: [
                                                                                 Text(
                                                                                   FFLocalizations.of(context).getText(
-                                                                                    'cwzirftq' /* Cancel */,
+                                                                                    'cwzirftq' /* Cancelled */,
                                                                                   ),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'Sofia Pro By Khuzaimah',

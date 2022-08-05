@@ -446,7 +446,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       12, 0, 0, 0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
-                                      '3a3j0qu5' /* Waitng for Offer Acceptance */,
+                                      '3a3j0qu5' /* Waiting for Offer Acceptance */,
                                     ),
                                     maxLines: 2,
                                     style: FlutterFlowTheme.of(context)
