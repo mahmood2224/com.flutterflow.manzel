@@ -535,3 +535,12 @@ int bookinPagePropertyIdToInt(String propertyId) {
   int res = int.parse(propertyId);
   return res;
 }
+
+bool chatButtonVisibility(String status) {
+  // Add your function code here!
+  if (status == "new" || status == "accepted") {
+    return true;
+  } else {
+    return false;
+  }
+}
