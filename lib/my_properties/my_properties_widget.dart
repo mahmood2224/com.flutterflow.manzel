@@ -923,10 +923,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           r'''$.reservation_amount''',
                                                                         ),
                                                                         propertyId:
-                                                                            getJsonField(
+                                                                            functions.bookinPagePropertyIdToInt(getJsonField(
                                                                           bookedPropertiesItem,
                                                                           r'''$.property_id''',
-                                                                        ),
+                                                                        ).toString()),
                                                                       ),
                                                                     ),
                                                                   );

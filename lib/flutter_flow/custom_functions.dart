@@ -513,7 +513,9 @@ String myPropertiesBookedStatus(
   String transactionId,
   String status,
 ) {
-  if ((transactionId == null || transactionId == "null") &&
+  if ((transactionId == null ||
+          transactionId.isEmpty ||
+          transactionId == "null") &&
       status == "reserved") {
     return "pending_payment";
   } else if ((transactionId != null || transactionId != "null") &&

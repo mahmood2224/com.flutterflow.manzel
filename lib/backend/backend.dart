@@ -11,6 +11,7 @@ import 'schema/user_saved_record.dart';
 import 'schema/property_record.dart';
 import 'schema/notifications_record.dart';
 import 'schema/transactions_record.dart';
+import 'schema/saved_properties_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -25,6 +26,7 @@ export 'schema/user_saved_record.dart';
 export 'schema/property_record.dart';
 export 'schema/notifications_record.dart';
 export 'schema/transactions_record.dart';
+export 'schema/saved_properties_record.dart';
 
 /// Functions to query UserRecords (as a Stream and as a Future).
 Stream<List<UserRecord>> queryUserRecord({
@@ -314,6 +316,48 @@ Future<FFFirestorePage<TransactionsRecord>> queryTransactionsRecordPage({
     queryCollectionPage(
       TransactionsRecord.collection,
       TransactionsRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query SavedPropertiesRecords (as a Stream and as a Future).
+Stream<List<SavedPropertiesRecord>> querySavedPropertiesRecord({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      SavedPropertiesRecord.collection,
+      SavedPropertiesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<SavedPropertiesRecord>> querySavedPropertiesRecordOnce({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      SavedPropertiesRecord.collection,
+      SavedPropertiesRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<SavedPropertiesRecord>> querySavedPropertiesRecordPage({
+  Query Function(Query) queryBuilder,
+  DocumentSnapshot nextPageMarker,
+  int pageSize,
+  bool isStream,
+}) =>
+    queryCollectionPage(
+      SavedPropertiesRecord.collection,
+      SavedPropertiesRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
