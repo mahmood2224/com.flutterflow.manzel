@@ -785,7 +785,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                        if (functions
+                                                        if (!functions
                                                             .myPropertiesViewOffersVisibility(
                                                                 valueOrDefault<
                                                                     String>(
