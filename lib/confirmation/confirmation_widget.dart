@@ -151,7 +151,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                       'CONFIRMATION_viewBookingDetails_ON_TAP');
                                   logFirebaseEvent(
                                       'viewBookingDetails_Navigate-To');
-                                  context.pushNamed(
+                                  context.goNamed(
                                     'BookingDetails',
                                     queryParams: {
                                       'orderId': serializeParam(
