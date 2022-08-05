@@ -39,6 +39,16 @@ class _ChatWidgetState extends State<ChatWidget> {
             size: 24,
           ),
         ),
+        title: Text(
+          'Chat',
+          textAlign: TextAlign.center,
+          style: FlutterFlowTheme.of(context).bodyText1.override(
+                fontFamily: 'Sofia Pro By Khuzaimah',
+                fontSize: 26,
+                fontWeight: FontWeight.w600,
+                useGoogleFonts: false,
+              ),
+        ),
         actions: [],
         centerTitle: false,
         elevation: 2,

@@ -796,7 +796,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                        if (functions
+                                                        if (!functions
                                                             .myPropertiesViewOffersVisibility(
                                                                 valueOrDefault<
                                                                     String>(
@@ -1435,7 +1435,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                         FontWeight
                                                                             .bold,
                                                                     fontSize:
-                                                                        18,
+                                                                        16,
                                                                     height: 2,
                                                                   ),
                                                                 ),
@@ -1465,7 +1465,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                         FontWeight
                                                                             .bold,
                                                                     fontSize:
-                                                                        18,
+                                                                        16,
                                                                     height: 2,
                                                                   ),
                                                                 ),

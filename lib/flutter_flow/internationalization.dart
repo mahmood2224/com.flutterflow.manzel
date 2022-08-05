@@ -1430,14 +1430,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Collect offers',
       'ar': 'جمع العروض',
     },
-    'b21jlid1': {
-      'en': '0',
-      'ar': '',
-    },
-    'mls6x5hy': {
-      'en': '/3',
-      'ar': '',
-    },
     '3a3j0qu5': {
       'en': 'Waitng for Offer Acceptance',
       'ar': 'انتظار قبول العرض',
@@ -1509,7 +1501,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Chat
   {
-    'e5wxcnbb': {
+    'dae9vh2m': {
+      'en': 'Chat',
+      'ar': '',
+    },
+    'y0c65cta': {
       'en': 'Home',
       'ar': '',
     },

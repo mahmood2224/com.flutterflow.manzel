@@ -501,19 +501,22 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         ),
                                                                   ),
                                                                   Text(
-                                                                    functions.offerScreenTime(
-                                                                        valueOrDefault<int>(
-                                                                          getJsonField(
-                                                                            activeOffersItem,
-                                                                            r'''$.created_at._seconds''',
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      functions.offerScreenTime(
+                                                                          valueOrDefault<int>(
+                                                                            getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$.created_at._seconds''',
+                                                                            ),
+                                                                            0,
                                                                           ),
-                                                                          0,
-                                                                        ),
-                                                                        valueOrDefault<String>(
-                                                                          FFAppState()
-                                                                              .locale,
-                                                                          'en',
-                                                                        )),
+                                                                          valueOrDefault<String>(
+                                                                            FFAppState().locale,
+                                                                            'en',
+                                                                          )),
+                                                                      '0',
+                                                                    ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyText1
@@ -739,73 +742,54 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                         ),
                                                       ),
                                                       Expanded(
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .getText(
-                                                                'vs0xmudi' /* Booking Ref. */,
-                                                              ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
-                                                                    color: Color(
-                                                                        0xFF6B6B6B),
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
-                                                            ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    '2bmjizhc' /* # */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
-                                                                        fontSize:
-                                                                            16,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(5,
+                                                                      0, 0, 0),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'vs0xmudi' /* Booking Ref. */,
                                                                 ),
-                                                                Expanded(
-                                                                  child: Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      getJsonField(
-                                                                        activeOffersItem,
-                                                                        r'''$.id''',
-                                                                      ).toString(),
-                                                                      '0',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Sofia Pro By Khuzaimah',
+                                                                      color: Color(
+                                                                          0xFF6B6B6B),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      useGoogleFonts:
+                                                                          false,
                                                                     ),
-                                                                    maxLines: 2,
+                                                              ),
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      '2bmjizhc' /* # */,
+                                                                    ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyText1
@@ -820,10 +804,37 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               false,
                                                                         ),
                                                                   ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          activeOffersItem,
+                                                                          r'''$.id''',
+                                                                        ).toString(),
+                                                                        '0',
+                                                                      ),
+                                                                      maxLines:
+                                                                          2,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Sofia Pro By Khuzaimah',
+                                                                            fontSize:
+                                                                                16,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
@@ -1407,8 +1418,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               'Offer accepted',
                                                                               style: TextStyle(
                                                                                 color: FlutterFlowTheme.of(context).white,
-                                                                                fontWeight: FontWeight.w800,
-                                                                                fontSize: 18,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
                                                                               ),
                                                                             ),
                                                                             duration:
@@ -1428,8 +1439,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               'An error has occured',
                                                                               style: TextStyle(
                                                                                 color: FlutterFlowTheme.of(context).white,
-                                                                                fontWeight: FontWeight.w800,
-                                                                                fontSize: 18,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
                                                                               ),
                                                                             ),
                                                                             duration:
