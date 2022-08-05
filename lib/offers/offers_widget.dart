@@ -711,10 +711,14 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                   ),
                                                             ),
                                                             Text(
-                                                              getJsonField(
-                                                                activeOffersItem,
-                                                                r'''$.property_name''',
-                                                              ).toString(),
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                getJsonField(
+                                                                  activeOffersItem,
+                                                                  r'''$.property_name''',
+                                                                ).toString(),
+                                                                'null',
+                                                              ),
                                                               maxLines: 2,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -1089,10 +1093,13 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         valueOrDefault<
                                                                             String>(
                                                                           functions
-                                                                              .formatAmount(getJsonField(
-                                                                            activeOffersItem,
-                                                                            r'''$.property_price''',
-                                                                          ).toString()),
+                                                                              .formatAmount(valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$.property_price''',
+                                                                            ).toString(),
+                                                                            '0',
+                                                                          )),
                                                                           '0',
                                                                         ),
                                                                         maxLines:

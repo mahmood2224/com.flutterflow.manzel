@@ -1509,11 +1509,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Chat
   {
-    '9ugzlysz': {
+    '3gs8y64y': {
       'en': 'Page Title',
       'ar': '',
     },
-    'i8dfvcbw': {
+    'svg8bti9': {
       'en': 'Home',
       'ar': '',
     },
