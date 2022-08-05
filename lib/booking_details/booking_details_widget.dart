@@ -585,84 +585,93 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  if (functions.orderProcessStatus(
-                                      getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
-                                        r'''$.result.order_status''',
-                                      ).toString(),
-                                      'cancelled',
-                                      'checked'))
-                                    Container(
-                                      width: 24,
-                                      height: 24,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFFFF0000),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                        if (functions.conditionalVisibility(
+                            getJsonField(
+                              bookingDetailsOrderDetailsResponse.jsonBody,
+                              r'''$.result.order_status''',
+                            ).toString(),
+                            'cancelled'))
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    if (functions.orderProcessStatus(
+                                        getJsonField(
+                                          bookingDetailsOrderDetailsResponse
+                                              .jsonBody,
+                                          r'''$.result.order_status''',
+                                        ).toString(),
+                                        'cancelled',
+                                        'checked'))
+                                      Container(
+                                        width: 24,
+                                        height: 24,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFFF0000),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 5),
+                                          child: Icon(
+                                            Icons.clear,
+                                            color: FlutterFlowTheme.of(context)
+                                                .white,
+                                            size: 22,
+                                          ),
                                         ),
                                       ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 5),
-                                        child: Icon(
-                                          Icons.clear,
-                                          color: FlutterFlowTheme.of(context)
-                                              .white,
-                                          size: 22,
-                                        ),
+                                    if (functions.orderProcessStatus(
+                                        getJsonField(
+                                          bookingDetailsOrderDetailsResponse
+                                              .jsonBody,
+                                          r'''$.result.order_status''',
+                                        ).toString(),
+                                        'cancelled',
+                                        'unchecked'))
+                                      Icon(
+                                        Icons.radio_button_off,
+                                        color: Colors.black,
+                                        size: 28,
                                       ),
+                                  ],
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12, 0, 0, 0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'dd079ljk' /* Cancelled */,
+                                      ),
+                                      maxLines: 2,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily:
+                                                'Sofia Pro By Khuzaimah',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                     ),
-                                  if (functions.orderProcessStatus(
-                                      getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
-                                        r'''$.result.order_status''',
-                                      ).toString(),
-                                      'cancelled',
-                                      'unchecked'))
-                                    Icon(
-                                      Icons.radio_button_off,
-                                      color: Colors.black,
-                                      size: 28,
-                                    ),
-                                ],
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      12, 0, 0, 0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'dd079ljk' /* Cancelled */,
-                                    ),
-                                    maxLines: 2,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),

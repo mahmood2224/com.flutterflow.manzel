@@ -420,6 +420,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Last update: ',
       'ar': '',
     },
+    'jcj51k47': {
+      'en': 'Disqualified',
+      'ar': 'غير مؤهل',
+    },
+    'zraegj7a': {
+      'en': 'Rejected',
+      'ar': 'مرفوض',
+    },
+    '2ak58fes': {
+      'en': 'Expired',
+      'ar': 'منتهي الصلاحية',
+    },
+    'vaaj8s0b': {
+      'en': 'Accepted',
+      'ar': 'وافقت',
+    },
     'lre09mx2': {
       'en': 'New Offer',
       'ar': 'عرض جديد',
@@ -1501,11 +1517,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Chat
   {
-    '001byovn': {
+    'en571nq8': {
       'en': 'Chat',
       'ar': '',
     },
-    'qdhnw9l7': {
+    'irsaglck': {
       'en': 'Home',
       'ar': '',
     },
