@@ -1507,6 +1507,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الصفحة الرئيسية',
     },
   },
+  // Chat
+  {
+    'godjqwkw': {
+      'en': 'Page Title',
+      'ar': '',
+    },
+    '3cbd9rxw': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
   // NotFoundPage
   {
     'gmbuwmld': {
