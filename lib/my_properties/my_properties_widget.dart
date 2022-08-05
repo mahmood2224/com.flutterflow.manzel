@@ -20,6 +20,7 @@ class MyPropertiesWidget extends StatefulWidget {
 }
 
 class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
+  ApiCallResponse bookmarkApiResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -1353,7 +1354,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 ),
                                                                           ),
                                                                           Text(
-                                                                            ' sqm',
+                                                                            FFLocalizations.of(context).getText(
+                                                                              '747xbn3l' /*  sqm */,
+                                                                            ),
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'Sofia Pro By Khuzaimah',
                                                                                   fontSize: 12,
@@ -1371,11 +1374,101 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                           ],
                                                         ),
                                                       ),
-                                                      Icon(
-                                                        Icons.bookmark_rounded,
-                                                        color:
-                                                            Color(0xFFD05C5C),
-                                                        size: 24,
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'MY_PROPERTIES_PAGE_Icon_0lkum35u_ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'Icon_Backend-Call');
+                                                          bookmarkApiResponse =
+                                                              await BookmarkPropertyCall
+                                                                  .call(
+                                                            userId:
+                                                                currentUserUid,
+                                                            propertyId:
+                                                                valueOrDefault<
+                                                                    String>(
+                                                              getJsonField(
+                                                                bookmarkedPropertiesItem,
+                                                                r'''$.property_data.data.id''',
+                                                              ).toString(),
+                                                              '0',
+                                                            ),
+                                                          );
+                                                          if ((bookmarkApiResponse
+                                                                      ?.statusCode ??
+                                                                  200) ==
+                                                              200) {
+                                                            logFirebaseEvent(
+                                                                'Icon_Show-Snack-Bar');
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  'Property sucessfully removed from Bookmark',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        18,
+                                                                    height: 2,
+                                                                  ),
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    Color(
+                                                                        0xFF777777),
+                                                              ),
+                                                            );
+                                                          } else {
+                                                            logFirebaseEvent(
+                                                                'Icon_Show-Snack-Bar');
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  'Some error has occured. Please try again later.',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        18,
+                                                                    height: 2,
+                                                                  ),
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    Color(
+                                                                        0xFF676767),
+                                                              ),
+                                                            );
+                                                          }
+
+                                                          setState(() {});
+                                                        },
+                                                        child: Icon(
+                                                          Icons
+                                                              .bookmark_rounded,
+                                                          color:
+                                                              Color(0xFFD05C5C),
+                                                          size: 24,
+                                                        ),
                                                       ),
                                                     ],
                                                   ),

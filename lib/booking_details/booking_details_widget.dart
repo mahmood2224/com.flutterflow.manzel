@@ -983,7 +983,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 ),
                                           ),
                                           Text(
-                                            ' sqm',
+                                            FFLocalizations.of(context).getText(
+                                              '6ry49rxz' /*  sqm */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
