@@ -1421,7 +1421,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                         .white,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .w600,
+                                                                            .bold,
                                                                     fontSize:
                                                                         16,
                                                                     height: 2,
@@ -1451,7 +1451,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                         .white,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .w600,
+                                                                            .bold,
                                                                     fontSize:
                                                                         16,
                                                                     height: 2,
