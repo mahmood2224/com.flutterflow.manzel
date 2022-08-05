@@ -71,8 +71,6 @@ class _CancelReserveBottomSheetWidgetState
                   Navigator.pop(context);
                   logFirebaseEvent('Button_Close-Dialog,-Drawer,-Etc');
                   Navigator.pop(context);
-                  logFirebaseEvent('Button_Navigate-To');
-                  context.pushNamed('MyProperties');
                 } else {
                   logFirebaseEvent('Button_Bottom-Sheet');
                   Navigator.pop(context);
@@ -84,7 +82,7 @@ class _CancelReserveBottomSheetWidgetState
                         style: TextStyle(
                           color: FlutterFlowTheme.of(context).white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: 16,
                           height: 2,
                         ),
                       ),
