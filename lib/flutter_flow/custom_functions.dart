@@ -357,8 +357,8 @@ String offerScreenPropertyIdisNull(String propertyId) {
 bool myPropertiesViewDetialsVisibility(String status) {
   // Add your function code here!
   if (status == "cancelled" ||
-      status == "ownership_transferred" ||
-      status == "waiting_offer_acceptance") {
+      status == "completed" ||
+      status == "offer_accepted") {
     return true;
   } else {
     return false;
