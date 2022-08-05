@@ -50,7 +50,16 @@ class _ChatWidgetState extends State<ChatWidget> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [],
+            children: [
+              Expanded(
+                child: Image.asset(
+                  'assets/images/gxif9_600',
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
           ),
         ),
       ),

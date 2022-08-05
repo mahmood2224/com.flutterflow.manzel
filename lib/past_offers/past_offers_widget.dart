@@ -716,16 +716,11 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                         Text(
                                                           valueOrDefault<
                                                               String>(
-                                                            functions.formatAmount(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                              getJsonField(
-                                                                allOffersItem,
-                                                                r'''$.offered_installment_amount''',
-                                                              ).toString(),
-                                                              '0',
-                                                            )),
-                                                            '0',
+                                                            getJsonField(
+                                                              allOffersItem,
+                                                              r'''$.property_name''',
+                                                            ).toString(),
+                                                            'null',
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
@@ -1110,9 +1105,19 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                       .end,
                                                               children: [
                                                                 Text(
-                                                                  functions
-                                                                      .formatAmount(
-                                                                          '790000'),
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    functions.formatAmount(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                      getJsonField(
+                                                                        allOffersItem,
+                                                                        r'''$.property_price''',
+                                                                      ).toString(),
+                                                                      '0',
+                                                                    )),
+                                                                    '0',
+                                                                  ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1
