@@ -176,8 +176,8 @@ class _ReservationBottomSheetWidgetState
           transactionStatus: 'failed',
           transactionId: tapSDKResult['charge_id'],
         );
-        if (((transactionApiResponse?.statusCode ?? 200)) ==
-            200) {
+        // if (((transactionApiResponse?.statusCode ?? 200)) ==
+        //     200) {
         Navigator.pop(context);
         logFirebaseEvent('Button_Show-Snack-Bar');
         ScaffoldMessenger.of(context).showSnackBar(
@@ -194,7 +194,7 @@ class _ReservationBottomSheetWidgetState
               duration: Duration(milliseconds: 4000),
               backgroundColor: Color(0xFF777777),
             ));
-    }
+   // }
           break;
         case "SDK_ERROR":
           print('sdk error............');
