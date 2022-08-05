@@ -782,12 +782,16 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                        if (!functions
-                                                            .myPropertiesViewDetialsVisibility(
-                                                                getJsonField(
-                                                          bookedPropertiesItem,
-                                                          r'''$.order_status''',
-                                                        ).toString()))
+                                                        if (functions
+                                                            .myPropertiesViewOffersVisibility(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                          getJsonField(
+                                                            bookedPropertiesItem,
+                                                            r'''$.order_status''',
+                                                          ).toString(),
+                                                          'null',
+                                                        )))
                                                           Expanded(
                                                             child: Padding(
                                                               padding:

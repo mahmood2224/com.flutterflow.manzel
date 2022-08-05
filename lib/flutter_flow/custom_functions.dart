@@ -354,11 +354,13 @@ String offerScreenPropertyIdisNull(String propertyId) {
   }
 }
 
-bool myPropertiesViewDetialsVisibility(String status) {
+bool myPropertiesViewOffersVisibility(String status) {
   // Add your function code here!
   if (status == "cancelled" ||
       status == "completed" ||
-      status == "offer_accepted") {
+      status == "offer_accepted" ||
+      status == "ownership_transfered" ||
+      status == "accepted") {
     return true;
   } else {
     return false;
