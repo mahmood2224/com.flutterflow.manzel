@@ -397,7 +397,7 @@ class _ReservationBottomSheetWidgetState
                           logFirebaseEvent('Button_Bottom-Sheet');
                           Navigator.pop(context);
                           logFirebaseEvent('Button_Navigate-To');
-                          context.pushNamed(
+                          context.goNamed(
                             'Confirmation',
                             queryParams: {
                               'propertyId': serializeParam(
