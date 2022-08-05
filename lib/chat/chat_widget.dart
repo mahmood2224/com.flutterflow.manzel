@@ -27,18 +27,17 @@ class _ChatWidgetState extends State<ChatWidget> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        leading: Icon(
-          Icons.arrow_back_rounded,
-          color: Colors.black,
-          size: 24,
-        ),
-        title: Text(
-          'Page Title',
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Sofia Pro',
-                color: Colors.black,
-                fontSize: 22,
-              ),
+        leading: InkWell(
+          onTap: () async {
+            logFirebaseEvent('CHAT_PAGE_Icon_mqw5te5l_ON_TAP');
+            logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_rounded,
+            color: Colors.black,
+            size: 24,
+          ),
         ),
         actions: [],
         centerTitle: false,
@@ -53,10 +52,10 @@ class _ChatWidgetState extends State<ChatWidget> {
             children: [
               Expanded(
                 child: Image.asset(
-                  'assets/images/gxif9_600',
+                  'assets/images/chat.jpg',
                   width: double.infinity,
                   height: double.infinity,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
             ],

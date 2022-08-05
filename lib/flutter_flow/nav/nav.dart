@@ -166,14 +166,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
             ),
             FFRoute(
-              name: 'PastOffers',
-              path: 'pastOffers',
-              builder: (context, params) => PastOffersWidget(),
-            ),
-            FFRoute(
               name: 'Filter',
               path: 'filter',
               builder: (context, params) => FilterWidget(),
+            ),
+            FFRoute(
+              name: 'PastOffers',
+              path: 'pastOffers',
+              builder: (context, params) => PastOffersWidget(),
             ),
             FFRoute(
               name: 'filterResults',

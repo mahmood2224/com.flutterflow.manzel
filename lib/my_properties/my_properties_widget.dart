@@ -652,6 +652,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                   mainAxisSize:
                                                                       MainAxisSize
                                                                           .max,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
                                                                   children: [
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional
@@ -1180,7 +1183,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             .max,
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
-                                                                            .start,
+                                                                            .center,
                                                                     children: [
                                                                       Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(

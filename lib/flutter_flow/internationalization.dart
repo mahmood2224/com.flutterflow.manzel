@@ -493,89 +493,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'عروض',
     },
   },
-  // PastOffers
-  {
-    'qvv3lsb7': {
-      'en': 'Past & canceled offers',
-      'ar': 'العروض السابقة والملغاة',
-    },
-    '3pqboynr': {
-      'en': 'Offers #',
-      'ar': 'عروض للحجز #',
-    },
-    'mne0k69i': {
-      'en': 'Last update: ',
-      'ar': '',
-    },
-    '7r7omofu': {
-      'en': 'Accepted',
-      'ar': 'وافقت',
-    },
-    'ftvaehka': {
-      'en': 'Expired',
-      'ar': 'منتهي الصلاحية',
-    },
-    'y5epausm': {
-      'en': 'Rejected',
-      'ar': 'مرفوض',
-    },
-    'dzlim6kq': {
-      'en': 'Disqualified',
-      'ar': 'غير مؤهل',
-    },
-    '6e3dl9a5': {
-      'en': 'Property',
-      'ar': 'ملكية',
-    },
-    'dcv75stq': {
-      'en': 'Booking Ref.',
-      'ar': 'مرجع الحجز.',
-    },
-    '0kssv8ii': {
-      'en': '#',
-      'ar': '',
-    },
-    'tpwleczh': {
-      'en': 'Initial installment',
-      'ar': 'القسط الأولي',
-    },
-    '6yumrre4': {
-      'en': '.00',
-      'ar': '',
-    },
-    '2szdgt5y': {
-      'en': 'SAR',
-      'ar': '',
-    },
-    'yv9roric': {
-      'en': 'Installment period',
-      'ar': 'فترة التقسيط',
-    },
-    '3v67jmtb': {
-      'en': 'Month',
-      'ar': 'شهر',
-    },
-    '3htsv7vx': {
-      'en': 'Total price',
-      'ar': 'السعر الكلي',
-    },
-    '3q0s7kis': {
-      'en': '.00',
-      'ar': '',
-    },
-    'k4nw3frq': {
-      'en': 'SAR',
-      'ar': '',
-    },
-    '4x5ij9es': {
-      'en': 'Agent Name',
-      'ar': 'اسم العميل',
-    },
-    'kct7wk1t': {
-      'en': 'Home',
-      'ar': '',
-    },
-  },
   // Filter
   {
     'h84toi7e': {
@@ -693,6 +610,89 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '5wfrx94q': {
       'en': 'Offers',
       'ar': 'مسكن',
+    },
+  },
+  // PastOffers
+  {
+    'qvv3lsb7': {
+      'en': 'Past & canceled offers',
+      'ar': 'العروض السابقة والملغاة',
+    },
+    '3pqboynr': {
+      'en': 'Offers #',
+      'ar': 'عروض للحجز #',
+    },
+    'mne0k69i': {
+      'en': 'Last update: ',
+      'ar': '',
+    },
+    '7r7omofu': {
+      'en': 'Accepted',
+      'ar': 'وافقت',
+    },
+    'ftvaehka': {
+      'en': 'Expired',
+      'ar': 'منتهي الصلاحية',
+    },
+    'y5epausm': {
+      'en': 'Rejected',
+      'ar': 'مرفوض',
+    },
+    'dzlim6kq': {
+      'en': 'Disqualified',
+      'ar': 'غير مؤهل',
+    },
+    '6e3dl9a5': {
+      'en': 'Property',
+      'ar': 'ملكية',
+    },
+    'dcv75stq': {
+      'en': 'Booking Ref.',
+      'ar': 'مرجع الحجز.',
+    },
+    '0kssv8ii': {
+      'en': '#',
+      'ar': '',
+    },
+    'tpwleczh': {
+      'en': 'Initial installment',
+      'ar': 'القسط الأولي',
+    },
+    '6yumrre4': {
+      'en': '.00',
+      'ar': '',
+    },
+    '2szdgt5y': {
+      'en': 'SAR',
+      'ar': '',
+    },
+    'yv9roric': {
+      'en': 'Installment period',
+      'ar': 'فترة التقسيط',
+    },
+    '3v67jmtb': {
+      'en': 'Month',
+      'ar': 'شهر',
+    },
+    '3htsv7vx': {
+      'en': 'Total price',
+      'ar': 'السعر الكلي',
+    },
+    '3q0s7kis': {
+      'en': '.00',
+      'ar': '',
+    },
+    'k4nw3frq': {
+      'en': 'SAR',
+      'ar': '',
+    },
+    '4x5ij9es': {
+      'en': 'Agent Name',
+      'ar': 'اسم العميل',
+    },
+    'kct7wk1t': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // filterResults
@@ -1509,11 +1509,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Chat
   {
-    '3gs8y64y': {
-      'en': 'Page Title',
-      'ar': '',
-    },
-    'svg8bti9': {
+    'e5wxcnbb': {
       'en': 'Home',
       'ar': '',
     },

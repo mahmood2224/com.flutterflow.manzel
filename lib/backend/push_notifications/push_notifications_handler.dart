@@ -93,8 +93,8 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
           propertyId: getParameter(data, 'propertyId'),
         )
       : NavBarPage(initialPage: 'Offers'),
-  'PastOffers': (data) async => PastOffersWidget(),
   'Filter': (data) async => FilterWidget(),
+  'PastOffers': (data) async => PastOffersWidget(),
   'filterResults': (data) async => FilterResultsWidget(),
   'MyProperties': (data) async => NavBarPage(initialPage: 'MyProperties'),
   'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
