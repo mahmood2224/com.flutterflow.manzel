@@ -226,7 +226,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                         color: Color(0xFF2971FB),
                         textStyle:
                             FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
+                                  fontFamily: 'AvenirArabic',
                                   color: Colors.white,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w800,

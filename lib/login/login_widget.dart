@@ -258,7 +258,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 fontWeight: FontWeight.w500,
@@ -271,7 +271,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           '5ard5tmn' /*  &  */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               color: Colors.black,
                               fontWeight: FontWeight.w300,
                               useGoogleFonts: false,
@@ -291,7 +291,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 fontWeight: FontWeight.w500,
@@ -362,7 +362,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             color: Color(0xFF2971FB),
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Colors.white,
                                       useGoogleFonts: false,
                                     ),

@@ -79,7 +79,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
                   widget.titleText,
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        fontFamily: 'AvenirArabic',
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                         useGoogleFonts: false,
@@ -122,7 +122,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
                 height: 46,
                 color: FlutterFlowTheme.of(context).primaryColor,
                 textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                      fontFamily: 'Sofia Pro By Khuzaimah',
+                      fontFamily: 'AvenirArabic',
                       color: Colors.white,
                       useGoogleFonts: false,
                     ),

@@ -366,7 +366,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 .subtitle2
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
+                                                                      'AvenirArabic',
                                                                   color: Colors
                                                                       .white,
                                                                   fontSize: 13,
@@ -405,7 +405,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
+                                                                'AvenirArabic',
                                                             fontSize: 12,
                                                             fontWeight:
                                                                 FontWeight.w300,
@@ -428,7 +428,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
+                                                                'AvenirArabic',
                                                             fontSize: 12,
                                                             fontWeight:
                                                                 FontWeight.w300,
@@ -501,7 +501,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               .bodyText1
                                                               .override(
                                                                 fontFamily:
-                                                                    'Sofia Pro By Khuzaimah',
+                                                                    'AvenirArabic',
                                                                 fontSize: 13,
                                                                 fontWeight:
                                                                     FontWeight
@@ -555,7 +555,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 25,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -602,7 +602,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
+                                                                'AvenirArabic',
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight.w300,
@@ -621,7 +621,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
+                                                                'AvenirArabic',
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight.w300,
@@ -640,7 +640,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
+                                                                'AvenirArabic',
                                                             fontSize: 13,
                                                             fontWeight:
                                                                 FontWeight.w300,
@@ -692,7 +692,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
+                                                                'AvenirArabic',
                                                             color: Color(
                                                                 0xFF2971FB),
                                                             fontSize: 13,
@@ -727,7 +727,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 13,
                                                           fontWeight:
                                                               FontWeight.w300,
@@ -795,7 +795,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w300,
@@ -814,7 +814,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w300,
@@ -861,7 +861,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w300,
@@ -880,7 +880,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w300,
@@ -928,7 +928,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w300,
@@ -947,7 +947,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w300,
@@ -994,7 +994,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w300,
@@ -1013,7 +1013,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w300,
@@ -1060,7 +1060,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w300,
@@ -1099,7 +1099,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 20,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -1129,7 +1129,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -1146,7 +1146,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -1180,7 +1180,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w300,
@@ -1197,7 +1197,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -1233,7 +1233,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w300,
@@ -1251,7 +1251,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -1281,7 +1281,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -1299,7 +1299,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 17,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -1329,7 +1329,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -1351,7 +1351,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
+                                                                'AvenirArabic',
                                                             fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -1370,7 +1370,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
+                                                                'AvenirArabic',
                                                             fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -1403,7 +1403,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -1426,7 +1426,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
+                                                                'AvenirArabic',
                                                             fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -1445,7 +1445,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .bodyText1
                                                           .override(
                                                             fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
+                                                                'AvenirArabic',
                                                             fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight.bold,
@@ -1480,7 +1480,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 20,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -1661,7 +1661,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                                 ).toString(),
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                      fontFamily: 'AvenirArabic',
                                                                                       fontSize: 14,
                                                                                       fontWeight: FontWeight.bold,
                                                                                       useGoogleFonts: false,
@@ -1674,7 +1674,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                                     '1v1r516t' /* More Details */,
                                                                                   ),
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                        fontFamily: 'AvenirArabic',
                                                                                         color: FlutterFlowTheme.of(context).primaryColor,
                                                                                         fontSize: 11,
                                                                                         fontWeight: FontWeight.bold,
@@ -1722,7 +1722,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 20,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -1750,7 +1750,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -1880,7 +1880,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 20,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -2161,7 +2161,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         fontSize:
                                                                             20,
                                                                         fontWeight:
@@ -2184,7 +2184,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         color: Color(
                                                                             0xFF474747),
                                                                         fontSize:
@@ -2242,7 +2242,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyText1
                                                                             .override(
-                                                                              fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                              fontFamily: 'AvenirArabic',
                                                                               fontSize: 13,
                                                                               fontWeight: FontWeight.w300,
                                                                               useGoogleFonts: false,
@@ -2260,7 +2260,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           .bodyText1
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
+                                                                                'AvenirArabic',
                                                                             fontSize:
                                                                                 13,
                                                                             fontWeight:
@@ -2279,7 +2279,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           .bodyText1
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
+                                                                                'AvenirArabic',
                                                                             fontSize:
                                                                                 13,
                                                                             fontWeight:
@@ -2386,7 +2386,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                       .bodyText2
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         color: Color(
                                                                             0xFF474747),
                                                                         fontSize:
@@ -2462,7 +2462,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyText1
                                                                             .override(
-                                                                              fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                              fontFamily: 'AvenirArabic',
                                                                               color: Color(0xFF2971FB),
                                                                               fontSize: 12,
                                                                               fontWeight: FontWeight.w500,
@@ -2489,7 +2489,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           .bodyText2
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
+                                                                                'AvenirArabic',
                                                                             color:
                                                                                 Colors.black,
                                                                             fontSize:
@@ -2511,7 +2511,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           .bodyText2
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
+                                                                                'AvenirArabic',
                                                                             color:
                                                                                 Colors.black,
                                                                             fontSize:
@@ -2595,8 +2595,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
                                             fontSize: 10,
@@ -2624,8 +2623,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryColor,
@@ -2646,8 +2644,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
+                                                  fontFamily: 'AvenirArabic',
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryColor,
@@ -2715,7 +2712,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     textStyle: FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: Colors.white,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w800,
@@ -2747,7 +2744,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     textStyle: FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: Colors.white,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w800,

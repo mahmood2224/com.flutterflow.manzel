@@ -70,7 +70,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 17,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -264,7 +264,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                                 .bodyText2
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
+                                                                      'AvenirArabic',
                                                                   color: Colors
                                                                       .black,
                                                                   fontSize: 16,
@@ -294,7 +294,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                                       .bodyText2
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         color: Color(
                                                                             0xFF6B6B6B),
                                                                         fontWeight:
@@ -314,7 +314,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         color: Color(
                                                                             0xFF676767),
                                                                         useGoogleFonts:

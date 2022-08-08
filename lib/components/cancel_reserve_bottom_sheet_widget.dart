@@ -106,7 +106,7 @@ class _CancelReserveBottomSheetWidgetState
               height: 61,
               color: Color(0xB2F5F5F5),
               textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'AvenirArabic',
                     color: Color(0xFFD05C5C),
                     useGoogleFonts: false,
                   ),
@@ -134,7 +134,7 @@ class _CancelReserveBottomSheetWidgetState
               height: 61,
               color: Color(0xFFF5F5F5),
               textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'AvenirArabic',
                     color: FlutterFlowTheme.of(context).customColor4,
                     useGoogleFonts: false,
                   ),

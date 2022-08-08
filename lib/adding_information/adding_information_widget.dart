@@ -182,7 +182,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 fontWeight: FontWeight.w500,
@@ -205,7 +205,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 fontWeight: FontWeight.w500,
@@ -228,7 +228,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 fontWeight: FontWeight.w500,
@@ -287,7 +287,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                             color: Color(0xFF2971FB),
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Colors.white,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w800,

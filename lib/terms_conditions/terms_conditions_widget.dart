@@ -96,7 +96,7 @@ class _TermsConditionsWidgetState extends State<TermsConditionsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
                                           useGoogleFonts: false,

@@ -85,7 +85,7 @@ class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
                       ),
                       textAlign: TextAlign.start,
                       style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
+                            fontFamily: 'AvenirArabic',
                             fontSize: 25,
                             fontWeight: FontWeight.w800,
                             useGoogleFonts: false,
@@ -105,7 +105,7 @@ class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
                       ),
                       textAlign: TextAlign.start,
                       style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
+                            fontFamily: 'AvenirArabic',
                             fontSize: 14,
                             fontWeight: FontWeight.w300,
                             useGoogleFonts: false,

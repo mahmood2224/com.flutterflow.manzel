@@ -142,6 +142,17 @@ flutter:
           weight: 600
         - asset: assets/fonts/Mostardesign_-_Sofia_Pro_Bold.otf
           weight: 700
+    - family: 'AvenirArabic'
+      fonts:
+        - asset: assets/fonts/AvenirArabic-Light.otf
+          weight: 300
+        - asset: assets/fonts/AvenirArabic-Black.otf
+        - asset: assets/fonts/AvenirArabic-Medium.otf
+          weight: 500
+        - asset: assets/fonts/AvenirArabic-Heavy.otf
+          weight: 700
+        - asset: assets/fonts/AvenirArabic-Book.otf
+          weight: 800
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

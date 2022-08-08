@@ -218,8 +218,7 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
+                                                  fontFamily: 'AvenirArabic',
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
                                                   useGoogleFonts: false,
@@ -271,8 +270,7 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
+                                                  fontFamily: 'AvenirArabic',
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w300,
                                                   useGoogleFonts: false,
@@ -300,8 +298,7 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
+                                                  fontFamily: 'AvenirArabic',
                                                   fontWeight: FontWeight.w500,
                                                   useGoogleFonts: false,
                                                 ),
@@ -333,17 +330,15 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                             height: 46,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily:
-                                                          'Sofia Pro By Khuzaimah',
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      useGoogleFonts: false,
-                                                    ),
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .subtitle2
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w800,
+                                                  useGoogleFonts: false,
+                                                ),
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1,

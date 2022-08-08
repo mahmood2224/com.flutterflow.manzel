@@ -188,7 +188,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -201,17 +201,15 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                   .getText(
                                                 'obc5bmtb' /* Riyadh, Alyasmeen */,
                                               ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        useGoogleFonts: false,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w300,
+                                                    useGoogleFonts: false,
+                                                  ),
                                             ),
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -393,7 +391,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: FlutterFlowTheme.of(context)
                                           .primaryColor,
                                       fontSize: 15,
@@ -424,7 +422,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontFamily: 'AvenirArabic',
                                         fontSize: 18,
                                         fontWeight: FontWeight.w300,
                                         useGoogleFonts: false,
@@ -461,8 +459,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               useGoogleFonts: false,
@@ -497,8 +494,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               useGoogleFonts: false,
@@ -544,7 +540,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 16,
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -622,7 +618,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                               .subtitle2
                                                               .override(
                                                                 fontFamily:
-                                                                    'Sofia Pro By Khuzaimah',
+                                                                    'AvenirArabic',
                                                                 color: Colors
                                                                     .white,
                                                                 fontSize: 14,
@@ -677,8 +673,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               useGoogleFonts: false,
@@ -713,8 +708,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               useGoogleFonts: false,

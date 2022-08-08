@@ -43,7 +43,7 @@ class _NotFoundPageWidgetState extends State<NotFoundPageWidget> {
                 ),
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'Sofia Pro By Khuzaimah',
+                      fontFamily: 'AvenirArabic',
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
                       useGoogleFonts: false,

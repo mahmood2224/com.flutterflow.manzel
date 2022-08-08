@@ -106,8 +106,7 @@ class _KycWidgetState extends State<KycWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             fontSize: 22,
                                             fontWeight: FontWeight.w500,
                                             useGoogleFonts: false,
@@ -133,7 +132,7 @@ class _KycWidgetState extends State<KycWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 15,
                                           fontWeight: FontWeight.w300,
                                           useGoogleFonts: false,
@@ -175,8 +174,7 @@ class _KycWidgetState extends State<KycWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
@@ -199,8 +197,7 @@ class _KycWidgetState extends State<KycWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2
                                                   .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
+                                                    fontFamily: 'AvenirArabic',
                                                     color: Color(0xFF81D05C),
                                                     fontSize: 11,
                                                     fontWeight: FontWeight.w500,
@@ -239,8 +236,7 @@ class _KycWidgetState extends State<KycWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               useGoogleFonts: false,
@@ -268,8 +264,7 @@ class _KycWidgetState extends State<KycWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
                                             useGoogleFonts: false,
@@ -306,7 +301,7 @@ class _KycWidgetState extends State<KycWidget> {
                                     textStyle: FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: Colors.white,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w800,
@@ -343,7 +338,7 @@ class _KycWidgetState extends State<KycWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: Color(0xFF6B6B6B),
                                           fontSize: 17,
                                           fontWeight: FontWeight.w300,

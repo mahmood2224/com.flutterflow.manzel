@@ -87,7 +87,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                     ),
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           useGoogleFonts: false,
@@ -98,7 +98,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                       'i7hby2rh' /* " */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           color: Color(0xFF2971FB),
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -108,7 +108,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                   Text(
                     widget.cityName,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           color: Color(0xFF2971FB),
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -120,7 +120,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                       '6gnj1yz7' /* " */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           color: Color(0xFF2971FB),
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -135,7 +135,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                   Text(
                     widget.propertiesAvailable.toString(),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           color: Color(0xFF6B6B6B),
                           useGoogleFonts: false,
                         ),
@@ -145,7 +145,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                       'nukctvmg' /*  properties found */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           color: Color(0xFF6B6B6B),
                           useGoogleFonts: false,
                         ),
@@ -451,17 +451,15 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                 r'''$.attributes.property_name''',
                                               ).toString(),
                                               maxLines: 1,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        useGoogleFonts: false,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
+                                                  ),
                                             ),
                                             Text(
                                               FFLocalizations.of(context)
@@ -473,8 +471,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       context)
                                                   .bodyText1
                                                   .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
+                                                    fontFamily: 'AvenirArabic',
                                                     color: Color(0xFF474747),
                                                     fontSize: 11,
                                                     fontWeight: FontWeight.w500,
@@ -513,7 +510,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 13,
                                                           fontWeight:
                                                               FontWeight.w300,
@@ -531,7 +528,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 13,
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -548,7 +545,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 13,
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -632,8 +629,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       context)
                                                   .bodyText2
                                                   .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
+                                                    fontFamily: 'AvenirArabic',
                                                     color: Color(0xFF474747),
                                                     fontSize: 11,
                                                     fontWeight: FontWeight.w500,
@@ -688,7 +684,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           color:
                                                               Color(0xFF2971FB),
                                                           fontSize: 12,
@@ -714,7 +710,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       .bodyText2
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         color: Colors.black,
                                                         fontSize: 16,
                                                         fontWeight:
@@ -732,7 +728,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       .bodyText2
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         color: Colors.black,
                                                         fontSize: 16,
                                                         fontWeight:

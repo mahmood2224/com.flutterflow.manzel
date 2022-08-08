@@ -67,7 +67,7 @@ class _NoResultWidgetState extends State<NoResultWidget> {
                   widget.titleText,
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        fontFamily: 'AvenirArabic',
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                         useGoogleFonts: false,
