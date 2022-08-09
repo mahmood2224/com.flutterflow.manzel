@@ -285,7 +285,7 @@ class _ReservationBottomSheetWidgetState
                             ),
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
                                       useGoogleFonts: false,
@@ -307,7 +307,7 @@ class _ReservationBottomSheetWidgetState
               ),
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'AvenirArabic',
                     fontSize: 13,
                     useGoogleFonts: false,
                   ),
@@ -324,7 +324,7 @@ class _ReservationBottomSheetWidgetState
                     'njswqwdn' /* agree to our  */,
                   ),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        fontFamily: 'AvenirArabic',
                         fontSize: 13,
                         useGoogleFonts: false,
                       ),
@@ -350,7 +350,7 @@ class _ReservationBottomSheetWidgetState
                       '0gizrv8a' /* terms & conditions  */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           color: Color(0xFF2971FB),
                           fontSize: 13,
                           useGoogleFonts: false,
@@ -368,7 +368,7 @@ class _ReservationBottomSheetWidgetState
               ),
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'AvenirArabic',
                     fontSize: 18,
                     useGoogleFonts: false,
                   ),
@@ -384,7 +384,7 @@ class _ReservationBottomSheetWidgetState
                 Text(
                   functions.formatAmount(widget.reservationCost?.toString()),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        fontFamily: 'AvenirArabic',
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
                         useGoogleFonts: false,
@@ -395,7 +395,7 @@ class _ReservationBottomSheetWidgetState
                     'ovajaogv' /* .00 */,
                   ),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        fontFamily: 'AvenirArabic',
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
                         useGoogleFonts: false,
@@ -408,7 +408,7 @@ class _ReservationBottomSheetWidgetState
                       'wqlgaavg' /* SAR */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           useGoogleFonts: false,
@@ -424,7 +424,7 @@ class _ReservationBottomSheetWidgetState
             ),
             textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).bodyText1.override(
-                  fontFamily: 'Sofia Pro By Khuzaimah',
+                  fontFamily: 'AvenirArabic',
                   color: Color(0xFFDC5D5C),
                   fontSize: 13,
                   useGoogleFonts: false,
@@ -437,7 +437,7 @@ class _ReservationBottomSheetWidgetState
                 'p0n3wi8y' /* Select Payment Method */,
               ),
               style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'AvenirArabic',
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     useGoogleFonts: false,
@@ -469,7 +469,7 @@ class _ReservationBottomSheetWidgetState
                       optionHeight: 56,
                       textStyle:
                           FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -479,7 +479,7 @@ class _ReservationBottomSheetWidgetState
                       selectedTextStyle: FlutterFlowTheme.of(context)
                           .bodyText1
                           .override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
+                            fontFamily: 'AvenirArabic',
                             color: FlutterFlowTheme.of(context).primaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -606,7 +606,7 @@ class _ReservationBottomSheetWidgetState
                       color: FlutterFlowTheme.of(context).primaryColor,
                       textStyle:
                           FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color: Colors.white,
                                 fontSize: 18,
                                 useGoogleFonts: false,

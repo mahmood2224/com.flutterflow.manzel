@@ -104,7 +104,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                           'ch5dgyyj' /* Absher Verification */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               fontSize: 25,
                               fontWeight: FontWeight.w800,
                               useGoogleFonts: false,
@@ -125,7 +125,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 15,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -171,7 +171,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
@@ -222,7 +222,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
@@ -256,7 +256,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                           color: FlutterFlowTheme.of(context).primaryColor,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,

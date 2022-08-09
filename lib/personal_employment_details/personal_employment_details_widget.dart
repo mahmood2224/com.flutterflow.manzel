@@ -113,7 +113,7 @@ class _PersonalEmploymentDetailsWidgetState
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -135,7 +135,7 @@ class _PersonalEmploymentDetailsWidgetState
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 17,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -182,7 +182,7 @@ class _PersonalEmploymentDetailsWidgetState
                             ),
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       fontWeight: FontWeight.w300,
                                       useGoogleFonts: false,
                                     ),
@@ -228,7 +228,7 @@ class _PersonalEmploymentDetailsWidgetState
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
@@ -441,7 +441,7 @@ class _PersonalEmploymentDetailsWidgetState
                           'araxruq2' /* Does the Sakani loan cover you... */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
                               useGoogleFonts: false,
@@ -470,7 +470,7 @@ class _PersonalEmploymentDetailsWidgetState
                             color: Colors.white,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500,
                                       useGoogleFonts: false,
@@ -496,7 +496,7 @@ class _PersonalEmploymentDetailsWidgetState
                           color: Colors.white,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
@@ -530,7 +530,7 @@ class _PersonalEmploymentDetailsWidgetState
                           color: FlutterFlowTheme.of(context).primaryColor,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,

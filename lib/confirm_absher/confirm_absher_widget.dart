@@ -119,7 +119,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                           'jbeldlu4' /* OTP Absher */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               fontSize: 25,
                               fontWeight: FontWeight.w800,
                               useGoogleFonts: false,
@@ -140,7 +140,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 16,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -160,7 +160,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                           currentPhoneNumber,
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: false,
@@ -231,7 +231,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
@@ -260,7 +260,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                           color: FlutterFlowTheme.of(context).primaryColor,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,

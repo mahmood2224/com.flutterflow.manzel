@@ -72,7 +72,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 21,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: false,
@@ -95,8 +95,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText2
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             color: Color(0xFF6B6B6B),
                                             fontSize: 14,
                                             fontWeight: FontWeight.w300,
@@ -110,8 +109,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             useGoogleFonts: false,
@@ -122,8 +120,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText2
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             fontSize: 14,
                                             fontWeight: FontWeight.w300,
                                             useGoogleFonts: false,
@@ -165,7 +162,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontFamily: 'AvenirArabic',
                                         color: Colors.white,
                                         fontWeight: FontWeight.w800,
                                         useGoogleFonts: false,

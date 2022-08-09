@@ -174,7 +174,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                         .subtitle1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           color: Colors.black,
                                                           fontSize: 14,
                                                           fontWeight:
@@ -201,7 +201,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .secondaryText,

@@ -167,8 +167,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             color: Colors.white,
                                             fontSize: 12,
                                             fontWeight: FontWeight.normal,
@@ -336,7 +335,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           'fei6w05f' /* Sort By */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText2.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               color: Colors.black,
                               fontWeight: FontWeight.w500,
                               useGoogleFonts: false,
@@ -365,7 +364,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             textAlign: TextAlign.center,
                             style:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Color(0xFF2971FB),
                                       fontSize: 13,
                                       fontWeight: FontWeight.bold,
@@ -677,8 +676,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
@@ -692,8 +690,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 color: Color(0xFF474747),
                                                 fontSize: 11,
                                                 fontWeight: FontWeight.w500,
@@ -732,7 +729,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 13,
                                                           fontWeight:
                                                               FontWeight.w300,
@@ -745,34 +742,30 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   .getText(
                                                 'efcxmcgl' /* ,  */,
                                               ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        useGoogleFonts: false,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w300,
+                                                    useGoogleFonts: false,
+                                                  ),
                                             ),
                                             Text(
                                               getJsonField(
                                                 propertiesItem,
                                                 r'''$..property_district''',
                                               ).toString(),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        useGoogleFonts: false,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w300,
+                                                    useGoogleFonts: false,
+                                                  ),
                                             ),
                                           ],
                                         ),
@@ -843,8 +836,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText2
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 color: Color(0xFF474747),
                                                 fontSize: 11,
                                                 fontWeight: FontWeight.w500,
@@ -897,7 +889,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           color:
                                                               Color(0xFF2971FB),
                                                           fontSize: 12,
@@ -918,36 +910,32 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 propertiesItem,
                                                 r'''$..property_price''',
                                               ).toString()),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        useGoogleFonts: false,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                    useGoogleFonts: false,
+                                                  ),
                                             ),
                                             Text(
                                               FFLocalizations.of(context)
                                                   .getText(
                                                 'dhoik8q5' /*  SAR */,
                                               ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        useGoogleFonts: false,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    color: Colors.black,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                    useGoogleFonts: false,
+                                                  ),
                                             ),
                                           ],
                                         ),

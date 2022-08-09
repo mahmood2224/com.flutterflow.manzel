@@ -78,7 +78,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               textAlign: TextAlign.center,
               maxLines: 1,
               style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'AvenirArabic',
                     fontSize: 17,
                     fontWeight: FontWeight.w800,
                     useGoogleFonts: false,
@@ -91,7 +91,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             'hy8565b9' /* Filter */,
           ),
           style: FlutterFlowTheme.of(context).bodyText1.override(
-                fontFamily: 'Sofia Pro By Khuzaimah',
+                fontFamily: 'AvenirArabic',
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
                 useGoogleFonts: false,
@@ -161,7 +161,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             ),
                             style:
                                 FlutterFlowTheme.of(context).subtitle1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -218,7 +218,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     textStyle: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
@@ -256,7 +256,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             ),
                             style:
                                 FlutterFlowTheme.of(context).subtitle1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -307,8 +307,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             color: Colors.white,
                                             fontSize: 15,
                                             fontWeight: FontWeight.normal,
@@ -323,8 +322,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500,
                                             useGoogleFonts: false,
@@ -360,7 +358,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .subtitle1
                                   .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Colors.black,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -385,7 +383,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                           fontSize: 16,
@@ -400,7 +398,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                           fontSize: 16,
@@ -420,7 +418,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                           fontSize: 16,
@@ -435,7 +433,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                           fontSize: 16,
@@ -471,7 +469,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontWeight: FontWeight.normal,
                                           useGoogleFonts: false,
                                         ),
@@ -505,7 +503,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontWeight: FontWeight.normal,
                                           useGoogleFonts: false,
                                         ),
@@ -550,7 +548,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             ),
                             style:
                                 FlutterFlowTheme.of(context).subtitle1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -615,8 +613,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             color: Colors.white,
                                             fontWeight: FontWeight.normal,
                                             useGoogleFonts: false,
@@ -630,8 +627,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             fontSize: 15,
                                             fontWeight: FontWeight.w500,
                                             useGoogleFonts: false,
@@ -712,7 +708,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontFamily: 'AvenirArabic',
                                         color: Colors.white,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600,
@@ -734,7 +730,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                           color: Color(0xFF2971FB),
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontWeight: FontWeight.w800,
                                     useGoogleFonts: false,
                                   ),

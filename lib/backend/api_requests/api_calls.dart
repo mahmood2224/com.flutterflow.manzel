@@ -234,7 +234,7 @@ class InitiateOrderCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'initiateOrder',
-      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/addOrder',
+      apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/addOrder',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -290,7 +290,7 @@ class StartInstanceCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Start Instance',
       apiUrl:
-          'https://us-central1-manzel-prod.cloudfunctions.net/booking-process-best-case-scenario-test',
+          'https://asia-south1-manzel-prod.cloudfunctions.net/booking-process-best-case-scenario-test',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -437,7 +437,7 @@ class AddOrderCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addOrder',
-      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/addOrder',
+      apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/addOrder',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -475,7 +475,7 @@ class AddTransactionCall {
     return ApiManager.instance.makeApiCall(
       callName: 'addTransaction',
       apiUrl:
-          'https://us-central1-manzel-prod.cloudfunctions.net/addTransaction',
+          'https://asia-south1-manzel-prod.cloudfunctions.net/addTransaction',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -509,7 +509,7 @@ class GetOffersCall {
     return ApiManager.instance.makeApiCall(
       callName: 'getOffers',
       apiUrl:
-          'https://us-central1-manzel-prod.cloudfunctions.net/getActiveOffers',
+          'https://asia-south1-manzel-prod.cloudfunctions.net/getActiveOffers',
       callType: ApiCallType.POST,
       headers: {},
       params: {
@@ -576,7 +576,7 @@ class AcceptOfferCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'acceptOffer',
-      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/acceptOffer',
+      apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/acceptOffer',
       callType: ApiCallType.POST,
       headers: {},
       params: {
@@ -601,7 +601,7 @@ class ArchivedOffersCall {
     return ApiManager.instance.makeApiCall(
       callName: 'archivedOffers',
       apiUrl:
-          'https://us-central1-manzel-prod.cloudfunctions.net/getArchivedOffers',
+          'https://asia-south1-manzel-prod.cloudfunctions.net/getArchivedOffers',
       callType: ApiCallType.POST,
       headers: {},
       params: {
@@ -630,7 +630,7 @@ class BookedPropertiesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'bookedProperties',
       apiUrl:
-          'https://us-central1-manzel-prod.cloudfunctions.net/getBookedProperties',
+          'https://asia-south1-manzel-prod.cloudfunctions.net/getBookedProperties',
       callType: ApiCallType.POST,
       headers: {},
       params: {
@@ -661,7 +661,7 @@ class OrderDetailsCall {
     return ApiManager.instance.makeApiCall(
       callName: 'orderDetails',
       apiUrl:
-          'https://us-central1-manzel-prod.cloudfunctions.net/getOrderDetail',
+          'https://asia-south1-manzel-prod.cloudfunctions.net/getOrderDetail',
       callType: ApiCallType.POST,
       headers: {},
       params: {
@@ -687,7 +687,7 @@ class BookmarkPropertyCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'bookmarkProperty',
-      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/bookmark',
+      apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/bookmark',
       callType: ApiCallType.POST,
       headers: {},
       params: {
@@ -712,7 +712,7 @@ class GetBookMarkedPropertiesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'getBookMarkedProperties',
       apiUrl:
-          'https://us-central1-manzel-prod.cloudfunctions.net/getBookMarkedProperties',
+          'https://asia-south1-manzel-prod.cloudfunctions.net/getBookMarkedProperties',
       callType: ApiCallType.POST,
       headers: {},
       params: {
@@ -742,7 +742,7 @@ class CancelOrderCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'cancelOrder',
-      apiUrl: 'https://us-central1-manzel-prod.cloudfunctions.net/cancelOrder',
+      apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/cancelOrder',
       callType: ApiCallType.POST,
       headers: {},
       params: {

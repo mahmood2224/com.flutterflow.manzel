@@ -96,51 +96,51 @@ class ThemeTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Sofia Pro By Khuzaimah';
+  String get title1Family => 'AvenirArabic';
   TextStyle get title1 => TextStyle(
-        fontFamily: 'Sofia Pro By Khuzaimah',
+        fontFamily: 'AvenirArabic',
         color: Colors.black,
         fontWeight: FontWeight.w600,
         fontSize: 24,
       );
-  String get title2Family => 'Sofia Pro By Khuzaimah';
+  String get title2Family => 'AvenirArabic';
   TextStyle get title2 => TextStyle(
-        fontFamily: 'Sofia Pro By Khuzaimah',
+        fontFamily: 'AvenirArabic',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 22,
       );
-  String get title3Family => 'Sofia Pro By Khuzaimah';
+  String get title3Family => 'AvenirArabic';
   TextStyle get title3 => TextStyle(
-        fontFamily: 'Sofia Pro By Khuzaimah',
+        fontFamily: 'AvenirArabic',
         color: Colors.white,
         fontWeight: FontWeight.w600,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Sofia Pro By Khuzaimah';
+  String get subtitle1Family => 'AvenirArabic';
   TextStyle get subtitle1 => TextStyle(
-        fontFamily: 'Sofia Pro By Khuzaimah',
+        fontFamily: 'AvenirArabic',
         color: Colors.white,
         fontWeight: FontWeight.w600,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Sofia Pro By Khuzaimah';
+  String get subtitle2Family => 'AvenirArabic';
   TextStyle get subtitle2 => TextStyle(
-        fontFamily: 'Sofia Pro By Khuzaimah',
+        fontFamily: 'AvenirArabic',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Sofia Pro By Khuzaimah';
+  String get bodyText1Family => 'AvenirArabic';
   TextStyle get bodyText1 => TextStyle(
-        fontFamily: 'Sofia Pro By Khuzaimah',
+        fontFamily: 'AvenirArabic',
         color: Colors.black,
         fontWeight: FontWeight.w300,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Sofia Pro By Khuzaimah';
+  String get bodyText2Family => 'AvenirArabic';
   TextStyle get bodyText2 => TextStyle(
-        fontFamily: 'Sofia Pro By Khuzaimah',
+        fontFamily: 'AvenirArabic',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14,

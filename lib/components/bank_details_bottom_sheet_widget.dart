@@ -96,7 +96,7 @@ class _BankDetailsBottomSheetWidgetState
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: false,
@@ -183,7 +183,7 @@ class _BankDetailsBottomSheetWidgetState
               height: 45,
               color: FlutterFlowTheme.of(context).primaryColor,
               textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'AvenirArabic',
                     color: Colors.white,
                     useGoogleFonts: false,
                   ),

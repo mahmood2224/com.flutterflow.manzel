@@ -83,7 +83,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                     'trw95gom' /* Booking Ref. :  */,
                   ),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        fontFamily: 'AvenirArabic',
                         color: FlutterFlowTheme.of(context).white,
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -93,7 +93,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                 Text(
                   widget.orderId,
                   style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        fontFamily: 'AvenirArabic',
                         color: FlutterFlowTheme.of(context).white,
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -165,7 +165,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 18,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -229,7 +229,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           useGoogleFonts: false,
@@ -298,7 +298,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           useGoogleFonts: false,
@@ -382,7 +382,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 16,
                                                           fontWeight:
                                                               FontWeight.w500,
@@ -452,7 +452,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           useGoogleFonts: false,
@@ -513,7 +513,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           useGoogleFonts: false,
@@ -574,7 +574,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           useGoogleFonts: false,
@@ -660,8 +660,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
                                             useGoogleFonts: false,
@@ -692,7 +691,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 18,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -745,7 +744,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: false,
@@ -774,7 +773,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
                                           useGoogleFonts: false,
@@ -791,7 +790,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
                                           useGoogleFonts: false,
@@ -813,7 +812,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
                                           useGoogleFonts: false,
@@ -954,8 +953,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
+                                                  fontFamily: 'AvenirArabic',
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryColor,
@@ -1012,7 +1010,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .subtitle2
                                     .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Color(0xFF2971FB),
                                       fontWeight: FontWeight.w800,
                                       useGoogleFonts: false,
@@ -1046,7 +1044,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             ),
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       fontSize: 18,
                                       fontWeight: FontWeight.w300,
                                       useGoogleFonts: false,
@@ -1084,8 +1082,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               color: Color(0xFF6B6B6B),
                                               fontWeight: FontWeight.w300,
                                               useGoogleFonts: false,
@@ -1104,8 +1101,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
@@ -1125,8 +1121,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
+                                                  fontFamily: 'AvenirArabic',
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w500,
                                                   useGoogleFonts: false,
@@ -1154,8 +1149,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             color: Color(0xFF6B6B6B),
                                             fontWeight: FontWeight.w300,
                                             useGoogleFonts: false,
@@ -1174,7 +1168,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 15,
                                           fontWeight: FontWeight.w500,
                                           useGoogleFonts: false,
@@ -1212,8 +1206,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               color: Color(0xFF6B6B6B),
                                               fontWeight: FontWeight.w300,
                                               useGoogleFonts: false,
@@ -1239,8 +1232,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
@@ -1253,8 +1245,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
@@ -1281,8 +1272,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             color: Color(0xFF6B6B6B),
                                             fontWeight: FontWeight.w300,
                                             useGoogleFonts: false,
@@ -1302,7 +1292,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 15,
                                           fontWeight: FontWeight.w500,
                                           useGoogleFonts: false,
@@ -1340,7 +1330,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .subtitle2
                                 .override(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
+                                  fontFamily: 'AvenirArabic',
                                   color:
                                       FlutterFlowTheme.of(context).primaryColor,
                                   fontSize: 15,

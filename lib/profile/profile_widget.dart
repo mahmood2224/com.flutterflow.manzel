@@ -432,7 +432,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           'qhxlmijh' /* App bulid 2.1.1 (231) */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText2.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               fontWeight: FontWeight.w300,
                               useGoogleFonts: false,
                             ),

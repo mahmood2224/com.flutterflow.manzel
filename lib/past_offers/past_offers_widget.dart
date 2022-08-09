@@ -78,7 +78,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: false,
@@ -274,7 +274,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
+                                                                          'AvenirArabic',
                                                                       fontSize:
                                                                           12,
                                                                       useGoogleFonts:
@@ -295,7 +295,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
+                                                                          'AvenirArabic',
                                                                       fontSize:
                                                                           12,
                                                                       useGoogleFonts:
@@ -318,7 +318,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                 .bodyText1
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
+                                                                      'AvenirArabic',
                                                                   fontSize: 20,
                                                                   fontWeight:
                                                                       FontWeight
@@ -345,7 +345,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
+                                                                          'AvenirArabic',
                                                                       color: Color(
                                                                           0xFF8C8C8C),
                                                                       fontSize:
@@ -379,7 +379,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
+                                                                          'AvenirArabic',
                                                                       color: Color(
                                                                           0xFF8C8C8C),
                                                                       fontSize:
@@ -453,7 +453,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                         .bodyText1
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
+                                                                              'AvenirArabic',
                                                                           color:
                                                                               FlutterFlowTheme.of(context).white,
                                                                           fontSize:
@@ -521,7 +521,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                         .bodyText1
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
+                                                                              'AvenirArabic',
                                                                           color:
                                                                               FlutterFlowTheme.of(context).white,
                                                                           fontSize:
@@ -589,7 +589,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                         .bodyText1
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
+                                                                              'AvenirArabic',
                                                                           color:
                                                                               FlutterFlowTheme.of(context).white,
                                                                           fontSize:
@@ -649,7 +649,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .white,
                                                                         fontSize:
@@ -703,7 +703,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                               .bodyText1
                                                               .override(
                                                                 fontFamily:
-                                                                    'Sofia Pro By Khuzaimah',
+                                                                    'AvenirArabic',
                                                                 color: Color(
                                                                     0xFF6B6B6B),
                                                                 fontWeight:
@@ -727,7 +727,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                               .bodyText1
                                                               .override(
                                                                 fontFamily:
-                                                                    'Sofia Pro By Khuzaimah',
+                                                                    'AvenirArabic',
                                                                 fontSize: 16,
                                                                 fontWeight:
                                                                     FontWeight
@@ -763,7 +763,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                 .bodyText1
                                                                 .override(
                                                                   fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
+                                                                      'AvenirArabic',
                                                                   color: Color(
                                                                       0xFF6B6B6B),
                                                                   fontWeight:
@@ -792,7 +792,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
+                                                                          'AvenirArabic',
                                                                       fontSize:
                                                                           16,
                                                                       fontWeight:
@@ -814,7 +814,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         fontSize:
                                                                             16,
                                                                         fontWeight:
@@ -868,7 +868,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     color: Color(
                                                                         0xFF6B6B6B),
                                                                     fontWeight:
@@ -905,7 +905,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         fontSize:
                                                                             20,
                                                                         fontWeight:
@@ -925,7 +925,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         fontSize:
                                                                             19,
                                                                         fontWeight:
@@ -952,7 +952,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                         .bodyText1
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
+                                                                              'AvenirArabic',
                                                                           fontSize:
                                                                               10,
                                                                           fontWeight:
@@ -992,7 +992,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
+                                                                          'AvenirArabic',
                                                                       color: Color(
                                                                           0xFF6B6B6B),
                                                                       fontWeight:
@@ -1024,7 +1024,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                         .bodyText1
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
+                                                                              'AvenirArabic',
                                                                           fontSize:
                                                                               20,
                                                                           fontWeight:
@@ -1051,7 +1051,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                           .bodyText1
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Sofia Pro By Khuzaimah',
+                                                                                'AvenirArabic',
                                                                             fontSize:
                                                                                 10,
                                                                             fontWeight:
@@ -1099,7 +1099,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                   .bodyText1
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Sofia Pro By Khuzaimah',
+                                                                        'AvenirArabic',
                                                                     color: Color(
                                                                         0xFF6B6B6B),
                                                                     fontWeight:
@@ -1136,7 +1136,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         fontSize:
                                                                             19,
                                                                         fontWeight:
@@ -1156,7 +1156,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                       .bodyText1
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Sofia Pro By Khuzaimah',
+                                                                            'AvenirArabic',
                                                                         fontSize:
                                                                             19,
                                                                         fontWeight:
@@ -1183,7 +1183,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                         .bodyText1
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Sofia Pro By Khuzaimah',
+                                                                              'AvenirArabic',
                                                                           fontSize:
                                                                               10,
                                                                           fontWeight:
@@ -1223,7 +1223,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
+                                                                          'AvenirArabic',
                                                                       color: Color(
                                                                           0xFF6B6B6B),
                                                                       fontWeight:
@@ -1247,7 +1247,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                     .bodyText1
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Sofia Pro By Khuzaimah',
+                                                                          'AvenirArabic',
                                                                       fontSize:
                                                                           16,
                                                                       fontWeight:

@@ -149,8 +149,7 @@ class _ReservationConfirmationWidgetState
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,
                                                 useGoogleFonts: false,
@@ -180,8 +179,7 @@ class _ReservationConfirmationWidgetState
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 13,
                                                 fontWeight: FontWeight.w300,
                                                 useGoogleFonts: false,
@@ -208,8 +206,7 @@ class _ReservationConfirmationWidgetState
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w300,
                                                 useGoogleFonts: false,
@@ -237,8 +234,7 @@ class _ReservationConfirmationWidgetState
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 40,
                                               fontWeight: FontWeight.bold,
                                               useGoogleFonts: false,
@@ -252,8 +248,7 @@ class _ReservationConfirmationWidgetState
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 40,
                                               fontWeight: FontWeight.bold,
                                               useGoogleFonts: false,
@@ -276,8 +271,7 @@ class _ReservationConfirmationWidgetState
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               color: Color(0xFFDC5D5C),
                                               fontWeight: FontWeight.w300,
                                               useGoogleFonts: false,
@@ -299,8 +293,7 @@ class _ReservationConfirmationWidgetState
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               useGoogleFonts: false,
@@ -332,8 +325,7 @@ class _ReservationConfirmationWidgetState
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               color: Colors.black,
                                               useGoogleFonts: false,
                                             ),
@@ -341,8 +333,7 @@ class _ReservationConfirmationWidgetState
                                                 context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
@@ -447,18 +438,16 @@ class _ReservationConfirmationWidgetState
                                             height: 52,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily:
-                                                          'Sofia Pro By Khuzaimah',
-                                                      color: Colors.white,
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      useGoogleFonts: false,
-                                                    ),
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .subtitle2
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  color: Colors.white,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w800,
+                                                  useGoogleFonts: false,
+                                                ),
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1,

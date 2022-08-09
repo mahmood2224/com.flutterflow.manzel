@@ -82,7 +82,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                     ),
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           useGoogleFonts: false,
@@ -130,7 +130,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                           textPropertiesResponse.jsonBody,
                         )),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               color: Color(0xFF6B6B6B),
                               useGoogleFonts: false,
                             ),
@@ -142,7 +142,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                       'wpcx1tpl' /*  properties found */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           color: Color(0xFF6B6B6B),
                           useGoogleFonts: false,
                         ),
@@ -203,7 +203,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontFamily: 'AvenirArabic',
                                         color: Colors.white,
                                         fontSize: 15,
                                         fontWeight: FontWeight.normal,
@@ -219,7 +219,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontFamily: 'AvenirArabic',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryBtnText,
                                         fontSize: 15,
@@ -528,17 +528,15 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                 r'''$.attributes.property_name''',
                                               ).toString(),
                                               maxLines: 1,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        useGoogleFonts: false,
-                                                      ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
+                                                  ),
                                             ),
                                             Text(
                                               FFLocalizations.of(context)
@@ -550,8 +548,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                       context)
                                                   .bodyText1
                                                   .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
+                                                    fontFamily: 'AvenirArabic',
                                                     color: Color(0xFF474747),
                                                     fontSize: 11,
                                                     fontWeight: FontWeight.w500,
@@ -590,7 +587,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           fontSize: 13,
                                                           fontWeight:
                                                               FontWeight.w300,
@@ -608,7 +605,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 13,
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -625,7 +622,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         fontSize: 13,
                                                         fontWeight:
                                                             FontWeight.w300,
@@ -709,8 +706,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                       context)
                                                   .bodyText2
                                                   .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
+                                                    fontFamily: 'AvenirArabic',
                                                     color: Color(0xFF474747),
                                                     fontSize: 11,
                                                     fontWeight: FontWeight.w500,
@@ -765,7 +761,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'AvenirArabic',
                                                           color:
                                                               Color(0xFF2971FB),
                                                           fontSize: 12,
@@ -791,7 +787,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                       .bodyText2
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         color: Colors.black,
                                                         fontSize: 16,
                                                         fontWeight:
@@ -809,7 +805,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                       .bodyText2
                                                       .override(
                                                         fontFamily:
-                                                            'Sofia Pro By Khuzaimah',
+                                                            'AvenirArabic',
                                                         color: Colors.black,
                                                         fontSize: 16,
                                                         fontWeight:
