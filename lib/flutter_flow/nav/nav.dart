@@ -268,7 +268,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Chat',
               path: 'chat',
-              builder: (context, params) => ChatWidget(),
+              builder: (context, params) => ChatWidget(
+                bankJson: params.getParam('bankJson', ParamType.JSON),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

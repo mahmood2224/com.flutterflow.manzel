@@ -1494,8 +1494,16 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         'OFFERS_PAGE_Container_4zrbybz6_ON_TAP');
                                                                     logFirebaseEvent(
                                                                         'Container_Navigate-To');
-                                                                    context.pushNamed(
-                                                                        'Chat');
+                                                                    context
+                                                                        .pushNamed(
+                                                                      'Chat',
+                                                                      queryParams:
+                                                                          {
+                                                                        'bankJson': serializeParam(
+                                                                            activeOffersItem,
+                                                                            ParamType.JSON),
+                                                                      }.withoutNulls,
+                                                                    );
                                                                   },
                                                                   child:
                                                                       Container(

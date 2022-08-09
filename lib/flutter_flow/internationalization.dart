@@ -1517,10 +1517,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Chat
   {
-    '3ai5a6zy': {
-      'en': 'Chat',
-      'ar': '',
-    },
     '9onf7xjs': {
       'en': 'Home',
       'ar': '',
