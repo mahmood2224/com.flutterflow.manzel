@@ -570,5 +570,6 @@ bool pastOfferColumnVisibility(
       return false;
     }
   }
+  return true;
   // Add your function code here!
 }

@@ -1500,7 +1500,10 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                       queryParams:
                                                                           {
                                                                         'bankJson': serializeParam(
-                                                                            activeOffersItem,
+                                                                            getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$''',
+                                                                            ),
                                                                             ParamType.JSON),
                                                                       }.withoutNulls,
                                                                     );

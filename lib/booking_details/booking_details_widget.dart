@@ -976,7 +976,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       getJsonField(
                                         bookingDetailsOrderDetailsResponse
                                             .jsonBody,
-                                        r'''$.result.property_data.data.attributes.city.data.attributes.city_name''',
+                                        r'''$.result.property_data.property_city''',
                                       ).toString(),
                                       'null',
                                     ),
@@ -1015,7 +1015,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       getJsonField(
                                         bookingDetailsOrderDetailsResponse
                                             .jsonBody,
-                                        r'''$.result.property_data.data.attributes.property_district''',
+                                        r'''$.result.property_data.property_district''',
                                       ).toString(),
                                       'null',
                                     ),
@@ -1065,7 +1065,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 getJsonField(
                                                   bookingDetailsOrderDetailsResponse
                                                       .jsonBody,
-                                                  r'''$.result.property_data.data.attributes.property_bedrooms''',
+                                                  r'''$.result.property_data.property_bedrooms''',
                                                 ).toString(),
                                                 '0',
                                               ),
@@ -1105,7 +1105,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 getJsonField(
                                                   bookingDetailsOrderDetailsResponse
                                                       .jsonBody,
-                                                  r'''$.result.property_data.data.attributes.property_bathrooms''',
+                                                  r'''$.result.property_data.property_bathrooms''',
                                                 ).toString(),
                                                 '0',
                                               ),
@@ -1140,7 +1140,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                               getJsonField(
                                                 bookingDetailsOrderDetailsResponse
                                                     .jsonBody,
-                                                r'''$.result.property_data.data.attributes.property_size''',
+                                                r'''$.result.property_data.property_size''',
                                               ).toString(),
                                               '0',
                                             ),
