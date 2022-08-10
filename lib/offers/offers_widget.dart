@@ -1033,7 +1033,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           String>(
                                                                         getJsonField(
                                                                           activeOffersItem,
-                                                                          r'''$.id''',
+                                                                          r'''$.order_id''',
                                                                         ).toString(),
                                                                         '0',
                                                                       ),

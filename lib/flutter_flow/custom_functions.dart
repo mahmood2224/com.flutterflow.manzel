@@ -549,3 +549,26 @@ bool chatButtonVisibility(String status) {
     return false;
   }
 }
+
+bool pastOfferColumnVisibility(
+  String status,
+  String installmentPeriod,
+  String installmentRange,
+  String agentName,
+  String totalPrice,
+) {
+  if (status == "disqualified") {
+    return false;
+  }
+  if (status == "cancelled") {
+    if (installmentPeriod != null ||
+        installmentRange != null ||
+        agentName != null ||
+        totalPrice != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  // Add your function code here!
+}
