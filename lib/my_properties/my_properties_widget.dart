@@ -337,7 +337,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               ).toString(),
                                                                               'waiting_offer_acceptance'))
                                                                             Container(
-                                                                              width: 192,
+                                                                              width: 199,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
                                                                                 color: Color(0xFFF0A637),
@@ -1141,7 +1141,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             String>(
                                                                           getJsonField(
                                                                             bookmarkedPropertiesItem,
-                                                                            r'''$.property_data.data.attributes.property_name''',
+                                                                            r'''$.property_data.property_name''',
                                                                           ).toString(),
                                                                           'null',
                                                                         ),
@@ -1186,7 +1186,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             String>(
                                                                           getJsonField(
                                                                             bookmarkedPropertiesItem,
-                                                                            r'''$.property_data.data.attributes.city.data.attributes.city_name''',
+                                                                            r'''$.property_data.property_city''',
                                                                           ).toString(),
                                                                           'null',
                                                                         ),
@@ -1218,7 +1218,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             String>(
                                                                           getJsonField(
                                                                             bookmarkedPropertiesItem,
-                                                                            r'''$.property_data.data.attributes.property_district''',
+                                                                            r'''$.property_data.property_district''',
                                                                           ).toString(),
                                                                           'null',
                                                                         ),
@@ -1273,7 +1273,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               valueOrDefault<String>(
                                                                                 getJsonField(
                                                                                   bookmarkedPropertiesItem,
-                                                                                  r'''$.property_data.data.attributes.property_bedrooms''',
+                                                                                  r'''$.property_data.property_bedrooms''',
                                                                                 ).toString(),
                                                                                 '0',
                                                                               ),
@@ -1310,7 +1310,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               valueOrDefault<String>(
                                                                                 getJsonField(
                                                                                   bookmarkedPropertiesItem,
-                                                                                  r'''$.property_data.data.attributes.property_bathrooms''',
+                                                                                  r'''$.property_data.property_bathrooms''',
                                                                                 ).toString(),
                                                                                 '0',
                                                                               ),
@@ -1340,7 +1340,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             valueOrDefault<String>(
                                                                               getJsonField(
                                                                                 bookmarkedPropertiesItem,
-                                                                                r'''$.property_data.data.attributes.property_size''',
+                                                                                r'''$.property_data.property_size''',
                                                                               ).toString(),
                                                                               '0',
                                                                             ),
