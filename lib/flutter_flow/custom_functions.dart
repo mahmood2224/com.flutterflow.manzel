@@ -573,3 +573,8 @@ bool pastOfferColumnVisibility(
   return true;
   // Add your function code here!
 }
+
+String bookingScreenCountOffers(List<dynamic> bankIds) {
+  return bankIds.length.toString();
+  // Add your function code here!
+}
