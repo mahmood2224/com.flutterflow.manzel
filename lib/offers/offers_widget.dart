@@ -8,7 +8,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,38 +31,6 @@ class _OffersWidgetState extends State<OffersWidget> {
   @override
   void initState() {
     super.initState();
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('OFFERS_PAGE_Offers_ON_PAGE_LOAD');
-      if (loggedIn) {
-        if (valueOrDefault(currentUserDocument?.status, '') == 'Active') {
-          return;
-        }
-
-        logFirebaseEvent('Offers_Alert-Dialog');
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Please get your account activated'),
-              content: Text(
-                  'You are not an active user please connect admin for further details on ok logout user '),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
-        logFirebaseEvent('Offers_Auth');
-        GoRouter.of(context).prepareAuthEvent();
-        await signOut();
-      }
-      context.goNamedAuth('OnboardingView', mounted);
-    });
-
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Offers'});
   }
 
@@ -101,10 +68,15 @@ class _OffersWidgetState extends State<OffersWidget> {
                     );
                   },
                 );
+                logFirebaseEvent('Column_Wait-Delay');
+                await Future.delayed(const Duration(milliseconds: 5000));
                 logFirebaseEvent('Column_Auth');
                 GoRouter.of(context).prepareAuthEvent();
                 await signOut();
+              } else {
+                return;
               }
+
               context.goNamedAuth('OnboardingView', mounted);
             },
             child: Column(
@@ -252,8 +224,10 @@ class _OffersWidgetState extends State<OffersWidget> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
                           child: FFButtonWidget(
-                            onPressed: () {
-                              print('Button pressed ...');
+                            onPressed: () async {
+                              logFirebaseEvent('OFFERS_PAGE_LOGIN_BTN_ON_TAP');
+                              logFirebaseEvent('Button_Navigate-To');
+                              context.pushNamed('Login');
                             },
                             text: FFLocalizations.of(context).getText(
                               '1cb5at0r' /* Login */,
@@ -1667,6 +1641,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             'null',
                                                                           ),
                                                                         );
+                                                                        logFirebaseEvent(
+                                                                            'Row_Wait-Delay');
+                                                                        await Future.delayed(const Duration(
+                                                                            milliseconds:
+                                                                                2000));
                                                                         if ((acceptOfferResponse?.statusCode ??
                                                                                 200) ==
                                                                             200) {

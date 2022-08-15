@@ -187,19 +187,20 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
-                                suffixIcon: phoneNumberController
-                                        .text.isNotEmpty
-                                    ? InkWell(
-                                        onTap: () => setState(
-                                          () => phoneNumberController?.clear(),
-                                        ),
-                                        child: Icon(
-                                          Icons.clear,
-                                          color: Color(0xFF757575),
-                                          size: 22,
-                                        ),
-                                      )
-                                    : null,
+                                suffixIcon:
+                                    phoneNumberController.text.isNotEmpty
+                                        ? InkWell(
+                                            onTap: () async {
+                                              phoneNumberController?.clear();
+                                              setState(() {});
+                                            },
+                                            child: Icon(
+                                              Icons.clear,
+                                              color: Color(0xFF757575),
+                                              size: 22,
+                                            ),
+                                          )
+                                        : null,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1

@@ -398,6 +398,16 @@ bool orderProcessStatus(
       // do something
       break;
     case "collect_offers":
+      if ((processStage == "reserved") && setType == "checked") {
+        return true;
+      } else if ((processStage != "reserved") && setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      // do something else
+      break;
+    case "waiting_offer_acceptance":
       if ((processStage == "reserved" || processStage == "collect_offers") &&
           setType == "checked") {
         return true;
@@ -408,9 +418,8 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      // do something else
       break;
-    case "waiting_offer_acceptance":
+    case "accepted":
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
               processStage == "waiting_offer_acceptance") &&
@@ -424,36 +433,17 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      break;
-    case "accepted":
-      if ((processStage == "reserved" ||
-              processStage == "collect_offers" ||
-              processStage == "waiting_offer_acceptance" ||
-              processStage == "accepted") &&
-          setType == "checked") {
-        return true;
-      } else if ((processStage != "reserved" &&
-              processStage != "collect_offers" &&
-              processStage != "waiting_offer_acceptance" &&
-              processStage != "accepted") &&
-          setType == "unchecked") {
-        return true;
-      } else {
-        return false;
-      }
       // do something else
       break;
     case "offer_accepted":
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
-              processStage == "waiting_offer_acceptance" ||
-              processStage == "accepted") &&
+              processStage == "waiting_offer_acceptance") &&
           setType == "checked") {
         return true;
       } else if ((processStage != "reserved" &&
               processStage != "collect_offers" &&
-              processStage != "waiting_offer_acceptance" &&
-              processStage != "accepted") &&
+              processStage != "waiting_offer_acceptance") &&
           setType == "unchecked") {
         return true;
       } else {
@@ -465,6 +455,24 @@ bool orderProcessStatus(
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
               processStage == "waiting_offer_acceptance" ||
+              processStage == "accepted") &&
+          setType == "checked") {
+        return true;
+      } else if ((processStage != "reserved" &&
+              processStage != "collect_offers" &&
+              processStage != "waiting_offer_acceptance" &&
+              processStage != "accepted") &&
+          setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      // do something else
+      break;
+    case "completed":
+      if ((processStage == "reserved" ||
+              processStage == "collect_offers" ||
+              processStage == "waiting_offer_acceptance" ||
               processStage == "accepted" ||
               processStage == "ownership_transferred") &&
           setType == "checked") {
@@ -472,8 +480,7 @@ bool orderProcessStatus(
       } else if ((processStage != "reserved" &&
               processStage != "collect_offers" &&
               processStage != "waiting_offer_acceptance" &&
-              processStage != "accepted" &&
-              processStage != "ownership_transferred") &&
+              processStage != "accepted") &&
           setType == "unchecked") {
         return true;
       } else {
