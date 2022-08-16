@@ -511,6 +511,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Accept offer',
       'ar': 'اقبل العرض',
     },
+    '9tst42qk': {
+      'en': 'Accept offer',
+      'ar': '',
+    },
     '5gvwuuh2': {
       'en': 'Completed or canceled offers',
       'ar': 'العروض المكتملة أو الملغاة',
