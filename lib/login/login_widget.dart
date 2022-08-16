@@ -10,7 +10,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:flutter/material.dart' as material;
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key key}) : super(key: key);
 
@@ -152,7 +152,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                         Expanded(
                           child: Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                                EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+                    child: Directionality(
+                      textDirection: material.TextDirection.ltr,
                             child: TextFormField(
                               controller: phoneNumberController,
                               onChanged: (_) => EasyDebounce.debounce(
@@ -216,6 +218,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             maxLines: 1,
                             keyboardType: TextInputType.phone,
                           ),
+                    ),
                         ),
                       ),
                     ],

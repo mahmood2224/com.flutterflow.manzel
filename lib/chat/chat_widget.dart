@@ -35,7 +35,7 @@ class ChatWidget extends StatefulWidget {
 }
 
 class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandler {
-  List<sendbird.FileMessage> _SendBirdMessages = [];
+  List<sendbird.BaseMessage> _SendBirdMessages = [];
   GroupChannel _channel;
   List<types.Message> _messages = [];
   types.User _user= types.User(id:"rhytham" ,firstName:"" ) ;
@@ -241,7 +241,7 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
   }
 
   //Map message
-  void asChatUIMessage(List<sendbird.FileMessage> messages) {
+  void asChatUIMessage(List<sendbird.BaseMessage> messages) {
     //List<types.Message> result = [];
 
     try {
@@ -253,12 +253,18 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
           }
           Map<String, dynamic> jsonData = {
 
-            "type" : 'text',
+            "type" : message.runtimeType == sendbird.UserMessage ? 'text' : 'image',
             "author" : {'firstName': message.sender?.nickname ?? '', 'id': message.sender?.userId, 'lastName': ''},
             "id":message.messageId.toString(),
             "text": message.message,
             "createdAt":message.createdAt,
           };
+          if(message.runtimeType == sendbird.FileMessage){
+            sendbird.FileMessage msg = message as sendbird.FileMessage;
+            types.PartialImage imageData = types.PartialImage(name: msg.name, size: msg.size, uri: msg.url);
+            jsonData['partialImage'] = imageData;
+            jsonData['uri'] = msg.url;
+          }
           types.Message chatMessage = types.Message.fromJson(jsonData as Map<String, dynamic>);
           setState(() {
             _messages.insert(0, chatMessage);
@@ -273,7 +279,7 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
 
   void getNewMsg(sendbird.FileMessage msg){
     Map<String, dynamic> jsonData = {
-      "type" : 'text',
+      "type" : msg.runtimeType == sendbird.UserMessage ? 'text' : 'image',
       "author" : {'firstName': msg.sender?.nickname ?? '', 'id': msg.sender?.userId, 'lastName': ''},
       "id":msg.messageId.toString(),
       "text": msg.message,
@@ -418,18 +424,19 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
       _user = asChatUiUser(sendbird.SendbirdSdk().currentUser);
       final query = sendbird.GroupChannelListQuery()
         ..limit = 1
-        ..userIdsExactlyIn = ["abhishek Sevarik","412216","admin","abhishek Visht","rhytham"];
+        ..channelUrls = ['sendbird_group_channel_42155649_3daf0105b8793d01dc54de688678f98462609f27'] ;
+        //..userIdsExactlyIn = ["abhishek Sevarik","412216","admin","abhishek Visht","rhytham"];
       List<GroupChannel> channels = await query.loadNext();
       GroupChannel aChannel;
       if (channels.length == 0) {
         aChannel = await GroupChannel.createChannel(sendbird.GroupChannelParams()
           ..isPublic = true
-          ..userIds = ["abhishek Sevarik","412216","admin","abhishek Visht"] + ["rhytham"]);
+          ..userIds = ['']);
       } else {
         aChannel = channels[0];
       }
-      List<sendbird.FileMessage> messages = await aChannel.getMessagesByTimestamp(
-          DateTime.now().millisecondsSinceEpoch * 1000, sendbird.MessageListParams()) as List<sendbird.FileMessage>;
+      List<sendbird.BaseMessage> messages = await aChannel.getMessagesByTimestamp(
+          DateTime.now().millisecondsSinceEpoch * 1000, sendbird.MessageListParams());
       _SendBirdMessages = messages;
       _channel = aChannel;
       asChatUIMessage(messages);
