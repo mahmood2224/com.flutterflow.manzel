@@ -110,10 +110,10 @@ class _OffersWidgetState extends State<OffersWidget> {
                                         useGoogleFonts: false,
                                       ),
                             ),
-                            if (loggedIn ==
-                                (valueOrDefault(
-                                        currentUserDocument?.status, '') ==
-                                    'Active'))
+                            if (functions.offerScreenConitionalVisibilty(
+                                loggedIn,
+                                valueOrDefault(
+                                    currentUserDocument?.status, '')))
                               AuthUserStreamWidget(
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -254,8 +254,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                     ],
                   ),
                 ),
-              if (loggedIn ==
-                  (valueOrDefault(currentUserDocument?.status, '') == 'Active'))
+              if (functions.offerScreenConitionalVisibilty(
+                  loggedIn, valueOrDefault(currentUserDocument?.status, '')))
                 Expanded(
                   child: AuthUserStreamWidget(
                     child: SingleChildScrollView(
