@@ -145,9 +145,10 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                           ),
                           suffixIcon: mobileNumberController.text.isNotEmpty
                               ? InkWell(
-                                  onTap: () => setState(
-                                    () => mobileNumberController?.clear(),
-                                  ),
+                                  onTap: () async {
+                                    mobileNumberController?.clear();
+                                    setState(() {});
+                                  },
                                   child: Icon(
                                     Icons.clear,
                                     color: Color(0xFF757575),

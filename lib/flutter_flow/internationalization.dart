@@ -11,13 +11,13 @@ class FFLocalizations {
 
   static List<String> languages() => ['en', 'ar'];
 
-  String get languageCode => locale.languageCode;
+  String get languageCode => locale.toString();
   int get languageIndex => languages().contains(languageCode)
       ? languages().indexOf(languageCode)
       : 0;
 
   String getText(String key) =>
-      (kTranslationsMap[key] ?? {})[locale.languageCode] ?? '';
+      (kTranslationsMap[key] ?? {})[locale.toString()] ?? '';
 
   String getVariableText({
     String enText = '',
@@ -31,7 +31,7 @@ class FFLocalizationsDelegate extends LocalizationsDelegate<FFLocalizations> {
 
   @override
   bool isSupported(Locale locale) =>
-      FFLocalizations.languages().contains(locale.languageCode);
+      FFLocalizations.languages().contains(locale.toString());
 
   @override
   Future<FFLocalizations> load(Locale locale) =>
@@ -40,6 +40,13 @@ class FFLocalizationsDelegate extends LocalizationsDelegate<FFLocalizations> {
   @override
   bool shouldReload(FFLocalizationsDelegate old) => false;
 }
+
+Locale createLocale(String language) => language.contains('_')
+    ? Locale.fromSubtags(
+        languageCode: language.split('_').first,
+        scriptCode: language.split('_').last,
+      )
+    : Locale(language);
 
 final kTranslationsMap = <Map<String, Map<String, String>>>[
   // Login
@@ -411,6 +418,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '9i2we2yx': {
       'en': ' offers active',
       'ar': 'العروض النشطة',
+    },
+    '1cb5at0r': {
+      'en': 'Login',
+      'ar': 'تسجيل الدخول',
     },
     't2kwojss': {
       'en': 'Offers #',
@@ -1442,53 +1453,61 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Property Reserved',
       'ar': 'تم حجز الملكية',
     },
-    'erz6vf4q': {
-      'en': 'In progress',
-      'ar': '',
-    },
     'm30m3lz9': {
       'en': 'Payment Confirmed',
       'ar': 'تم تأكيد عملية الدفع',
     },
     'zpv0x3sj': {
-      'en': 'Collect offers',
+      'en': 'Collecting Offers',
       'ar': 'جمع العروض',
     },
     'xa9e1t5y': {
-      'en': 'In progress',
+      'en': 'Waiting for banks to submit offers (',
+      'ar': '',
+    },
+    'q0oo8smb': {
+      'en': '/3)',
       'ar': '',
     },
     '3a3j0qu5': {
-      'en': 'Waiting for Offer Acceptance',
+      'en': 'Offer Accepted',
       'ar': 'في انتظار قبول العرض',
     },
     'ver0de4k': {
-      'en': 'In progress',
+      'en': 'Waiting for you to accept one of the offers provided by banks',
       'ar': '',
     },
     'oqathjmt': {
-      'en': 'Offer Accepted',
+      'en': 'Transferr Ownership',
       'ar': 'العرض مقبول',
     },
     'k64pcuyr': {
-      'en': 'In progress',
+      'en': 'Transferring the ownership of the property    to you ',
       'ar': '',
     },
     'nhrc354h': {
-      'en': 'Transferring Ownership to you ',
+      'en': 'Completed',
       'ar': 'نقل الملكية إليك',
     },
     'ubpscf43': {
-      'en': 'In progress',
+      'en': 'Ownership transferred successfully ',
       'ar': '',
-    },
-    '6mbwn3c6': {
-      'en': 'Completed',
-      'ar': 'نقل الملكية إليك',
     },
     'dd079ljk': {
       'en': 'Cancelled',
       'ar': 'ألغيت',
+    },
+    'mtbhr1iu': {
+      'en': 'You have Cancelled the reservation of the property',
+      'ar': '',
+    },
+    '5lptumrw': {
+      'en': 'Disqualified',
+      'ar': 'ألغيت',
+    },
+    'zaua3lqi': {
+      'en': 'You have been disqualified from all supported banks',
+      'ar': '',
     },
     'nxmc61bl': {
       'en': 'Property details',

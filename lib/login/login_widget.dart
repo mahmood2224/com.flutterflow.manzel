@@ -193,9 +193,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                               focusedBorder: InputBorder.none,
                               suffixIcon: phoneNumberController.text.isNotEmpty
                                   ? InkWell(
-                                      onTap: () => setState(
-                                        () => phoneNumberController?.clear(),
-                                      ),
+                                      onTap: () async {
+                                         phoneNumberController?.clear();
+                                              setState(() {});
+                                      },
                                       child: Icon(
                                         Icons.clear,
                                         color: Color(0xFF757575),
