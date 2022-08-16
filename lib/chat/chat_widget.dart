@@ -19,7 +19,7 @@ import 'package:mime/mime.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sendbird_sdk/core/channel/group/group_channel.dart';
-import 'package:sendbird_sdk/sendbird_sdk.dart';
+import 'package:sendbird_sdk/sendbird_sdk.dart' as sendbird;
 import 'package:uuid/uuid.dart';
 
 class ChatWidget extends StatefulWidget {
@@ -34,8 +34,8 @@ class ChatWidget extends StatefulWidget {
   _ChatWidgetState createState() => _ChatWidgetState();
 }
 
-class _ChatWidgetState extends State<ChatWidget> with ChannelEventHandler {
-  List<BaseMessage> _SendBirdMessages = [];
+class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandler {
+  List<sendbird.FileMessage> _SendBirdMessages = [];
   GroupChannel _channel;
   List<types.Message> _messages = [];
   types.User _user= types.User(id:"rhytham" ,firstName:"" ) ;
@@ -44,14 +44,14 @@ class _ChatWidgetState extends State<ChatWidget> with ChannelEventHandler {
   @override
   void initState() {
     fetchUser();
-    SendbirdSdk().addChannelEventHandler("chat",this);
+    sendbird.SendbirdSdk().addChannelEventHandler("chat",this);
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Chat'});
   }
 
   @override
   void dispose() {
-    SendbirdSdk().removeChannelEventHandler("chat");
+    sendbird.SendbirdSdk().removeChannelEventHandler("chat");
     super.dispose();
   }
 
@@ -232,7 +232,7 @@ class _ChatWidgetState extends State<ChatWidget> with ChannelEventHandler {
   }
 
   //User Mapping
-  types.User asChatUiUser(User user) {
+  types.User asChatUiUser(sendbird.User user) {
     if (user == null) {
       return types.User(id:"" ,firstName:"" );
     } else {
@@ -241,17 +241,18 @@ class _ChatWidgetState extends State<ChatWidget> with ChannelEventHandler {
   }
 
   //Map message
-  void asChatUIMessage(List<BaseMessage> messages) {
+  void asChatUIMessage(List<sendbird.FileMessage> messages) {
     //List<types.Message> result = [];
 
     try {
       if (messages != null) {
         messages.forEach((message) {
-          User user = message.sender;
+          sendbird.User user = message.sender;
           if (user == null) {
             return;
           }
           Map<String, dynamic> jsonData = {
+
             "type" : 'text',
             "author" : {'firstName': message.sender?.nickname ?? '', 'id': message.sender?.userId, 'lastName': ''},
             "id":message.messageId.toString(),
@@ -270,7 +271,7 @@ class _ChatWidgetState extends State<ChatWidget> with ChannelEventHandler {
     }
   }
 
-  void getNewMsg(BaseMessage msg){
+  void getNewMsg(sendbird.FileMessage msg){
     Map<String, dynamic> jsonData = {
       "type" : 'text',
       "author" : {'firstName': msg.sender?.nickname ?? '', 'id': msg.sender?.userId, 'lastName': ''},
@@ -327,7 +328,7 @@ class _ChatWidgetState extends State<ChatWidget> with ChannelEventHandler {
         width: image.width.toDouble(),
       );
       File file = File(result.path);
-      var sentFileMessage = _channel.sendFileMessage(FileMessageParams.withFile(file));
+      var sentFileMessage = _channel.sendFileMessage(sendbird.FileMessageParams.withFile(file));
       print(sentFileMessage);
       _addMessage(message);
     }
@@ -411,24 +412,24 @@ class _ChatWidgetState extends State<ChatWidget> with ChannelEventHandler {
 
   Future<void> load() async {
     try {
-      final sendbird = await SendbirdSdk(appId: "937533CF-B733-4B33-881E-46977D5DAB2B");
-      final _ = await sendbird.connect(currentUserUid);
-      Future.delayed(Duration(seconds: 5));
-      _user = asChatUiUser(SendbirdSdk().currentUser);
-      final query = GroupChannelListQuery()
+      final _sendbird = await sendbird.SendbirdSdk(appId: "937533CF-B733-4B33-881E-46977D5DAB2B");
+      final _ = await _sendbird.connect(currentUserUid);
+     // Future.delayed(Duration(seconds: 5));
+      _user = asChatUiUser(sendbird.SendbirdSdk().currentUser);
+      final query = sendbird.GroupChannelListQuery()
         ..limit = 1
         ..userIdsExactlyIn = ["abhishek Sevarik","412216","admin","abhishek Visht","rhytham"];
       List<GroupChannel> channels = await query.loadNext();
       GroupChannel aChannel;
       if (channels.length == 0) {
-        aChannel = await GroupChannel.createChannel(GroupChannelParams()
+        aChannel = await GroupChannel.createChannel(sendbird.GroupChannelParams()
           ..isPublic = true
           ..userIds = ["abhishek Sevarik","412216","admin","abhishek Visht"] + ["rhytham"]);
       } else {
         aChannel = channels[0];
       }
-      List<BaseMessage> messages = await aChannel.getMessagesByTimestamp(
-          DateTime.now().millisecondsSinceEpoch * 1000, MessageListParams());
+      List<sendbird.FileMessage> messages = await aChannel.getMessagesByTimestamp(
+          DateTime.now().millisecondsSinceEpoch * 1000, sendbird.MessageListParams()) as List<sendbird.FileMessage>;
       _SendBirdMessages = messages;
       _channel = aChannel;
       asChatUIMessage(messages);

@@ -35,7 +35,7 @@ class _ReservationBottomSheetWidgetState
   ApiCallResponse transactionApiResponse;
   String paymentMethodValue;
   Map<dynamic, dynamic> tapSDKResult;
-  String orderId;
+  int orderId;
 
   Future<void> setupSDKSession(int paymentType) async {
     try {
@@ -140,7 +140,7 @@ class _ReservationBottomSheetWidgetState
         transactionApiResponse = await AddTransactionCall.call(
           amountPaid: widget.reservationCost.toString(),
           transactionMethod: paymentMethodValue,
-          orderId: int.parse(orderId),
+          orderId: orderId,
           userId: currentUserReference.id,
           transactionStatus: 'completed',
           transactionId: tapSDKResult['charge_id'],
@@ -157,7 +157,7 @@ class _ReservationBottomSheetWidgetState
               'propertyId': serializeParam(
                   widget.propertyId, ParamType.int),
               'orderId': serializeParam(
-                  int.parse(orderId),
+                  orderId,
                   ParamType.int),
               'paymentMethod': serializeParam(
                   paymentMethodValue, ParamType.String),
@@ -171,7 +171,7 @@ class _ReservationBottomSheetWidgetState
         transactionApiResponse = await AddTransactionCall.call(
           amountPaid: widget.reservationCost.toString(),
           transactionMethod: paymentMethodValue,
-          orderId: int.parse(orderId),
+          orderId: orderId,
           userId: currentUserReference.id,
           transactionStatus: 'failed',
           transactionId: tapSDKResult['charge_id'],
