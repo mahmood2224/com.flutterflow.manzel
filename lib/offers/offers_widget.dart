@@ -1635,11 +1635,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           'null',
                                                                         ),
                                                                       );
-                                                                      logFirebaseEvent(
-                                                                          'Row_Wait-Delay');
-                                                                      await Future.delayed(const Duration(
-                                                                          milliseconds:
-                                                                              2000));
                                                                       if ((acceptOfferResponse?.statusCode ??
                                                                               200) ==
                                                                           200) {
