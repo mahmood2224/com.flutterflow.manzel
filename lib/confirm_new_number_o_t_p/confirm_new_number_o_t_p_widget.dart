@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:manzel/backend/backend.dart';
+import 'package:sendbird_sdk/sdk/sendbird_sdk_api.dart';
 
 import '../auth/auth_util.dart';
 import '../common_widgets/overlay.dart';
@@ -188,6 +189,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                 await currentUserReference.update(userUpdateData);
                                 if (currentUserDisplayName.isEmpty &&
                                     currentUserDocument.name.isEmpty) {
+                                  final _sendbird = await SendbirdSdk(appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
+                                  final _ = await _sendbird.connect(currentUserUid);
                                   context.goNamedAuth(
                                       'AddingInformation', mounted);
                                 } else {

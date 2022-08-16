@@ -418,23 +418,30 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
 
   Future<void> load() async {
     try {
-      final _sendbird = await sendbird.SendbirdSdk(appId: "937533CF-B733-4B33-881E-46977D5DAB2B");
+      String channel_url = valueOrDefault<String>(
+        getJsonField(
+          widget.bankJson,
+          r'''$.result.channel_detail.channel_url''',
+        ).toString(),
+        'null',
+      );
+      final _sendbird = await sendbird.SendbirdSdk(appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
       final _ = await _sendbird.connect(currentUserUid);
      // Future.delayed(Duration(seconds: 5));
       _user = asChatUiUser(sendbird.SendbirdSdk().currentUser);
       final query = sendbird.GroupChannelListQuery()
         ..limit = 1
-        ..channelUrls = ['sendbird_group_channel_42155649_3daf0105b8793d01dc54de688678f98462609f27'] ;
+        ..channelUrls = [channel_url] ;
         //..userIdsExactlyIn = ["abhishek Sevarik","412216","admin","abhishek Visht","rhytham"];
       List<GroupChannel> channels = await query.loadNext();
       GroupChannel aChannel;
-      if (channels.length == 0) {
-        aChannel = await GroupChannel.createChannel(sendbird.GroupChannelParams()
-          ..isPublic = true
-          ..userIds = ['']);
-      } else {
+      // if (channels.length == 0) {
+      //   aChannel = await GroupChannel.createChannel(sendbird.GroupChannelParams()
+      //     ..isPublic = true
+      //     ..userIds = ['']);
+      // } else {
         aChannel = channels[0];
-      }
+      //}
       List<sendbird.BaseMessage> messages = await aChannel.getMessagesByTimestamp(
           DateTime.now().millisecondsSinceEpoch * 1000, sendbird.MessageListParams());
       _SendBirdMessages = messages;
