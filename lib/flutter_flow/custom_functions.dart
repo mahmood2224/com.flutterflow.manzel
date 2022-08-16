@@ -585,3 +585,19 @@ String bookingScreenCountOffers(List<dynamic> bankIds) {
   return bankIds.length.toString();
   // Add your function code here!
 }
+
+bool offerScreenConitionalVisibilty(
+  bool isLoggedIn,
+  String status,
+) {
+  if (isLoggedIn) {
+    if (status == "Active") {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+  // Add your function code here!
+}
