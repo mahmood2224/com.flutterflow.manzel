@@ -263,6 +263,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'bookingDetails',
               builder: (context, params) => BookingDetailsWidget(
                 orderId: params.getParam('orderId', ParamType.String),
+                orderStatus: params.getParam('orderStatus', ParamType.String),
               ),
             ),
             FFRoute(

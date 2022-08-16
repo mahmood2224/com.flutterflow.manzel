@@ -532,6 +532,38 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 ],
                                                                               ),
                                                                             ),
+                                                                          if (functions.conditionalVisibility(
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_status''',
+                                                                              ).toString(),
+                                                                              'disqualified'))
+                                                                            Container(
+                                                                              width: 74,
+                                                                              height: 23,
+                                                                              decoration: BoxDecoration(
+                                                                                color: Color(0xFFFF0000),
+                                                                                borderRadius: BorderRadius.circular(7),
+                                                                              ),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    FFLocalizations.of(context).getText(
+                                                                                      '9svos0f4' /* Disqualified */,
+                                                                                    ),
+                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                          fontFamily: 'AvenirArabic',
+                                                                                          color: FlutterFlowTheme.of(context).white,
+                                                                                          fontSize: 12,
+                                                                                          fontWeight: FontWeight.w500,
+                                                                                          useGoogleFonts: false,
+                                                                                        ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
                                                                         ],
                                                                       ),
                                                                     ),
@@ -741,6 +773,15 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             r'''$.order_id''',
                                                                           ).toString(),
                                                                           ParamType.String),
+                                                                      'orderStatus': serializeParam(
+                                                                          valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              bookedPropertiesItem,
+                                                                              r'''$.order_status''',
+                                                                            ).toString(),
+                                                                            'accepted',
+                                                                          ),
+                                                                          ParamType.String),
                                                                     }.withoutNulls,
                                                                   );
                                                                 },
@@ -912,7 +953,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       child:
                                                                           Container(
                                                                         height: MediaQuery.of(context).size.height *
-                                                                            0.8,
+                                                                            0.89,
                                                                         child:
                                                                             ReservationBottomSheetWidget(
                                                                           reservationCost:

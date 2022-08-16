@@ -835,6 +835,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Reserved',
       'ar': 'محجوز',
     },
+    '9svos0f4': {
+      'en': 'Disqualified',
+      'ar': 'ألغيت',
+    },
     'tu9ytzrl': {
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز:',
@@ -1482,7 +1486,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'العرض مقبول',
     },
     'k64pcuyr': {
-      'en': 'Transferring the ownership of the property    to you ',
+      'en': 'Transferring the ownership of the property to you ',
       'ar': '',
     },
     'nhrc354h': {

@@ -15,9 +15,11 @@ class BookingDetailsWidget extends StatefulWidget {
   const BookingDetailsWidget({
     Key key,
     this.orderId,
+    this.orderStatus,
   }) : super(key: key);
 
   final String orderId;
+  final String orderStatus;
 
   @override
   _BookingDetailsWidgetState createState() => _BookingDetailsWidgetState();
@@ -35,122 +37,122 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<ApiCallResponse>(
-      future: OrderDetailsCall.call(
-        userid: currentUserUid,
-        orderId: widget.orderId,
-      ),
-      builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: SpinKitRipple(
-                color: Color(0xFF2971FB),
-                size: 50,
-              ),
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        automaticallyImplyLeading: true,
+        leading: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+          child: InkWell(
+            onTap: () async {
+              logFirebaseEvent('BOOKING_DETAILS_Icon_yxvmcr6s_ON_TAP');
+              logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              size: 30,
             ),
-          );
-        }
-        final bookingDetailsOrderDetailsResponse = snapshot.data;
-        return Scaffold(
-          key: scaffoldKey,
-          appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-            automaticallyImplyLeading: true,
-            leading: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-              child: InkWell(
-                onTap: () async {
-                  logFirebaseEvent('BOOKING_DETAILS_Icon_yxvmcr6s_ON_TAP');
-                  logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.arrow_back_rounded,
-                  color: Colors.white,
-                  size: 30,
-                ),
+          ),
+        ),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              FFLocalizations.of(context).getText(
+                'trw95gom' /* Booking Ref. :  */,
               ),
-            ),
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  FFLocalizations.of(context).getText(
-                    'trw95gom' /* Booking Ref. :  */,
+              style: FlutterFlowTheme.of(context).bodyText1.override(
+                    fontFamily: 'AvenirArabic',
+                    color: FlutterFlowTheme.of(context).white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    useGoogleFonts: false,
                   ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'AvenirArabic',
-                        color: FlutterFlowTheme.of(context).white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        useGoogleFonts: false,
-                      ),
-                ),
-                Text(
-                  widget.orderId,
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'AvenirArabic',
-                        color: FlutterFlowTheme.of(context).white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        useGoogleFonts: false,
-                      ),
-                ),
-              ],
             ),
-            actions: [
-              Visibility(
-                visible: functions.cancelReverveButtonVisibility(getJsonField(
-                  bookingDetailsOrderDetailsResponse.jsonBody,
-                  r'''$.result.order_status''',
-                ).toString()),
-                child: Align(
-                  alignment: AlignmentDirectional(0, -0.75),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 20.33, 0),
-                    child: InkWell(
-                      onTap: () async {
-                        logFirebaseEvent(
-                            'BOOKING_DETAILS_Icon_ayh07hly_ON_TAP');
-                        logFirebaseEvent('Icon_Bottom-Sheet');
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Color(0x64040404),
-                          barrierColor: Color(0x66040404),
-                          context: context,
-                          builder: (context) {
-                            return Padding(
-                              padding: MediaQuery.of(context).viewInsets,
-                              child: Container(
-                                height: MediaQuery.of(context).size.height * 1,
-                                child: CancelReserveBottomSheetWidget(
-                                  orderId: widget.orderId,
-                                ),
-                              ),
-                            );
-                          },
+            Text(
+              widget.orderId,
+              style: FlutterFlowTheme.of(context).bodyText1.override(
+                    fontFamily: 'AvenirArabic',
+                    color: FlutterFlowTheme.of(context).white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    useGoogleFonts: false,
+                  ),
+            ),
+          ],
+        ),
+        actions: [
+          Visibility(
+            visible:
+                functions.cancelReverveButtonVisibility(valueOrDefault<String>(
+              widget.orderStatus,
+              'accepted',
+            )),
+            child: Align(
+              alignment: AlignmentDirectional(0, -0.75),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 20.33, 0),
+                child: InkWell(
+                  onTap: () async {
+                    logFirebaseEvent('BOOKING_DETAILS_Icon_ayh07hly_ON_TAP');
+                    logFirebaseEvent('Icon_Bottom-Sheet');
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Color(0x64040404),
+                      barrierColor: Color(0x66040404),
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.of(context).viewInsets,
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 1,
+                            child: CancelReserveBottomSheetWidget(
+                              orderId: widget.orderId,
+                            ),
+                          ),
                         );
                       },
-                      child: FaIcon(
-                        FontAwesomeIcons.ellipsisH,
-                        color: FlutterFlowTheme.of(context).white,
-                        size: 30,
-                      ),
-                    ),
+                    );
+                  },
+                  child: FaIcon(
+                    FontAwesomeIcons.ellipsisH,
+                    color: FlutterFlowTheme.of(context).white,
+                    size: 30,
                   ),
                 ),
               ),
-            ],
-            centerTitle: true,
-            elevation: 4,
+            ),
           ),
-          backgroundColor: Colors.white,
-          body: SafeArea(
-            child: SingleChildScrollView(
+        ],
+        centerTitle: true,
+        elevation: 4,
+      ),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: FutureBuilder<ApiCallResponse>(
+          future: OrderDetailsCall.call(
+            orderId: widget.orderId,
+            userid: currentUserUid,
+          ),
+          builder: (context, snapshot) {
+            // Customize what your widget looks like when it's loading.
+            if (!snapshot.hasData) {
+              return Center(
+                child: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: SpinKitRipple(
+                    color: Color(0xFF2971FB),
+                    size: 50,
+                  ),
+                ),
+              );
+            }
+            final columnOrderDetailsResponse = snapshot.data;
+            return SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -191,8 +193,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 children: [
                                   if (functions.orderProcessStatus(
                                       getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
+                                        columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.order_status''',
                                       ).toString(),
                                       'reserved',
@@ -204,8 +205,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     ),
                                   if (functions.orderProcessStatus(
                                       getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
+                                        columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.order_status''',
                                       ).toString(),
                                       'reserved',
@@ -260,13 +260,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   if (functions
                                       .offerStatusPaymentCompletedCheck(
                                           getJsonField(
-                                            bookingDetailsOrderDetailsResponse
-                                                .jsonBody,
+                                            columnOrderDetailsResponse.jsonBody,
                                             r'''$.result.transaction_data.transaction_id''',
                                           ).toString(),
                                           getJsonField(
-                                            bookingDetailsOrderDetailsResponse
-                                                .jsonBody,
+                                            columnOrderDetailsResponse.jsonBody,
                                             r'''$.result.order_status''',
                                           ).toString()))
                                     Icon(
@@ -277,13 +275,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   if (!functions
                                       .offerStatusPaymentCompletedCheck(
                                           getJsonField(
-                                            bookingDetailsOrderDetailsResponse
-                                                .jsonBody,
+                                            columnOrderDetailsResponse.jsonBody,
                                             r'''$.result.transaction_data.transaction_id''',
                                           ).toString(),
                                           getJsonField(
-                                            bookingDetailsOrderDetailsResponse
-                                                .jsonBody,
+                                            columnOrderDetailsResponse.jsonBody,
                                             r'''$.result.order_status''',
                                           ).toString()))
                                     Icon(
@@ -347,7 +343,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             children: [
                                               if (functions.orderProcessStatus(
                                                   getJsonField(
-                                                    bookingDetailsOrderDetailsResponse
+                                                    columnOrderDetailsResponse
                                                         .jsonBody,
                                                     r'''$.result.order_status''',
                                                   ).toString(),
@@ -360,7 +356,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 ),
                                               if (functions.orderProcessStatus(
                                                   getJsonField(
-                                                    bookingDetailsOrderDetailsResponse
+                                                    columnOrderDetailsResponse
                                                         .jsonBody,
                                                     r'''$.result.order_status''',
                                                   ).toString(),
@@ -403,7 +399,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                   if (functions
                                                       .conditionalVisibility(
                                                           getJsonField(
-                                                            bookingDetailsOrderDetailsResponse
+                                                            columnOrderDetailsResponse
                                                                 .jsonBody,
                                                             r'''$.result.order_status''',
                                                           ).toString(),
@@ -435,7 +431,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                             functions
                                                                 .bookingScreenCountOffers(
                                                                     getJsonField(
-                                                              bookingDetailsOrderDetailsResponse
+                                                              columnOrderDetailsResponse
                                                                   .jsonBody,
                                                               r'''$.result.bank_ids''',
                                                             )),
@@ -496,8 +492,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 children: [
                                   if (functions.orderProcessStatus(
                                       getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
+                                        columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.order_status''',
                                       ).toString(),
                                       'waiting_offer_acceptance',
@@ -509,8 +504,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     ),
                                   if (functions.orderProcessStatus(
                                       getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
+                                        columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.order_status''',
                                       ).toString(),
                                       'waiting_offer_acceptance',
@@ -547,8 +541,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ),
                                       if (functions.conditionalVisibility(
                                           getJsonField(
-                                            bookingDetailsOrderDetailsResponse
-                                                .jsonBody,
+                                            columnOrderDetailsResponse.jsonBody,
                                             r'''$.result.order_status''',
                                           ).toString(),
                                           'waiting_offer_acceptance'))
@@ -583,8 +576,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 children: [
                                   if (functions.orderProcessStatus(
                                       getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
+                                        columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.order_status''',
                                       ).toString(),
                                       'accepted',
@@ -596,8 +588,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     ),
                                   if (functions.orderProcessStatus(
                                       getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
+                                        columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.order_status''',
                                       ).toString(),
                                       'accepted',
@@ -634,8 +625,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ),
                                       if (functions.conditionalVisibility(
                                           getJsonField(
-                                            bookingDetailsOrderDetailsResponse
-                                                .jsonBody,
+                                            columnOrderDetailsResponse.jsonBody,
                                             r'''$.result.order_status''',
                                           ).toString(),
                                           'accepted'))
@@ -670,8 +660,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 children: [
                                   if (functions.orderProcessStatus(
                                       getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
+                                        columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.order_status''',
                                       ).toString(),
                                       'ownership_transferred',
@@ -683,8 +672,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     ),
                                   if (functions.orderProcessStatus(
                                       getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
+                                        columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.order_status''',
                                       ).toString(),
                                       'ownership_transferred',
@@ -721,8 +709,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ),
                                       if (functions.conditionalVisibility(
                                           getJsonField(
-                                            bookingDetailsOrderDetailsResponse
-                                                .jsonBody,
+                                            columnOrderDetailsResponse.jsonBody,
                                             r'''$.result.order_status''',
                                           ).toString(),
                                           'ownership_transferred'))
@@ -747,7 +734,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                         ),
                         if (functions.conditionalVisibility(
                             getJsonField(
-                              bookingDetailsOrderDetailsResponse.jsonBody,
+                              columnOrderDetailsResponse.jsonBody,
                               r'''$.result.order_status''',
                             ).toString(),
                             'cancelled'))
@@ -764,8 +751,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   children: [
                                     if (functions.orderProcessStatus(
                                         getJsonField(
-                                          bookingDetailsOrderDetailsResponse
-                                              .jsonBody,
+                                          columnOrderDetailsResponse.jsonBody,
                                           r'''$.result.order_status''',
                                         ).toString(),
                                         'cancelled',
@@ -795,8 +781,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ),
                                     if (functions.orderProcessStatus(
                                         getJsonField(
-                                          bookingDetailsOrderDetailsResponse
-                                              .jsonBody,
+                                          columnOrderDetailsResponse.jsonBody,
                                           r'''$.result.order_status''',
                                         ).toString(),
                                         'cancelled',
@@ -852,7 +837,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         if (functions.conditionalVisibility(
                             getJsonField(
-                              bookingDetailsOrderDetailsResponse.jsonBody,
+                              columnOrderDetailsResponse.jsonBody,
                               r'''$.result.order_status''',
                             ).toString(),
                             'disqualified'))
@@ -869,8 +854,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   children: [
                                     if (functions.orderProcessStatus(
                                         getJsonField(
-                                          bookingDetailsOrderDetailsResponse
-                                              .jsonBody,
+                                          columnOrderDetailsResponse.jsonBody,
                                           r'''$.result.order_status''',
                                         ).toString(),
                                         'cancelled',
@@ -900,8 +884,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ),
                                     if (functions.orderProcessStatus(
                                         getJsonField(
-                                          bookingDetailsOrderDetailsResponse
-                                              .jsonBody,
+                                          columnOrderDetailsResponse.jsonBody,
                                           r'''$.result.order_status''',
                                         ).toString(),
                                         'cancelled',
@@ -999,11 +982,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 child: Image.network(
                                   valueOrDefault<String>(
                                     getJsonField(
-                                      bookingDetailsOrderDetailsResponse
-                                          .jsonBody,
+                                      columnOrderDetailsResponse.jsonBody,
                                       r'''$.result.property_data.data.attributes.property_images.data[0].attributes.url''',
                                     ),
-                                    'https://media.istockphoto.com/photos/house-in-dubai-picture-id490348444?k=20&m=490348444&s=612x612&w=0&h=HAhcenCKgOe5WQR3Ko514qWAkzHX3ugvlMpeKmUiStc=',
+                                    'https://media.istockphoto.com/photos/luxurious-beautiful-modern-villa-with-front-yard-garden-picture-id1283532143?b=1&k=20&m=1283532143&s=170667a&w=0&h=Vd_WTUbHxnc_NZNwMr1UnS0xVW1FjtUxKJUtCoL4Fgk=',
                                   ),
                                   width: 80,
                                   height: 75,
@@ -1020,7 +1002,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             Text(
                               valueOrDefault<String>(
                                 getJsonField(
-                                  bookingDetailsOrderDetailsResponse.jsonBody,
+                                  columnOrderDetailsResponse.jsonBody,
                                   r'''$.result.property_name''',
                                 ).toString(),
                                 'null',
@@ -1048,8 +1030,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   child: Text(
                                     valueOrDefault<String>(
                                       getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
+                                        columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.property_data.property_city''',
                                       ).toString(),
                                       'null',
@@ -1087,8 +1068,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   child: Text(
                                     valueOrDefault<String>(
                                       getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
+                                        columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.property_data.property_district''',
                                       ).toString(),
                                       'null',
@@ -1137,7 +1117,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             child: Text(
                                               valueOrDefault<String>(
                                                 getJsonField(
-                                                  bookingDetailsOrderDetailsResponse
+                                                  columnOrderDetailsResponse
                                                       .jsonBody,
                                                   r'''$.result.property_data.property_bedrooms''',
                                                 ).toString(),
@@ -1177,7 +1157,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             child: Text(
                                               valueOrDefault<String>(
                                                 getJsonField(
-                                                  bookingDetailsOrderDetailsResponse
+                                                  columnOrderDetailsResponse
                                                       .jsonBody,
                                                   r'''$.result.property_data.property_bathrooms''',
                                                 ).toString(),
@@ -1210,14 +1190,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             ),
                                           ),
                                           Text(
-                                            valueOrDefault<String>(
-                                              getJsonField(
-                                                bookingDetailsOrderDetailsResponse
-                                                    .jsonBody,
-                                                r'''$.result.property_data.property_size''',
-                                              ).toString(),
-                                              '0',
-                                            ),
+                                            getJsonField(
+                                              columnOrderDetailsResponse
+                                                  .jsonBody,
+                                              r'''$.result.property_data.property_size''',
+                                            ).toString(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
@@ -1276,8 +1253,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   queryParams: {
                                     'propertyId': serializeParam(
                                         getJsonField(
-                                          bookingDetailsOrderDetailsResponse
-                                              .jsonBody,
+                                          columnOrderDetailsResponse.jsonBody,
                                           r'''$.result.property_id''',
                                         ),
                                         ParamType.int),
@@ -1376,8 +1352,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     Text(
                                       valueOrDefault<String>(
                                         getJsonField(
-                                          bookingDetailsOrderDetailsResponse
-                                              .jsonBody,
+                                          columnOrderDetailsResponse.jsonBody,
                                           r'''$.result.transaction_data.transaction_method''',
                                         ).toString(),
                                         'null',
@@ -1440,11 +1415,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         child: AutoSizeText(
                                           valueOrDefault<String>(
                                             getJsonField(
-                                              bookingDetailsOrderDetailsResponse
+                                              columnOrderDetailsResponse
                                                   .jsonBody,
                                               r'''$.result.id''',
                                             ).toString(),
-                                            '0',
+                                            '000000',
                                           ),
                                           maxLines: 2,
                                           style: FlutterFlowTheme.of(context)
@@ -1505,7 +1480,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             functions.formatAmount(
                                                 valueOrDefault<String>(
                                               getJsonField(
-                                                bookingDetailsOrderDetailsResponse
+                                                columnOrderDetailsResponse
                                                     .jsonBody,
                                                 r'''$.result.transaction_data.paid_amount''',
                                               ).toString(),
@@ -1564,15 +1539,17 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     ),
                                   ),
                                   Text(
-                                    functions
-                                        .formatDateTime(valueOrDefault<int>(
-                                      getJsonField(
-                                        bookingDetailsOrderDetailsResponse
-                                            .jsonBody,
-                                        r'''$.result.transaction_data.created_at._seconds''',
-                                      ),
-                                      0,
-                                    )),
+                                    valueOrDefault<String>(
+                                      functions
+                                          .formatDateTime(valueOrDefault<int>(
+                                        getJsonField(
+                                          columnOrderDetailsResponse.jsonBody,
+                                          r'''$.result.transaction_data.created_at._seconds''',
+                                        ),
+                                        0,
+                                      )),
+                                      '0',
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
@@ -1633,10 +1610,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                   ),
                 ],
               ),
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 }
