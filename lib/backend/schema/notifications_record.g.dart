@@ -25,30 +25,65 @@ class _$NotificationsRecordSerializer
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     Object value;
-    value = object.bankName;
+    value = object.createdAt;
     if (value != null) {
       result
-        ..add('bank_name')
+        ..add('created_at')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
+    value = object.isRead;
+    if (value != null) {
+      result
+        ..add('is_read')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.messageAr;
+    if (value != null) {
+      result
+        ..add('message_ar')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.pId;
+    value = object.messageEn;
     if (value != null) {
       result
-        ..add('p_id')
+        ..add('message_en')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.notificationType;
+    if (value != null) {
+      result
+        ..add('notification_type')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.orderId;
+    if (value != null) {
+      result
+        ..add('order_id')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.quotation;
+    value = object.propertyId;
     if (value != null) {
       result
-        ..add('quotation')
+        ..add('property_id')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.uId;
+    value = object.updatedAt;
     if (value != null) {
       result
-        ..add('u_id')
+        ..add('updated_at')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
+    value = object.userId;
+    if (value != null) {
+      result
+        ..add('user_id')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
                 DocumentReference, const [const FullType(Object)])));
@@ -76,20 +111,40 @@ class _$NotificationsRecordSerializer
       iterator.moveNext();
       final Object value = iterator.current;
       switch (key) {
-        case 'bank_name':
-          result.bankName = serializers.deserialize(value,
+        case 'created_at':
+          result.createdAt = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'is_read':
+          result.isRead = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'message_ar':
+          result.messageAr = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'p_id':
-          result.pId = serializers.deserialize(value,
+        case 'message_en':
+          result.messageEn = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'notification_type':
+          result.notificationType = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'order_id':
+          result.orderId = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
-        case 'quotation':
-          result.quotation = serializers.deserialize(value,
+        case 'property_id':
+          result.propertyId = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'u_id':
-          result.uId = serializers.deserialize(value,
+        case 'updated_at':
+          result.updatedAt = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'user_id':
+          result.userId = serializers.deserialize(value,
                   specifiedType: const FullType(
                       DocumentReference, const [const FullType(Object)]))
               as DocumentReference<Object>;
@@ -109,13 +164,23 @@ class _$NotificationsRecordSerializer
 
 class _$NotificationsRecord extends NotificationsRecord {
   @override
-  final String bankName;
+  final DateTime createdAt;
   @override
-  final int pId;
+  final bool isRead;
   @override
-  final String quotation;
+  final String messageAr;
   @override
-  final DocumentReference<Object> uId;
+  final String messageEn;
+  @override
+  final String notificationType;
+  @override
+  final int orderId;
+  @override
+  final String propertyId;
+  @override
+  final DateTime updatedAt;
+  @override
+  final DocumentReference<Object> userId;
   @override
   final DocumentReference<Object> reference;
 
@@ -124,7 +189,16 @@ class _$NotificationsRecord extends NotificationsRecord {
       (new NotificationsRecordBuilder()..update(updates))._build();
 
   _$NotificationsRecord._(
-      {this.bankName, this.pId, this.quotation, this.uId, this.reference})
+      {this.createdAt,
+      this.isRead,
+      this.messageAr,
+      this.messageEn,
+      this.notificationType,
+      this.orderId,
+      this.propertyId,
+      this.updatedAt,
+      this.userId,
+      this.reference})
       : super._();
 
   @override
@@ -140,10 +214,15 @@ class _$NotificationsRecord extends NotificationsRecord {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is NotificationsRecord &&
-        bankName == other.bankName &&
-        pId == other.pId &&
-        quotation == other.quotation &&
-        uId == other.uId &&
+        createdAt == other.createdAt &&
+        isRead == other.isRead &&
+        messageAr == other.messageAr &&
+        messageEn == other.messageEn &&
+        notificationType == other.notificationType &&
+        orderId == other.orderId &&
+        propertyId == other.propertyId &&
+        updatedAt == other.updatedAt &&
+        userId == other.userId &&
         reference == other.reference;
   }
 
@@ -151,19 +230,36 @@ class _$NotificationsRecord extends NotificationsRecord {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, bankName.hashCode), pId.hashCode),
-                quotation.hashCode),
-            uId.hashCode),
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc($jc(0, createdAt.hashCode),
+                                        isRead.hashCode),
+                                    messageAr.hashCode),
+                                messageEn.hashCode),
+                            notificationType.hashCode),
+                        orderId.hashCode),
+                    propertyId.hashCode),
+                updatedAt.hashCode),
+            userId.hashCode),
         reference.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'NotificationsRecord')
-          ..add('bankName', bankName)
-          ..add('pId', pId)
-          ..add('quotation', quotation)
-          ..add('uId', uId)
+          ..add('createdAt', createdAt)
+          ..add('isRead', isRead)
+          ..add('messageAr', messageAr)
+          ..add('messageEn', messageEn)
+          ..add('notificationType', notificationType)
+          ..add('orderId', orderId)
+          ..add('propertyId', propertyId)
+          ..add('updatedAt', updatedAt)
+          ..add('userId', userId)
           ..add('reference', reference))
         .toString();
   }
@@ -173,21 +269,42 @@ class NotificationsRecordBuilder
     implements Builder<NotificationsRecord, NotificationsRecordBuilder> {
   _$NotificationsRecord _$v;
 
-  String _bankName;
-  String get bankName => _$this._bankName;
-  set bankName(String bankName) => _$this._bankName = bankName;
+  DateTime _createdAt;
+  DateTime get createdAt => _$this._createdAt;
+  set createdAt(DateTime createdAt) => _$this._createdAt = createdAt;
 
-  int _pId;
-  int get pId => _$this._pId;
-  set pId(int pId) => _$this._pId = pId;
+  bool _isRead;
+  bool get isRead => _$this._isRead;
+  set isRead(bool isRead) => _$this._isRead = isRead;
 
-  String _quotation;
-  String get quotation => _$this._quotation;
-  set quotation(String quotation) => _$this._quotation = quotation;
+  String _messageAr;
+  String get messageAr => _$this._messageAr;
+  set messageAr(String messageAr) => _$this._messageAr = messageAr;
 
-  DocumentReference<Object> _uId;
-  DocumentReference<Object> get uId => _$this._uId;
-  set uId(DocumentReference<Object> uId) => _$this._uId = uId;
+  String _messageEn;
+  String get messageEn => _$this._messageEn;
+  set messageEn(String messageEn) => _$this._messageEn = messageEn;
+
+  String _notificationType;
+  String get notificationType => _$this._notificationType;
+  set notificationType(String notificationType) =>
+      _$this._notificationType = notificationType;
+
+  int _orderId;
+  int get orderId => _$this._orderId;
+  set orderId(int orderId) => _$this._orderId = orderId;
+
+  String _propertyId;
+  String get propertyId => _$this._propertyId;
+  set propertyId(String propertyId) => _$this._propertyId = propertyId;
+
+  DateTime _updatedAt;
+  DateTime get updatedAt => _$this._updatedAt;
+  set updatedAt(DateTime updatedAt) => _$this._updatedAt = updatedAt;
+
+  DocumentReference<Object> _userId;
+  DocumentReference<Object> get userId => _$this._userId;
+  set userId(DocumentReference<Object> userId) => _$this._userId = userId;
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
@@ -201,10 +318,15 @@ class NotificationsRecordBuilder
   NotificationsRecordBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _bankName = $v.bankName;
-      _pId = $v.pId;
-      _quotation = $v.quotation;
-      _uId = $v.uId;
+      _createdAt = $v.createdAt;
+      _isRead = $v.isRead;
+      _messageAr = $v.messageAr;
+      _messageEn = $v.messageEn;
+      _notificationType = $v.notificationType;
+      _orderId = $v.orderId;
+      _propertyId = $v.propertyId;
+      _updatedAt = $v.updatedAt;
+      _userId = $v.userId;
       _reference = $v.reference;
       _$v = null;
     }
@@ -228,10 +350,15 @@ class NotificationsRecordBuilder
   _$NotificationsRecord _build() {
     final _$result = _$v ??
         new _$NotificationsRecord._(
-            bankName: bankName,
-            pId: pId,
-            quotation: quotation,
-            uId: uId,
+            createdAt: createdAt,
+            isRead: isRead,
+            messageAr: messageAr,
+            messageEn: messageEn,
+            notificationType: notificationType,
+            orderId: orderId,
+            propertyId: propertyId,
+            updatedAt: updatedAt,
+            userId: userId,
             reference: reference);
     replace(_$result);
     return _$result;

@@ -12,31 +12,55 @@ abstract class NotificationsRecord
       _$notificationsRecordSerializer;
 
   @nullable
-  @BuiltValueField(wireName: 'bank_name')
-  String get bankName;
+  @BuiltValueField(wireName: 'created_at')
+  DateTime get createdAt;
 
   @nullable
-  @BuiltValueField(wireName: 'p_id')
-  int get pId;
+  @BuiltValueField(wireName: 'is_read')
+  bool get isRead;
 
   @nullable
-  String get quotation;
+  @BuiltValueField(wireName: 'message_ar')
+  String get messageAr;
 
   @nullable
-  @BuiltValueField(wireName: 'u_id')
-  DocumentReference get uId;
+  @BuiltValueField(wireName: 'message_en')
+  String get messageEn;
+
+  @nullable
+  @BuiltValueField(wireName: 'notification_type')
+  String get notificationType;
+
+  @nullable
+  @BuiltValueField(wireName: 'order_id')
+  int get orderId;
+
+  @nullable
+  @BuiltValueField(wireName: 'property_id')
+  String get propertyId;
+
+  @nullable
+  @BuiltValueField(wireName: 'updated_at')
+  DateTime get updatedAt;
+
+  @nullable
+  @BuiltValueField(wireName: 'user_id')
+  DocumentReference get userId;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(NotificationsRecordBuilder builder) => builder
-    ..bankName = ''
-    ..pId = 0
-    ..quotation = '';
+    ..isRead = false
+    ..messageAr = ''
+    ..messageEn = ''
+    ..notificationType = ''
+    ..orderId = 0
+    ..propertyId = '';
 
   static CollectionReference get collection =>
-      FirebaseFirestore.instance.collection('notifications');
+      FirebaseFirestore.instance.collection('Notifications');
 
   static Stream<NotificationsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
@@ -58,15 +82,25 @@ abstract class NotificationsRecord
 }
 
 Map<String, dynamic> createNotificationsRecordData({
-  String bankName,
-  int pId,
-  String quotation,
-  DocumentReference uId,
+  DateTime createdAt,
+  bool isRead,
+  String messageAr,
+  String messageEn,
+  String notificationType,
+  int orderId,
+  String propertyId,
+  DateTime updatedAt,
+  DocumentReference userId,
 }) =>
     serializers.toFirestore(
         NotificationsRecord.serializer,
         NotificationsRecord((n) => n
-          ..bankName = bankName
-          ..pId = pId
-          ..quotation = quotation
-          ..uId = uId));
+          ..createdAt = createdAt
+          ..isRead = isRead
+          ..messageAr = messageAr
+          ..messageEn = messageEn
+          ..notificationType = notificationType
+          ..orderId = orderId
+          ..propertyId = propertyId
+          ..updatedAt = updatedAt
+          ..userId = userId));

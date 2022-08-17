@@ -1678,8 +1678,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                   setState(
                                                                       () {});
                                                                 },
-                                                                text:
-                                                                    'Accept offer',
+                                                                text: FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'y0qb0uvi' /* Accept offer */,
+                                                                ),
                                                                 options:
                                                                     FFButtonOptions(
                                                                   width: 130,
