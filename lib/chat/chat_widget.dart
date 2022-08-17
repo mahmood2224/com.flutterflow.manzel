@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:manzel/auth/auth_util.dart';
 
+import '../common_widgets/overlay.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -40,9 +41,11 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
   List<types.Message> _messages = [];
   types.User _user= types.User(id:"rhytham" ,firstName:"" ) ;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  OverlayEntry entry;
 
   @override
   void initState() {
+
     fetchUser();
     sendbird.SendbirdSdk().addChannelEventHandler("chat",this);
     super.initState();
@@ -418,10 +421,11 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
 
   Future<void> load() async {
     try {
+      entry = showOverlay(context);
       String channel_url = valueOrDefault<String>(
         getJsonField(
           widget.bankJson,
-          r'''$.result.channel_detail.channel_url''',
+          r'''$.channel_detail.channel_url''',
         ).toString(),
         'null',
       );
@@ -447,8 +451,18 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
       _SendBirdMessages = messages;
       _channel = aChannel;
       asChatUIMessage(messages);
+      entry.remove();
     } catch (error) {
+      entry.remove();
       print(error);
     }
+  }
+  OverlayEntry showOverlay(BuildContext context) {
+    var overlayState = Overlay.of(context);
+    var overlayEntry = OverlayEntry(
+      builder: (context) => CircularProgressOverlay(),
+    );
+    overlayState?.insert(overlayEntry);
+    return overlayEntry;
   }
 }
