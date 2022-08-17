@@ -36,16 +36,16 @@ class ChatWidget extends StatefulWidget {
 }
 
 class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandler {
+  bool isLoading = true;
   List<sendbird.BaseMessage> _SendBirdMessages = [];
   GroupChannel _channel;
   List<types.Message> _messages = [];
   types.User _user= types.User(id:"rhytham" ,firstName:"" ) ;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  OverlayEntry entry;
+
 
   @override
   void initState() {
-
     fetchUser();
     sendbird.SendbirdSdk().addChannelEventHandler("chat",this);
     super.initState();
@@ -55,6 +55,7 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
   @override
   void dispose() {
     sendbird.SendbirdSdk().removeChannelEventHandler("chat");
+    sendbird.SendbirdSdk().disconnect();
     super.dispose();
   }
 
@@ -69,116 +70,130 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50),
-        child: AppBar(
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
-          flexibleSpace: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+    return SafeArea(
+      child: Container(
+        color:Colors.white,
+      child: Center(
+        child: Visibility(
+          visible: isLoading,
+          replacement: Scaffold(
+            key: scaffoldKey,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(50),
+              child: AppBar(
+                backgroundColor: Colors.white,
+                automaticallyImplyLeading: false,
+                flexibleSpace: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: BoxDecoration(),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                          child: InkWell(
-                            onTap: () async {
-                              logFirebaseEvent(
-                                  'CHAT_PAGE_Icon_mqw5te5l_ON_TAP');
-                              logFirebaseEvent(
-                                  'Icon_Close-Dialog,-Drawer,-Etc');
-                              Navigator.pop(context);
-                            },
-                            child: Icon(
-                              Icons.arrow_back_rounded,
-                              color: Colors.black,
-                              size: 24,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-                          child: Container(
-                            width: 33,
-                            height: 33,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Padding(
-                              padding:
-                              EdgeInsetsDirectional.fromSTEB(1, 0, 0, 0),
-                              // child: ClipRRect(
-                              //   borderRadius: BorderRadius.circular(33),
-                              // child: Image.network(
-                              //   getJsonField(
-                              //     widget.bankJson,
-                              //     r'''$.bank_logo'''??"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI8AAACECAMAAACeeohiAAAAYFBMVEX///8AAAC5ublKSko6OjpmZmb4+PjX19fe3t6urq4nJyd3d3eTk5OIiIjAwMBvb2/l5eXu7u6cnJynp6fPz8/JyckQEBBBQUGCgoIvLy9SUlJeXl40NDQICAgcHBwiIiKGRo/tAAAEnklEQVR4nO2ai3aiOhRAT6LkIQHzIIKg9v//cvJSae/t1LEEO2uyl8uAsuru4eQkBAAKhUKhUCgUCoVCoVAoFF4CaV9t8A46ooq9WuKOOSCEjvzVGgkXHLS3E/oZISIcoYMLDdGuxa+2AVkhNDLoJgq0R6hWL7UhBqEzB1K7/GkAXIjQK0MkXdKMFDoXGBTDtHGp9LIQ8QtCGqBBVzQQgdDuNbXIZ850C07EB8v1tlqur4N3CAkC+ozOM6GDC9GA0MmubKOqEAxfemZ4sxSymqypw0/oIFzJOaD/cjBAXEr163U0373dGWHT/9h4Kgnt0RWAlUKEL6HYmE9sPAbAZdHbGh1N+eB0wKrf6IShzB7ROX+I8AmhgQD/rY3HVe29y6LMIZKDEB1A24ivaJxJK8SQsRQRpUggNV+QjnZNJh973j3DOVdx/Gk+hD3HqqX6tSgZSClK4p4kaTM2Ku6kJm9w6lRdxjA6sbRHXV3yI5cMRbsKO6gO00XUZfW5z73ckABd2m6jj2t9ndxD63cG8CX8nFVn5nNy09L27hZ8mvc+p7CT32d7SEG5DqlN8tnMfRrp3zPPOoJPa+MABSL51MkHkXl8/EfHzJeI0Ue6GYefyfvsvrhJ4XT1aefx8bZj5ouN4IPlm3sXEBJ2dG47knwaPPMZ40H5fVp2cVNlNy3d+NOy8+cp+Uyz+FSHmGT5fTiP+ax8BzL+TSWft+Hu8xYSag2faw7HDuSvv2zyOZ/uPiFGmXWuPuewcODL88GOoQDhm+jcp1nDJ17/TSqU57dwlSE+8dmucr7qMJcXofid/Pzenbwwfh0++qDcawupf/kfnkI57MNHU1A4beY+u5Bdq/iE+tPD3jtgH6yeeIWxnvtU5xUSaOazhfsl2EkFHz73GXy0xswJ9C4+98WEiww+dO7T+Fq04vjVq9nKj/UKG3KZ++gVEij4mDDP2EifsZd9SGIefGCa+9gVKlDwSQUo9LIxVh4TffjcJ5Tv4wo+ERH+/wrsLRibOIG9zQ+P+SvQ3efCUjBCElcxPmo79wlnL+8Ir/uNZ5wGCsZt9wLk1n1QWbezJzD0m74Buw3f+IN7k9Xntlhw204tzLc/NP8K0vBnMLmWgO7D9p+RK6Xpvn6GPc0h89CS2Ocs7sNjT3+Ofvl7mfrJ5InoxX0U/Q7LjhqK4wVYzsl+61xdWa6b0alagBfcpFsDfdwuxXGJbia+zoyHWWL5hS3RtxI/4YGKQqFQKBQKhUKhUCgUCoXMZFk8/wa5n9D5U5Zfqf4eD/rIdF5vNyLShiXw4d4EUemlSHy5TXfMo4/5PuRDWMel+8OYm5Yw8E9fis5tKKaV+zWqFCNMxQdVuTBaYK1bobE2WFMjWlKxBi/owzkVxlDNsWlFg5tWSN1pzEUnhARrrDbaNLwFLIE4B6y5MbxxTlx3YDG3rOEL+kiNLdadwF1LB8sMsdwwLWsDolFgaMftQDk1IAl0Ssia0Aa4+9YSKRhnoragH+vJD/lQQxllhjPDMDXMEt51uDMKY8ssVZq2nMpOhmdVrZaUQUsAE4Khc96mA6bMg09O/KX9ay1+ATftTlEKfsdNAAAAAElFTkSuQmCC",
-                              //   ),
-                              child: Container(),
-                              // width: 33,
-                              // height: 33,
-                              // fit: BoxFit.cover,
-                              //),
-                              //),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                          child: Text(
-                            valueOrDefault<String>(
-                              getJsonField(
-                                widget.bankJson,
-                                r'''$.agent_name''',
-                              ).toString(),
-                              'null',
-                            ),
-                            style:
-                            FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'AvenirArabic',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'CHAT_PAGE_Icon_mqw5te5l_ON_TAP');
+                                    logFirebaseEvent(
+                                        'Icon_Close-Dialog,-Drawer,-Etc');
+                                    Navigator.pop(context);
+                                  },
+                                  child: Icon(
+                                    Icons.arrow_back_rounded,
+                                    color: Colors.black,
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                child: Container(
+                                  width: 33,
+                                  height: 33,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Padding(
+                                    padding:
+                                    EdgeInsetsDirectional.fromSTEB(1, 0, 0, 0),
+                                    // child: ClipRRect(
+                                    //   borderRadius: BorderRadius.circular(33),
+                                    // child: Image.network(
+                                    //   getJsonField(
+                                    //     widget.bankJson,
+                                    //     r'''$.bank_logo'''??"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI8AAACECAMAAACeeohiAAAAYFBMVEX///8AAAC5ublKSko6OjpmZmb4+PjX19fe3t6urq4nJyd3d3eTk5OIiIjAwMBvb2/l5eXu7u6cnJynp6fPz8/JyckQEBBBQUGCgoIvLy9SUlJeXl40NDQICAgcHBwiIiKGRo/tAAAEnklEQVR4nO2ai3aiOhRAT6LkIQHzIIKg9v//cvJSae/t1LEEO2uyl8uAsuru4eQkBAAKhUKhUCgUCoVCoVAoFF4CaV9t8A46ooq9WuKOOSCEjvzVGgkXHLS3E/oZISIcoYMLDdGuxa+2AVkhNDLoJgq0R6hWL7UhBqEzB1K7/GkAXIjQK0MkXdKMFDoXGBTDtHGp9LIQ8QtCGqBBVzQQgdDuNbXIZ850C07EB8v1tlqur4N3CAkC+ozOM6GDC9GA0MmubKOqEAxfemZ4sxSymqypw0/oIFzJOaD/cjBAXEr163U0373dGWHT/9h4Kgnt0RWAlUKEL6HYmE9sPAbAZdHbGh1N+eB0wKrf6IShzB7ROX+I8AmhgQD/rY3HVe29y6LMIZKDEB1A24ivaJxJK8SQsRQRpUggNV+QjnZNJh973j3DOVdx/Gk+hD3HqqX6tSgZSClK4p4kaTM2Ku6kJm9w6lRdxjA6sbRHXV3yI5cMRbsKO6gO00XUZfW5z73ckABd2m6jj2t9ndxD63cG8CX8nFVn5nNy09L27hZ8mvc+p7CT32d7SEG5DqlN8tnMfRrp3zPPOoJPa+MABSL51MkHkXl8/EfHzJeI0Ue6GYefyfvsvrhJ4XT1aefx8bZj5ouN4IPlm3sXEBJ2dG47knwaPPMZ40H5fVp2cVNlNy3d+NOy8+cp+Uyz+FSHmGT5fTiP+ax8BzL+TSWft+Hu8xYSag2faw7HDuSvv2zyOZ/uPiFGmXWuPuewcODL88GOoQDhm+jcp1nDJ17/TSqU57dwlSE+8dmucr7qMJcXofid/Pzenbwwfh0++qDcawupf/kfnkI57MNHU1A4beY+u5Bdq/iE+tPD3jtgH6yeeIWxnvtU5xUSaOazhfsl2EkFHz73GXy0xswJ9C4+98WEiww+dO7T+Fq04vjVq9nKj/UKG3KZ++gVEij4mDDP2EifsZd9SGIefGCa+9gVKlDwSQUo9LIxVh4TffjcJ5Tv4wo+ERH+/wrsLRibOIG9zQ+P+SvQ3efCUjBCElcxPmo79wlnL+8Ir/uNZ5wGCsZt9wLk1n1QWbezJzD0m74Buw3f+IN7k9Xntlhw204tzLc/NP8K0vBnMLmWgO7D9p+RK6Xpvn6GPc0h89CS2Ocs7sNjT3+Ofvl7mfrJ5InoxX0U/Q7LjhqK4wVYzsl+61xdWa6b0alagBfcpFsDfdwuxXGJbia+zoyHWWL5hS3RtxI/4YGKQqFQKBQKhUKhUCgUCoXMZFk8/wa5n9D5U5Zfqf4eD/rIdF5vNyLShiXw4d4EUemlSHy5TXfMo4/5PuRDWMel+8OYm5Yw8E9fis5tKKaV+zWqFCNMxQdVuTBaYK1bobE2WFMjWlKxBi/owzkVxlDNsWlFg5tWSN1pzEUnhARrrDbaNLwFLIE4B6y5MbxxTlx3YDG3rOEL+kiNLdadwF1LB8sMsdwwLWsDolFgaMftQDk1IAl0Ssia0Aa4+9YSKRhnoragH+vJD/lQQxllhjPDMDXMEt51uDMKY8ssVZq2nMpOhmdVrZaUQUsAE4Khc96mA6bMg09O/KX9ay1+ATftTlEKfsdNAAAAAElFTkSuQmCC",
+                                    //   ),
+                                    child: Container(),
+                                    // width: 33,
+                                    // height: 33,
+                                    // fit: BoxFit.cover,
+                                    //),
+                                    //),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    getJsonField(
+                                      widget.bankJson,
+                                      r'''$.agent_name''',
+                                    ).toString(),
+                                    'null',
+                                  ),
+                                  style:
+                                  FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'AvenirArabic',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                ],
+                ),
+                actions: [],
+                elevation: 2,
               ),
             ),
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Chat(
+              messages: _messages,
+              onAttachmentPressed: _handleAttachmentPressed,
+              onMessageTap: _handleMessageTap,
+              onPreviewDataFetched: _handlePreviewDataFetched,
+              onSendPressed: _handleSendPressed,
+              showUserAvatars: true,
+              showUserNames: true,
+              user: _user,
+            ),
           ),
-          actions: [],
-          elevation: 2,
+          child:  SpinKitRipple(
+              color: Color(0xFF2971FB),
+              size: 50,
+          ),
+          ),
         ),
-      ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: Chat(
-        messages: _messages,
-        onAttachmentPressed: _handleAttachmentPressed,
-        onMessageTap: _handleMessageTap,
-        onPreviewDataFetched: _handlePreviewDataFetched,
-        onSendPressed: _handleSendPressed,
-        showUserAvatars: true,
-        showUserNames: true,
-        user: _user,
       ),
     );
   }
@@ -264,9 +279,9 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
           };
           if(message.runtimeType == sendbird.FileMessage){
             sendbird.FileMessage msg = message as sendbird.FileMessage;
-            types.PartialImage imageData = types.PartialImage(name: msg.name, size: msg.size, uri: msg.url);
+            types.PartialImage imageData = types.PartialImage(name: msg.name, size: msg.size, uri: msg.secureUrl);
             jsonData['partialImage'] = imageData;
-            jsonData['uri'] = msg.url;
+            jsonData['uri'] = msg.secureUrl;
           }
           types.Message chatMessage = types.Message.fromJson(jsonData as Map<String, dynamic>);
           setState(() {
@@ -288,12 +303,19 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
       "text": msg.message,
       "createdAt":msg.createdAt,
     };
+    if(msg.runtimeType == sendbird.FileMessage){
+      sendbird.FileMessage mssg = msg as sendbird.FileMessage;
+      types.PartialImage imageData = types.PartialImage(name: mssg.name, size: mssg.size, uri: mssg.secureUrl);
+      jsonData['partialImage'] = imageData;
+      jsonData['uri'] = mssg.secureUrl;
+    }
     types.Message chatMessage = types.Message.fromJson(jsonData as Map<String, dynamic>);
     setState(() {
       _messages.insert(0, chatMessage);
       //_messages.add(chatMessage);
     });
   }
+
 
   void _handleFileSelection() async {
     final result = await FilePicker.platform.pickFiles(
@@ -421,7 +443,6 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
 
   Future<void> load() async {
     try {
-      entry = showOverlay(context);
       String channel_url = valueOrDefault<String>(
         getJsonField(
           widget.bankJson,
@@ -451,18 +472,10 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
       _SendBirdMessages = messages;
       _channel = aChannel;
       asChatUIMessage(messages);
-      entry.remove();
+      isLoading = false;
     } catch (error) {
-      entry.remove();
+
       print(error);
     }
-  }
-  OverlayEntry showOverlay(BuildContext context) {
-    var overlayState = Overlay.of(context);
-    var overlayEntry = OverlayEntry(
-      builder: (context) => CircularProgressOverlay(),
-    );
-    overlayState?.insert(overlayEntry);
-    return overlayEntry;
   }
 }
