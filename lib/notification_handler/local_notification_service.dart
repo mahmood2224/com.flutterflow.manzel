@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:base_project/utils/services/logging/logging_service.dart';
-import 'package:base_project/utils/services/push_notification/push_notification_handler.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:manzel/notification_handler/push_notification_handler.dart';
 
 final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 class LocalNotificationService{
@@ -30,30 +29,29 @@ class LocalNotificationService{
     );
   }
 
-  void onSelectNotification(String? payload){
+  void onSelectNotification(String payload){
     if(payload != null && payload.trim().isNotEmpty){
       try {
-        Map<String, dynamic>? json = (jsonDecode(payload) as Map<String,
-            dynamic>?);
+        Map<String, dynamic> json = (jsonDecode(payload) as Map<String,
+            dynamic>);
         if(json!=null) {
           DeepLinkManager.navigate(json['redirect_to'], json);
         }
       }catch(error){
-        LoggingService().printLog(
-            message: 'PushNotificationHandler.onSelectNotification message==> $error');
+        print(error);
       }
     }
     return;
   }
 
   Future<void> showStandardNotification(
-      {required String? title,
-        required String? body,
+      { String title,
+         String body,
         int id = 0,
-        String? payload,
-        String? notificationChannelId,
-        String? notificationChannelName,
-        String? notificationChannelDes
+        String payload,
+        String notificationChannelId,
+        String notificationChannelName,
+        String notificationChannelDes
       }) async {
     final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     final notificationDetails = NotificationDetails(
@@ -84,10 +82,10 @@ class LocalNotificationService{
   // FUNCTIONS FOR NOTIFICATIONS
   Future _showNotification(
       FlutterLocalNotificationsPlugin notifications, {
-        required String? title,
-        required String? body,
-        required NotificationDetails type,
-        String? payload,
+         String title,
+         String body,
+         NotificationDetails type,
+        String payload,
         int id = 0,
       }) {
     return notifications.show(id, title, body, type, payload: payload);

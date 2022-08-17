@@ -97,6 +97,7 @@ dependencies:
   open_file: ^3.2.1
   path_provider: ^2.0.11
   uuid: ^3.0.6
+  flutter_local_notifications: ^9.7.1
 
 
   # The following adds the Cupertino Icons font to your application.
