@@ -53,7 +53,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
 
     GoSellSdkFlutter.configureApp(
         bundleId: 'com.flutterflow.manzel',
-        productionSecreteKey: 'sk_live_o9J1txZgOw3RcXQbTSMEGACy',
+        productionSecreteKey: 'sk_live_o4Z3j8HafuOCG9PNJ1eVrvsz',
         sandBoxsecretKey: 'sk_test_2r5JvPVafKxklSn6LRpqWycQ',
         lang: FFAppState().locale,);
   }
