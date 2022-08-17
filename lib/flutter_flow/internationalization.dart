@@ -507,11 +507,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Chat with ',
       'ar': 'الدردشة مع',
     },
-    'n6rgv2jr': {
-      'en': 'Accept offer',
-      'ar': 'اقبل العرض',
-    },
-    '9tst42qk': {
+    'lfixcn0r': {
       'en': 'Accept offer',
       'ar': '',
     },
