@@ -36,13 +36,6 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    match /notifications/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if false;
-      allow delete: if false;
-    }
-
     match /Transactions/{document} {
       allow create: if true;
       allow read: if true;
@@ -51,6 +44,20 @@ service cloud.firestore {
     }
 
     match /Saved_Properties/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /User_Device_Token/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /Notifications/{document} {
       allow create: if true;
       allow read: if true;
       allow write: if true;
