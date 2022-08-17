@@ -35,19 +35,20 @@ class ChatWidget extends StatefulWidget {
   _ChatWidgetState createState() => _ChatWidgetState();
 }
 
-class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandler {
+class _ChatWidgetState extends State<ChatWidget>
+    with sendbird.ChannelEventHandler {
   bool isLoading = true;
   List<sendbird.BaseMessage> _SendBirdMessages = [];
   GroupChannel _channel;
   List<types.Message> _messages = [];
-  types.User _user= types.User(id:"rhytham" ,firstName:"" ) ;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  types.User _user = types.User(id: "rhytham", firstName: "");
 
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     fetchUser();
-    sendbird.SendbirdSdk().addChannelEventHandler("chat",this);
+    sendbird.SendbirdSdk().addChannelEventHandler("chat", this);
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Chat'});
   }
@@ -70,133 +71,130 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        color:Colors.white,
-      child: Center(
-        child: Visibility(
-          visible: isLoading,
-          replacement: Scaffold(
-            key: scaffoldKey,
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(50),
-              child: AppBar(
-                backgroundColor: Colors.white,
-                automaticallyImplyLeading: false,
-                flexibleSpace: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                  child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: BoxDecoration(),
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: false,
+          flexibleSpace: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                                child: InkWell(
-                                  onTap: () async {
-                                    logFirebaseEvent(
-                                        'CHAT_PAGE_Icon_mqw5te5l_ON_TAP');
-                                    logFirebaseEvent(
-                                        'Icon_Close-Dialog,-Drawer,-Etc');
-                                    Navigator.pop(context);
-                                  },
-                                  child: Icon(
-                                    Icons.arrow_back_rounded,
-                                    color: Colors.black,
-                                    size: 24,
-                                  ),
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                          child: InkWell(
+                            onTap: () async {
+                              logFirebaseEvent(
+                                  'CHAT_PAGE_Icon_mqw5te5l_ON_TAP');
+                              logFirebaseEvent(
+                                  'Icon_Close-Dialog,-Drawer,-Etc');
+                              Navigator.pop(context);
+                            },
+                            child: Icon(
+                              Icons.arrow_back_rounded,
+                              color: Colors.black,
+                              size: 24,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                          child: Container(
+                            width: 33,
+                            height: 33,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(1, 0, 0, 0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(33),
+                              child: Image.network(
+                                getJsonField(
+                                  widget.bankJson,
+                                  r'''$.bank_logo'''??"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI8AAACECAMAAACeeohiAAAAYFBMVEX///8AAAC5ublKSko6OjpmZmb4+PjX19fe3t6urq4nJyd3d3eTk5OIiIjAwMBvb2/l5eXu7u6cnJynp6fPz8/JyckQEBBBQUGCgoIvLy9SUlJeXl40NDQICAgcHBwiIiKGRo/tAAAEnklEQVR4nO2ai3aiOhRAT6LkIQHzIIKg9v//cvJSae/t1LEEO2uyl8uAsuru4eQkBAAKhUKhUCgUCoVCoVAoFF4CaV9t8A46ooq9WuKOOSCEjvzVGgkXHLS3E/oZISIcoYMLDdGuxa+2AVkhNDLoJgq0R6hWL7UhBqEzB1K7/GkAXIjQK0MkXdKMFDoXGBTDtHGp9LIQ8QtCGqBBVzQQgdDuNbXIZ850C07EB8v1tlqur4N3CAkC+ozOM6GDC9GA0MmubKOqEAxfemZ4sxSymqypw0/oIFzJOaD/cjBAXEr163U0373dGWHT/9h4Kgnt0RWAlUKEL6HYmE9sPAbAZdHbGh1N+eB0wKrf6IShzB7ROX+I8AmhgQD/rY3HVe29y6LMIZKDEB1A24ivaJxJK8SQsRQRpUggNV+QjnZNJh973j3DOVdx/Gk+hD3HqqX6tSgZSClK4p4kaTM2Ku6kJm9w6lRdxjA6sbRHXV3yI5cMRbsKO6gO00XUZfW5z73ckABd2m6jj2t9ndxD63cG8CX8nFVn5nNy09L27hZ8mvc+p7CT32d7SEG5DqlN8tnMfRrp3zPPOoJPa+MABSL51MkHkXl8/EfHzJeI0Ue6GYefyfvsvrhJ4XT1aefx8bZj5ouN4IPlm3sXEBJ2dG47knwaPPMZ40H5fVp2cVNlNy3d+NOy8+cp+Uyz+FSHmGT5fTiP+ax8BzL+TSWft+Hu8xYSag2faw7HDuSvv2zyOZ/uPiFGmXWuPuewcODL88GOoQDhm+jcp1nDJ17/TSqU57dwlSE+8dmucr7qMJcXofid/Pzenbwwfh0++qDcawupf/kfnkI57MNHU1A4beY+u5Bdq/iE+tPD3jtgH6yeeIWxnvtU5xUSaOazhfsl2EkFHz73GXy0xswJ9C4+98WEiww+dO7T+Fq04vjVq9nKj/UKG3KZ++gVEij4mDDP2EifsZd9SGIefGCa+9gVKlDwSQUo9LIxVh4TffjcJ5Tv4wo+ERH+/wrsLRibOIG9zQ+P+SvQ3efCUjBCElcxPmo79wlnL+8Ir/uNZ5wGCsZt9wLk1n1QWbezJzD0m74Buw3f+IN7k9Xntlhw204tzLc/NP8K0vBnMLmWgO7D9p+RK6Xpvn6GPc0h89CS2Ocs7sNjT3+Ofvl7mfrJ5InoxX0U/Q7LjhqK4wVYzsl+61xdWa6b0alagBfcpFsDfdwuxXGJbia+zoyHWWL5hS3RtxI/4YGKQqFQKBQKhUKhUCgUCoXMZFk8/wa5n9D5U5Zfqf4eD/rIdF5vNyLShiXw4d4EUemlSHy5TXfMo4/5PuRDWMel+8OYm5Yw8E9fis5tKKaV+zWqFCNMxQdVuTBaYK1bobE2WFMjWlKxBi/owzkVxlDNsWlFg5tWSN1pzEUnhARrrDbaNLwFLIE4B6y5MbxxTlx3YDG3rOEL+kiNLdadwF1LB8sMsdwwLWsDolFgaMftQDk1IAl0Ssia0Aa4+9YSKRhnoragH+vJD/lQQxllhjPDMDXMEt51uDMKY8ssVZq2nMpOhmdVrZaUQUsAE4Khc96mA6bMg09O/KX9ay1+ATftTlEKfsdNAAAAAElFTkSuQmCC",
                                 ),
+                              width: 33,
+                              height: 33,
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-                                child: Container(
-                                  width: 33,
-                                  height: 33,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Padding(
-                                    padding:
-                                    EdgeInsetsDirectional.fromSTEB(1, 0, 0, 0),
-                                    // child: ClipRRect(
-                                    //   borderRadius: BorderRadius.circular(33),
-                                    // child: Image.network(
-                                    //   getJsonField(
-                                    //     widget.bankJson,
-                                    //     r'''$.bank_logo'''??"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAI8AAACECAMAAACeeohiAAAAYFBMVEX///8AAAC5ublKSko6OjpmZmb4+PjX19fe3t6urq4nJyd3d3eTk5OIiIjAwMBvb2/l5eXu7u6cnJynp6fPz8/JyckQEBBBQUGCgoIvLy9SUlJeXl40NDQICAgcHBwiIiKGRo/tAAAEnklEQVR4nO2ai3aiOhRAT6LkIQHzIIKg9v//cvJSae/t1LEEO2uyl8uAsuru4eQkBAAKhUKhUCgUCoVCoVAoFF4CaV9t8A46ooq9WuKOOSCEjvzVGgkXHLS3E/oZISIcoYMLDdGuxa+2AVkhNDLoJgq0R6hWL7UhBqEzB1K7/GkAXIjQK0MkXdKMFDoXGBTDtHGp9LIQ8QtCGqBBVzQQgdDuNbXIZ850C07EB8v1tlqur4N3CAkC+ozOM6GDC9GA0MmubKOqEAxfemZ4sxSymqypw0/oIFzJOaD/cjBAXEr163U0373dGWHT/9h4Kgnt0RWAlUKEL6HYmE9sPAbAZdHbGh1N+eB0wKrf6IShzB7ROX+I8AmhgQD/rY3HVe29y6LMIZKDEB1A24ivaJxJK8SQsRQRpUggNV+QjnZNJh973j3DOVdx/Gk+hD3HqqX6tSgZSClK4p4kaTM2Ku6kJm9w6lRdxjA6sbRHXV3yI5cMRbsKO6gO00XUZfW5z73ckABd2m6jj2t9ndxD63cG8CX8nFVn5nNy09L27hZ8mvc+p7CT32d7SEG5DqlN8tnMfRrp3zPPOoJPa+MABSL51MkHkXl8/EfHzJeI0Ue6GYefyfvsvrhJ4XT1aefx8bZj5ouN4IPlm3sXEBJ2dG47knwaPPMZ40H5fVp2cVNlNy3d+NOy8+cp+Uyz+FSHmGT5fTiP+ax8BzL+TSWft+Hu8xYSag2faw7HDuSvv2zyOZ/uPiFGmXWuPuewcODL88GOoQDhm+jcp1nDJ17/TSqU57dwlSE+8dmucr7qMJcXofid/Pzenbwwfh0++qDcawupf/kfnkI57MNHU1A4beY+u5Bdq/iE+tPD3jtgH6yeeIWxnvtU5xUSaOazhfsl2EkFHz73GXy0xswJ9C4+98WEiww+dO7T+Fq04vjVq9nKj/UKG3KZ++gVEij4mDDP2EifsZd9SGIefGCa+9gVKlDwSQUo9LIxVh4TffjcJ5Tv4wo+ERH+/wrsLRibOIG9zQ+P+SvQ3efCUjBCElcxPmo79wlnL+8Ir/uNZ5wGCsZt9wLk1n1QWbezJzD0m74Buw3f+IN7k9Xntlhw204tzLc/NP8K0vBnMLmWgO7D9p+RK6Xpvn6GPc0h89CS2Ocs7sNjT3+Ofvl7mfrJ5InoxX0U/Q7LjhqK4wVYzsl+61xdWa6b0alagBfcpFsDfdwuxXGJbia+zoyHWWL5hS3RtxI/4YGKQqFQKBQKhUKhUCgUCoXMZFk8/wa5n9D5U5Zfqf4eD/rIdF5vNyLShiXw4d4EUemlSHy5TXfMo4/5PuRDWMel+8OYm5Yw8E9fis5tKKaV+zWqFCNMxQdVuTBaYK1bobE2WFMjWlKxBi/owzkVxlDNsWlFg5tWSN1pzEUnhARrrDbaNLwFLIE4B6y5MbxxTlx3YDG3rOEL+kiNLdadwF1LB8sMsdwwLWsDolFgaMftQDk1IAl0Ssia0Aa4+9YSKRhnoragH+vJD/lQQxllhjPDMDXMEt51uDMKY8ssVZq2nMpOhmdVrZaUQUsAE4Khc96mA6bMg09O/KX9ay1+ATftTlEKfsdNAAAAAElFTkSuQmCC",
-                                    //   ),
-                                    child: Container(),
-                                    // width: 33,
-                                    // height: 33,
-                                    // fit: BoxFit.cover,
-                                    //),
-                                    //),
-                                  ),
-                                ),
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    getJsonField(
-                                      widget.bankJson,
-                                      r'''$.agent_name''',
-                                    ).toString(),
-                                    'null',
-                                  ),
-                                  style:
-                                  FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'AvenirArabic',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                          child: Text(
+                            valueOrDefault<String>(
+                              getJsonField(
+                                widget.bankJson,
+                                r'''$.agent_name''',
+                              ).toString(),
+                              'null',
+                            ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'AvenirArabic',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                actions: [],
-                elevation: 2,
+                ],
               ),
             ),
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: Chat(
-              messages: _messages,
-              onAttachmentPressed: _handleAttachmentPressed,
-              onMessageTap: _handleMessageTap,
-              onPreviewDataFetched: _handlePreviewDataFetched,
-              onSendPressed: _handleSendPressed,
-              showUserAvatars: true,
-              showUserNames: true,
-              user: _user,
+          ),
+          actions: [],
+          elevation: 2,
+        ),
+      ),
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      body: Container(
+        child: Center(
+          child: Center(
+            child: Visibility(
+              visible: isLoading,
+              replacement: Chat(
+                messages: _messages,
+                onAttachmentPressed: _handleAttachmentPressed,
+                onMessageTap: _handleMessageTap,
+                onPreviewDataFetched: _handlePreviewDataFetched,
+                onSendPressed: _handleSendPressed,
+                showUserAvatars: true,
+                showUserNames: true,
+                user: _user,
+              ),
+              child: SpinKitRipple(
+                color: Color(0xFF2971FB),
+                size: 50,
+              ),
             ),
-          ),
-          child:  SpinKitRipple(
-              color: Color(0xFF2971FB),
-              size: 50,
-          ),
           ),
         ),
       ),
     );
   }
+
   void _addMessage(types.Message message) {
     setState(() {
       _messages.insert(0, message);
@@ -252,9 +250,10 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
   //User Mapping
   types.User asChatUiUser(sendbird.User user) {
     if (user == null) {
-      return types.User(id:"" ,firstName:"" );
+      return types.User(id: "", firstName: "");
     } else {
-      return  types.User(id:user.userId ,firstName:user.nickname,lastSeen: user.lastSeenAt );
+      return types.User(
+          id: user.userId, firstName: user.nickname, lastSeen: user.lastSeenAt);
     }
   }
 
@@ -270,24 +269,29 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
             return;
           }
           Map<String, dynamic> jsonData = {
-
-            "type" : message.runtimeType == sendbird.UserMessage ? 'text' : 'image',
-            "author" : {'firstName': message.sender?.nickname ?? '', 'id': message.sender?.userId, 'lastName': ''},
-            "id":message.messageId.toString(),
+            "type":
+                message.runtimeType == sendbird.UserMessage ? 'text' : 'image',
+            "author": {
+              'firstName': message.sender?.nickname ?? '',
+              'id': message.sender?.userId,
+              'lastName': ''
+            },
+            "id": message.messageId.toString(),
             "text": message.message,
-            "createdAt":message.createdAt,
+            "createdAt": message.createdAt,
           };
-          if(message.runtimeType == sendbird.FileMessage){
+          if (message.runtimeType == sendbird.FileMessage) {
             sendbird.FileMessage msg = message as sendbird.FileMessage;
-            types.PartialImage imageData = types.PartialImage(name: msg.name, size: msg.size, uri: msg.secureUrl);
+            types.PartialImage imageData = types.PartialImage(
+                name: msg.name, size: msg.size, uri: msg.secureUrl);
             jsonData['partialImage'] = imageData;
             jsonData['uri'] = msg.secureUrl;
           }
-          types.Message chatMessage = types.Message.fromJson(jsonData as Map<String, dynamic>);
+          types.Message chatMessage =
+              types.Message.fromJson(jsonData as Map<String, dynamic>);
           setState(() {
             _messages.insert(0, chatMessage);
           });
-
         });
       }
     } on Exception catch (e) {
@@ -295,27 +299,32 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
     }
   }
 
-  void getNewMsg(sendbird.FileMessage msg){
+  void getNewMsg(sendbird.FileMessage msg) {
     Map<String, dynamic> jsonData = {
-      "type" : msg.runtimeType == sendbird.UserMessage ? 'text' : 'image',
-      "author" : {'firstName': msg.sender?.nickname ?? '', 'id': msg.sender?.userId, 'lastName': ''},
-      "id":msg.messageId.toString(),
+      "type": msg.runtimeType == sendbird.UserMessage ? 'text' : 'image',
+      "author": {
+        'firstName': msg.sender?.nickname ?? '',
+        'id': msg.sender?.userId,
+        'lastName': ''
+      },
+      "id": msg.messageId.toString(),
       "text": msg.message,
-      "createdAt":msg.createdAt,
+      "createdAt": msg.createdAt,
     };
-    if(msg.runtimeType == sendbird.FileMessage){
+    if (msg.runtimeType == sendbird.FileMessage) {
       sendbird.FileMessage mssg = msg as sendbird.FileMessage;
-      types.PartialImage imageData = types.PartialImage(name: mssg.name, size: mssg.size, uri: mssg.secureUrl);
+      types.PartialImage imageData = types.PartialImage(
+          name: mssg.name, size: mssg.size, uri: mssg.secureUrl);
       jsonData['partialImage'] = imageData;
       jsonData['uri'] = mssg.secureUrl;
     }
-    types.Message chatMessage = types.Message.fromJson(jsonData as Map<String, dynamic>);
+    types.Message chatMessage =
+        types.Message.fromJson(jsonData as Map<String, dynamic>);
     setState(() {
       _messages.insert(0, chatMessage);
       //_messages.add(chatMessage);
     });
   }
-
 
   void _handleFileSelection() async {
     final result = await FilePicker.platform.pickFiles(
@@ -359,7 +368,8 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
         width: image.width.toDouble(),
       );
       File file = File(result.path);
-      var sentFileMessage = _channel.sendFileMessage(sendbird.FileMessageParams.withFile(file));
+      var sentFileMessage =
+          _channel.sendFileMessage(sendbird.FileMessageParams.withFile(file));
       print(sentFileMessage);
       _addMessage(message);
     }
@@ -372,9 +382,9 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
       if (message.uri.startsWith('http')) {
         try {
           final index =
-          _messages.indexWhere((element) => element.id == message.id);
+              _messages.indexWhere((element) => element.id == message.id);
           final updatedMessage =
-          (_messages[index] as types.FileMessage).copyWith(
+              (_messages[index] as types.FileMessage).copyWith(
             isLoading: true,
           );
 
@@ -394,9 +404,9 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
           }
         } finally {
           final index =
-          _messages.indexWhere((element) => element.id == message.id);
+              _messages.indexWhere((element) => element.id == message.id);
           final updatedMessage =
-          (_messages[index] as types.FileMessage).copyWith(
+              (_messages[index] as types.FileMessage).copyWith(
             isLoading: null,
           );
 
@@ -411,9 +421,9 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
   }
 
   void _handlePreviewDataFetched(
-      types.TextMessage message,
-      types.PreviewData previewData,
-      ) {
+    types.TextMessage message,
+    types.PreviewData previewData,
+  ) {
     final index = _messages.indexWhere((element) => element.id == message.id);
     final updatedMessage = (_messages[index] as types.TextMessage).copyWith(
       previewData: previewData,
@@ -433,11 +443,9 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
     );
     _channel.sendUserMessageWithText(message.text);
     _addMessage(textMessage);
-
   }
 
-
-  Future<void> fetchUser()  async {
+  Future<void> fetchUser() async {
     await load();
   }
 
@@ -450,14 +458,15 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
         ).toString(),
         'null',
       );
-      final _sendbird = await sendbird.SendbirdSdk(appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
+      final _sendbird = await sendbird.SendbirdSdk(
+          appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
       final _ = await _sendbird.connect(currentUserUid);
-     // Future.delayed(Duration(seconds: 5));
+      // Future.delayed(Duration(seconds: 5));
       _user = asChatUiUser(sendbird.SendbirdSdk().currentUser);
       final query = sendbird.GroupChannelListQuery()
         ..limit = 1
-        ..channelUrls = [channel_url] ;
-        //..userIdsExactlyIn = ["abhishek Sevarik","412216","admin","abhishek Visht","rhytham"];
+        ..channelUrls = [channel_url];
+      //..userIdsExactlyIn = ["abhishek Sevarik","412216","admin","abhishek Visht","rhytham"];
       List<GroupChannel> channels = await query.loadNext();
       GroupChannel aChannel;
       // if (channels.length == 0) {
@@ -465,16 +474,17 @@ class _ChatWidgetState extends State<ChatWidget> with sendbird.ChannelEventHandl
       //     ..isPublic = true
       //     ..userIds = ['']);
       // } else {
-        aChannel = channels[0];
+      aChannel = channels[0];
       //}
-      List<sendbird.BaseMessage> messages = await aChannel.getMessagesByTimestamp(
-          DateTime.now().millisecondsSinceEpoch * 1000, sendbird.MessageListParams());
+      List<sendbird.BaseMessage> messages =
+          await aChannel.getMessagesByTimestamp(
+              DateTime.now().millisecondsSinceEpoch * 1000,
+              sendbird.MessageListParams());
       _SendBirdMessages = messages;
       _channel = aChannel;
       asChatUIMessage(messages);
       isLoading = false;
     } catch (error) {
-
       print(error);
     }
   }
