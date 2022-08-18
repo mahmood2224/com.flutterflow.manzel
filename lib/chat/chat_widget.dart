@@ -115,6 +115,34 @@ class _ChatWidgetState extends State<ChatWidget> {
                                     ),
                           ),
                         ),
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            'cmnqvi8z' /*  -  */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'AvenirArabic',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
+                        Text(
+                          valueOrDefault<String>(
+                            getJsonField(
+                              widget.bankJson,
+                              r'''$.bank_name''',
+                            ).toString(),
+                            'null',
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'AvenirArabic',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
                       ],
                     ),
                   ),

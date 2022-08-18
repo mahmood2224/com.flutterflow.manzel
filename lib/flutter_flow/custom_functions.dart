@@ -400,7 +400,11 @@ bool orderProcessStatus(
     case "collect_offers":
       if ((processStage == "reserved") && setType == "checked") {
         return true;
-      } else if ((processStage != "reserved") && setType == "unchecked") {
+      } else if ((processStage == "collect_offers") && setType == "pending") {
+        return true;
+      } else if ((processStage != "reserved" &&
+              processStage != "collect_offers") &&
+          setType == "unchecked") {
         return true;
       } else {
         return false;
@@ -411,8 +415,12 @@ bool orderProcessStatus(
       if ((processStage == "reserved" || processStage == "collect_offers") &&
           setType == "checked") {
         return true;
+      } else if ((processStage == "waiting_offer_acceptance") &&
+          setType == "pending") {
+        return true;
       } else if ((processStage != "reserved" &&
-              processStage != "collect_offers") &&
+              processStage != "collect_offers" &&
+              processStage != "waiting_offer_acceptance") &&
           setType == "unchecked") {
         return true;
       } else {
@@ -425,9 +433,12 @@ bool orderProcessStatus(
               processStage == "waiting_offer_acceptance") &&
           setType == "checked") {
         return true;
+      } else if ((processStage == "accepted") && setType == "pending") {
+        return true;
       } else if ((processStage != "reserved" &&
               processStage != "collect_offers" &&
-              processStage != "waiting_offer_acceptance") &&
+              processStage != "waiting_offer_acceptance" &&
+              processStage != "accepted") &&
           setType == "unchecked") {
         return true;
       } else {
@@ -441,7 +452,10 @@ bool orderProcessStatus(
               processStage == "waiting_offer_acceptance") &&
           setType == "checked") {
         return true;
+      } else if ((processStage == "offer_accepted") && setType == "pending") {
+        return true;
       } else if ((processStage != "reserved" &&
+              processStage != "offer_accepted" &&
               processStage != "collect_offers" &&
               processStage != "waiting_offer_acceptance") &&
           setType == "unchecked") {
@@ -455,13 +469,14 @@ bool orderProcessStatus(
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
               processStage == "waiting_offer_acceptance" ||
-              processStage == "accepted") &&
+              processStage == "offer_accepted" &&
+                  processStage == "ownership_transferred") &&
           setType == "checked") {
         return true;
       } else if ((processStage != "reserved" &&
               processStage != "collect_offers" &&
               processStage != "waiting_offer_acceptance" &&
-              processStage != "accepted") &&
+              processStage != "offer_accepted") &&
           setType == "unchecked") {
         return true;
       } else {
@@ -474,7 +489,8 @@ bool orderProcessStatus(
               processStage == "collect_offers" ||
               processStage == "waiting_offer_acceptance" ||
               processStage == "accepted" ||
-              processStage == "ownership_transferred") &&
+              processStage == "ownership_transferred" ||
+              processStage == "completed") &&
           setType == "checked") {
         return true;
       } else if ((processStage != "reserved" &&
@@ -493,6 +509,16 @@ bool orderProcessStatus(
       if (processStage == "cancelled" && setType == "checked") {
         return true;
       } else if (processStage != "cancelled" && setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      break;
+    case "disqalified":
+      // do something else
+      if (processStage == "disqualified" && setType == "checked") {
+        return true;
+      } else if (processStage != "disqualified" && setType == "unchecked") {
         return true;
       } else {
         return false;
@@ -596,6 +622,25 @@ bool offerScreenConitionalVisibilty(
     } else {
       return false;
     }
+  } else {
+    return false;
+  }
+  // Add your function code here!
+}
+
+bool bookingDeatilsViewOfferVisibilty(
+  String status,
+  String bankIdCount,
+) {
+  int count;
+  if (bankIdCount != null || bankIdCount != "null") {
+    count = int.parse(bankIdCount);
+  } else {
+    count = 0;
+  }
+  if ((status == "waiting_offer_acceptance" || status == "collect_offers") &
+      (count > 1)) {
+    return true;
   } else {
     return false;
   }

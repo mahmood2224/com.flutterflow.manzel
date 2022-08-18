@@ -215,6 +215,18 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       color: Colors.black,
                                       size: 28,
                                     ),
+                                  if (functions.orderProcessStatus(
+                                      getJsonField(
+                                        columnOrderDetailsResponse.jsonBody,
+                                        r'''$.result.order_status''',
+                                      ).toString(),
+                                      'reserved',
+                                      'pending'))
+                                    Icon(
+                                      Icons.pending_sharp,
+                                      color: Color(0xFFF0A637),
+                                      size: 28,
+                                    ),
                                 ],
                               ),
                               Expanded(
@@ -367,6 +379,19 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                   color: Colors.black,
                                                   size: 28,
                                                 ),
+                                              if (functions.orderProcessStatus(
+                                                  getJsonField(
+                                                    columnOrderDetailsResponse
+                                                        .jsonBody,
+                                                    r'''$.result.order_status''',
+                                                  ).toString(),
+                                                  'collect_offers',
+                                                  'pending'))
+                                                Icon(
+                                                  Icons.pending_sharp,
+                                                  color: Color(0xFFF0A637),
+                                                  size: 28,
+                                                ),
                                             ],
                                           ),
                                           Expanded(
@@ -378,23 +403,156 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'zpv0x3sj' /* Collecting Offers */,
-                                                    ),
-                                                    maxLines: 2,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'zpv0x3sj' /* Collecting Offers */,
                                                         ),
+                                                        maxLines: 2,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'AvenirArabic',
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'BOOKING_DETAILS_Container_arq4cwwe_ON_TA');
+                                                          logFirebaseEvent(
+                                                              'Container_Navigate-To');
+                                                          context.pushNamed(
+                                                            'Offers',
+                                                            queryParams: {
+                                                              'propertyId':
+                                                                  serializeParam(
+                                                                      getJsonField(
+                                                                        columnOrderDetailsResponse
+                                                                            .jsonBody,
+                                                                        r'''$.result.property_id''',
+                                                                      )
+                                                                          .toString(),
+                                                                      ParamType
+                                                                          .String),
+                                                            }.withoutNulls,
+                                                          );
+                                                        },
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  '66xer1e5' /* 0 */,
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                              Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'hho1grz4' /* / */,
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                              Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  functions
+                                                                      .bookingScreenCountOffers(
+                                                                          getJsonField(
+                                                                    columnOrderDetailsResponse
+                                                                        .jsonBody,
+                                                                    r'''$.result.bank_ids''',
+                                                                  )),
+                                                                  '0',
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                   if (functions
                                                       .conditionalVisibility(
@@ -452,7 +610,47 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'q0oo8smb' /* /3) */,
+                                                            'awjba3l0' /* / */,
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'AvenirArabic',
+                                                                fontSize: 12,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                        ),
+                                                        Text(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            functions
+                                                                .bookingScreenCountOffers(
+                                                                    getJsonField(
+                                                              columnOrderDetailsResponse
+                                                                  .jsonBody,
+                                                              r'''$.result.bank_ids''',
+                                                            )),
+                                                            '0',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'AvenirArabic',
+                                                                fontSize: 12,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                        ),
+                                                        Text(
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'mehsn231' /* ) */,
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
@@ -512,6 +710,18 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     Icon(
                                       Icons.radio_button_off,
                                       color: Colors.black,
+                                      size: 28,
+                                    ),
+                                  if (functions.orderProcessStatus(
+                                      getJsonField(
+                                        columnOrderDetailsResponse.jsonBody,
+                                        r'''$.result.order_status''',
+                                      ).toString(),
+                                      'waiting_offer_acceptance',
+                                      'pending'))
+                                    Icon(
+                                      Icons.pending_sharp,
+                                      color: Color(0xFFF0A637),
                                       size: 28,
                                     ),
                                 ],
@@ -579,7 +789,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.order_status''',
                                       ).toString(),
-                                      'accepted',
+                                      'offer_accepted',
                                       'checked'))
                                     Icon(
                                       Icons.check_circle_rounded,
@@ -591,11 +801,23 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         columnOrderDetailsResponse.jsonBody,
                                         r'''$.result.order_status''',
                                       ).toString(),
-                                      'accepted',
+                                      'offer_accepted',
                                       'unchecked'))
                                     Icon(
                                       Icons.radio_button_off,
                                       color: Colors.black,
+                                      size: 28,
+                                    ),
+                                  if (functions.orderProcessStatus(
+                                      getJsonField(
+                                        columnOrderDetailsResponse.jsonBody,
+                                        r'''$.result.order_status''',
+                                      ).toString(),
+                                      'offer_accepted',
+                                      'pending'))
+                                    Icon(
+                                      Icons.pending_sharp,
+                                      color: Color(0xFFF0A637),
                                       size: 28,
                                     ),
                                 ],
@@ -611,7 +833,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     children: [
                                       Text(
                                         FFLocalizations.of(context).getText(
-                                          'oqathjmt' /* Transferr Ownership */,
+                                          'oqathjmt' /* Transfer Ownership */,
                                         ),
                                         maxLines: 2,
                                         style: FlutterFlowTheme.of(context)
@@ -628,7 +850,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             columnOrderDetailsResponse.jsonBody,
                                             r'''$.result.order_status''',
                                           ).toString(),
-                                          'accepted'))
+                                          'offer_accepted'))
                                         Text(
                                           FFLocalizations.of(context).getText(
                                             'k64pcuyr' /* Transferring the ownership of ... */,
@@ -749,48 +971,28 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    if (functions.orderProcessStatus(
-                                        getJsonField(
-                                          columnOrderDetailsResponse.jsonBody,
-                                          r'''$.result.order_status''',
-                                        ).toString(),
-                                        'cancelled',
-                                        'checked'))
-                                      Container(
-                                        width: 24,
-                                        height: 24,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFFF0000),
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 5),
-                                          child: Icon(
-                                            Icons.clear,
-                                            color: FlutterFlowTheme.of(context)
-                                                .white,
-                                            size: 22,
-                                          ),
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFFFF0000),
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
                                         ),
                                       ),
-                                    if (functions.orderProcessStatus(
-                                        getJsonField(
-                                          columnOrderDetailsResponse.jsonBody,
-                                          r'''$.result.order_status''',
-                                        ).toString(),
-                                        'cancelled',
-                                        'unchecked'))
-                                      Icon(
-                                        Icons.radio_button_off,
-                                        color: Colors.black,
-                                        size: 28,
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 5),
+                                        child: Icon(
+                                          Icons.clear,
+                                          color: FlutterFlowTheme.of(context)
+                                              .white,
+                                          size: 22,
+                                        ),
                                       ),
+                                    ),
                                   ],
                                 ),
                                 Expanded(
@@ -852,48 +1054,28 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    if (functions.orderProcessStatus(
-                                        getJsonField(
-                                          columnOrderDetailsResponse.jsonBody,
-                                          r'''$.result.order_status''',
-                                        ).toString(),
-                                        'cancelled',
-                                        'checked'))
-                                      Container(
-                                        width: 24,
-                                        height: 24,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFFF0000),
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 5),
-                                          child: Icon(
-                                            Icons.clear,
-                                            color: FlutterFlowTheme.of(context)
-                                                .white,
-                                            size: 22,
-                                          ),
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFFFF0000),
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
                                         ),
                                       ),
-                                    if (functions.orderProcessStatus(
-                                        getJsonField(
-                                          columnOrderDetailsResponse.jsonBody,
-                                          r'''$.result.order_status''',
-                                        ).toString(),
-                                        'cancelled',
-                                        'unchecked'))
-                                      Icon(
-                                        Icons.radio_button_off,
-                                        color: Colors.black,
-                                        size: 28,
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 5),
+                                        child: Icon(
+                                          Icons.clear,
+                                          color: FlutterFlowTheme.of(context)
+                                              .white,
+                                          size: 22,
+                                        ),
                                       ),
+                                    ),
                                   ],
                                 ),
                                 Expanded(

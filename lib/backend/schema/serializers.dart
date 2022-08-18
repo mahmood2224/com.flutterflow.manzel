@@ -7,8 +7,8 @@ import 'user_saved_record.dart';
 import 'property_record.dart';
 import 'transactions_record.dart';
 import 'saved_properties_record.dart';
-import 'user_device_token_record.dart';
 import 'notifications_record.dart';
+import 'users_device_token_record.dart';
 
 import 'index.dart';
 
@@ -27,8 +27,8 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   PropertyRecord,
   TransactionsRecord,
   SavedPropertiesRecord,
-  UserDeviceTokenRecord,
   NotificationsRecord,
+  UsersDeviceTokenRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
