@@ -1456,10 +1456,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Collecting Offers',
       'ar': 'جمع العروض',
     },
-    '66xer1e5': {
-      'en': '0',
-      'ar': '',
-    },
     'hho1grz4': {
       'en': '/',
       'ar': '',

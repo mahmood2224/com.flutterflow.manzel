@@ -477,10 +477,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                                     .center,
                                                             children: [
                                                               Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  '66xer1e5' /* 0 */,
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  getJsonField(
+                                                                    columnOrderDetailsResponse
+                                                                        .jsonBody,
+                                                                    r'''$.result.offer_count''',
+                                                                  ).toString(),
+                                                                  '0',
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
@@ -586,13 +590,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                         Text(
                                                           valueOrDefault<
                                                               String>(
-                                                            functions
-                                                                .bookingScreenCountOffers(
-                                                                    getJsonField(
+                                                            getJsonField(
                                                               columnOrderDetailsResponse
                                                                   .jsonBody,
-                                                              r'''$.result.bank_ids''',
-                                                            )),
+                                                              r'''$.result.offer_count''',
+                                                            ).toString(),
                                                             '0',
                                                           ),
                                                           style: FlutterFlowTheme
