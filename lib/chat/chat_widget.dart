@@ -286,6 +286,9 @@ class _ChatWidgetState extends State<ChatWidget>
                 name: msg.name, size: msg.size, uri: msg.secureUrl);
             jsonData['partialImage'] = imageData;
             jsonData['uri'] = msg.secureUrl;
+            jsonData['type'] = msg.type.contains('image') ? 'image' : 'file';
+            jsonData['name'] = msg.name;
+            jsonData['size'] = msg.size;
           }
           types.Message chatMessage =
               types.Message.fromJson(jsonData as Map<String, dynamic>);
@@ -299,7 +302,7 @@ class _ChatWidgetState extends State<ChatWidget>
     }
   }
 
-  void getNewMsg(sendbird.FileMessage msg) {
+  void getNewMsg(sendbird.BaseMessage msg) {
     Map<String, dynamic> jsonData = {
       "type": msg.runtimeType == sendbird.UserMessage ? 'text' : 'image',
       "author": {
@@ -317,6 +320,9 @@ class _ChatWidgetState extends State<ChatWidget>
           name: mssg.name, size: mssg.size, uri: mssg.secureUrl);
       jsonData['partialImage'] = imageData;
       jsonData['uri'] = mssg.secureUrl;
+      jsonData['type'] = mssg.type.contains('image') ? 'image' : 'file';
+      jsonData['name'] = mssg.name;
+      jsonData['size'] = mssg.size;
     }
     types.Message chatMessage =
         types.Message.fromJson(jsonData as Map<String, dynamic>);
@@ -341,7 +347,10 @@ class _ChatWidgetState extends State<ChatWidget>
         size: result.files.single.size,
         uri: result.files.single.path,
       );
-
+      File file = File(result.files.single.path);
+      var sentFileMessage =
+      _channel.sendFileMessage(sendbird.FileMessageParams.withFile(file));
+      print(sentFileMessage);
       _addMessage(message);
     }
   }
