@@ -162,7 +162,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               useGoogleFonts: false,
                                             ),
                                       ),
-                                      showBadge: true,
+                                      showBadge: functions.notificationBadgeCount(
+                                              notificationsBadgeNotificationsRecordList
+                                                  .toList()) !=
+                                          '0',
                                       shape: BadgeShape.circle,
                                       badgeColor: Color(0xFFD05C5C),
                                       elevation: 4,
