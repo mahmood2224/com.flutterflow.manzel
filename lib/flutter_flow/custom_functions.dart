@@ -683,3 +683,12 @@ String notificationsDateTime(
     }
   }
 }
+
+String notificationBadgeCount(List<NotificationsRecord> unreadNotifications) {
+  // Add your function code here!
+  if (unreadNotifications.isEmpty) {
+    return '0';
+  }
+  String count = unreadNotifications.length.toString();
+  return count;
+}
