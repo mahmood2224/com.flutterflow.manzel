@@ -337,7 +337,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               ).toString(),
                                                                               'waiting_offer_acceptance'))
                                                                             Container(
-                                                                              width: 199,
+                                                                              width: 202,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
                                                                                 color: Color(0xFFF0A637),
