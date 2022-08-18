@@ -131,7 +131,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                   children: [
                                     if (notificationsListNotificationsRecord
                                             .isRead ==
-                                        false)
+                                        0)
                                       Container(
                                         width: 8,
                                         height: 88,
@@ -187,7 +187,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                           ),
                                                           if (notificationsListNotificationsRecord
                                                                   .isRead ==
-                                                              false)
+                                                              0)
                                                             Container(
                                                               width: 10,
                                                               height: 10,

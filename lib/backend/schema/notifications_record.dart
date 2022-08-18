@@ -16,10 +16,6 @@ abstract class NotificationsRecord
   DateTime get createdAt;
 
   @nullable
-  @BuiltValueField(wireName: 'is_read')
-  bool get isRead;
-
-  @nullable
   @BuiltValueField(wireName: 'message_ar')
   String get messageAr;
 
@@ -48,16 +44,20 @@ abstract class NotificationsRecord
   DocumentReference get userId;
 
   @nullable
+  @BuiltValueField(wireName: 'is_read')
+  int get isRead;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(NotificationsRecordBuilder builder) => builder
-    ..isRead = false
     ..messageAr = ''
     ..messageEn = ''
     ..notificationType = ''
     ..orderId = 0
-    ..propertyId = '';
+    ..propertyId = ''
+    ..isRead = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Notifications');
@@ -83,7 +83,6 @@ abstract class NotificationsRecord
 
 Map<String, dynamic> createNotificationsRecordData({
   DateTime createdAt,
-  bool isRead,
   String messageAr,
   String messageEn,
   String notificationType,
@@ -91,16 +90,17 @@ Map<String, dynamic> createNotificationsRecordData({
   String propertyId,
   DateTime updatedAt,
   DocumentReference userId,
+  int isRead,
 }) =>
     serializers.toFirestore(
         NotificationsRecord.serializer,
         NotificationsRecord((n) => n
           ..createdAt = createdAt
-          ..isRead = isRead
           ..messageAr = messageAr
           ..messageEn = messageEn
           ..notificationType = notificationType
           ..orderId = orderId
           ..propertyId = propertyId
           ..updatedAt = updatedAt
-          ..userId = userId));
+          ..userId = userId
+          ..isRead = isRead));
