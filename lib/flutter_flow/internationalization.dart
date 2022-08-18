@@ -387,10 +387,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Notifications
   {
-    'muysw2pl': {
-      'en': 'Today',
-      'ar': 'اليوم',
-    },
     'nm3bcvix': {
       'en': 'Notifications',
       'ar': 'إشعارات',

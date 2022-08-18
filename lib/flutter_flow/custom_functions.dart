@@ -646,3 +646,40 @@ bool bookingDeatilsViewOfferVisibilty(
   }
   // Add your function code here!
 }
+
+String notificationsDateTime(
+  String locale,
+  DateTime timestamp,
+) {
+  if (locale == "en") {
+    if ((DateFormat.yMd().format(timestamp)) ==
+        (DateFormat.yMd().format(DateTime.now()))) {
+      return "Today";
+    } else if ((DateFormat.yMd().format(timestamp)) ==
+        (DateFormat.yMd().format(DateTime.now()))) {
+      return "Yesterday";
+    } else {
+      String result = DateFormat.d().format(timestamp) +
+          " " +
+          DateFormat.MMM().format(timestamp) +
+          "" +
+          DateFormat.y().format(timestamp);
+      return result;
+    }
+  } else {
+    if ((DateFormat.yMd().format(timestamp)) ==
+        (DateFormat.yMd().format(DateTime.now()))) {
+      return "اليوم";
+    } else if ((DateFormat.yMd().format(timestamp)) ==
+        (DateFormat.yMd().format(DateTime.now()))) {
+      return "في الامس";
+    } else {
+      String result = DateFormat.d("ar_SA").format(timestamp) +
+          " " +
+          DateFormat.MMM("ar_SA").format(timestamp) +
+          "" +
+          DateFormat.y("ar_SA").format(timestamp);
+      return result;
+    }
+  }
+}
