@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_device_token_record.dart';
+part of 'users_device_token_record.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<UserDeviceTokenRecord> _$userDeviceTokenRecordSerializer =
-    new _$UserDeviceTokenRecordSerializer();
+Serializer<UsersDeviceTokenRecord> _$usersDeviceTokenRecordSerializer =
+    new _$UsersDeviceTokenRecordSerializer();
 
-class _$UserDeviceTokenRecordSerializer
-    implements StructuredSerializer<UserDeviceTokenRecord> {
+class _$UsersDeviceTokenRecordSerializer
+    implements StructuredSerializer<UsersDeviceTokenRecord> {
   @override
   final Iterable<Type> types = const [
-    UserDeviceTokenRecord,
-    _$UserDeviceTokenRecord
+    UsersDeviceTokenRecord,
+    _$UsersDeviceTokenRecord
   ];
   @override
-  final String wireName = 'UserDeviceTokenRecord';
+  final String wireName = 'UsersDeviceTokenRecord';
 
   @override
   Iterable<Object> serialize(
-      Serializers serializers, UserDeviceTokenRecord object,
+      Serializers serializers, UsersDeviceTokenRecord object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     Object value;
@@ -52,10 +52,10 @@ class _$UserDeviceTokenRecordSerializer
   }
 
   @override
-  UserDeviceTokenRecord deserialize(
+  UsersDeviceTokenRecord deserialize(
       Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new UserDeviceTokenRecordBuilder();
+    final result = new UsersDeviceTokenRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -86,7 +86,7 @@ class _$UserDeviceTokenRecordSerializer
   }
 }
 
-class _$UserDeviceTokenRecord extends UserDeviceTokenRecord {
+class _$UsersDeviceTokenRecord extends UsersDeviceTokenRecord {
   @override
   final String deviceToken;
   @override
@@ -94,26 +94,26 @@ class _$UserDeviceTokenRecord extends UserDeviceTokenRecord {
   @override
   final DocumentReference<Object> reference;
 
-  factory _$UserDeviceTokenRecord(
-          [void Function(UserDeviceTokenRecordBuilder) updates]) =>
-      (new UserDeviceTokenRecordBuilder()..update(updates))._build();
+  factory _$UsersDeviceTokenRecord(
+          [void Function(UsersDeviceTokenRecordBuilder) updates]) =>
+      (new UsersDeviceTokenRecordBuilder()..update(updates))._build();
 
-  _$UserDeviceTokenRecord._({this.deviceToken, this.userId, this.reference})
+  _$UsersDeviceTokenRecord._({this.deviceToken, this.userId, this.reference})
       : super._();
 
   @override
-  UserDeviceTokenRecord rebuild(
-          void Function(UserDeviceTokenRecordBuilder) updates) =>
+  UsersDeviceTokenRecord rebuild(
+          void Function(UsersDeviceTokenRecordBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  UserDeviceTokenRecordBuilder toBuilder() =>
-      new UserDeviceTokenRecordBuilder()..replace(this);
+  UsersDeviceTokenRecordBuilder toBuilder() =>
+      new UsersDeviceTokenRecordBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UserDeviceTokenRecord &&
+    return other is UsersDeviceTokenRecord &&
         deviceToken == other.deviceToken &&
         userId == other.userId &&
         reference == other.reference;
@@ -127,7 +127,7 @@ class _$UserDeviceTokenRecord extends UserDeviceTokenRecord {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'UserDeviceTokenRecord')
+    return (newBuiltValueToStringHelper(r'UsersDeviceTokenRecord')
           ..add('deviceToken', deviceToken)
           ..add('userId', userId)
           ..add('reference', reference))
@@ -135,9 +135,9 @@ class _$UserDeviceTokenRecord extends UserDeviceTokenRecord {
   }
 }
 
-class UserDeviceTokenRecordBuilder
-    implements Builder<UserDeviceTokenRecord, UserDeviceTokenRecordBuilder> {
-  _$UserDeviceTokenRecord _$v;
+class UsersDeviceTokenRecordBuilder
+    implements Builder<UsersDeviceTokenRecord, UsersDeviceTokenRecordBuilder> {
+  _$UsersDeviceTokenRecord _$v;
 
   String _deviceToken;
   String get deviceToken => _$this._deviceToken;
@@ -152,11 +152,11 @@ class UserDeviceTokenRecordBuilder
   set reference(DocumentReference<Object> reference) =>
       _$this._reference = reference;
 
-  UserDeviceTokenRecordBuilder() {
-    UserDeviceTokenRecord._initializeBuilder(this);
+  UsersDeviceTokenRecordBuilder() {
+    UsersDeviceTokenRecord._initializeBuilder(this);
   }
 
-  UserDeviceTokenRecordBuilder get _$this {
+  UsersDeviceTokenRecordBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _deviceToken = $v.deviceToken;
@@ -168,22 +168,22 @@ class UserDeviceTokenRecordBuilder
   }
 
   @override
-  void replace(UserDeviceTokenRecord other) {
+  void replace(UsersDeviceTokenRecord other) {
     ArgumentError.checkNotNull(other, 'other');
-    _$v = other as _$UserDeviceTokenRecord;
+    _$v = other as _$UsersDeviceTokenRecord;
   }
 
   @override
-  void update(void Function(UserDeviceTokenRecordBuilder) updates) {
+  void update(void Function(UsersDeviceTokenRecordBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  UserDeviceTokenRecord build() => _build();
+  UsersDeviceTokenRecord build() => _build();
 
-  _$UserDeviceTokenRecord _build() {
+  _$UsersDeviceTokenRecord _build() {
     final _$result = _$v ??
-        new _$UserDeviceTokenRecord._(
+        new _$UsersDeviceTokenRecord._(
             deviceToken: deviceToken, userId: userId, reference: reference);
     replace(_$result);
     return _$result;

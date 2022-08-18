@@ -11,8 +11,8 @@ import 'schema/user_saved_record.dart';
 import 'schema/property_record.dart';
 import 'schema/transactions_record.dart';
 import 'schema/saved_properties_record.dart';
-import 'schema/user_device_token_record.dart';
 import 'schema/notifications_record.dart';
+import 'schema/users_device_token_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -27,8 +27,8 @@ export 'schema/user_saved_record.dart';
 export 'schema/property_record.dart';
 export 'schema/transactions_record.dart';
 export 'schema/saved_properties_record.dart';
-export 'schema/user_device_token_record.dart';
 export 'schema/notifications_record.dart';
+export 'schema/users_device_token_record.dart';
 
 /// Functions to query UserRecords (as a Stream and as a Future).
 Stream<List<UserRecord>> queryUserRecord({
@@ -324,48 +324,6 @@ Future<FFFirestorePage<SavedPropertiesRecord>> querySavedPropertiesRecordPage({
       isStream: isStream,
     );
 
-/// Functions to query UserDeviceTokenRecords (as a Stream and as a Future).
-Stream<List<UserDeviceTokenRecord>> queryUserDeviceTokenRecord({
-  Query Function(Query) queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      UserDeviceTokenRecord.collection,
-      UserDeviceTokenRecord.serializer,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<UserDeviceTokenRecord>> queryUserDeviceTokenRecordOnce({
-  Query Function(Query) queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      UserDeviceTokenRecord.collection,
-      UserDeviceTokenRecord.serializer,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<FFFirestorePage<UserDeviceTokenRecord>> queryUserDeviceTokenRecordPage({
-  Query Function(Query) queryBuilder,
-  DocumentSnapshot nextPageMarker,
-  int pageSize,
-  bool isStream,
-}) =>
-    queryCollectionPage(
-      UserDeviceTokenRecord.collection,
-      UserDeviceTokenRecord.serializer,
-      queryBuilder: queryBuilder,
-      nextPageMarker: nextPageMarker,
-      pageSize: pageSize,
-      isStream: isStream,
-    );
-
 /// Functions to query NotificationsRecords (as a Stream and as a Future).
 Stream<List<NotificationsRecord>> queryNotificationsRecord({
   Query Function(Query) queryBuilder,
@@ -407,6 +365,49 @@ Future<FFFirestorePage<NotificationsRecord>> queryNotificationsRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
+
+/// Functions to query UsersDeviceTokenRecords (as a Stream and as a Future).
+Stream<List<UsersDeviceTokenRecord>> queryUsersDeviceTokenRecord({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      UsersDeviceTokenRecord.collection,
+      UsersDeviceTokenRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<UsersDeviceTokenRecord>> queryUsersDeviceTokenRecordOnce({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      UsersDeviceTokenRecord.collection,
+      UsersDeviceTokenRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<UsersDeviceTokenRecord>>
+    queryUsersDeviceTokenRecordPage({
+  Query Function(Query) queryBuilder,
+  DocumentSnapshot nextPageMarker,
+  int pageSize,
+  bool isStream,
+}) =>
+        queryCollectionPage(
+          UsersDeviceTokenRecord.collection,
+          UsersDeviceTokenRecord.serializer,
+          queryBuilder: queryBuilder,
+          nextPageMarker: nextPageMarker,
+          pageSize: pageSize,
+          isStream: isStream,
+        );
 
 Stream<List<T>> queryCollection<T>(Query collection, Serializer<T> serializer,
     {Query Function(Query) queryBuilder,

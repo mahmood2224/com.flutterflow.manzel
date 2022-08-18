@@ -387,11 +387,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Notifications
   {
-    'azq2kgbb': {
-      'en':
-          'A new proposal received from  Al Rajhi Bank to your booking  “Almajdiah Apartment“',
-      'ar': 'تم استلام عرض جديد من مصرف الراجحي لحجزك \"شقة الماجدية\" ',
-    },
     'muysw2pl': {
       'en': 'Today',
       'ar': 'اليوم',
@@ -1465,12 +1460,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Collecting Offers',
       'ar': 'جمع العروض',
     },
+    '66xer1e5': {
+      'en': '0',
+      'ar': '',
+    },
+    'hho1grz4': {
+      'en': '/',
+      'ar': '',
+    },
     'xa9e1t5y': {
       'en': 'Waiting for banks to submit offers (',
       'ar': '',
     },
-    'q0oo8smb': {
-      'en': '/3)',
+    'awjba3l0': {
+      'en': '/',
+      'ar': '',
+    },
+    'mehsn231': {
+      'en': ')',
       'ar': '',
     },
     '3a3j0qu5': {
@@ -1482,7 +1489,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'oqathjmt': {
-      'en': 'Transferr Ownership',
+      'en': 'Transfer Ownership',
       'ar': 'العرض مقبول',
     },
     'k64pcuyr': {
@@ -1568,6 +1575,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Chat
   {
+    'cmnqvi8z': {
+      'en': ' - ',
+      'ar': '',
+    },
     '9onf7xjs': {
       'en': 'Home',
       'ar': 'الرئيسية',
