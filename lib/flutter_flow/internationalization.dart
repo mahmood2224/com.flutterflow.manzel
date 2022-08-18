@@ -340,10 +340,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // HomeScreen
   {
-    'waavnvd4': {
-      'en': '1',
-      'ar': '1',
-    },
     'qnr0o42y': {
       'en': 'Where are you looking?',
       'ar': 'أين تبحث ؟',

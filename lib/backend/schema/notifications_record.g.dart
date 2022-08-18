@@ -32,13 +32,6 @@ class _$NotificationsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
-    value = object.isRead;
-    if (value != null) {
-      result
-        ..add('is_read')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     value = object.messageAr;
     if (value != null) {
       result
@@ -88,6 +81,12 @@ class _$NotificationsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType(Object)])));
     }
+    value = object.isRead;
+    if (value != null) {
+      result
+        ..add('is_read')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -114,10 +113,6 @@ class _$NotificationsRecordSerializer
         case 'created_at':
           result.createdAt = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
-          break;
-        case 'is_read':
-          result.isRead = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
           break;
         case 'message_ar':
           result.messageAr = serializers.deserialize(value,
@@ -149,6 +144,10 @@ class _$NotificationsRecordSerializer
                       DocumentReference, const [const FullType(Object)]))
               as DocumentReference<Object>;
           break;
+        case 'is_read':
+          result.isRead = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -166,8 +165,6 @@ class _$NotificationsRecord extends NotificationsRecord {
   @override
   final DateTime createdAt;
   @override
-  final bool isRead;
-  @override
   final String messageAr;
   @override
   final String messageEn;
@@ -182,6 +179,8 @@ class _$NotificationsRecord extends NotificationsRecord {
   @override
   final DocumentReference<Object> userId;
   @override
+  final int isRead;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$NotificationsRecord(
@@ -190,7 +189,6 @@ class _$NotificationsRecord extends NotificationsRecord {
 
   _$NotificationsRecord._(
       {this.createdAt,
-      this.isRead,
       this.messageAr,
       this.messageEn,
       this.notificationType,
@@ -198,6 +196,7 @@ class _$NotificationsRecord extends NotificationsRecord {
       this.propertyId,
       this.updatedAt,
       this.userId,
+      this.isRead,
       this.reference})
       : super._();
 
@@ -215,7 +214,6 @@ class _$NotificationsRecord extends NotificationsRecord {
     if (identical(other, this)) return true;
     return other is NotificationsRecord &&
         createdAt == other.createdAt &&
-        isRead == other.isRead &&
         messageAr == other.messageAr &&
         messageEn == other.messageEn &&
         notificationType == other.notificationType &&
@@ -223,6 +221,7 @@ class _$NotificationsRecord extends NotificationsRecord {
         propertyId == other.propertyId &&
         updatedAt == other.updatedAt &&
         userId == other.userId &&
+        isRead == other.isRead &&
         reference == other.reference;
   }
 
@@ -237,14 +236,14 @@ class _$NotificationsRecord extends NotificationsRecord {
                             $jc(
                                 $jc(
                                     $jc($jc(0, createdAt.hashCode),
-                                        isRead.hashCode),
-                                    messageAr.hashCode),
-                                messageEn.hashCode),
-                            notificationType.hashCode),
-                        orderId.hashCode),
-                    propertyId.hashCode),
-                updatedAt.hashCode),
-            userId.hashCode),
+                                        messageAr.hashCode),
+                                    messageEn.hashCode),
+                                notificationType.hashCode),
+                            orderId.hashCode),
+                        propertyId.hashCode),
+                    updatedAt.hashCode),
+                userId.hashCode),
+            isRead.hashCode),
         reference.hashCode));
   }
 
@@ -252,7 +251,6 @@ class _$NotificationsRecord extends NotificationsRecord {
   String toString() {
     return (newBuiltValueToStringHelper(r'NotificationsRecord')
           ..add('createdAt', createdAt)
-          ..add('isRead', isRead)
           ..add('messageAr', messageAr)
           ..add('messageEn', messageEn)
           ..add('notificationType', notificationType)
@@ -260,6 +258,7 @@ class _$NotificationsRecord extends NotificationsRecord {
           ..add('propertyId', propertyId)
           ..add('updatedAt', updatedAt)
           ..add('userId', userId)
+          ..add('isRead', isRead)
           ..add('reference', reference))
         .toString();
   }
@@ -272,10 +271,6 @@ class NotificationsRecordBuilder
   DateTime _createdAt;
   DateTime get createdAt => _$this._createdAt;
   set createdAt(DateTime createdAt) => _$this._createdAt = createdAt;
-
-  bool _isRead;
-  bool get isRead => _$this._isRead;
-  set isRead(bool isRead) => _$this._isRead = isRead;
 
   String _messageAr;
   String get messageAr => _$this._messageAr;
@@ -306,6 +301,10 @@ class NotificationsRecordBuilder
   DocumentReference<Object> get userId => _$this._userId;
   set userId(DocumentReference<Object> userId) => _$this._userId = userId;
 
+  int _isRead;
+  int get isRead => _$this._isRead;
+  set isRead(int isRead) => _$this._isRead = isRead;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -319,7 +318,6 @@ class NotificationsRecordBuilder
     final $v = _$v;
     if ($v != null) {
       _createdAt = $v.createdAt;
-      _isRead = $v.isRead;
       _messageAr = $v.messageAr;
       _messageEn = $v.messageEn;
       _notificationType = $v.notificationType;
@@ -327,6 +325,7 @@ class NotificationsRecordBuilder
       _propertyId = $v.propertyId;
       _updatedAt = $v.updatedAt;
       _userId = $v.userId;
+      _isRead = $v.isRead;
       _reference = $v.reference;
       _$v = null;
     }
@@ -351,7 +350,6 @@ class NotificationsRecordBuilder
     final _$result = _$v ??
         new _$NotificationsRecord._(
             createdAt: createdAt,
-            isRead: isRead,
             messageAr: messageAr,
             messageEn: messageEn,
             notificationType: notificationType,
@@ -359,6 +357,7 @@ class NotificationsRecordBuilder
             propertyId: propertyId,
             updatedAt: updatedAt,
             userId: userId,
+            isRead: isRead,
             reference: reference);
     replace(_$result);
     return _$result;

@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../backend/backend.dart';
 import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -109,45 +110,75 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               fit: BoxFit.none,
                             ),
                             if (loggedIn)
-                              InkWell(
-                                onTap: () async {
-                                  logFirebaseEvent(
-                                      'HOME_SCREEN_notificationsBadge_ON_TAP');
-                                  logFirebaseEvent(
-                                      'notificationsBadge_Navigate-To');
-                                  context.pushNamed('Notifications');
-                                },
-                                child: Badge(
-                                  badgeContent: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'waavnvd4' /* 1 */,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'AvenirArabic',
-                                          color: Colors.white,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: false,
-                                        ),
-                                  ),
-                                  showBadge: true,
-                                  shape: BadgeShape.circle,
-                                  badgeColor: Color(0xFFD05C5C),
-                                  elevation: 4,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      7, 7, 7, 7),
-                                  position: BadgePosition.topEnd(),
-                                  animationType: BadgeAnimationType.scale,
-                                  toAnimate: true,
-                                  child: Icon(
-                                    Icons.notifications_none,
-                                    color: Colors.white,
-                                    size: 26,
-                                  ),
+                              StreamBuilder<List<NotificationsRecord>>(
+                                stream: queryNotificationsRecord(
+                                  queryBuilder: (notificationsRecord) =>
+                                      notificationsRecord
+                                          .where('user_id',
+                                              isEqualTo: currentUserReference)
+                                          .where('is_read', isEqualTo: 0),
                                 ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: SpinKitRipple(
+                                          color: Color(0xFF2971FB),
+                                          size: 50,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<NotificationsRecord>
+                                      notificationsBadgeNotificationsRecordList =
+                                      snapshot.data;
+                                  return InkWell(
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                          'HOME_SCREEN_notificationsBadge_ON_TAP');
+                                      logFirebaseEvent(
+                                          'notificationsBadge_Navigate-To');
+                                      context.pushNamed('Notifications');
+                                    },
+                                    child: Badge(
+                                      badgeContent: Text(
+                                        valueOrDefault<String>(
+                                          functions.notificationBadgeCount(
+                                              notificationsBadgeNotificationsRecordList
+                                                  .toList()),
+                                          '0',
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'AvenirArabic',
+                                              color: Colors.white,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.normal,
+                                              useGoogleFonts: false,
+                                            ),
+                                      ),
+                                      showBadge: true,
+                                      shape: BadgeShape.circle,
+                                      badgeColor: Color(0xFFD05C5C),
+                                      elevation: 4,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          7, 7, 7, 7),
+                                      position: BadgePosition.topEnd(),
+                                      animationType: BadgeAnimationType.scale,
+                                      toAnimate: true,
+                                      child: Icon(
+                                        Icons.notifications_none,
+                                        color: Colors.white,
+                                        size: 26,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                           ],
                         ),
