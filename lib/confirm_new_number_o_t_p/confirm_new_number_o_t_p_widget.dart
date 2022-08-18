@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../notification_handler/firebase_cloud_messaging.dart';
+
 class ConfirmNewNumberOTPWidget extends StatefulWidget {
   final String phoneNumber;
   const ConfirmNewNumberOTPWidget({Key key,this.phoneNumber}) : super(key: key);
@@ -186,6 +188,22 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                 final userUpdateData = createUserRecordData(
                                   status: 'Active',
                                 );
+                                final userNotificationRecord = createUsersDeviceTokenRecordData(
+                                  deviceToken: await FirebaseMessagingUtils.getPushNotificationToken(),
+                                  userId: currentUserReference,
+                                );
+                                final QuerySnapshot result = await UsersDeviceTokenRecord.collection
+                                    .where('user_id', isEqualTo: currentUserReference).limit(1)
+                                    .get();
+
+                                if(result.docs.isNotEmpty) {
+                                  await UsersDeviceTokenRecord.collection.doc(
+                                      result.docs[0].id).update(
+                                      userNotificationRecord);
+                                }else {
+                                  await UsersDeviceTokenRecord.collection.doc().set(userNotificationRecord);
+                                }
+
                                 await currentUserReference.update(userUpdateData);
                                 if (currentUserDisplayName.isEmpty &&
                                     currentUserDocument.name.isEmpty) {
