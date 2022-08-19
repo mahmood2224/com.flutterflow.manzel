@@ -41,13 +41,17 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
     setState(() => _loading = true);
     try {
       final initialPageName = message.data['initialPageName'] as String;
-      final initialParameterData = getInitialParameterData(message.data);
+      //final initialParameterData = getInitialParameterData(message.data);
+      final initialParameterData = message.data;
       final pageBuilder = pageBuilderMap[initialPageName];
       if (pageBuilder != null) {
         final page = await pageBuilder(initialParameterData);
+        if(Navigator.canPop(context)){
+          Navigator.pop(context);
+        }
         await Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => page),
+          MaterialPageRoute(builder: (context) => page)
         );
       }
     } catch (e) {

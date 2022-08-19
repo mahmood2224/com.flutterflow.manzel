@@ -24,7 +24,7 @@ void main() async {
     badge: true,
     sound: true,
   );
-  FirebaseCloudMessaging().init();
+ // FirebaseCloudMessaging().init();
 
   FFAppState(); // Initialize FFAppState
 
@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
 
   final authUserSub = authenticatedUserStream.listen((_) {});
   final fcmTokenSub = fcmTokenUserStream.listen((_) {});
-  final _firebaseMessaging = FirebaseMessaging.instance;
+ // final _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
@@ -64,9 +64,9 @@ class _MyAppState extends State<MyApp> {
       Duration(seconds: 1),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
-    _firebaseMessaging.getToken().then((value) {
-      print('Your FCM token:- $value');
-    });
+    // _firebaseMessaging.getToken().then((value) {
+    //   print('Your FCM token:- $value');
+    // });
   }
 
   @override

@@ -521,6 +521,10 @@ class _ChatWidgetState extends State<ChatWidget>
       _channel = aChannel;
       asChatUIMessage(messages);
       isLoading = false;
+      if(messages.isEmpty){
+        setState(() {
+        });
+      }
     } catch (error) {
       print(error);
     }

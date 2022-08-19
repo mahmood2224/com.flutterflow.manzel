@@ -467,16 +467,19 @@ bool orderProcessStatus(
       break;
     case "ownership_transferred":
       if ((processStage == "reserved" ||
-              processStage == "collect_offers" ||
-              processStage == "waiting_offer_acceptance" ||
-              processStage == "offer_accepted" &&
-                  processStage == "ownership_transferred") &&
+          processStage == "collect_offers" ||
+          processStage == "waiting_offer_acceptance" ||
+          processStage == "offer_accepted" ||
+          processStage == "completed" ||
+          processStage == "ownership_transferred") &&
           setType == "checked") {
         return true;
       } else if ((processStage != "reserved" &&
-              processStage != "collect_offers" &&
-              processStage != "waiting_offer_acceptance" &&
-              processStage != "offer_accepted") &&
+          processStage != "collect_offers" &&
+          processStage != "waiting_offer_acceptance" &&
+          processStage != "offer_accepted" &&
+          processStage != "ownership_transferred" &&
+          processStage != "completed") &&
           setType == "unchecked") {
         return true;
       } else {
@@ -486,17 +489,19 @@ bool orderProcessStatus(
       break;
     case "completed":
       if ((processStage == "reserved" ||
-              processStage == "collect_offers" ||
-              processStage == "waiting_offer_acceptance" ||
-              processStage == "accepted" ||
-              processStage == "ownership_transferred" ||
-              processStage == "completed") &&
+          processStage == "collect_offers" ||
+          processStage == "waiting_offer_acceptance" ||
+          processStage == "offer_accepted" ||
+          processStage == "completed" ||
+          processStage == "ownership_transferred") &&
           setType == "checked") {
         return true;
       } else if ((processStage != "reserved" &&
-              processStage != "collect_offers" &&
-              processStage != "waiting_offer_acceptance" &&
-              processStage != "accepted") &&
+          processStage != "collect_offers" &&
+          processStage != "waiting_offer_acceptance" &&
+          processStage != "offer_accepted" &&
+          processStage != "ownership_transferred" &&
+          processStage != "completed") &&
           setType == "unchecked") {
         return true;
       } else {
