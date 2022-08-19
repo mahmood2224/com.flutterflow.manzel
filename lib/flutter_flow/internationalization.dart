@@ -876,6 +876,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PropertyDetails
   {
+    'y7dslpr6': {
+      'en': '#',
+      'ar': '',
+    },
     'ak0ss5un': {
       'en': 'Updated: ',
       'ar': 'محدث:',

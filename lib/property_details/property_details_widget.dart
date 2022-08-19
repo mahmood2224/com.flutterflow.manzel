@@ -319,6 +319,21 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: [
+                                                    Text(
+                                                      '#',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'AvenirArabic',
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            useGoogleFonts:
+                                                                false,
+                                                          ),
+                                                    ),
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
@@ -698,6 +713,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             fontSize: 13,
                                                             fontWeight:
                                                                 FontWeight.bold,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline,
                                                             useGoogleFonts:
                                                                 false,
                                                           ),
@@ -1611,13 +1629,16 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
                                                                             .start,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
                                                                     children: [
                                                                       Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            6,
-                                                                            6,
-                                                                            6,
-                                                                            6),
+                                                                            5,
+                                                                            5,
+                                                                            5,
+                                                                            5),
                                                                         child:
                                                                             ClipRRect(
                                                                           borderRadius:
@@ -1654,21 +1675,24 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
-                                                                              Text(
-                                                                                getJsonField(
-                                                                                  banksItem,
-                                                                                  r'''$..bank_name''',
-                                                                                ).toString(),
-                                                                                maxLines: 2,
-                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'AvenirArabic',
-                                                                                      fontSize: 14,
-                                                                                      fontWeight: FontWeight.bold,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(9, 0, 0, 0),
+                                                                                child: Text(
+                                                                                  getJsonField(
+                                                                                    banksItem,
+                                                                                    r'''$..bank_name''',
+                                                                                  ).toString(),
+                                                                                  maxLines: 2,
+                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                        fontFamily: 'AvenirArabic',
+                                                                                        fontSize: 14,
+                                                                                        fontWeight: FontWeight.bold,
+                                                                                        useGoogleFonts: false,
+                                                                                      ),
+                                                                                ),
                                                                               ),
                                                                               Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 17),
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(9, 0, 0, 17),
                                                                                 child: Text(
                                                                                   FFLocalizations.of(context).getText(
                                                                                     '1v1r516t' /* More Details */,

@@ -75,8 +75,9 @@ class _TermsConditionsWidgetState extends State<TermsConditionsWidget> {
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'TERMS_CONDITIONS_Icon_30sitq7s_ON_TAP');
-                                      logFirebaseEvent('Icon_Navigate-To');
-                                      context.pushNamed('PropertyDetails');
+                                      logFirebaseEvent(
+                                          'Icon_Close-Dialog,-Drawer,-Etc');
+                                      Navigator.pop(context);
                                     },
                                     child: Icon(
                                       Icons.close,
