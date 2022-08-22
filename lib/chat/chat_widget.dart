@@ -361,11 +361,10 @@ class _ChatWidgetState extends State<ChatWidget>
   }
 
   void _handleFileSelection() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.any,
-    );
+    final FilePickerResult result = await FilePicker.platform.pickFiles();
 
     if (result != null && result.files.single.path != null) {
+      File file = File(result.files.single.path);
       final message = types.FileMessage(
         author: _user,
         createdAt: DateTime.now().millisecondsSinceEpoch,
@@ -375,10 +374,15 @@ class _ChatWidgetState extends State<ChatWidget>
         size: result.files.single.size,
         uri: result.files.single.path,
       );
-      File file = File(result.files.single.path);
+      final fileMessage = sendbird.FileMessageParams.withFile(
+        file,
+        name: result.files.single.name,
+      );
       var sentFileMessage =
-      _channel.sendFileMessage(sendbird.FileMessageParams.withFile(file));
-      print(sentFileMessage);
+      _channel.sendFileMessage(fileMessage,onCompleted:(message,error){
+        print(message);
+        print("error------------->${error}");
+      });
       _addMessage(message);
     }
   }
