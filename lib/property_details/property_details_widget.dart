@@ -320,7 +320,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       MainAxisSize.min,
                                                   children: [
                                                     Text(
-                                                      '#',
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'tpufujg8' /* # */,
+                                                      ),
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyText1

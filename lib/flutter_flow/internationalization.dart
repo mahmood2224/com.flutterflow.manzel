@@ -344,14 +344,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Where are you looking?',
       'ar': 'أين تبحث ؟',
     },
-    'fei6w05f': {
-      'en': 'Sort By',
-      'ar': 'صنف حسب',
-    },
-    'jxwg61ha': {
-      'en': 'Near to me',
-      'ar': 'بالقرب مني',
-    },
     'etpebw43': {
       'en': 'Approved Banks',
       'ar': 'البنوك المعتمدة',
@@ -876,7 +868,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PropertyDetails
   {
-    'y7dslpr6': {
+    'tpufujg8': {
       'en': '#',
       'ar': '',
     },
@@ -1662,6 +1654,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     't7s7qd09': {
       'en': 'Cancel',
       'ar': 'إلغاء',
+    },
+  },
+  // termsConditionsBottomSheet
+  {
+    'dn9pwlw2': {
+      'en': 'Terms & Conditions',
+      'ar': 'البنود و الظروف',
     },
   },
   // Miscellaneous
