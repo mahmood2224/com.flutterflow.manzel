@@ -704,7 +704,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Please Enter Valid Installment Range',
+                                  'Please select valid installment range',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(

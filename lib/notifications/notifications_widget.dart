@@ -132,6 +132,32 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                               await notificationsListNotificationsRecord
                                   .reference
                                   .update(notificationsUpdateData);
+                              if (notificationsListNotificationsRecord
+                                      .notificationType ==
+                                  'offer_accepted') {
+                                logFirebaseEvent('Container_Navigate-To');
+                                context.pushNamed(
+                                  'Offers',
+                                  queryParams: {
+                                    'propertyId': serializeParam(
+                                        notificationsListNotificationsRecord
+                                            .propertyId,
+                                        ParamType.String),
+                                  }.withoutNulls,
+                                );
+                              } else {
+                                logFirebaseEvent('Container_Navigate-To');
+                                context.pushNamed(
+                                  'BookingDetails',
+                                  queryParams: {
+                                    'orderId': serializeParam(
+                                        notificationsListNotificationsRecord
+                                            .orderId
+                                            ?.toString(),
+                                        ParamType.String),
+                                  }.withoutNulls,
+                                );
+                              }
                             },
                             child: Container(
                               width: 100,
@@ -185,48 +211,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Stack(
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  1, 1),
-                                                          children: [
-                                                            ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          30),
-                                                              child:
-                                                                  Image.network(
-                                                                'https://customercarecontacts.com/wp-content/uploads/2017/09/Al-Rajhi-Bank.jpg',
-                                                                width: 35,
-                                                                height: 35,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            ),
-                                                            if (notificationsListNotificationsRecord
-                                                                    .isRead ==
-                                                                0)
-                                                              Container(
-                                                                width: 10,
-                                                                height: 10,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Color(
-                                                                      0xFF81D05C),
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .white,
-                                                                    width: 2,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                          ],
-                                                        ),
                                                         Expanded(
                                                           child: Padding(
                                                             padding:
