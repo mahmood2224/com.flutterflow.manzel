@@ -204,12 +204,16 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     initialOption: citiesListValue ??=
                                         FFAppState().filterCity,
                                     options: functions
-                                        .cityListBuilder((getJsonField(
-                                          citiesListCityListResponse.jsonBody,
-                                          r'''$.cities''',
-                                        ) as List)
-                                            .map<String>((s) => s.toString())
-                                            .toList())
+                                        .cityListBuilder(
+                                            (getJsonField(
+                                              citiesListCityListResponse
+                                                  .jsonBody,
+                                              r'''$.cities''',
+                                            ) as List)
+                                                .map<String>(
+                                                    (s) => s.toString())
+                                                .toList(),
+                                            FFAppState().locale)
                                         .toList(),
                                     onChanged: (val) =>
                                         setState(() => citiesListValue = val),
@@ -286,15 +290,18 @@ class _FilterWidgetState extends State<FilterWidget> {
                                             : functions.choicechipUnselected(
                                                 FFAppState()
                                                     .filterPropertyType
-                                                    .toList()),
+                                                    .toList(),
+                                                FFAppState().locale),
                                     options: (functions.propertTypeBuilder(
                                                 (getJsonField(
-                                              columnPropertiesResponse.jsonBody,
-                                              r'''$.meta.property_type''',
-                                            ) as List)
+                                                  columnPropertiesResponse
+                                                      .jsonBody,
+                                                  r'''$.meta.property_type''',
+                                                ) as List)
                                                     .map<String>(
                                                         (s) => s.toString())
-                                                    .toList()) ??
+                                                    .toList(),
+                                                FFAppState().locale) ??
                                             [])
                                         .map((label) => ChipData(label))
                                         .toList(),
@@ -585,7 +592,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                                             : functions.choicechipUnselected(
                                                 FFAppState()
                                                     .filterFurnishingType
-                                                    .toList()),
+                                                    .toList(),
+                                                FFAppState().locale),
                                     options: [
                                       ChipData(
                                           FFLocalizations.of(context).getText(
@@ -667,7 +675,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                             setState(() => FFAppState().filterPropertyType =
                                 functions
                                     .choicechipUnselected(
-                                        propertyTypeListValues.toList())
+                                        propertyTypeListValues.toList(),
+                                        FFAppState().locale)
                                     .toList());
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(
@@ -676,7 +685,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                             setState(() => FFAppState().filterFurnishingType =
                                 functions
                                     .choicechipUnselected(
-                                        isFurnishingValues.toList())
+                                        isFurnishingValues.toList(),
+                                        FFAppState().locale)
                                     .toList());
                             logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterMinPrice = 0);
@@ -704,7 +714,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Please select valid installment range',
+                                  functions.snackBarMessage(
+                                      'invalidInstallmentRange',
+                                      FFAppState().locale),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(

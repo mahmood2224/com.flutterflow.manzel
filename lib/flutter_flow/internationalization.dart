@@ -394,9 +394,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'You have ',
       'ar': 'لديك',
     },
+    '6yiidhe3': {
+      'en': ' ',
+      'ar': '',
+    },
     '9i2we2yx': {
       'en': ' offers active',
       'ar': 'العروض النشطة',
+    },
+    '3vfzs138': {
+      'en': ' ',
+      'ar': '',
     },
     '1cb5at0r': {
       'en': 'Login',
@@ -450,10 +458,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Initial installment',
       'ar': 'القسط الأولي',
     },
-    'ldwv6qbd': {
-      'en': '.00',
-      'ar': '.00',
-    },
     'z7x7wv59': {
       'en': 'SAR',
       'ar': 'ريال سعودي',
@@ -470,10 +474,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Total price',
       'ar': 'السعر الكلي',
     },
-    'c0ty6rbh': {
-      'en': '.00',
-      'ar': '.00',
-    },
     'h47bvnhi': {
       'en': 'SAR',
       'ar': 'ريال سعودي',
@@ -485,6 +485,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'pasrxjal': {
       'en': 'Chat with ',
       'ar': 'الدردشة مع',
+    },
+    'alqnps4o': {
+      'en': ' ',
+      'ar': '',
     },
     'y0qb0uvi': {
       'en': 'Accept offer',
@@ -668,10 +672,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Initial installment',
       'ar': 'القسط الأولي',
     },
-    '6yumrre4': {
-      'en': '.00',
-      'ar': '.00',
-    },
     '2szdgt5y': {
       'en': 'SAR',
       'ar': 'ريال سعودي',
@@ -687,10 +687,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '3htsv7vx': {
       'en': 'Total price',
       'ar': 'السعر الكلي',
-    },
-    '3q0s7kis': {
-      'en': '.00',
-      'ar': '.00',
     },
     'k4nw3frq': {
       'en': 'SAR',
@@ -711,9 +707,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Filter results ',
       'ar': 'نتائج التصفية',
     },
+    'kyyqdg35': {
+      'en': ' ',
+      'ar': '',
+    },
     'wpcx1tpl': {
-      'en': ' properties found',
+      'en': 'properties found',
       'ar': 'نتائج',
+    },
+    '16bydr50': {
+      'en': '  ',
+      'ar': '',
     },
     '7egi5iad': {
       'en': 'All',
@@ -858,8 +862,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'أين تبحث ؟',
     },
     'wptanz77': {
-      'en': ' properties available',
+      'en': ' properties available ',
       'ar': 'الملكيات المتاحة',
+    },
+    'w6jzdg0z': {
+      'en': '  ',
+      'ar': '',
     },
     'fce9ky0f': {
       'en': 'Home',
@@ -1038,6 +1046,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'nukctvmg': {
       'en': ' properties found',
       'ar': 'نتائج البحث',
+    },
+    'wk7xyqu8': {
+      'en': ' ',
+      'ar': '',
     },
     'ntrpmj08': {
       'en': 'Home',
@@ -1450,7 +1462,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'hho1grz4': {
       'en': '/',
-      'ar': '',
+      'ar': '/',
     },
     'xa9e1t5y': {
       'en': 'Waiting for banks to submit offers (',
@@ -1541,8 +1553,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'المبلغ',
     },
     '17eaou67': {
-      'en': '.00 SAR',
-      'ar': '.00 ريال سعودي',
+      'en': 'SAR',
+      'ar': 'ريال سعودي',
     },
     'x0ed6u9h': {
       'en': 'Date & Time',
@@ -1566,6 +1578,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '9onf7xjs': {
       'en': 'Home',
       'ar': 'الرئيسية',
+    },
+  },
+  // test
+  {
+    '8ud1d7fy': {
+      'en': 'Page Title',
+      'ar': '',
+    },
+    '8suwxh5l': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // NotFoundPage
@@ -1615,10 +1638,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'iyjhj02m': {
       'en': 'Reservation cost',
       'ar': 'تكلفة الحجز',
-    },
-    'ovajaogv': {
-      'en': '.00',
-      'ar': '.00',
     },
     'wqlgaavg': {
       'en': 'SAR',

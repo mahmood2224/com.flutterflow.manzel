@@ -136,6 +136,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
           future: OrderDetailsCall.call(
             orderId: widget.orderId,
             userid: currentUserUid,
+            locale: FFAppState().locale,
           ),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
@@ -1683,7 +1684,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         ),
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            '17eaou67' /* .00 SAR */,
+                                            '17eaou67' /* SAR */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1

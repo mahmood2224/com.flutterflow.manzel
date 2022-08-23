@@ -137,9 +137,14 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                       );
                     },
                   ),
+                  if (FFAppState().locale == 'en')
+                    Text(
+                      ' ',
+                      style: FlutterFlowTheme.of(context).bodyText1,
+                    ),
                   Text(
                     FFLocalizations.of(context).getText(
-                      'wpcx1tpl' /*  properties found */,
+                      'wpcx1tpl' /* properties found */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'AvenirArabic',
@@ -147,6 +152,13 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                           useGoogleFonts: false,
                         ),
                   ),
+                  if (FFAppState().locale == 'ar')
+                    Text(
+                      FFLocalizations.of(context).getText(
+                        '16bydr50' /*    */,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyText1,
+                    ),
                 ],
               ),
             ],
@@ -283,7 +295,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.5,
                                 child: NoResultWidget(
-                                  titleText: 'No results found',
+                                  titleText: functions.emptyListWidgetTitle(
+                                      'filterResult', FFAppState().locale),
                                   screenName: 'result',
                                 ),
                               ),
@@ -777,11 +790,19 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Text(
-                                                  functions.formatAmount(
+                                                  valueOrDefault<String>(
+                                                    functions
+                                                        .formatAmountWithoutDecimal(
+                                                            valueOrDefault<
+                                                                String>(
                                                       getJsonField(
-                                                    propertiesItem,
-                                                    r'''$..property_price''',
-                                                  ).toString()),
+                                                        propertiesItem,
+                                                        r'''$..property_price''',
+                                                      ).toString(),
+                                                      '0',
+                                                    )),
+                                                    '0',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText2

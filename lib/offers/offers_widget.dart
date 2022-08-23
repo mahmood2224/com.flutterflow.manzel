@@ -136,6 +136,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                         propertyId: functions
                                             .offerScreenPropertyIdisNull(
                                                 widget.propertyId),
+                                        locale: FFAppState().locale,
                                       ),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
@@ -174,6 +175,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       },
                                     ),
                                     Text(
+                                      ' ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                    ),
+                                    Text(
                                       FFLocalizations.of(context).getText(
                                         '9i2we2yx' /*  offers active */,
                                       ),
@@ -185,6 +191,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             fontWeight: FontWeight.bold,
                                             useGoogleFonts: false,
                                           ),
+                                    ),
+                                    Text(
+                                      ' ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                     ),
                                   ],
                                 ),
@@ -271,6 +282,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                 propertyId:
                                     functions.offerScreenPropertyIdisNull(
                                         widget.propertyId),
+                                locale: FFAppState().locale,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -302,7 +314,10 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                   .height *
                                               0.6,
                                           child: NoResultWidget(
-                                            titleText: 'No offers added yet',
+                                            titleText:
+                                                functions.emptyListWidgetTitle(
+                                                    'offers',
+                                                    FFAppState().locale),
                                             screenName: 'offer',
                                           ),
                                         ),
@@ -1144,20 +1159,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               useGoogleFonts: false,
                                                                             ),
                                                                       ),
-                                                                      Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'ldwv6qbd' /* .00 */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'AvenirArabic',
-                                                                              fontSize: 19,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: false,
-                                                                            ),
-                                                                      ),
                                                                       Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
                                                                             4,
@@ -1325,43 +1326,31 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         CrossAxisAlignment
                                                                             .end,
                                                                     children: [
-                                                                      Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          functions
-                                                                              .formatAmount(valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$.property_price''',
-                                                                            ).toString(),
+                                                                      Expanded(
+                                                                        child:
+                                                                            Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            functions.formatAmount(valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.property_price''',
+                                                                              ).toString(),
+                                                                              '0',
+                                                                            )),
                                                                             '0',
-                                                                          )),
-                                                                          '0',
+                                                                          ),
+                                                                          maxLines:
+                                                                              2,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                fontSize: 19,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                useGoogleFonts: false,
+                                                                              ),
                                                                         ),
-                                                                        maxLines:
-                                                                            2,
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'AvenirArabic',
-                                                                              fontSize: 19,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: false,
-                                                                            ),
-                                                                      ),
-                                                                      Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'c0ty6rbh' /* .00 */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'AvenirArabic',
-                                                                              fontSize: 19,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: false,
-                                                                            ),
                                                                       ),
                                                                       Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -1559,6 +1548,14 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 useGoogleFonts: false,
                                                                               ),
                                                                         ),
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'alqnps4o' /*   */,
+                                                                          ),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyText1,
+                                                                        ),
                                                                       ],
                                                                     ),
                                                                   ),
@@ -1635,7 +1632,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         SnackBar(
                                                                           content:
                                                                               Text(
-                                                                            'Offer accepted',
+                                                                            functions.snackBarMessage('offerAccepted',
+                                                                                FFAppState().locale),
                                                                             style:
                                                                                 TextStyle(
                                                                               color: FlutterFlowTheme.of(context).white,
@@ -1658,7 +1656,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         SnackBar(
                                                                           content:
                                                                               Text(
-                                                                            'An error has occured',
+                                                                            functions.snackBarMessage('error',
+                                                                                FFAppState().locale),
                                                                             style:
                                                                                 TextStyle(
                                                                               color: FlutterFlowTheme.of(context).white,
@@ -1798,9 +1797,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 17, 0),
                                       child: Icon(
-                                        Icons.keyboard_arrow_right,
+                                        Icons.arrow_forward_ios_rounded,
                                         color: Colors.black,
-                                        size: 24,
+                                        size: 18,
                                       ),
                                     ),
                                   ],

@@ -1448,12 +1448,20 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       MainAxisSize.max,
                                                   children: [
                                                     Text(
-                                                      functions.formatAmount(
+                                                      valueOrDefault<String>(
+                                                        functions
+                                                            .formatAmountWithoutDecimal(
+                                                                valueOrDefault<
+                                                                    String>(
                                                           PropertyCall
                                                               .propertyPrice(
-                                                        columnPropertyResponse
-                                                            .jsonBody,
-                                                      ).toString()),
+                                                            columnPropertyResponse
+                                                                .jsonBody,
+                                                          ).toString(),
+                                                          '0',
+                                                        )),
+                                                        '0',
+                                                      ),
                                                       style: FlutterFlowTheme
                                                               .of(context)
                                                           .bodyText1
@@ -2517,12 +2525,16 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           .max,
                                                                   children: [
                                                                     Text(
-                                                                      functions
-                                                                          .formatAmount(
-                                                                              getJsonField(
-                                                                        propertiesItem,
-                                                                        r'''$..property_price''',
-                                                                      ).toString()),
+                                                                      functions.formatAmountWithoutDecimal(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                        getJsonField(
+                                                                          columnPropertyResponse
+                                                                              .jsonBody,
+                                                                          r'''$..property_price''',
+                                                                        ).toString(),
+                                                                        '0',
+                                                                      )),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyText2

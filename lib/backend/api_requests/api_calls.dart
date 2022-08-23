@@ -500,11 +500,13 @@ class GetOffersCall {
   static Future<ApiCallResponse> call({
     String userId = '',
     String propertyId = '',
+    String locale = '',
   }) {
     final body = '''
 {
   "userID": "${userId}",
-  "propertyID": "${propertyId}"
+  "propertyID": "${propertyId}",
+  "accept-language":"${locale}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getOffers',
@@ -515,6 +517,7 @@ class GetOffersCall {
       params: {
         'userId': userId,
         'propertyId': propertyId,
+        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,
@@ -593,10 +596,12 @@ class AcceptOfferCall {
 class ArchivedOffersCall {
   static Future<ApiCallResponse> call({
     String userId = '',
+    String locale = '',
   }) {
     final body = '''
 {
-  "userID": "${userId}"
+  "userID": "${userId}",
+  "accept-language": "${locale}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'archivedOffers',
@@ -606,6 +611,7 @@ class ArchivedOffersCall {
       headers: {},
       params: {
         'userId': userId,
+        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,
@@ -622,10 +628,12 @@ class ArchivedOffersCall {
 class BookedPropertiesCall {
   static Future<ApiCallResponse> call({
     String userId = '',
+    String locale = '',
   }) {
     final body = '''
 {
-  "userID": "${userId}"
+  "userID": "${userId}",
+  "accept-language": "${locale}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'bookedProperties',
@@ -635,6 +643,7 @@ class BookedPropertiesCall {
       headers: {},
       params: {
         'userId': userId,
+        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,
@@ -652,11 +661,13 @@ class OrderDetailsCall {
   static Future<ApiCallResponse> call({
     String orderId = '',
     String userid = '',
+    String locale = '',
   }) {
     final body = '''
 {
   "orderId": "${orderId}",
-  "userId": "${userid}"
+  "userId": "${userid}",
+  "accept-language": "${locale}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'orderDetails',
@@ -667,6 +678,7 @@ class OrderDetailsCall {
       params: {
         'orderId': orderId,
         'userid': userid,
+        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,
@@ -679,11 +691,13 @@ class BookmarkPropertyCall {
   static Future<ApiCallResponse> call({
     String userId = '',
     String propertyId = '',
+    String locale = '',
   }) {
     final body = '''
 {
   "userID": "${userId}",
-  "propertyID": "${propertyId}"
+  "propertyID": "${propertyId}",
+  "accept-language": "${locale}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'bookmarkProperty',
@@ -693,6 +707,7 @@ class BookmarkPropertyCall {
       params: {
         'userId': userId,
         'propertyId': propertyId,
+        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,
@@ -704,10 +719,12 @@ class BookmarkPropertyCall {
 class GetBookMarkedPropertiesCall {
   static Future<ApiCallResponse> call({
     String userId = '',
+    String locale = '',
   }) {
     final body = '''
 {
-  "userID": "${userId}"
+  "userID": "${userId}",
+  "accept-language": "${locale}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getBookMarkedProperties',
@@ -717,6 +734,7 @@ class GetBookMarkedPropertiesCall {
       headers: {},
       params: {
         'userId': userId,
+        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,

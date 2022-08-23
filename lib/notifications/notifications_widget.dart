@@ -104,7 +104,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.height * 0.7,
                             child: NoResultWidget(
-                              titleText: 'No notifications yet',
+                              titleText: functions.emptyListWidgetTitle(
+                                  'notifications', FFAppState().locale),
                               screenName: 'notification',
                             ),
                           ),

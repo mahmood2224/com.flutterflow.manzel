@@ -2,6 +2,7 @@ import '../backend/api_requests/api_calls.dart';
 import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -149,7 +150,8 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                 width: 280,
                                 height: 169,
                                 child: NoResultWidget(
-                                  titleText: 'No cities found',
+                                  titleText: functions.emptyListWidgetTitle(
+                                      'cityList', FFAppState().locale),
                                   screenName: 'result',
                                 ),
                               ),
@@ -307,7 +309,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                                   FFLocalizations.of(
                                                                           context)
                                                                       .getText(
-                                                                    'wptanz77' /*  properties available */,
+                                                                    'wptanz77' /*  properties available  */,
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
@@ -321,6 +323,19 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                                             false,
                                                                       ),
                                                                 ),
+                                                                if (FFAppState()
+                                                                        .locale ==
+                                                                    'ar')
+                                                                  Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'w6jzdg0z' /*    */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1,
+                                                                  ),
                                                               ],
                                                             ),
                                                           ),

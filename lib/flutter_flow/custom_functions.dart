@@ -50,7 +50,7 @@ String formatAmount(String amount) {
   }
   var format = NumberFormat('###,###', 'en_US');
   double value = double.parse(amount);
-  return format.format(value);
+  return format.format(value) + ".00";
 }
 
 double formattedDouble(int maxRange) {
@@ -96,18 +96,36 @@ bool validateInstallmentRange(
   // Add your function code here!
 }
 
-List<String> cityListBuilder(List<String> cityListApiResponse) {
+List<String> cityListBuilder(
+  List<String> cityListApiResponse,
+  String locale,
+) {
   // Add your function code here!
-  var finalList = ["All"];
-  finalList.addAll(cityListApiResponse);
-  return finalList;
+  if (locale == "en") {
+    var finalList = ["All"];
+    finalList.addAll(cityListApiResponse);
+    return finalList;
+  } else {
+    var finalList = ["الكل"];
+    finalList.addAll(cityListApiResponse);
+    return finalList;
+  }
 }
 
-List<String> propertTypeBuilder(List<String> propertyTypeApiResponse) {
+List<String> propertTypeBuilder(
+  List<String> propertyTypeApiResponse,
+  String locale,
+) {
   // Add your function code here!
-  var finalList = ["All"];
-  finalList.addAll(propertyTypeApiResponse);
-  return finalList;
+  if (locale == "en") {
+    var finalList = ["All"];
+    finalList.addAll(propertyTypeApiResponse);
+    return finalList;
+  } else {
+    var finalList = ["الكل"];
+    finalList.addAll(propertyTypeApiResponse);
+    return finalList;
+  }
 }
 
 List<String> filteredResultChioceChipsBuilder(
@@ -329,10 +347,17 @@ bool conditionalVisibility(
   }
 }
 
-List<String> choicechipUnselected(List<String> choicechipValue) {
+List<String> choicechipUnselected(
+  List<String> choicechipValue,
+  String locale,
+) {
   // Add your function code here!
   if (choicechipValue.length == 0) {
-    return ["All"];
+    if (locale == "en") {
+      return ["All"];
+    } else {
+      return ["الكل"];
+    }
   } else {
     return choicechipValue;
   }
@@ -696,4 +721,210 @@ String notificationBadgeCount(List<NotificationsRecord> unreadNotifications) {
   }
   String count = unreadNotifications.length.toString();
   return count;
+}
+
+String emptyListWidgetTitle(
+  String screenName,
+  String locale,
+) {
+  switch (screenName) {
+    case "homeScreen":
+      {
+        // statements;
+        if (locale == "en") {
+          return "No properties avaiable";
+        } else {
+          return "لا توجد خصائص متاحة";
+        }
+      }
+      break;
+
+    case "notifications":
+      {
+        if (locale == "en") {
+          return "No notifications yet";
+        } else {
+          return "لا إخطارات حتى الآن";
+        }
+      }
+      break;
+    case "cityList":
+      {
+        if (locale == "en") {
+          return "No cities yet";
+        } else {
+          return "لا توجد مدن بعد";
+        }
+      }
+      break;
+    case "pastOffers":
+      {
+        if (locale == "en") {
+          return "No past offers yet";
+        } else {
+          return "لا توجد عروض سابقة حتى الآن";
+        }
+      }
+      break;
+    case "filterResult":
+      {
+        if (locale == "en") {
+          return "No result found";
+        } else {
+          return "لم يتم العثور على نتائج";
+        }
+      }
+      break;
+    case "offers":
+      {
+        if (locale == "en") {
+          return "No offers added yet";
+        } else {
+          return "لم تتم إضافة أي عروض حتى الآن";
+        }
+      }
+      break;
+    case "bookedProperties":
+      {
+        if (locale == "en") {
+          return "No properties booked yet";
+        } else {
+          return "لا توجد خصائص محجوزة حتى الآن";
+        }
+      }
+      break;
+    case "favorite":
+      {
+        if (locale == "en") {
+          return "No properties favorite yet";
+        } else {
+          return "لا توجد خصائص مفضلة حتى الآن";
+        }
+      }
+      break;
+
+    default:
+      {
+        if (locale == "en") {
+          return "Unable to fetch data";
+        } else {
+          return "تعذر جلب البيانات";
+        }
+      }
+      break;
+  }
+
+  return "Empty";
+  // Add your function code here!
+}
+
+String snackBarMessage(
+  String messageType,
+  String locale,
+) {
+  switch (messageType) {
+    case "error":
+      {
+        if (locale == "en") {
+          return "Some error has occurred. Please try again later.";
+        } else {
+          return "حدث خطأ ما. الرجاء معاودة المحاولة في وقت لاحق.";
+        }
+      }
+      break;
+    case "bookmarkRemoved":
+      {
+        if (locale == "en") {
+          return "The property has been successfully removed from the bookmark.";
+        } else {
+          return "تمت إزالة الخاصية بنجاح من الإشارة المرجعية.";
+        }
+      }
+      break;
+    case "invalidInstallmentRange":
+      {
+        if (locale == "en") {
+          return "Please select valid instalment range.";
+        } else {
+          return "الرجاء تحديد نطاق أقساط صالح.";
+        }
+      }
+      break;
+    case "offerAccepted":
+      {
+        if (locale == "en") {
+          return "Offer accepted.";
+        } else {
+          return "تم قبول العرض";
+        }
+      }
+      break;
+    case "reservationConfirmed":
+      {
+        if (locale == "en") {
+          return "This property is already booked.";
+        } else {
+          return "هذا العقار محجوز بالفعل.";
+        }
+      }
+      break;
+    default:
+      {
+        {
+          if (locale == "en") {
+            return "Some error has occurred. Please try again later.";
+          } else {
+            return "حدث خطأ ما. الرجاء معاودة المحاولة في وقت لاحق.";
+          }
+        }
+      }
+      break;
+  }
+}
+
+String subTitleText(
+  String locale,
+  String screenName,
+) {
+  switch (screenName) {
+    case "bookedProperties":
+      {
+        if (locale == "en") {
+          return "Your booking list is empty. Let's explore our properties.";
+        } else {
+          return "قائمة الحجز الخاصة بك فارغة. دعنا نستكشف خصائصنا.";
+        }
+      }
+      break;
+    case "favorite":
+      {
+        if (locale == "en") {
+          return "Your save list is empty. Let's exploring our properties.";
+        } else {
+          return "قائمة الحجز الخاصة بك فارغة. دعنا نستكشف خصائصنا.";
+        }
+      }
+      break;
+    default:
+      {
+        {
+          if (locale == "en") {
+            return "No Results to show.";
+          } else {
+            return "لا توجد نتائج للعرض.";
+          }
+        }
+      }
+      break;
+  }
+}
+
+String formatAmountWithoutDecimal(String amount) {
+  // Add your function code here!
+  if (amount == "null") {
+    return '0';
+  }
+  var format = NumberFormat('###,###', 'en_US');
+  double value = double.parse(amount);
+  return format.format(value);
 }

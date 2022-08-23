@@ -98,6 +98,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                   child: FutureBuilder<ApiCallResponse>(
                     future: ArchivedOffersCall.call(
                       userId: currentUserUid,
+                      locale: FFAppState().locale,
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -126,7 +127,8 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.6,
                                 child: NoResultWidget(
-                                  titleText: 'No past offers yet',
+                                  titleText: functions.emptyListWidgetTitle(
+                                      'pastOffers', FFAppState().locale),
                                   screenName: 'offer',
                                 ),
                               ),
@@ -1007,26 +1009,6 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                               false,
                                                                         ),
                                                                   ),
-                                                                  Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      '6yumrre4' /* .00 */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'AvenirArabic',
-                                                                          fontSize:
-                                                                              19,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
                                                                   Padding(
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
@@ -1223,26 +1205,6 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                         '0',
                                                                       )),
                                                                       '0',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'AvenirArabic',
-                                                                          fontSize:
-                                                                              19,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
-                                                                  Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      '3q0s7kis' /* .00 */,
                                                                     ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)

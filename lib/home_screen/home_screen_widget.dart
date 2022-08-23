@@ -144,11 +144,19 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SvgPicture.asset(
-                              'assets/images/d9t74_.svg',
-                              width: 43,
-                              height: 31,
-                              fit: BoxFit.none,
+                            InkWell(
+                              onTap: () async {
+                                logFirebaseEvent(
+                                    'HOME_SCREEN_PAGE_Image_mc822l7k_ON_TAP');
+                                logFirebaseEvent('Image_Navigate-To');
+                                context.pushNamed('test');
+                              },
+                              child: SvgPicture.asset(
+                                'assets/images/d9t74_.svg',
+                                width: 43,
+                                height: 31,
+                                fit: BoxFit.none,
+                              ),
                             ),
                             if (loggedIn)
                               StreamBuilder<List<NotificationsRecord>>(
@@ -938,11 +946,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Text(
-                                              functions
-                                                  .formatAmount(getJsonField(
+                                              valueOrDefault<String>(functions
+                                                  .formatAmountWithoutDecimal(
+                                                          valueOrDefault<
+                                                              String>(getJsonField(
                                                 propertiesItem,
                                                 r'''$..property_price''',
-                                              ).toString()),
+                                              ).toString(),
+                                                    '0',
+                                                  )),
+                                                  '0',),
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyText2
