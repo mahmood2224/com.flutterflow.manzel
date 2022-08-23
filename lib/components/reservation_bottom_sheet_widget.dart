@@ -206,17 +206,6 @@ class _ReservationBottomSheetWidgetState
                         useGoogleFonts: false,
                       ),
                 ),
-                Text(
-                  FFLocalizations.of(context).getText(
-                    'ovajaogv' /* .00 */,
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'AvenirArabic',
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        useGoogleFonts: false,
-                      ),
-                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                   child: Text(
@@ -422,7 +411,8 @@ class _ReservationBottomSheetWidgetState
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'The property is already booked',
+                              functions.snackBarMessage(
+                                  'reservationConfirmed', FFAppState().locale),
                               style: TextStyle(
                                 color: Color(0xFFA5A5A5),
                               ),

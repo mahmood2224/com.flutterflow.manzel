@@ -340,7 +340,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.6,
                               child: NoResultWidget(
-                                titleText: 'No results found',
+                                titleText: functions.emptyListWidgetTitle(
+                                    'homeScreen', FFAppState().locale),
                                 screenName: 'result',
                               ),
                             ),

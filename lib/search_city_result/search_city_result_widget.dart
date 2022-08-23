@@ -150,6 +150,13 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                           useGoogleFonts: false,
                         ),
                   ),
+                  if (FFAppState().locale == 'ar')
+                    Text(
+                      FFLocalizations.of(context).getText(
+                        'wk7xyqu8' /*   */,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyText1,
+                    ),
                 ],
               ),
             ],
@@ -203,7 +210,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                 height:
                                     MediaQuery.of(context).size.height * 0.6,
                                 child: NoResultsFoundWidget(
-                                  titleText: 'No results found',
+                                  titleText: functions.emptyListWidgetTitle(
+                                      'filterResult', FFAppState().locale),
                                   subtitleText: functions.noResultsCityName(
                                       widget.cityName, FFAppState().locale),
                                   screenName: 'Result',

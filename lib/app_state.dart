@@ -16,6 +16,7 @@ class FFAppState {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _isInitailLaunch = prefs.getBool('ff_isInitailLaunch') ?? _isInitailLaunch;
+    _locale = prefs.getString('ff_locale') ?? _locale;
   }
 
   SharedPreferences prefs;
@@ -36,8 +37,6 @@ class FFAppState {
     prefs.setBool('ff_isInitailLaunch', _value);
   }
 
-  String locale = '';
-
   List<String> filterPropertyType = [];
 
   List<String> filterFurnishingType = [];
@@ -47,6 +46,13 @@ class FFAppState {
   int filterMaxPrice = 0;
 
   String propertyStatus = '';
+
+  String _locale = 'en';
+  String get locale => _locale;
+  set locale(String _value) {
+    _locale = _value;
+    prefs.setString('ff_locale', _value);
+  }
 }
 
 LatLng _latLngFromString(String val) {

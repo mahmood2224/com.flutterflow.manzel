@@ -9,7 +9,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyPropertiesWidget extends StatefulWidget {
@@ -137,6 +136,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                             FutureBuilder<ApiCallResponse>(
                               future: BookedPropertiesCall.call(
                                 userId: currentUserUid,
+                                locale: FFAppState().locale,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -172,9 +172,13 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                               0.6,
                                           child: NoResultsFoundWidget(
                                             titleText:
-                                                'No properties booked yet',
+                                                functions.emptyListWidgetTitle(
+                                                    'bookedProperties',
+                                                    FFAppState().locale),
                                             subtitleText:
-                                                'Your booking list is empty. Let\'s explore our properties',
+                                                functions.subTitleText(
+                                                    FFAppState().locale,
+                                                    'bookedProperties'),
                                             isButtonVisible: true,
                                             screenName: 'myPropertiesBooked',
                                           ),
@@ -1031,6 +1035,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                             FutureBuilder<ApiCallResponse>(
                               future: GetBookMarkedPropertiesCall.call(
                                 userId: currentUserUid,
+                                locale: FFAppState().locale,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -1066,9 +1071,13 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                               0.4,
                                           child: NoResultsFoundWidget(
                                             titleText:
-                                                'No properties favorite yet',
+                                                functions.emptyListWidgetTitle(
+                                                    'favorite',
+                                                    FFAppState().locale),
                                             subtitleText:
-                                                'Your save list is empty. Let\'s exploring our properties',
+                                                functions.subTitleText(
+                                                    FFAppState().locale,
+                                                    'favorite'),
                                             isButtonVisible: true,
                                             screenName: 'myPropertiesFavorite',
                                           ),
@@ -1371,8 +1380,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 9,
                                                                                 0),
                                                                             child:
-                                                                                FaIcon(
-                                                                              FontAwesomeIcons.rulerCombined,
+                                                                                Icon(
+                                                                              Icons.design_services_outlined,
                                                                               color: Colors.black,
                                                                               size: 20,
                                                                             ),
@@ -1446,7 +1455,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 .showSnackBar(
                                                               SnackBar(
                                                                 content: Text(
-                                                                  'Property sucessfully removed from Bookmark',
+                                                                  functions.snackBarMessage(
+                                                                      'bookmarkRemoved',
+                                                                      FFAppState()
+                                                                          .locale),
                                                                   style:
                                                                       TextStyle(
                                                                     color: FlutterFlowTheme.of(
@@ -1476,7 +1488,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 .showSnackBar(
                                                               SnackBar(
                                                                 content: Text(
-                                                                  'Some error has occured. Please try again later.',
+                                                                  functions.snackBarMessage(
+                                                                      'error',
+                                                                      FFAppState()
+                                                                          .locale),
                                                                   style:
                                                                       TextStyle(
                                                                     color: FlutterFlowTheme.of(

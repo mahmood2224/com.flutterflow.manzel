@@ -117,6 +117,13 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.language;
+    if (value != null) {
+      result
+        ..add('language')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -195,6 +202,10 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.displayName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'language':
+          result.language = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -238,6 +249,8 @@ class _$UserRecord extends UserRecord {
   @override
   final String displayName;
   @override
+  final String language;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$UserRecord([void Function(UserRecordBuilder) updates]) =>
@@ -258,6 +271,7 @@ class _$UserRecord extends UserRecord {
       this.roleId,
       this.gender,
       this.displayName,
+      this.language,
       this.reference})
       : super._();
 
@@ -286,6 +300,7 @@ class _$UserRecord extends UserRecord {
         roleId == other.roleId &&
         gender == other.gender &&
         displayName == other.displayName &&
+        language == other.language &&
         reference == other.reference;
   }
 
@@ -305,21 +320,26 @@ class _$UserRecord extends UserRecord {
                                                 $jc(
                                                     $jc(
                                                         $jc(
-                                                            $jc(0,
-                                                                email.hashCode),
-                                                            uid.hashCode),
-                                                        createdTime.hashCode),
-                                                    phoneNumber.hashCode),
-                                                employmentStatus.hashCode),
-                                            bank.hashCode),
-                                        monthlyIncome.hashCode),
-                                    photoUrl.hashCode),
-                                status.hashCode),
-                            name.hashCode),
-                        countryCode.hashCode),
-                    roleId.hashCode),
-                gender.hashCode),
-            displayName.hashCode),
+                                                            $jc(
+                                                                $jc(
+                                                                    0,
+                                                                    email
+                                                                        .hashCode),
+                                                                uid.hashCode),
+                                                            createdTime
+                                                                .hashCode),
+                                                        phoneNumber.hashCode),
+                                                    employmentStatus.hashCode),
+                                                bank.hashCode),
+                                            monthlyIncome.hashCode),
+                                        photoUrl.hashCode),
+                                    status.hashCode),
+                                name.hashCode),
+                            countryCode.hashCode),
+                        roleId.hashCode),
+                    gender.hashCode),
+                displayName.hashCode),
+            language.hashCode),
         reference.hashCode));
   }
 
@@ -340,6 +360,7 @@ class _$UserRecord extends UserRecord {
           ..add('roleId', roleId)
           ..add('gender', gender)
           ..add('displayName', displayName)
+          ..add('language', language)
           ..add('reference', reference))
         .toString();
   }
@@ -406,6 +427,10 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   String get displayName => _$this._displayName;
   set displayName(String displayName) => _$this._displayName = displayName;
 
+  String _language;
+  String get language => _$this._language;
+  set language(String language) => _$this._language = language;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -432,6 +457,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _roleId = $v.roleId;
       _gender = $v.gender;
       _displayName = $v.displayName;
+      _language = $v.language;
       _reference = $v.reference;
       _$v = null;
     }
@@ -469,6 +495,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
             roleId: roleId,
             gender: gender,
             displayName: displayName,
+            language: language,
             reference: reference);
     replace(_$result);
     return _$result;
