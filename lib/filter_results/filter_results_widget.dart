@@ -790,11 +790,19 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Text(
-                                                  functions.formatAmount(
+                                                  valueOrDefault<String>(
+                                                    functions
+                                                        .formatAmountWithoutDecimal(
+                                                            valueOrDefault<
+                                                                String>(
                                                       getJsonField(
-                                                    propertiesItem,
-                                                    r'''$..property_price''',
-                                                  ).toString()),
+                                                        propertiesItem,
+                                                        r'''$..property_price''',
+                                                      ).toString(),
+                                                      '0',
+                                                    )),
+                                                    '0',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText2

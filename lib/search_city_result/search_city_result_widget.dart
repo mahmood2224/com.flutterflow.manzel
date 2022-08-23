@@ -708,11 +708,16 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Text(
-                                                  functions.formatAmount(
-                                                      getJsonField(
-                                                    propertiesItem,
-                                                    r'''$..property_price''',
-                                                  ).toString()),
+                                                  functions
+                                                      .formatAmountWithoutDecimal(
+                                                          valueOrDefault<
+                                                              String>(
+                                                    getJsonField(
+                                                      propertiesItem,
+                                                      r'''$..property_price''',
+                                                    ).toString(),
+                                                    '0',
+                                                  )),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText2
