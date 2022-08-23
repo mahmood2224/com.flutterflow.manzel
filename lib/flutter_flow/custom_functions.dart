@@ -919,12 +919,12 @@ String subTitleText(
   }
 }
 
-String formatAmountwithDecimal(String amount) {
+String formatAmountWithoutDecimal(String amount) {
   // Add your function code here!
   if (amount == "null") {
     return '0';
   }
   var format = NumberFormat('###,###', 'en_US');
   double value = double.parse(amount);
-  return format.format(value) + ".00";
+  return format.format(value);
 }

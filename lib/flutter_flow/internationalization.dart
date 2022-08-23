@@ -394,7 +394,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'You have ',
       'ar': 'لديك',
     },
-    'iqk6c5jn': {
+    '6faoq30c': {
       'en': ' ',
       'ar': '',
     },
@@ -402,7 +402,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' offers active',
       'ar': 'العروض النشطة',
     },
-    'l4ga10k9': {
+    'gueq8yqd': {
       'en': ' ',
       'ar': '',
     },
@@ -707,7 +707,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Filter results ',
       'ar': 'نتائج التصفية',
     },
-    'wknhlwte': {
+    'tcmsjehm': {
       'en': ' ',
       'ar': '',
     },
