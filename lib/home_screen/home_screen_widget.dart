@@ -793,11 +793,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Text(
-                                                functions
-                                                    .formatAmount(getJsonField(
-                                                  propertiesItem,
-                                                  r'''$..property_initial_installment''',
-                                                ).toString()),
+                                                valueOrDefault<String>(
+                                                  functions.formatAmount(
+                                                      getJsonField(
+                                                    propertiesItem,
+                                                    r'''$.attributes.property_initial_installment''',
+                                                  ).toString()),
+                                                  '0',
+                                                ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText1
