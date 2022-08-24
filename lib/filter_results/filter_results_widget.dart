@@ -139,7 +139,9 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                   ),
                   if (FFAppState().locale == 'en')
                     Text(
-                      ' ',
+                      FFLocalizations.of(context).getText(
+                        '9fngoi8o' /*   */,
+                      ),
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                   Text(
@@ -741,11 +743,17 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Text(
-                                                  functions.formatAmount(
+                                                  valueOrDefault<String>(
+                                                    functions.formatAmount(
+                                                        valueOrDefault<String>(
                                                       getJsonField(
-                                                    propertiesItem,
-                                                    r'''$..property_initial_installment''',
-                                                  ).toString()),
+                                                        propertiesItem,
+                                                        r'''$.attributes.property_initial_installment''',
+                                                      ).toString(),
+                                                      '0',
+                                                    )),
+                                                    '0',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1

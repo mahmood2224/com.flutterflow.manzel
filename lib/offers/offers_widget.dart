@@ -175,7 +175,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       },
                                     ),
                                     Text(
-                                      ' ',
+                                      FFLocalizations.of(context).getText(
+                                        '16gqb42z' /*   */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1,
                                     ),
@@ -193,7 +195,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                           ),
                                     ),
                                     Text(
-                                      ' ',
+                                      FFLocalizations.of(context).getText(
+                                        'z2siuoeg' /*   */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1,
                                     ),
