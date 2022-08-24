@@ -186,7 +186,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                             Future.delayed(const Duration(milliseconds: 500), () async{
                               if(currentUserDocument.status.isEmpty || currentUserDocument.status.toLowerCase() == 'active') {
                                 final userUpdateData = createUserRecordData(
-                                  status: 'Active',
+                                    status: 'Active',
+                                    language: FFLocalizations.of(context).languageCode,
                                 );
                                 final userNotificationRecord = createUsersDeviceTokenRecordData(
                                   deviceToken: await FirebaseMessagingUtils.getPushNotificationToken(),
