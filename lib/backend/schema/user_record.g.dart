@@ -128,8 +128,7 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
     if (value != null) {
       result
         ..add('is_deleted')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.reference;
     if (value != null) {
@@ -215,7 +214,7 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           break;
         case 'is_deleted':
           result.isDeleted = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(int)) as int;
           break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
@@ -262,7 +261,7 @@ class _$UserRecord extends UserRecord {
   @override
   final String language;
   @override
-  final bool isDeleted;
+  final int isDeleted;
   @override
   final DocumentReference<Object> reference;
 
@@ -452,9 +451,9 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   String get language => _$this._language;
   set language(String language) => _$this._language = language;
 
-  bool _isDeleted;
-  bool get isDeleted => _$this._isDeleted;
-  set isDeleted(bool isDeleted) => _$this._isDeleted = isDeleted;
+  int _isDeleted;
+  int get isDeleted => _$this._isDeleted;
+  set isDeleted(int isDeleted) => _$this._isDeleted = isDeleted;
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;

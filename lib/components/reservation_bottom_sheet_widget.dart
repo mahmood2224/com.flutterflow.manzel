@@ -329,8 +329,8 @@ class _ReservationBottomSheetWidgetState
                           child: SvgPicture.asset(
                             'assets/images/apple.svg',
                             width: 80,
-                            height: 25,
-                            fit: BoxFit.contain,
+                            height: 28,
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
                       ],
