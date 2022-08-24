@@ -5,6 +5,7 @@ import 'package:go_sell_sdk_flutter/model/models.dart';
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
+import '../components/terms_conditions_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -333,15 +334,21 @@ class _ReservationBottomSheetWidgetState
                   onTap: () async {
                     logFirebaseEvent(
                         'RESERVATION_BOTTOM_SHEET_Text_qhlvmiqm_O');
-                    logFirebaseEvent('Text_Navigate-To');
-                    context.pushNamed(
-                      'TermsConditions',
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 0),
-                        ),
+                    logFirebaseEvent('Text_Bottom-Sheet');
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: FlutterFlowTheme.of(context).white,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.of(context).viewInsets,
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 1,
+                            child: TermsConditionsBottomSheetWidget(
+                              pageType: 5,
+                            ),
+                          ),
+                        );
                       },
                     );
                   },

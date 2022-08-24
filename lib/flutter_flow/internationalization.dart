@@ -338,6 +338,33 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': ' الرئيسية',
     },
   },
+  // HelpAndSupport
+  {
+    'ejwcvtm6': {
+      'en': 'Please write us at',
+      'ar': 'الرجاء الكتابة إلينا على',
+    },
+    'su9hen9u': {
+      'en': 'manzel@manzel.app',
+      'ar': '',
+    },
+    'j6a73di8': {
+      'en': 'for any query and concern',
+      'ar': 'لأي استفسار وقلق',
+    },
+    'w6ge88x2': {
+      'en': 'Delete Account',
+      'ar': 'حذف الحساب',
+    },
+    'io7ksyi7': {
+      'en': 'Help & Support',
+      'ar': 'ساعد لدعم',
+    },
+    'gm7tjh1u': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
   // HomeScreen
   {
     'qnr0o42y': {
@@ -392,7 +419,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'r282eka0': {
       'en': 'You have ',
-      'ar': 'لديك',
+      'ar': 'عندك',
     },
     '16gqb42z': {
       'en': ' ',
@@ -1056,17 +1083,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الرئيسية ',
     },
   },
-  // bankDetails
-  {
-    'fohz964z': {
-      'en': 'Close',
-      'ar': 'اغلق',
-    },
-    'ng6azmpt': {
-      'en': 'Home',
-      'ar': ' الرئيسية',
-    },
-  },
   // ReservationConfirmation
   {
     'hc6is5tp': {
@@ -1108,6 +1124,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'ادفع',
     },
     's7jia86m': {
+      'en': 'Home',
+      'ar': ' الرئيسية',
+    },
+  },
+  // bankDetails
+  {
+    'fohz964z': {
+      'en': 'Close',
+      'ar': 'اغلق',
+    },
+    'ng6azmpt': {
       'en': 'Home',
       'ar': ' الرئيسية',
     },
@@ -1673,13 +1700,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     't7s7qd09': {
       'en': 'Cancel',
       'ar': 'إلغاء',
-    },
-  },
-  // termsConditionsBottomSheet
-  {
-    'dn9pwlw2': {
-      'en': 'Terms & Conditions',
-      'ar': 'البنود و الظروف',
     },
   },
   // Miscellaneous
