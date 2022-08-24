@@ -90,7 +90,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                                   .bodyText1
                                   .override(
                                     fontFamily: 'AvenirArabic',
-                                    fontSize: 15,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
                                   ),
@@ -105,7 +105,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                                     fontFamily: 'AvenirArabic',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
-                                    fontSize: 16,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: false,
                                   ),
@@ -118,7 +118,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                                   .bodyText1
                                   .override(
                                     fontFamily: 'AvenirArabic',
-                                    fontSize: 15,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
                                   ),
