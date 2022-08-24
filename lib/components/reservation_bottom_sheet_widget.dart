@@ -344,7 +344,7 @@ class _ReservationBottomSheetWidgetState
                         return Padding(
                           padding: MediaQuery.of(context).viewInsets,
                           child: Container(
-                            height: MediaQuery.of(context).size.height * 1,
+                            height: MediaQuery.of(context).size.height * 0.95,
                             child: TermsConditionsBottomSheetWidget(
                               pageType: 5,
                             ),
@@ -513,8 +513,8 @@ class _ReservationBottomSheetWidgetState
                           child: SvgPicture.asset(
                             'assets/images/apple.svg',
                             width: 80,
-                            height: 25,
-                            fit: BoxFit.contain,
+                            height: 28,
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
                       ],

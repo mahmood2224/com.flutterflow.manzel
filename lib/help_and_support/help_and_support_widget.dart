@@ -180,7 +180,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                       logFirebaseEvent('Container_Backend-Call');
 
                       final userUpdateData = createUserRecordData(
-                        isDeleted: true,
+                        isDeleted: 1,
                       );
                       await currentUserReference.update(userUpdateData);
                       logFirebaseEvent('Container_Auth');
