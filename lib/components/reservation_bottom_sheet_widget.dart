@@ -8,6 +8,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ReservationBottomSheetWidget extends StatefulWidget {
@@ -325,10 +326,11 @@ class _ReservationBottomSheetWidgetState
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: Image.asset(
-                            'assets/images/applepay.png',
-                            height: 20,
-                            fit: BoxFit.cover,
+                          child: SvgPicture.asset(
+                            'assets/images/apple.svg',
+                            width: 80,
+                            height: 25,
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ],
