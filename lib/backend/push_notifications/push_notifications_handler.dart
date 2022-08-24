@@ -98,11 +98,11 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'PastOffers': (data) async => PastOffersWidget(),
   'filterResults': (data) async => FilterResultsWidget(),
   'MyProperties': (data) async => NavBarPage(initialPage: 'MyProperties'),
-  'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
-        city: getParameter(data, 'city'),
-      ),
   'PropertyDetails': (data) async => PropertyDetailsWidget(
         propertyId: getParameter(data, 'propertyId'),
+      ),
+  'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
+        city: getParameter(data, 'city'),
       ),
   'SearchCityResult': (data) async => SearchCityResultWidget(
         cityName: getParameter(data, 'cityName'),
@@ -111,15 +111,15 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'ReservationConfirmation': (data) async => ReservationConfirmationWidget(
         propertyId: getParameter(data, 'propertyId'),
       ),
-  'bankDetails': (data) async => BankDetailsWidget(
-        bankId: getParameter(data, 'bankId'),
-        propertyId: getParameter(data, 'propertyId'),
-      ),
   'Confirmation': (data) async => ConfirmationWidget(
         propertyId: getParameter(data, 'propertyId'),
         paymentMethod: getParameter(data, 'paymentMethod'),
         orderId: getParameter(data, 'orderId'),
         transactionId: getParameter(data, 'transactionId'),
+      ),
+  'bankDetails': (data) async => BankDetailsWidget(
+        bankId: getParameter(data, 'bankId'),
+        propertyId: getParameter(data, 'propertyId'),
       ),
   'OrderDetails': (data) async => OrderDetailsWidget(
         propertId: getParameter(data, 'propertId'),
