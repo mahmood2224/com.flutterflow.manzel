@@ -505,8 +505,7 @@ class GetOffersCall {
     final body = '''
 {
   "userID": "${userId}",
-  "propertyID": "${propertyId}",
-  "accept-language":"${locale}"
+  "propertyID": "${propertyId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getOffers',
