@@ -389,11 +389,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'l38if619': {
       'en': ' SAR/Monthly',
-      'ar': 'ريال سعودي / شهري',
+      'ar': 'ريال/ شهريا',
     },
     'dhoik8q5': {
       'en': ' SAR',
-      'ar': 'ريال سعودي',
+      'ar': 'ر.س',
     },
     'd9p577jz': {
       'en': 'Explore',
@@ -487,7 +487,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'z7x7wv59': {
       'en': 'SAR',
-      'ar': 'ريال سعودي',
+      'ar': 'ر.س',
     },
     '4ha591ne': {
       'en': 'Installment period',
@@ -503,7 +503,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'h47bvnhi': {
       'en': 'SAR',
-      'ar': 'ريال سعودي',
+      'ar': 'ر.س',
     },
     'wxex1r7b': {
       'en': 'Agent Name',
@@ -701,7 +701,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '2szdgt5y': {
       'en': 'SAR',
-      'ar': 'ريال سعودي',
+      'ar': 'ر.س',
     },
     'yv9roric': {
       'en': 'Installment period',
@@ -717,7 +717,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'k4nw3frq': {
       'en': 'SAR',
-      'ar': 'ريال سعودي',
+      'ar': 'ر.س',
     },
     '4x5ij9es': {
       'en': 'Agent Name',
@@ -792,11 +792,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xk3izs5s': {
       'en': ' SAR/Monthly',
-      'ar': 'ريال سعودي / شهري',
+      'ar': 'ريال/ شهريا',
     },
     '66rkg6uk': {
       'en': ' SAR',
-      'ar': 'ريال سعودي',
+      'ar': 'ر.س',
     },
     'wcatvw4s': {
       'en': 'Home',
@@ -882,25 +882,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'ممتلكاتي',
     },
   },
-  // WhereAreYouLooking
-  {
-    'qlysszro': {
-      'en': 'Where are you  looking ?',
-      'ar': 'أين تبحث ؟',
-    },
-    'wptanz77': {
-      'en': ' properties available ',
-      'ar': 'الملكيات المتاحة',
-    },
-    'w6jzdg0z': {
-      'en': '  ',
-      'ar': '',
-    },
-    'fce9ky0f': {
-      'en': 'Home',
-      'ar': ' الرئيسية',
-    },
-  },
   // PropertyDetails
   {
     'tpufujg8': {
@@ -973,7 +954,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     've2ud2ws': {
       'en': ' SAR',
-      'ar': 'ريال سعودي',
+      'ar': 'ر.س',
     },
     'fobsike6': {
       'en': 'Supported Banks',
@@ -997,7 +978,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'mgi2d0o9': {
       'en': ' SAR/Monthly',
-      'ar': ' ريال سعودي / شهري',
+      'ar': 'ريال/ شهريا',
     },
     'dpmrt150': {
       'en': 'Reserve',
@@ -1006,6 +987,25 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'wzirx8i7': {
       'en': 'Booked',
       'ar': 'محجوز',
+    },
+  },
+  // WhereAreYouLooking
+  {
+    'qlysszro': {
+      'en': 'Where are you  looking ?',
+      'ar': 'أين تبحث ؟',
+    },
+    'wptanz77': {
+      'en': ' properties available ',
+      'ar': 'الملكيات المتاحة',
+    },
+    'w6jzdg0z': {
+      'en': '  ',
+      'ar': '',
+    },
+    'fce9ky0f': {
+      'en': 'Home',
+      'ar': ' الرئيسية',
     },
   },
   // SearchCityResult
@@ -1028,11 +1028,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'bm7ytrkl': {
       'en': ' SAR/Monthly',
-      'ar': 'ريال سعودي / شهري',
+      'ar': 'ريال/ شهريا',
     },
     's8nfdgfe': {
       'en': ' SAR',
-      'ar': 'ريال سعودي',
+      'ar': 'ر.س',
     },
     'cv6ymemd': {
       'en': 'Search results ',
@@ -1104,17 +1104,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': ' الرئيسية',
     },
   },
-  // bankDetails
-  {
-    'fohz964z': {
-      'en': 'Close',
-      'ar': 'اغلق',
-    },
-    'ng6azmpt': {
-      'en': 'Home',
-      'ar': ' الرئيسية',
-    },
-  },
   // Confirmation
   {
     'fnewib0l': {
@@ -1134,6 +1123,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'إظهار تفاصيل الحجز',
     },
     'jdsnk395': {
+      'en': 'Home',
+      'ar': ' الرئيسية',
+    },
+  },
+  // bankDetails
+  {
+    'fohz964z': {
+      'en': 'Close',
+      'ar': 'اغلق',
+    },
+    'ng6azmpt': {
       'en': 'Home',
       'ar': ' الرئيسية',
     },
@@ -1557,7 +1557,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '17eaou67': {
       'en': 'SAR',
-      'ar': 'ريال سعودي',
+      'ar': 'ر.س',
     },
     'x0ed6u9h': {
       'en': 'Date & Time',

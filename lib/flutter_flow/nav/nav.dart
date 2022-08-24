@@ -194,17 +194,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   : MyPropertiesWidget(),
             ),
             FFRoute(
-              name: 'WhereAreYouLooking',
-              path: 'whereAreYouLooking',
-              builder: (context, params) => WhereAreYouLookingWidget(
-                city: params.getParam('city', ParamType.String),
-              ),
-            ),
-            FFRoute(
               name: 'PropertyDetails',
               path: 'propertyDetails',
               builder: (context, params) => PropertyDetailsWidget(
                 propertyId: params.getParam('propertyId', ParamType.int),
+              ),
+            ),
+            FFRoute(
+              name: 'WhereAreYouLooking',
+              path: 'whereAreYouLooking',
+              builder: (context, params) => WhereAreYouLookingWidget(
+                city: params.getParam('city', ParamType.String),
               ),
             ),
             FFRoute(
@@ -224,14 +224,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'bankDetails',
-              path: 'bankDetails',
-              builder: (context, params) => BankDetailsWidget(
-                bankId: params.getParam('bankId', ParamType.int),
-                propertyId: params.getParam('propertyId', ParamType.int),
-              ),
-            ),
-            FFRoute(
               name: 'Confirmation',
               path: 'confirmation',
               builder: (context, params) => ConfirmationWidget(
@@ -241,6 +233,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 orderId: params.getParam('orderId', ParamType.String),
                 transactionId:
                     params.getParam('transactionId', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'bankDetails',
+              path: 'bankDetails',
+              builder: (context, params) => BankDetailsWidget(
+                bankId: params.getParam('bankId', ParamType.int),
+                propertyId: params.getParam('propertyId', ParamType.int),
               ),
             ),
             FFRoute(
