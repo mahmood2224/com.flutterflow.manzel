@@ -160,7 +160,7 @@ class _ReservationBottomSheetWidgetState
                         return Padding(
                           padding: MediaQuery.of(context).viewInsets,
                           child: Container(
-                            height: MediaQuery.of(context).size.height * 1,
+                            height: MediaQuery.of(context).size.height * 0.95,
                             child: TermsConditionsBottomSheetWidget(
                               pageType: 5,
                             ),
