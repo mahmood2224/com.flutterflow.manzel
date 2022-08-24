@@ -68,7 +68,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         // propertyType: FFAppState().filterPropertyType,
         pageNumber: pageKey.toString(),
         pageSize: _pageSize.toString(),
-        locale: FFAppState().locale,
+        locale: FFLocalizations.of(context).languageCode,
       );
       final newItems = getJsonField(
         (apiResponse?.jsonBody ?? ''),
