@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/terms_conditions_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -173,7 +174,23 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               'ADDING_INFORMATION_PAGE_terms_ON_TAP');
                           // termsAndConditions
                           logFirebaseEvent('terms_termsAndConditions');
-                          context.goNamed('TermsConditions');
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: FlutterFlowTheme.of(context).white,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 1,
+                                  child: TermsConditionsBottomSheetWidget(
+                                    pageType: 5,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
                         },
                         child: Text(
                           FFLocalizations.of(context).getText(
@@ -219,7 +236,23 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               'ADDING_INFORMATION_privacyPolicy_ON_TAP');
                           // termsAndConditions
                           logFirebaseEvent('privacyPolicy_termsAndConditions');
-                          context.goNamed('TermsConditions');
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: FlutterFlowTheme.of(context).white,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 1,
+                                  child: TermsConditionsBottomSheetWidget(
+                                    pageType: 6,
+                                  ),
+                                ),
+                              );
+                            },
+                          );
                         },
                         child: Text(
                           FFLocalizations.of(context).getText(

@@ -13,6 +13,8 @@ export 'edit_mobile_number/edit_mobile_number_widget.dart'
     show EditMobileNumberWidget;
 export 'confirm_new_number_o_t_p/confirm_new_number_o_t_p_widget.dart'
     show ConfirmNewNumberOTPWidget;
+export 'help_and_support/help_and_support_widget.dart'
+    show HelpAndSupportWidget;
 export 'home_screen/home_screen_widget.dart' show HomeScreenWidget;
 export 'notifications/notifications_widget.dart' show NotificationsWidget;
 export 'offers/offers_widget.dart' show OffersWidget;
@@ -26,9 +28,9 @@ export 'property_details/property_details_widget.dart'
     show PropertyDetailsWidget;
 export 'search_city_result/search_city_result_widget.dart'
     show SearchCityResultWidget;
-export 'bank_details/bank_details_widget.dart' show BankDetailsWidget;
 export 'reservation_confirmation/reservation_confirmation_widget.dart'
     show ReservationConfirmationWidget;
+export 'bank_details/bank_details_widget.dart' show BankDetailsWidget;
 export 'confirmation/confirmation_widget.dart' show ConfirmationWidget;
 export 'order_details/order_details_widget.dart' show OrderDetailsWidget;
 export 'add_card_details/add_card_details_widget.dart'

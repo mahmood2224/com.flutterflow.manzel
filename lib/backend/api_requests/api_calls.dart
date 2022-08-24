@@ -600,18 +600,18 @@ class ArchivedOffersCall {
   }) {
     final body = '''
 {
-  "userID": "${userId}",
-  "accept-language": "${locale}"
+  "userID": "${userId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'archivedOffers',
       apiUrl:
           'https://asia-south1-manzel-prod.cloudfunctions.net/getArchivedOffers',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Accept-Language': '${locale}',
+      },
       params: {
         'userId': userId,
-        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,
@@ -632,18 +632,18 @@ class BookedPropertiesCall {
   }) {
     final body = '''
 {
-  "userID": "${userId}",
-  "accept-language": "${locale}"
+  "userID": "${userId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'bookedProperties',
       apiUrl:
           'https://asia-south1-manzel-prod.cloudfunctions.net/getBookedProperties',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Accept-Language': '${locale}',
+      },
       params: {
         'userId': userId,
-        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,
@@ -666,19 +666,19 @@ class OrderDetailsCall {
     final body = '''
 {
   "orderId": "${orderId}",
-  "userId": "${userid}",
-  "accept-language": "${locale}"
+  "userId": "${userid}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'orderDetails',
       apiUrl:
           'https://asia-south1-manzel-prod.cloudfunctions.net/getOrderDetail',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Accept-Language': '${locale}',
+      },
       params: {
         'orderId': orderId,
         'userid': userid,
-        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,
@@ -696,8 +696,7 @@ class BookmarkPropertyCall {
     final body = '''
 {
   "userID": "${userId}",
-  "propertyID": "${propertyId}",
-  "accept-language": "${locale}"
+  "propertyID": "${propertyId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'bookmarkProperty',
@@ -723,18 +722,18 @@ class GetBookMarkedPropertiesCall {
   }) {
     final body = '''
 {
-  "userID": "${userId}",
-  "accept-language": "${locale}"
+  "userID": "${userId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getBookMarkedProperties',
       apiUrl:
           'https://asia-south1-manzel-prod.cloudfunctions.net/getBookMarkedProperties',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Accept-Language': '${locale}',
+      },
       params: {
         'userId': userId,
-        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,
@@ -769,6 +768,24 @@ class CancelOrderCall {
       },
       body: body,
       bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
+class TermsConitionsAndPrivacyPoliciesCall {
+  static Future<ApiCallResponse> call({
+    int pageType = 5,
+    String locale = 'en',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'termsConitionsAndPrivacyPolicies',
+      apiUrl: 'https://strapi-dev.manzel.app/api/in-app-contents/${pageType}',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'locale': locale,
+      },
       returnBody: true,
     );
   }

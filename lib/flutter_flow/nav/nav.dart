@@ -125,6 +125,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ConfirmNewNumberOTPWidget(),
             ),
             FFRoute(
+              name: 'HelpAndSupport',
+              path: 'helpAndSupport',
+              builder: (context, params) => HelpAndSupportWidget(),
+            ),
+            FFRoute(
               name: 'HomeScreen',
               path: 'homeScreen',
               builder: (context, params) => params.isEmpty
@@ -200,17 +205,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'bankDetails',
-              path: 'bankDetails',
-              builder: (context, params) => BankDetailsWidget(
-                bankId: params.getParam('bankId', ParamType.int),
+              name: 'ReservationConfirmation',
+              path: 'reservationConfirmation',
+              builder: (context, params) => ReservationConfirmationWidget(
                 propertyId: params.getParam('propertyId', ParamType.int),
               ),
             ),
             FFRoute(
-              name: 'ReservationConfirmation',
-              path: 'reservationConfirmation',
-              builder: (context, params) => ReservationConfirmationWidget(
+              name: 'bankDetails',
+              path: 'bankDetails',
+              builder: (context, params) => BankDetailsWidget(
+                bankId: params.getParam('bankId', ParamType.int),
                 propertyId: params.getParam('propertyId', ParamType.int),
               ),
             ),

@@ -87,6 +87,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'EditPersonallInfo': (data) async => EditPersonallInfoWidget(),
   'EditMobileNumber': (data) async => EditMobileNumberWidget(),
   'ConfirmNewNumberOTP': (data) async => ConfirmNewNumberOTPWidget(),
+  'HelpAndSupport': (data) async => HelpAndSupportWidget(),
   'Notifications': (data) async => NotificationsWidget(),
   'Offers': (data) async => hasMatchingParameters(data, {'propertyId'})
       ? OffersWidget(
@@ -107,11 +108,11 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         cityName: getParameter(data, 'cityName'),
         propertiesAvailable: getParameter(data, 'propertiesAvailable'),
       ),
-  'bankDetails': (data) async => BankDetailsWidget(
-        bankId: getParameter(data, 'bankId'),
+  'ReservationConfirmation': (data) async => ReservationConfirmationWidget(
         propertyId: getParameter(data, 'propertyId'),
       ),
-  'ReservationConfirmation': (data) async => ReservationConfirmationWidget(
+  'bankDetails': (data) async => BankDetailsWidget(
+        bankId: getParameter(data, 'bankId'),
         propertyId: getParameter(data, 'propertyId'),
       ),
   'Confirmation': (data) async => ConfirmationWidget(
