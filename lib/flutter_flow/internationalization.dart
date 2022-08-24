@@ -1583,17 +1583,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الرئيسية',
     },
   },
-  // test
-  {
-    'c89uloyu': {
-      'en': 'Page Title',
-      'ar': '',
-    },
-    'bd4w2hn3': {
-      'en': 'Home',
-      'ar': '',
-    },
-  },
   // NotFoundPage
   {
     'gmbuwmld': {
