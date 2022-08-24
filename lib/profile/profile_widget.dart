@@ -262,10 +262,24 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             // changeToArabic
                             logFirebaseEvent('currentLanguage_changeToArabic');
                             setAppLanguage(context, 'ar');
+                            logFirebaseEvent(
+                                'currentLanguage_Update-Local-State');
+                            setState(() => FFAppState().locale = 'en');
+                            logFirebaseEvent(
+                                'currentLanguage_Update-Local-State');
+                            setState(() => FFAppState().locale =
+                                FFLocalizations.of(context).languageCode);
                           } else {
                             // changeToEnglish
                             logFirebaseEvent('currentLanguage_changeToEnglish');
                             setAppLanguage(context, 'en');
+                            logFirebaseEvent(
+                                'currentLanguage_Update-Local-State');
+                            setState(() => FFAppState().locale = 'en');
+                            logFirebaseEvent(
+                                'currentLanguage_Update-Local-State');
+                            setState(() => FFAppState().locale =
+                                FFLocalizations.of(context).languageCode);
                           }
 
                           if (loggedIn) {
@@ -391,7 +405,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           return Padding(
                             padding: MediaQuery.of(context).viewInsets,
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.9,
+                              height: MediaQuery.of(context).size.height * 0.95,
                               child: TermsConditionsBottomSheetWidget(
                                 pageType: 5,
                               ),

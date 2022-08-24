@@ -260,7 +260,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.9,
+                                      MediaQuery.of(context).size.height * 0.95,
                                   child: TermsConditionsBottomSheetWidget(
                                     pageType: 5,
                                   ),
@@ -309,7 +309,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.9,
+                                      MediaQuery.of(context).size.height * 0.95,
                                   child: TermsConditionsBottomSheetWidget(
                                     pageType: 6,
                                   ),

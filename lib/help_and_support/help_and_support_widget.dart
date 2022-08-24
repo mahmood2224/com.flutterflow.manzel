@@ -183,7 +183,11 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                         isDeleted: true,
                       );
                       await currentUserReference.update(userUpdateData);
+                      logFirebaseEvent('Container_Auth');
+                      GoRouter.of(context).prepareAuthEvent();
+                      await signOut();
                     }
+                    context.goNamedAuth('OnboardingView', mounted);
                   },
                   child: Container(
                     decoration: BoxDecoration(
