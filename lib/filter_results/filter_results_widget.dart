@@ -139,7 +139,9 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                   ),
                   if (FFAppState().locale == 'en')
                     Text(
-                      ' ',
+                      FFLocalizations.of(context).getText(
+                        '9fngoi8o' /*   */,
+                      ),
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                   Text(

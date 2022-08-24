@@ -394,7 +394,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'You have ',
       'ar': 'لديك',
     },
-    'f46vvekt': {
+    '16gqb42z': {
       'en': ' ',
       'ar': '',
     },
@@ -402,7 +402,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' offers active',
       'ar': 'العروض النشطة',
     },
-    'u0hmc77a': {
+    'z2siuoeg': {
       'en': ' ',
       'ar': '',
     },
@@ -707,7 +707,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Filter results ',
       'ar': 'نتائج التصفية',
     },
-    'bomsutfs': {
+    '9fngoi8o': {
       'en': ' ',
       'ar': '',
     },
@@ -1582,11 +1582,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // test
   {
-    'd8w55cpr': {
+    'c89uloyu': {
       'en': 'Page Title',
       'ar': '',
     },
-    'qa2w77ef': {
+    'bd4w2hn3': {
       'en': 'Home',
       'ar': '',
     },

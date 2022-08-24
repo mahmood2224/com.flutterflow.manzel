@@ -513,11 +513,12 @@ class GetOffersCall {
       apiUrl:
           'https://asia-south1-manzel-prod.cloudfunctions.net/getActiveOffers',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Accept-Language': '${locale}',
+      },
       params: {
         'userId': userId,
         'propertyId': propertyId,
-        'locale': locale,
       },
       body: body,
       bodyType: BodyType.JSON,

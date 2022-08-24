@@ -29,7 +29,9 @@ class _TestWidgetState extends State<TestWidget> {
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Text(
-          'Page Title',
+          FFLocalizations.of(context).getText(
+            'c89uloyu' /* Page Title */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'AvenirArabic',
                 color: Colors.black,
