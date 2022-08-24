@@ -214,7 +214,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                             child: Text(
                               FFLocalizations.of(context).getText(
-                                'w6ge88x2' /* Delete Account */,
+                                'w6ge88x2' /* Deactivate Account */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1

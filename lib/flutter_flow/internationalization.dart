@@ -353,7 +353,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'لأي استفسار وقلق',
     },
     'w6ge88x2': {
-      'en': 'Delete Account',
+      'en': 'Deactivate Account',
       'ar': 'حذف الحساب',
     },
     'io7ksyi7': {
