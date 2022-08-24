@@ -185,37 +185,61 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                             }
                             Future.delayed(const Duration(milliseconds: 500), () async{
                               if(currentUserDocument.status.isEmpty || currentUserDocument.status.toLowerCase() == 'active') {
-                                final userUpdateData = createUserRecordData(
-                                    status: 'Active',
-                                    language: FFLocalizations.of(context).languageCode,
-                                );
-                                final userNotificationRecord = createUsersDeviceTokenRecordData(
-                                  deviceToken: await FirebaseMessagingUtils.getPushNotificationToken(),
-                                  userId: currentUserReference,
-                                );
-                                final QuerySnapshot result = await UsersDeviceTokenRecord.collection
-                                    .where('user_id', isEqualTo: currentUserReference).limit(1)
-                                    .get();
+    if(currentUserDocument.isDeleted != null && currentUserDocument.isDeleted != 1 ) {
+    final userUpdateData = createUserRecordData(
+    status: 'Active',
+    language: FFLocalizations.of(context).languageCode,
+    );
+    final userNotificationRecord = createUsersDeviceTokenRecordData(
+    deviceToken: await FirebaseMessagingUtils.getPushNotificationToken(),
+    userId: currentUserReference,
+    );
+    final QuerySnapshot result = await UsersDeviceTokenRecord.collection
+        .where('user_id', isEqualTo: currentUserReference).limit(1)
+        .get();
 
-                                if(result.docs.isNotEmpty) {
-                                  await UsersDeviceTokenRecord.collection.doc(
-                                      result.docs[0].id).update(
-                                      userNotificationRecord);
-                                }else {
-                                  await UsersDeviceTokenRecord.collection.doc().set(userNotificationRecord);
-                                }
+    if(result.docs.isNotEmpty) {
+    await UsersDeviceTokenRecord.collection.doc(
+    result.docs[0].id).update(
+    userNotificationRecord);
+    }else {
+    await UsersDeviceTokenRecord.collection.doc().set(userNotificationRecord);
+    }
 
-                                await currentUserReference.update(userUpdateData);
-                                if (currentUserDisplayName.isEmpty &&
-                                    currentUserDocument.name.isEmpty) {
-                                  final _sendbird = await SendbirdSdk(appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
-                                  final _ = await _sendbird.connect(currentUserUid);
-                                  context.goNamedAuth(
-                                      'AddingInformation', mounted);
-                                } else {
-                                  context.goNamedAuth(
-                                      'HomeScreen', mounted);
-                                }
+    await currentUserReference.update(userUpdateData);
+    if (currentUserDisplayName.isEmpty &&
+    currentUserDocument.name.isEmpty) {
+    final _sendbird = await SendbirdSdk(appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
+    final _ = await _sendbird.connect(currentUserUid);
+    context.goNamedAuth(
+    'AddingInformation', mounted);
+    } else {
+    context.goNamedAuth(
+    'HomeScreen', mounted);
+    }
+    }
+     else {
+      await showDialog(
+        context: context,
+        builder: (alertDialogContext) {
+          return AlertDialog(
+            title: Text('Deactivated'),
+            content: Text(
+                'Your account is Deactivated. Kindly connect to support for more information.'),
+            actions: [
+              TextButton(
+                onPressed: () async{
+                  await signOut();
+                  Navigator.pop(alertDialogContext);
+                  context.pop();
+                },
+                child: Text('Ok'),
+              ),
+            ],
+          );
+        },
+      );
+    }
                               }
                               else{
                                 // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
