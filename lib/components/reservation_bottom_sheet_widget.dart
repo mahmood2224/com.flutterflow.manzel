@@ -552,7 +552,7 @@ class _ReservationBottomSheetWidgetState
                       _shouldSetState = true;
                       if ((addOrderApiResponse?.statusCode ?? 200) == 200) {
                         logFirebaseEvent('Button_Backend-Call');
-                        setupSDKSession(paymentMethodValue.toLowerCase() == 'mada/visa' ? 0 : 1);
+                        setupSDKSession((paymentMethodValue.toLowerCase() == 'mada/visa' || paymentMethodValue.toLowerCase() == 'مدى / فيزا' ) ? 0 : 1);
                         orderId = getJsonField(
                           (addOrderApiResponse?.jsonBody ?? ''),
                           r'''$.result''',
