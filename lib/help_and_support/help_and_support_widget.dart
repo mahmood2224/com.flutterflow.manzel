@@ -49,9 +49,10 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
           ),
           textAlign: TextAlign.center,
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Sofia Pro',
+                fontFamily: 'AvenirArabic',
                 color: Colors.black,
                 fontSize: 22,
+                useGoogleFonts: false,
               ),
         ),
         actions: [],
@@ -89,7 +90,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                                   .bodyText1
                                   .override(
                                     fontFamily: 'AvenirArabic',
-                                    fontSize: 15,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
                                   ),
@@ -104,7 +105,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                                     fontFamily: 'AvenirArabic',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
-                                    fontSize: 16,
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: false,
                                   ),
@@ -117,7 +118,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                                   .bodyText1
                                   .override(
                                     fontFamily: 'AvenirArabic',
-                                    fontSize: 15,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
                                   ),
@@ -147,28 +148,54 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(30, 50, 20, 0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).white,
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(
-                      color: FlutterFlowTheme.of(context).primaryColor,
-                      width: 2,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-                    child: InkWell(
-                      onTap: () async {
-                        logFirebaseEvent(
-                            'HELP_AND_SUPPORT_Row_wchexu6u_ON_TAP');
-                        logFirebaseEvent('Row_Backend-Call');
+                child: InkWell(
+                  onTap: () async {
+                    logFirebaseEvent(
+                        'HELP_AND_SUPPORT_Container_tuq5l2th_ON_T');
+                    logFirebaseEvent('Container_Alert-Dialog');
+                    var confirmDialogResponse = await showDialog<bool>(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Delete Account '),
+                              content: Text(
+                                  'Are you sure you want to delete your account ?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, false),
+                                  child: Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('Confirm'),
+                                ),
+                              ],
+                            );
+                          },
+                        ) ??
+                        false;
+                    if (confirmDialogResponse) {
+                      logFirebaseEvent('Container_Backend-Call');
 
-                        final userUpdateData = createUserRecordData(
-                          isDeleted: true,
-                        );
-                        await currentUserReference.update(userUpdateData);
-                      },
+                      final userUpdateData = createUserRecordData(
+                        isDeleted: true,
+                      );
+                      await currentUserReference.update(userUpdateData);
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).white,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        width: 2,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -177,7 +204,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                           Icon(
                             Icons.delete_sweep_outlined,
                             color: FlutterFlowTheme.of(context).primaryColor,
-                            size: 20,
+                            size: 24,
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
@@ -191,7 +218,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                                     fontFamily: 'AvenirArabic',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
-                                    fontSize: 14,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: false,
                                   ),

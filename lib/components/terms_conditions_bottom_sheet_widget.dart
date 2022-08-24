@@ -112,14 +112,22 @@ class _TermsConditionsBottomSheetWidgetState
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                  child: Html(
-                    data: valueOrDefault<String>(
-                      getJsonField(
-                        columnTermsConitionsAndPrivacyPoliciesResponse.jsonBody,
-                        r'''$.data.attributes.description''',
-                      ).toString(),
-                      'null',
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Html(
+                          data: valueOrDefault<String>(
+                            getJsonField(
+                              columnTermsConitionsAndPrivacyPoliciesResponse
+                                  .jsonBody,
+                              r'''$.data.attributes.description''',
+                            ).toString(),
+                            'null',
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

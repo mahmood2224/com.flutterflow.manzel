@@ -183,7 +183,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 1,
+                                      MediaQuery.of(context).size.height * 0.9,
                                   child: TermsConditionsBottomSheetWidget(
                                     pageType: 5,
                                   ),
@@ -245,7 +245,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 1,
+                                      MediaQuery.of(context).size.height * 0.9,
                                   child: TermsConditionsBottomSheetWidget(
                                     pageType: 6,
                                   ),
