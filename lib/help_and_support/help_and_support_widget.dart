@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../auth/firebase_user_provider.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -146,101 +147,103 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(30, 50, 20, 0),
-                child: InkWell(
-                  onTap: () async {
-                    logFirebaseEvent(
-                        'HELP_AND_SUPPORT_Container_tuq5l2th_ON_T');
-                    Function() _navigate = () {};
-                    logFirebaseEvent('Container_Alert-Dialog');
-                    var confirmDialogResponse = await showDialog<bool>(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('Deactivate Account '),
-                              content: Text(
-                                  'Are you sure you want to delete your account ?'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext, false),
-                                  child: Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext, true),
-                                  child: Text('Confirm'),
-                                ),
-                              ],
-                            );
-                          },
-                        ) ??
-                        false;
-                    if (confirmDialogResponse) {
-                      logFirebaseEvent('Container_Backend-Call');
-
-                      final userUpdateData = createUserRecordData(
-                        isDeleted: 1,
-                      );
-                      await currentUserReference.update(userUpdateData);
-                      logFirebaseEvent('Container_Auth');
-                      GoRouter.of(context).prepareAuthEvent();
-                      await signOut();
-                      _navigate =
-                          () => context.goNamedAuth('OnboardingView', mounted);
-                    } else {
-                      logFirebaseEvent('Container_Wait-Delay');
-                      await Future.delayed(const Duration(milliseconds: 100));
-                    }
-
-                    _navigate();
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).white,
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        width: 2,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Icon(
-                            Icons.delete_sweep_outlined,
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            size: 24,
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                'w6ge88x2' /* Deactivate Account */,
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'AvenirArabic',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
+              if (loggedIn)
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(30, 50, 20, 0),
+                  child: InkWell(
+                    onTap: () async {
+                      logFirebaseEvent(
+                          'HELP_AND_SUPPORT_Container_tuq5l2th_ON_T');
+                      Function() _navigate = () {};
+                      logFirebaseEvent('Container_Alert-Dialog');
+                      var confirmDialogResponse = await showDialog<bool>(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Deactivate Account '),
+                                content: Text(
+                                    'Are you sure you want to delete your account ?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(
+                                        alertDialogContext, false),
+                                    child: Text('Cancel'),
                                   ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext, true),
+                                    child: Text('Confirm'),
+                                  ),
+                                ],
+                              );
+                            },
+                          ) ??
+                          false;
+                      if (confirmDialogResponse) {
+                        logFirebaseEvent('Container_Backend-Call');
+
+                        final userUpdateData = createUserRecordData(
+                          isDeleted: 1,
+                        );
+                        await currentUserReference.update(userUpdateData);
+                        logFirebaseEvent('Container_Auth');
+                        GoRouter.of(context).prepareAuthEvent();
+                        await signOut();
+                        _navigate = () =>
+                            context.goNamedAuth('OnboardingView', mounted);
+                      } else {
+                        logFirebaseEvent('Container_Wait-Delay');
+                        await Future.delayed(const Duration(milliseconds: 100));
+                      }
+
+                      _navigate();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).white,
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                          width: 2,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.delete_sweep_outlined,
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              size: 24,
                             ),
-                          ),
-                        ],
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  'w6ge88x2' /* Deactivate Account */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'AvenirArabic',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
         ),
