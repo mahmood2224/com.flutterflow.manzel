@@ -133,36 +133,45 @@ class _BankDetailsBottomSheetWidgetState
             ),
           ),
         ),
-        SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
-                child: Html(
-                  data: getJsonField(
-                    widget.bankJSON,
-                    r'''$.bank_description''',
-                  ).toString(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
+                        child: Html(
+                          data: getJsonField(
+                            widget.bankJSON,
+                            r'''$.bank_description''',
+                          ).toString(),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
-        SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 17, 20, 0),
-                child: Html(
-                  data: getJsonField(
-                    widget.bankJSON,
-                    r'''$.bank_rules''',
-                  ).toString(),
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 17, 20, 0),
+                        child: Html(
+                          data: getJsonField(
+                            widget.bankJSON,
+                            r'''$.bank_rules''',
+                          ).toString(),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         Padding(
