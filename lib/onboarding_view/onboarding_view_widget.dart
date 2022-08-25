@@ -24,10 +24,15 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('ONBOARDING_VIEW_OnboardingView_ON_LOAD');
-      if (!FFAppState().isInitailLaunch) {
+      if (FFAppState().isInitailLaunch) {
+        logFirebaseEvent('OnboardingView_Update-Local-State');
+        setState(() =>
+            FFAppState().locale = FFLocalizations.of(context).languageCode);
+      } else {
         logFirebaseEvent('OnboardingView_Navigate-To');
         context.goNamed('HomeScreen');
       }
+
       logFirebaseEvent('OnboardingView_Update-Local-State');
       setState(
           () => FFAppState().locale = FFLocalizations.of(context).languageCode);
