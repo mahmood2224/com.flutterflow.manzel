@@ -102,6 +102,7 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         propertyId: getParameter(data, 'propertyId'),
       ),
   'ImagePreview': (data) async => ImagePreviewWidget(),
+  'FloorPlan': (data) async => FloorPlanWidget(),
   'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
         city: getParameter(data, 'city'),
       ),
@@ -138,7 +139,6 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Chat': (data) async => ChatWidget(
         bankJson: getParameter(data, 'bankJson'),
       ),
-  'FloorPlan': (data) async => FloorPlanWidget(),
 };
 
 bool hasMatchingParameters(Map<String, dynamic> data, Set<String> params) =>

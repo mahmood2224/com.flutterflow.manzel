@@ -1004,6 +1004,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
   },
+  // FloorPlan
+  {
+    '316x1ckw': {
+      'en': 'Floor Plan ',
+      'ar': 'مخطط الطابق',
+    },
+    'qz7ded0d': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
   // WhereAreYouLooking
   {
     'qlysszro': {
@@ -1604,17 +1615,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '9onf7xjs': {
       'en': 'Home',
       'ar': 'الرئيسية',
-    },
-  },
-  // FloorPlan
-  {
-    '316x1ckw': {
-      'en': 'Floor Plan ',
-      'ar': 'مخطط الطابق',
-    },
-    'qz7ded0d': {
-      'en': 'Home',
-      'ar': '',
     },
   },
   // NotFoundPage

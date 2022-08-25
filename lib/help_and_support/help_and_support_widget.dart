@@ -152,6 +152,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                   onTap: () async {
                     logFirebaseEvent(
                         'HELP_AND_SUPPORT_Container_tuq5l2th_ON_T');
+                    Function() _navigate = () {};
                     logFirebaseEvent('Container_Alert-Dialog');
                     var confirmDialogResponse = await showDialog<bool>(
                           context: context,
@@ -186,8 +187,14 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                       logFirebaseEvent('Container_Auth');
                       GoRouter.of(context).prepareAuthEvent();
                       await signOut();
+                      _navigate =
+                          () => context.goNamedAuth('OnboardingView', mounted);
+                    } else {
+                      logFirebaseEvent('Container_Wait-Delay');
+                      await Future.delayed(const Duration(milliseconds: 100));
                     }
-                    context.goNamedAuth('OnboardingView', mounted);
+
+                    _navigate();
                   },
                   child: Container(
                     decoration: BoxDecoration(
