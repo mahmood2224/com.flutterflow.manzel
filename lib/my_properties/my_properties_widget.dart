@@ -477,7 +477,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               width: 74,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
-                                                                                color: Color(0xFFFF0000),
+                                                                                color: Color(0xFFD05C5C),
                                                                                 borderRadius: BorderRadius.circular(7),
                                                                               ),
                                                                               child: Row(
@@ -546,7 +546,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               width: 74,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
-                                                                                color: Color(0xFFFF0000),
+                                                                                color: Color(0xFFD05C5C),
                                                                                 borderRadius: BorderRadius.circular(7),
                                                                               ),
                                                                               child: Row(
@@ -578,7 +578,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               width: 100,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
-                                                                                color: Color(0xFFFF0000),
+                                                                                color: Color(0xFFD05C5C),
                                                                                 borderRadius: BorderRadius.circular(7),
                                                                               ),
                                                                               child: Row(
