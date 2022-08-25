@@ -1535,7 +1535,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '5lptumrw': {
       'en': 'Disqualified',
-      'ar': 'ألغيت',
+      'ar': 'غير مؤهل',
     },
     'zaua3lqi': {
       'en': 'You have been disqualified from all supported banks',

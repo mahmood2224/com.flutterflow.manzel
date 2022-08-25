@@ -537,19 +537,31 @@ bool orderProcessStatus(
       break;
     case "cancelled":
       // do something else
-      if (processStage == "cancelled" && setType == "checked") {
+      if ((processStage == "reserved" ||
+              processStage == "collect_offers" ||
+              processStage == "cancelled") &&
+          setType == "checked") {
         return true;
-      } else if (processStage != "cancelled" && setType == "unchecked") {
+      } else if ((processStage != "reserved" &&
+              processStage != "collect_offers" &&
+              processStage != "cancelled") &&
+          setType == "unchecked") {
         return true;
       } else {
         return false;
       }
       break;
-    case "disqalified":
+    case "disqualified":
       // do something else
-      if (processStage == "disqualified" && setType == "checked") {
+      if ((processStage == "reserved" ||
+              processStage == "collect_offers" ||
+              processStage == "disqualified") &&
+          setType == "checked") {
         return true;
-      } else if (processStage != "disqualified" && setType == "unchecked") {
+      } else if ((processStage != "reserved" &&
+              processStage != "collect_offers" &&
+              processStage != "disqualified") &&
+          setType == "unchecked") {
         return true;
       } else {
         return false;
@@ -557,9 +569,11 @@ bool orderProcessStatus(
       break;
     case "expired":
       // do something else
-      if (processStage == "expired" && setType == "checked") {
+      if ((processStage == "reserved" || processStage == "expired") &&
+          setType == "checked") {
         return true;
-      } else if (processStage != "expired" && setType == "unchecked") {
+      } else if ((processStage != "reserved" && processStage != "expired") &&
+          setType == "unchecked") {
         return true;
       } else {
         return false;
@@ -705,7 +719,7 @@ String notificationsDateTime(
       String result = DateFormat.d().format(timestamp) +
           " " +
           DateFormat.MMM().format(timestamp) +
-          "" +
+          " " +
           DateFormat.y().format(timestamp);
       return result;
     }
@@ -940,4 +954,45 @@ String formatAmountWithoutDecimal(String amount) {
   var format = NumberFormat('###,###', 'en_US');
   double value = double.parse(amount);
   return format.format(value);
+}
+
+bool bookingDetailsOrderStatusConditionlVisibilty(
+  String orderStatus,
+  String statusText,
+) {
+  switch (orderStatus) {
+    case "cancelled":
+      {
+        if (statusText != "reserved" && statusText != "collect_offers") {
+          return false;
+        } else {
+          return true;
+        }
+      }
+      break;
+    case "disqualified":
+      {
+        if (statusText != "reserved" && statusText != "collect_offers") {
+          return false;
+        } else {
+          return true;
+        }
+      }
+      break;
+    case "expired":
+      {
+        if (statusText != "reserved") {
+          return false;
+        } else {
+          return true;
+        }
+      }
+      break;
+
+    default:
+      {
+        return false;
+      }
+      break;
+  }
 }

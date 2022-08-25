@@ -1508,8 +1508,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     milliseconds:
                                                                         4000),
                                                                 backgroundColor:
-                                                                    Color(
-                                                                        0xFF777777),
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
                                                               ),
                                                             );
                                                           } else {
@@ -1541,8 +1542,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     milliseconds:
                                                                         4000),
                                                                 backgroundColor:
-                                                                    Color(
-                                                                        0xFF676767),
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
                                                               ),
                                                             );
                                                           }

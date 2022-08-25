@@ -1387,31 +1387,29 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         CrossAxisAlignment
                                                                             .end,
                                                                     children: [
-                                                                      Expanded(
-                                                                        child:
-                                                                            Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            functions.formatAmount(valueOrDefault<String>(
-                                                                              getJsonField(
-                                                                                activeOffersItem,
-                                                                                r'''$.property_price''',
-                                                                              ).toString(),
-                                                                              '0',
-                                                                            )),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          functions
+                                                                              .formatAmount(valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$.property_price''',
+                                                                            ).toString(),
                                                                             '0',
-                                                                          ),
-                                                                          maxLines:
-                                                                              2,
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                fontSize: 19,
-                                                                                fontWeight: FontWeight.bold,
-                                                                                useGoogleFonts: false,
-                                                                              ),
+                                                                          )),
+                                                                          '0',
                                                                         ),
+                                                                        maxLines:
+                                                                            2,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              fontSize: 19,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              useGoogleFonts: false,
+                                                                            ),
                                                                       ),
                                                                       Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -1705,7 +1703,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           duration:
                                                                               Duration(milliseconds: 4000),
                                                                           backgroundColor:
-                                                                              Color(0xFFA5A5A5),
+                                                                              FlutterFlowTheme.of(context).primaryText,
                                                                         ),
                                                                       );
                                                                     } else {
@@ -1729,7 +1727,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           duration:
                                                                               Duration(milliseconds: 4000),
                                                                           backgroundColor:
-                                                                              Color(0xFFA5A5A5),
+                                                                              FlutterFlowTheme.of(context).primaryText,
                                                                         ),
                                                                       );
                                                                     }

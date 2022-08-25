@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -450,6 +451,14 @@ Future<List<T>> queryCollectionOnce<T>(
       )
       .where((d) => d != null)
       .toList());
+}
+
+extension WhereInExtension on Query {
+  Query whereIn(String field, List list) => (list?.isEmpty ?? false)
+      //Ensures an empty list is returned for a query with no results
+      //since it is near impossible for list to have the same random double value
+      ? where(field, whereIn: [Random().nextDouble()])
+      : where(field, whereIn: list);
 }
 
 class FFFirestorePage<T> {

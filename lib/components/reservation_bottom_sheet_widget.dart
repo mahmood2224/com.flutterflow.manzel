@@ -423,11 +423,12 @@ class _ReservationBottomSheetWidgetState
                               functions.snackBarMessage(
                                   'reservationConfirmed', FFAppState().locale),
                               style: TextStyle(
-                                color: Color(0xFFA5A5A5),
+                                color: FlutterFlowTheme.of(context).white,
                               ),
                             ),
                             duration: Duration(milliseconds: 4000),
-                            backgroundColor: Color(0x00000000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).primaryText,
                           ),
                         );
                         if (_shouldSetState) setState(() {});
