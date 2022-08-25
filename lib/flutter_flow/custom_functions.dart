@@ -996,3 +996,17 @@ bool bookingDetailsOrderStatusConditionlVisibilty(
       break;
   }
 }
+
+bool notificationConditionalVisibilty(
+  String appLocale,
+  int isRead,
+  String textLang,
+  int textWeight,
+) {
+  if ((appLocale == textLang) && (isRead == textWeight)) {
+    return true;
+  } else {
+    return false;
+  }
+  // Add your function code here!
+}

@@ -229,9 +229,13 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                   CrossAxisAlignment
                                                                       .start,
                                                               children: [
-                                                                if (FFAppState()
-                                                                        .locale ==
-                                                                    'ar')
+                                                                if (functions.notificationConditionalVisibilty(
+                                                                    FFAppState()
+                                                                        .locale,
+                                                                    notificationsListNotificationsRecord
+                                                                        .isRead,
+                                                                    'ar',
+                                                                    0))
                                                                   Row(
                                                                     mainAxisSize:
                                                                         MainAxisSize
@@ -255,14 +259,18 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                       ),
                                                                     ],
                                                                   ),
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  children: [
-                                                                    if (FFAppState()
-                                                                            .locale ==
-                                                                        'en')
+                                                                if (functions.notificationConditionalVisibilty(
+                                                                    FFAppState()
+                                                                        .locale,
+                                                                    notificationsListNotificationsRecord
+                                                                        .isRead,
+                                                                    'en',
+                                                                    0))
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
                                                                       Expanded(
                                                                         child:
                                                                             Text(
@@ -279,8 +287,68 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                               ),
                                                                         ),
                                                                       ),
-                                                                  ],
-                                                                ),
+                                                                    ],
+                                                                  ),
+                                                                if (functions.notificationConditionalVisibilty(
+                                                                    FFAppState()
+                                                                        .locale,
+                                                                    notificationsListNotificationsRecord
+                                                                        .isRead,
+                                                                    'ar',
+                                                                    1))
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Text(
+                                                                          notificationsListNotificationsRecord
+                                                                              .messageAr,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .subtitle1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: Colors.black,
+                                                                                fontSize: 14,
+                                                                                fontWeight: FontWeight.w300,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                if (functions.notificationConditionalVisibilty(
+                                                                    FFAppState()
+                                                                        .locale,
+                                                                    notificationsListNotificationsRecord
+                                                                        .isRead,
+                                                                    'en',
+                                                                    1))
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Text(
+                                                                          notificationsListNotificationsRecord
+                                                                              .messageEn,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .subtitle1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: Colors.black,
+                                                                                fontSize: 14,
+                                                                                fontWeight: FontWeight.w300,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
                                                                 Padding(
                                                                   padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
