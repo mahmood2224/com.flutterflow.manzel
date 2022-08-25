@@ -581,7 +581,9 @@ bool offerStatusPaymentCompletedCheck(
 ) {
   // Add your function code here!
   if ((transactionId != null || transactionId != "null") &&
-      (status != "cancelled")) {
+      ((status != "cancelled" ||
+          status != "disqualified" ||
+          status != "expired"))) {
     return true;
   } else {
     return false;
