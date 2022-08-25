@@ -49,9 +49,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
-      logFirebaseEvent('HomeScreen_Update-Local-State');
-      setState(
-          () => FFAppState().locale = FFLocalizations.of(context).languageCode);
+      logFirebaseEvent('HomeScreen_Set-App-Language');
+      setAppLanguage(context, FFAppState().locale);
     });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});

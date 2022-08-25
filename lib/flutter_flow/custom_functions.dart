@@ -388,6 +388,7 @@ bool myPropertiesViewOffersVisibility(String status) {
       status == "completed" ||
       status == "offer_accepted" ||
       status == "ownership_transferred" ||
+      status == "expired" ||
       status == "accepted") {
     return true;
   } else {
@@ -549,6 +550,16 @@ bool orderProcessStatus(
       if (processStage == "disqualified" && setType == "checked") {
         return true;
       } else if (processStage != "disqualified" && setType == "unchecked") {
+        return true;
+      } else {
+        return false;
+      }
+      break;
+    case "expired":
+      // do something else
+      if (processStage == "expired" && setType == "checked") {
+        return true;
+      } else if (processStage != "expired" && setType == "unchecked") {
         return true;
       } else {
         return false;

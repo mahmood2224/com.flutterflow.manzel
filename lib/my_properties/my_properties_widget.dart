@@ -579,6 +579,38 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 ],
                                                                               ),
                                                                             ),
+                                                                          if (functions.conditionalVisibility(
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_status''',
+                                                                              ).toString(),
+                                                                              'expired'))
+                                                                            Container(
+                                                                              width: 100,
+                                                                              height: 23,
+                                                                              decoration: BoxDecoration(
+                                                                                color: Color(0xFFFF0000),
+                                                                                borderRadius: BorderRadius.circular(7),
+                                                                              ),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    FFLocalizations.of(context).getText(
+                                                                                      '1ky73fb2' /* Expired */,
+                                                                                    ),
+                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                          fontFamily: 'AvenirArabic',
+                                                                                          color: FlutterFlowTheme.of(context).white,
+                                                                                          fontSize: 12,
+                                                                                          fontWeight: FontWeight.w500,
+                                                                                          useGoogleFonts: false,
+                                                                                        ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
                                                                         ],
                                                                       ),
                                                                     ),

@@ -201,6 +201,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
+              name: 'ImagePreview',
+              path: 'imagePreview',
+              builder: (context, params) => ImagePreviewWidget(),
+            ),
+            FFRoute(
+              name: 'FloorPlan',
+              path: 'floorPlan',
+              builder: (context, params) => FloorPlanWidget(),
+            ),
+            FFRoute(
               name: 'WhereAreYouLooking',
               path: 'whereAreYouLooking',
               builder: (context, params) => WhereAreYouLookingWidget(
