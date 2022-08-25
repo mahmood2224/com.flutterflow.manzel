@@ -162,7 +162,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                               return AlertDialog(
                                 title: Text('Deactivate Account '),
                                 content: Text(
-                                    'Are you sure you want to delete your account ?'),
+                                    'Are you sure you want to deactivate your account ?'),
                                 actions: [
                                   TextButton(
                                     onPressed: () => Navigator.pop(

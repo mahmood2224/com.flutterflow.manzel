@@ -328,7 +328,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           return Padding(
                             padding: MediaQuery.of(context).viewInsets,
                             child: Container(
-                              height: 95,
+                              height: MediaQuery.of(context).size.height * 0.95,
                               child: TermsConditionsBottomSheetWidget(
                                 pageType: 7,
                               ),
@@ -376,7 +376,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           return Padding(
                             padding: MediaQuery.of(context).viewInsets,
                             child: Container(
-                              height: 95,
+                              height: MediaQuery.of(context).size.height * 0.95,
                               child: TermsConditionsBottomSheetWidget(
                                 pageType: 5,
                               ),
