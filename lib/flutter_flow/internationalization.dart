@@ -100,11 +100,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الخيار الأمثل لمنزلك المستقبلي',
     },
     'bl6z0bqv': {
-      'en': 'The perfect choice for \nyour future home',
+      'en': 'The dream home',
       'ar': 'الخيار الأمثل لمنزلك المستقبلي',
     },
     't9rvb8ym': {
-      'en': 'The perfect choice for \nyour future home',
+      'en': 'The dream become true',
       'ar': 'الخيار الأمثل لمنزلك المستقبلي',
     },
     'bgkoinqg': {

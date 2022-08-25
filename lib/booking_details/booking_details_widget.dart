@@ -978,7 +978,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       width: 24,
                                       height: 24,
                                       decoration: BoxDecoration(
-                                        color: Color(0xFFFF0000),
+                                        color: Color(0xFFD05C5C),
                                         shape: BoxShape.circle,
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
@@ -1061,7 +1061,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       width: 24,
                                       height: 24,
                                       decoration: BoxDecoration(
-                                        color: Color(0xFFFF0000),
+                                        color: Color(0xFFD05C5C),
                                         shape: BoxShape.circle,
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)
@@ -1144,7 +1144,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       width: 24,
                                       height: 24,
                                       decoration: BoxDecoration(
-                                        color: Color(0xFFFF0000),
+                                        color: Color(0xFFD05C5C),
                                         shape: BoxShape.circle,
                                         border: Border.all(
                                           color: FlutterFlowTheme.of(context)

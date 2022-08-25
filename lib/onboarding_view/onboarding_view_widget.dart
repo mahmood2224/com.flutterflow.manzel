@@ -115,9 +115,7 @@ your f... */
                                 EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
                             child: Text(
                               FFLocalizations.of(context).getText(
-                                'bl6z0bqv' /* The perfect choice for 
-your f... */
-                                ,
+                                'bl6z0bqv' /* The dream home */,
                               ),
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
@@ -151,9 +149,7 @@ your f... */
                                 EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
                             child: Text(
                               FFLocalizations.of(context).getText(
-                                't9rvb8ym' /* The perfect choice for 
-your f... */
-                                ,
+                                't9rvb8ym' /* The dream become true */,
                               ),
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
