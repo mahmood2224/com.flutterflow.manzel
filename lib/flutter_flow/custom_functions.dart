@@ -580,9 +580,9 @@ bool offerStatusPaymentCompletedCheck(
   String status,
 ) {
   // Add your function code here!
-  if ((transactionId != null || transactionId != "null") &&
-      ((status != "cancelled" ||
-          status != "disqualified" ||
+  if ((transactionId != null && transactionId != "null") &&
+      ((status != "cancelled" &&
+          status != "disqualified" &&
           status != "expired"))) {
     return true;
   } else {
