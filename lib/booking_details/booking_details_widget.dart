@@ -1048,7 +1048,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             'disqualified'))
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1107,6 +1107,89 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         Text(
                                           FFLocalizations.of(context).getText(
                                             'zaua3lqi' /* You have been disqualified fro... */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'AvenirArabic',
+                                                fontSize: 12,
+                                                useGoogleFonts: false,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        if (functions.conditionalVisibility(
+                            getJsonField(
+                              columnOrderDetailsResponse.jsonBody,
+                              r'''$.result.order_status''',
+                            ).toString(),
+                            'expired'))
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFFFF0000),
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 5),
+                                        child: Icon(
+                                          Icons.clear,
+                                          color: FlutterFlowTheme.of(context)
+                                              .white,
+                                          size: 22,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12, 0, 0, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'zv5c32ls' /* Expired */,
+                                          ),
+                                          maxLines: 2,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'AvenirArabic',
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
+                                              ),
+                                        ),
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'cgacbnp0' /* Your offer has been expired */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1

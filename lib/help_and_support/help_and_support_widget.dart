@@ -157,7 +157,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                           context: context,
                           builder: (alertDialogContext) {
                             return AlertDialog(
-                              title: Text('Delete Account '),
+                              title: Text('Deactivate Account '),
                               content: Text(
                                   'Are you sure you want to delete your account ?'),
                               actions: [

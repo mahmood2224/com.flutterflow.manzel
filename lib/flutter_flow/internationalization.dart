@@ -153,10 +153,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Personal info',
       'ar': 'المعلومات الشخصية',
     },
-    '0qus6h1d': {
-      'en': 'Payment & Cards',
-      'ar': 'الدفع والبطاقات',
-    },
     'vjemd3mv': {
       'en': 'Login',
       'ar': 'تسجيل الدخول',
@@ -168,10 +164,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '6mgqpd1r': {
       'en': 'Language',
       'ar': 'اللغة',
-    },
-    'u8ivo1rr': {
-      'en': 'FAQ',
-      'ar': 'الأسئلة الشائعة',
     },
     'ltqtegrk': {
       'en': 'Help Center',
@@ -188,10 +180,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '2csoqw0t': {
       'en': 'Logout',
       'ar': 'تسجيل خروج',
-    },
-    'qhxlmijh': {
-      'en': 'App bulid 2.1.1 (231)',
-      'ar': 'اصدار التطبيق 2.1.1 (231)',
     },
     'umgvt8b8': {
       'en': 'Account',
@@ -433,9 +421,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ' ',
       'ar': '',
     },
+    'muecz7ra': {
+      'en': 'You need to create an account or ',
+      'ar': 'تحتاج إلى إنشاء حساب أو',
+    },
+    'x824f0mb': {
+      'en': 'login to see this section',
+      'ar': 'تسجيل الدخول لرؤية هذا القسم',
+    },
     '1cb5at0r': {
-      'en': 'Login',
-      'ar': 'تسجيل الدخول',
+      'en': 'Login/Signup',
+      'ar': 'الدخول التسجيل فى الموقع',
     },
     't2kwojss': {
       'en': 'Offers #',
@@ -847,7 +843,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '9svos0f4': {
       'en': 'Disqualified',
-      'ar': 'ألغيت',
+      'ar': 'غير مؤهل',
+    },
+    '1ky73fb2': {
+      'en': 'Expired',
+      'ar': 'منتهي الصلاحية',
     },
     'tu9ytzrl': {
       'en': 'Booking ref: ',
@@ -884,17 +884,21 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PropertyDetails
   {
-    'tpufujg8': {
-      'en': '#',
-      'ar': '',
-    },
     'ak0ss5un': {
       'en': 'Updated: ',
       'ar': 'محدث:',
     },
-    'kqc4ney0': {
-      'en': 'Property manage by ',
-      'ar': 'إدارة الممتلكات عن طريق',
+    'tpufujg8': {
+      'en': '#',
+      'ar': '',
+    },
+    'fcc5u3dn': {
+      'en': '360 tour ',
+      'ar': '360 جولة',
+    },
+    '9d90para': {
+      'en': 'Apt. Plan',
+      'ar': 'ملائم. يخطط',
     },
     '73rcbvl6': {
       'en': ', ',
@@ -903,6 +907,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'regy8zap': {
       'en': 'View on map',
       'ar': 'عرض على الخريطة',
+    },
+    'kqc4ney0': {
+      'en': 'Property manage by ',
+      'ar': 'إدارة الممتلكات عن طريق',
     },
     'd1l98zzs': {
       'en': ' Bedrooms',
@@ -970,7 +978,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '67qymqb4': {
       'en': 'Photos',
-      'ar': 'ملكيات مماثلة',
+      'ar': 'الصور',
     },
     'i17ddd6l': {
       'en': 'Installment starting from',
@@ -987,6 +995,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'wzirx8i7': {
       'en': 'Booked',
       'ar': 'محجوز',
+    },
+  },
+  // ImagePreview
+  {
+    'hfcgod45': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // WhereAreYouLooking
@@ -1519,6 +1534,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'You have been disqualified from all supported banks',
       'ar': '',
     },
+    'zv5c32ls': {
+      'en': 'Expired',
+      'ar': 'منتهي الصلاحية',
+    },
+    'cgacbnp0': {
+      'en': 'Your offer has been expired',
+      'ar': 'لقد انتهت صلاحية عرضك',
+    },
     'nxmc61bl': {
       'en': 'Property details',
       'ar': 'تفاصيل اوضح',
@@ -1581,6 +1604,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '9onf7xjs': {
       'en': 'Home',
       'ar': 'الرئيسية',
+    },
+  },
+  // FloorPlan
+  {
+    '316x1ckw': {
+      'en': 'Floor Plan ',
+      'ar': 'مخطط الطابق',
+    },
+    'qz7ded0d': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // NotFoundPage

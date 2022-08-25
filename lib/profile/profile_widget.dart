@@ -144,33 +144,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              FFLocalizations.of(context).getText(
-                                '0qus6h1d' /* Payment & Cards */,
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: Colors.black,
-                              size: 20,
-                            ),
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                 if (!loggedIn)
@@ -310,31 +283,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        FFLocalizations.of(context).getText(
-                          'u8ivo1rr' /* FAQ */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: Colors.black,
-                        size: 20,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
                   child: InkWell(
                     onTap: () async {
                       logFirebaseEvent('PROFILE_PAGE_Row_u1wgoua7_ON_TAP');
@@ -368,27 +316,47 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        FFLocalizations.of(context).getText(
-                          'hyxsohqj' /* About manzel */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
+                  child: InkWell(
+                    onTap: () async {
+                      logFirebaseEvent('PROFILE_PAGE_Row_m107mnbe_ON_TAP');
+                      logFirebaseEvent('Row_Bottom-Sheet');
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: MediaQuery.of(context).viewInsets,
+                            child: TermsConditionsBottomSheetWidget(
+                              pageType: 7,
                             ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: Colors.black,
-                        size: 20,
-                      ),
-                    ],
+                          );
+                        },
+                      );
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          FFLocalizations.of(context).getText(
+                            'hyxsohqj' /* About manzel */,
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios_rounded,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
@@ -480,24 +448,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ],
                     ),
                   ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 15, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        FFLocalizations.of(context).getText(
-                          'qhxlmijh' /* App bulid 2.1.1 (231) */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyText2.override(
-                              fontFamily: 'AvenirArabic',
-                              fontWeight: FontWeight.w300,
-                              useGoogleFonts: false,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),

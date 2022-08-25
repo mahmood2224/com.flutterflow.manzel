@@ -189,6 +189,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
+              name: 'ImagePreview',
+              path: 'imagePreview',
+              builder: (context, params) => ImagePreviewWidget(),
+            ),
+            FFRoute(
               name: 'WhereAreYouLooking',
               path: 'whereAreYouLooking',
               builder: (context, params) => WhereAreYouLookingWidget(
@@ -277,6 +282,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ChatWidget(
                 bankJson: params.getParam('bankJson', ParamType.JSON),
               ),
+            ),
+            FFRoute(
+              name: 'FloorPlan',
+              path: 'floorPlan',
+              builder: (context, params) => FloorPlanWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

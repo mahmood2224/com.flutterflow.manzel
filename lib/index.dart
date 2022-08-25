@@ -24,6 +24,7 @@ export 'filter_results/filter_results_widget.dart' show FilterResultsWidget;
 export 'my_properties/my_properties_widget.dart' show MyPropertiesWidget;
 export 'property_details/property_details_widget.dart'
     show PropertyDetailsWidget;
+export 'image_preview/image_preview_widget.dart' show ImagePreviewWidget;
 export 'where_are_you_looking/where_are_you_looking_widget.dart'
     show WhereAreYouLookingWidget;
 export 'search_city_result/search_city_result_widget.dart'
@@ -43,3 +44,4 @@ export 'personal_employment_details/personal_employment_details_widget.dart'
     show PersonalEmploymentDetailsWidget;
 export 'booking_details/booking_details_widget.dart' show BookingDetailsWidget;
 export 'chat/chat_widget.dart' show ChatWidget;
+export 'floor_plan/floor_plan_widget.dart' show FloorPlanWidget;

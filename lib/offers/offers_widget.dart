@@ -237,32 +237,88 @@ class _OffersWidgetState extends State<OffersWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            logFirebaseEvent('OFFERS_PAGE_LOGIN_BTN_ON_TAP');
-                            logFirebaseEvent('Button_Navigate-To');
-                            context.pushNamed('Login');
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            '1cb5at0r' /* Login */,
-                          ),
-                          options: FFButtonOptions(
-                            width: 200,
-                            height: 40,
-                            color: FlutterFlowTheme.of(context).white,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'AvenirArabic',
-                                      color: Colors.black,
-                                      useGoogleFonts: false,
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Image.asset(
+                                'assets/images/offerScreenNoResult.png',
+                                width: 37,
+                                height: 38,
+                                fit: BoxFit.cover,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10, 15, 10, 0),
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'muecz7ra' /* You need to create an account ... */,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'AvenirArabic',
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: false,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 35),
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'x824f0mb' /* login to see this section */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'AvenirArabic',
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: false,
+                                      ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 10, 20, 10),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    logFirebaseEvent(
+                                        'OFFERS_PAGE_LOGIN_SIGNUP_BTN_ON_TAP');
+                                    logFirebaseEvent('Button_Navigate-To');
+                                    context.pushNamed('Login');
+                                  },
+                                  text: FFLocalizations.of(context).getText(
+                                    '1cb5at0r' /* Login/Signup */,
+                                  ),
+                                  options: FFButtonOptions(
+                                    width: 215,
+                                    height: 40,
+                                    color: Color(0xFF2971FB),
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: FlutterFlowTheme.of(context)
+                                              .white,
+                                          fontSize: 14,
+                                          useGoogleFonts: false,
+                                        ),
+                                    borderSide: BorderSide(
+                                      width: 1,
                                     ),
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(12),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
