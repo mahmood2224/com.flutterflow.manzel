@@ -232,27 +232,25 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             FFLocalizations.of(context).languageCode,
                           );
                           if (changeLanguage) {
+                            logFirebaseEvent(
+                                'currentLanguage_Update-Local-State');
+                            setState(() => FFAppState().locale = 'en');
+                            logFirebaseEvent(
+                                'currentLanguage_Update-Local-State');
+                            setState(() => FFAppState().locale = 'ar');
                             // changeToArabic
                             logFirebaseEvent('currentLanguage_changeToArabic');
                             setAppLanguage(context, 'ar');
+                          } else {
                             logFirebaseEvent(
                                 'currentLanguage_Update-Local-State');
                             setState(() => FFAppState().locale = 'en');
                             logFirebaseEvent(
                                 'currentLanguage_Update-Local-State');
-                            setState(() => FFAppState().locale =
-                                FFLocalizations.of(context).languageCode);
-                          } else {
+                            setState(() => FFAppState().locale = 'en');
                             // changeToEnglish
                             logFirebaseEvent('currentLanguage_changeToEnglish');
                             setAppLanguage(context, 'en');
-                            logFirebaseEvent(
-                                'currentLanguage_Update-Local-State');
-                            setState(() => FFAppState().locale = 'en');
-                            logFirebaseEvent(
-                                'currentLanguage_Update-Local-State');
-                            setState(() => FFAppState().locale =
-                                FFLocalizations.of(context).languageCode);
                           }
 
                           if (loggedIn) {

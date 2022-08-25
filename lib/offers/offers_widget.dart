@@ -118,17 +118,21 @@ class _OffersWidgetState extends State<OffersWidget> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        'r282eka0' /* You have  */,
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          1, 0, 1, 0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'r282eka0' /* You have */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 16,
+                                              useGoogleFonts: false,
+                                            ),
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'AvenirArabic',
-                                            fontSize: 16,
-                                            useGoogleFonts: false,
-                                          ),
                                     ),
                                     FutureBuilder<ApiCallResponse>(
                                       future: GetOffersCall.call(
@@ -174,25 +178,22 @@ class _OffersWidgetState extends State<OffersWidget> {
                                         );
                                       },
                                     ),
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        '16gqb42z' /*   */,
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          1, 0, 1, 0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          '9i2we2yx' /* offers active */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              useGoogleFonts: false,
+                                            ),
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
-                                    ),
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        '9i2we2yx' /*  offers active */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'AvenirArabic',
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            useGoogleFonts: false,
-                                          ),
                                     ),
                                     Text(
                                       FFLocalizations.of(context).getText(
