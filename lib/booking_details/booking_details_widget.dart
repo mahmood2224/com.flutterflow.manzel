@@ -1791,27 +1791,32 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        Text(
-                                          valueOrDefault<String>(
-                                            functions.formatAmount(
-                                                valueOrDefault<String>(
-                                              getJsonField(
-                                                columnOrderDetailsResponse
-                                                    .jsonBody,
-                                                r'''$.result.transaction_data.paid_amount''',
-                                              ).toString(),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 5, 0),
+                                          child: Text(
+                                            valueOrDefault<String>(
+                                              functions.formatAmount(
+                                                  valueOrDefault<String>(
+                                                getJsonField(
+                                                  columnOrderDetailsResponse
+                                                      .jsonBody,
+                                                  r'''$.result.transaction_data.paid_amount''',
+                                                ).toString(),
+                                                '0',
+                                              )),
                                               '0',
-                                            )),
-                                            '0',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts: false,
+                                                ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
                                         ),
                                         Text(
                                           FFLocalizations.of(context).getText(
