@@ -41,26 +41,49 @@ class _OffersWidgetState extends State<OffersWidget> {
           return;
         }
 
-        logFirebaseEvent('Offers_Alert-Dialog');
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Please get your account activated'),
-              content: Text(
-                  'You are not an active user please connect admin for further details on ok logout user '),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
-        logFirebaseEvent('Offers_Auth');
-        GoRouter.of(context).prepareAuthEvent();
-        await signOut();
+        if (FFAppState().locale == 'en') {
+          logFirebaseEvent('Offers_Alert-Dialog');
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: Text('Please get your account activated'),
+                content: Text(
+                    'You are not an active user please connect admin for further details on ok logout user '),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+          logFirebaseEvent('Offers_Auth');
+          GoRouter.of(context).prepareAuthEvent();
+          await signOut();
+        } else {
+          logFirebaseEvent('Offers_Alert-Dialog');
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: Text('يرجى تفعيل حسابك'),
+                content: Text(
+                    'أنت لست مستخدمًا نشطًا ، يرجى الاتصال بالمسؤول للحصول على مزيد من التفاصيل حول مستخدم موافق لتسجيل الخروج'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('موافق'),
+                  ),
+                ],
+              );
+            },
+          );
+          logFirebaseEvent('Offers_Auth');
+          GoRouter.of(context).prepareAuthEvent();
+          await signOut();
+        }
       } else {
         return;
       }
