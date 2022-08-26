@@ -993,7 +993,7 @@ bool bookingDetailsOrderStatusConditionlVisibilty(
 
     default:
       {
-        return false;
+        return true;
       }
       break;
   }

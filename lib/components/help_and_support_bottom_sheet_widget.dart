@@ -25,7 +25,6 @@ class _HelpAndSupportBottomSheetWidgetState
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          height: 70,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).white,
           ),
@@ -82,7 +81,7 @@ class _HelpAndSupportBottomSheetWidgetState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20, 70, 20, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 0),
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -227,7 +226,7 @@ class _HelpAndSupportBottomSheetWidgetState
                                   TextButton(
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext, true),
-                                    child: Text('Confirm'),
+                                    child: Text('يتأكد'),
                                   ),
                                 ],
                               );
