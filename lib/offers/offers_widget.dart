@@ -27,7 +27,7 @@ class OffersWidget extends StatefulWidget {
 
 class _OffersWidgetState extends State<OffersWidget> {
   ApiCallResponse acceptOfferResponse;
-  ApiCallResponse acceptOfferResponse;
+  ApiCallResponse acceptOfferResponseAr;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -1785,7 +1785,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                     if (confirmDialogResponse) {
                                                                       logFirebaseEvent(
                                                                           'Button_Backend-Call');
-                                                                      acceptOfferResponse =
+                                                                      acceptOfferResponseAr =
                                                                           await AcceptOfferCall
                                                                               .call(
                                                                         userId:
@@ -1799,7 +1799,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           'null',
                                                                         ),
                                                                       );
-                                                                      if ((acceptOfferResponse?.statusCode ??
+                                                                      if ((acceptOfferResponseAr?.statusCode ??
                                                                               200) ==
                                                                           200) {
                                                                         logFirebaseEvent(
