@@ -223,9 +223,12 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
         context: context,
         builder: (alertDialogContext) {
           return AlertDialog(
-            title: Text('Deactivated'),
-            content: Text(
-                'Your account is Deactivated. Kindly connect to support for more information.'),
+            title: Text(FFLocalizations.of(context).getText(
+              'OTPDeactivated' ,
+            )),
+            content: Text(FFLocalizations.of(context).getText(
+              'OTPDeactivatedText' ,
+            )),
             actions: [
               TextButton(
                 onPressed: () async{
@@ -233,11 +236,13 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                   Navigator.pop(alertDialogContext);
                   context.pop();
                 },
-                child: Text('Ok'),
+                child: Text(FFLocalizations.of(context).getText(
+                  'OTPOk' ,
+                )),
               ),
             ],
           );
-        },
+          },
       );
     }
                               }
@@ -249,17 +254,22 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                   context: context,
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
-                                      title: Text('Blocked'),
-                                      content: Text(
-                                          'Your account is not active. Kindly connect to support for more information.'),
+                                      title: Text(FFLocalizations.of(context).getText(
+                                        'OTPBlocked' ,
+                                      )),
+                                      content: Text(FFLocalizations.of(context).getText(
+                                        'OTPBlockedText' ,
+                                      )),
                                       actions: [
                                         TextButton(
                                           onPressed: () async{
                                             await signOut();
                                             Navigator.pop(alertDialogContext);
                                             context.pop();
-                                            },
-                                          child: Text('Ok'),
+                                          },
+                                          child: Text(FFLocalizations.of(context).getText(
+                                            'OTPOk' ,
+                                          )),
                                         ),
                                       ],
                                     );

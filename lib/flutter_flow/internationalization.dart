@@ -325,6 +325,26 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
       'ar': ' الرئيسية',
     },
+    'OTPBlocked':{
+      'ar':'ممنوع',
+      'en':'Blocked',
+    },
+    'OTPBlockedText':{
+      'ar':'حسابك غير فعال. يرجى الاتصال بالدعم لمزيد من المعلومات.',
+      'en':'Your account is not active. Kindly connect to support for more information.',
+    },
+    'OTPOk' :{
+      'en':'Ok',
+      'ar':'موافق',
+    },
+    'OTPDeactivated':{
+      'en':'Deactivated',
+      'ar':'معطل',
+    },
+    'OTPDeactivatedText':{
+      'en':'Your account is Deactivated. Kindly connect to support for more information.',
+      'ar':'حسابك معطل. يرجى الاتصال بالدعم لمزيد من المعلومات.',
+    },
   },
   // HelpAndSupport
   {
@@ -1116,6 +1136,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     's7jia86m': {
       'en': 'Home',
       'ar': ' الرئيسية',
+    },
+    'paymentFailed': {
+      'en': 'Payment Failed',
+      'ar': 'عملية الدفع فشلت',
     },
   },
   // Confirmation
