@@ -25,7 +25,6 @@ class _HelpAndSupportBottomSheetWidgetState
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          height: 70,
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).white,
           ),
