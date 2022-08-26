@@ -171,9 +171,9 @@ class _HelpAndSupportBottomSheetWidgetState
                             context: context,
                             builder: (alertDialogContext) {
                               return AlertDialog(
-                                title: Text('Deactivate Account '),
+                                title: Text('Delete Account '),
                                 content: Text(
-                                    'Are you sure you want to deactivate your account ?'),
+                                    'Your account deletion will be processed soon'),
                                 actions: [
                                   TextButton(
                                     onPressed: () => Navigator.pop(
@@ -214,9 +214,8 @@ class _HelpAndSupportBottomSheetWidgetState
                             context: context,
                             builder: (alertDialogContext) {
                               return AlertDialog(
-                                title: Text('تعطيل الحساب'),
-                                content: Text(
-                                    'هل أنت متأكد أنك تريد إلغاء تنشيط حسابك؟'),
+                                title: Text('حذف الحساب'),
+                                content: Text('سيتم معالجة حذف حسابك قريبًا'),
                                 actions: [
                                   TextButton(
                                     onPressed: () => Navigator.pop(
@@ -280,7 +279,7 @@ class _HelpAndSupportBottomSheetWidgetState
                             padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
                             child: Text(
                               FFLocalizations.of(context).getText(
-                                'eaazmbdx' /* Deactivate Account */,
+                                'eaazmbdx' /* Delete Account */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
