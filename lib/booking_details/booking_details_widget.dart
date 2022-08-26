@@ -368,7 +368,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             'collect_offers'))
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 2),
+                                            0, 0, 0, 21),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           crossAxisAlignment:
