@@ -227,7 +227,7 @@ class _HelpAndSupportBottomSheetWidgetState
                                   TextButton(
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext, true),
-                                    child: Text('Confirm'),
+                                    child: Text('يتأكد'),
                                   ),
                                 ],
                               );
