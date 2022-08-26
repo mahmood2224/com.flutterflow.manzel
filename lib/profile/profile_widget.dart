@@ -255,6 +255,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           }
 
                           if (loggedIn) {
+                            logFirebaseEvent('currentLanguage_Wait-Delay');
+                            await Future.delayed(
+                                const Duration(milliseconds: 100));
                             logFirebaseEvent('currentLanguage_Backend-Call');
 
                             final userUpdateData = createUserRecordData(

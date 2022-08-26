@@ -1708,7 +1708,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'لأي استفسار وقلق',
     },
     'eaazmbdx': {
-      'en': 'Deactivate Account',
+      'en': 'Delete Account',
       'ar': 'حذف الحساب',
     },
   },
