@@ -65,33 +65,89 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    FFButtonWidget(
-                      onPressed: () async {
-                        logFirebaseEvent('MY_PROPERTIES_PAGE_logIn_ON_TAP');
-                        // login
-                        logFirebaseEvent('logIn_login');
-                        context.goNamed('Login');
-                      },
-                      text: FFLocalizations.of(context).getText(
-                        '6silbaqf' /* Login */,
-                      ),
-                      options: FFButtonOptions(
-                        width: 335,
-                        height: 48,
-                        color: Colors.white,
-                        textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: false,
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Image.asset(
+                              'assets/images/offerScreenNoResult.png',
+                              width: 37,
+                              height: 38,
+                              fit: BoxFit.cover,
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(10, 15, 10, 0),
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  'w4bgagrv' /* You need to create an account ... */,
                                 ),
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                          width: 1,
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'AvenirArabic',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 35),
+                              child: Text(
+                                FFLocalizations.of(context).getText(
+                                  '9m2bglko' /* login to see this section */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'AvenirArabic',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20, 10, 20, 10),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'MY_PROPERTIES_LOGIN_SIGNUP_BTN_ON_TAP');
+                                  logFirebaseEvent('Button_Navigate-To');
+                                  context.pushNamed('Login');
+                                },
+                                text: FFLocalizations.of(context).getText(
+                                  'yo5djc7x' /* Login/Signup */,
+                                ),
+                                options: FFButtonOptions(
+                                  width: 215,
+                                  height: 40,
+                                  color: Color(0xFF2971FB),
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'AvenirArabic',
+                                        color:
+                                            FlutterFlowTheme.of(context).white,
+                                        fontSize: 14,
+                                        useGoogleFonts: false,
+                                      ),
+                                  borderSide: BorderSide(
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        borderRadius: BorderRadius.circular(12),
                       ),
                     ),
                   ],
@@ -1434,16 +1490,24 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                   useGoogleFonts: false,
                                                                                 ),
                                                                           ),
-                                                                          Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              '747xbn3l' /*  sqm */,
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                4,
+                                                                                0,
+                                                                                4,
+                                                                                0),
+                                                                            child:
+                                                                                Text(
+                                                                              FFLocalizations.of(context).getText(
+                                                                                '747xbn3l' /* sqm */,
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                    fontFamily: 'AvenirArabic',
+                                                                                    fontSize: 12,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                  ),
                                                                             ),
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 12,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
                                                                           ),
                                                                         ],
                                                                       ),

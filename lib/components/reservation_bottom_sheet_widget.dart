@@ -408,8 +408,6 @@ class _ReservationBottomSheetWidgetState
                                   ParamType.String),
                               'paymentMethod': serializeParam(
                                   paymentMethodValue, ParamType.String),
-                              'transactionId':
-                                  serializeParam('', ParamType.String),
                             }.withoutNulls,
                           );
                         }

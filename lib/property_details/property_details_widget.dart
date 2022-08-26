@@ -2259,10 +2259,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0, 11, 5, 0),
+                                                  4, 11, 4, 0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
-                                              'mgi2d0o9' /*  SAR/Monthly */,
+                                              'mgi2d0o9' /* SAR/Monthly */,
                                             ),
                                             textAlign: TextAlign.start,
                                             style: FlutterFlowTheme.of(context)

@@ -110,34 +110,35 @@ class _BankDetailsBottomSheetWidgetState
             ],
           ),
         ),
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(20, 12, 0, 0),
-          child: Container(
-            width: 130,
-            height: 93,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                getJsonField(
-                  widget.bankJSON,
-                  r'''$.bank_logo..url''',
-                ),
-                width: double.infinity,
-                height: double.infinity,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-        ),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 12, 0, 0),
+                  child: Container(
+                    width: 130,
+                    height: 93,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        getJsonField(
+                          widget.bankJSON,
+                          r'''$.bank_logo..url''',
+                        ),
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
                 SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,

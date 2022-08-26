@@ -140,23 +140,19 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                           useGoogleFonts: false,
                         ),
                   ),
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'nukctvmg' /*  properties found */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'AvenirArabic',
-                          color: Color(0xFF6B6B6B),
-                          useGoogleFonts: false,
-                        ),
-                  ),
-                  if (FFAppState().locale == 'ar')
-                    Text(
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
+                    child: Text(
                       FFLocalizations.of(context).getText(
-                        'wk7xyqu8' /*   */,
+                        'nukctvmg' /* properties found */,
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'AvenirArabic',
+                            color: Color(0xFF6B6B6B),
+                            useGoogleFonts: false,
+                          ),
                     ),
+                  ),
                 ],
               ),
             ],

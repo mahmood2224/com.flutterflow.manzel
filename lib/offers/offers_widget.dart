@@ -134,49 +134,53 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             ),
                                       ),
                                     ),
-                                    FutureBuilder<ApiCallResponse>(
-                                      future: GetOffersCall.call(
-                                        userId: currentUserUid,
-                                        propertyId: functions
-                                            .offerScreenPropertyIdisNull(
-                                                widget.propertyId),
-                                        locale: FFAppState().locale,
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: SpinKitRipple(
-                                                color: Color(0xFF2971FB),
-                                                size: 50,
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          4, 0, 4, 0),
+                                      child: FutureBuilder<ApiCallResponse>(
+                                        future: GetOffersCall.call(
+                                          userId: currentUserUid,
+                                          propertyId: functions
+                                              .offerScreenPropertyIdisNull(
+                                                  widget.propertyId),
+                                          locale: FFAppState().locale,
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child: SpinKitRipple(
+                                                  color: Color(0xFF2971FB),
+                                                  size: 50,
+                                                ),
                                               ),
+                                            );
+                                          }
+                                          final textGetOffersResponse =
+                                              snapshot.data;
+                                          return Text(
+                                            valueOrDefault<String>(
+                                              functions
+                                                  .countJsonData(getJsonField(
+                                                textGetOffersResponse.jsonBody,
+                                                r'''$.result''',
+                                              )),
+                                              '0',
                                             ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  useGoogleFonts: false,
+                                                ),
                                           );
-                                        }
-                                        final textGetOffersResponse =
-                                            snapshot.data;
-                                        return Text(
-                                          valueOrDefault<String>(
-                                            functions
-                                                .countJsonData(getJsonField(
-                                              textGetOffersResponse.jsonBody,
-                                              r'''$.result''',
-                                            )),
-                                            '0',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                useGoogleFonts: false,
-                                              ),
-                                        );
-                                      },
+                                        },
+                                      ),
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -1576,7 +1580,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         Text(
                                                                           FFLocalizations.of(context)
                                                                               .getText(
-                                                                            'pasrxjal' /* Chat with  */,
+                                                                            'pasrxjal' /* Chat with */,
                                                                           ),
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyText1
@@ -1588,24 +1592,29 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 useGoogleFonts: false,
                                                                               ),
                                                                         ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$.agent_name''',
-                                                                            ).toString(),
-                                                                            'null',
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              3,
+                                                                              0,
+                                                                              3,
+                                                                              0),
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.agent_name''',
+                                                                              ).toString(),
+                                                                              'null',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  color: FlutterFlowTheme.of(context).white,
+                                                                                  fontSize: 15,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
                                                                           ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                color: FlutterFlowTheme.of(context).white,
-                                                                                fontSize: 15,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                useGoogleFonts: false,
-                                                                              ),
                                                                         ),
                                                                         Text(
                                                                           FFLocalizations.of(context)

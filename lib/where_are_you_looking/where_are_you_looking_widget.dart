@@ -305,37 +305,32 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                                             false,
                                                                       ),
                                                                 ),
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'wptanz77' /*  properties available  */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        color: Color(
-                                                                            0xFF676767),
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                if (FFAppState()
-                                                                        .locale ==
-                                                                    'ar')
-                                                                  Text(
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          4,
+                                                                          0,
+                                                                          4,
+                                                                          0),
+                                                                  child: Text(
                                                                     FFLocalizations.of(
                                                                             context)
                                                                         .getText(
-                                                                      'w6jzdg0z' /*    */,
+                                                                      'wptanz77' /* properties available  */,
                                                                     ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .bodyText1,
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'AvenirArabic',
+                                                                          color:
+                                                                              Color(0xFF676767),
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
                                                                   ),
+                                                                ),
                                                               ],
                                                             ),
                                                           ),

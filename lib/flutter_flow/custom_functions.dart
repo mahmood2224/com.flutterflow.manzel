@@ -963,7 +963,9 @@ bool bookingDetailsOrderStatusConditionlVisibilty(
   switch (orderStatus) {
     case "cancelled":
       {
-        if (statusText != "reserved" && statusText != "collect_offers") {
+        if (statusText != "reserved" &&
+            statusText != "collect_offers" &&
+            statusText != "payment_confirmed") {
           return false;
         } else {
           return true;
@@ -972,7 +974,7 @@ bool bookingDetailsOrderStatusConditionlVisibilty(
       break;
     case "disqualified":
       {
-        if (statusText != "reserved" && statusText != "collect_offers") {
+        if (statusText != "reserved" && statusText != "payment_confirmed") {
           return false;
         } else {
           return true;

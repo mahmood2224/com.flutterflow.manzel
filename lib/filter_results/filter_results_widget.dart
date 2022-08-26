@@ -137,30 +137,19 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                       );
                     },
                   ),
-                  if (FFAppState().locale == 'en')
-                    Text(
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
+                    child: Text(
                       FFLocalizations.of(context).getText(
-                        '9fngoi8o' /*   */,
+                        'wpcx1tpl' /* properties found */,
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'AvenirArabic',
+                            color: Color(0xFF6B6B6B),
+                            useGoogleFonts: false,
+                          ),
                     ),
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'wpcx1tpl' /* properties found */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'AvenirArabic',
-                          color: Color(0xFF6B6B6B),
-                          useGoogleFonts: false,
-                        ),
                   ),
-                  if (FFAppState().locale == 'ar')
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        '16bydr50' /*    */,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                    ),
                 ],
               ),
             ],
