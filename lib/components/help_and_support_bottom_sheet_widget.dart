@@ -81,7 +81,7 @@ class _HelpAndSupportBottomSheetWidgetState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(20, 70, 20, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 0),
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
