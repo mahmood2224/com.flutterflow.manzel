@@ -1458,7 +1458,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // BookingDetails
   {
     'trw95gom': {
-      'en': 'Booking Ref. : ',
+      'en': 'Booking Ref. :',
       'ar': 'مرجع الحجز :',
     },
     '8eahonhl': {
@@ -1483,7 +1483,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xa9e1t5y': {
       'en': 'Waiting for banks to submit offers (',
-      'ar': '',
+      'ar': 'في انتظار البنوك لتقديم العروض (',
     },
     'awjba3l0': {
       'en': '/',
@@ -1491,7 +1491,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'mehsn231': {
       'en': ')',
-      'ar': '',
+      'ar': ')',
     },
     '3a3j0qu5': {
       'en': 'Offer Accepted',
@@ -1499,7 +1499,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ver0de4k': {
       'en': 'Waiting for you to accept one of the offers provided by banks',
-      'ar': '',
+      'ar': 'في انتظارك لقبول أحد العروض المقدمة من البنوك',
     },
     'oqathjmt': {
       'en': 'Transfer Ownership',
@@ -1507,7 +1507,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'k64pcuyr': {
       'en': 'Transferring the ownership of the property to you ',
-      'ar': '',
+      'ar': 'نقل ملكية العقار لك',
     },
     'nhrc354h': {
       'en': 'Completed',
@@ -1515,7 +1515,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ubpscf43': {
       'en': 'Ownership transferred successfully ',
-      'ar': '',
+      'ar': 'تم نقل الملكية بنجاح',
     },
     'dd079ljk': {
       'en': 'Cancelled',
@@ -1523,7 +1523,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'mtbhr1iu': {
       'en': 'You have Cancelled the reservation of the property',
-      'ar': '',
+      'ar': 'لقد ألغيت حجز العقار',
     },
     '5lptumrw': {
       'en': 'Disqualified',
@@ -1531,7 +1531,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'zaua3lqi': {
       'en': 'You have been disqualified from all supported banks',
-      'ar': '',
+      'ar': 'لقد تم استبعادك من جميع البنوك المدعومة',
     },
     'zv5c32ls': {
       'en': 'Expired',

@@ -15,11 +15,9 @@ class BookingDetailsWidget extends StatefulWidget {
   const BookingDetailsWidget({
     Key key,
     this.orderId,
-    this.orderStatus,
   }) : super(key: key);
 
   final String orderId;
-  final String orderStatus;
 
   @override
   _BookingDetailsWidgetState createState() => _BookingDetailsWidgetState();
@@ -60,17 +58,20 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              FFLocalizations.of(context).getText(
-                'trw95gom' /* Booking Ref. :  */,
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
+              child: Text(
+                FFLocalizations.of(context).getText(
+                  'trw95gom' /* Booking Ref. : */,
+                ),
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'AvenirArabic',
+                      color: FlutterFlowTheme.of(context).white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      useGoogleFonts: false,
+                    ),
               ),
-              style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'AvenirArabic',
-                    color: FlutterFlowTheme.of(context).white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    useGoogleFonts: false,
-                  ),
             ),
             Text(
               widget.orderId,
@@ -86,11 +87,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
         ),
         actions: [
           Visibility(
-            visible:
-                functions.cancelReverveButtonVisibility(valueOrDefault<String>(
-              widget.orderStatus,
-              'accepted',
-            )),
+            visible: widget.orderId != widget.orderId,
             child: Align(
               alignment: AlignmentDirectional(0, -0.75),
               child: Padding(

@@ -865,15 +865,6 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             r'''$.order_id''',
                                                                           ).toString(),
                                                                           ParamType.String),
-                                                                      'orderStatus': serializeParam(
-                                                                          valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              bookedPropertiesItem,
-                                                                              r'''$.order_status''',
-                                                                            ).toString(),
-                                                                            'accepted',
-                                                                          ),
-                                                                          ParamType.String),
                                                                     }.withoutNulls,
                                                                   );
                                                                 },

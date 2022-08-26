@@ -135,7 +135,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                   .update(notificationsUpdateData);
                               if (notificationsListNotificationsRecord
                                       .notificationType ==
-                                  'offer_accepted') {
+                                  'offer') {
                                 logFirebaseEvent('Container_Navigate-To');
                                 context.pushNamed(
                                   'Offers',
