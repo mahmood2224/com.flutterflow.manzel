@@ -157,17 +157,20 @@ class _ChatWidgetState extends State<ChatWidget>
                                     ),
                           ),
                         ),
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            'cmnqvi8z' /*  -  */,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              'cmnqvi8z' /* - */,
+                            ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'AvenirArabic',
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'AvenirArabic',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
                         ),
                         Text(
                           valueOrDefault<String>(

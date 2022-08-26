@@ -110,57 +110,65 @@ class _BankDetailsBottomSheetWidgetState
             ],
           ),
         ),
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(20, 12, 0, 0),
-          child: Container(
-            width: 130,
-            height: 93,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                getJsonField(
-                  widget.bankJSON,
-                  r'''$.bank_logo..url''',
-                ),
-                width: double.infinity,
-                height: double.infinity,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-        ),
-        SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
-                child: Html(
-                  data: getJsonField(
-                    widget.bankJSON,
-                    r'''$.bank_description''',
-                  ).toString(),
-                ),
-              ),
-            ],
-          ),
-        ),
         Expanded(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 17, 20, 0),
-                  child: Html(
-                    data: getJsonField(
-                      widget.bankJSON,
-                      r'''$.bank_rules''',
-                    ).toString(),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 12, 0, 0),
+                  child: Container(
+                    width: 130,
+                    height: 93,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        getJsonField(
+                          widget.bankJSON,
+                          r'''$.bank_logo..url''',
+                        ),
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
+                        child: Html(
+                          data: getJsonField(
+                            widget.bankJSON,
+                            r'''$.bank_description''',
+                          ).toString(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 17, 20, 0),
+                        child: Html(
+                          data: getJsonField(
+                            widget.bankJSON,
+                            r'''$.bank_rules''',
+                          ).toString(),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

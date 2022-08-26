@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/backend.dart';
+import '../components/help_and_support_bottom_sheet_widget.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -284,8 +285,21 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   child: InkWell(
                     onTap: () async {
                       logFirebaseEvent('PROFILE_PAGE_Row_u1wgoua7_ON_TAP');
-                      logFirebaseEvent('Row_Navigate-To');
-                      context.pushNamed('HelpAndSupport');
+                      logFirebaseEvent('Row_Bottom-Sheet');
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: FlutterFlowTheme.of(context).white,
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: MediaQuery.of(context).viewInsets,
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.95,
+                              child: HelpAndSupportBottomSheetWidget(),
+                            ),
+                          );
+                        },
+                      );
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,

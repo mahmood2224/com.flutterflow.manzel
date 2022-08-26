@@ -88,7 +88,7 @@ class _CancelReserveBottomSheetWidgetState
                         ),
                       ),
                       duration: Duration(milliseconds: 4000),
-                      backgroundColor: Color(0xFF777777),
+                      backgroundColor: FlutterFlowTheme.of(context).primaryText,
                     ),
                   );
                 }

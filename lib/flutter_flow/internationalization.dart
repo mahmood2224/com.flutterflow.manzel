@@ -198,7 +198,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'iegnrogi': {
       'en': ' ',
-      'ar': '+966',
+      'ar': '',
     },
     'dr5dq8mr': {
       'en': 'By clicking continue, you agree to our',
@@ -334,7 +334,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'su9hen9u': {
       'en': 'manzel@manzel.app',
-      'ar': '',
+      'ar': 'manzel@manzel.app',
     },
     'j6a73di8': {
       'en': 'for any query and concern',
@@ -502,7 +502,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'اسم الموظف',
     },
     'pasrxjal': {
-      'en': 'Chat with ',
+      'en': 'Chat with',
       'ar': 'الدردشة مع',
     },
     'alqnps4o': {
@@ -511,7 +511,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'y0qb0uvi': {
       'en': 'Accept offer',
-      'ar': '',
+      'ar': 'اقبل العرض',
     },
     '5gvwuuh2': {
       'en': 'Completed or canceled offers',
@@ -726,17 +726,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Filter results ',
       'ar': 'نتائج التصفية',
     },
-    '9fngoi8o': {
-      'en': ' ',
-      'ar': '',
-    },
     'wpcx1tpl': {
       'en': 'properties found',
       'ar': 'نتائج',
-    },
-    '16bydr50': {
-      'en': '  ',
-      'ar': '',
     },
     '7egi5iad': {
       'en': 'All',
@@ -801,9 +793,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'My Properties',
       'ar': 'ممتلكاتي',
     },
-    '6silbaqf': {
-      'en': 'Login',
-      'ar': 'تسجيل دخول',
+    'w4bgagrv': {
+      'en': 'You need to create an account or ',
+      'ar': 'تحتاج إلى إنشاء حساب أو',
+    },
+    '9m2bglko': {
+      'en': 'login to see this section',
+      'ar': 'تسجيل الدخول لرؤية هذا القسم',
+    },
+    'yo5djc7x': {
+      'en': 'Login/Signup',
+      'ar': 'الدخول التسجيل فى الموقع',
     },
     'gl02050s': {
       'en': 'Booked',
@@ -870,7 +870,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': ' ،',
     },
     '747xbn3l': {
-      'en': ' sqm',
+      'en': 'sqm',
       'ar': 'متر مربع',
     },
     'lhqoha7d': {
@@ -981,7 +981,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'القسط يبدأ من',
     },
     'mgi2d0o9': {
-      'en': ' SAR/Monthly',
+      'en': 'SAR/Monthly',
       'ar': 'ريال/ شهريا',
     },
     'dpmrt150': {
@@ -1018,12 +1018,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'أين تبحث ؟',
     },
     'wptanz77': {
-      'en': ' properties available ',
+      'en': 'properties available ',
       'ar': 'الملكيات المتاحة',
-    },
-    'w6jzdg0z': {
-      'en': '  ',
-      'ar': '',
     },
     'fce9ky0f': {
       'en': 'Home',
@@ -1069,12 +1065,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '\"',
     },
     'nukctvmg': {
-      'en': ' properties found',
+      'en': 'properties found',
       'ar': 'نتائج البحث',
-    },
-    'wk7xyqu8': {
-      'en': ' ',
-      'ar': '',
     },
     'ntrpmj08': {
       'en': 'Home',
@@ -1466,7 +1458,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // BookingDetails
   {
     'trw95gom': {
-      'en': 'Booking Ref. : ',
+      'en': 'Booking Ref. :',
       'ar': 'مرجع الحجز :',
     },
     '8eahonhl': {
@@ -1491,15 +1483,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xa9e1t5y': {
       'en': 'Waiting for banks to submit offers (',
-      'ar': '',
+      'ar': 'في انتظار البنوك لتقديم العروض (',
     },
     'awjba3l0': {
       'en': '/',
-      'ar': '',
+      'ar': '/',
     },
     'mehsn231': {
       'en': ')',
-      'ar': '',
+      'ar': ')',
     },
     '3a3j0qu5': {
       'en': 'Offer Accepted',
@@ -1507,7 +1499,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ver0de4k': {
       'en': 'Waiting for you to accept one of the offers provided by banks',
-      'ar': '',
+      'ar': 'في انتظارك لقبول أحد العروض المقدمة من البنوك',
     },
     'oqathjmt': {
       'en': 'Transfer Ownership',
@@ -1515,7 +1507,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'k64pcuyr': {
       'en': 'Transferring the ownership of the property to you ',
-      'ar': '',
+      'ar': 'نقل ملكية العقار لك',
     },
     'nhrc354h': {
       'en': 'Completed',
@@ -1523,7 +1515,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ubpscf43': {
       'en': 'Ownership transferred successfully ',
-      'ar': '',
+      'ar': 'تم نقل الملكية بنجاح',
     },
     'dd079ljk': {
       'en': 'Cancelled',
@@ -1531,15 +1523,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'mtbhr1iu': {
       'en': 'You have Cancelled the reservation of the property',
-      'ar': '',
+      'ar': 'لقد ألغيت حجز العقار',
     },
     '5lptumrw': {
       'en': 'Disqualified',
-      'ar': 'ألغيت',
+      'ar': 'غير مؤهل',
     },
     'zaua3lqi': {
       'en': 'You have been disqualified from all supported banks',
-      'ar': '',
+      'ar': 'لقد تم استبعادك من جميع البنوك المدعومة',
     },
     'zv5c32ls': {
       'en': 'Expired',
@@ -1605,8 +1597,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // Chat
   {
     'cmnqvi8z': {
-      'en': ' - ',
-      'ar': '',
+      'en': '-',
+      'ar': '-',
     },
     '9onf7xjs': {
       'en': 'Home',
@@ -1695,6 +1687,29 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     't7s7qd09': {
       'en': 'Cancel',
       'ar': 'إلغاء',
+    },
+  },
+  // helpAndSupportBottomSheet
+  {
+    'btyml6ed': {
+      'en': 'Help & Support',
+      'ar': 'ساعد لدعم',
+    },
+    'emjcotxb': {
+      'en': 'Please write us at',
+      'ar': 'الرجاء الكتابة إلينا على',
+    },
+    'hwo08yn2': {
+      'en': 'manzel@manzel.app',
+      'ar': 'manzel@manzel.app',
+    },
+    'pzfwn97d': {
+      'en': 'for any query and concern',
+      'ar': 'لأي استفسار وقلق',
+    },
+    'eaazmbdx': {
+      'en': 'Deactivate Account',
+      'ar': 'حذف الحساب',
     },
   },
   // Miscellaneous

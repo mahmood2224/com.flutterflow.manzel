@@ -27,6 +27,7 @@ class OffersWidget extends StatefulWidget {
 
 class _OffersWidgetState extends State<OffersWidget> {
   ApiCallResponse acceptOfferResponse;
+  ApiCallResponse acceptOfferResponseAr;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -40,26 +41,49 @@ class _OffersWidgetState extends State<OffersWidget> {
           return;
         }
 
-        logFirebaseEvent('Offers_Alert-Dialog');
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Please get your account activated'),
-              content: Text(
-                  'You are not an active user please connect admin for further details on ok logout user '),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
-        logFirebaseEvent('Offers_Auth');
-        GoRouter.of(context).prepareAuthEvent();
-        await signOut();
+        if (FFAppState().locale == 'en') {
+          logFirebaseEvent('Offers_Alert-Dialog');
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: Text('Please get your account activated'),
+                content: Text(
+                    'You are not an active user please connect admin for further details'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+          logFirebaseEvent('Offers_Auth');
+          GoRouter.of(context).prepareAuthEvent();
+          await signOut();
+        } else {
+          logFirebaseEvent('Offers_Alert-Dialog');
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: Text('يرجى تفعيل حسابك'),
+                content: Text(
+                    'أنت لست مستخدمًا نشطًا ، يرجى الاتصال بالمسؤول للحصول على مزيد من التفاصيل حول مستخدم موافق لتسجيل الخروج'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('موافق'),
+                  ),
+                ],
+              );
+            },
+          );
+          logFirebaseEvent('Offers_Auth');
+          GoRouter.of(context).prepareAuthEvent();
+          await signOut();
+        }
       } else {
         return;
       }
@@ -134,49 +158,53 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             ),
                                       ),
                                     ),
-                                    FutureBuilder<ApiCallResponse>(
-                                      future: GetOffersCall.call(
-                                        userId: currentUserUid,
-                                        propertyId: functions
-                                            .offerScreenPropertyIdisNull(
-                                                widget.propertyId),
-                                        locale: FFAppState().locale,
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: SpinKitRipple(
-                                                color: Color(0xFF2971FB),
-                                                size: 50,
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          4, 0, 4, 0),
+                                      child: FutureBuilder<ApiCallResponse>(
+                                        future: GetOffersCall.call(
+                                          userId: currentUserUid,
+                                          propertyId: functions
+                                              .offerScreenPropertyIdisNull(
+                                                  widget.propertyId),
+                                          locale: FFAppState().locale,
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child: SpinKitRipple(
+                                                  color: Color(0xFF2971FB),
+                                                  size: 50,
+                                                ),
                                               ),
+                                            );
+                                          }
+                                          final textGetOffersResponse =
+                                              snapshot.data;
+                                          return Text(
+                                            valueOrDefault<String>(
+                                              functions
+                                                  .countJsonData(getJsonField(
+                                                textGetOffersResponse.jsonBody,
+                                                r'''$.result''',
+                                              )),
+                                              '0',
                                             ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold,
+                                                  useGoogleFonts: false,
+                                                ),
                                           );
-                                        }
-                                        final textGetOffersResponse =
-                                            snapshot.data;
-                                        return Text(
-                                          valueOrDefault<String>(
-                                            functions
-                                                .countJsonData(getJsonField(
-                                              textGetOffersResponse.jsonBody,
-                                              r'''$.result''',
-                                            )),
-                                            '0',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                useGoogleFonts: false,
-                                              ),
-                                        );
-                                      },
+                                        },
+                                      ),
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -1387,31 +1415,29 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         CrossAxisAlignment
                                                                             .end,
                                                                     children: [
-                                                                      Expanded(
-                                                                        child:
-                                                                            Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            functions.formatAmount(valueOrDefault<String>(
-                                                                              getJsonField(
-                                                                                activeOffersItem,
-                                                                                r'''$.property_price''',
-                                                                              ).toString(),
-                                                                              '0',
-                                                                            )),
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          functions
+                                                                              .formatAmount(valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$.property_price''',
+                                                                            ).toString(),
                                                                             '0',
-                                                                          ),
-                                                                          maxLines:
-                                                                              2,
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                fontSize: 19,
-                                                                                fontWeight: FontWeight.bold,
-                                                                                useGoogleFonts: false,
-                                                                              ),
+                                                                          )),
+                                                                          '0',
                                                                         ),
+                                                                        maxLines:
+                                                                            2,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              fontSize: 19,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              useGoogleFonts: false,
+                                                                            ),
                                                                       ),
                                                                       Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -1578,7 +1604,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         Text(
                                                                           FFLocalizations.of(context)
                                                                               .getText(
-                                                                            'pasrxjal' /* Chat with  */,
+                                                                            'pasrxjal' /* Chat with */,
                                                                           ),
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyText1
@@ -1590,24 +1616,29 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 useGoogleFonts: false,
                                                                               ),
                                                                         ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$.agent_name''',
-                                                                            ).toString(),
-                                                                            'null',
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              3,
+                                                                              0,
+                                                                              3,
+                                                                              0),
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.agent_name''',
+                                                                              ).toString(),
+                                                                              'null',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  color: FlutterFlowTheme.of(context).white,
+                                                                                  fontSize: 15,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
                                                                           ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                color: FlutterFlowTheme.of(context).white,
-                                                                                fontSize: 15,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                useGoogleFonts: false,
-                                                                              ),
                                                                         ),
                                                                         Text(
                                                                           FFLocalizations.of(context)
@@ -1638,100 +1669,181 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                     () async {
                                                                   logFirebaseEvent(
                                                                       'OFFERS_PAGE_ACCEPT_OFFER_BTN_ON_TAP');
-                                                                  logFirebaseEvent(
-                                                                      'Button_Alert-Dialog');
-                                                                  var confirmDialogResponse =
-                                                                      await showDialog<
-                                                                              bool>(
-                                                                            context:
-                                                                                context,
-                                                                            builder:
-                                                                                (alertDialogContext) {
-                                                                              return AlertDialog(
-                                                                                title: Text('Accept offer'),
-                                                                                content: Text('Are you sure you want to accept the offer? we will reject all other offers if you accepted'),
-                                                                                actions: [
-                                                                                  TextButton(
-                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                    child: Text('No'),
-                                                                                  ),
-                                                                                  TextButton(
-                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                    child: Text('Accept'),
-                                                                                  ),
-                                                                                ],
-                                                                              );
-                                                                            },
-                                                                          ) ??
-                                                                          false;
-                                                                  if (confirmDialogResponse) {
+                                                                  if (FFAppState()
+                                                                          .locale ==
+                                                                      'en') {
                                                                     logFirebaseEvent(
-                                                                        'Button_Backend-Call');
-                                                                    acceptOfferResponse =
-                                                                        await AcceptOfferCall
-                                                                            .call(
-                                                                      userId:
-                                                                          currentUserUid,
-                                                                      offerId:
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                        getJsonField(
-                                                                          activeOffersItem,
-                                                                          r'''$.id''',
-                                                                        ).toString(),
-                                                                        'null',
-                                                                      ),
-                                                                    );
-                                                                    if ((acceptOfferResponse?.statusCode ??
-                                                                            200) ==
-                                                                        200) {
+                                                                        'Button_Alert-Dialog');
+                                                                    var confirmDialogResponse =
+                                                                        await showDialog<bool>(
+                                                                              context: context,
+                                                                              builder: (alertDialogContext) {
+                                                                                return AlertDialog(
+                                                                                  title: Text('Accept offer'),
+                                                                                  content: Text('Are you sure you want to accept the offer? we will reject all other offers if you accepted'),
+                                                                                  actions: [
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                      child: Text('No'),
+                                                                                    ),
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                      child: Text('Accept'),
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              },
+                                                                            ) ??
+                                                                            false;
+                                                                    if (confirmDialogResponse) {
                                                                       logFirebaseEvent(
-                                                                          'Button_Show-Snack-Bar');
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            functions.snackBarMessage('offerAccepted',
-                                                                                FFAppState().locale),
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: FlutterFlowTheme.of(context).white,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 16,
-                                                                            ),
-                                                                          ),
-                                                                          duration:
-                                                                              Duration(milliseconds: 4000),
-                                                                          backgroundColor:
-                                                                              Color(0xFFA5A5A5),
+                                                                          'Button_Backend-Call');
+                                                                      acceptOfferResponse =
+                                                                          await AcceptOfferCall
+                                                                              .call(
+                                                                        userId:
+                                                                            currentUserUid,
+                                                                        offerId:
+                                                                            valueOrDefault<String>(
+                                                                          getJsonField(
+                                                                            activeOffersItem,
+                                                                            r'''$.id''',
+                                                                          ).toString(),
+                                                                          'null',
                                                                         ),
                                                                       );
-                                                                    } else {
-                                                                      logFirebaseEvent(
-                                                                          'Button_Show-Snack-Bar');
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .showSnackBar(
-                                                                        SnackBar(
-                                                                          content:
-                                                                              Text(
-                                                                            functions.snackBarMessage('error',
-                                                                                FFAppState().locale),
-                                                                            style:
-                                                                                TextStyle(
-                                                                              color: FlutterFlowTheme.of(context).white,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              fontSize: 16,
+                                                                      if ((acceptOfferResponse?.statusCode ??
+                                                                              200) ==
+                                                                          200) {
+                                                                        logFirebaseEvent(
+                                                                            'Button_Show-Snack-Bar');
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                              functions.snackBarMessage('offerAccepted', FFAppState().locale),
+                                                                              style: TextStyle(
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
+                                                                              ),
                                                                             ),
+                                                                            duration:
+                                                                                Duration(milliseconds: 4000),
+                                                                            backgroundColor:
+                                                                                FlutterFlowTheme.of(context).primaryText,
                                                                           ),
-                                                                          duration:
-                                                                              Duration(milliseconds: 4000),
-                                                                          backgroundColor:
-                                                                              Color(0xFFA5A5A5),
+                                                                        );
+                                                                      } else {
+                                                                        logFirebaseEvent(
+                                                                            'Button_Show-Snack-Bar');
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                              functions.snackBarMessage('error', FFAppState().locale),
+                                                                              style: TextStyle(
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
+                                                                              ),
+                                                                            ),
+                                                                            duration:
+                                                                                Duration(milliseconds: 4000),
+                                                                            backgroundColor:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        );
+                                                                      }
+                                                                    }
+                                                                  } else {
+                                                                    logFirebaseEvent(
+                                                                        'Button_Alert-Dialog');
+                                                                    var confirmDialogResponse =
+                                                                        await showDialog<bool>(
+                                                                              context: context,
+                                                                              builder: (alertDialogContext) {
+                                                                                return AlertDialog(
+                                                                                  title: Text('اقبل العرض'),
+                                                                                  content: Text('هل أنت متأكد أنك تريد قبول العرض؟ سنرفض جميع العروض الأخرى إذا قبلتها'),
+                                                                                  actions: [
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                      child: Text('رقم'),
+                                                                                    ),
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                      child: Text('قبول'),
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              },
+                                                                            ) ??
+                                                                            false;
+                                                                    if (confirmDialogResponse) {
+                                                                      logFirebaseEvent(
+                                                                          'Button_Backend-Call');
+                                                                      acceptOfferResponseAr =
+                                                                          await AcceptOfferCall
+                                                                              .call(
+                                                                        userId:
+                                                                            currentUserUid,
+                                                                        offerId:
+                                                                            valueOrDefault<String>(
+                                                                          getJsonField(
+                                                                            activeOffersItem,
+                                                                            r'''$.id''',
+                                                                          ).toString(),
+                                                                          'null',
                                                                         ),
                                                                       );
+                                                                      if ((acceptOfferResponseAr?.statusCode ??
+                                                                              200) ==
+                                                                          200) {
+                                                                        logFirebaseEvent(
+                                                                            'Button_Show-Snack-Bar');
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                              functions.snackBarMessage('offerAccepted', FFAppState().locale),
+                                                                              style: TextStyle(
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
+                                                                              ),
+                                                                            ),
+                                                                            duration:
+                                                                                Duration(milliseconds: 4000),
+                                                                            backgroundColor:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        );
+                                                                      } else {
+                                                                        logFirebaseEvent(
+                                                                            'Button_Show-Snack-Bar');
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                              functions.snackBarMessage('error', FFAppState().locale),
+                                                                              style: TextStyle(
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
+                                                                              ),
+                                                                            ),
+                                                                            duration:
+                                                                                Duration(milliseconds: 4000),
+                                                                            backgroundColor:
+                                                                                FlutterFlowTheme.of(context).primaryText,
+                                                                          ),
+                                                                        );
+                                                                      }
                                                                     }
                                                                   }
 
