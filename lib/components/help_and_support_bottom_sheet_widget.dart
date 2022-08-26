@@ -166,47 +166,92 @@ class _HelpAndSupportBottomSheetWidgetState
                     logFirebaseEvent(
                         'HELP_AND_SUPPORT_BOTTOM_SHEET_Container_');
                     Function() _navigate = () {};
-                    logFirebaseEvent('Container_Alert-Dialog');
-                    var confirmDialogResponse = await showDialog<bool>(
-                          context: context,
-                          builder: (alertDialogContext) {
-                            return AlertDialog(
-                              title: Text('Deactivate Account '),
-                              content: Text(
-                                  'Are you sure you want to deactivate your account ?'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext, false),
-                                  child: Text('Cancel'),
-                                ),
-                                TextButton(
-                                  onPressed: () =>
-                                      Navigator.pop(alertDialogContext, true),
-                                  child: Text('Confirm'),
-                                ),
-                              ],
-                            );
-                          },
-                        ) ??
-                        false;
-                    if (confirmDialogResponse) {
-                      logFirebaseEvent('Container_Backend-Call');
+                    if (FFAppState().locale == 'en') {
+                      logFirebaseEvent('Container_Alert-Dialog');
+                      var confirmDialogResponse = await showDialog<bool>(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Deactivate Account '),
+                                content: Text(
+                                    'Are you sure you want to deactivate your account ?'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(
+                                        alertDialogContext, false),
+                                    child: Text('Cancel'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext, true),
+                                    child: Text('Confirm'),
+                                  ),
+                                ],
+                              );
+                            },
+                          ) ??
+                          false;
+                      if (confirmDialogResponse) {
+                        logFirebaseEvent('Container_Backend-Call');
 
-                      final userUpdateData = createUserRecordData(
-                        isDeleted: 1,
-                      );
-                      await currentUserReference.update(userUpdateData);
-                      logFirebaseEvent('Container_Auth');
-                      GoRouter.of(context).prepareAuthEvent();
-                      await signOut();
-                      _navigate =
-                          () => context.goNamedAuth('OnboardingView', mounted);
+                        final userUpdateData = createUserRecordData(
+                          isDeleted: 1,
+                        );
+                        await currentUserReference.update(userUpdateData);
+                        logFirebaseEvent('Container_Auth');
+                        GoRouter.of(context).prepareAuthEvent();
+                        await signOut();
+                        _navigate = () =>
+                            context.goNamedAuth('OnboardingView', mounted);
+                      } else {
+                        logFirebaseEvent('Container_Wait-Delay');
+                        await Future.delayed(const Duration(milliseconds: 100));
+                        logFirebaseEvent('Container_Bottom-Sheet');
+                        Navigator.pop(context);
+                      }
                     } else {
-                      logFirebaseEvent('Container_Wait-Delay');
-                      await Future.delayed(const Duration(milliseconds: 100));
-                      logFirebaseEvent('Container_Bottom-Sheet');
-                      Navigator.pop(context);
+                      logFirebaseEvent('Container_Alert-Dialog');
+                      var confirmDialogResponse = await showDialog<bool>(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('تعطيل الحساب'),
+                                content: Text(
+                                    'هل أنت متأكد أنك تريد إلغاء تنشيط حسابك؟'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(
+                                        alertDialogContext, false),
+                                    child: Text('يلغي'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext, true),
+                                    child: Text('Confirm'),
+                                  ),
+                                ],
+                              );
+                            },
+                          ) ??
+                          false;
+                      if (confirmDialogResponse) {
+                        logFirebaseEvent('Container_Backend-Call');
+
+                        final userUpdateData = createUserRecordData(
+                          isDeleted: 1,
+                        );
+                        await currentUserReference.update(userUpdateData);
+                        logFirebaseEvent('Container_Auth');
+                        GoRouter.of(context).prepareAuthEvent();
+                        await signOut();
+                        _navigate = () =>
+                            context.goNamedAuth('OnboardingView', mounted);
+                      } else {
+                        logFirebaseEvent('Container_Wait-Delay');
+                        await Future.delayed(const Duration(milliseconds: 100));
+                        logFirebaseEvent('Container_Bottom-Sheet');
+                        Navigator.pop(context);
+                      }
                     }
 
                     _navigate();

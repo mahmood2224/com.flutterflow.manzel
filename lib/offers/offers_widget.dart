@@ -49,7 +49,7 @@ class _OffersWidgetState extends State<OffersWidget> {
               return AlertDialog(
                 title: Text('Please get your account activated'),
                 content: Text(
-                    'You are not an active user please connect admin for further details on ok logout user '),
+                    'You are not an active user please connect admin for further details'),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
