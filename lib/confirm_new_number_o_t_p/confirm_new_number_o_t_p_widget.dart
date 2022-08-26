@@ -185,11 +185,14 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                             }
                             Future.delayed(const Duration(milliseconds: 500), () async{
                               if(currentUserDocument.status.isEmpty || currentUserDocument.status.toLowerCase() == 'active') {
-    if(currentUserDocument.isDeleted != null && currentUserDocument.isDeleted != 1 ) {
+
     final userUpdateData = createUserRecordData(
     status: 'Active',
     language: FFLocalizations.of(context).languageCode,
+        isDeleted: 0
     );
+
+
     final userNotificationRecord = createUsersDeviceTokenRecordData(
     deviceToken: await FirebaseMessagingUtils.getPushNotificationToken(),
     userId: currentUserReference,
@@ -217,34 +220,34 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
     context.goNamedAuth(
     'HomeScreen', mounted);
     }
-    }
-     else {
-      await showDialog(
-        context: context,
-        builder: (alertDialogContext) {
-          return AlertDialog(
-            title: Text(FFLocalizations.of(context).getText(
-              'OTPDeactivated' ,
-            )),
-            content: Text(FFLocalizations.of(context).getText(
-              'OTPDeactivatedText' ,
-            )),
-            actions: [
-              TextButton(
-                onPressed: () async{
-                  await signOut();
-                  Navigator.pop(alertDialogContext);
-                  context.pop();
-                },
-                child: Text(FFLocalizations.of(context).getText(
-                  'OTPOk' ,
-                )),
-              ),
-            ],
-          );
-          },
-      );
-    }
+
+    //  else {
+    //   await showDialog(
+    //     context: context,
+    //     builder: (alertDialogContext) {
+    //       return AlertDialog(
+    //         title: Text(FFLocalizations.of(context).getText(
+    //           'OTPDeactivated' ,
+    //         )),
+    //         content: Text(FFLocalizations.of(context).getText(
+    //           'OTPDeactivatedText' ,
+    //         )),
+    //         actions: [
+    //           TextButton(
+    //             onPressed: () async{
+    //               await signOut();
+    //               Navigator.pop(alertDialogContext);
+    //               context.pop();
+    //             },
+    //             child: Text(FFLocalizations.of(context).getText(
+    //               'OTPOk' ,
+    //             )),
+    //           ),
+    //         ],
+    //       );
+    //       },
+    //   );
+    // }
                               }
                               else{
                                 // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
