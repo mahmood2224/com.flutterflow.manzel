@@ -63,13 +63,16 @@ class _ThreeSixtyViewWidgetState extends State<ThreeSixtyViewWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              FlutterFlowWebView(
-                url: 'https://webobook.com/public/62e01156e972564a8f40d032',
-                bypass: false,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 1,
-                verticalScroll: false,
-                horizontalScroll: false,
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                child: FlutterFlowWebView(
+                  url: 'https://webobook.com/public/62e01156e972564a8f40d032',
+                  bypass: false,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.93,
+                  verticalScroll: false,
+                  horizontalScroll: false,
+                ),
               ),
             ],
           ),
