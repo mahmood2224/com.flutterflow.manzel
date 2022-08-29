@@ -664,11 +664,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                           if (functions.validateInstallmentRange(
                               sliderValue1, sliderValue2)) {
                             logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterCity = '');
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() =>
-                                FFAppState().filterCity = citiesListValue);
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(
                                 () => FFAppState().filterPropertyType = []);
                             logFirebaseEvent('apllyFilter_Update-Local-State');
@@ -701,6 +696,23 @@ class _FilterWidgetState extends State<FilterWidget> {
                             logFirebaseEvent('apllyFilter_Navigate-To');
                             context.pushNamed(
                               'filterResults',
+                              queryParams: {
+                                'cityName': serializeParam(
+                                    citiesListValue, ParamType.String),
+                                'minInstallment': serializeParam(
+                                    valueOrDefault<String>(
+                                      functions
+                                          .sliderToApi(sliderValue1)
+                                          .toString(),
+                                      '0',
+                                    ),
+                                    ParamType.String),
+                                'maxInstallment': serializeParam(
+                                    functions
+                                        .sliderToApi(sliderValue2)
+                                        .toString(),
+                                    ParamType.String),
+                              }.withoutNulls,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: TransitionInfo(
                                   hasTransition: true,

@@ -100,13 +100,24 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
       : NavBarPage(initialPage: 'Offers'),
   'Filter': (data) async => FilterWidget(),
   'PastOffers': (data) async => PastOffersWidget(),
-  'filterResults': (data) async => FilterResultsWidget(),
+  'filterResults': (data) async => FilterResultsWidget(
+        cityName: getParameter(data, 'cityName'),
+        furnishingType: getParameter(data, 'furnishingType'),
+        propertyType: getParameter(data, 'propertyType'),
+        minInstallment: getParameter(data, 'minInstallment'),
+        maxInstallment: getParameter(data, 'maxInstallment'),
+      ),
   'MyProperties': (data) async => NavBarPage(initialPage: 'MyProperties'),
   'PropertyDetails': (data) async => PropertyDetailsWidget(
         propertyId: getParameter(data, 'propertyId'),
       ),
-  'ImagePreview': (data) async => ImagePreviewWidget(),
-  'FloorPlan': (data) async => FloorPlanWidget(),
+  'FloorPlan': (data) async => FloorPlanWidget(
+        propertyId: getParameter(data, 'propertyId'),
+      ),
+  'ThreeSixtyView': (data) async => ThreeSixtyViewWidget(),
+  'imageGalleryView': (data) async => ImageGalleryViewWidget(
+        propertyId: getParameter(data, 'propertyId'),
+      ),
   'WhereAreYouLooking': (data) async => WhereAreYouLookingWidget(
         city: getParameter(data, 'city'),
       ),

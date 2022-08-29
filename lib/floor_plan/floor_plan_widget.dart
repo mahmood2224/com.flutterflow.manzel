@@ -1,12 +1,19 @@
-import '../flutter_flow/flutter_flow_pdf_viewer.dart';
+import '../backend/api_requests/api_calls.dart';
+import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class FloorPlanWidget extends StatefulWidget {
-  const FloorPlanWidget({Key key}) : super(key: key);
+  const FloorPlanWidget({
+    Key key,
+    this.propertyId,
+  }) : super(key: key);
+
+  final int propertyId;
 
   @override
   _FloorPlanWidgetState createState() => _FloorPlanWidgetState();
@@ -59,20 +66,81 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10, 30, 10, 30),
-                  child: FlutterFlowPdfViewer(
-                    networkPath: 'http://www.pdf995.com/samples/pdf.pdf',
-                    height: 300,
-                    horizontalScroll: false,
-                  ),
-                ),
-              ],
+          child: FutureBuilder<ApiCallResponse>(
+            future: PropertyCall.call(
+              propertyId: widget.propertyId,
+              locale: FFAppState().locale,
             ),
+            builder: (context, snapshot) {
+              // Customize what your widget looks like when it's loading.
+              if (!snapshot.hasData) {
+                return Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: SpinKitRipple(
+                      color: Color(0xFF2971FB),
+                      size: 50,
+                    ),
+                  ),
+                );
+              }
+              final columnPropertyResponse = snapshot.data;
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 30, 20, 30),
+                      child: InkWell(
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'FLOOR_PLAN_PAGE_Image_762wwk00_ON_TAP');
+                          logFirebaseEvent('Image_Expand-Image');
+                          await Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              child: FlutterFlowExpandedImageView(
+                                image: Image.network(
+                                  getJsonField(
+                                    columnPropertyResponse.jsonBody,
+                                    r'''$.data.attributes.property_floor_plan.data.attributes.url''',
+                                  ),
+                                  fit: BoxFit.contain,
+                                ),
+                                allowRotation: false,
+                                tag: getJsonField(
+                                  columnPropertyResponse.jsonBody,
+                                  r'''$.data.attributes.property_floor_plan.data.attributes.url''',
+                                ),
+                                useHeroAnimation: true,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Hero(
+                          tag: getJsonField(
+                            columnPropertyResponse.jsonBody,
+                            r'''$.data.attributes.property_floor_plan.data.attributes.url''',
+                          ),
+                          transitionOnUserGestures: true,
+                          child: Image.network(
+                            getJsonField(
+                              columnPropertyResponse.jsonBody,
+                              r'''$.data.attributes.property_floor_plan.data.attributes.url''',
+                            ),
+                            width: double.infinity,
+                            height: 500,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),
