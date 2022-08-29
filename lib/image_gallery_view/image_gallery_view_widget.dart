@@ -7,6 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ImageGalleryViewWidget extends StatefulWidget {
   const ImageGalleryViewWidget({
@@ -85,23 +86,33 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 26, 0),
-                            child: Container(
-                              width: 34,
-                              height: 34,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).white,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Color(0xFFF3F2F2),
+                            child: InkWell(
+                              onTap: () async {
+                                logFirebaseEvent(
+                                    'IMAGE_GALLERY_VIEW_Container_sx0hx6fk_ON');
+                                // shareProperty
+                                logFirebaseEvent('Container_shareProperty');
+                                await Share.share(
+                                    'manzel://manzel.com${GoRouter.of(context).location}');
+                              },
+                              child: Container(
+                                width: 34,
+                                height: 34,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).white,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Color(0xFFF3F2F2),
+                                  ),
                                 ),
-                              ),
-                              child: Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(6, 6, 6, 6),
-                                child: Icon(
-                                  Icons.share_outlined,
-                                  color: Colors.black,
-                                  size: 20,
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      6, 6, 6, 6),
+                                  child: Icon(
+                                    Icons.share_outlined,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
                                 ),
                               ),
                             ),
