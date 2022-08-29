@@ -177,26 +177,27 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         );
                                       },
                                     ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    child: FlutterFlowVideoPlayer(
-                                      path: getJsonField(
-                                        columnPropertyResponse.jsonBody,
-                                        r'''$.data.attributes.video_manifest_uri''',
+                                  if (widget.propertyId != widget.propertyId)
+                                    Align(
+                                      alignment: AlignmentDirectional(0, -0.1),
+                                      child: FlutterFlowVideoPlayer(
+                                        path: getJsonField(
+                                          columnPropertyResponse.jsonBody,
+                                          r'''$.data.attributes.video_manifest_uri''',
+                                        ),
+                                        videoType: VideoType.network,
+                                        width: double.infinity,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.4,
+                                        aspectRatio: 1.40,
+                                        autoPlay: true,
+                                        looping: true,
+                                        showControls: false,
+                                        allowFullScreen: true,
+                                        allowPlaybackSpeedMenu: false,
                                       ),
-                                      videoType: VideoType.network,
-                                      width: double.infinity,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.4,
-                                      aspectRatio: 1.30,
-                                      autoPlay: true,
-                                      looping: true,
-                                      showControls: false,
-                                      allowFullScreen: true,
-                                      allowPlaybackSpeedMenu: false,
                                     ),
-                                  ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         18, 52, 18, 0),
@@ -532,9 +533,16 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
-                                                    if (widget.propertyId !=
-                                                        widget.propertyId)
-                                                      Container(
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
+                                                        logFirebaseEvent(
+                                                            'Container_Navigate-To');
+                                                        context.pushNamed(
+                                                            'ThreeSixtyView');
+                                                      },
+                                                      child: Container(
                                                         width: 125,
                                                         height: 30,
                                                         decoration:
@@ -562,7 +570,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               FFLocalizations.of(
                                                                       context)
                                                                   .getText(
-                                                                'fcc5u3dn' /* 360 tour  */,
+                                                                'fcc5u3dn' /* 360° View */,
                                                               ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -582,13 +590,30 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           ],
                                                         ),
                                                       ),
-                                                    if (widget.propertyId !=
-                                                        widget.propertyId)
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0, 5, 0, 0),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 5, 0, 0),
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
+                                                          logFirebaseEvent(
+                                                              'Container_Navigate-To');
+                                                          context.pushNamed(
+                                                            'FloorPlan',
+                                                            queryParams: {
+                                                              'propertyId':
+                                                                  serializeParam(
+                                                                      widget
+                                                                          .propertyId,
+                                                                      ParamType
+                                                                          .int),
+                                                            }.withoutNulls,
+                                                          );
+                                                        },
                                                         child: Container(
                                                           width: 125,
                                                           height: 30,
@@ -640,6 +665,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           ),
                                                         ),
                                                       ),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
@@ -2199,16 +2225,24 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           0xFFF3F3F3),
                                                                     ),
                                                                   ),
-                                                                  child: Image
-                                                                      .network(
-                                                                    getJsonField(
-                                                                      propertyImagesItem,
-                                                                      r'''$.attributes.url''',
+                                                                  child:
+                                                                      ClipRRect(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(8),
+                                                                    child: Image
+                                                                        .network(
+                                                                      getJsonField(
+                                                                        propertyImagesItem,
+                                                                        r'''$.attributes.url''',
+                                                                      ),
+                                                                      width:
+                                                                          147,
+                                                                      height:
+                                                                          117,
+                                                                      fit: BoxFit
+                                                                          .cover,
                                                                     ),
-                                                                    width: 147,
-                                                                    height: 117,
-                                                                    fit: BoxFit
-                                                                        .cover,
                                                                   ),
                                                                 ),
                                                               );

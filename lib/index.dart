@@ -25,6 +25,8 @@ export 'my_properties/my_properties_widget.dart' show MyPropertiesWidget;
 export 'property_details/property_details_widget.dart'
     show PropertyDetailsWidget;
 export 'floor_plan/floor_plan_widget.dart' show FloorPlanWidget;
+export 'three_sixty_view/three_sixty_view_widget.dart'
+    show ThreeSixtyViewWidget;
 export 'image_gallery_view/image_gallery_view_widget.dart'
     show ImageGalleryViewWidget;
 export 'where_are_you_looking/where_are_you_looking_widget.dart'

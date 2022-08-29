@@ -200,7 +200,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'FloorPlan',
               path: 'floorPlan',
-              builder: (context, params) => FloorPlanWidget(),
+              builder: (context, params) => FloorPlanWidget(
+                propertyId: params.getParam('propertyId', ParamType.int),
+              ),
+            ),
+            FFRoute(
+              name: 'ThreeSixtyView',
+              path: 'threeSixtyView',
+              builder: (context, params) => ThreeSixtyViewWidget(),
             ),
             FFRoute(
               name: 'imageGalleryView',

@@ -889,8 +889,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'fcc5u3dn': {
-      'en': '360 tour ',
-      'ar': '360 جولة',
+      'en': '360° View',
+      'ar': 'عرض 360 درجة',
     },
     '9d90para': {
       'en': 'Apt. Plan',
@@ -1000,6 +1000,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مخطط الطابق',
     },
     'qz7ded0d': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
+  // ThreeSixtyView
+  {
+    'e6q07s67': {
+      'en': '360° View',
+      'ar': 'عرض 360 درجة',
+    },
+    '9e175bwt': {
       'en': 'Home',
       'ar': '',
     },
