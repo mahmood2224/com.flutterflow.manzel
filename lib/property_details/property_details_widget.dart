@@ -177,7 +177,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         );
                                       },
                                     ),
-                                  if (widget.propertyId != widget.propertyId)
+                                  if (functions
+                                      .videoPlayerVisibilty(getJsonField(
+                                    columnPropertyResponse.jsonBody,
+                                    r'''$.data.attributes.video_manifest_uri''',
+                                  )))
                                     Align(
                                       alignment: AlignmentDirectional(0, -0.1),
                                       child: FlutterFlowVideoPlayer(
