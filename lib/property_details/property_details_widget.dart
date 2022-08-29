@@ -8,6 +8,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_static_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/lat_lng.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -83,47 +84,28 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                       children: [
                         Stack(
                           children: [
-                            Stack(
-                              children: [
-                                Builder(
-                                  builder: (context) {
-                                    final images = PropertyCall.propertyImages(
-                                      columnPropertyResponse.jsonBody,
-                                    ).toList();
-                                    return Container(
-                                      width: double.infinity,
-                                      height: 300,
-                                      child: Stack(
-                                        children: [
-                                          PageView.builder(
-                                            controller: pageViewController ??=
-                                                PageController(
-                                                    initialPage: min(
-                                                        0, images.length - 1)),
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: images.length,
-                                            itemBuilder:
-                                                (context, imagesIndex) {
-                                              final imagesItem =
-                                                  images[imagesIndex];
-                                              return CachedNetworkImage(
-                                                imageUrl: getJsonField(
-                                                  imagesItem,
-                                                  r'''$.attributes.url''',
-                                                ),
-                                                width: double.infinity,
-                                                height: double.infinity,
-                                                fit: BoxFit.cover,
-                                              );
-                                            },
-                                          ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0, 0.9),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 0, 10),
-                                              child: SmoothPageIndicator(
+                            Container(
+                              width: double.infinity,
+                              height: MediaQuery.of(context).size.height * 0.4,
+                              child: Stack(
+                                children: [
+                                  if (!functions
+                                      .videoPlayerVisibilty(getJsonField(
+                                    columnPropertyResponse.jsonBody,
+                                    r'''$.data.attributes.video_manifest_uri''',
+                                  )))
+                                    Builder(
+                                      builder: (context) {
+                                        final images =
+                                            PropertyCall.propertyImages(
+                                          columnPropertyResponse.jsonBody,
+                                        ).toList();
+                                        return Container(
+                                          width: double.infinity,
+                                          height: 300,
+                                          child: Stack(
+                                            children: [
+                                              PageView.builder(
                                                 controller:
                                                     pageViewController ??=
                                                         PageController(
@@ -131,152 +113,211 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 0,
                                                                 images.length -
                                                                     1)),
-                                                count: images.length,
-                                                axisDirection: Axis.horizontal,
-                                                onDotClicked: (i) {
-                                                  pageViewController
-                                                      .animateToPage(
-                                                    i,
-                                                    duration: Duration(
-                                                        milliseconds: 500),
-                                                    curve: Curves.ease,
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: images.length,
+                                                itemBuilder:
+                                                    (context, imagesIndex) {
+                                                  final imagesItem =
+                                                      images[imagesIndex];
+                                                  return CachedNetworkImage(
+                                                    imageUrl: getJsonField(
+                                                      imagesItem,
+                                                      r'''$.attributes.url''',
+                                                    ),
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                    fit: BoxFit.cover,
                                                   );
                                                 },
-                                                effect: SlideEffect(
-                                                  spacing: 8,
-                                                  radius: 16,
-                                                  dotWidth: 6,
-                                                  dotHeight: 6,
-                                                  dotColor: Color(0xFF9E9E9E),
-                                                  activeDotColor: Colors.white,
-                                                  paintStyle:
-                                                      PaintingStyle.fill,
+                                              ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0, 0.9),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 10),
+                                                  child: SmoothPageIndicator(
+                                                    controller:
+                                                        pageViewController ??=
+                                                            PageController(
+                                                                initialPage: min(
+                                                                    0,
+                                                                    images.length -
+                                                                        1)),
+                                                    count: images.length,
+                                                    axisDirection:
+                                                        Axis.horizontal,
+                                                    onDotClicked: (i) {
+                                                      pageViewController
+                                                          .animateToPage(
+                                                        i,
+                                                        duration: Duration(
+                                                            milliseconds: 500),
+                                                        curve: Curves.ease,
+                                                      );
+                                                    },
+                                                    effect: SlideEffect(
+                                                      spacing: 8,
+                                                      radius: 16,
+                                                      dotWidth: 6,
+                                                      dotHeight: 6,
+                                                      dotColor:
+                                                          Color(0xFF9E9E9E),
+                                                      activeDotColor:
+                                                          Colors.white,
+                                                      paintStyle:
+                                                          PaintingStyle.fill,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                        ],
+                                        );
+                                      },
+                                    ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: FlutterFlowVideoPlayer(
+                                      path: getJsonField(
+                                        columnPropertyResponse.jsonBody,
+                                        r'''$.data.attributes.video_manifest_uri''',
                                       ),
-                                    );
-                                  },
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      18, 52, 18, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      FlutterFlowIconButton(
-                                        borderColor: Colors.transparent,
-                                        borderRadius: 30,
-                                        buttonSize: 34,
-                                        fillColor: Colors.white,
-                                        icon: Icon(
-                                          Icons.arrow_back_rounded,
-                                          color: Colors.black,
-                                          size: 18,
+                                      videoType: VideoType.network,
+                                      width: double.infinity,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.4,
+                                      aspectRatio: 1.30,
+                                      autoPlay: true,
+                                      looping: true,
+                                      showControls: false,
+                                      allowFullScreen: true,
+                                      allowPlaybackSpeedMenu: false,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        18, 52, 18, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        FlutterFlowIconButton(
+                                          borderColor: Colors.transparent,
+                                          borderRadius: 30,
+                                          buttonSize: 34,
+                                          fillColor: Colors.white,
+                                          icon: Icon(
+                                            Icons.arrow_back_rounded,
+                                            color: Colors.black,
+                                            size: 18,
+                                          ),
+                                          onPressed: () async {
+                                            logFirebaseEvent(
+                                                'PROPERTY_DETAILS_arrow_back_rounded_ICN_');
+                                            // back
+                                            logFirebaseEvent('IconButton_back');
+                                            context.pop();
+                                          },
                                         ),
-                                        onPressed: () async {
-                                          logFirebaseEvent(
-                                              'PROPERTY_DETAILS_arrow_back_rounded_ICN_');
-                                          // back
-                                          logFirebaseEvent('IconButton_back');
-                                          context.pop();
-                                        },
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 16, 0),
-                                            child: FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 30,
-                                              buttonSize: 34,
-                                              fillColor: Colors.white,
-                                              icon: Icon(
-                                                Icons.share_sharp,
-                                                color: Colors.black,
-                                                size: 18,
-                                              ),
-                                              onPressed: () async {
-                                                logFirebaseEvent(
-                                                    'PROPERTY_DETAILS_PAGE_share_ON_TAP');
-                                                // shareProperty
-                                                logFirebaseEvent(
-                                                    'share_shareProperty');
-                                                await Share.share(
-                                                    'manzel://manzel.com${GoRouter.of(context).location}');
-                                              },
-                                            ),
-                                          ),
-                                          Stack(
-                                            children: [
-                                              FlutterFlowIconButton(
-                                                borderColor: Colors.transparent,
-                                                borderRadius: 30,
-                                                borderWidth: 1,
-                                                buttonSize: 34,
-                                                fillColor: Colors.white,
-                                                icon: Icon(
-                                                  Icons.favorite,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .alternate,
-                                                  size: 18,
-                                                ),
-                                                onPressed: () {
-                                                  print(
-                                                      'BookMarkedIconButton pressed ...');
-                                                },
-                                              ),
-                                              FlutterFlowIconButton(
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 16, 0),
+                                              child: FlutterFlowIconButton(
                                                 borderColor: Colors.transparent,
                                                 borderRadius: 30,
                                                 buttonSize: 34,
                                                 fillColor: Colors.white,
                                                 icon: Icon(
-                                                  Icons.favorite_border,
+                                                  Icons.share_sharp,
                                                   color: Colors.black,
                                                   size: 18,
                                                 ),
                                                 onPressed: () async {
                                                   logFirebaseEvent(
-                                                      'PROPERTY_DETAILS_favorite_border_ICN_ON_');
-                                                  // save
+                                                      'PROPERTY_DETAILS_PAGE_share_ON_TAP');
+                                                  // shareProperty
                                                   logFirebaseEvent(
-                                                      'IconButton_save');
-
-                                                  final userSavedCreateData =
-                                                      createUserSavedRecordData(
-                                                    uId: currentUserReference,
-                                                    pId: widget.propertyId,
-                                                  );
-                                                  var userSavedRecordReference =
-                                                      UserSavedRecord.collection
-                                                          .doc();
-                                                  await userSavedRecordReference
-                                                      .set(userSavedCreateData);
-                                                  saveProperty = UserSavedRecord
-                                                      .getDocumentFromData(
-                                                          userSavedCreateData,
-                                                          userSavedRecordReference);
-
-                                                  setState(() {});
+                                                      'share_shareProperty');
+                                                  await Share.share(
+                                                      'manzel://manzel.com${GoRouter.of(context).location}');
                                                 },
                                               ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                            ),
+                                            Stack(
+                                              children: [
+                                                FlutterFlowIconButton(
+                                                  borderColor:
+                                                      Colors.transparent,
+                                                  borderRadius: 30,
+                                                  borderWidth: 1,
+                                                  buttonSize: 34,
+                                                  fillColor: Colors.white,
+                                                  icon: Icon(
+                                                    Icons.favorite,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
+                                                    size: 18,
+                                                  ),
+                                                  onPressed: () {
+                                                    print(
+                                                        'BookMarkedIconButton pressed ...');
+                                                  },
+                                                ),
+                                                FlutterFlowIconButton(
+                                                  borderColor:
+                                                      Colors.transparent,
+                                                  borderRadius: 30,
+                                                  buttonSize: 34,
+                                                  fillColor: Colors.white,
+                                                  icon: Icon(
+                                                    Icons.favorite_border,
+                                                    color: Colors.black,
+                                                    size: 18,
+                                                  ),
+                                                  onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'PROPERTY_DETAILS_favorite_border_ICN_ON_');
+                                                    // save
+                                                    logFirebaseEvent(
+                                                        'IconButton_save');
+
+                                                    final userSavedCreateData =
+                                                        createUserSavedRecordData(
+                                                      uId: currentUserReference,
+                                                      pId: widget.propertyId,
+                                                    );
+                                                    var userSavedRecordReference =
+                                                        UserSavedRecord
+                                                            .collection
+                                                            .doc();
+                                                    await userSavedRecordReference
+                                                        .set(
+                                                            userSavedCreateData);
+                                                    saveProperty = UserSavedRecord
+                                                        .getDocumentFromData(
+                                                            userSavedCreateData,
+                                                            userSavedRecordReference);
+
+                                                    setState(() {});
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             Align(
                               alignment: AlignmentDirectional(0, 0),
@@ -2043,59 +2084,75 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             indent: 10,
                                             endIndent: 10,
                                           ),
-                                          if (widget.propertyId !=
-                                              widget.propertyId)
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(16, 20, 16, 0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      '67qymqb4' /* Photos */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          useGoogleFonts: false,
-                                                        ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16, 20, 16, 0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    '67qymqb4' /* Photos */,
                                                   ),
-                                                ],
-                                              ),
-                                            ),
-                                          if (widget.propertyId !=
-                                              widget.propertyId)
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 12, 0, 55),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Expanded(
-                                                    child: Container(
-                                                      width: double.infinity,
-                                                      height: 164,
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.white,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'AvenirArabic',
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        useGoogleFonts: false,
                                                       ),
-                                                      child: Builder(
-                                                        builder: (context) {
-                                                          final propertyImages =
-                                                              PropertyCall
-                                                                  .propertyImages(
-                                                            columnPropertyResponse
-                                                                .jsonBody,
-                                                          ).toList();
-                                                          return ListView
-                                                              .builder(
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 12, 0, 55),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 164,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                    ),
+                                                    child: Builder(
+                                                      builder: (context) {
+                                                        final propertyImages =
+                                                            PropertyCall
+                                                                .propertyImages(
+                                                          columnPropertyResponse
+                                                              .jsonBody,
+                                                        ).toList();
+                                                        return InkWell(
+                                                          onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'PROPERTY_DETAILS_horizontalList_ON_TAP');
+                                                            logFirebaseEvent(
+                                                                'horizontalList_Navigate-To');
+                                                            context.pushNamed(
+                                                              'imageGalleryView',
+                                                              queryParams: {
+                                                                'propertyId':
+                                                                    serializeParam(
+                                                                        widget
+                                                                            .propertyId,
+                                                                        ParamType
+                                                                            .int),
+                                                              }.withoutNulls,
+                                                            );
+                                                          },
+                                                          child:
+                                                              ListView.builder(
                                                             padding:
                                                                 EdgeInsets.zero,
                                                             primary: false,
@@ -2156,14 +2213,15 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 ),
                                                               );
                                                             },
-                                                          );
-                                                        },
-                                                      ),
+                                                          ),
+                                                        );
+                                                      },
                                                     ),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
+                                          ),
                                         ],
                                       ),
                                     ),

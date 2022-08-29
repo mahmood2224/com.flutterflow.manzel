@@ -171,7 +171,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'filterResults',
               path: 'filterResults',
-              builder: (context, params) => FilterResultsWidget(),
+              builder: (context, params) => FilterResultsWidget(
+                cityName: params.getParam('cityName', ParamType.String),
+                furnishingType:
+                    params.getParam('furnishingType', ParamType.String),
+                propertyType: params.getParam('propertyType', ParamType.String),
+                minInstallment:
+                    params.getParam('minInstallment', ParamType.String),
+                maxInstallment:
+                    params.getParam('maxInstallment', ParamType.String),
+              ),
             ),
             FFRoute(
               name: 'MyProperties',
@@ -189,14 +198,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'ImagePreview',
-              path: 'imagePreview',
-              builder: (context, params) => ImagePreviewWidget(),
-            ),
-            FFRoute(
               name: 'FloorPlan',
               path: 'floorPlan',
               builder: (context, params) => FloorPlanWidget(),
+            ),
+            FFRoute(
+              name: 'imageGalleryView',
+              path: 'imageGalleryView',
+              builder: (context, params) => ImageGalleryViewWidget(
+                propertyId: params.getParam('propertyId', ParamType.int),
+              ),
             ),
             FFRoute(
               name: 'WhereAreYouLooking',

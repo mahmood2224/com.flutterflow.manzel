@@ -1009,3 +1009,12 @@ bool notificationConditionalVisibilty(
   }
   // Add your function code here!
 }
+
+bool videoPlayerVisibilty(String videoURL) {
+  // Add your function code here!
+  if (videoURL.isNotEmpty) {
+    return true;
+  } else {
+    return false;
+  }
+}

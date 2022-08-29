@@ -12,7 +12,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FilterResultsWidget extends StatefulWidget {
-  const FilterResultsWidget({Key key}) : super(key: key);
+  const FilterResultsWidget({
+    Key key,
+    this.cityName,
+    this.furnishingType,
+    this.propertyType,
+    this.minInstallment,
+    this.maxInstallment,
+  }) : super(key: key);
+
+  final String cityName;
+  final String furnishingType;
+  final String propertyType;
+  final String minInstallment;
+  final String maxInstallment;
 
   @override
   _FilterResultsWidgetState createState() => _FilterResultsWidgetState();

@@ -993,13 +993,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'محجوز',
     },
   },
-  // ImagePreview
-  {
-    'hfcgod45': {
-      'en': 'Home',
-      'ar': '',
-    },
-  },
   // FloorPlan
   {
     '316x1ckw': {
@@ -1007,6 +1000,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مخطط الطابق',
     },
     'qz7ded0d': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
+  // imageGalleryView
+  {
+    '8yghlvmu': {
       'en': 'Home',
       'ar': '',
     },
