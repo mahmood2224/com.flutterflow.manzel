@@ -144,107 +144,110 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                   ],
                 ),
               ),
-              FutureBuilder<ApiCallResponse>(
-                future: PropertyCall.call(
-                  propertyId: widget.propertyId,
-                  locale: FFAppState().locale,
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: SpinKitRipple(
-                          color: Color(0xFF2971FB),
-                          size: 50,
+              Expanded(
+                child: FutureBuilder<ApiCallResponse>(
+                  future: PropertyCall.call(
+                    propertyId: widget.propertyId,
+                    locale: FFAppState().locale,
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: SpinKitRipple(
+                            color: Color(0xFF2971FB),
+                            size: 50,
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                  final listViewPropertyResponse = snapshot.data;
-                  return Builder(
-                    builder: (context) {
-                      final images = PropertyCall.propertyImages(
-                        listViewPropertyResponse.jsonBody,
-                      ).toList();
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: images.length,
-                        itemBuilder: (context, imagesIndex) {
-                          final imagesItem = images[imagesIndex];
-                          return Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(8, 6, 8, 6),
-                            child: InkWell(
-                              onTap: () async {
-                                logFirebaseEvent(
-                                    'IMAGE_GALLERY_VIEW_Image_xq7pxmei_ON_TAP');
-                                logFirebaseEvent('Image_Expand-Image');
-                                await Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.fade,
-                                    child: FlutterFlowExpandedImageView(
-                                      image: Image.network(
-                                        valueOrDefault<String>(
+                      );
+                    }
+                    final listViewPropertyResponse = snapshot.data;
+                    return Builder(
+                      builder: (context) {
+                        final images = PropertyCall.propertyImages(
+                          listViewPropertyResponse.jsonBody,
+                        ).toList();
+                        return ListView.builder(
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.vertical,
+                          itemCount: images.length,
+                          itemBuilder: (context, imagesIndex) {
+                            final imagesItem = images[imagesIndex];
+                            return Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(8, 6, 8, 6),
+                              child: InkWell(
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'IMAGE_GALLERY_VIEW_Image_xq7pxmei_ON_TAP');
+                                  logFirebaseEvent('Image_Expand-Image');
+                                  await Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: FlutterFlowExpandedImageView(
+                                        image: Image.network(
+                                          valueOrDefault<String>(
+                                            getJsonField(
+                                              imagesItem,
+                                              r'''$.attributes.url''',
+                                            ),
+                                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTs0IBTFSuv05moQpi8yoB1rm8dEVXDEYOQ&usqp=CAU',
+                                          ),
+                                          fit: BoxFit.contain,
+                                        ),
+                                        allowRotation: false,
+                                        tag: valueOrDefault<String>(
                                           getJsonField(
                                             imagesItem,
-                                            r'''$.attributes.url''',
+                                            r'''$.attributes.url''' +
+                                                '$imagesIndex',
                                           ),
                                           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTs0IBTFSuv05moQpi8yoB1rm8dEVXDEYOQ&usqp=CAU',
                                         ),
-                                        fit: BoxFit.contain,
+                                        useHeroAnimation: true,
                                       ),
-                                      allowRotation: false,
-                                      tag: valueOrDefault<String>(
+                                    ),
+                                  );
+                                },
+                                child: Hero(
+                                  tag: valueOrDefault<String>(
+                                    getJsonField(
+                                      imagesItem,
+                                      r'''$.attributes.url''' + '$imagesIndex',
+                                    ),
+                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTs0IBTFSuv05moQpi8yoB1rm8dEVXDEYOQ&usqp=CAU',
+                                  ),
+                                  transitionOnUserGestures: true,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      valueOrDefault<String>(
                                         getJsonField(
                                           imagesItem,
-                                          r'''$.attributes.url''' +
-                                              '$imagesIndex',
+                                          r'''$.attributes.url''',
                                         ),
                                         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTs0IBTFSuv05moQpi8yoB1rm8dEVXDEYOQ&usqp=CAU',
                                       ),
-                                      useHeroAnimation: true,
+                                      width: 100,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.27,
+                                      fit: BoxFit.cover,
                                     ),
-                                  ),
-                                );
-                              },
-                              child: Hero(
-                                tag: valueOrDefault<String>(
-                                  getJsonField(
-                                    imagesItem,
-                                    r'''$.attributes.url''' + '$imagesIndex',
-                                  ),
-                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTs0IBTFSuv05moQpi8yoB1rm8dEVXDEYOQ&usqp=CAU',
-                                ),
-                                transitionOnUserGestures: true,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.network(
-                                    valueOrDefault<String>(
-                                      getJsonField(
-                                        imagesItem,
-                                        r'''$.attributes.url''',
-                                      ),
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTs0IBTFSuv05moQpi8yoB1rm8dEVXDEYOQ&usqp=CAU',
-                                    ),
-                                    width: 100,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.27,
-                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  );
-                },
+                            );
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ],
           ),
