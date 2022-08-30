@@ -6,6 +6,7 @@ import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'dart:async';
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ class HomeScreenWidget extends StatefulWidget {
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
+  Completer<ApiCallResponse> _apiRequestCompleter;
   PageController pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -312,7 +314,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 0),
                 child: FutureBuilder<ApiCallResponse>(
-                  future: PropertiesCall.call(),
+                  future: (_apiRequestCompleter ??= Completer<ApiCallResponse>()
+                        ..complete(PropertiesCall.call()))
+                      .future,
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -346,113 +350,77 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             ),
                           );
                         }
-                        return ListView.builder(
-                          padding: EdgeInsets.zero,
-                          primary: false,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemCount: properties.length,
-                          itemBuilder: (context, propertiesIndex) {
-                            final propertiesItem = properties[propertiesIndex];
-                            return Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12, 12, 12, 12),
-                              child: InkWell(
-                                onTap: () async {
-                                  logFirebaseEvent(
-                                      'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
-                                  // propertyDetails
-                                  logFirebaseEvent(
-                                      'propertyCard_propertyDetails');
-                                  context.pushNamed(
-                                    'PropertyDetails',
-                                    queryParams: {
-                                      'propertyId': serializeParam(
-                                          getJsonField(
-                                            propertiesItem,
-                                            r'''$.id''',
-                                          ),
-                                          ParamType.int),
-                                    }.withoutNulls,
-                                  );
-                                },
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.3,
-                                      child: Stack(
-                                        children: [
-                                          Builder(
-                                            builder: (context) {
-                                              final propertyImages =
-                                                  getJsonField(
-                                                propertiesItem,
-                                                r'''$..property_images.data''',
-                                              ).toList();
-                                              return Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.3,
-                                                child: Stack(
-                                                  children: [
-                                                    PageView.builder(
-                                                      controller: pageViewController ??=
-                                                          PageController(
-                                                              initialPage: min(
-                                                                  0,
-                                                                  propertyImages
-                                                                          .length -
-                                                                      1)),
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      itemCount:
-                                                          propertyImages.length,
-                                                      itemBuilder: (context,
-                                                          propertyImagesIndex) {
-                                                        final propertyImagesItem =
-                                                            propertyImages[
-                                                                propertyImagesIndex];
-                                                        return ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          child:
-                                                              CachedNetworkImage(
-                                                            imageUrl:
-                                                                getJsonField(
-                                                              propertyImagesItem,
-                                                              r'''$.attributes.url''',
-                                                            ),
-                                                            width:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                            height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .height *
-                                                                0.3,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                    Align(
-                                                      alignment:
-                                                          AlignmentDirectional(
-                                                              0, 0.7),
-                                                      child:
-                                                          SmoothPageIndicator(
+                        return RefreshIndicator(
+                          onRefresh: () async {
+                            logFirebaseEvent(
+                                'HOME_SCREEN_ListView_v6ucvx72_ON_PULL_TO');
+                            logFirebaseEvent(
+                                'ListView_Refresh-Database-Request');
+                            setState(() => _apiRequestCompleter = null);
+                            await waitForApiRequestCompleter();
+                          },
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            primary: false,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: properties.length,
+                            itemBuilder: (context, propertiesIndex) {
+                              final propertiesItem =
+                                  properties[propertiesIndex];
+                              return Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    12, 12, 12, 12),
+                                child: InkWell(
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
+                                    // propertyDetails
+                                    logFirebaseEvent(
+                                        'propertyCard_propertyDetails');
+                                    context.pushNamed(
+                                      'PropertyDetails',
+                                      queryParams: {
+                                        'propertyId': serializeParam(
+                                            getJsonField(
+                                              propertiesItem,
+                                              r'''$.id''',
+                                            ),
+                                            ParamType.int),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.3,
+                                        child: Stack(
+                                          children: [
+                                            Builder(
+                                              builder: (context) {
+                                                final propertyImages =
+                                                    getJsonField(
+                                                  propertiesItem,
+                                                  r'''$..property_images.data''',
+                                                ).toList();
+                                                return Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.3,
+                                                  child: Stack(
+                                                    children: [
+                                                      PageView.builder(
                                                         controller: pageViewController ??=
                                                             PageController(
                                                                 initialPage: min(
@@ -460,189 +428,280 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                                     propertyImages
                                                                             .length -
                                                                         1)),
-                                                        count: propertyImages
-                                                            .length,
-                                                        axisDirection:
+                                                        scrollDirection:
                                                             Axis.horizontal,
-                                                        onDotClicked: (i) {
-                                                          pageViewController
-                                                              .animateToPage(
-                                                            i,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                            curve: Curves.ease,
+                                                        itemCount:
+                                                            propertyImages
+                                                                .length,
+                                                        itemBuilder: (context,
+                                                            propertyImagesIndex) {
+                                                          final propertyImagesItem =
+                                                              propertyImages[
+                                                                  propertyImagesIndex];
+                                                          return ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                              imageUrl:
+                                                                  getJsonField(
+                                                                propertyImagesItem,
+                                                                r'''$.attributes.url''',
+                                                              ),
+                                                              width:
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                              height: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .height *
+                                                                  0.3,
+                                                              fit: BoxFit.cover,
+                                                            ),
                                                           );
                                                         },
-                                                        effect: SlideEffect(
-                                                          spacing: 8,
-                                                          radius: 3,
-                                                          dotWidth: 6,
-                                                          dotHeight: 6,
-                                                          dotColor:
-                                                              Color(0x80FFFFFF),
-                                                          activeDotColor:
-                                                              Colors.white,
-                                                          paintStyle:
-                                                              PaintingStyle
-                                                                  .fill,
+                                                      ),
+                                                      Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0, 0.7),
+                                                        child:
+                                                            SmoothPageIndicator(
+                                                          controller: pageViewController ??=
+                                                              PageController(
+                                                                  initialPage: min(
+                                                                      0,
+                                                                      propertyImages
+                                                                              .length -
+                                                                          1)),
+                                                          count: propertyImages
+                                                              .length,
+                                                          axisDirection:
+                                                              Axis.horizontal,
+                                                          onDotClicked: (i) {
+                                                            pageViewController
+                                                                .animateToPage(
+                                                              i,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                              curve:
+                                                                  Curves.ease,
+                                                            );
+                                                          },
+                                                          effect: SlideEffect(
+                                                            spacing: 8,
+                                                            radius: 3,
+                                                            dotWidth: 6,
+                                                            dotHeight: 6,
+                                                            dotColor: Color(
+                                                                0x80FFFFFF),
+                                                            activeDotColor:
+                                                                Colors.white,
+                                                            paintStyle:
+                                                                PaintingStyle
+                                                                    .fill,
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(1, -1),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 12, 15, 0),
-                                              child: InkWell(
-                                                onTap: () async {
-                                                  logFirebaseEvent(
-                                                      'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                                  if (loggedIn) {
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                            Align(
+                                              alignment:
+                                                  AlignmentDirectional(1, -1),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 12, 15, 0),
+                                                child: InkWell(
+                                                  onTap: () async {
                                                     logFirebaseEvent(
-                                                        'Container_Backend-Call');
-                                                    await BookmarkPropertyCall
-                                                        .call(
-                                                      userId: currentUserUid,
-                                                      propertyId:
-                                                          valueOrDefault<
-                                                              String>(
-                                                        getJsonField(
-                                                          propertiesItem,
-                                                          r'''$.id''',
-                                                        ).toString(),
-                                                        '0',
+                                                        'HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                                    if (loggedIn) {
+                                                      logFirebaseEvent(
+                                                          'Container_Backend-Call');
+                                                      await BookmarkPropertyCall
+                                                          .call(
+                                                        userId: currentUserUid,
+                                                        propertyId:
+                                                            valueOrDefault<
+                                                                String>(
+                                                          getJsonField(
+                                                            propertiesItem,
+                                                            r'''$.id''',
+                                                          ).toString(),
+                                                          '0',
+                                                        ),
+                                                      );
+                                                    } else {
+                                                      logFirebaseEvent(
+                                                          'Container_Navigate-To');
+                                                      context
+                                                          .pushNamed('Login');
+                                                    }
+                                                  },
+                                                  child: Container(
+                                                    width: 40,
+                                                    height: 40,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0x4D000000),
+                                                      image: DecorationImage(
+                                                        fit: BoxFit.none,
+                                                        image: Image.asset(
+                                                          'assets/images/Heart.png',
+                                                        ).image,
                                                       ),
-                                                    );
-                                                  } else {
-                                                    logFirebaseEvent(
-                                                        'Container_Navigate-To');
-                                                    context.pushNamed('Login');
-                                                  }
-                                                },
-                                                child: Container(
-                                                  width: 40,
-                                                  height: 40,
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0x4D000000),
-                                                    image: DecorationImage(
-                                                      fit: BoxFit.none,
-                                                      image: Image.asset(
-                                                        'assets/images/Heart.png',
-                                                      ).image,
+                                                      shape: BoxShape.circle,
                                                     ),
-                                                    shape: BoxShape.circle,
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(1, 1),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 18, 18),
-                                              child: Container(
-                                                width: 50,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  color: Color(0x80F3F1F1),
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
+                                            Align(
+                                              alignment:
+                                                  AlignmentDirectional(1, 1),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 18, 18),
+                                                child: Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
                                                     color: Color(0x80F3F1F1),
-                                                    width: 2,
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                      color: Color(0x80F3F1F1),
+                                                      width: 2,
+                                                    ),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    child: Image.network(
+                                                      getJsonField(
+                                                        propertiesItem,
+                                                        r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
+                                                      ),
+                                                      fit: BoxFit.cover,
+                                                    ),
                                                   ),
                                                 ),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  child: Image.network(
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            4, 14, 0, 0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              getJsonField(
+                                                propertiesItem,
+                                                r'''$.attributes.property_name''',
+                                              ).toString(),
+                                              maxLines: 1,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
+                                                  ),
+                                            ),
+                                            Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'etpebw43' /* Approved Banks */,
+                                              ),
+                                              textAlign: TextAlign.end,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    color: Color(0xFF474747),
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            4, 1, 0, 14),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Icon(
+                                                  Icons.location_on_outlined,
+                                                  color: Color(0xFF130F26),
+                                                  size: 11,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(4, 0, 0, 0),
+                                                  child: Text(
                                                     getJsonField(
                                                       propertiesItem,
-                                                      r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
-                                                    ),
-                                                    fit: BoxFit.cover,
+                                                      r'''$..attributes.city.data.attributes.city_name''',
+                                                    ).toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
                                                   ),
                                                 ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          4, 14, 0, 0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            getJsonField(
-                                              propertiesItem,
-                                              r'''$.attributes.property_name''',
-                                            ).toString(),
-                                            maxLines: 1,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'efcxmcgl' /* ,  */,
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'AvenirArabic',
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        useGoogleFonts: false,
+                                                      ),
                                                 ),
-                                          ),
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'etpebw43' /* Approved Banks */,
-                                            ),
-                                            textAlign: TextAlign.end,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  color: Color(0xFF474747),
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          4, 1, 0, 14),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(
-                                                Icons.location_on_outlined,
-                                                color: Color(0xFF130F26),
-                                                size: 11,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(4, 0, 0, 0),
-                                                child: Text(
+                                                Text(
                                                   getJsonField(
                                                     propertiesItem,
-                                                    r'''$..attributes.city.data.attributes.city_name''',
+                                                    r'''$..property_district''',
                                                   ).toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -656,244 +715,216 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         useGoogleFonts: false,
                                                       ),
                                                 ),
-                                              ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'efcxmcgl' /* ,  */,
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                              Text(
-                                                getJsonField(
+                                              ],
+                                            ),
+                                            Builder(
+                                              builder: (context) {
+                                                final banks = getJsonField(
                                                   propertiesItem,
-                                                  r'''$..property_district''',
-                                                ).toString(),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          useGoogleFonts: false,
+                                                  r'''$.attributes.banks.data''',
+                                                ).toList();
+                                                return Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                      banks.length,
+                                                      (banksIndex) {
+                                                    final banksItem =
+                                                        banks[banksIndex];
+                                                    return Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 8, 0),
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(11),
+                                                        child: Image.network(
+                                                          getJsonField(
+                                                            banksItem,
+                                                            r'''$.attributes.bank_logo.data.attributes.url''',
+                                                          ),
+                                                          width: 22,
+                                                          height: 22,
+                                                          fit: BoxFit.cover,
                                                         ),
-                                              ),
-                                            ],
-                                          ),
-                                          Builder(
-                                            builder: (context) {
-                                              final banks = getJsonField(
-                                                propertiesItem,
-                                                r'''$.attributes.banks.data''',
-                                              ).toList();
-                                              return Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: List.generate(
-                                                    banks.length, (banksIndex) {
-                                                  final banksItem =
-                                                      banks[banksIndex];
-                                                  return Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 0, 8, 0),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              11),
-                                                      child: Image.network(
-                                                        getJsonField(
-                                                          banksItem,
-                                                          r'''$.attributes.bank_logo.data.attributes.url''',
-                                                        ),
-                                                        width: 22,
-                                                        height: 22,
-                                                        fit: BoxFit.cover,
                                                       ),
-                                                    ),
-                                                  );
-                                                }),
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          4, 0, 0, 0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              '998is2ya' /* Installment starting from */,
+                                                    );
+                                                  }),
+                                                );
+                                              },
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .title3
-                                                .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
-                                                  color: Color(0xFF2971FB),
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'gqe4w739' /* Total property price */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  color: Color(0xFF474747),
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          4, 1, 0, 20),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  functions.formatAmount(
-                                                      getJsonField(
-                                                    propertiesItem,
-                                                    r'''$.attributes.property_initial_installment''',
-                                                  ).toString()),
-                                                  '0',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          color:
-                                                              Color(0xFF2971FB),
-                                                          fontSize: 24,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          useGoogleFonts: false,
-                                                        ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            4, 0, 0, 0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '998is2ya' /* Installment starting from */,
                                               ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(5, 10, 0, 0),
-                                                child: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'l38if619' /*  SAR/Monthly */,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .title3
+                                                  .override(
+                                                    fontFamily:
+                                                        'Sofia Pro By Khuzaimah',
+                                                    color: Color(0xFF2971FB),
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
                                                   ),
-                                                  textAlign: TextAlign.start,
+                                            ),
+                                            Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'gqe4w739' /* Total property price */,
+                                              ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    color: Color(0xFF474747),
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w500,
+                                                    useGoogleFonts: false,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            4, 1, 0, 20),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Text(
+                                                  valueOrDefault<String>(
+                                                    functions.formatAmount(
+                                                        getJsonField(
+                                                      propertiesItem,
+                                                      r'''$.attributes.property_initial_installment''',
+                                                    ).toString()),
+                                                    '0',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1
                                                       .override(
                                                         fontFamily:
-                                                            'AvenirArabic',
+                                                            'Sofia Pro By Khuzaimah',
                                                         color:
                                                             Color(0xFF2971FB),
-                                                        fontSize: 12,
+                                                        fontSize: 24,
                                                         fontWeight:
-                                                            FontWeight.w500,
+                                                            FontWeight.bold,
                                                         useGoogleFonts: false,
                                                       ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Text(
-                                                valueOrDefault<String>(
-                                                  functions
-                                                      .formatAmountWithoutDecimal(
-                                                          valueOrDefault<
-                                                              String>(
-                                                    getJsonField(
-                                                      propertiesItem,
-                                                      r'''$..property_price''',
-                                                    ).toString(),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(5, 10, 0, 0),
+                                                  child: Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'l38if619' /*  SAR/Monthly */,
+                                                    ),
+                                                    textAlign: TextAlign.start,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color:
+                                                              Color(0xFF2971FB),
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Text(
+                                                  valueOrDefault<String>(
+                                                    functions
+                                                        .formatAmountWithoutDecimal(
+                                                            valueOrDefault<
+                                                                String>(
+                                                      getJsonField(
+                                                        propertiesItem,
+                                                        r'''$..property_price''',
+                                                      ).toString(),
+                                                      '0',
+                                                    )),
                                                     '0',
-                                                  )),
-                                                  '0',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            'AvenirArabic',
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        useGoogleFonts: false,
+                                                      ),
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'dhoik8q5' /*  SAR */,
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'dhoik8q5' /*  SAR */,
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            'AvenirArabic',
+                                                        color: Colors.black,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        useGoogleFonts: false,
+                                                      ),
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText2
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Divider(
-                                      thickness: 1,
-                                      color: Color(0xFFECECEC),
-                                    ),
-                                  ],
+                                      Divider(
+                                        thickness: 1,
+                                        color: Color(0xFFECECEC),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         );
                       },
                     );
@@ -905,5 +936,20 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         ),
       ),
     );
+  }
+
+  Future waitForApiRequestCompleter({
+    double minWait = 0,
+    double maxWait = double.infinity,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    while (true) {
+      await Future.delayed(Duration(milliseconds: 50));
+      final timeElapsed = stopwatch.elapsedMilliseconds;
+      final requestComplete = _apiRequestCompleter?.isCompleted ?? false;
+      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+        break;
+      }
+    }
   }
 }

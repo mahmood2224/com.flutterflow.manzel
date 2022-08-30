@@ -18,6 +18,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mapbox_search/mapbox_search.dart';
 import 'package:share_plus/share_plus.dart';
@@ -428,6 +429,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       Row(
                                                         mainAxisSize:
                                                             MainAxisSize.min,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
                                                           Text(
                                                             FFLocalizations.of(
@@ -560,26 +564,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
                                                         children: [
-                                                          Text(
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                              'fcc5u3dn' /* 360° View */,
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'AvenirArabic',
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
+                                                          SvgPicture.asset(
+                                                            'assets/images/Frame.svg',
+                                                            height: 20,
+                                                            fit: BoxFit.cover,
                                                           ),
                                                         ],
                                                       ),
@@ -1598,7 +1590,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    16, 15, 16, 32),
+                                                    16, 15, 16, 0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -1674,6 +1666,53 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           ),
                                                     ),
                                                   ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16, 15, 16, 32),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'xiuyvuiq' /* Property type */,
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'AvenirArabic',
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                                Text(
+                                                  PropertyCall.propertyType(
+                                                    columnPropertyResponse
+                                                        .jsonBody,
+                                                  ).toString(),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'AvenirArabic',
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        useGoogleFonts: false,
+                                                      ),
                                                 ),
                                               ],
                                             ),
