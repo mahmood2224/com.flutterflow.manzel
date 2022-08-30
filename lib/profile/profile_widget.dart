@@ -270,7 +270,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           setState(() {});
                         },
                         child: Text(
-                          FFLocalizations.of(context).languageCode,
+                          FFLocalizations.of(context).getVariableText(
+                            enText: 'عربي',
+                            arText: 'English',
+                          ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Sofia Pro By Khuzaimah',

@@ -908,10 +908,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '#',
       'ar': '',
     },
-    'fcc5u3dn': {
-      'en': '360° View',
-      'ar': 'عرض 360 درجة',
-    },
     '9d90para': {
       'en': 'Apt. Plan',
       'ar': 'ملائم. يخطط',
@@ -979,6 +975,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     've2ud2ws': {
       'en': ' SAR',
       'ar': 'ر.س',
+    },
+    'xiuyvuiq': {
+      'en': 'Property type',
+      'ar': 'نوع الملكية',
     },
     'fobsike6': {
       'en': 'Supported Banks',

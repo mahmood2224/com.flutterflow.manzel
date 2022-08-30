@@ -44,30 +44,27 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        title: Text(
-          FFLocalizations.of(context).getText(
-            '21gpsvgr' /* My Properties */,
-          ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Sofia Pro By Khuzaimah',
-                color: Colors.black,
-                fontSize: 25,
-                fontWeight: FontWeight.w800,
-                useGoogleFonts: false,
-              ),
-        ),
-        actions: [],
-        centerTitle: false,
-        elevation: 0,
-      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 0),
+              child: Text(
+                FFLocalizations.of(context).getText(
+                  '21gpsvgr' /* My Properties */,
+                ),
+                style: FlutterFlowTheme.of(context).title2.override(
+                      fontFamily: 'Sofia Pro By Khuzaimah',
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800,
+                      useGoogleFonts: false,
+                    ),
+              ),
+            ),
             if (!loggedIn)
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 260, 0, 0),

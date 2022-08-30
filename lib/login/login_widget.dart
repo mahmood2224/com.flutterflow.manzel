@@ -70,10 +70,18 @@ class _LoginWidgetState extends State<LoginWidget> {
                   // changeToArabic
                   logFirebaseEvent('changeLanguage_changeToArabic');
                   setAppLanguage(context, 'ar');
+                  logFirebaseEvent('changeLanguage_Update-Local-State');
+                  setState(() => FFAppState().locale = 'en');
+                  logFirebaseEvent('changeLanguage_Update-Local-State');
+                  setState(() => FFAppState().locale = 'ar');
                 } else {
                   // changeToEnglish
                   logFirebaseEvent('changeLanguage_changeToEnglish');
                   setAppLanguage(context, 'en');
+                  logFirebaseEvent('changeLanguage_Update-Local-State');
+                  setState(() => FFAppState().locale = 'en');
+                  logFirebaseEvent('changeLanguage_Update-Local-State');
+                  setState(() => FFAppState().locale = 'en');
                 }
 
                 setState(() {});
