@@ -89,7 +89,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                               height: MediaQuery.of(context).size.height * 0.4,
                               child: Stack(
                                 children: [
-                                  if (!functions
+                                  if (functions
                                       .videoPlayerVisibilty(getJsonField(
                                     columnPropertyResponse.jsonBody,
                                     r'''$.data.attributes.video_manifest_uri''',
@@ -177,7 +177,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         );
                                       },
                                     ),
-                                  if (functions
+                                  if (!functions
                                       .videoPlayerVisibilty(getJsonField(
                                     columnPropertyResponse.jsonBody,
                                     r'''$.data.attributes.video_manifest_uri''',
@@ -537,15 +537,58 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        logFirebaseEvent(
-                                                            'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
-                                                        logFirebaseEvent(
-                                                            'Container_Navigate-To');
-                                                        context.pushNamed(
-                                                            'ThreeSixtyView');
-                                                      },
+                                                    Container(
+                                                      width: 125,
+                                                      height: 30,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
+                                                        border: Border.all(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'fcc5u3dn' /* 360° View */,
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'AvenirArabic',
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 5, 0, 0),
                                                       child: Container(
                                                         width: 125,
                                                         height: 30,
@@ -574,7 +617,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               FFLocalizations.of(
                                                                       context)
                                                                   .getText(
-                                                                'fcc5u3dn' /* 360° View */,
+                                                                '9d90para' /* Apt. Plan */,
                                                               ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -592,81 +635,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   ),
                                                             ),
                                                           ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 5, 0, 0),
-                                                      child: InkWell(
-                                                        onTap: () async {
-                                                          logFirebaseEvent(
-                                                              'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
-                                                          logFirebaseEvent(
-                                                              'Container_Navigate-To');
-                                                          context.pushNamed(
-                                                            'FloorPlan',
-                                                            queryParams: {
-                                                              'propertyId':
-                                                                  serializeParam(
-                                                                      widget
-                                                                          .propertyId,
-                                                                      ParamType
-                                                                          .int),
-                                                            }.withoutNulls,
-                                                          );
-                                                        },
-                                                        child: Container(
-                                                          width: 125,
-                                                          height: 30,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .white,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                            border: Border.all(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                            ),
-                                                          ),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  '9d90para' /* Apt. Plan */,
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      fontSize:
-                                                                          15,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
                                                         ),
                                                       ),
                                                     ),
