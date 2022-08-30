@@ -345,6 +345,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en':'Your account is Deactivated. Kindly connect to support for more information.',
       'ar':'حسابك معطل. يرجى الاتصال بالدعم لمزيد من المعلومات.',
     },
+    'Resend':{
+      'ar':'أعد إرسال الرمز',
+      'en':'Resend Code'
+    },
+    'ResendTimer':{
+      'ar':'أعد إرسال الرمز على: ',
+      'en':'Resend code in: '
+    },
   },
   // HelpAndSupport
   {

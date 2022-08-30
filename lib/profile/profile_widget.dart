@@ -11,6 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart' as material;
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({Key key}) : super(key: key);
@@ -72,6 +73,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             AuthUserStreamWidget(
+                              child: Directionality(
+                              textDirection: material.TextDirection.ltr,
                               child: Text(
                                 currentPhoneNumber,
                                 style: FlutterFlowTheme.of(context)
@@ -82,7 +85,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       fontWeight: FontWeight.w300,
                                       useGoogleFonts: false,
                                     ),
-                              ),
+                              )),
                             ),
                           ],
                         ),

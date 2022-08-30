@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 import '../auth/auth_util.dart';
 import '../common_widgets/overlay.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
@@ -172,6 +174,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 () => setState(() {}),
                               ),
                               autofocus: true,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[0-9]'))
+                              ],
                               obscureText: false,
                               decoration: InputDecoration(
                                 prefixText: FFLocalizations.of(context).getText(

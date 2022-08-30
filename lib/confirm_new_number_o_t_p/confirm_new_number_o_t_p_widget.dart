@@ -15,6 +15,7 @@ import 'package:pinput/pinput.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart' as material;
 
 import '../notification_handler/firebase_cloud_messaging.dart';
 
@@ -147,7 +148,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       AuthUserStreamWidget(
-                        child: Text(
+                        child: Directionality(
+                        textDirection: material.TextDirection.ltr,
+                            child:Text(
                           widget.phoneNumber ?? '1234567890',
                           style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Sofia Pro By Khuzaimah',
@@ -155,7 +158,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                             fontWeight: FontWeight.bold,
                             useGoogleFonts: false,
                           ),
-                        ),
+                        )),
                       ),
                     ],
                   ),
@@ -166,7 +169,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
-                        child: Pinput(
+                        child: Directionality(
+                        textDirection: material.TextDirection.ltr,
+                        child:Pinput(
                           onCompleted: (String otp) async {
                             // print(otp);
                             // if (otp.length == 6) {
@@ -334,7 +339,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               shape: BoxShape.circle,
                             ),
                           ),
-                        ),
+                        )),
                       ),
                     ],
                   ),
@@ -387,7 +392,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                 child: GestureDetector(
                                   onTap: resendOTP,
                                   child: Text(
-                                    'Resend Code',
+
+                                    FFLocalizations.of(context).getText(
+                                      'Resend' ,),
                                     style: TextStyle(
                                         decoration: TextDecoration.underline,
                                         fontFamily: 'Sofia Pro By Khuzaimah',

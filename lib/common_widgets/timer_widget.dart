@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../flutter_flow/internationalization.dart';
+
 class TimerWidget extends StatefulWidget {
   const TimerWidget(
       {Key key, @required this.onComplete, @required this.duration})
@@ -52,7 +54,9 @@ class _TimerWidgetState extends State<TimerWidget> {
     //return Text('Resend OTP${minutes.toString()}:${seconds.toString()}',style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).primaryColor,fontWeight: FontWeight.w700),);
     return RichText(
       text: TextSpan(
-        text: 'Resend code in: ',
+        text: FFLocalizations.of(context).getText(
+          'ResendTimer' /* Confirm your mobile number */,
+        ),
         style: TextStyle(
             fontFamily: 'Sofia Pro By Khuzaimah',
             fontSize: 16,
