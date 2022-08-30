@@ -190,23 +190,16 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                       type: PageTransitionType.fade,
                                       child: FlutterFlowExpandedImageView(
                                         image: Image.network(
-                                          valueOrDefault<String>(
-                                            getJsonField(
-                                              imagesItem,
-                                              r'''$.attributes.url''',
-                                            ),
-                                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTs0IBTFSuv05moQpi8yoB1rm8dEVXDEYOQ&usqp=CAU',
+                                          getJsonField(
+                                            imagesItem,
+                                            r'''$.attributes.url''',
                                           ),
                                           fit: BoxFit.contain,
                                         ),
                                         allowRotation: false,
-                                        tag: valueOrDefault<String>(
-                                          getJsonField(
-                                            imagesItem,
-                                            r'''$.attributes.url''' +
-                                                '$imagesIndex',
-                                          ),
-                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTs0IBTFSuv05moQpi8yoB1rm8dEVXDEYOQ&usqp=CAU',
+                                        tag: getJsonField(
+                                          imagesItem,
+                                          r'''$.attributes.url''',
                                         ),
                                         useHeroAnimation: true,
                                       ),
@@ -214,23 +207,17 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                   );
                                 },
                                 child: Hero(
-                                  tag: valueOrDefault<String>(
-                                    getJsonField(
-                                      imagesItem,
-                                      r'''$.attributes.url''' + '$imagesIndex',
-                                    ),
-                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTs0IBTFSuv05moQpi8yoB1rm8dEVXDEYOQ&usqp=CAU',
+                                  tag: getJsonField(
+                                    imagesItem,
+                                    r'''$.attributes.url''',
                                   ),
                                   transitionOnUserGestures: true,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
                                     child: Image.network(
-                                      valueOrDefault<String>(
-                                        getJsonField(
-                                          imagesItem,
-                                          r'''$.attributes.url''',
-                                        ),
-                                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNTs0IBTFSuv05moQpi8yoB1rm8dEVXDEYOQ&usqp=CAU',
+                                      getJsonField(
+                                        imagesItem,
+                                        r'''$.attributes.url''',
                                       ),
                                       width: 100,
                                       height:
