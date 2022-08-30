@@ -410,14 +410,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             ),
                                                             Text(
                                                               PropertyCall
-                                                                      .propertyUpdatedAt(
+                                                                  .propertyUpdatedAt(
                                                                 columnPropertyResponse
                                                                     .jsonBody,
-                                                              )
-                                                                  .toString()
-                                                                  .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          10),
+                                                              ).toString(),
                                                               maxLines: 2,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -592,52 +588,73 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0, 5, 0, 0),
-                                                      child: Container(
-                                                        width: 125,
-                                                        height: 30,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          border: Border.all(
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
+                                                          logFirebaseEvent(
+                                                              'Container_Navigate-To');
+                                                          context.pushNamed(
+                                                            'FloorPlan',
+                                                            queryParams: {
+                                                              'propertyId':
+                                                                  serializeParam(
+                                                                      widget
+                                                                          .propertyId,
+                                                                      ParamType
+                                                                          .int),
+                                                            }.withoutNulls,
+                                                          );
+                                                        },
+                                                        child: Container(
+                                                          width: 125,
+                                                          height: 30,
+                                                          decoration:
+                                                              BoxDecoration(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .primaryText,
-                                                          ),
-                                                        ),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Text(
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .getText(
-                                                                '9d90para' /* Apt. Plan */,
-                                                              ),
-                                                              style: FlutterFlowTheme
+                                                                .white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            border: Border.all(
+                                                              color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'AvenirArabic',
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
+                                                                  .primaryText,
                                                             ),
-                                                          ],
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  '9d90para' /* Apt. Plan */,
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
