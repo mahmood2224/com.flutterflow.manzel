@@ -399,14 +399,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             ),
                                                             Text(
                                                               PropertyCall
-                                                                      .propertyUpdatedAt(
+                                                                  .propertyUpdatedAt(
                                                                 columnPropertyResponse
                                                                     .jsonBody,
-                                                              )
-                                                                  .toString()
-                                                                  .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          10),
+                                                              ).toString(),
                                                               maxLines: 2,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
