@@ -430,8 +430,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الدخول التسجيل فى الموقع',
     },
     't2kwojss': {
-      'en': 'Offers #',
+      'en': 'Offers',
       'ar': 'عروض #',
+    },
+    '4wea05tq': {
+      'en': '#',
+      'ar': '',
     },
     'n5d3s79r': {
       'en': 'Last update : ',
