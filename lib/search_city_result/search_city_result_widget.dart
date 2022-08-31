@@ -3,6 +3,7 @@ import '../backend/api_requests/api_calls.dart';
 import '../components/no_results_found_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -275,118 +276,151 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                               0.3,
                                           child: Stack(
                                             children: [
-                                              Builder(
-                                                builder: (context) {
-                                                  final propertyImages =
+                                              if (functions
+                                                  .videoPlayerVisibilty(
                                                       getJsonField(
-                                                    propertiesItem,
-                                                    r'''$..property_images.data''',
-                                                  ).toList();
-                                                  return Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.3,
-                                                    child: Stack(
-                                                      children: [
-                                                        PageView.builder(
-                                                          controller: pageViewController ??=
-                                                              PageController(
-                                                                  initialPage: min(
-                                                                      0,
-                                                                      propertyImages
-                                                                              .length -
-                                                                          1)),
-                                                          scrollDirection:
-                                                              Axis.horizontal,
-                                                          itemCount:
-                                                              propertyImages
-                                                                  .length,
-                                                          itemBuilder: (context,
-                                                              propertyImagesIndex) {
-                                                            final propertyImagesItem =
-                                                                propertyImages[
-                                                                    propertyImagesIndex];
-                                                            return ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          8),
-                                                              child:
-                                                                  CachedNetworkImage(
-                                                                imageUrl:
-                                                                    getJsonField(
-                                                                  propertyImagesItem,
-                                                                  r'''$.attributes.url''',
-                                                                ),
-                                                                width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                                height: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .height *
-                                                                    0.3,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            );
-                                                          },
-                                                        ),
-                                                        Align(
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  0, 0.7),
-                                                          child:
-                                                              SmoothPageIndicator(
+                                                propertiesItem,
+                                                r'''$.attributes.video_manifest_uri''',
+                                              )))
+                                                Builder(
+                                                  builder: (context) {
+                                                    final propertyImages =
+                                                        getJsonField(
+                                                      propertiesItem,
+                                                      r'''$..property_images.data''',
+                                                    ).toList();
+                                                    return Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.3,
+                                                      child: Stack(
+                                                        children: [
+                                                          PageView.builder(
                                                             controller: pageViewController ??=
                                                                 PageController(
                                                                     initialPage: min(
                                                                         0,
                                                                         propertyImages.length -
                                                                             1)),
-                                                            count:
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            itemCount:
                                                                 propertyImages
                                                                     .length,
-                                                            axisDirection:
-                                                                Axis.horizontal,
-                                                            onDotClicked: (i) {
-                                                              pageViewController
-                                                                  .animateToPage(
-                                                                i,
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        500),
-                                                                curve:
-                                                                    Curves.ease,
+                                                            itemBuilder: (context,
+                                                                propertyImagesIndex) {
+                                                              final propertyImagesItem =
+                                                                  propertyImages[
+                                                                      propertyImagesIndex];
+                                                              return ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                child:
+                                                                    CachedNetworkImage(
+                                                                  imageUrl:
+                                                                      getJsonField(
+                                                                    propertyImagesItem,
+                                                                    r'''$.attributes.url''',
+                                                                  ),
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                                  height: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .height *
+                                                                      0.3,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
                                                               );
                                                             },
-                                                            effect: SlideEffect(
-                                                              spacing: 8,
-                                                              radius: 3,
-                                                              dotWidth: 6,
-                                                              dotHeight: 6,
-                                                              dotColor: Color(
-                                                                  0x80FFFFFF),
-                                                              activeDotColor:
-                                                                  Colors.white,
-                                                              paintStyle:
-                                                                  PaintingStyle
-                                                                      .fill,
+                                                          ),
+                                                          Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    0, 0.7),
+                                                            child:
+                                                                SmoothPageIndicator(
+                                                              controller: pageViewController ??=
+                                                                  PageController(
+                                                                      initialPage: min(
+                                                                          0,
+                                                                          propertyImages.length -
+                                                                              1)),
+                                                              count:
+                                                                  propertyImages
+                                                                      .length,
+                                                              axisDirection: Axis
+                                                                  .horizontal,
+                                                              onDotClicked:
+                                                                  (i) {
+                                                                pageViewController
+                                                                    .animateToPage(
+                                                                  i,
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          500),
+                                                                  curve: Curves
+                                                                      .ease,
+                                                                );
+                                                              },
+                                                              effect:
+                                                                  SlideEffect(
+                                                                spacing: 8,
+                                                                radius: 3,
+                                                                dotWidth: 6,
+                                                                dotHeight: 6,
+                                                                dotColor: Color(
+                                                                    0x80FFFFFF),
+                                                                activeDotColor:
+                                                                    Colors
+                                                                        .white,
+                                                                paintStyle:
+                                                                    PaintingStyle
+                                                                        .fill,
+                                                              ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                              ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              if (functions
+                                                  .videoPlayerVisibilty(
+                                                      getJsonField(
+                                                propertiesItem,
+                                                r'''$.attributes.video_manifest_uri''',
+                                              )))
+                                                FlutterFlowVideoPlayer(
+                                                  path: getJsonField(
+                                                    propertiesItem,
+                                                    r'''$.attributes.video_manifest_uri''',
+                                                  ),
+                                                  videoType: VideoType.network,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.35,
+                                                  autoPlay: true,
+                                                  looping: true,
+                                                  showControls: false,
+                                                  allowFullScreen: true,
+                                                  allowPlaybackSpeedMenu: false,
+                                                ),
                                               Align(
                                                 alignment:
                                                     AlignmentDirectional(1, -1),
