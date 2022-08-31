@@ -106,29 +106,38 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                             ),
                                       ),
                                     ),
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        '67mealxd' /* # */,
+                                    Container(
+                                      decoration: BoxDecoration(),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              '67mealxd' /* # */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  useGoogleFonts: false,
+                                                ),
+                                          ),
+                                          Text(
+                                            widget.orderId,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w300,
+                                                  useGoogleFonts: false,
+                                                ),
+                                          ),
+                                        ],
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            useGoogleFonts: false,
-                                          ),
-                                    ),
-                                    Text(
-                                      widget.orderId,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText2
-                                          .override(
-                                            fontFamily: 'AvenirArabic',
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w300,
-                                            useGoogleFonts: false,
-                                          ),
                                     ),
                                   ],
                                 ),
