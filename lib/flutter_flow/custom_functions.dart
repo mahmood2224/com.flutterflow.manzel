@@ -324,7 +324,14 @@ String offerScreenTime(
     }
   } else {
     if (dayDiffrence > 0) {
-      return "قبل ${dayDiffrence} أيام";
+      if (dayDiffrence == 1) {
+        return "قبل يوم";
+      }
+      if (dayDiffrence == 2) {
+        return "قبل يومين";
+      } else {
+        return "قبل ${dayDiffrence} أيام";
+      }
     } else if (hrsDiffrence > 0) {
       return "قبل ${hrsDiffrence} ساعات";
     } else if (minuteDiffrence > 0) {
@@ -726,7 +733,7 @@ String notificationsDateTime(
       return "اليوم";
     } else if ((DateFormat.yMd().format(timestamp)) ==
         (DateFormat.yMd().format(DateTime.now()))) {
-      return "في الامس";
+      return "امس";
     } else {
       String result = DateFormat.d("ar_SA").format(timestamp) +
           " " +
@@ -758,7 +765,7 @@ String emptyListWidgetTitle(
         if (locale == "en") {
           return "No properties avaiable";
         } else {
-          return "لا توجد خصائص متاحة";
+          return "لا توجد عقارات متاحة";
         }
       }
       break;
@@ -768,7 +775,7 @@ String emptyListWidgetTitle(
         if (locale == "en") {
           return "No notifications yet";
         } else {
-          return "لا إخطارات حتى الآن";
+          return "لا توجد إشعارات حتى الآن";
         }
       }
       break;
@@ -777,7 +784,7 @@ String emptyListWidgetTitle(
         if (locale == "en") {
           return "No cities yet";
         } else {
-          return "لا توجد مدن بعد";
+          return "لا توجد مدن متاحة حتى الان";
         }
       }
       break;
@@ -813,7 +820,7 @@ String emptyListWidgetTitle(
         if (locale == "en") {
           return "No properties booked yet";
         } else {
-          return "لا توجد خصائص محجوزة حتى الآن";
+          return "لا توجد عقارات محجوزة حتى الآن";
         }
       }
       break;
@@ -822,7 +829,7 @@ String emptyListWidgetTitle(
         if (locale == "en") {
           return "No properties favorite yet";
         } else {
-          return "لا توجد خصائص مفضلة حتى الآن";
+          return "لا توجد عقارات مفضلة حتى الآن";
         }
       }
       break;
@@ -838,7 +845,6 @@ String emptyListWidgetTitle(
       break;
   }
 
-  return "Empty";
   // Add your function code here!
 }
 
@@ -852,7 +858,7 @@ String snackBarMessage(
         if (locale == "en") {
           return "Some error has occurred. Please try again later.";
         } else {
-          return "حدث خطأ ما. الرجاء معاودة المحاولة في وقت لاحق.";
+          return "حدث خطأ ما. الرجاء المحاولة مرة أخرى في وقت لاحق.";
         }
       }
       break;
@@ -861,7 +867,7 @@ String snackBarMessage(
         if (locale == "en") {
           return "The property has been successfully removed from the bookmark.";
         } else {
-          return "تمت إزالة الخاصية بنجاح من الإشارة المرجعية.";
+          return "تم الإزالة من المفضلة بنجاح";
         }
       }
       break;
@@ -870,7 +876,7 @@ String snackBarMessage(
         if (locale == "en") {
           return "Please select valid instalment range.";
         } else {
-          return "الرجاء تحديد نطاق أقساط صالح.";
+          return "الرجاء تحديد نطاق أقساط صحيح";
         }
       }
       break;
@@ -888,7 +894,7 @@ String snackBarMessage(
         if (locale == "en") {
           return "This property is already booked.";
         } else {
-          return "هذا العقار محجوز بالفعل.";
+          return "هذا العقار محجوز بالفعل";
         }
       }
       break;
@@ -898,7 +904,7 @@ String snackBarMessage(
           if (locale == "en") {
             return "Some error has occurred. Please try again later.";
           } else {
-            return "حدث خطأ ما. الرجاء معاودة المحاولة في وقت لاحق.";
+            return "حدث خطأ ما. الرجاء المحاولة مرة أخرى في وقت لاحق.";
           }
         }
       }
@@ -916,7 +922,7 @@ String subTitleText(
         if (locale == "en") {
           return "Your booking list is empty. Let's explore our properties.";
         } else {
-          return "قائمة الحجز الخاصة بك فارغة. دعنا نستكشف خصائصنا.";
+          return "قائمة الحجز الخاصة بك فارغة";
         }
       }
       break;
@@ -925,7 +931,7 @@ String subTitleText(
         if (locale == "en") {
           return "Your save list is empty. Let's exploring our properties.";
         } else {
-          return "قائمة الحجز الخاصة بك فارغة. دعنا نستكشف خصائصنا.";
+          return " دعنا نستكشف خصائصنا.";
         }
       }
       break;

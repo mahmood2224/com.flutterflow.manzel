@@ -56,7 +56,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .title1
                                     .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       fontSize: 25,
                                       fontWeight: FontWeight.w800,
                                       useGoogleFonts: false,
@@ -271,7 +271,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         },
                         child: Text(
                           FFLocalizations.of(context).getVariableText(
-                            enText: 'عربي',
+                            enText: 'العربية',
                             arText: 'English',
                           ),
                           style:

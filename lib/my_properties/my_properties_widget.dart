@@ -46,7 +46,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                   '21gpsvgr' /* My Properties */,
                 ),
                 style: FlutterFlowTheme.of(context).title2.override(
-                      fontFamily: 'Sofia Pro By Khuzaimah',
+                      fontFamily: 'AvenirArabic',
                       color: Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.w800,

@@ -1413,6 +1413,8 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           Padding(
                                             padding:
