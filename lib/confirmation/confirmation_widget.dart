@@ -4,6 +4,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:google_fonts/google_fonts.dart';
 
 class ConfirmationWidget extends StatefulWidget {
@@ -64,7 +65,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 19, 0, 0),
+                            EdgeInsetsDirectional.fromSTEB(0, 19, 0, 0),
                             child: Text(
                               FFLocalizations.of(context).getText(
                                 'fnewib0l' /* Your Booking Confirmed */,
@@ -72,11 +73,11 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'AvenirArabic',
-                                    fontSize: 21,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
-                                  ),
+                                fontFamily: 'AvenirArabic',
+                                fontSize: 21,
+                                fontWeight: FontWeight.bold,
+                                useGoogleFonts: false,
+                              ),
                             ),
                           ),
                           Padding(
@@ -106,37 +107,40 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                             ),
                                       ),
                                     ),
-                                    Container(
-                                      decoration: BoxDecoration(),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              '67mealxd' /* # */,
+                                    Directionality(
+                                      textDirection: material.TextDirection.ltr,
+                                      child: Container(
+                                        decoration: BoxDecoration(),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Text(
+                                              FFLocalizations.of(context).getText(
+                                                '67mealxd' /* # */,
+                                              ),
+                                              style: FlutterFlowTheme.of(context)
+                                                  .bodyText1
+                                                  .override(
+                                                fontFamily: 'AvenirArabic',
+                                                color: FlutterFlowTheme.of(
+                                                    context)
+                                                    .secondaryText,
+                                                useGoogleFonts: false,
+                                              ),
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                          Text(
-                                            widget.orderId,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w300,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ],
+                                            Text(
+                                              widget.orderId,
+                                              style: FlutterFlowTheme.of(context)
+                                                  .bodyText2
+                                                  .override(
+                                                fontFamily: 'AvenirArabic',
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w300,
+                                                useGoogleFonts: false,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -146,7 +150,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 15, 20, 0),
+                            EdgeInsetsDirectional.fromSTEB(20, 15, 20, 0),
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               height: 52,
@@ -171,15 +175,15 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                 ),
                                 options: FFButtonOptions(
                                   color:
-                                      FlutterFlowTheme.of(context).primaryColor,
+                                  FlutterFlowTheme.of(context).primaryColor,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w800,
-                                        useGoogleFonts: false,
-                                      ),
+                                    fontFamily: 'AvenirArabic',
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w800,
+                                    useGoogleFonts: false,
+                                  ),
                                   borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1,
