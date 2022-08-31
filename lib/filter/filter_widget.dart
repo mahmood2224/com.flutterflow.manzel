@@ -667,6 +667,11 @@ class _FilterWidgetState extends State<FilterWidget> {
                             setState(
                                 () => FFAppState().filterPropertyType = []);
                             logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(() => FFAppState().filterCity = '');
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
+                            setState(() =>
+                                FFAppState().filterCity = citiesListValue);
+                            logFirebaseEvent('apllyFilter_Update-Local-State');
                             setState(() => FFAppState().filterPropertyType =
                                 functions
                                     .choicechipUnselected(
