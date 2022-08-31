@@ -771,7 +771,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         ),
                                               ),
                                             ),
-                                            Text(
+                                            Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(3, 0, 3, 0),
+                                                  child:Text(
                                               FFLocalizations.of(context)
                                                   .getText(
                                                 'efcxmcgl' /* ,  */,
@@ -783,7 +786,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     fontFamily: 'AvenirArabic',
                                                     fontSize: 13,
                                                     fontWeight: FontWeight.w300,
-                                                    useGoogleFonts: false,
+                                                    useGoogleFonts: false,),
                                                   ),
                                             ),
                                             Text(
@@ -940,7 +943,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            Text(
+                                            Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 3, 0),
+                                                  child:Text(
                                               valueOrDefault<String>(functions
                                                   .formatAmountWithoutDecimal(
                                                           valueOrDefault<
@@ -959,7 +965,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     color: Colors.black,
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.bold,
-                                                    useGoogleFonts: false,
+                                                    useGoogleFonts: false,),
                                                   ),
                                             ),
                                             Text(

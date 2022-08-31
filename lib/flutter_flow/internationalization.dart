@@ -458,12 +458,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الدخول التسجيل فى الموقع',
     },
     't2kwojss': {
-      'en': 'Offers #',
+      'en': 'Offers',
       'ar': 'عروض #',
     },
+    '4wea05tq': {
+      'en': '#',
+      'ar': '',
+    },
     'n5d3s79r': {
-      'en': 'Last update: ',
-      'ar': 'اخر تحديث:',
+      'en': 'Last update : ',
+      'ar': 'اخر تحديث :',
     },
     'jcj51k47': {
       'en': 'Disqualified',
@@ -915,6 +919,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'tpufujg8': {
       'en': '#',
       'ar': '',
+    },
+    'cmjr8qt1': {
+      'en': 'Available',
+      'ar': 'متوفرة',
+    },
+    'rh5awojh': {
+      'en': 'Booked',
+      'ar': 'حجز',
     },
     '9d90para': {
       'en': 'Apt. Plan',
@@ -1525,8 +1537,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '/',
     },
     'xa9e1t5y': {
-      'en': 'Waiting for banks to submit offers (',
-      'ar': 'في انتظار البنوك لتقديم العروض (',
+      'en': 'Waiting for banks to submit offers ',
+      'ar': 'في انتظار البنوك لتقديم العروض',
+    },
+    'pdhga106': {
+      'en': '(',
+      'ar': '(',
     },
     'awjba3l0': {
       'en': '/',
