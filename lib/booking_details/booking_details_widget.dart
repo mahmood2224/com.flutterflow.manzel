@@ -65,23 +65,23 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                   'trw95gom' /* Booking Ref. : */,
                 ),
                 style: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'AvenirArabic',
-                      color: FlutterFlowTheme.of(context).white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      useGoogleFonts: false,
-                    ),
+                  fontFamily: 'AvenirArabic',
+                  color: FlutterFlowTheme.of(context).white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  useGoogleFonts: false,
+                ),
               ),
             ),
             Text(
               widget.orderId,
               style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'AvenirArabic',
-                    color: FlutterFlowTheme.of(context).white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    useGoogleFonts: false,
-                  ),
+                fontFamily: 'AvenirArabic',
+                color: FlutterFlowTheme.of(context).white,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                useGoogleFonts: false,
+              ),
             ),
           ],
         ),
@@ -164,12 +164,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             '8eahonhl' /* Order Process */,
                           ),
                           style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'AvenirArabic',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w300,
-                                    useGoogleFonts: false,
-                                  ),
+                          FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'AvenirArabic',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                            useGoogleFonts: false,
+                          ),
                         ),
                       ],
                     ),
@@ -181,14 +181,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                       children: [
                         if (functions
                             .bookingDetailsOrderStatusConditionlVisibilty(
-                                getJsonField(
-                                  columnOrderDetailsResponse.jsonBody,
-                                  r'''$.result.order_status''',
-                                ).toString(),
-                                'reserved'))
+                            getJsonField(
+                              columnOrderDetailsResponse.jsonBody,
+                              r'''$.result.order_status''',
+                            ).toString(),
+                            'reserved'))
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,7 +242,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -252,11 +252,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -267,14 +267,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         if (functions
                             .bookingDetailsOrderStatusConditionlVisibilty(
-                                getJsonField(
-                                  columnOrderDetailsResponse.jsonBody,
-                                  r'''$.result.order_status''',
-                                ).toString(),
-                                'payment_confirmed'))
+                            getJsonField(
+                              columnOrderDetailsResponse.jsonBody,
+                              r'''$.result.order_status''',
+                            ).toString(),
+                            'payment_confirmed'))
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -285,16 +285,16 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   children: [
                                     if (functions
                                         .offerStatusPaymentCompletedCheck(
-                                            getJsonField(
-                                              columnOrderDetailsResponse
-                                                  .jsonBody,
-                                              r'''$.result.transaction_data.transaction_id''',
-                                            ).toString(),
-                                            getJsonField(
-                                              columnOrderDetailsResponse
-                                                  .jsonBody,
-                                              r'''$.result.order_status''',
-                                            ).toString()))
+                                        getJsonField(
+                                          columnOrderDetailsResponse
+                                              .jsonBody,
+                                          r'''$.result.transaction_data.transaction_id''',
+                                        ).toString(),
+                                        getJsonField(
+                                          columnOrderDetailsResponse
+                                              .jsonBody,
+                                          r'''$.result.order_status''',
+                                        ).toString()))
                                       Icon(
                                         Icons.check_circle_rounded,
                                         color: Color(0xFF7FC15F),
@@ -302,16 +302,16 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ),
                                     if (!functions
                                         .offerStatusPaymentCompletedCheck(
-                                            getJsonField(
-                                              columnOrderDetailsResponse
-                                                  .jsonBody,
-                                              r'''$.result.transaction_data.transaction_id''',
-                                            ).toString(),
-                                            getJsonField(
-                                              columnOrderDetailsResponse
-                                                  .jsonBody,
-                                              r'''$.result.order_status''',
-                                            ).toString()))
+                                        getJsonField(
+                                          columnOrderDetailsResponse
+                                              .jsonBody,
+                                          r'''$.result.transaction_data.transaction_id''',
+                                        ).toString(),
+                                        getJsonField(
+                                          columnOrderDetailsResponse
+                                              .jsonBody,
+                                          r'''$.result.order_status''',
+                                        ).toString()))
                                       Icon(
                                         Icons.radio_button_off,
                                         color: Colors.black,
@@ -326,7 +326,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -336,11 +336,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -360,21 +360,21 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   children: [
                                     if (functions
                                         .bookingDetailsOrderStatusConditionlVisibilty(
-                                            getJsonField(
-                                              columnOrderDetailsResponse
-                                                  .jsonBody,
-                                              r'''$.result.order_status''',
-                                            ).toString(),
-                                            'collect_offers'))
+                                        getJsonField(
+                                          columnOrderDetailsResponse
+                                              .jsonBody,
+                                          r'''$.result.order_status''',
+                                        ).toString(),
+                                        'collect_offers'))
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                         children: [
                                           Column(
                                             mainAxisSize: MainAxisSize.max,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               if (functions.orderProcessStatus(
                                                   getJsonField(
@@ -424,39 +424,39 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                                 children: [
                                                   Row(
                                                     mainAxisSize:
-                                                        MainAxisSize.max,
+                                                    MainAxisSize.max,
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
+                                                    CrossAxisAlignment
+                                                        .center,
                                                     children: [
                                                       Text(
                                                         FFLocalizations.of(
-                                                                context)
+                                                            context)
                                                             .getText(
                                                           'zpv0x3sj' /* Collecting Offers */,
                                                         ),
                                                         maxLines: 2,
                                                         style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'AvenirArabic',
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
+                                                        FlutterFlowTheme.of(
+                                                            context)
+                                                            .bodyText1
+                                                            .override(
+                                                          fontFamily:
+                                                          'AvenirArabic',
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w500,
+                                                          useGoogleFonts:
+                                                          false,
+                                                        ),
                                                       ),
                                                       InkWell(
                                                         onTap: () async {
@@ -468,36 +468,36 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                             'Offers',
                                                             queryParams: {
                                                               'propertyId':
-                                                                  serializeParam(
-                                                                      getJsonField(
-                                                                        columnOrderDetailsResponse
-                                                                            .jsonBody,
-                                                                        r'''$.result.property_id''',
-                                                                      )
-                                                                          .toString(),
-                                                                      ParamType
-                                                                          .String),
+                                                              serializeParam(
+                                                                  getJsonField(
+                                                                    columnOrderDetailsResponse
+                                                                        .jsonBody,
+                                                                    r'''$.result.property_id''',
+                                                                  )
+                                                                      .toString(),
+                                                                  ParamType
+                                                                      .String),
                                                             }.withoutNulls,
                                                           );
                                                         },
                                                         child: Container(
                                                           decoration:
-                                                              BoxDecoration(
+                                                          BoxDecoration(
                                                             color: FlutterFlowTheme
-                                                                    .of(context)
+                                                                .of(context)
                                                                 .white,
                                                             borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
+                                                            BorderRadius
+                                                                .circular(
+                                                                8),
                                                           ),
                                                           child: Row(
                                                             mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
+                                                            MainAxisSize
+                                                                .max,
                                                             mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
+                                                            MainAxisAlignment
+                                                                .center,
                                                             children: [
                                                               Text(
                                                                 valueOrDefault<
@@ -510,70 +510,70 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                                   '0',
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
-                                                                        context)
+                                                                    context)
                                                                     .bodyText1
                                                                     .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryText,
-                                                                      fontSize:
-                                                                          16,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
+                                                                  fontFamily:
+                                                                  'AvenirArabic',
+                                                                  color: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .primaryText,
+                                                                  fontSize:
+                                                                  16,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                                  useGoogleFonts:
+                                                                  false,
+                                                                ),
                                                               ),
                                                               Text(
                                                                 FFLocalizations.of(
-                                                                        context)
+                                                                    context)
                                                                     .getText(
                                                                   'hho1grz4' /* / */,
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
-                                                                        context)
+                                                                    context)
                                                                     .bodyText1
                                                                     .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      fontSize:
-                                                                          16,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
+                                                                  fontFamily:
+                                                                  'AvenirArabic',
+                                                                  fontSize:
+                                                                  16,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                                  useGoogleFonts:
+                                                                  false,
+                                                                ),
                                                               ),
                                                               Text(
                                                                 valueOrDefault<
                                                                     String>(
                                                                   functions
                                                                       .bookingScreenCountOffers(
-                                                                          getJsonField(
-                                                                    columnOrderDetailsResponse
-                                                                        .jsonBody,
-                                                                    r'''$.result.bank_ids''',
-                                                                  )),
+                                                                      getJsonField(
+                                                                        columnOrderDetailsResponse
+                                                                            .jsonBody,
+                                                                        r'''$.result.bank_ids''',
+                                                                      )),
                                                                   '0',
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
-                                                                        context)
+                                                                    context)
                                                                     .bodyText1
                                                                     .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      fontSize:
-                                                                          16,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
+                                                                  fontFamily:
+                                                                  'AvenirArabic',
+                                                                  fontSize:
+                                                                  16,
+                                                                  fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                                  useGoogleFonts:
+                                                                  false,
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
@@ -583,110 +583,146 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                   ),
                                                   if (functions
                                                       .conditionalVisibility(
-                                                          getJsonField(
-                                                            columnOrderDetailsResponse
-                                                                .jsonBody,
-                                                            r'''$.result.order_status''',
-                                                          ).toString(),
-                                                          'collect_offers'))
+                                                      getJsonField(
+                                                        columnOrderDetailsResponse
+                                                            .jsonBody,
+                                                        r'''$.result.order_status''',
+                                                      ).toString(),
+                                                      'collect_offers'))
                                                     Row(
                                                       mainAxisSize:
-                                                          MainAxisSize.max,
+                                                      MainAxisSize.max,
                                                       children: [
-                                                        Text(
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                            'xa9e1t5y' /* Waiting for banks to submit of... */,
+                                                        Padding(
+                                                          padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(0,
+                                                              0, 2, 0),
+                                                          child: Text(
+                                                            FFLocalizations.of(
+                                                                context)
+                                                                .getText(
+                                                              'xa9e1t5y' /* Waiting for banks to submit of... */,
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                .of(context)
+                                                                .bodyText1
+                                                                .override(
+                                                              fontFamily:
+                                                              'AvenirArabic',
+                                                              fontSize: 12,
+                                                              useGoogleFonts:
+                                                              false,
+                                                            ),
                                                           ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'AvenirArabic',
-                                                                fontSize: 12,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                              ),
                                                         ),
-                                                        Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            getJsonField(
-                                                              columnOrderDetailsResponse
-                                                                  .jsonBody,
-                                                              r'''$.result.offer_count''',
-                                                            ).toString(),
-                                                            '0',
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'AvenirArabic',
-                                                                fontSize: 12,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                              ),
-                                                        ),
-                                                        Text(
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                            'awjba3l0' /* / */,
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'AvenirArabic',
-                                                                fontSize: 12,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                              ),
-                                                        ),
-                                                        Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            functions
-                                                                .bookingScreenCountOffers(
+                                                        Directionality(
+                                                          textDirection: material.TextDirection.ltr,
+
+
+                                                          child: Container(
+                                                            decoration:
+                                                            BoxDecoration(),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                              MainAxisSize
+                                                                  .max,
+                                                              children: [
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                      context)
+                                                                      .getText(
+                                                                    'pdhga106' /* ( */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .bodyText1,
+                                                                ),
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
                                                                     getJsonField(
-                                                              columnOrderDetailsResponse
-                                                                  .jsonBody,
-                                                              r'''$.result.bank_ids''',
-                                                            )),
-                                                            '0',
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
+                                                                      columnOrderDetailsResponse
+                                                                          .jsonBody,
+                                                                      r'''$.result.offer_count''',
+                                                                    ).toString(),
+                                                                    '0',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                    fontFamily:
                                                                     'AvenirArabic',
-                                                                fontSize: 12,
-                                                                useGoogleFonts:
+                                                                    fontSize:
+                                                                    12,
+                                                                    useGoogleFonts:
                                                                     false,
-                                                              ),
-                                                        ),
-                                                        Text(
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                            'mehsn231' /* ) */,
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                      context)
+                                                                      .getText(
+                                                                    'awjba3l0' /* / */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                    fontFamily:
                                                                     'AvenirArabic',
-                                                                fontSize: 12,
-                                                                useGoogleFonts:
+                                                                    fontSize:
+                                                                    12,
+                                                                    useGoogleFonts:
                                                                     false,
-                                                              ),
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    functions
+                                                                        .bookingScreenCountOffers(
+                                                                        getJsonField(
+                                                                          columnOrderDetailsResponse
+                                                                              .jsonBody,
+                                                                          r'''$.result.bank_ids''',
+                                                                        )),
+                                                                    '0',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                    fontFamily:
+                                                                    'AvenirArabic',
+                                                                    fontSize:
+                                                                    12,
+                                                                    useGoogleFonts:
+                                                                    false,
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                      context)
+                                                                      .getText(
+                                                                    'mehsn231' /* ) */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                      context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                    fontFamily:
+                                                                    'AvenirArabic',
+                                                                    fontSize:
+                                                                    12,
+                                                                    useGoogleFonts:
+                                                                    false,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -704,14 +740,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                         ),
                         if (functions
                             .bookingDetailsOrderStatusConditionlVisibilty(
-                                getJsonField(
-                                  columnOrderDetailsResponse.jsonBody,
-                                  r'''$.result.order_status''',
-                                ).toString(),
-                                'waiting_offer_acceptance'))
+                            getJsonField(
+                              columnOrderDetailsResponse.jsonBody,
+                              r'''$.result.order_status''',
+                            ).toString(),
+                            'waiting_offer_acceptance'))
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -765,7 +801,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -775,11 +811,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                         if (functions.conditionalVisibility(
                                             getJsonField(
@@ -795,10 +831,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  fontSize: 12,
-                                                  useGoogleFonts: false,
-                                                ),
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 12,
+                                              useGoogleFonts: false,
+                                            ),
                                           ),
                                       ],
                                     ),
@@ -809,14 +845,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         if (functions
                             .bookingDetailsOrderStatusConditionlVisibilty(
-                                getJsonField(
-                                  columnOrderDetailsResponse.jsonBody,
-                                  r'''$.result.order_status''',
-                                ).toString(),
-                                'accepted'))
+                            getJsonField(
+                              columnOrderDetailsResponse.jsonBody,
+                              r'''$.result.order_status''',
+                            ).toString(),
+                            'accepted'))
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -870,7 +906,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -880,11 +916,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                         if (functions.conditionalVisibility(
                                             getJsonField(
@@ -900,10 +936,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  fontSize: 12,
-                                                  useGoogleFonts: false,
-                                                ),
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 12,
+                                              useGoogleFonts: false,
+                                            ),
                                           ),
                                       ],
                                     ),
@@ -914,14 +950,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         if (functions
                             .bookingDetailsOrderStatusConditionlVisibilty(
-                                getJsonField(
-                                  columnOrderDetailsResponse.jsonBody,
-                                  r'''$.result.order_status''',
-                                ).toString(),
-                                'ownership_transferred'))
+                            getJsonField(
+                              columnOrderDetailsResponse.jsonBody,
+                              r'''$.result.order_status''',
+                            ).toString(),
+                            'ownership_transferred'))
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -963,7 +999,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -973,11 +1009,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                         if (functions.conditionalVisibility(
                                             getJsonField(
@@ -993,10 +1029,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  fontSize: 12,
-                                                  useGoogleFonts: false,
-                                                ),
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 12,
+                                              useGoogleFonts: false,
+                                            ),
                                           ),
                                       ],
                                     ),
@@ -1013,7 +1049,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             'cancelled'))
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1053,7 +1089,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -1063,11 +1099,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -1076,10 +1112,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 12,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 12,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -1096,7 +1132,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             'disqualified'))
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1136,7 +1172,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -1146,11 +1182,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -1159,10 +1195,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 12,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 12,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -1179,7 +1215,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             'expired'))
                           Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1219,7 +1255,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -1229,11 +1265,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -1242,10 +1278,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 12,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 12,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -1273,12 +1309,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             'nxmc61bl' /* Property details */,
                           ),
                           style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'AvenirArabic',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w300,
-                                    useGoogleFonts: false,
-                                  ),
+                          FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'AvenirArabic',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                            useGoogleFonts: false,
+                          ),
                         ),
                       ],
                     ),
@@ -1326,11 +1362,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'AvenirArabic',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
-                                  ),
+                                fontFamily: 'AvenirArabic',
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                useGoogleFonts: false,
+                              ),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
@@ -1354,11 +1390,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          useGoogleFonts: false,
-                                        ),
+                                      fontFamily: 'AvenirArabic',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300,
+                                      useGoogleFonts: false,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -1371,11 +1407,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          useGoogleFonts: false,
-                                        ),
+                                      fontFamily: 'AvenirArabic',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300,
+                                      useGoogleFonts: false,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -1392,18 +1428,18 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          useGoogleFonts: false,
-                                        ),
+                                      fontFamily: 'AvenirArabic',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w300,
+                                      useGoogleFonts: false,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                              EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -1413,23 +1449,25 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       scrollDirection: Axis.horizontal,
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.end,
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 9, 0),
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0, 0, 9, 0),
                                             child: Icon(
                                               Icons.single_bed,
                                               color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryColor,
                                               size: 24,
                                             ),
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 20, 0),
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0, 0, 20, 0),
                                             child: Text(
                                               valueOrDefault<String>(
                                                 getJsonField(
@@ -1440,36 +1478,36 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 '0',
                                               ),
                                               style: FlutterFlowTheme.of(
-                                                      context)
+                                                  context)
                                                   .bodyText1
                                                   .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w500,
-                                                    useGoogleFonts: false,
-                                                  ),
+                                                fontFamily:
+                                                'Sofia Pro By Khuzaimah',
+                                                color: FlutterFlowTheme.of(
+                                                    context)
+                                                    .primaryColor,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
+                                              ),
                                             ),
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 9, 0),
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0, 0, 9, 0),
                                             child: Icon(
                                               Icons.bathtub_outlined,
                                               color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryColor,
                                               size: 24,
                                             ),
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 20, 0),
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0, 0, 20, 0),
                                             child: Text(
                                               valueOrDefault<String>(
                                                 getJsonField(
@@ -1480,28 +1518,28 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 '0',
                                               ),
                                               style: FlutterFlowTheme.of(
-                                                      context)
+                                                  context)
                                                   .bodyText1
                                                   .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    fontWeight: FontWeight.w500,
-                                                    useGoogleFonts: false,
-                                                  ),
+                                                fontFamily:
+                                                'Sofia Pro By Khuzaimah',
+                                                color: FlutterFlowTheme.of(
+                                                    context)
+                                                    .primaryColor,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
+                                              ),
                                             ),
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 9, 0),
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0, 0, 9, 0),
                                             child: Icon(
                                               Icons.design_services_outlined,
                                               color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryColor,
                                               size: 24,
                                             ),
                                           ),
@@ -1514,14 +1552,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
+                                              fontFamily:
+                                              'Sofia Pro By Khuzaimah',
+                                              color: FlutterFlowTheme.of(
+                                                  context)
+                                                  .primaryColor,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
                                           ),
                                           Text(
                                             FFLocalizations.of(context).getText(
@@ -1530,13 +1568,13 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
+                                              fontFamily: 'AvenirArabic',
+                                              color: FlutterFlowTheme.of(
+                                                  context)
+                                                  .primaryColor,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -1558,7 +1596,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                         Expanded(
                           child: Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                            EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 logFirebaseEvent(
@@ -1586,11 +1624,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .subtitle2
                                     .override(
-                                      fontFamily: 'AvenirArabic',
-                                      color: Color(0xFF2971FB),
-                                      fontWeight: FontWeight.w800,
-                                      useGoogleFonts: false,
-                                    ),
+                                  fontFamily: 'AvenirArabic',
+                                  color: Color(0xFF2971FB),
+                                  fontWeight: FontWeight.w800,
+                                  useGoogleFonts: false,
+                                ),
                                 borderSide: BorderSide(
                                   color: Color(0xFF2971FB),
                                   width: 1,
@@ -1619,12 +1657,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                               'qkoz8020' /* Transaction details */,
                             ),
                             style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'AvenirArabic',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w300,
-                                      useGoogleFonts: false,
-                                    ),
+                            FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'AvenirArabic',
+                              fontSize: 18,
+                              fontWeight: FontWeight.w300,
+                              useGoogleFonts: false,
+                            ),
                           ),
                         ),
                       ],
@@ -1643,7 +1681,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1658,11 +1696,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'AvenirArabic',
-                                              color: Color(0xFF6B6B6B),
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
+                                          fontFamily: 'AvenirArabic',
+                                          color: Color(0xFF6B6B6B),
+                                          fontWeight: FontWeight.w300,
+                                          useGoogleFonts: false,
+                                        ),
                                       ),
                                     ),
                                     Text(
@@ -1676,12 +1714,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'AvenirArabic',
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts: false,
-                                            lineHeight: 1.5,
-                                          ),
+                                        fontFamily: 'AvenirArabic',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
+                                        lineHeight: 1.5,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -1702,17 +1740,17 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Color(0xFF6B6B6B),
-                                            fontWeight: FontWeight.w300,
-                                            useGoogleFonts: false,
-                                          ),
+                                        fontFamily: 'AvenirArabic',
+                                        color: Color(0xFF6B6B6B),
+                                        fontWeight: FontWeight.w300,
+                                        useGoogleFonts: false,
+                                      ),
                                     ),
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         FFLocalizations.of(context).getText(
@@ -1721,11 +1759,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'AvenirArabic',
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              useGoogleFonts: false,
-                                            ),
+                                          fontFamily: 'AvenirArabic',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
                                       ),
                                       Expanded(
                                         child: AutoSizeText(
@@ -1741,11 +1779,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -1766,7 +1804,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             Expanded(
                               child: Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1781,11 +1819,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'AvenirArabic',
-                                              color: Color(0xFF6B6B6B),
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
+                                          fontFamily: 'AvenirArabic',
+                                          color: Color(0xFF6B6B6B),
+                                          fontWeight: FontWeight.w300,
+                                          useGoogleFonts: false,
+                                        ),
                                       ),
                                     ),
                                     Row(
@@ -1793,29 +1831,29 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 5, 0),
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0, 0, 5, 0),
                                           child: Text(
                                             valueOrDefault<String>(
                                               functions.formatAmount(
                                                   valueOrDefault<String>(
-                                                getJsonField(
-                                                  columnOrderDetailsResponse
-                                                      .jsonBody,
-                                                  r'''$.result.transaction_data.paid_amount''',
-                                                ).toString(),
-                                                '0',
-                                              )),
+                                                    getJsonField(
+                                                      columnOrderDetailsResponse
+                                                          .jsonBody,
+                                                      r'''$.result.transaction_data.paid_amount''',
+                                                    ).toString(),
+                                                    '0',
+                                                  )),
                                               '0',
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
                                           ),
                                         ),
                                         Text(
@@ -1825,11 +1863,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -1852,11 +1890,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Color(0xFF6B6B6B),
-                                            fontWeight: FontWeight.w300,
-                                            useGoogleFonts: false,
-                                          ),
+                                        fontFamily: 'AvenirArabic',
+                                        color: Color(0xFF6B6B6B),
+                                        fontWeight: FontWeight.w300,
+                                        useGoogleFonts: false,
+                                      ),
                                     ),
                                   ),
                                   Text(
@@ -1874,11 +1912,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
+                                      fontFamily: 'AvenirArabic',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -1912,13 +1950,13 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .subtitle2
                                 .override(
-                                  fontFamily: 'AvenirArabic',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: false,
-                                ),
+                              fontFamily: 'AvenirArabic',
+                              color:
+                              FlutterFlowTheme.of(context).primaryColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: false,
+                            ),
                             borderSide: BorderSide(
                               color: Color(0x1A2971FB),
                               width: 1,
