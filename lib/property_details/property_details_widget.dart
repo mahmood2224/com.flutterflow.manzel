@@ -488,51 +488,110 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   ),
                                                             ),
                                                           ),
-                                                          FFButtonWidget(
-                                                            onPressed: () {
-                                                              print(
-                                                                  'propertyStatus pressed ...');
-                                                            },
-                                                            text: PropertyCall
-                                                                .propertyStatus(
-                                                              columnPropertyResponse
-                                                                  .jsonBody,
-                                                            ).toString(),
-                                                            options:
-                                                                FFButtonOptions(
-                                                              height: 26,
-                                                              color: Color(
-                                                                  0xFF81D05C),
-                                                              textStyle:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .subtitle2
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontSize:
-                                                                            13,
-                                                                        fontWeight:
-                                                                            FontWeight.w500,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                              elevation: 0,
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: Colors
-                                                                    .transparent,
+                                                          if (functions
+                                                              .propertyStatusConditionalVisibilty(
+                                                                  PropertyCall
+                                                                      .propertyStatus(
+                                                            columnPropertyResponse
+                                                                .jsonBody,
+                                                          ).toString()))
+                                                            FFButtonWidget(
+                                                              onPressed: () {
+                                                                print(
+                                                                    'propertyStatus pressed ...');
+                                                              },
+                                                              text: FFLocalizations
+                                                                      .of(context)
+                                                                  .getText(
+                                                                'cmjr8qt1' /* Available */,
                                                               ),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          7),
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                height: 26,
+                                                                color: Color(
+                                                                    0xFF81D05C),
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                                elevation: 0,
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            7),
+                                                              ),
+                                                              showLoadingIndicator:
+                                                                  false,
                                                             ),
-                                                            showLoadingIndicator:
-                                                                false,
-                                                          ),
+                                                          if (!functions
+                                                              .propertyStatusConditionalVisibilty(
+                                                                  PropertyCall
+                                                                      .propertyStatus(
+                                                            columnPropertyResponse
+                                                                .jsonBody,
+                                                          ).toString()))
+                                                            FFButtonWidget(
+                                                              onPressed: () {
+                                                                print(
+                                                                    'propertyStatus pressed ...');
+                                                              },
+                                                              text: FFLocalizations
+                                                                      .of(context)
+                                                                  .getText(
+                                                                'rh5awojh' /* Booked */,
+                                                              ),
+                                                              options:
+                                                                  FFButtonOptions(
+                                                                height: 26,
+                                                                color: Color(
+                                                                    0xFFD7D7D7),
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                                elevation: 0,
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            7),
+                                                              ),
+                                                              showLoadingIndicator:
+                                                                  false,
+                                                            ),
                                                         ],
                                                       ),
                                                     ],

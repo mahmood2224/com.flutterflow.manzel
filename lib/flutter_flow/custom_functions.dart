@@ -1024,3 +1024,12 @@ bool videoPlayerVisibilty(String videoURL) {
     return false;
   }
 }
+
+bool propertyStatusConditionalVisibilty(String propertyStatus) {
+  // Add your function code here!
+  if (propertyStatus == "Available") {
+    return true;
+  } else {
+    return false;
+  }
+}

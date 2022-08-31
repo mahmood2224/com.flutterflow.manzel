@@ -888,6 +888,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '#',
       'ar': '',
     },
+    'cmjr8qt1': {
+      'en': 'Available',
+      'ar': 'متوفرة',
+    },
+    'rh5awojh': {
+      'en': 'Booked',
+      'ar': 'حجز',
+    },
     '9d90para': {
       'en': 'Apt. Plan',
       'ar': 'ملائم. يخطط',
@@ -1493,8 +1501,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '/',
     },
     'xa9e1t5y': {
-      'en': 'Waiting for banks to submit offers (',
-      'ar': 'في انتظار البنوك لتقديم العروض (',
+      'en': 'Waiting for banks to submit offers ',
+      'ar': 'في انتظار البنوك لتقديم العروض',
+    },
+    'pdhga106': {
+      'en': '(',
+      'ar': '(',
     },
     'awjba3l0': {
       'en': '/',
