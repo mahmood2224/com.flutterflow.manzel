@@ -376,26 +376,35 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           mainAxisSize:
                                                               MainAxisSize.min,
                                                           children: [
-                                                            Text(
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .getText(
-                                                                'ak0ss5un' /* Updated:  */,
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          3,
+                                                                          0),
+                                                              child: Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'ak0ss5un' /* Updated:  */,
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
                                                               ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'AvenirArabic',
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
                                                             ),
                                                             Text(
                                                               PropertyCall
@@ -725,24 +734,32 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 false,
                                                           ),
                                                     ),
-                                                    Text(
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        '73rcbvl6' /* ,  */,
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  3, 0, 3, 0),
+                                                      child: Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          '73rcbvl6' /* ,  */,
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'AvenirArabic',
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
                                                       ),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyText1
-                                                          .override(
-                                                            fontFamily:
-                                                                'AvenirArabic',
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight.w300,
-                                                            useGoogleFonts:
-                                                                false,
-                                                          ),
                                                     ),
                                                     Text(
                                                       PropertyCall
@@ -1005,24 +1022,33 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               MainAxisAlignment
                                                                   .center,
                                                           children: [
-                                                            Text(
-                                                              PropertyCall
-                                                                  .propertyBedrooms(
-                                                                columnPropertyResponse
-                                                                    .jsonBody,
-                                                              ).toString(),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'AvenirArabic',
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          3,
+                                                                          0),
+                                                              child: Text(
+                                                                PropertyCall
+                                                                    .propertyBedrooms(
+                                                                  columnPropertyResponse
+                                                                      .jsonBody,
+                                                                ).toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
                                                             ),
                                                             Text(
                                                               FFLocalizations.of(
@@ -1071,24 +1097,33 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               MainAxisAlignment
                                                                   .center,
                                                           children: [
-                                                            Text(
-                                                              PropertyCall
-                                                                  .propertyBathrooms(
-                                                                columnPropertyResponse
-                                                                    .jsonBody,
-                                                              ).toString(),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'AvenirArabic',
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          3,
+                                                                          0),
+                                                              child: Text(
+                                                                PropertyCall
+                                                                    .propertyBathrooms(
+                                                                  columnPropertyResponse
+                                                                      .jsonBody,
+                                                                ).toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
                                                             ),
                                                             Text(
                                                               FFLocalizations.of(
@@ -1138,24 +1173,33 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               MainAxisAlignment
                                                                   .center,
                                                           children: [
-                                                            Text(
-                                                              PropertyCall
-                                                                  .propertySize(
-                                                                columnPropertyResponse
-                                                                    .jsonBody,
-                                                              ).toString(),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'AvenirArabic',
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          3,
+                                                                          0),
+                                                              child: Text(
+                                                                PropertyCall
+                                                                    .propertySize(
+                                                                  columnPropertyResponse
+                                                                      .jsonBody,
+                                                                ).toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
                                                             ),
                                                             Text(
                                                               FFLocalizations.of(
@@ -1204,24 +1248,33 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               MainAxisAlignment
                                                                   .center,
                                                           children: [
-                                                            Text(
-                                                              PropertyCall
-                                                                  .propertyLivingrooms(
-                                                                columnPropertyResponse
-                                                                    .jsonBody,
-                                                              ).toString(),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'AvenirArabic',
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w300,
-                                                                    useGoogleFonts:
-                                                                        false,
-                                                                  ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          3,
+                                                                          0),
+                                                              child: Text(
+                                                                PropertyCall
+                                                                    .propertyLivingrooms(
+                                                                  columnPropertyResponse
+                                                                      .jsonBody,
+                                                                ).toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
                                                             ),
                                                             Text(
                                                               FFLocalizations.of(
@@ -1635,33 +1688,41 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
-                                                    Text(
-                                                      valueOrDefault<String>(
-                                                        functions
-                                                            .formatAmountWithoutDecimal(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                          PropertyCall
-                                                              .propertyPrice(
-                                                            columnPropertyResponse
-                                                                .jsonBody,
-                                                          ).toString(),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 3, 0),
+                                                      child: Text(
+                                                        valueOrDefault<String>(
+                                                          functions
+                                                              .formatAmountWithoutDecimal(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                            PropertyCall
+                                                                .propertyPrice(
+                                                              columnPropertyResponse
+                                                                  .jsonBody,
+                                                            ).toString(),
+                                                            '0',
+                                                          )),
                                                           '0',
-                                                        )),
-                                                        '0',
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'AvenirArabic',
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
                                                       ),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyText1
-                                                          .override(
-                                                            fontFamily:
-                                                                'AvenirArabic',
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            useGoogleFonts:
-                                                                false,
-                                                          ),
                                                     ),
                                                     Text(
                                                       FFLocalizations.of(

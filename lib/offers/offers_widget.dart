@@ -597,27 +597,29 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                       MainAxisSize
                                                                           .max,
                                                                   children: [
-                                                                    Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'n5d3s79r' /* Last update:  */,
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              0,
+                                                                              0,
+                                                                              3,
+                                                                              0),
+                                                                      child:
+                                                                          Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'n5d3s79r' /* Last update :  */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              color: FlutterFlowTheme.of(context).primaryColor,
+                                                                              fontSize: 10,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              useGoogleFonts: false,
+                                                                            ),
                                                                       ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'AvenirArabic',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryColor,
-                                                                            fontSize:
-                                                                                10,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
                                                                     ),
                                                                     Text(
                                                                       valueOrDefault<

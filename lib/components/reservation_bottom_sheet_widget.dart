@@ -137,15 +137,18 @@ class _ReservationBottomSheetWidgetState
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  FFLocalizations.of(context).getText(
-                    'njswqwdn' /* agree to our  */,
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 3, 0),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'njswqwdn' /* agree to our  */,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'AvenirArabic',
+                          fontSize: 13,
+                          useGoogleFonts: false,
+                        ),
                   ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'AvenirArabic',
-                        fontSize: 13,
-                        useGoogleFonts: false,
-                      ),
                 ),
                 InkWell(
                   onTap: () async {

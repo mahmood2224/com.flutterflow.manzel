@@ -676,17 +676,20 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           mainAxisSize:
                                                                               MainAxisSize.max,
                                                                           children: [
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'tu9ytzrl' /* Booking ref:  */,
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 3, 0),
+                                                                              child: Text(
+                                                                                FFLocalizations.of(context).getText(
+                                                                                  'tu9ytzrl' /* Booking ref:  */,
+                                                                                ),
+                                                                                style: FlutterFlowTheme.of(context).bodyText2.override(
+                                                                                      fontFamily: 'AvenirArabic',
+                                                                                      color: Color(0xFF6B6B6B),
+                                                                                      fontSize: 13,
+                                                                                      fontWeight: FontWeight.w300,
+                                                                                      useGoogleFonts: false,
+                                                                                    ),
                                                                               ),
-                                                                              style: FlutterFlowTheme.of(context).bodyText2.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    color: Color(0xFF6B6B6B),
-                                                                                    fontSize: 13,
-                                                                                    fontWeight: FontWeight.w300,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
                                                                             ),
                                                                             Text(
                                                                               valueOrDefault<String>(

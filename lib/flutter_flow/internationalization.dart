@@ -434,8 +434,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'عروض #',
     },
     'n5d3s79r': {
-      'en': 'Last update: ',
-      'ar': 'اخر تحديث:',
+      'en': 'Last update : ',
+      'ar': 'اخر تحديث :',
     },
     'jcj51k47': {
       'en': 'Disqualified',

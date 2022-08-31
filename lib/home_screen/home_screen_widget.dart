@@ -681,22 +681,26 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         ),
                                                   ),
                                                 ),
-                                                Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'efcxmcgl' /* ,  */,
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(3, 0, 3, 0),
+                                                  child: Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'efcxmcgl' /* ,  */,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'AvenirArabic',
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        useGoogleFonts: false,
-                                                      ),
                                                 ),
                                                 Text(
                                                   getJsonField(
@@ -865,32 +869,36 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                Text(
-                                                  valueOrDefault<String>(
-                                                    functions
-                                                        .formatAmountWithoutDecimal(
-                                                            valueOrDefault<
-                                                                String>(
-                                                      getJsonField(
-                                                        propertiesItem,
-                                                        r'''$..property_price''',
-                                                      ).toString(),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 3, 0),
+                                                  child: Text(
+                                                    valueOrDefault<String>(
+                                                      functions
+                                                          .formatAmountWithoutDecimal(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                        getJsonField(
+                                                          propertiesItem,
+                                                          r'''$..property_price''',
+                                                        ).toString(),
+                                                        '0',
+                                                      )),
                                                       '0',
-                                                    )),
-                                                    '0',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText2
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          useGoogleFonts: false,
+                                                        ),
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText2
-                                                      .override(
-                                                        fontFamily:
-                                                            'AvenirArabic',
-                                                        color: Colors.black,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        useGoogleFonts: false,
-                                                      ),
                                                 ),
                                                 Text(
                                                   FFLocalizations.of(context)
