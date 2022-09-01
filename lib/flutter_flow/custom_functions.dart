@@ -268,13 +268,24 @@ int orderIdGenerator(int randomNumber) {
   return orderId;
 }
 
-String formatDateTime(int inputTimeStamp) {
+String formatDateTime(
+  int inputTimeStamp,
+  String locale,
+) {
   // Add your function code here!
-  DateTime bookingTime =
-      DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
-  String formattedResult =
-      '${DateFormat.d().format(bookingTime)} ${DateFormat.MMM().format(bookingTime)} ${DateFormat.y().format(bookingTime)}  ${DateFormat.jm().format(bookingTime)}';
-  return formattedResult;
+  if (locale == "en") {
+    DateTime bookingTime =
+        DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+    String formattedResult =
+        '${DateFormat.d().format(bookingTime)} ${DateFormat.MMM().format(bookingTime)} ${DateFormat.y().format(bookingTime)}  ${DateFormat.jm().format(bookingTime)}';
+    return formattedResult;
+  } else {
+    DateTime bookingTime =
+        DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+    String formattedResult =
+        '${DateFormat.d("ar_SA").format(bookingTime)} ${DateFormat.MMM("ar_SA").format(bookingTime)} ${DateFormat.y("ar_SA").format(bookingTime)}  ${DateFormat.jm().format(bookingTime)}';
+    return formattedResult;
+  }
 }
 
 String pastOfferScreenDateTime(int inputDateTime) {
@@ -309,12 +320,22 @@ String offerScreenTime(
   // Add your function code here!
   Duration diff = DateTime.now().difference(offerTime);
   //int monthDiffrence = diff.i;
+  int yearsAgo;
+  int monthsAgo;
   int dayDiffrence = diff.inDays;
   int hrsDiffrence = diff.inHours;
   int minuteDiffrence = diff.inMinutes;
   int secondDiffence = diff.inSeconds;
   if (locale == "en") {
     if (dayDiffrence > 0) {
+      if ((dayDiffrence % 365) > 0) {
+        yearsAgo = dayDiffrence % 365;
+        return "${yearsAgo} Years ago";
+      }
+      if ((dayDiffrence % 30) > 0) {
+        monthsAgo = dayDiffrence % 30;
+        return "${monthsAgo} Months ago";
+      }
       return "${dayDiffrence} Days ago";
     } else if (hrsDiffrence > 0) {
       return "${hrsDiffrence} hrs ago";
@@ -326,6 +347,28 @@ String offerScreenTime(
   } else {
     //Day diffrence
     if (dayDiffrence > 0) {
+      if ((dayDiffrence % 365) > 0) {
+        yearsAgo = dayDiffrence % 365;
+        if (yearsAgo == 1) {
+          return "قبل سنة";
+        }
+        if (yearsAgo == 2) {
+          return "قبل سنتين";
+        } else {
+          return "قبل ${yearsAgo} عاما";
+        }
+      }
+      if ((dayDiffrence % 30) > 0) {
+        monthsAgo = dayDiffrence % 30;
+        if (monthsAgo == 1) {
+          return "قبل شهر";
+        }
+        if (monthsAgo == 2) {
+          return "قبل شهرين";
+        } else {
+          return "قبل ${monthsAgo} شهرا";
+        }
+      }
       if (dayDiffrence == 1) {
         return "قبل يوم";
       }
@@ -407,14 +450,23 @@ List<String> choicechipUnselected(
   }
 }
 
-String myPropertiesFormatDate(int inputTimeStamp) {
+String myPropertiesFormatDate(
+  int inputTimeStamp,
+  String locale,
+) {
+  String today = "اليوم";
   // Add your function code here!
   DateTime bookingTime;
   if (inputTimeStamp.toString().isEmpty) {
     bookingTime = DateTime.now();
   }
-  bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
-  return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime)}. ${DateFormat.y().format(bookingTime)}';
+  if (locale == "en") {
+    bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+    return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime)}. ${DateFormat.y().format(bookingTime)}';
+  } else {
+    bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+    return '${DateFormat.d("ar_SA").format(bookingTime)} ${DateFormat.MMMM("ar_SA").format(bookingTime)}. ${DateFormat.y("ar_SA").format(bookingTime)}';
+  }
 }
 
 String offerScreenPropertyIdisNull(String propertyId) {

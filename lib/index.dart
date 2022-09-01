@@ -46,5 +46,5 @@ export 'absher_verification/absher_verification_widget.dart'
 export 'confirm_absher/confirm_absher_widget.dart' show ConfirmAbsherWidget;
 export 'personal_employment_details/personal_employment_details_widget.dart'
     show PersonalEmploymentDetailsWidget;
-export 'booking_details/booking_details_widget.dart' show BookingDetailsWidget;
 export 'chat/chat_widget.dart' show ChatWidget;
+export 'booking_details/booking_details_widget.dart' show BookingDetailsWidget;

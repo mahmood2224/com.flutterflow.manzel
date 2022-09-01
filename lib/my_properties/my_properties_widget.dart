@@ -721,11 +721,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           ],
                                                                         ),
                                                                         Text(
-                                                                          functions
-                                                                              .myPropertiesFormatDate(getJsonField(
-                                                                            bookedPropertiesItem,
-                                                                            r'''$.created_at._seconds''',
-                                                                          )),
+                                                                          functions.myPropertiesFormatDate(
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.created_at._seconds''',
+                                                                              ),
+                                                                              FFAppState().locale),
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyText2
                                                                               .override(

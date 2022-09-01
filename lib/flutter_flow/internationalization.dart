@@ -1510,6 +1510,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': ' الرئيسية',
     },
   },
+  // Chat
+  {
+    'cmnqvi8z': {
+      'en': '-',
+      'ar': '-',
+    },
+    '9onf7xjs': {
+      'en': 'Home',
+      'ar': 'الرئيسية',
+    },
+  },
   // BookingDetails
   {
     'trw95gom': {
@@ -1651,17 +1662,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'vrsc3lt4': {
       'en': 'Home',
       'ar': ' الرئيسية',
-    },
-  },
-  // Chat
-  {
-    'cmnqvi8z': {
-      'en': '-',
-      'ar': '-',
-    },
-    '9onf7xjs': {
-      'en': 'Home',
-      'ar': 'الرئيسية',
     },
   },
   // NotFoundPage

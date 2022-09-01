@@ -531,7 +531,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                   height: MediaQuery.of(context)
                                                           .size
                                                           .height *
-                                                      1,
+                                                      0.4,
                                                   aspectRatio: 1.70,
                                                   autoPlay: true,
                                                   looping: true,

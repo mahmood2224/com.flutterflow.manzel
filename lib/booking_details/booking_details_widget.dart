@@ -1900,14 +1900,16 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   ),
                                   Text(
                                     valueOrDefault<String>(
-                                      functions
-                                          .formatDateTime(valueOrDefault<int>(
-                                        getJsonField(
-                                          columnOrderDetailsResponse.jsonBody,
-                                          r'''$.result.transaction_data.created_at._seconds''',
-                                        ),
-                                        0,
-                                      )),
+                                      functions.formatDateTime(
+                                          valueOrDefault<int>(
+                                            getJsonField(
+                                              columnOrderDetailsResponse
+                                                  .jsonBody,
+                                              r'''$.result.transaction_data.created_at._seconds''',
+                                            ),
+                                            0,
+                                          ),
+                                          FFAppState().locale),
                                       '0',
                                     ),
                                     style: FlutterFlowTheme.of(context)

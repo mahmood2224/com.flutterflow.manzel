@@ -149,11 +149,11 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'ConfirmAbsher': (data) async => ConfirmAbsherWidget(),
   'PersonalEmploymentDetails': (data) async =>
       PersonalEmploymentDetailsWidget(),
-  'BookingDetails': (data) async => BookingDetailsWidget(
-        orderId: getParameter(data, 'orderId'),
-      ),
   'Chat': (data) async => ChatWidget(
         bankJson: getParameter(data, 'bankJson'),
+      ),
+  'BookingDetails': (data) async => BookingDetailsWidget(
+        orderId: getParameter(data, 'orderId'),
       ),
 };
 
