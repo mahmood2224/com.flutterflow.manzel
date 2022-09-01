@@ -557,23 +557,10 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             MainAxisSize.max,
                                                                         children: [
                                                                           Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              '4wea05tq' /* # */,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 12,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                          ),
-                                                                          Text(
-                                                                            valueOrDefault<String>(
-                                                                              getJsonField(
-                                                                                activeOffersItem,
-                                                                                r'''$.order_id''',
-                                                                              ).toString(),
-                                                                              '0000000000',
-                                                                            ),
+                                                                            functions.orderIdFormatter(getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$.order_id''',
+                                                                            ).toString()),
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
                                                                                   fontSize: 12,
@@ -1138,37 +1125,14 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                       CrossAxisAlignment
                                                                           .start,
                                                                   children: [
-                                                                    Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        '2bmjizhc' /* # */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'AvenirArabic',
-                                                                            fontSize:
-                                                                                16,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
-                                                                    ),
                                                                     Expanded(
                                                                       child:
                                                                           Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          getJsonField(
-                                                                            activeOffersItem,
-                                                                            r'''$.order_id''',
-                                                                          ).toString(),
-                                                                          '0',
-                                                                        ),
+                                                                        functions
+                                                                            .orderIdFormatter(getJsonField(
+                                                                          activeOffersItem,
+                                                                          r'''$.order_id''',
+                                                                        ).toString()),
                                                                         maxLines:
                                                                             2,
                                                                         style: FlutterFlowTheme.of(context)

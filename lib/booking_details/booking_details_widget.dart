@@ -74,7 +74,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
               ),
             ),
             Text(
-              widget.orderId,
+              functions.orderIdFormatter(widget.orderId),
               style: FlutterFlowTheme.of(context).bodyText1.override(
                     fontFamily: 'AvenirArabic',
                     color: FlutterFlowTheme.of(context).white,
@@ -1747,29 +1747,13 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        FFLocalizations.of(context).getText(
-                                          'snmoyj94' /* # */,
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'AvenirArabic',
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
                                       Expanded(
                                         child: AutoSizeText(
-                                          valueOrDefault<String>(
-                                            getJsonField(
-                                              columnOrderDetailsResponse
-                                                  .jsonBody,
-                                              r'''$.result.id''',
-                                            ).toString(),
-                                            '000000',
-                                          ),
+                                          functions
+                                              .orderIdFormatter(getJsonField(
+                                            columnOrderDetailsResponse.jsonBody,
+                                            r'''$.result.id''',
+                                          ).toString()),
                                           maxLines: 2,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1

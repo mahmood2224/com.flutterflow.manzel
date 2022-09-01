@@ -438,26 +438,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             CrossAxisAlignment
                                                                 .start,
                                                         children: [
-                                                          Text(
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .getText(
-                                                              'tpufujg8' /* # */,
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'AvenirArabic',
-                                                                  fontSize: 18,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                          ),
                                                           Padding(
                                                             padding:
                                                                 EdgeInsetsDirectional
@@ -467,11 +447,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         14,
                                                                         0),
                                                             child: Text(
-                                                              PropertyCall
-                                                                  .propertyRef(
+                                                              functions.orderIdFormatter(
+                                                                  PropertyCall
+                                                                      .propertyRef(
                                                                 columnPropertyResponse
                                                                     .jsonBody,
-                                                              ).toString(),
+                                                              ).toString()),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyText1
@@ -601,62 +582,73 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 22, 16, 0),
-                                                child: Column(
+                                                child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
                                                   children: [
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        logFirebaseEvent(
-                                                            'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
-                                                        logFirebaseEvent(
-                                                            'Container_Navigate-To');
-                                                        context.pushNamed(
-                                                          'ThreeSixtyView',
-                                                          queryParams: {
-                                                            'url': serializeParam(
-                                                                getJsonField(
-                                                                  columnPropertyResponse
-                                                                      .jsonBody,
-                                                                  r'''$.data.attributes.threesixty_degree_view''',
-                                                                ).toString(),
-                                                                ParamType.String),
-                                                          }.withoutNulls,
-                                                        );
-                                                      },
-                                                      child: Container(
-                                                        width: 125,
-                                                        height: 30,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          border: Border.all(
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 8, 0),
+                                                      child: InkWell(
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
+                                                          logFirebaseEvent(
+                                                              'Container_Navigate-To');
+                                                          context.pushNamed(
+                                                            'ThreeSixtyView',
+                                                            queryParams: {
+                                                              'url': serializeParam(
+                                                                  getJsonField(
+                                                                    columnPropertyResponse
+                                                                        .jsonBody,
+                                                                    r'''$.data.attributes.threesixty_degree_view''',
+                                                                  ).toString(),
+                                                                  ParamType.String),
+                                                            }.withoutNulls,
+                                                          );
+                                                        },
+                                                        child: Container(
+                                                          width: 80,
+                                                          height: 30,
+                                                          decoration:
+                                                              BoxDecoration(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .primaryText,
-                                                          ),
-                                                        ),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            SvgPicture.asset(
-                                                              'assets/images/Frame.svg',
-                                                              height: 20,
-                                                              fit: BoxFit.cover,
+                                                                .white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8),
+                                                            border: Border.all(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
                                                             ),
-                                                          ],
+                                                          ),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              SvgPicture.asset(
+                                                                'assets/images/Frame.svg',
+                                                                height: 20,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
@@ -684,7 +676,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           );
                                                         },
                                                         child: Container(
-                                                          width: 125,
+                                                          width: 80,
                                                           height: 30,
                                                           decoration:
                                                               BoxDecoration(
