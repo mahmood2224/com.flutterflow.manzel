@@ -703,13 +703,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               ),
                                                                             ),
                                                                             Text(
-                                                                              valueOrDefault<String>(
-                                                                                getJsonField(
-                                                                                  bookedPropertiesItem,
-                                                                                  r'''$.order_id''',
-                                                                                ).toString(),
-                                                                                'null',
-                                                                              ),
+                                                                              functions.orderIdFormatter(getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_id''',
+                                                                              ).toString()),
                                                                               maxLines: 2,
                                                                               style: FlutterFlowTheme.of(context).bodyText2.override(
                                                                                     fontFamily: 'AvenirArabic',

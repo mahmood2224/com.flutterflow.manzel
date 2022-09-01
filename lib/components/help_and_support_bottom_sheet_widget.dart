@@ -109,7 +109,7 @@ class _HelpAndSupportBottomSheetWidgetState
                           ),
                           Text(
                             FFLocalizations.of(context).getText(
-                              'hwo08yn2' /* manzel@manzel.app */,
+                              'hwo08yn2' /* Support@manzel.app */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyText1

@@ -459,11 +459,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     't2kwojss': {
       'en': 'Offers',
-      'ar': 'عروض #',
-    },
-    '4wea05tq': {
-      'en': '#',
-      'ar': '',
+      'ar': 'عروض',
     },
     'n5d3s79r': {
       'en': 'Last update : ',
@@ -500,10 +496,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'vs0xmudi': {
       'en': 'Booking Ref.',
       'ar': 'مرجع الحجز',
-    },
-    '2bmjizhc': {
-      'en': '#',
-      'ar': '#',
     },
     'ez8wbssn': {
       'en': 'Initial installment',
@@ -680,8 +672,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'العروض السابقة والملغاة',
     },
     '3pqboynr': {
-      'en': 'Offers #',
-      'ar': 'عروض #',
+      'en': 'Offers ',
+      'ar': 'عروض',
     },
     'mne0k69i': {
       'en': 'Last update: ',
@@ -714,10 +706,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'dcv75stq': {
       'en': 'Booking Ref.',
       'ar': 'مرجع الحجز',
-    },
-    '0kssv8ii': {
-      'en': '#',
-      'ar': '#',
     },
     'tpwleczh': {
       'en': 'Initial installment',
@@ -915,10 +903,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'ak0ss5un': {
       'en': 'Updated: ',
       'ar': 'محدث:',
-    },
-    'tpufujg8': {
-      'en': '#',
-      'ar': '#',
     },
     'cmjr8qt1': {
       'en': 'Available',
@@ -1182,10 +1166,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'is83qb7v': {
       'en': 'Booking ref: ',
       'ar': 'مرجع الحجز :',
-    },
-    '67mealxd': {
-      'en': '#',
-      'ar': '#',
     },
     'qlfkupzn': {
       'en': 'Show booking details',
@@ -1639,10 +1619,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Transaction Ref.',
       'ar': 'مرجع المعاملة',
     },
-    'snmoyj94': {
-      'en': '#',
-      'ar': '#',
-    },
     'zagvs0yx': {
       'en': 'Amount',
       'ar': 'المبلغ',
@@ -1759,8 +1735,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الرجاء الكتابة إلينا على',
     },
     'hwo08yn2': {
-      'en': 'manzel@manzel.app',
-      'ar': 'manzel@manzel.app',
+      'en': 'Support@manzel.app',
+      'ar': 'Support@manzel.app',
     },
     'pzfwn97d': {
       'en': 'for any query and concern',

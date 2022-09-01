@@ -1122,3 +1122,8 @@ bool propertyStatusConditionalVisibilty(String propertyStatus) {
     return false;
   }
 }
+
+String orderIdFormatter(String orderId) {
+  // Add your function code here!
+  return '#${orderId}';
+}

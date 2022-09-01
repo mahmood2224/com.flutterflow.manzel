@@ -310,23 +310,31 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                   MainAxisSize
                                                                       .max,
                                                               children: [
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    '3pqboynr' /* Offers # */,
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          2,
+                                                                          0),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      '3pqboynr' /* Offers  */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'AvenirArabic',
+                                                                          fontSize:
+                                                                              12,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
                                                                   ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontSize:
-                                                                            12,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
                                                                 ),
                                                                 Text(
                                                                   valueOrDefault<
@@ -895,32 +903,14 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                   CrossAxisAlignment
                                                                       .start,
                                                               children: [
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    '0kssv8ii' /* # */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontSize:
-                                                                            16,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
                                                                 Expanded(
                                                                   child: Text(
-                                                                    getJsonField(
+                                                                    functions
+                                                                        .orderIdFormatter(
+                                                                            getJsonField(
                                                                       allOffersItem,
                                                                       r'''$.order_id''',
-                                                                    ).toString(),
+                                                                    ).toString()),
                                                                     maxLines: 2,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
