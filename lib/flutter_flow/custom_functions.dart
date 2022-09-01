@@ -268,13 +268,24 @@ int orderIdGenerator(int randomNumber) {
   return orderId;
 }
 
-String formatDateTime(int inputTimeStamp) {
+String formatDateTime(
+  int inputTimeStamp,
+  String locale,
+) {
   // Add your function code here!
-  DateTime bookingTime =
-      DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
-  String formattedResult =
-      '${DateFormat.d().format(bookingTime)} ${DateFormat.MMM().format(bookingTime)} ${DateFormat.y().format(bookingTime)}  ${DateFormat.jm().format(bookingTime)}';
-  return formattedResult;
+  if (locale == "en") {
+    DateTime bookingTime =
+        DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+    String formattedResult =
+        '${DateFormat.d().format(bookingTime)} ${DateFormat.MMM().format(bookingTime)} ${DateFormat.y().format(bookingTime)}  ${DateFormat.jm().format(bookingTime)}';
+    return formattedResult;
+  } else {
+    DateTime bookingTime =
+        DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+    String formattedResult =
+        '${DateFormat.d("ar_SA").format(bookingTime)} ${DateFormat.MMM("ar_SA").format(bookingTime)} ${DateFormat.y("ar_SA").format(bookingTime)}  ${DateFormat.jm().format(bookingTime)}';
+    return formattedResult;
+  }
 }
 
 String pastOfferScreenDateTime(int inputDateTime) {
@@ -407,14 +418,23 @@ List<String> choicechipUnselected(
   }
 }
 
-String myPropertiesFormatDate(int inputTimeStamp) {
+String myPropertiesFormatDate(
+  int inputTimeStamp,
+  String locale,
+) {
+  String today = "اليوم";
   // Add your function code here!
   DateTime bookingTime;
   if (inputTimeStamp.toString().isEmpty) {
     bookingTime = DateTime.now();
   }
-  bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
-  return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime)}. ${DateFormat.y().format(bookingTime)}';
+  if (locale == "en") {
+    bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+    return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime)}. ${DateFormat.y().format(bookingTime)}';
+  } else {
+    bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+    return '${DateFormat.d("ar_SA").format(bookingTime)} ${DateFormat.MMMM("ar_SA").format(bookingTime)}. ${DateFormat.y("ar_SA").format(bookingTime)}';
+  }
 }
 
 String offerScreenPropertyIdisNull(String propertyId) {

@@ -396,31 +396,50 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                     );
                                                   },
                                                 ),
-                                              if (functions
-                                                  .videoPlayerVisibilty(
-                                                      getJsonField(
-                                                propertiesItem,
-                                                r'''$.attributes.video_manifest_uri''',
-                                              )))
-                                                FlutterFlowVideoPlayer(
-                                                  path: getJsonField(
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.35,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                child: Visibility(
+                                                  visible: functions
+                                                      .videoPlayerVisibilty(
+                                                          getJsonField(
                                                     propertiesItem,
                                                     r'''$.attributes.video_manifest_uri''',
+                                                  )),
+                                                  child: FlutterFlowVideoPlayer(
+                                                    path: getJsonField(
+                                                      propertiesItem,
+                                                      r'''$.attributes.video_manifest_uri''',
+                                                    ),
+                                                    videoType:
+                                                        VideoType.network,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.4,
+                                                    autoPlay: true,
+                                                    looping: true,
+                                                    showControls: true,
+                                                    allowFullScreen: true,
+                                                    allowPlaybackSpeedMenu:
+                                                        false,
                                                   ),
-                                                  videoType: VideoType.network,
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.35,
-                                                  autoPlay: true,
-                                                  looping: true,
-                                                  showControls: false,
-                                                  allowFullScreen: true,
-                                                  allowPlaybackSpeedMenu: false,
                                                 ),
+                                              ),
                                               Align(
                                                 alignment:
                                                     AlignmentDirectional(1, -1),
