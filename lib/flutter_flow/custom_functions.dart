@@ -283,7 +283,7 @@ String formatDateTime(
     DateTime bookingTime =
         DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
     String formattedResult =
-        '${DateFormat.d("ar_SA").format(bookingTime)} ${DateFormat.MMM("ar_SA").format(bookingTime)} ${DateFormat.y("ar_SA").format(bookingTime)}  ${DateFormat.jm().format(bookingTime)}';
+        '${DateFormat.d("ar_SA").format(bookingTime)} ${DateFormat.MMM("ar_SA").format(bookingTime)} ${DateFormat.y("ar_SA").format(bookingTime)}  ${DateFormat.jm("ar_SA").format(bookingTime)}';
     return formattedResult;
   }
 }
