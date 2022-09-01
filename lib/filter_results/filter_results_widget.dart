@@ -542,8 +542,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                               ),
                                             ),
                                             Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.85, -0.65),
+                                              alignment:
+                                                  AlignmentDirectional(1, -1),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 12, 15, 0),
