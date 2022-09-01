@@ -510,7 +510,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                   0.35,
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(8),
+                                                    BorderRadius.circular(12),
                                               ),
                                               child: Visibility(
                                                 visible: functions
@@ -535,9 +535,9 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                   aspectRatio: 1.70,
                                                   autoPlay: true,
                                                   looping: true,
-                                                  showControls: false,
+                                                  showControls: true,
                                                   allowFullScreen: true,
-                                                  allowPlaybackSpeedMenu: false,
+                                                  allowPlaybackSpeedMenu: true,
                                                 ),
                                               ),
                                             ),
