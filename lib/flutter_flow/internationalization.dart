@@ -918,7 +918,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'tpufujg8': {
       'en': '#',
-      'ar': '',
+      'ar': '#',
     },
     'cmjr8qt1': {
       'en': 'Available',
