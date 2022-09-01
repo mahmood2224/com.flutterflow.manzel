@@ -481,6 +481,8 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                             }.withoutNulls,
                                                           );
                                                         },
+                                                        child: Directionality(
+                                                          textDirection: material.TextDirection.ltr,
                                                         child: Container(
                                                           decoration:
                                                           BoxDecoration(
@@ -578,7 +580,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                               ),
                                                             ],
                                                           ),
-                                                        ),
+                                                        )),
                                                       ),
                                                     ],
                                                   ),
