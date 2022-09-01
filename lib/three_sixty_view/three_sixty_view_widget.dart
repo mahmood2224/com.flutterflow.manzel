@@ -6,7 +6,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ThreeSixtyViewWidget extends StatefulWidget {
-  const ThreeSixtyViewWidget({Key key}) : super(key: key);
+  const ThreeSixtyViewWidget({
+    Key key,
+    this.url,
+  }) : super(key: key);
+
+  final String url;
 
   @override
   _ThreeSixtyViewWidgetState createState() => _ThreeSixtyViewWidgetState();
@@ -64,7 +69,7 @@ class _ThreeSixtyViewWidgetState extends State<ThreeSixtyViewWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               FlutterFlowWebView(
-                url: 'https://webobook.com/public/62e01156e972564a8f40d032',
+                url: widget.url,
                 bypass: false,
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.93,
