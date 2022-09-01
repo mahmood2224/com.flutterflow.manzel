@@ -308,6 +308,7 @@ String offerScreenTime(
   }
   // Add your function code here!
   Duration diff = DateTime.now().difference(offerTime);
+  //int monthDiffrence = diff.i;
   int dayDiffrence = diff.inDays;
   int hrsDiffrence = diff.inHours;
   int minuteDiffrence = diff.inMinutes;
@@ -323,21 +324,57 @@ String offerScreenTime(
       return "${secondDiffence} sec ago";
     }
   } else {
+    //Day diffrence
     if (dayDiffrence > 0) {
       if (dayDiffrence == 1) {
         return "قبل يوم";
       }
-      if (dayDiffrence == 2) {
-        return "قبل يومين";
+      if (dayDiffrence >= 3 && dayDiffrence <= 10) {
+        return "${dayDiffrence} أيام";
       } else {
         return "قبل ${dayDiffrence} أيام";
       }
-    } else if (hrsDiffrence > 0) {
-      return "قبل ${hrsDiffrence} ساعات";
-    } else if (minuteDiffrence > 0) {
-      return "قبل ${minuteDiffrence} دقائق";
+    }
+    //Hour diffrence
+    else if (hrsDiffrence > 0) {
+      if (hrsDiffrence == 1) {
+        return "ساعة";
+      }
+      if (hrsDiffrence == 2) {
+        return "ساعتين";
+      }
+      if (hrsDiffrence >= 3 && hrsDiffrence <= 10) {
+        return "${hrsDiffrence} ساعات";
+      } else {
+        return "${hrsDiffrence} ساعة";
+      }
+    }
+    //Minute diffrence
+    else if (minuteDiffrence > 0) {
+      if (minuteDiffrence == 1) {
+        return "دقيقة";
+      }
+      if (minuteDiffrence == 2) {
+        return "دقيقتان";
+      }
+      if (minuteDiffrence >= 3 && minuteDiffrence <= 10) {
+        return "${minuteDiffrence} دقائق";
+      } else {
+        return "${minuteDiffrence} دقيقة";
+      }
     } else {
-      return "قبل ${secondDiffence} ثوان";
+      //Second diffrence
+      if (secondDiffence == 1) {
+        return "ثانية";
+      }
+      if (secondDiffence == 2) {
+        return "ثانيتان";
+      }
+      if (secondDiffence >= 3 && secondDiffence <= 10) {
+        return "${secondDiffence} ثواني";
+      } else {
+        return "قبل ${secondDiffence} ثانية";
+      }
     }
   }
 }
