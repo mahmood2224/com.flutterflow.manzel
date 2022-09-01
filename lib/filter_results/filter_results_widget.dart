@@ -500,31 +500,47 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                   );
                                                 },
                                               ),
-                                            if (functions.videoPlayerVisibilty(
-                                                getJsonField(
-                                              propertiesItem,
-                                              r'''$.attributes.video_manifest_uri''',
-                                            )))
-                                              FlutterFlowVideoPlayer(
-                                                path: getJsonField(
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.35,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: Visibility(
+                                                visible: functions
+                                                    .videoPlayerVisibilty(
+                                                        getJsonField(
                                                   propertiesItem,
                                                   r'''$.attributes.video_manifest_uri''',
+                                                )),
+                                                child: FlutterFlowVideoPlayer(
+                                                  path: getJsonField(
+                                                    propertiesItem,
+                                                    r'''$.attributes.video_manifest_uri''',
+                                                  ),
+                                                  videoType: VideoType.network,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      1,
+                                                  aspectRatio: 1.70,
+                                                  autoPlay: true,
+                                                  looping: true,
+                                                  showControls: false,
+                                                  allowFullScreen: true,
+                                                  allowPlaybackSpeedMenu: false,
                                                 ),
-                                                videoType: VideoType.network,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.35,
-                                                aspectRatio: 1.70,
-                                                autoPlay: true,
-                                                looping: true,
-                                                showControls: false,
-                                                allowFullScreen: true,
-                                                allowPlaybackSpeedMenu: false,
                                               ),
+                                            ),
                                             Align(
                                               alignment: AlignmentDirectional(
                                                   0.85, -0.65),
