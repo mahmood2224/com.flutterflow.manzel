@@ -320,12 +320,22 @@ String offerScreenTime(
   // Add your function code here!
   Duration diff = DateTime.now().difference(offerTime);
   //int monthDiffrence = diff.i;
+  int yearsAgo;
+  int monthsAgo;
   int dayDiffrence = diff.inDays;
   int hrsDiffrence = diff.inHours;
   int minuteDiffrence = diff.inMinutes;
   int secondDiffence = diff.inSeconds;
   if (locale == "en") {
     if (dayDiffrence > 0) {
+      if ((dayDiffrence % 365) > 0) {
+        yearsAgo = dayDiffrence % 365;
+        return "${yearsAgo} Years ago";
+      }
+      if ((dayDiffrence % 30) > 0) {
+        monthsAgo = dayDiffrence % 30;
+        return "${monthsAgo} Months ago";
+      }
       return "${dayDiffrence} Days ago";
     } else if (hrsDiffrence > 0) {
       return "${hrsDiffrence} hrs ago";
@@ -337,6 +347,28 @@ String offerScreenTime(
   } else {
     //Day diffrence
     if (dayDiffrence > 0) {
+      if ((dayDiffrence % 365) > 0) {
+        yearsAgo = dayDiffrence % 365;
+        if (yearsAgo == 1) {
+          return "قبل سنة";
+        }
+        if (yearsAgo == 2) {
+          return "قبل سنتين";
+        } else {
+          return "قبل ${yearsAgo} عاما";
+        }
+      }
+      if ((dayDiffrence % 30) > 0) {
+        monthsAgo = dayDiffrence % 30;
+        if (monthsAgo == 1) {
+          return "قبل شهر";
+        }
+        if (monthsAgo == 2) {
+          return "قبل شهرين";
+        } else {
+          return "قبل ${monthsAgo} شهرا";
+        }
+      }
       if (dayDiffrence == 1) {
         return "قبل يوم";
       }
