@@ -101,7 +101,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                               height: MediaQuery.of(context).size.height * 0.4,
                               child: Stack(
                                 children: [
-                                  if (functions
+                                  if (!functions
                                       .videoPlayerVisibilty(getJsonField(
                                     columnPropertyResponse.jsonBody,
                                     r'''$.data.attributes.video_manifest_uri''',
@@ -189,7 +189,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         );
                                       },
                                     ),
-                                  if (!functions
+                                  if (functions
                                       .videoPlayerVisibilty(getJsonField(
                                     columnPropertyResponse.jsonBody,
                                     r'''$.data.attributes.video_manifest_uri''',
@@ -616,39 +616,59 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
-                                                    Container(
-                                                      width: 125,
-                                                      height: 30,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                        border: Border.all(
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
+                                                        logFirebaseEvent(
+                                                            'Container_Navigate-To');
+                                                        context.pushNamed(
+                                                          'ThreeSixtyView',
+                                                          queryParams: {
+                                                            'url': serializeParam(
+                                                                getJsonField(
+                                                                  columnPropertyResponse
+                                                                      .jsonBody,
+                                                                  r'''$.data.attributes.threesixty_degree_view''',
+                                                                ).toString(),
+                                                                ParamType.String),
+                                                          }.withoutNulls,
+                                                        );
+                                                      },
+                                                      child: Container(
+                                                        width: 125,
+                                                        height: 30,
+                                                        decoration:
+                                                            BoxDecoration(
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                      ),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          SvgPicture.asset(
-                                                            'assets/images/Frame.svg',
-                                                            height: 20,
-                                                            fit: BoxFit.cover,
+                                                              .white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
+                                                          border: Border.all(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
                                                           ),
-                                                        ],
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SvgPicture.asset(
+                                                              'assets/images/Frame.svg',
+                                                              height: 20,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                     Padding(

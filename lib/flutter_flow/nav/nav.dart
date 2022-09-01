@@ -219,7 +219,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'ThreeSixtyView',
               path: 'threeSixtyView',
-              builder: (context, params) => ThreeSixtyViewWidget(),
+              builder: (context, params) => ThreeSixtyViewWidget(
+                url: params.getParam('url', ParamType.String),
+              ),
             ),
             FFRoute(
               name: 'imageGalleryView',
