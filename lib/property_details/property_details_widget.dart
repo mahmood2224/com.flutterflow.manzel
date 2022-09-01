@@ -618,7 +618,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 getJsonField(
                                                                   columnPropertyResponse
                                                                       .jsonBody,
-                                                                  r'''$.attributes.threesixty_degree_view''',
+                                                                  r'''$.data.attributes.threesixty_degree_view''',
                                                                 ).toString(),
                                                                 ParamType.String),
                                                           }.withoutNulls,
