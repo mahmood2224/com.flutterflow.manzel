@@ -431,7 +431,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .height *
-                                                            0.4,
+                                                            1,
                                                     autoPlay: true,
                                                     looping: true,
                                                     showControls: false,

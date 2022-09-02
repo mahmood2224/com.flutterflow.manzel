@@ -184,7 +184,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     r'''$.data.attributes.video_manifest_uri''',
                                   )))
                                     Align(
-                                      alignment: AlignmentDirectional(0, -0.1),
+                                      alignment: AlignmentDirectional(0, 0),
                                       child: FlutterFlowVideoPlayer(
                                         path: getJsonField(
                                           columnPropertyResponse.jsonBody,
