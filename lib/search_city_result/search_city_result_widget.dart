@@ -277,7 +277,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                               0.3,
                                           child: Stack(
                                             children: [
-                                              if (functions
+                                              if (!functions
                                                   .videoPlayerVisibilty(
                                                       getJsonField(
                                                 propertiesItem,
@@ -434,7 +434,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                             0.4,
                                                     autoPlay: true,
                                                     looping: true,
-                                                    showControls: true,
+                                                    showControls: false,
                                                     allowFullScreen: true,
                                                     allowPlaybackSpeedMenu:
                                                         false,
