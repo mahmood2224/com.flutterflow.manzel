@@ -75,7 +75,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                           children: [
                             Text(
                               FFLocalizations.of(context).getText(
-                                'qvv3lsb7' /* Past & canceled offers */,
+                                'qvv3lsb7' /* Past Offers */,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1

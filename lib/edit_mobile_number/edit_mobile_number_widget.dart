@@ -25,10 +25,12 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'EditMobileNumber'});
-    mobileNumberController = TextEditingController(
-        text: FFLocalizations.of(context).getText(
-      'dkoyvgce' /* +966 */,
-    ));
+    mobileNumberController = TextEditingController();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          mobileNumberController.text = FFLocalizations.of(context).getText(
+            'dkoyvgce' /* +966 */,
+          );
+        }));
   }
 
   @override

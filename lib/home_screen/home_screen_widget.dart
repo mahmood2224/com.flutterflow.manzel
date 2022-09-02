@@ -5,6 +5,8 @@ import '../backend/backend.dart';
 import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_video_player.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:badges/badges.dart';
@@ -500,7 +502,49 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               0.3,
                                       child: Stack(
                                         children: [
-                                          Builder(
+                                          if (functions.videoPlayerVisibilty(
+                                                getJsonField(
+                                              propertiesItem,
+                                              r'''$.attributes.video_manifest_uri''',
+                                            )))
+                                              Container(
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.35,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                child: FlutterFlowVideoPlayer(
+                                                  path: getJsonField(
+                                                    propertiesItem,
+                                                    r'''$.attributes.video_manifest_uri''',
+                                                  ),
+                                                  videoType: VideoType.network,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.4,
+                                                  aspectRatio: 1.70,
+                                                  autoPlay: true,
+                                                  looping: true,
+                                                  showControls: true,
+                                                  allowFullScreen: true,
+                                                  allowPlaybackSpeedMenu: false,
+                                                ),
+                                              ),
+                                            if (!functions.videoPlayerVisibilty(
+                                                getJsonField(
+                                              propertiesItem,
+                                              r'''$.attributes.video_manifest_uri''',
+                                            )))Builder(
                                             builder: (context) {
                                               final propertyImages =
                                                   getJsonField(
@@ -535,7 +579,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         final propertyImagesItem =
                                                             propertyImages[
                                                                 propertyImagesIndex];
-                                                        return ClipRRect(
+                                                        return Visibility(
+                                                              visible: !functions
+                                                                  .videoPlayerVisibilty(
+                                                                      getJsonField(
+                                                                propertyImagesItem,
+                                                                r'''$.attributes.video_manifest_uri''',
+                                                              )),
+                                                              child:ClipRRect(
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(8),
@@ -558,10 +609,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                                 0.3,
                                                             fit: BoxFit.cover,
                                                           ),
-                                                        );
-                                                      },
-                                                    ),
-                                                    Align(
+                                                        ),
+                                                      );
+                                                    },
+                                                    ),Align(
                                                       alignment:
                                                           AlignmentDirectional(
                                                               0, 0.7),
@@ -684,7 +735,132 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   ),
                                                   fit: BoxFit.cover,
                                                 ),
+                                              ),),
                                               ),
+                                            ),
+                                            if (functions.conditionalVisibility(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.property_status''',
+                                                ).toString(),
+                                                'Available'))
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -0.99, -0.8),
+                                                child: FFButtonWidget(
+                                                  onPressed: () {
+                                                    print('Button pressed ...');
+                                                  },
+                                                  text: FFLocalizations.of(
+                                                          context)
+                                                      .getText(
+                                                    'i2h601mg' /* Available */,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    color: Color(0xFF81D05C),
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                ),
+                                              ),
+                                            if (functions.conditionalVisibility(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.property_status''',
+                                                ).toString(),
+                                                'Booked'))
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -0.99, -0.8),
+                                                child: FFButtonWidget(
+                                                  onPressed: () {
+                                                    print('Button pressed ...');
+                                                  },
+                                                  text: FFLocalizations.of(
+                                                          context)
+                                                      .getText(
+                                                    '977ahbnt' /* Booked */,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    color: Color(0xB2F5F5F5),
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                ),
+                                              ),
+                                            if (functions.conditionalVisibility(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.property_status''',
+                                                ).toString(),
+                                                'Coming soon'))
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -0.99, -0.8),
+                                                child: FFButtonWidget(
+                                                  onPressed: () {
+                                                    print('Button pressed ...');
+                                                  },
+                                                  text: FFLocalizations.of(
+                                                          context)
+                                                      .getText(
+                                                    '5qj98whz' /* Coming soon */,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    color: Color(0xCD2971FB),
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
                                             ),
                                           ),
                                         ),

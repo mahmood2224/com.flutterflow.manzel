@@ -1909,7 +1909,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                           18, 0, 0, 0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
-                                          '5gvwuuh2' /* Completed or canceled offers */,
+                                          '5gvwuuh2' /* Past Offers */,
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1

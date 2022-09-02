@@ -387,6 +387,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Where are you looking?',
       'ar': 'أين تبحث ؟',
     },
+    'i2h601mg': {
+      'en': 'Available',
+      'ar': 'متوفرة',
+    },
+    '977ahbnt': {
+      'en': 'Booked',
+      'ar': 'حجز',
+    },
+    '5qj98whz': {
+      'en': 'Coming soon',
+      'ar': 'قريبا',
+    },
     'etpebw43': {
       'en': 'Approved Banks',
       'ar': 'البنوك المعتمدة',
@@ -538,8 +550,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'اقبل العرض',
     },
     '5gvwuuh2': {
-      'en': 'Completed or canceled offers',
-      'ar': 'العروض المكتملة أو الملغاة',
+      'en': 'Past Offers',
+      'ar': 'العروض السابقة',
     },
     'km9ey405': {
       'en': 'Offers',
@@ -668,8 +680,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // PastOffers
   {
     'qvv3lsb7': {
-      'en': 'Past & canceled offers',
-      'ar': 'العروض السابقة والملغاة',
+      'en': 'Past Offers',
+      'ar': 'العروض السابقة',
     },
     '3pqboynr': {
       'en': 'Offers ',
