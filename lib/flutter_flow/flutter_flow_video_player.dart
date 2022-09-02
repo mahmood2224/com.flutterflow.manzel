@@ -112,16 +112,16 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
         _loggedError = true;
       }
       // Stop all other players when one video is playing.
-      if (_videoPlayerController.value.isPlaying) {
-        _videoPlayers.forEach((otherPlayer) {
-          if (otherPlayer != _videoPlayerController &&
-              otherPlayer.value.isPlaying) {
-            setState(() {
-              otherPlayer.pause();
-            });
-          }
-        });
-      }
+      // if (_videoPlayerController.value.isPlaying) {
+      //   _videoPlayers.forEach((otherPlayer) {
+      //     if (otherPlayer != _videoPlayerController &&
+      //         otherPlayer.value.isPlaying) {
+      //       setState(() {
+      //         otherPlayer.pause();
+      //       });
+      //     }
+      //   });
+      // }
     });
 
     setState(() {});

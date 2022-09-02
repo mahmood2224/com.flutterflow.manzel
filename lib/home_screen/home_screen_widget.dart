@@ -535,7 +535,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   aspectRatio: 1.70,
                                                   autoPlay: true,
                                                   looping: true,
-                                                  showControls: true,
+                                                  showControls: false,
                                                   allowFullScreen: true,
                                                   allowPlaybackSpeedMenu: false,
                                                 ),
