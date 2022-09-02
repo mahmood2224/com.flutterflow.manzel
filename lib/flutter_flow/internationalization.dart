@@ -1557,7 +1557,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'oqathjmt': {
       'en': 'Transfer Ownership',
-      'ar': 'العرض مقبول',
+      'ar': 'تم نقل الملكية إليك',
     },
     'k64pcuyr': {
       'en': 'Transferring the ownership of the property to you ',

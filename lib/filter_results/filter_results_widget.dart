@@ -610,7 +610,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                         ),
                                                     borderSide: BorderSide(
                                                       color: Colors.transparent,
-                                                      width: 1,
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -652,7 +651,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                         ),
                                                     borderSide: BorderSide(
                                                       color: Colors.transparent,
-                                                      width: 1,
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -694,7 +692,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                         ),
                                                     borderSide: BorderSide(
                                                       color: Colors.transparent,
-                                                      width: 1,
                                                     ),
                                                     borderRadius:
                                                         BorderRadius.circular(

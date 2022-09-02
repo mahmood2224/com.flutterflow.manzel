@@ -551,7 +551,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent,
-                                                        width: 1,
                                                       ),
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -601,7 +600,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent,
-                                                        width: 1,
                                                       ),
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -651,7 +649,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent,
-                                                        width: 1,
                                                       ),
                                                       borderRadius:
                                                           BorderRadius.circular(
