@@ -99,6 +99,9 @@ String formatNumber(
   String format,
   String locale,
 }) {
+  if (value == null) {
+    return '';
+  }
   var formattedValue = '';
   switch (formatType) {
     case FormatType.decimal:

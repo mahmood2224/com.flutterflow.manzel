@@ -581,7 +581,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 22, 16, 0),
+                                                    .fromSTEB(0, 12, 16, 0),
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
