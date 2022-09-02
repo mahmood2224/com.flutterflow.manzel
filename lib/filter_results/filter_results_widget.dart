@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -542,8 +543,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                               ),
                                             ),
                                             Align(
-                                              alignment:
-                                                  AlignmentDirectional(1, -1),
+                                              alignment: AlignmentDirectional(
+                                                  1, -0.95),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 12, 15, 0),
@@ -575,6 +576,132 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                 ),
                                               ),
                                             ),
+                                            if (functions.conditionalVisibility(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.property_status''',
+                                                ).toString(),
+                                                'Coming soon'))
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -0.99, -0.8),
+                                                child: FFButtonWidget(
+                                                  onPressed: () {
+                                                    print('Button pressed ...');
+                                                  },
+                                                  text: FFLocalizations.of(
+                                                          context)
+                                                      .getText(
+                                                    'llrt5ozo' /* Coming soon */,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    color: Color(0xCD2971FB),
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                ),
+                                              ),
+                                            if (functions.conditionalVisibility(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.property_status''',
+                                                ).toString(),
+                                                'Available'))
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -0.99, -0.8),
+                                                child: FFButtonWidget(
+                                                  onPressed: () {
+                                                    print('Button pressed ...');
+                                                  },
+                                                  text: FFLocalizations.of(
+                                                          context)
+                                                      .getText(
+                                                    'plfdsrsb' /* Available */,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    color: Color(0xFF81D05C),
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                ),
+                                              ),
+                                            if (functions.conditionalVisibility(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.property_status''',
+                                                ).toString(),
+                                                'Booked'))
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -0.99, -0.8),
+                                                child: FFButtonWidget(
+                                                  onPressed: () {
+                                                    print('Button pressed ...');
+                                                  },
+                                                  text: FFLocalizations.of(
+                                                          context)
+                                                      .getText(
+                                                    'kevbc07d' /* Booked */,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    color: Color(0xB2F5F5F5),
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                ),
+                                              ),
                                           ],
                                         ),
                                       ),

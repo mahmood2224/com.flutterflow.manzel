@@ -443,7 +443,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     't2kwojss': {
       'en': 'Offers',
-      'ar': 'عروض',
+      'ar': 'عرض',
     },
     'n5d3s79r': {
       'en': 'Last update : ',
@@ -762,6 +762,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'All',
       'ar': 'الكل',
     },
+    'llrt5ozo': {
+      'en': 'Coming soon',
+      'ar': 'قريبا',
+    },
+    'plfdsrsb': {
+      'en': 'Available',
+      'ar': 'متوفرة',
+    },
+    'kevbc07d': {
+      'en': 'Booked',
+      'ar': 'حجز',
+    },
     'y61ahqus': {
       'en': 'Approved Banks',
       'ar': 'البنوك المعتمدة',
@@ -1005,7 +1017,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     '316x1ckw': {
       'en': 'Floor Plan ',
-      'ar': 'مخطط الطابق',
+      'ar': 'المخطط',
     },
     'qz7ded0d': {
       'en': 'Home',
@@ -1047,6 +1059,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // SearchCityResult
   {
+    '81d8z9gv': {
+      'en': 'Coming soon',
+      'ar': 'قريبا',
+    },
+    'z6vaof0z': {
+      'en': 'Booked',
+      'ar': 'حجز',
+    },
+    'rmxl8rt6': {
+      'en': 'Available',
+      'ar': 'متوفرة',
+    },
     '5s0m6vc5': {
       'en': 'Approved Banks',
       'ar': 'البنوك المعتمدة',
@@ -1573,7 +1597,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'nxmc61bl': {
       'en': 'Property details',
-      'ar': 'تفاصيل اوضح',
+      'ar': 'تفاصيل أكثر',
     },
     'sfe2y1t7': {
       'en': ', ',
