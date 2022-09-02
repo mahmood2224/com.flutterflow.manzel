@@ -661,7 +661,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           ),
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(1, -1),
+                                              AlignmentDirectional(1, -0.95),
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
