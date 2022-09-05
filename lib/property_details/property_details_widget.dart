@@ -217,6 +217,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           autoPlay: true,
                                           looping: true,
                                           showControls: false,
+                                          aspectRatio: 1.4,
                                           allowFullScreen: true,
                                           allowPlaybackSpeedMenu: false,
                                         ),
