@@ -1154,17 +1154,17 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                       ],
                                                     ),
                                                   ),
-                                                  if (!functions
+                                                  Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [if (!functions
                                                       .conditionalVisibility(
                                                       getJsonField(
                                                         activeOffersItem,
                                                         r'''$.status''',
                                                       ).toString(),
                                                       'pending'))
-                                                    Column(
-                                                      mainAxisSize:
-                                                      MainAxisSize.max,
-                                                      children: [
+
                                                         Padding(
                                                           padding:
                                                           EdgeInsetsDirectional
@@ -1345,6 +1345,13 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                             ],
                                                           ),
                                                         ),
+                                                      if (!functions
+                                                          .conditionalVisibility(
+                                                              getJsonField(
+                                                                activeOffersItem,
+                                                                r'''$.status''',
+                                                              ).toString(),
+                                                              'pending'))
                                                         Padding(
                                                           padding:
                                                           EdgeInsetsDirectional
@@ -1516,14 +1523,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                             CrossAxisAlignment
                                                                 .stretch,
                                                             children: [
-                                                              if (functions
-                                                                  .chatButtonVisibility(
-                                                                  getJsonField(
-                                                                    activeOffersItem,
-                                                                    r'''$.status''',
-                                                                  ).toString()))
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                              Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                       0,
                                                                       0,
@@ -1594,7 +1596,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               valueOrDefault<String>(
                                                                                 getJsonField(
                                                                                   activeOffersItem,
-                                                                                  r'''$.agent_name''',
+                                                                                  r'''$.bank_name''',
                                                                                 ).toString(),
                                                                                 'null',
                                                                               ),
@@ -1609,27 +1611,37 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           ),
                                                                           Text(
                                                                             FFLocalizations.of(context).getText(
-                                                                              'alqnps4o' /*   */,
-                                                                            ),
-                                                                            style:
-                                                                            FlutterFlowTheme.of(context).bodyText1,
-                                                                          ),
-                                                                        ],
+                                                                              'alqnps4o' /*   */,),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1,
                                                                       ),
-                                                                    ),
+                                                                      Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'ps7kcru7' /* bank */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              color: FlutterFlowTheme.of(context).white,
+                                                                              fontSize: 15,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ),
-                                                              if (functions
-                                                                  .conditionalVisibility(
-                                                                  valueOrDefault<
-                                                                      String>(
+                                                              ),
+                                                            ),
+                                                            if (functions
+                                                                .chatButtonVisibility(
                                                                     getJsonField(
                                                                       activeOffersItem,
                                                                       r'''$.status''',
-                                                                    ).toString(),
-                                                                    'null',
-                                                                  ),
-                                                                  'new'))
+                                                                    ).toString()))
+
                                                                 FFButtonWidget(
                                                                   onPressed:
                                                                       () async {

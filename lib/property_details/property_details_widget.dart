@@ -189,31 +189,40 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         );
                                       },
                                     ),
-                                  if (functions
-                                      .videoPlayerVisibilty(getJsonField(
-                                    columnPropertyResponse.jsonBody,
-                                    r'''$.data.attributes.video_manifest_uri''',
-                                  )))
-                                    Align(
-                                      alignment: AlignmentDirectional(0, -0.1),
-                                      child: FlutterFlowVideoPlayer(
-                                        path: getJsonField(
-                                          columnPropertyResponse.jsonBody,
-                                          r'''$.data.attributes.video_manifest_uri''',
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height:
+                                        MediaQuery.of(context).size.height * 1,
+                                    decoration: BoxDecoration(),
+                                    child: Visibility(
+                                      visible: functions
+                                          .videoPlayerVisibilty(getJsonField(
+                                        columnPropertyResponse.jsonBody,
+                                        r'''$.data.attributes.video_manifest_uri''',
+                                      )),
+                                      child: Align(
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: FlutterFlowVideoPlayer(
+                                          path: getJsonField(
+                                            columnPropertyResponse.jsonBody,
+                                            r'''$.data.attributes.video_manifest_uri''',
+                                          ),
+                                          videoType: VideoType.network,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.4,
+                                          autoPlay: true,
+                                          looping: true,
+                                          showControls: false,
+                                          allowFullScreen: true,
+                                          allowPlaybackSpeedMenu: false,
                                         ),
-                                        videoType: VideoType.network,
-                                        width: double.infinity,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.4,
-                                        aspectRatio: 1.40,
-                                        autoPlay: true,
-                                        looping: true,
-                                        showControls: false,
-                                        allowFullScreen: true,
-                                        allowPlaybackSpeedMenu: false,
                                       ),
                                     ),
+                                  ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         18, 52, 18, 0),
