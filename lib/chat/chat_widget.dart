@@ -507,18 +507,19 @@ class _ChatWidgetState extends State<ChatWidget>
       final _ = await _sendbird.connect(currentUserUid);
       // Future.delayed(Duration(seconds: 5));
       _user = asChatUiUser(sendbird.SendbirdSdk().currentUser);
-      final query = sendbird.GroupChannelListQuery()
-        ..limit = 1
-        ..channelUrls = [channel_url];
+      // final query = sendbird.GroupChannelListQuery()
+      //   ..limit = 1
+      //   ..channelUrls = [channel_url];
       //..userIdsExactlyIn = ["abhishek Sevarik","412216","admin","abhishek Visht","rhytham"];
-      List<GroupChannel> channels = await query.loadNext();
-      GroupChannel aChannel;
+      // List<GroupChannel> channels = await query.loadNext();
+      // GroupChannel aChannel;
       // if (channels.length == 0) {
       //   aChannel = await GroupChannel.createChannel(sendbird.GroupChannelParams()
       //     ..isPublic = true
       //     ..userIds = ['']);
       // } else {
-      aChannel = channels[0];
+      final aChannel = await GroupChannel.getChannel(channel_url);
+     // aChannel = channels[0];
       //}
       List<sendbird.BaseMessage> messages =
           await aChannel.getMessagesByTimestamp(
