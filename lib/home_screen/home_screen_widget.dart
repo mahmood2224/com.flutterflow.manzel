@@ -568,6 +568,48 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   );
                                                 },
                                               ),
+                                            if (functions.conditionalVisibility(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.property_status''',
+                                                ).toString(),
+                                                'Coming soon'))
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -1.02, -0.79),
+                                                child: FFButtonWidget(
+                                                  onPressed: () {
+                                                    print('Button pressed ...');
+                                                  },
+                                                  text: FFLocalizations.of(
+                                                          context)
+                                                      .getText(
+                                                    '5qj98whz' /* Coming soon */,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    color: Color(0xCD2971FB),
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .subtitle2
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                ),
+                                              ),
                                             Align(
                                               alignment: AlignmentDirectional(
                                                   1, -0.95),
@@ -712,48 +754,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   ),
                                                   options: FFButtonOptions(
                                                     color: Color(0xB2F5F5F5),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                  ),
-                                                ),
-                                              ),
-                                            if (functions.conditionalVisibility(
-                                                getJsonField(
-                                                  propertiesItem,
-                                                  r'''$.attributes.property_status''',
-                                                ).toString(),
-                                                'Coming soon'))
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    -0.99, -0.8),
-                                                child: FFButtonWidget(
-                                                  onPressed: () {
-                                                    print('Button pressed ...');
-                                                  },
-                                                  text: FFLocalizations.of(
-                                                          context)
-                                                      .getText(
-                                                    '5qj98whz' /* Coming soon */,
-                                                  ),
-                                                  options: FFButtonOptions(
-                                                    color: Color(0xCD2971FB),
                                                     textStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .subtitle2

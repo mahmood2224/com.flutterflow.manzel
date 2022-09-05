@@ -97,12 +97,12 @@ class _ChatWidgetState extends State<ChatWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
                           child: Text(
                             valueOrDefault<String>(
                               getJsonField(
                                 widget.bankJson,
-                                r'''$.agent_name''',
+                                r'''$.bank_name''',
                               ).toString(),
                               'null',
                             ),
@@ -114,37 +114,6 @@ class _ChatWidgetState extends State<ChatWidget> {
                                       useGoogleFonts: false,
                                     ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              'cmnqvi8z' /* - */,
-                            ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'AvenirArabic',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
-                          ),
-                        ),
-                        Text(
-                          valueOrDefault<String>(
-                            getJsonField(
-                              widget.bankJson,
-                              r'''$.bank_name''',
-                            ).toString(),
-                            'null',
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'AvenirArabic',
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
                         ),
                       ],
                     ),

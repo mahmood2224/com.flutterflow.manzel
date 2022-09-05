@@ -359,6 +359,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Where are you looking?',
       'ar': 'أين تبحث ؟',
     },
+    '5qj98whz': {
+      'en': 'Coming soon',
+      'ar': 'قريبا',
+    },
     'i2h601mg': {
       'en': 'Available',
       'ar': 'متوفرة',
@@ -366,10 +370,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '977ahbnt': {
       'en': 'Booked',
       'ar': 'حجز',
-    },
-    '5qj98whz': {
-      'en': 'Coming soon',
-      'ar': 'قريبا',
     },
     'etpebw43': {
       'en': 'Approved Banks',
@@ -516,6 +516,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'alqnps4o': {
       'en': ' ',
       'ar': '',
+    },
+    'ps7kcru7': {
+      'en': 'bank',
+      'ar': 'مصرف',
     },
     'y0qb0uvi': {
       'en': 'Accept offer',
@@ -1496,10 +1500,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Chat
   {
-    'cmnqvi8z': {
-      'en': '-',
-      'ar': '-',
-    },
     '9onf7xjs': {
       'en': 'Home',
       'ar': 'الرئيسية',
