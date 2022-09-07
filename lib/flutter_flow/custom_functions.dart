@@ -9,6 +9,32 @@ import 'place.dart';
 import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
+import 'package:sendbird_sdk/core/channel/group/group_channel.dart';
+import 'package:sendbird_sdk/sendbird_sdk.dart' as sendbird;
+
+//   Future<String> unreadMessage(channelUrl)  async {
+//
+//    return getUnreadMessage(channelUrl).toString();
+// }
+Future<String> getUnreadMessage(String channelUrl) async {
+  try{
+    String channel_url = channelUrl.toString();
+    final aChannel = await GroupChannel.getChannel(channel_url);
+    print(aChannel.unreadMessageCount);
+    var channel= aChannel.unreadMessageCount.toString();
+    return channel;
+
+// print("unread Messages ${unreadMessage}");
+//   return   unreadMessage.toString();
+
+  }
+  catch(error){
+    print("*********************************************************");
+    print(error);
+    print("*********************************************************");
+  }
+
+}
 
 bool checkPhoneNumberFormat(String phoneNumber) {
   // Add your function code here

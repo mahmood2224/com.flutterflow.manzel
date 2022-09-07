@@ -98,7 +98,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                           children: [
                             Container(
                               width: double.infinity,
-                              height: MediaQuery.of(context).size.height * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.5,
                               child: Stack(
                                 children: [
                                   if (!functions
@@ -192,7 +192,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   Container(
                                     width: MediaQuery.of(context).size.width,
                                     height:
-                                        MediaQuery.of(context).size.height * 1,
+                                        MediaQuery.of(context).size.height,
                                     decoration: BoxDecoration(),
                                     child: Visibility(
                                       visible: functions
@@ -201,28 +201,33 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         r'''$.data.attributes.video_manifest_uri''',
                                       )),
                                       child: Align(
-                                        alignment: AlignmentDirectional(0, 0),
-                                        child: FlutterFlowVideoPlayer(
+                                        alignment: Alignment.topRight,
+
+
+
+
+
+
+            child: FlutterFlowVideoPlayer(
                                           path: getJsonField(
                                             columnPropertyResponse.jsonBody,
                                             r'''$.data.attributes.video_manifest_uri''',
                                           ),
+              height: MediaQuery.of(context).size.width/1.777777777,
+              width: MediaQuery.of(context)
+                  .size.width,
                                           videoType: VideoType.network,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.4,
                                           autoPlay: true,
                                           looping: true,
                                           showControls: false,
-                                          aspectRatio: 1.4,
+                                          //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
                                           allowFullScreen: true,
                                           allowPlaybackSpeedMenu: false,
-                                        ),
-                                      ),
-                                    ),
+                                        ),),),
+
+            //),),
+
+
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(

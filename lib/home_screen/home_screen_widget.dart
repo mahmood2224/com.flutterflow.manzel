@@ -1,3 +1,5 @@
+import 'package:video_player/video_player.dart';
+
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
@@ -9,6 +11,7 @@ import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +45,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   Completer<ApiCallResponse> _apiRequestCompleter;
   PageController pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  int _currentItem = 0;
+  bool autoplayVal;
+  //FlickMultiManager flickMultiManager;
+  Set<VideoPlayerController>videoControllerSet ;
+  VideoPlayerController _currentController ;
+  Map<String,VideoPlayerController> videocontrollerMap = {};
 
   static const _pageSize = 20;
   final PagingController<int, dynamic> _pagingController =
@@ -459,6 +468,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           builderDelegate: PagedChildBuilderDelegate<dynamic>(
+
                             itemBuilder: (context, propertiesItem, propertiesIndex) =>
 
                           // ListView.builder(
@@ -469,6 +479,28 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           // itemBuilder: (context, propertiesIndex) {
                           //   final propertiesItem = properties[propertiesIndex];
                           //   return
+                            VisibilityDetector(
+                              key: Key(propertiesIndex.toString()),
+                              onVisibilityChanged: (visibility) {
+                                if (visibility.visibleFraction == 0 && this.mounted){
+                                  print("propertiesIndex.toString() : ${propertiesIndex.toString()}");
+                                  setState(() {
+                                    _currentController = videocontrollerMap[(propertiesIndex-1).toString()];
+                                    _currentController.play();
+                                    videoControllerSet.forEach((otherPlayer) {
+                                      if (otherPlayer != _currentController &&
+                                          otherPlayer.value.isPlaying) {
+                                        setState(() {
+                                          otherPlayer.pause();
+
+                                        });
+                                      }
+                                    });
+                                    print("Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
+                                  });}else{autoplayVal = false;}
+                              },
+                              child:
+
                               Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   12, 12, 12, 12),
@@ -507,7 +539,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               propertiesItem,
                                               r'''$.attributes.video_manifest_uri''',
                                             )))
-                                              Container(
+                              ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                          child :Container(
                                                 width: MediaQuery.of(context)
                                                     .size
                                                     .width,
@@ -520,6 +554,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       BorderRadius.circular(12),
                                                 ),
                                                 child: FlutterFlowVideoPlayer(
+                                                  onTap: (videoControllerValue){
+                                                    videoControllerSet = videoControllerValue;
+                                                  print("videoControllerSet : ${videoControllerSet}");
+                                                  print("videoControllerSet_items : ${videoControllerSet.length}");
+                                                    //print("videoControllerSet.last :  ${videoControllerSet.last}");
+                                                    //print("propertiesIndex : ${propertiesIndex.toString()}");
+                                                    //print("videocontrollerMap : ${videocontrollerMap.length}");
+                                                    videocontrollerMap[propertiesIndex.toString()] = videoControllerSet.last;
+                                                    print("videocontrollerMap : ${videocontrollerMap.length}");
+
+                                                  },
                                                   path: getJsonField(
                                                     propertiesItem,
                                                     r'''$.attributes.video_manifest_uri''',
@@ -528,18 +573,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   width: MediaQuery.of(context)
                                                       .size
                                                       .width,
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.4,
+                                                  height:MediaQuery.of(context)
+                                                      .size
+                                                      .width/1.777777,
                                                   aspectRatio: 1.70,
-                                                  autoPlay: false,
+                                                  autoPlay: true,
                                                   looping: true,
                                                   showControls: true,
                                                   allowFullScreen: true,
                                                   allowPlaybackSpeedMenu: false,
                                                 ),
-                                              ),
+                                              ),),
                                             if (!functions.videoPlayerVisibilty(
                                                 getJsonField(
                                               propertiesItem,
@@ -667,7 +711,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 'Coming soon'))
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    -1.02, -0.79),
+                                                    -0.90, -0.89),
                                                 child: FFButtonWidget(
                                                   onPressed: () {
                                                     print('Button pressed ...');
@@ -787,7 +831,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 'Available'))
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    -0.99, -0.8),
+                                                    -0.90, -0.89),
                                                 child: FFButtonWidget(
                                                   onPressed: () {
                                                     print('Button pressed ...');
@@ -829,7 +873,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 'Booked'))
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    -0.99, -0.8),
+                                                    -0.90, -0.89),
                                                 child: FFButtonWidget(
                                                   onPressed: () {
                                                     print('Button pressed ...');
@@ -1178,10 +1222,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                    // );
                 //  },
   ),),
-            ],
+                        ),],
           ),
         ),
-      ),
+  ),
     );
   }
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
-const kDefaultAspectRatio = 16 / 9;
+//const kDefaultAspectRatio = 16 / 9;
 
 enum VideoType {
   asset,
@@ -25,7 +25,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
     this.showControls = true,
     this.allowFullScreen = true,
     this.allowPlaybackSpeedMenu = false,
-    this.lazyLoad = false,
+    this.lazyLoad = false, this.onTap,
   });
 
   final String path;
@@ -39,6 +39,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
   final bool allowFullScreen;
   final bool allowPlaybackSpeedMenu;
   final bool lazyLoad;
+  final Function(Set) onTap;
 
   @override
   State<StatefulWidget> createState() => _FlutterFlowVideoPlayerState();
@@ -72,8 +73,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
       : widget.height;
 
   double get aspectRatio =>
-      _chewieController?.videoPlayerController?.value?.aspectRatio ??
-      kDefaultAspectRatio;
+      _chewieController?.videoPlayerController?.value?.aspectRatio ;
 
   Future initializePlayer() async {
     _videoPlayerController = widget.videoType == VideoType.network
@@ -103,52 +103,61 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
       allowFullScreen: widget.allowFullScreen,
       allowPlaybackSpeedChanging: widget.allowPlaybackSpeedMenu,
     );
-
+    print("Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
     _videoPlayers.add(_videoPlayerController);
+    widget.onTap(_videoPlayers);
+
+    print("_chewieController: ${_chewieController}");
     _videoPlayerController.addListener(() {
       if (_videoPlayerController.value.hasError && !_loggedError) {
         print(
             'Error playing video: ${_videoPlayerController.value.errorDescription}');
         _loggedError = true;
       }
-      // Stop all other players when one video is playing.
-      // if (_videoPlayerController.value.isPlaying) {
-      //   _videoPlayers.forEach((otherPlayer) {
-      //     if (otherPlayer != _videoPlayerController &&
-      //         otherPlayer.value.isPlaying) {
-      //       setState(() {
-      //         otherPlayer.pause();
-      //       });
-      //     }
-      //   });
-      // }
+      //Stop all other players when one video is playing.
+      if (_videoPlayerController.value.isPlaying) {
+        _videoPlayers.forEach((otherPlayer) {
+          if (otherPlayer != _videoPlayerController &&
+              otherPlayer.value.isPlaying) {
+            setState(() {
+              otherPlayer.pause();
+
+            });
+          }
+        });
+      }
     });
 
     setState(() {});
   }
 
   @override
-  Widget build(BuildContext context) => FittedBox(
-        fit: BoxFit.cover,
-        child: Container(
-          height: height,
-          width: width,
-          child: _chewieController != null &&
-                  (widget.lazyLoad ||
-                      _chewieController
-                          .videoPlayerController.value.isInitialized)
-              ? Chewie(controller: _chewieController)
-              : (_chewieController != null &&
-                      _chewieController.videoPlayerController.value.hasError)
-                  ? Text('Error playing video')
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CircularProgressIndicator(),
-                        SizedBox(height: 20),
-                        Text('Loading'),
-                      ],
-                    ),
+  Widget build(BuildContext context) => Container(
+    width: MediaQuery.of(context).size.width,
+    height:
+    MediaQuery.of(context).size.height,
+    child: FittedBox(
+          fit: BoxFit.cover,
+          child: Container(
+            height: height,
+            width: width,
+            child: _chewieController != null &&
+                    (widget.lazyLoad ||
+                        _chewieController
+                            .videoPlayerController.value.isInitialized)
+                ? Chewie(controller: _chewieController)
+                : (_chewieController != null &&
+                        _chewieController.videoPlayerController.value.hasError)
+                    ? Text('Error playing video')
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          CircularProgressIndicator(),
+                          SizedBox(height: 20),
+                          Text('Loading'),
+                        ],
+                      ),
+          ),
         ),
-      );
+  );
 }
