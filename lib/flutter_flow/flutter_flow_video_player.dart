@@ -135,7 +135,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
 
   @override
   Widget build(BuildContext context) => Container(
-    width: MediaQuery.of(context).size.width,
+    width: width,
     height:
     MediaQuery.of(context).size.height,
     child: FittedBox(

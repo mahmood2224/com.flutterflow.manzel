@@ -517,10 +517,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(12),
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width,
+                                      width: MediaQuery.of(context).size.width*0.95,
                                       height:
-                                          MediaQuery.of(context).size.height *
-                                              0.35,
+                                      MediaQuery.of(context)
+                                          .size
+                                          .height*0.4,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                       ),
@@ -529,8 +530,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         onVisibilityChanged: (visibility) {
                                           if (visibility.visibleFraction*100 == 100 && this.mounted){
                                             print("propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction*100}");
+                                            Future.delayed(const Duration(seconds: 6),(){
                                             _currentController = videocontrollerMap[(propertiesIndex).toString()];
-                                            _currentController.play();
+                                            _currentController?.play();});
                                             setState(() {
                                               _currentController = videocontrollerMap[(propertiesIndex).toString()];
                                               _currentController.play();
@@ -579,7 +581,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           ),
                                           videoType: VideoType.network,
                                           width:
-                                              MediaQuery.of(context).size.width,
+                                              MediaQuery.of(context).size.width*95,
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .width /
@@ -587,7 +589,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           aspectRatio: 1.70,
                                           autoPlay: false,
                                           looping: true,
-                                          showControls: true,
+                                          //showControls: true,
                                           allowFullScreen: true,
                                           allowPlaybackSpeedMenu: false,
                                         ),
