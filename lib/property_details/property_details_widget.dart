@@ -213,7 +213,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             columnPropertyResponse.jsonBody,
                                             r'''$.data.attributes.video_manifest_uri''',
                                           ),
-              height: MediaQuery.of(context).size.width/1.777777,
+              height: MediaQuery.of(context).size.width/1.7777,
               width: MediaQuery.of(context)
                   .size.width,
                                           videoType: VideoType.network,

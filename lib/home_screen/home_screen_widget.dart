@@ -519,9 +519,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     child: Container(
                                       width: MediaQuery.of(context).size.width*0.95,
                                       height:
-                                      MediaQuery.of(context)
-                                          .size
-                                          .height*0.4,
+                                      MediaQuery.of(context).size.width/1.777777,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                       ),
@@ -585,7 +583,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .width /
-                                              1.777777,
+                                              1.8,
                                           aspectRatio: 1.70,
                                           autoPlay: false,
                                           looping: true,

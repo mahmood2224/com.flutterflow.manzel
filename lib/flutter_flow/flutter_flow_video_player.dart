@@ -135,7 +135,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
 
   @override
   Widget build(BuildContext context) => Container(
-    width: width,
+    width: MediaQuery.of(context).size.width,
     height:
     MediaQuery.of(context).size.height,
     child: FittedBox(
@@ -153,8 +153,11 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
                     ? Text('Error playing video')
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          CircularProgressIndicator(),
+                        children:  [
+                          Container(
+                            height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator()),
                           SizedBox(height: 20),
                           Text('Loading'),
                         ],
