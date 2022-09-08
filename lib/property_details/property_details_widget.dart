@@ -219,7 +219,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           videoType: VideoType.network,
                                           autoPlay: true,
                                           looping: true,
-                                          showControls: false,
+                                          showControls: true,
                                           //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
                                           allowFullScreen: true,
                                           allowPlaybackSpeedMenu: false,
@@ -470,7 +470,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     .fromSTEB(
                                                                         0,
                                                                         0,
-                                                                        14,
+                                                                        12,
                                                                         0),
                                                             child: Text(
                                                               functions.orderIdFormatter(
