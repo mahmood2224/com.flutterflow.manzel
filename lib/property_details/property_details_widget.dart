@@ -1,4 +1,6 @@
+import 'package:chewie/chewie.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
+import 'package:video_player/video_player.dart';
 
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
@@ -42,6 +44,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   PageController pageViewController;
   UserSavedRecord saveProperty;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  ChewieController _currentController;
+  VideoPlayerController videoPlayerController;
 
   @override
   void initState() {
@@ -189,19 +193,20 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         );
                                       },
                                     ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height:
-                                        MediaQuery.of(context).size.height,
-                                    decoration: BoxDecoration(),
-                                    child: Visibility(
-                                      visible: functions
-                                          .videoPlayerVisibilty(getJsonField(
-                                        columnPropertyResponse.jsonBody,
-                                        r'''$.data.attributes.video_manifest_uri''',
-                                      )),
-                                      child: Align(
-                                        alignment: Alignment.topRight,
+                                  InkWell(
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height:
+                                          MediaQuery.of(context).size.height,
+                                      decoration: BoxDecoration(),
+                                      child: Visibility(
+                                        visible: functions
+                                            .videoPlayerVisibilty(getJsonField(
+                                          columnPropertyResponse.jsonBody,
+                                          r'''$.data.attributes.video_manifest_uri''',
+                                        )),
+                                        child: Align(
+                                          alignment: Alignment.topRight,
 
 
 
@@ -209,25 +214,33 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
 
 
             child: FlutterFlowVideoPlayer(
-                                          path: getJsonField(
-                                            columnPropertyResponse.jsonBody,
-                                            r'''$.data.attributes.video_manifest_uri''',
-                                          ),
+    detailScreen: (value) {
+            print("detail_screen controller set length  = ${value}");
+            //_currentController = videoControllerValue.last;
+            },
+                                            path: getJsonField(
+                                              columnPropertyResponse.jsonBody,
+                                              r'''$.data.attributes.video_manifest_uri''',
+                                            ),
               height: MediaQuery.of(context).size.width/1.7777,
               width: MediaQuery.of(context)
                   .size.width,
-                                          videoType: VideoType.network,
-                                          autoPlay: true,
-                                          looping: true,
-                                          showControls: false,
-                                          //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
-                                          allowFullScreen: true,
-                                          allowPlaybackSpeedMenu: false,
-                                        ),),),
+                                            videoType: VideoType.network,
+                                            autoPlay: true,
+                                            looping: true,
+                                            showControls: false,
+                                            //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
+                                            allowFullScreen: true,
+                                            allowPlaybackSpeedMenu: false,
+                                          ),),),
 
             //),),
 
 
+                                    ),
+                              onTap: () {
+                                     // _currentController.enterFullScreen();
+                                    },
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(

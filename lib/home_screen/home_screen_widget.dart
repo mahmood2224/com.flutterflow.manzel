@@ -470,710 +470,795 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 builderDelegate: PagedChildBuilderDelegate<dynamic>(
-                  itemBuilder: (context, propertiesItem, propertiesIndex)=>
-                      // ListView.builder(
-                      // padding: EdgeInsets.zero,
-                      // shrinkWrap: true,
-                      // scrollDirection: Axis.vertical,
-                      // itemCount: properties.length,
-                      // itemBuilder: (context, propertiesIndex) {
-                      //   final propertiesItem = properties[propertiesIndex];
-                      //   return
+                  itemBuilder: (context, propertiesItem, propertiesIndex) {
+                    // ListView.builder(
+                    // padding: EdgeInsets.zero,
+                    // shrinkWrap: true,
+                    // scrollDirection: Axis.vertical,
+                    // itemCount: properties.length,
+                    // itemBuilder: (context, propertiesIndex) {
+                    //   final propertiesItem = properties[propertiesIndex];
+                    //   return
 
-                      Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                    child: InkWell(
-                      onTap: () async {
-                        logFirebaseEvent(
-                            'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
-                        // propertyDetails
-                        logFirebaseEvent('propertyCard_propertyDetails');
-                        context.pushNamed(
-                          'PropertyDetails',
-                          queryParams: {
-                            'propertyId': serializeParam(
-                                getJsonField(
-                                  propertiesItem,
-                                  r'''$.id''',
-                                ),
-                                ParamType.int),
-                          }.withoutNulls,
-                        );
-                        _currentController.pause();
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height * 0.3,
-                            child: Stack(
-                              children: [
-                                if (functions.videoPlayerVisibilty(getJsonField(
-                                  propertiesItem,
-                                  r'''$.attributes.video_manifest_uri''',
-                                )))
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width*0.95,
-                                      height:
-                                      MediaQuery.of(context).size.width/1.777777,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: VisibilityDetector(
-                                        key: Key(propertiesIndex.toString()),
-                                        onVisibilityChanged: (visibility) {
-                                          if (visibility.visibleFraction*100 == 100 && this.mounted){
-                                            print("propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction*100}");
-                                            Future.delayed(const Duration(seconds: 6),(){
-                                            _currentController = videocontrollerMap[(propertiesIndex).toString()];
-                                            _currentController?.play();});
-                                            setState(() {
-                                              _currentController = videocontrollerMap[(propertiesIndex).toString()];
-                                              _currentController.play();
-                                              videoControllerSet.forEach((otherPlayer) {
-                                                if (otherPlayer != _currentController &&
-                                                    otherPlayer.value.isPlaying) {
-                                                  setState(() {
-                                                    otherPlayer.pause();
-
-                                                  });
-                                                }
-                                              });
-                                              print("Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
-                                            });}else{autoplayVal = false;}
-                                        //onVisibilityChanged: (visibilityInfo) {
-                                          // var visiblePercentage =
-                                          //     visibilityInfo.visibleFraction *
-                                          //         100;
-                                          // debugPrint(
-                                          //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
-                                        },
-                                        child: FlutterFlowVideoPlayer(
-                                          onTap: (videoControllerValue) {
-                                            videoControllerSet =
-                                                videoControllerValue;
-
-                                            print(
-                                                "videoControllerSet : ${videoControllerSet}");
-                                            print(
-                                                "videoControllerSet_items : ${videoControllerSet.length}");
-                                            //print("videoControllerSet.last :  ${videoControllerSet.last}");
-                                            //print("propertiesIndex : ${propertiesIndex.toString()}");
-                                            //print("videocontrollerMap : ${videocontrollerMap.length}");
-                                            videocontrollerMap[propertiesIndex
-                                                    .toString()] =
-                                                videoControllerSet.last;
-                                            print(
-                                                "videocontrollerMap : ${videocontrollerMap.length}");
-                                            _currentController =
-                                                videocontrollerMap['0'];
-                                            //
-                                          },
-                                          path: getJsonField(
-                                            propertiesItem,
-                                            r'''$.attributes.video_manifest_uri''',
-                                          ),
-                                          videoType: VideoType.network,
-                                          width:
-                                              MediaQuery.of(context).size.width*95,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              1.8,
-                                          aspectRatio: 1.70,
-                                          autoPlay: false,
-                                          looping: true,
-                                          //showControls: true,
-                                          allowFullScreen: true,
-                                          allowPlaybackSpeedMenu: false,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                if (!functions
-                                    .videoPlayerVisibilty(getJsonField(
-                                  propertiesItem,
-                                  r'''$.attributes.video_manifest_uri''',
-                                )))
-                                  Builder(
-                                    builder: (context) {
-                                      final propertyImages = getJsonField(
-                                        propertiesItem,
-                                        r'''$..property_images.data''',
-                                      ).toList();
-
-                                      return Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.3,
-                                        child: Stack(
-                                          children: [
-                                            PageView.builder(
-                                              controller: pageViewController ??=
-                                                  PageController(
-                                                      initialPage: min(
-                                                          0,
-                                                          propertyImages
-                                                                  .length -
-                                                              1)),
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: propertyImages.length,
-                                              itemBuilder: (context,
-                                                  propertyImagesIndex) {
-                                                final propertyImagesItem =
-                                                    propertyImages[
-                                                        propertyImagesIndex];
-                                                return Visibility(
-                                                  visible: !functions
-                                                      .videoPlayerVisibilty(
-                                                          getJsonField(
-                                                    propertyImagesItem,
-                                                    r'''$.attributes.video_manifest_uri''',
-                                                  )),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    child: CachedNetworkImage(
-                                                      imageUrl: getJsonField(
-                                                        propertyImagesItem,
-                                                        r'''$.attributes.url''',
-                                                      ),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.3,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                            Align(
-                                              alignment:
-                                                  AlignmentDirectional(0, 0.7),
-                                              child: SmoothPageIndicator(
-                                                controller:
-                                                    pageViewController ??=
-                                                        PageController(
-                                                            initialPage: min(
-                                                                0,
-                                                                propertyImages
-                                                                        .length -
-                                                                    1)),
-                                                count: propertyImages.length,
-                                                axisDirection: Axis.horizontal,
-                                                onDotClicked: (i) {
-                                                  pageViewController
-                                                      .animateToPage(
-                                                    i,
-                                                    duration: Duration(
-                                                        milliseconds: 500),
-                                                    curve: Curves.ease,
-                                                  );
-                                                },
-                                                effect: SlideEffect(
-                                                  spacing: 8,
-                                                  radius: 3,
-                                                  dotWidth: 6,
-                                                  dotHeight: 6,
-                                                  dotColor: Color(0x80FFFFFF),
-                                                  activeDotColor: Colors.white,
-                                                  paintStyle:
-                                                      PaintingStyle.fill,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                if (functions.conditionalVisibility(
-                                    getJsonField(
-                                      propertiesItem,
-                                      r'''$.attributes.property_status''',
-                                    ).toString(),
-                                    'Coming soon'))
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-0.90, -0.89),
-                                    child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
-                                      },
-                                      text: FFLocalizations.of(context).getText(
-                                        '5qj98whz' /* Coming soon */,
-                                      ),
-                                      options: FFButtonOptions(
-                                        color: Color(0xCD2971FB),
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily: 'AvenirArabic',
-                                              color: Colors.white,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                  ),
-                                Align(
-                                  alignment: AlignmentDirectional(1, -0.95),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 15, 0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        logFirebaseEvent(
-                                            'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                        if (loggedIn) {
-                                          logFirebaseEvent(
-                                              'Container_Backend-Call');
-                                          await BookmarkPropertyCall.call(
-                                            userId: currentUserUid,
-                                            propertyId: valueOrDefault<String>(
-                                              getJsonField(
-                                                propertiesItem,
-                                                r'''$.id''',
-                                              ).toString(),
-                                              '0',
-                                            ),
-                                          );
-                                        } else {
-                                          logFirebaseEvent(
-                                              'Container_Navigate-To');
-                                          context.pushNamed('Login');
-                                        }
-                                      },
-                                      child: Container(
-                                        width: 40,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: Color(0x4D000000),
-                                          image: DecorationImage(
-                                            fit: BoxFit.none,
-                                            image: Image.asset(
-                                              'assets/images/Heart.png',
-                                            ).image,
-                                          ),
-                                          shape: BoxShape.circle,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(1, 1),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 18, 18),
-                                    child: Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: Color(0x80F3F1F1),
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Color(0x80F3F1F1),
-                                          width: 2,
-                                        ),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(30),
-                                        child: Image.network(
-                                          getJsonField(
-                                            propertiesItem,
-                                            r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                if (functions.conditionalVisibility(
-                                    getJsonField(
-                                      propertiesItem,
-                                      r'''$.attributes.property_status''',
-                                    ).toString(),
-                                    'Available'))
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-0.90, -0.89),
-                                    child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
-                                      },
-                                      text: FFLocalizations.of(context).getText(
-                                        'i2h601mg' /* Available */,
-                                      ),
-                                      options: FFButtonOptions(
-                                        color: Color(0xFF81D05C),
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily: 'AvenirArabic',
-                                              color: Colors.white,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                  ),
-                                if (functions.conditionalVisibility(
-                                    getJsonField(
-                                      propertiesItem,
-                                      r'''$.attributes.property_status''',
-                                    ).toString(),
-                                    'Booked'))
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-0.90, -0.89),
-                                    child: FFButtonWidget(
-                                      onPressed: () {
-                                        print('Button pressed ...');
-                                      },
-                                      text: FFLocalizations.of(context).getText(
-                                        '977ahbnt' /* Booked */,
-                                      ),
-                                      options: FFButtonOptions(
-                                        color: Color(0xB2F5F5F5),
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily: 'AvenirArabic',
-                                              color: Colors.white,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(4, 14, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
+if(propertiesIndex==(videocontrollerMap.length)+1){
+    Future.delayed(const Duration(
+    seconds: 8), () {
+      _currentController = videoControllerSet.first;
+_currentController?.play();});}
+                   return  Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                      child: InkWell(
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
+                          // propertyDetails
+                          logFirebaseEvent('propertyCard_propertyDetails');
+                          context.pushNamed(
+                            'PropertyDetails',
+                            queryParams: {
+                              'propertyId': serializeParam(
                                   getJsonField(
                                     propertiesItem,
-                                    r'''$.attributes.property_name''',
-                                  ).toString(),
-                                  maxLines: 1,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                ),
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'etpebw43' /* Approved Banks */,
+                                    r'''$.id''',
                                   ),
-                                  textAlign: TextAlign.end,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: Color(0xFF474747),
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(4, 1, 0, 14),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.location_on_outlined,
-                                      color: Color(0xFF130F26),
-                                      size: 11,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          4, 0, 0, 0),
-                                      child: Text(
-                                        getJsonField(
-                                          propertiesItem,
-                                          r'''$..attributes.city.data.attributes.city_name''',
-                                        ).toString(),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'AvenirArabic',
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          3, 0, 3, 0),
-                                      child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'efcxmcgl' /* ,  */,
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'AvenirArabic',
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                    ),
-                                    Text(
+                                  ParamType.int),
+                            }.withoutNulls,
+                          );
+                          _currentController.pause();
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width,
+                              height: MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height * 0.3,
+                              child: Stack(
+                                children: [
+                                  if (functions.videoPlayerVisibilty(
                                       getJsonField(
                                         propertiesItem,
-                                        r'''$..property_district''',
+                                        r'''$.attributes.video_manifest_uri''',
+                                      )))
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: Container(
+                                        width: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .width * 0.95,
+                                        height:
+                                        MediaQuery
+                                            .of(context)
+                                            .size
+                                            .width / 1.777777,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              12),
+                                        ),
+                                        child: VisibilityDetector(
+                                          key: Key(propertiesIndex.toString()),
+                                          onVisibilityChanged: (visibility) {
+                                            if (visibility.visibleFraction *
+                                                100 == 100 && this.mounted) {
+                                              print(
+                                                  "propertiesIndex.toString() : ${propertiesIndex
+                                                      .toString()},visibility.visibleFraction*100 = ${visibility
+                                                      .visibleFraction * 100}");
+                                              // Future.delayed(const Duration(
+                                              //     seconds: 6), () {
+                                              //   _currentController =
+                                              //   videocontrollerMap[(propertiesIndex)
+                                              //       .toString()];
+                                              //   _currentController?.play();
+                                              // });
+                                              setState(() {
+                                                _currentController =
+                                                videocontrollerMap[(propertiesIndex)
+                                                    .toString()];
+                                                _currentController.play();
+                                                videoControllerSet.forEach((
+                                                    otherPlayer) {
+                                                  if (otherPlayer !=
+                                                      _currentController &&
+                                                      otherPlayer.value
+                                                          .isPlaying) {
+                                                    setState(() {
+                                                      otherPlayer.pause();
+                                                    });
+                                                  }
+                                                });
+                                                print("Object_Key : ${ObjectKey(
+                                                    FlutterFlowVideoPlayer)
+                                                    .toString()}");
+                                              });
+                                            } else {
+                                              autoplayVal = false;
+                                            }
+                                            //onVisibilityChanged: (visibilityInfo) {
+                                            // var visiblePercentage =
+                                            //     visibilityInfo.visibleFraction *
+                                            //         100;
+                                            // debugPrint(
+                                            //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
+                                          },
+                                          child: FlutterFlowVideoPlayer(
+                                            onTap: (videoControllerValue) {
+                                              videoControllerSet =
+                                                  videoControllerValue;
+
+                                              print(
+                                                  "videoControllerSet : ${videoControllerSet}");
+                                              print(
+                                                  "videoControllerSet_items : ${videoControllerSet
+                                                      .length}");
+                                              //print("videoControllerSet.last :  ${videoControllerSet.last}");
+                                              //print("propertiesIndex : ${propertiesIndex.toString()}");
+                                              //print("videocontrollerMap : ${videocontrollerMap.length}");
+                                              videocontrollerMap[propertiesIndex
+                                                  .toString()] =
+                                                  videoControllerSet.last;
+                                              print(
+                                                  "videocontrollerMap : ${videocontrollerMap
+                                                      .length}");
+                                              _currentController =
+                                              videocontrollerMap['0'];
+                                              //
+                                            },
+                                            path: getJsonField(
+                                              propertiesItem,
+                                              r'''$.attributes.video_manifest_uri''',
+                                            ),
+                                            videoType: VideoType.network,
+                                            width:
+                                            MediaQuery
+                                                .of(context)
+                                                .size
+                                                .width * 95,
+                                            height: MediaQuery
+                                                .of(context)
+                                                .size
+                                                .width /
+                                                1.8,
+                                            aspectRatio: 1.70,
+                                            autoPlay: false,
+                                            looping: true,
+                                            //showControls: true,
+                                            allowFullScreen: true,
+                                            allowPlaybackSpeedMenu: false,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  if (!functions
+                                      .videoPlayerVisibilty(getJsonField(
+                                    propertiesItem,
+                                    r'''$.attributes.video_manifest_uri''',
+                                  )))
+                                    Builder(
+                                      builder: (context) {
+                                        final propertyImages = getJsonField(
+                                          propertiesItem,
+                                          r'''$..property_images.data''',
+                                        ).toList();
+
+                                        return Container(
+                                          width:
+                                          MediaQuery
+                                              .of(context)
+                                              .size
+                                              .width,
+                                          height:
+                                          MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height *
+                                              0.3,
+                                          child: Stack(
+                                            children: [
+                                              PageView.builder(
+                                                controller:
+                                                pageViewController ??=
+                                                    PageController(
+                                                        initialPage: min(
+                                                            0,
+                                                            propertyImages
+                                                                .length -
+                                                                1)),
+                                                scrollDirection: Axis
+                                                    .horizontal,
+                                                itemCount: propertyImages
+                                                    .length,
+                                                itemBuilder: (context,
+                                                    propertyImagesIndex) {
+                                                  final propertyImagesItem =
+                                                  propertyImages[
+                                                  propertyImagesIndex];
+                                                  return Visibility(
+                                                    visible: !functions
+                                                        .videoPlayerVisibilty(
+                                                        getJsonField(
+                                                          propertyImagesItem,
+                                                          r'''$.attributes.video_manifest_uri''',
+                                                        )),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                      BorderRadius.circular(
+                                                          8),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl: getJsonField(
+                                                          propertyImagesItem,
+                                                          r'''$.attributes.url''',
+                                                        ),
+                                                        width:
+                                                        MediaQuery
+                                                            .of(context)
+                                                            .size
+                                                            .width,
+                                                        height:
+                                                        MediaQuery
+                                                            .of(context)
+                                                            .size
+                                                            .height *
+                                                            0.3,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                              Align(
+                                                alignment:
+                                                AlignmentDirectional(0, 0.7),
+                                                child: SmoothPageIndicator(
+                                                  controller:
+                                                  pageViewController ??=
+                                                      PageController(
+                                                          initialPage: min(
+                                                              0,
+                                                              propertyImages
+                                                                  .length -
+                                                                  1)),
+                                                  count: propertyImages.length,
+                                                  axisDirection: Axis
+                                                      .horizontal,
+                                                  onDotClicked: (i) {
+                                                    pageViewController
+                                                        .animateToPage(
+                                                      i,
+                                                      duration: Duration(
+                                                          milliseconds: 500),
+                                                      curve: Curves.ease,
+                                                    );
+                                                  },
+                                                  effect: SlideEffect(
+                                                    spacing: 8,
+                                                    radius: 3,
+                                                    dotWidth: 6,
+                                                    dotHeight: 6,
+                                                    dotColor: Color(0x80FFFFFF),
+                                                    activeDotColor: Colors
+                                                        .white,
+                                                    paintStyle:
+                                                    PaintingStyle.fill,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  if (functions.conditionalVisibility(
+                                      getJsonField(
+                                        propertiesItem,
+                                        r'''$.attributes.property_status''',
                                       ).toString(),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
+                                      'Coming soon'))
+                                    Align(
+                                      alignment:
+                                      AlignmentDirectional(-0.90, -0.89),
+                                      child: FFButtonWidget(
+                                        onPressed: () {
+                                          print('Button pressed ...');
+                                        },
+                                        text: FFLocalizations.of(context)
+                                            .getText(
+                                          '5qj98whz' /* Coming soon */,
+                                        ),
+                                        options: FFButtonOptions(
+                                          color: Color(0xCD2971FB),
+                                          textStyle: FlutterFlowTheme
+                                              .of(context)
+                                              .subtitle2
+                                              .override(
+                                            fontFamily: 'AvenirArabic',
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w300,
+                                            useGoogleFonts: false,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                              8),
+                                        ),
+                                      ),
+                                    ),
+                                  Align(
+                                    alignment: AlignmentDirectional(1, -0.95),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 12, 15, 0),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          logFirebaseEvent(
+                                              'HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                          if (loggedIn) {
+                                            logFirebaseEvent(
+                                                'Container_Backend-Call');
+                                            await BookmarkPropertyCall.call(
+                                              userId: currentUserUid,
+                                              propertyId: valueOrDefault<
+                                                  String>(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.id''',
+                                                ).toString(),
+                                                '0',
+                                              ),
+                                            );
+                                          } else {
+                                            logFirebaseEvent(
+                                                'Container_Navigate-To');
+                                            context.pushNamed('Login');
+                                          }
+                                        },
+                                        child: Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            color: Color(0x4D000000),
+                                            image: DecorationImage(
+                                              fit: BoxFit.none,
+                                              image: Image
+                                                  .asset(
+                                                'assets/images/Heart.png',
+                                              )
+                                                  .image,
+                                            ),
+                                            shape: BoxShape.circle,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(1, 1),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 18, 18),
+                                      child: Container(
+                                        width: 50,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          color: Color(0x80F3F1F1),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: Color(0x80F3F1F1),
+                                            width: 2,
+                                          ),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                              30),
+                                          child: Image.network(
+                                            getJsonField(
+                                              propertiesItem,
+                                              r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  if (functions.conditionalVisibility(
+                                      getJsonField(
+                                        propertiesItem,
+                                        r'''$.attributes.property_status''',
+                                      ).toString(),
+                                      'Available'))
+                                    Align(
+                                      alignment:
+                                      AlignmentDirectional(-0.90, -0.89),
+                                      child: FFButtonWidget(
+                                        onPressed: () {
+                                          print('Button pressed ...');
+                                        },
+                                        text: FFLocalizations.of(context)
+                                            .getText(
+                                          'i2h601mg' /* Available */,
+                                        ),
+                                        options: FFButtonOptions(
+                                          color: Color(0xFF81D05C),
+                                          textStyle: FlutterFlowTheme
+                                              .of(context)
+                                              .subtitle2
+                                              .override(
+                                            fontFamily: 'AvenirArabic',
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w300,
+                                            useGoogleFonts: false,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                              8),
+                                        ),
+                                      ),
+                                    ),
+                                  if (functions.conditionalVisibility(
+                                      getJsonField(
+                                        propertiesItem,
+                                        r'''$.attributes.property_status''',
+                                      ).toString(),
+                                      'Booked'))
+                                    Align(
+                                      alignment:
+                                      AlignmentDirectional(-0.90, -0.89),
+                                      child: FFButtonWidget(
+                                        onPressed: () {
+                                          print('Button pressed ...');
+                                        },
+                                        text: FFLocalizations.of(context)
+                                            .getText(
+                                          '977ahbnt' /* Booked */,
+                                        ),
+                                        options: FFButtonOptions(
+                                          color: Color(0xB2F5F5F5),
+                                          textStyle: FlutterFlowTheme
+                                              .of(context)
+                                              .subtitle2
+                                              .override(
+                                            fontFamily: 'AvenirArabic',
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w300,
+                                            useGoogleFonts: false,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                              8),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                              EdgeInsetsDirectional.fromSTEB(4, 14, 0, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    getJsonField(
+                                      propertiesItem,
+                                      r'''$.attributes.property_name''',
+                                    ).toString(),
+                                    maxLines: 1,
+                                    style: FlutterFlowTheme
+                                        .of(context)
+                                        .bodyText1
+                                        .override(
+                                      fontFamily: 'AvenirArabic',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                                  ),
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      'etpebw43' /* Approved Banks */,
+                                    ),
+                                    textAlign: TextAlign.end,
+                                    style: FlutterFlowTheme
+                                        .of(context)
+                                        .bodyText1
+                                        .override(
+                                      fontFamily: 'AvenirArabic',
+                                      color: Color(0xFF474747),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                              EdgeInsetsDirectional.fromSTEB(4, 1, 0, 14),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.location_on_outlined,
+                                        color: Color(0xFF130F26),
+                                        size: 11,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            4, 0, 0, 0),
+                                        child: Text(
+                                          getJsonField(
+                                            propertiesItem,
+                                            r'''$..attributes.city.data.attributes.city_name''',
+                                          ).toString(),
+                                          style: FlutterFlowTheme
+                                              .of(context)
+                                              .bodyText1
+                                              .override(
                                             fontFamily: 'AvenirArabic',
                                             fontSize: 13,
                                             fontWeight: FontWeight.w300,
                                             useGoogleFonts: false,
                                           ),
-                                    ),
-                                  ],
-                                ),
-                                Builder(
-                                  builder: (context) {
-                                    final banks = getJsonField(
-                                      propertiesItem,
-                                      r'''$.attributes.banks.data''',
-                                    ).toList();
-                                    return Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: List.generate(banks.length,
-                                          (banksIndex) {
-                                        final banksItem = banks[banksIndex];
-                                        return Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 8, 0),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(11),
-                                            child: Image.network(
-                                              getJsonField(
-                                                banksItem,
-                                                r'''$.attributes.bank_logo.data.attributes.url''',
-                                              ),
-                                              width: 22,
-                                              height: 22,
-                                              fit: BoxFit.cover,
-                                            ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            3, 0, 3, 0),
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'efcxmcgl' /* ,  */,
                                           ),
-                                        );
-                                      }),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    '998is2ya' /* Installment starting from */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .title3
-                                      .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
-                                        color: Color(0xFF2971FB),
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                ),
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'gqe4w739' /* Total property price */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: Color(0xFF474747),
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(4, 1, 0, 20),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(
-                                      valueOrDefault<String>(
-                                        functions.formatAmount(getJsonField(
-                                          propertiesItem,
-                                          r'''$.attributes.property_initial_installment''',
-                                        ).toString()),
-                                        '0',
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
-                                            color: Color(0xFF2971FB),
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
+                                          style: FlutterFlowTheme
+                                              .of(context)
+                                              .bodyText1
+                                              .override(
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w300,
                                             useGoogleFonts: false,
                                           ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5, 10, 0, 0),
-                                      child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'l38if619' /*  SAR/Monthly */,
                                         ),
-                                        textAlign: TextAlign.start,
-                                        style: FlutterFlowTheme.of(context)
+                                      ),
+                                      Text(
+                                        getJsonField(
+                                          propertiesItem,
+                                          r'''$..property_district''',
+                                        ).toString(),
+                                        style: FlutterFlowTheme
+                                            .of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'AvenirArabic',
-                                              color: Color(0xFF2971FB),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                              useGoogleFonts: false,
-                                            ),
+                                          fontFamily: 'AvenirArabic',
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w300,
+                                          useGoogleFonts: false,
+                                        ),
                                       ),
+                                    ],
+                                  ),
+                                  Builder(
+                                    builder: (context) {
+                                      final banks = getJsonField(
+                                        propertiesItem,
+                                        r'''$.attributes.banks.data''',
+                                      ).toList();
+                                      return Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: List.generate(banks.length,
+                                                (banksIndex) {
+                                              final banksItem = banks[banksIndex];
+                                              return Padding(
+                                                padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 8, 0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                  BorderRadius.circular(11),
+                                                  child: Image.network(
+                                                    getJsonField(
+                                                      banksItem,
+                                                      r'''$.attributes.bank_logo.data.attributes.url''',
+                                                    ),
+                                                    width: 22,
+                                                    height: 22,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              );
+                                            }),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  4, 0, 0, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      '998is2ya' /* Installment starting from */,
                                     ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 3, 0),
-                                      child: Text(
+                                    style: FlutterFlowTheme
+                                        .of(context)
+                                        .title3
+                                        .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Color(0xFF2971FB),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                                  ),
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      'gqe4w739' /* Total property price */,
+                                    ),
+                                    style: FlutterFlowTheme
+                                        .of(context)
+                                        .bodyText2
+                                        .override(
+                                      fontFamily: 'AvenirArabic',
+                                      color: Color(0xFF474747),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                              EdgeInsetsDirectional.fromSTEB(4, 1, 0, 20),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
                                         valueOrDefault<String>(
-                                          functions.formatAmountWithoutDecimal(
-                                              valueOrDefault<String>(
-                                            getJsonField(
-                                              propertiesItem,
-                                              r'''$..property_price''',
-                                            ).toString(),
-                                            '0',
-                                          )),
+                                          functions.formatAmount(getJsonField(
+                                            propertiesItem,
+                                            r'''$.attributes.property_initial_installment''',
+                                          ).toString()),
                                           '0',
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2
+                                        style: FlutterFlowTheme
+                                            .of(context)
+                                            .bodyText1
                                             .override(
-                                              fontFamily: 'AvenirArabic',
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              useGoogleFonts: false,
-                                            ),
+                                          fontFamily:
+                                          'Sofia Pro By Khuzaimah',
+                                          color: Color(0xFF2971FB),
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: false,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        'dhoik8q5' /*  SAR */,
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            5, 10, 0, 0),
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'l38if619' /*  SAR/Monthly */,
+                                          ),
+                                          textAlign: TextAlign.start,
+                                          style: FlutterFlowTheme
+                                              .of(context)
+                                              .bodyText1
+                                              .override(
+                                            fontFamily: 'AvenirArabic',
+                                            color: Color(0xFF2971FB),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
+                                        ),
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText2
-                                          .override(
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 3, 0),
+                                        child: Text(
+                                          valueOrDefault<String>(
+                                            functions
+                                                .formatAmountWithoutDecimal(
+                                                valueOrDefault<String>(
+                                                  getJsonField(
+                                                    propertiesItem,
+                                                    r'''$..property_price''',
+                                                  ).toString(),
+                                                  '0',
+                                                )),
+                                            '0',
+                                          ),
+                                          style: FlutterFlowTheme
+                                              .of(context)
+                                              .bodyText2
+                                              .override(
                                             fontFamily: 'AvenirArabic',
                                             color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                             useGoogleFonts: false,
                                           ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                        ),
+                                      ),
+                                      Text(
+                                        FFLocalizations.of(context).getText(
+                                          'dhoik8q5' /*  SAR */,
+                                        ),
+                                        style: FlutterFlowTheme
+                                            .of(context)
+                                            .bodyText2
+                                            .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: false,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          Divider(
-                            thickness: 1,
-                            color: Color(0xFFECECEC),
-                          ),
-                        ],
+                            Divider(
+                              thickness: 1,
+                              color: Color(0xFFECECEC),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    //),
-                    //  },
+                      //),
+                      //  },
 
-                    // );
-                    //  },
-                  ),
-                ),
+                      // );
+                      //  },
+                    );
+                  },),
               ),
             ],
           ),

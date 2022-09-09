@@ -25,7 +25,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
     this.showControls = true,
     this.allowFullScreen = true,
     this.allowPlaybackSpeedMenu = false,
-    this.lazyLoad = false, this.onTap,
+    this.lazyLoad = false, this.onTap,this.detailScreen,
   });
 
   final String path;
@@ -40,6 +40,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
   final bool allowPlaybackSpeedMenu;
   final bool lazyLoad;
   final Function(Set) onTap;
+  final Function(ChewieController) detailScreen;
 
   @override
   State<StatefulWidget> createState() => _FlutterFlowVideoPlayerState();
@@ -108,6 +109,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
     print("Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
     _videoPlayers.add(_videoPlayerController);
     widget.onTap(_videoPlayers);
+    widget.detailScreen(_chewieController);
 
     print("_chewieController: ${_chewieController}");
     _videoPlayerController.addListener(() {
@@ -137,7 +139,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
   Widget build(BuildContext context) => Container(
     width: MediaQuery.of(context).size.width,
     height:
-    MediaQuery.of(context).size.height,
+    MediaQuery.of(context).size.height*0.4,
     child: FittedBox(
           fit: BoxFit.cover,
           child: Container(
