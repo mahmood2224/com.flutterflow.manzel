@@ -45,6 +45,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   PageController pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   int _currentItem = 0;
+  bool isPaused;
   bool autoplayVal;
 
   //FlickMultiManager flickMultiManager;
@@ -489,6 +490,7 @@ _currentController?.play();});}
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: InkWell(
                         onTap: () async {
+                          _currentController.pause();
                           logFirebaseEvent(
                               'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
                           // propertyDetails
@@ -504,7 +506,6 @@ _currentController?.play();});}
                                   ParamType.int),
                             }.withoutNulls,
                           );
-                          _currentController.pause();
                         },
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -559,6 +560,7 @@ _currentController?.play();});}
                                               //   _currentController?.play();
                                               // });
                                               setState(() {
+                                                if(_currentController!=null){
                                                 _currentController =
                                                 videocontrollerMap[(propertiesIndex)
                                                     .toString()];
@@ -577,7 +579,7 @@ _currentController?.play();});}
                                                 print("Object_Key : ${ObjectKey(
                                                     FlutterFlowVideoPlayer)
                                                     .toString()}");
-                                              });
+                                              }});
                                             } else {
                                               autoplayVal = false;
                                             }
@@ -629,13 +631,39 @@ _currentController?.play();});}
                                             aspectRatio: 1.70,
                                             autoPlay: false,
                                             looping: true,
-                                            //showControls: true,
+                                            showControls: false,
                                             allowFullScreen: true,
                                             allowPlaybackSpeedMenu: false,
                                           ),
                                         ),
                                       ),
                                     ),
+                                  Align(
+                                      alignment:
+                                      AlignmentDirectional(0, 0),
+                                      child: InkWell(
+                                        child: Container(
+                                          height:50,
+                                          width:50,
+                                          decoration: BoxDecoration(
+                                              color: _currentController?.value?.isPlaying??true?Colors.black.withOpacity(0.0):Colors.black.withOpacity(0.5),
+                                              shape: BoxShape.circle,
+                                          ),
+                                          child:Icon(Icons.play_arrow_rounded,color:_currentController?.value?.isPlaying??true?Colors.black.withOpacity(0.0):Colors.white.withOpacity(1.0),size: 40,),
+                                        ),
+                                        onTap: () {
+                                          if(_currentController.value.isPlaying){
+                                           _currentController.pause();
+                                           isPaused= true;
+                                           setState(() {});}
+                                          else{
+                                            _currentController.play();
+                                            isPaused= false;
+                                            setState(() {});
+                                          }
+                                        },
+                                      ),
+                                  ),
                                   if (!functions
                                       .videoPlayerVisibilty(getJsonField(
                                     propertiesItem,

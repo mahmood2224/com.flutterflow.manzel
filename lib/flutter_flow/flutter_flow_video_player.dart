@@ -76,6 +76,11 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
   double get aspectRatio =>
       _chewieController?.videoPlayerController?.value?.aspectRatio ;
 
+  void enterFullScreen() {
+    _chewieController.enterFullScreen();
+  }
+
+
   Future initializePlayer() async {
     _videoPlayerController = widget.videoType == VideoType.network
         ? VideoPlayerController.network(widget.path)
@@ -106,6 +111,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
 
     );
     setState(() {});
+
     print("Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
     _videoPlayers.add(_videoPlayerController);
     widget.onTap(_videoPlayers);

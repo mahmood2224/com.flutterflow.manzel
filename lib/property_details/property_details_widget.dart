@@ -1,6 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:video_player/video_player.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
@@ -44,7 +45,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   PageController pageViewController;
   UserSavedRecord saveProperty;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  ChewieController _currentController;
+  VideoPlayerController _currentController;
   VideoPlayerController videoPlayerController;
 
   @override
@@ -209,14 +210,22 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           alignment: Alignment.topRight,
 
 
+    child: VisibilityDetector(
+    key: ObjectKey(FlutterFlowVideoPlayer),
+    onVisibilityChanged: (visibility) {
+    if (visibility.visibleFraction *
+    100 != 100 && this.mounted) {
+      if(_currentController!=null){
+    _currentController.pause();}}else{if(_currentController!=null){_currentController.play();}}
 
+    },
 
 
 
             child: FlutterFlowVideoPlayer(
-    detailScreen: (value) {
-            print("detail_screen controller set length  = ${value}");
-            //_currentController = videoControllerValue.last;
+    onTap: (videoControllerValue) {
+            print("detail_screen controller set length  = ${videoControllerValue.length}");
+            _currentController = videoControllerValue.last;
             },
                                             path: getJsonField(
                                               columnPropertyResponse.jsonBody,
@@ -234,11 +243,13 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             allowPlaybackSpeedMenu: false,
                                           ),),),
 
-            //),),
+            //),
+            ),
 
 
                                     ),
                               onTap: () {
+                                     print("On Tapped");
                                      // _currentController.enterFullScreen();
                                     },
                                   ),
@@ -634,6 +645,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   0, 0, 8, 0),
                                                       child: InkWell(
                                                         onTap: () async {
+                                                          _currentController.pause();
                                                           logFirebaseEvent(
                                                               'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
                                                           logFirebaseEvent(
@@ -693,6 +705,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     ),
                                                     InkWell(
                                                       onTap: () async {
+                                                        _currentController.pause();
                                                         logFirebaseEvent(
                                                             'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
                                                         logFirebaseEvent(
@@ -2261,6 +2274,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           ).toString(),
                                                         );
                                                       },
+
                                                       child:
                                                           FlutterFlowStaticMap(
                                                         location: functions
@@ -2581,6 +2595,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   'Available'))
                                 FFButtonWidget(
                                   onPressed: () async {
+                                    _currentController.pause();
                                     logFirebaseEvent(
                                         'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
                                     if (loggedIn) {
@@ -2611,7 +2626,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             ),
                                           );
                                         },
-                                      );
+                                      ).then((value) => _currentController.play());
                                     } else {
                                       logFirebaseEvent('reserved_Navigate-To');
                                       context.pushNamed('Login');
