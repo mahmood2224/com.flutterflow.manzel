@@ -481,12 +481,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     //   final propertiesItem = properties[propertiesIndex];
                     //   return
 
-if(propertiesIndex==(videocontrollerMap.length)+1){
-    Future.delayed(const Duration(
-    seconds: 8), () {
-      _currentController = videoControllerSet.first;
-_currentController?.play();});}
-                   return  Padding(
+                    if (propertiesIndex == (videocontrollerMap.length) + 1) {
+                      Future.delayed(const Duration(seconds: 8), () {
+                        _currentController = videoControllerSet.first;
+                        _currentController?.play();
+                      });
+                    }
+                    return Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: InkWell(
                         onTap: () async {
@@ -504,6 +505,12 @@ _currentController?.play();});}
                                     r'''$.id''',
                                   ),
                                   ParamType.int),
+                              'path': serializeParam(
+                                  getJsonField(
+                                    propertiesItem,
+                                    r'''$.attributes.video_manifest_uri''',
+                                  ),
+                                  ParamType.String),
                             }.withoutNulls,
                           );
                         },
@@ -512,46 +519,37 @@ _currentController?.play();});}
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              width: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .width,
-                              height: MediaQuery
-                                  .of(context)
-                                  .size
-                                  .height * 0.3,
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 0.3,
                               child: Stack(
                                 children: [
-                                  if (functions.videoPlayerVisibilty(
-                                      getJsonField(
-                                        propertiesItem,
-                                        r'''$.attributes.video_manifest_uri''',
-                                      )))
+                                  if (functions
+                                      .videoPlayerVisibilty(getJsonField(
+                                    propertiesItem,
+                                    r'''$.attributes.video_manifest_uri''',
+                                  )))
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
                                       child: Container(
-                                        width: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width * 0.95,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.95,
                                         height:
-                                        MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width / 1.777777,
+                                            MediaQuery.of(context).size.height *
+                                                0.4,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                              12),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                         ),
                                         child: VisibilityDetector(
                                           key: Key(propertiesIndex.toString()),
                                           onVisibilityChanged: (visibility) {
                                             if (visibility.visibleFraction *
-                                                100 == 100 && this.mounted) {
+                                                        100 ==
+                                                    100 &&
+                                                this.mounted) {
                                               print(
-                                                  "propertiesIndex.toString() : ${propertiesIndex
-                                                      .toString()},visibility.visibleFraction*100 = ${visibility
-                                                      .visibleFraction * 100}");
+                                                  "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
                                               // Future.delayed(const Duration(
                                               //     seconds: 6), () {
                                               //   _currentController =
@@ -560,26 +558,28 @@ _currentController?.play();});}
                                               //   _currentController?.play();
                                               // });
                                               setState(() {
-                                                if(_currentController!=null){
-                                                _currentController =
-                                                videocontrollerMap[(propertiesIndex)
-                                                    .toString()];
-                                                _currentController.play();
-                                                videoControllerSet.forEach((
-                                                    otherPlayer) {
-                                                  if (otherPlayer !=
-                                                      _currentController &&
-                                                      otherPlayer.value
-                                                          .isPlaying) {
-                                                    setState(() {
-                                                      otherPlayer.pause();
-                                                    });
-                                                  }
-                                                });
-                                                print("Object_Key : ${ObjectKey(
-                                                    FlutterFlowVideoPlayer)
-                                                    .toString()}");
-                                              }});
+                                                if (_currentController !=
+                                                    null) {
+                                                  _currentController =
+                                                      videocontrollerMap[
+                                                          (propertiesIndex)
+                                                              .toString()];
+                                                  _currentController.play();
+                                                  videoControllerSet
+                                                      .forEach((otherPlayer) {
+                                                    if (otherPlayer !=
+                                                            _currentController &&
+                                                        otherPlayer
+                                                            .value.isPlaying) {
+                                                      setState(() {
+                                                        otherPlayer.pause();
+                                                      });
+                                                    }
+                                                  });
+                                                  print(
+                                                      "Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
+                                                }
+                                              });
                                             } else {
                                               autoplayVal = false;
                                             }
@@ -598,19 +598,17 @@ _currentController?.play();});}
                                               print(
                                                   "videoControllerSet : ${videoControllerSet}");
                                               print(
-                                                  "videoControllerSet_items : ${videoControllerSet
-                                                      .length}");
+                                                  "videoControllerSet_items : ${videoControllerSet.length}");
                                               //print("videoControllerSet.last :  ${videoControllerSet.last}");
                                               //print("propertiesIndex : ${propertiesIndex.toString()}");
                                               //print("videocontrollerMap : ${videocontrollerMap.length}");
                                               videocontrollerMap[propertiesIndex
-                                                  .toString()] =
+                                                      .toString()] =
                                                   videoControllerSet.last;
                                               print(
-                                                  "videocontrollerMap : ${videocontrollerMap
-                                                      .length}");
+                                                  "videocontrollerMap : ${videocontrollerMap.length}");
                                               _currentController =
-                                              videocontrollerMap['0'];
+                                                  videocontrollerMap['0'];
                                               //
                                             },
                                             path: getJsonField(
@@ -618,15 +616,13 @@ _currentController?.play();});}
                                               r'''$.attributes.video_manifest_uri''',
                                             ),
                                             videoType: VideoType.network,
-                                            width:
-                                            MediaQuery
-                                                .of(context)
-                                                .size
-                                                .width * 95,
-                                            height: MediaQuery
-                                                .of(context)
-                                                .size
-                                                .width /
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                95,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
                                                 1.8,
                                             aspectRatio: 1.70,
                                             autoPlay: false,
@@ -639,30 +635,42 @@ _currentController?.play();});}
                                       ),
                                     ),
                                   Align(
-                                      alignment:
-                                      AlignmentDirectional(0, 0),
-                                      child: InkWell(
-                                        child: Container(
-                                          height:50,
-                                          width:50,
-                                          decoration: BoxDecoration(
-                                              color: _currentController?.value?.isPlaying??true?Colors.black.withOpacity(0.0):Colors.black.withOpacity(0.5),
-                                              shape: BoxShape.circle,
-                                          ),
-                                          child:Icon(Icons.play_arrow_rounded,color:_currentController?.value?.isPlaying??true?Colors.black.withOpacity(0.0):Colors.white.withOpacity(1.0),size: 40,),
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: InkWell(
+                                      child: Container(
+                                        height: 50,
+                                        width: 50,
+                                        decoration: BoxDecoration(
+                                          color: _currentController
+                                                      ?.value?.isPlaying ??
+                                                  true
+                                              ? Colors.black.withOpacity(0.0)
+                                              : Colors.black.withOpacity(0.5),
+                                          shape: BoxShape.circle,
                                         ),
-                                        onTap: () {
-                                          if(_currentController.value.isPlaying){
-                                           _currentController.pause();
-                                           isPaused= true;
-                                           setState(() {});}
-                                          else{
-                                            _currentController.play();
-                                            isPaused= false;
-                                            setState(() {});
-                                          }
-                                        },
+                                        child: Icon(
+                                          Icons.play_arrow_rounded,
+                                          color: _currentController
+                                                      ?.value?.isPlaying ??
+                                                  true
+                                              ? Colors.black.withOpacity(0.0)
+                                              : Colors.white.withOpacity(1.0),
+                                          size: 40,
+                                        ),
                                       ),
+                                      onTap: () {
+                                        if (_currentController
+                                            .value.isPlaying) {
+                                          _currentController.pause();
+                                          isPaused = true;
+                                          setState(() {});
+                                        } else {
+                                          _currentController.play();
+                                          isPaused = false;
+                                          setState(() {});
+                                        }
+                                      },
+                                    ),
                                   ),
                                   if (!functions
                                       .videoPlayerVisibilty(getJsonField(
@@ -678,62 +686,55 @@ _currentController?.play();});}
 
                                         return Container(
                                           width:
-                                          MediaQuery
-                                              .of(context)
-                                              .size
-                                              .width,
-                                          height:
-                                          MediaQuery
-                                              .of(context)
-                                              .size
-                                              .height *
+                                              MediaQuery.of(context).size.width,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
                                               0.3,
                                           child: Stack(
                                             children: [
                                               PageView.builder(
                                                 controller:
-                                                pageViewController ??=
-                                                    PageController(
-                                                        initialPage: min(
-                                                            0,
-                                                            propertyImages
-                                                                .length -
-                                                                1)),
-                                                scrollDirection: Axis
-                                                    .horizontal,
-                                                itemCount: propertyImages
-                                                    .length,
+                                                    pageViewController ??=
+                                                        PageController(
+                                                            initialPage: min(
+                                                                0,
+                                                                propertyImages
+                                                                        .length -
+                                                                    1)),
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount:
+                                                    propertyImages.length,
                                                 itemBuilder: (context,
                                                     propertyImagesIndex) {
                                                   final propertyImagesItem =
-                                                  propertyImages[
-                                                  propertyImagesIndex];
+                                                      propertyImages[
+                                                          propertyImagesIndex];
                                                   return Visibility(
                                                     visible: !functions
                                                         .videoPlayerVisibilty(
-                                                        getJsonField(
-                                                          propertyImagesItem,
-                                                          r'''$.attributes.video_manifest_uri''',
-                                                        )),
+                                                            getJsonField(
+                                                      propertyImagesItem,
+                                                      r'''$.attributes.video_manifest_uri''',
+                                                    )),
                                                     child: ClipRRect(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          8),
+                                                          BorderRadius.circular(
+                                                              8),
                                                       child: CachedNetworkImage(
                                                         imageUrl: getJsonField(
                                                           propertyImagesItem,
                                                           r'''$.attributes.url''',
                                                         ),
-                                                        width:
-                                                        MediaQuery
-                                                            .of(context)
+                                                        width: MediaQuery.of(
+                                                                context)
                                                             .size
                                                             .width,
-                                                        height:
-                                                        MediaQuery
-                                                            .of(context)
-                                                            .size
-                                                            .height *
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
                                                             0.3,
                                                         fit: BoxFit.cover,
                                                       ),
@@ -742,20 +743,20 @@ _currentController?.play();});}
                                                 },
                                               ),
                                               Align(
-                                                alignment:
-                                                AlignmentDirectional(0, 0.7),
+                                                alignment: AlignmentDirectional(
+                                                    0, 0.7),
                                                 child: SmoothPageIndicator(
                                                   controller:
-                                                  pageViewController ??=
-                                                      PageController(
-                                                          initialPage: min(
-                                                              0,
-                                                              propertyImages
-                                                                  .length -
-                                                                  1)),
+                                                      pageViewController ??=
+                                                          PageController(
+                                                              initialPage: min(
+                                                                  0,
+                                                                  propertyImages
+                                                                          .length -
+                                                                      1)),
                                                   count: propertyImages.length,
-                                                  axisDirection: Axis
-                                                      .horizontal,
+                                                  axisDirection:
+                                                      Axis.horizontal,
                                                   onDotClicked: (i) {
                                                     pageViewController
                                                         .animateToPage(
@@ -771,10 +772,10 @@ _currentController?.play();});}
                                                     dotWidth: 6,
                                                     dotHeight: 6,
                                                     dotColor: Color(0x80FFFFFF),
-                                                    activeDotColor: Colors
-                                                        .white,
+                                                    activeDotColor:
+                                                        Colors.white,
                                                     paintStyle:
-                                                    PaintingStyle.fill,
+                                                        PaintingStyle.fill,
                                                   ),
                                                 ),
                                               ),
@@ -791,33 +792,33 @@ _currentController?.play();});}
                                       'Coming soon'))
                                     Align(
                                       alignment:
-                                      AlignmentDirectional(-0.90, -0.89),
+                                          AlignmentDirectional(-0.90, -0.89),
                                       child: FFButtonWidget(
                                         onPressed: () {
                                           print('Button pressed ...');
                                         },
-                                        text: FFLocalizations.of(context)
-                                            .getText(
+                                        text:
+                                            FFLocalizations.of(context).getText(
                                           '5qj98whz' /* Coming soon */,
                                         ),
                                         options: FFButtonOptions(
                                           color: Color(0xCD2971FB),
-                                          textStyle: FlutterFlowTheme
-                                              .of(context)
-                                              .subtitle2
-                                              .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w300,
-                                            useGoogleFonts: false,
-                                          ),
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w300,
+                                                    useGoogleFonts: false,
+                                                  ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
                                             width: 1,
                                           ),
-                                          borderRadius: BorderRadius.circular(
-                                              8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
@@ -835,8 +836,8 @@ _currentController?.play();});}
                                                 'Container_Backend-Call');
                                             await BookmarkPropertyCall.call(
                                               userId: currentUserUid,
-                                              propertyId: valueOrDefault<
-                                                  String>(
+                                              propertyId:
+                                                  valueOrDefault<String>(
                                                 getJsonField(
                                                   propertiesItem,
                                                   r'''$.id''',
@@ -857,11 +858,9 @@ _currentController?.play();});}
                                             color: Color(0x4D000000),
                                             image: DecorationImage(
                                               fit: BoxFit.none,
-                                              image: Image
-                                                  .asset(
+                                              image: Image.asset(
                                                 'assets/images/Heart.png',
-                                              )
-                                                  .image,
+                                              ).image,
                                             ),
                                             shape: BoxShape.circle,
                                           ),
@@ -886,8 +885,8 @@ _currentController?.play();});}
                                           ),
                                         ),
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                              30),
+                                          borderRadius:
+                                              BorderRadius.circular(30),
                                           child: Image.network(
                                             getJsonField(
                                               propertiesItem,
@@ -907,33 +906,33 @@ _currentController?.play();});}
                                       'Available'))
                                     Align(
                                       alignment:
-                                      AlignmentDirectional(-0.90, -0.89),
+                                          AlignmentDirectional(-0.90, -0.89),
                                       child: FFButtonWidget(
                                         onPressed: () {
                                           print('Button pressed ...');
                                         },
-                                        text: FFLocalizations.of(context)
-                                            .getText(
+                                        text:
+                                            FFLocalizations.of(context).getText(
                                           'i2h601mg' /* Available */,
                                         ),
                                         options: FFButtonOptions(
                                           color: Color(0xFF81D05C),
-                                          textStyle: FlutterFlowTheme
-                                              .of(context)
-                                              .subtitle2
-                                              .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w300,
-                                            useGoogleFonts: false,
-                                          ),
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w300,
+                                                    useGoogleFonts: false,
+                                                  ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
                                             width: 1,
                                           ),
-                                          borderRadius: BorderRadius.circular(
-                                              8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
@@ -945,33 +944,33 @@ _currentController?.play();});}
                                       'Booked'))
                                     Align(
                                       alignment:
-                                      AlignmentDirectional(-0.90, -0.89),
+                                          AlignmentDirectional(-0.90, -0.89),
                                       child: FFButtonWidget(
                                         onPressed: () {
                                           print('Button pressed ...');
                                         },
-                                        text: FFLocalizations.of(context)
-                                            .getText(
+                                        text:
+                                            FFLocalizations.of(context).getText(
                                           '977ahbnt' /* Booked */,
                                         ),
                                         options: FFButtonOptions(
                                           color: Color(0xB2F5F5F5),
-                                          textStyle: FlutterFlowTheme
-                                              .of(context)
-                                              .subtitle2
-                                              .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w300,
-                                            useGoogleFonts: false,
-                                          ),
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w300,
+                                                    useGoogleFonts: false,
+                                                  ),
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
                                             width: 1,
                                           ),
-                                          borderRadius: BorderRadius.circular(
-                                              8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
@@ -980,11 +979,11 @@ _currentController?.play();});}
                             ),
                             Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(4, 14, 0, 0),
+                                  EdgeInsetsDirectional.fromSTEB(4, 14, 0, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -993,42 +992,40 @@ _currentController?.play();});}
                                       r'''$.attributes.property_name''',
                                     ).toString(),
                                     maxLines: 1,
-                                    style: FlutterFlowTheme
-                                        .of(context)
+                                    style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                      fontFamily: 'AvenirArabic',
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
+                                          fontFamily: 'AvenirArabic',
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
                                       'etpebw43' /* Approved Banks */,
                                     ),
                                     textAlign: TextAlign.end,
-                                    style: FlutterFlowTheme
-                                        .of(context)
+                                    style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                      fontFamily: 'AvenirArabic',
-                                      color: Color(0xFF474747),
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
+                                          fontFamily: 'AvenirArabic',
+                                          color: Color(0xFF474747),
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
                                   ),
                                 ],
                               ),
                             ),
                             Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(4, 1, 0, 14),
+                                  EdgeInsetsDirectional.fromSTEB(4, 1, 0, 14),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -1046,15 +1043,14 @@ _currentController?.play();});}
                                             propertiesItem,
                                             r'''$..attributes.city.data.attributes.city_name''',
                                           ).toString(),
-                                          style: FlutterFlowTheme
-                                              .of(context)
+                                          style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                            fontFamily: 'AvenirArabic',
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w300,
-                                            useGoogleFonts: false,
-                                          ),
+                                                fontFamily: 'AvenirArabic',
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w300,
+                                                useGoogleFonts: false,
+                                              ),
                                         ),
                                       ),
                                       Padding(
@@ -1064,15 +1060,14 @@ _currentController?.play();});}
                                           FFLocalizations.of(context).getText(
                                             'efcxmcgl' /* ,  */,
                                           ),
-                                          style: FlutterFlowTheme
-                                              .of(context)
+                                          style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                            fontFamily: 'AvenirArabic',
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w300,
-                                            useGoogleFonts: false,
-                                          ),
+                                                fontFamily: 'AvenirArabic',
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w300,
+                                                useGoogleFonts: false,
+                                              ),
                                         ),
                                       ),
                                       Text(
@@ -1080,15 +1075,14 @@ _currentController?.play();});}
                                           propertiesItem,
                                           r'''$..property_district''',
                                         ).toString(),
-                                        style: FlutterFlowTheme
-                                            .of(context)
+                                        style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w300,
-                                          useGoogleFonts: false,
-                                        ),
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w300,
+                                              useGoogleFonts: false,
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -1101,27 +1095,27 @@ _currentController?.play();});}
                                       return Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: List.generate(banks.length,
-                                                (banksIndex) {
-                                              final banksItem = banks[banksIndex];
-                                              return Padding(
-                                                padding:
+                                            (banksIndex) {
+                                          final banksItem = banks[banksIndex];
+                                          return Padding(
+                                            padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0, 0, 8, 0),
-                                                child: ClipRRect(
-                                                  borderRadius:
+                                            child: ClipRRect(
+                                              borderRadius:
                                                   BorderRadius.circular(11),
-                                                  child: Image.network(
-                                                    getJsonField(
-                                                      banksItem,
-                                                      r'''$.attributes.bank_logo.data.attributes.url''',
-                                                    ),
-                                                    width: 22,
-                                                    height: 22,
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                              child: Image.network(
+                                                getJsonField(
+                                                  banksItem,
+                                                  r'''$.attributes.bank_logo.data.attributes.url''',
                                                 ),
-                                              );
-                                            }),
+                                                width: 22,
+                                                height: 22,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          );
+                                        }),
                                       );
                                     },
                                   ),
@@ -1129,53 +1123,51 @@ _currentController?.play();});}
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  4, 0, 0, 0),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
                                       '998is2ya' /* Installment starting from */,
                                     ),
-                                    style: FlutterFlowTheme
-                                        .of(context)
+                                    style: FlutterFlowTheme.of(context)
                                         .title3
                                         .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      color: Color(0xFF2971FB),
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          color: Color(0xFF2971FB),
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
                                       'gqe4w739' /* Total property price */,
                                     ),
-                                    style: FlutterFlowTheme
-                                        .of(context)
+                                    style: FlutterFlowTheme.of(context)
                                         .bodyText2
                                         .override(
-                                      fontFamily: 'AvenirArabic',
-                                      color: Color(0xFF474747),
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
+                                          fontFamily: 'AvenirArabic',
+                                          color: Color(0xFF474747),
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
                                   ),
                                 ],
                               ),
                             ),
                             Padding(
                               padding:
-                              EdgeInsetsDirectional.fromSTEB(4, 1, 0, 20),
+                                  EdgeInsetsDirectional.fromSTEB(4, 1, 0, 20),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment
-                                    .spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1188,17 +1180,16 @@ _currentController?.play();});}
                                           ).toString()),
                                           '0',
                                         ),
-                                        style: FlutterFlowTheme
-                                            .of(context)
+                                        style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                          fontFamily:
-                                          'Sofia Pro By Khuzaimah',
-                                          color: Color(0xFF2971FB),
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold,
-                                          useGoogleFonts: false,
-                                        ),
+                                              fontFamily:
+                                                  'Sofia Pro By Khuzaimah',
+                                              color: Color(0xFF2971FB),
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                              useGoogleFonts: false,
+                                            ),
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -1208,16 +1199,15 @@ _currentController?.play();});}
                                             'l38if619' /*  SAR/Monthly */,
                                           ),
                                           textAlign: TextAlign.start,
-                                          style: FlutterFlowTheme
-                                              .of(context)
+                                          style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Color(0xFF2971FB),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts: false,
-                                          ),
+                                                fontFamily: 'AvenirArabic',
+                                                color: Color(0xFF2971FB),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                useGoogleFonts: false,
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -1232,41 +1222,39 @@ _currentController?.play();});}
                                           valueOrDefault<String>(
                                             functions
                                                 .formatAmountWithoutDecimal(
-                                                valueOrDefault<String>(
-                                                  getJsonField(
-                                                    propertiesItem,
-                                                    r'''$..property_price''',
-                                                  ).toString(),
-                                                  '0',
-                                                )),
+                                                    valueOrDefault<String>(
+                                              getJsonField(
+                                                propertiesItem,
+                                                r'''$..property_price''',
+                                              ).toString(),
+                                              '0',
+                                            )),
                                             '0',
                                           ),
-                                          style: FlutterFlowTheme
-                                              .of(context)
+                                          style: FlutterFlowTheme.of(context)
                                               .bodyText2
                                               .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            useGoogleFonts: false,
-                                          ),
+                                                fontFamily: 'AvenirArabic',
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                useGoogleFonts: false,
+                                              ),
                                         ),
                                       ),
                                       Text(
                                         FFLocalizations.of(context).getText(
                                           'dhoik8q5' /*  SAR */,
                                         ),
-                                        style: FlutterFlowTheme
-                                            .of(context)
+                                        style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                          fontFamily: 'AvenirArabic',
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          useGoogleFonts: false,
-                                        ),
+                                              fontFamily: 'AvenirArabic',
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              useGoogleFonts: false,
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -1286,7 +1274,8 @@ _currentController?.play();});}
                       // );
                       //  },
                     );
-                  },),
+                  },
+                ),
               ),
             ],
           ),

@@ -2,7 +2,11 @@ import 'package:chewie/chewie.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-
+import 'package:chewie/chewie.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:video_player/video_player.dart';
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
@@ -29,13 +33,24 @@ import 'package:mapbox_search/mapbox_search.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'chewiePlayer.dart';
+
+enum VideoType {
+  asset,
+  network,
+}
+
+Set<VideoPlayerController> _videoPlayers = Set();
+
 class PropertyDetailsWidget extends StatefulWidget {
   const PropertyDetailsWidget({
     Key key,
     this.propertyId,
+    this.path,
   }) : super(key: key);
 
   final int propertyId;
+  final String path;
 
   @override
   _PropertyDetailsWidgetState createState() => _PropertyDetailsWidgetState();
@@ -47,13 +62,72 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   VideoPlayerController _currentController;
   VideoPlayerController videoPlayerController;
+  VideoPlayerController _videoPlayerController;
+  ChewieController _chewieController;
+  bool _loggedError = false;
 
   @override
   void initState() {
     super.initState();
+    initializePlayer();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PropertyDetails'});
   }
+  void enterFullScreen() {
+    _chewieController.enterFullScreen();
+  }
+  @override
+  void dispose() {
+    _videoPlayers.remove(_videoPlayerController);
+    _videoPlayerController?.dispose();
+    _chewieController?.dispose();
+    super.dispose();
+  }
+
+
+  Future initializePlayer() async {
+
+    _videoPlayerController = VideoPlayerController.network(widget.path);
+
+      await _videoPlayerController?.initialize();
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController,
+      deviceOrientationsOnEnterFullScreen: [
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ],
+      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+      aspectRatio: MediaQuery.of(context).size.width/(MediaQuery.of(context).size.height*0.35),
+      autoPlay: true,
+      looping: true,
+      showControls: true,
+      allowFullScreen: true,
+      allowPlaybackSpeedChanging: false,
+
+    );
+    setState(() {});
+
+   _videoPlayers.add(_videoPlayerController);
+
+    _videoPlayerController.addListener(() {
+      if (_videoPlayerController.value.hasError && !_loggedError) {
+        print(
+            'Error playing video: ${_videoPlayerController.value.errorDescription}');
+        _loggedError = true;
+      }
+      //Stop all other players when one video is playing.
+      // if (_videoPlayerController.value.isPlaying) {
+      //   _videoPlayers.forEach((otherPlayer) {
+      //     if (otherPlayer != _videoPlayerController &&
+      //         otherPlayer.value.isPlaying) {
+      //       setState(() {
+      //         otherPlayer.pause();
+      //
+      //       });
+      //      }
+      //    });
+      // }
+    });}
 
   Future<void> configurePaymentSdk() async {
 
@@ -211,37 +285,64 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
 
 
     child: VisibilityDetector(
-    key: ObjectKey(FlutterFlowVideoPlayer),
+    key: ObjectKey(Chewie),
     onVisibilityChanged: (visibility) {
     if (visibility.visibleFraction *
     100 != 100 && this.mounted) {
-      if(_currentController!=null){
-    _currentController.pause();}}else{if(_currentController!=null){_currentController.play();}}
+      if(_chewieController!=null){
+    _chewieController.pause();}}else{if(_chewieController!=null){_chewieController.play();}}
 
     },
 
 
 
-            child: FlutterFlowVideoPlayer(
-    onTap: (videoControllerValue) {
-            print("detail_screen controller set length  = ${videoControllerValue.length}");
-            _currentController = videoControllerValue.last;
-            },
-                                            path: getJsonField(
-                                              columnPropertyResponse.jsonBody,
-                                              r'''$.data.attributes.video_manifest_uri''',
-                                            ),
-              height: MediaQuery.of(context).size.width/1.7777,
-              width: MediaQuery.of(context)
-                  .size.width,
-                                            videoType: VideoType.network,
-                                            autoPlay: true,
-                                            looping: true,
-                                            showControls: false,
-                                            //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
-                                            allowFullScreen: true,
-                                            allowPlaybackSpeedMenu: false,
-                                          ),),),
+    //         child: FlutterFlowVideoPlayer(
+    // onTap: (videoControllerValue) {
+    //         print("detail_screen controller set length  = ${videoControllerValue.length}");
+    //         _currentController = videoControllerValue.last;
+    //         },
+    //                                         path: getJsonField(
+    //                                           columnPropertyResponse.jsonBody,
+    //                                           r'''$.data.attributes.video_manifest_uri''',
+    //                                         ),
+    //           height: MediaQuery.of(context).size.width/1.7777,
+    //           width: MediaQuery.of(context)
+    //               .size.width,
+    //                                         videoType: VideoType.network,
+    //                                         autoPlay: true,
+    //                                         looping: true,
+    //                                         showControls: false,
+    //                                         //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
+    //                                         allowFullScreen: true,
+    //                                         allowPlaybackSpeedMenu: false,
+    //                                       ),
+     child: FittedBox(
+            fit: BoxFit.fitWidth,
+            child: Container(
+            height: MediaQuery.of(context)
+                           .size.height*0.35,
+            width: MediaQuery.of(context)
+                           .size.width,
+              child:_chewieController != null &&
+          (_chewieController
+                  .videoPlayerController.value.isInitialized)
+          ? Chewie(controller: _chewieController)
+          : (_chewieController != null &&
+          _chewieController.videoPlayerController.value.hasError)
+          ? Text('Error playing video')
+          : Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:  [
+          Container(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator()),
+          SizedBox(height: 20),
+          Text('Loading'),
+        ],
+      ),
+
+    ),),),),
 
             //),
             ),
@@ -249,7 +350,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
 
                                     ),
                               onTap: () {
-                                     print("On Tapped");
+                                     //_chewieController.enterFullScreen();
+                                     _chewieController.toggleFullScreen();
                                      // _currentController.enterFullScreen();
                                     },
                                   ),
@@ -379,7 +481,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                               alignment: AlignmentDirectional(0, 0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 280, 0, 0),
+                                    0, 273, 0, 0),
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
@@ -645,7 +747,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   0, 0, 8, 0),
                                                       child: InkWell(
                                                         onTap: () async {
-                                                          _currentController.pause();
+                                                          _chewieController.pause();
                                                           logFirebaseEvent(
                                                               'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
                                                           logFirebaseEvent(
@@ -705,7 +807,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     ),
                                                     InkWell(
                                                       onTap: () async {
-                                                        _currentController.pause();
+                                                        _chewieController.pause();
                                                         logFirebaseEvent(
                                                             'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
                                                         logFirebaseEvent(
