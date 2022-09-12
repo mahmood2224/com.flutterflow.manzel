@@ -25,10 +25,10 @@ export 'internationalization.dart' show FFLocalizations;
 export '../backend/firebase_analytics/analytics.dart';
 export 'nav/nav.dart';
 
-T valueOrDefault<T>(T value, T defaultValue) =>
+T valueOrDefault<T>(T? value, T defaultValue) =>
     (value is String && value.isEmpty) || value == null ? defaultValue : value;
 
-String dateTimeFormat(String format, DateTime dateTime) {
+String dateTimeFormat(String format, DateTime? dateTime) {
   if (dateTime == null) {
     return '';
   }
@@ -48,10 +48,10 @@ Future launchURL(String url) async {
 }
 
 Future launchMap({
-  MapType mapType,
-  LatLng location,
-  String address,
-  title,
+  MapType? mapType,
+  LatLng? location,
+  String? address,
+  required title,
 }) async {
   final coords = location != null
       ? Coords(location.latitude, location.longitude)
@@ -68,7 +68,7 @@ Future launchMap({
     );
   }
   return MapLauncher.showMarker(
-    mapType: mapType,
+    mapType: mapType!,
     coords: coords,
     title: title,
     extraParams: extraParams,
@@ -91,13 +91,13 @@ enum DecimalType {
 }
 
 String formatNumber(
-  num value, {
-  FormatType formatType,
-  DecimalType decimalType,
-  String currency,
+  num? value, {
+  required FormatType formatType,
+  DecimalType? decimalType,
+  String? currency,
   bool toLowerCase = false,
-  String format,
-  String locale,
+  String? format,
+  String? locale,
 }) {
   if (value == null) {
     return '';
@@ -105,7 +105,7 @@ String formatNumber(
   var formattedValue = '';
   switch (formatType) {
     case FormatType.decimal:
-      switch (decimalType) {
+      switch (decimalType!) {
         case DecimalType.automatic:
           formattedValue = NumberFormat.decimalPattern().format(value);
           break;
@@ -161,20 +161,27 @@ extension DateTimeComparisonOperators on DateTime {
   bool operator >=(DateTime other) => this > other || isAtSameMomentAs(other);
 }
 
-dynamic getJsonField(dynamic response, String jsonPath) {
+dynamic getJsonField(
+  dynamic response,
+  String jsonPath, [
+  bool isForList = false,
+]) {
   final field = JsonPath(jsonPath).read(response);
-  return field.isNotEmpty
-      ? field.length > 1
-          ? field.map((f) => f.value).toList()
-          : field.first.value
-      : null;
+  if (field.isEmpty) {
+    return null;
+  }
+  if (field.length > 1) {
+    return field.map((f) => f.value).toList();
+  }
+  final value = field.first.value;
+  return isForList && value is! Iterable ? [value] : value;
 }
 
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
 bool get isiOS => !kIsWeb && Platform.isIOS;
 bool get isWeb => kIsWeb;
 bool responsiveVisibility({
-  @required BuildContext context,
+  required BuildContext context,
   bool phone = true,
   bool tablet = true,
   bool tabletLandscape = true,
@@ -239,7 +246,7 @@ void showSnackbar(
 }
 
 extension FFStringExt on String {
-  String maybeHandleOverflow({int maxChars, String replacement = ''}) =>
+  String maybeHandleOverflow({int? maxChars, String replacement = ''}) =>
       maxChars != null && length > maxChars
           ? replaceRange(maxChars, null, replacement)
           : this;

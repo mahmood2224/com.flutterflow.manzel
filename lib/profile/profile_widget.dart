@@ -13,14 +13,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileWidget extends StatefulWidget {
-  const ProfileWidget({Key key}) : super(key: key);
+  const ProfileWidget({Key? key}) : super(key: key);
 
   @override
   _ProfileWidgetState createState() => _ProfileWidgetState();
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
-  bool changeLanguage;
+  bool? changeLanguage;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -117,6 +117,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 'PROFILE_PAGE_Row_ekepkdfw_ON_TAP');
                             // editPersonalInfo
                             logFirebaseEvent('Row_editPersonalInfo');
+
                             context.goNamed('EditPersonallInfo');
                           },
                           child: Row(
@@ -159,6 +160,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             logFirebaseEvent('PROFILE_PAGE_logIn_ON_TAP');
                             // login
                             logFirebaseEvent('logIn_login');
+
                             context.goNamed('Login');
                           },
                           text: FFLocalizations.of(context).getText(
@@ -232,7 +234,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           changeLanguage = await actions.isEnglish(
                             FFLocalizations.of(context).languageCode,
                           );
-                          if (changeLanguage) {
+                          if (changeLanguage!) {
                             logFirebaseEvent(
                                 'currentLanguage_Update-Local-State');
                             setState(() => FFAppState().locale = 'en');
@@ -264,7 +266,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               language:
                                   FFLocalizations.of(context).languageCode,
                             );
-                            await currentUserReference.update(userUpdateData);
+                            await currentUserReference!.update(userUpdateData);
                           }
 
                           setState(() {});
@@ -442,6 +444,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             logFirebaseEvent('logout_Logout');
                             GoRouter.of(context).prepareAuthEvent();
                             await signOut();
+
                             context.goNamedAuth('OnboardingView', mounted);
                           },
                           text: FFLocalizations.of(context).getText(

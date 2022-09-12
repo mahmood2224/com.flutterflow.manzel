@@ -15,7 +15,7 @@ Set<VideoPlayerController> _videoPlayers = Set();
 
 class FlutterFlowVideoPlayer extends StatefulWidget {
   const FlutterFlowVideoPlayer({
-    @required this.path,
+    required this.path,
     this.videoType = VideoType.network,
     this.width,
     this.height,
@@ -30,9 +30,9 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
 
   final String path;
   final VideoType videoType;
-  final double width;
-  final double height;
-  final double aspectRatio;
+  final double? width;
+  final double? height;
+  final double? aspectRatio;
   final bool autoPlay;
   final bool looping;
   final bool showControls;
@@ -45,8 +45,8 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
 }
 
 class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
-  VideoPlayerController _videoPlayerController;
-  ChewieController _chewieController;
+  VideoPlayerController? _videoPlayerController;
+  ChewieController? _chewieController;
   bool _loggedError = false;
 
   @override
@@ -63,16 +63,17 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
     super.dispose();
   }
 
-  double get width => widget.width == null || widget.width >= double.infinity
+  double get width => widget.width == null || widget.width! >= double.infinity
       ? MediaQuery.of(context).size.width
-      : widget.width;
+      : widget.width!;
 
-  double get height => widget.height == null || widget.height >= double.infinity
-      ? width / aspectRatio
-      : widget.height;
+  double get height =>
+      widget.height == null || widget.height! >= double.infinity
+          ? width / aspectRatio
+          : widget.height!;
 
   double get aspectRatio =>
-      _chewieController?.videoPlayerController?.value?.aspectRatio ??
+      _chewieController?.videoPlayerController.value.aspectRatio ??
       kDefaultAspectRatio;
 
   Future initializePlayer() async {
@@ -84,13 +85,13 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
       // Ideally this should be configurable, but for now we just automatically
       // mute on web.
       // See https://pub.dev/packages/video_player_web#autoplay
-      _videoPlayerController.setVolume(0);
+      _videoPlayerController!.setVolume(0);
     }
     if (!widget.lazyLoad) {
       await _videoPlayerController?.initialize();
     }
     _chewieController = ChewieController(
-      videoPlayerController: _videoPlayerController,
+      videoPlayerController: _videoPlayerController!,
       deviceOrientationsOnEnterFullScreen: [
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
@@ -104,15 +105,15 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
       allowPlaybackSpeedChanging: widget.allowPlaybackSpeedMenu,
     );
 
-    _videoPlayers.add(_videoPlayerController);
-    _videoPlayerController.addListener(() {
-      if (_videoPlayerController.value.hasError && !_loggedError) {
+    _videoPlayers.add(_videoPlayerController!);
+    _videoPlayerController!.addListener(() {
+      if (_videoPlayerController!.value.hasError && !_loggedError) {
         print(
-            'Error playing video: ${_videoPlayerController.value.errorDescription}');
+            'Error playing video: ${_videoPlayerController!.value.errorDescription}');
         _loggedError = true;
       }
       // Stop all other players when one video is playing.
-      if (_videoPlayerController.value.isPlaying) {
+      if (_videoPlayerController!.value.isPlaying) {
         _videoPlayers.forEach((otherPlayer) {
           if (otherPlayer != _videoPlayerController &&
               otherPlayer.value.isPlaying) {
@@ -135,11 +136,11 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
           width: width,
           child: _chewieController != null &&
                   (widget.lazyLoad ||
-                      _chewieController
+                      _chewieController!
                           .videoPlayerController.value.isInitialized)
-              ? Chewie(controller: _chewieController)
+              ? Chewie(controller: _chewieController!)
               : (_chewieController != null &&
-                      _chewieController.videoPlayerController.value.hasError)
+                      _chewieController!.videoPlayerController.value.hasError)
                   ? Text('Error playing video')
                   : Column(
                       mainAxisAlignment: MainAxisAlignment.center,

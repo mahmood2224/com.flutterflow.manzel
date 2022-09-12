@@ -8,12 +8,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BankDetailsBottomSheetWidget extends StatefulWidget {
   const BankDetailsBottomSheetWidget({
-    Key key,
+    Key? key,
     this.bankId,
     this.bankJSON,
   }) : super(key: key);
 
-  final int bankId;
+  final int? bankId;
   final dynamic bankJSON;
 
   @override

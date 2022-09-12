@@ -13,13 +13,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ReservationBottomSheetWidget extends StatefulWidget {
   const ReservationBottomSheetWidget({
-    Key key,
+    Key? key,
     this.reservationCost,
     this.propertyId,
   }) : super(key: key);
 
-  final int reservationCost;
-  final int propertyId;
+  final int? reservationCost;
+  final int? propertyId;
 
   @override
   _ReservationBottomSheetWidgetState createState() =>
@@ -28,9 +28,9 @@ class ReservationBottomSheetWidget extends StatefulWidget {
 
 class _ReservationBottomSheetWidgetState
     extends State<ReservationBottomSheetWidget> {
-  ApiCallResponse addOrderApiResponse;
-  ApiCallResponse transactionApiResponse;
-  String paymentMethodValue;
+  ApiCallResponse? addOrderApiResponse;
+  ApiCallResponse? transactionApiResponse;
+  String? paymentMethodValue;
 
   @override
   Widget build(BuildContext context) {
@@ -367,7 +367,7 @@ class _ReservationBottomSheetWidgetState
                       ),
                     );
                   }
-                  List<OrdersRecord> buttonOrdersRecordList = snapshot.data;
+                  List<OrdersRecord> buttonOrdersRecordList = snapshot.data!;
                   return FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent(
@@ -398,6 +398,7 @@ class _ReservationBottomSheetWidgetState
                           logFirebaseEvent('Button_Bottom-Sheet');
                           Navigator.pop(context);
                           logFirebaseEvent('Button_Navigate-To');
+
                           context.goNamed(
                             'Confirmation',
                             queryParams: {

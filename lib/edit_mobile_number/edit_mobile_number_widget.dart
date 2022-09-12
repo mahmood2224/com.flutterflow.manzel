@@ -10,14 +10,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditMobileNumberWidget extends StatefulWidget {
-  const EditMobileNumberWidget({Key key}) : super(key: key);
+  const EditMobileNumberWidget({Key? key}) : super(key: key);
 
   @override
   _EditMobileNumberWidgetState createState() => _EditMobileNumberWidgetState();
 }
 
 class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
-  TextEditingController mobileNumberController;
+  TextEditingController? mobileNumberController;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -27,7 +28,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
         parameters: {'screen_name': 'EditMobileNumber'});
     mobileNumberController = TextEditingController();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
-          mobileNumberController.text = FFLocalizations.of(context).getText(
+          mobileNumberController?.text = FFLocalizations.of(context).getText(
             'dkoyvgce' /* +966 */,
           );
         }));
@@ -54,6 +55,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
             logFirebaseEvent('EDIT_MOBILE_NUMBER_PAGE_back_ON_TAP');
             // Back to onboarding view
             logFirebaseEvent('back_Backtoonboardingview');
+
             context.pushNamed('EditPersonallInfo');
           },
         ),
@@ -141,11 +143,25 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                           prefixIcon: Icon(
                             Icons.local_phone_outlined,
                             color: FlutterFlowTheme.of(context).secondaryText,
                           ),
-                          suffixIcon: mobileNumberController.text.isNotEmpty
+                          suffixIcon: mobileNumberController!.text.isNotEmpty
                               ? InkWell(
                                   onTap: () async {
                                     mobileNumberController?.clear();
@@ -182,10 +198,10 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                         logFirebaseEvent(
                             'EDIT_MOBILE_NUMBER_PAGE_sendOTP_ON_TAP');
                         if (functions.checkPhoneNumberFormat(
-                            mobileNumberController.text)) {
+                            mobileNumberController!.text)) {
                           // sendOTP
                           logFirebaseEvent('sendOTP_sendOTP');
-                          final phoneNumberVal = mobileNumberController.text;
+                          final phoneNumberVal = mobileNumberController!.text;
                           if (phoneNumberVal == null ||
                               phoneNumberVal.isEmpty ||
                               !phoneNumberVal.startsWith('+')) {

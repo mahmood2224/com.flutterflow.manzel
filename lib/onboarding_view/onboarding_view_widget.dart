@@ -8,14 +8,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingViewWidget extends StatefulWidget {
-  const OnboardingViewWidget({Key key}) : super(key: key);
+  const OnboardingViewWidget({Key? key}) : super(key: key);
 
   @override
   _OnboardingViewWidgetState createState() => _OnboardingViewWidgetState();
 }
 
 class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
-  PageController pageViewController;
+  PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -30,6 +30,7 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
             FFAppState().locale = FFLocalizations.of(context).languageCode);
       } else {
         logFirebaseEvent('OnboardingView_Navigate-To');
+
         context.goNamed('HomeScreen');
       }
 
@@ -176,7 +177,7 @@ your f... */
                       count: 3,
                       axisDirection: Axis.horizontal,
                       onDotClicked: (i) {
-                        pageViewController.animateToPage(
+                        pageViewController!.animateToPage(
                           i,
                           duration: Duration(milliseconds: 500),
                           curve: Curves.ease,
@@ -203,7 +204,9 @@ your f... */
                   logFirebaseEvent('ONBOARDING_VIEW_PAGE_getStarted_ON_TAP');
                   // GoTohome
                   logFirebaseEvent('getStarted_GoTohome');
+
                   context.goNamed('HomeScreen');
+
                   logFirebaseEvent('getStarted_Update-Local-State');
                   setState(() => FFAppState().isInitailLaunch = false);
                 },
@@ -234,7 +237,9 @@ your f... */
                 logFirebaseEvent('ONBOARDING_VIEW_PAGE_goToLogin_ON_TAP');
                 // Go to Login
                 logFirebaseEvent('goToLogin_GotoLogin');
+
                 context.pushNamed('Login');
+
                 logFirebaseEvent('goToLogin_Update-Local-State');
                 setState(() => FFAppState().isInitailLaunch = false);
               },

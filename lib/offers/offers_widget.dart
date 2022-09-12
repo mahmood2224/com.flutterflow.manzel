@@ -8,6 +8,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -16,20 +17,20 @@ import 'package:google_fonts/google_fonts.dart';
 
 class OffersWidget extends StatefulWidget {
   const OffersWidget({
-    Key key,
+    Key? key,
     this.propertyId,
   }) : super(key: key);
 
-  final String propertyId;
+  final String? propertyId;
 
   @override
   _OffersWidgetState createState() => _OffersWidgetState();
 }
 
 class _OffersWidgetState extends State<OffersWidget> {
-  ApiCallResponse acceptOfferResponse;
-  ApiCallResponse acceptOfferResponseAr;
-  Completer<ApiCallResponse> _apiRequestCompleter;
+  ApiCallResponse? acceptOfferResponse;
+  ApiCallResponse? acceptOfferResponseAr;
+  Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -186,7 +187,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             );
                                           }
                                           final textGetOffersResponse =
-                                              snapshot.data;
+                                              snapshot.data!;
                                           return Text(
                                             valueOrDefault<String>(
                                               functions
@@ -324,6 +325,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     logFirebaseEvent(
                                         'OFFERS_PAGE_LOGIN_SIGNUP_BTN_ON_TAP');
                                     logFirebaseEvent('Button_Navigate-To');
+
                                     context.pushNamed('Login');
                                   },
                                   text: FFLocalizations.of(context).getText(
@@ -392,7 +394,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     ),
                                   );
                                 }
-                                final listViewGetOffersResponse = snapshot.data;
+                                final listViewGetOffersResponse =
+                                    snapshot.data!;
                                 return Builder(
                                   builder: (context) {
                                     final activeOffers = GetOffersCall.result(
@@ -1519,86 +1522,106 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                               CrossAxisAlignment
                                                                   .stretch,
                                                           children: [
-                                                            Padding(
+                                                            Badge(
+                                                              badgeContent:
+                                                                  Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  '8xn1x1ox' /* 1 */,
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      color: Colors
+                                                                          .white,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                              showBadge: true,
+                                                              shape: BadgeShape
+                                                                  .circle,
+                                                              badgeColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .customColor3,
+                                                              elevation: 4,
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          0,
+                                                                          8,
+                                                                          8,
+                                                                          8,
                                                                           8),
-                                                              child: InkWell(
-                                                                onTap:
-                                                                    () async {
-                                                                  logFirebaseEvent(
-                                                                      'OFFERS_PAGE_Container_4zrbybz6_ON_TAP');
-                                                                  logFirebaseEvent(
-                                                                      'Container_Navigate-To');
-                                                                  context
-                                                                      .pushNamed(
-                                                                    'Chat',
-                                                                    queryParams:
-                                                                        {
-                                                                      'bankJson': serializeParam(
-                                                                          getJsonField(
-                                                                            activeOffersItem,
-                                                                            r'''$''',
-                                                                          ),
-                                                                          ParamType.JSON),
-                                                                    }.withoutNulls,
-                                                                  );
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  width: 100,
-                                                                  height: 42,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryColor,
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(8),
-                                                                  ),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'pasrxjal' /* Chat with */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'AvenirArabic',
-                                                                              color: FlutterFlowTheme.of(context).white,
-                                                                              fontSize: 15,
-                                                                              fontWeight: FontWeight.w500,
-                                                                              useGoogleFonts: false,
-                                                                            ),
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            3,
+                                                              position:
+                                                                  BadgePosition
+                                                                      .topEnd(),
+                                                              animationType:
+                                                                  BadgeAnimationType
+                                                                      .scale,
+                                                              toAnimate: true,
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
                                                                             0,
-                                                                            3,
-                                                                            0),
-                                                                        child:
-                                                                            Text(
-                                                                          valueOrDefault<
-                                                                              String>(
+                                                                            7,
+                                                                            0,
+                                                                            8),
+                                                                child: InkWell(
+                                                                  onTap:
+                                                                      () async {
+                                                                    logFirebaseEvent(
+                                                                        'OFFERS_PAGE_Container_4zrbybz6_ON_TAP');
+                                                                    logFirebaseEvent(
+                                                                        'Container_Navigate-To');
+
+                                                                    context
+                                                                        .pushNamed(
+                                                                      'Chat',
+                                                                      queryParams:
+                                                                          {
+                                                                        'bankJson': serializeParam(
                                                                             getJsonField(
                                                                               activeOffersItem,
-                                                                              r'''$.bank_name''',
-                                                                            ).toString(),
-                                                                            'null',
+                                                                              r'''$''',
+                                                                            ),
+                                                                            ParamType.JSON),
+                                                                      }.withoutNulls,
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width,
+                                                                    height: 42,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'pasrxjal' /* Chat with */,
                                                                           ),
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyText1
@@ -1610,31 +1633,55 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 useGoogleFonts: false,
                                                                               ),
                                                                         ),
-                                                                      ),
-                                                                      Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'alqnps4o' /*   */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1,
-                                                                      ),
-                                                                      Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'ps7kcru7' /* bank */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'AvenirArabic',
-                                                                              color: FlutterFlowTheme.of(context).white,
-                                                                              fontSize: 15,
-                                                                              fontWeight: FontWeight.w500,
-                                                                              useGoogleFonts: false,
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              3,
+                                                                              0,
+                                                                              2,
+                                                                              0),
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.bank_name''',
+                                                                              ).toString(),
+                                                                              'null',
                                                                             ),
-                                                                      ),
-                                                                    ],
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  color: FlutterFlowTheme.of(context).white,
+                                                                                  fontSize: 15,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'alqnps4o' /*   */,
+                                                                          ),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyText1,
+                                                                        ),
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'ps7kcru7' /* bank */,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 15,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
@@ -1896,6 +1943,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                 logFirebaseEvent(
                                     'OFFERS_PAGE_Container_kc3eke2v_ON_TAP');
                                 logFirebaseEvent('Container_Navigate-To');
+
                                 context.pushNamed(
                                   'PastOffers',
                                   extra: <String, dynamic>{

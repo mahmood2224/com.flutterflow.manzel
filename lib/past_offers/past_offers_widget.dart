@@ -10,14 +10,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PastOffersWidget extends StatefulWidget {
-  const PastOffersWidget({Key key}) : super(key: key);
+  const PastOffersWidget({Key? key}) : super(key: key);
 
   @override
   _PastOffersWidgetState createState() => _PastOffersWidgetState();
 }
 
 class _PastOffersWidgetState extends State<PastOffersWidget> {
-  Completer<ApiCallResponse> _apiRequestCompleter;
+  Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -119,7 +119,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                           ),
                         );
                       }
-                      final listViewArchivedOffersResponse = snapshot.data;
+                      final listViewArchivedOffersResponse = snapshot.data!;
                       return Builder(
                         builder: (context) {
                           final allOffers = ArchivedOffersCall.result(

@@ -9,17 +9,17 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ConfirmationWidget extends StatefulWidget {
   const ConfirmationWidget({
-    Key key,
+    Key? key,
     this.propertyId,
     this.paymentMethod,
     this.orderId,
     this.transactionId,
   }) : super(key: key);
 
-  final int propertyId;
-  final String paymentMethod;
-  final String orderId;
-  final String transactionId;
+  final int? propertyId;
+  final String? paymentMethod;
+  final String? orderId;
+  final String? transactionId;
 
   @override
   _ConfirmationWidgetState createState() => _ConfirmationWidgetState();
@@ -152,6 +152,7 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                   Navigator.pop(context);
                                   logFirebaseEvent(
                                       'viewBookingDetails_Navigate-To');
+
                                   context.goNamed('MyProperties');
                                 },
                                 text: FFLocalizations.of(context).getText(

@@ -7,11 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ThreeSixtyViewWidget extends StatefulWidget {
   const ThreeSixtyViewWidget({
-    Key key,
+    Key? key,
     this.url,
   }) : super(key: key);
 
-  final String url;
+  final String? url;
 
   @override
   _ThreeSixtyViewWidgetState createState() => _ThreeSixtyViewWidgetState();
@@ -70,7 +70,7 @@ class _ThreeSixtyViewWidgetState extends State<ThreeSixtyViewWidget> {
             children: [
               Expanded(
                 child: FlutterFlowWebView(
-                  url: widget.url,
+                  url: widget.url!,
                   bypass: false,
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 1,

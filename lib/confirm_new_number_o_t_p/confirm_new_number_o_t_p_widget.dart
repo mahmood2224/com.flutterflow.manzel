@@ -9,7 +9,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ConfirmNewNumberOTPWidget extends StatefulWidget {
-  const ConfirmNewNumberOTPWidget({Key key}) : super(key: key);
+  const ConfirmNewNumberOTPWidget({Key? key}) : super(key: key);
 
   @override
   _ConfirmNewNumberOTPWidgetState createState() =>
@@ -17,7 +17,8 @@ class ConfirmNewNumberOTPWidget extends StatefulWidget {
 }
 
 class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
-  TextEditingController enterOTPController;
+  TextEditingController? enterOTPController;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -49,6 +50,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
             logFirebaseEvent('CONFIRM_NEW_NUMBER_O_T_P_back_ON_TAP');
             // Back to login
             logFirebaseEvent('back_Backtologin');
+
             context.pushNamed('EditMobileNumber');
           },
         ),
@@ -153,6 +155,20 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Sofia Pro By Khuzaimah',
@@ -177,7 +193,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                         // verifyOTP
                         logFirebaseEvent('verifyOTP_verifyOTP');
                         GoRouter.of(context).prepareAuthEvent();
-                        final smsCodeVal = enterOTPController.text;
+                        final smsCodeVal = enterOTPController!.text;
                         if (smsCodeVal == null || smsCodeVal.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

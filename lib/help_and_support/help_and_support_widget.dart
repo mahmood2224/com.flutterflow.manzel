@@ -9,7 +9,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HelpAndSupportWidget extends StatefulWidget {
-  const HelpAndSupportWidget({Key key}) : super(key: key);
+  const HelpAndSupportWidget({Key? key}) : super(key: key);
 
   @override
   _HelpAndSupportWidgetState createState() => _HelpAndSupportWidgetState();
@@ -185,7 +185,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                         final userUpdateData = createUserRecordData(
                           isDeleted: 1,
                         );
-                        await currentUserReference.update(userUpdateData);
+                        await currentUserReference!.update(userUpdateData);
                         logFirebaseEvent('Container_Auth');
                         GoRouter.of(context).prepareAuthEvent();
                         await signOut();

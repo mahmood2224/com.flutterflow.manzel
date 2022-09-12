@@ -11,45 +11,36 @@ abstract class NotificationsRecord
   static Serializer<NotificationsRecord> get serializer =>
       _$notificationsRecordSerializer;
 
-  @nullable
   @BuiltValueField(wireName: 'created_at')
-  DateTime get createdAt;
+  DateTime? get createdAt;
 
-  @nullable
   @BuiltValueField(wireName: 'message_ar')
-  String get messageAr;
+  String? get messageAr;
 
-  @nullable
   @BuiltValueField(wireName: 'message_en')
-  String get messageEn;
+  String? get messageEn;
 
-  @nullable
   @BuiltValueField(wireName: 'notification_type')
-  String get notificationType;
+  String? get notificationType;
 
-  @nullable
   @BuiltValueField(wireName: 'order_id')
-  int get orderId;
+  int? get orderId;
 
-  @nullable
   @BuiltValueField(wireName: 'property_id')
-  String get propertyId;
+  String? get propertyId;
 
-  @nullable
   @BuiltValueField(wireName: 'updated_at')
-  DateTime get updatedAt;
+  DateTime? get updatedAt;
 
-  @nullable
   @BuiltValueField(wireName: 'user_id')
-  DocumentReference get userId;
+  DocumentReference? get userId;
 
-  @nullable
   @BuiltValueField(wireName: 'is_read')
-  int get isRead;
+  int? get isRead;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(NotificationsRecordBuilder builder) => builder
     ..messageAr = ''
@@ -64,11 +55,11 @@ abstract class NotificationsRecord
 
   static Stream<NotificationsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<NotificationsRecord> getDocumentOnce(DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   NotificationsRecord._();
   factory NotificationsRecord(
@@ -78,29 +69,35 @@ abstract class NotificationsRecord
   static NotificationsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createNotificationsRecordData({
-  DateTime createdAt,
-  String messageAr,
-  String messageEn,
-  String notificationType,
-  int orderId,
-  String propertyId,
-  DateTime updatedAt,
-  DocumentReference userId,
-  int isRead,
-}) =>
-    serializers.toFirestore(
-        NotificationsRecord.serializer,
-        NotificationsRecord((n) => n
-          ..createdAt = createdAt
-          ..messageAr = messageAr
-          ..messageEn = messageEn
-          ..notificationType = notificationType
-          ..orderId = orderId
-          ..propertyId = propertyId
-          ..updatedAt = updatedAt
-          ..userId = userId
-          ..isRead = isRead));
+  DateTime? createdAt,
+  String? messageAr,
+  String? messageEn,
+  String? notificationType,
+  int? orderId,
+  String? propertyId,
+  DateTime? updatedAt,
+  DocumentReference? userId,
+  int? isRead,
+}) {
+  final firestoreData = serializers.toFirestore(
+    NotificationsRecord.serializer,
+    NotificationsRecord(
+      (n) => n
+        ..createdAt = createdAt
+        ..messageAr = messageAr
+        ..messageEn = messageEn
+        ..notificationType = notificationType
+        ..orderId = orderId
+        ..propertyId = propertyId
+        ..updatedAt = updatedAt
+        ..userId = userId
+        ..isRead = isRead,
+    ),
+  );
+
+  return firestoreData;
+}

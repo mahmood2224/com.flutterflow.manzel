@@ -13,11 +13,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ReservationConfirmationWidget extends StatefulWidget {
   const ReservationConfirmationWidget({
-    Key key,
+    Key? key,
     this.propertyId,
   }) : super(key: key);
 
-  final int propertyId;
+  final int? propertyId;
 
   @override
   _ReservationConfirmationWidgetState createState() =>
@@ -26,9 +26,9 @@ class ReservationConfirmationWidget extends StatefulWidget {
 
 class _ReservationConfirmationWidgetState
     extends State<ReservationConfirmationWidget> {
-  ApiCallResponse initiateOrder;
-  OrdersRecord createOrder;
-  String paymentMethodsValue;
+  ApiCallResponse? initiateOrder;
+  OrdersRecord? createOrder;
+  String? paymentMethodsValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -58,7 +58,7 @@ class _ReservationConfirmationWidgetState
             ),
           );
         }
-        final reservationConfirmationPropertyResponse = snapshot.data;
+        final reservationConfirmationPropertyResponse = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: Colors.white,
@@ -123,6 +123,7 @@ class _ReservationConfirmationWidgetState
                                                 'RESERVATION_CONFIRMATION_Icon_n0mpifh9_O');
                                             logFirebaseEvent(
                                                 'Icon_Navigate-To');
+
                                             context.pushNamed(
                                               'PropertyDetails',
                                               queryParams: {
@@ -408,6 +409,7 @@ class _ReservationConfirmationWidgetState
                                               // OrderConfirmed
                                               logFirebaseEvent(
                                                   'pay_OrderConfirmed');
+
                                               context.goNamed(
                                                 'Confirmation',
                                                 queryParams: {

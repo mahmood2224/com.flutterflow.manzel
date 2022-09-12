@@ -3,11 +3,11 @@ import 'package:rxdart/rxdart.dart';
 
 class ManzelFirebaseUser {
   ManzelFirebaseUser(this.user);
-  User user;
+  User? user;
   bool get loggedIn => user != null;
 }
 
-ManzelFirebaseUser currentUser;
+ManzelFirebaseUser? currentUser;
 bool get loggedIn => currentUser?.loggedIn ?? false;
 Stream<ManzelFirebaseUser> manzelFirebaseUserStream() => FirebaseAuth.instance
     .authStateChanges()

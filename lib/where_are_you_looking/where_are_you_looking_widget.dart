@@ -9,11 +9,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class WhereAreYouLookingWidget extends StatefulWidget {
   const WhereAreYouLookingWidget({
-    Key key,
+    Key? key,
     this.city,
   }) : super(key: key);
 
-  final String city;
+  final String? city;
 
   @override
   _WhereAreYouLookingWidgetState createState() =>
@@ -137,7 +137,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                           ),
                         );
                       }
-                      final listViewSearchPageCitiesResponse = snapshot.data;
+                      final listViewSearchPageCitiesResponse = snapshot.data!;
                       return Builder(
                         builder: (context) {
                           final cities = getJsonField(
@@ -172,6 +172,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                     logFirebaseEvent(
                                         'WHERE_ARE_YOU_LOOKING_Container_errzn6go');
                                     logFirebaseEvent('Container_Navigate-To');
+
                                     context.pushNamed(
                                       'SearchCityResult',
                                       queryParams: {

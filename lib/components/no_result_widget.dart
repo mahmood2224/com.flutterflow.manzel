@@ -6,13 +6,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class NoResultWidget extends StatefulWidget {
   const NoResultWidget({
-    Key key,
+    Key? key,
     this.titleText,
     this.screenName,
   }) : super(key: key);
 
-  final String titleText;
-  final String screenName;
+  final String? titleText;
+  final String? screenName;
 
   @override
   _NoResultWidgetState createState() => _NoResultWidgetState();
@@ -64,7 +64,7 @@ class _NoResultWidgetState extends State<NoResultWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 9, 0, 0),
                 child: Text(
-                  widget.titleText,
+                  widget.titleText!,
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'AvenirArabic',

@@ -5,7 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TermsConditionsWidget extends StatefulWidget {
-  const TermsConditionsWidget({Key key}) : super(key: key);
+  const TermsConditionsWidget({Key? key}) : super(key: key);
 
   @override
   _TermsConditionsWidgetState createState() => _TermsConditionsWidgetState();

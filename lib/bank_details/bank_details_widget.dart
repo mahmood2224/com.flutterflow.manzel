@@ -9,13 +9,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BankDetailsWidget extends StatefulWidget {
   const BankDetailsWidget({
-    Key key,
+    Key? key,
     this.bankId,
     this.propertyId,
   }) : super(key: key);
 
-  final int bankId;
-  final int propertyId;
+  final int? bankId;
+  final int? propertyId;
 
   @override
   _BankDetailsWidgetState createState() => _BankDetailsWidgetState();
@@ -167,7 +167,7 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                   ),
                                 );
                               }
-                              final columnBankDetailsResponse = snapshot.data;
+                              final columnBankDetailsResponse = snapshot.data!;
                               return Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -187,6 +187,7 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                                   'BANK_DETAILS_PAGE_Icon_w5gr2oec_ON_TAP');
                                               logFirebaseEvent(
                                                   'Icon_Navigate-To');
+
                                               context.goNamed(
                                                 'PropertyDetails',
                                                 queryParams: {

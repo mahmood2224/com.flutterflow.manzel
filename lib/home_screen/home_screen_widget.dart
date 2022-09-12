@@ -6,7 +6,6 @@ import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:badges/badges.dart';
@@ -20,25 +19,25 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   const HomeScreenWidget({
-    Key key,
+    Key? key,
     this.city,
     this.type,
     this.installmentRange,
     this.furnishing,
   }) : super(key: key);
 
-  final String city;
-  final String type;
-  final double installmentRange;
-  final String furnishing;
+  final String? city;
+  final String? type;
+  final double? installmentRange;
+  final String? furnishing;
 
   @override
   _HomeScreenWidgetState createState() => _HomeScreenWidgetState();
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
-  Completer<ApiCallResponse> _apiRequestCompleter;
-  PageController pageViewController;
+  Completer<ApiCallResponse>? _apiRequestCompleter;
+  PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -138,13 +137,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   }
                                   List<NotificationsRecord>
                                       notificationsBadgeNotificationsRecordList =
-                                      snapshot.data;
+                                      snapshot.data!;
                                   return InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'HOME_SCREEN_notificationsBadge_ON_TAP');
                                       logFirebaseEvent(
                                           'notificationsBadge_Navigate-To');
+
                                       context.pushNamed('Notifications');
                                     },
                                     child: Badge(
@@ -223,6 +223,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     logFirebaseEvent(
                                         'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
                                     logFirebaseEvent('Text_Navigate-To');
+
                                     context.pushNamed(
                                       'WhereAreYouLooking',
                                       extra: <String, dynamic>{
@@ -273,6 +274,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             'HOME_SCREEN_Container_13mjruev_ON_TAP');
                                         logFirebaseEvent(
                                             'Container_Navigate-To');
+
                                         context.pushNamed(
                                           'Filter',
                                           extra: <String, dynamic>{
@@ -333,7 +335,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         ),
                       );
                     }
-                    final listViewPropertiesResponse = snapshot.data;
+                    final listViewPropertiesResponse = snapshot.data!;
                     return Builder(
                       builder: (context) {
                         final properties = PropertiesCall.properties(
@@ -380,6 +382,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     // propertyDetails
                                     logFirebaseEvent(
                                         'propertyCard_propertyDetails');
+
                                     context.pushNamed(
                                       'PropertyDetails',
                                       queryParams: {
@@ -538,7 +541,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                             axisDirection:
                                                                 Axis.horizontal,
                                                             onDotClicked: (i) {
-                                                              pageViewController
+                                                              pageViewController!
                                                                   .animateToPage(
                                                                 i,
                                                                 duration: Duration(
@@ -567,48 +570,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     ),
                                                   );
                                                 },
-                                              ),
-                                            if (functions.conditionalVisibility(
-                                                getJsonField(
-                                                  propertiesItem,
-                                                  r'''$.attributes.property_status''',
-                                                ).toString(),
-                                                'Coming soon'))
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    -1.02, -0.79),
-                                                child: FFButtonWidget(
-                                                  onPressed: () {
-                                                    print('Button pressed ...');
-                                                  },
-                                                  text: FFLocalizations.of(
-                                                          context)
-                                                      .getText(
-                                                    '5qj98whz' /* Coming soon */,
-                                                  ),
-                                                  options: FFButtonOptions(
-                                                    color: Color(0xCD2971FB),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                  ),
-                                                ),
                                               ),
                                             Align(
                                               alignment: AlignmentDirectional(
@@ -639,6 +600,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     } else {
                                                       logFirebaseEvent(
                                                           'Container_Navigate-To');
+
                                                       context
                                                           .pushNamed('Login');
                                                     }
@@ -700,37 +662,49 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 'Available'))
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    -0.99, -0.8),
-                                                child: FFButtonWidget(
-                                                  onPressed: () {
-                                                    print('Button pressed ...');
-                                                  },
-                                                  text: FFLocalizations.of(
-                                                          context)
-                                                      .getText(
-                                                    'i2h601mg' /* Available */,
-                                                  ),
-                                                  options: FFButtonOptions(
+                                                    -0.9, -0.89),
+                                                child: Container(
+                                                  width: 80,
+                                                  height: 26,
+                                                  decoration: BoxDecoration(
                                                     color: Color(0xFF81D05C),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 1,
-                                                    ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8),
+                                                            7),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(10, 1,
+                                                                    10, 1),
+                                                        child: Text(
+                                                          'Available',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'AvenirArabic',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .white,
+                                                                fontSize: 13,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
@@ -742,37 +716,103 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 'Booked'))
                                               Align(
                                                 alignment: AlignmentDirectional(
-                                                    -0.99, -0.8),
-                                                child: FFButtonWidget(
-                                                  onPressed: () {
-                                                    print('Button pressed ...');
-                                                  },
-                                                  text: FFLocalizations.of(
-                                                          context)
-                                                      .getText(
-                                                    '977ahbnt' /* Booked */,
-                                                  ),
-                                                  options: FFButtonOptions(
-                                                    color: Color(0xB2F5F5F5),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 1,
-                                                    ),
+                                                    -0.9, -0.89),
+                                                child: Container(
+                                                  width: 80,
+                                                  height: 26,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xFFD7D7D7),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8),
+                                                            7),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(10, 1,
+                                                                    10, 1),
+                                                        child: Text(
+                                                          'Booked',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'AvenirArabic',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .white,
+                                                                fontSize: 13,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            if (functions.conditionalVisibility(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.property_status''',
+                                                ).toString(),
+                                                'Coming soon'))
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -0.9, -0.89),
+                                                child: Container(
+                                                  width: 100,
+                                                  height: 26,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0xFF2971FB),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            7),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(10, 1,
+                                                                    10, 1),
+                                                        child: Text(
+                                                          'Coming soon',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'AvenirArabic',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .white,
+                                                                fontSize: 13,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
@@ -920,19 +960,30 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  0, 0, 8, 0),
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(11),
-                                                        child: Image.network(
-                                                          getJsonField(
-                                                            banksItem,
-                                                            r'''$.attributes.bank_logo.data.attributes.url''',
+                                                                  0, 0, 2, 0),
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          border: Border.all(
+                                                            color: Color(
+                                                                0xFF8C8C8C),
                                                           ),
-                                                          width: 22,
-                                                          height: 22,
-                                                          fit: BoxFit.cover,
+                                                        ),
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(11),
+                                                          child: Image.network(
+                                                            getJsonField(
+                                                              banksItem,
+                                                              r'''$.attributes.bank_logo.data.attributes.url''',
+                                                            ),
+                                                            width: 22,
+                                                            height: 22,
+                                                            fit: BoxFit.cover,
+                                                          ),
                                                         ),
                                                       ),
                                                     );

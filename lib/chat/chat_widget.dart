@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ChatWidget extends StatefulWidget {
   const ChatWidget({
-    Key key,
+    Key? key,
     this.bankJson,
   }) : super(key: key);
 

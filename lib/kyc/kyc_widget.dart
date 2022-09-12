@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class KycWidget extends StatefulWidget {
-  const KycWidget({Key key}) : super(key: key);
+  const KycWidget({Key? key}) : super(key: key);
 
   @override
   _KycWidgetState createState() => _KycWidgetState();
@@ -76,6 +76,7 @@ class _KycWidgetState extends State<KycWidget> {
                                       logFirebaseEvent(
                                           'KYC_PAGE_Icon_wn5vw9qi_ON_TAP');
                                       logFirebaseEvent('Icon_Navigate-To');
+
                                       context.pushNamed('PropertyDetails');
                                     },
                                     child: Icon(
@@ -288,6 +289,7 @@ class _KycWidgetState extends State<KycWidget> {
                                     // goToAbsherVerification
                                     logFirebaseEvent(
                                         'goToAbsherVerification_goToAbsherVerific');
+
                                     context.goNamed('AbsherVerification');
                                   },
                                   text: FFLocalizations.of(context).getText(

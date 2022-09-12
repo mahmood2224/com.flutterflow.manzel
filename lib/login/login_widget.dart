@@ -12,15 +12,16 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginWidget extends StatefulWidget {
-  const LoginWidget({Key key}) : super(key: key);
+  const LoginWidget({Key? key}) : super(key: key);
 
   @override
   _LoginWidgetState createState() => _LoginWidgetState();
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController phoneNumberController;
-  bool changeLanguage;
+  TextEditingController? phoneNumberController;
+
+  bool? changeLanguage;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -64,7 +65,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 changeLanguage = await actions.isEnglish(
                   FFLocalizations.of(context).languageCode,
                 );
-                if (changeLanguage) {
+                if (changeLanguage!) {
                   // changeToArabic
                   logFirebaseEvent('changeLanguage_changeToArabic');
                   setAppLanguage(context, 'ar');
@@ -196,8 +197,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     ),
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                focusedErrorBorder: InputBorder.none,
                                 suffixIcon:
-                                    phoneNumberController.text.isNotEmpty
+                                    phoneNumberController!.text.isNotEmpty
                                         ? InkWell(
                                             onTap: () async {
                                               phoneNumberController?.clear();
@@ -356,10 +359,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                           onPressed: () async {
                             logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
                             if (functions.checkPhoneNumberFormat(
-                                phoneNumberController.text)) {
+                                phoneNumberController!.text)) {
                               // sendOTP
                               logFirebaseEvent('sendOTP_sendOTP');
-                              final phoneNumberVal = phoneNumberController.text;
+                              final phoneNumberVal =
+                                  phoneNumberController!.text;
                               if (phoneNumberVal == null ||
                                   phoneNumberVal.isEmpty ||
                                   !phoneNumberVal.startsWith('+')) {

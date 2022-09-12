@@ -10,49 +10,39 @@ abstract class OrdersRecord
     implements Built<OrdersRecord, OrdersRecordBuilder> {
   static Serializer<OrdersRecord> get serializer => _$ordersRecordSerializer;
 
-  @nullable
   @BuiltValueField(wireName: 'order_id')
-  int get orderId;
+  int? get orderId;
 
-  @nullable
   @BuiltValueField(wireName: 'created_at')
-  DateTime get createdAt;
+  DateTime? get createdAt;
 
-  @nullable
   @BuiltValueField(wireName: 'updated_at')
-  DateTime get updatedAt;
+  DateTime? get updatedAt;
 
-  @nullable
   @BuiltValueField(wireName: 'user_id')
-  DocumentReference get userId;
+  DocumentReference? get userId;
 
-  @nullable
   @BuiltValueField(wireName: 'property_id')
-  int get propertyId;
+  int? get propertyId;
 
-  @nullable
   @BuiltValueField(wireName: 'order_status')
-  String get orderStatus;
+  String? get orderStatus;
 
-  @nullable
   @BuiltValueField(wireName: 'booking_expiry_date')
-  DateTime get bookingExpiryDate;
+  DateTime? get bookingExpiryDate;
 
-  @nullable
   @BuiltValueField(wireName: 'reservation_amount')
-  String get reservationAmount;
+  String? get reservationAmount;
 
-  @nullable
   @BuiltValueField(wireName: 'deposit_receipt')
-  String get depositReceipt;
+  String? get depositReceipt;
 
-  @nullable
   @BuiltValueField(wireName: 'cammunda_instance_id')
-  String get cammundaInstanceId;
+  String? get cammundaInstanceId;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(OrdersRecordBuilder builder) => builder
     ..orderId = 0
@@ -67,11 +57,11 @@ abstract class OrdersRecord
 
   static Stream<OrdersRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<OrdersRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   OrdersRecord._();
   factory OrdersRecord([void Function(OrdersRecordBuilder) updates]) =
@@ -80,31 +70,37 @@ abstract class OrdersRecord
   static OrdersRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createOrdersRecordData({
-  int orderId,
-  DateTime createdAt,
-  DateTime updatedAt,
-  DocumentReference userId,
-  int propertyId,
-  String orderStatus,
-  DateTime bookingExpiryDate,
-  String reservationAmount,
-  String depositReceipt,
-  String cammundaInstanceId,
-}) =>
-    serializers.toFirestore(
-        OrdersRecord.serializer,
-        OrdersRecord((o) => o
-          ..orderId = orderId
-          ..createdAt = createdAt
-          ..updatedAt = updatedAt
-          ..userId = userId
-          ..propertyId = propertyId
-          ..orderStatus = orderStatus
-          ..bookingExpiryDate = bookingExpiryDate
-          ..reservationAmount = reservationAmount
-          ..depositReceipt = depositReceipt
-          ..cammundaInstanceId = cammundaInstanceId));
+  int? orderId,
+  DateTime? createdAt,
+  DateTime? updatedAt,
+  DocumentReference? userId,
+  int? propertyId,
+  String? orderStatus,
+  DateTime? bookingExpiryDate,
+  String? reservationAmount,
+  String? depositReceipt,
+  String? cammundaInstanceId,
+}) {
+  final firestoreData = serializers.toFirestore(
+    OrdersRecord.serializer,
+    OrdersRecord(
+      (o) => o
+        ..orderId = orderId
+        ..createdAt = createdAt
+        ..updatedAt = updatedAt
+        ..userId = userId
+        ..propertyId = propertyId
+        ..orderStatus = orderStatus
+        ..bookingExpiryDate = bookingExpiryDate
+        ..reservationAmount = reservationAmount
+        ..depositReceipt = depositReceipt
+        ..cammundaInstanceId = cammundaInstanceId,
+    ),
+  );
+
+  return firestoreData;
+}

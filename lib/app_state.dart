@@ -19,11 +19,11 @@ class FFAppState {
     _locale = prefs.getString('ff_locale') ?? _locale;
   }
 
-  SharedPreferences prefs;
+  late SharedPreferences prefs;
 
   dynamic property;
 
-  LatLng coordinates;
+  LatLng? coordinates;
 
   dynamic filter = jsonDecode(
       '{\"city\":null,\" furnishing_type\":null,\"property_type\":null,\"minimum_price\":null,\"mximum_price\":null}');
@@ -55,7 +55,7 @@ class FFAppState {
   }
 }
 
-LatLng _latLngFromString(String val) {
+LatLng? _latLngFromString(String? val) {
   if (val == null) {
     return null;
   }

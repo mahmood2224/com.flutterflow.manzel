@@ -10,7 +10,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NotificationsWidget extends StatefulWidget {
-  const NotificationsWidget({Key key}) : super(key: key);
+  const NotificationsWidget({Key? key}) : super(key: key);
 
   @override
   _NotificationsWidgetState createState() => _NotificationsWidgetState();
@@ -97,7 +97,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                       }
                       List<NotificationsRecord>
                           notificationsListNotificationsRecordList =
-                          snapshot.data;
+                          snapshot.data!;
                       if (notificationsListNotificationsRecordList.isEmpty) {
                         return Center(
                           child: Container(
@@ -137,6 +137,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                       .notificationType ==
                                   'Offers') {
                                 logFirebaseEvent('Container_Navigate-To');
+
                                 context.pushNamed(
                                   'Offers',
                                   queryParams: {
@@ -148,6 +149,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                 );
                               } else {
                                 logFirebaseEvent('Container_Navigate-To');
+
                                 context.pushNamed(
                                   'BookingDetails',
                                   queryParams: {
@@ -245,7 +247,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                         child:
                                                                             Text(
                                                                           notificationsListNotificationsRecord
-                                                                              .messageAr,
+                                                                              .messageAr!,
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .subtitle1
                                                                               .override(
@@ -275,7 +277,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                         child:
                                                                             Text(
                                                                           notificationsListNotificationsRecord
-                                                                              .messageEn,
+                                                                              .messageEn!,
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .subtitle1
                                                                               .override(
@@ -305,7 +307,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                         child:
                                                                             Text(
                                                                           notificationsListNotificationsRecord
-                                                                              .messageAr,
+                                                                              .messageAr!,
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .subtitle1
                                                                               .override(
@@ -335,7 +337,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                         child:
                                                                             Text(
                                                                           notificationsListNotificationsRecord
-                                                                              .messageEn,
+                                                                              .messageEn!,
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .subtitle1
                                                                               .override(
