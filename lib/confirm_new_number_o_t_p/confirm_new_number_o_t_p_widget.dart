@@ -20,7 +20,7 @@ import 'package:flutter/material.dart' as material;
 import '../notification_handler/firebase_cloud_messaging.dart';
 
 class ConfirmNewNumberOTPWidget extends StatefulWidget {
-  final String phoneNumber;
+  final String? phoneNumber;
   const ConfirmNewNumberOTPWidget({Key? key,this.phoneNumber}) : super(key: key);
 
   @override
@@ -35,11 +35,11 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   String _phoneAuthVerificationCode = '';
   ValueNotifier<String> _showOtpError = ValueNotifier('');
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  OverlayEntry entry;
+  OverlayEntry? entry;
 
   void resendOTP() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: widget.phoneNumber,
+      phoneNumber: widget.phoneNumber!,
       timeout: Duration(seconds: 40),
       verificationCompleted: (phoneAuthCredential) async {
         await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
@@ -184,13 +184,13 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               context: context,
                               smsCode: otp,
                             );
-                            entry.remove();
+                            entry?.remove();
                             if (phoneVerifiedUser == null) {
                               _showOtpError.value = "You entered OTP incorrect";
                               return;
                             }
                             Future.delayed(const Duration(milliseconds: 500), () async{
-                              if(currentUserDocument.status.isEmpty || currentUserDocument.status.toLowerCase() == 'active') {
+                              if(currentUserDocument!.status!.isEmpty || currentUserDocument!.status!.toLowerCase() == 'active') {
 
     final userUpdateData = createUserRecordData(
     status: 'Active',
@@ -215,9 +215,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
     await UsersDeviceTokenRecord.collection.doc().set(userNotificationRecord);
     }
 
-    await currentUserReference.update(userUpdateData);
+    await currentUserReference?.update(userUpdateData);
     if (currentUserDisplayName.isEmpty &&
-    currentUserDocument.name.isEmpty) {
+    currentUserDocument!.name!.isEmpty) {
     final _sendbird = await SendbirdSdk(appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
     final _ = await _sendbird.connect(currentUserUid);
     context.goNamedAuth(

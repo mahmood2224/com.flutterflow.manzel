@@ -36,8 +36,8 @@ class _ReservationBottomSheetWidgetState
   ApiCallResponse? addOrderApiResponse;
   ApiCallResponse? transactionApiResponse;
   String? paymentMethodValue;
-  Map<dynamic, dynamic> tapSDKResult;
-  int orderId;
+  Map<dynamic, dynamic>? tapSDKResult;
+  int? orderId;
 
   Future<void> setupSDKSession(int paymentType) async {
     try {
@@ -47,47 +47,47 @@ class _ReservationBottomSheetWidgetState
           amount: widget.reservationCost.toString(),
           customer: Customer(
               customerId: "", // customer id is important to retrieve cards saved for this customer
-              email: currentUserDocument.email ?? '',
+              email: currentUserDocument?.email ?? '',
               isdNumber: "+966",
               number: '123456789',
-              firstName: currentUserDocument.name,
+              firstName: currentUserDocument?.name ?? '',
               middleName: "",
               lastName: "",
               metaData: null),
-          // paymentItems: <PaymentItem>[
-          //   PaymentItem(
-          //       name: "item1",
-          //       amountPerUnit: 1,
-          //       quantity: Quantity(value: 1),
-          //       discount: {"type": "F", "value": 10, "maximum_fee": 10, "minimum_fee": 1},
-          //       description: "Item 1 Apple",
-          //       taxes: [Tax(amount: Amount(type: "F", value: 10, minimumFee: 1, maximumFee: 10), name: "tax1", description: "tax describtion")],
-          //       totalAmount: 100),
-          // ],
+          paymentItems: <PaymentItem>[
+            PaymentItem(
+                name: "item1",
+                amountPerUnit: 1,
+                quantity: Quantity(value: 1),
+                discount: {"type": "F", "value": 10, "maximum_fee": 10, "minimum_fee": 1},
+                description: "Item 1 Apple",
+                taxes: [Tax(amount: Amount(type: "F", value: 10, minimumFee: 1, maximumFee: 10), name: "tax1", description: "tax describtion")],
+                totalAmount: 100),
+          ],
           // // List of taxes
-          // taxes: [
-          //   Tax(amount: Amount(type: "F", value: 10, minimumFee: 1, maximumFee: 10), name: "tax1", description: "tax describtion"),
-          //   Tax(amount: Amount(type: "F", value: 10, minimumFee: 1, maximumFee: 10), name: "tax1", description: "tax describtion")
-          // ],
+          taxes: [
+            Tax(amount: Amount(type: "F", value: 10, minimumFee: 1, maximumFee: 10), name: "tax1", description: "tax describtion"),
+            Tax(amount: Amount(type: "F", value: 10, minimumFee: 1, maximumFee: 10), name: "tax1", description: "tax describtion")
+          ],
           // List of shippnig
-          //  shippings: [
-          //   Shipping(name: "shipping 1", amount: 100, description: "shiping description 1"),
-          //   Shipping(name: "shipping 2", amount: 150, description: "shiping description 2")
-          // ],
+           shippings: [
+            Shipping(name: "shipping 1", amount: 100, description: "shiping description 1"),
+            Shipping(name: "shipping 2", amount: 150, description: "shiping description 2")
+          ],
           // Post URL
           postURL: "https://tap.company",
-          // // Payment description
-          // paymentDescription: "paymentDescription",
-          // // Payment Metadata
-          // paymentMetaData: {
-          //   "a": "a meta",
-          //   "b": "b meta",
-          // },
+          // Payment description
+          paymentDescription: "paymentDescription",
+          // Payment Metadata
+          paymentMetaData: {
+            "a": "a meta",
+            "b": "b meta",
+          },
           // Payment Reference
-          // paymentReference: Reference(
-          //      payment: "payment", order: orderId),
+          paymentReference: Reference(
+               payment: "payment", order: orderId.toString()),
           // payment Descriptor
-         // paymentStatementDescriptor: "paymentStatementDescriptor",
+          paymentStatementDescriptor: "paymentStatementDescriptor",
           // Save Card Switch
           isUserAllowedToSaveCard: false,
           // Enable/Disable 3DSecure
@@ -105,7 +105,7 @@ class _ReservationBottomSheetWidgetState
           applePayMerchantID: "merchant.com.flutterflow.manzel",
           allowsToSaveSameCardMoreThanOnce: false,
           // pass the card holder name to the SDK
-          //cardHolderName: "Card Holder NAME",
+          cardHolderName: "Card Holder NAME",
           // disable changing the card holder name by the user
           allowsToEditCardHolderName: true,
           // select payments you need to show [Default is all, and you can choose between WEB-CARD-APPLEPAY ]
@@ -129,8 +129,8 @@ class _ReservationBottomSheetWidgetState
     tapSDKResult = await GoSellSdkFlutter.startPaymentSDK;
 
 
-    print('>>>> ${tapSDKResult['sdk_result']}');
-    switch (tapSDKResult['sdk_result']) {
+    print('>>>> ${tapSDKResult!['sdk_result']}');
+    switch (tapSDKResult!['sdk_result']) {
       case "SUCCESS":
       // sdkStatus = "SUCCESS";
       // handleSDKResult();
@@ -143,9 +143,9 @@ class _ReservationBottomSheetWidgetState
           amountPaid: widget.reservationCost.toString(),
           transactionMethod: paymentMethodValue,
           orderId: orderId,
-          userId: currentUserReference.id,
+          userId: currentUserReference?.id,
           transactionStatus: 'completed',
-          transactionId: tapSDKResult['charge_id'],
+          transactionId: tapSDKResult!['charge_id'],
         );
 
         if (((transactionApiResponse?.statusCode ?? 200)) ==
@@ -164,7 +164,7 @@ class _ReservationBottomSheetWidgetState
               'paymentMethod': serializeParam(
                   paymentMethodValue, ParamType.String),
               'transactionId':
-              serializeParam(tapSDKResult['charge_id'], ParamType.String),
+              serializeParam(tapSDKResult!['charge_id'], ParamType.String),
             }.withoutNulls,
           );
         }
@@ -174,9 +174,9 @@ class _ReservationBottomSheetWidgetState
           amountPaid: widget.reservationCost.toString(),
           transactionMethod: paymentMethodValue,
           orderId: orderId,
-          userId: currentUserReference.id,
+          userId: currentUserReference?.id,
           transactionStatus: 'failed',
-          transactionId: tapSDKResult['charge_id'],
+          transactionId: tapSDKResult!['charge_id'],
         );
         // if (((transactionApiResponse?.statusCode ?? 200)) ==
         //     200) {
@@ -200,9 +200,9 @@ class _ReservationBottomSheetWidgetState
           break;
         case "SDK_ERROR":
           print('sdk error............');
-          print(tapSDKResult['sdk_error_code']);
-          print(tapSDKResult['sdk_error_message']);
-          print(tapSDKResult['sdk_error_description']);
+          print(tapSDKResult!['sdk_error_code']);
+          print(tapSDKResult!['sdk_error_message']);
+          print(tapSDKResult!['sdk_error_description']);
           print('sdk error............');
           // sdkErrorCode = tapSDKResult['sdk_error_code'].toString();
           // sdkErrorMessage = tapSDKResult['sdk_error_message'];
@@ -559,12 +559,12 @@ class _ReservationBottomSheetWidgetState
                       var _shouldSetState = false;
                       logFirebaseEvent('Button_Backend-Call');
                       addOrderApiResponse = await AddOrderCall.call(
-                        propertyId: widget.propertyId?.toString(),userId: currentUserReference.id,
+                        propertyId: widget.propertyId?.toString(),userId: currentUserReference?.id,
                       );
                       _shouldSetState = true;
                       if ((addOrderApiResponse?.statusCode ?? 200) == 200) {
                         logFirebaseEvent('Button_Backend-Call');
-                        setupSDKSession((paymentMethodValue.toLowerCase() == 'mada/visa' || paymentMethodValue.toLowerCase() == 'مدى / فيزا' ) ? 0 : 1);
+                        setupSDKSession((paymentMethodValue?.toLowerCase() == 'mada/visa' || paymentMethodValue?.toLowerCase() == 'مدى / فيزا' ) ? 0 : 1);
                         orderId = getJsonField(
                           (addOrderApiResponse?.jsonBody ?? ''),
                           r'''$.result''',

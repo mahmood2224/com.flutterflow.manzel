@@ -42,7 +42,7 @@ class _OffersWidgetState extends State<OffersWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> channels = {};
 
-  Future<List<GroupChannel>> getUnreadMessage() async {
+  Future<List<GroupChannel>?> getUnreadMessage() async {
     try {
       //String channel_url = channelUrl.toString();
       //final aChannel = await GroupChannel.getChannel(channel_url);
@@ -87,7 +87,7 @@ class _OffersWidgetState extends State<OffersWidget> {
           appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
       final _ = await _sendbird.connect(currentUserUid);
       // Future.delayed(Duration(seconds: 5));
-      final _user = asChatUiUser(sendbird.SendbirdSdk().currentUser);
+      final _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);
       getUnreadMessage();
 
       logFirebaseEvent('OFFERS_PAGE_Offers_ON_PAGE_LOAD');

@@ -39,7 +39,7 @@ class _ChatWidgetState extends State<ChatWidget>
     with sendbird.ChannelEventHandler {
   bool isLoading = true;
   List<sendbird.BaseMessage> _SendBirdMessages = [];
-  GroupChannel _channel;
+  GroupChannel? _channel;
   List<types.Message> _messages = [];
   types.User _user = types.User(id: "rhytham", firstName: "");
 
@@ -264,7 +264,7 @@ class _ChatWidgetState extends State<ChatWidget>
     try {
       if (messages != null) {
         messages.forEach((message) {
-          sendbird.User user = message.sender;
+          sendbird.User user = message.sender!;
           if (user == null) {
             return;
           }
@@ -283,10 +283,10 @@ class _ChatWidgetState extends State<ChatWidget>
           if (message.runtimeType == sendbird.FileMessage) {
             sendbird.FileMessage msg = message as sendbird.FileMessage;
             types.PartialImage imageData = types.PartialImage(
-                name: msg.name, size: msg.size, uri: msg.secureUrl);
+                name: msg.name ?? '', size: msg.size ?? 0, uri: msg.secureUrl ?? '');
             jsonData['partialImage'] = imageData;
             jsonData['uri'] = msg.secureUrl;
-            jsonData['type'] = msg.type.contains('image') ? 'image' : 'file';
+            jsonData['type'] = msg.type!.contains('image') ? 'image' : 'file';
             jsonData['name'] = msg.name;
             jsonData['size'] = msg.size;
           }
@@ -317,10 +317,10 @@ class _ChatWidgetState extends State<ChatWidget>
     if (msg.runtimeType == sendbird.FileMessage) {
       sendbird.FileMessage mssg = msg as sendbird.FileMessage;
       types.PartialImage imageData = types.PartialImage(
-          name: mssg.name, size: mssg.size, uri: mssg.secureUrl);
+          name: mssg.name ?? '', size: mssg.size ?? 0, uri: mssg.secureUrl ?? '');
       jsonData['partialImage'] = imageData;
       jsonData['uri'] = mssg.secureUrl;
-      jsonData['type'] = mssg.type.contains('image') ? 'image' : 'file';
+      jsonData['type'] = mssg.type!.contains('image') ? 'image' : 'file';
       jsonData['name'] = mssg.name;
       jsonData['size'] = mssg.size;
     }
@@ -333,25 +333,25 @@ class _ChatWidgetState extends State<ChatWidget>
   }
 
   void _handleFileSelection() async {
-    final FilePickerResult result = await FilePicker.platform.pickFiles();
+    final FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null && result.files.single.path != null) {
-      File file = File(result.files.single.path);
+      File file = File(result.files.single.path!);
       final message = types.FileMessage(
         author: _user,
         createdAt: DateTime.now().millisecondsSinceEpoch,
         id: const Uuid().v4(),
-        mimeType: lookupMimeType(result.files.single.path),
+        mimeType: lookupMimeType(result.files.single.path!),
         name: result.files.single.name,
         size: result.files.single.size,
-        uri: result.files.single.path,
+        uri: result.files.single.path!,
       );
       final fileMessage = sendbird.FileMessageParams.withFile(
         file,
         name: result.files.single.name,
       );
       var sentFileMessage =
-      _channel.sendFileMessage(fileMessage,onCompleted:(message,error){
+      _channel?.sendFileMessage(fileMessage,onCompleted:(message,error){
         print(message);
         print("error------------->${error}");
       });
@@ -382,7 +382,7 @@ class _ChatWidgetState extends State<ChatWidget>
       );
       File file = File(result.path);
       var sentFileMessage =
-          _channel.sendFileMessage(sendbird.FileMessageParams.withFile(file));
+          _channel?.sendFileMessage(sendbird.FileMessageParams.withFile(file));
       print(sentFileMessage);
       _addMessage(message);
     }
@@ -454,7 +454,7 @@ class _ChatWidgetState extends State<ChatWidget>
       id: const Uuid().v4(),
       text: message.text,
     );
-    _channel.sendUserMessageWithText(message.text);
+    _channel?.sendUserMessageWithText(message.text);
     _addMessage(textMessage);
   }
 
@@ -475,7 +475,7 @@ class _ChatWidgetState extends State<ChatWidget>
           appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
       final _ = await _sendbird.connect(currentUserUid);
       // Future.delayed(Duration(seconds: 5));
-      _user = asChatUiUser(sendbird.SendbirdSdk().currentUser);
+      _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);
       // final query = sendbird.GroupChannelListQuery()
       //   ..limit = 1
       //   ..channelUrls = [channel_url];

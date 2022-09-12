@@ -26,7 +26,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   bool? changeLanguage;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  OverlayEntry entry;
+  OverlayEntry? entry;
 
   @override
   void initState() {

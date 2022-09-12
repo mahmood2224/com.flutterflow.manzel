@@ -39,7 +39,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
   final bool allowFullScreen;
   final bool allowPlaybackSpeedMenu;
   final bool lazyLoad;
-  final Function(Set) onTap;
+  final Function(Set<VideoPlayerController>)? onTap;
 
   @override
   State<StatefulWidget> createState() => _FlutterFlowVideoPlayerState();
@@ -70,14 +70,14 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
 
   double get height =>
       widget.height == null || widget.height! >= double.infinity
-          ? width / aspectRatio
+          ? width / aspectRatio!
           : widget.height!;
 
-  double get aspectRatio =>
+  double? get aspectRatio =>
       _chewieController?.videoPlayerController.value.aspectRatio ;
 
   void enterFullScreen() {
-    _chewieController.enterFullScreen();
+    _chewieController?.enterFullScreen();
   }
 
   Future initializePlayer() async {
@@ -113,7 +113,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
 
     print("Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
     _videoPlayers.add(_videoPlayerController!);
-    widget.onTap(_videoPlayers);
+    widget.onTap!(_videoPlayers);
 
     print("_chewieController: ${_chewieController}");
     _videoPlayerController!.addListener(() {

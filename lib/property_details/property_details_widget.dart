@@ -49,7 +49,7 @@ class PropertyDetailsWidget extends StatefulWidget {
   }) : super(key: key);
 
   final int? propertyId;
-  final String path;
+  final String? path;
 
   @override
   _PropertyDetailsWidgetState createState() => _PropertyDetailsWidgetState();
@@ -59,10 +59,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   PageController? pageViewController;
   UserSavedRecord? saveProperty;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  VideoPlayerController _currentController;
-  VideoPlayerController videoPlayerController;
-  VideoPlayerController _videoPlayerController;
-  ChewieController _chewieController;
+  VideoPlayerController? _currentController;
+  VideoPlayerController? videoPlayerController;
+  VideoPlayerController? _videoPlayerController;
+  ChewieController? _chewieController;
   bool _loggedError = false;
 
   @override
@@ -73,7 +73,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         parameters: {'screen_name': 'PropertyDetails'});
   }
   void enterFullScreen() {
-    _chewieController.enterFullScreen();
+    _chewieController?.enterFullScreen();
   }
   @override
   void dispose() {
@@ -87,11 +87,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
 
   Future initializePlayer() async {
 
-    _videoPlayerController = VideoPlayerController.network(widget.path);
+    _videoPlayerController = VideoPlayerController.network(widget.path!);
 
       await _videoPlayerController?.initialize();
     _chewieController = ChewieController(
-      videoPlayerController: _videoPlayerController,
+      videoPlayerController: _videoPlayerController!,
       deviceOrientationsOnEnterFullScreen: [
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
@@ -107,12 +107,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     );
     setState(() {});
 
-   _videoPlayers.add(_videoPlayerController);
+   _videoPlayers.add(_videoPlayerController!);
 
-    _videoPlayerController.addListener(() {
-      if (_videoPlayerController.value.hasError && !_loggedError) {
+    _videoPlayerController?.addListener(() {
+      if (_videoPlayerController!.value.hasError && !_loggedError) {
         print(
-            'Error playing video: ${_videoPlayerController.value.errorDescription}');
+            'Error playing video: ${_videoPlayerController!.value.errorDescription}');
         _loggedError = true;
       }
       //Stop all other players when one video is playing.
@@ -290,7 +290,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     if (visibility.visibleFraction *
     100 != 100 && this.mounted) {
       if(_chewieController!=null){
-    _chewieController.pause();}}else{if(_chewieController!=null){_chewieController.play();}}
+    _chewieController?.pause();}}else{if(_chewieController!=null){_chewieController?.play();}}
 
     },
 
@@ -328,11 +328,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                   platform: TargetPlatform.android,
                 ),
                 child:(_chewieController != null &&
-          _chewieController
+          _chewieController!
                   .videoPlayerController.value.isInitialized)
-          ? Chewie(controller: _chewieController)
+          ? Chewie(controller: _chewieController!)
           : (_chewieController != null &&
-          _chewieController.videoPlayerController.value.hasError)
+          _chewieController!.videoPlayerController.value.hasError)
           ? Text('Error playing video')
           : Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -355,7 +355,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     ),
                               onTap: () {
                                      //_chewieController.enterFullScreen();
-                                     _chewieController.toggleFullScreen();
+                                     _chewieController?.toggleFullScreen();
                                      // _currentController.enterFullScreen();
                                     },
                                   ),
@@ -759,7 +759,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   0, 0, 8, 0),
                                                       child: InkWell(
                                                         onTap: () async {
-                                                          _chewieController.pause();
+                                                          _chewieController?.pause();
                                                           logFirebaseEvent(
                                                               'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
                                                           logFirebaseEvent(
@@ -819,7 +819,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     ),
                                                     InkWell(
                                                       onTap: () async {
-                                                        _chewieController.pause();
+                                                        _chewieController?.pause();
                                                         logFirebaseEvent(
                                                             'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
                                                         logFirebaseEvent(
@@ -2709,7 +2709,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   'Available'))
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    _currentController.pause();
+                                    _currentController?.pause();
                                     logFirebaseEvent(
                                         'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
                                     if (loggedIn) {
@@ -2745,7 +2745,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ),
                                             );
                                           },
-                                        ).then((value) => _currentController.play());
+                                        ).then((value) => _currentController?.play());
                                       } else {
                                         logFirebaseEvent(
                                             'reserved_Navigate-To');

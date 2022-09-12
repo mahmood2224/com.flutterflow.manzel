@@ -16,7 +16,7 @@ import 'package:sendbird_sdk/sendbird_sdk.dart' as sendbird;
 //
 //    return getUnreadMessage(channelUrl).toString();
 // }
-Future<String> getUnreadMessage(String channelUrl) async {
+Future<String?> getUnreadMessage(String channelUrl) async {
   try{
     String channel_url = channelUrl.toString();
     final aChannel = await GroupChannel.getChannel(channel_url);

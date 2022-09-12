@@ -46,13 +46,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   int _currentItem = 0;
-  bool isPaused;
-  bool autoplayVal;
+  bool? isPaused;
+  bool? autoplayVal;
 
   //FlickMultiManager flickMultiManager;
-  Set<VideoPlayerController> videoControllerSet;
+  Set<VideoPlayerController>? videoControllerSet;
 
-  VideoPlayerController _currentController;
+  VideoPlayerController? _currentController;
 
   Map<String, VideoPlayerController> videocontrollerMap = {};
 
@@ -484,8 +484,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
                     if (propertiesIndex == (videocontrollerMap.length) + 1) {
                       Future.delayed(const Duration(seconds: 8), () {
-                        if(_currentController!=null&&videoControllerSet.isNotEmpty){
-                        _currentController = videoControllerSet.first;
+                        if(_currentController!=null&&videoControllerSet!.isNotEmpty){
+                        _currentController = videoControllerSet?.first;
                         _currentController?.play();}
                       });
                     }
@@ -493,7 +493,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: InkWell(
                         onTap: () async {
-                          _currentController.pause();
+                          _currentController?.pause();
                           logFirebaseEvent(
                               'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
                           // propertyDetails
@@ -566,8 +566,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       videocontrollerMap[
                                                           (propertiesIndex)
                                                               .toString()];
-                                                  _currentController.play();
-                                                  videoControllerSet
+                                                  _currentController?.play();
+                                                  videoControllerSet!
                                                       .forEach((otherPlayer) {
                                                     if (otherPlayer !=
                                                             _currentController &&
@@ -600,13 +600,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               print(
                                                   "videoControllerSet : ${videoControllerSet}");
                                               print(
-                                                  "videoControllerSet_items : ${videoControllerSet.length}");
+                                                  "videoControllerSet_items : ${videoControllerSet?.length}");
                                               //print("videoControllerSet.last :  ${videoControllerSet.last}");
                                               //print("propertiesIndex : ${propertiesIndex.toString()}");
                                               //print("videocontrollerMap : ${videocontrollerMap.length}");
                                               videocontrollerMap[propertiesIndex
                                                       .toString()] =
-                                                  videoControllerSet.last;
+                                                  videoControllerSet!.last;
                                               print(
                                                   "videocontrollerMap : ${videocontrollerMap.length}");
                                               _currentController =
@@ -662,13 +662,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       ),
                                       onTap: () {
                                         if(_currentController!=null){
-                                        if (_currentController
+                                        if (_currentController!
                                             .value.isPlaying) {
-                                          _currentController.pause();
+                                          _currentController?.pause();
                                           isPaused = true;
                                           setState(() {});
                                         } else {
-                                          _currentController.play();
+                                          _currentController?.play();
                                           isPaused = false;
                                           setState(() {});
                                         }
@@ -761,7 +761,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   axisDirection:
                                                       Axis.horizontal,
                                                   onDotClicked: (i) {
-                                                    pageViewController
+                                                    pageViewController!
                                                         .animateToPage(
                                                       i,
                                                       duration: Duration(
