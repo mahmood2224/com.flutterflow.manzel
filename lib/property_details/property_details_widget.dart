@@ -33,7 +33,6 @@ import 'package:mapbox_search/mapbox_search.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'chewiePlayer.dart';
 
 enum VideoType {
   asset,
@@ -81,6 +80,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     _videoPlayers.remove(_videoPlayerController);
     _videoPlayerController?.dispose();
     _chewieController?.dispose();
+    _currentController = null;
     super.dispose();
   }
 
@@ -323,8 +323,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                            .size.height*0.35,
             width: MediaQuery.of(context)
                            .size.width,
-              child:_chewieController != null &&
-          (_chewieController
+              child: Theme(
+                data: ThemeData.light().copyWith(
+                  platform: TargetPlatform.android,
+                ),
+                child:(_chewieController != null &&
+          _chewieController
                   .videoPlayerController.value.isInitialized)
           ? Chewie(controller: _chewieController)
           : (_chewieController != null &&
@@ -340,7 +344,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
           SizedBox(height: 20),
           Text('Loading'),
         ],
-      ),
+      ),),
 
     ),),),),
 
@@ -374,10 +378,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             size: 18,
                                           ),
                                           onPressed: () async {
+
                                             logFirebaseEvent(
                                                 'PROPERTY_DETAILS_arrow_back_rounded_ICN_');
                                             // back
                                             logFirebaseEvent('IconButton_back');
+                                            dispose();
                                             context.pop();
                                           },
                                         ),
@@ -481,7 +487,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                               alignment: AlignmentDirectional(0, 0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 273, 0, 0),
+                                    0 ,MediaQuery.of(context).size.height*0.34, 0, 0),
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(

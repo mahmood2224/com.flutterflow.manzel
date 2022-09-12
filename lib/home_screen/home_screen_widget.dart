@@ -483,8 +483,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
                     if (propertiesIndex == (videocontrollerMap.length) + 1) {
                       Future.delayed(const Duration(seconds: 8), () {
+                        if(_currentController!=null&&videoControllerSet.isNotEmpty){
                         _currentController = videoControllerSet.first;
-                        _currentController?.play();
+                        _currentController?.play();}
                       });
                     }
                     return Padding(
@@ -659,6 +660,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         ),
                                       ),
                                       onTap: () {
+                                        if(_currentController!=null){
                                         if (_currentController
                                             .value.isPlaying) {
                                           _currentController.pause();
@@ -669,7 +671,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           isPaused = false;
                                           setState(() {});
                                         }
-                                      },
+                                      }},
                                     ),
                                   ),
                                   if (!functions
