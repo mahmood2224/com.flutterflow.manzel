@@ -9,7 +9,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HelpAndSupportBottomSheetWidget extends StatefulWidget {
-  const HelpAndSupportBottomSheetWidget({Key key}) : super(key: key);
+  const HelpAndSupportBottomSheetWidget({Key? key}) : super(key: key);
 
   @override
   _HelpAndSupportBottomSheetWidgetState createState() =>
@@ -196,7 +196,7 @@ class _HelpAndSupportBottomSheetWidgetState
                         final userUpdateData = createUserRecordData(
                           isDeleted: 1,
                         );
-                        await currentUserReference.update(userUpdateData);
+                        await currentUserReference!.update(userUpdateData);
                         logFirebaseEvent('Container_Auth');
                         GoRouter.of(context).prepareAuthEvent();
                         await signOut();
@@ -238,7 +238,7 @@ class _HelpAndSupportBottomSheetWidgetState
                         final userUpdateData = createUserRecordData(
                           isDeleted: 1,
                         );
-                        await currentUserReference.update(userUpdateData);
+                        await currentUserReference!.update(userUpdateData);
                         logFirebaseEvent('Container_Auth');
                         GoRouter.of(context).prepareAuthEvent();
                         await signOut();

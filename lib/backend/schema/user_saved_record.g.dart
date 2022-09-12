@@ -17,17 +17,17 @@ class _$UserSavedRecordSerializer
   final String wireName = 'UserSavedRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, UserSavedRecord object,
+  Iterable<Object?> serialize(Serializers serializers, UserSavedRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.uId;
     if (value != null) {
       result
         ..add('u_id')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.pId;
     if (value != null) {
@@ -35,44 +35,44 @@ class _$UserSavedRecordSerializer
         ..add('p_id')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   UserSavedRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UserSavedRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'u_id':
           result.uId = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'p_id':
           result.pId = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -83,16 +83,16 @@ class _$UserSavedRecordSerializer
 
 class _$UserSavedRecord extends UserSavedRecord {
   @override
-  final DocumentReference<Object> uId;
+  final DocumentReference<Object?>? uId;
   @override
-  final int pId;
+  final int? pId;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$UserSavedRecord([void Function(UserSavedRecordBuilder) updates]) =>
+  factory _$UserSavedRecord([void Function(UserSavedRecordBuilder)? updates]) =>
       (new UserSavedRecordBuilder()..update(updates))._build();
 
-  _$UserSavedRecord._({this.uId, this.pId, this.reference}) : super._();
+  _$UserSavedRecord._({this.uId, this.pId, this.ffRef}) : super._();
 
   @override
   UserSavedRecord rebuild(void Function(UserSavedRecordBuilder) updates) =>
@@ -108,13 +108,12 @@ class _$UserSavedRecord extends UserSavedRecord {
     return other is UserSavedRecord &&
         uId == other.uId &&
         pId == other.pId &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, uId.hashCode), pId.hashCode), reference.hashCode));
+    return $jf($jc($jc($jc(0, uId.hashCode), pId.hashCode), ffRef.hashCode));
   }
 
   @override
@@ -122,27 +121,26 @@ class _$UserSavedRecord extends UserSavedRecord {
     return (newBuiltValueToStringHelper(r'UserSavedRecord')
           ..add('uId', uId)
           ..add('pId', pId)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class UserSavedRecordBuilder
     implements Builder<UserSavedRecord, UserSavedRecordBuilder> {
-  _$UserSavedRecord _$v;
+  _$UserSavedRecord? _$v;
 
-  DocumentReference<Object> _uId;
-  DocumentReference<Object> get uId => _$this._uId;
-  set uId(DocumentReference<Object> uId) => _$this._uId = uId;
+  DocumentReference<Object?>? _uId;
+  DocumentReference<Object?>? get uId => _$this._uId;
+  set uId(DocumentReference<Object?>? uId) => _$this._uId = uId;
 
-  int _pId;
-  int get pId => _$this._pId;
-  set pId(int pId) => _$this._pId = pId;
+  int? _pId;
+  int? get pId => _$this._pId;
+  set pId(int? pId) => _$this._pId = pId;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   UserSavedRecordBuilder() {
     UserSavedRecord._initializeBuilder(this);
@@ -153,7 +151,7 @@ class UserSavedRecordBuilder
     if ($v != null) {
       _uId = $v.uId;
       _pId = $v.pId;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -166,7 +164,7 @@ class UserSavedRecordBuilder
   }
 
   @override
-  void update(void Function(UserSavedRecordBuilder) updates) {
+  void update(void Function(UserSavedRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -174,8 +172,8 @@ class UserSavedRecordBuilder
   UserSavedRecord build() => _build();
 
   _$UserSavedRecord _build() {
-    final _$result = _$v ??
-        new _$UserSavedRecord._(uId: uId, pId: pId, reference: reference);
+    final _$result =
+        _$v ?? new _$UserSavedRecord._(uId: uId, pId: pId, ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

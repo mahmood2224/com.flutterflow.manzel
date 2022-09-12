@@ -8,11 +8,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TermsConditionsBottomSheetWidget extends StatefulWidget {
   const TermsConditionsBottomSheetWidget({
-    Key key,
+    Key? key,
     this.pageType,
   }) : super(key: key);
 
-  final int pageType;
+  final int? pageType;
 
   @override
   _TermsConditionsBottomSheetWidgetState createState() =>
@@ -46,7 +46,7 @@ class _TermsConditionsBottomSheetWidgetState
               ),
             );
           }
-          final columnTermsConitionsAndPrivacyPoliciesResponse = snapshot.data;
+          final columnTermsConitionsAndPrivacyPoliciesResponse = snapshot.data!;
           return Column(
             mainAxisSize: MainAxisSize.max,
             children: [

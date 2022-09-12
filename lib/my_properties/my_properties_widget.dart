@@ -14,14 +14,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyPropertiesWidget extends StatefulWidget {
-  const MyPropertiesWidget({Key key}) : super(key: key);
+  const MyPropertiesWidget({Key? key}) : super(key: key);
 
   @override
   _MyPropertiesWidgetState createState() => _MyPropertiesWidgetState();
 }
 
 class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
-  ApiCallResponse bookmarkApiResponse;
+  ApiCallResponse? bookmarkApiResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -129,6 +129,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                   logFirebaseEvent(
                                       'MY_PROPERTIES_LOGIN_SIGNUP_BTN_ON_TAP');
                                   logFirebaseEvent('Button_Navigate-To');
+
                                   context.pushNamed('Login');
                                 },
                                 text: FFLocalizations.of(context).getText(
@@ -217,7 +218,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                   );
                                 }
                                 final propertiesListBookedPropertiesResponse =
-                                    snapshot.data;
+                                    snapshot.data!;
                                 return Builder(
                                   builder: (context) {
                                     final bookedProperties =
@@ -268,6 +269,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                   'MY_PROPERTIES_Container_mj6t37nu_ON_TAP');
                                               logFirebaseEvent(
                                                   'Container_Navigate-To');
+
                                               context.pushNamed(
                                                 'PropertyDetails',
                                                 queryParams: {
@@ -863,6 +865,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       'MY_PROPERTIES_PAGE_Row_od4ycs47_ON_TAP');
                                                                   logFirebaseEvent(
                                                                       'Row_Navigate-To');
+
                                                                   context
                                                                       .pushNamed(
                                                                     'BookingDetails',
@@ -939,6 +942,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                         'MY_PROPERTIES_VIEW_OFFERS_BTN_ON_TAP');
                                                                     logFirebaseEvent(
                                                                         'Button_Navigate-To');
+
                                                                     context
                                                                         .pushNamed(
                                                                       'Offers',
@@ -1141,7 +1145,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                   );
                                 }
                                 final propertiesListGetBookMarkedPropertiesResponse =
-                                    snapshot.data;
+                                    snapshot.data!;
                                 return Builder(
                                   builder: (context) {
                                     final bookmarkedProperties =

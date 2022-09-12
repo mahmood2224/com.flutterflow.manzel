@@ -17,17 +17,18 @@ class _$TransactionsRecordSerializer
   final String wireName = 'TransactionsRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, TransactionsRecord object,
+  Iterable<Object?> serialize(
+      Serializers serializers, TransactionsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.userId;
     if (value != null) {
       result
         ..add('user_id')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.orderId;
     if (value != null) {
@@ -84,72 +85,72 @@ class _$TransactionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   TransactionsRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new TransactionsRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'user_id':
           result.userId = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'order_id':
           result.orderId = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'paid_amount':
           result.paidAmount = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'transaction_type':
           result.transactionType = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'transaction_method':
           result.transactionMethod = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'transaction_status':
           result.transactionStatus = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'created_at':
           result.createdAt = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'updated_at':
           result.updatedAt = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'transaction_id':
           result.transactionId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -160,28 +161,28 @@ class _$TransactionsRecordSerializer
 
 class _$TransactionsRecord extends TransactionsRecord {
   @override
-  final DocumentReference<Object> userId;
+  final DocumentReference<Object?>? userId;
   @override
-  final int orderId;
+  final int? orderId;
   @override
-  final String paidAmount;
+  final String? paidAmount;
   @override
-  final String transactionType;
+  final String? transactionType;
   @override
-  final String transactionMethod;
+  final String? transactionMethod;
   @override
-  final String transactionStatus;
+  final String? transactionStatus;
   @override
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   @override
-  final String transactionId;
+  final String? transactionId;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$TransactionsRecord(
-          [void Function(TransactionsRecordBuilder) updates]) =>
+          [void Function(TransactionsRecordBuilder)? updates]) =>
       (new TransactionsRecordBuilder()..update(updates))._build();
 
   _$TransactionsRecord._(
@@ -194,7 +195,7 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.createdAt,
       this.updatedAt,
       this.transactionId,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -219,7 +220,7 @@ class _$TransactionsRecord extends TransactionsRecord {
         createdAt == other.createdAt &&
         updatedAt == other.updatedAt &&
         transactionId == other.transactionId &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -241,7 +242,7 @@ class _$TransactionsRecord extends TransactionsRecord {
                     createdAt.hashCode),
                 updatedAt.hashCode),
             transactionId.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -256,59 +257,58 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('createdAt', createdAt)
           ..add('updatedAt', updatedAt)
           ..add('transactionId', transactionId)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class TransactionsRecordBuilder
     implements Builder<TransactionsRecord, TransactionsRecordBuilder> {
-  _$TransactionsRecord _$v;
+  _$TransactionsRecord? _$v;
 
-  DocumentReference<Object> _userId;
-  DocumentReference<Object> get userId => _$this._userId;
-  set userId(DocumentReference<Object> userId) => _$this._userId = userId;
+  DocumentReference<Object?>? _userId;
+  DocumentReference<Object?>? get userId => _$this._userId;
+  set userId(DocumentReference<Object?>? userId) => _$this._userId = userId;
 
-  int _orderId;
-  int get orderId => _$this._orderId;
-  set orderId(int orderId) => _$this._orderId = orderId;
+  int? _orderId;
+  int? get orderId => _$this._orderId;
+  set orderId(int? orderId) => _$this._orderId = orderId;
 
-  String _paidAmount;
-  String get paidAmount => _$this._paidAmount;
-  set paidAmount(String paidAmount) => _$this._paidAmount = paidAmount;
+  String? _paidAmount;
+  String? get paidAmount => _$this._paidAmount;
+  set paidAmount(String? paidAmount) => _$this._paidAmount = paidAmount;
 
-  String _transactionType;
-  String get transactionType => _$this._transactionType;
-  set transactionType(String transactionType) =>
+  String? _transactionType;
+  String? get transactionType => _$this._transactionType;
+  set transactionType(String? transactionType) =>
       _$this._transactionType = transactionType;
 
-  String _transactionMethod;
-  String get transactionMethod => _$this._transactionMethod;
-  set transactionMethod(String transactionMethod) =>
+  String? _transactionMethod;
+  String? get transactionMethod => _$this._transactionMethod;
+  set transactionMethod(String? transactionMethod) =>
       _$this._transactionMethod = transactionMethod;
 
-  String _transactionStatus;
-  String get transactionStatus => _$this._transactionStatus;
-  set transactionStatus(String transactionStatus) =>
+  String? _transactionStatus;
+  String? get transactionStatus => _$this._transactionStatus;
+  set transactionStatus(String? transactionStatus) =>
       _$this._transactionStatus = transactionStatus;
 
-  DateTime _createdAt;
-  DateTime get createdAt => _$this._createdAt;
-  set createdAt(DateTime createdAt) => _$this._createdAt = createdAt;
+  DateTime? _createdAt;
+  DateTime? get createdAt => _$this._createdAt;
+  set createdAt(DateTime? createdAt) => _$this._createdAt = createdAt;
 
-  DateTime _updatedAt;
-  DateTime get updatedAt => _$this._updatedAt;
-  set updatedAt(DateTime updatedAt) => _$this._updatedAt = updatedAt;
+  DateTime? _updatedAt;
+  DateTime? get updatedAt => _$this._updatedAt;
+  set updatedAt(DateTime? updatedAt) => _$this._updatedAt = updatedAt;
 
-  String _transactionId;
-  String get transactionId => _$this._transactionId;
-  set transactionId(String transactionId) =>
+  String? _transactionId;
+  String? get transactionId => _$this._transactionId;
+  set transactionId(String? transactionId) =>
       _$this._transactionId = transactionId;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   TransactionsRecordBuilder() {
     TransactionsRecord._initializeBuilder(this);
@@ -326,7 +326,7 @@ class TransactionsRecordBuilder
       _createdAt = $v.createdAt;
       _updatedAt = $v.updatedAt;
       _transactionId = $v.transactionId;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -339,7 +339,7 @@ class TransactionsRecordBuilder
   }
 
   @override
-  void update(void Function(TransactionsRecordBuilder) updates) {
+  void update(void Function(TransactionsRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -358,7 +358,7 @@ class TransactionsRecordBuilder
             createdAt: createdAt,
             updatedAt: updatedAt,
             transactionId: transactionId,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

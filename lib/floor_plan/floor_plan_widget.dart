@@ -9,11 +9,11 @@ import 'package:page_transition/page_transition.dart';
 
 class FloorPlanWidget extends StatefulWidget {
   const FloorPlanWidget({
-    Key key,
+    Key? key,
     this.propertyId,
   }) : super(key: key);
 
-  final int propertyId;
+  final int? propertyId;
 
   @override
   _FloorPlanWidgetState createState() => _FloorPlanWidgetState();
@@ -85,7 +85,7 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
                   ),
                 );
               }
-              final columnPropertyResponse = snapshot.data;
+              final columnPropertyResponse = snapshot.data!;
               return SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,

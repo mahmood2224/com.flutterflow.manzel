@@ -25,7 +25,7 @@ import 'package:uuid/uuid.dart';
 
 class ChatWidget extends StatefulWidget {
   const ChatWidget({
-    Key key,
+    Key? key,
     this.bankJson,
   }) : super(key: key);
 

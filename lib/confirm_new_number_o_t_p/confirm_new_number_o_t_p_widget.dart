@@ -21,7 +21,7 @@ import '../notification_handler/firebase_cloud_messaging.dart';
 
 class ConfirmNewNumberOTPWidget extends StatefulWidget {
   final String phoneNumber;
-  const ConfirmNewNumberOTPWidget({Key key,this.phoneNumber}) : super(key: key);
+  const ConfirmNewNumberOTPWidget({Key? key,this.phoneNumber}) : super(key: key);
 
   @override
   _ConfirmNewNumberOTPWidgetState createState() =>
@@ -29,7 +29,7 @@ class ConfirmNewNumberOTPWidget extends StatefulWidget {
 }
 
 class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
-  TextEditingController enterOTPController;
+  TextEditingController? enterOTPController;
   int _otpResendTimes = 3;
   final ValueNotifier<bool> _showResendOtp = ValueNotifier(false);
   String _phoneAuthVerificationCode = '';
@@ -89,6 +89,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
             logFirebaseEvent('CONFIRM_NEW_NUMBER_O_T_P_back_ON_TAP');
             // Back to login
             logFirebaseEvent('back_Backtologin');
+
             context.pop();
           },
         ),

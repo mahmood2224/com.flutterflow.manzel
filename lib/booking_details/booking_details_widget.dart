@@ -14,11 +14,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BookingDetailsWidget extends StatefulWidget {
   const BookingDetailsWidget({
-    Key key,
+    Key? key,
     this.orderId,
   }) : super(key: key);
 
-  final String orderId;
+  final String? orderId;
 
   @override
   _BookingDetailsWidgetState createState() => _BookingDetailsWidgetState();
@@ -150,7 +150,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                 ),
               );
             }
-            final columnOrderDetailsResponse = snapshot.data;
+            final columnOrderDetailsResponse = snapshot.data!;
             return SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -465,6 +465,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                               'BOOKING_DETAILS_Container_arq4cwwe_ON_TA');
                                                           logFirebaseEvent(
                                                               'Container_Navigate-To');
+
                                                           context.pushNamed(
                                                             'Offers',
                                                             queryParams: {
@@ -1605,6 +1606,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 logFirebaseEvent(
                                     'BOOKING_DETAILS_VIEW_MORE_BTN_ON_TAP');
                                 logFirebaseEvent('Button_Navigate-To');
+
                                 context.pushNamed(
                                   'PropertyDetails',
                                   queryParams: {

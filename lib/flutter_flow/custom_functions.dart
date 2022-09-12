@@ -36,74 +36,74 @@ Future<String> getUnreadMessage(String channelUrl) async {
 
 }
 
-bool checkPhoneNumberFormat(String phoneNumber) {
+bool checkPhoneNumberFormat(String? phoneNumber) {
   // Add your function code here
-  if (phoneNumber.length < 9 || phoneNumber.length > 10) {
+  if (phoneNumber!.length < 9 || phoneNumber.length > 10) {
     return false;
   } else {
     return true;
   }
 }
 
-int calculate(String builtIn) {
+int calculate(String? builtIn) {
   // convert date to age
   final now = DateTime.now();
-  final difference = now.difference(DateTime.parse(builtIn));
+  final difference = now.difference(DateTime.parse(builtIn!));
   final result = difference.inDays / 365.25;
   return result.toInt();
 }
 
 LatLng latLngFronJson(dynamic latLngJson) {
   if (latLngJson == null) {
-    return null;
+    return latLngJson;
   }
   return LatLng(latLngJson['lat'], latLngJson['lng']);
 }
 
 LatLng propertyLocation(
-  double lat,
-  double lng,
+  double? lat,
+  double? lng,
 ) {
   if (lat == 0 && lng == 0) {
     return LatLng(40.8295538, -73.9386429);
   }
-  return LatLng(lat, lng);
+  return LatLng(lat ?? 40.8295538, lng ?? -73.9386429);
 }
 
-String formatAmount(String amount) {
+String formatAmount(String? amount) {
   if (amount == "null") {
     return '0';
   }
   var format = NumberFormat('###,###', 'en_US');
-  double value = double.parse(amount);
+  double value = double.parse(amount!);
   return format.format(value) + ".00";
 }
 
-double formattedDouble(int maxRange) {
+double formattedDouble(int? maxRange) {
   // Add your function code here!
-  double value = maxRange.toDouble();
+  double value = maxRange!.toDouble();
   return value;
 }
 
-String formattedSliderOutput(double rawSliderValue) {
+String formattedSliderOutput(double? rawSliderValue) {
   // Add your function code here!
-  double val = double.parse(rawSliderValue.toStringAsFixed(0));
+  double val = double.parse(rawSliderValue!.toStringAsFixed(0));
   String amount = val.toString();
   var format = NumberFormat('###,###', 'en_US');
   double value = double.parse(amount);
   return format.format(value);
 }
 
-int sliderToApi(double sliderValue) {
+int sliderToApi(double? sliderValue) {
   // Add your function code here!
-  double val = double.parse(sliderValue.toStringAsFixed(0));
+  double val = double.parse(sliderValue!.toStringAsFixed(0));
   int res = val.toInt();
   return res;
 }
 
-String searchPagePropertyText(int count) {
+String searchPagePropertyText(int? count) {
   // Add your function code here!
-  if (count > 1) {
+  if (count! > 1) {
     return "${count.toString()} properties available";
   } else {
     return "${count.toString()} property available";
@@ -111,10 +111,10 @@ String searchPagePropertyText(int count) {
 }
 
 bool validateInstallmentRange(
-  double minIntallmentRange,
-  double maxInstallmentRange,
+  double? minIntallmentRange,
+  double? maxInstallmentRange,
 ) {
-  if (minIntallmentRange < maxInstallmentRange) {
+  if (minIntallmentRange! < maxInstallmentRange!) {
     return true;
   } else {
     return false;
@@ -123,67 +123,63 @@ bool validateInstallmentRange(
 }
 
 List<String> cityListBuilder(
-  List<String> cityListApiResponse,
-  String locale,
+  List<String>? cityListApiResponse,
+  String? locale,
 ) {
   // Add your function code here!
   if (locale == "en") {
     var finalList = ["All"];
-    finalList.addAll(cityListApiResponse);
+    finalList.addAll(cityListApiResponse!);
     return finalList;
   } else {
     var finalList = ["الكل"];
-    finalList.addAll(cityListApiResponse);
+    finalList.addAll(cityListApiResponse!);
     return finalList;
   }
 }
 
 List<String> propertTypeBuilder(
-  List<String> propertyTypeApiResponse,
-  String locale,
+  List<String>? propertyTypeApiResponse,
+  String? locale,
 ) {
   // Add your function code here!
   if (locale == "en") {
     var finalList = ["All"];
-    finalList.addAll(propertyTypeApiResponse);
+    finalList.addAll(propertyTypeApiResponse!);
     return finalList;
   } else {
     var finalList = ["الكل"];
-    finalList.addAll(propertyTypeApiResponse);
+    finalList.addAll(propertyTypeApiResponse!);
     return finalList;
   }
 }
 
 List<String> filteredResultChioceChipsBuilder(
-  String filteredCity,
-  List<String> filteredPropertyType,
-  List<String> filteredFurnishingType,
-  String locale,
+  String? filteredCity,
+  String? filteredPropertyType,
+  String? filteredFurnishingType,
+  String? locale,
 ) {
   List<String> results = [];
   if (locale == "en") {
     if (filteredCity != '') {
       results.add("City: ${filteredCity} ");
     }
-    if (filteredPropertyType.length != 0) {
-      String properties = filteredPropertyType.join(', ');
-      results.add("Type: ${properties}");
+    if (filteredPropertyType!.length != 0) {
+      results.add("Type: ${filteredPropertyType}");
     }
-    if (filteredFurnishingType.length != 0) {
-      String furnishing = filteredFurnishingType.join(', ');
-      results.add("Furnishing: ${furnishing}");
+    if (filteredFurnishingType!.length != 0) {
+      results.add("Furnishing: ${filteredFurnishingType}");
     }
   } else {
     if (filteredCity != '') {
       results.add("المدينة: ${filteredCity} ");
     }
-    if (filteredPropertyType.length != 0) {
-      String properties = filteredPropertyType.join(', ');
-      results.add("يكتب: ${properties} ");
+    if (filteredPropertyType!.length != 0) {
+      results.add("يكتب: ${filteredPropertyType} ");
     }
-    if (filteredFurnishingType.length != 0) {
-      String furnishing = filteredFurnishingType.join(', ');
-      results.add("تأثيث: ${furnishing} ");
+    if (filteredFurnishingType!.length != 0) {
+      results.add("تأثيث: ${filteredFurnishingType} ");
     }
   }
   return results;
@@ -195,15 +191,15 @@ String countJsonData(dynamic jsonResponse) {
   // Add your function code here!
 }
 
-String listToApiParameters(List<String> paramList) {
+String listToApiParameters(List<String>? paramList) {
   // Add your function code here!
-  var param = paramList.join(',');
+  var param = paramList!.join(',');
   return param;
 }
 
 bool propertyTypeCheckHouse(
-  String propertyType,
-  String locale,
+  String? propertyType,
+  String? locale,
 ) {
   // Add your function code here!
   if (locale == "en") {
@@ -222,8 +218,8 @@ bool propertyTypeCheckHouse(
 }
 
 bool propertyTypeCheckApartment(
-  String propertyType,
-  String locale,
+  String? propertyType,
+  String? locale,
 ) {
   if (locale == "en") {
     if (propertyType == "Apartment") {
@@ -242,8 +238,8 @@ bool propertyTypeCheckApartment(
 }
 
 String noResultsCityName(
-  String cityName,
-  String locale,
+  String? cityName,
+  String? locale,
 ) {
   // Add your function code here!
   if (locale == "en") {
@@ -253,8 +249,8 @@ String noResultsCityName(
   }
 }
 
-String getFormattedMobileNumber(String mobileNumber) {
-  if (mobileNumber.startsWith('0')) {
+String getFormattedMobileNumber(String? mobileNumber) {
+  if (mobileNumber!.startsWith('0')) {
     String number = '+966' + mobileNumber.substring(1, (mobileNumber.length));
     return number;
   }
@@ -265,7 +261,7 @@ bool isSimilarPropertyAvailable(List<dynamic> similarProperties) {
   return similarProperties.isNotEmpty;
 }
 
-bool isPropertyAvailable(String currentProprtyStatus) {
+bool isPropertyAvailable(String? currentProprtyStatus) {
   // Add your function code here!
   if (currentProprtyStatus == "Available") {
     return true;
@@ -274,16 +270,16 @@ bool isPropertyAvailable(String currentProprtyStatus) {
   }
 }
 
-bool queryCollectionHasValue(List<OrdersRecord> queryDocuments) {
+bool queryCollectionHasValue(List<OrdersRecord>? queryDocuments) {
   // Add your function code here!
-  if (queryDocuments.length != 0) {
+  if (queryDocuments!.length != 0) {
     return true;
   } else {
     return false;
   }
 }
 
-int orderIdGenerator(int randomNumber) {
+int orderIdGenerator(int? randomNumber) {
   // Add your function code here!
   String timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
   int randomNumberLength = randomNumber.toString().length;
@@ -295,36 +291,36 @@ int orderIdGenerator(int randomNumber) {
 }
 
 String formatDateTime(
-  int inputTimeStamp,
-  String locale,
+  int? inputTimeStamp,
+  String? locale,
 ) {
   // Add your function code here!
   if (locale == "en") {
     DateTime bookingTime =
-        DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+        DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
     String formattedResult =
         '${DateFormat.d().format(bookingTime)} ${DateFormat.MMM().format(bookingTime)} ${DateFormat.y().format(bookingTime)}  ${DateFormat.jm().format(bookingTime)}';
     return formattedResult;
   } else {
     DateTime bookingTime =
-        DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+        DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
     String formattedResult =
         '${DateFormat.d("ar_SA").format(bookingTime)} ${DateFormat.MMM("ar_SA").format(bookingTime)} ${DateFormat.y("ar_SA").format(bookingTime)}  ${DateFormat.jm("ar_SA").format(bookingTime)}';
     return formattedResult;
   }
 }
 
-String pastOfferScreenDateTime(int inputDateTime) {
+String pastOfferScreenDateTime(int? inputDateTime) {
   // Add your function code here!
   DateTime offerTime =
-      DateTime.fromMillisecondsSinceEpoch(inputDateTime * 1000);
+      DateTime.fromMillisecondsSinceEpoch(inputDateTime! * 1000);
   String formattedResult =
       '${DateFormat.d().format(offerTime).toString().padLeft(2, "0")}/${DateFormat.M().format(offerTime).toString().padLeft(2, "0")}/${DateFormat.y().format(offerTime)} - ${DateFormat.jm().format(offerTime)}';
 
   return formattedResult;
 }
 
-bool pastOfferAcceptedStatusConditionalVisibilty(String offerStatus) {
+bool pastOfferAcceptedStatusConditionalVisibilty(String? offerStatus) {
   // Add your function code here!
   if (offerStatus == 'accepted') {
     return true;
@@ -334,14 +330,14 @@ bool pastOfferAcceptedStatusConditionalVisibilty(String offerStatus) {
 }
 
 String offerScreenTime(
-  int secondsTime,
-  String locale,
+  int? secondsTime,
+  String? locale,
 ) {
   DateTime offerTime;
   if (secondsTime.toString().length > 7) {
-    offerTime = DateTime.fromMillisecondsSinceEpoch(secondsTime * 1000);
+    offerTime = DateTime.fromMillisecondsSinceEpoch(secondsTime! * 1000);
   } else {
-    offerTime = DateTime.fromMillisecondsSinceEpoch(secondsTime * 10000000);
+    offerTime = DateTime.fromMillisecondsSinceEpoch(secondsTime! * 10000000);
   }
   // Add your function code here!
   Duration diff = DateTime.now().difference(offerTime);
@@ -449,8 +445,8 @@ String offerScreenTime(
 }
 
 bool conditionalVisibility(
-  String apiResponseState,
-  String desiredWidgetState,
+  String? apiResponseState,
+  String? desiredWidgetState,
 ) {
   if (apiResponseState == desiredWidgetState) {
     return true;
@@ -461,11 +457,11 @@ bool conditionalVisibility(
 }
 
 List<String> choicechipUnselected(
-  List<String> choicechipValue,
-  String locale,
+  List<String>? choicechipValue,
+  String? locale,
 ) {
   // Add your function code here!
-  if (choicechipValue.length == 0) {
+  if (choicechipValue!.length == 0) {
     if (locale == "en") {
       return ["All"];
     } else {
@@ -477,8 +473,8 @@ List<String> choicechipUnselected(
 }
 
 String myPropertiesFormatDate(
-  int inputTimeStamp,
-  String locale,
+  int? inputTimeStamp,
+  String? locale,
 ) {
   String today = "اليوم";
   // Add your function code here!
@@ -487,15 +483,15 @@ String myPropertiesFormatDate(
     bookingTime = DateTime.now();
   }
   if (locale == "en") {
-    bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+    bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
     return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime)}. ${DateFormat.y().format(bookingTime)}';
   } else {
-    bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp * 1000);
+    bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
     return '${DateFormat.d("ar_SA").format(bookingTime)} ${DateFormat.MMMM("ar_SA").format(bookingTime)}. ${DateFormat.y("ar_SA").format(bookingTime)}';
   }
 }
 
-String offerScreenPropertyIdisNull(String propertyId) {
+String offerScreenPropertyIdisNull(String? propertyId) {
   // Add your function code here!
   if (propertyId != null && propertyId != "null") {
     return propertyId;
@@ -504,7 +500,7 @@ String offerScreenPropertyIdisNull(String propertyId) {
   }
 }
 
-bool myPropertiesViewOffersVisibility(String status) {
+bool myPropertiesViewOffersVisibility(String? status) {
   // Add your function code here!
   if (status == "cancelled" ||
       status == "completed" ||
@@ -518,7 +514,7 @@ bool myPropertiesViewOffersVisibility(String status) {
   }
 }
 
-bool cancelReverveButtonVisibility(String bookingStatus) {
+bool cancelReverveButtonVisibility(String? bookingStatus) {
   // Add your function code here!
   if (bookingStatus == "reserved" ||
       bookingStatus == "collect_offers" ||
@@ -530,9 +526,9 @@ bool cancelReverveButtonVisibility(String bookingStatus) {
 }
 
 bool orderProcessStatus(
-  String apiResponse,
-  String processStage,
-  String setType,
+  String? apiResponse,
+  String? processStage,
+  String? setType,
 ) {
   switch (apiResponse) {
     case "reserved":
@@ -712,8 +708,8 @@ bool orderProcessStatus(
 }
 
 bool offerStatusPaymentCompletedCheck(
-  String transactionId,
-  String status,
+  String? transactionId,
+  String? status,
 ) {
   // Add your function code here!
   if (transactionId != null && transactionId != "null") {
@@ -724,8 +720,8 @@ bool offerStatusPaymentCompletedCheck(
 }
 
 String myPropertiesBookedStatus(
-  String transactionId,
-  String status,
+  String? transactionId,
+  String? status,
 ) {
   if ((transactionId == null ||
           transactionId.isEmpty ||
@@ -736,21 +732,21 @@ String myPropertiesBookedStatus(
       status == "reserved") {
     return "reserved";
   } else {
-    return status;
+    return status!;
   }
   // Add your function code here!
 }
 
-int bookinPagePropertyIdToInt(String propertyId) {
+int bookinPagePropertyIdToInt(String? propertyId) {
   // Add your function code here!
   if (propertyId == "null") {
     return 0;
   }
-  int res = int.parse(propertyId);
+  int res = int.parse(propertyId!);
   return res;
 }
 
-bool chatButtonVisibility(String status) {
+bool chatButtonVisibility(String? status) {
   // Add your function code here!
   if (status == "new") {
     return true;
@@ -760,11 +756,11 @@ bool chatButtonVisibility(String status) {
 }
 
 bool pastOfferColumnVisibility(
-  String status,
-  String installmentPeriod,
-  String installmentRange,
-  String agentName,
-  String totalPrice,
+  String? status,
+  String? installmentPeriod,
+  String? installmentRange,
+  String? agentName,
+  String? totalPrice,
 ) {
   if (status == "disqualified") {
     return false;
@@ -789,10 +785,10 @@ String bookingScreenCountOffers(List<dynamic> bankIds) {
 }
 
 bool offerScreenConitionalVisibilty(
-  bool isLoggedIn,
-  String status,
+  bool? isLoggedIn,
+  String? status,
 ) {
-  if (isLoggedIn) {
+  if (isLoggedIn!) {
     if (status == "Active") {
       return true;
     } else {
@@ -805,12 +801,12 @@ bool offerScreenConitionalVisibilty(
 }
 
 bool bookingDeatilsViewOfferVisibilty(
-  String status,
-  String bankIdCount,
+  String? status,
+  String? bankIdCount,
 ) {
   int count;
   if (bankIdCount != null || bankIdCount != "null") {
-    count = int.parse(bankIdCount);
+    count = int.parse(bankIdCount!);
   } else {
     count = 0;
   }
@@ -824,11 +820,11 @@ bool bookingDeatilsViewOfferVisibilty(
 }
 
 String notificationsDateTime(
-  String locale,
-  DateTime timestamp,
+  String? locale,
+  DateTime? timestamp,
 ) {
   if (locale == "en") {
-    if ((DateFormat.yMd().format(timestamp)) ==
+    if ((DateFormat.yMd().format(timestamp!)) ==
         (DateFormat.yMd().format(DateTime.now()))) {
       return "Today";
     } else if ((DateFormat.yMd().format(timestamp)) ==
@@ -843,7 +839,7 @@ String notificationsDateTime(
       return result;
     }
   } else {
-    if ((DateFormat.yMd().format(timestamp)) ==
+    if ((DateFormat.yMd().format(timestamp!)) ==
         (DateFormat.yMd().format(DateTime.now()))) {
       return "اليوم";
     } else if ((DateFormat.yMd().format(timestamp)) ==
@@ -860,9 +856,9 @@ String notificationsDateTime(
   }
 }
 
-String notificationBadgeCount(List<NotificationsRecord> unreadNotifications) {
+String notificationBadgeCount(List<NotificationsRecord>? unreadNotifications) {
   // Add your function code here!
-  if (unreadNotifications.isEmpty) {
+  if (unreadNotifications!.isEmpty) {
     return '0';
   }
   String count = unreadNotifications.length.toString();
@@ -870,8 +866,8 @@ String notificationBadgeCount(List<NotificationsRecord> unreadNotifications) {
 }
 
 String emptyListWidgetTitle(
-  String screenName,
-  String locale,
+  String? screenName,
+  String? locale,
 ) {
   switch (screenName) {
     case "homeScreen":
@@ -964,8 +960,8 @@ String emptyListWidgetTitle(
 }
 
 String snackBarMessage(
-  String messageType,
-  String locale,
+  String? messageType,
+  String? locale,
 ) {
   switch (messageType) {
     case "error":
@@ -1028,8 +1024,8 @@ String snackBarMessage(
 }
 
 String subTitleText(
-  String locale,
-  String screenName,
+  String? locale,
+  String? screenName,
 ) {
   switch (screenName) {
     case "bookedProperties":
@@ -1064,19 +1060,19 @@ String subTitleText(
   }
 }
 
-String formatAmountWithoutDecimal(String amount) {
+String formatAmountWithoutDecimal(String? amount) {
   // Add your function code here!
   if (amount == "null") {
     return '0';
   }
   var format = NumberFormat('###,###', 'en_US');
-  double value = double.parse(amount);
+  double value = double.parse(amount!);
   return format.format(value);
 }
 
 bool bookingDetailsOrderStatusConditionlVisibilty(
-  String orderStatus,
-  String statusText,
+  String? orderStatus,
+  String? statusText,
 ) {
   switch (orderStatus) {
     case "cancelled":
@@ -1118,10 +1114,10 @@ bool bookingDetailsOrderStatusConditionlVisibilty(
 }
 
 bool notificationConditionalVisibilty(
-  String appLocale,
-  int isRead,
-  String textLang,
-  int textWeight,
+  String? appLocale,
+  int? isRead,
+  String? textLang,
+  int? textWeight,
 ) {
   if ((appLocale == textLang) && (isRead == textWeight)) {
     return true;
@@ -1131,16 +1127,16 @@ bool notificationConditionalVisibilty(
   // Add your function code here!
 }
 
-bool videoPlayerVisibilty(String videoURL) {
+bool videoPlayerVisibilty(String? videoURL) {
   // Add your function code here!
-  if (videoURL.isNotEmpty) {
+  if (videoURL!.isNotEmpty) {
     return true;
   } else {
     return false;
   }
 }
 
-bool propertyStatusConditionalVisibilty(String propertyStatus) {
+bool propertyStatusConditionalVisibilty(String? propertyStatus) {
   // Add your function code here!
   if (propertyStatus == "Available") {
     return true;
@@ -1149,7 +1145,19 @@ bool propertyStatusConditionalVisibilty(String propertyStatus) {
   }
 }
 
-String orderIdFormatter(String orderId) {
+String orderIdFormatter(String? orderId) {
   // Add your function code here!
   return '#${orderId}';
+}
+
+bool profileCompletetionCheck(
+  String? email,
+  String? name,
+) {
+  // Add your function code here!
+  if (email != null && name != null) {
+    return true;
+  } else {
+    return false;
+  }
 }

@@ -5,16 +5,19 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddCardDetailsWidget extends StatefulWidget {
-  const AddCardDetailsWidget({Key key}) : super(key: key);
+  const AddCardDetailsWidget({Key? key}) : super(key: key);
 
   @override
   _AddCardDetailsWidgetState createState() => _AddCardDetailsWidgetState();
 }
 
 class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
-  TextEditingController cardNumberController1;
-  TextEditingController cardNumberController2;
-  TextEditingController cardNumberController3;
+  TextEditingController? cardNumberController1;
+
+  TextEditingController? cardNumberController2;
+
+  TextEditingController? cardNumberController3;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -53,6 +56,7 @@ class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
                           logFirebaseEvent(
                               'ADD_CARD_DETAILS_Icon_id5z0f8p_ON_TAP');
                           logFirebaseEvent('Icon_Navigate-To');
+
                           context.pushNamed(
                             'KYC',
                             extra: <String, dynamic>{
@@ -164,6 +168,8 @@ class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
                                   ),
                               enabledBorder: InputBorder.none,
                               focusedBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              focusedErrorBorder: InputBorder.none,
                             ),
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
@@ -237,6 +243,8 @@ class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
                                       ),
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  focusedErrorBorder: InputBorder.none,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
@@ -305,6 +313,8 @@ class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
                                       ),
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  focusedErrorBorder: InputBorder.none,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1

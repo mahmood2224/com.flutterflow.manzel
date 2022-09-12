@@ -16,10 +16,10 @@ class _$OrdersRecordSerializer implements StructuredSerializer<OrdersRecord> {
   final String wireName = 'OrdersRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, OrdersRecord object,
+  Iterable<Object?> serialize(Serializers serializers, OrdersRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.orderId;
     if (value != null) {
       result
@@ -46,7 +46,7 @@ class _$OrdersRecordSerializer implements StructuredSerializer<OrdersRecord> {
         ..add('user_id')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.propertyId;
     if (value != null) {
@@ -89,75 +89,76 @@ class _$OrdersRecordSerializer implements StructuredSerializer<OrdersRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
-  OrdersRecord deserialize(Serializers serializers, Iterable<Object> serialized,
+  OrdersRecord deserialize(
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new OrdersRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'order_id':
           result.orderId = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'created_at':
           result.createdAt = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'updated_at':
           result.updatedAt = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'user_id':
           result.userId = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'property_id':
           result.propertyId = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'order_status':
           result.orderStatus = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'booking_expiry_date':
           result.bookingExpiryDate = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'reservation_amount':
           result.reservationAmount = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'deposit_receipt':
           result.depositReceipt = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'cammunda_instance_id':
           result.cammundaInstanceId = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -168,29 +169,29 @@ class _$OrdersRecordSerializer implements StructuredSerializer<OrdersRecord> {
 
 class _$OrdersRecord extends OrdersRecord {
   @override
-  final int orderId;
+  final int? orderId;
   @override
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   @override
-  final DocumentReference<Object> userId;
+  final DocumentReference<Object?>? userId;
   @override
-  final int propertyId;
+  final int? propertyId;
   @override
-  final String orderStatus;
+  final String? orderStatus;
   @override
-  final DateTime bookingExpiryDate;
+  final DateTime? bookingExpiryDate;
   @override
-  final String reservationAmount;
+  final String? reservationAmount;
   @override
-  final String depositReceipt;
+  final String? depositReceipt;
   @override
-  final String cammundaInstanceId;
+  final String? cammundaInstanceId;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$OrdersRecord([void Function(OrdersRecordBuilder) updates]) =>
+  factory _$OrdersRecord([void Function(OrdersRecordBuilder)? updates]) =>
       (new OrdersRecordBuilder()..update(updates))._build();
 
   _$OrdersRecord._(
@@ -204,7 +205,7 @@ class _$OrdersRecord extends OrdersRecord {
       this.reservationAmount,
       this.depositReceipt,
       this.cammundaInstanceId,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -228,7 +229,7 @@ class _$OrdersRecord extends OrdersRecord {
         reservationAmount == other.reservationAmount &&
         depositReceipt == other.depositReceipt &&
         cammundaInstanceId == other.cammundaInstanceId &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -252,7 +253,7 @@ class _$OrdersRecord extends OrdersRecord {
                     reservationAmount.hashCode),
                 depositReceipt.hashCode),
             cammundaInstanceId.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -268,63 +269,62 @@ class _$OrdersRecord extends OrdersRecord {
           ..add('reservationAmount', reservationAmount)
           ..add('depositReceipt', depositReceipt)
           ..add('cammundaInstanceId', cammundaInstanceId)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class OrdersRecordBuilder
     implements Builder<OrdersRecord, OrdersRecordBuilder> {
-  _$OrdersRecord _$v;
+  _$OrdersRecord? _$v;
 
-  int _orderId;
-  int get orderId => _$this._orderId;
-  set orderId(int orderId) => _$this._orderId = orderId;
+  int? _orderId;
+  int? get orderId => _$this._orderId;
+  set orderId(int? orderId) => _$this._orderId = orderId;
 
-  DateTime _createdAt;
-  DateTime get createdAt => _$this._createdAt;
-  set createdAt(DateTime createdAt) => _$this._createdAt = createdAt;
+  DateTime? _createdAt;
+  DateTime? get createdAt => _$this._createdAt;
+  set createdAt(DateTime? createdAt) => _$this._createdAt = createdAt;
 
-  DateTime _updatedAt;
-  DateTime get updatedAt => _$this._updatedAt;
-  set updatedAt(DateTime updatedAt) => _$this._updatedAt = updatedAt;
+  DateTime? _updatedAt;
+  DateTime? get updatedAt => _$this._updatedAt;
+  set updatedAt(DateTime? updatedAt) => _$this._updatedAt = updatedAt;
 
-  DocumentReference<Object> _userId;
-  DocumentReference<Object> get userId => _$this._userId;
-  set userId(DocumentReference<Object> userId) => _$this._userId = userId;
+  DocumentReference<Object?>? _userId;
+  DocumentReference<Object?>? get userId => _$this._userId;
+  set userId(DocumentReference<Object?>? userId) => _$this._userId = userId;
 
-  int _propertyId;
-  int get propertyId => _$this._propertyId;
-  set propertyId(int propertyId) => _$this._propertyId = propertyId;
+  int? _propertyId;
+  int? get propertyId => _$this._propertyId;
+  set propertyId(int? propertyId) => _$this._propertyId = propertyId;
 
-  String _orderStatus;
-  String get orderStatus => _$this._orderStatus;
-  set orderStatus(String orderStatus) => _$this._orderStatus = orderStatus;
+  String? _orderStatus;
+  String? get orderStatus => _$this._orderStatus;
+  set orderStatus(String? orderStatus) => _$this._orderStatus = orderStatus;
 
-  DateTime _bookingExpiryDate;
-  DateTime get bookingExpiryDate => _$this._bookingExpiryDate;
-  set bookingExpiryDate(DateTime bookingExpiryDate) =>
+  DateTime? _bookingExpiryDate;
+  DateTime? get bookingExpiryDate => _$this._bookingExpiryDate;
+  set bookingExpiryDate(DateTime? bookingExpiryDate) =>
       _$this._bookingExpiryDate = bookingExpiryDate;
 
-  String _reservationAmount;
-  String get reservationAmount => _$this._reservationAmount;
-  set reservationAmount(String reservationAmount) =>
+  String? _reservationAmount;
+  String? get reservationAmount => _$this._reservationAmount;
+  set reservationAmount(String? reservationAmount) =>
       _$this._reservationAmount = reservationAmount;
 
-  String _depositReceipt;
-  String get depositReceipt => _$this._depositReceipt;
-  set depositReceipt(String depositReceipt) =>
+  String? _depositReceipt;
+  String? get depositReceipt => _$this._depositReceipt;
+  set depositReceipt(String? depositReceipt) =>
       _$this._depositReceipt = depositReceipt;
 
-  String _cammundaInstanceId;
-  String get cammundaInstanceId => _$this._cammundaInstanceId;
-  set cammundaInstanceId(String cammundaInstanceId) =>
+  String? _cammundaInstanceId;
+  String? get cammundaInstanceId => _$this._cammundaInstanceId;
+  set cammundaInstanceId(String? cammundaInstanceId) =>
       _$this._cammundaInstanceId = cammundaInstanceId;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   OrdersRecordBuilder() {
     OrdersRecord._initializeBuilder(this);
@@ -343,7 +343,7 @@ class OrdersRecordBuilder
       _reservationAmount = $v.reservationAmount;
       _depositReceipt = $v.depositReceipt;
       _cammundaInstanceId = $v.cammundaInstanceId;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -356,7 +356,7 @@ class OrdersRecordBuilder
   }
 
   @override
-  void update(void Function(OrdersRecordBuilder) updates) {
+  void update(void Function(OrdersRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -376,7 +376,7 @@ class OrdersRecordBuilder
             reservationAmount: reservationAmount,
             depositReceipt: depositReceipt,
             cammundaInstanceId: cammundaInstanceId,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

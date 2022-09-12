@@ -11,11 +11,11 @@ import 'package:share_plus/share_plus.dart';
 
 class ImageGalleryViewWidget extends StatefulWidget {
   const ImageGalleryViewWidget({
-    Key key,
+    Key? key,
     this.propertyId,
   }) : super(key: key);
 
-  final int propertyId;
+  final int? propertyId;
 
   @override
   _ImageGalleryViewWidgetState createState() => _ImageGalleryViewWidgetState();
@@ -164,7 +164,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                         ),
                       );
                     }
-                    final listViewPropertyResponse = snapshot.data;
+                    final listViewPropertyResponse = snapshot.data!;
                     return Builder(
                       builder: (context) {
                         final images = PropertyCall.propertyImages(

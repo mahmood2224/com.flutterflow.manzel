@@ -7,7 +7,7 @@ class FFLocalizations {
   final Locale locale;
 
   static FFLocalizations of(BuildContext context) =>
-      Localizations.of<FFLocalizations>(context, FFLocalizations);
+      Localizations.of<FFLocalizations>(context, FFLocalizations)!;
 
   static List<String> languages() => ['en', 'ar'];
 
@@ -20,8 +20,8 @@ class FFLocalizations {
       (kTranslationsMap[key] ?? {})[locale.toString()] ?? '';
 
   String getVariableText({
-    String enText = '',
-    String arText = '',
+    String? enText = '',
+    String? arText = '',
   }) =>
       [enText, arText][languageIndex] ?? '';
 }
@@ -266,8 +266,96 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Edit',
       'ar': 'تعديل',
     },
+    'jj84j3p5': {
+      'en': 'Employment details',
+      'ar': 'تفاصيل العمل',
+    },
+    '4w16yzqb': {
+      'en': '2000 - 5000 SAR',
+      'ar': '2000-5000 ريال سعودي',
+    },
+    'him4ym4p': {
+      'en': '5000 - 10000 SAR',
+      'ar': '5000-10000 ريال سعودي',
+    },
+    'pb50wqi5': {
+      'en': '10000 - 30000 SAR',
+      'ar': '10000 - 30000 ريال سعودي',
+    },
+    'ae71fn4w': {
+      'en': 'Monthly income',
+      'ar': 'الدخل الشهري',
+    },
+    '1x1hia9l': {
+      'en': 'Private Sector',
+      'ar': 'القطاع الخاص',
+    },
+    'uj45ba83': {
+      'en': 'Private Sector',
+      'ar': 'القطاع الخاص',
+    },
+    'vsxglb98': {
+      'en': 'Goverment sector',
+      'ar': 'قطاع الحكومة',
+    },
+    '5bct8jic': {
+      'en': 'Hafiz',
+      'ar': 'حافز',
+    },
+    'm0exe07x': {
+      'en': 'Retired',
+      'ar': 'متقاعد',
+    },
+    'qjiyq3zw': {
+      'en': 'Self Employment',
+      'ar': 'العمل الحر',
+    },
+    '0bt0abl8': {
+      'en': 'Student',
+      'ar': 'طالب',
+    },
+    'ofijqhhe': {
+      'en': 'Unemployed',
+      'ar': 'عاطل عن العمل',
+    },
+    'gerdd7rv': {
+      'en': 'Employment status',
+      'ar': 'الحالة الوظيفية',
+    },
+    'xaoukvl0': {
+      'en': 'AlRajhi Bank',
+      'ar': 'مصرف الراجحي',
+    },
+    'jf2d59jp': {
+      'en': 'Alinma Bank',
+      'ar': 'مصرف الإنماء',
+    },
+    'rdd2pyla': {
+      'en': 'Alahli Bank',
+      'ar': 'مصرف الاهلي',
+    },
+    'unctzrqf': {
+      'en': 'SAAB Bank',
+      'ar': 'مصرف ساب',
+    },
+    'nfhf8rho': {
+      'en': 'Salary bank',
+      'ar': 'بنك الراتب',
+    },
+    'gq52m1or': {
+      'en': 'Does the Sakani loan cover you?',
+      'ar': '',
+    },
+    'e7abweju': {
+      'en': 'Yes',
+      'ar': '',
+    },
+    'ro3keqro': {
+      'en': 'No',
+      'ar': '',
+    },
     '91pyvwfe': {
-      'en': 'Save changes',
+      'en': 'Submit',
       'ar': 'احفظ التغييرات',
     },
     'x4a06mk8': {
@@ -387,17 +475,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Where are you looking?',
       'ar': 'أين تبحث ؟',
     },
-    '5qj98whz': {
-      'en': 'Coming soon',
-      'ar': 'قريبا',
-    },
-    'i2h601mg': {
+    'fkkrkypa': {
       'en': 'Available',
-      'ar': 'متوفرة',
+      'ar': '',
     },
-    '977ahbnt': {
+    '8bxpa4ol': {
       'en': 'Booked',
-      'ar': 'حجز',
+      'ar': '',
+    },
+    'zoj24rbp': {
+      'en': 'Coming soon',
+      'ar': '',
     },
     'etpebw43': {
       'en': 'Approved Banks',
@@ -548,6 +636,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'ps7kcru7': {
       'en': 'bank',
       'ar': 'مصرف',
+    },
+    '8xn1x1ox': {
+      'en': '1',
+      'ar': '',
     },
     'y0qb0uvi': {
       'en': 'Accept offer',
@@ -932,13 +1024,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Updated: ',
       'ar': 'محدث:',
     },
-    'cmjr8qt1': {
+    'enmg5904': {
       'en': 'Available',
-      'ar': 'متوفرة',
+      'ar': '',
     },
-    'rh5awojh': {
+    'lh4ly28u': {
       'en': 'Booked',
-      'ar': 'حجز',
+      'ar': '',
     },
     '9d90para': {
       'en': 'Apt. Plan',

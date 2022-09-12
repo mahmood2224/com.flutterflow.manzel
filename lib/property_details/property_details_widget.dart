@@ -43,12 +43,12 @@ Set<VideoPlayerController> _videoPlayers = Set();
 
 class PropertyDetailsWidget extends StatefulWidget {
   const PropertyDetailsWidget({
-    Key key,
+    Key? key,
     this.propertyId,
     this.path,
   }) : super(key: key);
 
-  final int propertyId;
+  final int? propertyId;
   final String path;
 
   @override
@@ -56,8 +56,8 @@ class PropertyDetailsWidget extends StatefulWidget {
 }
 
 class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
-  PageController pageViewController;
-  UserSavedRecord saveProperty;
+  PageController? pageViewController;
+  UserSavedRecord? saveProperty;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   VideoPlayerController _currentController;
   VideoPlayerController videoPlayerController;
@@ -164,7 +164,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                 ),
               );
             }
-            final columnPropertyResponse = snapshot.data;
+            final columnPropertyResponse = snapshot.data!;
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -240,7 +240,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     axisDirection:
                                                         Axis.horizontal,
                                                     onDotClicked: (i) {
-                                                      pageViewController
+                                                      pageViewController!
                                                           .animateToPage(
                                                         i,
                                                         duration: Duration(
@@ -634,50 +634,53 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             columnPropertyResponse
                                                                 .jsonBody,
                                                           ).toString()))
-                                                            FFButtonWidget(
-                                                              onPressed: () {
-                                                                print(
-                                                                    'propertyStatus pressed ...');
-                                                              },
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                'cmjr8qt1' /* Available */,
-                                                              ),
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                height: 26,
+                                                            Container(
+                                                              height: 26,
+                                                              decoration:
+                                                                  BoxDecoration(
                                                                 color: Color(
                                                                     0xFF81D05C),
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                                elevation: 0,
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                ),
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
                                                                             7),
                                                               ),
-                                                              showLoadingIndicator:
-                                                                  false,
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            10,
+                                                                            1,
+                                                                            10,
+                                                                            1),
+                                                                    child: Text(
+                                                                      'Available',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'AvenirArabic',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).white,
+                                                                            fontSize:
+                                                                                13,
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           if (!functions
                                                               .propertyStatusConditionalVisibilty(
@@ -686,50 +689,53 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             columnPropertyResponse
                                                                 .jsonBody,
                                                           ).toString()))
-                                                            FFButtonWidget(
-                                                              onPressed: () {
-                                                                print(
-                                                                    'propertyStatus pressed ...');
-                                                              },
-                                                              text: FFLocalizations
-                                                                      .of(context)
-                                                                  .getText(
-                                                                'rh5awojh' /* Booked */,
-                                                              ),
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                height: 26,
+                                                            Container(
+                                                              height: 26,
+                                                              decoration:
+                                                                  BoxDecoration(
                                                                 color: Color(
                                                                     0xFFD7D7D7),
-                                                                textStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .subtitle2
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontSize:
-                                                                          13,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                                elevation: 0,
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                ),
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
                                                                             7),
                                                               ),
-                                                              showLoadingIndicator:
-                                                                  false,
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            10,
+                                                                            1,
+                                                                            10,
+                                                                            1),
+                                                                    child: Text(
+                                                                      'Booked',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'AvenirArabic',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).white,
+                                                                            fontSize:
+                                                                                13,
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
                                                         ],
                                                       ),
@@ -2707,34 +2713,45 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     logFirebaseEvent(
                                         'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
                                     if (loggedIn) {
-                                      logFirebaseEvent('reserved_Bottom-Sheet');
-                                      await configurePaymentSdk();
+                                      if (functions.profileCompletetionCheck(
+                                          currentUserEmail,
+                                          valueOrDefault(
+                                              currentUserDocument?.name, ''))) {
+                                        logFirebaseEvent(
+                                            'reserved_Bottom-Sheet');
+                                        await configurePaymentSdk();
                                     await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.white,
-                                        context: context,
-                                        builder: (context) {
-                                          return Padding(
-                                            padding: MediaQuery.of(context)
-                                                .viewInsets,
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.9,
-                                              child:
-                                                  ReservationBottomSheetWidget(
-                                                reservationCost: PropertyCall
-                                                    .reservationsCost(
-                                                  columnPropertyResponse
-                                                      .jsonBody,
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.white,
+                                          context: context,
+                                          builder: (context) {
+                                            return Padding(
+                                              padding: MediaQuery.of(context)
+                                                  .viewInsets,
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.9,
+                                                child:
+                                                    ReservationBottomSheetWidget(
+                                                  reservationCost: PropertyCall
+                                                      .reservationsCost(
+                                                    columnPropertyResponse
+                                                        .jsonBody,
+                                                  ),
+                                                  propertyId: widget.propertyId,
                                                 ),
-                                                propertyId: widget.propertyId,
                                               ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => _currentController.play());
+                                            );
+                                          },
+                                        ).then((value) => _currentController.play());
+                                      } else {
+                                        logFirebaseEvent(
+                                            'reserved_Navigate-To');
+
+                                        context.pushNamed('EditPersonallInfo');
+                                      }
                                     } else {
                                       logFirebaseEvent('reserved_Navigate-To');
                                       context.pushNamed('Login');

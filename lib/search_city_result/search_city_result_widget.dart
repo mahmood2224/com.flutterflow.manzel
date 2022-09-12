@@ -15,21 +15,21 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SearchCityResultWidget extends StatefulWidget {
   const SearchCityResultWidget({
-    Key key,
+    Key? key,
     this.cityName,
     this.propertiesAvailable,
   }) : super(key: key);
 
-  final String cityName;
-  final int propertiesAvailable;
+  final String? cityName;
+  final int? propertiesAvailable;
 
   @override
   _SearchCityResultWidgetState createState() => _SearchCityResultWidgetState();
 }
 
 class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
-  Completer<ApiCallResponse> _apiRequestCompleter;
-  PageController pageViewController;
+  Completer<ApiCallResponse>? _apiRequestCompleter;
+  PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -110,7 +110,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                         ),
                   ),
                   Text(
-                    widget.cityName,
+                    widget.cityName!,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'AvenirArabic',
                           color: Color(0xFF2971FB),
@@ -137,7 +137,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    widget.propertiesAvailable.toString(),
+                    widget.propertiesAvailable!.toString(),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'AvenirArabic',
                           color: Color(0xFF6B6B6B),
@@ -200,7 +200,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                           ),
                         );
                       }
-                      final listViewPropertiesResponse = snapshot.data;
+                      final listViewPropertiesResponse = snapshot.data!;
                       return Builder(
                         builder: (context) {
                           final properties = PropertiesCall.properties(
@@ -251,6 +251,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                       // propertyDetails
                                       logFirebaseEvent(
                                           'propertyCard_propertyDetails');
+
                                       context.pushNamed(
                                         'PropertyDetails',
                                         queryParams: {
@@ -365,7 +366,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                   .horizontal,
                                                               onDotClicked:
                                                                   (i) {
-                                                                pageViewController
+                                                                pageViewController!
                                                                     .animateToPage(
                                                                   i,
                                                                   duration: Duration(
@@ -454,6 +455,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       if (!loggedIn) {
                                                         logFirebaseEvent(
                                                             'Container_Navigate-To');
+
                                                         context
                                                             .pushNamed('Login');
                                                       }

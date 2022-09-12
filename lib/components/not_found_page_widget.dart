@@ -5,7 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NotFoundPageWidget extends StatefulWidget {
-  const NotFoundPageWidget({Key key}) : super(key: key);
+  const NotFoundPageWidget({Key? key}) : super(key: key);
 
   @override
   _NotFoundPageWidgetState createState() => _NotFoundPageWidgetState();

@@ -11,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class PersonalEmploymentDetailsWidget extends StatefulWidget {
-  const PersonalEmploymentDetailsWidget({Key key}) : super(key: key);
+  const PersonalEmploymentDetailsWidget({Key? key}) : super(key: key);
 
   @override
   _PersonalEmploymentDetailsWidgetState createState() =>
@@ -20,11 +20,13 @@ class PersonalEmploymentDetailsWidget extends StatefulWidget {
 
 class _PersonalEmploymentDetailsWidgetState
     extends State<PersonalEmploymentDetailsWidget> {
-  String bankValue;
-  String monthlyIncomeValue;
-  String privateSectorValue;
-  TextEditingController emailController;
-  TextEditingController fullNameController;
+  TextEditingController? emailController;
+
+  TextEditingController? fullNameController;
+
+  String? bankValue;
+  String? monthlyIncomeValue;
+  String? privateSectorValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -73,6 +75,7 @@ class _PersonalEmploymentDetailsWidgetState
                 logFirebaseEvent('PERSONAL_EMPLOYMENT_DETAILS_backIcon_ON_');
                 // goToKYC
                 logFirebaseEvent('backIcon_goToKYC');
+
                 context.pushNamed('KYC');
               },
             ),
@@ -179,6 +182,20 @@ class _PersonalEmploymentDetailsWidgetState
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                             ),
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
@@ -221,6 +238,20 @@ class _PersonalEmploymentDetailsWidgetState
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFFA5A5A5),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(8),

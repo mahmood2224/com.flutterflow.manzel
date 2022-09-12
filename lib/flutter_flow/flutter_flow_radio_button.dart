@@ -29,16 +29,16 @@ import 'package:flutter/material.dart';
 
 class FlutterFlowRadioButton extends StatefulWidget {
   const FlutterFlowRadioButton({
-    @required this.options,
-    @required this.onChanged,
+    required this.options,
+    required this.onChanged,
     this.initialValue = '',
-    this.optionHeight,
-    this.textStyle,
+    required this.optionHeight,
+    required this.textStyle,
     this.selectedTextStyle,
     this.textPadding = EdgeInsets.zero,
     this.buttonPosition = RadioButtonPosition.left,
     this.direction = Axis.vertical,
-    this.radioButtonColor,
+    required this.radioButtonColor,
     this.inactiveRadioButtonColor,
     this.toggleable = false,
     this.horizontalAlignment = WrapAlignment.start,
@@ -46,16 +46,16 @@ class FlutterFlowRadioButton extends StatefulWidget {
   });
 
   final List<String> options;
-  final Function(String) onChanged;
+  final Function(String?) onChanged;
   final String initialValue;
   final double optionHeight;
   final TextStyle textStyle;
-  final TextStyle selectedTextStyle;
+  final TextStyle? selectedTextStyle;
   final EdgeInsetsGeometry textPadding;
   final RadioButtonPosition buttonPosition;
   final Axis direction;
   final Color radioButtonColor;
-  final Color inactiveRadioButtonColor;
+  final Color? inactiveRadioButtonColor;
   final bool toggleable;
   final WrapAlignment horizontalAlignment;
   final WrapCrossAlignment verticalAlignment;
@@ -65,7 +65,7 @@ class FlutterFlowRadioButton extends StatefulWidget {
 }
 
 class _FlutterFlowRadioButtonState extends State<FlutterFlowRadioButton> {
-  String groupValue;
+  late String? groupValue;
   List<String> get effectiveOptions =>
       widget.options.isEmpty ? ['[Option]'] : widget.options;
 
@@ -122,22 +122,22 @@ class RadioButtonBuilder<T> {
 
 class RadioButton<T> extends StatelessWidget {
   const RadioButton({
-    @required this.description,
-    @required this.value,
-    @required this.groupValue,
-    @required this.onChanged,
-    this.buttonPosition,
-    this.activeColor,
-    this.toggleable,
-    this.textStyle,
-    this.selectedTextStyle,
-    this.textPadding,
+    required this.description,
+    required this.value,
+    required this.groupValue,
+    required this.onChanged,
+    required this.buttonPosition,
+    required this.activeColor,
+    required this.toggleable,
+    required this.textStyle,
+    required this.selectedTextStyle,
+    required this.textPadding,
   });
 
   final String description;
   final T value;
-  final T groupValue;
-  final void Function(T) onChanged;
+  final T? groupValue;
+  final void Function(T?)? onChanged;
   final RadioButtonPosition buttonPosition;
   final Color activeColor;
   final bool toggleable;
@@ -157,7 +157,7 @@ class RadioButton<T> extends StatelessWidget {
       ),
     );
     return InkWell(
-      onTap: () => onChanged(value),
+      onTap: () => onChanged!(value),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -178,25 +178,25 @@ class RadioButton<T> extends StatelessWidget {
 
 class RadioGroup<T> extends StatelessWidget {
   const RadioGroup.builder({
-    @required this.groupValue,
-    @required this.onChanged,
-    @required this.items,
-    @required this.itemBuilder,
-    this.direction,
-    this.optionHeight,
-    this.horizontalAlignment,
-    this.activeColor,
-    this.toggleable,
-    this.textStyle,
-    this.selectedTextStyle,
-    this.textPadding,
+    required this.groupValue,
+    required this.onChanged,
+    required this.items,
+    required this.itemBuilder,
+    required this.direction,
+    required this.optionHeight,
+    required this.horizontalAlignment,
+    required this.activeColor,
+    required this.toggleable,
+    required this.textStyle,
+    required this.selectedTextStyle,
+    required this.textPadding,
     this.verticalAlignment = WrapCrossAlignment.center,
   });
 
-  final T groupValue;
+  final T? groupValue;
   final List<T> items;
   final RadioButtonBuilder Function(T value) itemBuilder;
-  final void Function(T) onChanged;
+  final void Function(T?)? onChanged;
   final Axis direction;
   final double optionHeight;
   final WrapAlignment horizontalAlignment;

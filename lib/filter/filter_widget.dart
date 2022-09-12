@@ -12,18 +12,18 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FilterWidget extends StatefulWidget {
-  const FilterWidget({Key key}) : super(key: key);
+  const FilterWidget({Key? key}) : super(key: key);
 
   @override
   _FilterWidgetState createState() => _FilterWidgetState();
 }
 
 class _FilterWidgetState extends State<FilterWidget> {
-  List<String> isFurnishingValues;
-  List<String> propertyTypeListValues;
-  String citiesListValue;
-  double sliderValue1;
-  double sliderValue2;
+  List<String>? isFurnishingValues;
+  List<String>? propertyTypeListValues;
+  String? citiesListValue;
+  double? sliderValue1;
+  double? sliderValue2;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -60,6 +60,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               logFirebaseEvent('Text_Close-Dialog,-Drawer,-Etc');
               Navigator.pop(context);
               logFirebaseEvent('Text_Navigate-To');
+
               context.pushNamed(
                 'Filter',
                 extra: <String, dynamic>{
@@ -144,7 +145,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ),
                 );
               }
-              final columnPropertiesResponse = snapshot.data;
+              final columnPropertiesResponse = snapshot.data!;
               return SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -199,7 +200,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     );
                                   }
                                   final citiesListCityListResponse =
-                                      snapshot.data;
+                                      snapshot.data!;
                                   return FlutterFlowDropDown(
                                     initialOption: citiesListValue ??=
                                         FFAppState().filterCity,
@@ -292,17 +293,16 @@ class _FilterWidgetState extends State<FilterWidget> {
                                                     .filterPropertyType
                                                     .toList(),
                                                 FFAppState().locale),
-                                    options: (functions.propertTypeBuilder(
-                                                (getJsonField(
-                                                  columnPropertiesResponse
-                                                      .jsonBody,
-                                                  r'''$.meta.property_type''',
-                                                ) as List)
-                                                    .map<String>(
-                                                        (s) => s.toString())
-                                                    .toList(),
-                                                FFAppState().locale) ??
-                                            [])
+                                    options: functions
+                                        .propertTypeBuilder(
+                                            (getJsonField(
+                                              columnPropertiesResponse.jsonBody,
+                                              r'''$.meta.property_type''',
+                                            ) as List)
+                                                .map<String>(
+                                                    (s) => s.toString())
+                                                .toList(),
+                                            FFAppState().locale)
                                         .map((label) => ChipData(label))
                                         .toList(),
                                     onChanged: (val) => setState(
@@ -663,42 +663,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                           logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
                           if (functions.validateInstallmentRange(
                               sliderValue1, sliderValue2)) {
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(
-                                () => FFAppState().filterPropertyType = []);
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterCity = '');
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() =>
-                                FFAppState().filterCity = citiesListValue);
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterPropertyType =
-                                functions
-                                    .choicechipUnselected(
-                                        propertyTypeListValues.toList(),
-                                        FFAppState().locale)
-                                    .toList());
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(
-                                () => FFAppState().filterFurnishingType = []);
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterFurnishingType =
-                                functions
-                                    .choicechipUnselected(
-                                        isFurnishingValues.toList(),
-                                        FFAppState().locale)
-                                    .toList());
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterMinPrice = 0);
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterMaxPrice = 0);
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterMinPrice =
-                                functions.sliderToApi(sliderValue1));
-                            logFirebaseEvent('apllyFilter_Update-Local-State');
-                            setState(() => FFAppState().filterMaxPrice =
-                                functions.sliderToApi(sliderValue2));
                             logFirebaseEvent('apllyFilter_Navigate-To');
+
                             context.pushNamed(
                               'filterResults',
                               queryParams: {
@@ -716,6 +682,20 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     functions
                                         .sliderToApi(sliderValue2)
                                         .toString(),
+                                    ParamType.String),
+                                'furnishingType': serializeParam(
+                                    functions.listToApiParameters(functions
+                                        .choicechipUnselected(
+                                            isFurnishingValues?.toList(),
+                                            FFAppState().locale)
+                                        .toList()),
+                                    ParamType.String),
+                                'propertyType': serializeParam(
+                                    functions.listToApiParameters(functions
+                                        .choicechipUnselected(
+                                            propertyTypeListValues?.toList(),
+                                            FFAppState().locale)
+                                        .toList()),
                                     ParamType.String),
                               }.withoutNulls,
                               extra: <String, dynamic>{

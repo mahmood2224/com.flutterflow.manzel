@@ -4,18 +4,20 @@ import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
 
+const _kPrivateApiFunctionName = 'ffPrivateApiCall';
+
 class PropertiesCall {
   static Future<ApiCallResponse> call({
-    String populate =
+    String? populate =
         '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
-    String city = '',
-    String furnishingType = '',
-    String propertyType = '',
-    String pageNumber = '',
-    String pageSize = '',
-    String locale = 'en',
-    String minimumPrice = '',
-    String maximumPrice = '',
+    String? city = '',
+    String? furnishingType = '',
+    String? propertyType = '',
+    String? pageNumber = '',
+    String? pageSize = '',
+    String? locale = 'en',
+    String? minimumPrice = '',
+    String? maximumPrice = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
@@ -48,8 +50,8 @@ class PropertiesCall {
 
 class PropertyCall {
   static Future<ApiCallResponse> call({
-    int propertyId,
-    String locale = 'en',
+    int? propertyId,
+    String? locale = 'en',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Property',
@@ -206,7 +208,7 @@ class PropertyCall {
 
 class FilterCall {
   static Future<ApiCallResponse> call({
-    String city = '',
+    String? city = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'filter',
@@ -229,8 +231,8 @@ class FilterCall {
 
 class InitiateOrderCall {
   static Future<ApiCallResponse> call({
-    String userID = '',
-    String propertyID = '',
+    String? userID = '',
+    String? propertyID = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'initiateOrder',
@@ -248,7 +250,7 @@ class InitiateOrderCall {
 
 class BankDetailsCall {
   static Future<ApiCallResponse> call({
-    int bankId,
+    int? bankId,
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'BankDetails',
@@ -283,9 +285,9 @@ class BankDetailsCall {
 
 class StartInstanceCall {
   static Future<ApiCallResponse> call({
-    String userID = '',
-    int propertyID,
-    int orderID,
+    String? userID = '',
+    int? propertyID,
+    int? orderID,
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Start Instance',
@@ -305,7 +307,7 @@ class StartInstanceCall {
 
 class CityListCall {
   static Future<ApiCallResponse> call({
-    String locale = 'en',
+    String? locale = 'en',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'cityList',
@@ -347,8 +349,8 @@ class FilterParamsCall {
 
 class SearchPageCitiesCall {
   static Future<ApiCallResponse> call({
-    String locale = 'en',
-    String populate = 'city',
+    String? locale = 'en',
+    String? populate = 'city',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'searchPageCities',
@@ -382,7 +384,7 @@ class SearchPageCitiesCall {
 
 class PropertStatusCall {
   static Future<ApiCallResponse> call({
-    int propertyId,
+    int? propertyId,
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'propertStatus',
@@ -405,7 +407,7 @@ class PropertStatusCall {
 
 class PropertyBookingStatusCall {
   static Future<ApiCallResponse> call({
-    int propertyId,
+    int? propertyId,
   }) {
     final body = '''
 {"data": {"property_status": "Booked"}}''';
@@ -427,8 +429,8 @@ class PropertyBookingStatusCall {
 
 class AddOrderCall {
   static Future<ApiCallResponse> call({
-    String userId = '',
-    String propertyId = '',
+    String? userId = '',
+    String? propertyId = '',
   }) {
     final body = '''
 {
@@ -443,10 +445,7 @@ class AddOrderCall {
         'Authorization':
             'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
       },
-      params: {
-        'userId': userId,
-        'propertyId': propertyId,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -456,12 +455,12 @@ class AddOrderCall {
 
 class AddTransactionCall {
   static Future<ApiCallResponse> call({
-    int orderId,
-    String userId = '',
-    String amountPaid = '',
-    String transactionMethod = '',
-    String transactionStatus = '',
-    String transactionId = '',
+    int? orderId,
+    String? userId = '',
+    String? amountPaid = '',
+    String? transactionMethod = '',
+    String? transactionStatus = '',
+    String? transactionId = '',
   }) {
     final body = '''
 {
@@ -481,14 +480,7 @@ class AddTransactionCall {
         'Authorization':
             'Bearer 4831692c4e6cff9e42a99cf0fc1ef2184f9f55dba093695599f9f7abc4ff19f3aade5fd06d5ee5a1bc531d0114fd4f5557d5fd129dbcdc7f9083a6af0e857842f689ce780f893ed1ec6dc25e3de820827816275bef46013c8e331eee4a73e3ff1c56af93c35d114ad0871556ad9a7fdd2122095fd88b805f9ae49d45ec0babf8',
       },
-      params: {
-        'orderId': orderId,
-        'userId': userId,
-        'amountPaid': amountPaid,
-        'transactionMethod': transactionMethod,
-        'transactionStatus': transactionStatus,
-        'transactionId': transactionId,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -498,9 +490,9 @@ class AddTransactionCall {
 
 class GetOffersCall {
   static Future<ApiCallResponse> call({
-    String userId = '',
-    String propertyId = '',
-    String locale = '',
+    String? userId = '',
+    String? propertyId = '',
+    String? locale = '',
   }) {
     final body = '''
 {
@@ -515,10 +507,7 @@ class GetOffersCall {
       headers: {
         'Accept-Language': '${locale}',
       },
-      params: {
-        'userId': userId,
-        'propertyId': propertyId,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -569,8 +558,8 @@ class GetOffersCall {
 
 class AcceptOfferCall {
   static Future<ApiCallResponse> call({
-    String userId = '',
-    String offerId = '',
+    String? userId = '',
+    String? offerId = '',
   }) {
     final body = '''
 {
@@ -582,10 +571,7 @@ class AcceptOfferCall {
       apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/acceptOffer',
       callType: ApiCallType.POST,
       headers: {},
-      params: {
-        'userId': userId,
-        'offerId': offerId,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -595,8 +581,8 @@ class AcceptOfferCall {
 
 class ArchivedOffersCall {
   static Future<ApiCallResponse> call({
-    String userId = '',
-    String locale = '',
+    String? userId = '',
+    String? locale = '',
   }) {
     final body = '''
 {
@@ -610,9 +596,7 @@ class ArchivedOffersCall {
       headers: {
         'Accept-Language': '${locale}',
       },
-      params: {
-        'userId': userId,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -627,8 +611,8 @@ class ArchivedOffersCall {
 
 class BookedPropertiesCall {
   static Future<ApiCallResponse> call({
-    String userId = '',
-    String locale = '',
+    String? userId = '',
+    String? locale = '',
   }) {
     final body = '''
 {
@@ -642,9 +626,7 @@ class BookedPropertiesCall {
       headers: {
         'Accept-Language': '${locale}',
       },
-      params: {
-        'userId': userId,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -659,9 +641,9 @@ class BookedPropertiesCall {
 
 class OrderDetailsCall {
   static Future<ApiCallResponse> call({
-    String orderId = '',
-    String userid = '',
-    String locale = '',
+    String? orderId = '',
+    String? userid = '',
+    String? locale = '',
   }) {
     final body = '''
 {
@@ -676,10 +658,7 @@ class OrderDetailsCall {
       headers: {
         'Accept-Language': '${locale}',
       },
-      params: {
-        'orderId': orderId,
-        'userid': userid,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -689,9 +668,9 @@ class OrderDetailsCall {
 
 class BookmarkPropertyCall {
   static Future<ApiCallResponse> call({
-    String userId = '',
-    String propertyId = '',
-    String locale = '',
+    String? userId = '',
+    String? propertyId = '',
+    String? locale = '',
   }) {
     final body = '''
 {
@@ -703,11 +682,7 @@ class BookmarkPropertyCall {
       apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/bookmark',
       callType: ApiCallType.POST,
       headers: {},
-      params: {
-        'userId': userId,
-        'propertyId': propertyId,
-        'locale': locale,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -717,8 +692,8 @@ class BookmarkPropertyCall {
 
 class GetBookMarkedPropertiesCall {
   static Future<ApiCallResponse> call({
-    String userId = '',
-    String locale = '',
+    String? userId = '',
+    String? locale = '',
   }) {
     final body = '''
 {
@@ -732,9 +707,7 @@ class GetBookMarkedPropertiesCall {
       headers: {
         'Accept-Language': '${locale}',
       },
-      params: {
-        'userId': userId,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -749,8 +722,8 @@ class GetBookMarkedPropertiesCall {
 
 class CancelOrderCall {
   static Future<ApiCallResponse> call({
-    String orderId = '',
-    String userId = '',
+    String? orderId = '',
+    String? userId = '',
   }) {
     final body = '''
 {
@@ -762,10 +735,7 @@ class CancelOrderCall {
       apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/cancelOrder',
       callType: ApiCallType.POST,
       headers: {},
-      params: {
-        'orderId': orderId,
-        'userId': userId,
-      },
+      params: {},
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
@@ -775,8 +745,8 @@ class CancelOrderCall {
 
 class TermsConitionsAndPrivacyPoliciesCall {
   static Future<ApiCallResponse> call({
-    int pageType = 5,
-    String locale = 'en',
+    int? pageType = 5,
+    String? locale = 'en',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'termsConitionsAndPrivacyPolicies',

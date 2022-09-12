@@ -10,11 +10,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CancelReserveBottomSheetWidget extends StatefulWidget {
   const CancelReserveBottomSheetWidget({
-    Key key,
+    Key? key,
     this.orderId,
   }) : super(key: key);
 
-  final String orderId;
+  final String? orderId;
 
   @override
   _CancelReserveBottomSheetWidgetState createState() =>
@@ -23,7 +23,7 @@ class CancelReserveBottomSheetWidget extends StatefulWidget {
 
 class _CancelReserveBottomSheetWidgetState
     extends State<CancelReserveBottomSheetWidget> {
-  ApiCallResponse cancelOrder;
+  ApiCallResponse? cancelOrder;
 
   @override
   Widget build(BuildContext context) {

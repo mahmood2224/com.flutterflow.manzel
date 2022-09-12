@@ -10,14 +10,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ConfirmAbsherWidget extends StatefulWidget {
-  const ConfirmAbsherWidget({Key key}) : super(key: key);
+  const ConfirmAbsherWidget({Key? key}) : super(key: key);
 
   @override
   _ConfirmAbsherWidgetState createState() => _ConfirmAbsherWidgetState();
 }
 
 class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
-  TextEditingController enterOTPController;
+  TextEditingController? enterOTPController;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -189,7 +190,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                             // verifySMSCode
                             logFirebaseEvent('enterOTP_verifySMSCode');
                             GoRouter.of(context).prepareAuthEvent();
-                            final smsCodeVal = enterOTPController.text;
+                            final smsCodeVal = enterOTPController!.text;
                             if (smsCodeVal == null || smsCodeVal.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -224,6 +225,20 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(8),

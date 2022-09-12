@@ -10,7 +10,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddingInformationWidget extends StatefulWidget {
-  const AddingInformationWidget({Key key}) : super(key: key);
+  const AddingInformationWidget({Key? key}) : super(key: key);
 
   @override
   _AddingInformationWidgetState createState() =>
@@ -18,7 +18,8 @@ class AddingInformationWidget extends StatefulWidget {
 }
 
 class _AddingInformationWidgetState extends State<AddingInformationWidget> {
-  TextEditingController fullNameController;
+  TextEditingController? fullNameController;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -122,6 +123,8 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                           ),
                                       enabledBorder: InputBorder.none,
                                       focusedBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      focusedErrorBorder: InputBorder.none,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
@@ -213,6 +216,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               'ADDING_INFORMATION_PAGE_and_ON_TAP');
                           // termsAndConditions
                           logFirebaseEvent('and_termsAndConditions');
+
                           context.goNamed('TermsConditions');
                         },
                         child: Text(
@@ -283,8 +287,8 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           onPressed: () async {
                             logFirebaseEvent(
                                 'ADDING_INFORMATION_submitInfo_ON_TAP');
-                            if (fullNameController.text == null ||
-                                fullNameController.text == '') {
+                            if (fullNameController!.text == null ||
+                                fullNameController!.text == '') {
                               logFirebaseEvent('submitInfo_Show-Snack-Bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -304,10 +308,12 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               logFirebaseEvent('submitInfo_submitInfo');
 
                               final userUpdateData = createUserRecordData(
-                                name: fullNameController.text,
+                                name: fullNameController!.text,
                               );
-                              await currentUserReference.update(userUpdateData);
+                              await currentUserReference!
+                                  .update(userUpdateData);
                               logFirebaseEvent('submitInfo_Navigate-To');
+
                               context.goNamed('HomeScreen');
                             }
                           },

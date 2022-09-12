@@ -7,17 +7,17 @@ import 'package:google_fonts/google_fonts.dart';
 
 class NoResultsFoundWidget extends StatefulWidget {
   const NoResultsFoundWidget({
-    Key key,
+    Key? key,
     this.titleText,
     this.subtitleText,
     this.isButtonVisible,
     this.screenName,
   }) : super(key: key);
 
-  final String titleText;
-  final String subtitleText;
-  final bool isButtonVisible;
-  final String screenName;
+  final String? titleText;
+  final String? subtitleText;
+  final bool? isButtonVisible;
+  final String? screenName;
 
   @override
   _NoResultsFoundWidgetState createState() => _NoResultsFoundWidgetState();
@@ -76,7 +76,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 9, 0, 0),
                 child: Text(
-                  widget.titleText,
+                  widget.titleText!,
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'AvenirArabic',
@@ -97,7 +97,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
             children: [
               Expanded(
                 child: Text(
-                  widget.subtitleText,
+                  widget.subtitleText!,
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyText2,
                 ),
@@ -112,6 +112,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
               onPressed: () async {
                 logFirebaseEvent('NO_RESULTS_FOUND_EXPLORE_OUR_PROPERTIES_');
                 logFirebaseEvent('Button_Navigate-To');
+
                 context.pushNamed('HomeScreen');
               },
               text: FFLocalizations.of(context).getText(

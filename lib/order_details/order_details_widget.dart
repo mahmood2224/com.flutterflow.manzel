@@ -11,11 +11,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class OrderDetailsWidget extends StatefulWidget {
   const OrderDetailsWidget({
-    Key key,
+    Key? key,
     this.propertId,
   }) : super(key: key);
 
-  final int propertId;
+  final int? propertId;
 
   @override
   _OrderDetailsWidgetState createState() => _OrderDetailsWidgetState();
@@ -52,7 +52,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
             ),
           );
         }
-        final orderDetailsPropertyResponse = snapshot.data;
+        final orderDetailsPropertyResponse = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -375,6 +375,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                     'ORDER_DETAILS_PAGE_Text_idmwcq2x_ON_TAP');
                                 // PropertyDetails
                                 logFirebaseEvent('Text_PropertyDetails');
+
                                 context.goNamed(
                                   'PropertyDetails',
                                   queryParams: {

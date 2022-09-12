@@ -8,7 +8,6 @@ import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -22,27 +21,29 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+import '../flutter_flow/flutter_flow_widgets.dart';
+
 class HomeScreenWidget extends StatefulWidget {
   const HomeScreenWidget({
-    Key key,
+    Key? key,
     this.city,
     this.type,
     this.installmentRange,
     this.furnishing,
   }) : super(key: key);
 
-  final String city;
-  final String type;
-  final double installmentRange;
-  final String furnishing;
+  final String? city;
+  final String? type;
+  final double? installmentRange;
+  final String? furnishing;
 
   @override
   _HomeScreenWidgetState createState() => _HomeScreenWidgetState();
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
-  Completer<ApiCallResponse> _apiRequestCompleter;
-  PageController pageViewController;
+  Completer<ApiCallResponse>? _apiRequestCompleter;
+  PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   int _currentItem = 0;
   bool isPaused;
@@ -190,7 +191,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   }
                                   List<NotificationsRecord>
                                       notificationsBadgeNotificationsRecordList =
-                                      snapshot.data;
+                                      snapshot.data!;
                                   return InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(

@@ -11,17 +11,15 @@ abstract class UsersDeviceTokenRecord
   static Serializer<UsersDeviceTokenRecord> get serializer =>
       _$usersDeviceTokenRecordSerializer;
 
-  @nullable
   @BuiltValueField(wireName: 'device_token')
-  String get deviceToken;
+  String? get deviceToken;
 
-  @nullable
   @BuiltValueField(wireName: 'user_id')
-  DocumentReference get userId;
+  DocumentReference? get userId;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(UsersDeviceTokenRecordBuilder builder) =>
       builder..deviceToken = '';
@@ -31,12 +29,12 @@ abstract class UsersDeviceTokenRecord
 
   static Stream<UsersDeviceTokenRecord> getDocument(DocumentReference ref) =>
       ref.snapshots().map(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<UsersDeviceTokenRecord> getDocumentOnce(
           DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   UsersDeviceTokenRecord._();
   factory UsersDeviceTokenRecord(
@@ -46,15 +44,21 @@ abstract class UsersDeviceTokenRecord
   static UsersDeviceTokenRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createUsersDeviceTokenRecordData({
-  String deviceToken,
-  DocumentReference userId,
-}) =>
-    serializers.toFirestore(
-        UsersDeviceTokenRecord.serializer,
-        UsersDeviceTokenRecord((u) => u
-          ..deviceToken = deviceToken
-          ..userId = userId));
+  String? deviceToken,
+  DocumentReference? userId,
+}) {
+  final firestoreData = serializers.toFirestore(
+    UsersDeviceTokenRecord.serializer,
+    UsersDeviceTokenRecord(
+      (u) => u
+        ..deviceToken = deviceToken
+        ..userId = userId,
+    ),
+  );
+
+  return firestoreData;
+}

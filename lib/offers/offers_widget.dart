@@ -25,20 +25,20 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class OffersWidget extends StatefulWidget {
   const OffersWidget({
-    Key key,
+    Key? key,
     this.propertyId,
   }) : super(key: key);
 
-  final String propertyId;
+  final String? propertyId;
 
   @override
   _OffersWidgetState createState() => _OffersWidgetState();
 }
 
 class _OffersWidgetState extends State<OffersWidget> {
-  ApiCallResponse acceptOfferResponse;
-  ApiCallResponse acceptOfferResponseAr;
-  Completer<ApiCallResponse> _apiRequestCompleter;
+  ApiCallResponse? acceptOfferResponse;
+  ApiCallResponse? acceptOfferResponseAr;
+  Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> channels = {};
 
@@ -239,7 +239,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             );
                                           }
                                           final textGetOffersResponse =
-                                              snapshot.data;
+                                              snapshot.data!;
                                           return Text(
                                             valueOrDefault<String>(
                                               functions
@@ -377,6 +377,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     logFirebaseEvent(
                                         'OFFERS_PAGE_LOGIN_SIGNUP_BTN_ON_TAP');
                                     logFirebaseEvent('Button_Navigate-To');
+
                                     context.pushNamed('Login');
                                   },
                                   text: FFLocalizations.of(context).getText(
@@ -445,7 +446,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     ),
                                   );
                                 }
-                                final listViewGetOffersResponse = snapshot.data;
+                                final listViewGetOffersResponse =
+                                    snapshot.data!;
                                 return Builder(
                                   builder: (context) {
                                     final activeOffers = GetOffersCall.result(
@@ -1991,6 +1993,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                 logFirebaseEvent(
                                     'OFFERS_PAGE_Container_kc3eke2v_ON_TAP');
                                 logFirebaseEvent('Container_Navigate-To');
+
                                 context.pushNamed(
                                   'PastOffers',
                                   extra: <String, dynamic>{
