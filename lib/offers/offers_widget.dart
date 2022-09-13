@@ -67,6 +67,9 @@ class _OffersWidgetState extends State<OffersWidget> {
       print(error);
       print("*********************************************************");
     }
+    setState(() {
+
+    });
   }
 
   types.User asChatUiUser(sendbird.User user) {
@@ -84,7 +87,7 @@ class _OffersWidgetState extends State<OffersWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       final _sendbird = await sendbird.SendbirdSdk(
-          appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
+          appId: "0F58DDB9-5DB1-4FC5-A84D-6DD8BBC314FC");
       final _ = await _sendbird.connect(currentUserUid);
       // Future.delayed(Duration(seconds: 5));
       final _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);

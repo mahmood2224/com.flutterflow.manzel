@@ -218,7 +218,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
     await currentUserReference?.update(userUpdateData);
     if (currentUserDisplayName.isEmpty &&
     currentUserDocument!.name!.isEmpty) {
-    final _sendbird = await SendbirdSdk(appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
+    final _sendbird = await SendbirdSdk(appId: "0F58DDB9-5DB1-4FC5-A84D-6DD8BBC314FC");
     final _ = await _sendbird.connect(currentUserUid);
     context.goNamedAuth(
     'AddingInformation', mounted);

@@ -472,7 +472,7 @@ class _ChatWidgetState extends State<ChatWidget>
         'null',
       );
       final _sendbird = await sendbird.SendbirdSdk(
-          appId: "831DD210-B9EA-4E46-8A3F-BBC5690D139E");
+          appId: "0F58DDB9-5DB1-4FC5-A84D-6DD8BBC314FC");
       final _ = await _sendbird.connect(currentUserUid);
       // Future.delayed(Duration(seconds: 5));
       _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);
@@ -496,6 +496,7 @@ class _ChatWidgetState extends State<ChatWidget>
               sendbird.MessageListParams());
       _SendBirdMessages = messages;
       _channel = aChannel;
+      _channel?.markAsRead();
       asChatUIMessage(messages);
       isLoading = false;
       if(messages.isEmpty){
