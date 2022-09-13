@@ -1144,3 +1144,12 @@ bool profileCompletetionCheck(
     return false;
   }
 }
+
+bool sakaniLoan(String? chioceChipValue) {
+  // Add your function code here!
+  if (chioceChipValue == 'Yes' || chioceChipValue == 'نعم') {
+    return true;
+  } else {
+    return false;
+  }
+}

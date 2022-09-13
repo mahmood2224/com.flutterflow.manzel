@@ -664,6 +664,11 @@ class OrderDetailsCall {
       returnBody: true,
     );
   }
+
+  static dynamic depositreceipt(dynamic response) => getJsonField(
+        response,
+        r'''$.result.deposit_receipt''',
+      );
 }
 
 class BookmarkPropertyCall {

@@ -1915,8 +1915,21 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         FFButtonWidget(
-                          onPressed: () {
-                            print('receipt pressed ...');
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'BOOKING_DETAILS_PAGE_receipt_ON_TAP');
+                            logFirebaseEvent('receipt_Navigate-To');
+
+                            context.pushNamed(
+                              'depositeRecipt',
+                              queryParams: {
+                                'depositeRecpit': serializeParam(
+                                    OrderDetailsCall.depositreceipt(
+                                      columnOrderDetailsResponse.jsonBody,
+                                    ).toString(),
+                                    ParamType.String),
+                              }.withoutNulls,
+                            );
                           },
                           text: FFLocalizations.of(context).getText(
                             'i7w1em00' /* View Receipt Transaction */,

@@ -49,3 +49,4 @@ export 'personal_employment_details/personal_employment_details_widget.dart'
     show PersonalEmploymentDetailsWidget;
 export 'chat/chat_widget.dart' show ChatWidget;
 export 'booking_details/booking_details_widget.dart' show BookingDetailsWidget;
+export 'deposite_recipt/deposite_recipt_widget.dart' show DepositeReciptWidget;
