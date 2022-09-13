@@ -11,6 +11,7 @@ import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
+import '../common_widgets/overlay.dart';
 import '../components/bank_details_bottom_sheet_widget.dart';
 import '../components/reservation_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -64,6 +65,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   VideoPlayerController? _videoPlayerController;
   ChewieController? _chewieController;
   bool _loggedError = false;
+
 
   @override
   void initState() {
@@ -323,10 +325,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                            .size.height*0.35,
             width: MediaQuery.of(context)
                            .size.width,
-              child: Theme(
-                data: ThemeData.light().copyWith(
-                  platform: TargetPlatform.android,
-                ),
+              // child: Theme(
+              //   data: ThemeData.light().copyWith(
+              //     platform: TargetPlatform.android,
+              //   ),
                 child:(_chewieController != null &&
           _chewieController!
                   .videoPlayerController.value.isInitialized)
@@ -346,7 +348,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         ],
       ),),
 
-    ),),),),
+    ),),),
+            //),
 
             //),
             ),
@@ -2709,7 +2712,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   'Available'))
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    _currentController?.pause();
+                                    _chewieController?.pause();
                                     logFirebaseEvent(
                                         'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
                                     if (loggedIn) {
@@ -2745,7 +2748,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ),
                                             );
                                           },
-                                        ).then((value) => _currentController?.play());
+                                        ).then((value) => _chewieController?.play());
                                       } else {
                                         logFirebaseEvent(
                                             'reserved_Navigate-To');
@@ -2828,3 +2831,5 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     );
   }
 }
+
+

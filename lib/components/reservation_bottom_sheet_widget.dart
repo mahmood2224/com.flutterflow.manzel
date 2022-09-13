@@ -5,6 +5,7 @@ import 'package:go_sell_sdk_flutter/model/models.dart';
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
+import '../common_widgets/overlay.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -38,6 +39,7 @@ class _ReservationBottomSheetWidgetState
   String? paymentMethodValue;
   Map<dynamic, dynamic>? tapSDKResult;
   int? orderId;
+  OverlayEntry? entry;
 
   Future<void> setupSDKSession(int paymentType) async {
     try {
@@ -54,38 +56,20 @@ class _ReservationBottomSheetWidgetState
               middleName: "",
               lastName: "",
               metaData: null),
-          paymentItems: <PaymentItem>[
-            PaymentItem(
-                name: "item1",
-                amountPerUnit: 1,
-                quantity: Quantity(value: 1),
-                discount: {"type": "F", "value": 10, "maximum_fee": 10, "minimum_fee": 1},
-                description: "Item 1 Apple",
-                taxes: [Tax(amount: Amount(type: "F", value: 10, minimumFee: 1, maximumFee: 10), name: "tax1", description: "tax describtion")],
-                totalAmount: 100),
-          ],
+          paymentItems: <PaymentItem>[],
           // // List of taxes
-          taxes: [
-            Tax(amount: Amount(type: "F", value: 10, minimumFee: 1, maximumFee: 10), name: "tax1", description: "tax describtion"),
-            Tax(amount: Amount(type: "F", value: 10, minimumFee: 1, maximumFee: 10), name: "tax1", description: "tax describtion")
-          ],
+          taxes: [],
           // List of shippnig
-           shippings: [
-            Shipping(name: "shipping 1", amount: 100, description: "shiping description 1"),
-            Shipping(name: "shipping 2", amount: 150, description: "shiping description 2")
-          ],
+          shippings: [],
           // Post URL
           postURL: "https://tap.company",
           // Payment description
-          paymentDescription: "paymentDescription",
+          paymentDescription: "${widget.propertyId} number property purchased",
           // Payment Metadata
-          paymentMetaData: {
-            "a": "a meta",
-            "b": "b meta",
-          },
+          paymentMetaData: {},
           // Payment Reference
           paymentReference: Reference(
-               payment: "payment", order: orderId.toString()),
+              payment: "payment", order: orderId.toString()),
           // payment Descriptor
           paymentStatementDescriptor: "paymentStatementDescriptor",
           // Save Card Switch
@@ -93,11 +77,11 @@ class _ReservationBottomSheetWidgetState
           // Enable/Disable 3DSecure
           isRequires3DSecure: true,
           // Receipt SMS/Email
-          receipt: Receipt(true, false),
+          receipt: Receipt(false, false),
           // Authorize Action [Capture - Void]
           authorizeAction: AuthorizeAction(type: AuthorizeActionType.CAPTURE, timeInHours: 10),
           // Destinations
-          destinations: null,
+          //   destinations: null,
           // merchant id
           merchantID: "",
           // Allowed cards
@@ -105,7 +89,7 @@ class _ReservationBottomSheetWidgetState
           applePayMerchantID: "merchant.com.flutterflow.manzel",
           allowsToSaveSameCardMoreThanOnce: false,
           // pass the card holder name to the SDK
-          cardHolderName: "Card Holder NAME",
+          cardHolderName: "",
           // disable changing the card holder name by the user
           allowsToEditCardHolderName: true,
           // select payments you need to show [Default is all, and you can choose between WEB-CARD-APPLEPAY ]
@@ -119,7 +103,7 @@ class _ReservationBottomSheetWidgetState
     if (!mounted) return;
 
     setState(() {
-   //   tapSDKResult = {};
+      //   tapSDKResult = {};
     });
   }
 
@@ -627,4 +611,12 @@ class _ReservationBottomSheetWidgetState
       ),
     );
   }
+}
+OverlayEntry showOverlay(BuildContext context) {
+  var overlayState = Overlay.of(context);
+  var overlayEntry = OverlayEntry(
+    builder: (context) => CircularProgressOverlay(),
+  );
+  overlayState?.insert(overlayEntry);
+  return overlayEntry;
 }

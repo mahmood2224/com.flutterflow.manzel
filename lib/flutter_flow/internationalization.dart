@@ -471,6 +471,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // HomeScreen
   {
+    '2cud1oqj': {
+      'en': 'Available',
+      'ar': 'متوفرة',
+    },
+    'qtso45vv': {
+      'en': 'Booked',
+      'ar': 'حجز',
+    },
+    'juw40663': {
+      'en': 'Coming soon',
+      'ar': 'قريبا',
+    },
     'qnr0o42y': {
       'en': 'Where are you looking?',
       'ar': 'أين تبحث ؟',

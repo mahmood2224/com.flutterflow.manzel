@@ -33,6 +33,12 @@ class _FilterWidgetState extends State<FilterWidget> {
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
+
+  void reset(){
+    setState(() {
+      print("Reset should work");
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,20 +63,8 @@ class _FilterWidgetState extends State<FilterWidget> {
               setState(() => FFAppState().filterMinPrice = 0);
               logFirebaseEvent('Text_Update-Local-State');
               setState(() => FFAppState().filterMaxPrice = 0);
-              logFirebaseEvent('Text_Close-Dialog,-Drawer,-Etc');
-              Navigator.pop(context);
-              logFirebaseEvent('Text_Navigate-To');
+              reset();
 
-              context.pushNamed(
-                'Filter',
-                extra: <String, dynamic>{
-                  kTransitionInfoKey: TransitionInfo(
-                    hasTransition: true,
-                    transitionType: PageTransitionType.fade,
-                    duration: Duration(milliseconds: 0),
-                  ),
-                },
-              );
             },
             child: Text(
               FFLocalizations.of(context).getText(

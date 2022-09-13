@@ -690,7 +690,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               MainAxisSize.max,
                                                                           children: [
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 3, 0),
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 1, 0),
                                                                               child: Text(
                                                                                 FFLocalizations.of(context).getText(
                                                                                   'tu9ytzrl' /* Booking ref:  */,

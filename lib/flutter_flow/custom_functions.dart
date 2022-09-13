@@ -1155,7 +1155,7 @@ bool profileCompletetionCheck(
   String? name,
 ) {
   // Add your function code here!
-  if (email != null && name != null) {
+  if ((email != null||email!.isEmpty) && (name != null||name!.isEmpty)) {
     return true;
   } else {
     return false;

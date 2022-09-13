@@ -194,6 +194,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       snapshot.data!;
                                   return InkWell(
                                     onTap: () async {
+                                      _currentController?.pause();
                                       logFirebaseEvent(
                                           'HOME_SCREEN_notificationsBadge_ON_TAP');
                                       logFirebaseEvent(
@@ -273,6 +274,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               children: [
                                 InkWell(
                                   onTap: () async {
+                                    _currentController?.pause();
                                     logFirebaseEvent(
                                         'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
                                     logFirebaseEvent('Text_Navigate-To');
@@ -322,6 +324,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     ),
                                     InkWell(
                                       onTap: () async {
+                                        _currentController?.pause();
                                         logFirebaseEvent(
                                             'HOME_SCREEN_Container_13mjruev_ON_TAP');
                                         logFirebaseEvent(
@@ -484,9 +487,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
                     if (propertiesIndex == (videocontrollerMap.length) + 1) {
                       Future.delayed(const Duration(seconds: 8), () {
-                        if(_currentController!=null&&videoControllerSet!.isNotEmpty){
-                        _currentController = videoControllerSet?.first;
-                        _currentController?.play();}
+                        if (_currentController != null &&
+                            videoControllerSet!.isNotEmpty) {
+                          _currentController = videoControllerSet?.first;
+                          _currentController?.play();
+                        }
                       });
                     }
                     return Padding(
@@ -661,18 +666,19 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         ),
                                       ),
                                       onTap: () {
-                                        if(_currentController!=null){
-                                        if (_currentController!
-                                            .value.isPlaying) {
-                                          _currentController?.pause();
-                                          isPaused = true;
-                                          setState(() {});
-                                        } else {
-                                          _currentController?.play();
-                                          isPaused = false;
-                                          setState(() {});
+                                        if (_currentController != null) {
+                                          if (_currentController!
+                                              .value.isPlaying) {
+                                            _currentController?.pause();
+                                            isPaused = true;
+                                            setState(() {});
+                                          } else {
+                                            _currentController?.play();
+                                            isPaused = false;
+                                            setState(() {});
+                                          }
                                         }
-                                      }},
+                                      },
                                     ),
                                   ),
                                   if (!functions
@@ -787,44 +793,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         );
                                       },
                                     ),
-                                  if (functions.conditionalVisibility(
-                                      getJsonField(
-                                        propertiesItem,
-                                        r'''$.attributes.property_status''',
-                                      ).toString(),
-                                      'Coming soon'))
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(-0.90, -0.89),
-                                      child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          '5qj98whz' /* Coming soon */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          color: Color(0xCD2971FB),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'AvenirArabic',
-                                                    color: Colors.white,
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w300,
-                                                    useGoogleFonts: false,
-                                                  ),
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                      ),
-                                    ),
                                   Align(
                                     alignment: AlignmentDirectional(1, -0.95),
                                     child: Padding(
@@ -909,33 +877,45 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       'Available'))
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(-0.90, -0.89),
-                                      child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          'i2h601mg' /* Available */,
-                                        ),
-                                        options: FFButtonOptions(
+                                          AlignmentDirectional(-0.9, -0.89),
+                                      child: Container(
+                                        width: 80,
+                                        height: 26,
+                                        decoration: BoxDecoration(
                                           color: Color(0xFF81D05C),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'AvenirArabic',
-                                                    color: Colors.white,
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w300,
-                                                    useGoogleFonts: false,
-                                                  ),
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                              BorderRadius.circular(7),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 1, 10, 1),
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '2cud1oqj' /* Available */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .white,
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -947,33 +927,95 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       'Booked'))
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(-0.90, -0.89),
-                                      child: FFButtonWidget(
-                                        onPressed: () {
-                                          print('Button pressed ...');
-                                        },
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          '977ahbnt' /* Booked */,
-                                        ),
-                                        options: FFButtonOptions(
-                                          color: Color(0xB2F5F5F5),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'AvenirArabic',
-                                                    color: Colors.white,
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w300,
-                                                    useGoogleFonts: false,
-                                                  ),
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
+                                          AlignmentDirectional(-0.9, -0.89),
+                                      child: Container(
+                                        width: 80,
+                                        height: 26,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFD7D7D7),
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                              BorderRadius.circular(7),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 1, 10, 1),
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'qtso45vv' /* Booked */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .white,
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  if (functions.conditionalVisibility(
+                                      getJsonField(
+                                        propertiesItem,
+                                        r'''$.attributes.property_status''',
+                                      ).toString(),
+                                      'Coming soon'))
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(-0.9, -0.89),
+                                      child: Container(
+                                        width: 100,
+                                        height: 26,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFF2971FB),
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 1, 10, 1),
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'juw40663' /* Coming soon */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .white,
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -1089,6 +1131,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       ),
                                     ],
                                   ),
+                                  // Generated code for this Row Widget...
                                   Builder(
                                     builder: (context) {
                                       final banks = getJsonField(
@@ -1103,18 +1146,26 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           return Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 8, 0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(11),
-                                              child: Image.network(
-                                                getJsonField(
-                                                  banksItem,
-                                                  r'''$.attributes.bank_logo.data.attributes.url''',
+                                                    0, 0, 2, 0),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color: Color(0xFF8C8C8C),
                                                 ),
-                                                width: 22,
-                                                height: 22,
-                                                fit: BoxFit.cover,
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(11),
+                                                child: Image.network(
+                                                  getJsonField(
+                                                    banksItem,
+                                                    r'''$.attributes.bank_logo.data.attributes.url''',
+                                                  ),
+                                                  width: 22,
+                                                  height: 22,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                           );
