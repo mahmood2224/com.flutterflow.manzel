@@ -67,9 +67,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
           ),
           onPressed: () async {
             logFirebaseEvent('EDIT_PERSONALL_INFO_PAGE_back_ON_TAP');
-            logFirebaseEvent('back_Navigate-To');
-
-            context.pushNamed('Profile');
+            logFirebaseEvent('back_Close-Dialog,-Drawer,-Etc');
+            Navigator.pop(context);
           },
         ),
         title: Text(
