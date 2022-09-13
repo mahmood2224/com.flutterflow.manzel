@@ -1153,9 +1153,18 @@ String orderIdFormatter(String? orderId) {
 bool profileCompletetionCheck(
   String? email,
   String? name,
+  String? bank,
+  String? employment,
+  String? income,
+  String? loanCoverage,
 ) {
   // Add your function code here!
-  if ((email != null||email!.isEmpty) && (name != null||name!.isEmpty)) {
+  if ((email != null && email.isNotEmpty) &&
+      (name != null && name.isNotEmpty) &&
+      (bank != null && bank.isNotEmpty) &&
+      (employment != null && employment.isNotEmpty) &&
+      (income != null && income.isNotEmpty) &&
+      (loanCoverage != null && loanCoverage.isNotEmpty)) {
     return true;
   } else {
     return false;

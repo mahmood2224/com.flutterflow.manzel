@@ -483,6 +483,36 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       ],
                                     ),
                                   ),
+                                  InkWell(
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                          'PROPERTY_DETAILS_Image_8m4roe7z_ON_TAP');
+                                      logFirebaseEvent('Image_Navigate-To');
+
+                                      context.pushNamed(
+                                        'propertyVideo',
+                                        queryParams: {
+                                          'videoURL': serializeParam(
+                                              getJsonField(
+                                                columnPropertyResponse.jsonBody,
+                                                r'''$.data.attributes.video_manifest_uri''',
+                                              ),
+                                              ParamType.String),
+                                          'propertyName': serializeParam(
+                                              PropertyCall.propertyName(
+                                                columnPropertyResponse.jsonBody,
+                                              ).toString(),
+                                              ParamType.String),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                    child: Image.network(
+                                      'https://media.istockphoto.com/photos/house-in-dubai-picture-id490348444?k=20&m=490348444&s=612x612&w=0&h=HAhcenCKgOe5WQR3Ko514qWAkzHX3ugvlMpeKmUiStc=',
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -664,7 +694,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                             10,
                                                                             1),
                                                                     child: Text(
-                                                                      'Available',
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        'ccsmgbaf' /* Available */,
+                                                                      ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyText1
@@ -719,7 +753,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                             10,
                                                                             1),
                                                                     child: Text(
-                                                                      'Booked',
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        'ie4ye37b' /* Booked */,
+                                                                      ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyText1
@@ -2719,7 +2757,22 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       if (functions.profileCompletetionCheck(
                                           currentUserEmail,
                                           valueOrDefault(
-                                              currentUserDocument?.name, ''))) {
+                                              currentUserDocument?.name, ''),
+                                          valueOrDefault(
+                                              currentUserDocument?.bank, ''),
+                                          valueOrDefault(
+                                              currentUserDocument
+                                                  ?.employmentStatus,
+                                              ''),
+                                          valueOrDefault(
+                                              currentUserDocument
+                                                  ?.monthlyIncome,
+                                              ''),
+                                          valueOrDefault<bool>(
+                                                  currentUserDocument
+                                                      ?.sakaniLoanCoverage,
+                                                  false)
+                                              .toString())) {
                                         logFirebaseEvent(
                                             'reserved_Bottom-Sheet');
                                         await configurePaymentSdk();
@@ -2753,7 +2806,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         logFirebaseEvent(
                                             'reserved_Navigate-To');
 
-                                        context.pushNamed('EditPersonallInfo');
+                                        context.pushNamed(
+                                          'EditPersonallInfo',
+                                          queryParams: {
+                                            'screenName': serializeParam(
+                                                'PropertyDetails',
+                                                ParamType.String),
+                                          }.withoutNulls,
+                                        );
                                       }
                                     } else {
                                       logFirebaseEvent('reserved_Navigate-To');

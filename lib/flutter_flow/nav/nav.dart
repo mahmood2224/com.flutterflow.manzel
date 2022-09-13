@@ -119,7 +119,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'EditPersonallInfo',
               path: 'editPersonallInfo',
-              builder: (context, params) => EditPersonallInfoWidget(),
+              builder: (context, params) => EditPersonallInfoWidget(
+                screenName: params.getParam('screenName', ParamType.String),
+              ),
             ),
             FFRoute(
               name: 'EditMobileNumber',
@@ -207,6 +209,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => PropertyDetailsWidget(
                 propertyId: params.getParam('propertyId', ParamType.int),
                 path: params.getParam('path', ParamType.String)
+              ),
+            ),
+            FFRoute(
+              name: 'propertyVideo',
+              path: 'propertyVideo',
+              builder: (context, params) => PropertyVideoWidget(
+                videoURL: params.getParam('videoURL', ParamType.String),
+                propertyName: params.getParam('propertyName', ParamType.String),
               ),
             ),
             FFRoute(

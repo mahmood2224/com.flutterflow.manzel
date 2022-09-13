@@ -778,10 +778,10 @@ class GetBanksCall {
   }
 
   static dynamic bankNames(dynamic response) => getJsonField(
-    response,
-    r'''$.data..attributes.bank_name''',
-    true,
-  );
+        response,
+        r'''$.data..attributes.bank_name''',
+        true,
+      );
 }
 
 class EmplymentTypeCall {
@@ -801,8 +801,8 @@ class EmplymentTypeCall {
   }
 
   static dynamic emplymentTypes(dynamic response) => getJsonField(
-    response,
-    r'''$.data..attributes.Name''',
-    true,
-  );
+        response,
+        r'''$.data..attributes.Name''',
+        true,
+      );
 }

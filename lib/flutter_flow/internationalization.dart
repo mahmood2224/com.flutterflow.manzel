@@ -342,21 +342,21 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Salary bank',
       'ar': 'بنك الراتب',
     },
-    'gq52m1or': {
+    'doqco3ap': {
       'en': 'Does the Sakani loan cover you?',
-      'ar': '',
+      'ar': 'هل القرض السكني يغطيك؟',
     },
-    'e7abweju': {
+    'ag8peu33': {
       'en': 'Yes',
-      'ar': '',
+      'ar': 'نعم',
     },
-    'ro3keqro': {
+    'cxroduir': {
       'en': 'No',
-      'ar': '',
+      'ar': 'رقم',
     },
     '91pyvwfe': {
       'en': 'Submit',
-      'ar': 'احفظ التغييرات',
+      'ar': 'يُقدِّم',
     },
     'x4a06mk8': {
       'en': 'Home',
@@ -487,17 +487,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Where are you looking?',
       'ar': 'أين تبحث ؟',
     },
-    'fkkrkypa': {
+    '2cud1oqj': {
       'en': 'Available',
-      'ar': '',
+      'ar': 'متوفرة',
     },
-    '8bxpa4ol': {
+    'qtso45vv': {
       'en': 'Booked',
-      'ar': '',
+      'ar': 'حجز',
     },
-    'zoj24rbp': {
+    'juw40663': {
       'en': 'Coming soon',
-      'ar': '',
+      'ar': 'قريبا',
     },
     'etpebw43': {
       'en': 'Approved Banks',
@@ -1036,11 +1036,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Updated: ',
       'ar': 'محدث:',
     },
-    'enmg5904': {
+    'ccsmgbaf': {
       'en': 'Available',
       'ar': '',
     },
-    'lh4ly28u': {
+    'ie4ye37b': {
       'en': 'Booked',
       'ar': '',
     },
@@ -1147,6 +1147,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'wzirx8i7': {
       'en': 'Booked',
       'ar': 'محجوز',
+    },
+  },
+  // propertyVideo
+  {
+    'rwdz028r': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // FloorPlan

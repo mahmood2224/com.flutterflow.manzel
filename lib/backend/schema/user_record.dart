@@ -50,6 +50,9 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
   @BuiltValueField(wireName: 'is_deleted')
   int? get isDeleted;
 
+  @BuiltValueField(wireName: 'sakani_loan_coverage')
+  bool? get sakaniLoanCoverage;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -69,7 +72,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
     ..gender = ''
     ..displayName = ''
     ..language = ''
-    ..isDeleted = 0;
+    ..isDeleted = 0
+    ..sakaniLoanCoverage = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('User');
@@ -108,6 +112,7 @@ Map<String, dynamic> createUserRecordData({
   String? displayName,
   String? language,
   int? isDeleted,
+  bool? sakaniLoanCoverage,
 }) {
   final firestoreData = serializers.toFirestore(
     UserRecord.serializer,
@@ -128,7 +133,8 @@ Map<String, dynamic> createUserRecordData({
         ..gender = gender
         ..displayName = displayName
         ..language = language
-        ..isDeleted = isDeleted,
+        ..isDeleted = isDeleted
+        ..sakaniLoanCoverage = sakaniLoanCoverage,
     ),
   );
 
