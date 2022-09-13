@@ -344,19 +344,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'doqco3ap': {
       'en': 'Does the Sakani loan cover you?',
-      'ar': '',
+      'ar': 'هل القرض السكني يغطيك؟',
     },
     'ag8peu33': {
       'en': 'Yes',
-      'ar': '',
+      'ar': 'نعم',
     },
     'cxroduir': {
       'en': 'No',
-      'ar': '',
+      'ar': 'رقم',
     },
     '91pyvwfe': {
       'en': 'Submit',
-      'ar': 'احفظ التغييرات',
+      'ar': 'يُقدِّم',
     },
     'x4a06mk8': {
       'en': 'Home',

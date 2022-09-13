@@ -77,7 +77,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
             'w7fbktqj' /* Edit Personal Info */,
           ),
           style: FlutterFlowTheme.of(context).title1.override(
-                fontFamily: 'Sofia Pro By Khuzaimah',
+                fontFamily: 'AvenirArabic',
                 fontSize: 18,
                 fontWeight: FontWeight.normal,
                 useGoogleFonts: false,
@@ -169,7 +169,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                       useGoogleFonts: false,
@@ -258,7 +258,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
@@ -289,7 +289,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           'kpcecp9o' /* Mobile number */,
                         ),
                         style: FlutterFlowTheme.of(context).subtitle1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               color: Colors.black,
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
@@ -310,7 +310,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).subtitle1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Color(0xFF2971FB),
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
@@ -334,7 +334,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             currentPhoneNumber,
                             style:
                                 FlutterFlowTheme.of(context).subtitle1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
@@ -360,7 +360,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             ),
                             style:
                                 FlutterFlowTheme.of(context).subtitle1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Colors.black,
                                       fontSize: 17,
                                       fontWeight: FontWeight.w300,
@@ -399,7 +399,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontFamily: 'AvenirArabic',
                                         color: Colors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
@@ -471,7 +471,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     textStyle: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
@@ -543,8 +543,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
@@ -742,7 +741,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           color: Color(0xFF2971FB),
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Colors.white,
                                     fontWeight: FontWeight.w800,
                                     useGoogleFonts: false,
