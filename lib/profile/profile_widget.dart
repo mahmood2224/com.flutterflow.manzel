@@ -52,7 +52,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           children: [
                             AuthUserStreamWidget(
                               child: Text(
-                                currentUserDisplayName,
+                                valueOrDefault(currentUserDocument?.name, ''),
                                 style: FlutterFlowTheme.of(context)
                                     .title1
                                     .override(
@@ -118,7 +118,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             // editPersonalInfo
                             logFirebaseEvent('Row_editPersonalInfo');
 
-                            context.goNamed('EditPersonallInfo');
+                            context.goNamed(
+                              'EditPersonallInfo',
+                              queryParams: {
+                                'screenName':
+                                    serializeParam('Profile', ParamType.String),
+                              }.withoutNulls,
+                            );
                           },
                           child: Row(
                             mainAxisSize: MainAxisSize.max,

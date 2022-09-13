@@ -760,3 +760,49 @@ class TermsConitionsAndPrivacyPoliciesCall {
     );
   }
 }
+
+class GetBanksCall {
+  static Future<ApiCallResponse> call({
+    String? locale = 'en',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getBanks',
+      apiUrl: 'https://strapi-dev.manzel.app/api/banks?',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'locale': locale,
+      },
+      returnBody: true,
+    );
+  }
+
+  static dynamic bankNames(dynamic response) => getJsonField(
+        response,
+        r'''$.data..attributes.bank_name''',
+        true,
+      );
+}
+
+class EmplymentTypeCall {
+  static Future<ApiCallResponse> call({
+    String? locale = 'en',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'emplymentType',
+      apiUrl: 'https://strapi-dev.manzel.app/api/employement-statuses?',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'locale': locale,
+      },
+      returnBody: true,
+    );
+  }
+
+  static dynamic emplymentTypes(dynamic response) => getJsonField(
+        response,
+        r'''$.data..attributes.Name''',
+        true,
+      );
+}

@@ -112,7 +112,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'EditPersonallInfo',
               path: 'editPersonallInfo',
-              builder: (context, params) => EditPersonallInfoWidget(),
+              builder: (context, params) => EditPersonallInfoWidget(
+                screenName: params.getParam('screenName', ParamType.String),
+              ),
             ),
             FFRoute(
               name: 'EditMobileNumber',

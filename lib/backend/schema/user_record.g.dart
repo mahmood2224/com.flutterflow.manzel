@@ -130,6 +130,13 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add('is_deleted')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
+    value = object.sakaniLoanCoverage;
+    if (value != null) {
+      result
+        ..add('sakani_loan_coverage')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -216,6 +223,10 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.isDeleted = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
+        case 'sakani_loan_coverage':
+          result.sakaniLoanCoverage = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -263,6 +274,8 @@ class _$UserRecord extends UserRecord {
   @override
   final int? isDeleted;
   @override
+  final bool? sakaniLoanCoverage;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UserRecord([void Function(UserRecordBuilder)? updates]) =>
@@ -285,6 +298,7 @@ class _$UserRecord extends UserRecord {
       this.displayName,
       this.language,
       this.isDeleted,
+      this.sakaniLoanCoverage,
       this.ffRef})
       : super._();
 
@@ -315,6 +329,7 @@ class _$UserRecord extends UserRecord {
         displayName == other.displayName &&
         language == other.language &&
         isDeleted == other.isDeleted &&
+        sakaniLoanCoverage == other.sakaniLoanCoverage &&
         ffRef == other.ffRef;
   }
 
@@ -337,28 +352,30 @@ class _$UserRecord extends UserRecord {
                                                             $jc(
                                                                 $jc(
                                                                     $jc(
-                                                                        0,
-                                                                        email
+                                                                        $jc(
+                                                                            0,
+                                                                            email
+                                                                                .hashCode),
+                                                                        uid
                                                                             .hashCode),
-                                                                    uid
+                                                                    createdTime
                                                                         .hashCode),
-                                                                createdTime
+                                                                phoneNumber
                                                                     .hashCode),
-                                                            phoneNumber
+                                                            employmentStatus
                                                                 .hashCode),
-                                                        employmentStatus
-                                                            .hashCode),
-                                                    bank.hashCode),
-                                                monthlyIncome.hashCode),
-                                            photoUrl.hashCode),
-                                        status.hashCode),
-                                    name.hashCode),
-                                countryCode.hashCode),
-                            roleId.hashCode),
-                        gender.hashCode),
-                    displayName.hashCode),
-                language.hashCode),
-            isDeleted.hashCode),
+                                                        bank.hashCode),
+                                                    monthlyIncome.hashCode),
+                                                photoUrl.hashCode),
+                                            status.hashCode),
+                                        name.hashCode),
+                                    countryCode.hashCode),
+                                roleId.hashCode),
+                            gender.hashCode),
+                        displayName.hashCode),
+                    language.hashCode),
+                isDeleted.hashCode),
+            sakaniLoanCoverage.hashCode),
         ffRef.hashCode));
   }
 
@@ -381,6 +398,7 @@ class _$UserRecord extends UserRecord {
           ..add('displayName', displayName)
           ..add('language', language)
           ..add('isDeleted', isDeleted)
+          ..add('sakaniLoanCoverage', sakaniLoanCoverage)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -455,6 +473,11 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   int? get isDeleted => _$this._isDeleted;
   set isDeleted(int? isDeleted) => _$this._isDeleted = isDeleted;
 
+  bool? _sakaniLoanCoverage;
+  bool? get sakaniLoanCoverage => _$this._sakaniLoanCoverage;
+  set sakaniLoanCoverage(bool? sakaniLoanCoverage) =>
+      _$this._sakaniLoanCoverage = sakaniLoanCoverage;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -482,6 +505,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _displayName = $v.displayName;
       _language = $v.language;
       _isDeleted = $v.isDeleted;
+      _sakaniLoanCoverage = $v.sakaniLoanCoverage;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -521,6 +545,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
             displayName: displayName,
             language: language,
             isDeleted: isDeleted,
+            sakaniLoanCoverage: sakaniLoanCoverage,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

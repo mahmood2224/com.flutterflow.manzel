@@ -2596,7 +2596,22 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       if (functions.profileCompletetionCheck(
                                           currentUserEmail,
                                           valueOrDefault(
-                                              currentUserDocument?.name, ''))) {
+                                              currentUserDocument?.name, ''),
+                                          valueOrDefault(
+                                              currentUserDocument?.bank, ''),
+                                          valueOrDefault(
+                                              currentUserDocument
+                                                  ?.employmentStatus,
+                                              ''),
+                                          valueOrDefault(
+                                              currentUserDocument
+                                                  ?.monthlyIncome,
+                                              ''),
+                                          valueOrDefault<bool>(
+                                                  currentUserDocument
+                                                      ?.sakaniLoanCoverage,
+                                                  false)
+                                              .toString())) {
                                         logFirebaseEvent(
                                             'reserved_Bottom-Sheet');
                                         await showModalBottomSheet(
@@ -2629,7 +2644,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         logFirebaseEvent(
                                             'reserved_Navigate-To');
 
-                                        context.pushNamed('EditPersonallInfo');
+                                        context.pushNamed(
+                                          'EditPersonallInfo',
+                                          queryParams: {
+                                            'screenName': serializeParam(
+                                                'PropertyDetails',
+                                                ParamType.String),
+                                          }.withoutNulls,
+                                        );
                                       }
                                     } else {
                                       logFirebaseEvent('reserved_Navigate-To');
