@@ -151,6 +151,7 @@ class _ReservationBottomSheetWidgetState
               serializeParam(tapSDKResult!['charge_id'], ParamType.String),
             }.withoutNulls,
           );
+          entry!.remove();
         }
         break;
       case "FAILED":
@@ -180,6 +181,7 @@ class _ReservationBottomSheetWidgetState
               duration: Duration(milliseconds: 4000),
               backgroundColor: FlutterFlowTheme.of(context).primaryText,
             ));
+        entry!.remove();
    // }
           break;
         case "SDK_ERROR":
@@ -191,10 +193,44 @@ class _ReservationBottomSheetWidgetState
           // sdkErrorCode = tapSDKResult['sdk_error_code'].toString();
           // sdkErrorMessage = tapSDKResult['sdk_error_message'];
           // sdkErrorDescription = tapSDKResult['sdk_error_description'];
+          Navigator.pop(context);
+          logFirebaseEvent('Button_Show-Snack-Bar');
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Payment Failed',
+                  style: TextStyle(
+                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+                duration: Duration(milliseconds: 4000),
+                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+              ));
+          entry!.remove();
           break;
 
         case "NOT_IMPLEMENTED":
         //  sdkStatus = "NOT_IMPLEMENTED";
+          Navigator.pop(context);
+          logFirebaseEvent('Button_Show-Snack-Bar');
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Payment Failed',
+                  style: TextStyle(
+                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+                duration: Duration(milliseconds: 4000),
+                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+              ));
+          entry!.remove();
           break;
       }
 
@@ -553,6 +589,7 @@ class _ReservationBottomSheetWidgetState
                           (addOrderApiResponse?.jsonBody ?? ''),
                           r'''$.result''',
                         );
+                        entry = showOverlay(context);
                         startSDK(context, {
                           'propertyId': serializeParam(
                               widget.propertyId, ParamType.int),
