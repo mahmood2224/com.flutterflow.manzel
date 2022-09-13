@@ -1111,7 +1111,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // propertyVideo
   {
-    '3y7ei720': {
+    'gnkwrihl': {
       'en': 'Home',
       'ar': '',
     },
