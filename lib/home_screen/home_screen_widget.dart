@@ -685,7 +685,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                                 .fromSTEB(10, 1,
                                                                     10, 1),
                                                         child: Text(
-                                                          'Available',
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            '2cud1oqj' /* Available */,
+                                                          ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyText1
@@ -739,7 +743,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                                 .fromSTEB(10, 1,
                                                                     10, 1),
                                                         child: Text(
-                                                          'Booked',
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'qtso45vv' /* Booked */,
+                                                          ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyText1
@@ -793,7 +801,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                                 .fromSTEB(10, 1,
                                                                     10, 1),
                                                         child: Text(
-                                                          'Coming soon',
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'juw40663' /* Coming soon */,
+                                                          ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyText1

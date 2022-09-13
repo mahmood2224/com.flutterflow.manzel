@@ -24,6 +24,7 @@ export 'filter_results/filter_results_widget.dart' show FilterResultsWidget;
 export 'my_properties/my_properties_widget.dart' show MyPropertiesWidget;
 export 'property_details/property_details_widget.dart'
     show PropertyDetailsWidget;
+export 'property_video/property_video_widget.dart' show PropertyVideoWidget;
 export 'floor_plan/floor_plan_widget.dart' show FloorPlanWidget;
 export 'three_sixty_view/three_sixty_view_widget.dart'
     show ThreeSixtyViewWidget;

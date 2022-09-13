@@ -108,6 +108,10 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'PropertyDetails': (data) async => PropertyDetailsWidget(
         propertyId: getParameter(data, 'propertyId'),
       ),
+  'propertyVideo': (data) async => PropertyVideoWidget(
+        videoURL: getParameter(data, 'videoURL'),
+        propertyName: getParameter(data, 'propertyName'),
+      ),
   'FloorPlan': (data) async => FloorPlanWidget(
         propertyId: getParameter(data, 'propertyId'),
       ),

@@ -545,7 +545,9 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
-                              'Does the Sakani loan cover you?',
+                              FFLocalizations.of(context).getText(
+                                'doqco3ap' /* Does the Sakani loan cover you... */,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
@@ -568,7 +570,14 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   if (choiceChipsValue != null)
                                     choiceChipsValue!
                                 ],
-                                options: [ChipData('Yes'), ChipData('No')],
+                                options: [
+                                  ChipData(FFLocalizations.of(context).getText(
+                                    'ag8peu33' /* Yes */,
+                                  )),
+                                  ChipData(FFLocalizations.of(context).getText(
+                                    'cxroduir' /* No */,
+                                  ))
+                                ],
                                 onChanged: (val) => setState(
                                     () => choiceChipsValue = val?.first),
                                 selectedChipStyle: ChipStyle(

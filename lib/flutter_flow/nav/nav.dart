@@ -198,6 +198,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
+              name: 'propertyVideo',
+              path: 'propertyVideo',
+              builder: (context, params) => PropertyVideoWidget(
+                videoURL: params.getParam('videoURL', ParamType.String),
+                propertyName: params.getParam('propertyName', ParamType.String),
+              ),
+            ),
+            FFRoute(
               name: 'FloorPlan',
               path: 'floorPlan',
               builder: (context, params) => FloorPlanWidget(
