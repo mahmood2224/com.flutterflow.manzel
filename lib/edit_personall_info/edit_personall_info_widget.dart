@@ -32,14 +32,12 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
 
   TextEditingController? fullNameController;
 
+  ApiCallResponse? bankList;
   String? bankValue;
-  String? monthlyIncomeValue;
+  ApiCallResponse? emplymentList;
   String? privateSectorValue;
+  String? monthlyIncomeValue;
   String? choiceChipsValue;
-  ApiCallResponse? bankResponse1;
-  ApiCallResponse? emplymentResponse1;
-  ApiCallResponse? emplymentResponse;
-  ApiCallResponse? bankResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -441,171 +439,146 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: AuthUserStreamWidget(
-                                child: FutureBuilder<ApiCallResponse>(
-                                  future: EmplymentTypeCall.call(
-                                    locale: FFAppState().locale,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: SpinKitRipple(
-                                            color: Color(0xFF2971FB),
-                                            size: 50,
-                                          ),
+                        child: InkWell(
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'EDIT_PERSONALL_INFO_Row_cralxw2p_ON_TAP');
+                            logFirebaseEvent('Row_Backend-Call');
+                            emplymentList = await EmplymentTypeCall.call(
+                              locale: FFAppState().locale,
+                            );
+
+                            setState(() {});
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: AuthUserStreamWidget(
+                                  child: FlutterFlowDropDown(
+                                    initialOption: privateSectorValue ??=
+                                        functions.editProfileDropDownInitalVal(
+                                            (EmplymentTypeCall.emplymentTypes(
+                                              (emplymentList?.jsonBody ?? ''),
+                                            ) as List)
+                                                .map<String>(
+                                                    (s) => s.toString())
+                                                .toList(),
+                                            valueOrDefault(
+                                                currentUserDocument
+                                                    ?.employmentStatus,
+                                                '')),
+                                    options: (EmplymentTypeCall.emplymentTypes(
+                                      (emplymentList?.jsonBody ?? ''),
+                                    ) as List)
+                                        .map<String>((s) => s.toString())
+                                        .toList()
+                                        .toList(),
+                                    onChanged: (val) => setState(
+                                        () => privateSectorValue = val),
+                                    width: 335,
+                                    height: 55,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
                                         ),
-                                      );
-                                    }
-                                    final privateSectorEmplymentTypeResponse =
-                                        snapshot.data!;
-                                    return FlutterFlowDropDown(
-                                      initialOption: privateSectorValue ??=
-                                          functions
-                                              .editProfileDropDownInitalVal(
-                                                  (EmplymentTypeCall
-                                                          .emplymentTypes(
-                                                    privateSectorEmplymentTypeResponse
-                                                        .jsonBody,
-                                                  ) as List)
-                                                      .map<String>(
-                                                          (s) => s.toString())
-                                                      .toList(),
-                                                  valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.employmentStatus,
-                                                      '')),
-                                      options:
-                                          (EmplymentTypeCall.emplymentTypes(
-                                        privateSectorEmplymentTypeResponse
-                                            .jsonBody,
-                                      ) as List)
-                                              .map<String>((s) => s.toString())
-                                              .toList()
-                                              .toList(),
-                                      onChanged: (val) => setState(
-                                          () => privateSectorValue = val),
-                                      width: 335,
-                                      height: 55,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts: false,
-                                          ),
-                                      hintText:
-                                          FFLocalizations.of(context).getText(
-                                        'gerdd7rv' /* Employment status */,
-                                      ),
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down,
-                                        size: 15,
-                                      ),
-                                      fillColor: Colors.white,
-                                      elevation: 2,
-                                      borderColor: Color(0xFFA5A5A5),
-                                      borderWidth: 1,
-                                      borderRadius: 8,
-                                      margin: EdgeInsetsDirectional.fromSTEB(
-                                          12, 4, 12, 4),
-                                      hidesUnderline: true,
-                                    );
-                                  },
+                                    hintText:
+                                        FFLocalizations.of(context).getText(
+                                      'gerdd7rv' /* Employment status */,
+                                    ),
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down,
+                                      size: 15,
+                                    ),
+                                    fillColor: Colors.white,
+                                    elevation: 2,
+                                    borderColor: Color(0xFFA5A5A5),
+                                    borderWidth: 1,
+                                    borderRadius: 8,
+                                    margin: EdgeInsetsDirectional.fromSTEB(
+                                        12, 4, 12, 4),
+                                    hidesUnderline: true,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: AuthUserStreamWidget(
-                                child: FutureBuilder<ApiCallResponse>(
-                                  future: GetBanksCall.call(
-                                    locale: FFAppState().locale,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: SpinKitRipple(
-                                            color: Color(0xFF2971FB),
-                                            size: 50,
-                                          ),
+                        child: InkWell(
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'EDIT_PERSONALL_INFO_Row_k8qvw6ei_ON_TAP');
+                            logFirebaseEvent('Row_Backend-Call');
+                            bankList = await GetBanksCall.call(
+                              locale: FFAppState().locale,
+                            );
+
+                            setState(() {});
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: AuthUserStreamWidget(
+                                  child: FlutterFlowDropDown(
+                                    initialOption: bankValue ??=
+                                        functions.editProfileDropDownInitalVal(
+                                            (GetBanksCall.bankNames(
+                                              (bankList?.jsonBody ?? ''),
+                                            ) as List)
+                                                .map<String>(
+                                                    (s) => s.toString())
+                                                .toList(),
+                                            valueOrDefault(
+                                                currentUserDocument?.bank, '')),
+                                    options: (GetBanksCall.bankNames(
+                                      (bankList?.jsonBody ?? ''),
+                                    ) as List)
+                                        .map<String>((s) => s.toString())
+                                        .toList()
+                                        .toList(),
+                                    onChanged: (val) =>
+                                        setState(() => bankValue = val),
+                                    width: 335,
+                                    height: 55,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
                                         ),
-                                      );
-                                    }
-                                    final bankGetBanksResponse = snapshot.data!;
-                                    return FlutterFlowDropDown(
-                                      initialOption: bankValue ??= functions
-                                          .editProfileDropDownInitalVal(
-                                              (GetBanksCall.bankNames(
-                                                bankGetBanksResponse.jsonBody,
-                                              ) as List)
-                                                  .map<String>(
-                                                      (s) => s.toString())
-                                                  .toList(),
-                                              valueOrDefault(
-                                                  currentUserDocument?.bank,
-                                                  '')),
-                                      options: (GetBanksCall.bankNames(
-                                        bankGetBanksResponse.jsonBody,
-                                      ) as List)
-                                          .map<String>((s) => s.toString())
-                                          .toList()
-                                          .toList(),
-                                      onChanged: (val) =>
-                                          setState(() => bankValue = val),
-                                      width: 335,
-                                      height: 55,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts: false,
-                                          ),
-                                      hintText:
-                                          FFLocalizations.of(context).getText(
-                                        'nfhf8rho' /* Salary bank */,
-                                      ),
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down_rounded,
-                                        size: 15,
-                                      ),
-                                      fillColor: Colors.white,
-                                      elevation: 2,
-                                      borderColor: Color(0xFFA5A5A5),
-                                      borderWidth: 1,
-                                      borderRadius: 8,
-                                      margin: EdgeInsetsDirectional.fromSTEB(
-                                          12, 4, 12, 4),
-                                      hidesUnderline: true,
-                                    );
-                                  },
+                                    hintText:
+                                        FFLocalizations.of(context).getText(
+                                      'nfhf8rho' /* Salary bank */,
+                                    ),
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                      size: 15,
+                                    ),
+                                    fillColor: Colors.white,
+                                    elevation: 2,
+                                    borderColor: Color(0xFFA5A5A5),
+                                    borderWidth: 1,
+                                    borderRadius: 8,
+                                    margin: EdgeInsetsDirectional.fromSTEB(
+                                        12, 4, 12, 4),
+                                    hidesUnderline: true,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       Padding(
@@ -730,16 +703,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 privateSectorValue,
                                 monthlyIncomeValue,
                                 choiceChipsValue)) {
-                              logFirebaseEvent(
-                                  'updatePersonalInfo_Backend-Call');
-                              emplymentResponse1 = await EmplymentTypeCall.call(
-                                locale: FFAppState().locale,
-                              );
-                              logFirebaseEvent(
-                                  'updatePersonalInfo_Backend-Call');
-                              bankResponse1 = await GetBanksCall.call(
-                                locale: FFAppState().locale,
-                              );
                               // updatePersonaInfo
                               logFirebaseEvent(
                                   'updatePersonalInfo_updatePersonaInfo');
@@ -754,14 +717,14 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 employmentStatus:
                                     functions.editProfileindexReturn(
                                         (EmplymentTypeCall.emplymentTypes(
-                                          (emplymentResponse1?.jsonBody ?? ''),
+                                          (emplymentList?.jsonBody ?? ''),
                                         ) as List)
                                             .map<String>((s) => s.toString())
                                             .toList(),
                                         privateSectorValue),
                                 bank: functions.editProfileindexReturn(
                                     (GetBanksCall.bankNames(
-                                      (bankResponse1?.jsonBody ?? ''),
+                                      (bankList?.jsonBody ?? ''),
                                     ) as List)
                                         .map<String>((s) => s.toString())
                                         .toList(),
@@ -794,14 +757,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               );
                             }
                           } else {
-                            logFirebaseEvent('updatePersonalInfo_Backend-Call');
-                            emplymentResponse = await EmplymentTypeCall.call(
-                              locale: FFAppState().locale,
-                            );
-                            logFirebaseEvent('updatePersonalInfo_Backend-Call');
-                            bankResponse = await GetBanksCall.call(
-                              locale: FFAppState().locale,
-                            );
                             // updatePersonaInfo
                             logFirebaseEvent(
                                 'updatePersonalInfo_updatePersonaInfo');
@@ -814,14 +769,14 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               employmentStatus:
                                   functions.editProfileindexReturn(
                                       (EmplymentTypeCall.emplymentTypes(
-                                        (emplymentResponse?.jsonBody ?? ''),
+                                        (emplymentList?.jsonBody ?? ''),
                                       ) as List)
                                           .map<String>((s) => s.toString())
                                           .toList(),
                                       privateSectorValue),
                               bank: functions.editProfileindexReturn(
                                   (GetBanksCall.bankNames(
-                                    (bankResponse?.jsonBody ?? ''),
+                                    (bankList?.jsonBody ?? ''),
                                   ) as List)
                                       .map<String>((s) => s.toString())
                                       .toList(),
@@ -834,8 +789,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 'updatePersonalInfo_Close-Dialog,-Drawer,');
                             Navigator.pop(context);
                           }
-
-                          setState(() {});
                         },
                         text: FFLocalizations.of(context).getText(
                           '91pyvwfe' /* Submit */,
