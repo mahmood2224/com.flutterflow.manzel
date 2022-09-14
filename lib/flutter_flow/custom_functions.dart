@@ -740,10 +740,20 @@ bool pastOfferColumnVisibility(
     return false;
   }
   if (status == "cancelled") {
-    if (installmentPeriod != null ||
-        installmentRange != null ||
-        agentName != null ||
-        totalPrice != null) {
+    if ((installmentPeriod != null ||
+            installmentRange != null ||
+            totalPrice != null) &&
+        (agentName != null)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  if (status == "rejected") {
+    if ((installmentPeriod != null ||
+            installmentRange != null ||
+            totalPrice != null) &&
+        (agentName != null)) {
       return true;
     } else {
       return false;
