@@ -137,10 +137,10 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
-    value = object.lastLoggedin;
+    value = object.lastLogin;
     if (value != null) {
       result
-        ..add('last_loggedin')
+        ..add('last_login')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
@@ -234,8 +234,8 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.sakaniLoanCoverage = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
-        case 'last_loggedin':
-          result.lastLoggedin = serializers.deserialize(value,
+        case 'last_login':
+          result.lastLogin = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'Document__Reference__Field':
@@ -287,7 +287,7 @@ class _$UserRecord extends UserRecord {
   @override
   final bool? sakaniLoanCoverage;
   @override
-  final DateTime? lastLoggedin;
+  final DateTime? lastLogin;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -312,7 +312,7 @@ class _$UserRecord extends UserRecord {
       this.language,
       this.isDeleted,
       this.sakaniLoanCoverage,
-      this.lastLoggedin,
+      this.lastLogin,
       this.ffRef})
       : super._();
 
@@ -344,7 +344,7 @@ class _$UserRecord extends UserRecord {
         language == other.language &&
         isDeleted == other.isDeleted &&
         sakaniLoanCoverage == other.sakaniLoanCoverage &&
-        lastLoggedin == other.lastLoggedin &&
+        lastLogin == other.lastLogin &&
         ffRef == other.ffRef;
   }
 
@@ -392,7 +392,7 @@ class _$UserRecord extends UserRecord {
                         language.hashCode),
                     isDeleted.hashCode),
                 sakaniLoanCoverage.hashCode),
-            lastLoggedin.hashCode),
+            lastLogin.hashCode),
         ffRef.hashCode));
   }
 
@@ -416,7 +416,7 @@ class _$UserRecord extends UserRecord {
           ..add('language', language)
           ..add('isDeleted', isDeleted)
           ..add('sakaniLoanCoverage', sakaniLoanCoverage)
-          ..add('lastLoggedin', lastLoggedin)
+          ..add('lastLogin', lastLogin)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -496,10 +496,9 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   set sakaniLoanCoverage(bool? sakaniLoanCoverage) =>
       _$this._sakaniLoanCoverage = sakaniLoanCoverage;
 
-  DateTime? _lastLoggedin;
-  DateTime? get lastLoggedin => _$this._lastLoggedin;
-  set lastLoggedin(DateTime? lastLoggedin) =>
-      _$this._lastLoggedin = lastLoggedin;
+  DateTime? _lastLogin;
+  DateTime? get lastLogin => _$this._lastLogin;
+  set lastLogin(DateTime? lastLogin) => _$this._lastLogin = lastLogin;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -529,7 +528,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _language = $v.language;
       _isDeleted = $v.isDeleted;
       _sakaniLoanCoverage = $v.sakaniLoanCoverage;
-      _lastLoggedin = $v.lastLoggedin;
+      _lastLogin = $v.lastLogin;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -570,7 +569,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
             language: language,
             isDeleted: isDeleted,
             sakaniLoanCoverage: sakaniLoanCoverage,
-            lastLoggedin: lastLoggedin,
+            lastLogin: lastLogin,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

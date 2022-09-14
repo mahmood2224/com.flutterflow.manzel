@@ -455,54 +455,81 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             children: [
                               Expanded(
                                 child: AuthUserStreamWidget(
-                                  child: FlutterFlowDropDown(
-                                    initialOption: privateSectorValue ??=
-                                        functions.editProfileDropDownInitalVal(
+                                  child: FutureBuilder<ApiCallResponse>(
+                                    future: EmplymentTypeCall.call(
+                                      locale: FFAppState().locale,
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitRipple(
+                                              color: Color(0xFF2971FB),
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      final privateSectorEmplymentTypeResponse =
+                                          snapshot.data!;
+                                      return FlutterFlowDropDown(
+                                        initialOption: privateSectorValue ??=
+                                            functions
+                                                .editProfileDropDownInitalVal(
+                                                    (EmplymentTypeCall
+                                                            .emplymentTypes(
+                                                      privateSectorEmplymentTypeResponse
+                                                          .jsonBody,
+                                                    ) as List)
+                                                        .map<String>(
+                                                            (s) => s.toString())
+                                                        .toList(),
+                                                    valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.employmentStatus,
+                                                        '')),
+                                        options:
                                             (EmplymentTypeCall.emplymentTypes(
-                                              (emplymentList?.jsonBody ?? ''),
-                                            ) as List)
+                                          (emplymentList?.jsonBody ?? ''),
+                                        ) as List)
                                                 .map<String>(
                                                     (s) => s.toString())
+                                                .toList()
                                                 .toList(),
-                                            valueOrDefault(
-                                                currentUserDocument
-                                                    ?.employmentStatus,
-                                                '')),
-                                    options: (EmplymentTypeCall.emplymentTypes(
-                                      (emplymentList?.jsonBody ?? ''),
-                                    ) as List)
-                                        .map<String>((s) => s.toString())
-                                        .toList()
-                                        .toList(),
-                                    onChanged: (val) => setState(
-                                        () => privateSectorValue = val),
-                                    width: 335,
-                                    height: 55,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'AvenirArabic',
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
+                                        onChanged: (val) => setState(
+                                            () => privateSectorValue = val),
+                                        width: 335,
+                                        height: 55,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'AvenirArabic',
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
+                                        hintText:
+                                            FFLocalizations.of(context).getText(
+                                          'gerdd7rv' /* Employment status */,
                                         ),
-                                    hintText:
-                                        FFLocalizations.of(context).getText(
-                                      'gerdd7rv' /* Employment status */,
-                                    ),
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_down,
-                                      size: 15,
-                                    ),
-                                    fillColor: Colors.white,
-                                    elevation: 2,
-                                    borderColor: Color(0xFFA5A5A5),
-                                    borderWidth: 1,
-                                    borderRadius: 8,
-                                    margin: EdgeInsetsDirectional.fromSTEB(
-                                        12, 4, 12, 4),
-                                    hidesUnderline: true,
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down,
+                                          size: 15,
+                                        ),
+                                        fillColor: Colors.white,
+                                        elevation: 2,
+                                        borderColor: Color(0xFFA5A5A5),
+                                        borderWidth: 1,
+                                        borderRadius: 8,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            12, 4, 12, 4),
+                                        hidesUnderline: true,
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -528,52 +555,75 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             children: [
                               Expanded(
                                 child: AuthUserStreamWidget(
-                                  child: FlutterFlowDropDown(
-                                    initialOption: bankValue ??=
-                                        functions.editProfileDropDownInitalVal(
-                                            (GetBanksCall.bankNames(
-                                              (bankList?.jsonBody ?? ''),
-                                            ) as List)
-                                                .map<String>(
-                                                    (s) => s.toString())
-                                                .toList(),
-                                            valueOrDefault(
-                                                currentUserDocument?.bank, '')),
-                                    options: (GetBanksCall.bankNames(
-                                      (bankList?.jsonBody ?? ''),
-                                    ) as List)
-                                        .map<String>((s) => s.toString())
-                                        .toList()
-                                        .toList(),
-                                    onChanged: (val) =>
-                                        setState(() => bankValue = val),
-                                    width: 335,
-                                    height: 55,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'AvenirArabic',
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
+                                  child: FutureBuilder<ApiCallResponse>(
+                                    future: GetBanksCall.call(
+                                      locale: FFAppState().locale,
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitRipple(
+                                              color: Color(0xFF2971FB),
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      final bankGetBanksResponse =
+                                          snapshot.data!;
+                                      return FlutterFlowDropDown(
+                                        initialOption: bankValue ??= functions
+                                            .editProfileDropDownInitalVal(
+                                                (GetBanksCall.bankNames(
+                                                  bankGetBanksResponse.jsonBody,
+                                                ) as List)
+                                                    .map<String>(
+                                                        (s) => s.toString())
+                                                    .toList(),
+                                                valueOrDefault(
+                                                    currentUserDocument?.bank,
+                                                    '')),
+                                        options: (GetBanksCall.bankNames(
+                                          (bankList?.jsonBody ?? ''),
+                                        ) as List)
+                                            .map<String>((s) => s.toString())
+                                            .toList()
+                                            .toList(),
+                                        onChanged: (val) =>
+                                            setState(() => bankValue = val),
+                                        width: 335,
+                                        height: 55,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'AvenirArabic',
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
+                                        hintText:
+                                            FFLocalizations.of(context).getText(
+                                          'nfhf8rho' /* Salary bank */,
                                         ),
-                                    hintText:
-                                        FFLocalizations.of(context).getText(
-                                      'nfhf8rho' /* Salary bank */,
-                                    ),
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_down_rounded,
-                                      size: 15,
-                                    ),
-                                    fillColor: Colors.white,
-                                    elevation: 2,
-                                    borderColor: Color(0xFFA5A5A5),
-                                    borderWidth: 1,
-                                    borderRadius: 8,
-                                    margin: EdgeInsetsDirectional.fromSTEB(
-                                        12, 4, 12, 4),
-                                    hidesUnderline: true,
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down_rounded,
+                                          size: 15,
+                                        ),
+                                        fillColor: Colors.white,
+                                        elevation: 2,
+                                        borderColor: Color(0xFFA5A5A5),
+                                        borderWidth: 1,
+                                        borderRadius: 8,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            12, 4, 12, 4),
+                                        hidesUnderline: true,
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
