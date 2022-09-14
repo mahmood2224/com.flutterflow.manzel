@@ -1153,3 +1153,23 @@ bool sakaniLoan(String? chioceChipValue) {
     return false;
   }
 }
+
+String sakaniLoanInitialValue(
+  bool? loanCoverage,
+  String? locale,
+) {
+  // Add your function code here!
+  if (locale == 'en') {
+    if (loanCoverage == true) {
+      return 'Yes';
+    } else {
+      return 'No';
+    }
+  } else {
+    if (loanCoverage == true) {
+      return 'نعم';
+    } else {
+      return 'رقم';
+    }
+  }
+}

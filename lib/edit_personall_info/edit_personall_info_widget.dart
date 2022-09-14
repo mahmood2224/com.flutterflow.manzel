@@ -556,6 +556,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                           FFLocalizations.of(context).getText(
                                         'nfhf8rho' /* Salary bank */,
                                       ),
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        size: 15,
+                                      ),
                                       fillColor: Colors.white,
                                       elevation: 2,
                                       borderColor: Color(0xFFA5A5A5),
@@ -598,62 +602,76 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Expanded(
-                              child: FlutterFlowChoiceChips(
-                                initiallySelected: [
-                                  if (choiceChipsValue != null)
-                                    choiceChipsValue!
-                                ],
-                                options: [
-                                  ChipData(FFLocalizations.of(context).getText(
-                                    'ag8peu33' /* Yes */,
-                                  )),
-                                  ChipData(FFLocalizations.of(context).getText(
-                                    'cxroduir' /* No */,
-                                  ))
-                                ],
-                                onChanged: (val) => setState(
-                                    () => choiceChipsValue = val?.first),
-                                selectedChipStyle: ChipStyle(
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color:
-                                            FlutterFlowTheme.of(context).white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                  iconColor: Color(0x00000000),
-                                  iconSize: 18,
-                                  labelPadding: EdgeInsetsDirectional.fromSTEB(
-                                      38, 3, 38, 3),
-                                  elevation: 4,
+                              child: AuthUserStreamWidget(
+                                child: FlutterFlowChoiceChips(
+                                  initiallySelected: choiceChipsValue != null
+                                      ? [choiceChipsValue!]
+                                      : [
+                                          functions.sakaniLoanInitialValue(
+                                              valueOrDefault<bool>(
+                                                  currentUserDocument
+                                                      ?.sakaniLoanCoverage,
+                                                  false),
+                                              FFAppState().locale)
+                                        ],
+                                  options: [
+                                    ChipData(
+                                        FFLocalizations.of(context).getText(
+                                      'ag8peu33' /* Yes */,
+                                    )),
+                                    ChipData(
+                                        FFLocalizations.of(context).getText(
+                                      'cxroduir' /* No */,
+                                    ))
+                                  ],
+                                  onChanged: (val) => setState(
+                                      () => choiceChipsValue = val?.first),
+                                  selectedChipStyle: ChipStyle(
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: FlutterFlowTheme.of(context)
+                                              .white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
+                                    iconColor: Color(0x00000000),
+                                    iconSize: 18,
+                                    labelPadding:
+                                        EdgeInsetsDirectional.fromSTEB(
+                                            38, 3, 38, 3),
+                                    elevation: 4,
+                                  ),
+                                  unselectedChipStyle: ChipStyle(
+                                    backgroundColor: Colors.white,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
+                                    iconColor: Color(0x00000000),
+                                    iconSize: 18,
+                                    labelPadding:
+                                        EdgeInsetsDirectional.fromSTEB(
+                                            38, 3, 38, 3),
+                                    elevation: 4,
+                                  ),
+                                  chipSpacing: 20,
+                                  rowSpacing: 60,
+                                  multiselect: false,
+                                  initialized: choiceChipsValue != null,
+                                  alignment: WrapAlignment.start,
                                 ),
-                                unselectedChipStyle: ChipStyle(
-                                  backgroundColor: Colors.white,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                  iconColor: Color(0x00000000),
-                                  iconSize: 18,
-                                  labelPadding: EdgeInsetsDirectional.fromSTEB(
-                                      38, 3, 38, 3),
-                                  elevation: 4,
-                                ),
-                                chipSpacing: 20,
-                                rowSpacing: 60,
-                                multiselect: false,
-                                alignment: WrapAlignment.start,
                               ),
                             ),
                           ],
