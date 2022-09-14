@@ -60,63 +60,63 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   PageController? pageViewController;
   UserSavedRecord? saveProperty;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  VideoPlayerController? _currentController;
-  VideoPlayerController? videoPlayerController;
-  VideoPlayerController? _videoPlayerController;
-  ChewieController? _chewieController;
-  bool _loggedError = false;
+  // VideoPlayerController? _currentController;
+  // VideoPlayerController? videoPlayerController;
+  // VideoPlayerController? _videoPlayerController;
+  // ChewieController? _chewieController;
+  // bool _loggedError = false;
 
 
   @override
   void initState() {
     super.initState();
-    initializePlayer();
+    //initializePlayer();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PropertyDetails'});
   }
-  void enterFullScreen() {
-    _chewieController?.enterFullScreen();
-  }
-  @override
-  void dispose() {
-    _videoPlayers.remove(_videoPlayerController);
-    _videoPlayerController?.dispose();
-    _chewieController?.dispose();
-    _currentController = null;
-    super.dispose();
-  }
-
-
-  Future initializePlayer() async {
-
-    _videoPlayerController = VideoPlayerController.network(widget.path!);
-
-      await _videoPlayerController?.initialize();
-    _chewieController = ChewieController(
-      videoPlayerController: _videoPlayerController!,
-      deviceOrientationsOnEnterFullScreen: [
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ],
-      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-      aspectRatio: MediaQuery.of(context).size.width/(MediaQuery.of(context).size.height*0.35),
-      autoPlay: true,
-      looping: true,
-      showControls: true,
-      allowFullScreen: true,
-      allowPlaybackSpeedChanging: false,
-
-    );
-    setState(() {});
-
-   _videoPlayers.add(_videoPlayerController!);
-
-    _videoPlayerController?.addListener(() {
-      if (_videoPlayerController!.value.hasError && !_loggedError) {
-        print(
-            'Error playing video: ${_videoPlayerController!.value.errorDescription}');
-        _loggedError = true;
-      }
+  // void enterFullScreen() {
+  //   _chewieController?.enterFullScreen();
+  // }
+  // @override
+  // void dispose() {
+  //   _videoPlayers.remove(_videoPlayerController);
+  //   _videoPlayerController?.dispose();
+  //   _chewieController?.dispose();
+  //   _currentController = null;
+  //   super.dispose();
+  // }
+  //
+  //
+  // Future initializePlayer() async {
+  //
+  //   _videoPlayerController = VideoPlayerController.network(widget.path!);
+  //
+  //     await _videoPlayerController?.initialize();
+  //   _chewieController = ChewieController(
+  //     videoPlayerController: _videoPlayerController!,
+  //     deviceOrientationsOnEnterFullScreen: [
+  //       DeviceOrientation.landscapeLeft,
+  //       DeviceOrientation.landscapeRight,
+  //     ],
+  //     deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+  //     aspectRatio: MediaQuery.of(context).size.width/(MediaQuery.of(context).size.height*0.35),
+  //     autoPlay: true,
+  //     looping: true,
+  //     showControls: true,
+  //     allowFullScreen: true,
+  //     allowPlaybackSpeedChanging: false,
+  //
+  //   );
+  //   setState(() {});
+  //
+  //  _videoPlayers.add(_videoPlayerController!);
+  //
+  //   _videoPlayerController?.addListener(() {
+  //     if (_videoPlayerController!.value.hasError && !_loggedError) {
+  //       print(
+  //           'Error playing video: ${_videoPlayerController!.value.errorDescription}');
+  //       _loggedError = true;
+  //     }
       //Stop all other players when one video is playing.
       // if (_videoPlayerController.value.isPlaying) {
       //   _videoPlayers.forEach((otherPlayer) {
@@ -129,7 +129,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       //      }
       //    });
       // }
-    });}
+    //});}
 
   Future<void> configurePaymentSdk() async {
 
@@ -800,7 +800,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   0, 0, 8, 0),
                                                       child: InkWell(
                                                         onTap: () async {
-                                                          _chewieController?.pause();
+                                                          //_chewieController?.pause();
                                                           logFirebaseEvent(
                                                               'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
                                                           logFirebaseEvent(
@@ -860,7 +860,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     ),
                                                     InkWell(
                                                       onTap: () async {
-                                                        _chewieController?.pause();
+                                                        //_chewieController?.pause();
                                                         logFirebaseEvent(
                                                             'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
                                                         logFirebaseEvent(
@@ -2750,7 +2750,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   'Available'))
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    _chewieController?.pause();
+                                    //_chewieController?.pause();
                                     logFirebaseEvent(
                                         'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
                                     if (loggedIn) {
@@ -2801,7 +2801,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ),
                                             );
                                           },
-                                        ).then((value) => _chewieController?.play());
+                                        );
+                                        //.then((value) => _chewieController?.play());
                                       } else {
                                         logFirebaseEvent(
                                             'reserved_Navigate-To');
