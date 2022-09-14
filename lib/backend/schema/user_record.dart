@@ -53,8 +53,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
   @BuiltValueField(wireName: 'sakani_loan_coverage')
   bool? get sakaniLoanCoverage;
 
-  @BuiltValueField(wireName: 'last_login')
-  DateTime? get lastLogin;
+  @BuiltValueField(wireName: 'last_loggedin')
+  DateTime? get lastLoggedin;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -116,7 +116,7 @@ Map<String, dynamic> createUserRecordData({
   String? language,
   int? isDeleted,
   bool? sakaniLoanCoverage,
-  DateTime? lastLogin,
+  DateTime? lastLoggedin,
 }) {
   final firestoreData = serializers.toFirestore(
     UserRecord.serializer,
@@ -139,7 +139,7 @@ Map<String, dynamic> createUserRecordData({
         ..language = language
         ..isDeleted = isDeleted
         ..sakaniLoanCoverage = sakaniLoanCoverage
-        ..lastLogin = lastLogin,
+        ..lastLoggedin = lastLoggedin,
     ),
   );
 
