@@ -36,6 +36,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
   String? monthlyIncomeValue;
   String? privateSectorValue;
   String? choiceChipsValue;
+  ApiCallResponse? bankResponse1;
+  ApiCallResponse? emplymentResponse1;
+  ApiCallResponse? emplymentResponse;
+  ApiCallResponse? bankResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -322,7 +326,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 4, 20, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 4, 20, 25),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -344,6 +348,12 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                       ),
                     ],
                   ),
+                ),
+                Divider(
+                  thickness: 1,
+                  indent: 20,
+                  endIndent: 20,
+                  color: Color(0xFFECECEC),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
@@ -377,9 +387,13 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               child: AuthUserStreamWidget(
                                 child: FlutterFlowDropDown(
                                   initialOption: monthlyIncomeValue ??=
-                                      valueOrDefault(
-                                          currentUserDocument?.monthlyIncome,
-                                          ''),
+                                      functions.monthlyIncome(
+                                          'initialValue',
+                                          valueOrDefault(
+                                              currentUserDocument
+                                                  ?.monthlyIncome,
+                                              ''),
+                                          FFAppState().locale),
                                   options: [
                                     FFLocalizations.of(context).getText(
                                       '4w16yzqb' /* 2000 - 5000 SAR */,
@@ -454,10 +468,20 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                         snapshot.data!;
                                     return FlutterFlowDropDown(
                                       initialOption: privateSectorValue ??=
-                                          valueOrDefault(
-                                              currentUserDocument
-                                                  ?.employmentStatus,
-                                              ''),
+                                          functions
+                                              .editProfileDropDownInitalVal(
+                                                  (EmplymentTypeCall
+                                                          .emplymentTypes(
+                                                    privateSectorEmplymentTypeResponse
+                                                        .jsonBody,
+                                                  ) as List)
+                                                      .map<String>(
+                                                          (s) => s.toString())
+                                                      .toList(),
+                                                  valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.employmentStatus,
+                                                      '')),
                                       options:
                                           (EmplymentTypeCall.emplymentTypes(
                                         privateSectorEmplymentTypeResponse
@@ -530,9 +554,17 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     }
                                     final bankGetBanksResponse = snapshot.data!;
                                     return FlutterFlowDropDown(
-                                      initialOption: bankValue ??=
-                                          valueOrDefault(
-                                              currentUserDocument?.bank, ''),
+                                      initialOption: bankValue ??= functions
+                                          .editProfileDropDownInitalVal(
+                                              (GetBanksCall.bankNames(
+                                                bankGetBanksResponse.jsonBody,
+                                              ) as List)
+                                                  .map<String>(
+                                                      (s) => s.toString())
+                                                  .toList(),
+                                              valueOrDefault(
+                                                  currentUserDocument?.bank,
+                                                  '')),
                                       options: (GetBanksCall.bankNames(
                                         bankGetBanksResponse.jsonBody,
                                       ) as List)
@@ -555,6 +587,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       hintText:
                                           FFLocalizations.of(context).getText(
                                         'nfhf8rho' /* Salary bank */,
+                                      ),
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        size: 15,
                                       ),
                                       fillColor: Colors.white,
                                       elevation: 2,
@@ -598,62 +634,76 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Expanded(
-                              child: FlutterFlowChoiceChips(
-                                initiallySelected: [
-                                  if (choiceChipsValue != null)
-                                    choiceChipsValue!
-                                ],
-                                options: [
-                                  ChipData(FFLocalizations.of(context).getText(
-                                    'ag8peu33' /* Yes */,
-                                  )),
-                                  ChipData(FFLocalizations.of(context).getText(
-                                    'cxroduir' /* No */,
-                                  ))
-                                ],
-                                onChanged: (val) => setState(
-                                    () => choiceChipsValue = val?.first),
-                                selectedChipStyle: ChipStyle(
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color:
-                                            FlutterFlowTheme.of(context).white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                  iconColor: Color(0x00000000),
-                                  iconSize: 18,
-                                  labelPadding: EdgeInsetsDirectional.fromSTEB(
-                                      38, 3, 38, 3),
-                                  elevation: 4,
+                              child: AuthUserStreamWidget(
+                                child: FlutterFlowChoiceChips(
+                                  initiallySelected: choiceChipsValue != null
+                                      ? [choiceChipsValue!]
+                                      : [
+                                          functions.sakaniLoanInitialValue(
+                                              valueOrDefault<bool>(
+                                                  currentUserDocument
+                                                      ?.sakaniLoanCoverage,
+                                                  false),
+                                              FFAppState().locale)
+                                        ],
+                                  options: [
+                                    ChipData(
+                                        FFLocalizations.of(context).getText(
+                                      'ag8peu33' /* Yes */,
+                                    )),
+                                    ChipData(
+                                        FFLocalizations.of(context).getText(
+                                      'cxroduir' /* No */,
+                                    ))
+                                  ],
+                                  onChanged: (val) => setState(
+                                      () => choiceChipsValue = val?.first),
+                                  selectedChipStyle: ChipStyle(
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: FlutterFlowTheme.of(context)
+                                              .white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
+                                    iconColor: Color(0x00000000),
+                                    iconSize: 18,
+                                    labelPadding:
+                                        EdgeInsetsDirectional.fromSTEB(
+                                            38, 3, 38, 3),
+                                    elevation: 4,
+                                  ),
+                                  unselectedChipStyle: ChipStyle(
+                                    backgroundColor: Colors.white,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
+                                    iconColor: Color(0x00000000),
+                                    iconSize: 18,
+                                    labelPadding:
+                                        EdgeInsetsDirectional.fromSTEB(
+                                            38, 3, 38, 3),
+                                    elevation: 4,
+                                  ),
+                                  chipSpacing: 20,
+                                  rowSpacing: 60,
+                                  multiselect: false,
+                                  initialized: choiceChipsValue != null,
+                                  alignment: WrapAlignment.start,
                                 ),
-                                unselectedChipStyle: ChipStyle(
-                                  backgroundColor: Colors.white,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                  iconColor: Color(0x00000000),
-                                  iconSize: 18,
-                                  labelPadding: EdgeInsetsDirectional.fromSTEB(
-                                      38, 3, 38, 3),
-                                  elevation: 4,
-                                ),
-                                chipSpacing: 20,
-                                rowSpacing: 60,
-                                multiselect: false,
-                                alignment: WrapAlignment.start,
                               ),
                             ),
                           ],
@@ -680,17 +730,42 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 privateSectorValue,
                                 monthlyIncomeValue,
                                 choiceChipsValue)) {
+                              logFirebaseEvent(
+                                  'updatePersonalInfo_Backend-Call');
+                              emplymentResponse1 = await EmplymentTypeCall.call(
+                                locale: FFAppState().locale,
+                              );
+                              logFirebaseEvent(
+                                  'updatePersonalInfo_Backend-Call');
+                              bankResponse1 = await GetBanksCall.call(
+                                locale: FFAppState().locale,
+                              );
                               // updatePersonaInfo
                               logFirebaseEvent(
                                   'updatePersonalInfo_updatePersonaInfo');
 
                               final userUpdateData = createUserRecordData(
                                 email: emailController!.text,
-                                phoneNumber: currentPhoneNumber,
                                 name: fullNameController!.text,
-                                monthlyIncome: monthlyIncomeValue,
-                                employmentStatus: privateSectorValue,
-                                bank: bankValue,
+                                monthlyIncome: functions.monthlyIncome(
+                                    'getIndex',
+                                    monthlyIncomeValue,
+                                    FFAppState().locale),
+                                employmentStatus:
+                                    functions.editProfileindexReturn(
+                                        (EmplymentTypeCall.emplymentTypes(
+                                          (emplymentResponse1?.jsonBody ?? ''),
+                                        ) as List)
+                                            .map<String>((s) => s.toString())
+                                            .toList(),
+                                        privateSectorValue),
+                                bank: functions.editProfileindexReturn(
+                                    (GetBanksCall.bankNames(
+                                      (bankResponse1?.jsonBody ?? ''),
+                                    ) as List)
+                                        .map<String>((s) => s.toString())
+                                        .toList(),
+                                    bankValue),
                                 sakaniLoanCoverage:
                                     functions.sakaniLoan(choiceChipsValue),
                               );
@@ -719,17 +794,38 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               );
                             }
                           } else {
+                            logFirebaseEvent('updatePersonalInfo_Backend-Call');
+                            emplymentResponse = await EmplymentTypeCall.call(
+                              locale: FFAppState().locale,
+                            );
+                            logFirebaseEvent('updatePersonalInfo_Backend-Call');
+                            bankResponse = await GetBanksCall.call(
+                              locale: FFAppState().locale,
+                            );
                             // updatePersonaInfo
                             logFirebaseEvent(
                                 'updatePersonalInfo_updatePersonaInfo');
 
                             final userUpdateData = createUserRecordData(
                               email: emailController!.text,
-                              phoneNumber: currentPhoneNumber,
                               name: fullNameController!.text,
-                              monthlyIncome: monthlyIncomeValue,
-                              employmentStatus: privateSectorValue,
-                              bank: bankValue,
+                              monthlyIncome: functions.monthlyIncome('getIndex',
+                                  monthlyIncomeValue, FFAppState().locale),
+                              employmentStatus:
+                                  functions.editProfileindexReturn(
+                                      (EmplymentTypeCall.emplymentTypes(
+                                        (emplymentResponse?.jsonBody ?? ''),
+                                      ) as List)
+                                          .map<String>((s) => s.toString())
+                                          .toList(),
+                                      privateSectorValue),
+                              bank: functions.editProfileindexReturn(
+                                  (GetBanksCall.bankNames(
+                                    (bankResponse?.jsonBody ?? ''),
+                                  ) as List)
+                                      .map<String>((s) => s.toString())
+                                      .toList(),
+                                  bankValue),
                               sakaniLoanCoverage:
                                   functions.sakaniLoan(choiceChipsValue),
                             );
@@ -738,6 +834,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 'updatePersonalInfo_Close-Dialog,-Drawer,');
                             Navigator.pop(context);
                           }
+
+                          setState(() {});
                         },
                         text: FFLocalizations.of(context).getText(
                           '91pyvwfe' /* Submit */,

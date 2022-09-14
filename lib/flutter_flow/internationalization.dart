@@ -238,10 +238,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // EditPersonallInfo
   {
-    'w7fbktqj': {
-      'en': 'Edit Personal Info',
-      'ar': 'تحرير المعلومات الشخصية',
-    },
     'lrqyceei': {
       'en': 'Full name',
       'ar': 'الاسم الكامل',
@@ -353,6 +349,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '91pyvwfe': {
       'en': 'Submit',
       'ar': 'يُقدِّم',
+    },
+    'w7fbktqj': {
+      'en': 'Edit Personal Info',
+      'ar': 'تحرير المعلومات الشخصية',
     },
     'x4a06mk8': {
       'en': 'Home',
