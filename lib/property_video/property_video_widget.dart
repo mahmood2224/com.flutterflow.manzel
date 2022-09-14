@@ -80,7 +80,7 @@ class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
                   path: widget.videoURL!,
                   videoType: VideoType.network,
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.85,
                   autoPlay: true,
                   looping: true,
                   showControls: true,
