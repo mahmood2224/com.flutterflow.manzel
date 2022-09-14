@@ -1173,3 +1173,62 @@ String sakaniLoanInitialValue(
     }
   }
 }
+
+String? editProfileDropDownInitalVal(
+  List<String>? optionsList,
+  String? index,
+) {
+  if (index != 'null' || index != null || index!.isNotEmpty) {
+    int indx = int.parse(index!);
+    return optionsList![indx];
+  } else {
+    return null;
+  }
+  // Add your function code here!
+}
+
+String editProfileindexReturn(
+  List<String>? optionsArray,
+  String? selectedItem,
+) {
+  int ind = optionsArray!.indexOf(selectedItem!);
+  return ind.toString();
+  // Add your function code here!
+}
+
+String? monthlyIncome(
+  String? functionType,
+  String? intialValue,
+  String? locale,
+) {
+  // Add your function code here!
+  List<String> incomeEN = ['2000-5000 SAR', '5000-10000 SAR', '2000-5000 SAR'];
+  List<String> incomeAR = [
+    '2000-5000 ريال سعودي',
+    '5000-10000 ريال سعودي',
+    '2000-5000 ريال سعودي'
+  ];
+  if (locale == 'en') {
+    if (functionType == 'initialValue') {
+      int ind = int.parse(intialValue!);
+      if (ind == -1) {
+        return null;
+      }
+      return incomeEN[ind];
+    } else {
+      int ind = incomeEN.indexOf(intialValue!);
+      return ind.toString();
+    }
+  } else {
+    if (functionType == 'initialValue') {
+      int ind = int.parse(intialValue!);
+      if (ind == -1) {
+        return null;
+      }
+      return incomeAR[ind];
+    } else {
+      int ind = incomeAR.indexOf(intialValue!);
+      return ind.toString();
+    }
+  }
+}

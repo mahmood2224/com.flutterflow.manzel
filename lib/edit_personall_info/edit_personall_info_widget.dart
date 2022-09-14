@@ -36,6 +36,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
   String? monthlyIncomeValue;
   String? privateSectorValue;
   String? choiceChipsValue;
+  ApiCallResponse? bankResponse1;
+  ApiCallResponse? emplymentResponse1;
+  ApiCallResponse? emplymentResponse;
+  ApiCallResponse? bankResponse;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -383,9 +387,13 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               child: AuthUserStreamWidget(
                                 child: FlutterFlowDropDown(
                                   initialOption: monthlyIncomeValue ??=
-                                      valueOrDefault(
-                                          currentUserDocument?.monthlyIncome,
-                                          ''),
+                                      functions.monthlyIncome(
+                                          'initialValue',
+                                          valueOrDefault(
+                                              currentUserDocument
+                                                  ?.monthlyIncome,
+                                              ''),
+                                          FFAppState().locale),
                                   options: [
                                     FFLocalizations.of(context).getText(
                                       '4w16yzqb' /* 2000 - 5000 SAR */,
@@ -460,10 +468,20 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                         snapshot.data!;
                                     return FlutterFlowDropDown(
                                       initialOption: privateSectorValue ??=
-                                          valueOrDefault(
-                                              currentUserDocument
-                                                  ?.employmentStatus,
-                                              ''),
+                                          functions
+                                              .editProfileDropDownInitalVal(
+                                                  (EmplymentTypeCall
+                                                          .emplymentTypes(
+                                                    privateSectorEmplymentTypeResponse
+                                                        .jsonBody,
+                                                  ) as List)
+                                                      .map<String>(
+                                                          (s) => s.toString())
+                                                      .toList(),
+                                                  valueOrDefault(
+                                                      currentUserDocument
+                                                          ?.employmentStatus,
+                                                      '')),
                                       options:
                                           (EmplymentTypeCall.emplymentTypes(
                                         privateSectorEmplymentTypeResponse
@@ -536,9 +554,17 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     }
                                     final bankGetBanksResponse = snapshot.data!;
                                     return FlutterFlowDropDown(
-                                      initialOption: bankValue ??=
-                                          valueOrDefault(
-                                              currentUserDocument?.bank, ''),
+                                      initialOption: bankValue ??= functions
+                                          .editProfileDropDownInitalVal(
+                                              (GetBanksCall.bankNames(
+                                                bankGetBanksResponse.jsonBody,
+                                              ) as List)
+                                                  .map<String>(
+                                                      (s) => s.toString())
+                                                  .toList(),
+                                              valueOrDefault(
+                                                  currentUserDocument?.bank,
+                                                  '')),
                                       options: (GetBanksCall.bankNames(
                                         bankGetBanksResponse.jsonBody,
                                       ) as List)
@@ -704,6 +730,16 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 privateSectorValue,
                                 monthlyIncomeValue,
                                 choiceChipsValue)) {
+                              logFirebaseEvent(
+                                  'updatePersonalInfo_Backend-Call');
+                              emplymentResponse1 = await EmplymentTypeCall.call(
+                                locale: FFAppState().locale,
+                              );
+                              logFirebaseEvent(
+                                  'updatePersonalInfo_Backend-Call');
+                              bankResponse1 = await GetBanksCall.call(
+                                locale: FFAppState().locale,
+                              );
                               // updatePersonaInfo
                               logFirebaseEvent(
                                   'updatePersonalInfo_updatePersonaInfo');
@@ -712,9 +748,25 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 email: emailController!.text,
                                 phoneNumber: currentPhoneNumber,
                                 name: fullNameController!.text,
-                                monthlyIncome: monthlyIncomeValue,
-                                employmentStatus: privateSectorValue,
-                                bank: bankValue,
+                                monthlyIncome: functions.monthlyIncome(
+                                    'getIndex',
+                                    monthlyIncomeValue,
+                                    FFAppState().locale),
+                                employmentStatus:
+                                    functions.editProfileindexReturn(
+                                        (EmplymentTypeCall.emplymentTypes(
+                                          (emplymentResponse1?.jsonBody ?? ''),
+                                        ) as List)
+                                            .map<String>((s) => s.toString())
+                                            .toList(),
+                                        privateSectorValue),
+                                bank: functions.editProfileindexReturn(
+                                    (GetBanksCall.bankNames(
+                                      (bankResponse1?.jsonBody ?? ''),
+                                    ) as List)
+                                        .map<String>((s) => s.toString())
+                                        .toList(),
+                                    bankValue),
                                 sakaniLoanCoverage:
                                     functions.sakaniLoan(choiceChipsValue),
                               );
@@ -743,6 +795,14 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               );
                             }
                           } else {
+                            logFirebaseEvent('updatePersonalInfo_Backend-Call');
+                            emplymentResponse = await EmplymentTypeCall.call(
+                              locale: FFAppState().locale,
+                            );
+                            logFirebaseEvent('updatePersonalInfo_Backend-Call');
+                            bankResponse = await GetBanksCall.call(
+                              locale: FFAppState().locale,
+                            );
                             // updatePersonaInfo
                             logFirebaseEvent(
                                 'updatePersonalInfo_updatePersonaInfo');
@@ -751,9 +811,23 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               email: emailController!.text,
                               phoneNumber: currentPhoneNumber,
                               name: fullNameController!.text,
-                              monthlyIncome: monthlyIncomeValue,
-                              employmentStatus: privateSectorValue,
-                              bank: bankValue,
+                              monthlyIncome: functions.monthlyIncome('getIndex',
+                                  monthlyIncomeValue, FFAppState().locale),
+                              employmentStatus:
+                                  functions.editProfileindexReturn(
+                                      (EmplymentTypeCall.emplymentTypes(
+                                        (emplymentResponse?.jsonBody ?? ''),
+                                      ) as List)
+                                          .map<String>((s) => s.toString())
+                                          .toList(),
+                                      privateSectorValue),
+                              bank: functions.editProfileindexReturn(
+                                  (GetBanksCall.bankNames(
+                                    (bankResponse?.jsonBody ?? ''),
+                                  ) as List)
+                                      .map<String>((s) => s.toString())
+                                      .toList(),
+                                  bankValue),
                               sakaniLoanCoverage:
                                   functions.sakaniLoan(choiceChipsValue),
                             );
@@ -762,6 +836,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 'updatePersonalInfo_Close-Dialog,-Drawer,');
                             Navigator.pop(context);
                           }
+
+                          setState(() {});
                         },
                         text: FFLocalizations.of(context).getText(
                           '91pyvwfe' /* Submit */,
