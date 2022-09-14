@@ -271,6 +271,36 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       },
                                     ),
                                   InkWell(
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                          'PROPERTY_DETAILS_Image_8m4roe7z_ON_TAP');
+                                      logFirebaseEvent('Image_Navigate-To');
+
+                                      context.pushNamed(
+                                        'propertyVideo',
+                                        queryParams: {
+                                          'videoURL': serializeParam(
+                                              getJsonField(
+                                                columnPropertyResponse.jsonBody,
+                                                r'''$.data.attributes.video_manifest_uri''',
+                                              ),
+                                              ParamType.String),
+                                          'propertyName': serializeParam(
+                                              PropertyCall.propertyName(
+                                                columnPropertyResponse.jsonBody,
+                                              ).toString(),
+                                              ParamType.String),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                    child: Image.network(
+                                      'https://media.istockphoto.com/photos/house-in-dubai-picture-id490348444?k=20&m=490348444&s=612x612&w=0&h=HAhcenCKgOe5WQR3Ko514qWAkzHX3ugvlMpeKmUiStc=',
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  InkWell(
                                     child: Container(
                                       width: MediaQuery.of(context).size.width,
                                       height:
@@ -481,36 +511,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           ],
                                         ),
                                       ],
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'PROPERTY_DETAILS_Image_8m4roe7z_ON_TAP');
-                                      logFirebaseEvent('Image_Navigate-To');
-
-                                      context.pushNamed(
-                                        'propertyVideo',
-                                        queryParams: {
-                                          'videoURL': serializeParam(
-                                              getJsonField(
-                                                columnPropertyResponse.jsonBody,
-                                                r'''$.data.attributes.video_manifest_uri''',
-                                              ),
-                                              ParamType.String),
-                                          'propertyName': serializeParam(
-                                              PropertyCall.propertyName(
-                                                columnPropertyResponse.jsonBody,
-                                              ).toString(),
-                                              ParamType.String),
-                                        }.withoutNulls,
-                                      );
-                                    },
-                                    child: Image.network(
-                                      'https://media.istockphoto.com/photos/house-in-dubai-picture-id490348444?k=20&m=490348444&s=612x612&w=0&h=HAhcenCKgOe5WQR3Ko514qWAkzHX3ugvlMpeKmUiStc=',
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ],

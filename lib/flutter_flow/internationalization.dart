@@ -286,10 +286,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Monthly income',
       'ar': 'الدخل الشهري',
     },
-    '1x1hia9l': {
-      'en': 'Private Sector',
-      'ar': 'القطاع الخاص',
-    },
     'uj45ba83': {
       'en': 'Private Sector',
       'ar': 'القطاع الخاص',
@@ -1785,6 +1781,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'vrsc3lt4': {
       'en': 'Home',
       'ar': ' الرئيسية',
+    },
+  },
+  // depositeRecipt
+  {
+    'b8jn4qd2': {
+      'en': 'Deposit Receipt',
+      'ar': 'إيصال الإيداع',
+    },
+    '1t4ox6bl': {
+      'en': 'Home',
+      'ar': '',
     },
   },
   // NotFoundPage

@@ -328,6 +328,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => BookingDetailsWidget(
                 orderId: params.getParam('orderId', ParamType.String),
               ),
+            ),
+            FFRoute(
+              name: 'depositeRecipt',
+              path: 'depositeRecipt',
+              builder: (context, params) => DepositeReciptWidget(
+                depositeRecpit:
+                    params.getParam('depositeRecpit', ParamType.String),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
