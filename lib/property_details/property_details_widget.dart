@@ -179,7 +179,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                           children: [
                             Container(
                               width: double.infinity,
-                              height: MediaQuery.of(context).size.height * 0.5,
+                              height: MediaQuery.of(context).size.height * 0.4,
                               child: Stack(
                                 children: [
                                   if (!functions
@@ -270,6 +270,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         );
                                       },
                                     ),
+
                                   InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(
@@ -303,6 +304,30 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
+                                  if (functions
+                                      .videoPlayerVisibilty(getJsonField(
+                                    columnPropertyResponse.jsonBody,
+                                    r'''$.data.attributes.video_poster_image''',
+                                  )))
+                                    Align(
+                                      alignment: AlignmentDirectional(
+                                          0, 0),
+                                     child:
+                                      Container(
+                                        height: 50,
+                                        width: 50,
+                                        decoration: BoxDecoration(
+                                          color: Colors.black.withOpacity(1),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(
+                                          Icons.play_arrow_rounded,
+                                          color: Colors.white.withOpacity(1.0),
+                                          size: 40,
+                                        ),
+                                      ),
+                                    ),
+
     //                               InkWell(
     //                                 child: Container(
     //                                   width: MediaQuery.of(context).size.width,
