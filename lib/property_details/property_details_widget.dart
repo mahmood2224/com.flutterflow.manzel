@@ -182,94 +182,94 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                               height: MediaQuery.of(context).size.height * 0.5,
                               child: Stack(
                                 children: [
-                                  // if (!functions
-                                  //     .videoPlayerVisibilty(getJsonField(
-                                  //   columnPropertyResponse.jsonBody,
-                                  //   r'''$.data.attributes.video_manifest_uri''',
-                                  // )))
-                                  //   Builder(
-                                  //     builder: (context) {
-                                  //       final images =
-                                  //           PropertyCall.propertyImages(
-                                  //         columnPropertyResponse.jsonBody,
-                                  //       ).toList();
-                                  //       return Container(
-                                  //         width: double.infinity,
-                                  //         height: 300,
-                                  //         child: Stack(
-                                  //           children: [
-                                  //             PageView.builder(
-                                  //               controller:
-                                  //                   pageViewController ??=
-                                  //                       PageController(
-                                  //                           initialPage: min(
-                                  //                               0,
-                                  //                               images.length -
-                                  //                                   1)),
-                                  //               scrollDirection:
-                                  //                   Axis.horizontal,
-                                  //               itemCount: images.length,
-                                  //               itemBuilder:
-                                  //                   (context, imagesIndex) {
-                                  //                 final imagesItem =
-                                  //                     images[imagesIndex];
-                                  //                 return CachedNetworkImage(
-                                  //                   imageUrl: getJsonField(
-                                  //                     imagesItem,
-                                  //                     r'''$.attributes.url''',
-                                  //                   ),
-                                  //                   width: double.infinity,
-                                  //                   height: double.infinity,
-                                  //                   fit: BoxFit.cover,
-                                  //                 );
-                                  //               },
-                                  //             ),
-                                  //             Align(
-                                  //               alignment: AlignmentDirectional(
-                                  //                   0, 0.9),
-                                  //               child: Padding(
-                                  //                 padding: EdgeInsetsDirectional
-                                  //                     .fromSTEB(0, 0, 0, 10),
-                                  //                 child: SmoothPageIndicator(
-                                  //                   controller:
-                                  //                       pageViewController ??=
-                                  //                           PageController(
-                                  //                               initialPage: min(
-                                  //                                   0,
-                                  //                                   images.length -
-                                  //                                       1)),
-                                  //                   count: images.length,
-                                  //                   axisDirection:
-                                  //                       Axis.horizontal,
-                                  //                   onDotClicked: (i) {
-                                  //                     pageViewController!
-                                  //                         .animateToPage(
-                                  //                       i,
-                                  //                       duration: Duration(
-                                  //                           milliseconds: 500),
-                                  //                       curve: Curves.ease,
-                                  //                     );
-                                  //                   },
-                                  //                   effect: SlideEffect(
-                                  //                     spacing: 8,
-                                  //                     radius: 16,
-                                  //                     dotWidth: 6,
-                                  //                     dotHeight: 6,
-                                  //                     dotColor:
-                                  //                         Color(0xFF9E9E9E),
-                                  //                     activeDotColor:
-                                  //                         Colors.white,
-                                  //                     paintStyle:
-                                  //                         PaintingStyle.fill,
-                                  //                   ),
-                                  //                 ),
-                                  //               ),
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       );
-                                  //     },
-                                  //   ),
+                                  if (!functions
+                                      .videoPlayerVisibilty(getJsonField(
+                                    columnPropertyResponse.jsonBody,
+                                    r'''$.data.attributes.video_poster_image''',
+                                  )))
+                                    Builder(
+                                      builder: (context) {
+                                        final images =
+                                            PropertyCall.propertyImages(
+                                          columnPropertyResponse.jsonBody,
+                                        ).toList();
+                                        return Container(
+                                          width: double.infinity,
+                                          height: 300,
+                                          child: Stack(
+                                            children: [
+                                              PageView.builder(
+                                                controller:
+                                                    pageViewController ??=
+                                                        PageController(
+                                                            initialPage: min(
+                                                                0,
+                                                                images.length -
+                                                                    1)),
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: images.length,
+                                                itemBuilder:
+                                                    (context, imagesIndex) {
+                                                  final imagesItem =
+                                                      images[imagesIndex];
+                                                  return CachedNetworkImage(
+                                                    imageUrl: getJsonField(
+                                                      imagesItem,
+                                                      r'''$.attributes.url''',
+                                                    ),
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                    fit: BoxFit.cover,
+                                                  );
+                                                },
+                                              ),
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0, 0.9),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 0, 10),
+                                                  child: SmoothPageIndicator(
+                                                    controller:
+                                                        pageViewController ??=
+                                                            PageController(
+                                                                initialPage: min(
+                                                                    0,
+                                                                    images.length -
+                                                                        1)),
+                                                    count: images.length,
+                                                    axisDirection:
+                                                        Axis.horizontal,
+                                                    onDotClicked: (i) {
+                                                      pageViewController!
+                                                          .animateToPage(
+                                                        i,
+                                                        duration: Duration(
+                                                            milliseconds: 500),
+                                                        curve: Curves.ease,
+                                                      );
+                                                    },
+                                                    effect: SlideEffect(
+                                                      spacing: 8,
+                                                      radius: 16,
+                                                      dotWidth: 6,
+                                                      dotHeight: 6,
+                                                      dotColor:
+                                                          Color(0xFF9E9E9E),
+                                                      activeDotColor:
+                                                          Colors.white,
+                                                      paintStyle:
+                                                          PaintingStyle.fill,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(
