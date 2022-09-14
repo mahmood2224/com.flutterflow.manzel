@@ -249,6 +249,23 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       alignment: AlignmentDirectional(0, 0.75),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(14, 0, 14, 0),
+                        child: InkWell(
+                          onTap: () async {
+                            _currentController?.pause();
+                            logFirebaseEvent(
+                                'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
+                            logFirebaseEvent('Text_Navigate-To');
+                            context.pushNamed(
+                              'WhereAreYouLooking',
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType:
+                                  PageTransitionType.bottomToTop,
+                                ),
+                              },
+                            );
+                          },
                         child: Container(
                           width: double.infinity,
                           height: 54,
@@ -272,24 +289,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                InkWell(
-                                  onTap: () async {
-                                    _currentController?.pause();
-                                    logFirebaseEvent(
-                                        'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
-                                    logFirebaseEvent('Text_Navigate-To');
-                                    context.pushNamed(
-                                      'WhereAreYouLooking',
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.bottomToTop,
-                                        ),
-                                      },
-                                    );
-                                  },
-                                  child: Text(
+                                  Text(
                                     FFLocalizations.of(context).getText(
                                       'qnr0o42y' /* Where are you looking? */,
                                     ),
@@ -297,7 +297,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
                                   ),
-                                ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -360,10 +359,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     ),
                                   ],
                                 ),
+
                               ],
                             ),
                           ),
                         ),
+                    ),
                       ),
                     ),
                   ],
