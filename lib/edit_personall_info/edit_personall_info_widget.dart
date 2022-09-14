@@ -746,7 +746,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
 
                               final userUpdateData = createUserRecordData(
                                 email: emailController!.text,
-                                phoneNumber: currentPhoneNumber,
                                 name: fullNameController!.text,
                                 monthlyIncome: functions.monthlyIncome(
                                     'getIndex',
@@ -809,7 +808,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
 
                             final userUpdateData = createUserRecordData(
                               email: emailController!.text,
-                              phoneNumber: currentPhoneNumber,
                               name: fullNameController!.text,
                               monthlyIncome: functions.monthlyIncome('getIndex',
                                   monthlyIncomeValue, FFAppState().locale),
