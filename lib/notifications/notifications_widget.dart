@@ -222,17 +222,32 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(11,
                                                                       0, 10, 0),
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        17.5),
-                                                            child:
-                                                                Image.network(
-                                                              'https://uploads-ssl.webflow.com/62a48421caa93857cfcad452/62a60808a8f8d84ae522eb80_manzel%20logo%20copy%20(1).png',
-                                                              width: 35,
-                                                              height: 35,
-                                                              fit: BoxFit.cover,
+                                                          child: Container(
+                                                            width: 35,
+                                                            height: 35,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              border:
+                                                                  Border.all(
+                                                                color: Color(
+                                                                    0xFF8C8C8C),
+                                                              ),
+                                                            ),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          17.5),
+                                                              child:
+                                                                  Image.network(
+                                                                'https://uploads-ssl.webflow.com/62a48421caa93857cfcad452/62a60808a8f8d84ae522eb80_manzel%20logo%20copy%20(1).png',
+                                                                width: 35,
+                                                                height: 35,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
