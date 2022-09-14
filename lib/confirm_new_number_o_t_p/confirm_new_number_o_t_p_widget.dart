@@ -207,24 +207,10 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                             .languageCode,
                                         lastLogin: DateTime.now(),
                                         isDeleted: 0);
-                                    if (currentUserDocument!.createdTime!
-                                            .toString()
-                                            .isEmpty ||
-                                        currentUserDocument!.createdTime!
-                                                .toString() ==
-                                            'null') {
-                                      final userUpdateData =
-                                          createUserRecordData(
-                                        createdTime: DateTime.now(),
-                                        lastLogin: DateTime.now(),
-                                      );
-                                      print(
-                                          "************************  Created at : ${DateTime.now()}");
-                                    } else {
-                                      lastLogin:
-                                      DateTime.now();
-                                      print(
-                                          "**************************    Updated at : ${DateTime.now()}");
+                                    if (currentUserDocument!.status!.isEmpty )
+                                    {
+                                      userUpdateData.addAll({'created_at' : DateTime.now()});
+                                      userUpdateData.addAll({'lastLogin' : DateTime.now()});
                                     }
 
                                     final userNotificationRecord =
