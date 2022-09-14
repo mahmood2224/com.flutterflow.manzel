@@ -37,6 +37,17 @@ class _FilterWidgetState extends State<FilterWidget> {
   void reset(){
     setState(() {
       print("Reset should work");
+      isFurnishingValues!.clear();
+      propertyTypeListValues!.clear();
+      if(FFAppState().locale == 'en'){
+        isFurnishingValues!.add("All");
+        propertyTypeListValues!.add("All");
+      }else{
+        isFurnishingValues!.add("الكل");
+        propertyTypeListValues!.add("الكل");
+      }
+      sliderValue1 = null ;
+      sliderValue2 = null;
     });
   }
   @override

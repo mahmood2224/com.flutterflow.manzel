@@ -466,7 +466,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                           ),
                                         );
                                       }
-                                      final emplymentList =
+                                       emplymentList =
                                       snapshot.data!;
                                       return FlutterFlowDropDown(
                                         initialOption: privateSectorValue ??=
@@ -474,7 +474,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                                 .editProfileDropDownInitalVal(
                                                 (EmplymentTypeCall
                                                     .emplymentTypes(
-                                                  emplymentList
+                                                  emplymentList!
                                                       .jsonBody,
                                                 ) as List)
                                                     .map<String>(
@@ -554,13 +554,13 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                           ),
                                         );
                                       }
-                                       final bankList =
+                                        bankList =
                                       snapshot.data! ;
                                       return FlutterFlowDropDown(
                                         initialOption: bankValue ??= functions
                                             .editProfileDropDownInitalVal(
                                             (GetBanksCall.bankNames(
-                                              bankList.jsonBody,
+                                              bankList!.jsonBody,
                                             ) as List)
                                                 .map<String>(
                                                     (s) => s.toString())
