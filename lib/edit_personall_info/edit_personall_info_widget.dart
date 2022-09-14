@@ -322,7 +322,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 4, 20, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 4, 20, 25),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -344,6 +344,12 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                       ),
                     ],
                   ),
+                ),
+                Divider(
+                  thickness: 1,
+                  indent: 20,
+                  endIndent: 20,
+                  color: Color(0xFFECECEC),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
