@@ -300,98 +300,98 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  InkWell(
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height:
-                                          MediaQuery.of(context).size.height,
-                                      decoration: BoxDecoration(),
-                                      child: Visibility(
-                                        visible: functions
-                                            .videoPlayerVisibilty(getJsonField(
-                                          columnPropertyResponse.jsonBody,
-                                          r'''$.data.attributes.video_manifest_uri''',
-                                        )),
-                                        child: Align(
-                                          alignment: Alignment.topRight,
-
-
-    child: VisibilityDetector(
-    key: ObjectKey(Chewie),
-    onVisibilityChanged: (visibility) {
-    if (visibility.visibleFraction *
-    100 != 100 && this.mounted) {
-      if(_chewieController!=null){
-    _chewieController?.pause();}}else{if(_chewieController!=null){_chewieController?.play();}}
-
-    },
-
-
-
-    //         child: FlutterFlowVideoPlayer(
-    // onTap: (videoControllerValue) {
-    //         print("detail_screen controller set length  = ${videoControllerValue.length}");
-    //         _currentController = videoControllerValue.last;
-    //         },
-    //                                         path: getJsonField(
-    //                                           columnPropertyResponse.jsonBody,
-    //                                           r'''$.data.attributes.video_manifest_uri''',
-    //                                         ),
-    //           height: MediaQuery.of(context).size.width/1.7777,
-    //           width: MediaQuery.of(context)
-    //               .size.width,
-    //                                         videoType: VideoType.network,
-    //                                         autoPlay: true,
-    //                                         looping: true,
-    //                                         showControls: false,
-    //                                         //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
-    //                                         allowFullScreen: true,
-    //                                         allowPlaybackSpeedMenu: false,
-    //                                       ),
-     child: FittedBox(
-            fit: BoxFit.fitWidth,
-            child: Container(
-            height: MediaQuery.of(context)
-                           .size.height*0.35,
-            width: MediaQuery.of(context)
-                           .size.width,
-              // child: Theme(
-              //   data: ThemeData.light().copyWith(
-              //     platform: TargetPlatform.android,
-              //   ),
-                child:(_chewieController != null &&
-          _chewieController!
-                  .videoPlayerController.value.isInitialized)
-          ? Chewie(controller: _chewieController!)
-          : (_chewieController != null &&
-          _chewieController!.videoPlayerController.value.hasError)
-          ? Text('Error playing video')
-          : Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children:  [
-          Container(
-              height: 20,
-              width: 20,
-              child: CircularProgressIndicator()),
-          SizedBox(height: 20),
-          Text('Loading'),
-        ],
-      ),),
-
-    ),),),
-            //),
-
-            //),
-            ),
-
-
-                                    ),
-                              onTap: () {
-                                     //_chewieController.enterFullScreen();
-                                     _chewieController?.toggleFullScreen();
-                                     // _currentController.enterFullScreen();
-                                    },
-                                  ),
+    //                               InkWell(
+    //                                 child: Container(
+    //                                   width: MediaQuery.of(context).size.width,
+    //                                   height:
+    //                                       MediaQuery.of(context).size.height,
+    //                                   decoration: BoxDecoration(),
+    //                                   child: Visibility(
+    //                                     visible: functions
+    //                                         .videoPlayerVisibilty(getJsonField(
+    //                                       columnPropertyResponse.jsonBody,
+    //                                       r'''$.data.attributes.video_manifest_uri''',
+    //                                     )),
+    //                                     child: Align(
+    //                                       alignment: Alignment.topRight,
+    //
+    //
+    // child: VisibilityDetector(
+    // key: ObjectKey(Chewie),
+    // onVisibilityChanged: (visibility) {
+    // if (visibility.visibleFraction *
+    // 100 != 100 && this.mounted) {
+    //   if(_chewieController!=null){
+    // _chewieController?.pause();}}else{if(_chewieController!=null){_chewieController?.play();}}
+    //
+    // },
+    //
+    //
+    //
+    // //         child: FlutterFlowVideoPlayer(
+    // // onTap: (videoControllerValue) {
+    // //         print("detail_screen controller set length  = ${videoControllerValue.length}");
+    // //         _currentController = videoControllerValue.last;
+    // //         },
+    // //                                         path: getJsonField(
+    // //                                           columnPropertyResponse.jsonBody,
+    // //                                           r'''$.data.attributes.video_manifest_uri''',
+    // //                                         ),
+    // //           height: MediaQuery.of(context).size.width/1.7777,
+    // //           width: MediaQuery.of(context)
+    // //               .size.width,
+    // //                                         videoType: VideoType.network,
+    // //                                         autoPlay: true,
+    // //                                         looping: true,
+    // //                                         showControls: false,
+    // //                                         //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
+    // //                                         allowFullScreen: true,
+    // //                                         allowPlaybackSpeedMenu: false,
+    // //                                       ),
+    //  child: FittedBox(
+    //         fit: BoxFit.fitWidth,
+    //         child: Container(
+    //         height: MediaQuery.of(context)
+    //                        .size.height*0.35,
+    //         width: MediaQuery.of(context)
+    //                        .size.width,
+    //           // child: Theme(
+    //           //   data: ThemeData.light().copyWith(
+    //           //     platform: TargetPlatform.android,
+    //           //   ),
+    //             child:(_chewieController != null &&
+    //       _chewieController!
+    //               .videoPlayerController.value.isInitialized)
+    //       ? Chewie(controller: _chewieController!)
+    //       : (_chewieController != null &&
+    //       _chewieController!.videoPlayerController.value.hasError)
+    //       ? Text('Error playing video')
+    //       : Column(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children:  [
+    //       Container(
+    //           height: 20,
+    //           width: 20,
+    //           child: CircularProgressIndicator()),
+    //       SizedBox(height: 20),
+    //       Text('Loading'),
+    //     ],
+    //   ),),
+    //
+    // ),),),
+    //         //),
+    //
+    //         //),
+    //         ),
+    //
+    //
+    //                                 ),
+    //                           onTap: () {
+    //                                  //_chewieController.enterFullScreen();
+    //                                  _chewieController?.toggleFullScreen();
+    //                                  // _currentController.enterFullScreen();
+    //                                 },
+    //                               ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         18, 52, 18, 0),
