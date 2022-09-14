@@ -1202,11 +1202,15 @@ String? monthlyIncome(
   String? locale,
 ) {
   // Add your function code here!
-  List<String> incomeEN = ['2000-5000 SAR', '5000-10000 SAR', '2000-5000 SAR'];
+  List<String> incomeEN = [
+    '2000-5000 SAR',
+    '5000-10000 SAR',
+    '10000-30000 SAR'
+  ];
   List<String> incomeAR = [
     '2000-5000 ريال سعودي',
     '5000-10000 ريال سعودي',
-    '2000-5000 ريال سعودي'
+    '10000-30000 ريال سعودي'
   ];
   if (locale == 'en') {
     if (functionType == 'initialValue') {
