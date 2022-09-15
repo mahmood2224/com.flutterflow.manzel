@@ -40,6 +40,7 @@ dependencies:
   cloud_functions_web: 4.2.18
   device_info_plus: 4.0.0
   device_info_plus_platform_interface: 2.3.0+1
+  dio: ^4.0.0
   easy_debounce: 2.0.1
   equatable: 2.0.3
   file_picker: 4.5.1

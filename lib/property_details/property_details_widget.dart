@@ -2853,8 +2853,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     'dpmrt150' /* Reserve */,
                                   ),
                                   options: FFButtonOptions(
-                                    width: 140,
-                                    height: 56,
+                                    width: FFAppState().locale=="en"?140:120,
+                                    height: FFAppState().locale=="en"?56:40,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
                                     textStyle: FlutterFlowTheme.of(context)
