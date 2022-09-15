@@ -1635,6 +1635,26 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         ),
                                                                         Padding(
                                                                           padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              2,
+                                                                              0,
+                                                                              0,
+                                                                              0),
+                                                                          child:
+                                                                              Text(
+                                                                            FFLocalizations.of(context).getText(
+                                                                              'ps7kcru7' /* bank */,
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  color: FlutterFlowTheme.of(context).white,
+                                                                                  fontSize: 15,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
                                                                               3,
                                                                               0,
                                                                               2,
@@ -1664,21 +1684,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           ),
                                                                           style:
                                                                               FlutterFlowTheme.of(context).bodyText1,
-                                                                        ),
-                                                                        Text(
-                                                                          FFLocalizations.of(context)
-                                                                              .getText(
-                                                                            'ps7kcru7' /* bank */,
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                color: FlutterFlowTheme.of(context).white,
-                                                                                fontSize: 15,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                useGoogleFonts: false,
-                                                                              ),
                                                                         ),
                                                                       ],
                                                                     ),

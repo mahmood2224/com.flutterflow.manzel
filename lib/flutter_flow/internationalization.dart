@@ -597,13 +597,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Chat with',
       'ar': 'الدردشة مع',
     },
-    'alqnps4o': {
-      'en': ' ',
-      'ar': '',
-    },
     'ps7kcru7': {
       'en': 'bank',
       'ar': 'مصرف',
+    },
+    'alqnps4o': {
+      'en': ' ',
+      'ar': '',
     },
     '8xn1x1ox': {
       'en': '1',
