@@ -238,19 +238,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // EditPersonallInfo
   {
-    'lrqyceei': {
-      'en': 'Full name',
+    'umn1n8pc': {
+      'en': 'Full Name',
       'ar': 'الاسم الكامل',
     },
-    '9gp42g0b': {
+    '1fogeuqq': {
       'en': 'Your name',
       'ar': 'اسمك',
     },
-    'vxe1d85b': {
+    'pv48mvfw': {
       'en': 'Email',
       'ar': 'البريد الإلكتروني',
     },
-    'mgxrufe9': {
+    'u4lpnyfc': {
       'en': 'Email',
       'ar': 'البريد الإلكتروني',
     },
@@ -344,11 +344,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'cxroduir': {
       'en': 'No',
-      'ar': 'لا',
+      'ar': 'رقم',
     },
     '91pyvwfe': {
       'en': 'Submit',
-      'ar': 'حفظ',
+      'ar': 'يُقدِّم',
     },
     'w7fbktqj': {
       'en': 'Edit Personal Info',
@@ -503,11 +503,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'r282eka0': {
       'en': 'You have',
-      'ar': 'لديك',
+      'ar': 'عندك',
     },
     '9i2we2yx': {
       'en': 'offers active',
-      'ar': 'عروض نشطة',
+      'ar': 'العروض النشطة',
     },
     'z2siuoeg': {
       'en': ' ',
@@ -597,13 +597,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Chat with',
       'ar': 'الدردشة مع',
     },
-    'ps7kcru7': {
-      'en': 'bank',
-      'ar': 'مصرف',
-    },
     'alqnps4o': {
       'en': ' ',
       'ar': '',
+    },
+    'ps7kcru7': {
+      'en': 'bank',
+      'ar': 'مصرف',
     },
     '8xn1x1ox': {
       'en': '1',
@@ -706,7 +706,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wlsjihmj': {
       'en': 'Maximum',
-      'ar': 'الحد الأعلى',
+      'ar': 'بيت',
     },
     '2m2ni5iy': {
       'en': 'Furnishing',
@@ -723,6 +723,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '8x7rkqnv': {
       'en': 'Un-furnished',
       'ar': 'غير مفروشة',
+    },
+    'mhyiav30': {
+      'en': 'Semi-furnished',
+      'ar': ' شبه مفروش',
     },
     '7fpsv2qy': {
       'en': '',
@@ -1739,7 +1743,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'b8jn4qd2': {
       'en': 'Deposit Receipt',
-      'ar': 'إيصال المعاملة',
+      'ar': 'إيصال الإيداع',
     },
     '1t4ox6bl': {
       'en': 'Home',
@@ -1780,11 +1784,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'pdty4a6r': {
       'en':
           'To confirm the reservation, you need to pay an administration fee. By confirming payment, you ',
-      'ar': 'لتأكيد الحجز ، يتعين عليك دفع رسوم إدارية.',
+      'ar': 'لتأكيد الحجز ، يتعين عليك دفع رسوم إدارية. بتأكيد الدفع ، أنت',
     },
     'njswqwdn': {
       'en': 'agree to our ',
-      'ar': 'بتأكيد الدفع ، فإنك توافق على',
+      'ar': 'توافق على',
     },
     '0gizrv8a': {
       'en': 'terms & conditions ',
@@ -1834,7 +1838,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'btyml6ed': {
       'en': 'Help & Support',
-      'ar': 'المساعدة والدعم',
+      'ar': 'ساعد لدعم',
     },
     'emjcotxb': {
       'en': 'Please write us at',

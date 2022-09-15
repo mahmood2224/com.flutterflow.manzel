@@ -62,7 +62,16 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
                 useGoogleFonts: false,
               ),
         ),
-        actions: [],
+        actions: [
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 30, 0),
+            child: Icon(
+              Icons.download_rounded,
+              color: Colors.black,
+              size: 24,
+            ),
+          ),
+        ],
         centerTitle: true,
         elevation: 2,
       ),

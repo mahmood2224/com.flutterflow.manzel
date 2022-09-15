@@ -9,7 +9,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -100,84 +99,68 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(20, 26, 20, 0),
                   child: Container(
                     width: double.infinity,
+                    height: 55,
                     decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBtnText,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
                         color: Color(0xFFA5A5A5),
+                        width: 1,
                       ),
                     ),
                     child: Row(
-                      mainAxisSize: MainAxisSize.max,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Expanded(
                           child: Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 8, 12, 0),
+                                EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                             child: AuthUserStreamWidget(
                               child: TextFormField(
                                 controller: fullNameController,
-                                onChanged: (_) => EasyDebounce.debounce(
-                                  'fullNameController',
-                                  Duration(milliseconds: 2000),
-                                  () => setState(() {}),
-                                ),
+                                autofocus: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText:
                                       FFLocalizations.of(context).getText(
-                                    'lrqyceei' /* Full name */,
+                                    'umn1n8pc' /* Full Name */,
                                   ),
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
                                         fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w300,
                                         useGoogleFonts: false,
                                       ),
                                   hintText: FFLocalizations.of(context).getText(
-                                    '9gp42g0b' /* Your name */,
+                                    '1fogeuqq' /* Your name */,
                                   ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
+                                      ),
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  focusedErrorBorder: InputBorder.none,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'AvenirArabic',
-                                      fontSize: 16,
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w500,
                                       useGoogleFonts: false,
-                                      lineHeight: 1,
                                     ),
                                 maxLines: 1,
-                                keyboardType: TextInputType.name,
                               ),
                             ),
                           ),
@@ -187,85 +170,69 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 25),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
                   child: Container(
                     width: double.infinity,
+                    height: 55,
                     decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primaryBtnText,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
                         color: Color(0xFFA5A5A5),
+                        width: 1,
                       ),
                     ),
                     child: Row(
-                      mainAxisSize: MainAxisSize.max,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Expanded(
                           child: Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 8, 12, 0),
+                                EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                             child: TextFormField(
                               controller: emailController,
-                              onChanged: (_) => EasyDebounce.debounce(
-                                'emailController',
-                                Duration(milliseconds: 2000),
-                                () => setState(() {}),
-                              ),
+                              autofocus: true,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: FFLocalizations.of(context).getText(
-                                  'vxe1d85b' /* Email */,
+                                  'pv48mvfw' /* Email */,
                                 ),
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
                                       fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w300,
                                       useGoogleFonts: false,
-                                      lineHeight: 1,
                                     ),
                                 hintText: FFLocalizations.of(context).getText(
-                                  'mgxrufe9' /* Email */,
+                                  'u4lpnyfc' /* Email */,
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color(0x00000000),
-                                    width: 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(0),
-                                ),
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                focusedErrorBorder: InputBorder.none,
                               ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'AvenirArabic',
-                                    fontSize: 16,
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    color: Colors.black,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
-                                    lineHeight: 1,
                                   ),
-                              keyboardType: TextInputType.emailAddress,
+                              maxLines: 1,
                             ),
                           ),
                         ),
