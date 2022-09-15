@@ -606,10 +606,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       ChipData(
                                           FFLocalizations.of(context).getText(
                                         '8x7rkqnv' /* Un-furnished */,
-                                      )),
-                                      ChipData(
-                                          FFLocalizations.of(context).getText(
-                                        'mhyiav30' /* Semi-furnished */,
                                       ))
                                     ],
                                     onChanged: (val) => setState(

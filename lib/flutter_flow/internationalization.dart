@@ -344,11 +344,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'cxroduir': {
       'en': 'No',
-      'ar': 'رقم',
+      'ar': 'لا',
     },
     '91pyvwfe': {
       'en': 'Submit',
-      'ar': 'يُقدِّم',
+      'ar': 'حفظ',
     },
     'w7fbktqj': {
       'en': 'Edit Personal Info',
@@ -503,11 +503,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'r282eka0': {
       'en': 'You have',
-      'ar': 'عندك',
+      'ar': 'لديك',
     },
     '9i2we2yx': {
       'en': 'offers active',
-      'ar': 'العروض النشطة',
+      'ar': 'عروض نشطة',
     },
     'z2siuoeg': {
       'en': ' ',
@@ -706,7 +706,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wlsjihmj': {
       'en': 'Maximum',
-      'ar': 'أقصى',
+      'ar': 'الحد الأعلى',
     },
     '2m2ni5iy': {
       'en': 'Furnishing',
@@ -724,17 +724,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Un-furnished',
       'ar': 'غير مفروشة',
     },
-    'mhyiav30': {
-      'en': 'Semi-furnished',
-      'ar': ' شبه مفروش',
-    },
     '7fpsv2qy': {
       'en': '',
       'ar': 'الكل',
     },
     'dgzjfbdt': {
       'en': 'Show  Properties',
-      'ar': 'إظهار الملكيات',
+      'ar': 'إظهار النتائج',
     },
     '5wfrx94q': {
       'en': 'Offers',
@@ -994,11 +990,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ccsmgbaf': {
       'en': 'Available',
-      'ar': '',
+      'ar': 'متاح',
     },
     'ie4ye37b': {
       'en': 'Booked',
-      'ar': '',
+      'ar': 'محجوز',
     },
     '9d90para': {
       'en': 'Apt. Plan',
@@ -1014,7 +1010,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'kqc4ney0': {
       'en': 'Property manage by ',
-      'ar': 'إدارة الممتلكات عن طريق',
+      'ar': 'بواسطة',
     },
     'd1l98zzs': {
       'en': ' Bedrooms',
@@ -1038,7 +1034,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6brswcwm': {
       'en': 'Ref no.',
-      'ar': 'مصدر رقم',
+      'ar': 'رقم',
     },
     'ku7u4p9w': {
       'en': 'Floors',
@@ -1070,7 +1066,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xiuyvuiq': {
       'en': 'Property type',
-      'ar': 'نوع الملكية',
+      'ar': 'النوع',
     },
     'fobsike6': {
       'en': 'Supported Banks',
@@ -1082,7 +1078,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '8fdy3f5a': {
       'en': 'Location',
-      'ar': 'موقع',
+      'ar': 'الموقع',
     },
     '67qymqb4': {
       'en': 'Photos',
@@ -1743,7 +1739,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'b8jn4qd2': {
       'en': 'Deposit Receipt',
-      'ar': 'إيصال الإيداع',
+      'ar': 'إيصال المعاملة',
     },
     '1t4ox6bl': {
       'en': 'Home',
@@ -1784,11 +1780,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'pdty4a6r': {
       'en':
           'To confirm the reservation, you need to pay an administration fee. By confirming payment, you ',
-      'ar': 'لتأكيد الحجز ، يتعين عليك دفع رسوم إدارية. بتأكيد الدفع ، أنت',
+      'ar': 'لتأكيد الحجز ، يتعين عليك دفع رسوم إدارية.',
     },
     'njswqwdn': {
       'en': 'agree to our ',
-      'ar': 'توافق على',
+      'ar': 'بتأكيد الدفع ، فإنك توافق على',
     },
     '0gizrv8a': {
       'en': 'terms & conditions ',
@@ -1838,11 +1834,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'btyml6ed': {
       'en': 'Help & Support',
-      'ar': 'ساعد لدعم',
+      'ar': 'المساعدة والدعم',
     },
     'emjcotxb': {
       'en': 'Please write us at',
-      'ar': 'الرجاء الكتابة إلينا على',
+      'ar': 'قم بمراسلتنا عبر',
     },
     'hwo08yn2': {
       'en': 'Support@manzel.app',
@@ -1850,7 +1846,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'pzfwn97d': {
       'en': 'for any query and concern',
-      'ar': 'لأي استفسار وقلق',
+      'ar': 'للإجابة على استفساراتك',
     },
     'eaazmbdx': {
       'en': 'Delete Account',
