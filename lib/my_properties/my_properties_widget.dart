@@ -1155,12 +1155,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                 functions.emptyListWidgetTitle(
                                                     'favorite',
                                                     FFAppState().locale),
-                                            subtitleText:
-                                                functions.subTitleText(
-                                                    FFAppState().locale,
-                                                    'favorite'),
                                             isButtonVisible: true,
                                             screenName: 'myPropertiesFavorite',
+                                            subtitleText: ' ',
                                           ),
                                         ),
                                       );
