@@ -252,7 +252,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(14, 0, 14, 0),
                         child: InkWell(
                           onTap: () async {
-                            videoPlayers[currentPropertyindex!]?.pause();
+                            videoPlayers[currentPropertyindex].pause();
                             logFirebaseEvent(
                                 'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
                             logFirebaseEvent('Text_Navigate-To');
@@ -324,7 +324,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     ),
                                     InkWell(
                                       onTap: () async {
-                                        videoPlayers[currentPropertyindex!]?.pause();
+                                        videoPlayers[currentPropertyindex].pause();
                                         logFirebaseEvent(
                                             'HOME_SCREEN_Container_13mjruev_ON_TAP');
                                         logFirebaseEvent(
@@ -500,7 +500,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: InkWell(
                         onTap: () async {
-                          videoPlayers[currentPropertyindex!]?.pause();
+                          videoPlayers[currentPropertyindex].pause();
                           logFirebaseEvent(
                               'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
                           // propertyDetails
@@ -623,8 +623,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             } else {
     videoPlayers[propertiesIndex]
         .play();
+    currentPropertyindex = propertiesIndex;
     setState(() {
     videoPlayers.forEach((otherPlayer) {
+
       if (otherPlayer != videoPlayers[propertiesIndex]) {
         if (otherPlayer.value.isInitialized) {
           otherPlayer.pause();
