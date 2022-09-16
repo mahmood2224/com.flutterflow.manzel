@@ -65,6 +65,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   void initState() {
     super.initState();
     // On page load action.
+    videoPlayers.clear();
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
       logFirebaseEvent('HomeScreen_Set-App-Language');
