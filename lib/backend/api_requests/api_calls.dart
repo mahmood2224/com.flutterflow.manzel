@@ -21,7 +21,7 @@ class PropertiesCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
-      apiUrl: 'https://strapi-dev.manzel.app/api/properties/',
+      apiUrl: 'https://strapi.manzel.app/api/properties/',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -52,7 +52,7 @@ class PropertyCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Property',
-      apiUrl: 'https://strapi-dev.manzel.app/api/properties/${propertyId}',
+      apiUrl: 'https://strapi.manzel.app/api/properties/${propertyId}',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -206,7 +206,7 @@ class FilterCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'filter',
-      apiUrl: 'https://strapi-dev.manzel.app/api/properties/?city=${city}',
+      apiUrl: 'https://strapi.manzel.app/api/properties/?city=${city}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -245,7 +245,7 @@ class BankDetailsCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'BankDetails',
-      apiUrl: 'https://strapi-dev.manzel.app/api/banks/${bankId}?',
+      apiUrl: 'https://strapi.manzel.app/api/banks/${bankId}?',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -299,7 +299,7 @@ class CityListCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'cityList',
-      apiUrl: 'https://strapi-dev.manzel.app/api/cities/?',
+      apiUrl: 'https://strapi.manzel.app/api/cities/?',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -320,7 +320,7 @@ class FilterParamsCall {
     return ApiManager.instance.makeApiCall(
       callName: 'filterParams',
       apiUrl:
-          'https://strapi-dev.manzel.app/api/properties/?locale=en&populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
+          'https://strapi.manzel.app/api/properties/?locale=en&populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -336,7 +336,7 @@ class SearchPageCitiesCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'searchPageCities',
-      apiUrl: 'https://strapi-dev.manzel.app/api/property/search',
+      apiUrl: 'https://strapi.manzel.app/api/property/search',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -367,7 +367,7 @@ class PropertStatusCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'propertStatus',
-      apiUrl: 'https://strapi-dev.manzel.app/api/property/status/${propertyId}',
+      apiUrl: 'https://strapi.manzel.app/api/property/status/${propertyId}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -389,7 +389,7 @@ class PropertyBookingStatusCall {
 {"data": {"property_status": "Booked"}}''';
     return ApiManager.instance.makeApiCall(
       callName: 'propertyBookingStatus',
-      apiUrl: 'https://strapi-dev.manzel.app/api/properties/${propertyId}',
+      apiUrl: 'https://strapi.manzel.app/api/properties/${propertyId}',
       callType: ApiCallType.PUT,
       headers: {},
       params: {},
@@ -722,7 +722,7 @@ class TermsConitionsAndPrivacyPoliciesCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'termsConitionsAndPrivacyPolicies',
-      apiUrl: 'https://strapi-dev.manzel.app/api/in-app-contents/${pageType}',
+      apiUrl: 'https://strapi.manzel.app/api/in-app-contents/${pageType}',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -739,7 +739,7 @@ class GetBanksCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'getBanks',
-      apiUrl: 'https://strapi-dev.manzel.app/api/banks?',
+      apiUrl: 'https://strapi.manzel.app/api/banks?',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -762,7 +762,7 @@ class EmplymentTypeCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'emplymentType',
-      apiUrl: 'https://strapi-dev.manzel.app/api/employement-statuses?',
+      apiUrl: 'https://strapi.manzel.app/api/employement-statuses?',
       callType: ApiCallType.GET,
       headers: {},
       params: {
