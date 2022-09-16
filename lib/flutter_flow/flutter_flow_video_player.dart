@@ -26,6 +26,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
     this.allowFullScreen = true,
     this.allowPlaybackSpeedMenu = false,
     this.lazyLoad = false,
+    this.isFromPropertyDetail = false,
   });
 
   final String path;
@@ -39,6 +40,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
   final bool allowFullScreen;
   final bool allowPlaybackSpeedMenu;
   final bool lazyLoad;
+  final bool isFromPropertyDetail;
 
 
   @override
@@ -91,9 +93,9 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
       // See https://pub.dev/packages/video_player_web#autoplay
       _videoPlayerController!.setVolume(0);
     }
-    // if (!widget.lazyLoad) {
-    //   await _videoPlayerController?.initialize();
-    // }
+    if (!widget.lazyLoad && widget.isFromPropertyDetail) {
+      await _videoPlayerController?.initialize();
+    }
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController!,
       deviceOrientationsOnEnterFullScreen: [
@@ -102,7 +104,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
       ],
       deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
       aspectRatio: widget.aspectRatio,
-      autoPlay: false,
+      autoPlay: widget.autoPlay,
       looping: widget.looping,
       showControls: widget.showControls,
       allowFullScreen: widget.allowFullScreen,

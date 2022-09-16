@@ -86,6 +86,7 @@ class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
                   showControls: true,
                   allowFullScreen: false,
                   allowPlaybackSpeedMenu: false,
+                  isFromPropertyDetail: true,
                 ),
               ),
             ],
