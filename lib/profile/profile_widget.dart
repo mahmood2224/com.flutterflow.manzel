@@ -356,7 +356,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             child: Container(
                               height: MediaQuery.of(context).size.height * 0.5,
                               child: TermsConditionsBottomSheetWidget(
-                                pageType: 7,
+                                pageType: 3,
                               ),
                             ),
                           );
@@ -404,7 +404,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             child: Container(
                               height: MediaQuery.of(context).size.height * 0.95,
                               child: TermsConditionsBottomSheetWidget(
-                                pageType: 5,
+                                pageType: 1,
                               ),
                             ),
                           );
