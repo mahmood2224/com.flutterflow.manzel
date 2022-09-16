@@ -10,6 +10,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -48,6 +49,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   int _currentItem = 0;
   bool? isPaused;
   bool? autoplayVal;
+  bool? isMuted;
 
   //FlickMultiManager flickMultiManager;
   Set<VideoPlayerController>? videoControllerSet;
@@ -500,6 +502,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: InkWell(
                         onTap: () async {
+                          if (!functions.conditionalVisibility(
+                              getJsonField(
+                                propertiesItem,
+                                r'''$.attributes.property_status''',
+                              ).toString(),
+                              'Soon')){
                           videoPlayers[currentPropertyindex].pause();
                           logFirebaseEvent(
                               'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
@@ -522,7 +530,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   ParamType.String),
                             }.withoutNulls,
                           );
-                        },
+                        }},
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -649,48 +657,55 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             // debugPrint(
                                             //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
                                           },
-                                          child: FlutterFlowVideoPlayer(
 
-                                              // videoControllerSet =
-                                              //     videoControllerValue;
-                                              //
-                                              // print(
-                                              //     "videoControllerSet : ${videoControllerSet}");
-                                              // print(
-                                              //     "videoControllerSet_items : ${videoControllerSet?.length}");
-                                              // //print("videoControllerSet.last :  ${videoControllerSet.last}");
-                                              // //print("propertiesIndex : ${propertiesIndex.toString()}");
-                                              // //print("videocontrollerMap : ${videocontrollerMap.length}");
-                                              // videocontrollerMap[propertiesIndex
-                                              //         .toString()] =
-                                              //     videoControllerSet!.last;
-                                              // print(
-                                              //     "videocontrollerMap : ${videocontrollerMap.length}");
-                                              // _currentController =
-                                              //     videocontrollerMap['0'];
-                                              //
+                                            child: InkWell(
+                                              onTap:(){
 
-                                             path:
-                                             getJsonField(
-                                              propertiesItem,
-                                              r'''$.attributes.video_manifest_uri''',
+                                              },
+                                              child: FlutterFlowVideoPlayer(
+
+                                                  // videoControllerSet =
+                                                  //     videoControllerValue;
+                                                  //
+                                                  // print(
+                                                  //     "videoControllerSet : ${videoControllerSet}");
+                                                  // print(
+                                                  //     "videoControllerSet_items : ${videoControllerSet?.length}");
+                                                  // //print("videoControllerSet.last :  ${videoControllerSet.last}");
+                                                  // //print("propertiesIndex : ${propertiesIndex.toString()}");
+                                                  // //print("videocontrollerMap : ${videocontrollerMap.length}");
+                                                  // videocontrollerMap[propertiesIndex
+                                                  //         .toString()] =
+                                                  //     videoControllerSet!.last;
+                                                  // print(
+                                                  //     "videocontrollerMap : ${videocontrollerMap.length}");
+                                                  // _currentController =
+                                                  //     videocontrollerMap['0'];
+                                                  //
+
+                                                 path:
+                                                 getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.video_manifest_uri''',
+                                                ),
+                                                videoType: VideoType.network,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    95,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.8,
+                                                aspectRatio: 1.70,
+                                                autoPlay: false,
+                                                looping: true,
+                                                showControls: false,
+                                                allowFullScreen: true,
+                                                allowPlaybackSpeedMenu: false,
+                                              ),
                                             ),
-                                            videoType: VideoType.network,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                95,
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.8,
-                                            aspectRatio: 1.70,
-                                            autoPlay: false,
-                                            looping: true,
-                                            showControls: false,
-                                            allowFullScreen: true,
-                                            allowPlaybackSpeedMenu: false,
-                                          ),
+                                        //),
                                         ),
                                       ),
                                     ),
@@ -718,7 +733,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   //         size: 40,
                                   //       ),
                                   //     ),
-                                  //     onTap: () {
+                                   //   onTap: () {
                                   //       if (videoPlayers[propertiesIndex] != null) {
                                   //         if (videoPlayers[propertiesIndex]!
                                   //             .value.isPlaying) {
@@ -1027,12 +1042,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         propertiesItem,
                                         r'''$.attributes.property_status''',
                                       ).toString(),
-                                      'Coming soon'))
+                                      'Soon'))
                                     Align(
                                       alignment:
                                           AlignmentDirectional(-0.9, -0.89),
                                       child: Container(
-                                        width: 100,
+                                        width: 80,
                                         height: 26,
                                         decoration: BoxDecoration(
                                           color: Color(0xFF2971FB),
