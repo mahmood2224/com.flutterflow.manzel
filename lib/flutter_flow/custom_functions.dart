@@ -1214,7 +1214,7 @@ String? editProfileDropDownInitalVal(
   List<String>? optionsList,
   String? index,
 ) {
-  if (index != 'null' || index != null || index!.isNotEmpty) {
+  if (index != 'null' && index != null && index!.isNotEmpty) {
     int indx = int.parse(index!);
     return optionsList![indx];
   } else {
@@ -1250,6 +1250,8 @@ String? monthlyIncome(
   ];
   if (locale == 'en') {
     if (functionType == 'initialValue') {
+      if(intialValue == "" )
+        intialValue =  '-1';
       int ind = int.parse(intialValue!);
       if (ind == -1) {
         return null;
@@ -1261,6 +1263,8 @@ String? monthlyIncome(
     }
   } else {
     if (functionType == 'initialValue') {
+      if(intialValue == "" )
+        intialValue =  '-1';
       int ind = int.parse(intialValue!);
       if (ind == -1) {
         return null;
