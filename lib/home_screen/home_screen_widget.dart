@@ -53,6 +53,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   Set<VideoPlayerController>? videoControllerSet;
 
   VideoPlayerController? _currentController;
+  int currentPropertyindex = 0;
 
   Map<String, VideoPlayerController> videocontrollerMap = {};
 
@@ -194,7 +195,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       snapshot.data!;
                                   return InkWell(
                                     onTap: () async {
-                                      _currentController?.pause();
+                                      videoPlayers[currentPropertyindex!]?.pause();
                                       logFirebaseEvent(
                                           'HOME_SCREEN_notificationsBadge_ON_TAP');
                                       logFirebaseEvent(
@@ -251,7 +252,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(14, 0, 14, 0),
                         child: InkWell(
                           onTap: () async {
-                            _currentController?.pause();
+                            videoPlayers[currentPropertyindex!]?.pause();
                             logFirebaseEvent(
                                 'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
                             logFirebaseEvent('Text_Navigate-To');
@@ -323,7 +324,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     ),
                                     InkWell(
                                       onTap: () async {
-                                        _currentController?.pause();
+                                        videoPlayers[currentPropertyindex!]?.pause();
                                         logFirebaseEvent(
                                             'HOME_SCREEN_Container_13mjruev_ON_TAP');
                                         logFirebaseEvent(
@@ -486,20 +487,20 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     //   final propertiesItem = properties[propertiesIndex];
                     //   return
 
-                    if (propertiesIndex == (videocontrollerMap.length) + 1) {
-                      Future.delayed(const Duration(seconds: 8), () {
-                        if (_currentController != null &&
-                            videoControllerSet!.isNotEmpty) {
-                          _currentController = videoControllerSet?.first;
-                          _currentController?.play();
-                        }
-                      });
-                    }
+                    // if (propertiesIndex == (videocontrollerMap.length) + 1) {
+                    //   Future.delayed(const Duration(seconds: 8), () {
+                    //     if (_currentController != null &&
+                    //         videoControllerSet!.isNotEmpty) {
+                    //       _currentController = videoControllerSet?.first;
+                    //       _currentController?.play();
+                    //     }
+                    //   });
+                   //}
                     return Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: InkWell(
                         onTap: () async {
-                          _currentController?.pause();
+                          videoPlayers[currentPropertyindex!]?.pause();
                           logFirebaseEvent(
                               'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
                           // propertyDetails
@@ -560,6 +561,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 videoPlayers[propertiesIndex]
                                                     .initialize()
                                                     .then((value) {
+                                                  currentPropertyindex = propertiesIndex;
                                                   videoPlayers[propertiesIndex]
                                                       .play();
                                                   setState(() {
@@ -690,46 +692,46 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         ),
                                       ),
                                     ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    child: InkWell(
-                                      child: Container(
-                                        height: 50,
-                                        width: 50,
-                                        decoration: BoxDecoration(
-                                          color: _currentController
-                                                      ?.value?.isPlaying ??
-                                                  true
-                                              ? Colors.black.withOpacity(0.0)
-                                              : Colors.black.withOpacity(0.5),
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Icon(
-                                          Icons.play_arrow_rounded,
-                                          color: _currentController
-                                                      ?.value?.isPlaying ??
-                                                  true
-                                              ? Colors.black.withOpacity(0.0)
-                                              : Colors.white.withOpacity(1.0),
-                                          size: 40,
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        if (_currentController != null) {
-                                          if (_currentController!
-                                              .value.isPlaying) {
-                                            _currentController?.pause();
-                                            isPaused = true;
-                                            setState(() {});
-                                          } else {
-                                            _currentController?.play();
-                                            isPaused = false;
-                                            setState(() {});
-                                          }
-                                        }
-                                      },
-                                    ),
-                                  ),
+                                  // Align(
+                                  //   alignment: AlignmentDirectional(0, 0),
+                                  //   child: InkWell(
+                                  //     child: Container(
+                                  //       height: 50,
+                                  //       width: 50,
+                                  //       decoration: BoxDecoration(
+                                  //         color: videoPlayers[currentPropertyindex!]
+                                  //                     ?.value?.isPlaying ??
+                                  //                 true
+                                  //             ? Colors.black.withOpacity(0.0)
+                                  //             : Colors.black.withOpacity(0.5),
+                                  //         shape: BoxShape.circle,
+                                  //       ),
+                                  //       child: Icon(
+                                  //         Icons.play_arrow_rounded,
+                                  //         color: videoPlayers[currentPropertyindex!]
+                                  //                     ?.value?.isPlaying ??
+                                  //                 true
+                                  //             ? Colors.black.withOpacity(0.0)
+                                  //             : Colors.white.withOpacity(1.0),
+                                  //         size: 40,
+                                  //       ),
+                                  //     ),
+                                  //     onTap: () {
+                                  //       if (videoPlayers[propertiesIndex] != null) {
+                                  //         if (videoPlayers[propertiesIndex]!
+                                  //             .value.isPlaying) {
+                                  //           videoPlayers[propertiesIndex]?.pause();
+                                  //           isPaused = true;
+                                  //           setState(() {});
+                                  //         } else {
+                                  //           videoPlayers[propertiesIndex]?.play();
+                                  //           isPaused = false;
+                                  //           setState(() {});
+                                  //         }
+                                  //       }
+                                  //     },
+                                  //   ),
+                                  // ),
                                   if (!functions
                                       .videoPlayerVisibilty(getJsonField(
                                     propertiesItem,
