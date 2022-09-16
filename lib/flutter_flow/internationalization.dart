@@ -238,19 +238,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // EditPersonallInfo
   {
-    'lrqyceei': {
-      'en': 'Full name',
+    'umn1n8pc': {
+      'en': 'Full Name',
       'ar': 'الاسم الكامل',
     },
-    '9gp42g0b': {
+    '1fogeuqq': {
       'en': 'Your name',
       'ar': 'اسمك',
     },
-    'vxe1d85b': {
+    'pv48mvfw': {
       'en': 'Email',
       'ar': 'البريد الإلكتروني',
     },
-    'mgxrufe9': {
+    'u4lpnyfc': {
       'en': 'Email',
       'ar': 'البريد الإلكتروني',
     },
@@ -746,7 +746,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wlsjihmj': {
       'en': 'Maximum',
-      'ar': 'أقصى',
+      'ar': 'بيت',
     },
     '2m2ni5iy': {
       'en': 'Furnishing',
@@ -774,7 +774,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'dgzjfbdt': {
       'en': 'Show  Properties',
-      'ar': 'إظهار الملكيات',
+      'ar': 'إظهار النتائج',
     },
     '5wfrx94q': {
       'en': 'Offers',
@@ -1034,11 +1034,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ccsmgbaf': {
       'en': 'Available',
-      'ar': '',
+      'ar': 'متاح',
     },
     'ie4ye37b': {
       'en': 'Booked',
-      'ar': '',
+      'ar': 'محجوز',
     },
     '9d90para': {
       'en': 'Apt. Plan',
@@ -1054,7 +1054,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'kqc4ney0': {
       'en': 'Property manage by ',
-      'ar': 'إدارة الممتلكات عن طريق',
+      'ar': 'بواسطة',
     },
     'd1l98zzs': {
       'en': ' Bedrooms',
@@ -1078,7 +1078,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6brswcwm': {
       'en': 'Ref no.',
-      'ar': 'مصدر رقم',
+      'ar': 'رقم',
     },
     'ku7u4p9w': {
       'en': 'Floors',
@@ -1110,7 +1110,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xiuyvuiq': {
       'en': 'Property type',
-      'ar': 'نوع الملكية',
+      'ar': 'النوع',
     },
     'fobsike6': {
       'en': 'Supported Banks',
@@ -1122,7 +1122,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '8fdy3f5a': {
       'en': 'Location',
-      'ar': 'موقع',
+      'ar': 'الموقع',
     },
     '67qymqb4': {
       'en': 'Photos',
@@ -1886,7 +1886,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'emjcotxb': {
       'en': 'Please write us at',
-      'ar': 'الرجاء الكتابة إلينا على',
+      'ar': 'قم بمراسلتنا عبر',
     },
     'hwo08yn2': {
       'en': 'Support@manzel.app',
@@ -1894,7 +1894,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'pzfwn97d': {
       'en': 'for any query and concern',
-      'ar': 'لأي استفسار وقلق',
+      'ar': 'للإجابة على استفساراتك',
     },
     'eaazmbdx': {
       'en': 'Delete Account',
