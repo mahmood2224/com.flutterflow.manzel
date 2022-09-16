@@ -11,7 +11,7 @@ enum VideoType {
   network,
 }
 
-Set<VideoPlayerController> _videoPlayers = Set();
+List<VideoPlayerController> videoPlayers = [];
 
 class FlutterFlowVideoPlayer extends StatefulWidget {
   const FlutterFlowVideoPlayer({
@@ -58,7 +58,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
 
   @override
   void dispose() {
-    _videoPlayers.remove(_videoPlayerController);
+    videoPlayers.remove(_videoPlayerController);
     _videoPlayerController?.dispose();
     _chewieController?.dispose();
     super.dispose();
@@ -91,9 +91,9 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
       // See https://pub.dev/packages/video_player_web#autoplay
       _videoPlayerController!.setVolume(0);
     }
-    if (!widget.lazyLoad) {
-      await _videoPlayerController?.initialize();
-    }
+    // if (!widget.lazyLoad) {
+    //   await _videoPlayerController?.initialize();
+    // }
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController!,
       deviceOrientationsOnEnterFullScreen: [
@@ -102,7 +102,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
       ],
       deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
       aspectRatio: widget.aspectRatio,
-      autoPlay: widget.autoPlay,
+      autoPlay: false,
       looping: widget.looping,
       showControls: widget.showControls,
       allowFullScreen: widget.allowFullScreen,
@@ -112,8 +112,8 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
     setState(() {});
 
     print("Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
-    _videoPlayers.add(_videoPlayerController!);
-    widget.onTap!(_videoPlayers);
+    videoPlayers.add(_videoPlayerController!);
+    widget.onTap!(Set.from(videoPlayers));
 
     print("_chewieController: ${_chewieController}");
     _videoPlayerController!.addListener(() {
@@ -124,11 +124,19 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
       }
       //Stop all other players when one video is playing.
       // if (_videoPlayerController!.value.isPlaying) {
-      //   _videoPlayers.forEach((otherPlayer) {
+      //   videoPlayers.forEach((otherPlayer) {
       //     if (otherPlayer != _videoPlayerController &&
       //         otherPlayer.value.isPlaying) {
       //       setState(() {
-      //         otherPlayer.pause();
+      //
+      //         if(otherPlayer.value.isInitialized) {
+      //           otherPlayer.pause();
+      //           var dataSource = otherPlayer.dataSource;
+      //           otherPlayer.dispose();
+      //           otherPlayer = widget.videoType == VideoType.network
+      //               ? VideoPlayerController.network(dataSource)
+      //               : VideoPlayerController.asset(dataSource);
+      //         }
       //
       //       });
       //      }

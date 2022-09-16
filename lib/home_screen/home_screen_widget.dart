@@ -556,6 +556,36 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         100 ==
                                                     100 &&
                                                 this.mounted) {
+                                              if(!(videoPlayers[propertiesIndex].value.isInitialized)) {
+                                                videoPlayers[propertiesIndex]
+                                                    .initialize()
+                                                    .then((value) {
+                                                  videoPlayers[propertiesIndex]
+                                                      .play();
+                                                  setState(() {
+                                                    videoPlayers.forEach((otherPlayer) {
+                                                      if (otherPlayer != videoPlayers[propertiesIndex]) {
+
+
+                                                          if(otherPlayer.value.isInitialized) {
+                                                            otherPlayer.pause();
+                                                            // var dataSource = otherPlayer.dataSource;
+                                                            // otherPlayer.dispose();
+                                                            // otherPlayer =
+                                                            //     VideoPlayerController.network(dataSource);
+
+                                                          }
+                                                          else{
+                                                            otherPlayer.initialize().then((value) => otherPlayer.pause());
+                                                          }
+                                                      }
+                                                    });
+                                                    print(
+                                                        'propertyindex - $propertiesIndex');
+                                                  });
+                                                  ;
+                                                });
+
                                               print(
                                                   "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
                                               // Future.delayed(const Duration(
@@ -565,31 +595,48 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               //       .toString()];
                                               //   _currentController?.play();
                                               // });
-                                              setState(() {
-                                                if (_currentController !=
-                                                    null) {
-                                                  _currentController =
-                                                      videocontrollerMap[
-                                                          (propertiesIndex)
-                                                              .toString()];
-                                                  _currentController?.play();
-                                                  videoControllerSet!
-                                                      .forEach((otherPlayer) {
-                                                    if (otherPlayer !=
-                                                            _currentController &&
-                                                        otherPlayer
-                                                            .value.isPlaying) {
-                                                      setState(() {
-                                                        otherPlayer.pause();
-                                                      });
-                                                    }
-                                                  });
-                                                  print(
-                                                      "Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
-                                                }
-                                              });
+                                              // setState(() {
+                                              //   if (_currentController !=
+                                              //       null) {
+                                              //     _currentController =
+                                              //         videocontrollerMap[
+                                              //             (propertiesIndex)
+                                              //                 .toString()];
+                                              //     _currentController?.play();
+                                              //     videoControllerSet!
+                                              //         .forEach((otherPlayer) {
+                                              //       if (otherPlayer !=
+                                              //               _currentController &&
+                                              //           otherPlayer
+                                              //               .value.isPlaying) {
+                                              //         setState(() {
+                                              //           otherPlayer.pause();
+                                              //         });
+                                              //       }
+                                              //     });
+                                              //     print(
+                                              //         "Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
+                                              //   }
+                                              // });
                                             } else {
-                                              autoplayVal = false;
+    videoPlayers[propertiesIndex]
+        .play();
+    setState(() {
+    videoPlayers.forEach((otherPlayer) {
+      if (otherPlayer != videoPlayers[propertiesIndex]) {
+        if (otherPlayer.value.isInitialized) {
+          otherPlayer.pause();
+          // var dataSource = otherPlayer.dataSource;
+          // otherPlayer.dispose();
+          // otherPlayer =
+          //     VideoPlayerController.network(dataSource);
+
+        }
+      }
+    });
+    });
+                                              }
+                                              //autoplayVal = false;
                                             }
                                             //onVisibilityChanged: (visibilityInfo) {
                                             // var visiblePercentage =
@@ -600,26 +647,27 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           },
                                           child: FlutterFlowVideoPlayer(
                                             onTap: (videoControllerValue) {
-                                              videoControllerSet =
-                                                  videoControllerValue;
-
-                                              print(
-                                                  "videoControllerSet : ${videoControllerSet}");
-                                              print(
-                                                  "videoControllerSet_items : ${videoControllerSet?.length}");
-                                              //print("videoControllerSet.last :  ${videoControllerSet.last}");
-                                              //print("propertiesIndex : ${propertiesIndex.toString()}");
-                                              //print("videocontrollerMap : ${videocontrollerMap.length}");
-                                              videocontrollerMap[propertiesIndex
-                                                      .toString()] =
-                                                  videoControllerSet!.last;
-                                              print(
-                                                  "videocontrollerMap : ${videocontrollerMap.length}");
-                                              _currentController =
-                                                  videocontrollerMap['0'];
+                                              // videoControllerSet =
+                                              //     videoControllerValue;
+                                              //
+                                              // print(
+                                              //     "videoControllerSet : ${videoControllerSet}");
+                                              // print(
+                                              //     "videoControllerSet_items : ${videoControllerSet?.length}");
+                                              // //print("videoControllerSet.last :  ${videoControllerSet.last}");
+                                              // //print("propertiesIndex : ${propertiesIndex.toString()}");
+                                              // //print("videocontrollerMap : ${videocontrollerMap.length}");
+                                              // videocontrollerMap[propertiesIndex
+                                              //         .toString()] =
+                                              //     videoControllerSet!.last;
+                                              // print(
+                                              //     "videocontrollerMap : ${videocontrollerMap.length}");
+                                              // _currentController =
+                                              //     videocontrollerMap['0'];
                                               //
                                             },
-                                            path: getJsonField(
+                                             path:
+                                             getJsonField(
                                               propertiesItem,
                                               r'''$.attributes.video_manifest_uri''',
                                             ),
