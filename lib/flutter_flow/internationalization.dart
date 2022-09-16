@@ -452,8 +452,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'حجز',
     },
     'juw40663': {
-      'en': 'Coming soon',
-      'ar': 'قريبا',
+      'en': ' Soon',
+      'ar': 'هكذا',
     },
     'etpebw43': {
       'en': 'Approved Banks',

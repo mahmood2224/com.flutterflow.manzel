@@ -804,7 +804,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'juw40663' /* Coming soon */,
+                                                            'juw40663' /*  Soon */,
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
