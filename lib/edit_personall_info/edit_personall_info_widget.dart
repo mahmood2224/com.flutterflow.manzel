@@ -99,7 +99,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(20, 26, 20, 0),
                   child: Container(
                     width: double.infinity,
-                    height: 55,
+                    height: 65,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primaryBtnText,
                       borderRadius: BorderRadius.circular(8),
@@ -173,7 +173,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
                   child: Container(
                     width: double.infinity,
-                    height: 55,
+                    height: 65,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).primaryBtnText,
                       borderRadius: BorderRadius.circular(8),
