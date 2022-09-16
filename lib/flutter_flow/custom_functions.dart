@@ -740,10 +740,10 @@ bool pastOfferColumnVisibility(
     return false;
   }
   if (status == "cancelled") {
-    if ((installmentPeriod != null ||
+    if (((installmentPeriod != null) ||
             installmentRange != null ||
             totalPrice != null) &&
-        (agentName != null)) {
+        (agentName != null && agentName.isNotEmpty)) {
       return true;
     } else {
       return false;
@@ -753,7 +753,7 @@ bool pastOfferColumnVisibility(
     if ((installmentPeriod != null ||
             installmentRange != null ||
             totalPrice != null) &&
-        (agentName != null)) {
+        (agentName != null && agentName.isNotEmpty)) {
       return true;
     } else {
       return false;
