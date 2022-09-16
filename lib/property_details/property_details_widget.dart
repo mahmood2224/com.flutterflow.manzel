@@ -312,8 +312,30 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     Align(
                                       alignment: AlignmentDirectional(
                                           0, 0),
-                                     child:
-                                      Container(
+                                     child:InkWell(
+                                       onTap: () async {
+                                         logFirebaseEvent(
+                                             'PROPERTY_DETAILS_Image_8m4roe7z_ON_TAP');
+                                         logFirebaseEvent('Image_Navigate-To');
+
+                                         context.pushNamed(
+                                           'propertyVideo',
+                                           queryParams: {
+                                             'videoURL': serializeParam(
+                                                 getJsonField(
+                                                   columnPropertyResponse.jsonBody,
+                                                   r'''$.data.attributes.video_manifest_uri''',
+                                                 ),
+                                                 ParamType.String),
+                                             'propertyName': serializeParam(
+                                                 PropertyCall.propertyName(
+                                                   columnPropertyResponse.jsonBody,
+                                                 ).toString(),
+                                                 ParamType.String),
+                                           }.withoutNulls,
+                                         );
+                                       },
+                                      child:Container(
                                         height: 50,
                                         width: 50,
                                         decoration: BoxDecoration(
@@ -325,7 +347,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           color: Colors.white.withOpacity(1.0),
                                           size: 40,
                                         ),
-                                      ),
+                                      ),),
                                     ),
 
     //                               InkWell(

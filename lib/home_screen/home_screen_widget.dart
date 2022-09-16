@@ -646,7 +646,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
                                           },
                                           child: FlutterFlowVideoPlayer(
-                                            onTap: (videoControllerValue) {
+
                                               // videoControllerSet =
                                               //     videoControllerValue;
                                               //
@@ -665,7 +665,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               // _currentController =
                                               //     videocontrollerMap['0'];
                                               //
-                                            },
+
                                              path:
                                              getJsonField(
                                               propertiesItem,
