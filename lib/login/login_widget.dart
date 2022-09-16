@@ -283,7 +283,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.95,
                                   child: TermsConditionsBottomSheetWidget(
-                                    pageType: 5,
+                                    pageType: 1,
                                   ),
                                 ),
                               );
@@ -328,7 +328,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.95,
                                   child: TermsConditionsBottomSheetWidget(
-                                    pageType: 6,
+                                    pageType: 2,
                                   ),
                                 ),
                               );
