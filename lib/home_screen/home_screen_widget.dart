@@ -69,12 +69,18 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
       logFirebaseEvent('HomeScreen_Set-App-Language');
+      Future.delayed(const Duration(milliseconds: 500), () {
       setAppLanguage(context, FFAppState().locale);
+      });
+
     });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});
     _pagingController.addPageRequestListener((pageKey) {
-      _fetchPage(pageKey);
+      Future.delayed(const Duration(milliseconds: 500), () {
+        _fetchPage(pageKey);
+      });
+
     });
   }
 
@@ -501,28 +507,35 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: InkWell(
                         onTap: () async {
-                          videoPlayers[currentPropertyindex].pause();
-                          logFirebaseEvent(
-                              'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
-                          // propertyDetails
-                          logFirebaseEvent('propertyCard_propertyDetails');
-                          context.pushNamed(
-                            'PropertyDetails',
-                            queryParams: {
-                              'propertyId': serializeParam(
-                                  getJsonField(
-                                    propertiesItem,
-                                    r'''$.id''',
-                                  ),
-                                  ParamType.int),
-                              'path': serializeParam(
-                                  getJsonField(
-                                    propertiesItem,
-                                    r'''$.attributes.video_manifest_uri''',
-                                  ),
-                                  ParamType.String),
-                            }.withoutNulls,
-                          );
+                          if (!functions.conditionalVisibility(
+                              getJsonField(
+                                propertiesItem,
+                                r'''$.attributes.property_status''',
+                              ).toString(),
+                              'Soon')) {
+                            videoPlayers[currentPropertyindex].pause();
+                            logFirebaseEvent(
+                                'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
+                            // propertyDetails
+                            logFirebaseEvent('propertyCard_propertyDetails');
+                            context.pushNamed(
+                              'PropertyDetails',
+                              queryParams: {
+                                'propertyId': serializeParam(
+                                    getJsonField(
+                                      propertiesItem,
+                                      r'''$.id''',
+                                    ),
+                                    ParamType.int),
+                                'path': serializeParam(
+                                    getJsonField(
+                                      propertiesItem,
+                                      r'''$.attributes.video_manifest_uri''',
+                                    ),
+                                    ParamType.String),
+                              }.withoutNulls,
+                            );
+                          }
                         },
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -1028,7 +1041,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         propertiesItem,
                                         r'''$.attributes.property_status''',
                                       ).toString(),
-                                      'Coming soon'))
+                                      'Soon'))
                                     Align(
                                       alignment:
                                           AlignmentDirectional(-0.9, -0.89),

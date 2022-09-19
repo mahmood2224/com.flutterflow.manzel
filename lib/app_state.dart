@@ -47,7 +47,7 @@ class FFAppState {
 
   String propertyStatus = '';
 
-  String _locale = 'en';
+  String _locale = 'ar';
   String get locale => _locale;
   set locale(String _value) {
     _locale = _value;
