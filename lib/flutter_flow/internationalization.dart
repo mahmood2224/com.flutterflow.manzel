@@ -489,7 +489,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'qtso45vv': {
       'en': 'Booked',
-      'ar': 'حجز',
+      'ar': 'تم الحجز ',
     },
     'etpebw43': {
       'en': 'Approved Banks',
@@ -558,8 +558,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تسجيل الدخول لرؤية هذا القسم',
     },
     '1cb5at0r': {
-      'en': 'Login/Signup',
-      'ar': 'الدخول التسجيل فى الموقع',
+      'en': 'Login',
+      'ar': 'تسجيل الدخول',
     },
     't2kwojss': {
       'en': 'Offers',
@@ -900,7 +900,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'kevbc07d': {
       'en': 'Booked',
-      'ar': 'حجز',
+      'ar': 'تم الحجز ',
     },
     'y61ahqus': {
       'en': 'Approved Banks',
@@ -951,7 +951,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'gl02050s': {
       'en': 'Booked',
-      'ar': 'محجوز',
+      'ar': 'تم الحجز ',
     },
     'sfs0xn10': {
       'en': 'Offer Accepted',
@@ -1034,7 +1034,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ie4ye37b': {
       'en': 'Booked',
-      'ar': 'محجوز',
+      'ar': 'تم الحجز ',
     },
     '9d90para': {
       'en': 'Apt. Plan',
@@ -1070,7 +1070,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'nq19lw60': {
       'en': 'Features and Amenities',
-      'ar': 'الميزات والمرافق',
+      'ar': 'المميزات  والمرافق',
     },
     '6brswcwm': {
       'en': 'Ref no.',
@@ -1138,7 +1138,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wzirx8i7': {
       'en': 'Booked',
-      'ar': 'محجوز',
+      'ar': 'تم الحجز ',
     },
   },
   // propertyVideo
@@ -1200,7 +1200,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'z6vaof0z': {
       'en': 'Booked',
-      'ar': 'حجز',
+      'ar': 'تم الحجز ',
     },
     'rmxl8rt6': {
       'en': 'Available',

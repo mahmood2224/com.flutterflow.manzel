@@ -1043,7 +1043,7 @@ String subTitleText(
         if (locale == "en") {
           return "Your booking list is empty. Let's explore our properties.";
         } else {
-          return "قائمة الحجز الخاصة بك فارغة";
+          return " ";
         }
       }
       break;
@@ -1052,7 +1052,7 @@ String subTitleText(
         if (locale == "en") {
           return "Your save list is empty. Let's exploring our properties.";
         } else {
-          return " دعنا نستكشف خصائصنا.";
+          return " ";
         }
       }
       break;

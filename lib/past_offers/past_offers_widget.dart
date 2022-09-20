@@ -103,6 +103,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                               ..complete(ArchivedOffersCall.call(
                                 userId: currentUserUid,
                                 locale: FFAppState().locale,
+                                authorazationToken: FFAppState().authToken,
                               )))
                             .future,
                     builder: (context, snapshot) {

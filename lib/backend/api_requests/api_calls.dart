@@ -225,12 +225,15 @@ class InitiateOrderCall {
   static Future<ApiCallResponse> call({
     String? userID = '',
     String? propertyID = '',
+    String? authorazationToken = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'initiateOrder',
       apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/addOrder',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${authorazationToken}',
+      },
       params: {
         'userID': userID,
         'propertyID': propertyID,
@@ -405,6 +408,7 @@ class AddOrderCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
     String? propertyId = '',
+    String? authorazationToken = '',
   }) {
     final body = '''
 {
@@ -415,7 +419,9 @@ class AddOrderCall {
       callName: 'addOrder',
       apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/addOrder',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${authorazationToken}',
+      },
       params: {},
       body: body,
       bodyType: BodyType.JSON,
@@ -461,6 +467,7 @@ class GetOffersCall {
     String? userId = '',
     String? propertyId = '',
     String? locale = '',
+    String? authorazationToken = '',
   }) {
     final body = '''
 {
@@ -474,6 +481,7 @@ class GetOffersCall {
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
+        'Authorization': 'Bearer ${authorazationToken}',
       },
       params: {},
       body: body,
@@ -528,6 +536,7 @@ class AcceptOfferCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
     String? offerId = '',
+    String? authorazationToken = '',
   }) {
     final body = '''
 {
@@ -538,7 +547,9 @@ class AcceptOfferCall {
       callName: 'acceptOffer',
       apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/acceptOffer',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${authorazationToken}',
+      },
       params: {},
       body: body,
       bodyType: BodyType.JSON,
@@ -551,6 +562,7 @@ class ArchivedOffersCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
     String? locale = '',
+    String? authorazationToken = '',
   }) {
     final body = '''
 {
@@ -563,6 +575,7 @@ class ArchivedOffersCall {
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
+        'Authorization': 'Bearer ${authorazationToken}',
       },
       params: {},
       body: body,
@@ -581,6 +594,7 @@ class BookedPropertiesCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
     String? locale = '',
+    String? authorazationToken = '',
   }) {
     final body = '''
 {
@@ -593,6 +607,7 @@ class BookedPropertiesCall {
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
+        'Authorization': 'Bearer ${authorazationToken}',
       },
       params: {},
       body: body,
@@ -612,6 +627,7 @@ class OrderDetailsCall {
     String? orderId = '',
     String? userid = '',
     String? locale = '',
+    String? authorazationToken = '',
   }) {
     final body = '''
 {
@@ -625,6 +641,7 @@ class OrderDetailsCall {
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
+        'Authorization': 'Bearer ${authorazationToken}',
       },
       params: {},
       body: body,
@@ -644,6 +661,7 @@ class BookmarkPropertyCall {
     String? userId = '',
     String? propertyId = '',
     String? locale = '',
+    String? authorazationToken = '',
   }) {
     final body = '''
 {
@@ -654,7 +672,9 @@ class BookmarkPropertyCall {
       callName: 'bookmarkProperty',
       apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/bookmark',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${authorazationToken}',
+      },
       params: {},
       body: body,
       bodyType: BodyType.JSON,
@@ -667,6 +687,7 @@ class GetBookMarkedPropertiesCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
     String? locale = '',
+    String? authorazationToken = '',
   }) {
     final body = '''
 {
@@ -679,6 +700,7 @@ class GetBookMarkedPropertiesCall {
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
+        'Authorization': 'Bearer ${authorazationToken}',
       },
       params: {},
       body: body,
@@ -697,6 +719,7 @@ class CancelOrderCall {
   static Future<ApiCallResponse> call({
     String? orderId = '',
     String? userId = '',
+    String? authorazationToken = '',
   }) {
     final body = '''
 {
@@ -707,7 +730,9 @@ class CancelOrderCall {
       callName: 'cancelOrder',
       apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/cancelOrder',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${authorazationToken}',
+      },
       params: {},
       body: body,
       bodyType: BodyType.JSON,

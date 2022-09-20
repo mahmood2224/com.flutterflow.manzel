@@ -53,6 +53,10 @@ class FFAppState {
     _locale = _value;
     prefs.setString('ff_locale', _value);
   }
+
+  String authToken = '';
+
+  String refreshToken = '';
 }
 
 LatLng? _latLngFromString(String? val) {

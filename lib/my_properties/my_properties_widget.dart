@@ -202,6 +202,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                               future: BookedPropertiesCall.call(
                                 userId: currentUserUid,
                                 locale: FFAppState().locale,
+                                authorazationToken: FFAppState().authToken,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -1129,6 +1130,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                               future: GetBookMarkedPropertiesCall.call(
                                 userId: currentUserUid,
                                 locale: FFAppState().locale,
+                                authorazationToken: FFAppState().authToken,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
