@@ -323,13 +323,13 @@ class _OffersWidgetState extends State<OffersWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     logFirebaseEvent(
-                                        'OFFERS_PAGE_LOGIN_SIGNUP_BTN_ON_TAP');
+                                        'OFFERS_PAGE_LOGIN_BTN_ON_TAP');
                                     logFirebaseEvent('Button_Navigate-To');
 
                                     context.pushNamed('Login');
                                   },
                                   text: FFLocalizations.of(context).getText(
-                                    '1cb5at0r' /* Login/Signup */,
+                                    '1cb5at0r' /* Login */,
                                   ),
                                   options: FFButtonOptions(
                                     width: 215,
