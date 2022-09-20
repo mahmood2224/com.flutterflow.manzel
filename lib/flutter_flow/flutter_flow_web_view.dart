@@ -26,37 +26,50 @@ class FlutterFlowWebView extends StatefulWidget {
 }
 
 class _FlutterFlowWebViewState extends State<FlutterFlowWebView> {
+  bool isLoading = true;
+
   @override
-  Widget build(BuildContext context) => WebViewX(
-        key: webviewKey,
-        width: widget.width ?? MediaQuery.of(context).size.width,
-        height: widget.height ?? MediaQuery.of(context).size.height,
-        ignoreAllGestures: false,
-        initialContent: widget.url,
-        initialMediaPlaybackPolicy:
-            AutoMediaPlaybackPolicy.requireUserActionForAllMediaTypes,
-        initialSourceType:
-            widget.bypass ? SourceType.urlBypass : SourceType.url,
-        javascriptMode: JavascriptMode.unrestricted,
-        webSpecificParams: const WebSpecificParams(
-          webAllowFullscreenContent: true,
-        ),
-        mobileSpecificParams: MobileSpecificParams(
-          debuggingEnabled: false,
-          gestureNavigationEnabled: true,
-          mobileGestureRecognizers: {
-            if (widget.verticalScroll)
-              Factory<VerticalDragGestureRecognizer>(
-                () => VerticalDragGestureRecognizer(),
-              ),
-            if (widget.horizontalScroll)
-              Factory<HorizontalDragGestureRecognizer>(
-                () => HorizontalDragGestureRecognizer(),
-              ),
+  Widget build(BuildContext context) => Stack(
+    children:[
+      WebViewX(
+          key: webviewKey,
+          width: widget.width ?? MediaQuery.of(context).size.width,
+          height: widget.height ?? MediaQuery.of(context).size.height,
+          ignoreAllGestures: false,
+          initialContent: widget.url,
+          initialMediaPlaybackPolicy:
+              AutoMediaPlaybackPolicy.requireUserActionForAllMediaTypes,
+          initialSourceType:
+              widget.bypass ? SourceType.urlBypass : SourceType.url,
+          javascriptMode: JavascriptMode.unrestricted,
+          onPageFinished: (finish) {
+            setState(() {
+              isLoading = false;
+            });
           },
-          androidEnableHybridComposition: true,
+          webSpecificParams: const WebSpecificParams(
+            webAllowFullscreenContent: true,
+          ),
+          mobileSpecificParams: MobileSpecificParams(
+            debuggingEnabled: false,
+            gestureNavigationEnabled: true,
+            mobileGestureRecognizers: {
+              if (widget.verticalScroll)
+                Factory<VerticalDragGestureRecognizer>(
+                  () => VerticalDragGestureRecognizer(),
+                ),
+              if (widget.horizontalScroll)
+                Factory<HorizontalDragGestureRecognizer>(
+                  () => HorizontalDragGestureRecognizer(),
+                ),
+            },
+            androidEnableHybridComposition: true,
+          ),
         ),
-      );
+      isLoading ? Center( child: CircularProgressIndicator(),)
+          : Stack(),
+  ]
+  );
 
   Key get webviewKey => Key(
         [

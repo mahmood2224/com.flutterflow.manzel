@@ -1046,7 +1046,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       alignment:
                                           AlignmentDirectional(-0.9, -0.89),
                                       child: Container(
-                                        width: 100,
+                                        width: 80,
                                         height: 26,
                                         decoration: BoxDecoration(
                                           color: Color(0xFF2971FB),

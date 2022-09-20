@@ -68,7 +68,9 @@ class _ThreeSixtyViewWidgetState extends State<ThreeSixtyViewWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+
               Expanded(
+
                 child: FlutterFlowWebView(
                   url: widget.url!,
                   bypass: false,

@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 import 'backend/push_notifications/push_notifications_util.dart';
+import 'enviorment/env_variables.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
@@ -20,6 +21,7 @@ import 'notification_handler/firebase_cloud_messaging.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await EnvVariables.instance.initialise();
   Eraser.resetBadgeCountButKeepNotificationsInCenter();
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
