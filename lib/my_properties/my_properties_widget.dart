@@ -227,6 +227,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       propertiesListBookedPropertiesResponse
                                           .jsonBody,
                                     ).toList();
+                                    print("************* ${bookedProperties}");
                                     if (bookedProperties.isEmpty) {
                                       return Center(
                                         child: Container(

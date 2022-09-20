@@ -438,6 +438,7 @@ class AddTransactionCall {
     String? transactionMethod = '',
     String? transactionStatus = '',
     String? transactionId = '',
+    String ?authorazationToken='',
   }) {
     final body = '''
 {
@@ -453,7 +454,7 @@ class AddTransactionCall {
       apiUrl:
       '${EnvVariables.instance.firebaseBaseUrl}/addTransaction',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {'Authorization': 'Bearer ${authorazationToken}'},
       params: {},
       body: body,
       bodyType: BodyType.JSON,

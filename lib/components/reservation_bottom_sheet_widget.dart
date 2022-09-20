@@ -130,6 +130,7 @@ class _ReservationBottomSheetWidgetState
           userId: currentUserReference?.id,
           transactionStatus: 'completed',
           transactionId: tapSDKResult!['charge_id'],
+          authorazationToken: FFAppState().authToken
         );
 
         if (((transactionApiResponse?.statusCode ?? 200)) ==
@@ -151,8 +152,9 @@ class _ReservationBottomSheetWidgetState
               serializeParam(tapSDKResult!['charge_id'], ParamType.String),
             }.withoutNulls,
           );
-          entry!.remove();
+
         }
+        entry!.remove();
         break;
       case "FAILED":
         transactionApiResponse = await AddTransactionCall.call(
@@ -162,6 +164,7 @@ class _ReservationBottomSheetWidgetState
           userId: currentUserReference?.id,
           transactionStatus: 'failed',
           transactionId: tapSDKResult!['charge_id'],
+          authorazationToken: FFAppState().authToken,
         );
         // if (((transactionApiResponse?.statusCode ?? 200)) ==
         //     200) {

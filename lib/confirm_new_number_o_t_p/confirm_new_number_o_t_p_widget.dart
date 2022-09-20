@@ -39,6 +39,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   OverlayEntry? entry;
 
+
   void resendOTP() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: widget.phoneNumber!,
@@ -195,7 +196,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                   return;
                                 }
                                 Future.delayed(
-                                    const Duration(milliseconds: 500),
+                                    const Duration(milliseconds: 600),
                                     () async {
                                   if (currentUserDocument!.status!.isEmpty ||
                                       currentUserDocument!.status!
@@ -236,6 +237,21 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                           .doc()
                                           .set(userNotificationRecord);
                                     }
+                                    if (FirebaseAuth.instance.currentUser !=
+                                        null) {
+                                      final user = await FirebaseAuth
+                                          .instance.currentUser;
+                                      final idToken =
+                                      await user?.getIdToken();
+                                      print("************* token Id ${idToken}");
+                                      FFAppState().authToken = idToken!;
+                                    }else{print("*********************ERROR***");}
+    // if (FirebaseAuth.instance.currentUser != null) {
+    // final user = FirebaseAuth.instance.currentUser;
+    // final idTokenResult = await user!.getIdTokenResult(true);
+    // final token = idTokenResult.token;
+    //
+    // print( "********************* Resend auth token wala code${token}");}
 
                                     await currentUserReference
                                         ?.update(userUpdateData);
@@ -246,14 +262,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                               "0F58DDB9-5DB1-4FC5-A84D-6DD8BBC314FC");
                                       final _ = await _sendbird
                                           .connect(currentUserUid);
-                                      if (FirebaseAuth.instance.currentUser !=
-                                          null) {
-                                        final user = await FirebaseAuth
-                                            .instance.currentUser;
-                                        final idToken =
-                                            await user?.getIdToken();
-                                        print(" token Id ${idToken}");
-                                      }
                                       context.goNamedAuth(
                                           'AddingInformation', mounted);
                                     } else {
