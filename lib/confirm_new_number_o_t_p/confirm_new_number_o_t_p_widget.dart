@@ -207,10 +207,11 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                             .languageCode,
                                         lastLogin: DateTime.now(),
                                         isDeleted: 0);
-                                    if (currentUserDocument!.status!.isEmpty )
-                                    {
-                                      userUpdateData.addAll({'created_at' : DateTime.now()});
-                                      userUpdateData.addAll({'lastLogin' : DateTime.now()});
+                                    if (currentUserDocument!.status!.isEmpty) {
+                                      userUpdateData.addAll(
+                                          {'created_at': DateTime.now()});
+                                      userUpdateData.addAll(
+                                          {'lastLogin': DateTime.now()});
                                     }
 
                                     final userNotificationRecord =
@@ -245,6 +246,14 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                               "0F58DDB9-5DB1-4FC5-A84D-6DD8BBC314FC");
                                       final _ = await _sendbird
                                           .connect(currentUserUid);
+                                      if (FirebaseAuth.instance.currentUser !=
+                                          null) {
+                                        final user = await FirebaseAuth
+                                            .instance.currentUser;
+                                        final idToken =
+                                            await user?.getIdToken();
+                                        print(" token Id ${idToken}");
+                                      }
                                       context.goNamedAuth(
                                           'AddingInformation', mounted);
                                     } else {
