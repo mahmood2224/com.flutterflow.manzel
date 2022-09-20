@@ -2908,8 +2908,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     'wzirx8i7' /* Booked */,
                                   ),
                                   options: FFButtonOptions(
-                                    width: 140,
-                                    height: 56,
+                                    width: FFAppState().locale=="en"?140:120,
+                                    height: FFAppState().locale=="en"?56:40,
                                     color: Color(0xFF8C8C8C),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .subtitle2
