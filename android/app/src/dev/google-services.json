@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "759428031201",
+    "project_id": "manzel-dev",
+    "storage_bucket": "manzel-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:759428031201:android:9b9d383b368a9e8313cda0",
+        "android_client_info": {
+          "package_name": "com.flutterflow.manzel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "759428031201-mm8vr1aaiq5n6odgin6beoq5cm0lm9d5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAK3Mf-8SQXt0ZbAQwfFERELoRSHI8IOVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759428031201-mm8vr1aaiq5n6odgin6beoq5cm0lm9d5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "759428031201-j2176tnvhf6udpnoshvebopgovvha86i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflowdev.manzel"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

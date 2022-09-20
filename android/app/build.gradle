@@ -69,6 +69,17 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    flavorDimensions "env"
+    productFlavors {
+        dev {
+            dimension "env"
+            applicationId "com.flutterflow.manzel"
+        }
+        prod {
+            dimension "env"
+            applicationId "com.flutterflow.manzel"
+        }
+    }
 }
 
 flutter {
