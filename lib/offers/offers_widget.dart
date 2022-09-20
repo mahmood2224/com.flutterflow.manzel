@@ -378,6 +378,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                               .offerScreenPropertyIdisNull(
                                                   widget.propertyId),
                                           locale: FFAppState().locale,
+                                          authorazationToken:
+                                              FFAppState().authToken,
                                         )))
                                   .future,
                               builder: (context, snapshot) {

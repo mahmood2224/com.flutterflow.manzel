@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
@@ -376,7 +377,7 @@ class _ReservationBottomSheetWidgetState
                       logFirebaseEvent('Button_Backend-Call');
                       addOrderApiResponse = await AddOrderCall.call(
                         propertyId: widget.propertyId?.toString(),
-                        userId: '6TCZMQHGHJYXZEycWKX89PT4cwp1',
+                        userId: currentUserUid,
                       );
                       _shouldSetState = true;
                       if ((addOrderApiResponse?.statusCode ?? 200) == 200) {
