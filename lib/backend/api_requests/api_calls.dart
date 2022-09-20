@@ -1,3 +1,4 @@
+import '../../enviorment/env_variables.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 
 import 'api_manager.dart';
@@ -21,7 +22,7 @@ class PropertiesCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
-      apiUrl: 'https://strapi-dev.manzel.app/api/properties/',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -52,7 +53,7 @@ class PropertyCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Property',
-      apiUrl: 'https://strapi-dev.manzel.app/api/properties/${propertyId}',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/${propertyId}',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -206,7 +207,7 @@ class FilterCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'filter',
-      apiUrl: 'https://strapi-dev.manzel.app/api/properties/?city=${city}',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/?city=${city}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -227,7 +228,7 @@ class InitiateOrderCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'initiateOrder',
-      apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/addOrder',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/addOrder',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -245,7 +246,7 @@ class BankDetailsCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'BankDetails',
-      apiUrl: 'https://strapi-dev.manzel.app/api/banks/${bankId}?',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/banks/${bankId}?',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -280,7 +281,7 @@ class StartInstanceCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Start Instance',
       apiUrl:
-      'https://asia-south1-manzel-prod.cloudfunctions.net/booking-process-best-case-scenario-test',
+      '${EnvVariables.instance.firebaseBaseUrl}/booking-process-best-case-scenario-test',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -299,7 +300,7 @@ class CityListCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'cityList',
-      apiUrl: 'https://strapi-dev.manzel.app/api/cities/?',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/cities/?',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -320,7 +321,7 @@ class FilterParamsCall {
     return ApiManager.instance.makeApiCall(
       callName: 'filterParams',
       apiUrl:
-      'https://strapi-dev.manzel.app/api/properties/?locale=en&populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
+      '${EnvVariables.instance.strapiBaseURl}/api/properties/?locale=en&populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -336,7 +337,7 @@ class SearchPageCitiesCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'searchPageCities',
-      apiUrl: 'https://strapi-dev.manzel.app/api/property/search',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/property/search',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -367,7 +368,7 @@ class PropertStatusCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'propertStatus',
-      apiUrl: 'https://strapi-dev.manzel.app/api/property/status/${propertyId}',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/property/status/${propertyId}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -389,7 +390,7 @@ class PropertyBookingStatusCall {
 {"data": {"property_status": "Booked"}}''';
     return ApiManager.instance.makeApiCall(
       callName: 'propertyBookingStatus',
-      apiUrl: 'https://strapi-dev.manzel.app/api/properties/${propertyId}',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/${propertyId}',
       callType: ApiCallType.PUT,
       headers: {},
       params: {},
@@ -412,7 +413,7 @@ class AddOrderCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addOrder',
-      apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/addOrder',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/addOrder',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -444,7 +445,7 @@ class AddTransactionCall {
     return ApiManager.instance.makeApiCall(
       callName: 'addTransaction',
       apiUrl:
-      'https://asia-south1-manzel-prod.cloudfunctions.net/addTransaction',
+      '${EnvVariables.instance.firebaseBaseUrl}/addTransaction',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -469,7 +470,7 @@ class GetOffersCall {
     return ApiManager.instance.makeApiCall(
       callName: 'getOffers',
       apiUrl:
-      'https://asia-south1-manzel-prod.cloudfunctions.net/getActiveOffers',
+      '${EnvVariables.instance.firebaseBaseUrl}/getActiveOffers',
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
@@ -535,7 +536,7 @@ class AcceptOfferCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'acceptOffer',
-      apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/acceptOffer',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/acceptOffer',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -558,7 +559,7 @@ class ArchivedOffersCall {
     return ApiManager.instance.makeApiCall(
       callName: 'archivedOffers',
       apiUrl:
-      'https://asia-south1-manzel-prod.cloudfunctions.net/getArchivedOffers',
+      '${EnvVariables.instance.firebaseBaseUrl}/getArchivedOffers',
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
@@ -588,7 +589,7 @@ class BookedPropertiesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'bookedProperties',
       apiUrl:
-      'https://asia-south1-manzel-prod.cloudfunctions.net/getBookedProperties',
+      '${EnvVariables.instance.firebaseBaseUrl}/getBookedProperties',
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
@@ -620,7 +621,7 @@ class OrderDetailsCall {
     return ApiManager.instance.makeApiCall(
       callName: 'orderDetails',
       apiUrl:
-      'https://asia-south1-manzel-prod.cloudfunctions.net/getOrderDetail',
+      '${EnvVariables.instance.firebaseBaseUrl}/getOrderDetail',
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
@@ -651,7 +652,7 @@ class BookmarkPropertyCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'bookmarkProperty',
-      apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/bookmark',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/bookmark',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -674,7 +675,7 @@ class GetBookMarkedPropertiesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'getBookMarkedProperties',
       apiUrl:
-      'https://asia-south1-manzel-prod.cloudfunctions.net/getBookMarkedProperties',
+      '${EnvVariables.instance.firebaseBaseUrl}/getBookMarkedProperties',
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
@@ -722,7 +723,7 @@ class TermsConitionsAndPrivacyPoliciesCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'termsConitionsAndPrivacyPolicies',
-      apiUrl: 'https://strapi-dev.manzel.app/api/in-app-contents/${pageType}',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/in-app-contents/${pageType}',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -739,7 +740,7 @@ class GetBanksCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'getBanks',
-      apiUrl: 'https://strapi-dev.manzel.app/api/banks?',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/banks?',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -762,7 +763,7 @@ class EmplymentTypeCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'emplymentType',
-      apiUrl: 'https://strapi-dev.manzel.app/api/employement-statuses?',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/employement-statuses?',
       callType: ApiCallType.GET,
       headers: {},
       params: {
