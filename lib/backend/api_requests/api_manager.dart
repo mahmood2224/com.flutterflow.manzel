@@ -115,7 +115,14 @@ class ApiManager {
     final makeRequest = callType == ApiCallType.GET ? http.get : http.delete;
     final response =
         await makeRequest(Uri.parse(apiUrl), headers: toStringMap(headers));
+    if(response.statusCode != null &&response.statusCode==401){
+      RefreshToken();
+      final api_call_header = response.request!.headers;
+      api_call_header['Authorization'] = "Bearer "+FFAppState().authToken;
+      print("header : ${api_call_header}")
+      ApiManager.instance.makeApiCall(callName: refreshCallName!,callType: refreshCallType!,apiUrl: response.request!.url.toString()  ,headers:api_call_header,body: refreshCallBody,params: refreshCallParams,bodyType:refreshCallBodyType );
 
+    }
     return ApiCallResponse.fromHttpResponse(response, returnBody);
   }
 
