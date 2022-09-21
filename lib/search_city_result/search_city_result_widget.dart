@@ -479,7 +479,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                     }
                                                                   });
                                                                   print(
-                                                                      'propertyindex - $propertiesIndex');
+                                                                      'propertyindex - ${propertiesIndex}');
                                                                 });
                                                                 ;
                                                               });
@@ -662,150 +662,153 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                   ),
                                                 ),
                                               ),
-                                              if (functions
-                                                  .conditionalVisibility(
-                                                      getJsonField(
-                                                        propertiesItem,
-                                                        r'''$.attributes.property_status''',
-                                                      ).toString(),
-                                                      'Coming soon'))
+                                              if (functions.conditionalVisibility(
+                                                  getJsonField(
+                                                    propertiesItem,
+                                                    r'''$.attributes.property_status''',
+                                                  ).toString(),
+                                                  'Available'))
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
-                                                          -0.99, -0.8),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () {
-                                                      print(
-                                                          'Button pressed ...');
-                                                    },
-                                                    text: FFLocalizations.of(
-                                                            context)
-                                                        .getText(
-                                                      '81d8z9gv' /* Coming soon */,
-                                                    ),
-                                                    options: FFButtonOptions(
-                                                      color: Color(0xCD2971FB),
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2
-                                                              .override(
-                                                                fontFamily:
-                                                                    'AvenirArabic',
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                              ),
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                    ),
-                                                  ),
-                                                ),
-                                              if (functions
-                                                  .conditionalVisibility(
-                                                      getJsonField(
-                                                        propertiesItem,
-                                                        r'''$.attributes.property_status''',
-                                                      ).toString(),
-                                                      'Booked'))
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          -0.99, -0.8),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () {
-                                                      print(
-                                                          'Button pressed ...');
-                                                    },
-                                                    text: FFLocalizations.of(
-                                                            context)
-                                                        .getText(
-                                                      'z6vaof0z' /* Booked */,
-                                                    ),
-                                                    options: FFButtonOptions(
-                                                      color: Color(0xB2F5F5F5),
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2
-                                                              .override(
-                                                                fontFamily:
-                                                                    'AvenirArabic',
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                              ),
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                    ),
-                                                  ),
-                                                ),
-                                              if (functions
-                                                  .conditionalVisibility(
-                                                      getJsonField(
-                                                        propertiesItem,
-                                                        r'''$.attributes.property_status''',
-                                                      ).toString(),
-                                                      'Available'))
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          -0.99, -0.8),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () {
-                                                      print(
-                                                          'Button pressed ...');
-                                                    },
-                                                    text: FFLocalizations.of(
-                                                            context)
-                                                        .getText(
-                                                      'rmxl8rt6' /* Available */,
-                                                    ),
-                                                    options: FFButtonOptions(
+                                                  AlignmentDirectional(-0.85, -0.8),
+                                                  child: Container(
+                                                    width: 80,
+                                                    height: 26,
+                                                    decoration: BoxDecoration(
                                                       color: Color(0xFF81D05C),
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .subtitle2
-                                                              .override(
-                                                                fontFamily:
-                                                                    'AvenirArabic',
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                              ),
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                      ),
                                                       borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
+                                                      BorderRadius.circular(7),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsetsDirectional
+                                                              .fromSTEB(10, 1, 10, 1),
+                                                          child: Text(
+                                                            FFLocalizations.of(context)
+                                                                .getText(
+                                                              '2cud1oqj' /* Available */,
+                                                            ),
+                                                            style:
+                                                            FlutterFlowTheme.of(context)
+                                                                .bodyText1
+                                                                .override(
+                                                              fontFamily:
+                                                              'AvenirArabic',
+                                                              color: FlutterFlowTheme
+                                                                  .of(context)
+                                                                  .white,
+                                                              fontSize: 13,
+                                                              fontWeight:
+                                                              FontWeight.w500,
+                                                              useGoogleFonts: false,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              if (functions.conditionalVisibility(
+                                                  getJsonField(
+                                                    propertiesItem,
+                                                    r'''$.attributes.property_status''',
+                                                  ).toString(),
+                                                  'Booked'))
+                                                Align(
+                                                  alignment:
+                                                  AlignmentDirectional(-0.85, -0.8),
+                                                  child: Container(
+                                                    width: 80,
+                                                    height: 26,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0xFFD7D7D7),
+                                                      borderRadius:
+                                                      BorderRadius.circular(7),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsetsDirectional
+                                                              .fromSTEB(10, 1, 10, 1),
+                                                          child: Text(
+                                                            FFLocalizations.of(context)
+                                                                .getText(
+                                                              'qtso45vv' /* Booked */,
+                                                            ),
+                                                            style:
+                                                            FlutterFlowTheme.of(context)
+                                                                .bodyText1
+                                                                .override(
+                                                              fontFamily:
+                                                              'AvenirArabic',
+                                                              color: FlutterFlowTheme
+                                                                  .of(context)
+                                                                  .white,
+                                                              fontSize: 13,
+                                                              fontWeight:
+                                                              FontWeight.w500,
+                                                              useGoogleFonts: false,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              if (functions.conditionalVisibility(
+                                                  getJsonField(
+                                                    propertiesItem,
+                                                    r'''$.attributes.property_status''',
+                                                  ).toString(),
+                                                  'Soon'))
+                                                Align(
+                                                  alignment:
+                                                  AlignmentDirectional(-0.85, -0.8),
+                                                  child: Container(
+                                                    width: 80,
+                                                    height: 26,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0xFF2971FB),
+                                                      borderRadius:
+                                                      BorderRadius.circular(7),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize: MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsetsDirectional
+                                                              .fromSTEB(10, 1, 10, 1),
+                                                          child: Text(
+                                                            FFLocalizations.of(context)
+                                                                .getText(
+                                                              'juw40663' /* Coming soon */,
+                                                            ),
+                                                            style:
+                                                            FlutterFlowTheme.of(context)
+                                                                .bodyText1
+                                                                .override(
+                                                              fontFamily:
+                                                              'AvenirArabic',
+                                                              color: FlutterFlowTheme
+                                                                  .of(context)
+                                                                  .white,
+                                                              fontSize: 13,
+                                                              fontWeight:
+                                                              FontWeight.w500,
+                                                              useGoogleFonts: false,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
