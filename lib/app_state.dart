@@ -17,6 +17,7 @@ class FFAppState {
     prefs = await SharedPreferences.getInstance();
     _isInitailLaunch = prefs.getBool('ff_isInitailLaunch') ?? _isInitailLaunch;
     _locale = prefs.getString('ff_locale') ?? _locale;
+    _authToken = prefs.getString('ff_authToken') ?? _authToken;
   }
 
   late SharedPreferences prefs;
@@ -54,9 +55,14 @@ class FFAppState {
     prefs.setString('ff_locale', _value);
   }
 
-  String authToken = '';
-
   String refreshToken = '';
+
+  String _authToken = '';
+  String get authToken => _authToken;
+  set authToken(String _value) {
+    _authToken = _value;
+    prefs.setString('ff_authToken', _value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {
