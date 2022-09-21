@@ -946,8 +946,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تسجيل الدخول لرؤية هذا القسم',
     },
     'yo5djc7x': {
-      'en': 'Login/Signup',
-      'ar': 'الدخول التسجيل فى الموقع',
+      'en': 'Login',
+      'ar': 'تسجيل الدخول',
     },
     'gl02050s': {
       'en': 'Booked',
