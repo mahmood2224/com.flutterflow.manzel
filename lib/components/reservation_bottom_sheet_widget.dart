@@ -582,7 +582,7 @@ class _ReservationBottomSheetWidgetState
                       var _shouldSetState = false;
                       logFirebaseEvent('Button_Backend-Call');
                       addOrderApiResponse = await AddOrderCall.call(
-                        propertyId: widget.propertyId?.toString(),userId: currentUserReference?.id,
+                        propertyId: widget.propertyId?.toString(),userId: currentUserReference?.id,authorazationToken: FFAppState().authToken
                       );
                       _shouldSetState = true;
                       if ((addOrderApiResponse?.statusCode ?? 200) == 200) {
