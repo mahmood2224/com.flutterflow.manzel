@@ -226,6 +226,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                               .offerScreenPropertyIdisNull(
                                               widget.propertyId),
                                           locale: FFAppState().locale,
+                                          authorazationToken: FFAppState().authToken,
                                         ),
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.

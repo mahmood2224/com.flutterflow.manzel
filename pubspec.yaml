@@ -160,6 +160,7 @@ flutter:
     - assets/lottie_animations/
     - assets/rive_animations/
     - assets/pdfs/
+    - assets/icons/
     - .env
   fonts:
     - family: 'Sofia Pro By Khuzaimah'
@@ -183,9 +184,11 @@ flutter:
           weight: 700
         - asset: assets/fonts/AvenirArabic-Book.otf
           weight: 800
-    - family: Manzel
+    - family: 'Manzel'
       fonts:
-        - asset: assets/Manzel.ttf
+        - asset: assets/icons/Manzel.ttf
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
