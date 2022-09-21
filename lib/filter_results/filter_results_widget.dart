@@ -1,3 +1,6 @@
+import 'package:video_player/video_player.dart';
+import 'package:visibility_detector/visibility_detector.dart';
+
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_result_widget.dart';
@@ -21,6 +24,7 @@ class FilterResultsWidget extends StatefulWidget {
     this.propertyType,
     this.minInstallment,
     this.maxInstallment,
+    this.homeScreenLength
   }) : super(key: key);
 
   final String? cityName;
@@ -28,6 +32,7 @@ class FilterResultsWidget extends StatefulWidget {
   final String? propertyType;
   final String? minInstallment;
   final String? maxInstallment;
+  final int? homeScreenLength;
 
   @override
   _FilterResultsWidgetState createState() => _FilterResultsWidgetState();
@@ -37,6 +42,18 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
   List<String>? filteredParametesValues;
   PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  int _currentItem = 0;
+  bool? isPaused;
+  bool? autoplayVal;
+
+  //FlickMultiManager flickMultiManager;
+  Set<VideoPlayerController>? videoControllerSet;
+
+  VideoPlayerController? _currentController;
+  int currentPropertyindex = 0;
+
+  Map<String, VideoPlayerController> videocontrollerMap = {};
+
 
   @override
   void initState() {
@@ -393,25 +410,161 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                   propertiesItem,
                                                   r'''$.attributes.video_manifest_uri''',
                                                 )),
-                                                child: FlutterFlowVideoPlayer(
-                                                  path: getJsonField(
-                                                    propertiesItem,
-                                                    r'''$.attributes.video_manifest_uri''',
+                                                child: ClipRRect(
+                                                  borderRadius: BorderRadius.circular(12),
+                                                  child: Container(
+                                                    width:
+                                                    MediaQuery.of(context).size.width *
+                                                        0.95,
+                                                    height:
+                                                    MediaQuery.of(context).size.height *
+                                                        0.4,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                      BorderRadius.circular(12),
+                                                    ),
+                                                    child: VisibilityDetector(
+                                                      key: Key(propertiesIndex.toString()),
+                                                      onVisibilityChanged: (visibility) {
+                                                        if (visibility.visibleFraction *
+                                                            100 ==
+                                                            100 &&
+                                                            this.mounted) {
+                                                          if(!(videoPlayers[widget.homeScreenLength! + propertiesIndex].value.isInitialized)) {
+                                                            videoPlayers[widget.homeScreenLength!+propertiesIndex]
+                                                                .initialize()
+                                                                .then((value) {
+                                                              currentPropertyindex = widget.homeScreenLength!+propertiesIndex;
+                                                              videoPlayers[widget.homeScreenLength!+propertiesIndex]
+                                                                  .play();
+                                                              setState(() {
+                                                                videoPlayers.forEach((otherPlayer) {
+                                                                  if (otherPlayer != videoPlayers[widget.homeScreenLength!+propertiesIndex]) {
+
+
+                                                                    if(otherPlayer.value.isInitialized) {
+                                                                      otherPlayer.pause();
+                                                                      // var dataSource = otherPlayer.dataSource;
+                                                                      // otherPlayer.dispose();
+                                                                      // otherPlayer =
+                                                                      //     VideoPlayerController.network(dataSource);
+
+                                                                    }
+                                                                    else{
+                                                                      otherPlayer.initialize().then((value) => otherPlayer.pause());
+                                                                    }
+                                                                  }
+                                                                });
+                                                                print(
+                                                                    'propertyindex - $propertiesIndex');
+                                                              });
+                                                              ;
+                                                            });
+
+                                                            print(
+                                                                "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
+                                                            // Future.delayed(const Duration(
+                                                            //     seconds: 6), () {
+                                                            //   _currentController =
+                                                            //   videocontrollerMap[(propertiesIndex)
+                                                            //       .toString()];
+                                                            //   _currentController?.play();
+                                                            // });
+                                                            // setState(() {
+                                                            //   if (_currentController !=
+                                                            //       null) {
+                                                            //     _currentController =
+                                                            //         videocontrollerMap[
+                                                            //             (propertiesIndex)
+                                                            //                 .toString()];
+                                                            //     _currentController?.play();
+                                                            //     videoControllerSet!
+                                                            //         .forEach((otherPlayer) {
+                                                            //       if (otherPlayer !=
+                                                            //               _currentController &&
+                                                            //           otherPlayer
+                                                            //               .value.isPlaying) {
+                                                            //         setState(() {
+                                                            //           otherPlayer.pause();
+                                                            //         });
+                                                            //       }
+                                                            //     });
+                                                            //     print(
+                                                            //         "Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
+                                                            //   }
+                                                            // });
+                                                          } else {
+                                                            videoPlayers[widget.homeScreenLength!+propertiesIndex]
+                                                                .play();
+                                                            currentPropertyindex = widget.homeScreenLength!+propertiesIndex;
+                                                            setState(() {
+                                                              videoPlayers.forEach((otherPlayer) {
+
+                                                                if (otherPlayer != videoPlayers[widget.homeScreenLength!+propertiesIndex]) {
+                                                                  if (otherPlayer.value.isInitialized) {
+                                                                    otherPlayer.pause();
+                                                                    // var dataSource = otherPlayer.dataSource;
+                                                                    // otherPlayer.dispose();
+                                                                    // otherPlayer =
+                                                                    //     VideoPlayerController.network(dataSource);
+
+                                                                  }
+                                                                }
+                                                              });
+                                                            });
+                                                          }
+                                                          //autoplayVal = false;
+                                                        }
+                                                        //onVisibilityChanged: (visibilityInfo) {
+                                                        // var visiblePercentage =
+                                                        //     visibilityInfo.visibleFraction *
+                                                        //         100;
+                                                        // debugPrint(
+                                                        //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
+                                                      },
+                                                      child: FlutterFlowVideoPlayer(
+                                                        // videoControllerSet =
+                                                        //     videoControllerValue;
+                                                        //
+                                                        // print(
+                                                        //     "videoControllerSet : ${videoControllerSet}");
+                                                        // print(
+                                                        //     "videoControllerSet_items : ${videoControllerSet?.length}");
+                                                        // //print("videoControllerSet.last :  ${videoControllerSet.last}");
+                                                        // //print("propertiesIndex : ${propertiesIndex.toString()}");
+                                                        // //print("videocontrollerMap : ${videocontrollerMap.length}");
+                                                        // videocontrollerMap[propertiesIndex
+                                                        //         .toString()] =
+                                                        //     videoControllerSet!.last;
+                                                        // print(
+                                                        //     "videocontrollerMap : ${videocontrollerMap.length}");
+                                                        // _currentController =
+                                                        //     videocontrollerMap['0'];
+                                                        //
+
+                                                        path:
+                                                        getJsonField(
+                                                          propertiesItem,
+                                                          r'''$.attributes.video_manifest_uri''',
+                                                        ),
+                                                        videoType: VideoType.network,
+                                                        width: MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                            95,
+                                                        height: MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                            1.8,
+                                                        aspectRatio: 1.70,
+                                                        autoPlay: false,
+                                                        looping: true,
+                                                        showControls: false,
+                                                        allowFullScreen: true,
+                                                        allowPlaybackSpeedMenu: false,
+                                                      ),
+                                                    ),
                                                   ),
-                                                  videoType: VideoType.network,
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      1,
-                                                  aspectRatio: 1.70,
-                                                  autoPlay: true,
-                                                  looping: true,
-                                                  showControls: false,
-                                                  allowFullScreen: true,
-                                                  allowPlaybackSpeedMenu: false,
                                                 ),
                                               ),
                                             ),

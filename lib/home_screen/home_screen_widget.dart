@@ -48,6 +48,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   int _currentItem = 0;
   bool? isPaused;
   bool? autoplayVal;
+  List<VideoPlayerController> homeScreenPlayers = [];
 
   //FlickMultiManager flickMultiManager;
   Set<VideoPlayerController>? videoControllerSet;
@@ -70,9 +71,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
       logFirebaseEvent('HomeScreen_Set-App-Language');
       Future.delayed(const Duration(milliseconds: 500), () {
-      setAppLanguage(context, FFAppState().locale);
+        setAppLanguage(context, FFAppState().locale);
       });
-
     });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});
@@ -80,7 +80,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       Future.delayed(const Duration(milliseconds: 500), () {
         _fetchPage(pageKey);
       });
-
     });
   }
 
@@ -202,7 +201,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       snapshot.data!;
                                   return InkWell(
                                     onTap: () async {
-                                      videoPlayers[currentPropertyindex!]?.pause();
+                                      videoPlayers[currentPropertyindex!]
+                                          ?.pause();
                                       logFirebaseEvent(
                                           'HOME_SCREEN_notificationsBadge_ON_TAP');
                                       logFirebaseEvent(
@@ -264,39 +264,45 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                 'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
                             logFirebaseEvent('Text_Navigate-To');
                             context.pushNamed(
-                              'WhereAreYouLooking',
+                              'WhereAreYouLooking',queryParams: {
+                              'homeScreenLength':
+                              serializeParam(
+                                  videoPlayers.length ?? 0,
+                                  ParamType.int)
+                            }.withoutNulls,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: TransitionInfo(
                                   hasTransition: true,
                                   transitionType:
-                                  PageTransitionType.bottomToTop,
+                                      PageTransitionType.bottomToTop,
                                 ),
                               },
                             );
                           },
-                        child: Container(
-                          width: double.infinity,
-                          height: 54,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 5,
-                                color: Color(0x41000000),
-                                offset: Offset(0, 3),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(8),
-                            shape: BoxShape.rectangle,
-                          ),
-                          alignment: AlignmentDirectional(0, 0),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(23, 0, 12, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
+                          child: Container(
+                            width: double.infinity,
+                            height: 54,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 5,
+                                  color: Color(0x41000000),
+                                  offset: Offset(0, 3),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(8),
+                              shape: BoxShape.rectangle,
+                            ),
+                            alignment: AlignmentDirectional(0, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(23, 0, 12, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
                                       'qnr0o42y' /* Where are you looking? */,
@@ -305,74 +311,83 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
                                   ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 10, 0),
-                                      child: Container(
-                                        width: 36,
-                                        height: 36,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: Color(0xFFF4F4F4),
-                                            width: 1,
-                                          ),
-                                        ),
-                                        child: Icon(
-                                          Icons.map_outlined,
-                                          color: Colors.black,
-                                          size: 18,
-                                        ),
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () async {
-                                        videoPlayers[currentPropertyindex].pause();
-                                        logFirebaseEvent(
-                                            'HOME_SCREEN_Container_13mjruev_ON_TAP');
-                                        logFirebaseEvent(
-                                            'Container_Navigate-To');
-                                        context.pushNamed(
-                                          'Filter',
-                                          extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType: PageTransitionType
-                                                  .bottomToTop,
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 10, 0),
+                                        child: Container(
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Color(0xFFF4F4F4),
+                                              width: 1,
                                             ),
-                                          },
-                                        );
-                                      },
-                                      child: Container(
-                                        width: 36,
-                                        height: 36,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                            color: Color(0xFFF4F4F4),
-                                            width: 1,
+                                          ),
+                                          child: Icon(
+                                            Icons.map_outlined,
+                                            color: Colors.black,
+                                            size: 18,
                                           ),
                                         ),
-                                        child: Icon(
-                                          Icons.filter_list_rounded,
-                                          color: Colors.black,
-                                          size: 18,
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          videoPlayers[currentPropertyindex]
+                                              .pause();
+                                          logFirebaseEvent(
+                                              'HOME_SCREEN_Container_13mjruev_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Container_Navigate-To');
+                                          context.pushNamed(
+                                            'Filter',
+                                            queryParams: {
+                                              'homeScreenLength':
+                                                  serializeParam(
+                                                      videoPlayers.length ?? 0,
+                                                      ParamType.int)
+                                            }.withoutNulls
+                                            ,
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType
+                                                        .bottomToTop,
+                                              ),
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: Color(0xFFF4F4F4),
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: Icon(
+                                            Icons.filter_list_rounded,
+                                            color: Colors.black,
+                                            size: 18,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                    ),
                       ),
                     ),
                   ],
@@ -502,7 +517,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     //       _currentController?.play();
                     //     }
                     //   });
-                   //}
+                    //}
                     return Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: InkWell(
@@ -571,29 +586,38 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         100 ==
                                                     100 &&
                                                 this.mounted) {
-                                              if(!(videoPlayers[propertiesIndex].value.isInitialized)) {
+                                              if (!(videoPlayers[
+                                                      propertiesIndex]
+                                                  .value
+                                                  .isInitialized)) {
                                                 videoPlayers[propertiesIndex]
                                                     .initialize()
                                                     .then((value) {
-                                                  currentPropertyindex = propertiesIndex;
+                                                  currentPropertyindex =
+                                                      propertiesIndex;
                                                   videoPlayers[propertiesIndex]
                                                       .play();
                                                   setState(() {
-                                                    videoPlayers.forEach((otherPlayer) {
-                                                      if (otherPlayer != videoPlayers[propertiesIndex]) {
+                                                    videoPlayers
+                                                        .forEach((otherPlayer) {
+                                                      if (otherPlayer !=
+                                                          videoPlayers[
+                                                              propertiesIndex]) {
+                                                        if (otherPlayer.value
+                                                            .isInitialized) {
+                                                          otherPlayer.pause();
+                                                          // var dataSource = otherPlayer.dataSource;
+                                                          // otherPlayer.dispose();
+                                                          // otherPlayer =
+                                                          //     VideoPlayerController.network(dataSource);
 
-
-                                                          if(otherPlayer.value.isInitialized) {
-                                                            otherPlayer.pause();
-                                                            // var dataSource = otherPlayer.dataSource;
-                                                            // otherPlayer.dispose();
-                                                            // otherPlayer =
-                                                            //     VideoPlayerController.network(dataSource);
-
-                                                          }
-                                                          else{
-                                                            otherPlayer.initialize().then((value) => otherPlayer.pause());
-                                                          }
+                                                        } else {
+                                                          otherPlayer
+                                                              .initialize()
+                                                              .then((value) =>
+                                                                  otherPlayer
+                                                                      .pause());
+                                                        }
                                                       }
                                                     });
                                                     print(
@@ -602,57 +626,61 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   ;
                                                 });
 
-                                              print(
-                                                  "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
-                                              // Future.delayed(const Duration(
-                                              //     seconds: 6), () {
-                                              //   _currentController =
-                                              //   videocontrollerMap[(propertiesIndex)
-                                              //       .toString()];
-                                              //   _currentController?.play();
-                                              // });
-                                              // setState(() {
-                                              //   if (_currentController !=
-                                              //       null) {
-                                              //     _currentController =
-                                              //         videocontrollerMap[
-                                              //             (propertiesIndex)
-                                              //                 .toString()];
-                                              //     _currentController?.play();
-                                              //     videoControllerSet!
-                                              //         .forEach((otherPlayer) {
-                                              //       if (otherPlayer !=
-                                              //               _currentController &&
-                                              //           otherPlayer
-                                              //               .value.isPlaying) {
-                                              //         setState(() {
-                                              //           otherPlayer.pause();
-                                              //         });
-                                              //       }
-                                              //     });
-                                              //     print(
-                                              //         "Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
-                                              //   }
-                                              // });
-                                            } else {
-    videoPlayers[propertiesIndex]
-        .play();
-    currentPropertyindex = propertiesIndex;
-    setState(() {
-    videoPlayers.forEach((otherPlayer) {
+                                                print(
+                                                    "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
+                                                // Future.delayed(const Duration(
+                                                //     seconds: 6), () {
+                                                //   _currentController =
+                                                //   videocontrollerMap[(propertiesIndex)
+                                                //       .toString()];
+                                                //   _currentController?.play();
+                                                // });
+                                                // setState(() {
+                                                //   if (_currentController !=
+                                                //       null) {
+                                                //     _currentController =
+                                                //         videocontrollerMap[
+                                                //             (propertiesIndex)
+                                                //                 .toString()];
+                                                //     _currentController?.play();
+                                                //     videoControllerSet!
+                                                //         .forEach((otherPlayer) {
+                                                //       if (otherPlayer !=
+                                                //               _currentController &&
+                                                //           otherPlayer
+                                                //               .value.isPlaying) {
+                                                //         setState(() {
+                                                //           otherPlayer.pause();
+                                                //         });
+                                                //       }
+                                                //     });
+                                                //     print(
+                                                //         "Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
+                                                //   }
+                                                // });
+                                              } else {
+                                                videoPlayers[propertiesIndex]
+                                                    .play();
+                                                currentPropertyindex =
+                                                    propertiesIndex;
+                                                setState(() {
+                                                  videoPlayers
+                                                      .forEach((otherPlayer) {
+                                                    if (otherPlayer !=
+                                                        videoPlayers[
+                                                            propertiesIndex]) {
+                                                      if (otherPlayer.value
+                                                          .isInitialized) {
+                                                        otherPlayer.pause();
+                                                        // var dataSource = otherPlayer.dataSource;
+                                                        // otherPlayer.dispose();
+                                                        // otherPlayer =
+                                                        //     VideoPlayerController.network(dataSource);
 
-      if (otherPlayer != videoPlayers[propertiesIndex]) {
-        if (otherPlayer.value.isInitialized) {
-          otherPlayer.pause();
-          // var dataSource = otherPlayer.dataSource;
-          // otherPlayer.dispose();
-          // otherPlayer =
-          //     VideoPlayerController.network(dataSource);
-
-        }
-      }
-    });
-    });
+                                                      }
+                                                    }
+                                                  });
+                                                });
                                               }
                                               //autoplayVal = false;
                                             }
@@ -664,28 +692,26 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
                                           },
                                           child: FlutterFlowVideoPlayer(
+                                            // videoControllerSet =
+                                            //     videoControllerValue;
+                                            //
+                                            // print(
+                                            //     "videoControllerSet : ${videoControllerSet}");
+                                            // print(
+                                            //     "videoControllerSet_items : ${videoControllerSet?.length}");
+                                            // //print("videoControllerSet.last :  ${videoControllerSet.last}");
+                                            // //print("propertiesIndex : ${propertiesIndex.toString()}");
+                                            // //print("videocontrollerMap : ${videocontrollerMap.length}");
+                                            // videocontrollerMap[propertiesIndex
+                                            //         .toString()] =
+                                            //     videoControllerSet!.last;
+                                            // print(
+                                            //     "videocontrollerMap : ${videocontrollerMap.length}");
+                                            // _currentController =
+                                            //     videocontrollerMap['0'];
+                                            //
 
-                                              // videoControllerSet =
-                                              //     videoControllerValue;
-                                              //
-                                              // print(
-                                              //     "videoControllerSet : ${videoControllerSet}");
-                                              // print(
-                                              //     "videoControllerSet_items : ${videoControllerSet?.length}");
-                                              // //print("videoControllerSet.last :  ${videoControllerSet.last}");
-                                              // //print("propertiesIndex : ${propertiesIndex.toString()}");
-                                              // //print("videocontrollerMap : ${videocontrollerMap.length}");
-                                              // videocontrollerMap[propertiesIndex
-                                              //         .toString()] =
-                                              //     videoControllerSet!.last;
-                                              // print(
-                                              //     "videocontrollerMap : ${videocontrollerMap.length}");
-                                              // _currentController =
-                                              //     videocontrollerMap['0'];
-                                              //
-
-                                             path:
-                                             getJsonField(
+                                            path: getJsonField(
                                               propertiesItem,
                                               r'''$.attributes.video_manifest_uri''',
                                             ),

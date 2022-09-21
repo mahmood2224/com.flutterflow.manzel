@@ -11,9 +11,11 @@ class WhereAreYouLookingWidget extends StatefulWidget {
   const WhereAreYouLookingWidget({
     Key? key,
     this.city,
+    this.homeScreenLength,
   }) : super(key: key);
 
   final String? city;
+  final int? homeScreenLength;
 
   @override
   _WhereAreYouLookingWidgetState createState() =>
@@ -188,6 +190,9 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                               r'''$.count''',
                                             ),
                                             ParamType.int),
+                                        'homeScreenLength': serializeParam(
+                                        widget.homeScreenLength,
+                                        ParamType.int)
                                       }.withoutNulls,
                                     );
                                   },

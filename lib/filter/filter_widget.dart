@@ -12,7 +12,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FilterWidget extends StatefulWidget {
-  const FilterWidget({Key? key}) : super(key: key);
+  const FilterWidget({Key? key,
+  this.homeScreenLength}) : super(key: key);
+  final int? homeScreenLength;
 
   @override
   _FilterWidgetState createState() => _FilterWidgetState();
@@ -673,6 +675,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             context.pushNamed(
                               'filterResults',
                               queryParams: {
+                                'homeScreenLength':serializeParam(widget.homeScreenLength??0, ParamType.int),
                                 'cityName': serializeParam(
                                     citiesListValue, ParamType.String),
                                 'minInstallment': serializeParam(

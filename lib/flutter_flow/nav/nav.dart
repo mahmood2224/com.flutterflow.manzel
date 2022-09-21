@@ -174,7 +174,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Filter',
               path: 'filter',
-              builder: (context, params) => FilterWidget(),
+              builder: (context, params) => FilterWidget(
+                homeScreenLength: params.getParam('homeScreenLength', ParamType.int),
+              ),
             ),
             FFRoute(
               name: 'PastOffers',
@@ -185,6 +187,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'filterResults',
               path: 'filterResults',
               builder: (context, params) => FilterResultsWidget(
+                homeScreenLength: params.getParam('homeScreenLength', ParamType.int),
                 cityName: params.getParam('cityName', ParamType.String),
                 furnishingType:
                     params.getParam('furnishingType', ParamType.String),
@@ -245,6 +248,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'whereAreYouLooking',
               builder: (context, params) => WhereAreYouLookingWidget(
                 city: params.getParam('city', ParamType.String),
+                homeScreenLength: params.getParam('homeScreenLength', ParamType.int),
               ),
             ),
             FFRoute(
@@ -254,6 +258,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 cityName: params.getParam('cityName', ParamType.String),
                 propertiesAvailable:
                     params.getParam('propertiesAvailable', ParamType.int),
+                homeScreenLength: params.getParam('homeScreenLength', ParamType.int),
               ),
             ),
             FFRoute(
