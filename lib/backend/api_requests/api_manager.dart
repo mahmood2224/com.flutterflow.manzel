@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:core';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:equatable/equatable.dart';
+import 'package:manzel/app_state.dart';
+import 'package:manzel/auth/auth_util.dart';
 
 enum ApiCallType {
   GET,
@@ -19,6 +22,11 @@ enum BodyType {
   TEXT,
   X_WWW_FORM_URL_ENCODED,
 }
+String? refreshCallName;
+ApiCallType? refreshCallType ;
+BodyType? refreshCallBodyType ;
+Map<String, dynamic> refreshCallParams ={};
+String? refreshCallBody;
 
 class ApiCallRecord extends Equatable {
   ApiCallRecord(this.callName, this.apiUrl, this.headers, this.params,
@@ -30,6 +38,7 @@ class ApiCallRecord extends Equatable {
   final String? body;
   final BodyType? bodyType;
 
+
   @override
   List<Object?> get props =>
       [callName, apiUrl, headers, params, body, bodyType];
@@ -40,6 +49,7 @@ class ApiCallResponse {
   final dynamic jsonBody;
   final Map<String, String> headers;
   final int statusCode;
+
   // Whether we recieved a 2xx status (which generally marks success).
   bool get succeeded => statusCode >= 200 && statusCode < 300;
   String getHeader(String headerName) => headers[headerName] ?? '';
@@ -105,6 +115,7 @@ class ApiManager {
     final makeRequest = callType == ApiCallType.GET ? http.get : http.delete;
     final response =
         await makeRequest(Uri.parse(apiUrl), headers: toStringMap(headers));
+
     return ApiCallResponse.fromHttpResponse(response, returnBody);
   }
 
@@ -129,6 +140,13 @@ class ApiManager {
     }[type]!;
     final response = await requestFn(Uri.parse(apiUrl),
         headers: toStringMap(headers), body: postBody);
+    if(response.statusCode != null &&response.statusCode==401){
+      RefreshToken();
+      final api_call_header = response.request!.headers;
+      api_call_header['Authorization'] = "Bearer "+FFAppState().authToken;
+     ApiManager.instance.makeApiCall(callName: refreshCallName!,callType: refreshCallType!,apiUrl: response.request!.url.toString()  ,headers:api_call_header,body: refreshCallBody,params: refreshCallParams,bodyType:refreshCallBodyType );
+
+    }
     return ApiCallResponse.fromHttpResponse(response, returnBody);
   }
 
@@ -174,6 +192,11 @@ class ApiManager {
     bool returnBody = true,
     bool cache = false,
   }) async {
+    refreshCallName = callName;
+    refreshCallType = callType;
+    refreshCallBody = body;
+    refreshCallParams  = params;
+    refreshCallBodyType = bodyType;
     final callRecord =
         ApiCallRecord(callName, apiUrl, headers, params, body, bodyType);
     // Modify for your specific needs if this differs from your API.
@@ -212,4 +235,17 @@ class ApiManager {
 
     return result;
   }
+}
+
+void RefreshToken() async {
+  if (FirebaseAuth.instance.currentUser != null) {
+  final user = FirebaseAuth.instance.currentUser;
+  final idTokenResult = await user!.getIdTokenResult(true);
+  final token = idTokenResult.token;
+  if(token==null){
+    signOut();
+  }
+  FFAppState().authToken = token!;
+
+  print( "********************* Resend auth token wala code${token}");}
 }
