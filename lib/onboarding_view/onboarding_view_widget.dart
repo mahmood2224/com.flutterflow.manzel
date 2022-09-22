@@ -24,6 +24,7 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('ONBOARDING_VIEW_OnboardingView_ON_LOAD');
+      Future.delayed(const Duration(milliseconds: 100), () {
       if (FFAppState().isInitailLaunch) {
         logFirebaseEvent('OnboardingView_Update-Local-State');
         setState(() =>
@@ -35,10 +36,13 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
       }
 
       logFirebaseEvent('OnboardingView_Update-Local-State');
-      setState(
-          () => FFAppState().locale = FFLocalizations.of(context).languageCode);
-    });
+    //   setState(
+    //       () => FFAppState().locale = FFLocalizations.of(context).languageCode);
+      setAppLanguage(context, FFAppState().locale);
+     });
 
+
+    });
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'OnboardingView'});
   }
