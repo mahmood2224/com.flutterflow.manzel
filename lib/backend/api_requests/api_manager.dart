@@ -22,11 +22,6 @@ enum BodyType {
   TEXT,
   X_WWW_FORM_URL_ENCODED,
 }
-String? refreshCallName;
-ApiCallType? refreshCallType ;
-BodyType? refreshCallBodyType ;
-Map<String, dynamic> refreshCallParams ={};
-String? refreshCallBody;
 
 class ApiCallRecord extends Equatable {
   ApiCallRecord(this.callName, this.apiUrl, this.headers, this.params,
@@ -116,12 +111,10 @@ class ApiManager {
     final response =
         await makeRequest(Uri.parse(apiUrl), headers: toStringMap(headers));
     if(response.statusCode != null &&response.statusCode==401){
-      RefreshToken();
-      final api_call_header = response.request!.headers;
-      api_call_header['Authorization'] = "Bearer "+FFAppState().authToken;
-      print("header : ${api_call_header}")
-      ApiManager.instance.makeApiCall(callName: refreshCallName!,callType: refreshCallType!,apiUrl: response.request!.url.toString()  ,headers:api_call_header,body: refreshCallBody,params: refreshCallParams,bodyType:refreshCallBodyType );
-
+      final updatedHeader = await refreshToken(headers);
+      final updatedResponse = await makeRequest(Uri.parse(apiUrl), headers: toStringMap(updatedHeader));
+      if(updatedResponse.statusCode!=null && updatedResponse.statusCode==401){signOut();}
+      return ApiCallResponse.fromHttpResponse(updatedResponse, returnBody);
     }
     return ApiCallResponse.fromHttpResponse(response, returnBody);
   }
@@ -148,11 +141,11 @@ class ApiManager {
     final response = await requestFn(Uri.parse(apiUrl),
         headers: toStringMap(headers), body: postBody);
     if(response.statusCode != null &&response.statusCode==401){
-      RefreshToken();
-      final api_call_header = response.request!.headers;
-      api_call_header['Authorization'] = "Bearer "+FFAppState().authToken;
-     ApiManager.instance.makeApiCall(callName: refreshCallName!,callType: refreshCallType!,apiUrl: response.request!.url.toString()  ,headers:api_call_header,body: refreshCallBody,params: refreshCallParams,bodyType:refreshCallBodyType );
-
+      final updatedHeader = await refreshToken(headers);
+      final updatedResponse = await requestFn(Uri.parse(apiUrl),
+          headers: toStringMap(updatedHeader), body: postBody);
+      if(updatedResponse.statusCode != null &&updatedResponse.statusCode==401){signOut();}
+      return ApiCallResponse.fromHttpResponse(updatedResponse, returnBody);
     }
     return ApiCallResponse.fromHttpResponse(response, returnBody);
   }
@@ -199,11 +192,6 @@ class ApiManager {
     bool returnBody = true,
     bool cache = false,
   }) async {
-    refreshCallName = callName;
-    refreshCallType = callType;
-    refreshCallBody = body;
-    refreshCallParams  = params;
-    refreshCallBodyType = bodyType;
     final callRecord =
         ApiCallRecord(callName, apiUrl, headers, params, body, bodyType);
     // Modify for your specific needs if this differs from your API.
@@ -244,15 +232,14 @@ class ApiManager {
   }
 }
 
-void RefreshToken() async {
+Future<Map<String,dynamic>> refreshToken(Map<String,dynamic> header) async {
   if (FirebaseAuth.instance.currentUser != null) {
   final user = FirebaseAuth.instance.currentUser;
   final idTokenResult = await user!.getIdTokenResult(true);
   final token = idTokenResult.token;
-  if(token==null){
-    signOut();
-  }
+  FFAppState().authToken ='';
   FFAppState().authToken = token!;
-
-  print( "********************* Resend auth token wala code${token}");}
+  }
+  header['Authorization'] = "Bearer "+FFAppState().authToken;
+  return header;
 }

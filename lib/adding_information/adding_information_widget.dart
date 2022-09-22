@@ -188,7 +188,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.95,
                                   child: TermsConditionsBottomSheetWidget(
-                                    pageType: 1,
+                                    pageType: 5,
                                   ),
                                 ),
                               );
@@ -251,7 +251,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.95,
                                   child: TermsConditionsBottomSheetWidget(
-                                    pageType: 2,
+                                    pageType: 6,
                                   ),
                                 ),
                               );
