@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:manzel/backend/backend.dart';
 import 'package:sendbird_sdk/sdk/sendbird_sdk_api.dart';
-
+import '../../enviorment/env_variables.dart';
 import '../auth/auth_util.dart';
 import '../common_widgets/overlay.dart';
 import '../common_widgets/timer_widget.dart';
@@ -259,7 +259,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                         currentUserDocument!.name!.isEmpty) {
                                       final _sendbird = await SendbirdSdk(
                                           appId:
-                                              "0F58DDB9-5DB1-4FC5-A84D-6DD8BBC314FC");
+                                              "${EnvVariables.instance.sendbirdAppId}");
                                       final _ = await _sendbird
                                           .connect(currentUserUid);
                                       context.goNamedAuth(

@@ -5,6 +5,7 @@ import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_result_widget.dart';
+import '../enviorment/env_variables.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -87,7 +88,7 @@ class _OffersWidgetState extends State<OffersWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       final _sendbird = await sendbird.SendbirdSdk(
-          appId: "0F58DDB9-5DB1-4FC5-A84D-6DD8BBC314FC");
+          appId: "${EnvVariables.instance.sendbirdAppId}");
       final _ = await _sendbird.connect(currentUserUid);
       // Future.delayed(Duration(seconds: 5));
       final _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);

@@ -7,7 +7,7 @@ class EnvVariables {
 
   String _strapiBaseUrl = '';
   String _firebaseBaseUrl = '';
-  // String _healthSdkShaKey = '';
+  String _sendbirdAppId = '';
   // String _healthSdkProfileId = '';
   // String _healthSdkPartnerId = '';
   // String _healthSdkTestId = '';
@@ -24,7 +24,7 @@ class EnvVariables {
     //Variables from .env files
      _strapiBaseUrl = dotenv.get('STRAPI_BASE_URL', fallback: '');
      _firebaseBaseUrl = dotenv.get('FIREBASE_BASE_URL', fallback: '');
-    // _healthSdkShaKey = dotenv.get('SSL_SHA_KEY', fallback: '');
+    _sendbirdAppId = dotenv.get('SENDBIRD_FIREBASE_KEY', fallback: '');
     // _healthSdkProfileId = dotenv.get('PROFILE_ID', fallback: '');
     // _healthSdkPartnerId = dotenv.get('PARTNER_ID', fallback: '');
     // _healthSdkTestId = dotenv.get('TEST_ID', fallback: '');
@@ -43,7 +43,7 @@ class EnvVariables {
 
   String get firebaseBaseUrl => _firebaseBaseUrl;
 
-  // String get healthSdkShaKey => _healthSdkShaKey;
+  String get sendbirdAppId => _sendbirdAppId;
   //
   // String get healthSdkProfileId => _healthSdkProfileId;
   //
