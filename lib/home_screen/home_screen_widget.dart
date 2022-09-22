@@ -46,9 +46,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   int _currentItem = 0;
-  bool? isPaused;
+
+  bool isPaused = false;
   bool? autoplayVal;
   List<VideoPlayerController> homeScreenPlayers = [];
+  ValueNotifier<bool> isMuted = ValueNotifier<bool>(true);
+  //ValueNotifier<bool> isPaused = ValueNotifier<bool>(false);
 
   //FlickMultiManager flickMultiManager;
   Set<VideoPlayerController>? videoControllerSet;
@@ -264,12 +267,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                 'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
                             logFirebaseEvent('Text_Navigate-To');
                             context.pushNamed(
-                              'WhereAreYouLooking',queryParams: {
-                              'homeScreenLength':
-                              serializeParam(
-                                  videoPlayers.length ?? 0,
-                                  ParamType.int)
-                            }.withoutNulls,
+                              'WhereAreYouLooking',
+                              queryParams: {
+                                'homeScreenLength': serializeParam(
+                                    videoPlayers.length ?? 0, ParamType.int)
+                              }.withoutNulls,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: TransitionInfo(
                                   hasTransition: true,
@@ -350,8 +352,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   serializeParam(
                                                       videoPlayers.length ?? 0,
                                                       ParamType.int)
-                                            }.withoutNulls
-                                            ,
+                                            }.withoutNulls,
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
                                                   TransitionInfo(
@@ -500,6 +501,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 scrollDirection: Axis.vertical,
                 builderDelegate: PagedChildBuilderDelegate<dynamic>(
                   itemBuilder: (context, propertiesItem, propertiesIndex) {
+                    print('PROPERTIES INDEX >>>>>>>>>>>>>>$propertiesIndex');
                     // ListView.builder(
                     // padding: EdgeInsets.zero,
                     // shrinkWrap: true,
@@ -597,6 +599,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       propertiesIndex;
                                                   videoPlayers[propertiesIndex]
                                                       .play();
+                                                  isPaused = false;
+                                                  isMuted.value
+                                                      ? videoPlayers[
+                                                              propertiesIndex]
+                                                          .setVolume(0)
+                                                      : videoPlayers[
+                                                              propertiesIndex]
+                                                          .setVolume(100);
                                                   setState(() {
                                                     videoPlayers
                                                         .forEach((otherPlayer) {
@@ -661,6 +671,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               } else {
                                                 videoPlayers[propertiesIndex]
                                                     .play();
+                                                isPaused = false;
+                                                isMuted.value
+                                                    ? videoPlayers[
+                                                            propertiesIndex]
+                                                        .setVolume(0)
+                                                    : videoPlayers[
+                                                            propertiesIndex]
+                                                        .setVolume(100);
                                                 currentPropertyindex =
                                                     propertiesIndex;
                                                 setState(() {
@@ -691,6 +709,47 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             // debugPrint(
                                             //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
                                           },
+
+                                          //child: InkWell(
+                                          // onTap: () {
+                                          //   isMuted?isMuted = false:isMuted = true;
+                                          //   isMutedIcon.value = true;
+                                          //   ValueListenableBuilder<bool>(
+                                          //     builder: (BuildContext context,
+                                          //         bool value, Widget? child) {
+                                          //       return Align(
+                                          //         alignment :,
+                                          //         Container(
+                                          //         height: 50,
+                                          //         width: 50,
+                                          //         decoration: BoxDecoration(
+                                          //           color: isMutedIcon.value
+                                          //               ? Colors.black
+                                          //                   .withOpacity(0.5)
+                                          //               : Colors.black
+                                          //                   .withOpacity(0.0),
+                                          //           shape: BoxShape.circle,
+                                          //         ),
+                                          //         child: Icon(
+                                          //           Icons.volume_mute_rounded,
+                                          //           color: isMutedIcon.value
+                                          //               ? Colors.white
+                                          //                   .withOpacity(1.0)
+                                          //               : Colors.black
+                                          //                   .withOpacity(0.0),
+                                          //           size: 40,
+                                          //         ),
+                                          //       ),);
+                                          //     },
+                                          //     valueListenable: isMutedIcon,
+                                          //   );
+                                          //   Future.delayed(
+                                          //           Duration(seconds: 2))
+                                          //       .then((value) {
+                                          //     isMutedIcon.value = false;
+                                          //   });
+                                          //
+                                          // },
                                           child: FlutterFlowVideoPlayer(
                                             // videoControllerSet =
                                             //     videoControllerValue;
@@ -732,48 +791,156 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             allowPlaybackSpeedMenu: false,
                                           ),
                                         ),
+                                        //),
                                       ),
                                     ),
-                                  // Align(
-                                  //   alignment: AlignmentDirectional(0, 0),
-                                  //   child: InkWell(
-                                  //     child: Container(
-                                  //       height: 50,
-                                  //       width: 50,
-                                  //       decoration: BoxDecoration(
-                                  //         color: videoPlayers[currentPropertyindex!]
-                                  //                     ?.value?.isPlaying ??
-                                  //                 true
-                                  //             ? Colors.black.withOpacity(0.0)
-                                  //             : Colors.black.withOpacity(0.5),
-                                  //         shape: BoxShape.circle,
-                                  //       ),
-                                  //       child: Icon(
-                                  //         Icons.play_arrow_rounded,
-                                  //         color: videoPlayers[currentPropertyindex!]
-                                  //                     ?.value?.isPlaying ??
-                                  //                 true
-                                  //             ? Colors.black.withOpacity(0.0)
-                                  //             : Colors.white.withOpacity(1.0),
-                                  //         size: 40,
-                                  //       ),
-                                  //     ),
-                                  //     onTap: () {
-                                  //       if (videoPlayers[propertiesIndex] != null) {
-                                  //         if (videoPlayers[propertiesIndex]!
-                                  //             .value.isPlaying) {
-                                  //           videoPlayers[propertiesIndex]?.pause();
-                                  //           isPaused = true;
-                                  //           setState(() {});
-                                  //         } else {
-                                  //           videoPlayers[propertiesIndex]?.play();
-                                  //           isPaused = false;
-                                  //           setState(() {});
-                                  //         }
-                                  //       }
-                                  //     },
-                                  //   ),
-                                  // ),
+                                  //),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: InkWell(
+                                      onTap: () {
+                                          //print("pause value>>>>>>>>>>>>> $isPaused");
+                                          isPaused =
+                                          isPaused ? false : true;
+
+                                          isPaused
+                                              ? videoPlayers[propertiesIndex]
+                                              .pause()
+                                              : videoPlayers[propertiesIndex]
+                                              .play();
+                                          setState(() {
+
+                                          });
+                                      },
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.3,
+                                        // color: Colors.transparent,
+                                        // child: ValueListenableBuilder(
+                                        //   builder: (BuildContext context,
+                                        //       bool value, Widget? child) {
+                                        //     return
+                                          child: Container(
+                                              margin: EdgeInsets.all(100),
+                                              height: 50,
+                                              width: 50,
+                                              decoration: BoxDecoration(
+                                                color: isPaused
+                                                    ? Colors.black
+                                                        .withOpacity(0.5)
+                                                    : Colors.black
+                                                        .withOpacity(0.0),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                isPaused
+                                                    ? Icons.play_arrow_rounded
+                                                    : Icons.pause,
+                                                color: isPaused
+                                                    ? Colors.white
+                                                        .withOpacity(1.0)
+                                                    : Colors.white
+                                                        .withOpacity(0.0),
+                                                size: 20,
+                                              ),
+                                           // );
+                                          //},
+                                          //valueListenable: isPaused,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child:
+                                    propertiesIndex == currentPropertyindex
+                                        ? Container():Container(
+                                      margin: EdgeInsets.all(100),
+                                      height: 50,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                        color:Colors.black
+                                            .withOpacity(0.5),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Icons.play_arrow_rounded,
+                                        color:  Colors.white
+                                            .withOpacity(1.0),
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0.9, 0.8),
+                                    child: InkWell(
+                                      child: ValueListenableBuilder(
+                                        builder: (BuildContext context,
+                                            bool value, Widget? child) {
+                                          return Container(
+                                            height: 30,
+                                            width: 30,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.black.withOpacity(0.5),
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Icon(
+                                              isMuted.value
+                                                  ? Icons.volume_off_rounded
+                                                  : Icons.volume_up_rounded,
+                                              color:
+                                                  Colors.white.withOpacity(1.0),
+                                              size: 20,
+                                            ),
+                                          );
+                                        },
+                                        valueListenable: isMuted,
+                                      ),
+                                      onTap: () {
+                                        if (videoPlayers[propertiesIndex] !=
+                                            null) {
+                                          if (videoPlayers[propertiesIndex]!
+                                                  .value
+                                                  .volume >
+                                              0) {
+                                            videoPlayers[propertiesIndex]
+                                                ?.setVolume(0);
+                                            isMuted.value = true;
+                                          } else {
+                                            videoPlayers[propertiesIndex]
+                                                ?.setVolume(100);
+                                            isMuted.value = false;
+                                          }
+                                          //   setState(() {
+
+                                          //     Future.delayed(
+                                          //             Duration(seconds: 3))
+                                          //         .then((value) {
+                                          //       isMutedIcon.value = false;
+                                          //       setState(() {});
+                                          //     });
+                                          //   });
+                                          // } else {
+                                          //   videoPlayers[propertiesIndex]
+                                          //       ?.setVolume(100);
+                                          //   setState(() {
+                                          //     isMuted = false;
+                                          //     Future.delayed(
+                                          //             Duration(seconds: 3))
+                                          //         .then((value) {
+                                          //       isMutedIcon.value = false;
+                                          //       setState(() {});
+                                          //     });
+                                          //   });
+                                          // }
+                                        }
+                                      },
+                                    ),
+                                  ),
                                   if (!functions
                                       .videoPlayerVisibilty(getJsonField(
                                     propertiesItem,
@@ -910,6 +1077,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               ),
                                             );
                                           } else {
+                                            videoPlayers[propertiesIndex]
+                                                .pause();
                                             logFirebaseEvent(
                                                 'Container_Navigate-To');
                                             context.pushNamed('Login');
@@ -933,7 +1102,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(1, 1),
+                                    alignment: AlignmentDirectional(-0.9, 1),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 18, 18),
