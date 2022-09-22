@@ -29,7 +29,7 @@ class _BankDetailsBottomSheetWidgetState
       width: 100,
       height: 100,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
+        color: Colors.white,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
