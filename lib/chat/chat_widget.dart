@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:manzel/auth/auth_util.dart';
 
 import '../common_widgets/overlay.dart';
+import '../enviorment/env_variables.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -472,7 +473,7 @@ class _ChatWidgetState extends State<ChatWidget>
         'null',
       );
       final _sendbird = await sendbird.SendbirdSdk(
-          appId: "0F58DDB9-5DB1-4FC5-A84D-6DD8BBC314FC");
+          appId: "${EnvVariables.instance.sendbirdAppId}");
       final _ = await _sendbird.connect(currentUserUid);
       // Future.delayed(Duration(seconds: 5));
       _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);
