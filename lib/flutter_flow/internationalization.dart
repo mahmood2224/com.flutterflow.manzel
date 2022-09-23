@@ -12,6 +12,7 @@ class FFLocalizations {
   static List<String> languages() => ['en', 'ar'];
 
   String get languageCode => locale.toString();
+
   int get languageIndex => languages().contains(languageCode)
       ? languages().indexOf(languageCode)
       : 0;
@@ -78,7 +79,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '5ard5tmn': {
       'en': ' & ',
-      'ar': '&',
+      'ar': ' و ',
     },
     'irbrz9hi': {
       'en': 'privacy policy',
@@ -128,7 +129,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'pgz55f9t': {
       'en': 'We\'ve sent you a 6 digital code via SMS to ',
-      'ar': 'لقد أرسلنا لك 6 رموز رقمية عبر رسالة نصية قصيرة إلى',
+      'ar': 'لقد أرسلنا لك 6 ارقام للتحقق عبر رسالة نصية قصيرة إلى',
     },
     '4ndu996h': {
       'en': 'Enter the OTP number',
@@ -159,7 +160,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'f0scnkco': {
       'en': 'Help & Support',
-      'ar': 'المساعدة و الدعم',
+      'ar': 'المساعدة والدعم',
     },
     '6mgqpd1r': {
       'en': 'Language',
@@ -210,7 +211,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'uzfzq8tl': {
       'en': '& ',
-      'ar': '&',
+      'ar': ' و ',
     },
     'c1o6ckwl': {
       'en': 'privacy policy',
@@ -244,7 +245,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '1fogeuqq': {
       'en': 'Your name',
-      'ar': 'اسمك',
+      'ar': 'الاسم',
     },
     'pv48mvfw': {
       'en': 'Email',
@@ -267,16 +268,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تفاصيل العمل',
     },
     '4w16yzqb': {
-      'en': '2000 - 5000 SAR',
-      'ar': '2000-5000 ريال سعودي',
+      'en': '4,000 - 20,000 SAR',
+      'ar': '4,000 - 20,000 ريال سعودي',
     },
     'him4ym4p': {
-      'en': '5000 - 10000 SAR',
-      'ar': '5000-10000 ريال سعودي',
+      'en': '21,000 - 50,000 SAR',
+      'ar': '21,000 - 50,000 ريال سعودي',
     },
     'pb50wqi5': {
-      'en': '10000 - 30000 SAR',
-      'ar': '10000 - 30000 ريال سعودي',
+      'en': '51,000 - 100,000+ SAR',
+      'ar': '51,000 - 100,000+ ريال سعودي',
     },
     'ae71fn4w': {
       'en': 'Monthly income',
@@ -335,8 +336,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بنك الراتب',
     },
     'doqco3ap': {
-      'en': 'Does the Sakani loan cover you?',
-      'ar': 'هل القرض السكني يغطيك؟',
+      'en': 'Are you eligible for Salani support?',
+      'ar': 'هل انت مستحق للدعم السكني؟',
     },
     'ag8peu33': {
       'en': 'Yes',
@@ -344,15 +345,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'cxroduir': {
       'en': 'No',
-      'ar': 'رقم',
+      'ar': 'لا',
     },
     '91pyvwfe': {
-      'en': 'Submit',
-      'ar': 'يُقدِّم',
+      'en': 'Update',
+      'ar': 'تحديث',
     },
     'w7fbktqj': {
       'en': 'Edit Personal Info',
-      'ar': 'تحرير المعلومات الشخصية',
+      'ar': 'تعديل المعلومات الشخصية',
     },
     'x4a06mk8': {
       'en': 'Home',
@@ -395,7 +396,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '0qmluaen': {
       'en': 'We\'ve sent you a 6 digital code via SMS to ',
-      'ar': 'لقد أرسلنا لك 6 رموز رقمية عبر رسالة نصية قصيرة إلى',
+      'ar': 'لقد أرسلنا لك 6 ارقام للتحقق عبر رسالة نصية قصيرة إلى',
     },
     '3c5hrl5f': {
       'en': 'Enter the OTP number',
@@ -409,48 +410,44 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
       'ar': ' الرئيسية',
     },
-    'OTPBlocked':{
-      'ar':'ممنوع',
-      'en':'Blocked',
+    'OTPBlocked': {
+      'ar': 'محظور',
+      'en': 'Blocked',
     },
-    'OTPBlockedText':{
-      'ar':'حسابك غير فعال. يرجى الاتصال بالدعم لمزيد من المعلومات.',
-      'en':'Your account is not active. Kindly connect to support for more information.',
+    'OTPBlockedText': {
+      'ar': 'حسابك غير فعال. يرجى الاتصال بالدعم لمزيد من المعلومات.',
+      'en':
+          'Your account is not active. Kindly connect to support for more information.',
     },
-    'OTPOk' :{
-      'en':'Ok',
-      'ar':'موافق',
+    'OTPOk': {
+      'en': 'Ok',
+      'ar': 'موافق',
     },
-    'OTPDeactivated':{
-      'en':'Deactivated',
-      'ar':'معطل',
+    'OTPDeactivated': {
+      'en': 'Deactivated',
+      'ar': 'غير مفعل',
     },
-    'OTPDeactivatedText':{
-      'en':'Your account is Deactivated. Kindly connect to support for more information.',
-      'ar':'حسابك معطل. يرجى الاتصال بالدعم لمزيد من المعلومات.',
+    'OTPDeactivatedText': {
+      'en':
+          'Your account is Deactivated. Kindly connect to support for more information.',
+      'ar': 'حسابك غير مفعل. يرجى الاتصال بالدعم لمزيد من المعلومات.',
     },
-    'Resend':{
-      'ar':'أعد إرسال الرمز',
-      'en':'Resend Code'
-    },
-    'ResendTimer':{
-      'ar':'أعد إرسال الرمز على: ',
-      'en':'Resend code in: '
-    },
+    'Resend': {'ar': 'أعد إرسال الرمز', 'en': 'Resend Code'},
+    'ResendTimer': {'ar': 'أعد إرسال الرمز على: ', 'en': 'Resend code in: '}
   },
   // HelpAndSupport
   {
     'ejwcvtm6': {
-      'en': 'Please write us at',
-      'ar': 'الرجاء الكتابة إلينا على',
+      'en': 'Please contact us at',
+      'ar': 'قم بمراسلتنا عبر',
     },
     'su9hen9u': {
       'en': 'manzel@manzel.app',
       'ar': 'manzel@manzel.app',
     },
     'j6a73di8': {
-      'en': 'for any query and concern',
-      'ar': 'لأي استفسار وقلق',
+      'en': 'for any concern',
+      'ar': 'للإجابة على استفساراتك',
     },
     'w6ge88x2': {
       'en': 'Deactivate Account',
@@ -458,7 +455,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'io7ksyi7': {
       'en': 'Help & Support',
-      'ar': 'ساعد لدعم',
+      'ar': 'المساعدة والدعم',
     },
     'gm7tjh1u': {
       'en': 'Home',
@@ -469,11 +466,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     '2cud1oqj': {
       'en': 'Available',
-      'ar': 'متوفرة',
+      'ar': 'متاح',
     },
     'qtso45vv': {
       'en': 'Booked',
-      'ar': 'حجز',
+      'ar': 'محجوز',
     },
     'juw40663': {
       'en': 'Soon',
@@ -485,7 +482,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '2cud1oqj': {
       'en': 'Available',
-      'ar': 'متوفرة',
+      'ar': 'متاح',
     },
     'qtso45vv': {
       'en': 'Booked',
@@ -535,19 +532,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'mthnzz7x': {
       'en': 'Offers',
-      'ar': 'عروض',
+      'ar': 'العروض',
     },
     'r282eka0': {
       'en': 'You have',
-      'ar': 'عندك',
+      'ar': 'لديك',
     },
     '9i2we2yx': {
       'en': 'offers active',
-      'ar': 'العروض النشطة',
+      'ar': 'عروض النشطة',
     },
     'z2siuoeg': {
       'en': ' ',
-      'ar': '',
+      'ar': ' ',
     },
     'muecz7ra': {
       'en': 'You need to create an account or ',
@@ -555,14 +552,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'x824f0mb': {
       'en': 'login to see this section',
-      'ar': 'تسجيل الدخول لرؤية هذا القسم',
+      'ar': 'تسجيل الدخول للإطلاع على هذا القسم',
     },
     '1cb5at0r': {
       'en': 'Login',
       'ar': 'تسجيل الدخول',
     },
     't2kwojss': {
-      'en': 'Offers',
+      'en': 'Offer',
       'ar': 'عرض',
     },
     'n5d3s79r': {
@@ -595,7 +592,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'np7vw75o': {
       'en': 'Property',
-      'ar': 'ملكية',
+      'ar': 'عقار',
     },
     'vs0xmudi': {
       'en': 'Booking Ref.',
@@ -655,14 +652,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'km9ey405': {
       'en': 'Offers',
-      'ar': 'عروض',
+      'ar': 'العروض',
     },
   },
   // Filter
   {
     'h84toi7e': {
       'en': 'Reset',
-      'ar': 'إعادة ضبط',
+      'ar': 'إعادة تعيين',
     },
     'hy8565b9': {
       'en': 'Filter',
@@ -694,7 +691,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'n51panna': {
       'en': 'Type',
-      'ar': 'نوع',
+      'ar': 'النوع',
     },
     'rtp5z5fb': {
       'en': 'All',
@@ -742,7 +739,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wlsjihmj': {
       'en': 'Maximum',
-      'ar': 'بيت',
+      'ar': 'الحد الأقصى',
     },
     '2m2ni5iy': {
       'en': 'Furnishing',
@@ -784,8 +781,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'العروض السابقة',
     },
     '3pqboynr': {
-      'en': 'Offers ',
-      'ar': 'عروض',
+      'en': 'Offer',
+      'ar': 'عرض',
     },
     'mne0k69i': {
       'en': 'Last update: ',
@@ -813,7 +810,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6e3dl9a5': {
       'en': 'Property',
-      'ar': 'ملكية',
+      'ar': 'عقار',
     },
     'dcv75stq': {
       'en': 'Booking Ref.',
@@ -855,8 +852,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // filterResults
   {
     'kmjdnh1c': {
-      'en': 'Filter results ',
-      'ar': 'نتائج التصفية',
+      'en': 'Results ',
+      'ar': 'النتائج',
     },
     'wpcx1tpl': {
       'en': 'properties found',
@@ -892,15 +889,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'llrt5ozo': {
       'en': 'Coming soon',
-      'ar': 'قريبا',
+      'ar': 'قريبًا',
     },
     'plfdsrsb': {
       'en': 'Available',
-      'ar': 'متوفرة',
+      'ar': 'متاح',
     },
     'kevbc07d': {
       'en': 'Booked',
-      'ar': 'تم الحجز ',
+      'ar': 'محجوز',
     },
     'y61ahqus': {
       'en': 'Approved Banks',
@@ -935,7 +932,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     '21gpsvgr': {
       'en': 'My Properties',
-      'ar': 'ممتلكاتي',
+      'ar': 'عقارااتي',
     },
     'w4bgagrv': {
       'en': 'You need to create an account or ',
@@ -963,7 +960,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'hv5vj04i': {
       'en': 'Collect Offer',
-      'ar': 'جمع العرض',
+      'ar': 'جمع العروض',
     },
     'r3xdvf7i': {
       'en': 'Completed',
@@ -1007,7 +1004,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '4uvlncbs': {
       'en': 'Favorite',
-      'ar': 'مفضلة',
+      'ar': 'المفضلة',
     },
     'j1mv6jzk': {
       'en': ', ',
@@ -1019,14 +1016,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'lhqoha7d': {
       'en': 'My Properties',
-      'ar': 'ممتلكاتي',
+      'ar': 'عقاراتي',
     },
   },
   // PropertyDetails
   {
     'ak0ss5un': {
-      'en': 'Updated: ',
-      'ar': 'محدث:',
+      'en': 'Last updated: ',
+      'ar': 'آخر تحديث :',
     },
     'ccsmgbaf': {
       'en': 'Available',
@@ -1037,8 +1034,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'تم الحجز ',
     },
     '9d90para': {
-      'en': 'Apt. Plan',
-      'ar': 'ملائم. يخطط',
+      'en': 'Floor plan',
+      'ar': 'المخطط',
     },
     '73rcbvl6': {
       'en': ', ',
@@ -1049,16 +1046,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'عرض على الخريطة',
     },
     'kqc4ney0': {
-      'en': 'Property manage by ',
-      'ar': 'بواسطة',
+      'en': 'Developed by ',
+      'ar': 'المطور العقاري',
     },
     'd1l98zzs': {
       'en': ' Bedrooms',
-      'ar': 'غرف نوم',
+      'ar': 'غرف',
     },
     'gqq478h5': {
       'en': ' Bathrooms',
-      'ar': 'الحمامات',
+      'ar': 'دورات الميا',
     },
     'swyvkhf5': {
       'en': ' sqm',
@@ -1069,8 +1066,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'غرف المعيشة',
     },
     'nq19lw60': {
-      'en': 'Features and Amenities',
-      'ar': 'المميزات  والمرافق',
+      'en': 'Details',
+      'ar': 'التفاصيل',
     },
     '6brswcwm': {
       'en': 'Ref no.',
@@ -1082,7 +1079,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'bidhdd2g': {
       'en': 'Floor Number',
-      'ar': 'الطابق',
+      'ar': 'رقم الطابق',
     },
     'vrdckjrg': {
       'en': 'Furnishing type',
@@ -1093,8 +1090,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'عرض الشارع',
     },
     'ntqkfyop': {
-      'en': ' m',
-      'ar': 'م',
+      'en': 'm²',
+      'ar': 'م²',
     },
     'e52iigjz': {
       'en': 'Total Price',
@@ -1138,7 +1135,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wzirx8i7': {
       'en': 'Booked',
-      'ar': 'تم الحجز ',
+      'ar': 'محجوز',
     },
   },
   // propertyVideo
@@ -1177,34 +1174,34 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
   },
-  // WhereAreYouLooking
+// WhereAreYouLooking
   {
     'qlysszro': {
       'en': 'Where are you  looking ?',
       'ar': 'أين تبحث ؟',
     },
     'wptanz77': {
-      'en': 'properties available ',
-      'ar': 'الملكيات المتاحة',
+      'en': 'properties available',
+      'ar': 'وحدات متاحة',
     },
     'fce9ky0f': {
       'en': 'Home',
       'ar': ' الرئيسية',
     },
   },
-  // SearchCityResult
+// SearchCityResult
   {
     '81d8z9gv': {
       'en': 'Coming soon',
-      'ar': 'قريبا',
+      'ar': 'قريبًا',
     },
     'z6vaof0z': {
       'en': 'Booked',
-      'ar': 'تم الحجز ',
+      'ar': 'محجوز',
     },
     'rmxl8rt6': {
       'en': 'Available',
-      'ar': 'متوفرة',
+      'ar': 'متاح',
     },
     '5s0m6vc5': {
       'en': 'Approved Banks',
@@ -1259,9 +1256,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'plhqknku': {
       'en':
-          'To confirm the reservation, you need to pay an administration fee. By confirming payment, you agree to our terms & conditions ',
+      'To confirm the reservation, you need to pay an administration fee. By confirming payment, you agree to our terms & conditions ',
       'ar':
-          'لتأكيد الحجز ، يتعين عليك دفع رسوم إدارية. بتأكيد الدفع ، فإنك توافق على الشروط والأحكام الخاصة بنا',
+      'لتأكيد الحجز ، يتعين عليك دفع رسوم إدارية\n .بتأكيد الدفع ، فإنك توافق على الشروط والأحكام الخاصة بنا',
     },
     'jwz7tx3y': {
       'en': 'Reservation cost',
@@ -1338,7 +1335,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'dghbf6mg': {
       'en': 'View Property Details',
-      'ar': 'عرض تفاصيل الملكية',
+      'ar': 'عرض تفاصيل العقار',
     },
     '6on06i4j': {
       'en': 'Order Process',
@@ -1420,9 +1417,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'znz2idhe': {
       'en':
-          'To confirm your booking we need to collect some information from you to fulfill our regulatory obligations.',
+      'To confirm your booking we need to collect some information from you to fulfill our regulatory obligations.',
       'ar':
-          'لتأكيد حجزك ، نحتاج إلى جمع بعض المعلومات منك للوفاء بالتزاماتنا التنظيمية.',
+      'لتأكيد حجزك ، نحتاج إلى جمع بعض المعلومات منك للوفاء بالتزاماتنا التنظيمية.',
     },
     '6sbw69l9': {
       'en': 'Absher verification',
@@ -1465,7 +1462,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '820iwo6l': {
       'en':
-          'To verify your identity, you should be registered in Absher first.',
+      'To verify your identity, you should be registered in Absher first.',
       'ar': 'للتحقق من هويتك ، يجب أن تكون مسجلاً في أبشر أولاً.',
     },
     'sagsx4yq': {
@@ -1497,7 +1494,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     't6diss1v': {
       'en': 'We\'ve sent you a 6 digital code via SMS to ',
-      'ar': 'لقد أرسلنا لك 6 رموز رقمية عبر رسالة نصية قصيرة إلى',
+      'ar': 'لقد أرسلنا لك 6 ارقام تحقق عبر رسالة نصية قصيرة إلى',
     },
     '8b44886a': {
       'en': 'Enter the OTP number',
@@ -1520,9 +1517,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '8gduxe32': {
       'en':
-          'We need to collect some information from you to fulfill our regulatory obligations. Don\'t worry your information is stored safely',
+      'We need to collect some information from you to fulfill our regulatory obligations. Don\'t worry your information is stored safely',
       'ar':
-          'نحتاج إلى جمع بعض المعلومات منك للوفاء بالتزاماتنا التنظيمية. لا تقلق ، يتم تخزين معلوماتك بأمان',
+      'نحتاج إلى جمع بعض المعلومات منك للوفاء بالتزاماتنا التنظيمية. لا تقلق ، يتم تخزين معلوماتك بأمان',
     },
     '3pne660j': {
       'en': 'Personal details',
@@ -1652,7 +1649,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'w2795v66': {
       'en': 'Property Reserved',
-      'ar': 'تم حجز الملكية',
+      'ar': 'تم حجز العقار',
     },
     'm30m3lz9': {
       'en': 'Payment Confirmed',
@@ -1746,242 +1743,242 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'View More',
       'ar': 'عرض المزيد',
     },
-    'qkoz8020': {
-      'en': 'Transaction details',
-      'ar': 'تفاصيل الصفقه',
-    },
-    '0ck5hck8': {
-      'en': 'Payment Method',
-      'ar': 'طريقة الدفع',
-    },
-    'qxs4ycvd': {
-      'en': 'Transaction Ref.',
-      'ar': 'مرجع المعاملة',
-    },
-    'zagvs0yx': {
-      'en': 'Amount',
-      'ar': 'المبلغ',
-    },
-    '17eaou67': {
-      'en': 'SAR',
-      'ar': 'ر.س',
-    },
-    'x0ed6u9h': {
-      'en': 'Date & Time',
-      'ar': 'التاريخ والوقت',
-    },
-    'i7w1em00': {
-      'en': 'View Receipt Transaction',
-      'ar': 'عرض إيصال المعاملة',
-    },
-    'vrsc3lt4': {
-      'en': 'Home',
-      'ar': ' الرئيسية',
-    },
-  },
-  // depositeRecipt
-  {
-    'b8jn4qd2': {
-      'en': 'Deposit Receipt',
-      'ar': 'إيصال الإيداع',
-    },
-    '1t4ox6bl': {
-      'en': 'Home',
-      'ar': '',
-    },
-  },
-  // NotFoundPage
-  {
-    'gmbuwmld': {
-      'en': 'No Result Found',
-      'ar': 'لم يتم العثور على نتائج',
-    },
-  },
-  // bankDetailsBottomSheet
-  {
-    'qb244g7f': {
-      'en': 'Bank Details',
-      'ar': 'تفاصيل البنك',
-    },
-    'ua6uqn3o': {
-      'en': 'Close',
-      'ar': 'إغلاق',
-    },
-  },
-  // NoResultsFound
-  {
-    '1yep0j1q': {
-      'en': 'Explore our properties',
-      'ar': 'اكتشف ممتلكاتنا',
-    },
-  },
-  // reservationBottomSheet
-  {
-    'jaefs5yd': {
-      'en': 'Reservation confirmation',
-      'ar': 'تأكيد الحجز',
-    },
-    'pdty4a6r': {
-      'en':
-          'To confirm the reservation, you need to pay an administration fee. By confirming payment, you ',
-      'ar': 'لتأكيد الحجز ، يتعين عليك دفع رسوم إدارية. بتأكيد الدفع ، أنت',
-    },
-    'njswqwdn': {
-      'en': 'agree to our ',
-      'ar': 'توافق على',
-    },
-    '0gizrv8a': {
-      'en': 'terms & conditions ',
-      'ar': 'الشروط والأحكام',
-    },
-    'iyjhj02m': {
-      'en': 'Reservation cost',
-      'ar': 'تكلفة الحجز',
-    },
-    'wqlgaavg': {
-      'en': 'SAR',
-      'ar': 'ريال سعودي',
-    },
-    'sohxgusa': {
-      'en': 'Note: Reservation cost is non-refundable ',
-      'ar': 'ملاحظة: تكلفة الحجز غير قابلة للاسترداد',
-    },
-    'p0n3wi8y': {
-      'en': 'Select Payment Method',
-      'ar': 'اختار طريقة الدفع',
-    },
-    '0pkqdf0l': {
-      'en': 'Mada/Visa',
-      'ar': 'مدى / فيزا',
-    },
-    'icwlzrr6': {
-      'en': 'ApplePay',
-      'ar': 'ابل باي',
-    },
-    'p50ponkb': {
-      'en': 'Pay',
-      'ar': 'ادفع',
-    },
-  },
-  // cancelReserveBottomSheet
-  {
-    'wb43h3r4': {
-      'en': 'Cancel Reserve',
-      'ar': 'إلغاء الحجز',
-    },
-    't7s7qd09': {
-      'en': 'Cancel',
-      'ar': 'إلغاء',
-    },
-  },
-  // helpAndSupportBottomSheet
-  {
-    'btyml6ed': {
-      'en': 'Help & Support',
-      'ar': 'ساعد لدعم',
-    },
-    'emjcotxb': {
-      'en': 'Please write us at',
-      'ar': 'قم بمراسلتنا عبر',
-    },
-    'hwo08yn2': {
-      'en': 'Support@manzel.app',
-      'ar': 'Support@manzel.app',
-    },
-    'pzfwn97d': {
-      'en': 'for any query and concern',
-      'ar': 'للإجابة على استفساراتك',
-    },
-    'eaazmbdx': {
-      'en': 'Delete Account',
-      'ar': 'حذف الحساب',
-    },
-  },
-  // Miscellaneous
-  {
-    'qr81nfm0': {
-      'en': '',
-      'ar': '',
-    },
-    'uc1oksun': {
-      'en': '',
-      'ar': '',
-    },
-    '1q6kv0ag': {
-      'en': '',
-      'ar': '',
-    },
-    'hfba8ghq': {
-      'en': '',
-      'ar': '',
-    },
-    'iswxm5h0': {
-      'en': '',
-      'ar': '',
-    },
-    'nu2t0b0f': {
-      'en': '',
-      'ar': '',
-    },
-    'jsle1mmd': {
-      'en': '',
-      'ar': '',
-    },
-    '9xs0c7u8': {
-      'en': '',
-      'ar': '',
-    },
-    '9z16oone': {
-      'en': '',
-      'ar': '',
-    },
-    'fem3d7jn': {
-      'en': '',
-      'ar': '',
-    },
-    '6qutc3px': {
-      'en': '',
-      'ar': '',
-    },
-    'j7s33te0': {
-      'en': '',
-      'ar': '',
-    },
-    '8iccyr2w': {
-      'en': '',
-      'ar': '',
-    },
-    'z44qufyb': {
-      'en': '',
-      'ar': '',
-    },
-    'hbhjpb56': {
-      'en': '',
-      'ar': '',
-    },
-    'yhdnkgh9': {
-      'en': '',
-      'ar': '',
-    },
-    'ryrf4mu9': {
-      'en': '',
-      'ar': '',
-    },
-    'tgrrw1pg': {
-      'en': '',
-      'ar': '',
-    },
-    'ny2h6j0x': {
-      'en': '',
-      'ar': '',
-    },
-    'e79jfteg': {
-      'en': '',
-      'ar': '',
-    },
-    'igfljhsl': {
-      'en': '',
-      'ar': '',
-    },
-  },
+'qkoz8020': {
+'en': 'Transaction details',
+'ar': 'تفاصيل الصفقه',
+},
+'0ck5hck8': {
+'en': 'Payment Method',
+'ar': 'طريقة الدفع',
+},
+'qxs4ycvd': {
+'en': 'Transaction Ref.',
+'ar': 'مرجع المعاملة',
+},
+'zagvs0yx': {
+'en': 'Amount',
+'ar': 'المبلغ',
+},
+'17eaou67': {
+'en': 'SAR',
+'ar': 'ر.س',
+},
+'x0ed6u9h': {
+'en': 'Date & Time',
+'ar': 'التاريخ والوقت',
+},
+'i7w1em00': {
+'en': 'View Transaction Receipt',
+'ar': 'عرض إيصال المعاملة',
+},
+'vrsc3lt4': {
+'en': 'Home',
+'ar': ' الرئيسية',
+},
+},
+// depositeRecipt
+    {
+'b8jn4qd2': {
+'en': 'Transaction Receipt',
+'ar':  'إيصال المعاملة',
+},
+'1t4ox6bl': {
+'en': 'Home',
+'ar': '',
+},
+},
+// NotFoundPage
+    {
+'gmbuwmld': {
+'en': 'No Result Found',
+'ar': 'لم يتم العثور على اي نتائج',
+},
+},
+// bankDetailsBottomSheet
+    {
+'qb244g7f': {
+'en': 'Bank Details',
+'ar': 'تفاصيل البنك',
+},
+'ua6uqn3o': {
+'en': 'Close',
+'ar': 'إغلاق',
+},
+},
+// NoResultsFound
+    {
+'1yep0j1q': {
+'en': 'Explore our properties',
+'ar': 'اكتشف عقاراتنا',
+},
+},
+// reservationBottomSheet
+    {
+'jaefs5yd': {
+'en': 'Reservation confirmation',
+'ar': 'تأكيد الحجز',
+},
+'pdty4a6r': {
+'en':
+'To confirm the reservation, you need to pay an administration fee. By confirming payment, you ',
+'ar': '\nلتأكيد الحجز ، يتعين عليك دفع رسوم إدارية. بتأكيد الدفع ، أنت',
+},
+'njswqwdn': {
+'en': 'agree to our ',
+'ar': 'توافق على',
+},
+'0gizrv8a': {
+'en': 'terms & conditions ',
+'ar': 'الشروط والأحكام',
+},
+'iyjhj02m': {
+'en': 'Reservation cost',
+'ar': 'تكلفة الحجز',
+},
+'wqlgaavg': {
+'en': 'SAR',
+'ar': 'ريال سعودي',
+},
+'sohxgusa': {
+'en': 'Note: Reservation cost is non-refundable ',
+'ar': 'ملاحظة: تكلفة الحجز غير قابلة للاسترداد',
+},
+'p0n3wi8y': {
+'en': 'Select Payment Method',
+'ar': 'اختر طريقة الدفع',
+},
+'0pkqdf0l': {
+'en': 'Mada/Visa',
+'ar': 'مدى / فيزا',
+},
+'icwlzrr6': {
+'en': 'ApplePay',
+'ar': 'ابل باي',
+},
+'p50ponkb': {
+'en': 'Pay',
+'ar': 'ادفع',
+},
+},
+// cancelReserveBottomSheet
+    {
+'wb43h3r4': {
+'en': 'Cancel Reserve',
+'ar': 'إلغاء الحجز',
+},
+'t7s7qd09': {
+'en': 'Cancel',
+'ar': 'إلغاء',
+},
+},
+// helpAndSupportBottomSheet
+    {
+'btyml6ed': {
+'en': 'Help & Support',
+'ar': 'المساعدة والدعم',
+},
+'emjcotxb': {
+'en': 'Please write us at',
+'ar': 'قم بمراسلتنا عبر',
+},
+'hwo08yn2': {
+'en': 'Support@manzel.app',
+'ar': 'Support@manzel.app',
+},
+'pzfwn97d': {
+'en': 'for any concern',
+'ar': 'للإجابة على استفساراتك',
+},
+'eaazmbdx': {
+'en': 'Delete Account',
+'ar': 'حذف الحساب',
+},
+},
+// Miscellaneous
+    {
+'qr81nfm0': {
+'en': '',
+'ar': '',
+},
+'uc1oksun': {
+'en': '',
+'ar': '',
+},
+'1q6kv0ag': {
+'en': '',
+'ar': '',
+},
+'hfba8ghq': {
+'en': '',
+'ar': '',
+},
+'iswxm5h0': {
+'en': '',
+'ar': '',
+},
+'nu2t0b0f': {
+'en': '',
+'ar': '',
+},
+'jsle1mmd': {
+'en': '',
+'ar': '',
+},
+'9xs0c7u8': {
+'en': '',
+'ar': '',
+},
+'9z16oone': {
+'en': '',
+'ar': '',
+},
+'fem3d7jn': {
+'en': '',
+'ar': '',
+},
+'6qutc3px': {
+'en': '',
+'ar': '',
+},
+'j7s33te0': {
+'en': '',
+'ar': '',
+},
+'8iccyr2w': {
+'en': '',
+'ar': '',
+},
+'z44qufyb': {
+'en': '',
+'ar': '',
+},
+'hbhjpb56': {
+'en': '',
+'ar': '',
+},
+'yhdnkgh9': {
+'en': '',
+'ar': '',
+},
+'ryrf4mu9': {
+'en': '',
+'ar': '',
+},
+'tgrrw1pg': {
+'en': '',
+'ar': '',
+},
+'ny2h6j0x': {
+'en': '',
+'ar': '',
+},
+'e79jfteg': {
+'en': '',
+'ar': '',
+},
+'igfljhsl': {
+'en': '',
+'ar': '',
+},
+},
 ].reduce((a, b) => a..addAll(b));

@@ -1041,7 +1041,7 @@ String subTitleText(
     case "bookedProperties":
       {
         if (locale == "en") {
-          return "Your booking list is empty. Let's explore our properties.";
+          return " ";
         } else {
           return " ";
         }
@@ -1050,7 +1050,7 @@ String subTitleText(
     case "favorite":
       {
         if (locale == "en") {
-          return "Your save list is empty. Let's exploring our properties.";
+          return " ";
         } else {
           return " ";
         }
@@ -1239,14 +1239,14 @@ String? monthlyIncome(
 ) {
   // Add your function code here!
   List<String> incomeEN = [
-    '2000 - 5000 SAR',
-    '5000 - 10000 SAR',
-    '10000 - 30000 SAR'
+    '4,000 - 20,000 SAR',
+    '21,000 - 50,000 SAR',
+    '51,000 - 100,000+ SAR'
   ];
   List<String> incomeAR = [
-    '2000-5000 ريال سعودي',
-    '5000-10000 ريال سعودي',
-    '10000-30000 ريال سعودي'
+    '4,000 - 20,000 ريال سعودي',
+    '21,000 - 50,000 ريال سعودي',
+    '51,000 - 100,000+ ريال سعودي'
   ];
   if (locale == 'en') {
     if (functionType == 'initialValue') {
