@@ -1821,6 +1821,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             FlutterFlowTheme.of(context).primaryText,
                                                                           ),
                                                                         );
+                                                                       // Future.delayed(const Duration(seconds: 5), () {
+                                                                          setState(
+                                                                                  () => _apiRequestCompleter = null);
+
+                                                                       // });
                                                                       } else {
                                                                         logFirebaseEvent(
                                                                             'Button_Show-Snack-Bar');
@@ -1908,6 +1913,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             FlutterFlowTheme.of(context).primaryText,
                                                                           ),
                                                                         );
+                                                                        // setState(() {
+                                                                        // });
                                                                       } else {
                                                                         logFirebaseEvent(
                                                                             'Button_Show-Snack-Bar');

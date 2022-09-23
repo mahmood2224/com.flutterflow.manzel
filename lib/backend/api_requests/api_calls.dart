@@ -22,7 +22,7 @@ class PropertiesCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Properties',
-      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/',
+      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties',
       callType: ApiCallType.GET,
       headers: {},
       params: {
