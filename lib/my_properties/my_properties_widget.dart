@@ -150,6 +150,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       ),
                                   borderSide: BorderSide(
                                     width: 1,
+                                    color: Colors.transparent,
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                 ),

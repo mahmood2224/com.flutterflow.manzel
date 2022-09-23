@@ -730,7 +730,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                             .withOpacity(1.0)
                                                             : Colors.white
                                                             .withOpacity(0.0),
-                                                        size: 20,
+                                                        size: 40,
                                                       ),
                                                       // );
                                                       //},
@@ -749,14 +749,14 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                   width: 50,
                                                   decoration: BoxDecoration(
                                                     color:Colors.black
-                                                        .withOpacity(0.5),
+                                                        .withOpacity(1.0),
                                                     shape: BoxShape.circle,
                                                   ),
                                                   child: Icon(
                                                     Icons.play_arrow_rounded,
                                                     color:  Colors.white
                                                         .withOpacity(1.0),
-                                                    size: 20,
+                                                    size: 40,
                                                   ),
                                                 ),
                                               ),
@@ -827,56 +827,56 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                   },
                                                 ),
                                               ),
-                                              if (functions.conditionalVisibility(
-                                                  getJsonField(
-                                                    propertiesItem,
-                                                    r'''$.attributes.property_status''',
-                                                  ).toString(),
-                                                  'Available'))
-                                                Align(
-                                                  alignment:
-                                                  AlignmentDirectional(-0.85, -0.8),
-                                                  child: Container(
-                                                    width: 80,
-                                                    height: 26,
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0xFF81D05C),
-                                                      borderRadius:
-                                                      BorderRadius.circular(7),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisSize: MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                      children: [
-                                                        Padding(
-                                                          padding: EdgeInsetsDirectional
-                                                              .fromSTEB(10, 1, 10, 1),
-                                                          child: Text(
-                                                            FFLocalizations.of(context)
-                                                                .getText(
-                                                              '2cud1oqj' /* Available */,
-                                                            ),
-                                                            style:
-                                                            FlutterFlowTheme.of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                              fontFamily:
-                                                              'AvenirArabic',
-                                                              color: FlutterFlowTheme
-                                                                  .of(context)
-                                                                  .white,
-                                                              fontSize: 13,
-                                                              fontWeight:
-                                                              FontWeight.w500,
-                                                              useGoogleFonts: false,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
+                                              // if (functions.conditionalVisibility(
+                                              //     getJsonField(
+                                              //       propertiesItem,
+                                              //       r'''$.attributes.property_status''',
+                                              //     ).toString(),
+                                              //     'Available'))
+                                              //   Align(
+                                              //     alignment:
+                                              //     AlignmentDirectional(-0.85, -0.8),
+                                              //     child: Container(
+                                              //       width: 80,
+                                              //       height: 26,
+                                              //       decoration: BoxDecoration(
+                                              //         color: Color(0xFF81D05C),
+                                              //         borderRadius:
+                                              //         BorderRadius.circular(7),
+                                              //       ),
+                                              //       child: Row(
+                                              //         mainAxisSize: MainAxisSize.max,
+                                              //         mainAxisAlignment:
+                                              //         MainAxisAlignment.center,
+                                              //         children: [
+                                              //           Padding(
+                                              //             padding: EdgeInsetsDirectional
+                                              //                 .fromSTEB(10, 1, 10, 1),
+                                              //             child: Text(
+                                              //               FFLocalizations.of(context)
+                                              //                   .getText(
+                                              //                 '2cud1oqj' /* Available */,
+                                              //               ),
+                                              //               style:
+                                              //               FlutterFlowTheme.of(context)
+                                              //                   .bodyText1
+                                              //                   .override(
+                                              //                 fontFamily:
+                                              //                 'AvenirArabic',
+                                              //                 color: FlutterFlowTheme
+                                              //                     .of(context)
+                                              //                     .white,
+                                              //                 fontSize: 13,
+                                              //                 fontWeight:
+                                              //                 FontWeight.w500,
+                                              //                 useGoogleFonts: false,
+                                              //               ),
+                                              //             ),
+                                              //           ),
+                                              //         ],
+                                              //       ),
+                                              //     ),
+                                              //   ),
                                               if (functions.conditionalVisibility(
                                                   getJsonField(
                                                     propertiesItem,

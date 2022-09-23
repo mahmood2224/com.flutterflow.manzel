@@ -991,6 +991,102 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           ),
                                           Padding(
                                             padding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                16, 35, 16, 0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Container(
+                                                  width: 46,
+                                                  height: 46,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0x80F3F1F1),
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                      color: Color(0x7EF3F1F1),
+                                                      width: 2,
+                                                    ),
+                                                  ),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        30),
+                                                    child: Image.network(
+                                                      PropertyCall.companyLogo(
+                                                        columnPropertyResponse
+                                                            .jsonBody,
+                                                      ),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(13, 0, 0, 0),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                    MainAxisSize.min,
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment
+                                                        .start,
+                                                    children: [
+                                                      Align(
+                                                        alignment:
+                                                        AlignmentDirectional(
+                                                            0, 0),
+                                                        child: Text(
+                                                          FFLocalizations.of(
+                                                              context)
+                                                              .getText(
+                                                            'kqc4ney0' /* Property manage by  */,
+                                                          ),
+                                                          textAlign:
+                                                          TextAlign.start,
+                                                          style: FlutterFlowTheme
+                                                              .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                            fontFamily:
+                                                            'AvenirArabic',
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .w300,
+                                                            useGoogleFonts:
+                                                            false,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        PropertyCall.mangedBy(
+                                                          columnPropertyResponse
+                                                              .jsonBody,
+                                                        ).toString(),
+                                                        style:
+                                                        FlutterFlowTheme.of(
+                                                            context)
+                                                            .bodyText1
+                                                            .override(
+                                                          fontFamily:
+                                                          'Sofia Pro By Khuzaimah',
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .bold,
+                                                          useGoogleFonts:
+                                                          false,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     16, 21, 16, 0),
                                             child: Row(
@@ -1018,6 +1114,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ],
                                             ),
                                           ),
+
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -1110,6 +1207,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     ),
                                                   ],
                                                 ),
+
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(1, 0, 0, 0),
@@ -1208,102 +1306,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ],
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 35, 16, 47),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Container(
-                                                  width: 46,
-                                                  height: 46,
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0x80F3F1F1),
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                      color: Color(0x7EF3F1F1),
-                                                      width: 2,
-                                                    ),
-                                                  ),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30),
-                                                    child: Image.network(
-                                                      PropertyCall.companyLogo(
-                                                        columnPropertyResponse
-                                                            .jsonBody,
-                                                      ),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(13, 0, 0, 0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Align(
-                                                        alignment:
-                                                            AlignmentDirectional(
-                                                                0, 0),
-                                                        child: Text(
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                            'kqc4ney0' /* Developed by  */,
-                                                          ),
-                                                          textAlign:
-                                                              TextAlign.start,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1
-                                                              .override(
-                                                                fontFamily:
-                                                                    'AvenirArabic',
-                                                                fontSize: 13,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                                useGoogleFonts:
-                                                                    false,
-                                                              ),
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        PropertyCall.mangedBy(
-                                                          columnPropertyResponse
-                                                              .jsonBody,
-                                                        ).toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Sofia Pro By Khuzaimah',
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
