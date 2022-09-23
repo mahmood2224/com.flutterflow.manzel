@@ -113,7 +113,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           ),
                         );
                       },
-                    );
+                    ).then((value) => setState(() {}));
                   },
                   child: FaIcon(
                     FontAwesomeIcons.ellipsisH,
@@ -1927,18 +1927,41 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                           onPressed: () async {
                             logFirebaseEvent(
                                 'BOOKING_DETAILS_PAGE_receipt_ON_TAP');
-                            logFirebaseEvent('receipt_Navigate-To');
+                            if (functions.depositReciptSnackBar(
+                                OrderDetailsCall.depositreceipt(
+                              columnOrderDetailsResponse.jsonBody,
+                            ).toString())) {
+                              logFirebaseEvent('receipt_Show-Snack-Bar');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    functions.snackBarMessage(
+                                        'depositReceipt', FFAppState().locale),
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context).white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              );
+                            } else {
+                              logFirebaseEvent('receipt_Navigate-To');
 
-                            context.pushNamed(
-                              'depositeRecipt',
-                              queryParams: {
-                                'depositeRecpit': serializeParam(
-                                    OrderDetailsCall.depositreceipt(
-                                      columnOrderDetailsResponse.jsonBody,
-                                    ).toString(),
-                                    ParamType.String),
-                              }.withoutNulls,
-                            );
+                              context.pushNamed(
+                                'depositeRecipt',
+                                queryParams: {
+                                  'depositeRecpit': serializeParam(
+                                      OrderDetailsCall.depositreceipt(
+                                        columnOrderDetailsResponse.jsonBody,
+                                      ).toString(),
+                                      ParamType.String),
+                                }.withoutNulls,
+                              );
+                            }
                           },
                           text: FFLocalizations.of(context).getText(
                             'i7w1em00' /* View Receipt Transaction */,

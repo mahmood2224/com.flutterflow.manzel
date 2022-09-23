@@ -316,7 +316,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                           );
                         },
-                      );
+                      ).then((value) => setState(() {}));
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -364,7 +364,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                           );
                         },
-                      );
+                      ).then((value) => setState(() {}));
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -412,7 +412,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             ),
                           );
                         },
-                      );
+                      ).then((value) => setState(() {}));
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,

@@ -18,7 +18,6 @@ class ConfirmAbsherWidget extends StatefulWidget {
 
 class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
   TextEditingController? enterOTPController;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -27,6 +26,12 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
     enterOTPController = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ConfirmAbsher'});
+  }
+
+  @override
+  void dispose() {
+    enterOTPController?.dispose();
+    super.dispose();
   }
 
   @override

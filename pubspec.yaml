@@ -79,7 +79,7 @@ dependencies:
   map_launcher: 2.2.3
   mapbox_search: 3.0.1+2
   mime_type: 1.0.0
-  page_transition: 2.0.9
+  page_transition: 2.0.4
   pdfx: 2.2.0
   percent_indicator: 4.2.2
   photo_view: 0.14.0

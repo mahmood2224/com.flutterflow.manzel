@@ -18,7 +18,6 @@ class EditMobileNumberWidget extends StatefulWidget {
 
 class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
   TextEditingController? mobileNumberController;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -32,6 +31,12 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
             'dkoyvgce' /* +966 */,
           );
         }));
+  }
+
+  @override
+  void dispose() {
+    mobileNumberController?.dispose();
+    super.dispose();
   }
 
   @override

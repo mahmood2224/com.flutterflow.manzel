@@ -23,7 +23,6 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget> {
   TextEditingController? phoneNumberController;
-
   bool? changeLanguage;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   OverlayEntry? entry;
@@ -33,6 +32,12 @@ class _LoginWidgetState extends State<LoginWidget> {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Login'});
     phoneNumberController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    phoneNumberController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -287,7 +292,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   ),
                                 ),
                               );
-                            },);
+                            },).then((value) => setState(() {}));
                       },
                       child: Text(
                         FFLocalizations.of(context).getText(
@@ -332,7 +337,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   ),
                                 ),
                               );
-                            },);
+                            },).then((value) => setState(() {}));
                       },
                       child: Text(
                         FFLocalizations.of(context).getText(

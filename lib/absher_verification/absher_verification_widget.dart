@@ -18,9 +18,7 @@ class AbsherVerificationWidget extends StatefulWidget {
 
 class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
   TextEditingController? birthdayController;
-
   TextEditingController? idNumberController;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -30,6 +28,13 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
     idNumberController = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AbsherVerification'});
+  }
+
+  @override
+  void dispose() {
+    birthdayController?.dispose();
+    idNumberController?.dispose();
+    super.dispose();
   }
 
   @override

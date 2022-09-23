@@ -28,16 +28,14 @@ class EditPersonallInfoWidget extends StatefulWidget {
 }
 
 class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
-  TextEditingController? emailController;
-
-  TextEditingController? fullNameController;
-
   ApiCallResponse? bankList;
   String? bankValue;
   ApiCallResponse? emplymentList;
   String? privateSectorValue;
   String? monthlyIncomeValue;
   String? choiceChipsValue;
+  TextEditingController? emailController;
+  TextEditingController? fullNameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -48,6 +46,13 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
         text: valueOrDefault(currentUserDocument?.name, ''));
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'EditPersonallInfo'});
+  }
+
+  @override
+  void dispose() {
+    emailController?.dispose();
+    fullNameController?.dispose();
+    super.dispose();
   }
 
   @override

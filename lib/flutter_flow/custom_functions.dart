@@ -1019,6 +1019,15 @@ String snackBarMessage(
         }
       }
       break;
+    case "depositReceipt":
+      {
+        if (locale == "en") {
+          return "We are working on generating your transaction receipt . Please wait for few moments .";
+        } else {
+          return "نحن نعمل على إصدار إيصال معاملتك. من فضلك انتظر لحظات قليلة.";
+        }
+      }
+      break;
     default:
       {
         {
@@ -1274,5 +1283,14 @@ String? monthlyIncome(
       int ind = incomeAR.indexOf(intialValue!);
       return ind.toString();
     }
+  }
+}
+
+bool depositReciptSnackBar(String? url) {
+  // Add your function code here!
+  if (url == null || url.isEmpty || url == '') {
+    return true;
+  } else {
+    return false;
   }
 }

@@ -20,13 +20,11 @@ class PersonalEmploymentDetailsWidget extends StatefulWidget {
 
 class _PersonalEmploymentDetailsWidgetState
     extends State<PersonalEmploymentDetailsWidget> {
-  TextEditingController? emailController;
-
-  TextEditingController? fullNameController;
-
   String? bankValue;
   String? monthlyIncomeValue;
   String? privateSectorValue;
+  TextEditingController? emailController;
+  TextEditingController? fullNameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -36,6 +34,13 @@ class _PersonalEmploymentDetailsWidgetState
     fullNameController = TextEditingController(text: currentUserDisplayName);
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PersonalEmploymentDetails'});
+  }
+
+  @override
+  void dispose() {
+    emailController?.dispose();
+    fullNameController?.dispose();
+    super.dispose();
   }
 
   @override

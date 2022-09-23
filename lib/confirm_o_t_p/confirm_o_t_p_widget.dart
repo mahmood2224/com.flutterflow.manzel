@@ -17,7 +17,6 @@ class ConfirmOTPWidget extends StatefulWidget {
 
 class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
   TextEditingController? phoneNumberController;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -25,6 +24,12 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'ConfirmOTP'});
     phoneNumberController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    phoneNumberController?.dispose();
+    super.dispose();
   }
 
   @override

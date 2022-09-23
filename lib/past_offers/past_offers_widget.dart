@@ -203,16 +203,12 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title: Text(
-                                                        'Please get your account activated'),
-                                                    content: Text(
-                                                        'You are not an active user please connect admin for further details on ok logout user '),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
                                                             Navigator.pop(
                                                                 alertDialogContext),
-                                                        child: Text('Ok'),
+                                                        child: Text(''),
                                                       ),
                                                     ],
                                                   );
@@ -229,16 +225,12 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title: Text(
-                                                        'يرجى تفعيل حسابك'),
-                                                    content: Text(
-                                                        'أنت لست مستخدمًا نشطًا ، يرجى الاتصال بالمسؤول للحصول على مزيد من التفاصيل'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
                                                             Navigator.pop(
                                                                 alertDialogContext),
-                                                        child: Text('موافق'),
+                                                        child: Text(''),
                                                       ),
                                                     ],
                                                   );
