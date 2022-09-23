@@ -168,6 +168,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                     child: Directionality(
                       textDirection: material.TextDirection.ltr,
                             child: TextFormField(
+                              maxLength: 9,
+                              //buildCounter: Container(),
                               controller: phoneNumberController,
                               onChanged: (_) => EasyDebounce.debounce(
                                 'phoneNumberController',
@@ -181,10 +183,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                               ],
                               obscureText: false,
                               decoration: InputDecoration(
+                                counterText: "",
+                                hintText: "XXXXXXXXXX",
                                 prefixText: FFLocalizations.of(context).getText(
                                   'f4tpckti' /* +966 */,),
                               labelText: FFLocalizations.of(context).getText(
                                 '4m2r1iwr' /* Mobile Number */,
+
                               ),
                               labelStyle: FlutterFlowTheme.of(context)
                                   .bodyText1

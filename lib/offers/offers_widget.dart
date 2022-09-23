@@ -298,7 +298,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                       ),
                       if (widget.propertyId != null && widget.propertyId != '')
                         FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
+                          borderColor: FlutterFlowTheme.of(context).primaryText,
                           borderRadius: 25,
                           borderWidth: 1,
                           buttonSize: 60,
@@ -402,6 +402,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       useGoogleFonts: false,
                                     ),
                                     borderSide: BorderSide(
+                                      color: Colors.transparent,
                                       width: 1,
                                     ),
                                     borderRadius: BorderRadius.circular(12),
