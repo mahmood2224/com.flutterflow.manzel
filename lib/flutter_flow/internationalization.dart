@@ -1013,8 +1013,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'عرض على الخريطة',
     },
     'kqc4ney0': {
-      'en': 'Property manage by ',
-      'ar': 'بواسطة',
+      'en': 'Developed by ',
+      'ar': 'المطور العقاري ',
     },
     'd1l98zzs': {
       'en': ' Bedrooms',

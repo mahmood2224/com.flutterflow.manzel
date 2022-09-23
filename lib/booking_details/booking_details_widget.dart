@@ -1927,10 +1927,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'We are working on genereating your transaction recepit . Please wait for few moments .',
+                                    functions.snackBarMessage(
+                                        'depositReceipt', FFAppState().locale),
                                     style: TextStyle(
                                       color: FlutterFlowTheme.of(context).white,
-                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
                                     ),
                                   ),
                                   duration: Duration(milliseconds: 4000),

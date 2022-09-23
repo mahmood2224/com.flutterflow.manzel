@@ -1049,7 +1049,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           FFLocalizations.of(
                                                                   context)
                                                               .getText(
-                                                            'kqc4ney0' /* Property manage by  */,
+                                                            'kqc4ney0' /* Developed by  */,
                                                           ),
                                                           textAlign:
                                                               TextAlign.start,

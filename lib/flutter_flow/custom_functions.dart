@@ -993,6 +993,15 @@ String snackBarMessage(
         }
       }
       break;
+    case "depositReceipt":
+      {
+        if (locale == "en") {
+          return "We are working on generating your transaction receipt . Please wait for few moments .";
+        } else {
+          return "نحن نعمل على إصدار إيصال معاملتك. من فضلك انتظر لحظات قليلة.";
+        }
+      }
+      break;
     default:
       {
         {
