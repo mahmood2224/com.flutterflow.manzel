@@ -171,7 +171,7 @@ class _ReservationBottomSheetWidgetState
                           ),
                         );
                       },
-                    );
+                    ).then((value) => setState(() {}));
                   },
                   child: Text(
                     FFLocalizations.of(context).getText(

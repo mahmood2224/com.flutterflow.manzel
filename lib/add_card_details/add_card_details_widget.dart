@@ -13,11 +13,8 @@ class AddCardDetailsWidget extends StatefulWidget {
 
 class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
   TextEditingController? cardNumberController1;
-
   TextEditingController? cardNumberController2;
-
   TextEditingController? cardNumberController3;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -28,6 +25,14 @@ class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
     cardNumberController3 = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AddCardDetails'});
+  }
+
+  @override
+  void dispose() {
+    cardNumberController1?.dispose();
+    cardNumberController2?.dispose();
+    cardNumberController3?.dispose();
+    super.dispose();
   }
 
   @override

@@ -2025,7 +2025,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         ),
                                                                       );
                                                                     },
-                                                                  );
+                                                                  ).then((value) =>
+                                                                      setState(
+                                                                          () {}));
                                                                 },
                                                                 child:
                                                                     Container(
@@ -2639,7 +2641,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ),
                                             );
                                           },
-                                        );
+                                        ).then((value) => setState(() {}));
                                       } else {
                                         logFirebaseEvent(
                                             'reserved_Navigate-To');

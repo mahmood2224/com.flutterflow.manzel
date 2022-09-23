@@ -171,19 +171,16 @@ class _HelpAndSupportBottomSheetWidgetState
                             context: context,
                             builder: (alertDialogContext) {
                               return AlertDialog(
-                                title: Text('Delete Account '),
-                                content: Text(
-                                    'Your account deletion will be processed soon'),
                                 actions: [
                                   TextButton(
                                     onPressed: () => Navigator.pop(
                                         alertDialogContext, false),
-                                    child: Text('Cancel'),
+                                    child: Text(''),
                                   ),
                                   TextButton(
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext, true),
-                                    child: Text('Confirm'),
+                                    child: Text(''),
                                   ),
                                 ],
                               );
@@ -214,18 +211,16 @@ class _HelpAndSupportBottomSheetWidgetState
                             context: context,
                             builder: (alertDialogContext) {
                               return AlertDialog(
-                                title: Text('حذف حسابي'),
-                                content: Text('سيتم معالجة حذف حسابك قريبًا'),
                                 actions: [
                                   TextButton(
                                     onPressed: () => Navigator.pop(
                                         alertDialogContext, false),
-                                    child: Text('إلغاء'),
+                                    child: Text(''),
                                   ),
                                   TextButton(
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext, true),
-                                    child: Text('تأكيد'),
+                                    child: Text(''),
                                   ),
                                 ],
                               );

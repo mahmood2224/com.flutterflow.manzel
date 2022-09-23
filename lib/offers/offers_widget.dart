@@ -50,13 +50,10 @@ class _OffersWidgetState extends State<OffersWidget> {
             context: context,
             builder: (alertDialogContext) {
               return AlertDialog(
-                title: Text('Please get your account activated'),
-                content: Text(
-                    'You are not an active user please connect admin for further details'),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('Ok'),
+                    child: Text(''),
                   ),
                 ],
               );
@@ -71,13 +68,10 @@ class _OffersWidgetState extends State<OffersWidget> {
             context: context,
             builder: (alertDialogContext) {
               return AlertDialog(
-                title: Text('الرجاء تفعيل الحساب الخاص بك'),
-                content: Text(
-                    'أنت لست مستخدمًا نشطًا ، تواصل معنا للحصول على مزيد من التفاصيل'),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('موافق'),
+                    child: Text(''),
                   ),
                 ],
               );
@@ -1709,16 +1703,14 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               context: context,
                                                                               builder: (alertDialogContext) {
                                                                                 return AlertDialog(
-                                                                                  title: Text('Accept offer'),
-                                                                                  content: Text('Are you sure you want to accept the offer? we will reject all other offers if you accepted'),
                                                                                   actions: [
                                                                                     TextButton(
                                                                                       onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                      child: Text('No'),
+                                                                                      child: Text(''),
                                                                                     ),
                                                                                     TextButton(
                                                                                       onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                      child: Text('Accept'),
+                                                                                      child: Text(''),
                                                                                     ),
                                                                                   ],
                                                                                 );
@@ -1796,16 +1788,14 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               context: context,
                                                                               builder: (alertDialogContext) {
                                                                                 return AlertDialog(
-                                                                                  title: Text('اقبل العرض'),
-                                                                                  content: Text('هل أنت متأكد أنك تريد قبول العرض؟ سيتم رفض جميع العروض الأخرى بعد قبول هذا العرض'),
                                                                                   actions: [
                                                                                     TextButton(
                                                                                       onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                      child: Text('لا، احتاج بعض من الوقت'),
+                                                                                      child: Text(''),
                                                                                     ),
                                                                                     TextButton(
                                                                                       onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                      child: Text('قبول العرض'),
+                                                                                      child: Text(''),
                                                                                     ),
                                                                                   ],
                                                                                 );

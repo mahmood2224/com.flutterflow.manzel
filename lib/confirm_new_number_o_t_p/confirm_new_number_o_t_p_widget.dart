@@ -18,7 +18,6 @@ class ConfirmNewNumberOTPWidget extends StatefulWidget {
 
 class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   TextEditingController? enterOTPController;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -27,6 +26,12 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
     enterOTPController = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ConfirmNewNumberOTP'});
+  }
+
+  @override
+  void dispose() {
+    enterOTPController?.dispose();
+    super.dispose();
   }
 
   @override

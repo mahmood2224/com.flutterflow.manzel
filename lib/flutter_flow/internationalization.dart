@@ -266,22 +266,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Employment details',
       'ar': 'تفاصيل العمل',
     },
-    '4w16yzqb': {
-      'en': '2000 - 5000 SAR',
-      'ar': '2000-5000 ريال سعودي',
-    },
-    'him4ym4p': {
-      'en': '5000 - 10000 SAR',
-      'ar': '5000-10000 ريال سعودي',
-    },
-    'pb50wqi5': {
-      'en': '10000 - 30000 SAR',
-      'ar': '10000 - 30000 ريال سعودي',
-    },
-    'ae71fn4w': {
-      'en': 'Monthly income',
-      'ar': 'الدخل الشهري',
-    },
     'uj45ba83': {
       'en': 'Private Sector',
       'ar': 'القطاع الخاص',
@@ -313,6 +297,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'gerdd7rv': {
       'en': 'Employment status',
       'ar': 'الحالة الوظيفية',
+    },
+    '4w16yzqb': {
+      'en': '2000 - 5000 SAR',
+      'ar': '2000-5000 ريال سعودي',
+    },
+    'him4ym4p': {
+      'en': '5000 - 10000 SAR',
+      'ar': '5000-10000 ريال سعودي',
+    },
+    'pb50wqi5': {
+      'en': '10000 - 30000 SAR',
+      'ar': '10000 - 30000 ريال سعودي',
+    },
+    'ae71fn4w': {
+      'en': 'Monthly income',
+      'ar': 'الدخل الشهري',
     },
     'xaoukvl0': {
       'en': 'AlRajhi Bank',

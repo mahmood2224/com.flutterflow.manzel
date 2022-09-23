@@ -68,11 +68,9 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
   Widget build(BuildContext context) => _loading
       ? Container(
           color: FlutterFlowTheme.of(context).primaryBackground,
-          child: Builder(
-            builder: (context) => Image.asset(
-              'assets/images/Group_4_(2).png',
-              fit: BoxFit.scaleDown,
-            ),
+          child: Image.asset(
+            'assets/images/Group_4_(2).png',
+            fit: BoxFit.scaleDown,
           ),
         )
       : widget.child;

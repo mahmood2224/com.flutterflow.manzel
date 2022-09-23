@@ -160,19 +160,16 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                             context: context,
                             builder: (alertDialogContext) {
                               return AlertDialog(
-                                title: Text('Deactivate Account '),
-                                content: Text(
-                                    'Are you sure you want to deactivate your account ?'),
                                 actions: [
                                   TextButton(
                                     onPressed: () => Navigator.pop(
                                         alertDialogContext, false),
-                                    child: Text('Cancel'),
+                                    child: Text(''),
                                   ),
                                   TextButton(
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext, true),
-                                    child: Text('Confirm'),
+                                    child: Text(''),
                                   ),
                                 ],
                               );

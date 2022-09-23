@@ -42,19 +42,16 @@ class _CancelReserveBottomSheetWidgetState
                     context: context,
                     builder: (alertDialogContext) {
                       return AlertDialog(
-                        title: Text('Cancel Reserve'),
-                        content: Text(
-                            'Are you sure you want to cancel your reservation?'),
                         actions: [
                           TextButton(
                             onPressed: () =>
                                 Navigator.pop(alertDialogContext, false),
-                            child: Text('No'),
+                            child: Text(''),
                           ),
                           TextButton(
                             onPressed: () =>
                                 Navigator.pop(alertDialogContext, true),
-                            child: Text('Yes'),
+                            child: Text(''),
                           ),
                         ],
                       );

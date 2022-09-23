@@ -1246,3 +1246,12 @@ String? monthlyIncome(
     }
   }
 }
+
+bool depositReciptSnackBar(String? url) {
+  // Add your function code here!
+  if (url == null || url.isEmpty || url == '') {
+    return true;
+  } else {
+    return false;
+  }
+}

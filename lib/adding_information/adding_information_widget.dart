@@ -19,7 +19,6 @@ class AddingInformationWidget extends StatefulWidget {
 
 class _AddingInformationWidgetState extends State<AddingInformationWidget> {
   TextEditingController? fullNameController;
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -28,6 +27,12 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
     fullNameController = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AddingInformation'});
+  }
+
+  @override
+  void dispose() {
+    fullNameController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -193,7 +198,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                 ),
                               );
                             },
-                          );
+                          ).then((value) => setState(() {}));
                         },
                         child: Text(
                           FFLocalizations.of(context).getText(
@@ -256,7 +261,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                 ),
                               );
                             },
-                          );
+                          ).then((value) => setState(() {}));
                         },
                         child: Text(
                           FFLocalizations.of(context).getText(

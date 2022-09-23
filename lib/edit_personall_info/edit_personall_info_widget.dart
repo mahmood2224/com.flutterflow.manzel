@@ -27,16 +27,14 @@ class EditPersonallInfoWidget extends StatefulWidget {
 }
 
 class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
-  TextEditingController? emailController;
-
-  TextEditingController? fullNameController;
-
   ApiCallResponse? bankList;
   String? bankValue;
   ApiCallResponse? emplymentList;
   String? privateSectorValue;
   String? monthlyIncomeValue;
   String? choiceChipsValue;
+  TextEditingController? emailController;
+  TextEditingController? fullNameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -47,6 +45,13 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
         text: valueOrDefault(currentUserDocument?.name, ''));
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'EditPersonallInfo'});
+  }
+
+  @override
+  void dispose() {
+    emailController?.dispose();
+    fullNameController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -344,67 +349,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: AuthUserStreamWidget(
-                                child: FlutterFlowDropDown(
-                                  initialOption: monthlyIncomeValue ??=
-                                      functions.monthlyIncome(
-                                          'initialValue',
-                                          valueOrDefault(
-                                              currentUserDocument
-                                                  ?.monthlyIncome,
-                                              ''),
-                                          FFAppState().locale),
-                                  options: [
-                                    FFLocalizations.of(context).getText(
-                                      '4w16yzqb' /* 2000 - 5000 SAR */,
-                                    ),
-                                    FFLocalizations.of(context).getText(
-                                      'him4ym4p' /* 5000 - 10000 SAR */,
-                                    ),
-                                    FFLocalizations.of(context).getText(
-                                      'pb50wqi5' /* 10000 - 30000 SAR */,
-                                    )
-                                  ],
-                                  onChanged: (val) =>
-                                      setState(() => monthlyIncomeValue = val),
-                                  width: 335,
-                                  height: 55,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                  hintText: FFLocalizations.of(context).getText(
-                                    'ae71fn4w' /* Monthly income */,
-                                  ),
-                                  icon: Icon(
-                                    Icons.keyboard_arrow_down,
-                                    size: 15,
-                                  ),
-                                  fillColor: Colors.white,
-                                  elevation: 2,
-                                  borderColor: Color(0xFFA5A5A5),
-                                  borderWidth: 1,
-                                  borderRadius: 8,
-                                  margin: EdgeInsetsDirectional.fromSTEB(
-                                      12, 4, 12, 4),
-                                  hidesUnderline: true,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                         child: InkWell(
                           onTap: () async {
@@ -502,6 +446,67 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               ),
                             ],
                           ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: AuthUserStreamWidget(
+                                child: FlutterFlowDropDown(
+                                  initialOption: monthlyIncomeValue ??=
+                                      functions.monthlyIncome(
+                                          'initialValue',
+                                          valueOrDefault(
+                                              currentUserDocument
+                                                  ?.monthlyIncome,
+                                              ''),
+                                          FFAppState().locale),
+                                  options: [
+                                    FFLocalizations.of(context).getText(
+                                      '4w16yzqb' /* 2000 - 5000 SAR */,
+                                    ),
+                                    FFLocalizations.of(context).getText(
+                                      'him4ym4p' /* 5000 - 10000 SAR */,
+                                    ),
+                                    FFLocalizations.of(context).getText(
+                                      'pb50wqi5' /* 10000 - 30000 SAR */,
+                                    )
+                                  ],
+                                  onChanged: (val) =>
+                                      setState(() => monthlyIncomeValue = val),
+                                  width: 335,
+                                  height: 55,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'AvenirArabic',
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
+                                      ),
+                                  hintText: FFLocalizations.of(context).getText(
+                                    'ae71fn4w' /* Monthly income */,
+                                  ),
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down,
+                                    size: 15,
+                                  ),
+                                  fillColor: Colors.white,
+                                  elevation: 2,
+                                  borderColor: Color(0xFFA5A5A5),
+                                  borderWidth: 1,
+                                  borderRadius: 8,
+                                  margin: EdgeInsetsDirectional.fromSTEB(
+                                      12, 4, 12, 4),
+                                  hidesUnderline: true,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Padding(

@@ -26,10 +26,10 @@ class _BankDetailsBottomSheetWidgetState
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 100,
+      width: double.infinity,
+      height: double.infinity,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
+        color: FlutterFlowTheme.of(context).white,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,

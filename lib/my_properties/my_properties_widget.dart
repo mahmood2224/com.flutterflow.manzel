@@ -1056,7 +1056,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       ),
                                                                     );
                                                                   },
-                                                                );
+                                                                ).then((value) =>
+                                                                    setState(
+                                                                        () {}));
                                                               },
                                                               text: FFLocalizations
                                                                       .of(context)
