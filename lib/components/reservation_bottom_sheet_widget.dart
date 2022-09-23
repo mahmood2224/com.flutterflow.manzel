@@ -235,6 +235,9 @@ class _ReservationBottomSheetWidgetState
               ));
           entry!.remove();
           break;
+      default:
+        entry!.remove();
+
       }
 
   }
