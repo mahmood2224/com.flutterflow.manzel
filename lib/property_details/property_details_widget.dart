@@ -1120,7 +1120,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               12),
                                                       border: Border.all(
                                                         color:
-                                                            Color(0xFFEED260),
+                                                            Color(0xFFFFD03E),
                                                         width: 2,
                                                       ),
                                                     ),
@@ -1219,7 +1219,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               12),
                                                       border: Border.all(
                                                         color:
-                                                            Color(0xFFEED260),
+                                                            Color(0xFFFFD03E),
                                                         width: 2,
                                                       ),
                                                     ),
@@ -1315,7 +1315,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               12),
                                                       border: Border.all(
                                                         color:
-                                                            Color(0xFFEED260),
+                                                            Color(0xFFFFD03E),
                                                         width: 2,
                                                       ),
                                                     ),
