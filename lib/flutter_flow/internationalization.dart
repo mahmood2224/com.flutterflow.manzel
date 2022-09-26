@@ -822,10 +822,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Filter results ',
       'ar': 'نتائج التصفية',
     },
-    'wpcx1tpl': {
-      'en': 'properties found',
-      'ar': 'نتائج',
-    },
     '7egi5iad': {
       'en': 'All',
       'ar': 'الكل',
@@ -1193,10 +1189,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '6gnj1yz7': {
       'en': '\"',
       'ar': '\"',
-    },
-    'nukctvmg': {
-      'en': 'properties found',
-      'ar': 'نتائج البحث',
     },
     'ntrpmj08': {
       'en': 'Home',

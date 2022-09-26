@@ -1394,3 +1394,43 @@ String agoTextDetailScreen(
     return "null";
   }
 }
+
+String resultText(
+  String? count,
+  String? locale,
+) {
+  // Add your function code here!
+  if (locale!.isNotEmpty && count!.isNotEmpty) {
+    int results = int.parse(count!);
+    if (locale == 'en') {
+      if (results == 1) {
+        return "1 Result Found ";
+      } else {
+        return "${results} Results Found";
+      }
+    } else {
+      if (results == 1) {
+        return "نتيجة واحدة";
+      }
+      if (results == 2) {
+        return "نتيجتين";
+      }
+      if (results >= 3 && results <= 10) {
+        return "${results} نتائج";
+      } else {
+        return "${results} نتيجة";
+      }
+    }
+  } else {
+    return "No results found";
+  }
+}
+
+String intToString(int? num) {
+  // Add your function code here!
+  if (num != null) {
+    return num.toString();
+  } else {
+    return "0";
+  }
+}
