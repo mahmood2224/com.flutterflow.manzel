@@ -252,7 +252,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                 child:
                                                                     SvgPicture
                                                                         .asset(
-                                                                  'assets/images/App_icon_with_background.svg',
+                                                                  'assets/images/icon_list.svg',
                                                                   width: 35,
                                                                   height: 35,
                                                                   fit: BoxFit

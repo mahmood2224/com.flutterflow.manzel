@@ -171,7 +171,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SvgPicture.asset(
-                              'assets/images/App_icon_with_background.svg',
+                              'assets/images/icon_list.svg',
                               width: 45,
                               height: 35,
                               fit: BoxFit.fill,
