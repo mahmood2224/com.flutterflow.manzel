@@ -1124,46 +1124,75 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         width: 2,
                                                       ),
                                                     ),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Icon(
-                                                          Icons
-                                                              .single_bed_outlined,
-                                                          color: Colors.black,
-                                                          size: 24,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      8, 0, 0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            3,
-                                                                            0),
-                                                                child: Text(
-                                                                  PropertyCall
-                                                                      .propertyBedrooms(
-                                                                    columnPropertyResponse
-                                                                        .jsonBody,
-                                                                  ).toString(),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 2, 0, 0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .single_bed_outlined,
+                                                            color: Colors.black,
+                                                            size: 24,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        8,
+                                                                        0,
+                                                                        0),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          3,
+                                                                          0),
+                                                                  child: Text(
+                                                                    PropertyCall
+                                                                        .propertyBedrooms(
+                                                                      columnPropertyResponse
+                                                                          .jsonBody,
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'AvenirArabic',
+                                                                          fontWeight:
+                                                                              FontWeight.w300,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  functions
+                                                                      .bedroomsText(
+                                                                          PropertyCall
+                                                                              .propertyBedrooms(
+                                                                            columnPropertyResponse.jsonBody,
+                                                                          ),
+                                                                          FFAppState()
+                                                                              .locale),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1
@@ -1176,84 +1205,351 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                             false,
                                                                       ),
                                                                 ),
-                                                              ),
-                                                              Text(
-                                                                functions
-                                                                    .bedroomsText(
-                                                                        PropertyCall
-                                                                            .propertyBedrooms(
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                      border: Border.all(
+                                                        color:
+                                                            Color(0xFFEED260),
+                                                        width: 2,
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 2, 0, 0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .bathtub_outlined,
+                                                            color: Colors.black,
+                                                            size: 24,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        8,
+                                                                        0,
+                                                                        0),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          3,
+                                                                          0),
+                                                                  child: Text(
+                                                                    PropertyCall
+                                                                        .propertyBathrooms(
+                                                                      columnPropertyResponse
+                                                                          .jsonBody,
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'AvenirArabic',
+                                                                          fontWeight:
+                                                                              FontWeight.w300,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  functions
+                                                                      .bathroomText(
+                                                                          PropertyCall
+                                                                              .propertyBathrooms(
+                                                                            columnPropertyResponse.jsonBody,
+                                                                          ),
+                                                                          FFAppState()
+                                                                              .locale),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'AvenirArabic',
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                      border: Border.all(
+                                                        color:
+                                                            Color(0xFFEED260),
+                                                        width: 2,
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 2, 0, 0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .design_services_outlined,
+                                                            color: Colors.black,
+                                                            size: 24,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        8,
+                                                                        0,
+                                                                        0),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          3,
+                                                                          0),
+                                                                  child: Text(
+                                                                    PropertyCall
+                                                                        .propertySize(
+                                                                      columnPropertyResponse
+                                                                          .jsonBody,
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'AvenirArabic',
+                                                                          fontWeight:
+                                                                              FontWeight.w300,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'swyvkhf5' /*  sqm */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'AvenirArabic',
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                      border: Border.all(
+                                                        color:
+                                                            Color(0xFFEED260),
+                                                        width: 2,
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 2, 0, 0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .live_tv_rounded,
+                                                            color: Colors.black,
+                                                            size: 24,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        8,
+                                                                        0,
+                                                                        0),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          3,
+                                                                          0),
+                                                                  child: Text(
+                                                                    PropertyCall
+                                                                        .propertyLivingrooms(
+                                                                      columnPropertyResponse
+                                                                          .jsonBody,
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'AvenirArabic',
+                                                                          fontWeight:
+                                                                              FontWeight.w300,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  functions
+                                                                      .livingroomText(
+                                                                          PropertyCall
+                                                                              .propertyLivingrooms(
+                                                                            columnPropertyResponse.jsonBody,
+                                                                          ),
+                                                                          FFAppState()
+                                                                              .locale),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'AvenirArabic',
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                      border: Border.all(
+                                                        color:
+                                                            Color(0xFFEED260),
+                                                        width: 2,
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 2, 0, 0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Icon(
+                                                            Icons
+                                                                .house_outlined,
+                                                            color: Colors.black,
+                                                            size: 24,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        8,
+                                                                        0,
+                                                                        0),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    functions.intText(
+                                                                        PropertyCall.propertyBuiltIn(
                                                                           columnPropertyResponse
                                                                               .jsonBody,
-                                                                        ),
-                                                                        FFAppState()
-                                                                            .locale),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12),
-                                                      border: Border.all(
-                                                        color:
-                                                            Color(0xFFEED260),
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Icon(
-                                                          Icons
-                                                              .bathtub_outlined,
-                                                          color: Colors.black,
-                                                          size: 24,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      8, 0, 0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            3,
-                                                                            0),
-                                                                child: Text(
-                                                                  PropertyCall
-                                                                      .propertyBathrooms(
-                                                                    columnPropertyResponse
-                                                                        .jsonBody,
-                                                                  ).toString(),
+                                                                        ).toString(),
+                                                                        FFAppState().locale),
+                                                                    'null',
+                                                                  ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText1
@@ -1266,283 +1562,22 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                             false,
                                                                       ),
                                                                 ),
-                                                              ),
-                                                              Text(
-                                                                functions
-                                                                    .bathroomText(
-                                                                        PropertyCall
-                                                                            .propertyBathrooms(
-                                                                          columnPropertyResponse
-                                                                              .jsonBody,
-                                                                        ),
-                                                                        FFAppState()
-                                                                            .locale),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12),
-                                                      border: Border.all(
-                                                        color:
-                                                            Color(0xFFEED260),
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Icon(
-                                                          Icons
-                                                              .design_services_outlined,
-                                                          color: Colors.black,
-                                                          size: 24,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      8, 0, 0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            3,
-                                                                            0),
-                                                                child: Text(
-                                                                  PropertyCall
-                                                                      .propertySize(
-                                                                    columnPropertyResponse
-                                                                        .jsonBody,
-                                                                  ).toString(),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontWeight:
-                                                                            FontWeight.w300,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  'swyvkhf5' /*  sqm */,
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12),
-                                                      border: Border.all(
-                                                        color:
-                                                            Color(0xFFEED260),
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Icon(
-                                                          Icons.live_tv_rounded,
-                                                          color: Colors.black,
-                                                          size: 24,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      8, 0, 0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            3,
-                                                                            0),
-                                                                child: Text(
-                                                                  PropertyCall
-                                                                      .propertyLivingrooms(
-                                                                    columnPropertyResponse
-                                                                        .jsonBody,
-                                                                  ).toString(),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontWeight:
-                                                                            FontWeight.w300,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                functions
-                                                                    .livingroomText(
-                                                                        PropertyCall
-                                                                            .propertyLivingrooms(
-                                                                          columnPropertyResponse
-                                                                              .jsonBody,
-                                                                        ),
-                                                                        FFAppState()
-                                                                            .locale),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12),
-                                                      border: Border.all(
-                                                        color:
-                                                            Color(0xFFEED260),
-                                                        width: 2,
-                                                      ),
-                                                    ),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Icon(
-                                                          Icons.house_outlined,
-                                                          color: Colors.black,
-                                                          size: 24,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
-                                                                      8, 0, 0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  functions.intText(
+                                                                Text(
+                                                                  functions.agoTextDetailScreen(
                                                                       PropertyCall.propertyBuiltIn(
                                                                         columnPropertyResponse
                                                                             .jsonBody,
                                                                       ).toString(),
                                                                       FFAppState().locale),
-                                                                  'null',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1,
                                                                 ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                functions.agoTextDetailScreen(
-                                                                    PropertyCall.propertyBuiltIn(
-                                                                      columnPropertyResponse
-                                                                          .jsonBody,
-                                                                    ).toString(),
-                                                                    FFAppState().locale),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1,
-                                                              ),
-                                                            ],
+                                                              ],
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
