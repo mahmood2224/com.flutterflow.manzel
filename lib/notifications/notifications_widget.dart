@@ -7,7 +7,6 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NotificationsWidget extends StatefulWidget {
@@ -250,9 +249,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                         .circular(
                                                                             17.5),
                                                                 child:
-                                                                    SvgPicture
-                                                                        .asset(
-                                                                  'assets/images/icon_list.svg',
+                                                                    Image.asset(
+                                                                  'assets/images/App_Icon___White_(2).png',
                                                                   width: 35,
                                                                   height: 35,
                                                                   fit: BoxFit
