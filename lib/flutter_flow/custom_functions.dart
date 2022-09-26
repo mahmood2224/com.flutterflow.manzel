@@ -45,6 +45,7 @@ bool checkPhoneNumberFormat(String? phoneNumber) {
   }
 }
 
+
 int calculate(String? builtIn) {
   // convert date to age
   final now = DateTime.now();
@@ -376,69 +377,80 @@ String offerScreenTime(
         }
         if (yearsAgo == 2) {
           return "قبل سنتين";
-        } else {
-          return "قبل ${yearsAgo} عاما";
+        }
+        if(yearsAgo >= 3 && yearsAgo <= 10){
+          return "منذ ${yearsAgo} سنوات";
+        }
+        else {
+          return "قبل ${yearsAgo} سنة";
         }
       }
       if ((dayDiffrence % 30) > 0) {
         monthsAgo = dayDiffrence % 30;
         if (monthsAgo == 1) {
-          return "قبل شهر";
+          return "منذ شهر";
         }
         if (monthsAgo == 2) {
-          return "قبل شهرين";
-        } else {
-          return "قبل ${monthsAgo} شهرا";
+          return "منذ شهرين";
+        }
+        if(monthsAgo >= 3 && monthsAgo <= 10){
+          return "منذ ${monthsAgo} أشهر";
+        }
+        else {
+          return "قبل ${monthsAgo} شهر";
         }
       }
       if (dayDiffrence == 1) {
         return "قبل يوم";
       }
+      if(dayDiffrence==2){
+        return "منذ يومين";
+      }
       if (dayDiffrence >= 3 && dayDiffrence <= 10) {
-        return "${dayDiffrence} أيام";
+        return "منذ ${dayDiffrence} أيام";
       } else {
-        return "قبل ${dayDiffrence} أيام";
+        return "منذ ${dayDiffrence} يوم";
       }
     }
     //Hour diffrence
     else if (hrsDiffrence > 0) {
       if (hrsDiffrence == 1) {
-        return "ساعة";
+        return "قبل ساعة";
       }
       if (hrsDiffrence == 2) {
-        return "ساعتين";
+        return "قبل ساعتين";
       }
       if (hrsDiffrence >= 3 && hrsDiffrence <= 10) {
-        return "${hrsDiffrence} ساعات";
+        return "منذ ${hrsDiffrence} ساعات";
       } else {
-        return "${hrsDiffrence} ساعة";
+        return "منذ ${hrsDiffrence} ساعة";
       }
     }
     //Minute diffrence
     else if (minuteDiffrence > 0) {
       if (minuteDiffrence == 1) {
-        return "دقيقة";
+        return "قبل دقيقة";
       }
       if (minuteDiffrence == 2) {
-        return "دقيقتان";
+        return "قبل دقيقتين";
       }
       if (minuteDiffrence >= 3 && minuteDiffrence <= 10) {
-        return "${minuteDiffrence} دقائق";
+        return "منذ ${minuteDiffrence} دقائق";
       } else {
-        return "${minuteDiffrence} دقيقة";
+        return "منذ ${minuteDiffrence} دقيقة";
       }
     } else {
       //Second diffrence
       if (secondDiffence == 1) {
-        return "ثانية";
+        return "قبل ثانية";
       }
       if (secondDiffence == 2) {
-        return "ثانيتان";
+        return "قبل ثانيتين";
       }
       if (secondDiffence >= 3 && secondDiffence <= 10) {
-        return "${secondDiffence} ثواني";
+        return "منذ ${secondDiffence} ثواني";
       } else {
-        return "قبل ${secondDiffence} ثانية";
+        return "منذ ${secondDiffence} ثانية";
       }
     }
   }

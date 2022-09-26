@@ -486,7 +486,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'qtso45vv': {
       'en': 'Booked',
-      'ar': 'تم الحجز ',
+      'ar': 'محجوز ',
     },
     'etpebw43': {
       'en': 'Approved Banks',
@@ -540,7 +540,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '9i2we2yx': {
       'en': 'offers active',
-      'ar': 'عروض النشطة',
+      'ar': 'عروض نشطة',
     },
     'z2siuoeg': {
       'en': ' ',
@@ -548,11 +548,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'muecz7ra': {
       'en': 'You need to create an account or ',
-      'ar': 'تحتاج إلى إنشاء حساب أو',
+      'ar': 'تحتاج إلى إنشاء حساب جديد او',
     },
     'x824f0mb': {
       'en': 'login to see this section',
-      'ar': 'تسجيل الدخول للإطلاع على هذا القسم',
+      'ar': ' تسجيل الدخول اولاًً',
     },
     '1cb5at0r': {
       'en': 'Login',
@@ -932,15 +932,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     '21gpsvgr': {
       'en': 'My Properties',
-      'ar': 'عقارااتي',
+      'ar': ' عقاراتي ',
     },
     'w4bgagrv': {
       'en': 'You need to create an account or ',
-      'ar': 'تحتاج إلى إنشاء حساب أو',
+      'ar': 'تحتاج إلى إنشاء حساب جديد او',
     },
     '9m2bglko': {
       'en': 'login to see this section',
-      'ar': 'تسجيل الدخول لرؤية هذا القسم',
+      'ar': ' تسجيل الدخول اولاً',
     },
     'yo5djc7x': {
       'en': 'Login',
@@ -948,7 +948,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'gl02050s': {
       'en': 'Booked',
-      'ar': 'تم الحجز ',
+      'ar': 'محجوز ',
     },
     'sfs0xn10': {
       'en': 'Offer Accepted',
@@ -1031,7 +1031,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ie4ye37b': {
       'en': 'Booked',
-      'ar': 'تم الحجز ',
+      'ar': 'محجوز ',
     },
     '9d90para': {
       'en': 'Floor plan',
