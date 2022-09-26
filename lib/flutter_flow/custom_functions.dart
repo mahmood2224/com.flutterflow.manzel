@@ -1306,3 +1306,133 @@ bool depositReciptSnackBar(String? url) {
     return false;
   }
 }
+
+String bedroomsText(
+  int? num,
+  String? locale,
+) {
+  if (locale!.isNotEmpty && num != null) {
+    if (locale == 'en') {
+      if (num == 1) {
+        return "Bedroom";
+      }
+      return "Bedrooms";
+    } else {
+      if (num == 1) {
+        return "غرفة";
+      }
+      if (num == 2) {
+        return "غرفتين";
+      }
+      if (num! >= 3 && num <= 11) {
+        return "غرف";
+      } else {
+        return "غرفة";
+      }
+    }
+  } else {
+    return "Bedrooms";
+  }
+  // Add your function code here!
+}
+
+String bathroomText(
+  int? num,
+  String? locale,
+) {
+  // Add your function code here!
+  if (locale!.isNotEmpty && num != null) {
+    if (locale == 'en') {
+      if (num == 1) {
+        return "Bathroom";
+      }
+      return "Bathrooms";
+    } else {
+      if (num == 1) {
+        return "دورة مياة";
+      }
+      if (num == 2) {
+        return "دورتين مياة";
+      }
+      if (num >= 3 && num <= 11) {
+        return "دورات مياة";
+      } else {
+        return "دورة مياة";
+      }
+    }
+  } else {
+    return "Bathrooms";
+  }
+}
+
+String livingroomText(
+  int? num,
+  String? locale,
+) {
+  // Add your function code here
+  if (locale!.isNotEmpty && num != null) {
+    if (locale == 'en') {
+      if (num == 1) {
+        return "Livingroom";
+      }
+      return "Livingrooms";
+    } else {
+      if (num == 1) {
+        return "غرفة معيشة";
+      }
+      if (num == 2) {
+        return "غرفتان معيشة";
+      }
+      if (num! >= 3 && num <= 11) {
+        return "غرف معيشة";
+      } else {
+        return "غرفة معيشة";
+      }
+    }
+  } else {
+    return "Livingroom";
+  }
+}
+
+String intText(
+  String? text,
+  String? locale,
+) {
+  // Add your function code here!
+  if (locale!.isNotEmpty && text!.isNotEmpty) {
+    if (locale == 'en') {
+      final engRegex = RegExp(r'[^0-9].*', multiLine: true);
+      Iterable<String> res =
+          (engRegex.allMatches(text).map((m) => m.group(0)!));
+      return text.replaceAll(res.elementAt(0), '');
+    } else {
+      final arRegex = RegExp(r'\s+(\d+)\s+', multiLine: true);
+      Iterable<String> res = (arRegex.allMatches(text).map((m) => m.group(0)!));
+      return res.elementAt(0);
+    }
+  } else {
+    return "null";
+  }
+}
+
+String agoTextDetailScreen(
+  String? inputText,
+  String? locale,
+) {
+  // Add your function code here!
+  if (locale!.isNotEmpty && inputText!.isNotEmpty) {
+    if (locale == 'en') {
+      final engRegex = RegExp(r'[^0-9].*', multiLine: true);
+      Iterable<String> res =
+          (engRegex.allMatches(inputText).map((m) => m.group(0)!));
+      return res.elementAt(0).trim();
+    } else {
+      final arRegex = RegExp(r'\s+(\d+)\s+', multiLine: true);
+      Iterable<String> res =
+          (arRegex.allMatches(inputText).map((m) => m.group(0)!));
+      return inputText.replaceAll(res.elementAt(0), ' ');
+    }
+  } else {
+    return "null";
+  }
+}
