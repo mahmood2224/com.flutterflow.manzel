@@ -107,9 +107,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SvgPicture.asset(
-                              'assets/images/d9t74_.svg',
-                              width: 43,
-                              height: 31,
+                              'assets/images/icon_list.svg',
+                              width: 45,
+                              height: 35,
                               fit: BoxFit.fill,
                             ),
                             if (loggedIn)
