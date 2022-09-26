@@ -1016,21 +1016,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Developed by ',
       'ar': 'المطور العقاري ',
     },
-    'd1l98zzs': {
-      'en': ' Bedrooms',
-      'ar': 'غرف نوم',
-    },
-    'gqq478h5': {
-      'en': ' Bathrooms',
-      'ar': 'الحمامات',
-    },
     'swyvkhf5': {
       'en': ' sqm',
       'ar': 'متر مربع',
-    },
-    'u0xq15h6': {
-      'en': ' Livingrooms',
-      'ar': 'غرف المعيشة',
     },
     'nq19lw60': {
       'en': 'Features and Amenities',
