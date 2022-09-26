@@ -7,6 +7,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NotificationsWidget extends StatefulWidget {
@@ -235,18 +236,28 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                     0xFF8C8C8C),
                                                               ),
                                                             ),
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          17.5),
-                                                              child:
-                                                                  Image.network(
-                                                                'https://uploads-ssl.webflow.com/62a48421caa93857cfcad452/62a60808a8f8d84ae522eb80_manzel%20logo%20copy%20(1).png',
-                                                                width: 35,
-                                                                height: 35,
-                                                                fit: BoxFit
-                                                                    .cover,
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          3,
+                                                                          3,
+                                                                          3,
+                                                                          3),
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            17.5),
+                                                                child:
+                                                                    SvgPicture
+                                                                        .asset(
+                                                                  'assets/images/App_icon_with_background.svg',
+                                                                  width: 35,
+                                                                  height: 35,
+                                                                  fit: BoxFit
+                                                                      .fill,
+                                                                ),
                                                               ),
                                                             ),
                                                           ),

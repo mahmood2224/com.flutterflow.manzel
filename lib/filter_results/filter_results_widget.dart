@@ -154,9 +154,14 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                       }
                       final textPropertiesResponse = snapshot.data!;
                       return Text(
-                        functions.countJsonData(PropertiesCall.properties(
-                          textPropertiesResponse.jsonBody,
-                        )),
+                        functions.resultText(
+                            valueOrDefault<String>(
+                              functions.countJsonData(PropertiesCall.properties(
+                                textPropertiesResponse.jsonBody,
+                              )),
+                              '0',
+                            ),
+                            FFAppState().locale),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'AvenirArabic',
                               color: Color(0xFF6B6B6B),
@@ -164,19 +169,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                             ),
                       );
                     },
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
-                    child: Text(
-                      FFLocalizations.of(context).getText(
-                        'wpcx1tpl' /* properties found */,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'AvenirArabic',
-                            color: Color(0xFF6B6B6B),
-                            useGoogleFonts: false,
-                          ),
-                    ),
                   ),
                 ],
               ),

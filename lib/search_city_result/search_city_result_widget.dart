@@ -154,25 +154,20 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    widget.propertiesAvailable!.toString(),
+                    valueOrDefault<String>(
+                      functions.resultText(
+                          valueOrDefault<String>(
+                            functions.intToString(widget.propertiesAvailable),
+                            '0',
+                          ),
+                          FFAppState().locale),
+                      '0',
+                    ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'AvenirArabic',
                           color: Color(0xFF6B6B6B),
                           useGoogleFonts: false,
                         ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
-                    child: Text(
-                      FFLocalizations.of(context).getText(
-                        'nukctvmg' /* properties found */,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'AvenirArabic',
-                            color: Color(0xFF6B6B6B),
-                            useGoogleFonts: false,
-                          ),
-                    ),
                   ),
                 ],
               ),
