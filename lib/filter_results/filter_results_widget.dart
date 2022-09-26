@@ -137,8 +137,9 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                       return Text(
                         functions.resultText(
                             valueOrDefault<String>(
-                              functions.countJsonData(
-                                  textPropertiesResponse.jsonBody),
+                              functions.countJsonData(PropertiesCall.properties(
+                                textPropertiesResponse.jsonBody,
+                              )),
                               '0',
                             ),
                             FFAppState().locale),
