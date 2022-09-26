@@ -1190,6 +1190,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '\"',
       'ar': '\"',
     },
+    'nukctvmg': {
+      'en': 'properties found',
+      'ar': 'نتائج البحث',
+    },
     'ntrpmj08': {
       'en': 'Home',
       'ar': 'الرئيسية ',
