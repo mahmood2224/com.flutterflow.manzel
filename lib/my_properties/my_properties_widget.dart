@@ -247,7 +247,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                 functions.subTitleText(
                                                     FFAppState().locale,
                                                     'bookedProperties'),
-                                            isButtonVisible: true,
+                                            isButtonVisible: false,
                                             screenName: 'myPropertiesBooked',
                                           ),
                                         ),
@@ -1177,7 +1177,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                 functions.subTitleText(
                                                     FFAppState().locale,
                                                     'favorite'),
-                                            isButtonVisible: true,
+                                            isButtonVisible: false,
                                             screenName: 'myPropertiesFavorite',
                                           ),
                                         ),
@@ -1455,22 +1455,25 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 20,
                                                                                 0),
                                                                             child:
-                                                                                Text(
+                                                                                Expanded(
+                                                                                  child: Text(
                                                                               valueOrDefault<String>(
-                                                                                getJsonField(
-                                                                                  bookmarkedPropertiesItem,
-                                                                                  r'''$.property_data.property_bathrooms''',
-                                                                                ).toString(),
-                                                                                '0',
+                                                                                  getJsonField(
+                                                                                    bookmarkedPropertiesItem,
+                                                                                    r'''$.property_data.property_bathrooms''',
+                                                                                  ).toString(),
+                                                                                  '0',
                                                                               ),
+                                                                              maxLines: 2,
                                                                               style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                    color: Colors.black,
-                                                                                    fontSize: 12,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
+                                                                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                      color: Colors.black,
+                                                                                      fontSize: 12,
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                      useGoogleFonts: false,
+                                                                                    ),
                                                                             ),
+                                                                                ),
                                                                           ),
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(

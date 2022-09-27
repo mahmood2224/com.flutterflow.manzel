@@ -172,9 +172,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           children: [
                             SvgPicture.asset(
                               'assets/images/d9t74_.svg',
-                              width: 45,
-                              height: 35,
-                              fit: BoxFit.fill,
+                              width: 43,
+                              height: 31,
+                              fit: BoxFit.none,
                             ),
                             if (loggedIn)
                               StreamBuilder<List<NotificationsRecord>>(
@@ -595,18 +595,18 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 videoPlayers[propertiesIndex]
                                                     .initialize()
                                                     .then((value) {
+                                                  isPaused = false;
+                                                  isMuted.value
+                                                      ? videoPlayers[
+                                                  propertiesIndex]
+                                                      .setVolume(0)
+                                                      : videoPlayers[
+                                                  propertiesIndex]
+                                                      .setVolume(100);
                                                   currentPropertyindex =
                                                       propertiesIndex;
                                                   videoPlayers[propertiesIndex]
                                                       .play();
-                                                  isPaused = false;
-                                                  isMuted.value
-                                                      ? videoPlayers[
-                                                              propertiesIndex]
-                                                          .setVolume(0)
-                                                      : videoPlayers[
-                                                              propertiesIndex]
-                                                          .setVolume(100);
                                                   setState(() {
                                                     videoPlayers
                                                         .forEach((otherPlayer) {
@@ -615,6 +615,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                               propertiesIndex]) {
                                                         if (otherPlayer.value
                                                             .isInitialized) {
+                                                          otherPlayer.setVolume(0.0);
                                                           otherPlayer.pause();
                                                           // var dataSource = otherPlayer.dataSource;
                                                           // otherPlayer.dispose();
@@ -627,6 +628,21 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                               .then((value) =>
                                                                   otherPlayer
                                                                       .pause());
+                                                          isPaused = false;
+                                                          isMuted.value
+                                                              ? videoPlayers[
+                                                          propertiesIndex]
+                                                              .setVolume(0)
+                                                              : videoPlayers[
+                                                          propertiesIndex]
+                                                              .setVolume(100);isPaused = false;
+                                                          isMuted.value
+                                                              ? videoPlayers[
+                                                          propertiesIndex]
+                                                              .setVolume(0)
+                                                              : videoPlayers[
+                                                          propertiesIndex]
+                                                              .setVolume(100);
                                                         }
                                                       }
                                                     });
@@ -669,16 +685,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 //   }
                                                 // });
                                               } else {
-                                                videoPlayers[propertiesIndex]
-                                                    .play();
                                                 isPaused = false;
                                                 isMuted.value
                                                     ? videoPlayers[
-                                                            propertiesIndex]
-                                                        .setVolume(0)
+                                                propertiesIndex]
+                                                    .setVolume(0)
                                                     : videoPlayers[
-                                                            propertiesIndex]
-                                                        .setVolume(100);
+                                                propertiesIndex]
+                                                    .setVolume(100);
+                                                videoPlayers[propertiesIndex]
+                                                    .play();
                                                 currentPropertyindex =
                                                     propertiesIndex;
                                                 setState(() {
@@ -689,6 +705,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                             propertiesIndex]) {
                                                       if (otherPlayer.value
                                                           .isInitialized) {
+                                                        otherPlayer.setVolume(0.0);
                                                         otherPlayer.pause();
                                                         // var dataSource = otherPlayer.dataSource;
                                                         // otherPlayer.dispose();

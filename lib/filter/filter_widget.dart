@@ -1,3 +1,5 @@
+import 'package:syncfusion_flutter_sliders/sliders.dart';
+
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -12,8 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FilterWidget extends StatefulWidget {
-  const FilterWidget({Key? key,
-  this.homeScreenLength}) : super(key: key);
+  const FilterWidget({Key? key, this.homeScreenLength}) : super(key: key);
   final int? homeScreenLength;
 
   @override
@@ -26,6 +27,9 @@ class _FilterWidgetState extends State<FilterWidget> {
   String? citiesListValue;
   double? sliderValue1;
   double? sliderValue2;
+  SfRangeValues? installmentRange;
+
+  //= SfRangeValues(0, 2000000);
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -35,23 +39,23 @@ class _FilterWidgetState extends State<FilterWidget> {
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
-
-  void reset(){
+  void reset() {
     setState(() {
       print("Reset should work");
       isFurnishingValues!.clear();
       propertyTypeListValues!.clear();
-      if(FFAppState().locale == 'en'){
+      if (FFAppState().locale == 'en') {
         isFurnishingValues!.add("All");
         propertyTypeListValues!.add("All");
-      }else{
+      } else {
         isFurnishingValues!.add("الكل");
         propertyTypeListValues!.add("الكل");
       }
-      sliderValue1 = null ;
+      sliderValue1 = null;
       sliderValue2 = null;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +81,6 @@ class _FilterWidgetState extends State<FilterWidget> {
               logFirebaseEvent('Text_Update-Local-State');
               setState(() => FFAppState().filterMaxPrice = 0);
               reset();
-
             },
             child: Text(
               FFLocalizations.of(context).getText(
@@ -381,7 +384,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(30, 0, 0, 0),
+                                  EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -389,7 +392,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     valueOrDefault<String>(
                                       functions.formattedSliderOutput(
                                           valueOrDefault<double>(
-                                        sliderValue1,
+                                        double.parse(
+                                            (installmentRange?.start ?? '0')
+                                                .toString()),
                                         1.0,
                                       )),
                                       '1',
@@ -424,7 +429,20 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     valueOrDefault<String>(
                                       functions.formattedSliderOutput(
                                           valueOrDefault<double>(
-                                        sliderValue2,
+                                        double.parse((installmentRange?.end ??
+                                                valueOrDefault<double>(
+                                                  functions.formattedDouble(
+                                                      valueOrDefault<int>(
+                                                    getJsonField(
+                                                      columnPropertiesResponse
+                                                          .jsonBody,
+                                                      r'''$.meta.max_price''',
+                                                    ),
+                                                    1,
+                                                  )),
+                                                  1.0,
+                                                ))
+                                            .toString()),
                                         1.0,
                                       )),
                                       '1',
@@ -472,82 +490,129 @@ class _FilterWidgetState extends State<FilterWidget> {
                             child: Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    FFLocalizations.of(context).getText(
-                                      'q62w4vtf' /* Minimum */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: false,
-                                        ),
+                              child: Container(
+                                child: SliderTheme(
+                                  data: SliderThemeData(
+                                    rangeThumbShape: RoundRangeSliderThumbShape(
+                                        enabledThumbRadius: 15),
+                                    trackHeight: 6,
                                   ),
-                                  Slider(
+                                  child: SfRangeSlider(
+                                    min: 0.0,
+                                    max: 2000000,
+                                    values: installmentRange ??= SfRangeValues(
+                                        0,
+                                        valueOrDefault<double>(
+                                          functions.formattedDouble(
+                                              valueOrDefault<int>(
+                                            getJsonField(
+                                              columnPropertiesResponse.jsonBody,
+                                              r'''$.meta.max_price''',
+                                            ),
+                                            1,
+                                          )),
+                                          1.0,
+                                        )),
+                                    //interval: 2000,
+                                    //stepSize: 1,
+                                    showTicks: false,
+                                    showLabels: false,
+                                    //enableTooltip: true,
                                     activeColor: FlutterFlowTheme.of(context)
                                         .primaryColor,
-                                    inactiveColor: Color(0xFF9E9E9E),
-                                    min: 0,
-                                    max: 200000,
-                                    value: sliderValue1 ??=
-                                        valueOrDefault<double>(
-                                      functions
-                                          .formattedDouble(valueOrDefault<int>(
-                                        getJsonField(
-                                          columnPropertiesResponse.jsonBody,
-                                          r'''$.meta.max_price''',
-                                        ),
-                                        1,
-                                      )),
-                                      1.0,
-                                    ),
-                                    onChanged: (newValue) {
-                                      setState(() => sliderValue1 = newValue);
+                                    //inactiveColor: AppColors.colorDBDBDB,
+                                    //minorTicksPerInterval: 1,
+                                    onChanged: (SfRangeValues values) {
+                                      setState(() {
+                                        installmentRange = values;
+                                        print(installmentRange);
+                                      });
                                     },
                                   ),
-                                  Text(
-                                    FFLocalizations.of(context).getText(
-                                      'wlsjihmj' /* Maximum */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: false,
-                                        ),
-                                  ),
-                                  Slider(
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
-                                    inactiveColor: Color(0xFF9E9E9E),
-                                    min: 0,
-                                    max: 200000,
-                                    value: sliderValue2 ??=
-                                        valueOrDefault<double>(
-                                      functions
-                                          .formattedDouble(valueOrDefault<int>(
-                                        getJsonField(
-                                          columnPropertiesResponse.jsonBody,
-                                          r'''$.meta.max_price''',
-                                        ),
-                                        1,
-                                      )),
-                                      1.0,
-                                    ),
-                                    onChanged: (newValue) {
-                                      setState(() => sliderValue2 = newValue);
-                                    },
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
+                          // Expanded(
+                          //   child: Padding(
+                          //     padding:
+                          //         EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                          //     child: Column(
+                          //       mainAxisSize: MainAxisSize.max,
+                          //       crossAxisAlignment: CrossAxisAlignment.start,
+                          //       children: [
+                          //         Text(
+                          //           FFLocalizations.of(context).getText(
+                          //             'q62w4vtf' /* Minimum */,
+                          //           ),
+                          //           style: FlutterFlowTheme.of(context)
+                          //               .bodyText1
+                          //               .override(
+                          //                 fontFamily: 'AvenirArabic',
+                          //                 fontWeight: FontWeight.normal,
+                          //                 useGoogleFonts: false,
+                          //               ),
+                          //         ),
+                          //         Slider(
+                          //           activeColor: FlutterFlowTheme.of(context)
+                          //               .primaryColor,
+                          //           inactiveColor: Color(0xFF9E9E9E),
+                          //           min: 0,
+                          //           max: 200000,
+                          //           value: sliderValue1 ??=
+                          //               valueOrDefault<double>(
+                          //             functions
+                          //                 .formattedDouble(valueOrDefault<int>(
+                          //               getJsonField(
+                          //                 columnPropertiesResponse.jsonBody,
+                          //                 r'''$.meta.max_price''',
+                          //               ),
+                          //               1,
+                          //             )),
+                          //             1.0,
+                          //           ),
+                          //           onChanged: (newValue) {
+                          //             setState(() => sliderValue1 = newValue);
+                          //           },
+                          //         ),
+                          //         Text(
+                          //           FFLocalizations.of(context).getText(
+                          //             'wlsjihmj' /* Maximum */,
+                          //           ),
+                          //           style: FlutterFlowTheme.of(context)
+                          //               .bodyText1
+                          //               .override(
+                          //                 fontFamily: 'AvenirArabic',
+                          //                 fontWeight: FontWeight.normal,
+                          //                 useGoogleFonts: false,
+                          //               ),
+                          //         ),
+                          //         Slider(
+                          //           activeColor: FlutterFlowTheme.of(context)
+                          //               .primaryColor,
+                          //           inactiveColor: Color(0xFF9E9E9E),
+                          //           min: 0,
+                          //           max: 200000,
+                          //           value: sliderValue2 ??=
+                          //               valueOrDefault<double>(
+                          //             functions
+                          //                 .formattedDouble(valueOrDefault<int>(
+                          //               getJsonField(
+                          //                 columnPropertiesResponse.jsonBody,
+                          //                 r'''$.meta.max_price''',
+                          //               ),
+                          //               1,
+                          //             )),
+                          //             1.0,
+                          //           ),
+                          //           onChanged: (newValue) {
+                          //             setState(() => sliderValue2 = newValue);
+                          //           },
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -669,26 +734,32 @@ class _FilterWidgetState extends State<FilterWidget> {
                         onPressed: () async {
                           logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
                           if (functions.validateInstallmentRange(
-                              sliderValue1, sliderValue2)) {
+                              double.parse(installmentRange!.start.toString()),
+                              double.parse(installmentRange!.end.toString()))) {
                             logFirebaseEvent('apllyFilter_Navigate-To');
 
                             context.pushNamed(
                               'filterResults',
                               queryParams: {
-                                'homeScreenLength':serializeParam(widget.homeScreenLength??0, ParamType.int),
+                                'homeScreenLength': serializeParam(
+                                    widget.homeScreenLength ?? 0,
+                                    ParamType.int),
                                 'cityName': serializeParam(
                                     citiesListValue, ParamType.String),
                                 'minInstallment': serializeParam(
                                     valueOrDefault<String>(
                                       functions
-                                          .sliderToApi(sliderValue1)
+                                          .sliderToApi(double.parse(
+                                              installmentRange!.start
+                                                  .toString()))
                                           .toString(),
                                       '0',
                                     ),
                                     ParamType.String),
                                 'maxInstallment': serializeParam(
                                     functions
-                                        .sliderToApi(sliderValue2)
+                                        .sliderToApi(double.parse(
+                                            installmentRange!.end.toString()))
                                         .toString(),
                                     ParamType.String),
                                 'furnishingType': serializeParam(
