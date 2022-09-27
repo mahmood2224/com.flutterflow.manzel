@@ -162,7 +162,7 @@ class _PersonalEmploymentDetailsWidgetState
                               Duration(milliseconds: 2000),
                               () => setState(() {}),
                             ),
-                            autofocus: true,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: FFLocalizations.of(context).getText(
@@ -222,7 +222,7 @@ class _PersonalEmploymentDetailsWidgetState
                             Duration(milliseconds: 2000),
                             () => setState(() {}),
                           ),
-                          autofocus: true,
+                          autofocus: false,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: FFLocalizations.of(context).getText(

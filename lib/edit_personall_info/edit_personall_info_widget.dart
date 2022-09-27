@@ -119,7 +119,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             child: AuthUserStreamWidget(
                               child: TextFormField(
                                 controller: fullNameController,
-                                autofocus: true,
+                                autofocus: false,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText:
@@ -191,8 +191,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             padding:
                             EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                             child: TextFormField(
+                              onTap: (){
+                                setState(() {});},
                               controller: emailController,
-                              autofocus: true,
+                              autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: FFLocalizations.of(context).getText(
@@ -691,6 +693,22 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
+                          if ((bankValue == null || bankValue == '')&&(privateSectorValue == null ||privateSectorValue == '')||(monthlyIncomeValue == null || monthlyIncomeValue == '')&&(choiceChipsValue == null || choiceChipsValue == '')||(emailController!.text == null || emailController!.text == '')||(fullNameController!.text == null || fullNameController!.text == '')){
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Please fill all the information fields',
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context).white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                            );}else{
                           logFirebaseEvent(
                               'EDIT_PERSONALL_INFO_updatePersonalInfo_O');
                           if (widget.screenName == 'PropertyDetails') {
@@ -787,14 +805,20 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 'updatePersonalInfo_Close-Dialog,-Drawer,');
                             Navigator.pop(context);
                           }
-                        },
+                        }},
                         text: FFLocalizations.of(context).getText(
                           '91pyvwfe' /* Submit */,
                         ),
                         options: FFButtonOptions(
                           width: 343,
                           height: 56,
-                          color: Color(0xFF2971FB),
+                            // emailController!.text,
+                            // fullNameController!.text,
+                            // bankValue,
+                            // privateSectorValue,
+                            // monthlyIncomeValue,
+                            // choiceChipsValue
+                          color: ((bankValue != null && bankValue != '')&&(privateSectorValue != null && privateSectorValue != '')&&(monthlyIncomeValue != null && monthlyIncomeValue != '')&&(choiceChipsValue != null && choiceChipsValue != '')&&(emailController!.text != null && emailController!.text != '')&&(fullNameController!.text != null && fullNameController!.text != ''))?Color(0xFF2971FB):Color(0xFF8C8C8C),
                           textStyle:
                           FlutterFlowTheme.of(context).subtitle1.override(
                             fontFamily: 'AvenirArabic',
