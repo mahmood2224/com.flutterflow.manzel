@@ -1,4 +1,5 @@
 import 'package:eraser/eraser.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +72,7 @@ class _MyAppState extends State<MyApp> {
     // _firebaseMessaging.getToken().then((value) {
     //   print('Your FCM token:- $value');
     // });
+    handleDynamicLinks();
   }
 
   @override
@@ -107,6 +109,42 @@ class _MyAppState extends State<MyApp> {
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
     );
+  }
+  Future<void> handleDynamicLinks()async{
+    PendingDynamicLinkData? _pendingLinks = await FirebaseDynamicLinks.instance.getInitialLink();
+    _handleDeepLinks(_pendingLinks);
+    FirebaseDynamicLinks.instance.onLink.listen(_handleDeepLinks,onError: (Object error)
+    {
+      debugPrint('Error while deeplinking ###### ${error.toString()}');
+    });
+
+  }
+
+  void _handleDeepLinks(PendingDynamicLinkData? data){
+    Uri? deeplinkUri = data?.link;
+   // LoggingService().printLog(message: 'Deeplink Url - > $deeplinkUri',tag: _TAG);
+    if (deeplinkUri != null) {
+      Map<String, dynamic> params = deeplinkUri.queryParameters;
+      if (params.isNotEmpty) {
+        // if(params[AppConstants.kVideoId]!=null) {
+        //   _sharedVideoAction(params[AppConstants.kVideoId]);
+        // }else if(params[AppConstants.kPropertyIdParam]!=null&&params[AppConstants.kOrderId]!=null){
+        //   if(GlobalVariables.isAuthenticated) {
+        //     _handleMyOrderAction(params[AppConstants.kOrderIdParam],
+        //         params[AppConstants.kPropertyIdParam]);
+        //   }
+        // } else if(params[AppConstants.kPropertyIdParam] != null || params[AppConstants.kProjectIdParam] != null){
+        //   _shareProjectOrPropertyAction(params);
+        // }
+        context.pushNamed(
+          'PropertyDetails',
+          queryParams: {
+            'propertyId': params['propertyId'],
+            'path': '',
+          },
+        );
+      }
+    }
   }
 }
 

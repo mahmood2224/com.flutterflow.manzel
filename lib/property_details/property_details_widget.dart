@@ -495,7 +495,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       'share_shareProperty');
 
                                                    await Share.share(
-                                                    await generateDynamicLink({'projectId':widget.propertyId.toString() }, description:  PropertyCall.propertyName(
+                                                    await generateDynamicLink({'propertyId':widget.propertyId, }, description:  PropertyCall.propertyName(
                                                     columnPropertyResponse
                                                         .jsonBody,
                                                   ).toString(), thumbnailUrl:  PropertyCall
@@ -3071,7 +3071,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     );
   }
 
-  Future<String> generateDynamicLink(Map<String,String> params,{required String description, required String? thumbnailUrl})async{
+  Future<String> generateDynamicLink(Map<String,dynamic> params,{required String description, required String? thumbnailUrl})async{
     String url = 'https://www.manzel.app/';
 
     if(params.isNotEmpty){

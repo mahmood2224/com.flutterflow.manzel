@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:url_launcher/url_launcher.dart';
+
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/backend.dart';
@@ -23,6 +27,8 @@ class ProfileWidget extends StatefulWidget {
 class _ProfileWidgetState extends State<ProfileWidget> {
   bool? changeLanguage;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  static const String kWhatsAppAndroid = 'https://api.whatsapp.com/send?phone=';
+  static const String kWhatsAppIOS = 'https://wa.me/';
 
   @override
   void initState() {
@@ -444,6 +450,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   child: FFButtonWidget(
                     onPressed: () {
                       print('Button pressed ...');
+                       openWhatsapp(context);
                     },
                     text: FFLocalizations.of(context).getText(
                       'u6lrslui' /* Chat Manzel in Whatsapp */,
@@ -519,5 +526,39 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         ),
       ),
     );
+  }
+
+  static void  openWhatsapp(BuildContext context) async {
+    var whatsapp = '+966550385531';
+    var whatsappUrlAndroid =
+    Uri.parse('$kWhatsAppAndroid$whatsapp&text=hi');
+    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp');
+    if (Platform.isIOS) {
+      if (await canLaunchUrl(whatsappUrlIos)) {
+        await launchUrl(whatsappUrlIos, mode: LaunchMode.externalApplication);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Cannot open whatsapp',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(color: Colors.white))));
+      }
+    } else {
+      bool canLaunch = await canLaunchUrl(whatsappUrlAndroid);
+      if (canLaunch) {
+        await launchUrl(whatsappUrlAndroid,
+            mode: LaunchMode.externalApplication);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+              'Cannot open whatsapp',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: Colors.white),
+            )));
+      }
+    }
   }
 }

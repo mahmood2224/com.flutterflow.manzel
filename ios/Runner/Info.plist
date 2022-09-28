@@ -85,6 +85,9 @@
 		<string>osmandmaps</string>
 		<string>dgis</string>
 		<string>qqmap</string>
+        <string>https</string>
+        <string>http</string>
+        <string>whatsapp</string>
 		<string>here-location</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
