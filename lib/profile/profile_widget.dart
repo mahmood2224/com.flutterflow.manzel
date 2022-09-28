@@ -439,9 +439,41 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                  child: FFButtonWidget(
+                    onPressed: () {
+                      print('Button pressed ...');
+                    },
+                    text: FFLocalizations.of(context).getText(
+                      'u6lrslui' /* Chat Manzel in Whatsapp */,
+                    ),
+                    icon: Icon(
+                      Icons.share_rounded,
+                      size: 15,
+                    ),
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 52,
+                      color: Color(0xFF4AC85A),
+                      textStyle:
+                          FlutterFlowTheme.of(context).subtitle2.override(
+                                fontFamily: 'AvenirArabic',
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                useGoogleFonts: false,
+                              ),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                  ),
+                ),
                 if (loggedIn)
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 31, 20, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,

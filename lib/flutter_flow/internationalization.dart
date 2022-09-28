@@ -178,6 +178,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Terms & Conditions',
       'ar': 'الشروط والأحكام',
     },
+    'u6lrslui': {
+      'en': 'Chat Manzel in Whatsapp',
+      'ar': 'دردشة المنزل في الواتس اب',
+    },
     '2csoqw0t': {
       'en': 'Logout',
       'ar': 'تسجيل خروج',
