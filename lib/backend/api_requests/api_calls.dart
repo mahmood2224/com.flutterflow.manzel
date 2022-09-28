@@ -199,6 +199,10 @@ class PropertyCall {
     response,
     r'''$.data.id''',
   );
+  static dynamic thumbnailImage(dynamic response) => getJsonField(
+    response,
+    r'''$.data.attributes.property_images.data[0].attributes.formats.thumbnail.url''',
+  );
 }
 
 class FilterCall {

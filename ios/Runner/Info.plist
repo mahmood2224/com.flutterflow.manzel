@@ -32,6 +32,16 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>manzeldev.page.link</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>https</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.1004584112880-4horea6t29aarfc4irj7vr57ue0jl8j9</string>
@@ -84,7 +94,7 @@
 	<key>NSAllowsArbitraryLoads</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to your  phone's camera</string>
+	<string>This app requires access to your  phone&apos;s camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This application requires location permission to get your current location</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

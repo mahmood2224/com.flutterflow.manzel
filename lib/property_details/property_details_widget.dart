@@ -1,4 +1,5 @@
 import 'package:chewie/chewie.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -492,8 +493,16 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   // shareProperty
                                                   logFirebaseEvent(
                                                       'share_shareProperty');
-                                                  await Share.share(
-                                                      'manzel://manzel.com${GoRouter.of(context).location}');
+
+                                                   await Share.share(
+                                                    await generateDynamicLink({'projectId':widget.propertyId.toString() }, description:  PropertyCall.propertyName(
+                                                    columnPropertyResponse
+                                                        .jsonBody,
+                                                  ).toString(), thumbnailUrl:  PropertyCall
+                                                      .thumbnailImage(
+                                                    columnPropertyResponse
+                                                        .jsonBody
+                                                  )));
                                                 },
                                               ),
                                             ),
@@ -3060,6 +3069,42 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         ),
       ),
     );
+  }
+
+  Future<String> generateDynamicLink(Map<String,String> params,{required String description, required String? thumbnailUrl})async{
+    String url = 'https://www.manzel.app/';
+
+    if(params.isNotEmpty){
+      url = '$url?';
+    }
+
+    List<String> keys =  params.keys.toList();
+    for(int i=0;i<keys.length;i++){
+      url += '${keys[i]}=${params[keys[i]]}';
+      if(i<keys.length-1){
+        url+='&';
+      }
+    }
+
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      socialMetaTagParameters: SocialMetaTagParameters(
+          title: "Join Manzel to see what I've been upto",
+          imageUrl: Uri.parse(thumbnailUrl!),
+          description: description
+      ),
+      uriPrefix: 'https://manzeldev.page.link',
+      link: Uri.parse(url),
+      androidParameters: const AndroidParameters(
+        packageName: 'com.flutterflow.manzel',
+        minimumVersion: 1,
+      ),
+      iosParameters: const IOSParameters(
+        bundleId: 'com.flutterflow.manzel',
+        minimumVersion: '1',
+      ),
+    );
+    ShortDynamicLink uri = await FirebaseDynamicLinks.instance.buildShortLink(parameters,shortLinkType: ShortDynamicLinkType.short);
+    return uri.shortUrl.toString();
   }
 }
 
