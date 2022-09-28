@@ -1959,6 +1959,15 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         columnOrderDetailsResponse.jsonBody,
                                       ).toString(),
                                       ParamType.String),
+                                  'propertyName': serializeParam(
+                                      valueOrDefault<String>(
+                                        getJsonField(
+                                          columnOrderDetailsResponse.jsonBody,
+                                          r'''$.result.property_data.property_name''',
+                                        ).toString(),
+                                        'null'
+                                      ),
+                                      ParamType.String),
                                 }.withoutNulls,
                               );
                             }

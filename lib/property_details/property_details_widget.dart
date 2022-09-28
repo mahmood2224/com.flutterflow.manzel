@@ -7,6 +7,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:manzel/common_widgets/my_flutter_app_icons.dart';
 import 'package:video_player/video_player.dart';
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
@@ -579,7 +580,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                               alignment: AlignmentDirectional(0, 0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0 ,MediaQuery.of(context).size.height*0.34, 0, 0),
+                                    0 ,MediaQuery.of(context).size.height*0.33, 0, 0),
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
@@ -719,65 +720,65 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   ),
                                                             ),
                                                           ),
-                                                          if (functions
-                                                              .propertyStatusConditionalVisibilty(
-                                                                  PropertyCall
-                                                                      .propertyStatus(
-                                                            columnPropertyResponse
-                                                                .jsonBody,
-                                                          ).toString()))
-                                                            Container(
-                                                              height: 26,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color(
-                                                                    0xFF81D05C),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            7),
-                                                              ),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10,
-                                                                            1,
-                                                                            10,
-                                                                            1),
-                                                                    child: Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'ccsmgbaf' /* Available */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'AvenirArabic',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).white,
-                                                                            fontSize:
-                                                                                13,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
+                                                          // if (functions
+                                                          //     .propertyStatusConditionalVisibilty(
+                                                          //         PropertyCall
+                                                          //             .propertyStatus(
+                                                          //   columnPropertyResponse
+                                                          //       .jsonBody,
+                                                          // ).toString()))
+                                                          //   Container(
+                                                          //     height: 26,
+                                                          //     decoration:
+                                                          //         BoxDecoration(
+                                                          //       color: Color(
+                                                          //           0xFF81D05C),
+                                                          //       borderRadius:
+                                                          //           BorderRadius
+                                                          //               .circular(
+                                                          //                   7),
+                                                          //     ),
+                                                          //     child: Row(
+                                                          //       mainAxisSize:
+                                                          //           MainAxisSize
+                                                          //               .max,
+                                                          //       mainAxisAlignment:
+                                                          //           MainAxisAlignment
+                                                          //               .center,
+                                                          //       children: [
+                                                          //         Padding(
+                                                          //           padding: EdgeInsetsDirectional
+                                                          //               .fromSTEB(
+                                                          //                   10,
+                                                          //                   1,
+                                                          //                   10,
+                                                          //                   1),
+                                                          //           child: Text(
+                                                          //             FFLocalizations.of(
+                                                          //                     context)
+                                                          //                 .getText(
+                                                          //               'ccsmgbaf' /* Available */,
+                                                          //             ),
+                                                          //             style: FlutterFlowTheme.of(
+                                                          //                     context)
+                                                          //                 .bodyText1
+                                                          //                 .override(
+                                                          //                   fontFamily:
+                                                          //                       'AvenirArabic',
+                                                          //                   color:
+                                                          //                       FlutterFlowTheme.of(context).white,
+                                                          //                   fontSize:
+                                                          //                       13,
+                                                          //                   fontWeight:
+                                                          //                       FontWeight.w500,
+                                                          //                   useGoogleFonts:
+                                                          //                       false,
+                                                          //                 ),
+                                                          //           ),
+                                                          //          ),
+                                                          //       ],
+                                                          //     ),
+                                                          //  ),
                                                           if (!functions
                                                               .propertyStatusConditionalVisibilty(
                                                                   PropertyCall
@@ -1327,9 +1328,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 gridDelegate:
                                                     SliverGridDelegateWithFixedCrossAxisCount(
                                                   crossAxisCount: 3,
-                                                  crossAxisSpacing: 10,
-                                                  mainAxisSpacing: 15,
-                                                  childAspectRatio: 1.4,
+                                                  crossAxisSpacing: 20,
+                                                  mainAxisSpacing: 20,
+                                                  childAspectRatio: 1,
                                                 ),
                                                 primary: false,
                                                 shrinkWrap: true,
@@ -1343,20 +1344,20 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       border: Border.all(
                                                         color:
                                                             Color(0xFFEED260),
-                                                        width: 2,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  0, 2, 0, 0),
+                                                                  0, 0, 0, 0),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.min,
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .start,
+                                                                .center,
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
                                                                 .center,
@@ -1442,20 +1443,20 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       border: Border.all(
                                                         color:
                                                             Color(0xFFEED260),
-                                                        width: 2,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  0, 2, 0, 0),
+                                                                  0, 0, 0, 0),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.min,
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .start,
+                                                                .center,
                                                         children: [
                                                           Icon(
                                                             Icons
@@ -1538,7 +1539,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       border: Border.all(
                                                         color:
                                                             Color(0xFFEED260),
-                                                        width: 2,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Padding(
@@ -1551,7 +1552,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             MainAxisSize.min,
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .start,
+                                                                .center,
                                                         children: [
                                                           Icon(
                                                             Icons
@@ -1631,7 +1632,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       border: Border.all(
                                                         color:
                                                             Color(0xFFEED260),
-                                                        width: 2,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Padding(
@@ -1644,7 +1645,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             MainAxisSize.max,
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .start,
+                                                                .center,
                                                         children: [
                                                           Icon(
                                                             Icons
@@ -1727,7 +1728,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       border: Border.all(
                                                         color:
                                                             Color(0xFFEED260),
-                                                        width: 2,
+                                                        width: 1,
                                                       ),
                                                     ),
                                                     child: Padding(
@@ -1740,7 +1741,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             MainAxisSize.min,
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .start,
+                                                                .center,
                                                         children: [
                                                           Icon(
                                                             Icons

@@ -340,6 +340,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => DepositeReciptWidget(
                 depositeRecpit:
                     params.getParam('depositeRecpit', ParamType.String),
+                propertyName: params.getParam('propertyName', ParamType.String),
               ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),

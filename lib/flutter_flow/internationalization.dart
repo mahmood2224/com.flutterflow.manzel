@@ -556,7 +556,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'x824f0mb': {
       'en': 'login to see this section',
-      'ar': ' تسجيل الدخول اولاًً',
+      'ar': 'تسجيل الدخول اولاً',
     },
     '1cb5at0r': {
       'en': 'Login',
@@ -940,7 +940,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '9m2bglko': {
       'en': 'login to see this section',
-      'ar': ' تسجيل الدخول اولاً',
+      'ar': 'تسجيل الدخول اولاً',
     },
     'yo5djc7x': {
       'en': 'Login',

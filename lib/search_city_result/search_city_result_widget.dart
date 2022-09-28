@@ -169,19 +169,19 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                           useGoogleFonts: false,
                         ),
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
-                    child: Text(
-                      FFLocalizations.of(context).getText(
-                        'nukctvmg' /* properties found */,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'AvenirArabic',
-                            color: Color(0xFF6B6B6B),
-                            useGoogleFonts: false,
-                          ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
+                  //   child: Text(
+                  //     FFLocalizations.of(context).getText(
+                  //       'nukctvmg' /* properties found */,
+                  //     ),
+                  //     style: FlutterFlowTheme.of(context).bodyText1.override(
+                  //           fontFamily: 'AvenirArabic',
+                  //           color: Color(0xFF6B6B6B),
+                  //           useGoogleFonts: false,
+                  //         ),
+                  //   ),
+                  // ),
                 ],
               ),
             ],
@@ -717,32 +717,32 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                     //   builder: (BuildContext context,
                                                     //       bool value, Widget? child) {
                                                     //     return
-                                                    child: Container(
-                                                      margin: EdgeInsets.all(100),
-                                                      height: 50,
-                                                      width: 50,
-                                                      decoration: BoxDecoration(
-                                                        color: isPaused
-                                                            ? Colors.black
-                                                            .withOpacity(0.5)
-                                                            : Colors.black
-                                                            .withOpacity(0.0),
-                                                        shape: BoxShape.circle,
+                                                    child: Center(
+                                                      child: Container(
+                                                        constraints: BoxConstraints(minWidth: 50, maxWidth: 50),
+                                                        decoration: BoxDecoration(
+                                                          color: isPaused
+                                                              ? Colors.black
+                                                              .withOpacity(1.0)
+                                                              : Colors.black
+                                                              .withOpacity(0.0),
+                                                          shape: BoxShape.circle,
+                                                        ),
+                                                        child: Icon(
+                                                          isPaused
+                                                              ? Icons.play_arrow_rounded
+                                                              : Icons.pause,
+                                                          color: isPaused
+                                                              ? Colors.white
+                                                              .withOpacity(1.0)
+                                                              : Colors.white
+                                                              .withOpacity(0.0),
+                                                          size: 40,
+                                                        ),
+                                                        // );
+                                                        //},
+                                                        //valueListenable: isPaused,
                                                       ),
-                                                      child: Icon(
-                                                        isPaused
-                                                            ? Icons.play_arrow_rounded
-                                                            : Icons.pause,
-                                                        color: isPaused
-                                                            ? Colors.white
-                                                            .withOpacity(1.0)
-                                                            : Colors.white
-                                                            .withOpacity(0.0),
-                                                        size: 40,
-                                                      ),
-                                                      // );
-                                                      //},
-                                                      //valueListenable: isPaused,
                                                     ),
                                                   ),
                                                 ),
@@ -750,11 +750,9 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                               Align(
                                                 alignment: AlignmentDirectional(0, 0),
                                                 child:
-                                                propertiesIndex == currentPropertyindex-widget.homeScreenLength!
+                                                propertiesIndex == (currentPropertyindex==0?currentPropertyindex=widget!.homeScreenLength!:currentPropertyindex= currentPropertyindex) - widget.homeScreenLength!
                                                     ? Container():Container(
-                                                  margin: EdgeInsets.all(100),
-                                                  height: 50,
-                                                  width: 50,
+                                                  constraints: BoxConstraints(minWidth: 50, maxWidth: 50),
                                                   decoration: BoxDecoration(
                                                     color:Colors.black
                                                         .withOpacity(1.0),

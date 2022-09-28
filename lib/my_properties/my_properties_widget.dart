@@ -93,7 +93,6 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                   'w4bgagrv' /* You need to create an account ... */,
                                 ),
                                 textAlign: TextAlign.center,
-                                maxLines: 2,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -121,41 +120,41 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     ),
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20, 10, 20, 10),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent(
-                                      'MY_PROPERTIES_LOGIN_SIGNUP_BTN_ON_TAP');
-                                  logFirebaseEvent('Button_Navigate-To');
-
-                                  context.pushNamed('Login');
-                                },
-                                text: FFLocalizations.of(context).getText(
-                                  'yo5djc7x' /* Login/Signup */,
-                                ),
-                                options: FFButtonOptions(
-                                  width: 215,
-                                  height: 40,
-                                  color: Color(0xFF2971FB),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color:
-                                            FlutterFlowTheme.of(context).white,
-                                        fontSize: 14,
-                                        useGoogleFonts: false,
-                                      ),
-                                  borderSide: BorderSide(
-                                    width: 1,
-                                    color: Colors.transparent,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: EdgeInsetsDirectional.fromSTEB(
+                            //       20, 10, 20, 10),
+                            //   child: FFButtonWidget(
+                            //     onPressed: () async {
+                            //       logFirebaseEvent(
+                            //           'MY_PROPERTIES_LOGIN_SIGNUP_BTN_ON_TAP');
+                            //       logFirebaseEvent('Button_Navigate-To');
+                            //
+                            //       context.pushNamed('Login');
+                            //     },
+                            //     text: FFLocalizations.of(context).getText(
+                            //       'yo5djc7x' /* Login/Signup */,
+                            //     ),
+                            //     options: FFButtonOptions(
+                            //       width: 215,
+                            //       height: 40,
+                            //       color: Color(0xFF2971FB),
+                            //       textStyle: FlutterFlowTheme.of(context)
+                            //           .subtitle2
+                            //           .override(
+                            //             fontFamily: 'AvenirArabic',
+                            //             color:
+                            //                 FlutterFlowTheme.of(context).white,
+                            //             fontSize: 14,
+                            //             useGoogleFonts: false,
+                            //           ),
+                            //       borderSide: BorderSide(
+                            //         width: 1,
+                            //         color: Colors.transparent,
+                            //       ),
+                            //       borderRadius: BorderRadius.circular(12),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

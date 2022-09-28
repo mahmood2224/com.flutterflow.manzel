@@ -157,7 +157,9 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                         functions.resultText(
                             valueOrDefault<String>(
                               functions.countJsonData(
-                                  textPropertiesResponse.jsonBody),
+                              PropertiesCall.properties(
+                                textPropertiesResponse.jsonBody,
+                              ).toList()),
                               '0',
                             ),
                             FFAppState().locale),
@@ -574,32 +576,32 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                   //   builder: (BuildContext context,
                                                   //       bool value, Widget? child) {
                                                   //     return
-                                                  child: Container(
-                                                    margin: EdgeInsets.all(100),
-                                                    height: 50,
-                                                    width: 50,
-                                                    decoration: BoxDecoration(
-                                                      color: isPaused
-                                                          ? Colors.black
-                                                          .withOpacity(0.5)
-                                                          : Colors.black
-                                                          .withOpacity(0.0),
-                                                      shape: BoxShape.circle,
+                                                  child: Center(
+                                                    child: Container(
+                                                      constraints: BoxConstraints(minWidth: 50, maxWidth: 50),
+                                                      decoration: BoxDecoration(
+                                                        color: isPaused
+                                                            ? Colors.black
+                                                            .withOpacity(0.5)
+                                                            : Colors.black
+                                                            .withOpacity(0.0),
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      child: Icon(
+                                                        isPaused
+                                                            ? Icons.play_arrow_rounded
+                                                            : Icons.pause,
+                                                        color: isPaused
+                                                            ? Colors.white
+                                                            .withOpacity(1.0)
+                                                            : Colors.white
+                                                            .withOpacity(0.0),
+                                                        size: 40,
+                                                      ),
+                                                      // );
+                                                      //},
+                                                      //valueListenable: isPaused,
                                                     ),
-                                                    child: Icon(
-                                                      isPaused
-                                                          ? Icons.play_arrow_rounded
-                                                          : Icons.pause,
-                                                      color: isPaused
-                                                          ? Colors.white
-                                                          .withOpacity(1.0)
-                                                          : Colors.white
-                                                          .withOpacity(0.0),
-                                                      size: 40,
-                                                    ),
-                                                    // );
-                                                    //},
-                                                    //valueListenable: isPaused,
                                                   ),
                                                 ),
                                               ),
@@ -607,11 +609,9 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                             Align(
                                               alignment: AlignmentDirectional(0, 0),
                                               child:
-                                              propertiesIndex == currentPropertyindex-widget.homeScreenLength!
+                                              propertiesIndex == (currentPropertyindex==0?currentPropertyindex=widget!.homeScreenLength!:currentPropertyindex= currentPropertyindex) - widget.homeScreenLength!
                                                   ? Container():Container(
-                                                margin: EdgeInsets.all(100),
-                                                height: 50,
-                                                width: 50,
+                                                constraints: BoxConstraints(minWidth: 50, maxWidth: 50),
                                                 decoration: BoxDecoration(
                                                   color:Colors.black
                                                       .withOpacity(1.0),

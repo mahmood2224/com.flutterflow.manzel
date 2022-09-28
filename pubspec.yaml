@@ -103,6 +103,7 @@ dependencies:
   visibility_detector: ^0.3.3
   webviewx: 0.2.1
   infinite_scroll_pagination: 3.1.0
+  permission_handler: ^10.0.2
   pinput: ^2.2.7
   go_sell_sdk_flutter: 2.1.5
   sendbird_sdk: ^3.1.0
@@ -111,6 +112,7 @@ dependencies:
   flutter_chat_ui: ^1.6.4
   mime: ^1.0.2
   open_file: ^3.2.1
+  flutter_local_notifications: ^11.0.1
   path_provider: ^2.0.11
   uuid: ^3.0.6
   #flutter_local_notifications: ^9.7.1
@@ -189,6 +191,9 @@ flutter:
     - family: 'Manzel'
       fonts:
         - asset: assets/icons/Manzel.ttf
+    - family: MyFlutterApp
+      fonts:
+        - asset: assets/icons/MyFlutterApp.ttf
 
 
 
