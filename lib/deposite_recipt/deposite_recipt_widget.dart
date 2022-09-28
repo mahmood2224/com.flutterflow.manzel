@@ -1,3 +1,10 @@
+
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_pdf_viewer.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -7,12 +14,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DepositeReciptWidget extends StatefulWidget {
-  const DepositeReciptWidget({
+   const DepositeReciptWidget({
     Key? key,
     this.depositeRecpit,
+     this.propertyName,
   }) : super(key: key);
 
   final String? depositeRecpit;
+  final String? propertyName;
 
   @override
   _DepositeReciptWidgetState createState() => _DepositeReciptWidgetState();
@@ -20,6 +29,10 @@ class DepositeReciptWidget extends StatefulWidget {
 
 class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final ValueNotifier<bool> isDowloading = ValueNotifier<bool>(false);
+  final ValueNotifier<num> downloadProgress = ValueNotifier<num>(0);
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
 
   @override
   void initState() {
@@ -63,12 +76,15 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
               ),
         ),
         actions: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 30, 0),
-            child: Icon(
-              Icons.download_rounded,
-              color: Colors.black,
-              size: 24,
+          InkWell(
+            onTap: (){download(context);},
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 30, 0),
+              child: Icon(
+                Icons.download_rounded,
+                color: Colors.black,
+                size: 24,
+              ),
             ),
           ),
         ],
@@ -98,4 +114,90 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
       ),
     );
   }
+  Future download(BuildContext context) async {
+    PermissionManager.instance().ask(Permission.storage, granted: ()async{
+      try {
+        isDowloading.value=true;
+        Response response = await Dio().get(
+          widget.depositeRecpit??'http://www.pdf995.com/samples/pdf.pdf',
+          onReceiveProgress: updateProgress,
+          options: Options(
+              responseType: ResponseType.bytes,
+              followRedirects: false,
+              validateStatus: (status) { return status! < 500; }
+          ),
+        );
+        Directory? _path;
+        String _localPath='';
+        if(Platform.isAndroid){
+          _path = Directory('/storage/emulated/0/Download');
+          if (!await _path.exists()) _path = await getExternalStorageDirectory();
+          _localPath = '${_path?.path??''}';
+        }else{
+          _path = await getApplicationDocumentsDirectory();
+          _localPath = '${_path.path}${Platform.pathSeparator}Download';
+        }
+        final savedDir = Directory(_localPath);
+        bool hasExisted = await savedDir.exists();
+        if (!hasExisted) {
+          savedDir.create();
+        }
+        String fileName = '${widget.propertyName} Transaction Receipt${DateTime.now().microsecondsSinceEpoch}.pdf';
+        var file =  File('$_localPath/$fileName');
+        await file.writeAsBytes((response.data as Uint8List).toList());
+        print("Download completed");
+
+      } catch (e) {
+        print("Error downloading ${e}");
+        print(e);
+      }finally{
+        isDowloading.value=false;
+      }
+    }, decline: (){});
+  }
+
+  void updateProgress(int received,int total){
+    downloadProgress.value = received/total;
+  }
+
+
+
 }
+class PermissionManager{
+  PermissionManager._();
+  static final PermissionManager _instance = PermissionManager._();
+  factory PermissionManager.instance()=>_instance;
+
+  void ask(Permission permission,{required VoidCallback granted,required VoidCallback decline,bool navigateToSettingsIfDeclined=false})async{
+    final permissionRequestStatus = await permission.request();
+    if(permissionRequestStatus.isGranted){
+      granted();
+    }else if(permissionRequestStatus.isDenied){
+      decline();
+    }else if(permissionRequestStatus.isPermanentlyDenied && navigateToSettingsIfDeclined){
+      //TODO: show dialog
+      await openAppSettings();
+    }
+  }
+  // Future _showNotificationWithoutSound() async {
+  //   var android = new AndroidNotificationDetails(
+  //       'your channel id', 'your channel name', 'your channel description',
+  //       playSound: false, importance: Importance.max, priority: Priority.high);
+  //   var ios =
+  //   new IOSNotificationDetails(presentSound: false);
+  //   var platformChannelSpecifics = new NotificationDetails(
+  //        iOS: ios ,android: android);
+  //   await flutterLocalNotificationsPlugin.show(
+  //     0,
+  //     'New Post',
+  //     'How to Show Notification in Flutter',
+  //     platformChannelSpecifics,
+  //     payload: 'No_Sound',
+  //   );
+  // }
+
+
+}
+
+
+

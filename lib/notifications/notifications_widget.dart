@@ -218,45 +218,21 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                               .start,
                                                       children: [
                                                         Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(11,
-                                                                      0, 10, 0),
+                                                          padding: EdgeInsetsDirectional.fromSTEB(11, 0, 10, 0),
                                                           child: Container(
                                                             width: 35,
                                                             height: 35,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              border:
-                                                                  Border.all(
-                                                                color: Color(
-                                                                    0xFF8C8C8C),
+                                                            decoration: BoxDecoration(
+                                                              color: Color(0xFF53C3EB),
+                                                              shape: BoxShape.circle,
+                                                              border: Border.all(
+                                                                color: Color(0xFF8C8C8C),
                                                               ),
                                                             ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          3,
-                                                                          3,
-                                                                          3,
-                                                                          3),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            17.5),
-                                                                child:
-                                                                    Image.asset(
-                                                                  'assets/images/App_Icon___White_(2).png',
-                                                                  width: 35,
-                                                                  height: 35,
-                                                                  fit: BoxFit
-                                                                      .fill,
-                                                                ),
-                                                              ),
+                                                            child: Icon(
+                                                              Icons.notifications_none,
+                                                              color: Colors.black,
+                                                              size: 20,
                                                             ),
                                                           ),
                                                         ),
