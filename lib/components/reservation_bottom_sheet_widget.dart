@@ -95,7 +95,7 @@ class _ReservationBottomSheetWidgetState
           // select payments you need to show [Default is all, and you can choose between WEB-CARD-APPLEPAY ]
           paymentType: paymentType == 0 ? PaymentType.CARD : PaymentType.DEVICE,
           // Transaction mode
-          sdkMode: SDKMode.Production);
+          sdkMode: SDKMode.Sandbox);
     } on PlatformException {
       // platformVersion = 'Failed to get platform version.';
     }
@@ -590,11 +590,12 @@ class _ReservationBottomSheetWidgetState
                       _shouldSetState = true;
                       if ((addOrderApiResponse?.statusCode ?? 200) == 200) {
                         logFirebaseEvent('Button_Backend-Call');
-                        setupSDKSession((paymentMethodValue?.toLowerCase() == 'mada/visa' || paymentMethodValue?.toLowerCase() == 'مدى / فيزا' ) ? 0 : 1);
                         orderId = getJsonField(
                           (addOrderApiResponse?.jsonBody ?? ''),
                           r'''$.result''',
                         );
+                        setupSDKSession((paymentMethodValue?.toLowerCase() == 'mada/visa' || paymentMethodValue?.toLowerCase() == 'مدى / فيزا' ) ? 0 : 1);
+
                         entry = showOverlay(context);
                         startSDK(context, {
                           'propertyId': serializeParam(
