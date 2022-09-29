@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-
+import 'package:auto_size_text/auto_size_text.dart';
 import '../auth/auth_util.dart';
 import '../common_widgets/overlay.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
@@ -26,6 +26,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   bool? changeLanguage;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   OverlayEntry? entry;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -367,72 +368,129 @@ class _LoginWidgetState extends State<LoginWidget> {
                   Expanded(
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 13, 16, 0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
-                          if (functions.checkPhoneNumberFormat(
-                              phoneNumberController!.text)) {
-                            // sendOTP
-                            logFirebaseEvent('sendOTP_sendOTP');
-                            final phoneNumberVal =   functions.getFormattedMobileNumber(
-                                phoneNumberController!.text);
-                            if (phoneNumberVal == null ||
-                                phoneNumberVal.isEmpty ||
-                                !phoneNumberVal.startsWith('+')) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                      'Phone Number is required and has to start with +.'),
-                                ),
-                              );
-                              return;
-                            }
-                            //entry = showOverlay(context);
-                            await beginPhoneAuth(
-                              context: context,
-                              phoneNumber: phoneNumberVal,
-                              onCodeSent: () async {
-                            //    entry.remove();
-                                context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberVal});
-                                },
-                              );
-                            } else {
-                              // Invalid_phone_number_action
-                              logFirebaseEvent(
-                                  'sendOTP_Invalid_phone_number_action');
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'The phone number format should be +966123456789',
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                      child: Container(
+                        width: double.infinity,
+                        height: 56,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            isLoading = true;
+                            logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
+                            if (functions.checkPhoneNumberFormat(
+                                phoneNumberController!.text)) {
+                              // sendOTP
+                              logFirebaseEvent('sendOTP_sendOTP');
+                              final phoneNumberVal =   functions.getFormattedMobileNumber(
+                                  phoneNumberController!.text);
+                              if (phoneNumberVal == null ||
+                                  phoneNumberVal.isEmpty ||
+                                  !phoneNumberVal.startsWith('+')) {
+                                isLoading = false;
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                        'Phone Number is required and has to start with +.'),
                                   ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor: Color(0xFF777777),
-                                ),
-                              );
-                            }
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            'l3ozn1az' /* Continue */,
-                          ),
-                          options: FFButtonOptions(
-                            width: double.infinity,
-                            height: 56,
-                            color: Color(0xFF2971FB),
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
+                                );
+
+                                return;
+                              }
+                              //entry = showOverlay(context);
+                              await beginPhoneAuth(
+                                context: context,
+                                phoneNumber: phoneNumberVal,
+                                onCodeSent: () async {
+                              //    entry.remove();
+                                  isLoading = false;
+                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberVal});
+                                  },
+                                );
+                              } else {
+                                // Invalid_phone_number_action
+                                logFirebaseEvent(
+                                    'sendOTP_Invalid_phone_number_action');
+                                isLoading = false;
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'The phone number format should be +966123456789',
+                                      style:
+                                          FlutterFlowTheme.of(context).subtitle1,
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor: Color(0xFF777777),
+                                  ),
+                                );
+                              }
+                            },
+                            child: isLoading?
+                             Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                    width: 30,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation(Colors.white),
+                                      strokeWidth: 5,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                                : AutoSizeText(
+                                FFLocalizations.of(context).getText(
+                              'l3ozn1az' /* Continue */,
+                            ),
+                              style: FlutterFlowTheme.of(context).subtitle2.override(
+
+                                fontSize: 18,
+                                fontFamily: 'AvenirArabic',
+                                color: Colors.white,
+                                useGoogleFonts: false,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+
+                            ),
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+                                    (states) {
+                                  if (states.contains(MaterialState.disabled)) {
+                                    FlutterFlowTheme.of(context).subtitle2.override(
                                       fontFamily: 'AvenirArabic',
                                       color: Colors.white,
                                       useGoogleFonts: false,
-                                    ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
+                                    );
+                                  }
+                                  FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'AvenirArabic',
+                                    color: Colors.white,
+                                    useGoogleFonts: false,
+                                  );
+                                },
+                              ),
+                              backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                                    (states) {
+                                  if (states.contains(MaterialState.disabled)) {
+                                    return Color(0xFF2971FB);
+                                  }
+                                  return Color(0xFF2971FB);
+                                },
+                              ),
+
+                              shape: MaterialStateProperty.all<OutlinedBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:BorderRadius.circular(12),
+                              side: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              )),
                             ),
-                            borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                        ),
+                      ),
                       ),
                     ),
                   ],

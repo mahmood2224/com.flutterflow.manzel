@@ -76,17 +76,30 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
               ),
         ),
         actions: [
-          InkWell(
-            onTap: (){download(context);},
-            child: Padding(
+          Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 30, 0),
-              child: Icon(
-                Icons.download_rounded,
-                color: Colors.black,
-                size: 24,
-              ),
+            child: ValueListenableBuilder(
+                valueListenable: isDowloading,
+                builder: (context,bool isDownloading,_) {
+                  if(isDownloading){
+                    return ValueListenableBuilder(
+                        valueListenable: downloadProgress,
+                        builder: (context,num value,_) {
+                          print(value);
+                          return Center(child: SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(value: value.toDouble(),backgroundColor: Colors.white,)));
+                        }
+                    );
+                  }
+                  return InkWell(onTap:(){
+                    download(context);
+                  },child: Icon(Icons.download,color: Colors.black,));
+                }
             ),
-          ),
+            ),
+
         ],
         centerTitle: true,
         elevation: 2,
@@ -146,10 +159,35 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
         var file =  File('$_localPath/$fileName');
         await file.writeAsBytes((response.data as Uint8List).toList());
         print("Download completed");
-
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              FFLocalizations.of(context).getText(
+                'downloadSucessfulMessage' /* Account */,
+              ),
+              style:
+              FlutterFlowTheme.of(context).subtitle1,
+            ),
+            duration: Duration(milliseconds: 4000),
+            backgroundColor: Colors.black,
+          ),
+        );
       } catch (e) {
         print("Error downloading ${e}");
         print(e);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              FFLocalizations.of(context).getText(
+                'errorDownloading' /* Account */,
+              ),
+              style:
+              FlutterFlowTheme.of(context).subtitle1,
+            ),
+            duration: Duration(milliseconds: 4000),
+            backgroundColor: Colors.black,
+          ),
+        );
       }finally{
         isDowloading.value=false;
       }
@@ -175,7 +213,6 @@ class PermissionManager{
     }else if(permissionRequestStatus.isDenied){
       decline();
     }else if(permissionRequestStatus.isPermanentlyDenied && navigateToSettingsIfDeclined){
-      //TODO: show dialog
       await openAppSettings();
     }
   }

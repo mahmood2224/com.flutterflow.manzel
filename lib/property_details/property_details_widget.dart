@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:chewie/chewie.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
+import 'package:manzel/profile/profile_widget.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/foundation.dart';
@@ -35,7 +39,6 @@ import 'package:mapbox_search/mapbox_search.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-
 enum VideoType {
   asset,
   network,
@@ -61,12 +64,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   PageController? pageViewController;
   UserSavedRecord? saveProperty;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  static const String kWhatsAppAndroid = 'https://api.whatsapp.com/send?phone=';
+  static const String kWhatsAppIOS = 'https://wa.me/';
+
   // VideoPlayerController? _currentController;
   // VideoPlayerController? videoPlayerController;
   // VideoPlayerController? _videoPlayerController;
   // ChewieController? _chewieController;
   // bool _loggedError = false;
-
 
   @override
   void initState() {
@@ -75,6 +80,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PropertyDetails'});
   }
+
   // void enterFullScreen() {
   //   _chewieController?.enterFullScreen();
   // }
@@ -118,27 +124,27 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   //           'Error playing video: ${_videoPlayerController!.value.errorDescription}');
   //       _loggedError = true;
   //     }
-      //Stop all other players when one video is playing.
-      // if (_videoPlayerController.value.isPlaying) {
-      //   _videoPlayers.forEach((otherPlayer) {
-      //     if (otherPlayer != _videoPlayerController &&
-      //         otherPlayer.value.isPlaying) {
-      //       setState(() {
-      //         otherPlayer.pause();
-      //
-      //       });
-      //      }
-      //    });
-      // }
-    //});}
+  //Stop all other players when one video is playing.
+  // if (_videoPlayerController.value.isPlaying) {
+  //   _videoPlayers.forEach((otherPlayer) {
+  //     if (otherPlayer != _videoPlayerController &&
+  //         otherPlayer.value.isPlaying) {
+  //       setState(() {
+  //         otherPlayer.pause();
+  //
+  //       });
+  //      }
+  //    });
+  // }
+  //});}
 
   Future<void> configurePaymentSdk() async {
-
     GoSellSdkFlutter.configureApp(
-        bundleId: 'com.flutterflow.manzel',
-        productionSecreteKey: 'sk_live_o4Z3j8HafuOCG9PNJ1eVrvsz',
-        sandBoxsecretKey: 'sk_test_2r5JvPVafKxklSn6LRpqWycQ',
-        lang: FFAppState().locale,);
+      bundleId: 'com.flutterflow.manzel',
+      productionSecreteKey: 'sk_live_o4Z3j8HafuOCG9PNJ1eVrvsz',
+      sandBoxsecretKey: 'sk_test_2r5JvPVafKxklSn6LRpqWycQ',
+      lang: FFAppState().locale,
+    );
   }
 
   @override
@@ -301,7 +307,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         r'''$.data.attributes.video_poster_image''',
                                       ),
                                       width: MediaQuery.of(context).size.width,
-                                      height: MediaQuery.of(context).size.height*0.35,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.35,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -311,138 +319,141 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     r'''$.data.attributes.video_poster_image''',
                                   )))
                                     Align(
-                                      alignment: AlignmentDirectional(
-                                          0, 0),
-                                     child:InkWell(
-                                       onTap: () async {
-                                         logFirebaseEvent(
-                                             'PROPERTY_DETAILS_Image_8m4roe7z_ON_TAP');
-                                         logFirebaseEvent('Image_Navigate-To');
+                                      alignment: AlignmentDirectional(0, 0),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          logFirebaseEvent(
+                                              'PROPERTY_DETAILS_Image_8m4roe7z_ON_TAP');
+                                          logFirebaseEvent('Image_Navigate-To');
 
-                                         context.pushNamed(
-                                           'propertyVideo',
-                                           queryParams: {
-                                             'videoURL': serializeParam(
-                                                 getJsonField(
-                                                   columnPropertyResponse.jsonBody,
-                                                   r'''$.data.attributes.video_manifest_uri''',
-                                                 ),
-                                                 ParamType.String),
-                                             'propertyName': serializeParam(
-                                                 PropertyCall.propertyName(
-                                                   columnPropertyResponse.jsonBody,
-                                                 ).toString(),
-                                                 ParamType.String),
-                                           }.withoutNulls,
-                                         );
-                                       },
-                                      child:Container(
-                                        height: 50,
-                                        width: 50,
-                                        decoration: BoxDecoration(
-                                          color: Colors.black.withOpacity(1),
-                                          shape: BoxShape.circle,
+                                          context.pushNamed(
+                                            'propertyVideo',
+                                            queryParams: {
+                                              'videoURL': serializeParam(
+                                                  getJsonField(
+                                                    columnPropertyResponse
+                                                        .jsonBody,
+                                                    r'''$.data.attributes.video_manifest_uri''',
+                                                  ),
+                                                  ParamType.String),
+                                              'propertyName': serializeParam(
+                                                  PropertyCall.propertyName(
+                                                    columnPropertyResponse
+                                                        .jsonBody,
+                                                  ).toString(),
+                                                  ParamType.String),
+                                            }.withoutNulls,
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 50,
+                                          width: 50,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black.withOpacity(1),
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            Icons.play_arrow_rounded,
+                                            color:
+                                                Colors.white.withOpacity(1.0),
+                                            size: 40,
+                                          ),
                                         ),
-                                        child: Icon(
-                                          Icons.play_arrow_rounded,
-                                          color: Colors.white.withOpacity(1.0),
-                                          size: 40,
-                                        ),
-                                      ),),
+                                      ),
                                     ),
 
-    //                               InkWell(
-    //                                 child: Container(
-    //                                   width: MediaQuery.of(context).size.width,
-    //                                   height:
-    //                                       MediaQuery.of(context).size.height,
-    //                                   decoration: BoxDecoration(),
-    //                                   child: Visibility(
-    //                                     visible: functions
-    //                                         .videoPlayerVisibilty(getJsonField(
-    //                                       columnPropertyResponse.jsonBody,
-    //                                       r'''$.data.attributes.video_manifest_uri''',
-    //                                     )),
-    //                                     child: Align(
-    //                                       alignment: Alignment.topRight,
-    //
-    //
-    // child: VisibilityDetector(
-    // key: ObjectKey(Chewie),
-    // onVisibilityChanged: (visibility) {
-    // if (visibility.visibleFraction *
-    // 100 != 100 && this.mounted) {
-    //   if(_chewieController!=null){
-    // _chewieController?.pause();}}else{if(_chewieController!=null){_chewieController?.play();}}
-    //
-    // },
-    //
-    //
-    //
-    // //         child: FlutterFlowVideoPlayer(
-    // // onTap: (videoControllerValue) {
-    // //         print("detail_screen controller set length  = ${videoControllerValue.length}");
-    // //         _currentController = videoControllerValue.last;
-    // //         },
-    // //                                         path: getJsonField(
-    // //                                           columnPropertyResponse.jsonBody,
-    // //                                           r'''$.data.attributes.video_manifest_uri''',
-    // //                                         ),
-    // //           height: MediaQuery.of(context).size.width/1.7777,
-    // //           width: MediaQuery.of(context)
-    // //               .size.width,
-    // //                                         videoType: VideoType.network,
-    // //                                         autoPlay: true,
-    // //                                         looping: true,
-    // //                                         showControls: false,
-    // //                                         //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
-    // //                                         allowFullScreen: true,
-    // //                                         allowPlaybackSpeedMenu: false,
-    // //                                       ),
-    //  child: FittedBox(
-    //         fit: BoxFit.fitWidth,
-    //         child: Container(
-    //         height: MediaQuery.of(context)
-    //                        .size.height*0.35,
-    //         width: MediaQuery.of(context)
-    //                        .size.width,
-    //           // child: Theme(
-    //           //   data: ThemeData.light().copyWith(
-    //           //     platform: TargetPlatform.android,
-    //           //   ),
-    //             child:(_chewieController != null &&
-    //       _chewieController!
-    //               .videoPlayerController.value.isInitialized)
-    //       ? Chewie(controller: _chewieController!)
-    //       : (_chewieController != null &&
-    //       _chewieController!.videoPlayerController.value.hasError)
-    //       ? Text('Error playing video')
-    //       : Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children:  [
-    //       Container(
-    //           height: 20,
-    //           width: 20,
-    //           child: CircularProgressIndicator()),
-    //       SizedBox(height: 20),
-    //       Text('Loading'),
-    //     ],
-    //   ),),
-    //
-    // ),),),
-    //         //),
-    //
-    //         //),
-    //         ),
-    //
-    //
-    //                                 ),
-    //                           onTap: () {
-    //                                  //_chewieController.enterFullScreen();
-    //                                  _chewieController?.toggleFullScreen();
-    //                                  // _currentController.enterFullScreen();
-    //                                 },
-    //                               ),
+                                  //                               InkWell(
+                                  //                                 child: Container(
+                                  //                                   width: MediaQuery.of(context).size.width,
+                                  //                                   height:
+                                  //                                       MediaQuery.of(context).size.height,
+                                  //                                   decoration: BoxDecoration(),
+                                  //                                   child: Visibility(
+                                  //                                     visible: functions
+                                  //                                         .videoPlayerVisibilty(getJsonField(
+                                  //                                       columnPropertyResponse.jsonBody,
+                                  //                                       r'''$.data.attributes.video_manifest_uri''',
+                                  //                                     )),
+                                  //                                     child: Align(
+                                  //                                       alignment: Alignment.topRight,
+                                  //
+                                  //
+                                  // child: VisibilityDetector(
+                                  // key: ObjectKey(Chewie),
+                                  // onVisibilityChanged: (visibility) {
+                                  // if (visibility.visibleFraction *
+                                  // 100 != 100 && this.mounted) {
+                                  //   if(_chewieController!=null){
+                                  // _chewieController?.pause();}}else{if(_chewieController!=null){_chewieController?.play();}}
+                                  //
+                                  // },
+                                  //
+                                  //
+                                  //
+                                  // //         child: FlutterFlowVideoPlayer(
+                                  // // onTap: (videoControllerValue) {
+                                  // //         print("detail_screen controller set length  = ${videoControllerValue.length}");
+                                  // //         _currentController = videoControllerValue.last;
+                                  // //         },
+                                  // //                                         path: getJsonField(
+                                  // //                                           columnPropertyResponse.jsonBody,
+                                  // //                                           r'''$.data.attributes.video_manifest_uri''',
+                                  // //                                         ),
+                                  // //           height: MediaQuery.of(context).size.width/1.7777,
+                                  // //           width: MediaQuery.of(context)
+                                  // //               .size.width,
+                                  // //                                         videoType: VideoType.network,
+                                  // //                                         autoPlay: true,
+                                  // //                                         looping: true,
+                                  // //                                         showControls: false,
+                                  // //                                         //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
+                                  // //                                         allowFullScreen: true,
+                                  // //                                         allowPlaybackSpeedMenu: false,
+                                  // //                                       ),
+                                  //  child: FittedBox(
+                                  //         fit: BoxFit.fitWidth,
+                                  //         child: Container(
+                                  //         height: MediaQuery.of(context)
+                                  //                        .size.height*0.35,
+                                  //         width: MediaQuery.of(context)
+                                  //                        .size.width,
+                                  //           // child: Theme(
+                                  //           //   data: ThemeData.light().copyWith(
+                                  //           //     platform: TargetPlatform.android,
+                                  //           //   ),
+                                  //             child:(_chewieController != null &&
+                                  //       _chewieController!
+                                  //               .videoPlayerController.value.isInitialized)
+                                  //       ? Chewie(controller: _chewieController!)
+                                  //       : (_chewieController != null &&
+                                  //       _chewieController!.videoPlayerController.value.hasError)
+                                  //       ? Text('Error playing video')
+                                  //       : Column(
+                                  //     mainAxisAlignment: MainAxisAlignment.center,
+                                  //     children:  [
+                                  //       Container(
+                                  //           height: 20,
+                                  //           width: 20,
+                                  //           child: CircularProgressIndicator()),
+                                  //       SizedBox(height: 20),
+                                  //       Text('Loading'),
+                                  //     ],
+                                  //   ),),
+                                  //
+                                  // ),),),
+                                  //         //),
+                                  //
+                                  //         //),
+                                  //         ),
+                                  //
+                                  //
+                                  //                                 ),
+                                  //                           onTap: () {
+                                  //                                  //_chewieController.enterFullScreen();
+                                  //                                  _chewieController?.toggleFullScreen();
+                                  //                                  // _currentController.enterFullScreen();
+                                  //                                 },
+                                  //                               ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         18, 52, 18, 0),
@@ -462,7 +473,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             size: 18,
                                           ),
                                           onPressed: () async {
-
                                             logFirebaseEvent(
                                                 'PROPERTY_DETAILS_arrow_back_rounded_ICN_');
                                             // back
@@ -494,15 +504,21 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   logFirebaseEvent(
                                                       'share_shareProperty');
 
-                                                   await Share.share(
-                                                    await generateDynamicLink({'propertyId':widget.propertyId, }, description:  PropertyCall.propertyName(
-                                                    columnPropertyResponse
-                                                        .jsonBody,
-                                                  ).toString(), thumbnailUrl:  PropertyCall
-                                                      .thumbnailImage(
-                                                    columnPropertyResponse
-                                                        .jsonBody
-                                                  )));
+                                                  await Share.share(
+                                                      await generateDynamicLink({
+                                                    'propertyId':
+                                                        widget.propertyId,
+                                                  },
+                                                          description:
+                                                              PropertyCall
+                                                                  .propertyName(
+                                                            columnPropertyResponse
+                                                                .jsonBody,
+                                                          ).toString(),
+                                                          thumbnailUrl: PropertyCall
+                                                              .thumbnailImage(
+                                                                  columnPropertyResponse
+                                                                      .jsonBody)));
                                                 },
                                               ),
                                             ),
@@ -579,7 +595,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                               alignment: AlignmentDirectional(0, 0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0 ,MediaQuery.of(context).size.height*0.33, 0, 0),
+                                    0,
+                                    MediaQuery.of(context).size.height * 0.33,
+                                    0,
+                                    0),
                                 child: Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
@@ -1000,8 +1019,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                16, 35, 16, 0),
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16, 35, 16, 0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -1018,8 +1037,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   ),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        30),
+                                                        BorderRadius.circular(
+                                                            30),
                                                     child: Image.network(
                                                       PropertyCall.companyLogo(
                                                         columnPropertyResponse
@@ -1034,38 +1053,38 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .fromSTEB(13, 0, 0, 0),
                                                   child: Column(
                                                     mainAxisSize:
-                                                    MainAxisSize.min,
+                                                        MainAxisSize.min,
                                                     mainAxisAlignment:
-                                                    MainAxisAlignment.start,
+                                                        MainAxisAlignment.start,
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment
-                                                        .start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       Align(
                                                         alignment:
-                                                        AlignmentDirectional(
-                                                            0, 0),
+                                                            AlignmentDirectional(
+                                                                0, 0),
                                                         child: Text(
                                                           FFLocalizations.of(
-                                                              context)
+                                                                  context)
                                                               .getText(
                                                             'kqc4ney0' /* Property manage by  */,
                                                           ),
                                                           textAlign:
-                                                          TextAlign.start,
+                                                              TextAlign.start,
                                                           style: FlutterFlowTheme
-                                                              .of(context)
+                                                                  .of(context)
                                                               .bodyText1
                                                               .override(
-                                                            fontFamily:
-                                                            'AvenirArabic',
-                                                            fontSize: 13,
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .w300,
-                                                            useGoogleFonts:
-                                                            false,
-                                                          ),
+                                                                fontFamily:
+                                                                    'AvenirArabic',
+                                                                fontSize: 13,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w300,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
                                                         ),
                                                       ),
                                                       Text(
@@ -1074,19 +1093,19 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               .jsonBody,
                                                         ).toString(),
                                                         style:
-                                                        FlutterFlowTheme.of(
-                                                            context)
-                                                            .bodyText1
-                                                            .override(
-                                                          fontFamily:
-                                                          'Sofia Pro By Khuzaimah',
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .bold,
-                                                          useGoogleFonts:
-                                                          false,
-                                                        ),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Sofia Pro By Khuzaimah',
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
                                                       ),
                                                     ],
                                                   ),
@@ -1123,7 +1142,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ],
                                             ),
                                           ),
-
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -1216,7 +1234,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     ),
                                                   ],
                                                 ),
-
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(1, 0, 0, 0),
@@ -1315,7 +1332,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ],
                                             ),
                                           ),
-
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
@@ -2206,7 +2222,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    16, 15, 16, 32),
+                                                    16, 15, 16, 0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               mainAxisAlignment:
@@ -2250,6 +2266,168 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               ],
                                             ),
                                           ),
+                                          if (!functions.requestButtonVisibilty(
+                                              getJsonField(
+                                            columnPropertyResponse.jsonBody,
+                                            r'''$.data.attributes.pincode''',
+                                          )))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 15, 16, 32),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText('pinCode'),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0, 0, 3, 0),
+                                                        child: Text(
+                                                          getJsonField(
+                                                            columnPropertyResponse
+                                                                .jsonBody,
+                                                            r'''$.data.attributes.pincode''',
+                                                          ).toString(),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'AvenirArabic',
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      // Text(
+                                                      //   FFLocalizations.of(
+                                                      //           context)
+                                                      //       .getText(
+                                                      //     've2ud2ws' /*  SAR */,
+                                                      //   ),
+                                                      //   style:
+                                                      //       FlutterFlowTheme.of(
+                                                      //               context)
+                                                      //           .bodyText1
+                                                      //           .override(
+                                                      //             fontFamily:
+                                                      //                 'AvenirArabic',
+                                                      //             fontSize: 16,
+                                                      //             fontWeight:
+                                                      //                 FontWeight
+                                                      //                     .bold,
+                                                      //             useGoogleFonts:
+                                                      //                 false,
+                                                      //           ),
+                                                      // ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          if (functions.requestButtonVisibilty(
+                                              getJsonField(
+                                            columnPropertyResponse.jsonBody,
+                                            r'''$.data.attributes.pincode''',
+                                          )))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 32, 16, 32),
+                                              child: Row(
+                                                  mainAxisAlignment : MainAxisAlignment.center,
+                                                children: [
+                                                  FFButtonWidget(
+                                                    onPressed: () async {
+                                                      final phoneNumber = getJsonField(
+                                                        columnPropertyResponse.jsonBody,
+                                                        r'''$.data.attributes.managed_by.data.attributes.Company_phone''',
+                                                      );
+                                                      print(">>>>>>>>>>>>>>>>>>>>>>phone number = ${phoneNumber}");
+                                                      final message = '''
+                                                      ${FFLocalizations.of(context)
+                                                          .getText(
+                                                        'opening' /* Logout */,
+                                                      )}
+                                                       ${FFLocalizations.of(context).getText('propertyName' /* Logout */,)} : ${PropertyCall
+                                                                                    .propertyName(
+                                                                                  columnPropertyResponse
+                                                                                      .jsonBody,
+                                                                                ).toString()}
+                                                      ${FFLocalizations.of(context).getText('propertyRef' /* Logout */,)} : ${PropertyCall.propertyRef(
+                                                                                  columnPropertyResponse
+                                                                                      .jsonBody,
+                                                                                ).toString()}
+                                                     ${FFLocalizations.of(context).getText('propertyAdd' /* Logout */,)} : ${PropertyCall
+                                                                                    .propertyEntranceDirection(
+                                                                                  columnPropertyResponse
+                                                                                      .jsonBody,
+                                                                                ).toString()}
+                                                      ''';
+                                                      openWhatsapp(context,message,phoneNumber);
+                                                    },
+                                                    text:
+                                                        FFLocalizations.of(context)
+                                                            .getText(
+                                                      'requestVisit' /* Logout */,
+                                                    ),
+                                                    options: FFButtonOptions(
+                                                      width: 335,
+                                                      height: 48,
+                                                      color: Colors.white,
+                                                      textStyle: FlutterFlowTheme
+                                                              .of(context)
+                                                          .subtitle2
+                                                          .override(
+                                                            fontFamily:
+                                                                'Sofia Pro By Khuzaimah',
+                                                            color:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            useGoogleFonts: false,
+                                                          ),
+                                                      borderSide: BorderSide(
+                                                        color: FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryColor,
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(8),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              ),
                                           Divider(
                                             thickness: 1,
                                             indent: 10,
@@ -2608,7 +2786,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           ).toString(),
                                                         );
                                                       },
-
                                                       child:
                                                           FlutterFlowStaticMap(
                                                         location: functions
@@ -2955,7 +3132,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         logFirebaseEvent(
                                             'reserved_Bottom-Sheet');
                                         await configurePaymentSdk();
-                                    await showModalBottomSheet(
+                                        await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.white,
                                           context: context,
@@ -3004,8 +3181,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     'dpmrt150' /* Reserve */,
                                   ),
                                   options: FFButtonOptions(
-                                    width: FFAppState().locale=="en"?140:120,
-                                    height: FFAppState().locale=="en"?56:40,
+                                    width:
+                                        FFAppState().locale == "en" ? 140 : 120,
+                                    height:
+                                        FFAppState().locale == "en" ? 56 : 40,
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -3037,8 +3216,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     'wzirx8i7' /* Booked */,
                                   ),
                                   options: FFButtonOptions(
-                                    width: FFAppState().locale=="en"?140:120,
-                                    height: FFAppState().locale=="en"?56:40,
+                                    width:
+                                        FFAppState().locale == "en" ? 140 : 120,
+                                    height:
+                                        FFAppState().locale == "en" ? 56 : 40,
                                     color: Color(0xFF8C8C8C),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .subtitle2
@@ -3071,18 +3252,19 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     );
   }
 
-  Future<String> generateDynamicLink(Map<String,dynamic> params,{required String description, required String? thumbnailUrl})async{
+  Future<String> generateDynamicLink(Map<String, dynamic> params,
+      {required String description, required String? thumbnailUrl}) async {
     String url = 'https://www.manzel.app/';
 
-    if(params.isNotEmpty){
+    if (params.isNotEmpty) {
       url = '$url?';
     }
 
-    List<String> keys =  params.keys.toList();
-    for(int i=0;i<keys.length;i++){
+    List<String> keys = params.keys.toList();
+    for (int i = 0; i < keys.length; i++) {
       url += '${keys[i]}=${params[keys[i]]}';
-      if(i<keys.length-1){
-        url+='&';
+      if (i < keys.length - 1) {
+        url += '&';
       }
     }
 
@@ -3090,8 +3272,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       socialMetaTagParameters: SocialMetaTagParameters(
           title: "Join Manzel to see what I've been upto",
           imageUrl: Uri.parse(thumbnailUrl!),
-          description: description
-      ),
+          description: description),
       uriPrefix: 'https://manzeldev.page.link',
       link: Uri.parse(url),
       androidParameters: const AndroidParameters(
@@ -3103,9 +3284,41 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         minimumVersion: '1',
       ),
     );
-    ShortDynamicLink uri = await FirebaseDynamicLinks.instance.buildShortLink(parameters,shortLinkType: ShortDynamicLinkType.short);
+    ShortDynamicLink uri = await FirebaseDynamicLinks.instance
+        .buildShortLink(parameters, shortLinkType: ShortDynamicLinkType.short);
     return uri.shortUrl.toString();
   }
+
+  void openWhatsapp(BuildContext context,String? message,String? phoneNumber) async {
+    var whatsapp = phoneNumber;
+    var whatsappUrlAndroid = Uri.parse('$kWhatsAppAndroid$whatsapp&text=${message}');
+    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp&text=${message}');
+    if (Platform.isIOS) {
+      if (await canLaunchUrl(whatsappUrlIos)) {
+        await launchUrl(whatsappUrlIos, mode: LaunchMode.externalApplication);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Cannot open whatsapp',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(color: Colors.white))));
+      }
+    } else {
+      bool canLaunch = await canLaunchUrl(whatsappUrlAndroid);
+      if (canLaunch) {
+        await launchUrl(whatsappUrlAndroid,
+            mode: LaunchMode.externalApplication);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+          'Cannot open whatsapp',
+          style: Theme.of(context)
+              .textTheme
+              .bodySmall
+              ?.copyWith(color: Colors.white),
+        )));
+      }
+    }
+  }
 }
-
-

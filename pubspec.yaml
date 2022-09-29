@@ -191,7 +191,9 @@ flutter:
     - family: 'Manzel'
       fonts:
         - asset: assets/icons/Manzel.ttf
-
+#    - family: MyFlutterApp
+#      fonts:
+#        - asset: assets/icons/MyFlutterApp.ttf
 
 
 

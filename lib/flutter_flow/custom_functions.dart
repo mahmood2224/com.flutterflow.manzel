@@ -1166,7 +1166,11 @@ bool videoPlayerVisibilty(String? videoURL) {
     return false;
   }
 }
-
+bool requestButtonVisibilty(String? pincode){
+  if((pincode!=null)&&((pincode??'').isNotEmpty)){
+    return false;
+  }else{return true;}
+}
 bool propertyStatusConditionalVisibilty(String? propertyStatus) {
   // Add your function code here!
   if (propertyStatus == "Available") {
