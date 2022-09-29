@@ -80,18 +80,18 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           children: [
                             AuthUserStreamWidget(
                               child: Directionality(
-                              textDirection: material.TextDirection.ltr,
-                              child: Text(
-                                currentPhoneNumber,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w300,
-                                      useGoogleFonts: false,
-                                    ),
-                              )),
+                                  textDirection: material.TextDirection.ltr,
+                                  child: Text(
+                                    currentPhoneNumber,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                          useGoogleFonts: false,
+                                        ),
+                                  )),
                             ),
                           ],
                         ),
@@ -450,7 +450,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   child: FFButtonWidget(
                     onPressed: () {
                       print('Button pressed ...');
-                       openWhatsapp(context);
+                      openWhatsapp(context);
                     },
                     text: FFLocalizations.of(context).getText(
                       'u6lrslui' /* Chat Manzel in Whatsapp */,
@@ -460,7 +460,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       size: 15,
                     ),
                     options: FFButtonOptions(
-                      width: double.infinity,
+                      width: 335,
                       height: 52,
                       color: Color(0xFF4AC85A),
                       textStyle:
@@ -487,13 +487,84 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       children: [
                         FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent('PROFILE_PAGE_logout_ON_TAP');
-                            // Logout
-                            logFirebaseEvent('logout_Logout');
-                            GoRouter.of(context).prepareAuthEvent();
-                            await signOut();
+                            if (FFAppState().locale == 'en') {
+                              logFirebaseEvent('Button_Alert-Dialog');
+                              var confirmDialogResponse =
+                                  await showDialog<bool>(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Confirm Logout'),
+                                            content: Text(
+                                                    'Are you sure you want to logout?'),
 
-                            context.goNamedAuth('OnboardingView', mounted);
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, false),
+                                                child:
+                                                     Text('No')
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, true),
+                                                child:
+                                                     Text('Yes')
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ) ??
+                                      false;
+                              if (confirmDialogResponse) {
+                                logFirebaseEvent('PROFILE_PAGE_logout_ON_TAP');
+                                // Logout
+                                logFirebaseEvent('logout_Logout');
+                                GoRouter.of(context).prepareAuthEvent();
+                                await signOut();
+
+                                context.goNamedAuth('OnboardingView', mounted);
+                              }
+                            }else{
+                              logFirebaseEvent('Button_Alert-Dialog');
+                              var confirmDialogResponse =
+                                  await showDialog<bool>(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('قم بتأكيد تسجيل الخروج'),
+                                        content: Text(
+                                            'هل أنت متأكد أنك تريد تسجيل الخروج؟'),
+
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext, false),
+                                              child:
+                                              Text('لا')
+                                          ),
+                                          TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext, true),
+                                              child:
+                                              Text('نعم')
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ) ??
+                                      false;
+                              if (confirmDialogResponse) {
+                                logFirebaseEvent('PROFILE_PAGE_logout_ON_TAP');
+                                // Logout
+                                logFirebaseEvent('logout_Logout');
+                                GoRouter.of(context).prepareAuthEvent();
+                                await signOut();
+
+                                context.goNamedAuth('OnboardingView', mounted);
+                              }
+                            }
+                            ;
                           },
                           text: FFLocalizations.of(context).getText(
                             '2csoqw0t' /* Logout */,
@@ -528,10 +599,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     );
   }
 
-  static void  openWhatsapp(BuildContext context) async {
+  static void openWhatsapp(BuildContext context) async {
     var whatsapp = '+966550385531';
-    var whatsappUrlAndroid =
-    Uri.parse('$kWhatsAppAndroid$whatsapp&text=hi');
+    var whatsappUrlAndroid = Uri.parse('$kWhatsAppAndroid$whatsapp&text=hi');
     var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp');
     if (Platform.isIOS) {
       if (await canLaunchUrl(whatsappUrlIos)) {
@@ -552,12 +622,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
-              'Cannot open whatsapp',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
-                  ?.copyWith(color: Colors.white),
-            )));
+          'Cannot open whatsapp',
+          style: Theme.of(context)
+              .textTheme
+              .bodySmall
+              ?.copyWith(color: Colors.white),
+        )));
       }
     }
   }

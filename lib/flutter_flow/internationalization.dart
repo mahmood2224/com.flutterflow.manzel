@@ -1021,6 +1021,30 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PropertyDetails
   {
+    'propertyName':{
+      'en':'Property name',
+      'ar':'اسم الخاصية',
+    },
+    'propertyRef':{
+      'en':'Property Ref.',
+      'ar':'مرجع الملكية.',
+    },
+    'propertyAdd':{
+      'en':'Property address.',
+      'ar':'عنوان العقار',
+    },
+    'opening':{
+      'en':'Hello ! I want to request a visit to',
+      'ar':'أهلا وسهلا ! أريد أن أطلب زيارة إلى',
+    },
+    'requestVisit':{
+      'en' : 'Request Visit',
+      'ar':'اطلب زيارة',
+    },
+    'pinCode': {
+      'en': 'Pin code ',
+      'ar': 'كود PIN ',
+    },
     'ak0ss5un': {
       'en': 'Last updated: ',
       'ar': 'آخر تحديث :',
@@ -1256,9 +1280,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'plhqknku': {
       'en':
-      'To confirm the reservation, you need to pay an administration fee. By confirming payment, you agree to our terms & conditions ',
+          'To confirm the reservation, you need to pay an administration fee. By confirming payment, you agree to our terms & conditions ',
       'ar':
-      'لتأكيد الحجز ، يتعين عليك دفع رسوم إدارية\n .بتأكيد الدفع ، فإنك توافق على الشروط والأحكام الخاصة بنا',
+          'لتأكيد الحجز ، يتعين عليك دفع رسوم إدارية\n .بتأكيد الدفع ، فإنك توافق على الشروط والأحكام الخاصة بنا',
     },
     'jwz7tx3y': {
       'en': 'Reservation cost',
@@ -1417,9 +1441,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'znz2idhe': {
       'en':
-      'To confirm your booking we need to collect some information from you to fulfill our regulatory obligations.',
+          'To confirm your booking we need to collect some information from you to fulfill our regulatory obligations.',
       'ar':
-      'لتأكيد حجزك ، نحتاج إلى جمع بعض المعلومات منك للوفاء بالتزاماتنا التنظيمية.',
+          'لتأكيد حجزك ، نحتاج إلى جمع بعض المعلومات منك للوفاء بالتزاماتنا التنظيمية.',
     },
     '6sbw69l9': {
       'en': 'Absher verification',
@@ -1462,7 +1486,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '820iwo6l': {
       'en':
-      'To verify your identity, you should be registered in Absher first.',
+          'To verify your identity, you should be registered in Absher first.',
       'ar': 'للتحقق من هويتك ، يجب أن تكون مسجلاً في أبشر أولاً.',
     },
     'sagsx4yq': {
@@ -1517,9 +1541,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '8gduxe32': {
       'en':
-      'We need to collect some information from you to fulfill our regulatory obligations. Don\'t worry your information is stored safely',
+          'We need to collect some information from you to fulfill our regulatory obligations. Don\'t worry your information is stored safely',
       'ar':
-      'نحتاج إلى جمع بعض المعلومات منك للوفاء بالتزاماتنا التنظيمية. لا تقلق ، يتم تخزين معلوماتك بأمان',
+          'نحتاج إلى جمع بعض المعلومات منك للوفاء بالتزاماتنا التنظيمية. لا تقلق ، يتم تخزين معلوماتك بأمان',
     },
     '3pne660j': {
       'en': 'Personal details',
@@ -1743,242 +1767,250 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'View More',
       'ar': 'عرض المزيد',
     },
-'qkoz8020': {
-'en': 'Transaction details',
-'ar': 'تفاصيل الصفقه',
-},
-'0ck5hck8': {
-'en': 'Payment Method',
-'ar': 'طريقة الدفع',
-},
-'qxs4ycvd': {
-'en': 'Transaction Ref.',
-'ar': 'مرجع المعاملة',
-},
-'zagvs0yx': {
-'en': 'Amount',
-'ar': 'المبلغ',
-},
-'17eaou67': {
-'en': 'SAR',
-'ar': 'ر.س',
-},
-'x0ed6u9h': {
-'en': 'Date & Time',
-'ar': 'التاريخ والوقت',
-},
-'i7w1em00': {
-'en': 'View Transaction Receipt',
-'ar': 'عرض إيصال المعاملة',
-},
-'vrsc3lt4': {
-'en': 'Home',
-'ar': ' الرئيسية',
-},
-},
+    'qkoz8020': {
+      'en': 'Transaction details',
+      'ar': 'تفاصيل الصفقه',
+    },
+    '0ck5hck8': {
+      'en': 'Payment Method',
+      'ar': 'طريقة الدفع',
+    },
+    'qxs4ycvd': {
+      'en': 'Transaction Ref.',
+      'ar': 'مرجع المعاملة',
+    },
+    'zagvs0yx': {
+      'en': 'Amount',
+      'ar': 'المبلغ',
+    },
+    '17eaou67': {
+      'en': 'SAR',
+      'ar': 'ر.س',
+    },
+    'x0ed6u9h': {
+      'en': 'Date & Time',
+      'ar': 'التاريخ والوقت',
+    },
+    'i7w1em00': {
+      'en': 'View Transaction Receipt',
+      'ar': 'عرض إيصال المعاملة',
+    },
+    'vrsc3lt4': {
+      'en': 'Home',
+      'ar': ' الرئيسية',
+    },
+  },
 // depositeRecipt
-    {
-'b8jn4qd2': {
-'en': 'Transaction Receipt',
-'ar':  'إيصال المعاملة',
-},
-'1t4ox6bl': {
-'en': 'Home',
-'ar': '',
-},
-},
+  {
+    'b8jn4qd2': {
+      'en': 'Transaction Receipt',
+      'ar': 'إيصال المعاملة',
+    },
+    '1t4ox6bl': {
+      'en': 'Home',
+      'ar': '',
+    },
+    'downloadSucessfulMessage': {
+      'en': 'Receipt has been downloaded check Downloads',
+      'ar': 'تم تنزيل الإيصال تحقق من التنزيلات'
+    },
+    'errorDownloading': {
+      'en': 'Error downloading receipt please try again later',
+      'ar': 'خطأ في تنزيل الإيصال ، يرجى المحاولة مرة أخرى لاحقًا'
+    },
+  },
 // NotFoundPage
-    {
-'gmbuwmld': {
-'en': 'No Result Found',
-'ar': 'لم يتم العثور على اي نتائج',
-},
-},
+  {
+    'gmbuwmld': {
+      'en': 'No Result Found',
+      'ar': 'لم يتم العثور على اي نتائج',
+    },
+  },
 // bankDetailsBottomSheet
-    {
-'qb244g7f': {
-'en': 'Bank Details',
-'ar': 'تفاصيل البنك',
-},
-'ua6uqn3o': {
-'en': 'Close',
-'ar': 'إغلاق',
-},
-},
+  {
+    'qb244g7f': {
+      'en': 'Bank Details',
+      'ar': 'تفاصيل البنك',
+    },
+    'ua6uqn3o': {
+      'en': 'Close',
+      'ar': 'إغلاق',
+    },
+  },
 // NoResultsFound
-    {
-'1yep0j1q': {
-'en': 'Explore our properties',
-'ar': 'اكتشف عقاراتنا',
-},
-},
+  {
+    '1yep0j1q': {
+      'en': 'Explore our properties',
+      'ar': 'اكتشف عقاراتنا',
+    },
+  },
 // reservationBottomSheet
-    {
-'jaefs5yd': {
-'en': 'Reservation confirmation',
-'ar': 'تأكيد الحجز',
-},
-'pdty4a6r': {
-'en':
-'To confirm the reservation, you need to pay an administration fee. By confirming payment, you ',
-'ar': '\nلتأكيد الحجز ، يتعين عليك دفع رسوم إدارية. بتأكيد الدفع ، أنت',
-},
-'njswqwdn': {
-'en': 'agree to our ',
-'ar': 'توافق على',
-},
-'0gizrv8a': {
-'en': 'terms & conditions ',
-'ar': 'الشروط والأحكام',
-},
-'iyjhj02m': {
-'en': 'Reservation cost',
-'ar': 'تكلفة الحجز',
-},
-'wqlgaavg': {
-'en': 'SAR',
-'ar': 'ريال سعودي',
-},
-'sohxgusa': {
-'en': 'Note: Reservation cost is non-refundable ',
-'ar': 'ملاحظة: تكلفة الحجز غير قابلة للاسترداد',
-},
-'p0n3wi8y': {
-'en': 'Select Payment Method',
-'ar': 'اختر طريقة الدفع',
-},
-'0pkqdf0l': {
-'en': 'Mada/Visa',
-'ar': 'مدى / فيزا',
-},
-'icwlzrr6': {
-'en': 'ApplePay',
-'ar': 'ابل باي',
-},
-'p50ponkb': {
-'en': 'Pay',
-'ar': 'ادفع',
-},
-},
+  {
+    'jaefs5yd': {
+      'en': 'Reservation confirmation',
+      'ar': 'تأكيد الحجز',
+    },
+    'pdty4a6r': {
+      'en':
+          'To confirm the reservation, you need to pay an administration fee. By confirming payment, you ',
+      'ar': '\nلتأكيد الحجز ، يتعين عليك دفع رسوم إدارية. بتأكيد الدفع ، أنت',
+    },
+    'njswqwdn': {
+      'en': 'agree to our ',
+      'ar': 'توافق على',
+    },
+    '0gizrv8a': {
+      'en': 'terms & conditions ',
+      'ar': 'الشروط والأحكام',
+    },
+    'iyjhj02m': {
+      'en': 'Reservation cost',
+      'ar': 'تكلفة الحجز',
+    },
+    'wqlgaavg': {
+      'en': 'SAR',
+      'ar': 'ريال سعودي',
+    },
+    'sohxgusa': {
+      'en': 'Note: Reservation cost is non-refundable ',
+      'ar': 'ملاحظة: تكلفة الحجز غير قابلة للاسترداد',
+    },
+    'p0n3wi8y': {
+      'en': 'Select Payment Method',
+      'ar': 'اختر طريقة الدفع',
+    },
+    '0pkqdf0l': {
+      'en': 'Mada/Visa',
+      'ar': 'مدى / فيزا',
+    },
+    'icwlzrr6': {
+      'en': 'ApplePay',
+      'ar': 'ابل باي',
+    },
+    'p50ponkb': {
+      'en': 'Pay',
+      'ar': 'ادفع',
+    },
+  },
 // cancelReserveBottomSheet
-    {
-'wb43h3r4': {
-'en': 'Cancel Reserve',
-'ar': 'إلغاء الحجز',
-},
-'t7s7qd09': {
-'en': 'Cancel',
-'ar': 'إلغاء',
-},
-},
+  {
+    'wb43h3r4': {
+      'en': 'Cancel Reserve',
+      'ar': 'إلغاء الحجز',
+    },
+    't7s7qd09': {
+      'en': 'Cancel',
+      'ar': 'إلغاء',
+    },
+  },
 // helpAndSupportBottomSheet
-    {
-'btyml6ed': {
-'en': 'Help & Support',
-'ar': 'المساعدة والدعم',
-},
-'emjcotxb': {
-'en': 'Please write us at',
-'ar': 'قم بمراسلتنا عبر',
-},
-'hwo08yn2': {
-'en': 'Support@manzel.app',
-'ar': 'Support@manzel.app',
-},
-'pzfwn97d': {
-'en': 'for any concern',
-'ar': 'للإجابة على استفساراتك',
-},
-'eaazmbdx': {
-'en': 'Delete Account',
-'ar': 'حذف الحساب',
-},
-},
+  {
+    'btyml6ed': {
+      'en': 'Help & Support',
+      'ar': 'المساعدة والدعم',
+    },
+    'emjcotxb': {
+      'en': 'Please write us at',
+      'ar': 'قم بمراسلتنا عبر',
+    },
+    'hwo08yn2': {
+      'en': 'Support@manzel.app',
+      'ar': 'Support@manzel.app',
+    },
+    'pzfwn97d': {
+      'en': 'for any concern',
+      'ar': 'للإجابة على استفساراتك',
+    },
+    'eaazmbdx': {
+      'en': 'Delete Account',
+      'ar': 'حذف الحساب',
+    },
+  },
 // Miscellaneous
-    {
-'qr81nfm0': {
-'en': '',
-'ar': '',
-},
-'uc1oksun': {
-'en': '',
-'ar': '',
-},
-'1q6kv0ag': {
-'en': '',
-'ar': '',
-},
-'hfba8ghq': {
-'en': '',
-'ar': '',
-},
-'iswxm5h0': {
-'en': '',
-'ar': '',
-},
-'nu2t0b0f': {
-'en': '',
-'ar': '',
-},
-'jsle1mmd': {
-'en': '',
-'ar': '',
-},
-'9xs0c7u8': {
-'en': '',
-'ar': '',
-},
-'9z16oone': {
-'en': '',
-'ar': '',
-},
-'fem3d7jn': {
-'en': '',
-'ar': '',
-},
-'6qutc3px': {
-'en': '',
-'ar': '',
-},
-'j7s33te0': {
-'en': '',
-'ar': '',
-},
-'8iccyr2w': {
-'en': '',
-'ar': '',
-},
-'z44qufyb': {
-'en': '',
-'ar': '',
-},
-'hbhjpb56': {
-'en': '',
-'ar': '',
-},
-'yhdnkgh9': {
-'en': '',
-'ar': '',
-},
-'ryrf4mu9': {
-'en': '',
-'ar': '',
-},
-'tgrrw1pg': {
-'en': '',
-'ar': '',
-},
-'ny2h6j0x': {
-'en': '',
-'ar': '',
-},
-'e79jfteg': {
-'en': '',
-'ar': '',
-},
-'igfljhsl': {
-'en': '',
-'ar': '',
-},
-},
+  {
+    'qr81nfm0': {
+      'en': '',
+      'ar': '',
+    },
+    'uc1oksun': {
+      'en': '',
+      'ar': '',
+    },
+    '1q6kv0ag': {
+      'en': '',
+      'ar': '',
+    },
+    'hfba8ghq': {
+      'en': '',
+      'ar': '',
+    },
+    'iswxm5h0': {
+      'en': '',
+      'ar': '',
+    },
+    'nu2t0b0f': {
+      'en': '',
+      'ar': '',
+    },
+    'jsle1mmd': {
+      'en': '',
+      'ar': '',
+    },
+    '9xs0c7u8': {
+      'en': '',
+      'ar': '',
+    },
+    '9z16oone': {
+      'en': '',
+      'ar': '',
+    },
+    'fem3d7jn': {
+      'en': '',
+      'ar': '',
+    },
+    '6qutc3px': {
+      'en': '',
+      'ar': '',
+    },
+    'j7s33te0': {
+      'en': '',
+      'ar': '',
+    },
+    '8iccyr2w': {
+      'en': '',
+      'ar': '',
+    },
+    'z44qufyb': {
+      'en': '',
+      'ar': '',
+    },
+    'hbhjpb56': {
+      'en': '',
+      'ar': '',
+    },
+    'yhdnkgh9': {
+      'en': '',
+      'ar': '',
+    },
+    'ryrf4mu9': {
+      'en': '',
+      'ar': '',
+    },
+    'tgrrw1pg': {
+      'en': '',
+      'ar': '',
+    },
+    'ny2h6j0x': {
+      'en': '',
+      'ar': '',
+    },
+    'e79jfteg': {
+      'en': '',
+      'ar': '',
+    },
+    'igfljhsl': {
+      'en': '',
+      'ar': '',
+    },
+  },
 ].reduce((a, b) => a..addAll(b));
