@@ -273,29 +273,29 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           useGoogleFonts: false,
                         ),
                       ),
-                      // InkWell(
-                      //   onTap: () async {
-                      //     logFirebaseEvent(
-                      //         'EDIT_PERSONALL_INFO_editMobile_ON_TAP');
-                      //     logFirebaseEvent('editMobile_Navigate-To');
-                      //
-                      //     context.goNamed('EditMobileNumber');
-                      //   },
-                      //   child: Text(
-                      //     FFLocalizations.of(context).getText(
-                      //       'lbyulmrk' /* Edit */,
-                      //     ),
-                      //     style:
-                      //     FlutterFlowTheme.of(context).subtitle1.override(
-                      //       fontFamily: 'AvenirArabic',
-                      //       color: Color(0xFF2971FB),
-                      //       fontSize: 16,
-                      //       fontWeight: FontWeight.w500,
-                      //       decoration: TextDecoration.underline,
-                      //       useGoogleFonts: false,
-                      //     ),
-                      //   ),
-                      // ),
+                      InkWell(
+                        onTap: () async {
+                          logFirebaseEvent(
+                              'EDIT_PERSONALL_INFO_editMobile_ON_TAP');
+                          logFirebaseEvent('editMobile_Navigate-To');
+
+                          context.goNamed('EditMobileNumber');
+                        },
+                        child: Text(
+                          FFLocalizations.of(context).getText(
+                            'lbyulmrk' /* Edit */,
+                          ),
+                          style:
+                          FlutterFlowTheme.of(context).subtitle1.override(
+                            fontFamily: 'AvenirArabic',
+                            color: Color(0xFF2971FB),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            decoration: TextDecoration.underline,
+                            useGoogleFonts: false,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
