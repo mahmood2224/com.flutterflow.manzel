@@ -21,8 +21,10 @@ import '../notification_handler/firebase_cloud_messaging.dart';
 
 class ConfirmNewNumberOTPWidget extends StatefulWidget {
   final String? phoneNumber;
+  final String? isFromUpdate;
 
-  const ConfirmNewNumberOTPWidget({Key? key, this.phoneNumber})
+  const ConfirmNewNumberOTPWidget(
+      {Key? key, this.phoneNumber, this.isFromUpdate})
       : super(key: key);
 
   @override
@@ -33,19 +35,24 @@ class ConfirmNewNumberOTPWidget extends StatefulWidget {
 class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   TextEditingController? enterOTPController;
   int _otpResendTimes = 3;
+  bool? isFromUpdate;
   final ValueNotifier<bool> _showResendOtp = ValueNotifier(false);
   String _phoneAuthVerificationCode = '';
   ValueNotifier<String> _showOtpError = ValueNotifier('');
   final scaffoldKey = GlobalKey<ScaffoldState>();
   OverlayEntry? entry;
 
-
   void resendOTP() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: widget.phoneNumber!,
+      phoneNumber: widget!.phoneNumber!,
       timeout: Duration(seconds: 40),
       verificationCompleted: (phoneAuthCredential) async {
-        await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+        if (isFromUpdate ?? false) {
+          await FirebaseAuth.instance.currentUser!
+              .updatePhoneNumber(phoneAuthCredential);
+        } else {
+          await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+        }
       },
       verificationFailed: (e) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -67,6 +74,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   void initState() {
     super.initState();
     enterOTPController = TextEditingController();
+    isFromUpdate = widget.isFromUpdate == "true" ? true : false;
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ConfirmNewNumberOTP'});
   }
@@ -191,155 +199,192 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                 // }
 
                                 entry = showOverlay(context);
-                                final phoneVerifiedUser = await verifySmsCode(
-                                  context: context,
-                                  smsCode: otp,
-                                );
-                                entry?.remove();
-                                if (phoneVerifiedUser == null) {
-                                  _showOtpError.value =
-                                      "You entered OTP incorrect";
-                                  return;
-                                }
-                                Future.delayed(
-                                    const Duration(milliseconds: 600),
-                                    () async {
-                                  if (currentUserDocument!.status!.isEmpty ||
-                                      currentUserDocument!.status!
-                                              .toLowerCase() ==
-                                          'active') {
-                                    final userUpdateData = createUserRecordData(
-                                        status: 'Active',
-                                        language: FFLocalizations.of(context)
-                                            .languageCode,
-                                        lastLogin: DateTime.now(),
-                                        isDeleted: 0);
-                                    if (currentUserDocument!.status!.isEmpty) {
-                                      userUpdateData.addAll(
-                                          {'created_at': DateTime.now()});
-                                      userUpdateData.addAll(
-                                          {'lastLogin': DateTime.now()});
-                                    }
-
-                                    final userNotificationRecord =
-                                        createUsersDeviceTokenRecordData(
-                                      deviceToken: await FirebaseMessagingUtils
-                                          .getPushNotificationToken(),
-                                      userId: currentUserReference,
-                                    );
-                                    final QuerySnapshot result =
-                                        await UsersDeviceTokenRecord.collection
-                                            .where('user_id',
-                                                isEqualTo: currentUserReference)
-                                            .limit(1)
-                                            .get();
-
-                                    if (result.docs.isNotEmpty) {
-                                      await UsersDeviceTokenRecord.collection
-                                          .doc(result.docs[0].id)
-                                          .update(userNotificationRecord);
-                                    } else {
-                                      await UsersDeviceTokenRecord.collection
-                                          .doc()
-                                          .set(userNotificationRecord);
-                                    }
-                                    if (FirebaseAuth.instance.currentUser !=
-                                        null) {
-                                      final user = await FirebaseAuth
-                                          .instance.currentUser;
-                                      final idToken =
-                                      await user?.getIdToken();
-                                      print("************* token Id ${idToken}");
-                                      FFAppState().authToken = idToken!;
-                                    }else{print("*********************ERROR***");}
-    // if (FirebaseAuth.instance.currentUser != null) {
-    // final user = FirebaseAuth.instance.currentUser;
-    // final idTokenResult = await user!.getIdTokenResult(true);
-    // final token = idTokenResult.token;
-    //
-    // print( "********************* Resend auth token wala code${token}");}
-
-                                    await currentUserReference
-                                        ?.update(userUpdateData);
-                                    if (currentUserDisplayName.isEmpty &&
-                                        currentUserDocument!.name!.isEmpty) {
-                                      final _sendbird = await SendbirdSdk(
-                                          appId:
-                                              "${EnvVariables.instance.sendbirdAppId}");
-                                      final _ = await _sendbird
-                                          .connect(currentUserUid);
-                                      context.goNamedAuth(
-                                          'AddingInformation', mounted);
-                                    } else {
-                                      context.goNamedAuth(
-                                          'HomeScreen', mounted);
-                                    }
-
-                                    //  else {
-                                    //   await showDialog(
-                                    //     context: context,
-                                    //     builder: (alertDialogContext) {
-                                    //       return AlertDialog(
-                                    //         title: Text(FFLocalizations.of(context).getText(
-                                    //           'OTPDeactivated' ,
-                                    //         )),
-                                    //         content: Text(FFLocalizations.of(context).getText(
-                                    //           'OTPDeactivatedText' ,
-                                    //         )),
-                                    //         actions: [
-                                    //           TextButton(
-                                    //             onPressed: () async{
-                                    //               await signOut();
-                                    //               Navigator.pop(alertDialogContext);
-                                    //               context.pop();
-                                    //             },
-                                    //             child: Text(FFLocalizations.of(context).getText(
-                                    //               'OTPOk' ,
-                                    //             )),
-                                    //           ),
-                                    //         ],
-                                    //       );
-                                    //       },
-                                    //   );
-                                    // }
-                                  } else {
-                                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    //   content: Text('Your account is not active. Kindly connect to support for more information.'),
-                                    // ));
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                            'OTPBlocked',
-                                          )),
-                                          content: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                            'OTPBlockedText',
-                                          )),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () async {
-                                                await signOut();
-                                                Navigator.pop(
-                                                    alertDialogContext);
-                                                context.pop();
-                                              },
-                                              child: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                'OTPOk',
-                                              )),
-                                            ),
-                                          ],
-                                        );
+                                if (isFromUpdate ?? false) {
+                                  FirebaseAuth.instance.verifyPhoneNumber(
+                                      phoneNumber: widget.phoneNumber!,
+                                      timeout: const Duration(seconds: 40),
+                                      verificationCompleted:
+                                          (credential) async {
+                                        await FirebaseAuth.instance.currentUser!
+                                            .updatePhoneNumber(credential);
+                                        // either this occurs or the user needs to manually enter the SMS code
                                       },
-                                    );
+                                      verificationFailed: (e) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(SnackBar(
+                                          content: Text('Error: ${e.message}'),
+                                        ));
+                                      },
+                                      codeSent: (verificationId, _) async {
+                                        final PhoneAuthCredential credential =
+                                            PhoneAuthProvider.credential(
+                                                verificationId: verificationId,
+                                                smsCode: otp);
+                                        await FirebaseAuth.instance.currentUser!
+                                            .updatePhoneNumber(credential);
+                                      },
+                                      codeAutoRetrievalTimeout: (_) {});
+                                } else {
+                                  final phoneVerifiedUser = await verifySmsCode(
+                                    context: context,
+                                    smsCode: otp,
+                                  );
+                                  entry?.remove();
+                                  if (phoneVerifiedUser == null) {
+                                    _showOtpError.value =
+                                        "You entered OTP incorrect";
+                                    return;
                                   }
-                                });
+                                  Future.delayed(
+                                      const Duration(milliseconds: 600),
+                                      () async {
+                                    if (currentUserDocument!.status!.isEmpty ||
+                                        currentUserDocument!.status!
+                                                .toLowerCase() ==
+                                            'active') {
+                                      final userUpdateData =
+                                          createUserRecordData(
+                                              status: 'Active',
+                                              language:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                              lastLogin: DateTime.now(),
+                                              isDeleted: 0);
+                                      if (currentUserDocument!
+                                          .status!.isEmpty) {
+                                        userUpdateData.addAll(
+                                            {'created_at': DateTime.now()});
+                                        userUpdateData.addAll(
+                                            {'lastLogin': DateTime.now()});
+                                      }
+
+                                      final userNotificationRecord =
+                                          createUsersDeviceTokenRecordData(
+                                        deviceToken:
+                                            await FirebaseMessagingUtils
+                                                .getPushNotificationToken(),
+                                        userId: currentUserReference,
+                                      );
+                                      final QuerySnapshot result =
+                                          await UsersDeviceTokenRecord
+                                              .collection
+                                              .where('user_id',
+                                                  isEqualTo:
+                                                      currentUserReference)
+                                              .limit(1)
+                                              .get();
+
+                                      if (result.docs.isNotEmpty) {
+                                        await UsersDeviceTokenRecord.collection
+                                            .doc(result.docs[0].id)
+                                            .update(userNotificationRecord);
+                                      } else {
+                                        await UsersDeviceTokenRecord.collection
+                                            .doc()
+                                            .set(userNotificationRecord);
+                                      }
+                                      if (FirebaseAuth.instance.currentUser !=
+                                          null) {
+                                        final user = await FirebaseAuth
+                                            .instance.currentUser;
+                                        final idToken =
+                                            await user?.getIdToken();
+                                        print(
+                                            "************* token Id ${idToken}");
+                                        FFAppState().authToken = idToken!;
+                                      } else {
+                                        print("*********************ERROR***");
+                                      }
+                                      // if (FirebaseAuth.instance.currentUser != null) {
+                                      // final user = FirebaseAuth.instance.currentUser;
+                                      // final idTokenResult = await user!.getIdTokenResult(true);
+                                      // final token = idTokenResult.token;
+                                      //
+                                      // print( "********************* Resend auth token wala code${token}");}
+
+                                      await currentUserReference
+                                          ?.update(userUpdateData);
+
+                                      if (currentUserDisplayName.isEmpty &&
+                                          currentUserDocument!.name!.isEmpty) {
+                                        final _sendbird = await SendbirdSdk(
+                                            appId:
+                                                "${EnvVariables.instance.sendbirdAppId}");
+                                        final _ = await _sendbird
+                                            .connect(currentUserUid);
+                                        context.goNamedAuth(
+                                            'AddingInformation', mounted);
+                                      } else {
+                                        context.goNamedAuth(
+                                            'HomeScreen', mounted);
+                                      }
+
+                                      //  else {
+                                      //   await showDialog(
+                                      //     context: context,
+                                      //     builder: (alertDialogContext) {
+                                      //       return AlertDialog(
+                                      //         title: Text(FFLocalizations.of(context).getText(
+                                      //           'OTPDeactivated' ,
+                                      //         )),
+                                      //         content: Text(FFLocalizations.of(context).getText(
+                                      //           'OTPDeactivatedText' ,
+                                      //         )),
+                                      //         actions: [
+                                      //           TextButton(
+                                      //             onPressed: () async{
+                                      //               await signOut();
+                                      //               Navigator.pop(alertDialogContext);
+                                      //               context.pop();
+                                      //             },
+                                      //             child: Text(FFLocalizations.of(context).getText(
+                                      //               'OTPOk' ,
+                                      //             )),
+                                      //           ),
+                                      //         ],
+                                      //       );
+                                      //       },
+                                      //   );
+                                      // }
+                                    } else {
+                                      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      //   content: Text('Your account is not active. Kindly connect to support for more information.'),
+                                      // ));
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              'OTPBlocked',
+                                            )),
+                                            content: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              'OTPBlockedText',
+                                            )),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () async {
+                                                  await signOut();
+                                                  Navigator.pop(
+                                                      alertDialogContext);
+                                                  context.pop();
+                                                },
+                                                child: Text(
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                  'OTPOk',
+                                                )),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+                                  });
+                                }
 
                                 // FirebaseFirestore.instance
                                 //     .collection('User')

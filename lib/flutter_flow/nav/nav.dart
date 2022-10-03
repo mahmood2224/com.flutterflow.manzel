@@ -97,7 +97,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'ConfirmOTP',
               path: 'confirmOTP',
-              builder: (context, params) => ConfirmOTPWidget(),
+              builder: (context, params) => ConfirmOTPWidget(
+                  phoneNumber:
+                  params.getParam('phoneNumber', ParamType.String)
+              ),
             ),
             FFRoute(
               name: 'Profile',
@@ -134,8 +137,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'ConfirmNewNumberOTPWidget')
                   : ConfirmNewNumberOTPWidget(
-                      phoneNumber:
-                          params.getParam('phoneNumber', ParamType.String)),
+                  phoneNumber: params.getParam('phoneNumber', ParamType.String),
+                isFromUpdate: params.getParam('isFromUpdate', ParamType.bool)
+              ),
             ),
             FFRoute(
               name: 'HelpAndSupport',
