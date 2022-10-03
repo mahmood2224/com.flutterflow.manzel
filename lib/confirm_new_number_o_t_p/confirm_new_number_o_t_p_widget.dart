@@ -198,32 +198,13 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                 //   _showOtpError.value = "Working";
                                 // }
 
-                                entry = showOverlay(context);
+                                 entry = showOverlay(context);
                                 if (isFromUpdate ?? false) {
-                                  FirebaseAuth.instance.verifyPhoneNumber(
-                                      phoneNumber: widget.phoneNumber!,
-                                      timeout: const Duration(seconds: 40),
-                                      verificationCompleted:
-                                          (credential) async {
-                                        await FirebaseAuth.instance.currentUser!
-                                            .updatePhoneNumber(credential);
-                                        // either this occurs or the user needs to manually enter the SMS code
-                                      },
-                                      verificationFailed: (e) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(SnackBar(
-                                          content: Text('Error: ${e.message}'),
-                                        ));
-                                      },
-                                      codeSent: (verificationId, _) async {
-                                        final PhoneAuthCredential credential =
-                                            PhoneAuthProvider.credential(
-                                                verificationId: verificationId,
-                                                smsCode: otp);
-                                        await FirebaseAuth.instance.currentUser!
-                                            .updatePhoneNumber(credential);
-                                      },
-                                      codeAutoRetrievalTimeout: (_) {});
+                                  final phoneVerifiedUser = await verifySmsCode(
+                                    isFromUpdate: true,
+                                    context: context,
+                                    smsCode: otp,
+                                  );
                                 } else {
                                   final phoneVerifiedUser = await verifySmsCode(
                                     context: context,

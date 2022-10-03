@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 import 'backend/push_notifications/push_notifications_util.dart';
@@ -199,8 +200,8 @@ class _NavBarPageState extends State<NavBarPage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.search_rounded,
-              size: 24,
+              Manzel.explore,
+              size: 20,
             ),
             label: FFLocalizations.of(context).getText(
               'd9p577jz' /* Explore */,
@@ -219,8 +220,8 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: FaIcon(
-              FontAwesomeIcons.commentDots,
-              size: 24,
+              Manzel.offer,
+              size: 20,
             ),
             label: FFLocalizations.of(context).getText(
               'km9ey405' /* Offers */,

@@ -252,12 +252,13 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               }
                               //entry = showOverlay(context);
                               await beginPhoneAuth(
+                                isFromUpdate: true,
                                 context: context,
                                 phoneNumber: phoneNumberVal,
                                 onCodeSent: () async {
                                   //    entry.remove();
                                   isLoading = false;
-                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'isFromUpdate':"true",'phoneNumber': phoneNumberVal});
+                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'isFromUpdate':"true",'phoneNumber': "+917016915317"});
                                 },
                               );
 
