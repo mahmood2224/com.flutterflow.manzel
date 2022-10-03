@@ -85,9 +85,9 @@
 		<string>osmandmaps</string>
 		<string>dgis</string>
 		<string>qqmap</string>
-        <string>https</string>
-        <string>http</string>
-        <string>whatsapp</string>
+		<string>https</string>
+		<string>http</string>
+		<string>whatsapp</string>
 		<string>here-location</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
@@ -97,7 +97,7 @@
 	<key>NSAllowsArbitraryLoads</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to your  phone&apos;s camera</string>
+	<string>This app requires access to your  phone's camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This application requires location permission to get your current location</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
