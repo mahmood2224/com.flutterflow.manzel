@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_result_widget.dart';
@@ -59,10 +61,13 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                           logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
                           Navigator.pop(context);
                         },
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                          size: 24,
+                        child: RotatedBox(
+                          quarterTurns: FFAppState().locale=='en'?0:2,
+                          child: Icon(
+                            Manzel.back_icon,
+                            color: Colors.black,
+                            size: 14,
+                          ),
                         ),
                       ),
                     ),

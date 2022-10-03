@@ -1,3 +1,4 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:sendbird_sdk/constant/enums.dart';
 import 'package:sendbird_sdk/query/channel_list/group_channel_list_query.dart';
 
@@ -303,9 +304,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                           borderWidth: 1,
                           buttonSize: 30,
                           icon: Icon(
-                            Icons.clear,
+                            Manzel.clear,
                             color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24,
+                            size: 16,
                           ),
                           onPressed: () async {
                             logFirebaseEvent('OFFERS_PAGE_clear_ICN_ON_TAP');

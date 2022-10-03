@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:manzel/backend/backend.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:sendbird_sdk/sdk/sendbird_sdk_api.dart';
 import '../../enviorment/env_variables.dart';
 import '../auth/auth_util.dart';
@@ -98,9 +99,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
           borderWidth: 1,
           buttonSize: 60,
           icon: Icon(
-            Icons.clear_rounded,
+            Manzel.clear,
             color: Colors.black,
-            size: 30,
+            size: 20,
           ),
           onPressed: () async {
             logFirebaseEvent('CONFIRM_NEW_NUMBER_O_T_P_back_ON_TAP');

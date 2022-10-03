@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:go_sell_sdk_flutter/model/models.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
@@ -291,9 +292,9 @@ class _ReservationBottomSheetWidgetState
                         Navigator.pop(context);
                       },
                       child: Icon(
-                        Icons.clear,
+                        Manzel.clear,
                         color: Colors.black,
-                        size: 24,
+                        size: 20,
                       ),
                     ),
                   ),

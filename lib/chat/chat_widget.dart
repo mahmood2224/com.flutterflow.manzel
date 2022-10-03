@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:manzel/auth/auth_util.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../common_widgets/overlay.dart';
 import '../enviorment/env_variables.dart';
@@ -106,10 +107,13 @@ class _ChatWidgetState extends State<ChatWidget>
                                   'Icon_Close-Dialog,-Drawer,-Etc');
                               Navigator.pop(context);
                             },
-                            child: Icon(
-                              Icons.arrow_back_rounded,
-                              color: Colors.black,
-                              size: 24,
+                            child: RotatedBox(
+                              quarterTurns: FFAppState().locale=='en'?0:2,
+                              child: Icon(
+                                Manzel.back_icon,
+                                color: Colors.black,
+                                size: 24,
+                              ),
                             ),
                           ),
                         ),

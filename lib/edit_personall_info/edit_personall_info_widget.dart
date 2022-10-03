@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
@@ -62,21 +64,24 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30,
-          borderWidth: 1,
-          buttonSize: 60,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Colors.black,
-            size: 30,
+        leading: RotatedBox(
+          quarterTurns: FFAppState().locale=='en'?0:2,
+          child: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Manzel.back_icon,
+              color: Colors.black,
+              size: 15,
+            ),
+            onPressed: () async {
+              logFirebaseEvent('EDIT_PERSONALL_INFO_PAGE_back_ON_TAP');
+              logFirebaseEvent('back_Close-Dialog,-Drawer,-Etc');
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () async {
-            logFirebaseEvent('EDIT_PERSONALL_INFO_PAGE_back_ON_TAP');
-            logFirebaseEvent('back_Close-Dialog,-Drawer,-Etc');
-            Navigator.pop(context);
-          },
         ),
         title: Text(
           FFLocalizations.of(context).getText(

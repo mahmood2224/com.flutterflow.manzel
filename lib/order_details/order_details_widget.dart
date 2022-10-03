@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../backend/api_requests/api_calls.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -65,7 +67,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
               buttonSize: 60,
               fillColor: Colors.transparent,
               icon: Icon(
-                Icons.arrow_back_rounded,
+                Manzel.back_icon,
                 color: Colors.white,
                 size: 30,
               ),

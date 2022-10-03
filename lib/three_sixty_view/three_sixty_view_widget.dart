@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_web_view.dart';
@@ -40,10 +42,13 @@ class _ThreeSixtyViewWidgetState extends State<ThreeSixtyViewWidget> {
             logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
             Navigator.pop(context);
           },
-          child: Icon(
-            Icons.arrow_back_outlined,
-            color: Colors.black,
-            size: 24,
+          child: RotatedBox(
+            quarterTurns: FFAppState().locale=='en'?0:2,
+            child: Icon(
+              Manzel.clear,
+              color: Colors.black,
+              size: 24,
+            ),
           ),
         ),
         title: Text(

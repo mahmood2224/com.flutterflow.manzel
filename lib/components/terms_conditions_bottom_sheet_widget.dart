@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -71,9 +73,9 @@ class _TermsConditionsBottomSheetWidgetState
                             Navigator.pop(context);
                           },
                           child: Icon(
-                            Icons.close,
+                            Manzel.clear,
                             color: Colors.black,
-                            size: 24,
+                            size: 16,
                           ),
                         ),
                       ),

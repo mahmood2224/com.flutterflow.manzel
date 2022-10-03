@@ -1,3 +1,4 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../backend/api_requests/api_calls.dart';
@@ -116,9 +117,9 @@ class _FilterWidgetState extends State<FilterWidget> {
               borderRadius: 30,
               buttonSize: 48,
               icon: Icon(
-                Icons.close_rounded,
+                Manzel.clear,
                 color: FlutterFlowTheme.of(context).secondaryText,
-                size: 30,
+                size: 15,
               ),
               onPressed: () async {
                 logFirebaseEvent('FILTER_PAGE_close_rounded_ICN_ON_TAP');
