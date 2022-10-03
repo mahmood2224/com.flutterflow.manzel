@@ -111,6 +111,7 @@ String? _phoneAuthVerificationCode;
 ConfirmationResult? _webPhoneAuthConfirmationResult;
 
 Future beginPhoneAuth({
+  bool? isFromUpdate ,
   required BuildContext context,
   required String phoneNumber,
   required VoidCallback onCodeSent,
@@ -130,6 +131,9 @@ Future beginPhoneAuth({
     phoneNumber: phoneNumber,
     timeout: Duration(seconds: 40),
     verificationCompleted: (phoneAuthCredential) async {
+      if(isFromUpdate??false){
+        await FirebaseAuth.instance.currentUser!.updatePhoneNumber(phoneAuthCredential);
+      }
       await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
       // If you've implemented auto-verification, navigate to home page or
       // onboarding page here manually. Uncomment the lines below and replace
@@ -153,6 +157,7 @@ Future beginPhoneAuth({
 }
 
 Future verifySmsCode({
+  bool? isFromUpdate,
   required BuildContext context,
   required String smsCode,
 }) async {
@@ -162,11 +167,14 @@ Future verifySmsCode({
   } else {
     final authCredential = PhoneAuthProvider.credential(
         verificationId: _phoneAuthVerificationCode!, smsCode: smsCode);
+    if(isFromUpdate??false){
+      FirebaseAuth.instance.currentUser!.updatePhoneNumber(authCredential);
+    }else{
     return signInOrCreateAccount(
       context,
       () => FirebaseAuth.instance.signInWithCredential(authCredential),
     );
-  }
+  }}
 }
 
 DocumentReference? get currentUserReference => currentUser?.user != null

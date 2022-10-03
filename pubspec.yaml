@@ -188,12 +188,9 @@ flutter:
           weight: 700
         - asset: assets/fonts/AvenirArabic-Book.otf
           weight: 800
-    - family: 'Manzel'
+    - family: Manzel
       fonts:
         - asset: assets/icons/Manzel.ttf
-#    - family: MyFlutterApp
-#      fonts:
-#        - asset: assets/icons/MyFlutterApp.ttf
 
 
 

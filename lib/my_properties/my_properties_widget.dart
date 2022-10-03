@@ -1,4 +1,5 @@
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
@@ -779,7 +780,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             .max,
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
-                                                                            .center,
+                                                                            .start,
                                                                     children: [
                                                                       Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -789,12 +790,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             0),
                                                                         child:
                                                                             Icon(
-                                                                          Icons
-                                                                              .location_on_outlined,
+                                                                          Manzel.location_pin,
                                                                           color:
                                                                               Colors.black,
                                                                           size:
-                                                                              15,
+                                                                              13,
                                                                         ),
                                                                       ),
                                                                       Text(
@@ -1321,12 +1321,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             3),
                                                                         child:
                                                                             Icon(
-                                                                          Icons
-                                                                              .location_on_outlined,
+                                                                          Manzel.location_pin,
                                                                           color:
                                                                               Colors.black,
                                                                           size:
-                                                                              15,
+                                                                              13,
                                                                         ),
                                                                       ),
                                                                       Text(
@@ -1405,14 +1404,14 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 0),
                                                                             child:
                                                                                 Icon(
-                                                                              Icons.single_bed,
+                                                                              Manzel.bed,
                                                                               color: Colors.black,
-                                                                              size: 20,
+                                                                              size: 10,
                                                                             ),
                                                                           ),
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                0,
+                                                                                4,
                                                                                 0,
                                                                                 20,
                                                                                 0),
@@ -1442,9 +1441,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 0),
                                                                             child:
                                                                                 Icon(
-                                                                              Icons.bathtub_outlined,
+                                                                              Manzel.bath,
                                                                               color: Colors.black,
-                                                                              size: 20,
+                                                                              size: 16,
                                                                             ),
                                                                           ),
                                                                           Padding(
@@ -1453,8 +1452,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 0,
                                                                                 20,
                                                                                 0),
-                                                                            child:
-                                                                                Expanded(
+
                                                                                   child: Text(
                                                                               valueOrDefault<String>(
                                                                                   getJsonField(
@@ -1472,7 +1470,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                       useGoogleFonts: false,
                                                                                     ),
                                                                             ),
-                                                                                ),
+
                                                                           ),
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -1482,9 +1480,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 0),
                                                                             child:
                                                                                 Icon(
-                                                                              Icons.design_services_outlined,
+                                                                              Manzel.size,
                                                                               color: Colors.black,
-                                                                              size: 20,
+                                                                              size: 16,
                                                                             ),
                                                                           ),
                                                                           Text(
@@ -1629,8 +1627,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                           setState(() {});
                                                         },
                                                         child: Icon(
-                                                          Icons
-                                                              .bookmark_rounded,
+                                                          Manzel.bookmark,
                                                           color:
                                                               Color(0xFFD05C5C),
                                                           size: 24,

@@ -2,8 +2,8 @@ import 'package:video_player/video_player.dart';
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
-import 'package:manzel/common_widgets/manzel_icons.dart';
 import '../backend/backend.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -244,7 +244,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       animationType: BadgeAnimationType.scale,
                                       toAnimate: true,
                                       child: Icon(
-                                        Icons.notifications_none,
+                                        Manzel.notification,
                                         color: Colors.white,
                                         size: 26,
                                       ),
@@ -376,9 +376,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             ),
                                           ),
                                           child: Icon(
-                                            Icons.filter_list_rounded,
+                                            Manzel.filter,
                                             color: Colors.black,
-                                            size: 18,
+                                            size: 10,
                                           ),
                                         ),
                                       ),
@@ -1108,13 +1108,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           height: 40,
                                           decoration: BoxDecoration(
                                             color: Color(0x4D000000),
-                                            image: DecorationImage(
-                                              fit: BoxFit.none,
-                                              image: Image.asset(
-                                                'assets/images/Heart.png',
-                                              ).image,
-                                            ),
                                             shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            Manzel.favorite,
+                                            color: Colors.white,
+                                            size: 20,
                                           ),
                                         ),
                                       ),
@@ -1357,7 +1356,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(
-                                        Icons.location_on_outlined,
+                                        Manzel.location_pin,
                                         color: Color(0xFF130F26),
                                         size: 11,
                                       ),
