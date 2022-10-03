@@ -136,7 +136,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   ? NavBarPage(initialPage: 'ConfirmNewNumberOTPWidget')
                   : ConfirmNewNumberOTPWidget(
                   phoneNumber: params.getParam('phoneNumber', ParamType.String),
-                isFromUpdate: params.getParam('isFromUpdate', ParamType.bool)
+                isFromUpdate: params.getParam('isFromUpdate', ParamType.String)
               ),
             ),
             FFRoute(

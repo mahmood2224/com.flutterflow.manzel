@@ -3271,7 +3271,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       socialMetaTagParameters: SocialMetaTagParameters(
           title: "Join Manzel to see what I've been upto",
-          imageUrl: Uri.parse('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/View_of_the_southern_spiral_NGC_300.jpg/300px-View_of_the_southern_spiral_NGC_300.jpg'),
+          imageUrl: Uri.parse('https://storage.googleapis.com/cms_media_bucket/thumbnail_Almajdiah_Main_logo_bed7e7c80a/thumbnail_Almajdiah_Main_logo_bed7e7c80a.png'),
           description: description),
       uriPrefix: 'https://manzeldev.page.link',
       link: Uri.parse(url),

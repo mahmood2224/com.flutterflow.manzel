@@ -205,6 +205,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     context: context,
                                     smsCode: otp,
                                   );
+                                  entry?.remove();
                                 } else {
                                   final phoneVerifiedUser = await verifySmsCode(
                                     context: context,

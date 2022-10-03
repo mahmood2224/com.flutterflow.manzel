@@ -258,7 +258,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 onCodeSent: () async {
                                   //    entry.remove();
                                   isLoading = false;
-                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'isFromUpdate':"true",'phoneNumber': "+917016915317"});
+                                  context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': "+917016915317",'isFromUpdate': 'true' });
                                 },
                               );
 

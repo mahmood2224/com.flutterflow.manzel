@@ -134,6 +134,7 @@ Future beginPhoneAuth({
       if(isFromUpdate??false){
         await FirebaseAuth.instance.currentUser!.updatePhoneNumber(phoneAuthCredential);
       }
+      else
       await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
       // If you've implemented auto-verification, navigate to home page or
       // onboarding page here manually. Uncomment the lines below and replace
@@ -168,7 +169,7 @@ Future verifySmsCode({
     final authCredential = PhoneAuthProvider.credential(
         verificationId: _phoneAuthVerificationCode!, smsCode: smsCode);
     if(isFromUpdate??false){
-      FirebaseAuth.instance.currentUser!.updatePhoneNumber(authCredential);
+     return FirebaseAuth.instance.currentUser!.updatePhoneNumber(authCredential);
     }else{
     return signInOrCreateAccount(
       context,

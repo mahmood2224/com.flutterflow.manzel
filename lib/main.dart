@@ -137,15 +137,17 @@ class _MyAppState extends State<MyApp> {
         // } else if(params[AppConstants.kPropertyIdParam] != null || params[AppConstants.kProjectIdParam] != null){
         //   _shareProjectOrPropertyAction(params);
         // }
-        Future.delayed(Duration(seconds: 5),(){
-        context.pushNamed(
+       // Future.delayed(Duration(seconds: 5),(){
+          BuildContext?  ctx = _router.routerDelegate.navigatorKey.currentContext;
+        ctx?.pushNamed(
         'PropertyDetails',
         queryParams: {
         'propertyId': params['propertyId'],
         'path': '',
          },
         );
-        });
+
+      //  });
 
       }
     }
