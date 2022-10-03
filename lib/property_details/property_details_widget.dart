@@ -3292,7 +3292,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   void openWhatsapp(BuildContext context,String? message,String? phoneNumber) async {
     var whatsapp = phoneNumber;
     var whatsappUrlAndroid = Uri.parse('$kWhatsAppAndroid$whatsapp&text=${message}');
-    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp&text=${message}');
+    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp');
     if (Platform.isIOS) {
       if (await canLaunchUrl(whatsappUrlIos)) {
         await launchUrl(whatsappUrlIos, mode: LaunchMode.externalApplication);

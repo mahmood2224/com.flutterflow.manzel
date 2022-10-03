@@ -98,8 +98,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'ConfirmOTP',
               path: 'confirmOTP',
               builder: (context, params) => ConfirmOTPWidget(
-                  phoneNumber:
-                  params.getParam('phoneNumber', ParamType.String)
               ),
             ),
             FFRoute(

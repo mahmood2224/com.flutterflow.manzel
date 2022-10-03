@@ -136,13 +136,16 @@ class _MyAppState extends State<MyApp> {
         // } else if(params[AppConstants.kPropertyIdParam] != null || params[AppConstants.kProjectIdParam] != null){
         //   _shareProjectOrPropertyAction(params);
         // }
+        Future.delayed(Duration(seconds: 5),(){
         context.pushNamed(
-          'PropertyDetails',
-          queryParams: {
-            'propertyId': params['propertyId'],
-            'path': '',
-          },
+        'PropertyDetails',
+        queryParams: {
+        'propertyId': params['propertyId'],
+        'path': '',
+         },
         );
+        });
+
       }
     }
   }
