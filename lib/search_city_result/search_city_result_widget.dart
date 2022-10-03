@@ -1,3 +1,4 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -84,10 +85,13 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                   logFirebaseEvent('Icon_Navigate-Back');
                   context.pop();
                 },
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 20,
+                child: RotatedBox(
+                  quarterTurns: FFAppState().locale=='en'?0:2,
+                  child: Icon(
+                    Manzel.back_icon,
+                    color: Colors.black,
+                    size: 14,
+                  ),
                 ),
               ),
             ),
@@ -644,14 +648,13 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       decoration: BoxDecoration(
                                                         color:
                                                             Color(0x4D000000),
-                                                        image: DecorationImage(
-                                                          fit: BoxFit.none,
-                                                          image: Image.asset(
-                                                            'assets/images/Heart.png',
-                                                          ).image,
-                                                        ),
                                                         shape: BoxShape.circle,
                                                       ),
+                                                      child : Icon(
+                                                        Manzel.favorite,
+                                                        color: Colors.white,
+                                                        size: 15,
+                                                      )
                                                     ),
                                                   ),
                                                 ),
@@ -1051,7 +1054,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   Icon(
-                                                    Icons.location_on_outlined,
+                                                    Manzel.location_pin,
                                                     color: Color(0xFF130F26),
                                                     size: 11,
                                                   ),

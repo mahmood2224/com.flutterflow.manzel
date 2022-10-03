@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -68,10 +70,13 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                             logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
                             Navigator.pop(context);
                           },
-                          child: Icon(
-                            Icons.arrow_back,
-                            color: Colors.black,
-                            size: 20,
+                          child: RotatedBox(
+                            quarterTurns: FFAppState().locale=='en'?0:2,
+                            child: Icon(
+                              Manzel.back_icon,
+                              color: Colors.black,
+                              size: 14,
+                            ),
                           ),
                         ),
                       ),
@@ -109,9 +114,9 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       6, 6, 6, 6),
                                   child: Icon(
-                                    Icons.share_outlined,
+                                    Manzel.share,
                                     color: Colors.black,
-                                    size: 20,
+                                    size: 16,
                                   ),
                                 ),
                               ),
@@ -130,12 +135,11 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                             child: Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(6, 6, 6, 6),
-                              child: SvgPicture.asset(
-                                'assets/images/Heart-black.svg',
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
+                              child: Icon(
+                                Manzel.favorite,
+                                color: Colors.black,
+                                size: 16,
+                              )
                             ),
                           ),
                         ],

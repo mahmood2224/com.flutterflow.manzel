@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -106,9 +108,9 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                               context.pop();
                             },
                             child: Icon(
-                              Icons.clear,
+                              Manzel.clear,
                               color: Colors.black,
-                              size: 24,
+                              size: 12,
                             ),
                           ),
                         ),

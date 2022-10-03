@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chewie/chewie.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 import 'package:manzel/profile/profile_widget.dart';
@@ -27,6 +28,7 @@ import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/lat_lng.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:flutter/material.dart' as material;
 import 'package:map_launcher/map_launcher.dart' as $ml;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -462,24 +464,27 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        FlutterFlowIconButton(
-                                          borderColor: Colors.transparent,
-                                          borderRadius: 30,
-                                          buttonSize: 34,
-                                          fillColor: Colors.white,
-                                          icon: Icon(
-                                            Icons.arrow_back_rounded,
-                                            color: Colors.black,
-                                            size: 18,
+                                        RotatedBox(
+                                          quarterTurns: FFAppState().locale=='en'?0:2,
+                                          child: FlutterFlowIconButton(
+                                            borderColor: Colors.transparent,
+                                            borderRadius: 30,
+                                            buttonSize: 34,
+                                            fillColor: Colors.white,
+                                            icon: Icon(
+                                              Manzel.back_icon,
+                                              color: Colors.black,
+                                              size: 12,
+                                            ),
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'PROPERTY_DETAILS_arrow_back_rounded_ICN_');
+                                              // back
+                                              logFirebaseEvent('IconButton_back');
+                                              dispose();
+                                              context.pop();
+                                            },
                                           ),
-                                          onPressed: () async {
-                                            logFirebaseEvent(
-                                                'PROPERTY_DETAILS_arrow_back_rounded_ICN_');
-                                            // back
-                                            logFirebaseEvent('IconButton_back');
-                                            dispose();
-                                            context.pop();
-                                          },
                                         ),
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -493,9 +498,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 buttonSize: 34,
                                                 fillColor: Colors.white,
                                                 icon: Icon(
-                                                  Icons.share_sharp,
+                                                  Manzel.share,
                                                   color: Colors.black,
-                                                  size: 18,
+                                                  size: 14,
                                                 ),
                                                 onPressed: () async {
                                                   logFirebaseEvent(
@@ -532,7 +537,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   buttonSize: 34,
                                                   fillColor: Colors.white,
                                                   icon: Icon(
-                                                    Icons.favorite,
+                                                    Manzel.favorite,
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .alternate,
@@ -550,9 +555,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   buttonSize: 34,
                                                   fillColor: Colors.white,
                                                   icon: Icon(
-                                                    Icons.favorite_border,
+                                                    Manzel.favorite,
                                                     color: Colors.black,
-                                                    size: 18,
+                                                    size: 14,
                                                   ),
                                                   onPressed: () async {
                                                     logFirebaseEvent(
@@ -925,12 +930,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 CrossAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              SvgPicture.asset(
-                                                                'assets/images/Frame.svg',
-                                                                height: 20,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
+                                                              Padding(
+                                                                padding: const EdgeInsets.only(right:8),
+                                                                child: Icon(
+                                                                  Manzel.view_360,
+                                                                    size :20,
+                                                                  color : Colors.black,
+                                                                ),
+                                                              )
                                                             ],
                                                           ),
                                                         ),
@@ -986,26 +993,13 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           0,
                                                                           5,
                                                                           0),
-                                                              child: Text(
-                                                                FFLocalizations.of(
-                                                                        context)
-                                                                    .getText(
-                                                                  '9d90para' /* Apt. Plan */,
+                                                              child: Container(
+                                                                  width : 60,
+                                                                child: Icon(
+                                                                    Manzel.floor_plan,
+                                                                    color: Colors.black,
+                                                                  size: 20
                                                                 ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'AvenirArabic',
-                                                                      fontSize:
-                                                                          15,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          false,
-                                                                    ),
                                                               ),
                                                             ),
                                                           ],
@@ -1155,17 +1149,17 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
+                                                  crossAxisAlignment: CrossAxisAlignment.end,
                                                   children: [
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  0, 0, 6, 0),
+                                                                  0, 0, 6, 6),
                                                       child: Icon(
-                                                        Icons
-                                                            .location_on_outlined,
+                                                        Manzel.location_pin,
                                                         color: Colors.black,
-                                                        size: 18,
+                                                        size: 14,
                                                       ),
                                                     ),
                                                     Text(
@@ -1378,10 +1372,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 .center,
                                                         children: [
                                                           Icon(
-                                                            Icons
-                                                                .single_bed_outlined,
+                                                            Manzel.bed,
                                                             color: Colors.black,
-                                                            size: 24,
+                                                            size: 14,
                                                           ),
                                                           Padding(
                                                             padding:
@@ -1474,8 +1467,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 .center,
                                                         children: [
                                                           Icon(
-                                                            Icons
-                                                                .bathtub_outlined,
+                                                            Manzel.bath,
                                                             color: Colors.black,
                                                             size: 24,
                                                           ),
@@ -1570,8 +1562,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 .center,
                                                         children: [
                                                           Icon(
-                                                            Icons
-                                                                .design_services_outlined,
+                                                            Manzel.size,
                                                             color: Colors.black,
                                                             size: 24,
                                                           ),
@@ -1663,8 +1654,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 .center,
                                                         children: [
                                                           Icon(
-                                                            Icons
-                                                                .live_tv_rounded,
+                                                            Manzel.living_room,
                                                             color: Colors.black,
                                                             size: 24,
                                                           ),
@@ -1759,8 +1749,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 .center,
                                                         children: [
                                                           Icon(
-                                                            Icons
-                                                                .house_outlined,
+                                                            Manzel.home_icon,
                                                             color: Colors.black,
                                                             size: 24,
                                                           ),

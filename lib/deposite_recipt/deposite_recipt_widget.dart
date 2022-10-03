@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:dio/dio.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -48,21 +49,24 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30,
-          borderWidth: 1,
-          buttonSize: 60,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Colors.black,
-            size: 30,
+        leading: RotatedBox(
+          quarterTurns: FFAppState().locale=='en'?0:2,
+          child: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Manzel.back_icon,
+              color: Colors.black,
+              size: 15,
+            ),
+            onPressed: () async {
+              logFirebaseEvent('DEPOSITE_RECIPT_arrow_back_rounded_ICN_O');
+              logFirebaseEvent('IconButton_Close-Dialog,-Drawer,-Etc');
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () async {
-            logFirebaseEvent('DEPOSITE_RECIPT_arrow_back_rounded_ICN_O');
-            logFirebaseEvent('IconButton_Close-Dialog,-Drawer,-Etc');
-            Navigator.pop(context);
-          },
         ),
         title: Text(
           FFLocalizations.of(context).getText(

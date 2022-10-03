@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -37,21 +39,24 @@ class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30,
-          borderWidth: 1,
-          buttonSize: 60,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: Colors.black,
-            size: 30,
+        leading: RotatedBox(
+          quarterTurns: FFAppState().locale=='en'?0:2,
+          child: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Manzel.back_icon,
+              color: Colors.black,
+              size: 15,
+            ),
+            onPressed: () async {
+              logFirebaseEvent('PROPERTY_VIDEO_arrow_back_rounded_ICN_ON');
+              logFirebaseEvent('IconButton_Close-Dialog,-Drawer,-Etc');
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () async {
-            logFirebaseEvent('PROPERTY_VIDEO_arrow_back_rounded_ICN_ON');
-            logFirebaseEvent('IconButton_Close-Dialog,-Drawer,-Etc');
-            Navigator.pop(context);
-          },
         ),
         title: Text(
           widget.propertyName!,

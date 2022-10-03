@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -23,7 +24,7 @@ class EditMobileNumberWidget extends StatefulWidget {
 
 class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
   TextEditingController? mobileNumberController;
-  bool isLoading = false;
+  ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -53,9 +54,9 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
           borderWidth: 1,
           buttonSize: 60,
           icon: Icon(
-            Icons.clear_rounded,
+            Manzel.clear,
             color: Colors.black,
-            size: 30,
+            size: 15,
           ),
           onPressed: () async {
             logFirebaseEvent('EDIT_MOBILE_NUMBER_PAGE_back_ON_TAP');
@@ -192,9 +193,9 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                   setState(() {});
                                 },
                                 child: Icon(
-                                  Icons.clear,
+                                  Manzel.clear,
                                   color: Color(0xFF757575),
-                                  size: 22,
+                                  size: 15,
                                 ),
                               )
                                   : null,
@@ -240,7 +241,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               if (phoneNumberVal == null ||
                                   phoneNumberVal.isEmpty ||
                                   !phoneNumberVal.startsWith('+')) {
-                                isLoading = false;
+                                isLoading.value = false;
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
@@ -257,7 +258,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 phoneNumber: phoneNumberVal,
                                 onCodeSent: () async {
                                   //    entry.remove();
-                                  isLoading = false;
+                                  isLoading.value = false;
                                   context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': "+917016915317",'isFromUpdate': 'true' });
                                 },
                               );
@@ -266,7 +267,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               // Invalid_phone_number_action
                               logFirebaseEvent(
                                   'sendOTP_Invalid_phone_number_action');
-                              isLoading = false;
+                              isLoading.value = false;
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -280,7 +281,10 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               );
                             }
                           },
-                          child: isLoading?
+                          child:
+    ValueListenableBuilder<bool>(
+    builder: (BuildContext context, bool value, Widget? child){
+                         return isLoading.value?
                           Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Row(
@@ -311,7 +315,9 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
 
-                          ),
+                          );},
+      valueListenable: isLoading,
+    ),
                           style: ButtonStyle(
                             foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                                   (states) {

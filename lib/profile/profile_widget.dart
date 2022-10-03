@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../auth/auth_util.dart';
@@ -456,7 +457,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       'u6lrslui' /* Chat Manzel in Whatsapp */,
                     ),
                     icon: Icon(
-                      Icons.share_rounded,
+                      Manzel.share,
                       size: 15,
                     ),
                     options: FFButtonOptions(

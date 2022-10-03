@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/no_result_widget.dart';
@@ -230,8 +232,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                               ),
                                                             ),
                                                             child: Icon(
-                                                              Icons.notifications_none,
-                                                              color: Colors.black,
+                                                              Manzel.notification,
+                                                              color: Colors.white,
                                                               size: 20,
                                                             ),
                                                           ),

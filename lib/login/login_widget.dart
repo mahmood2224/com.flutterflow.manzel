@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 import '../auth/auth_util.dart';
 import '../common_widgets/overlay.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
@@ -26,7 +27,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   bool? changeLanguage;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   OverlayEntry? entry;
-  bool isLoading = false;
+  ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
 
   @override
   void initState() {
@@ -54,9 +55,9 @@ class _LoginWidgetState extends State<LoginWidget> {
           borderWidth: 1,
           buttonSize: 60,
           icon: Icon(
-            Icons.arrow_back_rounded,
+            Manzel.back_icon,
             color: Colors.black,
-            size: 30,
+            size: 15,
           ),
           onPressed: () async {
             logFirebaseEvent('LOGIN_PAGE_back_ON_TAP');
@@ -228,9 +229,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               setState(() {});
                                       },
                                       child: Icon(
-                                        Icons.clear,
+                                        Manzel.clear,
                                         color: Color(0xFF757575),
-                                        size: 22,
+                                        size: 12,
                                       ),
                                     )
                                   : null,
@@ -373,7 +374,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         height: 56,
                         child: ElevatedButton(
                           onPressed: () async {
-                            isLoading = true;
+                            isLoading.value = true;
                             logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
                             if (functions.checkPhoneNumberFormat(
                                 phoneNumberController!.text)) {
@@ -384,7 +385,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               if (phoneNumberVal == null ||
                                   phoneNumberVal.isEmpty ||
                                   !phoneNumberVal.startsWith('+')) {
-                                isLoading = false;
+                                isLoading.value = false;
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
@@ -400,7 +401,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 phoneNumber: phoneNumberVal,
                                 onCodeSent: () async {
                               //    entry.remove();
-                                  isLoading = false;
+                                  isLoading.value = false;
                                   context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberVal});
                                   },
                                 );
@@ -408,7 +409,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 // Invalid_phone_number_action
                                 logFirebaseEvent(
                                     'sendOTP_Invalid_phone_number_action');
-                                isLoading = false;
+                                isLoading.value = false;
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
@@ -422,38 +423,47 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 );
                               }
                             },
-                            child: isLoading?
-                             Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SizedBox(
-                                    height: 30,
-                                    width: 30,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation(Colors.white),
-                                      strokeWidth: 5,
+                            child:
+                                ValueListenableBuilder<bool>(
+                                    builder: (BuildContext context, bool value, Widget? child){
+
+                                      return isLoading.value?Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            SizedBox(
+                                              height: 30,
+                                              width: 30,
+                                              child: CircularProgressIndicator(
+                                                valueColor: AlwaysStoppedAnimation(Colors.white),
+                                                strokeWidth: 5,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                          : AutoSizeText(
+                                        FFLocalizations.of(context).getText(
+                                          'l3ozn1az' /* Continue */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context).subtitle2.override(
+
+                                          fontSize: 18,
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.white,
+                                          useGoogleFonts: false,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+
+                                      );
+
+                                    },
+                                    valueListenable: isLoading,
                                     ),
-                                  )
-                                ],
-                              ),
-                            )
-                                : AutoSizeText(
-                                FFLocalizations.of(context).getText(
-                              'l3ozn1az' /* Continue */,
-                            ),
-                              style: FlutterFlowTheme.of(context).subtitle2.override(
 
-                                fontSize: 18,
-                                fontFamily: 'AvenirArabic',
-                                color: Colors.white,
-                                useGoogleFonts: false,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
 
-                            ),
                             style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                                     (states) {
