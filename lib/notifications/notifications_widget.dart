@@ -225,7 +225,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                             width: 35,
                                                             height: 35,
                                                             decoration: BoxDecoration(
-                                                              color: Color(0xFF53C3EB),
+                                                              color: Colors.white,
                                                               shape: BoxShape.circle,
                                                               border: Border.all(
                                                                 color: Color(0xFF8C8C8C),
@@ -233,7 +233,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                             ),
                                                             child: Icon(
                                                               Manzel.notification,
-                                                              color: Colors.white,
+                                                              color: Colors.black,
                                                               size: 20,
                                                             ),
                                                           ),

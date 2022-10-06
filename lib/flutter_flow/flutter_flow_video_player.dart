@@ -171,11 +171,11 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children:  [
                           Container(
-                            height: 20,
-                              width: 20,
+                            height: (!widget.lazyLoad && widget.isFromPropertyDetail)?25:35,
+                              width: (!widget.lazyLoad && widget.isFromPropertyDetail)?25:35,
                               child: CircularProgressIndicator()),
-                          SizedBox(height: 20),
-                          Text('Loading'),
+                          SizedBox(height: 25),
+                          (!widget.lazyLoad && widget.isFromPropertyDetail)? Text('Loading'):SizedBox.shrink(),
                         ],
                       ),
           ),

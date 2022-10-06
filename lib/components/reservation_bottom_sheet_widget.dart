@@ -155,12 +155,50 @@ class _ReservationBottomSheetWidgetState
           );
 
         }
+        if(transactionApiResponse?.statusCode  ==
+            400){
+          Navigator.pop(context);
+          logFirebaseEvent('Button_Show-Snack-Bar');
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Something went wrong. Please try again.',
+                  style: TextStyle(
+                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+                duration: Duration(milliseconds: 4000),
+                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+              ));
+    }
+        if(transactionApiResponse?.statusCode  ==
+            399){
+          Navigator.pop(context);
+          logFirebaseEvent('Button_Show-Snack-Bar');
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Something went wrong. Please try again.',
+                  style: TextStyle(
+                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+                duration: Duration(milliseconds: 4000),
+                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+              ));
+        }
         entry!.remove();
         break;
       case "FAILED":
         transactionApiResponse = await AddTransactionCall.call(
           amountPaid: widget.reservationCost.toString(),
-          transactionMethod: paymentMethodValue,
+          transactionMethod: ((paymentMethodValue?.toLowerCase() == 'mada/visa' || paymentMethodValue?.toLowerCase() == 'مدى / فيزا' ) ? "Mada/Visa" : "Apple Pay"),
           orderId: orderId,
           userId: currentUserReference?.id,
           transactionStatus: 'failed',
@@ -531,11 +569,12 @@ class _ReservationBottomSheetWidgetState
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
                           child: Image.asset(
-                            'assets/images/visa:mada.png',
-                            height: 20,
-                            fit: BoxFit.cover,
+                            'assets/images/MadaPay.png',
+                            height: 30,
+                            width: 80,
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
                         Padding(
@@ -543,7 +582,7 @@ class _ReservationBottomSheetWidgetState
                           child: SvgPicture.asset(
                             'assets/images/apple.svg',
                             width: 80,
-                            height: 28,
+                            height: 25,
                             fit: BoxFit.scaleDown,
                           ),
                         ),
@@ -656,6 +695,7 @@ class _ReservationBottomSheetWidgetState
       ),
     );
   }
+
 }
 OverlayEntry showOverlay(BuildContext context) {
   var overlayState = Overlay.of(context);

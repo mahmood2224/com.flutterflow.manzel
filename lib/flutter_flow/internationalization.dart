@@ -180,7 +180,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'u6lrslui': {
       'en': 'Chat Manzel in Whatsapp',
-      'ar': 'دردشة المنزل في الواتس اب',
+      'ar': 'تحدث مع فريق منزل',
     },
     '2csoqw0t': {
       'en': 'Logout',
@@ -1811,8 +1811,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'downloadSucessfulMessage': {
-      'en': 'Receipt has been downloaded check Downloads',
-      'ar': 'تم تنزيل الإيصال تحقق من التنزيلات'
+      'en': 'Recipt has been downloaded',
+      'ar': 'تم تنزيل الإيصال'
     },
     'errorDownloading': {
       'en': 'Error downloading receipt please try again later',

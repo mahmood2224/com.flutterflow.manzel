@@ -51,6 +51,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   bool? autoplayVal;
   List<VideoPlayerController> homeScreenPlayers = [];
   ValueNotifier<bool> isMuted = ValueNotifier<bool>(true);
+
   //ValueNotifier<bool> isPaused = ValueNotifier<bool>(false);
 
   //FlickMultiManager flickMultiManager;
@@ -190,13 +191,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {
                                     return Center(
-                                      child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: SpinKitRipple(
-                                          color: Color(0xFF2971FB),
-                                          size: 50,
-                                        ),
+                                      child: Icon(
+                                        Manzel.notification,
+                                        color: Colors.white,
+                                        size: 26,
                                       ),
                                     );
                                   }
@@ -503,6 +501,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 builderDelegate: PagedChildBuilderDelegate<dynamic>(
                   itemBuilder: (context, propertiesItem, propertiesIndex) {
                     print('PROPERTIES INDEX >>>>>>>>>>>>>>$propertiesIndex');
+                    Future.delayed(Duration(seconds: 2));
                     // ListView.builder(
                     // padding: EdgeInsets.zero,
                     // shrinkWrap: true,
@@ -599,11 +598,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   isPaused = false;
                                                   isMuted.value
                                                       ? videoPlayers[
-                                                  propertiesIndex]
-                                                      .setVolume(0)
+                                                              propertiesIndex]
+                                                          .setVolume(0)
                                                       : videoPlayers[
-                                                  propertiesIndex]
-                                                      .setVolume(100);
+                                                              propertiesIndex]
+                                                          .setVolume(100);
                                                   currentPropertyindex =
                                                       propertiesIndex;
                                                   videoPlayers[propertiesIndex]
@@ -616,7 +615,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                               propertiesIndex]) {
                                                         if (otherPlayer.value
                                                             .isInitialized) {
-                                                          otherPlayer.setVolume(0.0);
+                                                          otherPlayer
+                                                              .setVolume(0.0);
                                                           otherPlayer.pause();
                                                           // var dataSource = otherPlayer.dataSource;
                                                           // otherPlayer.dispose();
@@ -632,18 +632,21 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           isPaused = false;
                                                           isMuted.value
                                                               ? videoPlayers[
-                                                          propertiesIndex]
-                                                              .setVolume(0)
+                                                                      propertiesIndex]
+                                                                  .setVolume(0)
                                                               : videoPlayers[
-                                                          propertiesIndex]
-                                                              .setVolume(100);isPaused = false;
+                                                                      propertiesIndex]
+                                                                  .setVolume(
+                                                                      100);
+                                                          isPaused = false;
                                                           isMuted.value
                                                               ? videoPlayers[
-                                                          propertiesIndex]
-                                                              .setVolume(0)
+                                                                      propertiesIndex]
+                                                                  .setVolume(0)
                                                               : videoPlayers[
-                                                          propertiesIndex]
-                                                              .setVolume(100);
+                                                                      propertiesIndex]
+                                                                  .setVolume(
+                                                                      100);
                                                         }
                                                       }
                                                     });
@@ -689,11 +692,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 isPaused = false;
                                                 isMuted.value
                                                     ? videoPlayers[
-                                                propertiesIndex]
-                                                    .setVolume(0)
+                                                            propertiesIndex]
+                                                        .setVolume(0)
                                                     : videoPlayers[
-                                                propertiesIndex]
-                                                    .setVolume(100);
+                                                            propertiesIndex]
+                                                        .setVolume(100);
                                                 videoPlayers[propertiesIndex]
                                                     .play();
                                                 currentPropertyindex =
@@ -706,7 +709,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                             propertiesIndex]) {
                                                       if (otherPlayer.value
                                                           .isInitialized) {
-                                                        otherPlayer.setVolume(0.0);
+                                                        otherPlayer
+                                                            .setVolume(0.0);
                                                         otherPlayer.pause();
                                                         // var dataSource = otherPlayer.dataSource;
                                                         // otherPlayer.dispose();
@@ -817,18 +821,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     alignment: AlignmentDirectional(0, 0),
                                     child: InkWell(
                                       onTap: () {
-                                          //print("pause value>>>>>>>>>>>>> $isPaused");
-                                          isPaused =
-                                          isPaused ? false : true;
+                                        //print("pause value>>>>>>>>>>>>> $isPaused");
+                                        isPaused = isPaused ? false : true;
 
-                                          isPaused
-                                              ? videoPlayers[propertiesIndex]
-                                              .pause()
-                                              : videoPlayers[propertiesIndex]
-                                              .play();
-                                          setState(() {
-
-                                          });
+                                        isPaused
+                                            ? videoPlayers[propertiesIndex]
+                                                .pause()
+                                            : videoPlayers[propertiesIndex]
+                                                .play();
+                                        setState(() {});
                                       },
                                       child: Container(
                                         width:
@@ -841,58 +842,62 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         //   builder: (BuildContext context,
                                         //       bool value, Widget? child) {
                                         //     return
-                                          child: Center(
-                                            child: Container(
-                                                //margin: EdgeInsets.all(100),
-                                               
-                    constraints: BoxConstraints(minWidth: 50, maxWidth: 50),
-                                                decoration: BoxDecoration(
-                                                  color: isPaused
-                                                      ? Colors.black
-                                                          .withOpacity(1.0)
-                                                      : Colors.black
-                                                          .withOpacity(0.0),
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Icon(
-                                                  isPaused
-                                                      ? Icons.play_arrow_rounded
-                                                      : Icons.pause,
-                                                  color: isPaused
-                                                      ? Colors.white
-                                                          .withOpacity(1.0)
-                                                      : Colors.white
-                                                          .withOpacity(0.0),
-                                                  size: 40,
-                                                ),
-                                             // );
+                                        child: Center(
+                                          child: Container(
+                                            //margin: EdgeInsets.all(100),
+
+                                            constraints: BoxConstraints(
+                                                minWidth: 50, maxWidth: 50),
+                                            decoration: BoxDecoration(
+                                              color: isPaused
+                                                  ? Colors.black
+                                                      .withOpacity(1.0)
+                                                  : Colors.black
+                                                      .withOpacity(0.0),
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Icon(
+                                              isPaused
+                                                  ? Icons.play_arrow_rounded
+                                                  : Icons.pause,
+                                              color: isPaused
+                                                  ? Colors.white
+                                                      .withOpacity(1.0)
+                                                  : Colors.white
+                                                      .withOpacity(0.0),
+                                              size: 40,
+                                            ),
+                                            // );
                                             //},
                                             //valueListenable: isPaused,
-                                        ),
                                           ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                   Align(
                                     alignment: AlignmentDirectional(0, 0),
-                                    child:
-                                    propertiesIndex == currentPropertyindex
-                                        ? Container():Container(
-                                      //margin: EdgeInsets.all(100),
+                                    child: (propertiesIndex??0) ==
+                                                (currentPropertyindex??0)   
+                                        ? Container()
+                                        :  Container(
+                                                //margin: EdgeInsets.all(100),
 
-                    constraints: BoxConstraints(minWidth: 50, maxWidth: 50),
-                                      decoration: BoxDecoration(
-                                        color:Colors.black
-                                            .withOpacity(1.0),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(
-                                        Icons.play_arrow_rounded,
-                                        color:  Colors.white
-                                            .withOpacity(1.0),
-                                        size: 40,
-                                      ),
-                                    ),
+                                                constraints: BoxConstraints(
+                                                    minWidth: 50, maxWidth: 50),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black
+                                                      .withOpacity(1.0),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Icon(
+                                                  Icons.play_arrow_rounded,
+                                                  color: Colors.white
+                                                      .withOpacity(1.0),
+                                                  size: 40,
+                                                ),
+                                              )
+                                           ,
                                   ),
                                   Align(
                                     alignment: AlignmentDirectional(0.9, 0.8),

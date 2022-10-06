@@ -3152,7 +3152,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         logFirebaseEvent(
                                             'reserved_Navigate-To');
 
-                                        context.pushNamed(
+                                         context.pushNamed(
                                           'EditPersonallInfo',
                                           queryParams: {
                                             'screenName': serializeParam(
@@ -3160,6 +3160,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 ParamType.String),
                                           }.withoutNulls,
                                         );
+                                        setState(() {
+
+                                        });
                                       }
                                     } else {
                                       logFirebaseEvent('reserved_Navigate-To');

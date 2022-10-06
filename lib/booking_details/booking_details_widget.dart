@@ -1074,10 +1074,6 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0xFFD05C5C),
                                         shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
                                       ),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
