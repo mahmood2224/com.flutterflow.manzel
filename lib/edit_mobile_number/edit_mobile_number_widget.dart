@@ -259,7 +259,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 onCodeSent: () async {
                                   //    entry.remove();
                                   isLoading.value = false;
-                                  context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': "+917016915317",'isFromUpdate': 'true' });
+                                  context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': phoneNumberVal,'isFromUpdate': 'true' });
                                 },
                               );
 
