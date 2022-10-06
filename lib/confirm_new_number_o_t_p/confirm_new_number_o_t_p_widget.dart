@@ -44,27 +44,35 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   OverlayEntry? entry;
 
   void resendOTP() async {
-    await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: widget!.phoneNumber!,
-      timeout: Duration(seconds: 40),
-      verificationCompleted: (phoneAuthCredential) async {
-        if (isFromUpdate ?? false) {
-          await FirebaseAuth.instance.currentUser!
-              .updatePhoneNumber(phoneAuthCredential);
-        } else {
-          await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
-        }
+    await resendOtpFromFirebse(
+      isFromUpdate: isFromUpdate,
+      context: context,
+      phoneNumber: widget.phoneNumber!,
+      onCodeSent: () async {
+        print('Otp sent sucessfullly');
       },
-      verificationFailed: (e) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Error: ${e.message}'),
-        ));
-      },
-      codeSent: (verificationId, _) {
-        _phoneAuthVerificationCode = verificationId;
-      },
-      codeAutoRetrievalTimeout: (_) {},
     );
+    // await FirebaseAuth.instance.verifyPhoneNumber(
+    //   phoneNumber: '+918901523415',
+    //   timeout: Duration(seconds: 40),
+    //   verificationCompleted: (phoneAuthCredential) async {
+    //     if (isFromUpdate ?? false) {
+    //       await FirebaseAuth.instance.currentUser!
+    //           .updatePhoneNumber(phoneAuthCredential);
+    //     } else {
+    //       await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+    //     }
+    //   },
+    //   verificationFailed: (e) {
+    //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //       content: Text('Error: ${e.message}'),
+    //     ));
+    //   },
+    //   codeSent: (verificationId, _) {
+    //     _phoneAuthVerificationCode = verificationId;
+    //   },
+    //   codeAutoRetrievalTimeout: (_) {},
+    // );
     if (_otpResendTimes > 0) {
       _showResendOtp.value = false;
       _otpResendTimes--;
@@ -207,6 +215,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     smsCode: otp,
                                   );
                                   entry?.remove();
+                                 context.pop();
                                 } else {
                                   final phoneVerifiedUser = await verifySmsCode(
                                     context: context,
@@ -236,9 +245,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                       if (currentUserDocument!
                                           .status!.isEmpty) {
                                         userUpdateData.addAll(
-                                            {'created_at': DateTime.now()});
+                                            {'created_time': DateTime.now()});
                                         userUpdateData.addAll(
-                                            {'lastLogin': DateTime.now()});
+                                            {'last_login': DateTime.now()});
                                       }
 
                                       final userNotificationRecord =

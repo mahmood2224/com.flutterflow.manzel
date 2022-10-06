@@ -3260,9 +3260,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       socialMetaTagParameters: SocialMetaTagParameters(
           title: "Join Manzel to see what I've been upto",
-          imageUrl: Uri.parse('https://storage.googleapis.com/cms_media_bucket/thumbnail_Almajdiah_Main_logo_bed7e7c80a/thumbnail_Almajdiah_Main_logo_bed7e7c80a.png'),
+          imageUrl: Uri.parse(thumbnailUrl!),
           description: description),
-      uriPrefix: 'https://manzeldev.page.link',
+      uriPrefix: 'https://manzelprod.page.link',
       link: Uri.parse(url),
       androidParameters: const AndroidParameters(
         packageName: 'com.flutterflow.manzel',

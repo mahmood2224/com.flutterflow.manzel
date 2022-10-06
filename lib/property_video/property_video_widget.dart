@@ -1,4 +1,6 @@
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:video_player/video_player.dart';
 
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -24,14 +26,22 @@ class PropertyVideoWidget extends StatefulWidget {
 
 class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+  late FlickManager flickManager;
   @override
   void initState() {
     super.initState();
+    flickManager = FlickManager(
+      videoPlayerController: VideoPlayerController.network(
+         widget.videoURL!),
+    );
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'propertyVideo'});
   }
-
+@override
+  void dispose() {
+  flickManager.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,21 +88,31 @@ class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                child: FlutterFlowVideoPlayer(
-                  path: widget.videoURL!,
-                  videoType: VideoType.network,
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height * 0.85,
-                  autoPlay: true,
-                  looping: true,
-                  showControls: true,
-                  allowFullScreen: true,
-                  allowPlaybackSpeedMenu: false,
-                  isFromPropertyDetail: true,
+              Container(
+                child:FlickVideoPlayer(
+                  flickManager: flickManager,
+                  flickVideoWithControls: FlickVideoWithControls(
+                    closedCaptionTextStyle: TextStyle(fontSize: 8),
+                    controls: FlickPortraitControls(),
+                  ),
+                  flickVideoWithControlsFullscreen: FlickVideoWithControls(
+                    controls: FlickLandscapeControls(),
+                  ),
                 ),
+                // FlutterFlowVideoPlayer(
+                //   path: widget.videoURL!,
+                //   videoType: VideoType.network,
+                //   width: double.infinity,
+                //   height: MediaQuery.of(context).size.height * 0.85,
+                //   autoPlay: true,
+                //   looping: true,
+                //   showControls: true,
+                //   allowFullScreen: true,
+                //   allowPlaybackSpeedMenu: false,
+                //   isFromPropertyDetail: true,
+                // ),
               ),
             ],
           ),
