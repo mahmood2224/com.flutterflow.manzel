@@ -23,10 +23,12 @@ class ReservationBottomSheetWidget extends StatefulWidget {
     Key? key,
     this.reservationCost,
     this.propertyId,
+    this.orderId
   }) : super(key: key);
 
   final int? reservationCost;
   final int? propertyId;
+  final int? orderId;
 
   @override
   _ReservationBottomSheetWidgetState createState() =>
@@ -39,7 +41,6 @@ class _ReservationBottomSheetWidgetState
   ApiCallResponse? transactionApiResponse;
   String? paymentMethodValue;
   Map<dynamic, dynamic>? tapSDKResult;
-  int? orderId;
   OverlayEntry? entry;
 
   Future<void> setupSDKSession(int paymentType) async {
@@ -70,7 +71,7 @@ class _ReservationBottomSheetWidgetState
           paymentMetaData: {},
           // Payment Reference
           paymentReference: Reference(
-              payment: "payment", order: orderId.toString()),
+              payment: "payment", order: widget.orderId.toString()),
           // payment Descriptor
           paymentStatementDescriptor: "paymentStatementDescriptor",
           // Save Card Switch
@@ -126,8 +127,8 @@ class _ReservationBottomSheetWidgetState
 
         transactionApiResponse = await AddTransactionCall.call(
           amountPaid: widget.reservationCost.toString(),
-          transactionMethod: paymentMethodValue,
-          orderId: orderId,
+          transactionMethod: ((paymentMethodValue?.toLowerCase() == 'mada/visa' || paymentMethodValue?.toLowerCase() == 'مدى / فيزا' ) ?"Mada/Visa":"ApplePay"),
+          orderId: widget.orderId,
           userId: currentUserReference?.id,
           transactionStatus: 'completed',
           transactionId: tapSDKResult!['charge_id'],
@@ -145,7 +146,7 @@ class _ReservationBottomSheetWidgetState
               'propertyId': serializeParam(
                   widget.propertyId, ParamType.int),
               'orderId': serializeParam(
-                  orderId,
+                  widget.orderId,
                   ParamType.int),
               'paymentMethod': serializeParam(
                   paymentMethodValue, ParamType.String),
@@ -160,8 +161,8 @@ class _ReservationBottomSheetWidgetState
       case "FAILED":
         transactionApiResponse = await AddTransactionCall.call(
           amountPaid: widget.reservationCost.toString(),
-          transactionMethod: paymentMethodValue,
-          orderId: orderId,
+          transactionMethod: ((paymentMethodValue?.toLowerCase() == 'mada/visa' || paymentMethodValue?.toLowerCase() == 'مدى / فيزا' ) ?"Mada/Visa":"ApplePay"),
+          orderId: widget.orderId,
           userId: currentUserReference?.id,
           transactionStatus: 'failed',
           transactionId: tapSDKResult!['charge_id'],
@@ -183,7 +184,7 @@ class _ReservationBottomSheetWidgetState
                 ),
               ),
               duration: Duration(milliseconds: 4000),
-              backgroundColor: FlutterFlowTheme.of(context).primaryText,
+              backgroundColor: FlutterFlowTheme.of(context).primaryRed,
             ));
         entry!.remove();
    // }
@@ -211,7 +212,7 @@ class _ReservationBottomSheetWidgetState
                   ),
                 ),
                 duration: Duration(milliseconds: 4000),
-                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                backgroundColor: FlutterFlowTheme.of(context).primaryRed,
               ));
           entry!.remove();
           break;
@@ -232,7 +233,7 @@ class _ReservationBottomSheetWidgetState
                   ),
                 ),
                 duration: Duration(milliseconds: 4000),
-                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                backgroundColor: FlutterFlowTheme.of(context).primaryRed,
               ));
           entry!.remove();
           break;
@@ -585,18 +586,9 @@ class _ReservationBottomSheetWidgetState
                           'RESERVATION_BOTTOM_SHEET_PAY_BTN_ON_TAP');
                       var _shouldSetState = false;
                       logFirebaseEvent('Button_Backend-Call');
-                      addOrderApiResponse = await AddOrderCall.call(
-                        propertyId: widget.propertyId?.toString(),userId: currentUserReference?.id,authorazationToken: FFAppState().authToken
-                      );
-                      _shouldSetState = true;
-                      if ((addOrderApiResponse?.statusCode ?? 200) == 200) {
+    _shouldSetState = true;
                         logFirebaseEvent('Button_Backend-Call');
-                        orderId = getJsonField(
-                          (addOrderApiResponse?.jsonBody ?? ''),
-                          r'''$.result''',
-                        );
                         setupSDKSession((paymentMethodValue?.toLowerCase() == 'mada/visa' || paymentMethodValue?.toLowerCase() == 'مدى / فيزا' ) ? 0 : 1);
-
                         entry = showOverlay(context);
                         startSDK(context, {
                           'propertyId': serializeParam(
@@ -604,27 +596,7 @@ class _ReservationBottomSheetWidgetState
                           'paymentMethod': serializeParam(
                               paymentMethodValue, ParamType.String),
                         }.withoutNulls);
-                      } else {
-                        logFirebaseEvent('Button_Bottom-Sheet');
-                        Navigator.pop(context);
-                        logFirebaseEvent('Button_Show-Snack-Bar');
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              functions.snackBarMessage(
-                                  'reservationConfirmed', FFAppState().locale),
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).white,
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).primaryText,
-                          ),
-                        );
-                        if (_shouldSetState) setState(() {});
-                        return;
-                      }
+
 
                       if (_shouldSetState) setState(() {});
                     },

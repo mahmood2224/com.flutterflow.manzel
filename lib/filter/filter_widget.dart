@@ -806,7 +806,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 ),
                                 duration: Duration(milliseconds: 4000),
                                 backgroundColor:
-                                    FlutterFlowTheme.of(context).primaryText,
+                                    FlutterFlowTheme.of(context).primaryRed,
                               ),
                             );
                           }

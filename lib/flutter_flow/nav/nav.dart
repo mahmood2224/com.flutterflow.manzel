@@ -43,6 +43,7 @@ class AppStateNotifier extends ChangeNotifier {
   bool get shouldRedirect => loggedIn && _redirectLocation != null;
 
   String getRedirectLocation() => _redirectLocation!;
+
   bool hasRedirect() => _redirectLocation != null;
 
   void setRedirectLocationIfUnset(String loc) => _redirectLocation ??= loc;
@@ -135,9 +136,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'ConfirmNewNumberOTPWidget')
                   : ConfirmNewNumberOTPWidget(
-                  phoneNumber: params.getParam('phoneNumber', ParamType.String),
-                isFromUpdate: params.getParam('isFromUpdate', ParamType.String)
-              ),
+                      phoneNumber:
+                          params.getParam('phoneNumber', ParamType.String),
+                      isFromUpdate:
+                          params.getParam('isFromUpdate', ParamType.String)),
             ),
             FFRoute(
               name: 'HelpAndSupport',
@@ -177,7 +179,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Filter',
               path: 'filter',
               builder: (context, params) => FilterWidget(
-                homeScreenLength: params.getParam('homeScreenLength', ParamType.int),
+                homeScreenLength:
+                    params.getParam('homeScreenLength', ParamType.int),
               ),
             ),
             FFRoute(
@@ -189,7 +192,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'filterResults',
               path: 'filterResults',
               builder: (context, params) => FilterResultsWidget(
-                homeScreenLength: params.getParam('homeScreenLength', ParamType.int),
+                homeScreenLength:
+                    params.getParam('homeScreenLength', ParamType.int),
                 cityName: params.getParam('cityName', ParamType.String),
                 furnishingType:
                     params.getParam('furnishingType', ParamType.String),
@@ -212,9 +216,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'PropertyDetails',
               path: 'propertyDetails',
               builder: (context, params) => PropertyDetailsWidget(
-                propertyId: params.getParam('propertyId', ParamType.int),
-                path: params.getParam('path', ParamType.String)
-              ),
+                  propertyId: params.getParam('propertyId', ParamType.int),
+                  path: params.getParam('path', ParamType.String)),
             ),
             FFRoute(
               name: 'propertyVideo',
@@ -250,7 +253,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'whereAreYouLooking',
               builder: (context, params) => WhereAreYouLookingWidget(
                 city: params.getParam('city', ParamType.String),
-                homeScreenLength: params.getParam('homeScreenLength', ParamType.int),
+                homeScreenLength:
+                    params.getParam('homeScreenLength', ParamType.int),
               ),
             ),
             FFRoute(
@@ -260,7 +264,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 cityName: params.getParam('cityName', ParamType.String),
                 propertiesAvailable:
                     params.getParam('propertiesAvailable', ParamType.int),
-                homeScreenLength: params.getParam('homeScreenLength', ParamType.int),
+                homeScreenLength:
+                    params.getParam('homeScreenLength', ParamType.int),
               ),
             ),
             FFRoute(
@@ -440,6 +445,7 @@ class FFParameters {
       state.allParams.isEmpty ||
       (state.extraMap.length == 1 &&
           state.extraMap.containsKey(kTransitionInfoKey));
+
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
 

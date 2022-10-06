@@ -276,7 +276,9 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                     FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                   duration: Duration(milliseconds: 4000),
-                                  backgroundColor: Color(0xFF777777),
+                                  backgroundColor: FlutterFlowTheme.of(
+                                      context)
+                                      .primaryRed,
                                 ),
                               );
                             }

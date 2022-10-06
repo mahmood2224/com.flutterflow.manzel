@@ -609,7 +609,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                             Align(
                                               alignment: AlignmentDirectional(0, 0),
                                               child:
-                                              propertiesIndex == (currentPropertyindex==0?currentPropertyindex=widget!.homeScreenLength!:currentPropertyindex= currentPropertyindex) - widget.homeScreenLength!
+                                              (propertiesIndex??0) == ((currentPropertyindex??0)==0?currentPropertyindex=widget!.homeScreenLength!:currentPropertyindex= currentPropertyindex) - widget.homeScreenLength!
                                                   ? Container():Container(
                                                 constraints: BoxConstraints(minWidth: 50, maxWidth: 50),
                                                 decoration: BoxDecoration(

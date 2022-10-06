@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,6 +28,7 @@ class ProfileWidget extends StatefulWidget {
 
 class _ProfileWidgetState extends State<ProfileWidget> {
   bool? changeLanguage;
+  ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   final scaffoldKey = GlobalKey<ScaffoldState>();
   static const String kWhatsAppAndroid = 'https://api.whatsapp.com/send?phone=';
   static const String kWhatsAppIOS = 'https://wa.me/';
@@ -457,8 +459,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       'u6lrslui' /* Chat Manzel in Whatsapp */,
                     ),
                     icon: Icon(
-                      Manzel.share,
-                      size: 15,
+                      Icons.whatsapp_rounded,
+                      size: 26,
                     ),
                     options: FFButtonOptions(
                       width: 335,
@@ -486,107 +488,172 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        FFButtonWidget(
-                          onPressed: () async {
-                            if (FFAppState().locale == 'en') {
-                              logFirebaseEvent('Button_Alert-Dialog');
-                              var confirmDialogResponse =
-                                  await showDialog<bool>(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('Confirm Logout'),
-                                            content: Text(
-                                                    'Are you sure you want to logout?'),
-
-                                            actions: [
-                                              TextButton(
+                        Container(
+                          width: 335,
+                          height: 48,
+                          color: Colors.white,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (FFAppState().locale == 'en') {
+                                logFirebaseEvent('Button_Alert-Dialog');
+                                var confirmDialogResponse =
+                                    await showDialog<bool>(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('Confirm Logout'),
+                                              content: Text(
+                                                  'Are you sure you want to logout?'),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            false),
+                                                    child: Text('No')),
+                                                TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext,
+                                                            true),
+                                                    child: Text('Yes')),
+                                              ],
+                                            );
+                                          },
+                                        ) ??
+                                        false;
+                                if (confirmDialogResponse) {
+                                  isLoading.value = true;
+                                  logFirebaseEvent(
+                                      'PROFILE_PAGE_logout_ON_TAP');
+                                  // Logout
+                                  logFirebaseEvent('logout_Logout');
+                                  GoRouter.of(context).prepareAuthEvent();
+                                  await signOut();
+                                  isLoading.value = false;
+                                  context.goNamedAuth(
+                                      'OnboardingView', mounted);
+                                }
+                              } else {
+                                logFirebaseEvent('Button_Alert-Dialog');
+                                var confirmDialogResponse = await showDialog<
+                                        bool>(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('قم بتأكيد تسجيل الخروج'),
+                                          content: Text(
+                                              'هل أنت متأكد أنك تريد تسجيل الخروج؟'),
+                                          actions: [
+                                            TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext, false),
-                                                child:
-                                                     Text('No')
-                                              ),
-                                              TextButton(
+                                                child: Text('لا')),
+                                            TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext, true),
-                                                child:
-                                                     Text('Yes')
+                                                child: Text('نعم')),
+                                          ],
+                                        );
+                                      },
+                                    ) ??
+                                    false;
+                                if (confirmDialogResponse) {
+                                  isLoading.value = true;
+                                  logFirebaseEvent(
+                                      'PROFILE_PAGE_logout_ON_TAP');
+                                  // Logout
+                                  logFirebaseEvent('logout_Logout');
+                                  GoRouter.of(context).prepareAuthEvent();
+                                  await signOut();
+                                  isLoading.value = false;
+                                  context.goNamedAuth(
+                                      'OnboardingView', mounted);
+                                }
+                              }
+                              ;
+                            },
+                            child: ValueListenableBuilder<bool>(
+                              builder: (BuildContext context, bool value,
+                                  Widget? child) {
+                                return isLoading.value
+                                    ? Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            SizedBox(
+                                              height: 30,
+                                              width: 30,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation(
+                                                        Colors.black),
+                                                strokeWidth: 5,
                                               ),
-                                            ],
-                                          );
-                                        },
-                                      ) ??
-                                      false;
-                              if (confirmDialogResponse) {
-                                logFirebaseEvent('PROFILE_PAGE_logout_ON_TAP');
-                                // Logout
-                                logFirebaseEvent('logout_Logout');
-                                GoRouter.of(context).prepareAuthEvent();
-                                await signOut();
-
-                                context.goNamedAuth('OnboardingView', mounted);
-                              }
-                            }else{
-                              logFirebaseEvent('Button_Alert-Dialog');
-                              var confirmDialogResponse =
-                                  await showDialog<bool>(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        title: Text('قم بتأكيد تسجيل الخروج'),
-                                        content: Text(
-                                            'هل أنت متأكد أنك تريد تسجيل الخروج؟'),
-
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext, false),
-                                              child:
-                                              Text('لا')
-                                          ),
-                                          TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext, true),
-                                              child:
-                                              Text('نعم')
-                                          ),
-                                        ],
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    : AutoSizeText(
+                                        FFLocalizations.of(context).getText(
+                                          '2csoqw0t' /* Logout */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily:
+                                                  'Sofia Pro By Khuzaimah',
+                                              color: Colors.black,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
+                                        maxLines: 1,
                                       );
-                                    },
-                                  ) ??
-                                      false;
-                              if (confirmDialogResponse) {
-                                logFirebaseEvent('PROFILE_PAGE_logout_ON_TAP');
-                                // Logout
-                                logFirebaseEvent('logout_Logout');
-                                GoRouter.of(context).prepareAuthEvent();
-                                await signOut();
-
-                                context.goNamedAuth('OnboardingView', mounted);
-                              }
-                            }
-                            ;
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            '2csoqw0t' /* Logout */,
-                          ),
-                          options: FFButtonOptions(
-                            width: 335,
-                            height: 48,
-                            color: Colors.white,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
+                              },
+                              valueListenable: isLoading,
                             ),
-                            borderRadius: BorderRadius.circular(12),
+                            style: ButtonStyle(
+                              foregroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (states) {
+                                  if (states.contains(MaterialState.disabled)) {
+                                    FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.black,
+                                          useGoogleFonts: false,
+                                        );
+                                  }
+                                  FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'AvenirArabic',
+                                        color: Colors.white,
+                                        useGoogleFonts: false,
+                                      );
+                                },
+                              ),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (states) {
+                                  if (states.contains(MaterialState.disabled)) {
+                                    return Colors.white;
+                                  }
+                                  return Colors.white;
+                                },
+                              ),
+                              shape: MaterialStateProperty.all<OutlinedBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    side: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    )),
+                              ),
+                            ),
                           ),
                         ),
                       ],

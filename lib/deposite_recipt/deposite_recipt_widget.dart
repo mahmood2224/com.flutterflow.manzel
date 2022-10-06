@@ -173,7 +173,9 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
               FlutterFlowTheme.of(context).subtitle1,
             ),
             duration: Duration(milliseconds: 4000),
-            backgroundColor: Colors.black,
+            backgroundColor: FlutterFlowTheme.of(
+                context)
+                .primaryGreen,
           ),
         );
       } catch (e) {
@@ -189,7 +191,9 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
               FlutterFlowTheme.of(context).subtitle1,
             ),
             duration: Duration(milliseconds: 4000),
-            backgroundColor: Colors.black,
+            backgroundColor: FlutterFlowTheme.of(
+                context)
+                .primaryRed,
           ),
         );
       }finally{

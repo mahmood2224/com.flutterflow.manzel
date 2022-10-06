@@ -68,6 +68,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   static const String kWhatsAppAndroid = 'https://api.whatsapp.com/send?phone=';
   static const String kWhatsAppIOS = 'https://wa.me/';
+  ApiCallResponse? addOrderApiResponse;
 
   // VideoPlayerController? _currentController;
   // VideoPlayerController? videoPlayerController;
@@ -465,7 +466,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         RotatedBox(
-                                          quarterTurns: FFAppState().locale=='en'?0:2,
+                                          quarterTurns:
+                                              FFAppState().locale == 'en'
+                                                  ? 0
+                                                  : 2,
                                           child: FlutterFlowIconButton(
                                             borderColor: Colors.transparent,
                                             borderRadius: 30,
@@ -480,7 +484,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               logFirebaseEvent(
                                                   'PROPERTY_DETAILS_arrow_back_rounded_ICN_');
                                               // back
-                                              logFirebaseEvent('IconButton_back');
+                                              logFirebaseEvent(
+                                                  'IconButton_back');
                                               dispose();
                                               context.pop();
                                             },
@@ -802,65 +807,65 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           //       ],
                                                           //     ),
                                                           //  ),
-                                                          if (!functions
-                                                              .propertyStatusConditionalVisibilty(
-                                                                  PropertyCall
-                                                                      .propertyStatus(
-                                                            columnPropertyResponse
-                                                                .jsonBody,
-                                                          ).toString()))
-                                                            Container(
-                                                              height: 26,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color(
-                                                                    0xFFD7D7D7),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            7),
-                                                              ),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            10,
-                                                                            1,
-                                                                            10,
-                                                                            1),
-                                                                    child: Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        'ie4ye37b' /* Booked */,
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'AvenirArabic',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).white,
-                                                                            fontSize:
-                                                                                13,
-                                                                            fontWeight:
-                                                                                FontWeight.w500,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
+                                                          // if (!functions
+                                                          //     .propertyStatusConditionalVisibilty(
+                                                          //         PropertyCall
+                                                          //             .propertyStatus(
+                                                          //   columnPropertyResponse
+                                                          //       .jsonBody,
+                                                          // ).toString()))
+                                                          //   Container(
+                                                          //     height: 26,
+                                                          //     decoration:
+                                                          //         BoxDecoration(
+                                                          //       color: Color(
+                                                          //           0xFFD7D7D7),
+                                                          //       borderRadius:
+                                                          //           BorderRadius
+                                                          //               .circular(
+                                                          //                   7),
+                                                          //     ),
+                                                          //     child: Row(
+                                                          //       mainAxisSize:
+                                                          //           MainAxisSize
+                                                          //               .max,
+                                                          //       mainAxisAlignment:
+                                                          //           MainAxisAlignment
+                                                          //               .center,
+                                                          //       children: [
+                                                          //         Padding(
+                                                          //           padding: EdgeInsetsDirectional
+                                                          //               .fromSTEB(
+                                                          //                   10,
+                                                          //                   1,
+                                                          //                   10,
+                                                          //                   1),
+                                                          //           child: Text(
+                                                          //             FFLocalizations.of(
+                                                          //                     context)
+                                                          //                 .getText(
+                                                          //               'ie4ye37b' /* Booked */,
+                                                          //             ),
+                                                          //             style: FlutterFlowTheme.of(
+                                                          //                     context)
+                                                          //                 .bodyText1
+                                                          //                 .override(
+                                                          //                   fontFamily:
+                                                          //                       'AvenirArabic',
+                                                          //                   color:
+                                                          //                       FlutterFlowTheme.of(context).white,
+                                                          //                   fontSize:
+                                                          //                       13,
+                                                          //                   fontWeight:
+                                                          //                       FontWeight.w500,
+                                                          //                   useGoogleFonts:
+                                                          //                       false,
+                                                          //                 ),
+                                                          //           ),
+                                                          //         ),
+                                                          //       ],
+                                                          //     ),
+                                                          //   ),
                                                         ],
                                                       ),
                                                     ],
@@ -931,11 +936,17 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     .center,
                                                             children: [
                                                               Padding(
-                                                                padding: const EdgeInsets.only(right:8),
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            8),
                                                                 child: Icon(
-                                                                  Manzel.view_360,
-                                                                    size :20,
-                                                                  color : Colors.black,
+                                                                  Manzel
+                                                                      .view_360,
+                                                                  size: 20,
+                                                                  color: Colors
+                                                                      .black,
                                                                 ),
                                                               )
                                                             ],
@@ -994,12 +1005,13 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                           5,
                                                                           0),
                                                               child: Container(
-                                                                  width : 60,
+                                                                width: 60,
                                                                 child: Icon(
-                                                                    Manzel.floor_plan,
-                                                                    color: Colors.black,
-                                                                  size: 20
-                                                                ),
+                                                                    Manzel
+                                                                        .floor_plan,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    size: 20),
                                                               ),
                                                             ),
                                                           ],
@@ -1149,7 +1161,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
                                                   children: [
                                                     Padding(
                                                       padding:
@@ -2349,74 +2362,86 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(16, 32, 16, 32),
                                               child: Row(
-                                                  mainAxisAlignment : MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   FFButtonWidget(
                                                     onPressed: () async {
-                                                      final phoneNumber = getJsonField(
-                                                        columnPropertyResponse.jsonBody,
+                                                      final phoneNumber =
+                                                          getJsonField(
+                                                        columnPropertyResponse
+                                                            .jsonBody,
                                                         r'''$.data.attributes.managed_by.data.attributes.Company_phone''',
                                                       );
-                                                      print(">>>>>>>>>>>>>>>>>>>>>>phone number = ${phoneNumber}");
+                                                      print(
+                                                          ">>>>>>>>>>>>>>>>>>>>>>phone number = ${phoneNumber}");
                                                       final message = '''
-                                                      ${FFLocalizations.of(context)
-                                                          .getText(
+                                                      ${FFLocalizations.of(context).getText(
                                                         'opening' /* Logout */,
                                                       )}
-                                                       ${FFLocalizations.of(context).getText('propertyName' /* Logout */,)} : ${PropertyCall
-                                                                                    .propertyName(
-                                                                                  columnPropertyResponse
-                                                                                      .jsonBody,
-                                                                                ).toString()}
-                                                      ${FFLocalizations.of(context).getText('propertyRef' /* Logout */,)} : ${PropertyCall.propertyRef(
-                                                                                  columnPropertyResponse
-                                                                                      .jsonBody,
-                                                                                ).toString()}
-                                                     ${FFLocalizations.of(context).getText('propertyAdd' /* Logout */,)} : ${PropertyCall
-                                                                                    .propertyEntranceDirection(
-                                                                                  columnPropertyResponse
-                                                                                      .jsonBody,
-                                                                                ).toString()}
+                                                       ${FFLocalizations.of(context).getText(
+                                                        'propertyName' /* Logout */,
+                                                      )} : ${PropertyCall.propertyName(
+                                                        columnPropertyResponse
+                                                            .jsonBody,
+                                                      ).toString()}
+                                                      ${FFLocalizations.of(context).getText(
+                                                        'propertyRef' /* Logout */,
+                                                      )} : ${PropertyCall.propertyRef(
+                                                        columnPropertyResponse
+                                                            .jsonBody,
+                                                      ).toString()}
+                                                     ${FFLocalizations.of(context).getText(
+                                                        'propertyAdd' /* Logout */,
+                                                      )} : ${PropertyCall.propertyEntranceDirection(
+                                                        columnPropertyResponse
+                                                            .jsonBody,
+                                                      ).toString()}
                                                       ''';
-                                                      openWhatsapp(context,message,phoneNumber);
+                                                      openWhatsapp(context,
+                                                          message, phoneNumber);
                                                     },
-                                                    text:
-                                                        FFLocalizations.of(context)
-                                                            .getText(
+                                                    text: FFLocalizations.of(
+                                                            context)
+                                                        .getText(
                                                       'requestVisit' /* Logout */,
                                                     ),
                                                     options: FFButtonOptions(
                                                       width: 335,
                                                       height: 48,
                                                       color: Colors.white,
-                                                      textStyle: FlutterFlowTheme
-                                                              .of(context)
-                                                          .subtitle2
-                                                          .override(
-                                                            fontFamily:
-                                                                'Sofia Pro By Khuzaimah',
-                                                            color:
-                                                                FlutterFlowTheme.of(
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro By Khuzaimah',
+                                                                color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryColor,
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            useGoogleFonts: false,
-                                                          ),
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
                                                       borderSide: BorderSide(
-                                                        color: FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryColor,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
                                                         width: 1,
                                                       ),
                                                       borderRadius:
-                                                          BorderRadius.circular(8),
+                                                          BorderRadius.circular(
+                                                              8),
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                              ),
+                                            ),
                                           Divider(
                                             thickness: 1,
                                             indent: 10,
@@ -3120,34 +3145,119 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               .toString())) {
                                         logFirebaseEvent(
                                             'reserved_Bottom-Sheet');
-                                        await configurePaymentSdk();
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.white,
-                                          context: context,
-                                          builder: (context) {
-                                            return Padding(
-                                              padding: MediaQuery.of(context)
-                                                  .viewInsets,
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.9,
-                                                child:
-                                                    ReservationBottomSheetWidget(
-                                                  reservationCost: PropertyCall
-                                                      .reservationsCost(
-                                                    columnPropertyResponse
-                                                        .jsonBody,
+                                        addOrderApiResponse =
+                                            await AddOrderCall.call(
+                                                propertyId: widget!.propertyId.toString(),
+                                                userId:
+                                                    currentUserReference?.id,
+                                                authorazationToken:
+                                                    FFAppState().authToken);
+
+                                        if ((addOrderApiResponse?.statusCode ??
+                                                200) ==
+                                            200) {
+                                          await configurePaymentSdk();
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.white,
+                                            context: context,
+                                            builder: (context) {
+                                              return Padding(
+                                                padding: MediaQuery.of(context)
+                                                    .viewInsets,
+                                                child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.9,
+                                                  child:
+                                                      ReservationBottomSheetWidget(
+                                                    reservationCost:
+                                                        PropertyCall
+                                                            .reservationsCost(
+                                                      columnPropertyResponse
+                                                          .jsonBody,
+                                                    ),
+                                                    propertyId:
+                                                        widget.propertyId,
                                                   ),
-                                                  propertyId: widget.propertyId,
+                                                ),
+                                              );
+                                            },
+                                          ).then((value) => setState(() {}));
+                                          //.then((value) => _chewieController?.play());
+                                        }
+                                        if(addOrderApiResponse!.statusCode==399){
+                                          Navigator.pop(context);
+                                          logFirebaseEvent(
+                                              'Button_Show-Snack-Bar');
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                "Some issue is there",
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                      context)
+                                                      .white,
                                                 ),
                                               ),
-                                            );
-                                          },
-                                        ).then((value) => setState(() {}));
-                                        //.then((value) => _chewieController?.play());
+                                              duration:
+                                              Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryRed,
+                                            ),
+                                          );
+                                        }
+                                        if(addOrderApiResponse!.statusCode==400){
+                                          Navigator.pop(context);
+                                          logFirebaseEvent(
+                                              'Button_Show-Snack-Bar');
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                               FFAppState().locale=='en'? "Something went wrong. Please try again.":"هناك خطأ ما. حاول مرة اخرى.",
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                      context)
+                                                      .white,
+                                                ),
+                                              ),
+                                              duration:
+                                              Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryRed,
+                                            ),
+                                          );
+                                        }
+                                        else {
+                                          Navigator.pop(context);
+                                          logFirebaseEvent(
+                                              'Button_Show-Snack-Bar');
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                functions.snackBarMessage(
+                                                    'reservationConfirmed',
+                                                    FFAppState().locale),
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .white,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryRed,
+                                            ),
+                                          );
+                                        }
                                       } else {
                                         logFirebaseEvent(
                                             'reserved_Navigate-To');
@@ -3278,10 +3388,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     return uri.shortUrl.toString();
   }
 
-  void openWhatsapp(BuildContext context,String? message,String? phoneNumber) async {
+  void openWhatsapp(
+      BuildContext context, String? message, String? phoneNumber) async {
     var whatsapp = phoneNumber;
-    var whatsappUrlAndroid = Uri.parse('$kWhatsAppAndroid$whatsapp&text=${message}');
-    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp');
+    var whatsappUrlAndroid =
+        Uri.parse('$kWhatsAppAndroid$whatsapp&text=${message}');
+    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp&text=${message}');
     if (Platform.isIOS) {
       if (await canLaunchUrl(whatsappUrlIos)) {
         await launchUrl(whatsappUrlIos, mode: LaunchMode.externalApplication);
@@ -3291,7 +3403,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                 style: Theme.of(context)
                     .textTheme
                     .bodySmall
-                    ?.copyWith(color: Colors.white))));
+                    ?.copyWith(color: Colors.white)),
+          backgroundColor: FlutterFlowTheme.of(context).primaryRed,
+        ));
       }
     } else {
       bool canLaunch = await canLaunchUrl(whatsappUrlAndroid);
@@ -3306,7 +3420,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
               .textTheme
               .bodySmall
               ?.copyWith(color: Colors.white),
-        )));
+            ),
+          backgroundColor: FlutterFlowTheme.of(context).primaryRed,
+        ));
       }
     }
   }

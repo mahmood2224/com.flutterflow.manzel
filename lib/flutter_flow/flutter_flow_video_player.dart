@@ -159,10 +159,10 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
           child: Container(
             height: height,
             width: width,
-            child: _chewieController != null &&
+            child: (_chewieController != null &&
                     (widget.lazyLoad ||
                         _chewieController!
-                            .videoPlayerController.value.isInitialized)
+                            .videoPlayerController.value.isInitialized))
                 ? Chewie(controller: _chewieController!)
                 : (_chewieController != null &&
                         _chewieController!.videoPlayerController.value.hasError)
@@ -171,11 +171,11 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children:  [
                           Container(
-                            height: 20,
-                              width: 20,
+                            height: (!widget.lazyLoad && widget.isFromPropertyDetail)?25:35,
+                              width: (!widget.lazyLoad && widget.isFromPropertyDetail)?25:35,
                               child: CircularProgressIndicator()),
-                          SizedBox(height: 20),
-                          Text('Loading'),
+                          SizedBox(height: 25),
+                          (!widget.lazyLoad && widget.isFromPropertyDetail)? Text('Loading'):SizedBox.shrink(),
                         ],
                       ),
           ),

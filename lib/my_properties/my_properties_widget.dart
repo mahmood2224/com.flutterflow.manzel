@@ -33,12 +33,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   }
 
   Future<void> configurePaymentSdk() async {
-
     GoSellSdkFlutter.configureApp(
       bundleId: 'com.flutterflow.manzel',
       productionSecreteKey: 'sk_live_o4Z3j8HafuOCG9PNJ1eVrvsz',
       sandBoxsecretKey: 'sk_test_2r5JvPVafKxklSn6LRpqWycQ',
-      lang: FFAppState().locale,);
+      lang: FFAppState().locale,
+    );
   }
 
   @override
@@ -790,7 +790,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             0),
                                                                         child:
                                                                             Icon(
-                                                                          Manzel.location_pin,
+                                                                          Manzel
+                                                                              .location_pin,
                                                                           color:
                                                                               Colors.black,
                                                                           size:
@@ -1029,49 +1030,46 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 FFButtonWidget(
                                                               onPressed:
                                                                   () async {
-                                                                logFirebaseEvent(
-                                                                    'MY_PROPERTIES_PAGE_PAY_NOW_BTN_ON_TAP');
-                                                                logFirebaseEvent(
-                                                                    'Button_Bottom-Sheet');
-                                                                await configurePaymentSdk();
-                                                              await showModalBottomSheet(
-                                                                  isScrollControlled:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .white,
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return Padding(
-                                                                      padding: MediaQuery.of(
-                                                                              context)
-                                                                          .viewInsets,
-                                                                      child:
-                                                                          Container(
-                                                                        height: MediaQuery.of(context).size.height *
-                                                                            0.89,
-                                                                        child:
-                                                                            ReservationBottomSheetWidget(
-                                                                          reservationCost:
-                                                                              getJsonField(
-                                                                            bookedPropertiesItem,
-                                                                            r'''$.reservation_amount''',
+                                                                    await configurePaymentSdk();
+                                                                    await showModalBottomSheet(
+                                                                      isScrollControlled:
+                                                                          true,
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .white,
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (context) {
+                                                                        return Padding(
+                                                                          padding:
+                                                                              MediaQuery.of(context).viewInsets,
+                                                                          child:
+                                                                              Container(
+                                                                            height:
+                                                                                MediaQuery.of(context).size.height * 0.89,
+                                                                            child:
+                                                                                ReservationBottomSheetWidget(
+                                                                              reservationCost: getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.reservation_amount''',
+                                                                              ),
+                                                                              propertyId: functions.bookinPagePropertyIdToInt(getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.property_id''',
+                                                                              ).toString()),
+                                                                              orderId: getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_id''',
+                                                                              ),
+                                                                            ),
                                                                           ),
-                                                                          propertyId:
-                                                                              functions.bookinPagePropertyIdToInt(getJsonField(
-                                                                            bookedPropertiesItem,
-                                                                            r'''$.property_id''',
-                                                                          ).toString()),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                ).then((value) =>
-                                                                    setState(
-                                                                        () {}));
+                                                                        );
+                                                                      },
+                                                                    ).then((value) =>
+                                                                        setState(
+                                                                            () {}));
+
                                                               },
                                                               text: FFLocalizations
                                                                       .of(context)
@@ -1321,7 +1319,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             3),
                                                                         child:
                                                                             Icon(
-                                                                          Manzel.location_pin,
+                                                                          Manzel
+                                                                              .location_pin,
                                                                           color:
                                                                               Colors.black,
                                                                           size:
@@ -1452,25 +1451,24 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 0,
                                                                                 20,
                                                                                 0),
-
-                                                                                  child: Text(
+                                                                            child:
+                                                                                Text(
                                                                               valueOrDefault<String>(
-                                                                                  getJsonField(
-                                                                                    bookmarkedPropertiesItem,
-                                                                                    r'''$.property_data.property_bathrooms''',
-                                                                                  ).toString(),
-                                                                                  '0',
+                                                                                getJsonField(
+                                                                                  bookmarkedPropertiesItem,
+                                                                                  r'''$.property_data.property_bathrooms''',
+                                                                                ).toString(),
+                                                                                '0',
                                                                               ),
                                                                               maxLines: 2,
                                                                               style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                      color: Colors.black,
-                                                                                      fontSize: 12,
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
+                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                    color: Colors.black,
+                                                                                    fontSize: 12,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                  ),
                                                                             ),
-
                                                                           ),
                                                                           Padding(
                                                                             padding: EdgeInsetsDirectional.fromSTEB(
@@ -1585,7 +1583,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 backgroundColor:
                                                                     FlutterFlowTheme.of(
                                                                             context)
-                                                                        .primaryText,
+                                                                        .primaryGreen,
                                                               ),
                                                             );
                                                           } else {
@@ -1619,7 +1617,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 backgroundColor:
                                                                     FlutterFlowTheme.of(
                                                                             context)
-                                                                        .primaryText,
+                                                                        .primaryRed,
                                                               ),
                                                             );
                                                           }

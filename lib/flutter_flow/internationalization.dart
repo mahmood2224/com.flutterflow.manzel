@@ -180,7 +180,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'u6lrslui': {
       'en': 'Chat Manzel in Whatsapp',
-      'ar': 'دردشة المنزل في الواتس اب',
+      'ar': 'تحدث مع فريق منزل',
     },
     '2csoqw0t': {
       'en': 'Logout',
@@ -534,6 +534,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Offers
   {
+    'lastInstallmentOffer':{
+      'en':'Last Installment',
+      'ar':'القسط الأخير',
+    },
     'mthnzz7x': {
       'en': 'Offers',
       'ar': 'العروض',
@@ -603,7 +607,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مرجع الحجز',
     },
     'ez8wbssn': {
-      'en': 'Initial installment',
+      'en': 'Installment Amount',
       'ar': 'القسط الأولي',
     },
     'z7x7wv59': {
@@ -780,6 +784,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PastOffers
   {
+    'lastInstallment':{
+      'en':'Last Installment',
+      'ar':'القسط الأخير',
+    },
     'qvv3lsb7': {
       'en': 'Past Offers',
       'ar': 'العروض السابقة',
@@ -821,7 +829,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مرجع الحجز',
     },
     'tpwleczh': {
-      'en': 'Initial installment',
+      'en': 'Installment Amount',
       'ar': 'القسط الأولي',
     },
     '2szdgt5y': {
@@ -1021,25 +1029,25 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PropertyDetails
   {
-    'propertyName':{
-      'en':'Property name',
-      'ar':'اسم الخاصية',
+    'propertyName': {
+      'en': 'Property name',
+      'ar': 'اسم الخاصية',
     },
-    'propertyRef':{
-      'en':'Property Ref.',
-      'ar':'مرجع الملكية.',
+    'propertyRef': {
+      'en': 'Property Ref.',
+      'ar': 'مرجع الملكية.',
     },
-    'propertyAdd':{
-      'en':'Property address.',
-      'ar':'عنوان العقار',
+    'propertyAdd': {
+      'en': 'Property address.',
+      'ar': 'عنوان العقار',
     },
-    'opening':{
-      'en':'Hello ! I want to request a visit to',
-      'ar':'أهلا وسهلا ! أريد أن أطلب زيارة إلى',
+    'opening': {
+      'en': 'Hello ! I want to request a visit to',
+      'ar': 'أهلا وسهلا ! أريد أن أطلب زيارة إلى',
     },
-    'requestVisit':{
-      'en' : 'Request Visit',
-      'ar':'اطلب زيارة',
+    'requestVisit': {
+      'en': 'Request Visit',
+      'ar': 'اطلب زيارة',
     },
     'pinCode': {
       'en': 'Pin code ',
@@ -1323,6 +1331,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Confirmation
   {
+    'failureButton': {
+      'en': 'Explore more properties',
+      'ar': 'اكتشف المزيد من الخصائص'
+    },
+    'failure': {
+      'en': 'We are unable to process payment please try again later',
+      'ar':
+          'نحن غير قادرين على معالجة الدفع في هذا الوقت. الرجاء معاودة المحاولة في وقت لاحق'
+    },
     'fnewib0l': {
       'en': 'Your Booking Confirmed',
       'ar': 'تم تأكيد حجزك',
@@ -1811,8 +1828,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
     'downloadSucessfulMessage': {
-      'en': 'Receipt has been downloaded check Downloads',
-      'ar': 'تم تنزيل الإيصال تحقق من التنزيلات'
+      'en': 'Recipt has been downloaded',
+      'ar': 'تم تنزيل الإيصال'
     },
     'errorDownloading': {
       'en': 'Error downloading receipt please try again later',
