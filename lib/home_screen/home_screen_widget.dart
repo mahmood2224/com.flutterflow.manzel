@@ -172,11 +172,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SvgPicture.asset(
-                              'assets/images/d9t74_.svg',
+                            Image.asset(
+                              'assets/images/manzel_logo.png',
                               width: 43,
                               height: 31,
-                              fit: BoxFit.none,
+                              fit: BoxFit.cover,
                             ),
                             if (loggedIn)
                               StreamBuilder<List<NotificationsRecord>>(
@@ -875,10 +875,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       ),
                                     ),
                                   ),
+                                  if((videoPlayers??[]).length>=1)
                                   Align(
                                     alignment: AlignmentDirectional(0, 0),
-                                    child: (propertiesIndex??0) ==
-                                                (currentPropertyindex??0)   
+                                    child: ((propertiesIndex??0) ==
+                                                (currentPropertyindex??0))
                                         ? Container()
                                         :  Container(
                                                 //margin: EdgeInsets.all(100),

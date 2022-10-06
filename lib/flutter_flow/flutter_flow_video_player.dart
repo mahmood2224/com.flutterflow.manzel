@@ -159,10 +159,10 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
           child: Container(
             height: height,
             width: width,
-            child: _chewieController != null &&
+            child: (_chewieController != null &&
                     (widget.lazyLoad ||
                         _chewieController!
-                            .videoPlayerController.value.isInitialized)
+                            .videoPlayerController.value.isInitialized))
                 ? Chewie(controller: _chewieController!)
                 : (_chewieController != null &&
                         _chewieController!.videoPlayerController.value.hasError)

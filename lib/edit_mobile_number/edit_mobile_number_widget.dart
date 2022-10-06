@@ -259,7 +259,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 onCodeSent: () async {
                                   //    entry.remove();
                                   isLoading.value = false;
-                                  context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': "+917016915317",'isFromUpdate': 'true' });
+                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'isFromUpdate':"true",'phoneNumber': phoneNumberVal});
                                 },
                               );
 
@@ -276,7 +276,9 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                     FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                   duration: Duration(milliseconds: 4000),
-                                  backgroundColor: Color(0xFF777777),
+                                  backgroundColor: FlutterFlowTheme.of(
+                                      context)
+                                      .primaryRed,
                                 ),
                               );
                             }

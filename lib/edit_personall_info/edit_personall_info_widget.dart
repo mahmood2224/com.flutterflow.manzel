@@ -725,7 +725,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 ),
                                 duration: Duration(milliseconds: 4000),
                                 backgroundColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                    .primaryRed,
                               ),
                             );
                           } else {
@@ -789,8 +789,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     ),
                                     duration: Duration(milliseconds: 4000),
                                     backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
+                                    FlutterFlowTheme.of(context).primaryRed,
                                   ),
                                 );
                               }

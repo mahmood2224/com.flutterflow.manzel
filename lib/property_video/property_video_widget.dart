@@ -92,6 +92,7 @@ class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
                   allowFullScreen: true,
                   allowPlaybackSpeedMenu: false,
                   isFromPropertyDetail: true,
+                  //lazyLoad: true,
                 ),
               ),
             ],

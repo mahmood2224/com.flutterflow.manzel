@@ -1230,7 +1230,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         Text(
                                                                           FFLocalizations.of(context)
                                                                               .getText(
-                                                                            'ez8wbssn' /* Initial installment */,
+                                                                            'lastInstallmentOffer' /* Initial installment */,
                                                                           ),
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyText1
@@ -1252,7 +1252,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 functions.formatAmount(valueOrDefault<String>(
                                                                                   getJsonField(
                                                                                     activeOffersItem,
-                                                                                    r'''$.offered_installment_amount''',
+                                                                                    r'''$.last_installment_amount''',
                                                                                   ).toString(),
                                                                                   '0',
                                                                                 )),
@@ -1286,10 +1286,108 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                   ),
                                                                   Expanded(
                                                                     child:
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                          5,
+                                                                          0,
+                                                                          0,
+                                                                          0),
+                                                                      child:
+                                                                      Column(
+                                                                        mainAxisSize:
+                                                                        MainAxisSize.max,
+                                                                        crossAxisAlignment:
+                                                                        CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          Text(
+                                                                            FFLocalizations.of(context).getText(
+                                                                              '2kxnix92' /* Total price */,
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              color: Color(0xFF6B6B6B),
+                                                                              fontWeight: FontWeight.w300,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                          ),
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                            crossAxisAlignment:
+                                                                            CrossAxisAlignment.end,
+                                                                            children: [
+                                                                              Text(
+                                                                                valueOrDefault<String>(
+                                                                                  functions.formatAmount(valueOrDefault<String>(
+                                                                                    getJsonField(
+                                                                                      activeOffersItem,
+                                                                                      r'''$.property_price''',
+                                                                                    ).toString(),
+                                                                                    '0',
+                                                                                  )),
+                                                                                  '0',
+                                                                                ),
+                                                                                maxLines: 2,
+                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  fontSize: 19,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
+                                                                              ),
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
+                                                                                child: Text(
+                                                                                  FFLocalizations.of(context).getText(
+                                                                                    'h47bvnhi' /* SAR */,
+                                                                                  ),
+                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                    fontFamily: 'AvenirArabic',
+                                                                                    fontSize: 10,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          if (!functions
+                                                              .conditionalVisibility(
+                                                                  getJsonField(
+                                                                    activeOffersItem,
+                                                                    r'''$.status''',
+                                                                  ).toString(),
+                                                                  'pending'))
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          16,
+                                                                          0,
+                                                                          16,
+                                                                          18),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child:
                                                                         Padding(
                                                                       padding: EdgeInsetsDirectional
                                                                           .fromSTEB(
-                                                                              5,
+                                                                              0,
                                                                               0,
                                                                               0,
                                                                               0),
@@ -1352,100 +1450,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          if (!functions
-                                                              .conditionalVisibility(
-                                                                  getJsonField(
-                                                                    activeOffersItem,
-                                                                    r'''$.status''',
-                                                                  ).toString(),
-                                                                  'pending'))
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          16,
-                                                                          0,
-                                                                          16,
-                                                                          18),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  Expanded(
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          FFLocalizations.of(context)
-                                                                              .getText(
-                                                                            '2kxnix92' /* Total price */,
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                color: Color(0xFF6B6B6B),
-                                                                                fontWeight: FontWeight.w300,
-                                                                                useGoogleFonts: false,
-                                                                              ),
-                                                                        ),
-                                                                        Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.end,
-                                                                          children: [
-                                                                            Text(
-                                                                              valueOrDefault<String>(
-                                                                                functions.formatAmount(valueOrDefault<String>(
-                                                                                  getJsonField(
-                                                                                    activeOffersItem,
-                                                                                    r'''$.property_price''',
-                                                                                  ).toString(),
-                                                                                  '0',
-                                                                                )),
-                                                                                '0',
-                                                                              ),
-                                                                              maxLines: 2,
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    fontSize: 19,
-                                                                                    fontWeight: FontWeight.bold,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
-                                                                            ),
-                                                                            Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
-                                                                              child: Text(
-                                                                                FFLocalizations.of(context).getText(
-                                                                                  'h47bvnhi' /* SAR */,
-                                                                                ),
-                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'AvenirArabic',
-                                                                                      fontSize: 10,
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
                                                                   Expanded(
                                                                     child:
                                                                         Padding(
@@ -1464,7 +1468,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         children: [
                                                                           Text(
                                                                             FFLocalizations.of(context).getText(
-                                                                              'wxex1r7b' /* Agent Name */,
+                                                                              '2kxnix92' /* Total price */,
                                                                             ),
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
@@ -1473,25 +1477,51 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                   useGoogleFonts: false,
                                                                                 ),
                                                                           ),
-                                                                          Text(
-                                                                            valueOrDefault<String>(
-                                                                              getJsonField(
-                                                                                activeOffersItem,
-                                                                                r'''$.agent_name''',
-                                                                              ).toString(),
-                                                                              'null',
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 16,
-                                                                                  fontWeight: FontWeight.bold,
-                                                                                  useGoogleFonts: false,
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.end,
+                                                                            children: [
+                                                                              Text(
+                                                                                valueOrDefault<String>(
+                                                                                  functions.formatAmount(valueOrDefault<String>(
+                                                                                    getJsonField(
+                                                                                      activeOffersItem,
+                                                                                      r'''$.property_price''',
+                                                                                    ).toString(),
+                                                                                    '0',
+                                                                                  )),
+                                                                                  '0',
                                                                                 ),
+                                                                                maxLines: 2,
+                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      fontFamily: 'AvenirArabic',
+                                                                                      fontSize: 19,
+                                                                                      fontWeight: FontWeight.bold,
+                                                                                      useGoogleFonts: false,
+                                                                                    ),
+                                                                              ),
+                                                                              Padding(
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
+                                                                                child: Text(
+                                                                                  FFLocalizations.of(context).getText(
+                                                                                    'h47bvnhi' /* SAR */,
+                                                                                  ),
+                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                        fontFamily: 'AvenirArabic',
+                                                                                        fontSize: 10,
+                                                                                        fontWeight: FontWeight.w500,
+                                                                                        useGoogleFonts: false,
+                                                                                      ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
                                                                           ),
                                                                         ],
                                                                       ),
                                                                     ),
-                                                                  ),
+                                                                  )
                                                                 ],
                                                               ),
                                                             ),

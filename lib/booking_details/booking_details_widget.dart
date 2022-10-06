@@ -255,7 +255,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           FFLocalizations.of(context).getText(
                                             'w2795v66' /* Property Reserved */,
                                           ),
-                                          maxLines: 2,
+                                          maxLines: 1,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -1077,7 +1077,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       ),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 5),
+                                            0, 0, 0, 0),
                                         child: Icon(
                                           Icons.clear,
                                           color: FlutterFlowTheme.of(context)
@@ -1153,14 +1153,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0xFFD05C5C),
                                         shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
+
                                       ),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 5),
+                                            0, 0, 0, 0),
                                         child: Icon(
                                           Icons.clear,
                                           color: FlutterFlowTheme.of(context)
@@ -1236,10 +1233,6 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       decoration: BoxDecoration(
                                         color: Color(0xFFD05C5C),
                                         shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
                                       ),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -1946,7 +1939,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   ),
                                   duration: Duration(milliseconds: 4000),
                                   backgroundColor:
-                                      FlutterFlowTheme.of(context).primaryText,
+                                      FlutterFlowTheme.of(context).primaryRed,
                                 ),
                               );
                             } else {
