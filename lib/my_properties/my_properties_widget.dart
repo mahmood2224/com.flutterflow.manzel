@@ -329,7 +329,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                   String>(
                                                                 getJsonField(
                                                                   bookedPropertiesItem,
-                                                                  r'''$.property_images[0].url''',
+                                                                  r'''$.property_images[0].formats.medium.url''',
                                                                 ),
                                                                 'https://media.istockphoto.com/photos/luxurious-beautiful-modern-villa-with-front-yard-garden-picture-id1283532143?b=1&k=20&m=1283532143&s=170667a&w=0&h=Vd_WTUbHxnc_NZNwMr1UnS0xVW1FjtUxKJUtCoL4Fgk=',
                                                               ),
@@ -1247,7 +1247,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       String>(
                                                                     getJsonField(
                                                                       bookmarkedPropertiesItem,
-                                                                      r'''$.property_data.data.attributes.property_images.data[0].attributes.url''',
+                                                                      r'''$..property_images[0].formats.medium.url''',
                                                                     ),
                                                                     'https://media.istockphoto.com/photos/house-in-dubai-picture-id490348444?k=20&m=490348444&s=612x612&w=0&h=HAhcenCKgOe5WQR3Ko514qWAkzHX3ugvlMpeKmUiStc=',
                                                                   ),

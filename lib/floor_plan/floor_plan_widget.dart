@@ -110,7 +110,7 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
                                 image: Image.network(
                                   getJsonField(
                                     columnPropertyResponse.jsonBody,
-                                    r'''$.data.attributes.property_floor_plan.data.attributes.url''',
+                                    r'''$.data.attributes.property_floor_plan.data.attributes.formats.medium.url''',
                                   ),
                                   fit: BoxFit.contain,
                                 ),

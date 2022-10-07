@@ -181,7 +181,7 @@ class PropertyCall {
   );
   static dynamic propertyImg(dynamic response) => getJsonField(
     response,
-    r'''$..property_images.data[0].attributes.name''',
+    r'''$..property_images.data[0].attributes.formats.medium.url''',
   );
   static dynamic companyLogo(dynamic response) => getJsonField(
     response,

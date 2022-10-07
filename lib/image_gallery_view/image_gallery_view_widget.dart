@@ -196,14 +196,14 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                         image: Image.network(
                                           getJsonField(
                                             imagesItem,
-                                            r'''$.attributes.url''',
+                                            r'''$.attributes.formats.medium.url''',
                                           ),
                                           fit: BoxFit.contain,
                                         ),
                                         allowRotation: false,
                                         tag: getJsonField(
                                           imagesItem,
-                                          r'''$.attributes.url''',
+                                          r'''$.attributes.formats.medium.url''',
                                         ),
                                         useHeroAnimation: true,
                                       ),
@@ -213,7 +213,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                 child: Hero(
                                   tag: getJsonField(
                                     imagesItem,
-                                    r'''$.attributes.url''',
+                                    r'''$.attributes.formats.medium.url''',
                                   ),
                                   transitionOnUserGestures: true,
                                   child: ClipRRect(
@@ -221,7 +221,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                     child: Image.network(
                                       getJsonField(
                                         imagesItem,
-                                        r'''$.attributes.url''',
+                                        r'''$.attributes.formats.medium.url''',
                                       ),
                                       width: 100,
                                       height:

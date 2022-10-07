@@ -878,8 +878,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   if((videoPlayers??[]).length>=1)
                                   Align(
                                     alignment: AlignmentDirectional(0, 0),
-                                    child: ((propertiesIndex??0) ==
-                                                (currentPropertyindex??0))
+                                    child: ((propertiesIndex) ==
+                                                (currentPropertyindex))
                                         ? Container()
                                         :  Container(
                                                 //margin: EdgeInsets.all(100),
