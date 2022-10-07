@@ -74,6 +74,7 @@ class _OffersWidgetState extends State<OffersWidget> {
       print(error);
       print("*********************************************************");
     }
+    if(mounted)
     setState(() {});
   }
 
@@ -1770,6 +1771,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 ),
                                                                               );
                                                                               // Future.delayed(const Duration(seconds: 5), () {
+                                                                              if(mounted)
                                                                               setState(() {});
 
                                                                               // });
@@ -1849,6 +1851,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                   backgroundColor: FlutterFlowTheme.of(context).primaryText,
                                                                                 ),
                                                                               );
+                                                                              if(mounted)
                                                                               setState(() {});
                                                                               isLoading.value = false;
                                                                             } else {
@@ -1871,7 +1874,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             }
                                                                           }
                                                                         }
-
+                                                                        if(mounted)
                                                                         setState(
                                                                             () {});
                                                                       },

@@ -878,8 +878,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   if((videoPlayers??[]).length>=1)
                                   Align(
                                     alignment: AlignmentDirectional(0, 0),
-                                    child: ((propertiesIndex??0) ==
-                                                (currentPropertyindex??0))
+                                    child: ((propertiesIndex) ==
+                                                (currentPropertyindex))
                                         ? Container()
                                         :  Container(
                                                 //margin: EdgeInsets.all(100),
@@ -929,16 +929,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       onTap: () {
                                         if (videoPlayers[propertiesIndex] !=
                                             null) {
-                                          if (videoPlayers[propertiesIndex]!
+                                          if (videoPlayers[propertiesIndex]
                                                   .value
                                                   .volume >
                                               0) {
                                             videoPlayers[propertiesIndex]
-                                                ?.setVolume(0);
+                                                .setVolume(0);
                                             isMuted.value = true;
                                           } else {
                                             videoPlayers[propertiesIndex]
-                                                ?.setVolume(100);
+                                                .setVolume(100);
                                             isMuted.value = false;
                                           }
                                           //   setState(() {
