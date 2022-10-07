@@ -38,6 +38,7 @@ class _FilterWidgetState extends State<FilterWidget> {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Filter'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    //installmentRange = SfRangeValues(start, end)
   }
 
   void reset() {
@@ -500,7 +501,17 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   ),
                                   child: SfRangeSlider(
                                     min: 0.0,
-                                    max: 2000000,
+                                    max: valueOrDefault<double>(
+                                      functions.formattedDouble(
+                                          valueOrDefault<int>(
+                                            getJsonField(
+                                              columnPropertiesResponse.jsonBody,
+                                              r'''$.meta.max_price''',
+                                            ),
+                                            20000000,
+                                          )),
+                                      20000000.0,
+                                    ),
                                     values: installmentRange ??= SfRangeValues(
                                         0,
                                         valueOrDefault<double>(

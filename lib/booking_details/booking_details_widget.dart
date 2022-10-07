@@ -121,7 +121,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                     ).then((value) => setState(() {}));
                   },
                   child: FaIcon(
-                    FontAwesomeIcons.ellipsisH,
+                    FontAwesomeIcons.ellipsis,
                     color: FlutterFlowTheme.of(context).white,
                     size: 30,
                   ),
@@ -212,9 +212,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'reserved',
                                         'checked'))
                                       Icon(
-                                        Icons.check_circle_rounded,
+                                        Manzel.completed,
                                         color: Color(0xFF7FC15F),
-                                        size: 28,
+                                        size: 24,
                                       ),
                                     if (functions.orderProcessStatus(
                                         getJsonField(
@@ -236,9 +236,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'reserved',
                                         'pending'))
                                       Icon(
-                                        Icons.pending_sharp,
+                                        Manzel.pending,
                                         color: Color(0xFFF0A637),
-                                        size: 28,
+                                        size: 24,
                                       ),
                                   ],
                                 ),
@@ -303,9 +303,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           r'''$.result.order_status''',
                                         ).toString()))
                                       Icon(
-                                        Icons.check_circle_rounded,
+                                        Manzel.completed,
                                         color: Color(0xFF7FC15F),
-                                        size: 28,
+                                        size: 24,
                                       ),
                                     if (!functions
                                         .offerStatusPaymentCompletedCheck(
@@ -392,9 +392,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                   'collect_offers',
                                                   'checked'))
                                                 Icon(
-                                                  Icons.check_circle_rounded,
+                                                  Manzel.completed,
                                                   color: Color(0xFF7FC15F),
-                                                  size: 28,
+                                                  size: 24,
                                                 ),
                                               if (functions.orderProcessStatus(
                                                   getJsonField(
@@ -418,9 +418,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                   'collect_offers',
                                                   'pending'))
                                                 Icon(
-                                                  Icons.pending_sharp,
+                                                  Manzel.pending,
                                                   color: Color(0xFFF0A637),
-                                                  size: 28,
+                                                  size: 24,
                                                 ),
                                             ],
                                           ),
@@ -774,9 +774,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'waiting_offer_acceptance',
                                         'checked'))
                                       Icon(
-                                        Icons.check_circle_rounded,
+                                        Manzel.completed,
                                         color: Color(0xFF7FC15F),
-                                        size: 28,
+                                        size: 24,
                                       ),
                                     if (functions.orderProcessStatus(
                                         getJsonField(
@@ -798,9 +798,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'waiting_offer_acceptance',
                                         'pending'))
                                       Icon(
-                                        Icons.pending_sharp,
+                                        Manzel.pending,
                                         color: Color(0xFFF0A637),
-                                        size: 28,
+                                        size: 24,
                                       ),
                                   ],
                                 ),
@@ -879,9 +879,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'offer_accepted',
                                         'checked'))
                                       Icon(
-                                        Icons.check_circle_rounded,
+                                        Manzel.completed,
                                         color: Color(0xFF7FC15F),
-                                        size: 28,
+                                        size: 24,
                                       ),
                                     if (functions.orderProcessStatus(
                                         getJsonField(
@@ -903,9 +903,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'offer_accepted',
                                         'pending'))
                                       Icon(
-                                        Icons.pending_sharp,
+                                        Manzel.pending,
                                         color: Color(0xFFF0A637),
-                                        size: 28,
+                                        size: 24,
                                       ),
                                   ],
                                 ),
@@ -984,9 +984,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'ownership_transferred',
                                         'checked'))
                                       Icon(
-                                        Icons.check_circle_rounded,
+                                        Manzel.completed,
                                         color: Color(0xFF7FC15F),
-                                        size: 28,
+                                        size: 24,
                                       ),
                                     if (functions.orderProcessStatus(
                                         getJsonField(
@@ -1068,24 +1068,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      width: 24,
-                                      height: 24,
-                                      decoration: BoxDecoration(
+                                     Icon(
+            Manzel.cancelled,
                                         color: Color(0xFFD05C5C),
-                                        shape: BoxShape.circle,
+                                        size: 24,
                                       ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 0),
-                                        child: Icon(
-                                          Icons.clear,
-                                          color: FlutterFlowTheme.of(context)
-                                              .white,
-                                          size: 22,
-                                        ),
-                                      ),
-                                    ),
                                   ],
                                 ),
                                 Expanded(
@@ -1147,24 +1134,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      width: 24,
-                                      height: 24,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFFD05C5C),
-                                        shape: BoxShape.circle,
-
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 0),
-                                        child: Icon(
-                                          Icons.clear,
-                                          color: FlutterFlowTheme.of(context)
-                                              .white,
-                                          size: 22,
-                                        ),
-                                      ),
+                                    Icon(
+                                      Manzel.cancelled,
+                                      color: Color(0xFFD05C5C),
+                                      size: 24,
                                     ),
                                   ],
                                 ),
@@ -1227,23 +1200,10 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      width: 24,
-                                      height: 24,
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFFD05C5C),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 5),
-                                        child: Icon(
-                                          Icons.clear,
-                                          color: FlutterFlowTheme.of(context)
-                                              .white,
-                                          size: 22,
-                                        ),
-                                      ),
+                                    Icon(
+                                      Manzel.cancelled,
+                                      color: Color(0xFFD05C5C),
+                                      size: 24,
                                     ),
                                   ],
                                 ),
@@ -1334,7 +1294,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   valueOrDefault<String>(
                                     getJsonField(
                                       columnOrderDetailsResponse.jsonBody,
-                                      r'''$.result.property_data.property_images[0].url''',
+                                      r'''$.result.property_data.property_images[0].formats.medium.url''',
                                     ),
                                     'https://media.istockphoto.com/photos/luxurious-beautiful-modern-villa-with-front-yard-garden-picture-id1283532143?b=1&k=20&m=1283532143&s=170667a&w=0&h=Vd_WTUbHxnc_NZNwMr1UnS0xVW1FjtUxKJUtCoL4Fgk=',
                                   ),
@@ -1371,9 +1331,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Icon(
-                                  Icons.location_on_outlined,
+                                  Manzel.location_pin,
                                   color: Colors.black,
-                                  size: 18,
+                                  size: 12,
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -1449,24 +1409,24 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.end,
+                                        CrossAxisAlignment.center,
                                         children: [
                                           Padding(
                                             padding:
                                             EdgeInsetsDirectional.fromSTEB(
-                                                0, 0, 9, 0),
+                                                0, 4, 9, 0),
                                             child: Icon(
-                                              Icons.single_bed,
+                                              Manzel.bed,
                                               color:
                                               FlutterFlowTheme.of(context)
                                                   .primaryColor,
-                                              size: 24,
+                                              size: 11.7,
                                             ),
                                           ),
                                           Padding(
                                             padding:
                                             EdgeInsetsDirectional.fromSTEB(
-                                                0, 0, 20, 0),
+                                                9, 0, 20, 0),
                                             child: Text(
                                               valueOrDefault<String>(
                                                 getJsonField(
@@ -1496,11 +1456,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0, 0, 9, 0),
                                             child: Icon(
-                                              Icons.bathtub_outlined,
+                                              Manzel.bath,
                                               color:
                                               FlutterFlowTheme.of(context)
                                                   .primaryColor,
-                                              size: 24,
+                                              size:18,
                                             ),
                                           ),
                                           Padding(
@@ -1535,11 +1495,11 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             EdgeInsetsDirectional.fromSTEB(
                                                 0, 0, 9, 0),
                                             child: Icon(
-                                              Icons.design_services_outlined,
+                                              Manzel.size,
                                               color:
                                               FlutterFlowTheme.of(context)
                                                   .primaryColor,
-                                              size: 24,
+                                              size: 16,
                                             ),
                                           ),
                                           Text(
