@@ -150,6 +150,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       lang: FFAppState().locale,
     );
   }
+  @override
+  void dispose() {
+    pageViewController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

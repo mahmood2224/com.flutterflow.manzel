@@ -956,16 +956,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       onTap: () {
                                         if (videoPlayers[propertiesIndex] !=
                                             null) {
-                                          if (videoPlayers[propertiesIndex]!
+                                          if (videoPlayers[propertiesIndex]
                                                   .value
                                                   .volume >
                                               0) {
                                             videoPlayers[propertiesIndex]
-                                                ?.setVolume(0);
+                                                .setVolume(0);
                                             isMuted.value = true;
                                           } else {
                                             videoPlayers[propertiesIndex]
-                                                ?.setVolume(100);
+                                                .setVolume(100);
                                             isMuted.value = false;
                                           }
                                           //   setState(() {
