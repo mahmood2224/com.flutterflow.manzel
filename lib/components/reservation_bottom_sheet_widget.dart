@@ -152,9 +152,28 @@ class _ReservationBottomSheetWidgetState
                   paymentMethodValue, ParamType.String),
               'transactionId':
               serializeParam(tapSDKResult!['charge_id'], ParamType.String),
+              'transactionCase': serializeParam("SUCCESS", ParamType.String),
             }.withoutNulls,
           );
 
+        }else{
+          Navigator.pop(context);
+          logFirebaseEvent('Button_Navigate-To');
+          context.goNamed(
+            'Confirmation',
+            queryParams: {
+              'propertyId': serializeParam(
+                  widget.propertyId, ParamType.int),
+              'orderId': serializeParam(
+                  widget.orderId,
+                  ParamType.int),
+              'paymentMethod': serializeParam(
+                  paymentMethodValue, ParamType.String),
+              'transactionId':
+              serializeParam(tapSDKResult!['charge_id'], ParamType.String),
+              'transactionCase': serializeParam("FAILURE", ParamType.String),
+            }.withoutNulls,
+          );
         }
         entry!.remove();
         break;
