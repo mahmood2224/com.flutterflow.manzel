@@ -3187,6 +3187,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     ),
                                                     propertyId:
                                                         widget.propertyId,
+                                                        orderId: addOrderApiResponse?.jsonBody['result'],
                                                   ),
                                                 ),
                                               );
@@ -3194,16 +3195,16 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           ).then((value) => setState(() {}));
                                           //.then((value) => _chewieController?.play());
                                         }
-                                        if (addOrderApiResponse!.statusCode ==
+                                    else    if (addOrderApiResponse!.statusCode ==
                                             399) {
-                                          Navigator.pop(context);
+                                       //   Navigator.pop(context);
                                           logFirebaseEvent(
                                               'Button_Show-Snack-Bar');
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
                                               content: Text(
-                                                "Some issue is there",
+                                                addOrderApiResponse!.jsonBody['error'],
                                                 style: TextStyle(
                                                   color: FlutterFlowTheme.of(
                                                           context)
@@ -3218,9 +3219,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             ),
                                           );
                                         }
-                                        if (addOrderApiResponse!.statusCode ==
+                                     else   if (addOrderApiResponse!.statusCode ==
                                             400) {
-                                          Navigator.pop(context);
+                                          //Navigator.pop(context);
                                           logFirebaseEvent(
                                               'Button_Show-Snack-Bar');
                                           ScaffoldMessenger.of(context)
@@ -3244,7 +3245,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             ),
                                           );
                                         } else {
-                                          Navigator.pop(context);
+                                         // Navigator.pop(context);
                                           logFirebaseEvent(
                                               'Button_Show-Snack-Bar');
                                           ScaffoldMessenger.of(context)
@@ -3286,7 +3287,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 'reserved_Bottom-Sheet');
                                             addOrderApiResponse =
                                                 await AddOrderCall.call(
-                                                    propertyId: widget!
+                                                    propertyId: widget
                                                         .propertyId
                                                         .toString(),
                                                     userId: currentUserReference
@@ -3332,17 +3333,17 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   (value) => setState(() {}));
                                               //.then((value) => _chewieController?.play());
                                             }
-                                            if (addOrderApiResponse!
+                                          else  if (addOrderApiResponse!
                                                     .statusCode ==
                                                 399) {
-                                              Navigator.pop(context);
+                                              //Navigator.pop(context);
                                               logFirebaseEvent(
                                                   'Button_Show-Snack-Bar');
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
                                                   content: Text(
-                                                    "Some issue is there",
+                                                    addOrderApiResponse!.jsonBody['error'],
                                                     style: TextStyle(
                                                       color:
                                                           FlutterFlowTheme.of(
@@ -3359,10 +3360,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 ),
                                               );
                                             }
-                                            if (addOrderApiResponse!
+                                         else   if (addOrderApiResponse!
                                                     .statusCode ==
                                                 400) {
-                                              Navigator.pop(context);
+                                            //  Navigator.pop(context);
                                               logFirebaseEvent(
                                                   'Button_Show-Snack-Bar');
                                               ScaffoldMessenger.of(context)
