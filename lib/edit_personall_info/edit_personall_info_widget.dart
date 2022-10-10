@@ -295,7 +295,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           style:
                               FlutterFlowTheme.of(context).subtitle1.override(
                                     fontFamily: 'AvenirArabic',
-                                    color: Color(0xFF2971FB),
+                                    color: FlutterFlowTheme.of(context).primaryColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     decoration: TextDecoration.underline,
@@ -382,7 +382,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                           width: 50,
                                           height: 50,
                                           child: SpinKitRipple(
-                                            color: Color(0xFF2971FB),
+                                            color: FlutterFlowTheme.of(context).primaryColor,
                                             size: 50,
                                           ),
                                         ),
@@ -528,7 +528,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                           width: 50,
                                           height: 50,
                                           child: SpinKitRipple(
-                                            color: Color(0xFF2971FB),
+                                            color: FlutterFlowTheme.of(context).primaryColor,
                                             size: 50,
                                           ),
                                         ),
@@ -854,7 +854,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       emailController!.text != '') &&
                                   (fullNameController!.text != null &&
                                       fullNameController!.text != ''))
-                              ? Color(0xFF2971FB)
+                              ? FlutterFlowTheme.of(context).primaryColor
                               : Color(0xFF8C8C8C),
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle1.override(

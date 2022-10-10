@@ -183,7 +183,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                       width: 50,
                       height: 50,
                       child: SpinKitRipple(
-                        color: Color(0xFF2971FB),
+                        color:FlutterFlowTheme.of(context).primaryColor,
                         size: 50,
                       ),
                     ),
@@ -416,7 +416,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     //     options: FFButtonOptions(
                                     //       width: 215,
                                     //       height: 40,
-                                    //       color: Color(0xFF2971FB),
+                                    //       color: FlutterFlowTheme.of(context).primaryColor,
                                     //       textStyle: FlutterFlowTheme.of(context)
                                     //           .subtitle2
                                     //           .override(
@@ -717,7 +717,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               .bodyText1
                                                                               .override(
                                                                                 fontFamily: 'AvenirArabic',
-                                                                                color: Color(0xFF2971FB),
+                                                                                color: FlutterFlowTheme.of(context).primaryColor,
                                                                                 fontSize: 10,
                                                                                 fontWeight: FontWeight.w500,
                                                                                 useGoogleFonts: false,
@@ -755,7 +755,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           color:
-                                                                              Color(0xFFD05C5C),
+                                                                          FlutterFlowTheme.of(context).secondaryRed,
                                                                           borderRadius:
                                                                               BorderRadius.circular(5),
                                                                         ),
@@ -805,7 +805,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           color:
-                                                                              Color(0xFFD05C5C),
+                                                                          FlutterFlowTheme.of(context).secondaryRed,
                                                                           borderRadius:
                                                                               BorderRadius.circular(5),
                                                                         ),
@@ -960,7 +960,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           color:
-                                                                              Color(0xFFD05C5C),
+                                                                          FlutterFlowTheme.of(context).secondaryRed,
                                                                           borderRadius:
                                                                               BorderRadius.circular(5),
                                                                         ),
@@ -1005,8 +1005,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           22,
                                                                       decoration:
                                                                           BoxDecoration(
-                                                                        color: Color(
-                                                                            0xFFF0A637),
+                                                                        color: FlutterFlowTheme.of(context).primaryOrange,
                                                                         borderRadius:
                                                                             BorderRadius.circular(5),
                                                                       ),
@@ -1937,9 +1936,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             MaterialStateProperty.resolveWith<Color?>(
                                                                           (states) {
                                                                             if (states.contains(MaterialState.disabled)) {
-                                                                              return Color(0xFF2971FB);
+                                                                              return FlutterFlowTheme.of(context).primaryColor;
                                                                             }
-                                                                            return Color(0xFF2971FB);
+                                                                            return FlutterFlowTheme.of(context).primaryColor;
                                                                           },
                                                                         ),
                                                                         shape: MaterialStateProperty.all<

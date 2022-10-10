@@ -340,9 +340,9 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                             backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                                   (states) {
                                 if (states.contains(MaterialState.disabled)) {
-                                  return Color(0xFF2971FB);
+                                  return FlutterFlowTheme.of(context).primaryColor;
                                 }
-                                return Color(0xFF2971FB);
+                                return FlutterFlowTheme.of(context).primaryColor;
                               },
                             ),
 

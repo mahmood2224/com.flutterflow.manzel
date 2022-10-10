@@ -138,7 +138,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                             //     options: FFButtonOptions(
                             //       width: 215,
                             //       height: 40,
-                            //       color: Color(0xFF2971FB),
+                            //       color: FlutterFlowTheme.of(context).primaryColor,
                             //       textStyle: FlutterFlowTheme.of(context)
                             //           .subtitle2
                             //           .override(
@@ -213,7 +213,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       width: 50,
                                       height: 50,
                                       child: SpinKitRipple(
-                                        color: Color(0xFF2971FB),
+                                        color: FlutterFlowTheme.of(context).primaryColor,
                                         size: 50,
                                       ),
                                     ),
@@ -413,7 +413,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               width: 202,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
-                                                                                color: Color(0xFFF0A637),
+                                                                                color: FlutterFlowTheme.of(context).primaryOrange,
                                                                                 borderRadius: BorderRadius.circular(7),
                                                                               ),
                                                                               child: Row(
@@ -477,7 +477,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               width: 89,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
-                                                                                color: Color(0xFF81D05C),
+                                                                                color: FlutterFlowTheme.of(context).secondaryGreen,
                                                                                 borderRadius: BorderRadius.circular(7),
                                                                               ),
                                                                               child: Row(
@@ -514,7 +514,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               width: 125,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
-                                                                                color: Color(0xFFF0A637),
+                                                                                color: FlutterFlowTheme.of(context).primaryOrange,
                                                                                 borderRadius: BorderRadius.circular(7),
                                                                               ),
                                                                               child: Row(
@@ -546,7 +546,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               width: 74,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
-                                                                                color: Color(0xFFD05C5C),
+                                                                                color: FlutterFlowTheme.of(context).secondaryRed,
                                                                                 borderRadius: BorderRadius.circular(7),
                                                                               ),
                                                                               child: Row(
@@ -615,7 +615,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               width: 74,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
-                                                                                color: Color(0xFFD05C5C),
+                                                                                color: FlutterFlowTheme.of(context).secondaryRed,
                                                                                 borderRadius: BorderRadius.circular(7),
                                                                               ),
                                                                               child: Row(
@@ -647,7 +647,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               width: 100,
                                                                               height: 23,
                                                                               decoration: BoxDecoration(
-                                                                                color: Color(0xFFD05C5C),
+                                                                                color: FlutterFlowTheme.of(context).secondaryRed,
                                                                                 borderRadius: BorderRadius.circular(7),
                                                                               ),
                                                                               child: Row(
@@ -1141,7 +1141,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       width: 50,
                                       height: 50,
                                       child: SpinKitRipple(
-                                        color: Color(0xFF2971FB),
+                                        color: FlutterFlowTheme.of(context).primaryColor,
                                         size: 50,
                                       ),
                                     ),
@@ -1627,7 +1627,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                         child: Icon(
                                                           Manzel.bookmark,
                                                           color:
-                                                              Color(0xFFD05C5C),
+                                                          FlutterFlowTheme.of(context).secondaryRed,
                                                           size: 24,
                                                         ),
                                                       ),

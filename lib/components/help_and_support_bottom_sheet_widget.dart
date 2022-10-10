@@ -1,4 +1,5 @@
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:flutter/services.dart';
 
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
@@ -109,20 +110,36 @@ class _HelpAndSupportBottomSheetWidgetState
                                       useGoogleFonts: false,
                                     ),
                           ),
-                          Text(
-                            FFLocalizations.of(context).getText(
-                              'hwo08yn2' /* Support@manzel.app */,
+                          InkWell(
+                            onTap: () async {
+                              await Clipboard.setData(
+                                      ClipboardData(text: "Support@manzel.app"))
+                                  .then((_) {
+                                Navigator.pop(context);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(FFAppState().locale ==
+                                                'en'
+                                            ? 'Copied to your clipboard !'
+                                            : 'نسخ إلى الحافظة الخاصة بك')));
+                              });
+                              // copied successfully
+                            },
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'hwo08yn2' /* Support@manzel.app */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'AvenirArabic',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: false,
+                                  ),
                             ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyText1
-                                .override(
-                                  fontFamily: 'AvenirArabic',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
-                                ),
                           ),
                           Text(
                             FFLocalizations.of(context).getText(
@@ -139,20 +156,35 @@ class _HelpAndSupportBottomSheetWidgetState
                         ],
                       ),
                     ),
-                    Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          width: 2,
+                    InkWell(
+                      onTap: () async {
+                        await Clipboard.setData(
+                            ClipboardData(text: "Support@manzel.app"))
+                            .then((_) {
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text(FFAppState().locale ==
+                                      'en'
+                                      ? 'Copied to your clipboard !'
+                                      : 'نسخ إلى الحافظة الخاصة بك')));
+                        });
+                      },
+                      child: Container(
+                        width: 35,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            width: 2,
+                          ),
                         ),
-                      ),
-                      child: Icon(
-                        Icons.email_outlined,
-                        color: Colors.black,
-                        size: 24,
+                        child: Icon(
+                          Icons.email_outlined,
+                          color: Colors.black,
+                          size: 24,
+                        ),
                       ),
                     ),
                   ],

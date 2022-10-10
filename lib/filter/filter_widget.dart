@@ -151,7 +151,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                     width: 50,
                     height: 50,
                     child: SpinKitRipple(
-                      color: Color(0xFF2971FB),
+                      color: FlutterFlowTheme.of(context).primaryColor,
                       size: 50,
                     ),
                   ),
@@ -205,7 +205,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         width: 50,
                                         height: 50,
                                         child: SpinKitRipple(
-                                          color: Color(0xFF2971FB),
+                                          color: FlutterFlowTheme.of(context).primaryColor,
                                           size: 50,
                                         ),
                                       ),
@@ -828,7 +828,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 56,
-                          color: Color(0xFF2971FB),
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle1.override(
                                     fontFamily: 'AvenirArabic',

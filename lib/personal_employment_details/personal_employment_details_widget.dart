@@ -104,7 +104,7 @@ class _PersonalEmploymentDetailsWidgetState
                   width: 338,
                   lineHeight: 4,
                   animation: true,
-                  progressColor: Color(0xFF81D05C),
+                  progressColor: FlutterFlowTheme.of(context).secondaryGreen,
                   backgroundColor: Color(0xFFF8F8F8),
                   barRadius: Radius.circular(6),
                   padding: EdgeInsets.zero,

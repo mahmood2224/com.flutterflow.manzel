@@ -150,7 +150,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                   width: 50,
                   height: 50,
                   child: SpinKitRipple(
-                    color: Color(0xFF2971FB),
+                    color: FlutterFlowTheme.of(context).primaryColor,
                     size: 50,
                   ),
                 ),
@@ -213,7 +213,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'checked'))
                                       Icon(
                                         Manzel.completed,
-                                        color: Color(0xFF7FC15F),
+                                        color: FlutterFlowTheme.of(context).secondaryGreen,
                                         size: 24,
                                       ),
                                     if (functions.orderProcessStatus(
@@ -237,7 +237,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'pending'))
                                       Icon(
                                         Manzel.pending,
-                                        color: Color(0xFFF0A637),
+                                        color: FlutterFlowTheme.of(context).primaryOrange,
                                         size: 24,
                                       ),
                                   ],
@@ -304,7 +304,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         ).toString()))
                                       Icon(
                                         Manzel.completed,
-                                        color: Color(0xFF7FC15F),
+                                        color: FlutterFlowTheme.of(context).secondaryGreen,
                                         size: 24,
                                       ),
                                     if (!functions
@@ -393,7 +393,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                   'checked'))
                                                 Icon(
                                                   Manzel.completed,
-                                                  color: Color(0xFF7FC15F),
+                                                  color: FlutterFlowTheme.of(context).secondaryGreen,
                                                   size: 24,
                                                 ),
                                               if (functions.orderProcessStatus(
@@ -419,7 +419,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                   'pending'))
                                                 Icon(
                                                   Manzel.pending,
-                                                  color: Color(0xFFF0A637),
+                                                  color: FlutterFlowTheme.of(context).primaryOrange,
                                                   size: 24,
                                                 ),
                                             ],
@@ -775,7 +775,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'checked'))
                                       Icon(
                                         Manzel.completed,
-                                        color: Color(0xFF7FC15F),
+                                        color: FlutterFlowTheme.of(context).secondaryGreen,
                                         size: 24,
                                       ),
                                     if (functions.orderProcessStatus(
@@ -799,7 +799,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'pending'))
                                       Icon(
                                         Manzel.pending,
-                                        color: Color(0xFFF0A637),
+                                        color: FlutterFlowTheme.of(context).primaryOrange,
                                         size: 24,
                                       ),
                                   ],
@@ -880,7 +880,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'checked'))
                                       Icon(
                                         Manzel.completed,
-                                        color: Color(0xFF7FC15F),
+                                        color: FlutterFlowTheme.of(context).secondaryGreen,
                                         size: 24,
                                       ),
                                     if (functions.orderProcessStatus(
@@ -904,7 +904,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'pending'))
                                       Icon(
                                         Manzel.pending,
-                                        color: Color(0xFFF0A637),
+                                        color: FlutterFlowTheme.of(context).primaryOrange,
                                         size: 24,
                                       ),
                                   ],
@@ -985,7 +985,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         'checked'))
                                       Icon(
                                         Manzel.completed,
-                                        color: Color(0xFF7FC15F),
+                                        color: FlutterFlowTheme.of(context).secondaryGreen,
                                         size: 24,
                                       ),
                                     if (functions.orderProcessStatus(
@@ -1070,7 +1070,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   children: [
                                      Icon(
             Manzel.cancelled,
-                                        color: Color(0xFFD05C5C),
+                                        color: FlutterFlowTheme.of(context).secondaryRed,
                                         size: 24,
                                       ),
                                   ],
@@ -1136,7 +1136,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   children: [
                                     Icon(
                                       Manzel.cancelled,
-                                      color: Color(0xFFD05C5C),
+                                      color: FlutterFlowTheme.of(context).secondaryRed,
                                       size: 24,
                                     ),
                                   ],
@@ -1202,7 +1202,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   children: [
                                     Icon(
                                       Manzel.cancelled,
-                                      color: Color(0xFFD05C5C),
+                                      color: FlutterFlowTheme.of(context).secondaryRed,
                                       size: 24,
                                     ),
                                   ],
@@ -1335,6 +1335,44 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                   color: Colors.black,
                                   size: 12,
                                 ),
+                                // Padding(
+                                //   padding: EdgeInsetsDirectional.fromSTEB(
+                                //       0, 3, 0, 0),
+                                //   child: Text(
+                                //     valueOrDefault<String>(
+                                //       getJsonField(
+                                //         columnOrderDetailsResponse.jsonBody,
+                                //         r'''$.result.property_data.property_city''',
+                                //       ).toString(),
+                                //       'null',
+                                //     ),
+                                //     style: FlutterFlowTheme.of(context)
+                                //         .bodyText1
+                                //         .override(
+                                //       fontFamily: 'AvenirArabic',
+                                //       fontSize: 12,
+                                //       fontWeight: FontWeight.w300,
+                                //       useGoogleFonts: false,
+                                //     ),
+                                //   ),
+                                // ),
+                                // Padding(
+                                //   padding: EdgeInsetsDirectional.fromSTEB(
+                                //       0, 3, 0, 0),
+                                //   child: Text(
+                                //     FFLocalizations.of(context).getText(
+                                //       'sfe2y1t7' /* ,  */,
+                                //     ),
+                                //     style: FlutterFlowTheme.of(context)
+                                //         .bodyText1
+                                //         .override(
+                                //       fontFamily: 'AvenirArabic',
+                                //       fontSize: 12,
+                                //       fontWeight: FontWeight.w300,
+                                //       useGoogleFonts: false,
+                                //     ),
+                                //   ),
+                                // ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 3, 0, 0),
@@ -1342,45 +1380,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     valueOrDefault<String>(
                                       getJsonField(
                                         columnOrderDetailsResponse.jsonBody,
-                                        r'''$.result.property_data.property_city''',
-                                      ).toString(),
-                                      'null',
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                      fontFamily: 'AvenirArabic',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300,
-                                      useGoogleFonts: false,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 3, 0, 0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'sfe2y1t7' /* ,  */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                      fontFamily: 'AvenirArabic',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w300,
-                                      useGoogleFonts: false,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 3, 0, 0),
-                                  child: Text(
-                                    valueOrDefault<String>(
-                                      getJsonField(
-                                        columnOrderDetailsResponse.jsonBody,
-                                        r'''$.result.property_data.property_district''',
+                                        r'''$.result.property_data.property_address''',
                                       ).toString(),
                                       'null',
                                     ),
@@ -1585,12 +1585,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     .subtitle2
                                     .override(
                                   fontFamily: 'AvenirArabic',
-                                  color: Color(0xFF2971FB),
+                                  color: FlutterFlowTheme.of(context).primaryColor,
                                   fontWeight: FontWeight.w800,
                                   useGoogleFonts: false,
                                 ),
                                 borderSide: BorderSide(
-                                  color: Color(0xFF2971FB),
+                                  color: FlutterFlowTheme.of(context).primaryColor,
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(8),

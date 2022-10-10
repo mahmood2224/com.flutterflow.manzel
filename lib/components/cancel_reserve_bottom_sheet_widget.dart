@@ -108,7 +108,7 @@ class _CancelReserveBottomSheetWidgetState
               color: Color(0xB2F5F5F5),
               textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                     fontFamily: 'AvenirArabic',
-                    color: Color(0xFFD05C5C),
+                    color: FlutterFlowTheme.of(context).secondaryRed,
                     useGoogleFonts: false,
                   ),
               borderSide: BorderSide(

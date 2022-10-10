@@ -171,7 +171,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                   width: 50,
                   height: 50,
                   child: SpinKitRipple(
-                    color: Color(0xFF2971FB),
+                    color: FlutterFlowTheme.of(context).primaryColor,
                     size: 50,
                   ),
                 ),
@@ -760,8 +760,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           //     height: 26,
                                                           //     decoration:
                                                           //         BoxDecoration(
-                                                          //       color: Color(
-                                                          //           0xFF81D05C),
+                                                          //       color: FlutterFlowTheme.of(context).secondaryGreen
+                                                          //           ,
                                                           //       borderRadius:
                                                           //           BorderRadius
                                                           //               .circular(
@@ -1285,8 +1285,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           .override(
                                                             fontFamily:
                                                                 'AvenirArabic',
-                                                            color: Color(
-                                                                0xFF2971FB),
+                                                            color: FlutterFlowTheme.of(context).primaryColor,
                                                             fontSize: 13,
                                                             fontWeight:
                                                                 FontWeight.bold,

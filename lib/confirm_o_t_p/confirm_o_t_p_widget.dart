@@ -224,7 +224,7 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
                       options: FFButtonOptions(
                         width: 343,
                         height: 56,
-                        color: Color(0xFF2971FB),
+                        color: FlutterFlowTheme.of(context).primaryColor,
                         textStyle:
                             FlutterFlowTheme.of(context).subtitle2.override(
                                   fontFamily: 'Sofia Pro By Khuzaimah',
