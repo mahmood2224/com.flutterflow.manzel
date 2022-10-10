@@ -97,7 +97,7 @@ class _ReservationBottomSheetWidgetState
           // select payments you need to show [Default is all, and you can choose between WEB-CARD-APPLEPAY ]
           paymentType: paymentType == 0 ? PaymentType.CARD : PaymentType.DEVICE,
           // Transaction mode
-          sdkMode: SDKMode.Sandbox);
+          sdkMode: SDKMode.Production);
     } on PlatformException {
       // platformVersion = 'Failed to get platform version.';
     }
@@ -171,21 +171,21 @@ class _ReservationBottomSheetWidgetState
         // if (((transactionApiResponse?.statusCode ?? 200)) ==
         //     200) {
         Navigator.pop(context);
-        logFirebaseEvent('Button_Show-Snack-Bar');
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'Payment Failed',
-                style: TextStyle(
-                  fontFamily: 'Sofia Pro By Khuzaimah',
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,
-                ),
-              ),
-              duration: Duration(milliseconds: 4000),
-              backgroundColor: FlutterFlowTheme.of(context).primaryRed,
-            ));
+        logFirebaseEvent('Button_Navigate-To');
+        context.goNamed(
+          'Confirmation',
+          queryParams: {
+            'propertyId': serializeParam(
+                widget.propertyId, ParamType.int),
+            'orderId': serializeParam(
+                widget.orderId,
+                ParamType.int),
+            'paymentMethod': serializeParam(
+                paymentMethodValue, ParamType.String),
+            'transactionId':
+            serializeParam(tapSDKResult!['charge_id'], ParamType.String),
+          }.withoutNulls,
+        );
         entry!.remove();
    // }
           break;

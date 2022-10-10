@@ -173,10 +173,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Image.asset(
-                              'assets/images/manzel_logo.png',
+                              'assets/images/manzel_logo_white.png',
                               width: 43,
                               height: 31,
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fitHeight,
                             ),
                             if (loggedIn)
                               StreamBuilder<List<NotificationsRecord>>(
@@ -1627,6 +1627,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   @override
   void dispose() {
+    videoPlayers.clear();
     _pagingController.dispose();
     super.dispose();
   }
