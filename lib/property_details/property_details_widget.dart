@@ -54,10 +54,12 @@ class PropertyDetailsWidget extends StatefulWidget {
     Key? key,
     this.propertyId,
     this.path,
+    this.jsonData,
   }) : super(key: key);
 
   final int? propertyId;
   final String? path;
+  final dynamic? jsonData;
 
   @override
   _PropertyDetailsWidgetState createState() => _PropertyDetailsWidgetState();
@@ -163,14 +165,16 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: FutureBuilder<ApiCallResponse>(
-          future: PropertyCall.call(
-            propertyId: widget.propertyId,
-            locale: FFAppState().locale,
-          ),
+        // child: FutureBuilder<ApiCallResponse>(
+        //   future: PropertyCall.call(
+        //     propertyId: widget.propertyId,
+        //     locale: FFAppState().locale,
+        //   ),
+        child : FutureBuilder<Map<String,dynamic>>(
+          future: widget.jsonData,
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
-            if (!snapshot.hasData) {
+            if (!widget.jsonData.hasData) {
               return Center(
                 child: SizedBox(
                   width: 50,
@@ -182,7 +186,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                 ),
               );
             }
-            final columnPropertyResponse = snapshot.data!;
+            final columnPropertyResponse = widget.jsonData;
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: [

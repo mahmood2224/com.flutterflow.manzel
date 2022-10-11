@@ -217,6 +217,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'propertyDetails',
               builder: (context, params) => PropertyDetailsWidget(
                   propertyId: params.getParam('propertyId', ParamType.int),
+                  jsonData: params.getParam('jsonData', ParamType.JSON),
                   path: params.getParam('path', ParamType.String)),
             ),
             FFRoute(

@@ -571,6 +571,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       r'''$.id''',
                                     ),
                                     ParamType.int),
+                                'jsonData':serializeParam(
+                                    getJsonField(
+                                      propertiesItem,
+                                      r'''$.attributes''',
+                                    ),
+                                    ParamType.JSON),
                                 'path': serializeParam(
                                     getJsonField(
                                       propertiesItem,
