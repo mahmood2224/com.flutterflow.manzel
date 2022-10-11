@@ -190,7 +190,7 @@ class _ChatWidgetState extends State<ChatWidget>
                 user: _user,
               ),
               child: SpinKitRipple(
-                color: Color(0xFF2971FB),
+                color: FlutterFlowTheme.of(context).primaryColor,
                 size: 50,
               ),
             ),

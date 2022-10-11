@@ -86,7 +86,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                   context.pop();
                 },
                 child: RotatedBox(
-                  quarterTurns: FFAppState().locale=='en'?0:2,
+                  quarterTurns: FFAppState().locale == 'en' ? 0 : 2,
                   child: Icon(
                     Manzel.back_icon,
                     color: Colors.black,
@@ -124,7 +124,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'AvenirArabic',
-                          color: Color(0xFF2971FB),
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           useGoogleFonts: false,
@@ -134,7 +134,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                     widget.cityName!,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'AvenirArabic',
-                          color: Color(0xFF2971FB),
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           useGoogleFonts: false,
@@ -146,7 +146,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'AvenirArabic',
-                          color: Color(0xFF2971FB),
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           useGoogleFonts: false,
@@ -223,7 +223,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                             width: 50,
                             height: 50,
                             child: SpinKitRipple(
-                              color: Color(0xFF2971FB),
+                              color: FlutterFlowTheme.of(context).primaryColor,
                               size: 50,
                             ),
                           ),
@@ -275,24 +275,33 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                       16, 0, 16, 25),
                                   child: InkWell(
                                     onTap: () async {
-                                      videoPlayers[propertiesIndex+widget.homeScreenLength!].pause();
-                                      logFirebaseEvent(
-                                          'SEARCH_CITY_RESULT_propertyCard_ON_TAP');
-                                      // propertyDetails
-                                      logFirebaseEvent(
-                                          'propertyCard_propertyDetails');
+                                      if (!functions.conditionalVisibility(
+                                          getJsonField(
+                                            propertiesItem,
+                                            r'''$.attributes.property_status''',
+                                          ).toString(),
+                                          'Soon')) {
+                                        videoPlayers[propertiesIndex +
+                                                widget.homeScreenLength!]
+                                            .pause();
+                                        logFirebaseEvent(
+                                            'SEARCH_CITY_RESULT_propertyCard_ON_TAP');
+                                        // propertyDetails
+                                        logFirebaseEvent(
+                                            'propertyCard_propertyDetails');
 
-                                      context.pushNamed(
-                                        'PropertyDetails',
-                                        queryParams: {
-                                          'propertyId': serializeParam(
-                                              getJsonField(
-                                                propertiesItem,
-                                                r'''$.id''',
-                                              ),
-                                              ParamType.int),
-                                        }.withoutNulls,
-                                      );
+                                        context.pushNamed(
+                                          'PropertyDetails',
+                                          queryParams: {
+                                            'propertyId': serializeParam(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.id''',
+                                                ),
+                                                ParamType.int),
+                                          }.withoutNulls,
+                                        );
+                                      }
                                     },
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -448,55 +457,84 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                     r'''$.attributes.video_manifest_uri''',
                                                   )),
                                                   child: ClipRRect(
-                                                    borderRadius: BorderRadius.circular(12),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
                                                     child: Container(
                                                       width:
-                                                      MediaQuery.of(context).size.width *
-                                                          0.95,
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.95,
                                                       height:
-                                                      MediaQuery.of(context).size.height *
-                                                          0.4,
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.4,
                                                       decoration: BoxDecoration(
                                                         borderRadius:
-                                                        BorderRadius.circular(12),
+                                                            BorderRadius
+                                                                .circular(12),
                                                       ),
                                                       child: VisibilityDetector(
-                                                        key: Key(propertiesIndex.toString()),
-                                                        onVisibilityChanged: (visibility) {
+                                                        key: Key(propertiesIndex
+                                                            .toString()),
+                                                        onVisibilityChanged:
+                                                            (visibility) {
                                                           if (visibility.visibleFraction *
-                                                              100 ==
-                                                              100 &&
+                                                                      100 ==
+                                                                  100 &&
                                                               this.mounted) {
-                                                            if(!(videoPlayers[widget.homeScreenLength!+propertiesIndex].value.isInitialized)) {
-                                                              videoPlayers[widget.homeScreenLength!+propertiesIndex]
+                                                            if (!(videoPlayers[widget
+                                                                        .homeScreenLength! +
+                                                                    propertiesIndex]
+                                                                .value
+                                                                .isInitialized)) {
+                                                              videoPlayers[widget
+                                                                          .homeScreenLength! +
+                                                                      propertiesIndex]
                                                                   .initialize()
-                                                                  .then((value) {
-                                                                currentPropertyindex = propertiesIndex;
-                                                                videoPlayers[widget.homeScreenLength!+propertiesIndex]
+                                                                  .then(
+                                                                      (value) {
+                                                                currentPropertyindex =
+                                                                    propertiesIndex;
+                                                                videoPlayers[widget
+                                                                            .homeScreenLength! +
+                                                                        propertiesIndex]
                                                                     .play();
-                                                                isPaused = false;
+                                                                isPaused =
+                                                                    false;
                                                                 isMuted.value
-                                                                    ? videoPlayers[
-                                                                widget.homeScreenLength!+propertiesIndex]
-                                                                    .setVolume(0)
-                                                                    : videoPlayers[
-                                                                widget.homeScreenLength!+propertiesIndex]
-                                                                    .setVolume(100);
+                                                                    ? videoPlayers[widget.homeScreenLength! +
+                                                                            propertiesIndex]
+                                                                        .setVolume(
+                                                                            0)
+                                                                    : videoPlayers[widget.homeScreenLength! +
+                                                                            propertiesIndex]
+                                                                        .setVolume(
+                                                                            100);
                                                                 setState(() {
-                                                                  videoPlayers.forEach((otherPlayer) {
-                                                                    if (otherPlayer != videoPlayers[widget.homeScreenLength!+propertiesIndex]) {
-
-
-                                                                      if(otherPlayer.value.isInitialized) {
-                                                                        otherPlayer.pause();
+                                                                  videoPlayers
+                                                                      .forEach(
+                                                                          (otherPlayer) {
+                                                                    if (otherPlayer !=
+                                                                        videoPlayers[widget.homeScreenLength! +
+                                                                            propertiesIndex]) {
+                                                                      if (otherPlayer
+                                                                          .value
+                                                                          .isInitialized) {
+                                                                        otherPlayer
+                                                                            .pause();
                                                                         // var dataSource = otherPlayer.dataSource;
                                                                         // otherPlayer.dispose();
                                                                         // otherPlayer =
                                                                         //     VideoPlayerController.network(dataSource);
 
-                                                                      }
-                                                                      else{
-                                                                        otherPlayer.initialize().then((value) => otherPlayer.pause());
+                                                                      } else {
+                                                                        otherPlayer
+                                                                            .initialize()
+                                                                            .then((value) =>
+                                                                                otherPlayer.pause());
                                                                       }
                                                                     }
                                                                   });
@@ -539,23 +577,38 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                               //   }
                                                               // });
                                                             } else {
-                                                              videoPlayers[widget.homeScreenLength!+propertiesIndex]
+                                                              videoPlayers[widget
+                                                                          .homeScreenLength! +
+                                                                      propertiesIndex]
                                                                   .play();
                                                               isPaused = false;
                                                               isMuted.value
                                                                   ? videoPlayers[
-                                                              widget.homeScreenLength!+propertiesIndex]
-                                                                  .setVolume(0)
+                                                                          widget.homeScreenLength! +
+                                                                              propertiesIndex]
+                                                                      .setVolume(
+                                                                          0)
                                                                   : videoPlayers[
-                                                              widget.homeScreenLength!+propertiesIndex]
-                                                                  .setVolume(100);
-                                                              currentPropertyindex = widget.homeScreenLength!+propertiesIndex;
+                                                                          widget.homeScreenLength! +
+                                                                              propertiesIndex]
+                                                                      .setVolume(
+                                                                          100);
+                                                              currentPropertyindex =
+                                                                  widget.homeScreenLength! +
+                                                                      propertiesIndex;
                                                               setState(() {
-                                                                videoPlayers.forEach((otherPlayer) {
-
-                                                                  if (otherPlayer != videoPlayers[widget.homeScreenLength!+propertiesIndex]) {
-                                                                    if (otherPlayer.value.isInitialized) {
-                                                                      otherPlayer.pause();
+                                                                videoPlayers
+                                                                    .forEach(
+                                                                        (otherPlayer) {
+                                                                  if (otherPlayer !=
+                                                                      videoPlayers[
+                                                                          widget.homeScreenLength! +
+                                                                              propertiesIndex]) {
+                                                                    if (otherPlayer
+                                                                        .value
+                                                                        .isInitialized) {
+                                                                      otherPlayer
+                                                                          .pause();
                                                                       // var dataSource = otherPlayer.dataSource;
                                                                       // otherPlayer.dispose();
                                                                       // otherPlayer =
@@ -575,9 +628,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                           // debugPrint(
                                                           //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
                                                         },
-                                                        child: FlutterFlowVideoPlayer(
-
-
+                                                        child:
+                                                            FlutterFlowVideoPlayer(
                                                           // videoControllerSet =
                                                           //     videoControllerValue;
                                                           //
@@ -597,26 +649,29 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                           //     videocontrollerMap['0'];
                                                           //
 
-                                                          path:
-                                                          getJsonField(
+                                                          path: getJsonField(
                                                             propertiesItem,
                                                             r'''$.attributes.video_manifest_uri''',
                                                           ),
-                                                          videoType: VideoType.network,
-                                                          width: MediaQuery.of(context)
-                                                              .size
-                                                              .width *
+                                                          videoType:
+                                                              VideoType.network,
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
                                                               95,
-                                                          height: MediaQuery.of(context)
-                                                              .size
-                                                              .width /
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
                                                               1.8,
                                                           aspectRatio: 1.70,
                                                           autoPlay: false,
                                                           looping: true,
                                                           showControls: false,
                                                           allowFullScreen: true,
-                                                          allowPlaybackSpeedMenu: false,
+                                                          allowPlaybackSpeedMenu:
+                                                              false,
                                                         ),
                                                       ),
                                                     ),
@@ -631,7 +686,10 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       .fromSTEB(0, 12, 15, 0),
                                                   child: InkWell(
                                                     onTap: () async {
-                                                      videoPlayers[propertiesIndex+widget.homeScreenLength!].pause();
+                                                      videoPlayers[propertiesIndex +
+                                                              widget
+                                                                  .homeScreenLength!]
+                                                          .pause();
                                                       logFirebaseEvent(
                                                           'SEARCH_CITY_RESULT_Container_0oy6ukkp_ON');
                                                       if (!loggedIn) {
@@ -643,25 +701,26 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       }
                                                     },
                                                     child: Container(
-                                                      width: 40,
-                                                      height: 40,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            Color(0x4D000000),
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child : Icon(
-                                                        Manzel.favorite,
-                                                        color: Colors.white,
-                                                        size: 15,
-                                                      )
-                                                    ),
+                                                        width: 40,
+                                                        height: 40,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              Color(0x4D000000),
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        child: Icon(
+                                                          Manzel.favorite,
+                                                          color: Colors.white,
+                                                          size: 15,
+                                                        )),
                                                   ),
                                                 ),
                                               ),
                                               Align(
-                                                alignment:
-                                                    AlignmentDirectional(-0.9, 1),
+                                                alignment: AlignmentDirectional(
+                                                    -0.9, 1),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 0, 18, 18),
@@ -693,28 +752,35 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                 ),
                                               ),
                                               Align(
-                                                alignment: AlignmentDirectional(0, 0),
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
                                                 child: InkWell(
                                                   onTap: () {
                                                     //print("pause value>>>>>>>>>>>>> $isPaused");
                                                     isPaused =
-                                                    isPaused ? false : true;
+                                                        isPaused ? false : true;
 
                                                     isPaused
-                                                        ? videoPlayers[widget.homeScreenLength!+propertiesIndex]
-                                                        .pause()
-                                                        : videoPlayers[widget.homeScreenLength!+propertiesIndex]
-                                                        .play();
-                                                    setState(() {
-
-                                                    });
+                                                        ? videoPlayers[widget
+                                                                    .homeScreenLength! +
+                                                                propertiesIndex]
+                                                            .pause()
+                                                        : videoPlayers[widget
+                                                                    .homeScreenLength! +
+                                                                propertiesIndex]
+                                                            .play();
+                                                    setState(() {});
                                                   },
                                                   child: Container(
                                                     width:
-                                                    MediaQuery.of(context).size.width,
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
                                                     height:
-                                                    MediaQuery.of(context).size.height *
-                                                        0.3,
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.3,
                                                     // color: Colors.transparent,
                                                     // child: ValueListenableBuilder(
                                                     //   builder: (BuildContext context,
@@ -722,24 +788,34 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                     //     return
                                                     child: Center(
                                                       child: Container(
-                                                        constraints: BoxConstraints(minWidth: 50, maxWidth: 50),
-                                                        decoration: BoxDecoration(
+                                                        constraints:
+                                                            BoxConstraints(
+                                                                minWidth: 50,
+                                                                maxWidth: 50),
+                                                        decoration:
+                                                            BoxDecoration(
                                                           color: isPaused
                                                               ? Colors.black
-                                                              .withOpacity(1.0)
+                                                                  .withOpacity(
+                                                                      1.0)
                                                               : Colors.black
-                                                              .withOpacity(0.0),
-                                                          shape: BoxShape.circle,
+                                                                  .withOpacity(
+                                                                      0.0),
+                                                          shape:
+                                                              BoxShape.circle,
                                                         ),
                                                         child: Icon(
                                                           isPaused
-                                                              ? Icons.play_arrow_rounded
+                                                              ? Icons
+                                                                  .play_arrow_rounded
                                                               : Icons.pause,
                                                           color: isPaused
                                                               ? Colors.white
-                                                              .withOpacity(1.0)
+                                                                  .withOpacity(
+                                                                      1.0)
                                                               : Colors.white
-                                                              .withOpacity(0.0),
+                                                                  .withOpacity(
+                                                                      0.0),
                                                           size: 40,
                                                         ),
                                                         // );
@@ -751,44 +827,68 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                 ),
                                               ),
                                               Align(
-                                                alignment: AlignmentDirectional(0, 0),
-                                                child:
-                                                (propertiesIndex??0) == ((currentPropertyindex??0)==0?currentPropertyindex=widget!.homeScreenLength!:currentPropertyindex= currentPropertyindex) - widget.homeScreenLength!
-                                                    ? Container():Container(
-                                                  constraints: BoxConstraints(minWidth: 50, maxWidth: 50),
-                                                  decoration: BoxDecoration(
-                                                    color:Colors.black
-                                                        .withOpacity(1.0),
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: Icon(
-                                                    Icons.play_arrow_rounded,
-                                                    color:  Colors.white
-                                                        .withOpacity(1.0),
-                                                    size: 40,
-                                                  ),
-                                                ),
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: (propertiesIndex ?? 0) ==
+                                                        ((currentPropertyindex ??
+                                                                        0) ==
+                                                                    0
+                                                                ? currentPropertyindex =
+                                                                    widget!
+                                                                        .homeScreenLength!
+                                                                : currentPropertyindex =
+                                                                    currentPropertyindex) -
+                                                            widget
+                                                                .homeScreenLength!
+                                                    ? Container()
+                                                    : Container(
+                                                        constraints:
+                                                            BoxConstraints(
+                                                                minWidth: 50,
+                                                                maxWidth: 50),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.black
+                                                              .withOpacity(1.0),
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        child: Icon(
+                                                          Icons
+                                                              .play_arrow_rounded,
+                                                          color: Colors.white
+                                                              .withOpacity(1.0),
+                                                          size: 40,
+                                                        ),
+                                                      ),
                                               ),
                                               Align(
-                                                alignment: AlignmentDirectional(0.9, 0.8),
+                                                alignment: AlignmentDirectional(
+                                                    0.9, 0.8),
                                                 child: InkWell(
                                                   child: ValueListenableBuilder(
-                                                    builder: (BuildContext context,
-                                                        bool value, Widget? child) {
+                                                    builder:
+                                                        (BuildContext context,
+                                                            bool value,
+                                                            Widget? child) {
                                                       return Container(
                                                         height: 30,
                                                         width: 30,
-                                                        decoration: BoxDecoration(
-                                                          color:
-                                                          Colors.black.withOpacity(0.5),
-                                                          shape: BoxShape.circle,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.black
+                                                              .withOpacity(0.5),
+                                                          shape:
+                                                              BoxShape.circle,
                                                         ),
                                                         child: Icon(
                                                           isMuted.value
-                                                              ? Icons.volume_off_rounded
-                                                              : Icons.volume_up_rounded,
-                                                          color:
-                                                          Colors.white.withOpacity(1.0),
+                                                              ? Icons
+                                                                  .volume_off_rounded
+                                                              : Icons
+                                                                  .volume_up_rounded,
+                                                          color: Colors.white
+                                                              .withOpacity(1.0),
                                                           size: 20,
                                                         ),
                                                       );
@@ -796,17 +896,24 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                     valueListenable: isMuted,
                                                   ),
                                                   onTap: () {
-                                                    if (videoPlayers[propertiesIndex] !=
+                                                    if (videoPlayers[
+                                                            propertiesIndex] !=
                                                         null) {
-                                                      if (videoPlayers[widget.homeScreenLength!+propertiesIndex]!
-                                                          .value
-                                                          .volume >
+                                                      if (videoPlayers[widget
+                                                                      .homeScreenLength! +
+                                                                  propertiesIndex]!
+                                                              .value
+                                                              .volume >
                                                           0) {
-                                                        videoPlayers[widget.homeScreenLength!+propertiesIndex]
+                                                        videoPlayers[widget
+                                                                    .homeScreenLength! +
+                                                                propertiesIndex]
                                                             ?.setVolume(0);
                                                         isMuted.value = true;
                                                       } else {
-                                                        videoPlayers[widget.homeScreenLength!+propertiesIndex]
+                                                        videoPlayers[widget
+                                                                    .homeScreenLength! +
+                                                                propertiesIndex]
                                                             ?.setVolume(100);
                                                         isMuted.value = false;
                                                       }
@@ -849,7 +956,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                               //       width: 80,
                                               //       height: 26,
                                               //       decoration: BoxDecoration(
-                                              //         color: Color(0xFF81D05C),
+                                              //         color: FlutterFlowTheme.of(context).secondaryGreen,
                                               //         borderRadius:
                                               //         BorderRadius.circular(7),
                                               //       ),
@@ -886,100 +993,123 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                               //       ),
                                               //     ),
                                               //   ),
-                                              if (functions.conditionalVisibility(
-                                                  getJsonField(
-                                                    propertiesItem,
-                                                    r'''$.attributes.property_status''',
-                                                  ).toString(),
-                                                  'Booked'))
+                                              if (functions
+                                                  .conditionalVisibility(
+                                                      getJsonField(
+                                                        propertiesItem,
+                                                        r'''$.attributes.property_status''',
+                                                      ).toString(),
+                                                      'Booked'))
                                                 Align(
                                                   alignment:
-                                                  AlignmentDirectional(-0.85, -0.8),
+                                                      AlignmentDirectional(
+                                                          -0.85, -0.8),
                                                   child: Container(
                                                     width: 80,
                                                     height: 26,
                                                     decoration: BoxDecoration(
                                                       color: Color(0xFFD7D7D7),
                                                       borderRadius:
-                                                      BorderRadius.circular(7),
+                                                          BorderRadius.circular(
+                                                              7),
                                                     ),
                                                     child: Row(
-                                                      mainAxisSize: MainAxisSize.max,
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
                                                       mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Padding(
-                                                          padding: EdgeInsetsDirectional
-                                                              .fromSTEB(10, 1, 10, 1),
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(10,
+                                                                      1, 10, 1),
                                                           child: Text(
-                                                            FFLocalizations.of(context)
+                                                            FFLocalizations.of(
+                                                                    context)
                                                                 .getText(
                                                               'qtso45vv' /* Booked */,
                                                             ),
-                                                            style:
-                                                            FlutterFlowTheme.of(context)
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .bodyText1
                                                                 .override(
-                                                              fontFamily:
-                                                              'AvenirArabic',
-                                                              color: FlutterFlowTheme
-                                                                  .of(context)
-                                                                  .white,
-                                                              fontSize: 13,
-                                                              fontWeight:
-                                                              FontWeight.w500,
-                                                              useGoogleFonts: false,
-                                                            ),
+                                                                  fontFamily:
+                                                                      'AvenirArabic',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .white,
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
                                                           ),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
                                                 ),
-                                              if (functions.conditionalVisibility(
-                                                  getJsonField(
-                                                    propertiesItem,
-                                                    r'''$.attributes.property_status''',
-                                                  ).toString(),
-                                                  'Soon'))
+                                              if (functions
+                                                  .conditionalVisibility(
+                                                      getJsonField(
+                                                        propertiesItem,
+                                                        r'''$.attributes.property_status''',
+                                                      ).toString(),
+                                                      'Soon'))
                                                 Align(
                                                   alignment:
-                                                  AlignmentDirectional(-0.85, -0.8),
+                                                      AlignmentDirectional(
+                                                          -0.85, -0.8),
                                                   child: Container(
                                                     width: 80,
                                                     height: 26,
                                                     decoration: BoxDecoration(
-                                                      color: Color(0xFF2971FB),
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
                                                       borderRadius:
-                                                      BorderRadius.circular(7),
+                                                          BorderRadius.circular(
+                                                              7),
                                                     ),
                                                     child: Row(
-                                                      mainAxisSize: MainAxisSize.max,
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
                                                       mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Padding(
-                                                          padding: EdgeInsetsDirectional
-                                                              .fromSTEB(10, 1, 10, 1),
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(10,
+                                                                      1, 10, 1),
                                                           child: Text(
-                                                            FFLocalizations.of(context)
+                                                            FFLocalizations.of(
+                                                                    context)
                                                                 .getText(
                                                               'juw40663' /* Coming soon */,
                                                             ),
-                                                            style:
-                                                            FlutterFlowTheme.of(context)
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .bodyText1
                                                                 .override(
-                                                              fontFamily:
-                                                              'AvenirArabic',
-                                                              color: FlutterFlowTheme
-                                                                  .of(context)
-                                                                  .white,
-                                                              fontSize: 13,
-                                                              fontWeight:
-                                                              FontWeight.w500,
-                                                              useGoogleFonts: false,
-                                                            ),
+                                                                  fontFamily:
+                                                                      'AvenirArabic',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .white,
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
                                                           ),
                                                         ),
                                                       ],
@@ -1179,8 +1309,9 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                         .override(
                                                           fontFamily:
                                                               'Sofia Pro By Khuzaimah',
-                                                          color:
-                                                              Color(0xFF2971FB),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
                                                           fontSize: 11,
                                                           fontWeight:
                                                               FontWeight.w500,
@@ -1240,8 +1371,9 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                         .override(
                                                           fontFamily:
                                                               'Sofia Pro By Khuzaimah',
-                                                          color:
-                                                              Color(0xFF2971FB),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
                                                           fontSize: 24,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -1261,20 +1393,23 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       ),
                                                       textAlign:
                                                           TextAlign.start,
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyText1
-                                                          .override(
-                                                            fontFamily:
-                                                                'AvenirArabic',
-                                                            color: Color(
-                                                                0xFF2971FB),
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            useGoogleFonts:
-                                                                false,
-                                                          ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'AvenirArabic',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
                                                     ),
                                                   ),
                                                 ],

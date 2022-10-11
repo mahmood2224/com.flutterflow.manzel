@@ -409,7 +409,7 @@ class _ReservationBottomSheetWidgetState
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'AvenirArabic',
-                          color: Color(0xFF2971FB),
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           fontSize: 13,
                           useGoogleFonts: false,
                         ),
@@ -592,7 +592,7 @@ class _ReservationBottomSheetWidgetState
                         width: 50,
                         height: 50,
                         child: SpinKitRipple(
-                          color: Color(0xFF2971FB),
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           size: 50,
                         ),
                       ),

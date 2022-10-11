@@ -28,6 +28,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   OverlayEntry? entry;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
+  int count =0;
 
   @override
   void initState() {
@@ -178,11 +179,23 @@ class _LoginWidgetState extends State<LoginWidget> {
                               maxLength: 9,
                               //buildCounter: Container(),
                               controller: phoneNumberController,
-                              onChanged: (_) => EasyDebounce.debounce(
+                              onChanged: (val) { EasyDebounce.debounce(
                                 'phoneNumberController',
                                 Duration(milliseconds: 2000),
                                 () => setState(() {}),
-                              ),
+                              );
+                              if (count == val.length) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: FlutterFlowTheme.of(context).primaryRed,
+                                        content: Text(FFAppState().locale ==
+                                            'en'
+                                            ? 'Please enter English numbers!'
+                                            : 'الرجاء إدخال الأرقام الإنجليزية!')));
+                              }
+                              count = val.length;
+
+                              },
                               autofocus: true,
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(
@@ -484,9 +497,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                               backgroundColor: MaterialStateProperty.resolveWith<Color?>(
                                     (states) {
                                   if (states.contains(MaterialState.disabled)) {
-                                    return Color(0xFF2971FB);
+                                    return FlutterFlowTheme.of(context).primaryColor;
                                   }
-                                  return Color(0xFF2971FB);
+                                  return FlutterFlowTheme.of(context).primaryColor;
                                 },
                               ),
 

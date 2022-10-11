@@ -235,7 +235,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   .toList()) !=
                                           '0',
                                       shape: BadgeShape.circle,
-                                      badgeColor: Color(0xFFD05C5C),
+                                      badgeColor: FlutterFlowTheme.of(context).secondaryRed,
                                       elevation: 4,
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           7, 7, 7, 7),
@@ -315,24 +315,51 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 10, 0),
-                                        child: Container(
-                                          width: 36,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color: Color(0xFFF4F4F4),
-                                              width: 1,
+                                      InkWell(
+                                        onTap: () async {
+                                          await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                FFLocalizations.of(context).getText(
+                                                          'HomeScreenAlertTitle',
+                                                        ),
+                                              ),
+                                              content: Text(
+                                                FFLocalizations.of(context).getText(
+                                                  'HomeScreenAlertMessage',
+                                                ),
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                          );
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                              0, 0, 10, 0),
+                                          child: Container(
+                                            width: 36,
+                                            height: 36,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                color: Color(0xFFF4F4F4),
+                                                width: 1,
+                                              ),
                                             ),
-                                          ),
-                                          child: Icon(
-                                            Icons.map_outlined,
-                                            color: Colors.black,
-                                            size: 18,
+                                            child: Icon(
+                                              Icons.map_outlined,
+                                              color: Colors.black,
+                                              size: 18,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -427,7 +454,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               //             color: Color(0x192971FB),
               //             borderRadius: BorderRadius.circular(100),
               //             border: Border.all(
-              //               color: Color(0xFF2971FB),
+              //               color: FlutterFlowTheme.of(context).primaryColor,
               //               width: 1,
               //             ),
               //           ),
@@ -441,7 +468,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               //               style:
               //                   FlutterFlowTheme.of(context).subtitle2.override(
               //                         fontFamily: 'AvenirArabic',
-              //                         color: Color(0xFF2971FB),
+              //                         color: FlutterFlowTheme.of(context).primaryColor,
               //                         fontSize: 13,
               //                         fontWeight: FontWeight.bold,
               //                         useGoogleFonts: false,
@@ -467,7 +494,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               //           width: 50,
               //           height: 50,
               //           child: SpinKitRipple(
-              //             color: Color(0xFF2971FB),
+              //             color: FlutterFlowTheme.of(context).primaryColor,
               //             size: 50,
               //           ),
               //         ),
@@ -1169,7 +1196,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   //       width: 80,
                                   //       height: 26,
                                   //       decoration: BoxDecoration(
-                                  //         color: Color(0xFF81D05C),
+                                  //         color: FlutterFlowTheme.of(context).secondaryGreen,
                                   //         borderRadius:
                                   //             BorderRadius.circular(7),
                                   //       ),
@@ -1269,7 +1296,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         width: 80,
                                         height: 26,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFF2971FB),
+                                          color: FlutterFlowTheme.of(context).primaryColor,
                                           borderRadius:
                                               BorderRadius.circular(7),
                                         ),
@@ -1479,7 +1506,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         .title3
                                         .override(
                                           fontFamily: 'Sofia Pro By Khuzaimah',
-                                          color: Color(0xFF2971FB),
+                                          color: FlutterFlowTheme.of(context).primaryColor,
                                           fontSize: 11,
                                           fontWeight: FontWeight.w500,
                                           useGoogleFonts: false,
@@ -1526,7 +1553,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             .override(
                                               fontFamily:
                                                   'Sofia Pro By Khuzaimah',
-                                              color: Color(0xFF2971FB),
+                                              color: FlutterFlowTheme.of(context).primaryColor,
                                               fontSize: 24,
                                               fontWeight: FontWeight.bold,
                                               useGoogleFonts: false,
@@ -1544,7 +1571,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               .bodyText1
                                               .override(
                                                 fontFamily: 'AvenirArabic',
-                                                color: Color(0xFF2971FB),
+                                                color: FlutterFlowTheme.of(context).primaryColor,
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,

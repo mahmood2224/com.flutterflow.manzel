@@ -119,7 +119,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                             width: 50,
                             height: 50,
                             child: SpinKitRipple(
-                              color: Color(0xFF2971FB),
+                              color: FlutterFlowTheme.of(context).primaryColor,
                               size: 50,
                             ),
                           ),
@@ -619,8 +619,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                 height: 22,
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  color: Color(
-                                                                      0xFFD05C5C),
+                                                                  color: FlutterFlowTheme.of(context).secondaryRed,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -687,8 +686,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                 height: 22,
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  color: Color(
-                                                                      0xFFD05C5C),
+                                                                  color: FlutterFlowTheme.of(context).secondaryRed,
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -747,8 +745,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                               height: 22,
                                                               decoration:
                                                                   BoxDecoration(
-                                                                color: Color(
-                                                                    0xFFD05C5C),
+                                                                color: FlutterFlowTheme.of(context).secondaryRed,
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(

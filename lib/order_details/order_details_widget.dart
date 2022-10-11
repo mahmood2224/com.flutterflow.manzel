@@ -48,7 +48,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
               width: 50,
               height: 50,
               child: SpinKitRipple(
-                color: Color(0xFF2971FB),
+                color: FlutterFlowTheme.of(context).primaryColor,
                 size: 50,
               ),
             ),
@@ -304,8 +304,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                               .override(
                                                                 fontFamily:
                                                                     'Sofia Pro By Khuzaimah',
-                                                                color: Color(
-                                                                    0xFF2971FB),
+                                                                color: FlutterFlowTheme.of(context).primaryColor,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,
@@ -323,7 +322,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                           Icons
                                                               .design_services_outlined,
                                                           color:
-                                                              Color(0xFF2971FB),
+                                                          FlutterFlowTheme.of(context).primaryColor,
                                                           size: 24,
                                                         ),
                                                       ),
@@ -343,8 +342,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                                 .override(
                                                                   fontFamily:
                                                                       'Sofia Pro By Khuzaimah',
-                                                                  color: Color(
-                                                                      0xFF2971FB),
+                                                                  color: FlutterFlowTheme.of(context).primaryColor,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
@@ -451,7 +449,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                             0, 0, 12, 5),
                                         child: Icon(
                                           Icons.check_circle_rounded,
-                                          color: Color(0xFF7FC15F),
+                                          color: FlutterFlowTheme.of(context).secondaryGreen,
                                           size: 28,
                                         ),
                                       ),

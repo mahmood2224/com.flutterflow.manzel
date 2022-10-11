@@ -10,7 +10,7 @@ abstract class FlutterFlowTheme {
 
   late Color primaryColor;
   late Color secondaryColor;
-  late Color tertiaryColor;
+  late Color primaryOrange;
   late Color alternate;
   late Color primaryBackground;
   late Color secondaryBackground;
@@ -31,6 +31,9 @@ abstract class FlutterFlowTheme {
   late Color customColor4;
   late Color white;
   late Color background;
+  late Color secondaryGreen;
+  late Color primaryYellow;
+  late Color secondaryRed;
 
   String get title1Family => typography.title1Family;
   TextStyle get title1 => typography.title1;
@@ -51,9 +54,9 @@ abstract class FlutterFlowTheme {
 }
 
 class LightModeTheme extends FlutterFlowTheme {
-  late Color primaryColor = const Color(0xFF2971FB);
+  late Color primaryColor = const Color(0xFF374797);
   late Color secondaryColor = const Color(0xFF39D2C0);
-  late Color tertiaryColor = const Color(0xFFEE8B60);
+  late Color primaryOrange = const Color(0xFFF3922C);
   late Color alternate = const Color(0xFFFF5963);
   late Color primaryBackground = const Color(0xFFFFFFFF);
   late Color secondaryBackground = const Color(0xFF000000);
@@ -61,6 +64,9 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color secondaryText = const Color(0xFF57636C);
   late Color primaryRed = const Color(0xFFFF5963);
   late Color primaryGreen = const Color(0xFF39D2C0);
+  late Color secondaryGreen = const Color(0xFF4FB26D);
+  late Color primaryYellow = const Color(0xFFFFD03E);
+  late Color secondaryRed = const Color(0xFFEA5343);
 
   late Color primaryBtnText = Color(0xFFFFFFFF);
   late Color grayIcon = Color(0xFF95A1AC);

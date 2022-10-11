@@ -468,6 +468,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // HomeScreen
   {
+    'HomeScreenAlertTitle':{
+      'en': 'Coming Soon',
+      'ar':'قريبًا',
+    },
+    'AlertMessage':{
+      'en':'The map feature will be availiable soon',
+      'ar':'ستكون ميزة الخريطة متاحة قريبًا'
+    },
+    'HomeScreenAlertOk':{
+      'en':'Ok',
+      'ar':'موافق',
+    },
     '2cud1oqj': {
       'en': 'Available',
       'ar': 'متاح',
@@ -560,7 +572,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'x824f0mb': {
       'en': 'login to see this section',
-      'ar': 'تسجيل الدخول  اولاً ',
+      'ar': 'تسجيل الدخول اولاً ',
     },
     '1cb5at0r': {
       'en': 'Login',
@@ -730,8 +742,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'الكل',
     },
     '4mz2rd2p': {
-      'en': 'Installment Range',
-      'ar': 'نطاق التقسيط',
+      'en': 'Total price range',
+      'ar': 'النطاق السعري الإجمالي',
     },
     'k57fhygg': {
       'en': ' - ',
@@ -739,7 +751,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'krfzs4ot': {
       'en': ' SAR',
-      'ar': 'ريال سعودي',
+      'ar': 'ر.س',
     },
     'q62w4vtf': {
       'en': 'Minimum',
@@ -948,7 +960,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '9m2bglko': {
       'en': 'login to see this section',
-      'ar': 'تسجيل الدخول  اولاً ',
+      'ar': 'تسجيل الدخول اولاً ',
     },
     'yo5djc7x': {
       'en': 'Login',

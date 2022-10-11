@@ -162,7 +162,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                           width: 50,
                           height: 50,
                           child: SpinKitRipple(
-                            color: Color(0xFF2971FB),
+                            color: FlutterFlowTheme.of(context).primaryColor,
                             size: 50,
                           ),
                         ),

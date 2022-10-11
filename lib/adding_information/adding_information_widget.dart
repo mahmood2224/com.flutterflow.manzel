@@ -328,7 +328,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 56,
-                            color: Color(0xFF2971FB),
+                            color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
                                       fontFamily: 'AvenirArabic',

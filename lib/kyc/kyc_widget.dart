@@ -193,13 +193,13 @@ class _KycWidgetState extends State<KycWidget> {
                                         options: FFButtonOptions(
                                           width: 60,
                                           height: 21,
-                                          color: Color(0x3381D05C),
+                                          color: FlutterFlowTheme.of(context).secondaryGreen,
                                           textStyle:
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2
                                                   .override(
                                                     fontFamily: 'AvenirArabic',
-                                                    color: Color(0xFF81D05C),
+                                                    color: FlutterFlowTheme.of(context).secondaryGreen,
                                                     fontSize: 11,
                                                     fontWeight: FontWeight.w500,
                                                     useGoogleFonts: false,
