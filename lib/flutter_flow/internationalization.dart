@@ -1897,8 +1897,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'اختر طريقة الدفع',
     },
     '0pkqdf0l': {
-      'en': 'Mada/Visa',
-      'ar': 'مدى / فيزا',
+      'en': 'Mada',
+      'ar': 'مدى',
     },
     'icwlzrr6': {
       'en': 'ApplePay',

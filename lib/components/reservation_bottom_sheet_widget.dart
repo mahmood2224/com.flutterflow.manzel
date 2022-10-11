@@ -127,7 +127,7 @@ class _ReservationBottomSheetWidgetState
 
         transactionApiResponse = await AddTransactionCall.call(
           amountPaid: widget.reservationCost.toString(),
-          transactionMethod: ((paymentMethodValue?.toLowerCase() == 'mada/visa' || paymentMethodValue?.toLowerCase() == 'مدى / فيزا' ) ?"Mada/Visa":"ApplePay"),
+          transactionMethod: ((paymentMethodValue?.toLowerCase() == 'mada' || paymentMethodValue?.toLowerCase() == 'مدى' ) ?"Mada":"ApplePay"),
           orderId: widget.orderId,
           userId: currentUserReference?.id,
           transactionStatus: 'completed',
@@ -180,7 +180,7 @@ class _ReservationBottomSheetWidgetState
       case "FAILED":
         transactionApiResponse = await AddTransactionCall.call(
           amountPaid: widget.reservationCost.toString(),
-          transactionMethod: ((paymentMethodValue?.toLowerCase() == 'mada/visa' || paymentMethodValue?.toLowerCase() == 'مدى / فيزا' ) ?"Mada/Visa":"ApplePay"),
+          transactionMethod: ((paymentMethodValue?.toLowerCase() == 'mada' || paymentMethodValue?.toLowerCase() == 'مدى' ) ?"Mada":"ApplePay"),
           orderId: widget.orderId,
           userId: currentUserReference?.id,
           transactionStatus: 'failed',
@@ -551,11 +551,12 @@ class _ReservationBottomSheetWidgetState
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
                           child: Image.asset(
-                            'assets/images/visa:mada.png',
-                            height: 20,
-                            fit: BoxFit.cover,
+                            'assets/images/MadaPay.png',
+                            height: 30,
+                            width: 80,
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
                         Padding(
@@ -607,7 +608,7 @@ class _ReservationBottomSheetWidgetState
                       logFirebaseEvent('Button_Backend-Call');
     _shouldSetState = true;
                         logFirebaseEvent('Button_Backend-Call');
-                        setupSDKSession((paymentMethodValue?.toLowerCase() == 'mada/visa' || paymentMethodValue?.toLowerCase() == 'مدى / فيزا' ) ? 0 : 1);
+                        setupSDKSession((paymentMethodValue?.toLowerCase() == 'mada' || paymentMethodValue?.toLowerCase() == 'مدى' ) ? 0 : 1);
                         entry = showOverlay(context);
                         startSDK(context, {
                           'propertyId': serializeParam(
