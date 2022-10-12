@@ -1701,16 +1701,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'مراحل الطلب',
     },
     'w2795v66': {
-      'en': 'Property Reserved',
-      'ar': 'تم حجز العقار',
+      'en': 'Property reservation',
+      'ar': 'حجز العقار',
     },
     'm30m3lz9': {
-      'en': 'Payment Confirmed',
-      'ar': 'تم تأكيد عملية الدفع',
+      'en': 'Pay the reservation amount',
+      'ar': 'دفع مبلغ الحجز',
     },
     'zpv0x3sj': {
-      'en': 'Collecting Offers',
-      'ar': 'جمع العروض',
+      'en': 'Offers',
+      'ar': 'العروض',
     },
     'hho1grz4': {
       'en': '/',
@@ -1733,24 +1733,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': ')',
     },
     '3a3j0qu5': {
-      'en': 'Offer Accepted',
-      'ar': 'في انتظار قبول العرض',
+      'en': 'Accept a suitable offer',
+      'ar': 'قبول عرض مناسب',
     },
     'ver0de4k': {
       'en': 'Waiting for you to accept one of the offers provided by banks',
       'ar': 'في انتظارك لقبول أحد العروض المقدمة من البنوك',
     },
     'oqathjmt': {
-      'en': 'Transfer Ownership',
-      'ar': 'تم نقل الملكية إليك',
+      'en': 'Approval of the request',
+      'ar': 'إعتماد الطلب',
     },
     'k64pcuyr': {
       'en': 'Transferring the ownership of the property to you ',
       'ar': 'نقل ملكية العقار لك',
     },
     'nhrc354h': {
-      'en': 'Completed',
-      'ar': 'نقل الملكية إليك',
+      'en': 'Deal completed successfully',
+      'ar': 'تمت الصفقة بنجاح',
     },
     'ubpscf43': {
       'en': 'Ownership transferred successfully ',
