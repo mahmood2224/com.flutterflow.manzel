@@ -171,9 +171,10 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                     final listViewPropertyResponse = snapshot.data!;
                     return Builder(
                       builder: (context) {
-                        final images = PropertyCall.propertyImages(
-                          listViewPropertyResponse.jsonBody,
-                        ).toList();
+                        final images = getJsonField(
+                            listViewPropertyResponse.jsonBody,
+
+    r'''$.data.attributes.property_images.data''').toList();
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.vertical,

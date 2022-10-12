@@ -474,8 +474,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       return Builder(
                                         builder: (context) {
                                           final activeOffers =
-                                              GetOffersCall.result(
-                                            listViewGetOffersResponse.jsonBody,
+
+                                            (listViewGetOffersResponse.jsonBody
                                           ).toList();
                                           if (activeOffers.isEmpty) {
                                             return Center(

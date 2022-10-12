@@ -59,7 +59,7 @@ class PropertyDetailsWidget extends StatefulWidget {
 
   final int? propertyId;
   final String? path;
-  final dynamic? jsonData;
+  final dynamic jsonData;
 
   @override
   _PropertyDetailsWidgetState createState() => _PropertyDetailsWidgetState();
@@ -72,6 +72,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   static const String kWhatsAppAndroid = 'https://api.whatsapp.com/send?phone=';
   static const String kWhatsAppIOS = 'https://wa.me/';
   ApiCallResponse? addOrderApiResponse;
+  var columnPropertyResponse ;
 
   // VideoPlayerController? _currentController;
   // VideoPlayerController? videoPlayerController;
@@ -83,6 +84,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   void initState() {
     super.initState();
     //initializePlayer();
+   columnPropertyResponse = widget.jsonData;
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PropertyDetails'});
   }
@@ -170,24 +172,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         //     propertyId: widget.propertyId,
         //     locale: FFAppState().locale,
         //   ),
-        child : FutureBuilder<Map<String,dynamic>>(
-          future: widget.jsonData,
-          builder: (context, snapshot) {
-            // Customize what your widget looks like when it's loading.
-            if (!widget.jsonData.hasData) {
-              return Center(
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: SpinKitRipple(
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    size: 50,
-                  ),
-                ),
-              );
-            }
-            final columnPropertyResponse = widget.jsonData;
-            return Column(
+        child :  Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
@@ -204,14 +189,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                 children: [
                                   if (!functions
                                       .videoPlayerVisibilty(getJsonField(
-                                    columnPropertyResponse.jsonBody,
-                                    r'''$.data.attributes.video_poster_image''',
+                                    columnPropertyResponse,
+                                    r'''$.attributes.video_poster_image''',
                                   )))
                                     Builder(
                                       builder: (context) {
                                         final images =
                                             PropertyCall.propertyImages(
-                                          columnPropertyResponse.jsonBody,
+                                          columnPropertyResponse,
                                         ).toList();
                                         return Container(
                                           width: double.infinity,
@@ -302,13 +287,13 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         queryParams: {
                                           'videoURL': serializeParam(
                                               getJsonField(
-                                                columnPropertyResponse.jsonBody,
-                                                r'''$.data.attributes.video_manifest_uri''',
+                                                columnPropertyResponse,
+                                                r'''$.attributes.video_manifest_uri''',
                                               ),
                                               ParamType.String),
                                           'propertyName': serializeParam(
                                               PropertyCall.propertyName(
-                                                columnPropertyResponse.jsonBody,
+                                                columnPropertyResponse,
                                               ).toString(),
                                               ParamType.String),
                                         }.withoutNulls,
@@ -316,8 +301,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     },
                                     child: Image.network(
                                       getJsonField(
-                                        columnPropertyResponse.jsonBody,
-                                        r'''$.data.attributes.video_poster_image''',
+                                        columnPropertyResponse,
+                                        r'''$.attributes.video_poster_image''',
                                       ),
                                       width: MediaQuery.of(context).size.width,
                                       height:
@@ -328,8 +313,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   ),
                                   if (functions
                                       .videoPlayerVisibilty(getJsonField(
-                                    columnPropertyResponse.jsonBody,
-                                    r'''$.data.attributes.video_poster_image''',
+                                    columnPropertyResponse,
+                                    r'''$.attributes.video_poster_image''',
                                   )))
                                     Align(
                                       alignment: AlignmentDirectional(0, 0),
@@ -345,14 +330,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               'videoURL': serializeParam(
                                                   getJsonField(
                                                     columnPropertyResponse
-                                                        .jsonBody,
-                                                    r'''$.data.attributes.video_manifest_uri''',
+                                                        ,
+                                                    r'''$.attributes.video_manifest_uri''',
                                                   ),
                                                   ParamType.String),
                                               'propertyName': serializeParam(
                                                   PropertyCall.propertyName(
                                                     columnPropertyResponse
-                                                        .jsonBody,
+                                                        ,
                                                   ).toString(),
                                                   ParamType.String),
                                             }.withoutNulls,
@@ -384,8 +369,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   //                                   child: Visibility(
                                   //                                     visible: functions
                                   //                                         .videoPlayerVisibilty(getJsonField(
-                                  //                                       columnPropertyResponse.jsonBody,
-                                  //                                       r'''$.data.attributes.video_manifest_uri''',
+                                  //                                       columnPropertyResponse,
+                                  //                                       r'''$.attributes.video_manifest_uri''',
                                   //                                     )),
                                   //                                     child: Align(
                                   //                                       alignment: Alignment.topRight,
@@ -409,8 +394,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                   // //         _currentController = videoControllerValue.last;
                                   // //         },
                                   // //                                         path: getJsonField(
-                                  // //                                           columnPropertyResponse.jsonBody,
-                                  // //                                           r'''$.data.attributes.video_manifest_uri''',
+                                  // //                                           columnPropertyResponse,
+                                  // //                                           r'''$.attributes.video_manifest_uri''',
                                   // //                                         ),
                                   // //           height: MediaQuery.of(context).size.width/1.7777,
                                   // //           width: MediaQuery.of(context)
@@ -533,12 +518,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               PropertyCall
                                                                   .propertyName(
                                                             columnPropertyResponse
-                                                                .jsonBody,
+                                                                ,
                                                           ).toString(),
                                                           thumbnailUrl: PropertyCall
                                                               .thumbnailImage(
                                                                   columnPropertyResponse
-                                                                      .jsonBody)));
+                                                                      )));
                                                 },
                                               ),
                                             ),
@@ -699,7 +684,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               PropertyCall
                                                                   .propertyUpdatedAt(
                                                                 columnPropertyResponse
-                                                                    .jsonBody,
+                                                                    ,
                                                               ).toString(),
                                                               maxLines: 2,
                                                               style: FlutterFlowTheme
@@ -740,7 +725,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   PropertyCall
                                                                       .propertyRef(
                                                                 columnPropertyResponse
-                                                                    .jsonBody,
+                                                                    ,
                                                               ).toString()),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -763,7 +748,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           //         PropertyCall
                                                           //             .propertyStatus(
                                                           //   columnPropertyResponse
-                                                          //       .jsonBody,
+                                                          //       ,
                                                           // ).toString()))
                                                           //   Container(
                                                           //     height: 26,
@@ -822,7 +807,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           //         PropertyCall
                                                           //             .propertyStatus(
                                                           //   columnPropertyResponse
-                                                          //       .jsonBody,
+                                                          //       ,
                                                           // ).toString()))
                                                           //   Container(
                                                           //     height: 26,
@@ -909,8 +894,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               'url': serializeParam(
                                                                   getJsonField(
                                                                     columnPropertyResponse
-                                                                        .jsonBody,
-                                                                    r'''$.data.attributes.threesixty_degree_view''',
+                                                                        ,
+                                                                    r'''$.attributes.threesixty_degree_view''',
                                                                   ).toString(),
                                                                   ParamType.String),
                                                             }.withoutNulls,
@@ -1058,7 +1043,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     child: Image.network(
                                                       PropertyCall.companyLogo(
                                                         columnPropertyResponse
-                                                            .jsonBody,
                                                       ),
                                                       fit: BoxFit.cover,
                                                     ),
@@ -1106,7 +1090,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       Text(
                                                         PropertyCall.mangedBy(
                                                           columnPropertyResponse
-                                                              .jsonBody,
+                                                              ,
                                                         ).toString(),
                                                         style:
                                                             FlutterFlowTheme.of(
@@ -1140,7 +1124,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   child: Text(
                                                     PropertyCall.propertyName(
                                                       columnPropertyResponse
-                                                          .jsonBody,
+                                                          ,
                                                     ).toString(),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -1188,7 +1172,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     Text(
                                                       PropertyCall.propertyCity(
                                                         columnPropertyResponse
-                                                            .jsonBody,
+                                                            ,
                                                       ).toString(),
                                                       style: FlutterFlowTheme
                                                               .of(context)
@@ -1234,7 +1218,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       PropertyCall
                                                           .propertyDistrict(
                                                         columnPropertyResponse
-                                                            .jsonBody,
+                                                            ,
                                                       ).toString(),
                                                       style: FlutterFlowTheme
                                                               .of(context)
@@ -1268,17 +1252,17 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 PropertyCall
                                                                     .propertyLat(
                                                                   columnPropertyResponse
-                                                                      .jsonBody,
+                                                                      ,
                                                                 ),
                                                                 PropertyCall
                                                                     .propertylng(
                                                                   columnPropertyResponse
-                                                                      .jsonBody,
+                                                                      ,
                                                                 )),
                                                         title: PropertyCall
                                                             .propertyName(
                                                           columnPropertyResponse
-                                                              .jsonBody,
+                                                              ,
                                                         ).toString(),
                                                       );
                                                     },
@@ -1327,7 +1311,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       PropertyCall
                                                           .propertyDescription(
                                                         columnPropertyResponse
-                                                            .jsonBody,
+                                                            ,
                                                       ).toString(),
                                                       maxLines: 20,
                                                       style: FlutterFlowTheme
@@ -1422,7 +1406,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     PropertyCall
                                                                         .propertyBedrooms(
                                                                       columnPropertyResponse
-                                                                          .jsonBody,
+                                                                          ,
                                                                     ).toString(),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -1442,7 +1426,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                       .bedroomsText(
                                                                           PropertyCall
                                                                               .propertyBedrooms(
-                                                                            columnPropertyResponse.jsonBody,
+                                                                            columnPropertyResponse,
                                                                           ),
                                                                           FFAppState()
                                                                               .locale),
@@ -1517,7 +1501,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     PropertyCall
                                                                         .propertyBathrooms(
                                                                       columnPropertyResponse
-                                                                          .jsonBody,
+                                                                          ,
                                                                     ).toString(),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -1537,7 +1521,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                       .bathroomText(
                                                                           PropertyCall
                                                                               .propertyBathrooms(
-                                                                            columnPropertyResponse.jsonBody,
+                                                                            columnPropertyResponse,
                                                                           ),
                                                                           FFAppState()
                                                                               .locale),
@@ -1612,7 +1596,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     PropertyCall
                                                                         .propertySize(
                                                                       columnPropertyResponse
-                                                                          .jsonBody,
+                                                                          ,
                                                                     ).toString(),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -1704,7 +1688,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     PropertyCall
                                                                         .propertyLivingrooms(
                                                                       columnPropertyResponse
-                                                                          .jsonBody,
+                                                                          ,
                                                                     ).toString(),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -1724,7 +1708,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                       .livingroomText(
                                                                           PropertyCall
                                                                               .propertyLivingrooms(
-                                                                            columnPropertyResponse.jsonBody,
+                                                                            columnPropertyResponse,
                                                                           ),
                                                                           FFAppState()
                                                                               .locale),
@@ -1794,7 +1778,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     functions.intText(
                                                                         PropertyCall.propertyBuiltIn(
                                                                           columnPropertyResponse
-                                                                              .jsonBody,
+                                                                              ,
                                                                         ).toString(),
                                                                         FFAppState().locale),
                                                                     'null',
@@ -1815,7 +1799,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   functions.agoTextDetailScreen(
                                                                       PropertyCall.propertyBuiltIn(
                                                                         columnPropertyResponse
-                                                                            .jsonBody,
+                                                                            ,
                                                                       ).toString(),
                                                                       FFAppState().locale),
                                                                   style: FlutterFlowTheme.of(
@@ -1895,7 +1879,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 Text(
                                                   PropertyCall.propertyRef(
                                                     columnPropertyResponse
-                                                        .jsonBody,
+                                                        ,
                                                   ).toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -1914,7 +1898,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           ),
                                           if (functions.propertyTypeCheckHouse(
                                               PropertyCall.propertyType(
-                                                columnPropertyResponse.jsonBody,
+                                                columnPropertyResponse,
                                               ).toString(),
                                               FFAppState().locale))
                                             Padding(
@@ -1946,7 +1930,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   Text(
                                                     PropertyCall.propertyFloors(
                                                       columnPropertyResponse
-                                                          .jsonBody,
+                                                          ,
                                                     ).toString(),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -1967,7 +1951,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               .propertyTypeCheckApartment(
                                                   PropertyCall.propertyType(
                                                     columnPropertyResponse
-                                                        .jsonBody,
+                                                        ,
                                                   ).toString(),
                                                   FFAppState().locale))
                                             Padding(
@@ -2000,7 +1984,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     PropertyCall
                                                         .propertyFloorNumber(
                                                       columnPropertyResponse
-                                                          .jsonBody,
+                                                          ,
                                                     ).toString(),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -2048,7 +2032,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   PropertyCall
                                                       .propertyFurnishingType(
                                                     columnPropertyResponse
-                                                        .jsonBody,
+                                                        ,
                                                   ).toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -2100,7 +2084,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       PropertyCall
                                                           .propertyStreetWidth(
                                                         columnPropertyResponse
-                                                            .jsonBody,
+                                                            ,
                                                       ).toString(),
                                                       style: FlutterFlowTheme
                                                               .of(context)
@@ -2184,7 +2168,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             PropertyCall
                                                                 .propertyPrice(
                                                               columnPropertyResponse
-                                                                  .jsonBody,
+                                                                  ,
                                                             ).toString(),
                                                             '0',
                                                           )),
@@ -2260,7 +2244,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 Text(
                                                   PropertyCall.propertyType(
                                                     columnPropertyResponse
-                                                        .jsonBody,
+                                                        ,
                                                   ).toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -2279,8 +2263,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           ),
                                           if (!functions.requestButtonVisibilty(
                                               getJsonField(
-                                            columnPropertyResponse.jsonBody,
-                                            r'''$.data.attributes.pincode''',
+                                            columnPropertyResponse,
+                                            r'''$.attributes.pincode''',
                                           )))
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -2318,8 +2302,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         child: Text(
                                                           getJsonField(
                                                             columnPropertyResponse
-                                                                .jsonBody,
-                                                            r'''$.data.attributes.pincode''',
+                                                                ,
+                                                            r'''$.attributes.pincode''',
                                                           ).toString(),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
@@ -2364,8 +2348,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                             ),
                                           if (functions.requestButtonVisibilty(
                                               getJsonField(
-                                            columnPropertyResponse.jsonBody,
-                                            r'''$.data.attributes.pincode''',
+                                            columnPropertyResponse,
+                                            r'''$.attributes.pincode''',
                                           )))
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -2379,8 +2363,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       final phoneNumber =
                                                           getJsonField(
                                                         columnPropertyResponse
-                                                            .jsonBody,
-                                                        r'''$.data.attributes.managed_by.data.attributes.Company_phone''',
+                                                            ,
+                                                        r'''$.attributes.managed_by.data.attributes.Company_phone''',
                                                       );
                                                       print(
                                                           ">>>>>>>>>>>>>>>>>>>>>>phone number = ${phoneNumber}");
@@ -2392,19 +2376,19 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         'propertyName' /* Logout */,
                                                       )} : ${PropertyCall.propertyName(
                                                         columnPropertyResponse
-                                                            .jsonBody,
+                                                            ,
                                                       ).toString()}
                                                       ${FFLocalizations.of(context).getText(
                                                         'propertyRef' /* Logout */,
                                                       )} : ${PropertyCall.propertyRef(
                                                         columnPropertyResponse
-                                                            .jsonBody,
+                                                            ,
                                                       ).toString()}
                                                      ${FFLocalizations.of(context).getText(
                                                         'propertyAdd' /* Logout */,
                                                       )} : ${PropertyCall.propertyEntranceDirection(
                                                         columnPropertyResponse
-                                                            .jsonBody,
+                                                            ,
                                                       ).toString()}
                                                       ''';
                                                       openWhatsapp(context,
@@ -2502,7 +2486,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         final banks =
                                                             PropertyCall.banks(
                                                           columnPropertyResponse
-                                                              .jsonBody,
+                                                              ,
                                                         ).toList();
                                                         return ListView.builder(
                                                           padding:
@@ -2744,7 +2728,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   PropertyCall
                                                       .propertyEntranceDirection(
                                                     columnPropertyResponse
-                                                        .jsonBody,
+                                                        ,
                                                   ).toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
@@ -2795,17 +2779,17 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   PropertyCall
                                                                       .propertyLat(
                                                                     columnPropertyResponse
-                                                                        .jsonBody,
+                                                                        ,
                                                                   ),
                                                                   PropertyCall
                                                                       .propertylng(
                                                                     columnPropertyResponse
-                                                                        .jsonBody,
+                                                                        ,
                                                                   )),
                                                           title: PropertyCall
                                                               .propertyName(
                                                             columnPropertyResponse
-                                                                .jsonBody,
+                                                                ,
                                                           ).toString(),
                                                         );
                                                       },
@@ -2816,12 +2800,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 PropertyCall
                                                                     .propertyLat(
                                                                   columnPropertyResponse
-                                                                      .jsonBody,
+                                                                      ,
                                                                 ),
                                                                 PropertyCall
                                                                     .propertylng(
                                                                   columnPropertyResponse
-                                                                      .jsonBody,
+                                                                      ,
                                                                 )),
                                                         apiKey:
                                                             'pk.eyJ1IjoibWFuemVsIiwiYSI6ImNsNTB0NjI3YjA3OXQzYm9sdWNvM2Rrc2kifQ.zAYcxr9ozMoZfe4pEfxv7A',
@@ -2904,7 +2888,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             PropertyCall
                                                                 .propertyImages(
                                                           columnPropertyResponse
-                                                              .jsonBody,
+                                                              ,
                                                         ).toList();
                                                         return InkWell(
                                                           onTap: () async {
@@ -3077,7 +3061,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           functions
                                               .formatAmount(PropertyCall
                                                   .propertyInitialInstallment(
-                                                columnPropertyResponse.jsonBody,
+                                                columnPropertyResponse,
                                               ).toString())
                                               .maybeHandleOverflow(
                                                   maxChars: 10),
@@ -3124,7 +3108,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                               ),
                               if (functions.conditionalVisibility(
                                   PropertyCall.propertyStatus(
-                                    columnPropertyResponse.jsonBody,
+                                    columnPropertyResponse,
                                   ).toString(),
                                   'Available'))
                                 FFButtonWidget(
@@ -3186,7 +3170,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         PropertyCall
                                                             .reservationsCost(
                                                       columnPropertyResponse
-                                                          .jsonBody,
+                                                          ,
                                                     ),
                                                     propertyId:
                                                         widget.propertyId,
@@ -3324,7 +3308,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             PropertyCall
                                                                 .reservationsCost(
                                                           columnPropertyResponse
-                                                              .jsonBody,
+                                                              ,
                                                         ),
                                                         propertyId:
                                                             widget.propertyId,
@@ -3455,7 +3439,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                 ),
                               if (!functions.conditionalVisibility(
                                   PropertyCall.propertyStatus(
-                                    columnPropertyResponse.jsonBody,
+                                    columnPropertyResponse,
                                   ).toString(),
                                   'Available'))
                                 FFButtonWidget(
@@ -3495,11 +3479,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                   ],
                 ),
               ],
-            );
-          },
-        ),
+            ),
       ),
-    );
+        );
   }
 
   Future<String> generateDynamicLink(Map<String, dynamic> params,

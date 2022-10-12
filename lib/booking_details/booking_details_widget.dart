@@ -195,7 +195,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             'reserved'))
                           Padding(
                             padding:
-                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,7 +281,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             'payment_confirmed'))
                           Padding(
                             padding:
-                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 21, 0, 21),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1571,6 +1571,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           r'''$.result.property_id''',
                                         ),
                                         ParamType.int),
+                                    'jsonData':
+                                    serializeParam(
+                                getJsonField(
+                                columnOrderDetailsResponse.jsonBody,
+                                r'''$.result.property_data'''),
+                                        ParamType.JSON),
                                   }.withoutNulls,
                                 );
                               },

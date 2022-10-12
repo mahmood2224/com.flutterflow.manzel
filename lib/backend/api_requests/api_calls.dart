@@ -65,119 +65,119 @@ class PropertyCall {
 
   static dynamic property(dynamic response) => getJsonField(
     response,
-    r'''$.data''',
+    r'''$''',
   );
   static dynamic propertyRef(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_reference''',
+    r'''$.attributes.property_reference''',
   );
   static dynamic propertyStatus(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_status''',
+    r'''$.attributes.property_status''',
   );
   static dynamic propertyUpdatedAt(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.updatedAt''',
+    r'''$.attributes.updatedAt''',
   );
   static dynamic propertyName(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_name''',
+    r'''$.attributes.property_name''',
   );
   static dynamic propertyCity(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.city.data.attributes.city_name''',
+    r'''$.attributes.city.data.attributes.city_name''',
   );
   static dynamic propertyDistrict(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_district''',
+    r'''$.attributes.property_district''',
   );
   static dynamic propertyDescription(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_description''',
+    r'''$.attributes.property_description''',
   );
   static dynamic propertyBedrooms(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_bedrooms''',
+    r'''$.attributes.property_bedrooms''',
   );
   static dynamic propertyBathrooms(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_bathrooms''',
+    r'''$.attributes.property_bathrooms''',
   );
   static dynamic propertySize(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_size''',
+    r'''$.attributes.property_size''',
   );
   static dynamic propertyBuiltIn(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_built_in''',
+    r'''$.attributes.property_built_in''',
   );
   static dynamic propertyLivingrooms(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_livingroom''',
+    r'''$.attributes.property_livingroom''',
   );
   static dynamic propertyFloors(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_floors''',
+    r'''$.attributes.property_floors''',
   );
   static dynamic propertyFurnishingType(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_furnishing_type''',
+    r'''$.attributes.property_furnishing_type''',
   );
   static dynamic propertyStreetWidth(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_street_width''',
+    r'''$.attributes.property_street_width''',
   );
   static dynamic propertyPrice(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_price''',
+    r'''$.attributes.property_price''',
   );
   static dynamic propertyEntranceDirection(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_address''',
+    r'''$.attributes.property_address''',
   );
   static dynamic propertyType(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_type''',
+    r'''$.attributes.property_type''',
   );
   static dynamic propertyInitialInstallment(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_initial_installment''',
+    r'''$.attributes.property_initial_installment''',
   );
   static dynamic propertyFloorNumber(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_floor_number''',
+    r'''$.attributes.property_floor_number''',
   );
   static dynamic propertyLat(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_lat''',
+    r'''$.attributes.property_lat''',
   );
   static dynamic propertylng(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_lng''',
+    r'''$.attributes.property_lng''',
   );
   static dynamic propertyCoordinates(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_coordinates''',
+    r'''$.attributes.property_coordinates''',
   );
   static dynamic banks(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.banks.data''',
+    r'''$.attributes.banks.data''',
   );
   static dynamic bankName(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.banks.data..bank_name''',
+    r'''$.attributes.banks.data..bank_name''',
   );
   static dynamic bankDescription(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.banks.data..bank_description''',
+    r'''$.attributes.banks.data..bank_description''',
   );
   static dynamic bankRules(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.banks.data..bank_rules''',
+    r'''$.attributes.banks.data..bank_rules''',
   );
   static dynamic mangedBy(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.managed_by.data.attributes.company_name''',
+    r'''$.attributes.managed_by.data.attributes.company_name''',
   );
   static dynamic propertyImg(dynamic response) => getJsonField(
     response,
@@ -185,23 +185,23 @@ class PropertyCall {
   );
   static dynamic companyLogo(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
+    r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
   );
   static dynamic reservationsCost(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_reservation_cost''',
+    r'''$.attributes.property_reservation_cost''',
   );
   static dynamic propertyImages(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_images.data''',
+    r'''$.attributes.property_images.data''',
   );
   static dynamic propertyId(dynamic response) => getJsonField(
     response,
-    r'''$.data.id''',
+    r'''$.id''',
   );
   static dynamic thumbnailImage(dynamic response) => getJsonField(
     response,
-    r'''$.data.attributes.property_images.data[0].attributes.formats.small.url''',
+    r'''$.attributes.property_images.data[0].attributes.formats.small.url''',
   );
 }
 

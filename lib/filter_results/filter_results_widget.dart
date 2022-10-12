@@ -338,12 +338,18 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                       context.pushNamed(
                                         'PropertyDetails',
                                         queryParams: {
-                                          'propertyId': serializeParam(
+                                          'propertyId':
+                                          serializeParam(
                                               getJsonField(
                                                 propertiesItem,
                                                 r'''$.id''',
                                               ),
                                               ParamType.int),
+                                          'jsonData':
+                                          serializeParam(
+                                              propertiesItem,
+                                              ParamType.JSON),
+
                                         }.withoutNulls,
                                       );
                                     }

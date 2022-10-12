@@ -299,6 +299,10 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                   r'''$.id''',
                                                 ),
                                                 ParamType.int),
+                                            'jsonData':
+                                            serializeParam(
+                                                propertiesItem,
+                                                ParamType.JSON),
                                           }.withoutNulls,
                                         );
                                       }
