@@ -182,7 +182,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 15, 16, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 15, 16, 21),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -195,7 +195,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             'reserved'))
                           Padding(
                             padding:
-                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
+                            EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
