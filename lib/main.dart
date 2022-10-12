@@ -3,6 +3,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
@@ -105,7 +106,12 @@ class _MyAppState extends State<MyApp> {
         Locale('en'),
         Locale('ar'),
       ],
-      theme: ThemeData(brightness: Brightness.light),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          backwardsCompatibility: false, // 1
+          systemOverlayStyle: SystemUiOverlayStyle.dark, // 2
+        ),
+      ),
       themeMode: _themeMode,
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
