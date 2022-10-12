@@ -86,15 +86,28 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   void initState() {
     super.initState();
     //initializePlayer();
-    if(widget.jsonData.isNotEmpty){
+    if(widget?.jsonData!=null){
     columnPropertyResponse = widget.jsonData;}
     else{
+      isLoading.value = true;
+      makeProeprtyApiCall();
+      isLoading.value = false;
 
     }
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PropertyDetails'});
   }
 
+  Future<void> makeProeprtyApiCall() async {
+    //Future.delayed(Duration(seconds: 5));
+    final callResult = await PropertyCall.call(
+      propertyId: widget.propertyId,
+      locale: FFAppState().locale,
+    );
+    final callResultToJson = callResult.jsonBody['data'];
+    columnPropertyResponse = callResultToJson;
+    print("++++");
+  }
   // void enterFullScreen() {
   //   _chewieController?.enterFullScreen();
   // }
@@ -173,7 +186,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+        // onTap: () => FocusScope.of(context).unfocus(),
         // child: FutureBuilder<ApiCallResponse>(
         //   future: PropertyCall.call(
         //     propertyId: widget.propertyId,
