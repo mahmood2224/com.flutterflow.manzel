@@ -320,12 +320,12 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                     16, 0, 16, 25),
                                 child: InkWell(
                                   onTap: () async {
-                                    if (!functions.conditionalVisibility(
-                                        getJsonField(
-                                          propertiesItem,
-                                          r'''$.attributes.property_status''',
-                                        ).toString(),
-                                        'Soon')) {
+                                    // if (!functions.conditionalVisibility(
+                                    //     getJsonField(
+                                    //       propertiesItem,
+                                    //       r'''$.attributes.property_status''',
+                                    //     ).toString(),
+                                    //     'Soon')) {
                                       videoPlayers[propertiesIndex +
                                               widget.homeScreenLength!]
                                           .pause();
@@ -346,7 +346,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                               ParamType.int),
                                         }.withoutNulls,
                                       );
-                                    }
+      //                              }
                                   },
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,

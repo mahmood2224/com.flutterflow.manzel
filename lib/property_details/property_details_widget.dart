@@ -150,11 +150,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       lang: FFAppState().locale,
     );
   }
-  // @override
-  // void dispose() {
-  //   pageViewController?.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    pageViewController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -3519,8 +3519,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
           title: "Join Manzel to see what I've been upto",
           imageUrl: Uri.parse(thumbnailUrl!),
           description: description),
-      uriPrefix: 'https://manzelprod.page.link',
-     // uriPrefix: 'https://manzeldev.page.link',
+      //uriPrefix: 'https://manzelprod.page.link',
+      uriPrefix: 'https://manzeldev.page.link',
       link: Uri.parse(url),
       androidParameters: const AndroidParameters(
         packageName: 'com.flutterflow.manzel',
