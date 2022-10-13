@@ -91,7 +91,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     else{
       isLoading.value = true;
       makeProeprtyApiCall();
-      isLoading.value = false;
+
 
     }
     logFirebaseEvent('screen_view',
@@ -107,6 +107,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     final callResultToJson = callResult.jsonBody['data'];
     columnPropertyResponse = callResultToJson;
     print("++++");
+    isLoading.value = false;
   }
   // void enterFullScreen() {
   //   _chewieController?.enterFullScreen();
@@ -539,7 +540,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     // back
                                                     logFirebaseEvent(
                                                         'IconButton_back');
-                                                    dispose();
+                                                  //  dispose();
                                                     context.pop();
                                                   },
                                                 ),
