@@ -199,6 +199,18 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                             imagesItem,
                                             r'''$.attributes.formats.medium.url''',
                                           ),
+                                          loadingBuilder: (BuildContext context, Widget child,
+                                              ImageChunkEvent? loadingProgress) {
+                                            if (loadingProgress == null) return child;
+                                            return Center(
+                                              child: CircularProgressIndicator(
+                                                value: loadingProgress.expectedTotalBytes != null
+                                                    ? loadingProgress.cumulativeBytesLoaded /
+                                                    loadingProgress.expectedTotalBytes!
+                                                    : null,
+                                              ),
+                                            );
+                                          },
                                           fit: BoxFit.contain,
                                         ),
                                         allowRotation: false,
@@ -224,6 +236,19 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                         imagesItem,
                                         r'''$.attributes.formats.medium.url''',
                                       ),
+                                      loadingBuilder: (BuildContext context, Widget child,
+                                          ImageChunkEvent? loadingProgress) {
+                                        if (loadingProgress == null) return child;
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value: loadingProgress.expectedTotalBytes != null
+                                                ? loadingProgress.cumulativeBytesLoaded /
+                                                loadingProgress.expectedTotalBytes!
+                                                : null,
+                                          ),
+                                        );
+                                      },
+
                                       width: 100,
                                       height:
                                           MediaQuery.of(context).size.height *

@@ -184,7 +184,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 Duration(milliseconds: 2000),
                                 () => setState(() {}),
                               );
-                              if (count == val.length) {
+                              if (count == val.length && val.length<9) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       backgroundColor: FlutterFlowTheme.of(context).primaryRed,

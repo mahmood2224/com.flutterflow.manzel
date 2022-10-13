@@ -275,12 +275,12 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                       16, 0, 16, 25),
                                   child: InkWell(
                                     onTap: () async {
-                                      if (!functions.conditionalVisibility(
-                                          getJsonField(
-                                            propertiesItem,
-                                            r'''$.attributes.property_status''',
-                                          ).toString(),
-                                          'Soon')) {
+                                      // if (!functions.conditionalVisibility(
+                                      //     getJsonField(
+                                      //       propertiesItem,
+                                      //       r'''$.attributes.property_status''',
+                                      //     ).toString(),
+                                      //     'Soon')) {
                                         videoPlayers[propertiesIndex +
                                                 widget.homeScreenLength!]
                                             .pause();
@@ -305,7 +305,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                 ParamType.JSON),
                                           }.withoutNulls,
                                         );
-                                      }
+      //                                }
                                     },
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,

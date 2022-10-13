@@ -175,11 +175,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     );
   }
 
-  // @override
-  // void dispose() {
-  //   pageViewController?.dispose();
-  //   super.dispose();
-  // }
+   @override
+  void dispose() {
+    pageViewController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -263,7 +263,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           imageUrl:
                                                               getJsonField(
                                                             imagesItem,
-                                                            r'''$.attributes.url''',
+                                                            r'''$.attributes.formats.medium.url''',
                                                           ),
                                                           width:
                                                               double.infinity,
@@ -3692,7 +3692,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
           title: "Join Manzel to see what I've been upto",
           imageUrl: Uri.parse(thumbnailUrl!),
           description: description),
-      // uriPrefix: 'https://manzelprod.page.link',
+      //uriPrefix: 'https://manzelprod.page.link',
       uriPrefix: 'https://manzeldev.page.link',
       link: Uri.parse(url),
       androidParameters: const AndroidParameters(
@@ -3714,7 +3714,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     var whatsapp = phoneNumber;
     var whatsappUrlAndroid =
         Uri.parse('$kWhatsAppAndroid$whatsapp&text=${message}');
-    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp&text=${message}');
+    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp');
     if (Platform.isIOS) {
       if (await canLaunchUrl(whatsappUrlIos)) {
         await launchUrl(whatsappUrlIos, mode: LaunchMode.externalApplication);

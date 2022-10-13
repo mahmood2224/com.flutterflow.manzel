@@ -328,7 +328,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               ),
                                               content: Text(
                                                 FFLocalizations.of(context).getText(
-                                                  'HomeScreenAlertMessage',
+                                                  'AlertMessage',
                                                 ),
                                               ),
                                               actions: [
@@ -551,12 +551,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: InkWell(
                         onTap: () async {
-                          if (!functions.conditionalVisibility(
-                              getJsonField(
-                                propertiesItem,
-                                r'''$.attributes.property_status''',
-                              ).toString(),
-                              'Soon')) {
+                          // if (!functions.conditionalVisibility(
+                          //     getJsonField(
+                          //       propertiesItem,
+                          //       r'''$.attributes.property_status''',
+                          //     ).toString(),
+                          //     'Soon')) {
                             videoPlayers[currentPropertyindex].pause();
                             logFirebaseEvent(
                                 'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
@@ -582,7 +582,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     ParamType.String),
                               }.withoutNulls,
                             );
-                          }
+                 //         }
                         },
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -1050,7 +1050,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       child: CachedNetworkImage(
                                                         imageUrl: getJsonField(
                                                           propertyImagesItem,
-                                                          r'''$.attributes.url''',
+                                                          r'''$.attributes.formats.medium.url''',
                                                         ),
                                                         width: MediaQuery.of(
                                                                 context)
