@@ -1047,7 +1047,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       child: CachedNetworkImage(
                                                         imageUrl: getJsonField(
                                                           propertyImagesItem,
-                                                          r'''$.attributes.url''',
+                                                          r'''$.attributes.formats.medium.url''',
                                                         ),
                                                         width: MediaQuery.of(
                                                                 context)

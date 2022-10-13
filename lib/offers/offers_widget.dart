@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:sendbird_sdk/constant/enums.dart';
 import 'package:sendbird_sdk/query/channel_list/group_channel_list_query.dart';
@@ -45,6 +46,8 @@ class _OffersWidgetState extends State<OffersWidget> {
   ApiCallResponse? acceptOfferResponseAr;
   ApiCallResponse? getOfferResponse;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
+  final InAppReview inAppReview = InAppReview.instance;
+
   //Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> channels = {};
@@ -90,6 +93,7 @@ class _OffersWidgetState extends State<OffersWidget> {
   void initState() {
     super.initState();
     // On page load action.
+   // inAppReview.openStoreListing(appStoreId: '1630341481');
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       final _sendbird = await sendbird.SendbirdSdk(
           appId: "${EnvVariables.instance.sendbirdAppId}");
@@ -1873,6 +1877,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           // });
                                                                           isLoading.value =
                                                                               false;
+                                                                          inAppReview.requestReview();
                                                                         } else {
                                                                           logFirebaseEvent(
                                                                               'Button_Show-Snack-Bar');

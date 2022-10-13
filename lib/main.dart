@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:eraser/eraser.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,12 +24,21 @@ import 'package:google_fonts/google_fonts.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 import 'notification_handler/firebase_cloud_messaging.dart';
-
+const _kTestingCrashlytics = false;
 void main() async {
+  await runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    runApp(MyApp());
+  }, (error, stackTrace) {
+    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+  });
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await EnvVariables.instance.initialise();
   Eraser.resetBadgeCountButKeepNotificationsInCenter();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
@@ -75,6 +88,7 @@ class _MyAppState extends State<MyApp> {
     //   print('Your FCM token:- $value');
     // });
     handleDynamicLinks();
+    _initializeFlutterFire();
   }
 
   @override
@@ -82,6 +96,22 @@ class _MyAppState extends State<MyApp> {
     authUserSub.cancel();
     fcmTokenSub.cancel();
     super.dispose();
+  }
+
+  Future<void> _initializeFlutterFire() async {
+    if (_kTestingCrashlytics) {
+      // Force enable crashlytics collection enabled if we're testing it.
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    } else {
+      // Else only enable it in non-debug builds.
+      // You could additionally extend this to allow users to opt-in.
+      await FirebaseCrashlytics.instance
+          .setCrashlyticsCollectionEnabled(!kDebugMode);
+    }
+
+    // if (_kShouldTestAsyncErrorOnInit) {
+    //   await _testAsyncErrorOnInit();
+    // }
   }
 
   void setLocale(String language) =>
@@ -106,11 +136,8 @@ class _MyAppState extends State<MyApp> {
         Locale('en'),
         Locale('ar'),
       ],
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backwardsCompatibility: false, // 1
-          systemOverlayStyle: SystemUiOverlayStyle.dark, // 2
-        ),
+      theme: ThemeData(brightness: Brightness.light,
+
       ),
       themeMode: _themeMode,
       routeInformationParser: _router.routeInformationParser,
