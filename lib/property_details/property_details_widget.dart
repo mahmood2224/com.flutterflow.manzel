@@ -196,22 +196,24 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         child: ValueListenableBuilder<bool>(
           builder: (BuildContext context, bool value, Widget? child) {
             return isLoading.value
-                ? Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.black),
-                            strokeWidth: 5,
-                          ),
-                        )
-                      ],
+                ? Center(
+                  child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: CircularProgressIndicator(
+                              // valueColor: AlwaysStoppedAnimation(Colors.black),
+                              // strokeWidth: 5,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  )
+                )
                 : Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -3692,8 +3694,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
           title: "Join Manzel to see what I've been upto",
           imageUrl: Uri.parse(thumbnailUrl!),
           description: description),
-      //uriPrefix: 'https://manzelprod.page.link',
-      uriPrefix: 'https://manzeldev.page.link',
+      uriPrefix: 'https://manzelprod.page.link',
+      //uriPrefix: 'https://manzeldev.page.link',
       link: Uri.parse(url),
       androidParameters: const AndroidParameters(
         packageName: 'com.flutterflow.manzel',
