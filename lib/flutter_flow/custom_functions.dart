@@ -351,11 +351,11 @@ String offerScreenTime(
   int secondDiffence = diff.inSeconds;
   if (locale == "en") {
     if (dayDiffrence > 0) {
-      if ((dayDiffrence % 365) > 0) {
+      if ((dayDiffrence>=365) &&((dayDiffrence % 365) > 0)) {
         yearsAgo = dayDiffrence % 365;
         return "${yearsAgo} Years ago";
       }
-      if ((dayDiffrence % 30) > 0) {
+      if ((dayDiffrence>30) && ((dayDiffrence % 30) > 0)) {
         monthsAgo = dayDiffrence % 30;
         return "${monthsAgo} Months ago";
       }

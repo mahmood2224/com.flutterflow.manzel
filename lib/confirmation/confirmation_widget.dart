@@ -192,10 +192,12 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                 ),
                               ],
                             )
-                          : Column(mainAxisSize: MainAxisSize.max, children: [
+                          : Column(mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
                               Icon(
                                 Manzel.cancelled,
-                                size: 30,
+                                size: 40,
                                 color: Colors.red,
                               ),
                               Padding(

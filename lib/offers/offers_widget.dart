@@ -45,6 +45,7 @@ class _OffersWidgetState extends State<OffersWidget> {
   ApiCallResponse? acceptOfferResponse;
   ApiCallResponse? acceptOfferResponseAr;
   ApiCallResponse? getOfferResponse;
+  var acceptOfferTappedIndex;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   final InAppReview inAppReview = InAppReview.instance;
 
@@ -187,7 +188,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                       width: 50,
                       height: 50,
                       child: SpinKitRipple(
-                        color:FlutterFlowTheme.of(context).primaryColor,
+                        color: Color(0xFF2971FB),
                         size: 50,
                       ),
                     ),
@@ -320,8 +321,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
+                                          color: Color(0xFFF3F2F2),
                                         width: 1,
                                       )),
                                   height: 30,
@@ -420,7 +420,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     //     options: FFButtonOptions(
                                     //       width: 215,
                                     //       height: 40,
-                                    //       color: FlutterFlowTheme.of(context).primaryColor,
+                                    //       color: Color(0xFF2971FB),
                                     //       textStyle: FlutterFlowTheme.of(context)
                                     //           .subtitle2
                                     //           .override(
@@ -458,9 +458,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                 children: [
                                   Builder(
                                     builder: (context) {
-                                      final activeOffers = GetOffersCall.result(
-                                        getOfferResponse!.jsonBody,
-                                      ).toList();
+                                      final activeOffers =
+                                        getOfferResponse!.jsonBody["result"].toList();
                                       if (activeOffers.isEmpty) {
                                         return Center(
                                           child: Container(
@@ -705,45 +704,46 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             fontFamily:
                                                                                 'AvenirArabic',
                                                                             color:
-                                                                                FlutterFlowTheme.of(context).primaryColor,
-                                                                                fontSize: 10,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                useGoogleFonts: false,
-                                                                              ),
-                                                                        ),
-                                                                      ],
+                                                                                Color(0xFF2971FB),
+                                                                            fontSize:
+                                                                                10,
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
                                                                     ),
                                                                   ],
                                                                 ),
-                                                              ),
-                                                              Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  if (functions.conditionalVisibility(
-                                                                      getJsonField(
-                                                                        activeOffersItem,
-                                                                        r'''$.status''',
-                                                                      ).toString(),
-                                                                      'disqualified'))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            88,
-                                                                        height:
-                                                                            22,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                          FlutterFlowTheme.of(context).secondaryRed,
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              if (functions.conditionalVisibility(
+                                                                  getJsonField(
+                                                                    activeOffersItem,
+                                                                    r'''$.status''',
+                                                                  ).toString(),
+                                                                  'disqualified'))
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 88,
+                                                                    height: 22,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFFD05C5C),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               5),
@@ -784,23 +784,21 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         r'''$.status''',
                                                                       ).toString(),
                                                                       'rejected'))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            74,
-                                                                        height:
-                                                                            22,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                          FlutterFlowTheme.of(context).secondaryRed,
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 74,
+                                                                    height: 22,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFFD05C5C),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               5),
@@ -896,78 +894,80 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         r'''$.status''',
                                                                       ).toString(),
                                                                       'accepted'))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            74,
-                                                                        height:
-                                                                            22,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Color(0xFF43B6A5),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'vaaj8s0b' /* Accepted */,
-                                                                              ),
-                                                                              textAlign: TextAlign.center,
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    color: FlutterFlowTheme.of(context).white,
-                                                                                    fontSize: 11,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 74,
+                                                                    height: 22,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFF43B6A5),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
                                                                     ),
-                                                                  if (functions
-                                                                      .conditionalVisibility(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$.status''',
-                                                                            ).toString(),
-                                                                            'null',
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'vaaj8s0b' /* Accepted */,
                                                                           ),
-                                                                          'new'))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            74,
-                                                                        height:
-                                                                            22,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                          FlutterFlowTheme.of(context).secondaryRed,
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 11,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              if (functions
+                                                                  .conditionalVisibility(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          activeOffersItem,
+                                                                          r'''$.status''',
+                                                                        ).toString(),
+                                                                        'null',
+                                                                      ),
+                                                                      'new'))
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 74,
+                                                                    height: 22,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFFD05C5C),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               5),
@@ -1017,7 +1017,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                   height: 22,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(context).primaryOrange,
+                                                                    color: Color(
+                                                                        0xFFF0A637),
                                                                     borderRadius:
                                                                         BorderRadius
                                                                             .circular(5),
@@ -1742,12 +1743,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               0),
                                                                           child:
                                                                               Text(
-                                                                            valueOrDefault<String>(
-                                                                              getJsonField(
-                                                                                activeOffersItem,
-                                                                                r'''$.bank_name''',
-                                                                              ).toString(),
-                                                                              'null',
+                                                                            FFLocalizations.of(context)
+                                                                              .getText(
+                                                                                'ps7kcru7' /* bank */,
                                                                             ),
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
@@ -1758,18 +1756,20 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 ),
                                                                           ),
                                                                         ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            3,
+                                                                          0,
+                                                                          2,
+                                                                              0),
+                                                                        child:
                                                                         Text(
-                                                                          FFLocalizations.of(context)
-                                                                              .getText(
-                                                                            'alqnps4o' /*   */,
-                                                                          ),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyText1,
-                                                                        ),
-                                                                        Text(
-                                                                          FFLocalizations.of(context)
-                                                                              .getText(
-                                                                            'ps7kcru7' /* bank */,
+                                                                          valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.bank_name''',
+                                                                              ).toString(),
+                                                                              'null',
                                                                           ),
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyText1
@@ -1778,9 +1778,18 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 color: FlutterFlowTheme.of(context).white,
                                                                                 fontSize: 15,
                                                                                 fontWeight: FontWeight.w500,
-                                                                                useGoogleFonts: false,
-                                                                              ),
+                                                                                useGoogleFonts: false,),
+                                                                          ),
                                                                         ),
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'alqnps4o' /*   */,
+                                                                          ),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyText1,
+                                                                              ),
+
                                                                       ],
                                                                     ),
                                                                   ),
@@ -1799,7 +1808,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                 child:
                                                                     ElevatedButton(
                                                                   onPressed:
-                                                                      () async {
+                                                                      () async {if(isLoading.value == true){
                                                                     logFirebaseEvent(
                                                                         'OFFERS_PAGE_ACCEPT_OFFER_BTN_ON_TAP');
                                                                     if (FFAppState()
@@ -1830,7 +1839,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             },
                                                                           ) ??
                                                                           false;
-                                                                      if (confirmDialogResponse) {
+                                                                      if (confirmDialogResponse) {acceptOfferTappedIndex = activeOffersIndex;
                                                                         isLoading.value =
                                                                             true;
                                                                         logFirebaseEvent(
@@ -1927,7 +1936,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           ) ??
                                                                           false;
                                                                       if (confirmDialogResponse) {
-                                                                        isLoading.value =
+                                                                        acceptOfferTappedIndex = activeOffersIndex;isLoading.value =
                                                                             true;
                                                                         logFirebaseEvent(
                                                                             'Button_Backend-Call');
@@ -1996,7 +2005,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                     if (mounted)
                                                                       setState(
                                                                           () {});
-                                                                  },
+                                                                  }},
                                                                   child:
                                                                       ValueListenableBuilder<
                                                                           bool>(
@@ -2006,8 +2015,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             value,
                                                                         Widget?
                                                                             child) {
-                                                                      return isLoading
-                                                                              .value
+                                                                      return
+                                                                        (((activeOffersIndex!=acceptOfferTappedIndex) && (isLoading
+                                                                              .value==true))? false:
+                                                                        isLoading
+                                                                              .value)
                                                                           ? Padding(
                                                                               padding: const EdgeInsets.all(5.0),
                                                                               child: Row(
@@ -2070,9 +2082,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                       (states) {
                                                                         if (states
                                                                             .contains(MaterialState.disabled)) {
-                                                                          return FlutterFlowTheme.of(context).primaryColor;
+                                                                          return Color(
+                                                                              0xFF2971FB);
                                                                         }
-                                                                        return FlutterFlowTheme.of(context).primaryColor;
+                                                                        return Color(
+                                                                            0xFF2971FB);
                                                                       },
                                                                     ),
                                                                     shape: MaterialStateProperty

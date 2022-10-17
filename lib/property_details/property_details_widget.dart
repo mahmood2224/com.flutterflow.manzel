@@ -74,7 +74,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   ApiCallResponse? addOrderApiResponse;
   var columnPropertyResponse;
 
-  ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
+  late ValueNotifier<bool> isLoading = ValueNotifier<bool>(true);
 
   // VideoPlayerController? _currentController;
   // VideoPlayerController? videoPlayerController;
@@ -86,12 +86,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   void initState() {
     super.initState();
     //initializePlayer();
-    if(widget?.jsonData!=null){
-    columnPropertyResponse = widget.jsonData;}
-    else{
+    if (widget?.jsonData != null) {
       isLoading.value = true;
+      columnPropertyResponse = widget.jsonData;
+      isLoading.value = false;
+    } else {
       makeProeprtyApiCall();
-
 
     }
     logFirebaseEvent('screen_view',
@@ -99,6 +99,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   }
 
   Future<void> makeProeprtyApiCall() async {
+    isLoading.value = true;
     //Future.delayed(Duration(seconds: 5));
     final callResult = await PropertyCall.call(
       propertyId: widget.propertyId,
@@ -109,6 +110,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     print("++++");
     isLoading.value = false;
   }
+
   // void enterFullScreen() {
   //   _chewieController?.enterFullScreen();
   // }
@@ -591,65 +593,87 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   ),
                                                   Stack(
                                                     children: [
-                                                      FlutterFlowIconButton(
-                                                        borderColor:
-                                                            Colors.transparent,
-                                                        borderRadius: 30,
-                                                        borderWidth: 1,
-                                                        buttonSize: 34,
-                                                        fillColor: Colors.white,
-                                                        icon: Icon(
-                                                          Manzel.favorite,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
-                                                          size: 18,
-                                                        ),
-                                                        onPressed: () {
-                                                          print(
-                                                              'BookMarkedIconButton pressed ...');
-                                                        },
-                                                      ),
-                                                      FlutterFlowIconButton(
-                                                        borderColor:
-                                                            Colors.transparent,
-                                                        borderRadius: 30,
-                                                        buttonSize: 34,
-                                                        fillColor: Colors.white,
-                                                        icon: Icon(
-                                                          Manzel.favorite,
-                                                          color: Colors.black,
-                                                          size: 14,
-                                                        ),
-                                                        onPressed: () async {
-                                                          logFirebaseEvent(
-                                                              'PROPERTY_DETAILS_favorite_border_ICN_ON_');
-                                                          // save
-                                                          logFirebaseEvent(
-                                                              'IconButton_save');
+                                                      // FlutterFlowIconButton(
+                                                      //   borderColor:
+                                                      //       Colors.transparent,
+                                                      //   borderRadius: 30,
+                                                      //   borderWidth: 1,
+                                                      //   buttonSize: 34,
+                                                      //   fillColor: Colors.white,
+                                                      //   icon: Icon(
+                                                      //     Manzel.favorite,
+                                                      //     color: FlutterFlowTheme
+                                                      //             .of(context)
+                                                      //         .alternate,
+                                                      //     size: 18,
+                                                      //   ),
+                                                      //   onPressed: () {
+                                                      //     print(
+                                                      //         'BookMarkedIconButton pressed ...');
+                                                      //   },
+                                                      // ),
+                                                      // FlutterFlowIconButton(
+                                                      //   borderColor:
+                                                      //       Colors.transparent,
+                                                      //   borderRadius: 30,
+                                                      //   buttonSize: 34,
+                                                      //   fillColor: Colors.white,
+                                                      //   icon: Icon(
+                                                      //     Manzel.favorite,
+                                                      //     color: Colors.black,
+                                                      //     size: 18,
+                                                      //   ),
+                                                      //   onPressed: () async {
+                                                      //     logFirebaseEvent(
+                                                      //         'PROPERTY_DETAILS_favorite_border_ICN_ON_');
+                                                      //     // save
+                                                      //     logFirebaseEvent(
+                                                      //         'IconButton_save');
+                                                      //
+                                                      //     final userSavedCreateData =
+                                                      //         createUserSavedRecordData(
+                                                      //       uId:
+                                                      //           currentUserReference,
+                                                      //       pId: widget
+                                                      //           .propertyId,
+                                                      //     );
+                                                      //     var userSavedRecordReference =
+                                                      //         UserSavedRecord
+                                                      //             .collection
+                                                      //             .doc();
+                                                      //     await userSavedRecordReference
+                                                      //         .set(
+                                                      //             userSavedCreateData);
+                                                      //     saveProperty = UserSavedRecord
+                                                      //         .getDocumentFromData(
+                                                      //             userSavedCreateData,
+                                                      //             userSavedRecordReference);
+                                                      //
+                                                      //     setState(() {});
+                                                      //   },
+                                                      // ),
+                                                      Container(
+                                                        height: 35,
+                                                        width: 35,
+                                                        decoration:
+                                                            BoxDecoration(
 
-                                                          final userSavedCreateData =
-                                                              createUserSavedRecordData(
-                                                            uId:
-                                                                currentUserReference,
-                                                            pId: widget
-                                                                .propertyId,
-                                                          );
-                                                          var userSavedRecordReference =
-                                                              UserSavedRecord
-                                                                  .collection
-                                                                  .doc();
-                                                          await userSavedRecordReference
-                                                              .set(
-                                                                  userSavedCreateData);
-                                                          saveProperty = UserSavedRecord
-                                                              .getDocumentFromData(
-                                                                  userSavedCreateData,
-                                                                  userSavedRecordReference);
-
-                                                          setState(() {});
-                                                        },
-                                                      ),
+                                                                color: Colors
+                                                                    .white,
+                                                                shape: BoxShape
+                                                                    .circle),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(2,
+                                                                      5, 2, 5),
+                                                          child: Icon(
+                                                            Manzel.favorite,
+                                                            color: Colors.black,
+                                                            size: 18,
+                                                          ),
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
                                                 ],

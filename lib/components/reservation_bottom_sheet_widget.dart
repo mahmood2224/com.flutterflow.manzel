@@ -415,6 +415,52 @@ class _ReservationBottomSheetWidgetState
                         ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 2,left: 2),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'reservationAnd'  ,
+                    ), style: FlutterFlowTheme.of(context).bodyText1.override(
+                    fontFamily: 'AvenirArabic',
+                    fontSize: 13,
+                    useGoogleFonts: false,
+                  ),),
+                ),
+                InkWell(
+                  onTap: () async {
+                    logFirebaseEvent(
+                        'RESERVATION_BOTTOM_SHEET_Text_qhlvmiqm_O');
+                    logFirebaseEvent('Text_Bottom-Sheet');
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: FlutterFlowTheme.of(context).white,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.of(context).viewInsets,
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.95,
+                            child: TermsConditionsBottomSheetWidget(
+                              pageType: 6,
+                            ),
+                          ),
+                        );
+                      },
+                    ).then((value) => setState(() {}));
+                  },
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'reservationPrivacyPolicy' /* privacy policy  */,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'AvenirArabic',
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      fontSize: 13,
+                      useGoogleFonts: false,
+                    ),
+                  ),
+                ),
+
               ],
             ),
           ),

@@ -13,6 +13,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'backend/push_notifications/push_notifications_util.dart';
 import 'enviorment/env_variables.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -278,3 +279,10 @@ class _NavBarPageState extends State<NavBarPage> {
     );
   }
 }
+// Future<RemoteConfig> setupRemoteConfig() async {
+//   final RemoteConfig remoteConfig = RemoteConfig.instance;
+//   await remoteConfig.fetch();
+//   await remoteConfig.activate();
+//   await remoteConfig.fetchAndActivate();
+//   return remoteConfig;
+// }
