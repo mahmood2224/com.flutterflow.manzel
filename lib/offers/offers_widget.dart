@@ -44,8 +44,9 @@ class _OffersWidgetState extends State<OffersWidget> {
   ApiCallResponse? acceptOfferResponse;
   ApiCallResponse? acceptOfferResponseAr;
   ApiCallResponse? getOfferResponse;
+  var acceptOfferTappedIndex;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
-  Completer<ApiCallResponse>? _apiRequestCompleter;
+  //Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> channels = {};
 
@@ -74,8 +75,7 @@ class _OffersWidgetState extends State<OffersWidget> {
       print(error);
       print("*********************************************************");
     }
-    if(mounted)
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   types.User asChatUiUser(sendbird.User user) {
@@ -184,7 +184,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                       width: 50,
                       height: 50,
                       child: SpinKitRipple(
-                        color:FlutterFlowTheme.of(context).primaryColor,
+                        color: Color(0xFF2971FB),
                         size: 50,
                       ),
                     ),
@@ -417,7 +417,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     //     options: FFButtonOptions(
                                     //       width: 215,
                                     //       height: 40,
-                                    //       color: FlutterFlowTheme.of(context).primaryColor,
+                                    //       color: Color(0xFF2971FB),
                                     //       textStyle: FlutterFlowTheme.of(context)
                                     //           .subtitle2
                                     //           .override(
@@ -447,112 +447,783 @@ class _OffersWidgetState extends State<OffersWidget> {
                       Expanded(
                         child: AuthUserStreamWidget(
                           child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 16, 16, 0),
-                                  child: FutureBuilder<ApiCallResponse>(
-                                    future: (_apiRequestCompleter ??=
-                                            Completer<ApiCallResponse>()
-                                              ..complete(GetOffersCall.call(
-                                                userId: currentUserUid,
-                                                propertyId: functions
-                                                    .offerScreenPropertyIdisNull(
-                                                        widget.propertyId),
-                                                locale: FFAppState().locale,
-                                                authorazationToken:
-                                                    FFAppState().authToken,
-                                              )))
-                                        .future,
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-
-                                      final listViewGetOffersResponse =
-                                          getOfferResponse!;
-                                      return Builder(
-                                        builder: (context) {
-                                          final activeOffers =
-
-                                            (listViewGetOffersResponse.jsonBody
-                                          ).toList();
-                                          if (activeOffers.isEmpty) {
-                                            return Center(
-                                              child: Container(
-                                                width: MediaQuery.of(context)
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Builder(
+                                    builder: (context) {
+                                      final activeOffers =
+                                        getOfferResponse!.jsonBody["result"].toList();
+                                      if (activeOffers.isEmpty) {
+                                        return Center(
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: MediaQuery.of(context)
                                                     .size
-                                                    .width,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.6,
-                                                child: NoResultWidget(
-                                                  titleText: functions
-                                                      .emptyListWidgetTitle(
-                                                          'offers',
-                                                          FFAppState().locale),
-                                                  screenName: 'offer',
+                                                    .height *
+                                                0.6,
+                                            child: NoResultWidget(
+                                              titleText: functions
+                                                  .emptyListWidgetTitle(
+                                                      'offers',
+                                                      FFAppState().locale),
+                                              screenName: 'offer',
+                                            ),
+                                          ),
+                                        );
+                                      }
+
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        primary: false,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: activeOffers.length,
+                                        itemBuilder:
+                                            (context, activeOffersIndex) {
+                                          final activeOffersItem =
+                                              activeOffers[activeOffersIndex];
+                                          return Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 12),
+                                            child: Container(
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    blurRadius: 15,
+                                                    color: Color(0x06000000),
+                                                    offset: Offset(0, 8),
+                                                    spreadRadius: 0,
+                                                  )
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                border: Border.all(
+                                                  color: Color(0xFFF1F1F1),
                                                 ),
                                               ),
-                                            );
-                                          }
-
-                                          return ListView.builder(
-                                            padding: EdgeInsets.zero,
-                                            primary: false,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount: activeOffers.length,
-                                            itemBuilder:
-                                                (context, activeOffersIndex) {
-                                              final activeOffersItem =
-                                                  activeOffers[
-                                                      activeOffersIndex];
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 12),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        blurRadius: 15,
-                                                        color:
-                                                            Color(0x06000000),
-                                                        offset: Offset(0, 8),
-                                                        spreadRadius: 0,
-                                                      )
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                    border: Border.all(
-                                                      color: Color(0xFFF1F1F1),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                16, 16, 16, 16),
+                                                    child: Container(
+                                                      width: double.infinity,
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        8,
+                                                                        0),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          43),
+                                                              child:
+                                                                  Image.network(
+                                                                getJsonField(
+                                                                  activeOffersItem,
+                                                                  r'''$.bank_logo''',
+                                                                ),
+                                                                width: 43,
+                                                                height: 43,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              0,
+                                                                              0,
+                                                                              3,
+                                                                              0),
+                                                                      child:
+                                                                          Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          't2kwojss' /* Offers */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              fontSize: 12,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Container(
+                                                                      decoration:
+                                                                          BoxDecoration(),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Text(
+                                                                            functions.orderIdFormatter(getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$.order_id''',
+                                                                            ).toString()),
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  fontSize: 12,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    getJsonField(
+                                                                      activeOffersItem,
+                                                                      r'''$.bank_name''',
+                                                                    ).toString(),
+                                                                    'null',
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'AvenirArabic',
+                                                                        fontSize:
+                                                                            20,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                        lineHeight:
+                                                                            1.5,
+                                                                      ),
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              0,
+                                                                              0,
+                                                                              3,
+                                                                              0),
+                                                                      child:
+                                                                          Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'n5d3s79r' /* Last update :  */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              color: FlutterFlowTheme.of(context).primaryColor,
+                                                                              fontSize: 10,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        functions.offerScreenTime(
+                                                                            valueOrDefault<int>(
+                                                                              getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.created_at._seconds''',
+                                                                              ),
+                                                                              0,
+                                                                            ),
+                                                                            valueOrDefault<String>(
+                                                                              FFAppState().locale,
+                                                                              'en',
+                                                                            )),
+                                                                        '0',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'AvenirArabic',
+                                                                            color:
+                                                                                Color(0xFF2971FB),
+                                                                            fontSize:
+                                                                                10,
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              if (functions.conditionalVisibility(
+                                                                  getJsonField(
+                                                                    activeOffersItem,
+                                                                    r'''$.status''',
+                                                                  ).toString(),
+                                                                  'disqualified'))
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 88,
+                                                                    height: 22,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFFD05C5C),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'jcj51k47' /* Disqualified */,
+                                                                          ),
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 11,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              if (functions
+                                                                  .conditionalVisibility(
+                                                                      getJsonField(
+                                                                        activeOffersItem,
+                                                                        r'''$.status''',
+                                                                      ).toString(),
+                                                                      'rejected'))
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 74,
+                                                                    height: 22,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFFD05C5C),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'zraegj7a' /* Rejected */,
+                                                                          ),
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 11,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              if (functions
+                                                                  .conditionalVisibility(
+                                                                      getJsonField(
+                                                                        activeOffersItem,
+                                                                        r'''$.status''',
+                                                                      ).toString(),
+                                                                      'expired'))
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 74,
+                                                                    height: 22,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFF444444),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            '2ak58fes' /* Expired */,
+                                                                          ),
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 11,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              if (functions
+                                                                  .conditionalVisibility(
+                                                                      getJsonField(
+                                                                        activeOffersItem,
+                                                                        r'''$.status''',
+                                                                      ).toString(),
+                                                                      'accepted'))
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 74,
+                                                                    height: 22,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFF43B6A5),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'vaaj8s0b' /* Accepted */,
+                                                                          ),
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 11,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              if (functions
+                                                                  .conditionalVisibility(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          activeOffersItem,
+                                                                          r'''$.status''',
+                                                                        ).toString(),
+                                                                        'null',
+                                                                      ),
+                                                                      'new'))
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          0,
+                                                                          8),
+                                                                  child:
+                                                                      Container(
+                                                                    width: 74,
+                                                                    height: 22,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFFD05C5C),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'lre09mx2' /* New Offer */,
+                                                                          ),
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 11,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              if (functions
+                                                                  .conditionalVisibility(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          activeOffersItem,
+                                                                          r'''$.status''',
+                                                                        ).toString(),
+                                                                        'null',
+                                                                      ),
+                                                                      'pending'))
+                                                                Container(
+                                                                  width: 74,
+                                                                  height: 22,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: Color(
+                                                                        0xFFF0A637),
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                  ),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'nu7aeeks' /* Pending */,
+                                                                        ),
+                                                                        textAlign:
+                                                                            TextAlign.center,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              color: FlutterFlowTheme.of(context).white,
+                                                                              fontSize: 11,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                  child: Column(
+                                                  Divider(
+                                                    thickness: 1,
+                                                    color: Color(0xFFF1F1F1),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                16, 18, 26, 16),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'np7vw75o' /* Property */,
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      color: Color(
+                                                                          0xFF6B6B6B),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                              Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  getJsonField(
+                                                                    activeOffersItem,
+                                                                    r'''$.property_name''',
+                                                                  ).toString(),
+                                                                  'null',
+                                                                ),
+                                                                maxLines: 2,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        5,
+                                                                        0,
+                                                                        0,
+                                                                        0),
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'vs0xmudi' /* Booking Ref. */,
+                                                                  ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'AvenirArabic',
+                                                                        color: Color(
+                                                                            0xFF6B6B6B),
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Expanded(
+                                                                      child:
+                                                                          Text(
+                                                                        functions
+                                                                            .orderIdFormatter(getJsonField(
+                                                                          activeOffersItem,
+                                                                          r'''$.order_id''',
+                                                                        ).toString()),
+                                                                        maxLines:
+                                                                            2,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              fontSize: 16,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(16,
-                                                                    16, 16, 16),
-                                                        child: Container(
-                                                          width:
-                                                              double.infinity,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryBackground,
-                                                          ),
+                                                      if (!functions
+                                                          .conditionalVisibility(
+                                                              getJsonField(
+                                                                activeOffersItem,
+                                                                r'''$.status''',
+                                                              ).toString(),
+                                                              'pending'))
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      16,
+                                                                      0,
+                                                                      16,
+                                                                      16),
                                                           child: Row(
                                                             mainAxisSize:
                                                                 MainAxisSize
@@ -564,567 +1235,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            8,
-                                                                            0),
-                                                                child:
-                                                                    ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              43),
-                                                                  child: Image
-                                                                      .network(
-                                                                    getJsonField(
-                                                                      activeOffersItem,
-                                                                      r'''$.bank_logo''',
-                                                                    ),
-                                                                    width: 43,
-                                                                    height: 43,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                              ),
                                                               Expanded(
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              3,
-                                                                              0),
-                                                                          child:
-                                                                              Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              't2kwojss' /* Offers */,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 12,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                          ),
-                                                                        ),
-                                                                        Container(
-                                                                          decoration:
-                                                                              BoxDecoration(),
-                                                                          child:
-                                                                              Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            children: [
-                                                                              Text(
-                                                                                functions.orderIdFormatter(getJsonField(
-                                                                                  activeOffersItem,
-                                                                                  r'''$.order_id''',
-                                                                                ).toString()),
-                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'AvenirArabic',
-                                                                                      fontSize: 12,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        getJsonField(
-                                                                          activeOffersItem,
-                                                                          r'''$.bank_name''',
-                                                                        ).toString(),
-                                                                        'null',
-                                                                      ),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyText1
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'AvenirArabic',
-                                                                            fontSize:
-                                                                                20,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                            lineHeight:
-                                                                                1.5,
-                                                                          ),
-                                                                    ),
-                                                                    Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              3,
-                                                                              0),
-                                                                          child:
-                                                                              Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              'n5d3s79r' /* Last update :  */,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'AvenirArabic',
-                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                  fontSize: 10,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            functions.offerScreenTime(
-                                                                                valueOrDefault<int>(
-                                                                                  getJsonField(
-                                                                                    activeOffersItem,
-                                                                                    r'''$.created_at._seconds''',
-                                                                                  ),
-                                                                                  0,
-                                                                                ),
-                                                                                valueOrDefault<String>(
-                                                                                  FFAppState().locale,
-                                                                                  'en',
-                                                                                )),
-                                                                            '0',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                color: FlutterFlowTheme.of(context).primaryColor,
-                                                                                fontSize: 10,
-                                                                                fontWeight: FontWeight.w500,
-                                                                                useGoogleFonts: false,
-                                                                              ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  if (functions.conditionalVisibility(
-                                                                      getJsonField(
-                                                                        activeOffersItem,
-                                                                        r'''$.status''',
-                                                                      ).toString(),
-                                                                      'disqualified'))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            88,
-                                                                        height:
-                                                                            22,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                          FlutterFlowTheme.of(context).secondaryRed,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'jcj51k47' /* Disqualified */,
-                                                                              ),
-                                                                              textAlign: TextAlign.center,
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    color: FlutterFlowTheme.of(context).white,
-                                                                                    fontSize: 11,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  if (functions.conditionalVisibility(
-                                                                      getJsonField(
-                                                                        activeOffersItem,
-                                                                        r'''$.status''',
-                                                                      ).toString(),
-                                                                      'rejected'))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            74,
-                                                                        height:
-                                                                            22,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                          FlutterFlowTheme.of(context).secondaryRed,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'zraegj7a' /* Rejected */,
-                                                                              ),
-                                                                              textAlign: TextAlign.center,
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    color: FlutterFlowTheme.of(context).white,
-                                                                                    fontSize: 11,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  if (functions.conditionalVisibility(
-                                                                      getJsonField(
-                                                                        activeOffersItem,
-                                                                        r'''$.status''',
-                                                                      ).toString(),
-                                                                      'expired'))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            74,
-                                                                        height:
-                                                                            22,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Color(0xFF444444),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                '2ak58fes' /* Expired */,
-                                                                              ),
-                                                                              textAlign: TextAlign.center,
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    color: FlutterFlowTheme.of(context).white,
-                                                                                    fontSize: 11,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  if (functions.conditionalVisibility(
-                                                                      getJsonField(
-                                                                        activeOffersItem,
-                                                                        r'''$.status''',
-                                                                      ).toString(),
-                                                                      'accepted'))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            74,
-                                                                        height:
-                                                                            22,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              Color(0xFF43B6A5),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'vaaj8s0b' /* Accepted */,
-                                                                              ),
-                                                                              textAlign: TextAlign.center,
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    color: FlutterFlowTheme.of(context).white,
-                                                                                    fontSize: 11,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  if (functions
-                                                                      .conditionalVisibility(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$.status''',
-                                                                            ).toString(),
-                                                                            'null',
-                                                                          ),
-                                                                          'new'))
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              8),
-                                                                      child:
-                                                                          Container(
-                                                                        width:
-                                                                            74,
-                                                                        height:
-                                                                            22,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                          FlutterFlowTheme.of(context).secondaryRed,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'lre09mx2' /* New Offer */,
-                                                                              ),
-                                                                              textAlign: TextAlign.center,
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    color: FlutterFlowTheme.of(context).white,
-                                                                                    fontSize: 11,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  if (functions
-                                                                      .conditionalVisibility(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$.status''',
-                                                                            ).toString(),
-                                                                            'null',
-                                                                          ),
-                                                                          'pending'))
-                                                                    Container(
-                                                                      width: 74,
-                                                                      height:
-                                                                          22,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        color: FlutterFlowTheme.of(context).primaryOrange,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(5),
-                                                                      ),
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        children: [
-                                                                          Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              'nu7aeeks' /* Pending */,
-                                                                            ),
-                                                                            textAlign:
-                                                                                TextAlign.center,
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'AvenirArabic',
-                                                                                  color: FlutterFlowTheme.of(context).white,
-                                                                                  fontSize: 11,
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Divider(
-                                                        thickness: 1,
-                                                        color:
-                                                            Color(0xFFF1F1F1),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(16,
-                                                                    18, 26, 16),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'np7vw75o' /* Property */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'AvenirArabic',
-                                                                          color:
-                                                                              Color(0xFF6B6B6B),
-                                                                          fontWeight:
-                                                                              FontWeight.w300,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
-                                                                  Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      getJsonField(
-                                                                        activeOffersItem,
-                                                                        r'''$.property_name''',
-                                                                      ).toString(),
-                                                                      'null',
-                                                                    ),
-                                                                    maxLines: 2,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'AvenirArabic',
-                                                                          fontSize:
-                                                                              16,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5,
-                                                                            0,
-                                                                            0,
-                                                                            0),
                                                                 child: Column(
                                                                   mainAxisSize:
                                                                       MainAxisSize
@@ -1137,7 +1248,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                       FFLocalizations.of(
                                                                               context)
                                                                           .getText(
-                                                                        'vs0xmudi' /* Booking Ref. */,
+                                                                        'lastInstallmentOffer' /* Initial installment */,
                                                                       ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
@@ -1159,21 +1270,44 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               .max,
                                                                       crossAxisAlignment:
                                                                           CrossAxisAlignment
-                                                                              .start,
+                                                                              .end,
                                                                       children: [
-                                                                        Expanded(
+                                                                        Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            functions.formatAmount(valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.last_installment_amount''',
+                                                                              ).toString(),
+                                                                              '0',
+                                                                            )),
+                                                                            '0',
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                fontSize: 19,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              4,
+                                                                              0,
+                                                                              0,
+                                                                              4),
                                                                           child:
                                                                               Text(
-                                                                            functions.orderIdFormatter(getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$.order_id''',
-                                                                            ).toString()),
-                                                                            maxLines:
-                                                                                2,
+                                                                            FFLocalizations.of(context).getText(
+                                                                              'z7x7wv59' /* SAR */,
+                                                                            ),
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 16,
-                                                                                  fontWeight: FontWeight.bold,
+                                                                                  fontSize: 10,
+                                                                                  fontWeight: FontWeight.w500,
                                                                                   useGoogleFonts: false,
                                                                                 ),
                                                                           ),
@@ -1183,877 +1317,876 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                   ],
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          if (!functions
-                                                              .conditionalVisibility(
-                                                                  getJsonField(
-                                                                    activeOffersItem,
-                                                                    r'''$.status''',
-                                                                  ).toString(),
-                                                                  'pending'))
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          16,
-                                                                          0,
-                                                                          16,
-                                                                          16),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Expanded(
-                                                                    child:
-                                                                        Column(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          FFLocalizations.of(context)
-                                                                              .getText(
-                                                                            'lastInstallmentOffer' /* Initial installment */,
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                color: Color(0xFF6B6B6B),
-                                                                                fontWeight: FontWeight.w300,
-                                                                                useGoogleFonts: false,
-                                                                              ),
-                                                                        ),
-                                                                        Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.end,
-                                                                          children: [
-                                                                            Text(
-                                                                              valueOrDefault<String>(
-                                                                                functions.formatAmount(valueOrDefault<String>(
-                                                                                  getJsonField(
-                                                                                    activeOffersItem,
-                                                                                    r'''$.last_installment_amount''',
-                                                                                  ).toString(),
-                                                                                  '0',
-                                                                                )),
-                                                                                '0',
-                                                                              ),
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    fontSize: 19,
-                                                                                    fontWeight: FontWeight.bold,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
-                                                                            ),
-                                                                            Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
-                                                                              child: Text(
-                                                                                FFLocalizations.of(context).getText(
-                                                                                  'z7x7wv59' /* SAR */,
-                                                                                ),
-                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'AvenirArabic',
-                                                                                      fontSize: 10,
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                  Expanded(
-                                                                    child:
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
                                                                           5,
                                                                           0,
                                                                           0,
                                                                           0),
-                                                                      child:
-                                                                      Column(
-                                                                        mainAxisSize:
-                                                                        MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                        CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              '2kxnix92' /* Total price */,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          '2kxnix92' /* Total price */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
                                                                               fontFamily: 'AvenirArabic',
                                                                               color: Color(0xFF6B6B6B),
                                                                               fontWeight: FontWeight.w300,
                                                                               useGoogleFonts: false,
                                                                             ),
-                                                                          ),
-                                                                          Row(
-                                                                            mainAxisSize:
+                                                                      ),
+                                                                      Row(
+                                                                        mainAxisSize:
                                                                             MainAxisSize.max,
-                                                                            crossAxisAlignment:
+                                                                        crossAxisAlignment:
                                                                             CrossAxisAlignment.end,
-                                                                            children: [
-                                                                              Text(
-                                                                                valueOrDefault<String>(
-                                                                                  functions.formatAmount(valueOrDefault<String>(
-                                                                                    getJsonField(
-                                                                                      activeOffersItem,
-                                                                                      r'''$.property_price''',
-                                                                                    ).toString(),
-                                                                                    '0',
-                                                                                  )),
-                                                                                  '0',
-                                                                                ),
-                                                                                maxLines: 2,
-                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                        children: [
+                                                                          Text(
+                                                                            valueOrDefault<String>(
+                                                                              functions.formatAmount(valueOrDefault<String>(
+                                                                                getJsonField(
+                                                                                  activeOffersItem,
+                                                                                  r'''$.property_price''',
+                                                                                ).toString(),
+                                                                                '0',
+                                                                              )),
+                                                                              '0',
+                                                                            ),
+                                                                            maxLines:
+                                                                                2,
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
                                                                                   fontSize: 19,
                                                                                   fontWeight: FontWeight.bold,
                                                                                   useGoogleFonts: false,
                                                                                 ),
+                                                                          ),
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                4,
+                                                                                0,
+                                                                                0,
+                                                                                4),
+                                                                            child:
+                                                                                Text(
+                                                                              FFLocalizations.of(context).getText(
+                                                                                'h47bvnhi' /* SAR */,
                                                                               ),
-                                                                              Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
-                                                                                child: Text(
-                                                                                  FFLocalizations.of(context).getText(
-                                                                                    'h47bvnhi' /* SAR */,
-                                                                                  ),
-                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                     fontFamily: 'AvenirArabic',
                                                                                     fontSize: 10,
                                                                                     fontWeight: FontWeight.w500,
                                                                                     useGoogleFonts: false,
                                                                                   ),
-                                                                                ),
-                                                                              ),
-                                                                            ],
+                                                                            ),
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          if (!functions
-                                                              .conditionalVisibility(
-                                                                  getJsonField(
-                                                                    activeOffersItem,
-                                                                    r'''$.status''',
-                                                                  ).toString(),
-                                                                  'pending'))
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      if (!functions
+                                                          .conditionalVisibility(
+                                                              getJsonField(
+                                                                activeOffersItem,
+                                                                r'''$.status''',
+                                                              ).toString(),
+                                                              'pending'))
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      16,
+                                                                      0,
+                                                                      16,
+                                                                      18),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          16,
                                                                           0,
-                                                                          16,
-                                                                          18),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  Expanded(
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              0),
-                                                                      child:
-                                                                          Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              '4ha591ne' /* Installment period */,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'AvenirArabic',
-                                                                                  color: Color(0xFF6B6B6B),
-                                                                                  fontWeight: FontWeight.w300,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                          ),
-                                                                          Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.end,
-                                                                            children: [
-                                                                              Text(
-                                                                                valueOrDefault<String>(
-                                                                                  getJsonField(
-                                                                                    activeOffersItem,
-                                                                                    r'''$.offered_installment_period''',
-                                                                                  ).toString(),
-                                                                                  '0',
-                                                                                ),
-                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'AvenirArabic',
-                                                                                      fontSize: 19,
-                                                                                      fontWeight: FontWeight.bold,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
-                                                                              ),
-                                                                              Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
-                                                                                child: Text(
-                                                                                  FFLocalizations.of(context).getText(
-                                                                                    'b1jmmlnc' /* Month */,
-                                                                                  ),
-                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                        fontFamily: 'AvenirArabic',
-                                                                                        fontSize: 10,
-                                                                                        fontWeight: FontWeight.w500,
-                                                                                        useGoogleFonts: false,
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  Expanded(
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              5,
-                                                                              0,
-                                                                              0,
-                                                                              0),
-                                                                      child:
-                                                                          Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            FFLocalizations.of(context).getText(
-                                                                              '2kxnix92' /* Total price */,
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'AvenirArabic',
-                                                                                  color: Color(0xFF6B6B6B),
-                                                                                  fontWeight: FontWeight.w300,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
-                                                                          ),
-                                                                          Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.end,
-                                                                            children: [
-                                                                              Text(
-                                                                                valueOrDefault<String>(
-                                                                                  functions.formatAmount(valueOrDefault<String>(
-                                                                                    getJsonField(
-                                                                                      activeOffersItem,
-                                                                                      r'''$.property_price''',
-                                                                                    ).toString(),
-                                                                                    '0',
-                                                                                  )),
-                                                                                  '0',
-                                                                                ),
-                                                                                maxLines: 2,
-                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'AvenirArabic',
-                                                                                      fontSize: 19,
-                                                                                      fontWeight: FontWeight.bold,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
-                                                                              ),
-                                                                              Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 4),
-                                                                                child: Text(
-                                                                                  FFLocalizations.of(context).getText(
-                                                                                    'h47bvnhi' /* SAR */,
-                                                                                  ),
-                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                        fontFamily: 'AvenirArabic',
-                                                                                        fontSize: 10,
-                                                                                        fontWeight: FontWeight.w500,
-                                                                                        useGoogleFonts: false,
-                                                                                      ),
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        16,
-                                                                        0,
-                                                                        16,
-                                                                        20),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .stretch,
-                                                              children: [
-                                                                Badge(
-                                                                  badgeContent:
+                                                                          0,
+                                                                          0,
+                                                                          0),
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
                                                                       Text(
-                                                                    channels[valueOrDefault<String>(
-                                                                            getJsonField(activeOffersItem, r'''$.channel_detail.channel_url''').toString(),
-                                                                            '0')] ??
-                                                                        '0',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'AvenirArabic',
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          fontSize:
-                                                                              12,
-                                                                          useGoogleFonts:
-                                                                              false,
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          '4ha591ne' /* Installment period */,
                                                                         ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              color: Color(0xFF6B6B6B),
+                                                                              fontWeight: FontWeight.w300,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.end,
+                                                                        children: [
+                                                                          Text(
+                                                                            valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.offered_installment_period''',
+                                                                              ).toString(),
+                                                                              '0',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  fontSize: 19,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
+                                                                          ),
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                4,
+                                                                                0,
+                                                                                0,
+                                                                                4),
+                                                                            child:
+                                                                                Text(
+                                                                              FFLocalizations.of(context).getText(
+                                                                                'b1jmmlnc' /* Month */,
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                    fontFamily: 'AvenirArabic',
+                                                                                    fontSize: 10,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                  ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
                                                                   ),
-                                                                  showBadge: (channels[valueOrDefault<String>(getJsonField(activeOffersItem, r'''$.channel_detail.channel_url''').toString(), '0')] !=
-                                                                              '0' &&
-                                                                          channels[valueOrDefault<String>(getJsonField(activeOffersItem, r'''$.channel_detail.channel_url''').toString(), '0')] !=
-                                                                              null)
-                                                                      ? true
-                                                                      : false,
-                                                                  shape:
-                                                                      BadgeShape
-                                                                          .circle,
-                                                                  badgeColor: FlutterFlowTheme.of(
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          5,
+                                                                          0,
+                                                                          0,
+                                                                          0),
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          '2kxnix92' /* Total price */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              color: Color(0xFF6B6B6B),
+                                                                              fontWeight: FontWeight.w300,
+                                                                              useGoogleFonts: false,
+                                                                            ),
+                                                                      ),
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.end,
+                                                                        children: [
+                                                                          Text(
+                                                                            valueOrDefault<String>(
+                                                                              functions.formatAmount(valueOrDefault<String>(
+                                                                                getJsonField(
+                                                                                  activeOffersItem,
+                                                                                  r'''$.property_price''',
+                                                                                ).toString(),
+                                                                                '0',
+                                                                              )),
+                                                                              '0',
+                                                                            ),
+                                                                            maxLines:
+                                                                                2,
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  fontSize: 19,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
+                                                                          ),
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                4,
+                                                                                0,
+                                                                                0,
+                                                                                4),
+                                                                            child:
+                                                                                Text(
+                                                                              FFLocalizations.of(context).getText(
+                                                                                'h47bvnhi' /* SAR */,
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                    fontFamily: 'AvenirArabic',
+                                                                                    fontSize: 10,
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                    useGoogleFonts: false,
+                                                                                  ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(16, 0,
+                                                                    16, 20),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .stretch,
+                                                          children: [
+                                                            Badge(
+                                                              badgeContent:
+                                                                  Text(
+                                                                channels[valueOrDefault<
+                                                                            String>(
+                                                                        getJsonField(activeOffersItem,
+                                                                                r'''$.channel_detail.channel_url''')
+                                                                            .toString(),
+                                                                        '0')] ??
+                                                                    '0',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontSize:
+                                                                          12,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                              showBadge: (channels[valueOrDefault<String>(
+                                                                              getJsonField(activeOffersItem, r'''$.channel_detail.channel_url''')
+                                                                                  .toString(),
+                                                                              '0')] !=
+                                                                          '0' &&
+                                                                      channels[valueOrDefault<String>(
+                                                                              getJsonField(activeOffersItem, r'''$.channel_detail.channel_url''').toString(),
+                                                                              '0')] !=
+                                                                          null)
+                                                                  ? true
+                                                                  : false,
+                                                              shape: BadgeShape
+                                                                  .circle,
+                                                              badgeColor:
+                                                                  FlutterFlowTheme.of(
                                                                           context)
                                                                       .customColor3,
-                                                                  elevation: 4,
-                                                                  padding: EdgeInsetsDirectional
+                                                              elevation: 4,
+                                                              padding:
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           10,
                                                                           10,
                                                                           10,
                                                                           10),
-                                                                  position:
-                                                                      BadgePosition
-                                                                          .topEnd(),
-                                                                  animationType:
-                                                                      BadgeAnimationType
-                                                                          .scale,
-                                                                  toAnimate:
-                                                                      true,
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                              position:
+                                                                  BadgePosition
+                                                                      .topEnd(),
+                                                              animationType:
+                                                                  BadgeAnimationType
+                                                                      .scale,
+                                                              toAnimate: true,
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0,
                                                                             7,
                                                                             0,
                                                                             8),
-                                                                    child:
-                                                                        InkWell(
-                                                                      onTap:
-                                                                          () async {
-                                                                        logFirebaseEvent(
-                                                                            'OFFERS_PAGE_Container_4zrbybz6_ON_TAP');
-                                                                        logFirebaseEvent(
-                                                                            'Container_Navigate-To');
-                                                                        context
-                                                                            .pushNamed(
-                                                                          'Chat',
-                                                                          queryParams:
-                                                                              {
-                                                                            'bankJson': serializeParam(
-                                                                                getJsonField(
-                                                                                  activeOffersItem,
-                                                                                  r'''$''',
-                                                                                ),
-                                                                                ParamType.JSON),
-                                                                          }.withoutNulls,
-                                                                        );
-                                                                      },
-                                                                      child:
-                                                                          Container(
-                                                                        width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width,
-                                                                        height:
-                                                                            42,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryColor,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(10),
+                                                                child: InkWell(
+                                                                  onTap:
+                                                                      () async {
+                                                                    logFirebaseEvent(
+                                                                        'OFFERS_PAGE_Container_4zrbybz6_ON_TAP');
+                                                                    logFirebaseEvent(
+                                                                        'Container_Navigate-To');
+                                                                    context
+                                                                        .pushNamed(
+                                                                      'Chat',
+                                                                      queryParams:
+                                                                          {
+                                                                        'bankJson': serializeParam(
+                                                                            getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$''',
+                                                                            ),
+                                                                            ParamType.JSON),
+                                                                      }.withoutNulls,
+                                                                    );
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width,
+                                                                    height: 42,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'pasrxjal' /* Chat with */,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 15,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
                                                                         ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'pasrxjal' /* Chat with */,
-                                                                              ),
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    color: FlutterFlowTheme.of(context).white,
-                                                                                    fontSize: 15,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
+                                                                        Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              3,
+                                                                              0,
+                                                                              2,
+                                                                              0),
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.bank_name''',
+                                                                              ).toString(),
+                                                                              'null',
                                                                             ),
-                                                                            Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(3, 0, 2, 0),
-                                                                              child: Text(
-                                                                                valueOrDefault<String>(
-                                                                                  getJsonField(
-                                                                                    activeOffersItem,
-                                                                                    r'''$.bank_name''',
-                                                                                  ).toString(),
-                                                                                  'null',
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  color: FlutterFlowTheme.of(context).white,
+                                                                                  fontSize: 15,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  useGoogleFonts: false,
                                                                                 ),
-                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'AvenirArabic',
-                                                                                      color: FlutterFlowTheme.of(context).white,
-                                                                                      fontSize: 15,
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
-                                                                              ),
-                                                                            ),
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'alqnps4o' /*   */,
-                                                                              ),
-                                                                              style: FlutterFlowTheme.of(context).bodyText1,
-                                                                            ),
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'ps7kcru7' /* bank */,
-                                                                              ),
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
-                                                                                    color: FlutterFlowTheme.of(context).white,
-                                                                                    fontSize: 15,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
+                                                                          ),
                                                                         ),
-                                                                      ),
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'alqnps4o' /*   */,
+                                                                          ),
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyText1,
+                                                                        ),
+                                                                        Text(
+                                                                          FFLocalizations.of(context)
+                                                                              .getText(
+                                                                            'ps7kcru7' /* bank */,
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyText1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontSize: 15,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ],
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                if (functions
-                                                                    .chatButtonVisibility(
-                                                                        getJsonField(
-                                                                  activeOffersItem,
-                                                                  r'''$.status''',
-                                                                ).toString()))
-                                                                  Container(
-                                                                    width: 130,
-                                                                    height: 42,
-                                                                    child:
-                                                                        ElevatedButton(
-                                                                      onPressed:
-                                                                          () async {
+                                                              ),
+                                                            ),
+                                                            if (functions
+                                                                .chatButtonVisibility(
+                                                                    getJsonField(
+                                                              activeOffersItem,
+                                                              r'''$.status''',
+                                                            ).toString()))
+                                                              Container(
+                                                                width: 130,
+                                                                height: 42,
+                                                                child:
+                                                                    ElevatedButton(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    if(isLoading.value == true){
+                                                                    logFirebaseEvent(
+                                                                        'OFFERS_PAGE_ACCEPT_OFFER_BTN_ON_TAP');
+                                                                    if (FFAppState()
+                                                                            .locale ==
+                                                                        'en') {
+                                                                      logFirebaseEvent(
+                                                                          'Button_Alert-Dialog');
+                                                                      var confirmDialogResponse = await showDialog<
+                                                                              bool>(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (alertDialogContext) {
+                                                                              return AlertDialog(
+                                                                                title: Text('Accept offer'),
+                                                                                content: Text('Are you sure you want to accept the offer? we will reject all other offers if you accepted'),
+                                                                                actions: [
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                    child: Text('No'),
+                                                                                  ),
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                    child: Text('Accept'),
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          ) ??
+                                                                          false;
+                                                                      if (confirmDialogResponse) {
+                                                                        acceptOfferTappedIndex = activeOffersIndex;
+                                                                        isLoading.value =
+                                                                            true;
                                                                         logFirebaseEvent(
-                                                                            'OFFERS_PAGE_ACCEPT_OFFER_BTN_ON_TAP');
-                                                                        if (FFAppState().locale ==
-                                                                            'en') {
+                                                                            'Button_Backend-Call');
+                                                                        acceptOfferResponse =
+                                                                            await AcceptOfferCall.call(
+                                                                          userId:
+                                                                              currentUserUid,
+                                                                          authorazationToken:
+                                                                              FFAppState().authToken,
+                                                                          offerId:
+                                                                              valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$.id''',
+                                                                            ).toString(),
+                                                                            'null',
+                                                                          ),
+                                                                        );
+                                                                        if ((acceptOfferResponse?.statusCode ??
+                                                                                200) ==
+                                                                            200) {
                                                                           logFirebaseEvent(
-                                                                              'Button_Alert-Dialog');
-                                                                          var confirmDialogResponse = await showDialog<bool>(
-                                                                                context: context,
-                                                                                builder: (alertDialogContext) {
-                                                                                  return AlertDialog(
-                                                                                    title: Text('Accept offer'),
-                                                                                    content: Text('Are you sure you want to accept the offer? we will reject all other offers if you accepted'),
-                                                                                    actions: [
-                                                                                      TextButton(
-                                                                                        onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                        child: Text('No'),
-                                                                                      ),
-                                                                                      TextButton(
-                                                                                        onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                        child: Text('Accept'),
-                                                                                      ),
-                                                                                    ],
-                                                                                  );
-                                                                                },
-                                                                              ) ??
-                                                                              false;
-                                                                          if (confirmDialogResponse) {
-                                                                            isLoading.value =
-                                                                                true;
-                                                                            logFirebaseEvent('Button_Backend-Call');
-                                                                            acceptOfferResponse =
-                                                                                await AcceptOfferCall.call(
-                                                                              userId: currentUserUid,
-                                                                              authorazationToken: FFAppState().authToken,
-                                                                              offerId: valueOrDefault<String>(
-                                                                                getJsonField(
-                                                                                  activeOffersItem,
-                                                                                  r'''$.id''',
-                                                                                ).toString(),
-                                                                                'null',
+                                                                              'Button_Show-Snack-Bar');
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(
+                                                                            SnackBar(
+                                                                              content: Text(
+                                                                                functions.snackBarMessage('offerAccepted', FFAppState().locale),
+                                                                                style: TextStyle(
+                                                                                  color: FlutterFlowTheme.of(context).white,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  fontSize: 16,
+                                                                                ),
                                                                               ),
-                                                                            );
-                                                                            if ((acceptOfferResponse?.statusCode ?? 200) ==
-                                                                                200) {
-                                                                              logFirebaseEvent('Button_Show-Snack-Bar');
-                                                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                                                SnackBar(
-                                                                                  content: Text(
-                                                                                    functions.snackBarMessage('offerAccepted', FFAppState().locale),
-                                                                                    style: TextStyle(
-                                                                                      color: FlutterFlowTheme.of(context).white,
-                                                                                      fontWeight: FontWeight.bold,
-                                                                                      fontSize: 16,
-                                                                                    ),
-                                                                                  ),
-                                                                                  duration: Duration(milliseconds: 4000),
-                                                                                  backgroundColor: FlutterFlowTheme.of(context).primaryText,
-                                                                                ),
-                                                                              );
-                                                                              // Future.delayed(const Duration(seconds: 5), () {
-                                                                              if(mounted)
-                                                                              setState(() {});
+                                                                              duration: Duration(milliseconds: 4000),
+                                                                              backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                            ),
+                                                                          );
+                                                                          // Future.delayed(const Duration(seconds: 5), () {
+                                                                          if (mounted)
+                                                                            setState(() {});
 
-                                                                              // });
-                                                                              isLoading.value = false;
-                                                                            } else {
-                                                                              logFirebaseEvent('Button_Show-Snack-Bar');
-                                                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                                                SnackBar(
-                                                                                  content: Text(
-                                                                                    functions.snackBarMessage('error', FFAppState().locale),
-                                                                                    style: TextStyle(
-                                                                                      color: FlutterFlowTheme.of(context).white,
-                                                                                      fontWeight: FontWeight.bold,
-                                                                                      fontSize: 16,
-                                                                                    ),
-                                                                                  ),
-                                                                                  duration: Duration(milliseconds: 4000),
-                                                                                  backgroundColor: FlutterFlowTheme.of(context).primaryText,
-                                                                                ),
-                                                                              );
-                                                                              isLoading.value = false;
-                                                                            }
-                                                                          }
+                                                                          // });
+                                                                          isLoading.value =
+                                                                              false;
                                                                         } else {
                                                                           logFirebaseEvent(
-                                                                              'Button_Alert-Dialog');
-                                                                          var confirmDialogResponse = await showDialog<bool>(
-                                                                                context: context,
-                                                                                builder: (alertDialogContext) {
-                                                                                  return AlertDialog(
-                                                                                    title: Text('اقبل العرض'),
-                                                                                    content: Text('هل أنت متأكد أنك تريد قبول العرض؟ سيتم رفض جميع العروض الأخرى بعد قبول هذا العرض'),
-                                                                                    actions: [
-                                                                                      TextButton(
-                                                                                        onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                        child: Text('لا، احتاج بعض من الوقت'),
-                                                                                      ),
-                                                                                      TextButton(
-                                                                                        onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                        child: Text('قبول العرض'),
-                                                                                      ),
-                                                                                    ],
-                                                                                  );
-                                                                                },
-                                                                              ) ??
-                                                                              false;
-                                                                          if (confirmDialogResponse) {
-                                                                            isLoading.value =
-                                                                                true;
-                                                                            logFirebaseEvent('Button_Backend-Call');
-                                                                            acceptOfferResponseAr =
-                                                                                await AcceptOfferCall.call(
-                                                                              userId: currentUserUid,
-                                                                              authorazationToken: FFAppState().authToken,
-                                                                              offerId: valueOrDefault<String>(
-                                                                                getJsonField(
-                                                                                  activeOffersItem,
-                                                                                  r'''$.id''',
-                                                                                ).toString(),
-                                                                                'null',
+                                                                              'Button_Show-Snack-Bar');
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(
+                                                                            SnackBar(
+                                                                              content: Text(
+                                                                                functions.snackBarMessage('error', FFAppState().locale),
+                                                                                style: TextStyle(
+                                                                                  color: FlutterFlowTheme.of(context).white,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  fontSize: 16,
+                                                                                ),
                                                                               ),
-                                                                            );
-                                                                            if ((acceptOfferResponseAr?.statusCode ?? 200) ==
-                                                                                200) {
-                                                                              logFirebaseEvent('Button_Show-Snack-Bar');
-                                                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                                                SnackBar(
-                                                                                  content: Text(
-                                                                                    functions.snackBarMessage('offerAccepted', FFAppState().locale),
-                                                                                    style: TextStyle(
-                                                                                      color: FlutterFlowTheme.of(context).white,
-                                                                                      fontWeight: FontWeight.bold,
-                                                                                      fontSize: 16,
-                                                                                    ),
-                                                                                  ),
-                                                                                  duration: Duration(milliseconds: 4000),
-                                                                                  backgroundColor: FlutterFlowTheme.of(context).primaryText,
-                                                                                ),
-                                                                              );
-                                                                              if(mounted)
-                                                                              setState(() {});
-                                                                              isLoading.value = false;
-                                                                            } else {
-                                                                              logFirebaseEvent('Button_Show-Snack-Bar');
-                                                                              ScaffoldMessenger.of(context).showSnackBar(
-                                                                                SnackBar(
-                                                                                  content: Text(
-                                                                                    functions.snackBarMessage('error', FFAppState().locale),
-                                                                                    style: TextStyle(
-                                                                                      color: FlutterFlowTheme.of(context).white,
-                                                                                      fontWeight: FontWeight.bold,
-                                                                                      fontSize: 16,
-                                                                                    ),
-                                                                                  ),
-                                                                                  duration: Duration(milliseconds: 4000),
-                                                                                  backgroundColor: FlutterFlowTheme.of(context).primaryText,
-                                                                                ),
-                                                                              );
-                                                                              isLoading.value = false;
-                                                                            }
-                                                                          }
+                                                                              duration: Duration(milliseconds: 4000),
+                                                                              backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                            ),
+                                                                          );
+                                                                          isLoading.value =
+                                                                              false;
                                                                         }
-                                                                        if(mounted)
-                                                                        setState(
-                                                                            () {});
-                                                                      },
-                                                                      child: ValueListenableBuilder<
+                                                                      }
+                                                                    } else {
+                                                                      logFirebaseEvent(
+                                                                          'Button_Alert-Dialog');
+                                                                      var confirmDialogResponse = await showDialog<
+                                                                              bool>(
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (alertDialogContext) {
+                                                                              return AlertDialog(
+                                                                                title: Text('اقبل العرض'),
+                                                                                content: Text('هل أنت متأكد أنك تريد قبول العرض؟ سيتم رفض جميع العروض الأخرى بعد قبول هذا العرض'),
+                                                                                actions: [
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                    child: Text('لا، احتاج بعض من الوقت'),
+                                                                                  ),
+                                                                                  TextButton(
+                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                    child: Text('قبول العرض'),
+                                                                                  ),
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          ) ??
+                                                                          false;
+                                                                      if (confirmDialogResponse) {
+                                                                        acceptOfferTappedIndex = activeOffersIndex;
+                                                                        isLoading.value =
+                                                                            true;
+                                                                        logFirebaseEvent(
+                                                                            'Button_Backend-Call');
+                                                                        acceptOfferResponseAr =
+                                                                            await AcceptOfferCall.call(
+                                                                          userId:
+                                                                              currentUserUid,
+                                                                          authorazationToken:
+                                                                              FFAppState().authToken,
+                                                                          offerId:
+                                                                              valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              activeOffersItem,
+                                                                              r'''$.id''',
+                                                                            ).toString(),
+                                                                            'null',
+                                                                          ),
+                                                                        );
+                                                                        if ((acceptOfferResponseAr?.statusCode ??
+                                                                                200) ==
+                                                                            200) {
+                                                                          logFirebaseEvent(
+                                                                              'Button_Show-Snack-Bar');
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(
+                                                                            SnackBar(
+                                                                              content: Text(
+                                                                                functions.snackBarMessage('offerAccepted', FFAppState().locale),
+                                                                                style: TextStyle(
+                                                                                  color: FlutterFlowTheme.of(context).white,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  fontSize: 16,
+                                                                                ),
+                                                                              ),
+                                                                              duration: Duration(milliseconds: 4000),
+                                                                              backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                            ),
+                                                                          );
+                                                                          if (mounted)
+                                                                            setState(() {});
+                                                                          isLoading.value =
+                                                                              false;
+                                                                        } else {
+                                                                          logFirebaseEvent(
+                                                                              'Button_Show-Snack-Bar');
+                                                                          ScaffoldMessenger.of(context)
+                                                                              .showSnackBar(
+                                                                            SnackBar(
+                                                                              content: Text(
+                                                                                functions.snackBarMessage('error', FFAppState().locale),
+                                                                                style: TextStyle(
+                                                                                  color: FlutterFlowTheme.of(context).white,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  fontSize: 16,
+                                                                                ),
+                                                                              ),
+                                                                              duration: Duration(milliseconds: 4000),
+                                                                              backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                            ),
+                                                                          );
+                                                                          isLoading.value =
+                                                                              false;
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                    if (mounted)
+                                                                      setState(
+                                                                          () {});
+                                                                  }},
+                                                                  child:
+                                                                      ValueListenableBuilder<
                                                                           bool>(
-                                                                        builder: (BuildContext context,
-                                                                            bool
-                                                                                value,
-                                                                            Widget?
-                                                                                child) {
-                                                                          return isLoading.value
-                                                                              ? Padding(
-                                                                                  padding: const EdgeInsets.all(5.0),
-                                                                                  child: Row(
-                                                                                    mainAxisSize: MainAxisSize.min,
-                                                                                    children: [
-                                                                                      SizedBox(
-                                                                                        height: 30,
-                                                                                        width: 30,
-                                                                                        child: CircularProgressIndicator(
-                                                                                          valueColor: AlwaysStoppedAnimation(Colors.white),
-                                                                                          strokeWidth: 5,
-                                                                                        ),
-                                                                                      )
-                                                                                    ],
-                                                                                  ),
-                                                                                )
-                                                                              : AutoSizeText(
-                                                                                  FFLocalizations.of(context).getText(
-                                                                                    'y0qb0uvi' /* Accept offer */,
-                                                                                  ),
-                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                        fontFamily: 'AvenirArabic',
-                                                                                        color: FlutterFlowTheme.of(context).white,
-                                                                                        fontSize: 15,
-                                                                                        fontWeight: FontWeight.w500,
-                                                                                        useGoogleFonts: false,
-                                                                                      ));
-                                                                        },
-                                                                        valueListenable:
-                                                                            isLoading,
-                                                                      ),
-                                                                      style:
-                                                                          ButtonStyle(
-                                                                        foregroundColor:
-                                                                            MaterialStateProperty.resolveWith<Color?>(
-                                                                          (states) {
-                                                                            if (states.contains(MaterialState.disabled)) {
-                                                                              FlutterFlowTheme.of(context).subtitle2.override(
+                                                                    builder: (BuildContext
+                                                                            context,
+                                                                        bool
+                                                                            value,
+                                                                        Widget?
+                                                                            child) {
+                                                                      return
+                                                                        (((activeOffersIndex!=acceptOfferTappedIndex) && (isLoading.value==true))? false:
+                                                                        isLoading
+                                                                              .value)
+                                                                          ? Padding(
+                                                                              padding: const EdgeInsets.all(5.0),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.min,
+                                                                                children: [
+                                                                                  SizedBox(
+                                                                                    height: 30,
+                                                                                    width: 30,
+                                                                                    child: CircularProgressIndicator(
+                                                                                      valueColor: AlwaysStoppedAnimation(Colors.white),
+                                                                                      strokeWidth: 5,
+                                                                                    ),
+                                                                                  )
+                                                                                ],
+                                                                              ),
+                                                                            )
+                                                                          : AutoSizeText(
+                                                                              FFLocalizations.of(context).getText(
+                                                                                'y0qb0uvi' /* Accept offer */,
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                     fontFamily: 'AvenirArabic',
-                                                                                    color: Colors.white,
+                                                                                    color: FlutterFlowTheme.of(context).white,
+                                                                                    fontSize: 15,
+                                                                                    fontWeight: FontWeight.w500,
                                                                                     useGoogleFonts: false,
-                                                                                  );
-                                                                            }
-                                                                            FlutterFlowTheme.of(context).subtitle2.override(
-                                                                                  fontFamily: 'AvenirArabic',
-                                                                                  color: Colors.white,
-                                                                                  useGoogleFonts: false,
-                                                                                );
-                                                                          },
-                                                                        ),
-                                                                        backgroundColor:
-                                                                            MaterialStateProperty.resolveWith<Color?>(
-                                                                          (states) {
-                                                                            if (states.contains(MaterialState.disabled)) {
-                                                                              return FlutterFlowTheme.of(context).primaryColor;
-                                                                            }
-                                                                            return FlutterFlowTheme.of(context).primaryColor;
-                                                                          },
-                                                                        ),
-                                                                        shape: MaterialStateProperty.all<
+                                                                                  ));
+                                                                    },
+                                                                    valueListenable:
+                                                                        isLoading,
+                                                                  ),
+                                                                  style:
+                                                                      ButtonStyle(
+                                                                    foregroundColor:
+                                                                        MaterialStateProperty.resolveWith<
+                                                                            Color?>(
+                                                                      (states) {
+                                                                        if (states
+                                                                            .contains(MaterialState.disabled)) {
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .subtitle2
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: Colors.white,
+                                                                                useGoogleFonts: false,
+                                                                              );
+                                                                        }
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .subtitle2
+                                                                            .override(
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              color: Colors.white,
+                                                                              useGoogleFonts: false,
+                                                                            );
+                                                                      },
+                                                                    ),
+                                                                    backgroundColor:
+                                                                        MaterialStateProperty.resolveWith<
+                                                                            Color?>(
+                                                                      (states) {
+                                                                        if (states
+                                                                            .contains(MaterialState.disabled)) {
+                                                                          return Color(
+                                                                              0xFF2971FB);
+                                                                        }
+                                                                        return Color(
+                                                                            0xFF2971FB);
+                                                                      },
+                                                                    ),
+                                                                    shape: MaterialStateProperty
+                                                                        .all<
                                                                             OutlinedBorder>(
-                                                                          RoundedRectangleBorder(
-                                                                              borderRadius: BorderRadius.circular(8),
-                                                                              side: BorderSide(
-                                                                                color: Colors.transparent,
-                                                                                width: 1,
-                                                                              )),
-                                                                        ),
-                                                                      ),
+                                                                      RoundedRectangleBorder(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              8),
+                                                                          side:
+                                                                              BorderSide(
+                                                                            color:
+                                                                                Colors.transparent,
+                                                                            width:
+                                                                                1,
+                                                                          )),
                                                                     ),
                                                                   ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
+                                                                ),
+                                                              ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
-                                                ),
-                                              );
-                                            },
+                                                ],
+                                              ),
+                                            ),
                                           );
                                         },
                                       );
                                     },
                                   ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 20, 16, 10),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'OFFERS_PAGE_Container_kc3eke2v_ON_TAP');
-                                      logFirebaseEvent('Container_Navigate-To');
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 20, 16, 10),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'OFFERS_PAGE_Container_kc3eke2v_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Container_Navigate-To');
 
-                                      context.pushNamed(
-                                        'PastOffers',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                            duration: Duration(milliseconds: 0),
+                                        context.pushNamed(
+                                          'PastOffers',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 0),
+                                            ),
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 52,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              blurRadius: 15,
+                                              color: Color(0x06000000),
+                                              offset: Offset(0, 8),
+                                              spreadRadius: 0,
+                                            )
+                                          ],
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          border: Border.all(
+                                            color: Color(0xFFF1F1F1),
                                           ),
-                                        },
-                                      );
-                                    },
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 52,
-                                      decoration: BoxDecoration(
-                                        color:
-                                            FlutterFlowTheme.of(context).white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 15,
-                                            color: Color(0x06000000),
-                                            offset: Offset(0, 8),
-                                            spreadRadius: 0,
-                                          )
-                                        ],
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: Color(0xFFF1F1F1),
                                         ),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    18, 0, 0, 0),
-                                            child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                '5gvwuuh2' /* Past Offers */,
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(18, 0, 0, 0),
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '5gvwuuh2' /* Past Offers */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          color:
+                                                              Color(0xFF474747),
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
                                               ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily: 'AvenirArabic',
-                                                    color: Color(0xFF474747),
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    useGoogleFonts: false,
-                                                  ),
                                             ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 17, 0),
-                                            child: Icon(
-                                              Icons.arrow_forward_ios_rounded,
-                                              color: Colors.black,
-                                              size: 18,
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 17, 0),
+                                              child: Icon(
+                                                Icons.arrow_forward_ios_rounded,
+                                                color: Colors.black,
+                                                size: 18,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -2068,18 +2201,18 @@ class _OffersWidgetState extends State<OffersWidget> {
     );
   }
 
-  Future waitForApiRequestCompleter({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = _apiRequestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
-  }
-}
+//   Future waitForApiRequestCompleter({
+//     double minWait = 0,
+//     double maxWait = double.infinity,
+//   }) async {
+//     final stopwatch = Stopwatch()..start();
+//     while (true) {
+//       await Future.delayed(Duration(milliseconds: 50));
+//       final timeElapsed = stopwatch.elapsedMilliseconds;
+//       final requestComplete = _apiRequestCompleter?.isCompleted ?? false;
+//       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+//         break;
+//       }
+//     }
+//   }
+ }
