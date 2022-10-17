@@ -112,7 +112,7 @@ class _ChatWidgetState extends State<ChatWidget>
                               child: Icon(
                                 Manzel.back_icon,
                                 color: Colors.black,
-                                size: 24,
+                                size: 18,
                               ),
                             ),
                           ),

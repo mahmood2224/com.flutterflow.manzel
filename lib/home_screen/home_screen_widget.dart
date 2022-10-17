@@ -1123,6 +1123,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 'Container_Backend-Call');
                                             await BookmarkPropertyCall.call(
                                               userId: currentUserUid,
+                                              authorazationToken: FFAppState().authToken,
                                               propertyId:
                                                   valueOrDefault<String>(
                                                 getJsonField(
