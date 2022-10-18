@@ -1585,11 +1585,6 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           r'''$.result.property_id''',
                                         ),
                                         ParamType.int),
-                                    'jsonData': serializeParam(
-                                        getJsonField(
-                                            columnOrderDetailsResponse.jsonBody,
-                                            r'''$.result.property_data'''),
-                                        ParamType.JSON),
                                   }.withoutNulls,
                                 );
                               },

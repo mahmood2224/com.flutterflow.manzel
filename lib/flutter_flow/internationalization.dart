@@ -146,6 +146,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Profile
   {
+    'appBuild':{
+      'en':'App build',
+      'ar':'رقم بناء التطبيق',
+    },
     'zpi4cs66': {
       'en': 'Account',
       'ar': 'الحساب',
@@ -743,7 +747,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '4mz2rd2p': {
       'en': 'Total price range',
-      'ar': 'النطاق السعري الإجمالي',
+      'ar': 'نطاق السعر الإجمالي',
     },
     'k57fhygg': {
       'en': ' - ',
@@ -771,7 +775,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'skyj7jpv': {
       'en': 'Furnished',
-      'ar': 'مفروشة',
+      'ar': 'التأثيث',
     },
     '8x7rkqnv': {
       'en': 'Un-furnished',

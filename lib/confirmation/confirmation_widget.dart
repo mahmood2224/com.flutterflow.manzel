@@ -192,84 +192,87 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                 ),
                               ],
                             )
-                          : Column(mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                              Icon(
-                                Manzel.cancelled,
-                                size: 40,
-                                color: Colors.red,
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(10, 50, 10, 0),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'failure' /* Your Booking Confirmed */,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                    maxLines: 3,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontSize: 21,
-                                          fontWeight: FontWeight.bold,
-                                          useGoogleFonts: false,
-
-
+                          : Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                  Image.asset(
+                                    'assets/images/booking_failure.png',
+                                    width: 40,
+                                    height: 40,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 50, 10, 0),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'failure' /* Your Booking Confirmed */,
                                         ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 80, 20, 0),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 52,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'CONFIRMATION_viewBookingDetails_ON_TAP');
-                                      logFirebaseEvent(
-                                          'viewBookingDetails_Close-Dialog,-Drawer,');
-                                      Navigator.pop(context);
-                                      //Navigator.pop(context);
-                                      logFirebaseEvent(
-                                          'viewBookingDetails_Navigate-To');
-                                    },
-                                    text: FFLocalizations.of(context).getText(
-                                      'failureButton',
-                                    ),
-                                    options: FFButtonOptions(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .subtitle2
-                                          .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w800,
-                                            useGoogleFonts: false,
-                                          ),
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 3,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 21,
+                                              fontWeight: FontWeight.bold,
+                                              useGoogleFonts: false,
+                                            ),
                                       ),
-                                      borderRadius: BorderRadius.circular(12),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ]),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 80, 20, 0),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 52,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          logFirebaseEvent(
+                                              'CONFIRMATION_viewBookingDetails_ON_TAP');
+                                          logFirebaseEvent(
+                                              'viewBookingDetails_Close-Dialog,-Drawer,');
+                                          Navigator.pop(context);
+                                          //Navigator.pop(context);
+                                          logFirebaseEvent(
+                                              'viewBookingDetails_Navigate-To');
+                                        },
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'failureButton',
+                                        ),
+                                        options: FFButtonOptions(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .subtitle2
+                                                  .override(
+                                                    fontFamily: 'AvenirArabic',
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w800,
+                                                    useGoogleFonts: false,
+                                                  ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
                     ),
                   ),
                 ],

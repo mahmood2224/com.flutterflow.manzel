@@ -63,22 +63,22 @@ class _ZoomImageState extends State<ZoomImage> {
               itemCount: imageLinks?.length??0,
               itemBuilder: (_, int index) {
                 return
-                  InteractiveViewer(child:  CachedNetworkImage(
+                  PinchZoom(child:  CachedNetworkImage(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.contain,
                     imageUrl: imageLinks![index]!,
                   ),
                     //for pinch zoom
-                    // resetDuration:
-                    // const Duration(milliseconds: 100),
-                    // maxScale: 2.5,
-                    // onZoomStart: () {
-                    //
-                    // },
-                    // onZoomEnd: () {
-                    //
-                    // },
+                    resetDuration:
+                    const Duration(milliseconds: 100),
+                    maxScale: 2.5,
+                    onZoomStart: () {
+
+                    },
+                    onZoomEnd: () {
+
+                    },
                   );
               },
               controller: pageController,

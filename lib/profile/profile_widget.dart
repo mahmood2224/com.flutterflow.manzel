@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../auth/auth_util.dart';
@@ -32,10 +33,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   static const String kWhatsAppAndroid = 'https://api.whatsapp.com/send?phone=';
   static const String kWhatsAppIOS = 'https://wa.me/';
+  int? appVersion;
+  int? appBuildNo;
 
   @override
   void initState() {
     super.initState();
+    //buildInfo();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Profile'});
   }
 
@@ -50,6 +54,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 if (loggedIn)
                   Column(
@@ -659,12 +664,68 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ],
                     ),
                   ),
+                Padding(padding: EdgeInsetsDirectional.fromSTEB(22, 10, 0, 31),
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text( FFLocalizations.of(context).getText(
+                          'appBuild' /* Appbuild */),
+                        style: FlutterFlowTheme.of(context)
+                            .subtitle2
+                            .override(
+                          fontFamily:
+                          'Sofia Pro By Khuzaimah',
+                          color: Color(0xFFA5A5A5),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                          useGoogleFonts: false,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 2),
+                        child: Text("${FFAppState().buildVersion}",
+                          style: FlutterFlowTheme.of(context)
+                              .subtitle2
+                              .override(
+                            fontFamily:
+                            'Sofia Pro By Khuzaimah',
+                            color: Color(0xFFA5A5A5),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                            useGoogleFonts: false,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 2),
+                        child: Text("(${FFAppState().buildNo})",
+                          style: FlutterFlowTheme.of(context)
+                              .subtitle2
+                              .override(
+                            fontFamily:
+                            'Sofia Pro By Khuzaimah',
+                            color: Color(0xFFA5A5A5),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                            useGoogleFonts: false,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> buildInfo() async {
+    PackageInfo info = await PackageInfo.fromPlatform();
+     appVersion = await int.parse(info.version);
+     appBuildNo = await int.parse(info.buildNumber);
   }
 
   static void openWhatsapp(BuildContext context) async {

@@ -36,16 +36,16 @@ class Manzel {
   static const IconData location_pin = IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData floor_plan = IconData(0xe80d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData absher = IconData(0xe80e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData booking_completed = IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData view_360 = IconData(0xe810, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData map = IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData explore = IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData clear = IconData(0xe813, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData notification = IconData(0xe814, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData bookmark = IconData(0xe815, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData favorite = IconData(0xe816, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData offer = IconData(0xe817, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData my_properties_selected = IconData(0xe818, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData my_properties = IconData(0xe819, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData profile = IconData(0xe81a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData maps2 = IconData(0xe818, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData confirm_booking = IconData(0xe819, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData cancel_booking = IconData(0xe81a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData notification = IconData(0xe81b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData notifications = IconData(0xe81c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
