@@ -472,7 +472,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Coming Soon',
       'ar':'قريبًا',
     },
-    'AlertMessage':{
+    'HomeScreenAlertMessage':{
       'en':'The map feature will be availiable soon',
       'ar':'ستكون ميزة الخريطة متاحة قريبًا'
     },

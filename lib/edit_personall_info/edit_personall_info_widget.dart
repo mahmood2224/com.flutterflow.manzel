@@ -133,6 +133,11 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 controller: fullNameController,
                                 autofocus: false,
                                 obscureText: false,
+                                onTap: (){
+                                  setState(() {
+
+                                  });
+                                },
                                 decoration: InputDecoration(
                                   labelText:
                                       FFLocalizations.of(context).getText(
