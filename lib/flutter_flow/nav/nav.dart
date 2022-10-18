@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../zoom_image/zoom_image_widget.dart';
 import '../flutter_flow_theme.dart';
 import '../../backend/backend.dart';
 import '../../auth/firebase_user_provider.dart';
 import '../../backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
-
+import '';
 import '../../index.dart';
 import '../../main.dart';
 import 'serialization_util.dart';
@@ -141,6 +142,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                       isFromUpdate:
                           params.getParam('isFromUpdate', ParamType.String)),
             ),
+
             FFRoute(
               name: 'HelpAndSupport',
               path: 'helpAndSupport',
@@ -212,6 +214,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   ? NavBarPage(initialPage: 'MyProperties')
                   : MyPropertiesWidget(),
             ),
+
             FFRoute(
               name: 'PropertyDetails',
               path: 'propertyDetails',
@@ -344,6 +347,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 orderId: params.getParam('orderId', ParamType.String),
               ),
             ),
+
             FFRoute(
               name: 'depositeRecipt',
               path: 'depositeRecipt',

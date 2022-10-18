@@ -1,4 +1,5 @@
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/zoom_image/zoom_image_widget.dart';
 
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_expanded_image_view.dart';
@@ -25,6 +26,7 @@ class ImageGalleryViewWidget extends StatefulWidget {
 
 class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  List<dynamic> imageList = [];
 
   @override
   void initState() {
@@ -173,8 +175,10 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                       builder: (context) {
                         final images = getJsonField(
                             listViewPropertyResponse.jsonBody,
-
     r'''$.data.attributes.property_images.data''').toList();
+                         imageList = getJsonField(
+                             listViewPropertyResponse.jsonBody,
+                             r'''$.data.attributes.property_images.data..attributes.formats.medium.url''');
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.vertical,
@@ -186,29 +190,42 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                   EdgeInsetsDirectional.fromSTEB(8, 6, 8, 6),
                               child: InkWell(
                                 onTap: () async {
+                                  //PageTransition(
+                                    //   type: PageTransitionType.fade,
+                                    //   child: FlutterFlowExpandedImageView(
+                                    //     image: Image.network(
+                                    //       getJsonField(
+                                    //         imagesItem,
+                                    //         r'''$.attributes.formats.medium.url''',
+                                    //       ),
+                                    //       fit: BoxFit.contain,
+                                    //     ),
+                                    //     allowRotation: false,
+                                    //     tag: getJsonField(
+                                    //       imagesItem,
+                                    //       r'''$.attributes.formats.medium.url''',
+                                    //     ),
+                                    //     useHeroAnimation: true,
+                                    //   ),
                                   logFirebaseEvent(
                                       'IMAGE_GALLERY_VIEW_Image_xq7pxmei_ON_TAP');
                                   logFirebaseEvent('Image_Expand-Image');
+                                  Map<int,String> dataList = {} ;
+                                  int count = 1;
+                                  imageList.forEach((element) {
+                                    dataList[count] = element.toString();
+                                    count +=1;
+                                  });
                                   await Navigator.push(
                                     context,
-                                    PageTransition(
-                                      type: PageTransitionType.fade,
-                                      child: FlutterFlowExpandedImageView(
-                                        image: Image.network(
-                                          getJsonField(
-                                            imagesItem,
-                                            r'''$.attributes.formats.medium.url''',
-                                          ),
-                                          fit: BoxFit.contain,
-                                        ),
-                                        allowRotation: false,
-                                        tag: getJsonField(
-                                          imagesItem,
-                                          r'''$.attributes.formats.medium.url''',
-                                        ),
-                                        useHeroAnimation: true,
-                                      ),
-                                    ),
+                                  MaterialPageRoute(
+                                  builder: (context) =>
+                                  ZoomImage(
+                                  data:
+                                  dataList,
+                                    index: imagesIndex,
+                                  ),
+                                  ),
                                   );
                                 },
                                 child: Hero(

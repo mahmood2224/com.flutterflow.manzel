@@ -164,8 +164,7 @@ class _OffersWidgetState extends State<OffersWidget> {
       key: scaffoldKey,
       appBar: AppBar(
         centerTitle: false,
-        titleSpacing: (widget.propertyId != null &&
-            widget.propertyId != '')?0:16,
+        titleSpacing: 16,
         leadingWidth: 0,
         title:Text(
         FFLocalizations.of(context).getText(
@@ -1313,7 +1312,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                               child: Padding(
                                                                 padding: EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        5,
+                                                                        0,
                                                                         0,
                                                                         0,
                                                                         0),
@@ -1496,7 +1495,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                               child: Padding(
                                                                 padding: EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        5,
+                                                                        0,
                                                                         0,
                                                                         0,
                                                                         0),
