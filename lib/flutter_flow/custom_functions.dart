@@ -177,10 +177,10 @@ List<String> filteredResultChioceChipsBuilder(
       results.add("المدينة: ${filteredCity} ");
     }
     if (filteredPropertyType!.length != 0) {
-      results.add("يكتب: ${filteredPropertyType} ");
+      results.add("النوع يكتب: ${filteredPropertyType} ");
     }
     if (filteredFurnishingType!.length != 0) {
-      results.add("تأثيث: ${filteredFurnishingType} ");
+      results.add("النوع تأثيث: ${filteredFurnishingType} ");
     }
   }
   return results;

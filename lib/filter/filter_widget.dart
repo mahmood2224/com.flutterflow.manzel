@@ -29,6 +29,8 @@ class _FilterWidgetState extends State<FilterWidget> {
   double? sliderValue1;
   double? sliderValue2;
   SfRangeValues? installmentRange;
+  double? mxRange;
+  ApiCallResponse? response;
 
   //= SfRangeValues(0, 2000000);
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -53,8 +55,7 @@ class _FilterWidgetState extends State<FilterWidget> {
         isFurnishingValues!.add("الكل");
         propertyTypeListValues!.add("الكل");
       }
-      sliderValue1 = null;
-      sliderValue2 = null;
+      installmentRange = SfRangeValues(0,mxRange);
     });
   }
 
@@ -82,6 +83,17 @@ class _FilterWidgetState extends State<FilterWidget> {
               setState(() => FFAppState().filterMinPrice = 0);
               logFirebaseEvent('Text_Update-Local-State');
               setState(() => FFAppState().filterMaxPrice = 0);
+              mxRange = valueOrDefault<double>(
+                functions.formattedDouble(
+                    valueOrDefault<int>(
+                      getJsonField(
+                        response!.jsonBody,
+                        r'''$.meta.max_price''',
+                      ),
+                      1,
+                    )),
+                1.0,
+              );
               reset();
             },
             child: Text(
@@ -158,6 +170,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                 );
               }
               final columnPropertiesResponse = snapshot.data!;
+              response = columnPropertiesResponse;
               return SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
