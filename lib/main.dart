@@ -9,6 +9,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -50,10 +51,10 @@ void main() async {
     badge: true,
     sound: true,
   );
- // FirebaseCloudMessaging().init();
+  // FirebaseCloudMessaging().init();
 
   FFAppState(); // Initialize FFAppState
-
+  //versionCheck();
   runApp(MyApp());
 }
 
@@ -74,14 +75,17 @@ class _MyAppState extends State<MyApp> {
 
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
+  final update_result = [];
 
   final authUserSub = authenticatedUserStream.listen((_) {});
   final fcmTokenSub = fcmTokenUserStream.listen((_) {});
- // final _firebaseMessaging = FirebaseMessaging.instance;
+
+  // final _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
     super.initState();
+
     _appStateNotifier = AppStateNotifier();
     _router = createRouter(_appStateNotifier);
     userStream = manzelFirebaseUserStream()
@@ -95,6 +99,13 @@ class _MyAppState extends State<MyApp> {
     // });
     handleDynamicLinks();
     _initializeFlutterFire();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      BuildContext? buildContext =
+          _router.routerDelegate.navigatorKey.currentContext;
+      if (buildContext != null) {
+        versionCheck(buildContext);
+      }
+    });
   }
 
   @override
@@ -122,6 +133,7 @@ class _MyAppState extends State<MyApp> {
 
   void setLocale(String language) =>
       setState(() => _locale = createLocale(language));
+
   void setThemeMode(ThemeMode mode) => setState(() {
         _themeMode = mode;
       });
@@ -150,19 +162,186 @@ class _MyAppState extends State<MyApp> {
       routerDelegate: _router.routerDelegate,
     );
   }
-  Future<void> handleDynamicLinks()async{
-    PendingDynamicLinkData? _pendingLinks = await FirebaseDynamicLinks.instance.getInitialLink();
+
+  Future<void> handleDynamicLinks() async {
+    PendingDynamicLinkData? _pendingLinks =
+        await FirebaseDynamicLinks.instance.getInitialLink();
     _handleDeepLinks(_pendingLinks);
-    FirebaseDynamicLinks.instance.onLink.listen(_handleDeepLinks,onError: (Object error)
-    {
+    FirebaseDynamicLinks.instance.onLink.listen(_handleDeepLinks,
+        onError: (Object error) {
       debugPrint('Error while deeplinking ###### ${error.toString()}');
     });
-
   }
 
-  void _handleDeepLinks(PendingDynamicLinkData? data){
+  Future<void> showUpdateDialog(
+      BuildContext context, bool isForceUpdate, String packageName) async {
+    await showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return isForceUpdate
+            ? AlertDialog(
+                title: Text(
+                    FFAppState().locale == 'en'
+                        ? 'Your version of app is out of date kindly update'
+                        : 'إصدار التطبيق الخاص بك قديم ، يرجى التحديث',
+                    textAlign: TextAlign.center),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        final appPackageName = packageName;
+
+                        if (Platform.isAndroid) {
+                          launchURL(
+                              "https://play.google.com/store/apps/details?id=$appPackageName");
+                        } else if (Platform.isIOS) {
+                          launchURL("market://details?id=$appPackageName");
+                        }
+                      },
+                      child: Text(
+                          FFAppState().locale == 'en' ? 'Update' : 'تحديث')),
+                ],
+              )
+            : AlertDialog(
+                title: Text(
+                  FFAppState().locale == 'en'
+                      ? 'A new version of app is available'
+                      : 'يتوفر إصدار جديد من التطبيق',
+                  textAlign: TextAlign.center,
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      final appPackageName = packageName;
+
+                      if (Platform.isAndroid) {
+                        launchURL(
+                            "https://play.google.com/store/apps/details?id=$appPackageName");
+                      } else if (Platform.isIOS) {
+                        launchURL("market://details?id=$appPackageName");
+                      }
+                    },
+                    child:
+                        Text(FFAppState().locale == 'en' ? 'Update' : 'تحديث'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                        FFAppState().locale == 'en' ? 'Later' : 'في وقت لاحق'),
+                  ),
+                ],
+              );
+      },
+    );
+  }
+
+  Future<void> versionCheck(BuildContext context) async {
+    PackageInfo info = await PackageInfo.fromPlatform();
+    final appPackageName = info.packageName;
+    RemoteConfig remoteConfig = await RemoteConfig.instance;
+    await remoteConfig.setConfigSettings(RemoteConfigSettings(
+      fetchTimeout: const Duration(seconds: 10),
+      minimumFetchInterval: Duration.zero,
+    ));
+    await remoteConfig.fetch();
+    await remoteConfig.activate();
+    await remoteConfig.fetchAndActivate();
+    final remote_config_settings =
+        await remoteConfig.getValue('application_version').asString();
+    final current_remote_version_JSON =
+        jsonDecode(remote_config_settings) as Map;
+    FFAppState().buildNo = int.parse(info.buildNumber);
+    FFAppState().buildVersion = info.version;
+    if (Platform.isAndroid) {
+      final min_required_version =
+          remoteConfig.getString('minimum_supported_version_android');
+      final recent_version = current_remote_version_JSON['android_version'];
+      final current_remote_build =
+          current_remote_version_JSON['android_build_number'];
+      final current_remote_backend_version =
+          current_remote_version_JSON['supported_backend_version'];
+      final isForceUpdate = current_remote_version_JSON['is_force_update'];
+      final installed_app_version = info.version;
+      final arr_required_version = min_required_version.split('.');
+      final arr_current_version = recent_version.split('.');
+      final arr_installed_version = installed_app_version.split('.');
+      //for minimum required version
+      if (recent_version != installed_app_version) {
+        if (isForceUpdate) {
+          showUpdateDialog(context, true, appPackageName);
+        } else if (int.parse(arr_required_version[0]) >
+            int.parse(arr_installed_version[0])) {
+          showUpdateDialog(context, true, appPackageName);
+        } else if (int.parse(arr_required_version[1]) >
+            int.parse(arr_installed_version[1])) {
+          showUpdateDialog(context, true, appPackageName);
+        } else if (int.parse(arr_required_version[2]) >
+            int.parse(arr_installed_version[2])) {
+          showUpdateDialog(context, true, appPackageName);
+        } else if (int.parse(arr_current_version[0]) >
+            int.parse(arr_installed_version[0])) {
+          showUpdateDialog(context, false, appPackageName);
+        } else if (int.parse(arr_current_version[1]) >
+            int.parse(arr_installed_version[1])) {
+          showUpdateDialog(context, false, appPackageName);
+        } else if (int.parse(arr_current_version[2]) >
+            int.parse(arr_installed_version[2])) {
+          showUpdateDialog(context, false, appPackageName);
+        } else if (current_remote_backend_version !=
+            int.parse(info.buildNumber)) {
+          showUpdateDialog(context, false, appPackageName);
+        }
+      }
+    }
+    if (Platform.isIOS) {
+      final min_required_version =
+          remoteConfig.getString('minimum_app_supported_version_iOS');
+      final recent_version = current_remote_version_JSON['iOS_version'];
+      final current_remote_build =
+          current_remote_version_JSON['iOS_build_number'];
+      final current_remote_backend_version =
+          current_remote_version_JSON['supported_backend_version'];
+      final isForceUpdate = current_remote_version_JSON['is_force_update'];
+      final installed_app_version = info.version;
+      final installed_build_number = info.buildNumber;
+      final arr_required_version = min_required_version.split('.');
+      final arr_current_version = recent_version.split('.');
+      final arr_installed_version = current_remote_build.split('.');
+      //for minimum required version
+      if (recent_version != installed_app_version) {
+        if (isForceUpdate) {
+          showUpdateDialog(context, true, appPackageName);
+        } else if (int.parse(arr_required_version[0]) >
+            int.parse(arr_installed_version[0])) {
+          showUpdateDialog(context, true, appPackageName);
+        } else if (int.parse(arr_required_version[1]) >
+            int.parse(arr_installed_version[1])) {
+          showUpdateDialog(context, true, appPackageName);
+        } else if (int.parse(arr_required_version[2]) >
+            int.parse(arr_installed_version[2])) {
+          showUpdateDialog(context, true, appPackageName);
+        } else if (int.parse(arr_current_version[0]) >
+            int.parse(arr_installed_version[0])) {
+          showUpdateDialog(context, false, appPackageName);
+        } else if (int.parse(arr_current_version[1]) >
+            int.parse(arr_installed_version[1])) {
+          showUpdateDialog(context, false, appPackageName);
+        } else if (int.parse(arr_current_version[2]) >
+            int.parse(arr_installed_version[2])) {
+          showUpdateDialog(context, false, appPackageName);
+        } else if (current_remote_backend_version !=
+            int.parse(info.buildNumber)) {
+          showUpdateDialog(context, false, appPackageName);
+        }
+      }
+    }
+  }
+
+  void _handleDeepLinks(PendingDynamicLinkData? data) {
     Uri? deeplinkUri = data?.link;
-   // LoggingService().printLog(message: 'Deeplink Url - > $deeplinkUri',tag: _TAG);
+    // LoggingService().printLog(message: 'Deeplink Url - > $deeplinkUri',tag: _TAG);
     if (deeplinkUri != null) {
       Map<String, dynamic> params = deeplinkUri.queryParameters;
       if (params.isNotEmpty) {
@@ -176,17 +355,17 @@ class _MyAppState extends State<MyApp> {
         // } else if(params[AppConstants.kPropertyIdParam] != null || params[AppConstants.kProjectIdParam] != null){
         //   _shareProjectOrPropertyAction(params);
         // }
-       // Future.delayed(Duration(seconds: 5),(){
-          BuildContext?  ctx = _router.routerDelegate.navigatorKey.currentContext;
+        // Future.delayed(Duration(seconds: 5),(){
+        BuildContext? ctx = _router.routerDelegate.navigatorKey.currentContext;
         ctx?.pushNamed(
-        'PropertyDetails',
-        queryParams: {
-        'propertyId': params['propertyId'],
-        'path': '',
-         },
+          'PropertyDetails',
+          queryParams: {
+            'propertyId': params['propertyId'],
+            'path': '',
+          },
         );
 
-      //  });
+        //  });
 
       }
     }
@@ -282,78 +461,6 @@ class _NavBarPageState extends State<NavBarPage> {
         ],
       ),
     );
-  }
-}
-// Future<RemoteConfig> setupRemoteConfig() async {
-//   final RemoteConfig remoteConfig = RemoteConfig.instance;
-//   await remoteConfig.fetch();
-//   await remoteConfig.activate();
-//   await remoteConfig.fetchAndActivate();
-//   return remoteConfig;
-// }
-versionCheck(context) async {
-  PackageInfo info = await PackageInfo.fromPlatform();
-  RemoteConfig remoteConfig = await RemoteConfig.instance;
-  await remoteConfig.setConfigSettings(RemoteConfigSettings(
-    fetchTimeout: const Duration(seconds: 10),
-    minimumFetchInterval: Duration(hours: 10),
-  ));
-  await remoteConfig.fetch();
-  await remoteConfig.activate();
-  await remoteConfig.fetchAndActivate();
-  final currentBuildNumber = int.parse(info.buildNumber);
-  final requiredBuildNumber = remoteConfig
-      .getInt('version');
-  if (requiredBuildNumber > currentBuildNumber) {
-  remoteConfig.getBool("isHardUpdate")?showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (_) => AlertDialog(
-        title: Text(FFAppState().locale=='en'?'Your version of app is out of date kindly update':'إصدار التطبيق الخاص بك قديم ، يرجى التحديث'),
-        actions: [
-          TextButton(
-            onPressed: launchAppStore,
-            child: Text(FFAppState().locale=='en'?'Open App Store':'افتح متجر التطبيقات')
-          ),
-        ],
-      ),
-    ):
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (_) => AlertDialog(
-      title: Text(FFAppState().locale=='en'?'A new version of app is available':'يتوفر إصدار جديد من التطبيق'),
-      actions: [
-        TextButton(
-          onPressed: launchAppStore,
-          child: Text(FFAppState().locale=='en'?'Open App Store':'افتح متجر التطبيقات'),
-        ),
-        TextButton(
-          onPressed: launchAppStore,
-          child: Text(FFAppState().locale=='en'?'No':'لا'),
-        ),
-      ],
-    ),
-  );
-  }
-}
-Future<void> printBuildNumber() async {
-  PackageInfo info = await PackageInfo.fromPlatform();
-  print("******************* info ${info}");
-  print("******************** App name is : ${info.appName}");
-  print("******************** Current build number is : ${info.buildNumber}");
-}
-
-
-void launchAppStore() {
-  /// Depending on where you are putting this method you might need
-  /// to pass a reference from your _packageInfo.
-  final appPackageName = '';
-
-  if (Platform.isAndroid) {
-    launchURL("https://play.google.com/store/apps/details?id=$appPackageName");
-  } else if (Platform.isIOS) {
-    launchURL("market://details?id=$appPackageName");
   }
 }
 

@@ -146,6 +146,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Profile
   {
+    'appBuild':{
+      'en':'App build',
+      'ar':'رقم بناء التطبيق',
+    },
     'zpi4cs66': {
       'en': 'Account',
       'ar': 'الحساب',

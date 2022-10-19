@@ -42,6 +42,10 @@ class FFAppState {
 
   List<String> filterFurnishingType = [];
 
+  int buildNo = 0;
+
+  String buildVersion = '';
+
   int filterMinPrice = 0;
 
   int filterMaxPrice = 0;
