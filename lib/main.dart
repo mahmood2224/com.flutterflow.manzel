@@ -337,7 +337,7 @@ class _MyAppState extends State<MyApp> {
 
       }
     }
-
+  }
 }
 
 class NavBarPage extends StatefulWidget {
