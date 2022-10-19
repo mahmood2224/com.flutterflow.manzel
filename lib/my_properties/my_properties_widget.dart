@@ -52,7 +52,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(15, 8, 15, 0),
               child: Text(
                 FFLocalizations.of(context).getText(
                   '21gpsvgr' /* My Properties */,
@@ -1559,7 +1559,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       String>(
                                                                 getJsonField(
                                                                   bookmarkedPropertiesItem,
-                                                                  r'''$.property_data.data.id''',
+                                                                  r'''$..property_id''',
                                                                 ).toString(),
                                                                 '0',
                                                               ),

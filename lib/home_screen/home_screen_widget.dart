@@ -190,7 +190,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
                                   if (!snapshot.hasData) {
-                                    return Center(
+                                    return Container(
                                       child: Icon(
                                         Manzel.notification,
                                         color: Colors.white,
@@ -909,7 +909,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   Align(
                                     alignment: AlignmentDirectional(0, 0),
                                     child: ((propertiesIndex) ==
-                                                (currentPropertyindex))
+                                                (currentPropertyindex)
                                         ? Container()
                                         :  Container(
                                                 //margin: EdgeInsets.all(100),
@@ -917,18 +917,24 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 constraints: BoxConstraints(
                                                     minWidth: 50, maxWidth: 50),
                                                 decoration: BoxDecoration(
-                                                  color: Colors.black
-                                                      .withOpacity(1.0),
+                                                  color: (videoPlayers[
+                    currentPropertyindex]
+                        .value.isInitialized)?Colors.black
+                                                      .withOpacity(1.0):Colors.black
+                                                      .withOpacity(0.0),
                                                   shape: BoxShape.circle,
                                                 ),
                                                 child: Icon(
                                                   Icons.play_arrow_rounded,
-                                                  color: Colors.white
-                                                      .withOpacity(1.0),
+                                                  color: (videoPlayers[
+                                                  currentPropertyindex]
+                                                      .value.isInitialized)?Colors.white
+                                                      .withOpacity(1.0):Colors.white
+                                                      .withOpacity(0.0),
                                                   size: 40,
                                                 ),
                                               )
-                                           ,
+                                    ),
                                   ),
                                   Align(
                                     alignment: AlignmentDirectional(0.9, 0.8),

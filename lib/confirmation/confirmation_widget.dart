@@ -202,25 +202,31 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                               ),
                               Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 19, 0, 0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'failure' /* Your Booking Confirmed */,
+                                    EdgeInsetsDirectional.fromSTEB(10, 50, 10, 0),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'failure' /* Your Booking Confirmed */,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 3,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'AvenirArabic',
+                                          fontSize: 21,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: false,
+
+
+                                        ),
                                   ),
-                                  maxLines: 3,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        fontSize: 21,
-                                        fontWeight: FontWeight.bold,
-                                        useGoogleFonts: false,
-                                      ),
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 15, 20, 0),
+                                    20, 80, 20, 0),
                                 child: Container(
                                   width: MediaQuery.of(context).size.width,
                                   height: 52,

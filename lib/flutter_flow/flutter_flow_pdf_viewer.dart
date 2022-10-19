@@ -24,13 +24,13 @@ class FlutterFlowPdfViewer extends StatefulWidget {
 }
 
 class _FlutterFlowPdfViewerState extends State<FlutterFlowPdfViewer> {
-  PdfController? controller;
+  PdfControllerPinch? controller;
   String get networkPath => widget.networkPath ?? '';
   String get assetPath => widget.assetPath ?? '';
 
   void initializeController() =>
       controller = networkPath.isNotEmpty || assetPath.isNotEmpty
-          ? PdfController(
+          ? PdfControllerPinch(
               document: assetPath.isNotEmpty
                   ? PdfDocument.openAsset(assetPath)
                   : PdfDocument.openData(InternetFile.get(networkPath)),
@@ -56,11 +56,11 @@ class _FlutterFlowPdfViewerState extends State<FlutterFlowPdfViewer> {
         width: widget.width,
         height: widget.height,
         child: controller != null
-            ? PdfView(
+            ? PdfViewPinch(
                 controller: controller!,
                 scrollDirection:
                     widget.horizontalScroll ? Axis.horizontal : Axis.vertical,
-                builders: PdfViewBuilders<DefaultBuilderOptions>(
+                builders: PdfViewPinchBuilders<DefaultBuilderOptions>(
                   options: const DefaultBuilderOptions(),
                   documentLoaderBuilder: (_) =>
                       const Center(child: CircularProgressIndicator()),

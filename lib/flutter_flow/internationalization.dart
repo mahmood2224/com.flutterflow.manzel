@@ -472,7 +472,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Coming Soon',
       'ar':'قريبًا',
     },
-    'AlertMessage':{
+    'HomeScreenAlertMessage':{
       'en':'The map feature will be availiable soon',
       'ar':'ستكون ميزة الخريطة متاحة قريبًا'
     },
@@ -743,7 +743,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '4mz2rd2p': {
       'en': 'Total price range',
-      'ar': 'النطاق السعري الإجمالي',
+      'ar': 'نطاق السعر الإجمالي',
     },
     'k57fhygg': {
       'en': ' - ',
@@ -771,7 +771,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'skyj7jpv': {
       'en': 'Furnished',
-      'ar': 'مفروشة',
+      'ar': 'التأثيث',
     },
     '8x7rkqnv': {
       'en': 'Un-furnished',

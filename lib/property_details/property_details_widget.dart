@@ -3718,8 +3718,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
           title: "Join Manzel to see what I've been upto",
           imageUrl: Uri.parse(thumbnailUrl!),
           description: description),
-      uriPrefix: 'https://manzelprod.page.link',
-      //uriPrefix: 'https://manzeldev.page.link',
+      // uriPrefix: 'https://manzelprod.page.link',
+      uriPrefix: 'https://manzeldev.page.link',
       link: Uri.parse(url),
       androidParameters: const AndroidParameters(
         packageName: 'com.flutterflow.manzel',
@@ -3740,7 +3740,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     var whatsapp = phoneNumber;
     var whatsappUrlAndroid =
         Uri.parse('$kWhatsAppAndroid$whatsapp&text=${message}');
-    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp');
+    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp&text=${Uri.parse("${message}")}');
     if (Platform.isIOS) {
       if (await canLaunchUrl(whatsappUrlIos)) {
         await launchUrl(whatsappUrlIos, mode: LaunchMode.externalApplication);

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'dart:async';
 
 import 'package:eraser/eraser.dart';
@@ -8,9 +10,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -38,6 +42,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await EnvVariables.instance.initialise();
+  //await printBuildNumber();
   Eraser.resetBadgeCountButKeepNotificationsInCenter();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -286,3 +291,70 @@ class _NavBarPageState extends State<NavBarPage> {
 //   await remoteConfig.fetchAndActivate();
 //   return remoteConfig;
 // }
+versionCheck(context) async {
+  PackageInfo info = await PackageInfo.fromPlatform();
+  RemoteConfig remoteConfig = await RemoteConfig.instance;
+  await remoteConfig.setConfigSettings(RemoteConfigSettings(
+    fetchTimeout: const Duration(seconds: 10),
+    minimumFetchInterval: Duration(hours: 10),
+  ));
+  await remoteConfig.fetch();
+  await remoteConfig.activate();
+  await remoteConfig.fetchAndActivate();
+  final currentBuildNumber = int.parse(info.buildNumber);
+  final requiredBuildNumber = remoteConfig
+      .getInt('version');
+  if (requiredBuildNumber > currentBuildNumber) {
+  remoteConfig.getBool("isHardUpdate")?showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        title: Text(FFAppState().locale=='en'?'Your version of app is out of date kindly update':'إصدار التطبيق الخاص بك قديم ، يرجى التحديث'),
+        actions: [
+          TextButton(
+            onPressed: launchAppStore,
+            child: Text(FFAppState().locale=='en'?'Open App Store':'افتح متجر التطبيقات')
+          ),
+        ],
+      ),
+    ):
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) => AlertDialog(
+      title: Text(FFAppState().locale=='en'?'A new version of app is available':'يتوفر إصدار جديد من التطبيق'),
+      actions: [
+        TextButton(
+          onPressed: launchAppStore,
+          child: Text(FFAppState().locale=='en'?'Open App Store':'افتح متجر التطبيقات'),
+        ),
+        TextButton(
+          onPressed: launchAppStore,
+          child: Text(FFAppState().locale=='en'?'No':'لا'),
+        ),
+      ],
+    ),
+  );
+  }
+}
+Future<void> printBuildNumber() async {
+  PackageInfo info = await PackageInfo.fromPlatform();
+  print("******************* info ${info}");
+  print("******************** App name is : ${info.appName}");
+  print("******************** Current build number is : ${info.buildNumber}");
+}
+
+
+void launchAppStore() {
+  /// Depending on where you are putting this method you might need
+  /// to pass a reference from your _packageInfo.
+  final appPackageName = '';
+
+  if (Platform.isAndroid) {
+    launchURL("https://play.google.com/store/apps/details?id=$appPackageName");
+  } else if (Platform.isIOS) {
+    launchURL("market://details?id=$appPackageName");
+  }
+}
+
+
