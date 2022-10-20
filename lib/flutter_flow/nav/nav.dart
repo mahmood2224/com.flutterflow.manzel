@@ -183,6 +183,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => FilterWidget(
                 homeScreenLength:
                     params.getParam('homeScreenLength', ParamType.int),
+                //cityList : params.getParam('cityList',ParamType.JSON),
               ),
             ),
             FFRoute(
@@ -250,6 +251,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'imageGalleryView',
               builder: (context, params) => ImageGalleryViewWidget(
                 propertyId: params.getParam('propertyId', ParamType.int),
+                  screenName: params.getParam('screenName', ParamType.String),
+                  imageList: params.getParam('imageList', ParamType.JSON)
               ),
             ),
             FFRoute(

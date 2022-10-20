@@ -402,6 +402,7 @@ class _ReservationConfirmationWidgetState
                                               propertyID:
                                                   widget.propertyId.toString(),
                                               userID: currentUserUid,
+                                                  version: FFAppState().apiVersion
                                             );
                                             _shouldSetState = true;
                                             if ((initiateOrder?.succeeded ??

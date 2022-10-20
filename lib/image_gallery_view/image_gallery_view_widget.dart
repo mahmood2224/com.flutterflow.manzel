@@ -16,9 +16,13 @@ class ImageGalleryViewWidget extends StatefulWidget {
   const ImageGalleryViewWidget({
     Key? key,
     this.propertyId,
+    this.screenName,
+    this.imageList,
   }) : super(key: key);
 
   final int? propertyId;
+  final String? screenName;
+  final dynamic imageList;
 
   @override
   _ImageGalleryViewWidgetState createState() => _ImageGalleryViewWidgetState();
@@ -151,40 +155,21 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                 ),
               ),
               Expanded(
-                child: FutureBuilder<ApiCallResponse>(
-                  future: PropertyCall.call(
-                    propertyId: widget.propertyId,
-                    locale: FFAppState().locale,
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: SpinKitRipple(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            size: 50,
-                          ),
-                        ),
-                      );
-                    }
-                    final listViewPropertyResponse = snapshot.data!;
-                    return Builder(
+                child: Builder(
                       builder: (context) {
-                        final images = getJsonField(
-                            listViewPropertyResponse.jsonBody,
-    r'''$.data.attributes.property_images.data''').toList();
-                         imageList = getJsonField(
-                             listViewPropertyResponse.jsonBody,
-                             r'''$.data.attributes.property_images.data..attributes.formats.medium.url''');
+
+                         imageList = widget.imageList.length==1?
+                         [getJsonField(
+                             widget.imageList,
+                             r'''$..attributes.formats.medium.url''')]:getJsonField(
+                             widget.imageList,
+                             r'''$..attributes.formats.medium.url''');
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.vertical,
-                          itemCount: images.length,
+                          itemCount: widget.imageList.length,
                           itemBuilder: (context, imagesIndex) {
-                            final imagesItem = images[imagesIndex];
+                            final imagesItem = widget.imageList[imagesIndex];
                             return Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(8, 6, 8, 6),
@@ -267,8 +252,6 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                           },
                         );
                       },
-                    );
-                  },
                 ),
               ),
             ],

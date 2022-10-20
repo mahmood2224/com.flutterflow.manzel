@@ -1045,6 +1045,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PropertyDetails
   {
+    'floorPlan' : {
+      'en': 'Floor plan',
+      'ar': 'المخطط',
+    },
     'propertyName': {
       'en': 'Property name',
       'ar': 'اسم الخاصية',

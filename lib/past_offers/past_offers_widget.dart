@@ -106,6 +106,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                     future:
                         (_apiRequestCompleter ??= Completer<ApiCallResponse>()
                               ..complete(ArchivedOffersCall.call(
+                                version: FFAppState().apiVersion,
                                 userId: currentUserUid,
                                 locale: FFAppState().locale,
                                 authorazationToken: FFAppState().authToken,

@@ -141,6 +141,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
             userid: currentUserUid,
             locale: FFAppState().locale,
             authorazationToken: FFAppState().authToken,
+            version: FFAppState().apiVersion,
           ),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.

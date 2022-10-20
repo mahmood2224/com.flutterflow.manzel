@@ -132,7 +132,8 @@ class _ReservationBottomSheetWidgetState
           userId: currentUserReference?.id,
           transactionStatus: 'completed',
           transactionId: tapSDKResult!['charge_id'],
-          authorazationToken: FFAppState().authToken
+          authorazationToken: FFAppState().authToken,
+          version: FFAppState().apiVersion
         );
 
         if (((transactionApiResponse?.statusCode ?? 200)) ==
@@ -186,6 +187,7 @@ class _ReservationBottomSheetWidgetState
           transactionStatus: 'failed',
           transactionId: tapSDKResult!['charge_id'],
           authorazationToken: FFAppState().authToken,
+          version: FFAppState().apiVersion
         );
         // if (((transactionApiResponse?.statusCode ?? 200)) ==
         //     200) {

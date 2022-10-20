@@ -204,6 +204,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                 userId: currentUserUid,
                                 locale: FFAppState().locale,
                                 authorazationToken: FFAppState().authToken,
+                                version: FFAppState().apiVersion,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -1132,6 +1133,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                 userId: currentUserUid,
                                 locale: FFAppState().locale,
                                 authorazationToken: FFAppState().authToken,
+                                version: FFAppState().apiVersion,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -1563,6 +1565,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 ).toString(),
                                                                 '0',
                                                               ),
+                                                                  version: FFAppState().apiVersion,
                                                             );
                                                             if ((bookmarkApiResponse
                                                                         ?.statusCode ??

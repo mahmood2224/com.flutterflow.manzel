@@ -7,10 +7,11 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
+
 class PropertiesCall {
   static Future<ApiCallResponse> call({
     String? populate =
-    '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
+    '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
     String? city = '',
     String? furnishingType = '',
     String? propertyType = '',
@@ -230,6 +231,7 @@ class InitiateOrderCall {
     String? userID = '',
     String? propertyID = '',
     String? authorazationToken = '',
+    String? version = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'initiateOrder',
@@ -237,6 +239,7 @@ class InitiateOrderCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',
+        'version' : version
       },
       params: {
         'userID': userID,
@@ -413,6 +416,7 @@ class AddOrderCall {
     String? userId = '',
     String? propertyId = '',
     String? authorazationToken = '',
+    String? version = '',
   }) {
     final body = '''
 {
@@ -425,6 +429,7 @@ class AddOrderCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',
+        'version' : version
       },
       params: {},
       body: body,
@@ -443,6 +448,7 @@ class AddTransactionCall {
     String? transactionStatus = '',
     String? transactionId = '',
     String ?authorazationToken='',
+    String? version = '',
   }) {
     final body = '''
 {
@@ -458,7 +464,8 @@ class AddTransactionCall {
       apiUrl:
       '${EnvVariables.instance.firebaseBaseUrl}/addTransaction',
       callType: ApiCallType.POST,
-      headers: {'Authorization': 'Bearer ${authorazationToken}'},
+      headers: {'Authorization': 'Bearer ${authorazationToken}',
+        'version' : version},
       params: {},
       body: body,
       bodyType: BodyType.JSON,
@@ -473,6 +480,7 @@ class GetOffersCall {
     String? propertyId = '',
     String? locale = '',
     String? authorazationToken = '',
+    String? version = '',
   }) {
     final body = '''
 {
@@ -487,6 +495,7 @@ class GetOffersCall {
       headers: {
         'Accept-Language': '${locale}',
         'Authorization': 'Bearer ${authorazationToken}',
+        'version' : version
       },
       params: {},
       body: body,
@@ -542,6 +551,7 @@ class AcceptOfferCall {
     String? userId = '',
     String? offerId = '',
     String? authorazationToken = '',
+    String? version = ''
   }) {
     final body = '''
 {
@@ -554,6 +564,7 @@ class AcceptOfferCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',
+        'version' : version
       },
       params: {},
       body: body,
@@ -568,6 +579,7 @@ class ArchivedOffersCall {
     String? userId = '',
     String? locale = '',
     String? authorazationToken = '',
+    String? version ='',
   }) {
     final body = '''
 {
@@ -581,6 +593,7 @@ class ArchivedOffersCall {
       headers: {
         'Accept-Language': '${locale}',
         'Authorization': 'Bearer ${authorazationToken}',
+        'version' : version
       },
       params: {},
       body: body,
@@ -600,6 +613,8 @@ class BookedPropertiesCall {
     String? userId = '',
     String? locale = '',
     String? authorazationToken = '',
+    String? version ='',
+
   }) {
     final body = '''
 {
@@ -613,6 +628,7 @@ class BookedPropertiesCall {
       headers: {
         'Accept-Language': '${locale}',
         'Authorization': 'Bearer ${authorazationToken}',
+        'version' : version
       },
       params: {},
       body: body,
@@ -633,6 +649,7 @@ class OrderDetailsCall {
     String? userid = '',
     String? locale = '',
     String? authorazationToken = '',
+    String? version ='',
   }) {
     final body = '''
 {
@@ -647,6 +664,7 @@ class OrderDetailsCall {
       headers: {
         'Accept-Language': '${locale}',
         'Authorization': 'Bearer ${authorazationToken}',
+        'version' : version
       },
       params: {},
       body: body,
@@ -667,6 +685,7 @@ class BookmarkPropertyCall {
     String? propertyId = '',
     String? locale = '',
     String? authorazationToken = '',
+    String? version ='',
   }) {
     final body = '''
 {
@@ -679,6 +698,7 @@ class BookmarkPropertyCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',
+        'version' : version
       },
       params: {},
       body: body,
@@ -693,6 +713,7 @@ class GetBookMarkedPropertiesCall {
     String? userId = '',
     String? locale = '',
     String? authorazationToken = '',
+    String? version = '',
   }) {
     final body = '''
 {
@@ -706,6 +727,7 @@ class GetBookMarkedPropertiesCall {
       headers: {
         'Accept-Language': '${locale}',
         'Authorization': 'Bearer ${authorazationToken}',
+        'version' : version
       },
       params: {},
       body: body,

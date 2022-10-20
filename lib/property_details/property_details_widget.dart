@@ -975,7 +975,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0,
-                                                                        0,
+                                                                        10,
                                                                         8,
                                                                         0),
                                                             child: InkWell(
@@ -1048,73 +1048,73 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               ),
                                                             ),
                                                           ),
-                                                          InkWell(
-                                                            onTap: () async {
-                                                              //_chewieController?.pause();
-                                                              logFirebaseEvent(
-                                                                  'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
-                                                              logFirebaseEvent(
-                                                                  'Container_Navigate-To');
-                                                              context.pushNamed(
-                                                                'FloorPlan',
-                                                                queryParams: {
-                                                                  'propertyId': serializeParam(
-                                                                      widget
-                                                                          .propertyId,
-                                                                      ParamType
-                                                                          .int),
-                                                                }.withoutNulls,
-                                                              );
-                                                            },
-                                                            child: Container(
-                                                              height: 30,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .white,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8),
-                                                                border:
-                                                                    Border.all(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryText,
-                                                                ),
-                                                              ),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            5,
-                                                                            0,
-                                                                            5,
-                                                                            0),
-                                                                    child:
-                                                                        Container(
-                                                                      width: 60,
-                                                                      child: Icon(
-                                                                          Manzel
-                                                                              .floor_plan,
-                                                                          color: Colors
-                                                                              .black,
-                                                                          size:
-                                                                              20),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
+                                                          // InkWell(
+                                                          //   onTap: () async {
+                                                          //     //_chewieController?.pause();
+                                                          //     logFirebaseEvent(
+                                                          //         'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
+                                                          //     logFirebaseEvent(
+                                                          //         'Container_Navigate-To');
+                                                          //     context.pushNamed(
+                                                          //       'FloorPlan',
+                                                          //       queryParams: {
+                                                          //         'propertyId': serializeParam(
+                                                          //             widget
+                                                          //                 .propertyId,
+                                                          //             ParamType
+                                                          //                 .int),
+                                                          //       }.withoutNulls,
+                                                          //     );
+                                                          //   },
+                                                          //   child: Container(
+                                                          //     height: 30,
+                                                          //     decoration:
+                                                          //         BoxDecoration(
+                                                          //       color: FlutterFlowTheme.of(
+                                                          //               context)
+                                                          //           .white,
+                                                          //       borderRadius:
+                                                          //           BorderRadius
+                                                          //               .circular(
+                                                          //                   8),
+                                                          //       border:
+                                                          //           Border.all(
+                                                          //         color: FlutterFlowTheme.of(
+                                                          //                 context)
+                                                          //             .primaryText,
+                                                          //       ),
+                                                          //     ),
+                                                          //     child: Row(
+                                                          //       mainAxisSize:
+                                                          //           MainAxisSize
+                                                          //               .max,
+                                                          //       mainAxisAlignment:
+                                                          //           MainAxisAlignment
+                                                          //               .center,
+                                                          //       children: [
+                                                          //         Padding(
+                                                          //           padding: EdgeInsetsDirectional
+                                                          //               .fromSTEB(
+                                                          //                   5,
+                                                          //                   0,
+                                                          //                   5,
+                                                          //                   0),
+                                                          //           child:
+                                                          //               Container(
+                                                          //             width: 60,
+                                                          //             child: Icon(
+                                                          //                 Manzel
+                                                          //                     .floor_plan,
+                                                          //                 color: Colors
+                                                          //                     .black,
+                                                          //                 size:
+                                                          //                     20),
+                                                          //           ),
+                                                          //         ),
+                                                          //       ],
+                                                          //     ),
+                                                          //   ),
+                                                          // ),
                                                         ],
                                                       ),
                                                     ),
@@ -3065,6 +3065,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               .propertyId,
                                                                           ParamType
                                                                               .int),
+                                                                          'imageList': serializeParam(propertyImages, ParamType.JSON),
+                                                                          'ScreenName':serializeParam("PropertyImages", ParamType.String)
                                                                     }.withoutNulls,
                                                                   );
                                                                 },
@@ -3134,6 +3136,166 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                                 117,
                                                                             fit:
                                                                                 BoxFit.cover,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              );
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Divider(
+                                                  thickness: 1,
+                                                  indent: 10,
+                                                  endIndent: 10,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(16, 20, 16, 0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                    MainAxisSize.max,
+                                                    children: [
+                                                      Text(
+                                                        FFLocalizations.of(
+                                                            context)
+                                                            .getText(
+                                                          'floorPlan' /* Photos */,
+                                                        ),
+                                                        style:
+                                                        FlutterFlowTheme.of(
+                                                            context)
+                                                            .bodyText1
+                                                            .override(
+                                                          fontFamily:
+                                                          'AvenirArabic',
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .bold,
+                                                          useGoogleFonts:
+                                                          false,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 12, 0, 55),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                    MainAxisSize.min,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Container(
+                                                          width:
+                                                          double.infinity,
+                                                          height: 164,
+                                                          decoration:
+                                                          BoxDecoration(
+                                                            color: Colors.white,
+                                                          ),
+                                                          child: Builder(
+                                                            builder: (context) {
+                                                              final propertyFloorPlan =
+                                                              getJsonField(
+                                                                  columnPropertyResponse,
+                                                                  r'''$.attributes.property_floor_plan.data''').toList();
+                                                              return InkWell(
+                                                                onTap:
+                                                                    () async {
+                                                                  logFirebaseEvent(
+                                                                      'PROPERTY_DETAILS_horizontalList_ON_TAP');
+                                                                  logFirebaseEvent(
+                                                                      'horizontalList_Navigate-To');
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'imageGalleryView',
+                                                                    queryParams:
+                                                                    {
+                                                                      'propertyId': serializeParam(
+                                                                          widget
+                                                                              .propertyId,
+                                                                          ParamType
+                                                                              .int),
+                                                                      'imageList': serializeParam(propertyFloorPlan, ParamType.JSON),
+                                                                      'ScreenName':serializeParam("FloorPlan", ParamType.String)
+                                                                    }.withoutNulls,
+                                                                  );
+                                                                },
+                                                                child: ListView
+                                                                    .builder(
+                                                                  padding:
+                                                                  EdgeInsets
+                                                                      .zero,
+                                                                  primary:
+                                                                  false,
+                                                                  shrinkWrap:
+                                                                  true,
+                                                                  scrollDirection:
+                                                                  Axis.horizontal,
+                                                                  itemCount:
+                                                                  propertyFloorPlan
+                                                                      .length,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                      propertyFloorPlanIndex) {
+                                                                    final propertyFloorPlanItem =
+                                                                    propertyFloorPlan[
+                                                                    propertyFloorPlanIndex];
+                                                                    return Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                          16,
+                                                                          0,
+                                                                          0,
+                                                                          0),
+                                                                      child:
+                                                                      Container(
+                                                                        width:
+                                                                        147,
+                                                                        height:
+                                                                        117,
+                                                                        decoration:
+                                                                        BoxDecoration(
+                                                                          color:
+                                                                          Colors.white,
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Color(0x230F1113),
+                                                                            )
+                                                                          ],
+                                                                          borderRadius:
+                                                                          BorderRadius.circular(12),
+                                                                          border:
+                                                                          Border.all(
+                                                                            color:
+                                                                            Color(0xFFF3F3F3),
+                                                                          ),
+                                                                        ),
+                                                                        child:
+                                                                        ClipRRect(
+                                                                          borderRadius:
+                                                                          BorderRadius.circular(8),
+                                                                          child:
+                                                                          Image.network(
+                                                                            getJsonField(
+                                                                              propertyFloorPlanItem,
+                                                                              r'''$..attributes.formats.medium.url''',
+                                                                            ),
+                                                                            width:
+                                                                            147,
+                                                                            height:
+                                                                            117,
+                                                                            fit:
+                                                                            BoxFit.cover,
                                                                           ),
                                                                         ),
                                                                       ),
@@ -3321,7 +3483,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               ?.id,
                                                       authorazationToken:
                                                           FFAppState()
-                                                              .authToken);
+                                                              .authToken,
+                                                    version: FFAppState().apiVersion
+                                                  );
 
                                               if ((addOrderApiResponse
                                                           ?.statusCode ??
@@ -3473,7 +3637,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   ?.id,
                                                           authorazationToken:
                                                               FFAppState()
-                                                                  .authToken);
+                                                                  .authToken,
+                                                          version: FFAppState().apiVersion
+                                                      );
 
                                                   if ((addOrderApiResponse
                                                               ?.statusCode ??

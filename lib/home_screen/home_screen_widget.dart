@@ -56,6 +56,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   //FlickMultiManager flickMultiManager;
   Set<VideoPlayerController>? videoControllerSet;
+  ApiCallResponse? apiData;
 
   VideoPlayerController? _currentController;
   int currentPropertyindex = 0;
@@ -98,6 +99,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         pageSize: _pageSize.toString(),
         locale: FFAppState().locale,
       );
+       apiData = apiResponse;
       final newItems = getJsonField(
             (apiResponse?.jsonBody ?? ''),
             r'''$.data''',
@@ -377,7 +379,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               'homeScreenLength':
                                                   serializeParam(
                                                       videoPlayers.length ?? 0,
-                                                      ParamType.int)
+                                                      ParamType.int),
+                                          //     'cityList':serializeParam(
+                                          // getJsonField(
+                                          //       apiData!.jsonBody,
+                                          //       r'''$.attributes.property_status''',
+                                          //     )
+                                          //     , ParamType.JSON)
                                             }.withoutNulls,
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
@@ -1138,6 +1146,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 ).toString(),
                                                 '0',
                                               ),
+                                              version: FFAppState().apiVersion,
                                             );
                                           } else {
                                             videoPlayers[propertiesIndex]

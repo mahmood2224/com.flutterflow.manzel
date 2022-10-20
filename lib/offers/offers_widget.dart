@@ -232,6 +232,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                   functions.offerScreenPropertyIdisNull(widget.propertyId),
               locale: FFAppState().locale,
               authorazationToken: FFAppState().authToken,
+              version: FFAppState().apiVersion
             )),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
@@ -1850,6 +1851,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ).toString(),
                                                                             'null',
                                                                           ),
+                                                                              version: FFAppState().apiVersion
                                                                         );
                                                                         if ((acceptOfferResponse?.statusCode ??
                                                                                 200) ==
@@ -1946,6 +1948,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ).toString(),
                                                                             'null',
                                                                           ),
+                                                                              version: FFAppState().apiVersion
                                                                         );
                                                                         if ((acceptOfferResponseAr?.statusCode ??
                                                                                 200) ==

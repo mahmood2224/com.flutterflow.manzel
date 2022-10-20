@@ -18,6 +18,7 @@ class FFAppState {
     _isInitailLaunch =  prefs.getBool('ff_isInitailLaunch') ?? _isInitailLaunch;
     _locale = await prefs.getString('ff_locale') ?? _locale;
     _authToken = prefs.getString('ff_authToken') ?? _authToken;
+    _apiVersion = prefs.getString('ff__apiVersion') ?? _apiVersion;
   }
 
   late SharedPreferences prefs;
@@ -66,6 +67,13 @@ class FFAppState {
   set authToken(String _value) {
     _authToken = _value;
     prefs.setString('ff_authToken', _value);
+  }
+
+  String _apiVersion = 'v1';
+  String get apiVersion => _apiVersion;
+  set apiVersion(String _value) {
+    _apiVersion = _value;
+    prefs.setString('ff__apiVersion', _value);
   }
 }
 

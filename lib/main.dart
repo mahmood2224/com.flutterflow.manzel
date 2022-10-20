@@ -30,7 +30,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 import 'notification_handler/firebase_cloud_messaging.dart';
+
 const _kTestingCrashlytics = false;
+
 void main() async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -154,8 +156,8 @@ class _MyAppState extends State<MyApp> {
         Locale('en'),
         Locale('ar'),
       ],
-      theme: ThemeData(brightness: Brightness.light,
-
+      theme: ThemeData(
+        brightness: Brightness.light,
       ),
       themeMode: _themeMode,
       routeInformationParser: _router.routeInformationParser,
@@ -179,60 +181,73 @@ class _MyAppState extends State<MyApp> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return isForceUpdate
-            ? AlertDialog(
-                title: Text(
-                    FFAppState().locale == 'en'
-                        ? 'Your version of app is out of date kindly update'
-                        : 'إصدار التطبيق الخاص بك قديم ، يرجى التحديث',
-                    textAlign: TextAlign.center),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        final appPackageName = packageName;
-
-                        if (Platform.isAndroid) {
-                          launchURL(
-                              "https://play.google.com/store/apps/details?id=$appPackageName");
-                        } else if (Platform.isIOS) {
-                          launchURL("market://details?id=$appPackageName");
-                        }
-                      },
-                      child: Text(
-                          FFAppState().locale == 'en' ? 'Update' : 'تحديث')),
-                ],
-              )
-            : AlertDialog(
-                title: Text(
-                  FFAppState().locale == 'en'
-                      ? 'A new version of app is available'
-                      : 'يتوفر إصدار جديد من التطبيق',
-                  textAlign: TextAlign.center,
+        return AlertDialog(
+          title: Text(
+            FFAppState().locale == 'en'
+                ? "New Update Available"
+                : " تحديث جديد متاح ",
+            style: FlutterFlowTheme.of(context).subtitle2.override(
+                  fontFamily: 'AvenirArabic',
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  useGoogleFonts: false,
                 ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      final appPackageName = packageName;
+          ),
+          content: Text(
+            FFAppState().locale == 'en'
+                ? 'Your version of app is out of date kindly update'
+                : 'إصدار التطبيق الخاص بك قديم ، يرجى التحديث',
+            style: FlutterFlowTheme.of(context).subtitle2.override(
+                  fontFamily: 'AvenirArabic',
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                  useGoogleFonts: false,
+                ),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  final appPackageName = packageName;
 
-                      if (Platform.isAndroid) {
-                        launchURL(
-                            "https://play.google.com/store/apps/details?id=$appPackageName");
-                      } else if (Platform.isIOS) {
-                        launchURL("market://details?id=$appPackageName");
-                      }
-                    },
-                    child:
-                        Text(FFAppState().locale == 'en' ? 'Update' : 'تحديث'),
-                  ),
-                  TextButton(
+                  if (Platform.isAndroid) {
+                    launchURL(
+                        "https://play.google.com/store/apps/details?id=$appPackageName");
+                  } else if (Platform.isIOS) {
+                    launchURL(
+                        'https://apps.apple.com/sa/app/%D9%85%D9%86%D8%B2%D9%84/id1630341481');
+                  }
+                },
+                child: Text(
+                  FFAppState().locale == 'en' ? 'Update' : 'تحديث',
+                  style: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'AvenirArabic',
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                        useGoogleFonts: false,
+                      ),
+                )),
+            isForceUpdate
+                ? SizedBox.shrink():TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                        FFAppState().locale == 'en' ? 'Later' : 'في وقت لاحق'),
-                  ),
-                ],
-              );
+                      FFAppState().locale == 'en' ? 'Later' : 'في وقت لاحق',
+                      style: FlutterFlowTheme.of(context).subtitle2.override(
+                            fontFamily: 'AvenirArabic',
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300,
+                            useGoogleFonts: false,
+                          ),
+                    ),
+                  )
+                ,
+          ],
+        );
       },
     );
   }
@@ -268,6 +283,9 @@ class _MyAppState extends State<MyApp> {
       final arr_current_version = recent_version.split('.');
       final arr_installed_version = installed_app_version.split('.');
       //for minimum required version
+      if (installed_app_version == recent_version) {
+        FFAppState().apiVersion = current_remote_backend_version;
+      }
       if (recent_version != installed_app_version) {
         if (isForceUpdate) {
           showUpdateDialog(context, true, appPackageName);
@@ -289,8 +307,7 @@ class _MyAppState extends State<MyApp> {
         } else if (int.parse(arr_current_version[2]) >
             int.parse(arr_installed_version[2])) {
           showUpdateDialog(context, false, appPackageName);
-        } else if (current_remote_backend_version !=
-            int.parse(info.buildNumber)) {
+        } else if (current_remote_build != int.parse(info.buildNumber)) {
           showUpdateDialog(context, false, appPackageName);
         }
       }
@@ -308,8 +325,11 @@ class _MyAppState extends State<MyApp> {
       final installed_build_number = info.buildNumber;
       final arr_required_version = min_required_version.split('.');
       final arr_current_version = recent_version.split('.');
-      final arr_installed_version = current_remote_build.split('.');
+      final arr_installed_version = installed_app_version.split('.');
       //for minimum required version
+      if (installed_app_version == recent_version) {
+        FFAppState().apiVersion = current_remote_backend_version;
+      }
       if (recent_version != installed_app_version) {
         if (isForceUpdate) {
           showUpdateDialog(context, true, appPackageName);
@@ -331,8 +351,7 @@ class _MyAppState extends State<MyApp> {
         } else if (int.parse(arr_current_version[2]) >
             int.parse(arr_installed_version[2])) {
           showUpdateDialog(context, false, appPackageName);
-        } else if (current_remote_backend_version !=
-            int.parse(info.buildNumber)) {
+        } else if (installed_build_number != current_remote_build) {
           showUpdateDialog(context, false, appPackageName);
         }
       }
@@ -463,5 +482,3 @@ class _NavBarPageState extends State<NavBarPage> {
     );
   }
 }
-
-

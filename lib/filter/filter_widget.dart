@@ -17,6 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 class FilterWidget extends StatefulWidget {
   const FilterWidget({Key? key, this.homeScreenLength}) : super(key: key);
   final int? homeScreenLength;
+  //final dynamic cityList;
 
   @override
   _FilterWidgetState createState() => _FilterWidgetState();
@@ -56,6 +57,7 @@ class _FilterWidgetState extends State<FilterWidget> {
         propertyTypeListValues!.add("الكل");
       }
       installmentRange = SfRangeValues(0,mxRange);
+      citiesListValue= null;
     });
   }
 
@@ -227,8 +229,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                                   final citiesListCityListResponse =
                                       snapshot.data!;
                                   return FlutterFlowDropDown(
-                                    initialOption: citiesListValue ??=
-                                        FFAppState().filterCity,
+                                    initialOption: citiesListValue ??
+                                        'Select city',
                                     options: functions
                                         .cityListBuilder(
                                             (getJsonField(
