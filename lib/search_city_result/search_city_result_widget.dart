@@ -53,6 +53,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
   @override
   void initState() {
     super.initState();
+    logFirebaseEvent('view_search_results');
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'SearchCityResult'});
   }

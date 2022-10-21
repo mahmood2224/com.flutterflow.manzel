@@ -73,6 +73,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     // On page load action.
     videoPlayers.clear();
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('view_item_list');
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
       logFirebaseEvent('HomeScreen_Set-App-Language');
       setAppLanguage(context, FFAppState().locale);
@@ -319,6 +320,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     children: [
                                       InkWell(
                                         onTap: () async {
+                                          logFirebaseEvent('search');
                                           await showDialog(
                                               context: context,
                                               builder: (alertDialogContext) {
@@ -367,6 +369,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
+                                          logFirebaseEvent('search');
                                           videoPlayers[currentPropertyindex]
                                               .pause();
                                           logFirebaseEvent(
@@ -566,6 +569,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           //     ).toString(),
                           //     'Soon')) {
                             videoPlayers[currentPropertyindex].pause();
+                            logFirebaseEvent('view_item');
                             logFirebaseEvent(
                                 'HOME_SCREEN_PAGE_propertyCard_ON_TAP');
                             // propertyDetails
@@ -1130,6 +1134,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           0, 12, 15, 0),
                                       child: InkWell(
                                         onTap: () async {
+                                          logFirebaseEvent('add_to_wishlist');
                                           logFirebaseEvent(
                                               'HOME_SCREEN_Container_jprwonvd_ON_TAP');
                                           if (loggedIn) {

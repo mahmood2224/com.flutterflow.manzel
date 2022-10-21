@@ -234,6 +234,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                         currentUserDocument!.status!
                                                 .toLowerCase() ==
                                             'active') {
+                                      logFirebaseEvent('login');
                                       final userUpdateData =
                                           createUserRecordData(
                                               status: 'Active',
@@ -244,6 +245,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                               isDeleted: 0);
                                       if (currentUserDocument!
                                           .status!.isEmpty) {
+                                        logFirebaseEvent('sign_up');
                                         userUpdateData.addAll(
                                             {'created_time': DateTime.now()});
                                         userUpdateData.addAll(

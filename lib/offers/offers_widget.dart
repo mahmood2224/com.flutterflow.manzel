@@ -1804,6 +1804,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                       () async {if(isLoading.value == false){
                                                                     logFirebaseEvent(
                                                                         'OFFERS_PAGE_ACCEPT_OFFER_BTN_ON_TAP');
+                                                                    logFirebaseEvent('select_item');
                                                                     if (FFAppState()
                                                                             .locale ==
                                                                         'en') {

@@ -26,6 +26,7 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
   @override
   void initState() {
     super.initState();
+    logFirebaseEvent('tutorial_begin');
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       versionCheck(context);
@@ -75,7 +76,7 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
           content: Text(
             FFAppState().locale == 'en'
                 ? 'Your version of app is out of date kindly update'
-                : 'إصدار التطبيق الخاص بك قديم ، يرجى التحديث',
+                : 'يتوفر تحديث جديد لتطبيق منزل، يرجى تحديث التطبيق الى الإصدار الأحدث',
             style: FlutterFlowTheme.of(context).subtitle2.override(
               fontFamily: 'AvenirArabic',
               color: Colors.black,
@@ -374,6 +375,7 @@ your f... */
               padding: EdgeInsetsDirectional.fromSTEB(16, 27, 16, 18),
               child: FFButtonWidget(
                 onPressed: () async {
+                  logFirebaseEvent('tutorial_complete');
                   logFirebaseEvent('ONBOARDING_VIEW_PAGE_getStarted_ON_TAP');
                   // GoTohome
                   logFirebaseEvent('getStarted_GoTohome');
@@ -407,6 +409,7 @@ your f... */
             ),
             InkWell(
               onTap: () async {
+
                 logFirebaseEvent('ONBOARDING_VIEW_PAGE_goToLogin_ON_TAP');
                 // Go to Login
                 logFirebaseEvent('goToLogin_GotoLogin');

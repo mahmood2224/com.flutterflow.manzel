@@ -1546,6 +1546,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                         ),
                                                         InkWell(
                                                           onTap: () async {
+                                                            logFirebaseEvent('view_cart');
                                                             logFirebaseEvent(
                                                                 'MY_PROPERTIES_PAGE_Icon_0lkum35u_ON_TAP');
                                                             logFirebaseEvent(

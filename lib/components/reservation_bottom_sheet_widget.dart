@@ -124,7 +124,7 @@ class _ReservationBottomSheetWidgetState
       //   'Confirmation',
       //   queryParams: query
       // );
-
+      logFirebaseEvent('purchase');
         transactionApiResponse = await AddTransactionCall.call(
           amountPaid: widget.reservationCost.toString(),
           transactionMethod: ((paymentMethodValue?.toLowerCase() == 'mada' || paymentMethodValue?.toLowerCase() == 'مدى' ) ?"Mada":"ApplePay"),
@@ -652,6 +652,8 @@ class _ReservationBottomSheetWidgetState
                     onPressed: () async {
                       logFirebaseEvent(
                           'RESERVATION_BOTTOM_SHEET_PAY_BTN_ON_TAP');
+                      logFirebaseEvent('add_payment_info');
+                      logFirebaseEvent('begin_checkout');
                       var _shouldSetState = false;
                       logFirebaseEvent('Button_Backend-Call');
     _shouldSetState = true;

@@ -570,6 +570,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         size: 14,
                                                       ),
                                                       onPressed: () async {
+                                                        logFirebaseEvent('share');
                                                         logFirebaseEvent(
                                                             'PROPERTY_DETAILS_PAGE_share_ON_TAP');
                                                         // shareProperty
@@ -3446,6 +3447,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         'Available'))
                                       FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent('add_to_cart');
                                           //_chewieController?.pause();
                                           logFirebaseEvent(
                                               'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');

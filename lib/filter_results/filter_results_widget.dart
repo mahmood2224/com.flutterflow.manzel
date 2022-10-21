@@ -58,6 +58,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
   @override
   void initState() {
     super.initState();
+    logFirebaseEvent('view_search_results');
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'filterResults'});
   }
