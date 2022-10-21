@@ -1880,7 +1880,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           // });
                                                                           isLoading.value =
                                                                               false;
-                                                                          inAppReview.requestReview();
+                                                                          if (await inAppReview.isAvailable()) {
+                                                                            Future.delayed(const Duration(seconds: 2), () {
+                                                                              inAppReview.requestReview();
+                                                                            });
+                                                                          }
                                                                         } else {
                                                                           logFirebaseEvent(
                                                                               'Button_Show-Snack-Bar');
