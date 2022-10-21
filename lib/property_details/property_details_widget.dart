@@ -3906,7 +3906,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     var whatsapp = phoneNumber;
     var whatsappUrlAndroid =
         Uri.parse('$kWhatsAppAndroid$whatsapp&text=${message}');
-    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp&text=${Uri.parse("${message}")}');
+    var whatsappUrlIos = Uri.parse('$kWhatsAppIOS$whatsapp?text=$message');
     if (Platform.isIOS) {
       if (await canLaunchUrl(whatsappUrlIos)) {
         await launchUrl(whatsappUrlIos, mode: LaunchMode.externalApplication);

@@ -9,6 +9,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -230,7 +231,8 @@ class _MyAppState extends State<MyApp> {
                       ),
                 )),
             isForceUpdate
-                ? SizedBox.shrink():TextButton(
+                ? SizedBox.shrink()
+                : TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -244,8 +246,7 @@ class _MyAppState extends State<MyApp> {
                             useGoogleFonts: false,
                           ),
                     ),
-                  )
-                ,
+                  ),
           ],
         );
       },
@@ -253,6 +254,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> versionCheck(BuildContext context) async {
+    Future.delayed(Duration(milliseconds: 100));
     PackageInfo info = await PackageInfo.fromPlatform();
     final appPackageName = info.packageName;
     RemoteConfig remoteConfig = await RemoteConfig.instance;
@@ -269,93 +271,72 @@ class _MyAppState extends State<MyApp> {
         jsonDecode(remote_config_settings) as Map;
     FFAppState().buildNo = int.parse(info.buildNumber);
     FFAppState().buildVersion = info.version;
-    if (Platform.isAndroid) {
-      final min_required_version =
-          remoteConfig.getString('minimum_supported_version_android');
-      final recent_version = current_remote_version_JSON['android_version'];
-      final current_remote_build =
-          current_remote_version_JSON['android_build_number'];
+    bool isAndriod = Platform.isAndroid ? true : false;
+      //Minimum required version
+      final min_required_version = remoteConfig.getString(isAndriod
+          ? 'minimum_supported_version_android'
+          : 'minimum_app_supported_version_iOS');
+      //android_version or iOS version inside application_version JSON
+      final recent_version = current_remote_version_JSON[
+          isAndriod ? 'android_version' : 'iOS_version'];
+      //Build Number
+      final current_remote_build = current_remote_version_JSON[
+          isAndriod ? 'android_build_number' : 'i0S_build_number'];
+      //Backend version
       final current_remote_backend_version =
           current_remote_version_JSON['supported_backend_version'];
+      //Force Update
       final isForceUpdate = current_remote_version_JSON['is_force_update'];
+      //Installed App version
       final installed_app_version = info.version;
+      //Individual decimal Value of all the version
       final arr_required_version = min_required_version.split('.');
       final arr_current_version = recent_version.split('.');
       final arr_installed_version = installed_app_version.split('.');
       //for minimum required version
       if (installed_app_version == recent_version) {
-        FFAppState().apiVersion = current_remote_backend_version;
-      }
-      if (recent_version != installed_app_version) {
+        if (FFAppState().apiVersion != current_remote_backend_version) {
+          FFAppState().apiVersion = current_remote_backend_version;
+          return;
+        }
+      } else {
         if (isForceUpdate) {
           showUpdateDialog(context, true, appPackageName);
-        } else if (int.parse(arr_required_version[0]) >
-            int.parse(arr_installed_version[0])) {
-          showUpdateDialog(context, true, appPackageName);
-        } else if (int.parse(arr_required_version[1]) >
-            int.parse(arr_installed_version[1])) {
-          showUpdateDialog(context, true, appPackageName);
-        } else if (int.parse(arr_required_version[2]) >
-            int.parse(arr_installed_version[2])) {
-          showUpdateDialog(context, true, appPackageName);
-        } else if (int.parse(arr_current_version[0]) >
-            int.parse(arr_installed_version[0])) {
-          showUpdateDialog(context, false, appPackageName);
-        } else if (int.parse(arr_current_version[1]) >
-            int.parse(arr_installed_version[1])) {
-          showUpdateDialog(context, false, appPackageName);
-        } else if (int.parse(arr_current_version[2]) >
-            int.parse(arr_installed_version[2])) {
-          showUpdateDialog(context, false, appPackageName);
+          return;
+        } else if (min_required_version != installed_app_version) {
+          if (int.parse(arr_required_version[0]) >
+              int.parse(arr_installed_version[0])) {
+            showUpdateDialog(context, true, appPackageName);
+            return;
+          } else if (int.parse(arr_required_version[1]) >
+              int.parse(arr_installed_version[1])) {
+            showUpdateDialog(context, true, appPackageName);
+            return;
+          } else if (int.parse(arr_required_version[2]) >
+              int.parse(arr_installed_version[2])) {
+            showUpdateDialog(context, true, appPackageName);
+            return;
+          }
+         else if (recent_version != installed_app_version) {
+          if (int.parse(arr_current_version[0]) >
+              int.parse(arr_installed_version[0])) {
+            showUpdateDialog(context, false, appPackageName);
+            return;
+          } else if (int.parse(arr_current_version[1]) >
+              int.parse(arr_installed_version[1])) {
+            showUpdateDialog(context, false, appPackageName);
+            return;
+          } else if (int.parse(arr_current_version[2]) >
+              int.parse(arr_installed_version[2])) {
+            showUpdateDialog(context, false, appPackageName);
+            return;
+          }
         } else if (current_remote_build != int.parse(info.buildNumber)) {
           showUpdateDialog(context, false, appPackageName);
         }
       }
-    }
-    if (Platform.isIOS) {
-      final min_required_version =
-          remoteConfig.getString('minimum_app_supported_version_iOS');
-      final recent_version = current_remote_version_JSON['iOS_version'];
-      final current_remote_build =
-          current_remote_version_JSON['iOS_build_number'];
-      final current_remote_backend_version =
-          current_remote_version_JSON['supported_backend_version'];
-      final isForceUpdate = current_remote_version_JSON['is_force_update'];
-      final installed_app_version = info.version;
-      final installed_build_number = info.buildNumber;
-      final arr_required_version = min_required_version.split('.');
-      final arr_current_version = recent_version.split('.');
-      final arr_installed_version = installed_app_version.split('.');
-      //for minimum required version
-      if (installed_app_version == recent_version) {
-        FFAppState().apiVersion = current_remote_backend_version;
       }
-      if (recent_version != installed_app_version) {
-        if (isForceUpdate) {
-          showUpdateDialog(context, true, appPackageName);
-        } else if (int.parse(arr_required_version[0]) >
-            int.parse(arr_installed_version[0])) {
-          showUpdateDialog(context, true, appPackageName);
-        } else if (int.parse(arr_required_version[1]) >
-            int.parse(arr_installed_version[1])) {
-          showUpdateDialog(context, true, appPackageName);
-        } else if (int.parse(arr_required_version[2]) >
-            int.parse(arr_installed_version[2])) {
-          showUpdateDialog(context, true, appPackageName);
-        } else if (int.parse(arr_current_version[0]) >
-            int.parse(arr_installed_version[0])) {
-          showUpdateDialog(context, false, appPackageName);
-        } else if (int.parse(arr_current_version[1]) >
-            int.parse(arr_installed_version[1])) {
-          showUpdateDialog(context, false, appPackageName);
-        } else if (int.parse(arr_current_version[2]) >
-            int.parse(arr_installed_version[2])) {
-          showUpdateDialog(context, false, appPackageName);
-        } else if (installed_build_number != current_remote_build) {
-          showUpdateDialog(context, false, appPackageName);
-        }
-      }
-    }
+
   }
 
   void _handleDeepLinks(PendingDynamicLinkData? data) {

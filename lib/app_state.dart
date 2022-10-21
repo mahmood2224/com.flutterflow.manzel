@@ -69,7 +69,7 @@ class FFAppState {
     prefs.setString('ff_authToken', _value);
   }
 
-  String _apiVersion = 'v1';
+  String _apiVersion = '';
   String get apiVersion => _apiVersion;
   set apiVersion(String _value) {
     _apiVersion = _value;
