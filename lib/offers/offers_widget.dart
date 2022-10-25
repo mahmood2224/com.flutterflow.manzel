@@ -541,22 +541,27 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                       0,
                                                                       8,
                                                                       0),
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        43),
+                                                          child: Container(
+                                                            height: 43,
+                                                            width: 43,
+                                                            decoration: BoxDecoration(
+                                                                shape: BoxShape.circle,
+                                                                border : Border.all(color: Color(0xFFF3F2F2),
+                                                                  width: 1,)
+                                                            ),
                                                             child:
-                                                                Image.network(
+                                                                ClipRRect(
+                                                                  borderRadius: BorderRadius.circular(21),
+                                                                  child: Image.network(
                                                               getJsonField(
-                                                                activeOffersItem,
-                                                                r'''$.bank_logo''',
+                                                                  activeOffersItem,
+                                                                  r'''$.bank_logo''',
                                                               ),
                                                               width: 43,
                                                               height: 43,
-                                                              fit: BoxFit
-                                                                  .cover,
+                                                              fit: BoxFit.contain,
                                                             ),
+                                                                ),
                                                           ),
                                                         ),
                                                         Expanded(
@@ -1713,6 +1718,13 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           MainAxisAlignment
                                                                               .center,
                                                                       children: [
+                                                                        Padding(padding: EdgeInsetsDirectional.only(end: 5),
+                                                                            child: Icon(
+                                                                              Manzel.chat_icon,
+                                                                              size: 22,
+                                                                              color: Colors.white,
+                                                                            ),
+                                                                        ),
                                                                         Text(
                                                                           FFLocalizations.of(context)
                                                                               .getText(

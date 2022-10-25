@@ -2543,20 +2543,20 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 ">>>>>>>>>>>>>>>>>>>>>>phone number = ${phoneNumber}");
                                                             final message = '''
                                                         ${FFLocalizations.of(context).getText(
-                                                              'opening' /* Logout */,
+                                                              'opening' ,
                                                             )}
                                                          ${FFLocalizations.of(context).getText(
-                                                              'propertyName' /* Logout */,
+                                                              'propertyName',
                                                             )} : ${PropertyCall.propertyName(
                                                               columnPropertyResponse,
                                                             ).toString()}
                                                         ${FFLocalizations.of(context).getText(
-                                                              'propertyRef' /* Logout */,
+                                                              'propertyRef' ,
                                                             )} : ${PropertyCall.propertyRef(
                                                               columnPropertyResponse,
                                                             ).toString()}
                                                        ${FFLocalizations.of(context).getText(
-                                                              'propertyAdd' /* Logout */,
+                                                              'propertyAdd' ,
                                                             )} : ${PropertyCall.propertyEntranceDirection(
                                                               columnPropertyResponse,
                                                             ).toString()}
@@ -2566,14 +2566,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 message,
                                                                 phoneNumber);
                                                           },
-                                                          text: FFLocalizations
+                                                           text: FFLocalizations
                                                                   .of(context)
                                                               .getText(
                                                             'requestVisit' /* Logout */,
                                                           ),
-                                                          options:
+                                                           options:
                                                               FFButtonOptions(
-                                                            width: 335,
+                                                                width: 335,
                                                             height: 48,
                                                             color: Colors.white,
                                                             textStyle:
@@ -2606,6 +2606,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     .circular(
                                                                         8),
                                                           ),
+                                                            icon :Icon(
+                                                              Manzel.request_visit,
+                                                                size:22,
+                                                            ),
                                                         ),
                                                       ],
                                                     ),

@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'dart:math' as math;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -463,26 +463,31 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     text: FFLocalizations.of(context).getText(
                       'u6lrslui' /* Chat Manzel in Whatsapp */,
                     ),
-                    icon: Icon(
-                      Icons.whatsapp_rounded,
-                      size: 26,
+                    icon: Transform(
+                      alignment: Alignment.center,
+                      transform: FFAppState().locale=='en'?Matrix4.rotationY(0):Matrix4.rotationY(math.pi),
+                      child: Icon(
+                        Manzel.whatsApp_icon,
+                        size: 26,
+                      ),
                     ),
                     options: FFButtonOptions(
+                      elevation: 1,
                       width: 335,
                       height: 52,
-                      color: Color(0xFF4AC85A),
+                      color: Colors.white,
                       textStyle:
                           FlutterFlowTheme.of(context).subtitle2.override(
                                 fontFamily: 'AvenirArabic',
-                                color: Colors.white,
+                                color: Color(0xFF4FB26D),
                                 fontWeight: FontWeight.w500,
                                 useGoogleFonts: false,
                               ),
                       borderSide: BorderSide(
-                        color: Colors.transparent,
+                        color: Color(0xFF4FB26D),
                         width: 1,
                       ),
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                 ),

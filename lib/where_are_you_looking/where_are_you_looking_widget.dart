@@ -14,10 +14,12 @@ class WhereAreYouLookingWidget extends StatefulWidget {
     Key? key,
     this.city,
     this.homeScreenLength,
+    this.favourites
   }) : super(key: key);
 
   final String? city;
   final int? homeScreenLength;
+  final dynamic favourites;
 
   @override
   _WhereAreYouLookingWidgetState createState() =>
@@ -193,8 +195,8 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                             ),
                                             ParamType.int),
                                         'homeScreenLength': serializeParam(
-                                        widget.homeScreenLength,
-                                        ParamType.int)
+                                            widget.homeScreenLength,
+                                            ParamType.int)
                                       }.withoutNulls,
                                     );
                                   },
@@ -219,32 +221,40 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                   width: 46,
                                                   height: 46,
                                                   decoration: BoxDecoration(
-                                                    color: Color(0xFFEEEEEE),
+                                                    color: Colors.white,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             5),
                                                   ),
                                                   child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    child: Image.network(
-                                                      valueOrDefault<String>(
-                                                        getJsonField(
-                                                          citiesItem,
-                                                          r'''$.image''',
-                                                        ),
-                                                        'https://cdn.pixabay.com/photo/2020/01/27/14/38/bedroom-4797364_1280.jpg',
-                                                      ),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.46,
-                                                      height: 46,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      child: getJsonField(
+                                                                  citiesItem,
+                                                                  r'''$.image''') ==
+                                                              ''
+                                                          ? Image.network(
+                                                              getJsonField(
+                                                                citiesItem,
+                                                                r'''$.image''',
+                                                              ),
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.46,
+                                                              height: 46,
+                                                              fit: BoxFit.cover,
+                                                            )
+                                                          : Icon(
+                                                              Manzel
+                                                                  .location_pin,
+                                                              size: 33,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryColor,
+                                                            )),
                                                 ),
                                                 Expanded(
                                                   child: Padding(

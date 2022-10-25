@@ -639,7 +639,7 @@ class BookmarkListCall {
     return ApiManager.instance.makeApiCall(
       callName: 'bookmarkList',
       apiUrl:
-      'https://${EnvVariables.instance.firebaseBaseUrl}/getBookMarkedPropertyIds',
+      '${EnvVariables.instance.firebaseBaseUrl}/getBookMarkedPropertyIds',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',

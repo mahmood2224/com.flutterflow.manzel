@@ -62,8 +62,8 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                           ? Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                SvgPicture.asset(
-                                  'assets/images/Group_1763.svg',
+                        Image.asset(
+                                  'assets/images/booking_success.png',
                                   width: 60,
                                   height: 60,
                                   fit: BoxFit.cover,
@@ -198,13 +198,13 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                               children: [
                                   Image.asset(
                                     'assets/images/booking_failure.png',
-                                    width: 40,
-                                    height: 40,
+                                    width: 60,
+                                    height: 60,
                                     fit: BoxFit.cover,
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        10, 50, 10, 0),
+                                        10, 20, 10, 0),
                                     child: Align(
                                       alignment: Alignment.center,
                                       child: Text(

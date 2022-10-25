@@ -171,17 +171,17 @@ class _HelpAndSupportBottomSheetWidgetState
                         });
                       },
                       child: Container(
-                        width: 35,
-                        height: 35,
+                        width: 40,
+                        height: 40,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
                             color: FlutterFlowTheme.of(context).primaryText,
-                            width: 2,
+                            width: 1,
                           ),
                         ),
                         child: Icon(
-                          Icons.email_outlined,
+                          Manzel.mail_icon,
                           color: Colors.black,
                           size: 24,
                         ),

@@ -1970,7 +1970,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             'i7w1em00' /* View Receipt Transaction */,
                           ),
                           icon: Icon(
-                            Icons.sticky_note_2_outlined,
+                            Manzel.receipt,
                             color: FlutterFlowTheme.of(context).primaryColor,
                             size: 20,
                           ),
