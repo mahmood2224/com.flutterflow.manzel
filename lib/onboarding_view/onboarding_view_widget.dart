@@ -29,7 +29,7 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
     logFirebaseEvent('tutorial_begin');
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      versionCheck(context);
+    await versionCheck(context);
       logFirebaseEvent('ONBOARDING_VIEW_OnboardingView_ON_LOAD');
       Future.delayed(const Duration(milliseconds: 100), () {
         setAppLanguage(context, FFAppState().locale);
