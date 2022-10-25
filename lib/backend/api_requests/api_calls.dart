@@ -25,7 +25,9 @@ class PropertiesCall {
       callName: 'Properties',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {
         'populate': populate,
         'city': city,
@@ -56,7 +58,9 @@ class PropertyCall {
       callName: 'Property',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/${propertyId}',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {
         'locale': locale,
       },
@@ -214,7 +218,9 @@ class FilterCall {
       callName: 'filter',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/?city=${city}',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {},
       returnBody: true,
     );
@@ -258,7 +264,9 @@ class BankDetailsCall {
       callName: 'BankDetails',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/banks/${bankId}?',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {},
       returnBody: true,
     );
@@ -312,7 +320,9 @@ class CityListCall {
       callName: 'cityList',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/cities/?',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {
         'locale': locale,
       },
@@ -333,7 +343,9 @@ class FilterParamsCall {
       apiUrl:
       '${EnvVariables.instance.strapiBaseURl}/api/properties/?locale=en&populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {},
       returnBody: true,
     );
@@ -349,7 +361,9 @@ class SearchPageCitiesCall {
       callName: 'searchPageCities',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/property/search',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {
         'locale': locale,
         'populate': populate,
@@ -380,7 +394,9 @@ class PropertStatusCall {
       callName: 'propertStatus',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/property/status/${propertyId}',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {},
       returnBody: true,
     );
@@ -402,7 +418,9 @@ class PropertyBookingStatusCall {
       callName: 'propertyBookingStatus',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/${propertyId}',
       callType: ApiCallType.PUT,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {},
       body: body,
       bodyType: BodyType.JSON,
@@ -608,6 +626,32 @@ class ArchivedOffersCall {
   );
 }
 
+class BookmarkListCall {
+  static Future<ApiCallResponse> call({
+    String? userId = '',
+    String? authorazationToken = '',
+    String? version = ''
+  }) {
+    final body = '''
+{
+  "userId": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'bookmarkList',
+      apiUrl:
+      'https://${EnvVariables.instance.firebaseBaseUrl}/getBookMarkedPropertyIds',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${authorazationToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
 class BookedPropertiesCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
@@ -777,7 +821,9 @@ class TermsConitionsAndPrivacyPoliciesCall {
       callName: 'termsConitionsAndPrivacyPolicies',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/in-app-contents/${pageType}',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {
         'locale': locale,
       },
@@ -794,7 +840,9 @@ class GetBanksCall {
       callName: 'getBanks',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/banks?',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+      },
       params: {
         'locale': locale,
       },
@@ -817,7 +865,9 @@ class EmplymentTypeCall {
       callName: 'emplymentType',
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/employement-statuses?',
       callType: ApiCallType.GET,
-      headers: {},
+      headers: {
+        'x-api-key':'',
+      },
       params: {
         'locale': locale,
       },
