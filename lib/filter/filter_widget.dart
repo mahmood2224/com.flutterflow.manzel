@@ -17,7 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 class FilterWidget extends StatefulWidget {
   const FilterWidget({Key? key, this.homeScreenLength,this.favourites}) : super(key: key);
   final int? homeScreenLength;
- final dynamic favourites;
+ final String? favourites;
   //final dynamic cityList;
 
   @override
@@ -804,7 +804,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                             FFAppState().locale)
                                         .toList()),
                                     ParamType.String),
-                                'favourites':serializeParam(widget.favourites, ParamType.JSON)
+                                'favourites':serializeParam(widget.favourites, ParamType.JSON),
                               }.withoutNulls,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: TransitionInfo(

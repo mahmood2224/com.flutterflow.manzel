@@ -62,7 +62,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   VideoPlayerController? _currentController;
   int currentPropertyindex = 0;
-
+  String? res;
   Map<String, VideoPlayerController> videocontrollerMap = {};
 
   static const _pageSize = 20;
@@ -405,7 +405,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       videoPlayers.length ?? 0,
                                                       ParamType.int),
                                               'favourites': serializeParam(
-                                                  favourites, ParamType.JSON)
+                                                  res, ParamType.JSON)
                                               //     'cityList':serializeParam(
                                               // getJsonField(
                                               //       apiData!.jsonBody,
@@ -563,6 +563,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   itemBuilder: (context, propertiesItem, propertiesIndex) {
                     print('PROPERTIES INDEX >>>>>>>>>>>>>>$propertiesIndex');
                     Future.delayed(Duration(seconds: 2));
+                    res = favourites.toString();
                     propertiesItem['isBookmarked'] =
                         favourites[propertiesItem['id'].toString()] ?? false;
 
