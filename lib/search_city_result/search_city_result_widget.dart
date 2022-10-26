@@ -24,13 +24,11 @@ class SearchCityResultWidget extends StatefulWidget {
     this.cityName,
     this.propertiesAvailable,
     this.homeScreenLength,
-    this.favourites
   }) : super(key: key);
 
   final String? cityName;
   final int? propertiesAvailable;
   final int? homeScreenLength;
-  final String? favourites;
 
   @override
   _SearchCityResultWidgetState createState() => _SearchCityResultWidgetState();
@@ -62,7 +60,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
     logFirebaseEvent('view_search_results');
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'SearchCityResult'});
-    fav = globalVar.favorite;
+    fav = FavoriteList.instance.favorite;
   }
 
   @override
@@ -91,7 +89,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                 onTap: () async {
                   logFirebaseEvent('SEARCH_CITY_RESULT_Icon_uhxori33_ON_TAP');
                   logFirebaseEvent('Icon_Navigate-Back');
-                  globalVar.favorite = fav;
+                  FavoriteList.instance.setFavourite(fav);
                   context.pop();
                 },
                 child: RotatedBox(

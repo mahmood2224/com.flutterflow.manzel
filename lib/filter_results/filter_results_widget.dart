@@ -27,7 +27,7 @@ class FilterResultsWidget extends StatefulWidget {
       this.minInstallment,
       this.maxInstallment,
       this.homeScreenLength,
-      this.favourites})
+      })
       : super(key: key);
 
   final String? cityName;
@@ -36,7 +36,7 @@ class FilterResultsWidget extends StatefulWidget {
   final String? minInstallment;
   final String? maxInstallment;
   final int? homeScreenLength;
-  final String? favourites;
+
 
   @override
   _FilterResultsWidgetState createState() => _FilterResultsWidgetState();
@@ -67,7 +67,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
     logFirebaseEvent('view_search_results');
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'filterResults'});
-    fav = globalVar.favorite;
+    fav =FavoriteList.instance.favorite;
   }
 
   @override
@@ -96,8 +96,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                 onTap: () async {
                   logFirebaseEvent('FILTER_RESULTS_PAGE_Icon_n6g5zub7_ON_TAP');
                   logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
-                  globalVar.favorite = fav;
-                  Navigator.pop(context);
+                  FavoriteList.instance.setFavourite(fav);
+                  context.pop();
                 },
                 child: Icon(
                   Icons.arrow_back,

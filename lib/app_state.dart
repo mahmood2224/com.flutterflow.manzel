@@ -6,12 +6,17 @@ Map<String,bool> favorite = {};
 class FavoriteList {
   static FavoriteList _instance = FavoriteList._();
   static FavoriteList get instance => _instance;
-  Map<String,bool> _favorite = {};
+  Map<String,bool> _favorite ={};
   FavoriteList._();
   Future<void> initialise() async {
-    _favorite ;
+    _favorite = {} ;
   }
   Map<String,bool> get favorite => _favorite;
+  //void set setFavourite(Map<String,bool> val) => val= FavoriteList.instance._favorite;
+
+  void setFavourite(Map<String, bool> fav) {
+    fav = FavoriteList.instance._favorite;
+  }
 }
 
 class FFAppState {

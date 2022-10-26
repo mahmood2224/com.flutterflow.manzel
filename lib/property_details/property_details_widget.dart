@@ -73,7 +73,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   static const String kWhatsAppIOS = 'https://wa.me/';
   ApiCallResponse? addOrderApiResponse;
   var columnPropertyResponse;
-
+  Map<String, bool> fav = {};
+  bool? bookMarkTapped;
   late ValueNotifier<bool> isLoading = ValueNotifier<bool>(true);
 
   // VideoPlayerController? _currentController;
@@ -92,7 +93,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       isLoading.value = false;
     } else {
       makeProeprtyApiCall();
-
     }
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PropertyDetails'});
@@ -177,10 +177,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     );
   }
 
-   @override
+  @override
   void dispose() {
     pageViewController?.dispose();
     super.dispose();
+    fav = FavoriteList.instance.favorite;
   }
 
   @override
@@ -197,9 +198,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         //   ),
         child: ValueListenableBuilder<bool>(
           builder: (BuildContext context, bool value, Widget? child) {
+            columnPropertyResponse['isBookmarked'] =
+                fav[widget.propertyId.toString()] ?? false;
             return isLoading.value
                 ? Center(
-                  child: Padding(
+                    child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -208,14 +211,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                             height: 30,
                             width: 30,
                             child: CircularProgressIndicator(
-                              // valueColor: AlwaysStoppedAnimation(Colors.black),
-                              // strokeWidth: 5,
-                            ),
+                                // valueColor: AlwaysStoppedAnimation(Colors.black),
+                                // strokeWidth: 5,
+                                ),
                           )
                         ],
                       ),
                     ),
-                )
+                  )
                 : Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -544,7 +547,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     // back
                                                     logFirebaseEvent(
                                                         'IconButton_back');
-                                                  //  dispose();
+                                                    //  dispose();
                                                     context.pop();
                                                   },
                                                 ),
@@ -570,7 +573,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         size: 14,
                                                       ),
                                                       onPressed: () async {
-                                                        logFirebaseEvent('share');
+                                                        logFirebaseEvent(
+                                                            'share');
                                                         logFirebaseEvent(
                                                             'PROPERTY_DETAILS_PAGE_share_ON_TAP');
                                                         // shareProperty
@@ -594,87 +598,178 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   ),
                                                   Stack(
                                                     children: [
-                                                      // FlutterFlowIconButton(
-                                                      //   borderColor:
-                                                      //       Colors.transparent,
-                                                      //   borderRadius: 30,
-                                                      //   borderWidth: 1,
-                                                      //   buttonSize: 34,
-                                                      //   fillColor: Colors.white,
-                                                      //   icon: Icon(
-                                                      //     Manzel.favorite,
-                                                      //     color: FlutterFlowTheme
-                                                      //             .of(context)
-                                                      //         .alternate,
-                                                      //     size: 18,
-                                                      //   ),
-                                                      //   onPressed: () {
-                                                      //     print(
-                                                      //         'BookMarkedIconButton pressed ...');
-                                                      //   },
-                                                      // ),
-                                                      // FlutterFlowIconButton(
-                                                      //   borderColor:
-                                                      //       Colors.transparent,
-                                                      //   borderRadius: 30,
-                                                      //   buttonSize: 34,
-                                                      //   fillColor: Colors.white,
-                                                      //   icon: Icon(
-                                                      //     Manzel.favorite,
-                                                      //     color: Colors.black,
-                                                      //     size: 18,
-                                                      //   ),
-                                                      //   onPressed: () async {
-                                                      //     logFirebaseEvent(
-                                                      //         'PROPERTY_DETAILS_favorite_border_ICN_ON_');
-                                                      //     // save
-                                                      //     logFirebaseEvent(
-                                                      //         'IconButton_save');
-                                                      //
-                                                      //     final userSavedCreateData =
-                                                      //         createUserSavedRecordData(
-                                                      //       uId:
-                                                      //           currentUserReference,
-                                                      //       pId: widget
-                                                      //           .propertyId,
-                                                      //     );
-                                                      //     var userSavedRecordReference =
-                                                      //         UserSavedRecord
-                                                      //             .collection
-                                                      //             .doc();
-                                                      //     await userSavedRecordReference
-                                                      //         .set(
-                                                      //             userSavedCreateData);
-                                                      //     saveProperty = UserSavedRecord
-                                                      //         .getDocumentFromData(
-                                                      //             userSavedCreateData,
-                                                      //             userSavedRecordReference);
-                                                      //
-                                                      //     setState(() {});
-                                                      //   },
-                                                      // ),
-                                                      Container(
-                                                        height: 35,
-                                                        width: 35,
-                                                        decoration:
-                                                            BoxDecoration(
-
-                                                                color: Colors
-                                                                    .white,
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(2,
-                                                                      5, 2, 5),
-                                                          child: Icon(
-                                                            Manzel.favorite,
-                                                            color: Colors.black,
-                                                            size: 18,
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'add_to_wishlist');
+                                                          logFirebaseEvent(
+                                                              'HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                                          if (loggedIn) {
+                                                            if (columnPropertyResponse[
+                                                                'isBookmarked']) {
+                                                              logFirebaseEvent(
+                                                                  'Container_Backend-Call');
+                                                              final bookmarkApiResponse =
+                                                                  await BookmarkPropertyCall
+                                                                      .call(
+                                                                userId:
+                                                                    currentUserUid,
+                                                                authorazationToken:
+                                                                    FFAppState()
+                                                                        .authToken,
+                                                                propertyId: widget
+                                                                    .propertyId
+                                                                    .toString(),
+                                                                version:
+                                                                    FFAppState()
+                                                                        .apiVersion,
+                                                              );
+                                                              if ((bookmarkApiResponse
+                                                                          ?.statusCode ??
+                                                                      200) ==
+                                                                  200) {
+                                                                fav.remove(widget
+                                                                    .propertyId
+                                                                    .toString());
+                                                                columnPropertyResponse[
+                                                                        'isBookmarked'] =
+                                                                    false;
+                                                              } else {
+                                                                logFirebaseEvent(
+                                                                    'Icon_Show-Snack-Bar');
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      functions.snackBarMessage(
+                                                                          'error',
+                                                                          FFAppState()
+                                                                              .locale),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .white,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        fontSize:
+                                                                            16,
+                                                                        height:
+                                                                            2,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .primaryRed,
+                                                                  ),
+                                                                );
+                                                              }
+                                                            } else {
+                                                              logFirebaseEvent(
+                                                                  'Container_Backend-Call');
+                                                              final bookmarkApiResponse =
+                                                                  await BookmarkPropertyCall
+                                                                      .call(
+                                                                userId:
+                                                                    currentUserUid,
+                                                                authorazationToken:
+                                                                    FFAppState()
+                                                                        .authToken,
+                                                                propertyId: widget
+                                                                    .propertyId
+                                                                    .toString(),
+                                                                version:
+                                                                    FFAppState()
+                                                                        .apiVersion,
+                                                              );
+                                                              if ((bookmarkApiResponse
+                                                                          ?.statusCode ??
+                                                                      200) ==
+                                                                  200) {
+                                                                fav[widget
+                                                                    .propertyId
+                                                                    .toString()] = true;
+                                                                columnPropertyResponse[
+                                                                        'isBookmarked'] =
+                                                                    true;
+                                                              } else {
+                                                                logFirebaseEvent(
+                                                                    'Icon_Show-Snack-Bar');
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      functions.snackBarMessage(
+                                                                          'error',
+                                                                          FFAppState()
+                                                                              .locale),
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .white,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        fontSize:
+                                                                            16,
+                                                                        height:
+                                                                            2,
+                                                                      ),
+                                                                    ),
+                                                                    duration: Duration(
+                                                                        milliseconds:
+                                                                            4000),
+                                                                    backgroundColor:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .primaryRed,
+                                                                  ),
+                                                                );
+                                                              }
+                                                            }
+                                                          }else {
+                                                            logFirebaseEvent(
+                                                                'Container_Navigate-To');
+                                                            context
+                                                                .pushNamed(
+                                                                'Login');
+                                                          }
+                                                          bookMarkTapped =
+                                                          false;
+                                                          setState(() {});
+                                                        },
+                                                        child: Container(
+                                                          height: 35,
+                                                          width: 35,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  color: columnPropertyResponse['isBookmarked'] ?FlutterFlowTheme.of(context).primaryRed:Colors
+                                                                      .white,
+                                                                  shape: BoxShape
+                                                                      .circle),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        2,
+                                                                        5,
+                                                                        2,
+                                                                        5),
+                                                            child: Icon(
+                                                              Manzel.favorite,
+                                                              color:
+                                                              columnPropertyResponse[
+                                                              "isBookmarked"]
+                                                                  ? Colors.white:Colors.black,
+                                                              size: 18,
+                                                            ),
                                                           ),
                                                         ),
-                                                      )
+                                                      ),
                                                     ],
                                                   ),
                                                 ],
@@ -2543,7 +2638,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 ">>>>>>>>>>>>>>>>>>>>>>phone number = ${phoneNumber}");
                                                             final message = '''
                                                         ${FFLocalizations.of(context).getText(
-                                                              'opening' ,
+                                                              'opening',
                                                             )}
                                                          ${FFLocalizations.of(context).getText(
                                                               'propertyName',
@@ -2551,12 +2646,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               columnPropertyResponse,
                                                             ).toString()}
                                                         ${FFLocalizations.of(context).getText(
-                                                              'propertyRef' ,
+                                                              'propertyRef',
                                                             )} : ${PropertyCall.propertyRef(
                                                               columnPropertyResponse,
                                                             ).toString()}
                                                        ${FFLocalizations.of(context).getText(
-                                                              'propertyAdd' ,
+                                                              'propertyAdd',
                                                             )} : ${PropertyCall.propertyEntranceDirection(
                                                               columnPropertyResponse,
                                                             ).toString()}
@@ -2566,14 +2661,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 message,
                                                                 phoneNumber);
                                                           },
-                                                           text: FFLocalizations
+                                                          text: FFLocalizations
                                                                   .of(context)
                                                               .getText(
                                                             'requestVisit' /* Logout */,
                                                           ),
-                                                           options:
+                                                          options:
                                                               FFButtonOptions(
-                                                                width: 335,
+                                                            width: 335,
                                                             height: 48,
                                                             color: Colors.white,
                                                             textStyle:
@@ -2606,10 +2701,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     .circular(
                                                                         8),
                                                           ),
-                                                            icon :Icon(
-                                                              Manzel.request_visit,
-                                                                size:22,
-                                                            ),
+                                                          icon: Icon(
+                                                            Manzel
+                                                                .request_visit,
+                                                            size: 22,
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -3070,8 +3166,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               .propertyId,
                                                                           ParamType
                                                                               .int),
-                                                                          'imageList': serializeParam(propertyImages, ParamType.JSON),
-                                                                          'ScreenName':serializeParam("PropertyImages", ParamType.String)
+                                                                      'imageList': serializeParam(
+                                                                          propertyImages,
+                                                                          ParamType
+                                                                              .JSON),
+                                                                      'ScreenName': serializeParam(
+                                                                          "PropertyImages",
+                                                                          ParamType
+                                                                              .String)
                                                                     }.withoutNulls,
                                                                   );
                                                                 },
@@ -3165,28 +3267,28 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .fromSTEB(16, 20, 16, 0),
                                                   child: Row(
                                                     mainAxisSize:
-                                                    MainAxisSize.max,
+                                                        MainAxisSize.max,
                                                     children: [
                                                       Text(
                                                         FFLocalizations.of(
-                                                            context)
+                                                                context)
                                                             .getText(
                                                           'floorPlan' /* Photos */,
                                                         ),
                                                         style:
-                                                        FlutterFlowTheme.of(
-                                                            context)
-                                                            .bodyText1
-                                                            .override(
-                                                          fontFamily:
-                                                          'AvenirArabic',
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .bold,
-                                                          useGoogleFonts:
-                                                          false,
-                                                        ),
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'AvenirArabic',
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
                                                       ),
                                                     ],
                                                   ),
@@ -3196,23 +3298,24 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       .fromSTEB(0, 12, 0, 55),
                                                   child: Row(
                                                     mainAxisSize:
-                                                    MainAxisSize.min,
+                                                        MainAxisSize.min,
                                                     children: [
                                                       Expanded(
                                                         child: Container(
                                                           width:
-                                                          double.infinity,
+                                                              double.infinity,
                                                           height: 164,
                                                           decoration:
-                                                          BoxDecoration(
+                                                              BoxDecoration(
                                                             color: Colors.white,
                                                           ),
                                                           child: Builder(
                                                             builder: (context) {
                                                               final propertyFloorPlan =
-                                                              getJsonField(
-                                                                  columnPropertyResponse,
-                                                                  r'''$.attributes.property_floor_plan.data''').toList();
+                                                                  getJsonField(
+                                                                          columnPropertyResponse,
+                                                                          r'''$.attributes.property_floor_plan.data''')
+                                                                      .toList();
                                                               return InkWell(
                                                                 onTap:
                                                                     () async {
@@ -3224,83 +3327,89 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                       .pushNamed(
                                                                     'imageGalleryView',
                                                                     queryParams:
-                                                                    {
+                                                                        {
                                                                       'propertyId': serializeParam(
                                                                           widget
                                                                               .propertyId,
                                                                           ParamType
                                                                               .int),
-                                                                      'imageList': serializeParam(propertyFloorPlan, ParamType.JSON),
-                                                                      'ScreenName':serializeParam("FloorPlan", ParamType.String)
+                                                                      'imageList': serializeParam(
+                                                                          propertyFloorPlan,
+                                                                          ParamType
+                                                                              .JSON),
+                                                                      'ScreenName': serializeParam(
+                                                                          "FloorPlan",
+                                                                          ParamType
+                                                                              .String)
                                                                     }.withoutNulls,
                                                                   );
                                                                 },
                                                                 child: ListView
                                                                     .builder(
                                                                   padding:
-                                                                  EdgeInsets
-                                                                      .zero,
+                                                                      EdgeInsets
+                                                                          .zero,
                                                                   primary:
-                                                                  false,
+                                                                      false,
                                                                   shrinkWrap:
-                                                                  true,
+                                                                      true,
                                                                   scrollDirection:
-                                                                  Axis.horizontal,
+                                                                      Axis.horizontal,
                                                                   itemCount:
-                                                                  propertyFloorPlan
-                                                                      .length,
+                                                                      propertyFloorPlan
+                                                                          .length,
                                                                   itemBuilder:
                                                                       (context,
-                                                                      propertyFloorPlanIndex) {
+                                                                          propertyFloorPlanIndex) {
                                                                     final propertyFloorPlanItem =
-                                                                    propertyFloorPlan[
-                                                                    propertyFloorPlanIndex];
+                                                                        propertyFloorPlan[
+                                                                            propertyFloorPlanIndex];
                                                                     return Padding(
                                                                       padding: EdgeInsetsDirectional
                                                                           .fromSTEB(
-                                                                          16,
-                                                                          0,
-                                                                          0,
-                                                                          0),
+                                                                              16,
+                                                                              0,
+                                                                              0,
+                                                                              0),
                                                                       child:
-                                                                      Container(
+                                                                          Container(
                                                                         width:
-                                                                        147,
+                                                                            147,
                                                                         height:
-                                                                        117,
+                                                                            117,
                                                                         decoration:
-                                                                        BoxDecoration(
+                                                                            BoxDecoration(
                                                                           color:
-                                                                          Colors.white,
+                                                                              Colors.white,
                                                                           boxShadow: [
                                                                             BoxShadow(
                                                                               color: Color(0x230F1113),
                                                                             )
                                                                           ],
                                                                           borderRadius:
-                                                                          BorderRadius.circular(12),
+                                                                              BorderRadius.circular(12),
                                                                           border:
-                                                                          Border.all(
+                                                                              Border.all(
                                                                             color:
-                                                                            Color(0xFFF3F3F3),
+                                                                                Color(0xFFF3F3F3),
                                                                           ),
                                                                         ),
                                                                         child:
-                                                                        ClipRRect(
+                                                                            ClipRRect(
                                                                           borderRadius:
-                                                                          BorderRadius.circular(8),
+                                                                              BorderRadius.circular(8),
                                                                           child:
-                                                                          Image.network(
+                                                                              Image.network(
                                                                             getJsonField(
                                                                               propertyFloorPlanItem,
                                                                               r'''$..attributes.formats.medium.url''',
                                                                             ),
                                                                             width:
-                                                                            147,
+                                                                                147,
                                                                             height:
-                                                                            117,
+                                                                                117,
                                                                             fit:
-                                                                            BoxFit.cover,
+                                                                                BoxFit.cover,
                                                                           ),
                                                                         ),
                                                                       ),
@@ -3481,17 +3590,18 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   'reserved_Bottom-Sheet');
                                               addOrderApiResponse =
                                                   await AddOrderCall.call(
-                                                      propertyId: widget!
-                                                          .propertyId
-                                                          .toString(),
+                                                      propertyId:
+                                                          widget!
+                                                              .propertyId
+                                                              .toString(),
                                                       userId:
                                                           currentUserReference
                                                               ?.id,
                                                       authorazationToken:
                                                           FFAppState()
                                                               .authToken,
-                                                    version: FFAppState().apiVersion
-                                                  );
+                                                      version: FFAppState()
+                                                          .apiVersion);
 
                                               if ((addOrderApiResponse
                                                           ?.statusCode ??
@@ -3638,14 +3748,13 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           propertyId: widget
                                                               .propertyId
                                                               .toString(),
-                                                          userId:
-                                                              currentUserReference
-                                                                  ?.id,
+                                                          userId: currentUserReference
+                                                              ?.id,
                                                           authorazationToken:
                                                               FFAppState()
                                                                   .authToken,
-                                                          version: FFAppState().apiVersion
-                                                      );
+                                                          version: FFAppState()
+                                                              .apiVersion);
 
                                                   if ((addOrderApiResponse
                                                               ?.statusCode ??

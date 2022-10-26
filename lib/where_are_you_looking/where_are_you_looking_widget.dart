@@ -14,12 +14,10 @@ class WhereAreYouLookingWidget extends StatefulWidget {
     Key? key,
     this.city,
     this.homeScreenLength,
-    this.favourites
   }) : super(key: key);
 
   final String? city;
   final int? homeScreenLength;
-  final String? favourites;
 
   @override
   _WhereAreYouLookingWidgetState createState() =>
@@ -34,12 +32,6 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'WhereAreYouLooking'});
-  }
-  watchRouteChange() {
-    if (!GoRouter.of(context).location.contains("fav")) {  // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
-      // do something
-      GoRouter.of(context).removeListener(watchRouteChange); // remove listener
-    }
   }
 
   @override
@@ -202,14 +194,8 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                         'homeScreenLength': serializeParam(
                                             widget.homeScreenLength,
                                             ParamType.int),
-                                        'favourites':serializeParam(widget.favourites, ParamType.JSON),
                                       }.withoutNulls,
                                     );
-                                    GoRouter.of(context).addListener(() {
-                                      watchRouteChange();
-                                      print("Updated>>>>>>>>>>>>>>>>>${widget.favourites}");
-                                    });
-                                    print("Updated>>>>>>>>>>>>>>>>>}");
                                   },
                                   child: Container(
                                     width: MediaQuery.of(context).size.width,
