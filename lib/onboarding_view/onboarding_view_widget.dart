@@ -1,11 +1,12 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart'
+    as smooth_page_indicator;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingViewWidget extends StatefulWidget {
   const OnboardingViewWidget({Key? key}) : super(key: key);
@@ -25,16 +26,16 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('ONBOARDING_VIEW_OnboardingView_ON_LOAD');
       if (FFAppState().isInitailLaunch) {
-        logFirebaseEvent('OnboardingView_Update-Local-State');
+        logFirebaseEvent('OnboardingView_update_local_state');
         setState(() =>
             FFAppState().locale = FFLocalizations.of(context).languageCode);
       } else {
-        logFirebaseEvent('OnboardingView_Navigate-To');
+        logFirebaseEvent('OnboardingView_navigate_to');
 
         context.goNamed('HomeScreen');
       }
 
-      logFirebaseEvent('OnboardingView_Update-Local-State');
+      logFirebaseEvent('OnboardingView_update_local_state');
       setState(
           () => FFAppState().locale = FFLocalizations.of(context).languageCode);
     });
@@ -171,7 +172,7 @@ your f... */
                   ),
                   Align(
                     alignment: AlignmentDirectional(0, 1),
-                    child: SmoothPageIndicator(
+                    child: smooth_page_indicator.SmoothPageIndicator(
                       controller: pageViewController ??=
                           PageController(initialPage: 0),
                       count: 3,
@@ -183,7 +184,7 @@ your f... */
                           curve: Curves.ease,
                         );
                       },
-                      effect: SlideEffect(
+                      effect: smooth_page_indicator.SlideEffect(
                         spacing: 20,
                         radius: 16,
                         dotWidth: 6,
@@ -207,7 +208,7 @@ your f... */
 
                   context.goNamed('HomeScreen');
 
-                  logFirebaseEvent('getStarted_Update-Local-State');
+                  logFirebaseEvent('getStarted_update_local_state');
                   setState(() => FFAppState().isInitailLaunch = false);
                 },
                 text: FFLocalizations.of(context).getText(
@@ -240,7 +241,7 @@ your f... */
 
                 context.pushNamed('Login');
 
-                logFirebaseEvent('goToLogin_Update-Local-State');
+                logFirebaseEvent('goToLogin_update_local_state');
                 setState(() => FFAppState().isInitailLaunch = false);
               },
               child: Text(

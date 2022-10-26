@@ -7,11 +7,12 @@ import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart'
+    as smooth_page_indicator;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SearchCityResultWidget extends StatefulWidget {
   const SearchCityResultWidget({
@@ -43,6 +44,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: true,
@@ -64,7 +66,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
               child: InkWell(
                 onTap: () async {
                   logFirebaseEvent('SEARCH_CITY_RESULT_Icon_uhxori33_ON_TAP');
-                  logFirebaseEvent('Icon_Navigate-Back');
+                  logFirebaseEvent('Icon_navigate_back');
                   context.pop();
                 },
                 child: Icon(
@@ -174,7 +176,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
         centerTitle: true,
         elevation: 4,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -236,7 +237,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                               logFirebaseEvent(
                                   'SEARCH_CITY_RESULT_ListView_hu1h9tbs_ON_');
                               logFirebaseEvent(
-                                  'ListView_Refresh-Database-Request');
+                                  'ListView_refresh_database_request');
                               setState(() => _apiRequestCompleter = null);
                               await waitForApiRequestCompleter();
                             },
@@ -264,11 +265,12 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                         'PropertyDetails',
                                         queryParams: {
                                           'propertyId': serializeParam(
-                                              getJsonField(
-                                                propertiesItem,
-                                                r'''$.id''',
-                                              ),
-                                              ParamType.int),
+                                            getJsonField(
+                                              propertiesItem,
+                                              r'''$.id''',
+                                            ),
+                                            ParamType.int,
+                                          ),
                                         }.withoutNulls,
                                       );
                                     },
@@ -359,8 +361,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                             alignment:
                                                                 AlignmentDirectional(
                                                                     0, 0.7),
-                                                            child:
-                                                                SmoothPageIndicator(
+                                                            child: smooth_page_indicator
+                                                                .SmoothPageIndicator(
                                                               controller: pageViewController ??=
                                                                   PageController(
                                                                       initialPage: min(
@@ -385,7 +387,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                 );
                                                               },
                                                               effect:
-                                                                  SlideEffect(
+                                                                  smooth_page_indicator
+                                                                      .SlideEffect(
                                                                 spacing: 8,
                                                                 radius: 3,
                                                                 dotWidth: 6,
@@ -462,7 +465,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                           'SEARCH_CITY_RESULT_Container_0oy6ukkp_ON');
                                                       if (!loggedIn) {
                                                         logFirebaseEvent(
-                                                            'Container_Navigate-To');
+                                                            'Container_navigate_to');
 
                                                         context
                                                             .pushNamed('Login');

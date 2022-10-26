@@ -32,13 +32,14 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
             logFirebaseEvent('FLOOR_PLAN_PAGE_Icon_r92djljt_ON_TAP');
-            logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+            logFirebaseEvent('Icon_close_dialog,_drawer,_etc');
             Navigator.pop(context);
           },
           child: Icon(
@@ -62,7 +63,6 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
         centerTitle: false,
         elevation: 2,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -96,7 +96,7 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
                         onTap: () async {
                           logFirebaseEvent(
                               'FLOOR_PLAN_PAGE_Image_762wwk00_ON_TAP');
-                          logFirebaseEvent('Image_Expand-Image');
+                          logFirebaseEvent('Image_expand_image');
                           await Navigator.push(
                             context,
                             PageTransition(

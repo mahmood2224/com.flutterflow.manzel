@@ -58,6 +58,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
@@ -73,7 +74,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
           ),
           onPressed: () async {
             logFirebaseEvent('EDIT_PERSONALL_INFO_PAGE_back_ON_TAP');
-            logFirebaseEvent('back_Close-Dialog,-Drawer,-Etc');
+            logFirebaseEvent('back_close_dialog,_drawer,_etc');
             Navigator.pop(context);
           },
         ),
@@ -92,7 +93,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
         centerTitle: true,
         elevation: 2,
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -273,7 +273,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                         onTap: () async {
                           logFirebaseEvent(
                               'EDIT_PERSONALL_INFO_editMobile_ON_TAP');
-                          logFirebaseEvent('editMobile_Navigate-To');
+                          logFirebaseEvent('editMobile_navigate_to');
 
                           context.goNamed('EditMobileNumber');
                         },
@@ -354,7 +354,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           onTap: () async {
                             logFirebaseEvent(
                                 'EDIT_PERSONALL_INFO_Row_cralxw2p_ON_TAP');
-                            logFirebaseEvent('Row_Backend-Call');
+                            logFirebaseEvent('Row_backend_call');
                             emplymentList = await EmplymentTypeCall.call(
                               locale: FFAppState().locale,
                             );
@@ -515,7 +515,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           onTap: () async {
                             logFirebaseEvent(
                                 'EDIT_PERSONALL_INFO_Row_k8qvw6ei_ON_TAP');
-                            logFirebaseEvent('Row_Backend-Call');
+                            logFirebaseEvent('Row_backend_call');
                             bankList = await GetBanksCall.call(
                               locale: FFAppState().locale,
                             );
@@ -631,16 +631,14 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             Expanded(
                               child: AuthUserStreamWidget(
                                 child: FlutterFlowChoiceChips(
-                                  initiallySelected: choiceChipsValue != null
-                                      ? [choiceChipsValue!]
-                                      : [
-                                          functions.sakaniLoanInitialValue(
-                                              valueOrDefault<bool>(
-                                                  currentUserDocument
-                                                      ?.sakaniLoanCoverage,
-                                                  false),
-                                              FFAppState().locale)
-                                        ],
+                                  initiallySelected: [
+                                    functions.sakaniLoanInitialValue(
+                                        valueOrDefault<bool>(
+                                            currentUserDocument
+                                                ?.sakaniLoanCoverage,
+                                            false),
+                                        FFAppState().locale)
+                                  ],
                                   options: [
                                     ChipData(
                                         FFLocalizations.of(context).getText(
@@ -757,11 +755,11 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               await currentUserReference!
                                   .update(userUpdateData);
                               logFirebaseEvent(
-                                  'updatePersonalInfo_Close-Dialog,-Drawer,');
+                                  'updatePersonalInfo_close_dialog,_drawer,');
                               Navigator.pop(context);
                             } else {
                               logFirebaseEvent(
-                                  'updatePersonalInfo_Show-Snack-Bar');
+                                  'updatePersonalInfo_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -808,7 +806,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             );
                             await currentUserReference!.update(userUpdateData);
                             logFirebaseEvent(
-                                'updatePersonalInfo_Close-Dialog,-Drawer,');
+                                'updatePersonalInfo_close_dialog,_drawer,');
                             Navigator.pop(context);
                           }
                         },

@@ -31,13 +31,14 @@ class _ThreeSixtyViewWidgetState extends State<ThreeSixtyViewWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
             logFirebaseEvent('THREE_SIXTY_VIEW_Icon_p867d9du_ON_TAP');
-            logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+            logFirebaseEvent('Icon_close_dialog,_drawer,_etc');
             Navigator.pop(context);
           },
           child: Icon(
@@ -61,7 +62,6 @@ class _ThreeSixtyViewWidgetState extends State<ThreeSixtyViewWidget> {
         centerTitle: false,
         elevation: 2,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

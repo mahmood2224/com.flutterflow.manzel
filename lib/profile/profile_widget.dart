@@ -121,8 +121,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             context.goNamed(
                               'EditPersonallInfo',
                               queryParams: {
-                                'screenName':
-                                    serializeParam('Profile', ParamType.String),
+                                'screenName': serializeParam(
+                                  'Profile',
+                                  ParamType.String,
+                                ),
                               }.withoutNulls,
                             );
                           },
@@ -242,20 +244,20 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           );
                           if (changeLanguage!) {
                             logFirebaseEvent(
-                                'currentLanguage_Update-Local-State');
+                                'currentLanguage_update_local_state');
                             setState(() => FFAppState().locale = 'en');
                             logFirebaseEvent(
-                                'currentLanguage_Update-Local-State');
+                                'currentLanguage_update_local_state');
                             setState(() => FFAppState().locale = 'ar');
                             // changeToArabic
                             logFirebaseEvent('currentLanguage_changeToArabic');
                             setAppLanguage(context, 'ar');
                           } else {
                             logFirebaseEvent(
-                                'currentLanguage_Update-Local-State');
+                                'currentLanguage_update_local_state');
                             setState(() => FFAppState().locale = 'en');
                             logFirebaseEvent(
-                                'currentLanguage_Update-Local-State');
+                                'currentLanguage_update_local_state');
                             setState(() => FFAppState().locale = 'en');
                             // changeToEnglish
                             logFirebaseEvent('currentLanguage_changeToEnglish');
@@ -263,10 +265,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           }
 
                           if (loggedIn) {
-                            logFirebaseEvent('currentLanguage_Wait-Delay');
+                            logFirebaseEvent('currentLanguage_wait__delay');
                             await Future.delayed(
                                 const Duration(milliseconds: 100));
-                            logFirebaseEvent('currentLanguage_Backend-Call');
+                            logFirebaseEvent('currentLanguage_backend_call');
 
                             final userUpdateData = createUserRecordData(
                               language:
@@ -299,7 +301,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   child: InkWell(
                     onTap: () async {
                       logFirebaseEvent('PROFILE_PAGE_Row_u1wgoua7_ON_TAP');
-                      logFirebaseEvent('Row_Bottom-Sheet');
+                      logFirebaseEvent('Row_bottom_sheet');
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: FlutterFlowTheme.of(context).white,
@@ -345,7 +347,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   child: InkWell(
                     onTap: () async {
                       logFirebaseEvent('PROFILE_PAGE_Row_m107mnbe_ON_TAP');
-                      logFirebaseEvent('Row_Bottom-Sheet');
+                      logFirebaseEvent('Row_bottom_sheet');
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: Colors.transparent,
@@ -393,7 +395,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   child: InkWell(
                     onTap: () async {
                       logFirebaseEvent('PROFILE_PAGE_Row_szhcvid3_ON_TAP');
-                      logFirebaseEvent('Row_Bottom-Sheet');
+                      logFirebaseEvent('Row_bottom_sheet');
                       await showModalBottomSheet(
                         isScrollControlled: true,
                         backgroundColor: FlutterFlowTheme.of(context).white,

@@ -78,7 +78,7 @@ class _ReservationBottomSheetWidgetState
                       onTap: () async {
                         logFirebaseEvent(
                             'RESERVATION_BOTTOM_SHEET_Icon_hapf6xse_O');
-                        logFirebaseEvent('Icon_Bottom-Sheet');
+                        logFirebaseEvent('Icon_bottom_sheet');
                         Navigator.pop(context);
                       },
                       child: Icon(
@@ -155,7 +155,7 @@ class _ReservationBottomSheetWidgetState
                   onTap: () async {
                     logFirebaseEvent(
                         'RESERVATION_BOTTOM_SHEET_Text_qhlvmiqm_O');
-                    logFirebaseEvent('Text_Bottom-Sheet');
+                    logFirebaseEvent('Text_bottom_sheet');
                     await showModalBottomSheet(
                       isScrollControlled: true,
                       backgroundColor: FlutterFlowTheme.of(context).white,
@@ -280,9 +280,8 @@ class _ReservationBottomSheetWidgetState
                           'icwlzrr6' /* ApplePay */,
                         )
                       ].toList(),
-                      onChanged: (value) {
-                        setState(() => paymentMethodValue = value);
-                      },
+                      onChanged: (val) =>
+                          setState(() => paymentMethodValue = val),
                       optionHeight: 56,
                       textStyle:
                           FlutterFlowTheme.of(context).bodyText1.override(
@@ -374,14 +373,14 @@ class _ReservationBottomSheetWidgetState
                       logFirebaseEvent(
                           'RESERVATION_BOTTOM_SHEET_PAY_BTN_ON_TAP');
                       var _shouldSetState = false;
-                      logFirebaseEvent('Button_Backend-Call');
+                      logFirebaseEvent('Button_backend_call');
                       addOrderApiResponse = await AddOrderCall.call(
                         propertyId: widget.propertyId?.toString(),
                         userId: currentUserUid,
                       );
                       _shouldSetState = true;
                       if ((addOrderApiResponse?.statusCode ?? 200) == 200) {
-                        logFirebaseEvent('Button_Backend-Call');
+                        logFirebaseEvent('Button_backend_call');
                         transactionApiResponse = await AddTransactionCall.call(
                           amountPaid: widget.reservationCost?.toString(),
                           transactionMethod: paymentMethodValue,
@@ -396,30 +395,35 @@ class _ReservationBottomSheetWidgetState
                         _shouldSetState = true;
                         if ((transactionApiResponse?.statusCode ?? 200) ==
                             200) {
-                          logFirebaseEvent('Button_Bottom-Sheet');
+                          logFirebaseEvent('Button_bottom_sheet');
                           Navigator.pop(context);
-                          logFirebaseEvent('Button_Navigate-To');
+                          logFirebaseEvent('Button_navigate_to');
 
                           context.goNamed(
                             'Confirmation',
                             queryParams: {
                               'propertyId': serializeParam(
-                                  widget.propertyId, ParamType.int),
+                                widget.propertyId,
+                                ParamType.int,
+                              ),
                               'orderId': serializeParam(
-                                  getJsonField(
-                                    (addOrderApiResponse?.jsonBody ?? ''),
-                                    r'''$.result''',
-                                  ).toString(),
-                                  ParamType.String),
+                                getJsonField(
+                                  (addOrderApiResponse?.jsonBody ?? ''),
+                                  r'''$.result''',
+                                ).toString(),
+                                ParamType.String,
+                              ),
                               'paymentMethod': serializeParam(
-                                  paymentMethodValue, ParamType.String),
+                                paymentMethodValue,
+                                ParamType.String,
+                              ),
                             }.withoutNulls,
                           );
                         }
                       } else {
-                        logFirebaseEvent('Button_Bottom-Sheet');
+                        logFirebaseEvent('Button_bottom_sheet');
                         Navigator.pop(context);
-                        logFirebaseEvent('Button_Show-Snack-Bar');
+                        logFirebaseEvent('Button_show_snack_bar');
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(

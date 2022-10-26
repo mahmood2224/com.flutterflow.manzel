@@ -32,6 +32,7 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
@@ -47,7 +48,7 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
           ),
           onPressed: () async {
             logFirebaseEvent('DEPOSITE_RECIPT_arrow_back_rounded_ICN_O');
-            logFirebaseEvent('IconButton_Close-Dialog,-Drawer,-Etc');
+            logFirebaseEvent('IconButton_close_dialog,_drawer,_etc');
             Navigator.pop(context);
           },
         ),
@@ -75,7 +76,6 @@ class _DepositeReciptWidgetState extends State<DepositeReciptWidget> {
         centerTitle: true,
         elevation: 2,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

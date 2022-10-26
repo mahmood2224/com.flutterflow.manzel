@@ -4,16 +4,19 @@ import '../backend/api_requests/api_calls.dart';
 import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_timer.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class OffersWidget extends StatefulWidget {
   const OffersWidget({
@@ -28,6 +31,9 @@ class OffersWidget extends StatefulWidget {
 }
 
 class _OffersWidgetState extends State<OffersWidget> {
+  StopWatchTimer? timerController;
+  String? timerValue;
+  int? timerMilliseconds;
   ApiCallResponse? acceptOfferResponse;
   ApiCallResponse? acceptOfferResponseAr;
   Completer<ApiCallResponse>? _apiRequestCompleter;
@@ -45,7 +51,7 @@ class _OffersWidgetState extends State<OffersWidget> {
         }
 
         if (FFAppState().locale == 'en') {
-          logFirebaseEvent('Offers_Alert-Dialog');
+          logFirebaseEvent('Offers_alert_dialog');
           await showDialog(
             context: context,
             builder: (alertDialogContext) {
@@ -62,11 +68,11 @@ class _OffersWidgetState extends State<OffersWidget> {
               );
             },
           );
-          logFirebaseEvent('Offers_Auth');
+          logFirebaseEvent('Offers_auth');
           GoRouter.of(context).prepareAuthEvent();
           await signOut();
         } else {
-          logFirebaseEvent('Offers_Alert-Dialog');
+          logFirebaseEvent('Offers_alert_dialog');
           await showDialog(
             context: context,
             builder: (alertDialogContext) {
@@ -83,7 +89,7 @@ class _OffersWidgetState extends State<OffersWidget> {
               );
             },
           );
-          logFirebaseEvent('Offers_Auth');
+          logFirebaseEvent('Offers_auth');
           GoRouter.of(context).prepareAuthEvent();
           await signOut();
         }
@@ -95,6 +101,13 @@ class _OffersWidgetState extends State<OffersWidget> {
     });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Offers'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    timerController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -145,6 +158,25 @@ class _OffersWidgetState extends State<OffersWidget> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10, 15, 10, 0),
+                                      child: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'muecz7ra' /* You need to create an account ... */,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              useGoogleFonts: false,
+                                            ),
+                                      ),
+                                    ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           1, 0, 1, 0),
@@ -253,7 +285,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                           onPressed: () async {
                             logFirebaseEvent('OFFERS_PAGE_clear_ICN_ON_TAP');
                             logFirebaseEvent(
-                                'IconButton_Close-Dialog,-Drawer,-Etc');
+                                'IconButton_close_dialog,_drawer,_etc');
                             Navigator.pop(context);
                           },
                         ),
@@ -282,25 +314,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                 fit: BoxFit.cover,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10, 15, 10, 0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'muecz7ra' /* You need to create an account ... */,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        useGoogleFonts: false,
-                                      ),
-                                ),
-                              ),
-                              Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 35),
                                 child: Text(
@@ -324,7 +337,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                   onPressed: () async {
                                     logFirebaseEvent(
                                         'OFFERS_PAGE_LOGIN_BTN_ON_TAP');
-                                    logFirebaseEvent('Button_Navigate-To');
+                                    logFirebaseEvent('Button_navigate_to');
 
                                     context.pushNamed('Login');
                                   },
@@ -427,7 +440,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                         logFirebaseEvent(
                                             'OFFERS_ListView_gd4yo4mj_ON_PULL_TO_REFR');
                                         logFirebaseEvent(
-                                            'ListView_Refresh-Database-Request');
+                                            'ListView_refresh_database_request');
                                         setState(
                                             () => _apiRequestCompleter = null);
                                         await waitForApiRequestCompleter();
@@ -1008,6 +1021,182 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                       ),
                                                     ),
                                                   ),
+                                                  if (functions
+                                                      .conditionalVisibility(
+                                                          getJsonField(
+                                                            activeOffersItem,
+                                                            r'''$.status''',
+                                                          ).toString(),
+                                                          'new'))
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 0, 0, 15),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 30,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              Color(0xFFFADA6B),
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'y42wn8bh' /* You have  */,
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'AvenirArabic',
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          2,
+                                                                          0,
+                                                                          2,
+                                                                          0),
+                                                              child:
+                                                                  FlutterFlowTimer(
+                                                                timerValue: timerValue ??=
+                                                                    StopWatchTimer
+                                                                        .getDisplayTime(
+                                                                  timerMilliseconds ??=
+                                                                      10,
+                                                                  hours: false,
+                                                                  minute: true,
+                                                                  second: true,
+                                                                  milliSecond:
+                                                                      false,
+                                                                ),
+                                                                timer: timerController ??=
+                                                                    StopWatchTimer(
+                                                                  mode: StopWatchMode
+                                                                      .countDown,
+                                                                  presetMillisecond:
+                                                                      timerMilliseconds ??=
+                                                                          10,
+                                                                  onChange:
+                                                                      (value) {
+                                                                    setState(
+                                                                        () {
+                                                                      timerMilliseconds =
+                                                                          value;
+                                                                      timerValue =
+                                                                          StopWatchTimer
+                                                                              .getDisplayTime(
+                                                                        value,
+                                                                        hours:
+                                                                            false,
+                                                                        minute:
+                                                                            true,
+                                                                        second:
+                                                                            true,
+                                                                        milliSecond:
+                                                                            false,
+                                                                      );
+                                                                    });
+                                                                  },
+                                                                ),
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                                onEnded: () {},
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          2,
+                                                                          0),
+                                                              child: Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  '9j4qhgy0' /* min. */,
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'f82o9diq' /* to accept offer */,
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'AvenirArabic',
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
                                                   Divider(
                                                     thickness: 1,
                                                     color: Color(0xFFF1F1F1),
@@ -1159,6 +1348,91 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                       ],
                                                     ),
                                                   ),
+                                                  if (functions
+                                                      .conditionalVisibility(
+                                                          getJsonField(
+                                                            activeOffersItem,
+                                                            r'''$.status''',
+                                                          ).toString(),
+                                                          'pending'))
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(16, 19,
+                                                                  16, 20),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0,
+                                                                        0,
+                                                                        12,
+                                                                        0),
+                                                            child:
+                                                                CircularPercentIndicator(
+                                                              percent: 0.5,
+                                                              radius: 15,
+                                                              lineWidth: 2,
+                                                              animation: true,
+                                                              progressColor:
+                                                                  Color(
+                                                                      0xFFFF5A5A),
+                                                              backgroundColor:
+                                                                  Color(
+                                                                      0xFFF1F4F8),
+                                                              center: Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  '8mwku18m' /* 57% */,
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                      fontSize:
+                                                                          9,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              '8xr274xh' /* Average probability to approve */,
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'AvenirArabic',
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -1580,19 +1854,22 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                     logFirebaseEvent(
                                                                         'OFFERS_PAGE_Container_4zrbybz6_ON_TAP');
                                                                     logFirebaseEvent(
-                                                                        'Container_Navigate-To');
+                                                                        'Container_navigate_to');
 
                                                                     context
                                                                         .pushNamed(
                                                                       'Chat',
                                                                       queryParams:
                                                                           {
-                                                                        'bankJson': serializeParam(
-                                                                            getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$''',
-                                                                            ),
-                                                                            ParamType.JSON),
+                                                                        'bankJson':
+                                                                            serializeParam(
+                                                                          getJsonField(
+                                                                            activeOffersItem,
+                                                                            r'''$''',
+                                                                          ),
+                                                                          ParamType
+                                                                              .JSON,
+                                                                        ),
                                                                       }.withoutNulls,
                                                                     );
                                                                   },
@@ -1703,7 +1980,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           .locale ==
                                                                       'en') {
                                                                     logFirebaseEvent(
-                                                                        'Button_Alert-Dialog');
+                                                                        'Button_alert_dialog');
                                                                     var confirmDialogResponse =
                                                                         await showDialog<bool>(
                                                                               context: context,
@@ -1727,7 +2004,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             false;
                                                                     if (confirmDialogResponse) {
                                                                       logFirebaseEvent(
-                                                                          'Button_Backend-Call');
+                                                                          'Button_backend_call');
                                                                       acceptOfferResponse =
                                                                           await AcceptOfferCall
                                                                               .call(
@@ -1746,7 +2023,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               200) ==
                                                                           200) {
                                                                         logFirebaseEvent(
-                                                                            'Button_Show-Snack-Bar');
+                                                                            'Button_show_snack_bar');
                                                                         ScaffoldMessenger.of(context)
                                                                             .showSnackBar(
                                                                           SnackBar(
@@ -1767,7 +2044,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         );
                                                                       } else {
                                                                         logFirebaseEvent(
-                                                                            'Button_Show-Snack-Bar');
+                                                                            'Button_show_snack_bar');
                                                                         ScaffoldMessenger.of(context)
                                                                             .showSnackBar(
                                                                           SnackBar(
@@ -1790,7 +2067,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                     }
                                                                   } else {
                                                                     logFirebaseEvent(
-                                                                        'Button_Alert-Dialog');
+                                                                        'Button_alert_dialog');
                                                                     var confirmDialogResponse =
                                                                         await showDialog<bool>(
                                                                               context: context,
@@ -1814,7 +2091,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             false;
                                                                     if (confirmDialogResponse) {
                                                                       logFirebaseEvent(
-                                                                          'Button_Backend-Call');
+                                                                          'Button_backend_call');
                                                                       acceptOfferResponseAr =
                                                                           await AcceptOfferCall
                                                                               .call(
@@ -1833,7 +2110,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               200) ==
                                                                           200) {
                                                                         logFirebaseEvent(
-                                                                            'Button_Show-Snack-Bar');
+                                                                            'Button_show_snack_bar');
                                                                         ScaffoldMessenger.of(context)
                                                                             .showSnackBar(
                                                                           SnackBar(
@@ -1854,7 +2131,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                         );
                                                                       } else {
                                                                         logFirebaseEvent(
-                                                                            'Button_Show-Snack-Bar');
+                                                                            'Button_show_snack_bar');
                                                                         ScaffoldMessenger.of(context)
                                                                             .showSnackBar(
                                                                           SnackBar(
@@ -1944,7 +2221,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                               onTap: () async {
                                 logFirebaseEvent(
                                     'OFFERS_PAGE_Container_kc3eke2v_ON_TAP');
-                                logFirebaseEvent('Container_Navigate-To');
+                                logFirebaseEvent('Container_navigate_to');
 
                                 context.pushNamed(
                                   'PastOffers',

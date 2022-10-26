@@ -37,7 +37,7 @@ class _CancelReserveBottomSheetWidgetState
           child: FFButtonWidget(
             onPressed: () async {
               logFirebaseEvent('CANCEL_RESERVE_BOTTOM_SHEET_CANCEL_RESER');
-              logFirebaseEvent('Button_Alert-Dialog');
+              logFirebaseEvent('Button_alert_dialog');
               var confirmDialogResponse = await showDialog<bool>(
                     context: context,
                     builder: (alertDialogContext) {
@@ -62,20 +62,20 @@ class _CancelReserveBottomSheetWidgetState
                   ) ??
                   false;
               if (confirmDialogResponse) {
-                logFirebaseEvent('Button_Backend-Call');
+                logFirebaseEvent('Button_backend_call');
                 cancelOrder = await CancelOrderCall.call(
                   orderId: widget.orderId,
                   userId: currentUserUid,
                 );
                 if ((cancelOrder?.statusCode ?? 200) == 200) {
-                  logFirebaseEvent('Button_Bottom-Sheet');
+                  logFirebaseEvent('Button_bottom_sheet');
                   Navigator.pop(context);
-                  logFirebaseEvent('Button_Close-Dialog,-Drawer,-Etc');
+                  logFirebaseEvent('Button_close_dialog,_drawer,_etc');
                   Navigator.pop(context);
                 } else {
-                  logFirebaseEvent('Button_Bottom-Sheet');
+                  logFirebaseEvent('Button_bottom_sheet');
                   Navigator.pop(context);
-                  logFirebaseEvent('Button_Show-Snack-Bar');
+                  logFirebaseEvent('Button_show_snack_bar');
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
@@ -93,7 +93,7 @@ class _CancelReserveBottomSheetWidgetState
                   );
                 }
               } else {
-                logFirebaseEvent('Button_Bottom-Sheet');
+                logFirebaseEvent('Button_bottom_sheet');
                 Navigator.pop(context);
               }
 
@@ -124,7 +124,7 @@ class _CancelReserveBottomSheetWidgetState
           child: FFButtonWidget(
             onPressed: () async {
               logFirebaseEvent('CANCEL_RESERVE_BOTTOM_SHEET_CANCEL_BTN_O');
-              logFirebaseEvent('Button_Bottom-Sheet');
+              logFirebaseEvent('Button_bottom_sheet');
               Navigator.pop(context);
             },
             text: FFLocalizations.of(context).getText(

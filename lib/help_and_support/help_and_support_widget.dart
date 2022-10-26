@@ -29,13 +29,14 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         leading: InkWell(
           onTap: () async {
             logFirebaseEvent('HELP_AND_SUPPORT_Icon_9vvfdevj_ON_TAP');
-            logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+            logFirebaseEvent('Icon_close_dialog,_drawer,_etc');
             Navigator.pop(context);
           },
           child: Icon(
@@ -60,7 +61,6 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
         centerTitle: false,
         elevation: 2,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -155,7 +155,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                       logFirebaseEvent(
                           'HELP_AND_SUPPORT_Container_tuq5l2th_ON_T');
                       Function() _navigate = () {};
-                      logFirebaseEvent('Container_Alert-Dialog');
+                      logFirebaseEvent('Container_alert_dialog');
                       var confirmDialogResponse = await showDialog<bool>(
                             context: context,
                             builder: (alertDialogContext) {
@@ -180,19 +180,19 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                           ) ??
                           false;
                       if (confirmDialogResponse) {
-                        logFirebaseEvent('Container_Backend-Call');
+                        logFirebaseEvent('Container_backend_call');
 
                         final userUpdateData = createUserRecordData(
                           isDeleted: 1,
                         );
                         await currentUserReference!.update(userUpdateData);
-                        logFirebaseEvent('Container_Auth');
+                        logFirebaseEvent('Container_auth');
                         GoRouter.of(context).prepareAuthEvent();
                         await signOut();
                         _navigate = () =>
                             context.goNamedAuth('OnboardingView', mounted);
                       } else {
-                        logFirebaseEvent('Container_Wait-Delay');
+                        logFirebaseEvent('Container_wait__delay');
                         await Future.delayed(const Duration(milliseconds: 100));
                       }
 

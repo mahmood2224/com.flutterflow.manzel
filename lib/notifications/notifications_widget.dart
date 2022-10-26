@@ -30,6 +30,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
@@ -51,7 +52,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
             child: InkWell(
               onTap: () async {
                 logFirebaseEvent('NOTIFICATIONS_PAGE_cancel_ON_TAP');
-                logFirebaseEvent('cancel_Close-Dialog,-Drawer,-Etc');
+                logFirebaseEvent('cancel_close_dialog,_drawer,_etc');
                 Navigator.pop(context);
               },
               child: Icon(
@@ -65,7 +66,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
         centerTitle: false,
         elevation: 0,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -127,33 +127,35 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                               if (notificationsListNotificationsRecord
                                       .notificationType ==
                                   'Offers') {
-                                logFirebaseEvent('Container_Navigate-To');
+                                logFirebaseEvent('Container_navigate_to');
 
                                 context.pushNamed(
                                   'Offers',
                                   queryParams: {
                                     'propertyId': serializeParam(
-                                        notificationsListNotificationsRecord
-                                            .propertyId,
-                                        ParamType.String),
+                                      notificationsListNotificationsRecord
+                                          .propertyId,
+                                      ParamType.String,
+                                    ),
                                   }.withoutNulls,
                                 );
                               } else {
-                                logFirebaseEvent('Container_Navigate-To');
+                                logFirebaseEvent('Container_navigate_to');
 
                                 context.pushNamed(
                                   'BookingDetails',
                                   queryParams: {
                                     'orderId': serializeParam(
-                                        notificationsListNotificationsRecord
-                                            .orderId
-                                            ?.toString(),
-                                        ParamType.String),
+                                      notificationsListNotificationsRecord
+                                          .orderId
+                                          ?.toString(),
+                                      ParamType.String,
+                                    ),
                                   }.withoutNulls,
                                 );
                               }
 
-                              logFirebaseEvent('Container_Backend-Call');
+                              logFirebaseEvent('Container_backend_call');
 
                               final notificationsUpdateData =
                                   createNotificationsRecordData(
@@ -227,6 +229,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                             height: 35,
                                                             decoration:
                                                                 BoxDecoration(
+                                                              color: Color(
+                                                                  0xFF53C3EB),
                                                               shape: BoxShape
                                                                   .circle,
                                                               border:
@@ -235,28 +239,12 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                     0xFF8C8C8C),
                                                               ),
                                                             ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          3,
-                                                                          3,
-                                                                          3,
-                                                                          3),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            17.5),
-                                                                child:
-                                                                    Image.asset(
-                                                                  'assets/images/App_Icon___White_(2).png',
-                                                                  width: 35,
-                                                                  height: 35,
-                                                                  fit: BoxFit
-                                                                      .fill,
-                                                                ),
-                                                              ),
+                                                            child: Icon(
+                                                              Icons
+                                                                  .notifications_none,
+                                                              color:
+                                                                  Colors.black,
+                                                              size: 20,
                                                             ),
                                                           ),
                                                         ),

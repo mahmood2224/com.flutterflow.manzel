@@ -8,6 +8,8 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart'
+    as smooth_page_indicator;
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   const HomeScreenWidget({
@@ -46,7 +47,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
-      logFirebaseEvent('HomeScreen_Set-App-Language');
+      logFirebaseEvent('HomeScreen_set_app_language');
       setAppLanguage(context, FFAppState().locale);
     });
 
@@ -143,7 +144,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       logFirebaseEvent(
                                           'HOME_SCREEN_notificationsBadge_ON_TAP');
                                       logFirebaseEvent(
-                                          'notificationsBadge_Navigate-To');
+                                          'notificationsBadge_navigate_to');
 
                                       context.pushNamed('Notifications');
                                     },
@@ -222,7 +223,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   onTap: () async {
                                     logFirebaseEvent(
                                         'HOME_SCREEN_PAGE_Text_iowqhltc_ON_TAP');
-                                    logFirebaseEvent('Text_Navigate-To');
+                                    logFirebaseEvent('Text_navigate_to');
 
                                     context.pushNamed(
                                       'WhereAreYouLooking',
@@ -273,7 +274,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         logFirebaseEvent(
                                             'HOME_SCREEN_Container_13mjruev_ON_TAP');
                                         logFirebaseEvent(
-                                            'Container_Navigate-To');
+                                            'Container_navigate_to');
 
                                         context.pushNamed(
                                           'Filter',
@@ -359,7 +360,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             logFirebaseEvent(
                                 'HOME_SCREEN_ListView_v6ucvx72_ON_PULL_TO');
                             logFirebaseEvent(
-                                'ListView_Refresh-Database-Request');
+                                'ListView_refresh_database_request');
                             setState(() => _apiRequestCompleter = null);
                             await waitForApiRequestCompleter();
                           },
@@ -387,11 +388,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       'PropertyDetails',
                                       queryParams: {
                                         'propertyId': serializeParam(
-                                            getJsonField(
-                                              propertiesItem,
-                                              r'''$.id''',
-                                            ),
-                                            ParamType.int),
+                                          getJsonField(
+                                            propertiesItem,
+                                            r'''$.id''',
+                                          ),
+                                          ParamType.int,
+                                        ),
                                       }.withoutNulls,
                                     );
                                   },
@@ -527,8 +529,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           alignment:
                                                               AlignmentDirectional(
                                                                   0, 0.7),
-                                                          child:
-                                                              SmoothPageIndicator(
+                                                          child: smooth_page_indicator
+                                                              .SmoothPageIndicator(
                                                             controller: pageViewController ??=
                                                                 PageController(
                                                                     initialPage: min(
@@ -551,7 +553,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                                     Curves.ease,
                                                               );
                                                             },
-                                                            effect: SlideEffect(
+                                                            effect:
+                                                                smooth_page_indicator
+                                                                    .SlideEffect(
                                                               spacing: 8,
                                                               radius: 3,
                                                               dotWidth: 6,
@@ -583,7 +587,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         'HOME_SCREEN_Container_jprwonvd_ON_TAP');
                                                     if (loggedIn) {
                                                       logFirebaseEvent(
-                                                          'Container_Backend-Call');
+                                                          'Container_backend_call');
                                                       await BookmarkPropertyCall
                                                           .call(
                                                         userId: currentUserUid,
@@ -599,7 +603,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       );
                                                     } else {
                                                       logFirebaseEvent(
-                                                          'Container_Navigate-To');
+                                                          'Container_navigate_to');
 
                                                       context
                                                           .pushNamed('Login');

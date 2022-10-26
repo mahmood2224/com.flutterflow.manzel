@@ -100,7 +100,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                             onTap: () async {
                               logFirebaseEvent(
                                   'WHERE_ARE_YOU_LOOKING_Icon_dyncjlz2_ON_T');
-                              logFirebaseEvent('Icon_Navigate-Back');
+                              logFirebaseEvent('Icon_navigate_back');
                               context.pop();
                             },
                             child: Icon(
@@ -171,23 +171,25 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                   onTap: () async {
                                     logFirebaseEvent(
                                         'WHERE_ARE_YOU_LOOKING_Container_errzn6go');
-                                    logFirebaseEvent('Container_Navigate-To');
+                                    logFirebaseEvent('Container_navigate_to');
 
                                     context.pushNamed(
                                       'SearchCityResult',
                                       queryParams: {
                                         'cityName': serializeParam(
-                                            getJsonField(
-                                              citiesItem,
-                                              r'''$.name''',
-                                            ).toString(),
-                                            ParamType.String),
+                                          getJsonField(
+                                            citiesItem,
+                                            r'''$.name''',
+                                          ).toString(),
+                                          ParamType.String,
+                                        ),
                                         'propertiesAvailable': serializeParam(
-                                            getJsonField(
-                                              citiesItem,
-                                              r'''$.count''',
-                                            ),
-                                            ParamType.int),
+                                          getJsonField(
+                                            citiesItem,
+                                            r'''$.count''',
+                                          ),
+                                          ParamType.int,
+                                        ),
                                       }.withoutNulls,
                                     );
                                   },

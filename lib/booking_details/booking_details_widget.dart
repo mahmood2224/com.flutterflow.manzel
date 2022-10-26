@@ -37,6 +37,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryColor,
         automaticallyImplyLeading: true,
@@ -45,7 +46,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
           child: InkWell(
             onTap: () async {
               logFirebaseEvent('BOOKING_DETAILS_Icon_yxvmcr6s_ON_TAP');
-              logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+              logFirebaseEvent('Icon_close_dialog,_drawer,_etc');
               Navigator.pop(context);
             },
             child: Icon(
@@ -95,7 +96,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                 child: InkWell(
                   onTap: () async {
                     logFirebaseEvent('BOOKING_DETAILS_Icon_ayh07hly_ON_TAP');
-                    logFirebaseEvent('Icon_Bottom-Sheet');
+                    logFirebaseEvent('Icon_bottom_sheet');
                     await showModalBottomSheet(
                       isScrollControlled: true,
                       backgroundColor: Color(0x64040404),
@@ -127,7 +128,6 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
         centerTitle: true,
         elevation: 4,
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: FutureBuilder<ApiCallResponse>(
           future: OrderDetailsCall.call(
@@ -464,21 +464,21 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                           logFirebaseEvent(
                                                               'BOOKING_DETAILS_Container_arq4cwwe_ON_TA');
                                                           logFirebaseEvent(
-                                                              'Container_Navigate-To');
+                                                              'Container_navigate_to');
 
                                                           context.pushNamed(
                                                             'Offers',
                                                             queryParams: {
                                                               'propertyId':
                                                                   serializeParam(
-                                                                      getJsonField(
-                                                                        columnOrderDetailsResponse
-                                                                            .jsonBody,
-                                                                        r'''$.result.property_id''',
-                                                                      )
-                                                                          .toString(),
-                                                                      ParamType
-                                                                          .String),
+                                                                getJsonField(
+                                                                  columnOrderDetailsResponse
+                                                                      .jsonBody,
+                                                                  r'''$.result.property_id''',
+                                                                ).toString(),
+                                                                ParamType
+                                                                    .String,
+                                                              ),
                                                             }.withoutNulls,
                                                           );
                                                         },
@@ -1598,17 +1598,18 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                               onPressed: () async {
                                 logFirebaseEvent(
                                     'BOOKING_DETAILS_VIEW_MORE_BTN_ON_TAP');
-                                logFirebaseEvent('Button_Navigate-To');
+                                logFirebaseEvent('Button_navigate_to');
 
                                 context.pushNamed(
                                   'PropertyDetails',
                                   queryParams: {
                                     'propertyId': serializeParam(
-                                        getJsonField(
-                                          columnOrderDetailsResponse.jsonBody,
-                                          r'''$.result.property_id''',
-                                        ),
-                                        ParamType.int),
+                                      getJsonField(
+                                        columnOrderDetailsResponse.jsonBody,
+                                        r'''$.result.property_id''',
+                                      ),
+                                      ParamType.int,
+                                    ),
                                   }.withoutNulls,
                                 );
                               },
@@ -1923,7 +1924,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 OrderDetailsCall.depositreceipt(
                               columnOrderDetailsResponse.jsonBody,
                             ).toString())) {
-                              logFirebaseEvent('receipt_Show-Snack-Bar');
+                              logFirebaseEvent('receipt_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -1941,16 +1942,17 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 ),
                               );
                             } else {
-                              logFirebaseEvent('receipt_Navigate-To');
+                              logFirebaseEvent('receipt_navigate_to');
 
                               context.pushNamed(
                                 'depositeRecipt',
                                 queryParams: {
                                   'depositeRecpit': serializeParam(
-                                      OrderDetailsCall.depositreceipt(
-                                        columnOrderDetailsResponse.jsonBody,
-                                      ).toString(),
-                                      ParamType.String),
+                                    OrderDetailsCall.depositreceipt(
+                                      columnOrderDetailsResponse.jsonBody,
+                                    ).toString(),
+                                    ParamType.String,
+                                  ),
                                 }.withoutNulls,
                               );
                             }

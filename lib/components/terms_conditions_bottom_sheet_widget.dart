@@ -67,7 +67,7 @@ class _TermsConditionsBottomSheetWidgetState
                           onTap: () async {
                             logFirebaseEvent(
                                 'TERMS_CONDITIONS_BOTTOM_SHEET_Icon_hhw3c');
-                            logFirebaseEvent('Icon_Bottom-Sheet');
+                            logFirebaseEvent('Icon_bottom_sheet');
                             Navigator.pop(context);
                           },
                           child: Icon(

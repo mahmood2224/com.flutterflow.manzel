@@ -37,6 +37,7 @@ class _FilterWidgetState extends State<FilterWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
@@ -45,21 +46,21 @@ class _FilterWidgetState extends State<FilterWidget> {
           child: InkWell(
             onTap: () async {
               logFirebaseEvent('FILTER_PAGE_Text_re50sdm2_ON_TAP');
-              logFirebaseEvent('Text_Update-Local-State');
+              logFirebaseEvent('Text_update_local_state');
               setState(() => FFAppState().filterCity = '');
-              logFirebaseEvent('Text_Update-Local-State');
+              logFirebaseEvent('Text_update_local_state');
               setState(() => FFAppState().filterPropertyType = []);
-              logFirebaseEvent('Text_Update-Local-State');
+              logFirebaseEvent('Text_update_local_state');
               setState(() => FFAppState().filterFurnishingType = []);
-              logFirebaseEvent('Text_Update-Local-State');
+              logFirebaseEvent('Text_update_local_state');
               setState(() => FFAppState().filterCity = '');
-              logFirebaseEvent('Text_Update-Local-State');
+              logFirebaseEvent('Text_update_local_state');
               setState(() => FFAppState().filterMinPrice = 0);
-              logFirebaseEvent('Text_Update-Local-State');
+              logFirebaseEvent('Text_update_local_state');
               setState(() => FFAppState().filterMaxPrice = 0);
-              logFirebaseEvent('Text_Close-Dialog,-Drawer,-Etc');
+              logFirebaseEvent('Text_close_dialog,_drawer,_etc');
               Navigator.pop(context);
-              logFirebaseEvent('Text_Navigate-To');
+              logFirebaseEvent('Text_navigate_to');
 
               context.pushNamed(
                 'Filter',
@@ -112,7 +113,7 @@ class _FilterWidgetState extends State<FilterWidget> {
               ),
               onPressed: () async {
                 logFirebaseEvent('FILTER_PAGE_close_rounded_ICN_ON_TAP');
-                logFirebaseEvent('IconButton_Close-Dialog,-Drawer,-Etc');
+                logFirebaseEvent('IconButton_close_dialog,_drawer,_etc');
                 Navigator.pop(context);
               },
             ),
@@ -121,7 +122,6 @@ class _FilterWidgetState extends State<FilterWidget> {
         centerTitle: true,
         elevation: 1,
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
@@ -286,13 +286,11 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       20, 0, 0, 0),
                                   child: FlutterFlowChoiceChips(
                                     initiallySelected:
-                                        propertyTypeListValues != null
-                                            ? propertyTypeListValues
-                                            : functions.choicechipUnselected(
-                                                FFAppState()
-                                                    .filterPropertyType
-                                                    .toList(),
-                                                FFAppState().locale),
+                                        functions.choicechipUnselected(
+                                            FFAppState()
+                                                .filterPropertyType
+                                                .toList(),
+                                            FFAppState().locale),
                                     options: functions
                                         .propertTypeBuilder(
                                             (getJsonField(
@@ -587,13 +585,11 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       20, 0, 0, 0),
                                   child: FlutterFlowChoiceChips(
                                     initiallySelected:
-                                        isFurnishingValues != null
-                                            ? isFurnishingValues
-                                            : functions.choicechipUnselected(
-                                                FFAppState()
-                                                    .filterFurnishingType
-                                                    .toList(),
-                                                FFAppState().locale),
+                                        functions.choicechipUnselected(
+                                            FFAppState()
+                                                .filterFurnishingType
+                                                .toList(),
+                                            FFAppState().locale),
                                     options: [
                                       ChipData(
                                           FFLocalizations.of(context).getText(
@@ -663,40 +659,46 @@ class _FilterWidgetState extends State<FilterWidget> {
                           logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
                           if (functions.validateInstallmentRange(
                               sliderValue1, sliderValue2)) {
-                            logFirebaseEvent('apllyFilter_Navigate-To');
+                            logFirebaseEvent('apllyFilter_navigate_to');
 
                             context.pushNamed(
                               'filterResults',
                               queryParams: {
                                 'cityName': serializeParam(
-                                    citiesListValue, ParamType.String),
+                                  citiesListValue,
+                                  ParamType.String,
+                                ),
                                 'minInstallment': serializeParam(
-                                    valueOrDefault<String>(
-                                      functions
-                                          .sliderToApi(sliderValue1)
-                                          .toString(),
-                                      '0',
-                                    ),
-                                    ParamType.String),
-                                'maxInstallment': serializeParam(
+                                  valueOrDefault<String>(
                                     functions
-                                        .sliderToApi(sliderValue2)
+                                        .sliderToApi(sliderValue1)
                                         .toString(),
-                                    ParamType.String),
+                                    '0',
+                                  ),
+                                  ParamType.String,
+                                ),
+                                'maxInstallment': serializeParam(
+                                  functions
+                                      .sliderToApi(sliderValue2)
+                                      .toString(),
+                                  ParamType.String,
+                                ),
                                 'furnishingType': serializeParam(
-                                    functions.listToApiParameters(functions
-                                        .choicechipUnselected(
-                                            isFurnishingValues?.toList(),
-                                            FFAppState().locale)
-                                        .toList()),
-                                    ParamType.String),
+                                  functions.listToApiParameters(functions
+                                      .choicechipUnselected(
+                                          isFurnishingValues?.toList(),
+                                          FFAppState().locale)
+                                      .toList()),
+                                  ParamType.String,
+                                ),
                                 'propertyType': serializeParam(
-                                    functions.listToApiParameters(functions
-                                        .choicechipUnselected(
-                                            propertyTypeListValues?.toList(),
-                                            FFAppState().locale)
-                                        .toList()),
-                                    ParamType.String),
+                                  functions.listToApiParameters(functions
+                                      .choicechipUnselected(
+                                          propertyTypeListValues?.toList(),
+                                          FFAppState().locale)
+                                      .toList()),
+                                  ParamType.String,
+                                ),
                               }.withoutNulls,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: TransitionInfo(
@@ -707,7 +709,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               },
                             );
                           } else {
-                            logFirebaseEvent('apllyFilter_Show-Snack-Bar');
+                            logFirebaseEvent('apllyFilter_show_snack_bar');
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(

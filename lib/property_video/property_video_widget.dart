@@ -34,6 +34,7 @@ class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
@@ -49,7 +50,7 @@ class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
           ),
           onPressed: () async {
             logFirebaseEvent('PROPERTY_VIDEO_arrow_back_rounded_ICN_ON');
-            logFirebaseEvent('IconButton_Close-Dialog,-Drawer,-Etc');
+            logFirebaseEvent('IconButton_close_dialog,_drawer,_etc');
             Navigator.pop(context);
           },
         ),
@@ -66,7 +67,6 @@ class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
         centerTitle: true,
         elevation: 2,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

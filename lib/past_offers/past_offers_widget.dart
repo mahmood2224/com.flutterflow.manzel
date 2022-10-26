@@ -56,7 +56,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                         onTap: () async {
                           logFirebaseEvent(
                               'PAST_OFFERS_PAGE_Icon_x76ofvg0_ON_TAP');
-                          logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+                          logFirebaseEvent('Icon_close_dialog,_drawer,_etc');
                           Navigator.pop(context);
                         },
                         child: Icon(
@@ -145,7 +145,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                               logFirebaseEvent(
                                   'PAST_OFFERS_ListView_jjqn2huf_ON_PULL_TO');
                               logFirebaseEvent(
-                                  'ListView_Refresh-Database-Request');
+                                  'ListView_refresh_database_request');
                               setState(() => _apiRequestCompleter = null);
                               await waitForApiRequestCompleter();
                             },
@@ -198,7 +198,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
 
                                             if (FFAppState().locale == 'en') {
                                               logFirebaseEvent(
-                                                  'Column_Alert-Dialog');
+                                                  'Column_alert_dialog');
                                               await showDialog(
                                                 context: context,
                                                 builder: (alertDialogContext) {
@@ -218,13 +218,13 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                   );
                                                 },
                                               );
-                                              logFirebaseEvent('Column_Auth');
+                                              logFirebaseEvent('Column_auth');
                                               GoRouter.of(context)
                                                   .prepareAuthEvent();
                                               await signOut();
                                             } else {
                                               logFirebaseEvent(
-                                                  'Column_Alert-Dialog');
+                                                  'Column_alert_dialog');
                                               await showDialog(
                                                 context: context,
                                                 builder: (alertDialogContext) {
@@ -244,7 +244,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                   );
                                                 },
                                               );
-                                              logFirebaseEvent('Column_Auth');
+                                              logFirebaseEvent('Column_auth');
                                               GoRouter.of(context)
                                                   .prepareAuthEvent();
                                               await signOut();

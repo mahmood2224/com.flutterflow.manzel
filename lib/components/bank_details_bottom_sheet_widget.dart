@@ -76,7 +76,7 @@ class _BankDetailsBottomSheetWidgetState
                       onTap: () async {
                         logFirebaseEvent(
                             'BANK_DETAILS_BOTTOM_SHEET_Icon_b8d7zqap_');
-                        logFirebaseEvent('Icon_Bottom-Sheet');
+                        logFirebaseEvent('Icon_bottom_sheet');
                         Navigator.pop(context);
                       },
                       child: Icon(
@@ -188,7 +188,7 @@ class _BankDetailsBottomSheetWidgetState
             child: FFButtonWidget(
               onPressed: () async {
                 logFirebaseEvent('BANK_DETAILS_BOTTOM_SHEET_CLOSE_BTN_ON_T');
-                logFirebaseEvent('Button_Bottom-Sheet');
+                logFirebaseEvent('Button_bottom_sheet');
                 Navigator.pop(context);
               },
               text: FFLocalizations.of(context).getText(

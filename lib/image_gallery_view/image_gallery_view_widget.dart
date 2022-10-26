@@ -65,7 +65,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                           onTap: () async {
                             logFirebaseEvent(
                                 'IMAGE_GALLERY_VIEW_Icon_61cpjbpa_ON_TAP');
-                            logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+                            logFirebaseEvent('Icon_close_dialog,_drawer,_etc');
                             Navigator.pop(context);
                           },
                           child: Icon(
@@ -183,7 +183,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                 onTap: () async {
                                   logFirebaseEvent(
                                       'IMAGE_GALLERY_VIEW_Image_xq7pxmei_ON_TAP');
-                                  logFirebaseEvent('Image_Expand-Image');
+                                  logFirebaseEvent('Image_expand_image');
                                   await Navigator.push(
                                     context,
                                     PageTransition(

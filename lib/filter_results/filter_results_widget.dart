@@ -7,11 +7,12 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:smooth_page_indicator/smooth_page_indicator.dart'
+    as smooth_page_indicator;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FilterResultsWidget extends StatefulWidget {
   const FilterResultsWidget({
@@ -49,6 +50,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: true,
@@ -70,7 +72,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
               child: InkWell(
                 onTap: () async {
                   logFirebaseEvent('FILTER_RESULTS_PAGE_Icon_n6g5zub7_ON_TAP');
-                  logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+                  logFirebaseEvent('Icon_close_dialog,_drawer,_etc');
                   Navigator.pop(context);
                 },
                 child: Icon(
@@ -159,7 +161,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
         centerTitle: true,
         elevation: 4,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -181,10 +182,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                               child: FlutterFlowChoiceChips(
-                                initiallySelected:
-                                    filteredParametesValues != null
-                                        ? filteredParametesValues
-                                        : [],
                                 options: functions
                                     .filteredResultChioceChipsBuilder(
                                         widget.cityName,
@@ -312,11 +309,12 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                       'PropertyDetails',
                                       queryParams: {
                                         'propertyId': serializeParam(
-                                            getJsonField(
-                                              propertiesItem,
-                                              r'''$.id''',
-                                            ),
-                                            ParamType.int),
+                                          getJsonField(
+                                            propertiesItem,
+                                            r'''$.id''',
+                                          ),
+                                          ParamType.int,
+                                        ),
                                       }.withoutNulls,
                                     );
                                   },
@@ -481,8 +479,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                             alignment:
                                                                 AlignmentDirectional(
                                                                     0, 0.7),
-                                                            child:
-                                                                SmoothPageIndicator(
+                                                            child: smooth_page_indicator
+                                                                .SmoothPageIndicator(
                                                               controller: pageViewController ??=
                                                                   PageController(
                                                                       initialPage: min(
@@ -507,7 +505,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                 );
                                                               },
                                                               effect:
-                                                                  SlideEffect(
+                                                                  smooth_page_indicator
+                                                                      .SlideEffect(
                                                                 spacing: 8,
                                                                 radius: 3,
                                                                 dotWidth: 6,
@@ -541,7 +540,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                         'FILTER_RESULTS_Container_kslgg6qy_ON_TAP');
                                                     if (!loggedIn) {
                                                       logFirebaseEvent(
-                                                          'Container_Navigate-To');
+                                                          'Container_navigate_to');
 
                                                       context
                                                           .pushNamed('Login');

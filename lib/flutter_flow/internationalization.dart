@@ -505,6 +505,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Offers',
       'ar': 'عروض',
     },
+    'muecz7ra': {
+      'en': 'You need to create an account or ',
+      'ar': 'تحتاج إلى إنشاء حساب أو',
+    },
     'r282eka0': {
       'en': 'You have',
       'ar': 'عندك',
@@ -516,10 +520,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'z2siuoeg': {
       'en': ' ',
       'ar': '',
-    },
-    'muecz7ra': {
-      'en': 'You need to create an account or ',
-      'ar': 'تحتاج إلى إنشاء حساب أو',
     },
     'x824f0mb': {
       'en': 'login to see this section',
@@ -561,6 +561,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Pending',
       'ar': 'قيد الانتظار',
     },
+    'y42wn8bh': {
+      'en': 'You have ',
+      'ar': 'عندك',
+    },
+    '9j4qhgy0': {
+      'en': 'min.',
+      'ar': 'دقيقة',
+    },
+    'f82o9diq': {
+      'en': 'to accept offer',
+      'ar': 'لقبول العرض',
+    },
     'np7vw75o': {
       'en': 'Property',
       'ar': 'ملكية',
@@ -568,6 +580,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'vs0xmudi': {
       'en': 'Booking Ref.',
       'ar': 'مرجع الحجز',
+    },
+    '8mwku18m': {
+      'en': '57%',
+      'ar': '',
+    },
+    '8xr274xh': {
+      'en': 'Average probability to approve',
+      'ar': 'متوسط احتمال الموافقة',
     },
     'ez8wbssn': {
       'en': 'Initial installment',

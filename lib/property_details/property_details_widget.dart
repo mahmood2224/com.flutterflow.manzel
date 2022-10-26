@@ -13,6 +13,8 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/lat_lng.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:map_launcher/map_launcher.dart' as $ml;
+import 'package:smooth_page_indicator/smooth_page_indicator.dart'
+    as smooth_page_indicator;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,7 +24,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mapbox_search/mapbox_search.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PropertyDetailsWidget extends StatefulWidget {
   const PropertyDetailsWidget({
@@ -164,7 +165,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 0, 0, 10),
-                                                  child: SmoothPageIndicator(
+                                                  child: smooth_page_indicator
+                                                      .SmoothPageIndicator(
                                                     controller:
                                                         pageViewController ??=
                                                             PageController(
@@ -184,7 +186,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         curve: Curves.ease,
                                                       );
                                                     },
-                                                    effect: SlideEffect(
+                                                    effect:
+                                                        smooth_page_indicator
+                                                            .SlideEffect(
                                                       spacing: 8,
                                                       radius: 16,
                                                       dotWidth: 6,
@@ -208,22 +212,24 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'PROPERTY_DETAILS_Image_8m4roe7z_ON_TAP');
-                                      logFirebaseEvent('Image_Navigate-To');
+                                      logFirebaseEvent('Image_navigate_to');
 
                                       context.pushNamed(
                                         'propertyVideo',
                                         queryParams: {
                                           'videoURL': serializeParam(
-                                              getJsonField(
-                                                columnPropertyResponse.jsonBody,
-                                                r'''$.data.attributes.video_manifest_uri''',
-                                              ),
-                                              ParamType.String),
+                                            getJsonField(
+                                              columnPropertyResponse.jsonBody,
+                                              r'''$.data.attributes.video_manifest_uri''',
+                                            ),
+                                            ParamType.String,
+                                          ),
                                           'propertyName': serializeParam(
-                                              PropertyCall.propertyName(
-                                                columnPropertyResponse.jsonBody,
-                                              ).toString(),
-                                              ParamType.String),
+                                            PropertyCall.propertyName(
+                                              columnPropertyResponse.jsonBody,
+                                            ).toString(),
+                                            ParamType.String,
+                                          ),
                                         }.withoutNulls,
                                       );
                                     },
@@ -643,18 +649,21 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           logFirebaseEvent(
                                                               'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
                                                           logFirebaseEvent(
-                                                              'Container_Navigate-To');
+                                                              'Container_navigate_to');
 
                                                           context.pushNamed(
                                                             'ThreeSixtyView',
                                                             queryParams: {
-                                                              'url': serializeParam(
-                                                                  getJsonField(
-                                                                    columnPropertyResponse
-                                                                        .jsonBody,
-                                                                    r'''$.data.attributes.threesixty_degree_view''',
-                                                                  ).toString(),
-                                                                  ParamType.String),
+                                                              'url':
+                                                                  serializeParam(
+                                                                getJsonField(
+                                                                  columnPropertyResponse
+                                                                      .jsonBody,
+                                                                  r'''$.data.attributes.threesixty_degree_view''',
+                                                                ).toString(),
+                                                                ParamType
+                                                                    .String,
+                                                              ),
                                                             }.withoutNulls,
                                                           );
                                                         },
@@ -703,17 +712,16 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         logFirebaseEvent(
                                                             'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
                                                         logFirebaseEvent(
-                                                            'Container_Navigate-To');
+                                                            'Container_navigate_to');
 
                                                         context.pushNamed(
                                                           'FloorPlan',
                                                           queryParams: {
                                                             'propertyId':
                                                                 serializeParam(
-                                                                    widget
-                                                                        .propertyId,
-                                                                    ParamType
-                                                                        .int),
+                                                              widget.propertyId,
+                                                              ParamType.int,
+                                                            ),
                                                           }.withoutNulls,
                                                         );
                                                       },
@@ -908,7 +916,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       logFirebaseEvent(
                                                           'PROPERTY_DETAILS_Text_ytdaqx1p_ON_TAP');
                                                       logFirebaseEvent(
-                                                          'Text_Launch-Map');
+                                                          'Text_launch_map');
                                                       await launchMap(
                                                         mapType:
                                                             $ml.MapType.google,
@@ -2109,7 +2117,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                   logFirebaseEvent(
                                                                       'PROPERTY_DETAILS_Container_94tgk0v4_ON_T');
                                                                   logFirebaseEvent(
-                                                                      'Container_Bottom-Sheet');
+                                                                      'Container_bottom_sheet');
                                                                   await showModalBottomSheet(
                                                                     isScrollControlled:
                                                                         true,
@@ -2488,17 +2496,17 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             logFirebaseEvent(
                                                                 'PROPERTY_DETAILS_horizontalList_ON_TAP');
                                                             logFirebaseEvent(
-                                                                'horizontalList_Navigate-To');
+                                                                'horizontalList_navigate_to');
 
                                                             context.pushNamed(
                                                               'imageGalleryView',
                                                               queryParams: {
                                                                 'propertyId':
                                                                     serializeParam(
-                                                                        widget
-                                                                            .propertyId,
-                                                                        ParamType
-                                                                            .int),
+                                                                  widget
+                                                                      .propertyId,
+                                                                  ParamType.int,
+                                                                ),
                                                               }.withoutNulls,
                                                             );
                                                           },
@@ -2730,7 +2738,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   false)
                                               .toString())) {
                                         logFirebaseEvent(
-                                            'reserved_Bottom-Sheet');
+                                            'reserved_bottom_sheet');
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.white,
@@ -2759,19 +2767,20 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                         ).then((value) => setState(() {}));
                                       } else {
                                         logFirebaseEvent(
-                                            'reserved_Navigate-To');
+                                            'reserved_navigate_to');
 
                                         context.pushNamed(
                                           'EditPersonallInfo',
                                           queryParams: {
                                             'screenName': serializeParam(
-                                                'PropertyDetails',
-                                                ParamType.String),
+                                              'PropertyDetails',
+                                              ParamType.String,
+                                            ),
                                           }.withoutNulls,
                                         );
                                       }
                                     } else {
-                                      logFirebaseEvent('reserved_Navigate-To');
+                                      logFirebaseEvent('reserved_navigate_to');
 
                                       context.pushNamed('Login');
                                     }
