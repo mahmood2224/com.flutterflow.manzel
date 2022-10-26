@@ -19,7 +19,7 @@ class WhereAreYouLookingWidget extends StatefulWidget {
 
   final String? city;
   final int? homeScreenLength;
-  final dynamic favourites;
+  final String? favourites;
 
   @override
   _WhereAreYouLookingWidgetState createState() =>
@@ -34,6 +34,12 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'WhereAreYouLooking'});
+  }
+  watchRouteChange() {
+    if (!GoRouter.of(context).location.contains("fav")) {  // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
+      // do something
+      GoRouter.of(context).removeListener(watchRouteChange); // remove listener
+    }
   }
 
   @override
@@ -178,7 +184,6 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                     logFirebaseEvent(
                                         'WHERE_ARE_YOU_LOOKING_Container_errzn6go');
                                     logFirebaseEvent('Container_Navigate-To');
-
                                     context.pushNamed(
                                       'SearchCityResult',
                                       queryParams: {
@@ -196,9 +201,15 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                             ParamType.int),
                                         'homeScreenLength': serializeParam(
                                             widget.homeScreenLength,
-                                            ParamType.int)
+                                            ParamType.int),
+                                        'favourites':serializeParam(widget.favourites, ParamType.JSON),
                                       }.withoutNulls,
                                     );
+                                    GoRouter.of(context).addListener(() {
+                                      watchRouteChange();
+                                      print("Updated>>>>>>>>>>>>>>>>>${widget.favourites}");
+                                    });
+                                    print("Updated>>>>>>>>>>>>>>>>>}");
                                   },
                                   child: Container(
                                     width: MediaQuery.of(context).size.width,

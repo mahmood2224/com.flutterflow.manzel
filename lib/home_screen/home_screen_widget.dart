@@ -5,6 +5,7 @@ import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import '../components/no_result_widget.dart';
+import 'package:manzel/app_state.dart'as globalVar;
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
@@ -69,6 +70,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   final PagingController<int, dynamic> _pagingController =
       PagingController(firstPageKey: 0);
 
+
   @override
   void initState() {
     super.initState();
@@ -91,6 +93,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       });
     });
   }
+  watchRouteChange() {
+    if (!GoRouter.of(context).location.contains("whereAreYouLookingAt")) {  // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
+      // do something
+      favourites= globalVar.favorite;
+       setState(() {
+
+       });
+
+      GoRouter.of(context).removeListener(watchRouteChange); // remove listener
+    }
+  }
 
   Future<void> callBookmarkListApi() async {
     final result = await BookmarkListCall.call(
@@ -103,6 +116,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     favList.forEach((element) {
       favourites[element] = true;
     });
+    globalVar.favorite = favorite;
+
   }
 
   Future<void> _fetchPage(int pageKey) async {
@@ -288,7 +303,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               'WhereAreYouLooking',
                               queryParams: {
                                 'homeScreenLength': serializeParam(
-                                    videoPlayers.length ?? 0, ParamType.int)
+                                    videoPlayers.length ?? 0, ParamType.int),
+                                'favourites': serializeParam(
+                                    res, ParamType.JSON)
                               }.withoutNulls,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: TransitionInfo(
@@ -298,6 +315,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                 ),
                               },
                             );
+    GoRouter.of(context).addListener(() {
+    watchRouteChange();
+    });
+
                           },
                           child: Container(
                             width: double.infinity,
@@ -563,7 +584,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   itemBuilder: (context, propertiesItem, propertiesIndex) {
                     print('PROPERTIES INDEX >>>>>>>>>>>>>>$propertiesIndex');
                     Future.delayed(Duration(seconds: 2));
-                    res = favourites.toString();
+                    res = jsonEncode(favourites);
                     propertiesItem['isBookmarked'] =
                         favourites[propertiesItem['id'].toString()] ?? false;
 

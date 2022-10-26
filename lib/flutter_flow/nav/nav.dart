@@ -183,7 +183,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => FilterWidget(
                 homeScreenLength:
                     params.getParam('homeScreenLength', ParamType.int),
-                  favourites:params.getParam('favourites', ParamType.String)
+                  favourites:params.getParam('favourites', ParamType.JSON)
                 //cityList : params.getParam('cityList',ParamType.JSON),
               ),
             ),
@@ -206,7 +206,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     params.getParam('minInstallment', ParamType.String),
                 maxInstallment:
                     params.getParam('maxInstallment', ParamType.String),
-                  favourites:params.getParam('favourites', ParamType.String)
+                  favourites:params.getParam('favourites', ParamType.JSON)
               ),
             ),
             FFRoute(
@@ -264,6 +264,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 city: params.getParam('city', ParamType.String),
                 homeScreenLength:
                     params.getParam('homeScreenLength', ParamType.int),
+                  favourites:params.getParam('favourites', ParamType.JSON)
               ),
             ),
             FFRoute(
@@ -275,6 +276,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     params.getParam('propertiesAvailable', ParamType.int),
                 homeScreenLength:
                     params.getParam('homeScreenLength', ParamType.int),
+                  favourites:params.getParam('favourites', ParamType.JSON)
               ),
             ),
             FFRoute(

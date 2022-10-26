@@ -2,6 +2,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/lat_lng.dart';
 import 'dart:convert';
 
+Map<String,bool> favorite = {};
+class FavoriteList {
+  static FavoriteList _instance = FavoriteList._();
+  static FavoriteList get instance => _instance;
+  Map<String,bool> _favorite = {};
+  FavoriteList._();
+  Future<void> initialise() async {
+    _favorite ;
+  }
+  Map<String,bool> get favorite => _favorite;
+}
+
 class FFAppState {
   static final FFAppState _instance = FFAppState._internal();
 
