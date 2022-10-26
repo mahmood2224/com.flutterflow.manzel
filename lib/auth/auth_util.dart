@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,10 @@ export 'jwt_token_auth.dart';
 /// Tries to sign in or create an account using Firebase Auth.
 /// Returns the User object if sign in was successful.
 Future<User?> signInOrCreateAccount(
-    BuildContext context, Future<UserCredential?> Function() signInFunc) async {
+  BuildContext context,
+  Future<UserCredential?> Function() signInFunc,
+  String authProvider,
+) async {
   try {
     final userCredential = await signInFunc();
     if (userCredential?.user != null) {
@@ -34,7 +39,6 @@ Future<User?> signInOrCreateAccount(
 }
 
 Future signOut() {
-  _currentJwtToken = '';
   return FirebaseAuth.instance.signOut();
 }
 
@@ -76,8 +80,6 @@ Future resetPassword(
 Future sendEmailVerification() async =>
     currentUser?.user?.sendEmailVerification();
 
-String? _currentJwtToken = '';
-
 String get currentUserEmail =>
     currentUserDocument?.email ?? currentUser?.user?.email ?? '';
 
@@ -104,6 +106,14 @@ bool get currentUserEmailVerified {
   }
   return currentUser?.user?.emailVerified ?? false;
 }
+
+/// Create a Stream that listens to the current user's JWT Token, since Firebase
+/// generates a new token every hour.
+String? _currentJwtToken;
+final jwtTokenStream = FirebaseAuth.instance
+    .idTokenChanges()
+    .map((user) async => _currentJwtToken = await user?.getIdToken())
+    .asBroadcastStream();
 
 // Set when using phone verification (after phone number is provided).
 String? _phoneAuthVerificationCode;
@@ -216,7 +226,10 @@ Future verifySmsCode({
 }) async {
   if (kIsWeb) {
     return signInOrCreateAccount(
-        context, () => _webPhoneAuthConfirmationResult!.confirm(smsCode));
+      context,
+      () => _webPhoneAuthConfirmationResult!.confirm(smsCode),
+      'PHONE',
+    );
   } else {
     final authCredential = PhoneAuthProvider.credential(
         verificationId: _phoneAuthVerificationCode!, smsCode: smsCode);
@@ -226,6 +239,7 @@ Future verifySmsCode({
     return signInOrCreateAccount(
       context,
       () => FirebaseAuth.instance.signInWithCredential(authCredential),
+      'PHONE',
     );
   }}
 }
@@ -237,13 +251,7 @@ DocumentReference? get currentUserReference => currentUser?.user != null
 UserRecord? currentUserDocument;
 final authenticatedUserStream = FirebaseAuth.instance
     .authStateChanges()
-    .map<String>((user) {
-      // Store jwt token on user update.
-      () async {
-        _currentJwtToken = await user?.getIdToken();
-      }();
-      return user?.uid ?? '';
-    })
+    .map<String>((user) => user?.uid ?? '')
     .switchMap(
       (uid) => uid.isEmpty
           ? Stream.value(null)

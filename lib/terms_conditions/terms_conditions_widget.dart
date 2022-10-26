@@ -76,7 +76,7 @@ class _TermsConditionsWidgetState extends State<TermsConditionsWidget> {
                                       logFirebaseEvent(
                                           'TERMS_CONDITIONS_Icon_30sitq7s_ON_TAP');
                                       logFirebaseEvent(
-                                          'Icon_Close-Dialog,-Drawer,-Etc');
+                                          'Icon_close_dialog,_drawer,_etc');
                                       Navigator.pop(context);
                                     },
                                     child: Icon(

@@ -186,14 +186,15 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                               logFirebaseEvent(
                                                   'BANK_DETAILS_PAGE_Icon_w5gr2oec_ON_TAP');
                                               logFirebaseEvent(
-                                                  'Icon_Navigate-To');
+                                                  'Icon_navigate_to');
 
                                               context.goNamed(
                                                 'PropertyDetails',
                                                 queryParams: {
                                                   'propertyId': serializeParam(
-                                                      widget.propertyId,
-                                                      ParamType.int),
+                                                    widget.propertyId,
+                                                    ParamType.int,
+                                                  ),
                                                 }.withoutNulls,
                                               );
                                             },
@@ -319,7 +320,7 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                             logFirebaseEvent(
                                                 'BANK_DETAILS_PAGE_closeBtn_ON_TAP');
                                             logFirebaseEvent(
-                                                'closeBtn_Navigate-Back');
+                                                'closeBtn_navigate_back');
                                             context.pop();
                                           },
                                           text: FFLocalizations.of(context)

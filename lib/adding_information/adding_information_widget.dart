@@ -294,7 +294,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                 'ADDING_INFORMATION_submitInfo_ON_TAP');
                             if (fullNameController!.text == null ||
                                 fullNameController!.text == '') {
-                              logFirebaseEvent('submitInfo_Show-Snack-Bar');
+                              logFirebaseEvent('submitInfo_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -317,7 +317,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               );
                               await currentUserReference!
                                   .update(userUpdateData);
-                              logFirebaseEvent('submitInfo_Navigate-To');
+                              logFirebaseEvent('submitInfo_navigate_to');
 
                               context.goNamed('HomeScreen');
                             }

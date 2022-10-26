@@ -36,6 +36,7 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBtnText,
         automaticallyImplyLeading: false,
@@ -61,7 +62,6 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
         centerTitle: false,
         elevation: 2,
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

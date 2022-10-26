@@ -47,6 +47,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBtnText,
         automaticallyImplyLeading: false,
@@ -62,7 +63,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           onPressed: () async {
             logFirebaseEvent('LOGIN_PAGE_back_ON_TAP');
-            logFirebaseEvent('back_Navigate-Back');
+            logFirebaseEvent('back_navigate_back');
             context.pop();
           },
         ),
@@ -81,17 +82,17 @@ class _LoginWidgetState extends State<LoginWidget> {
                   // changeToArabic
                   logFirebaseEvent('changeLanguage_changeToArabic');
                   setAppLanguage(context, 'ar');
-                  logFirebaseEvent('changeLanguage_Update-Local-State');
+                  logFirebaseEvent('changeLanguage_update_local_state');
                   setState(() => FFAppState().locale = 'en');
-                  logFirebaseEvent('changeLanguage_Update-Local-State');
+                  logFirebaseEvent('changeLanguage_update_local_state');
                   setState(() => FFAppState().locale = 'ar');
                 } else {
                   // changeToEnglish
                   logFirebaseEvent('changeLanguage_changeToEnglish');
                   setAppLanguage(context, 'en');
-                  logFirebaseEvent('changeLanguage_Update-Local-State');
+                  logFirebaseEvent('changeLanguage_update_local_state');
                   setState(() => FFAppState().locale = 'en');
-                  logFirebaseEvent('changeLanguage_Update-Local-State');
+                  logFirebaseEvent('changeLanguage_update_local_state');
                   setState(() => FFAppState().locale = 'en');
                 }
 
@@ -115,7 +116,6 @@ class _LoginWidgetState extends State<LoginWidget> {
         centerTitle: false,
         elevation: 0,
       ),
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

@@ -122,14 +122,15 @@ class _ReservationConfirmationWidgetState
                                             logFirebaseEvent(
                                                 'RESERVATION_CONFIRMATION_Icon_n0mpifh9_O');
                                             logFirebaseEvent(
-                                                'Icon_Navigate-To');
+                                                'Icon_navigate_to');
 
                                             context.pushNamed(
                                               'PropertyDetails',
                                               queryParams: {
                                                 'propertyId': serializeParam(
-                                                    widget.propertyId,
-                                                    ParamType.int),
+                                                  widget.propertyId,
+                                                  ParamType.int,
+                                                ),
                                               }.withoutNulls,
                                             );
                                           },
@@ -318,10 +319,8 @@ class _ReservationConfirmationWidgetState
                                             '54vch0v9' /* ApplePay */,
                                           )
                                         ].toList(),
-                                        onChanged: (value) {
-                                          setState(() =>
-                                              paymentMethodsValue = value);
-                                        },
+                                        onChanged: (val) => setState(
+                                            () => paymentMethodsValue = val),
                                         optionHeight: 54,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
@@ -415,12 +414,14 @@ class _ReservationConfirmationWidgetState
                                                 'Confirmation',
                                                 queryParams: {
                                                   'propertyId': serializeParam(
-                                                      widget.propertyId,
-                                                      ParamType.int),
+                                                    widget.propertyId,
+                                                    ParamType.int,
+                                                  ),
                                                   'paymentMethod':
                                                       serializeParam(
-                                                          paymentMethodsValue,
-                                                          ParamType.String),
+                                                    paymentMethodsValue,
+                                                    ParamType.String,
+                                                  ),
                                                 }.withoutNulls,
                                               );
                                             } else {

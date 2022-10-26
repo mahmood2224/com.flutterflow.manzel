@@ -42,7 +42,7 @@ class _HelpAndSupportBottomSheetWidgetState
                     onTap: () async {
                       logFirebaseEvent(
                           'HELP_AND_SUPPORT_BOTTOM_SHEET_Icon_6if05');
-                      logFirebaseEvent('Icon_Bottom-Sheet');
+                      logFirebaseEvent('Icon_bottom_sheet');
                       Navigator.pop(context);
                     },
                     child: Icon(
@@ -200,7 +200,7 @@ class _HelpAndSupportBottomSheetWidgetState
                         'HELP_AND_SUPPORT_BOTTOM_SHEET_Container_');
                     Function() _navigate = () {};
                     if (FFAppState().locale == 'en') {
-                      logFirebaseEvent('Container_Alert-Dialog');
+                      logFirebaseEvent('Container_alert_dialog');
                       var confirmDialogResponse = await showDialog<bool>(
                             context: context,
                             builder: (alertDialogContext) {
@@ -225,25 +225,25 @@ class _HelpAndSupportBottomSheetWidgetState
                           ) ??
                           false;
                       if (confirmDialogResponse) {
-                        logFirebaseEvent('Container_Backend-Call');
+                        logFirebaseEvent('Container_backend_call');
 
                         final userUpdateData = createUserRecordData(
                           isDeleted: 1,
                         );
                         await currentUserReference!.update(userUpdateData);
-                        logFirebaseEvent('Container_Auth');
+                        logFirebaseEvent('Container_auth');
                         GoRouter.of(context).prepareAuthEvent();
                         await signOut();
                         _navigate = () =>
                             context.goNamedAuth('OnboardingView', mounted);
                       } else {
-                        logFirebaseEvent('Container_Wait-Delay');
+                        logFirebaseEvent('Container_wait__delay');
                         await Future.delayed(const Duration(milliseconds: 100));
-                        logFirebaseEvent('Container_Bottom-Sheet');
+                        logFirebaseEvent('Container_bottom_sheet');
                         Navigator.pop(context);
                       }
                     } else {
-                      logFirebaseEvent('Container_Alert-Dialog');
+                      logFirebaseEvent('Container_alert_dialog');
                       var confirmDialogResponse = await showDialog<bool>(
                             context: context,
                             builder: (alertDialogContext) {
@@ -267,21 +267,21 @@ class _HelpAndSupportBottomSheetWidgetState
                           ) ??
                           false;
                       if (confirmDialogResponse) {
-                        logFirebaseEvent('Container_Backend-Call');
+                        logFirebaseEvent('Container_backend_call');
 
                         final userUpdateData = createUserRecordData(
                           isDeleted: 1,
                         );
                         await currentUserReference!.update(userUpdateData);
-                        logFirebaseEvent('Container_Auth');
+                        logFirebaseEvent('Container_auth');
                         GoRouter.of(context).prepareAuthEvent();
                         await signOut();
                         _navigate = () =>
                             context.goNamedAuth('OnboardingView', mounted);
                       } else {
-                        logFirebaseEvent('Container_Wait-Delay');
+                        logFirebaseEvent('Container_wait__delay');
                         await Future.delayed(const Duration(milliseconds: 100));
-                        logFirebaseEvent('Container_Bottom-Sheet');
+                        logFirebaseEvent('Container_bottom_sheet');
                         Navigator.pop(context);
                       }
                     }

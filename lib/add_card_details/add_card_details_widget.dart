@@ -60,7 +60,7 @@ class _AddCardDetailsWidgetState extends State<AddCardDetailsWidget> {
                         onTap: () async {
                           logFirebaseEvent(
                               'ADD_CARD_DETAILS_Icon_id5z0f8p_ON_TAP');
-                          logFirebaseEvent('Icon_Navigate-To');
+                          logFirebaseEvent('Icon_navigate_to');
 
                           context.pushNamed(
                             'KYC',

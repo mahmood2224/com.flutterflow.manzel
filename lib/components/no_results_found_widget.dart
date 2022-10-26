@@ -111,7 +111,7 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
             child: FFButtonWidget(
               onPressed: () async {
                 logFirebaseEvent('NO_RESULTS_FOUND_EXPLORE_OUR_PROPERTIES_');
-                logFirebaseEvent('Button_Navigate-To');
+                logFirebaseEvent('Button_navigate_to');
 
                 context.pushNamed('HomeScreen');
               },

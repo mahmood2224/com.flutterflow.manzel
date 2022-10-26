@@ -24,7 +24,9 @@ class OrderDetailsWidget extends StatefulWidget {
 }
 
 class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
+  bool isMediaUploading = false;
   String uploadedFileUrl = '';
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -57,6 +59,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
         final orderDetailsPropertyResponse = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).primaryColor,
             automaticallyImplyLeading: false,
@@ -112,7 +115,6 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
             centerTitle: true,
             elevation: 2,
           ),
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           body: SafeArea(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -380,7 +382,9 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                   'PropertyDetails',
                                   queryParams: {
                                     'propertyId': serializeParam(
-                                        widget.propertId, ParamType.int),
+                                      widget.propertId,
+                                      ParamType.int,
+                                    ),
                                   }.withoutNulls,
                                 );
                               },
@@ -561,7 +565,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                       logFirebaseEvent(
                                                           'ORDER_DETAILS_uploadDocuments_ON_TAP');
                                                       logFirebaseEvent(
-                                                          'uploadDocuments_Upload-File');
+                                                          'uploadDocuments_upload_file');
                                                       final selectedFile =
                                                           await selectFile(
                                                               allowedExtensions: [
@@ -569,30 +573,40 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
                                                           ]);
                                                       if (selectedFile !=
                                                           null) {
-                                                        showUploadMessage(
-                                                          context,
-                                                          'Uploading file...',
-                                                          showLoading: true,
-                                                        );
-                                                        final downloadUrl =
-                                                            await uploadData(
-                                                                selectedFile
-                                                                    .storagePath,
-                                                                selectedFile
-                                                                    .bytes);
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .hideCurrentSnackBar();
+                                                        setState(() =>
+                                                            isMediaUploading =
+                                                                true);
+                                                        String? downloadUrl;
+                                                        try {
+                                                          showUploadMessage(
+                                                            context,
+                                                            'Uploading file...',
+                                                            showLoading: true,
+                                                          );
+                                                          downloadUrl =
+                                                              await uploadData(
+                                                                  selectedFile
+                                                                      .storagePath,
+                                                                  selectedFile
+                                                                      .bytes);
+                                                        } finally {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .hideCurrentSnackBar();
+                                                          isMediaUploading =
+                                                              false;
+                                                        }
                                                         if (downloadUrl !=
                                                             null) {
                                                           setState(() =>
                                                               uploadedFileUrl =
-                                                                  downloadUrl);
+                                                                  downloadUrl!);
                                                           showUploadMessage(
                                                             context,
                                                             'Success!',
                                                           );
                                                         } else {
+                                                          setState(() {});
                                                           showUploadMessage(
                                                             context,
                                                             'Failed to upload file',

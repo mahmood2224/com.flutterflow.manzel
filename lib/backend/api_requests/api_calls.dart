@@ -882,6 +882,31 @@ class EmplymentTypeCall {
       );
 }
 
+class BookmarkListCall {
+  static Future<ApiCallResponse> call({
+    String? userId = '',
+    String? authorazationToken = '',
+  }) {
+    final body = '''
+{
+  "userId": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'bookmarkList',
+      apiUrl:
+          'https://asia-south1-manzel-prod.cloudfunctions.net/getBookMarkedPropertyIds',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${authorazationToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

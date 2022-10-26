@@ -75,7 +75,7 @@ class _KycWidgetState extends State<KycWidget> {
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'KYC_PAGE_Icon_wn5vw9qi_ON_TAP');
-                                      logFirebaseEvent('Icon_Navigate-To');
+                                      logFirebaseEvent('Icon_navigate_to');
 
                                       context.pushNamed('PropertyDetails');
                                     },
