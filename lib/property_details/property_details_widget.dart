@@ -99,6 +99,18 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         parameters: {'screen_name': 'PropertyDetails'});
 
   }
+  watchRouteChange() {
+    if (!GoRouter.of(context).location.contains("fav")) {  // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
+      // do something
+      fav= FavouriteList.instance.favourite;
+      if(mounted){
+      setState(() {
+      });}
+
+      GoRouter.of(context).removeListener(watchRouteChange);
+      // remove listener
+    }
+  }
 
   Future<void> makeProeprtyApiCall() async {
     isLoading.value = true;
@@ -3170,6 +3182,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                               .String)
                                                                     }.withoutNulls,
                                                                   );
+                                                                  GoRouter.of(context).addListener(() {
+                                                                    watchRouteChange();
+                                                                  });
                                                                 },
                                                                 child: ListView
                                                                     .builder(

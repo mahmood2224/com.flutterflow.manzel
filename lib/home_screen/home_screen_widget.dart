@@ -95,14 +95,20 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   }
   watchRouteChange() {
-    if (!GoRouter.of(context).location.contains("fav")) {  // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
-      // do something
-      favourites= FavouriteList.instance.favourite;
-       setState(() {
-       });
-
-      GoRouter.of(context).removeListener(watchRouteChange); // remove listener
-    }
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (!GoRouter
+          .of(context)
+          .location
+          .contains(
+          "fav")) { // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
+        // do something
+        favourites = FavouriteList.instance.favourite;
+        if(mounted){
+        setState(() {});}
+        GoRouter.of(context).removeListener(
+            watchRouteChange); // remove listener
+      }
+    });
   }
 
   Future<void> callBookmarkListApi() async {

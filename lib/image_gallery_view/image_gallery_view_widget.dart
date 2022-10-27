@@ -1,6 +1,8 @@
+import 'package:manzel/auth/auth_util.dart';
+import 'package:manzel/auth/firebase_user_provider.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/zoom_image/zoom_image_widget.dart';
-
+import '../flutter_flow/custom_functions.dart' as functions;
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -31,10 +33,13 @@ class ImageGalleryViewWidget extends StatefulWidget {
 class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   List<dynamic> imageList = [];
+  Map<String, bool> fav = {};
+  bool? bookMarkTapped;
 
   @override
   void initState() {
     super.initState();
+    fav = FavouriteList.instance.favourite;
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'imageGalleryView'});
   }
@@ -74,6 +79,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                             logFirebaseEvent(
                                 'IMAGE_GALLERY_VIEW_Icon_61cpjbpa_ON_TAP');
                             logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+                            FavouriteList.instance.setFavourite(fav);
                             Navigator.pop(context);
                           },
                           child: RotatedBox(
@@ -128,24 +134,169 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                               ),
                             ),
                           ),
-                          Container(
-                            width: 34,
-                            height: 34,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).white,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Color(0xFFF3F2F2),
+                          InkWell(
+                            onTap: () async {
+                              logFirebaseEvent(
+                                  'add_to_wishlist');
+                              logFirebaseEvent(
+                                  'HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                              if (loggedIn) {
+                                if (fav[widget.propertyId.toString()]??false) {
+                                  logFirebaseEvent(
+                                      'Container_Backend-Call');
+                                  final bookmarkApiResponse =
+                                  await BookmarkPropertyCall
+                                      .call(
+                                    userId:
+                                    currentUserUid,
+                                    authorazationToken:
+                                    FFAppState()
+                                        .authToken,
+                                    propertyId: widget
+                                        .propertyId
+                                        .toString(),
+                                    version:
+                                    FFAppState()
+                                        .apiVersion,
+                                  );
+                                  if ((bookmarkApiResponse
+                                      ?.statusCode ??
+                                      200) ==
+                                      200) {
+                                    fav.remove(widget
+                                        .propertyId
+                                        .toString());
+
+                                  } else {
+                                    logFirebaseEvent(
+                                        'Icon_Show-Snack-Bar');
+                                    ScaffoldMessenger.of(
+                                        context)
+                                        .showSnackBar(
+                                      SnackBar(
+                                        content:
+                                        Text(
+                                          functions.snackBarMessage(
+                                              'error',
+                                              FFAppState()
+                                                  .locale),
+                                          style:
+                                          TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .white,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                            fontSize:
+                                            16,
+                                            height:
+                                            2,
+                                          ),
+                                        ),
+                                        duration: Duration(
+                                            milliseconds:
+                                            4000),
+                                        backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryRed,
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  logFirebaseEvent(
+                                      'Container_Backend-Call');
+                                  final bookmarkApiResponse =
+                                  await BookmarkPropertyCall
+                                      .call(
+                                    userId:
+                                    currentUserUid,
+                                    authorazationToken:
+                                    FFAppState()
+                                        .authToken,
+                                    propertyId: widget
+                                        .propertyId
+                                        .toString(),
+                                    version:
+                                    FFAppState()
+                                        .apiVersion,
+                                  );
+                                  if ((bookmarkApiResponse
+                                      ?.statusCode ??
+                                      200) ==
+                                      200) {
+                                    fav[widget
+                                        .propertyId
+                                        .toString()] = true;
+                                  } else {
+                                    logFirebaseEvent(
+                                        'Icon_Show-Snack-Bar');
+                                    ScaffoldMessenger.of(
+                                        context)
+                                        .showSnackBar(
+                                      SnackBar(
+                                        content:
+                                        Text(
+                                          functions.snackBarMessage(
+                                              'error',
+                                              FFAppState()
+                                                  .locale),
+                                          style:
+                                          TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .white,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                            fontSize:
+                                            16,
+                                            height:
+                                            2,
+                                          ),
+                                        ),
+                                        duration: Duration(
+                                            milliseconds:
+                                            4000),
+                                        backgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryRed,
+                                      ),
+                                    );
+                                  }
+                                }
+                              }else {
+                                logFirebaseEvent(
+                                    'Container_Navigate-To');
+                                context
+                                    .pushNamed(
+                                    'Login');
+                              }
+                              bookMarkTapped =
+                              false;
+                              setState(() {});
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+                              decoration:
+                              BoxDecoration(
+                                  color: (fav[widget.propertyId.toString()]??false) ?FlutterFlowTheme.of(context).primaryRed:Colors
+                                      .white,
+                                  shape: BoxShape
+                                      .circle),
+                              child: Padding(
+                                padding:
+                                EdgeInsetsDirectional
+                                    .fromSTEB(
+                                    2,
+                                    5,
+                                    2,
+                                    5),
+                                child: Icon(
+                                  Manzel.favourite,
+                                  color:
+                                  (fav[widget.propertyId.toString()]??false)
+                                      ? Colors.white:Colors.black,
+                                  size: 18,
+                                ),
                               ),
-                            ),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(6, 6, 6, 6),
-                              child: Icon(
-                                Manzel.favourite,
-                                color: Colors.black,
-                                size: 16,
-                              )
                             ),
                           ),
                         ],
