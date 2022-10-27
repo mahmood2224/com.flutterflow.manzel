@@ -75,30 +75,30 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   void initState() {
     super.initState();
     // On page load action.
-    videoPlayers.clear();
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('view_item_list');
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
       logFirebaseEvent('HomeScreen_Set-App-Language');
-      setAppLanguage(context, FFAppState().locale);
+      setAppLanguage(context, await FFAppState().locale);
       Future.delayed(const Duration(milliseconds: 500), () {
         setAppLanguage(context, FFAppState().locale);
       });
     });
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});
-    callBookmarkListApi();
+    videoPlayers.clear();
+
     _pagingController.addPageRequestListener((pageKey) {
       Future.delayed(const Duration(milliseconds: 500), () {
         _fetchPage(pageKey);
       });
     });
+
   }
   watchRouteChange() {
-    if (!GoRouter.of(context).location.contains("whereAreYouLookingAt")) {  // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
+    if (!GoRouter.of(context).location.contains("fav")) {  // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
       // do something
-      favourites= globalVar.favorite;
+      favourites= FavouriteList.instance.favourite;
        setState(() {
-
        });
 
       GoRouter.of(context).removeListener(watchRouteChange); // remove listener
@@ -106,29 +106,31 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   }
 
   Future<void> callBookmarkListApi() async {
-    final result = await BookmarkListCall.call(
-      userId: currentUserUid,
-      authorazationToken: FFAppState().authToken,
-      version: FFAppState().apiVersion,
-    );
-    print("REsult>>>>>>>>>>>>>${result}");
-    List<dynamic> favList = await result.jsonBody['result'];
-    favList.forEach((element) {
-      favourites[element] = true;
-    });
-    globalVar.favorite = favorite;
-
+      final result = await BookmarkListCall.call(
+        userId: currentUserUid,
+        authorazationToken: await FFAppState().authToken,
+        version: await FFAppState().apiVersion,
+      );
+      print("REsult>>>>>>>>>>>>>${result.jsonBody}");
+      List<dynamic> favList = await result.jsonBody['result'];
+      favList.forEach((element) {
+        favourites[element] = true;
+      });
+      FavouriteList.instance.setFavourite(favourites);
+      setState(() {
+      });
   }
 
   Future<void> _fetchPage(int pageKey) async {
     try {
+      callBookmarkListApi();
       final apiResponse = await PropertiesCall.call(
         // city: FFAppState().filterCity,
         // furnishingType: FFAppState().filterFurnishingType,
         // propertyType: FFAppState().filterPropertyType,
         pageNumber: pageKey.toString(),
         pageSize: _pageSize.toString(),
-        locale: FFAppState().locale,
+        locale:  FFAppState().locale,
       );
       apiData = apiResponse;
       final newItems = getJsonField(
@@ -304,8 +306,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               queryParams: {
                                 'homeScreenLength': serializeParam(
                                     videoPlayers.length ?? 0, ParamType.int),
-                                'favourites': serializeParam(
-                                    res, ParamType.JSON)
                               }.withoutNulls,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: TransitionInfo(
@@ -425,8 +425,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   serializeParam(
                                                       videoPlayers.length ?? 0,
                                                       ParamType.int),
-                                              'favourites': serializeParam(
-                                                  res, ParamType.JSON)
                                               //     'cityList':serializeParam(
                                               // getJsonField(
                                               //       apiData!.jsonBody,
@@ -444,6 +442,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               ),
                                             },
                                           );
+                                          GoRouter.of(context).addListener(() {
+                                            watchRouteChange();
+                                          });
                                         },
                                         child: Container(
                                           width: 36,
@@ -584,7 +585,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   itemBuilder: (context, propertiesItem, propertiesIndex) {
                     print('PROPERTIES INDEX >>>>>>>>>>>>>>$propertiesIndex');
                     Future.delayed(Duration(seconds: 2));
-                    res = jsonEncode(favourites);
                     propertiesItem['isBookmarked'] =
                         favourites[propertiesItem['id'].toString()] ?? false;
 
@@ -641,6 +641,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   ParamType.String),
                             }.withoutNulls,
                           );
+                          GoRouter.of(context).addListener(() {
+                            watchRouteChange();
+                          });
                           //         }
                         },
                         child: Column(
@@ -1191,15 +1194,22 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   propertiesIndex ==
                                                       tapped_index)
                                               ? SizedBox(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor),
-                                                    // strokeWidth: 5,
-                                                  ),
+                                              child: Container(
+                                                width: 40,
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                  color: propertiesItem[
+                                                  "isBookmarked"]
+                                                      ? Color(0x4DFF0000)
+                                                      : Color(0x4D000000),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Icon(
+                                                  Manzel.favourite,
+                                                  color: Colors.white,
+                                                  size: 20,
+                                                ),
+                                              )
                                                 )
                                               : InkWell(
                                                   onTap: () async {
@@ -1376,7 +1386,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Icon(
-                                                      Manzel.favorite,
+                                                      Manzel.favourite,
                                                       color: Colors.white,
                                                       size: 20,
                                                     ),
