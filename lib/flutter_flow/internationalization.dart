@@ -148,7 +148,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'appBuild':{
       'en':'App build',
-      'ar':'رقم بناء التطبيق',
+      'ar':' رقم بناء التطبيق',
     },
     'zpi4cs66': {
       'en': 'Account',
@@ -1184,6 +1184,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'dpmrt150': {
       'en': 'Reserve',
       'ar': 'حجز',
+    },
+    'buttonSoon':{
+      'en':'Soon',
+      'ar':'قريبًا'
     },
     'wzirx8i7': {
       'en': 'Booked',

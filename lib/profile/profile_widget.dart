@@ -687,7 +687,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 2),
+                        padding: const EdgeInsets.only(left: 3,right: 3),
                         child: Text("${FFAppState().buildVersion}",
                           style: FlutterFlowTheme.of(context)
                               .subtitle2

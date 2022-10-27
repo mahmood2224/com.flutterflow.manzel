@@ -2707,11 +2707,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     .circular(
                                                                         8),
                                                           ),
-                                                          // icon: Icon(
-                                                          //   Manzel
-                                                          //       .request_visit,
-                                                          //   size: 22,
-                                                          // ),
+                                                          icon: Icon(
+                                                            Manzel
+                                                                .request_visit,
+                                                            size: 22,
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -3932,11 +3932,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               BorderRadius.circular(12),
                                         ),
                                       ),
-                                    if (!functions.conditionalVisibility(
+                                    if (functions.conditionalVisibility(
                                         PropertyCall.propertyStatus(
                                           columnPropertyResponse,
                                         ).toString(),
-                                        'Available'))
+                                        'Booked'))
                                       FFButtonWidget(
                                         onPressed: () {
                                           print('Button pressed ...');
@@ -3969,6 +3969,45 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(12),
+                                        ),
+                                      ),
+                                    if (functions.conditionalVisibility(
+                                        PropertyCall.propertyStatus(
+                                          columnPropertyResponse,
+                                        ).toString(),
+                                        'Soon'))
+                                      FFButtonWidget(
+                                        onPressed: () {
+                                          print('Button pressed ...');
+                                        },
+                                        text:
+                                        FFLocalizations.of(context).getText(
+                                          'buttonSoon' /* Booked */,
+                                        ),
+                                        options: FFButtonOptions(
+                                          width: FFAppState().locale == "en"
+                                              ? 140
+                                              : 120,
+                                          height: FFAppState().locale == "en"
+                                              ? 56
+                                              : 40,
+                                          color: FlutterFlowTheme.of(context).primaryColor,
+                                          textStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .subtitle2
+                                              .override(
+                                            fontFamily: 'AvenirArabic',
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w800,
+                                            useGoogleFonts: false,
+                                          ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                          BorderRadius.circular(12),
                                         ),
                                       ),
                                   ],

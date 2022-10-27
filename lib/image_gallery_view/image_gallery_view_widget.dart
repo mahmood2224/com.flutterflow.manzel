@@ -80,7 +80,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                 'IMAGE_GALLERY_VIEW_Icon_61cpjbpa_ON_TAP');
                             logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
                             FavouriteList.instance.setFavourite(fav);
-                            Navigator.pop(context);
+                            context.pop();
                           },
                           child: RotatedBox(
                             quarterTurns: FFAppState().locale=='en'?0:2,

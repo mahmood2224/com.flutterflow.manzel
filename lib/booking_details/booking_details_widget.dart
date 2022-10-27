@@ -1390,7 +1390,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 // ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 3, 0, 0),
+                                      3, 3, 0, 0),
                                   child: Text(
                                     valueOrDefault<String>(
                                       getJsonField(

@@ -1343,23 +1343,26 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 13,
                                                                           ),
                                                                         ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            getJsonField(
-                                                                              bookmarkedPropertiesItem,
-                                                                              r'''$.property_data.property_city''',
-                                                                            ).toString(),
-                                                                            'null',
+                                                                        Padding(
+                                                                          padding: const EdgeInsets.only(left: 3),
+                                                                          child: Text(
+                                                                            valueOrDefault<
+                                                                                String>(
+                                                                              getJsonField(
+                                                                                bookmarkedPropertiesItem,
+                                                                                r'''$.property_data.property_city''',
+                                                                              ).toString(),
+                                                                              'null',
+                                                                            ),
+                                                                            style: FlutterFlowTheme.of(context)
+                                                                                .bodyText1
+                                                                                .override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  fontSize: 12,
+                                                                                  fontWeight: FontWeight.w300,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
                                                                           ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                fontSize: 12,
-                                                                                fontWeight: FontWeight.w300,
-                                                                                useGoogleFonts: false,
-                                                                              ),
                                                                         ),
                                                                         Text(
                                                                           FFLocalizations.of(context)

@@ -377,7 +377,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 content: Text(
                                                   FFLocalizations.of(context)
                                                       .getText(
-                                                    'AlertMessage',
+                                                    'HomeScreenAlertMessage',
                                                   ),
                                                 ),
                                                 actions: [

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:manzel/app_state.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/flutter_flow/flutter_flow_theme.dart';
+import 'package:manzel/flutter_flow/flutter_flow_util.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
 
 import '../backend/firebase_analytics/analytics.dart';
@@ -95,7 +96,7 @@ class _ZoomImageState extends State<ZoomImage> {
                     children: [
                       InkWell(
                         onTap :(){
-                          Navigator.of(context).pop();
+                          context.pop();
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(top:8 ,left:20 ),
