@@ -1359,9 +1359,9 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 Icon(
-                                                  Icons.location_on_outlined,
+                                                  Manzel.location_pin,
                                                   color: Color(0xFF130F26),
-                                                  size: 11,
+                                                  size: 14,
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional

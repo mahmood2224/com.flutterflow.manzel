@@ -77,30 +77,33 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
         automaticallyImplyLeading: true,
         leading: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(18, 0, 0, 0),
-          child: Container(
-            width: 34,
-            height: 34,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Color(0xFFF3F2F2),
-                width: 1,
+          child: RotatedBox(
+            quarterTurns: FFAppState().locale=='en'?0:2,
+            child: Container(
+              width: 34,
+              height: 34,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Color(0xFFF3F2F2),
+                  width: 1,
+                ),
               ),
-            ),
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-              child: InkWell(
-                onTap: () async {
-                  logFirebaseEvent('FILTER_RESULTS_PAGE_Icon_n6g5zub7_ON_TAP');
-                  logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
-                  FavouriteList.instance.setFavourite(fav);
-                  context.pop();
-                },
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black,
-                  size: 20,
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                child: InkWell(
+                  onTap: () async {
+                    logFirebaseEvent('FILTER_RESULTS_PAGE_Icon_n6g5zub7_ON_TAP');
+                    logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
+                    FavouriteList.instance.setFavourite(fav);
+                    context.pop();
+                  },
+                  child: Icon(
+                    Manzel.back_icon,
+                    color: Colors.black,
+                    size: 14,
+                  ),
                 ),
               ),
             ),
@@ -1413,9 +1416,9 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 Icon(
-                                                  Icons.location_on_outlined,
+                                                  Manzel.location_pin,
                                                   color: Color(0xFF130F26),
-                                                  size: 11,
+                                                  size: 14,
                                                 ),
                                                 Padding(
                                                   padding: EdgeInsetsDirectional

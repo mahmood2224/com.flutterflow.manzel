@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -253,7 +255,7 @@ class _KycWidgetState extends State<KycWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 10, 0),
                                       child: Icon(
-                                        Icons.location_on_outlined,
+                                        Manzel.location_pin,
                                         color: Color(0xFF33840D),
                                         size: 35,
                                       ),
