@@ -244,15 +244,25 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                                               height: 46,
                                                               fit: BoxFit.cover,
                                                             )
-                                                          : Icon(
-                                                              Manzel
-                                                                  .location_pin,
-                                                              size: 33,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryColor,
-                                                            )),
-                                                ),
+                                                          :Image.network(
+                                                        'https://media.istockphoto.com/photos/panorama-of-dubai-marina-in-uae-modern-skyscrapers-and-port-with-picture-id1266923176?b=1&k=20&m=1266923176&s=170667a&w=0&h=BAcB2chj9gQJystJETo24W2MAZZSe03NW5b0f-475D0=',
+                                                        width: MediaQuery.of(
+                                                            context)
+                                                            .size
+                                                            .width *
+                                                            0.46,
+                                                        height: 46,
+                                                        fit: BoxFit.cover,
+                                                      )
+                                                          // : Icon(
+                                                          //     Manzel
+                                                          //         .location_pin,
+                                                          //     size: 33,
+                                                          //     color: FlutterFlowTheme
+                                                          //             .of(context)
+                                                          //         .primaryColor,
+                                                          //   )),
+                                                )),
                                                 Expanded(
                                                   child: Padding(
                                                     padding:

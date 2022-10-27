@@ -2707,11 +2707,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     .circular(
                                                                         8),
                                                           ),
-                                                          icon: Icon(
-                                                            Manzel
-                                                                .request_visit,
-                                                            size: 22,
-                                                          ),
+                                                          // icon: Icon(
+                                                          //   Manzel
+                                                          //       .request_visit,
+                                                          //   size: 22,
+                                                          // ),
                                                         ),
                                                       ],
                                                     ),
