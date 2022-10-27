@@ -42,7 +42,7 @@ class Manzel {
   static const IconData clear = IconData(0xe813, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData group_1811 = IconData(0xe814, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData bookmark = IconData(0xe815, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData favorite = IconData(0xe816, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData favourite = IconData(0xe816, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData offer = IconData(0xe817, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData maps2 = IconData(0xe818, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData confirm_booking = IconData(0xe819, fontFamily: _kFontFam, fontPackage: _kFontPkg);

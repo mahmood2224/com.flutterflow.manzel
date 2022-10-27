@@ -87,6 +87,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   void initState() {
     super.initState();
     //initializePlayer();
+    fav = FavouriteList.instance.favourite;
     if (widget?.jsonData != null) {
       isLoading.value = true;
       columnPropertyResponse = widget.jsonData;
@@ -96,6 +97,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     }
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PropertyDetails'});
+
   }
 
   Future<void> makeProeprtyApiCall() async {
@@ -181,7 +183,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   void dispose() {
     pageViewController?.dispose();
     super.dispose();
-    fav = FavoriteList.instance.favorite;
+
   }
 
   @override
@@ -197,9 +199,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         //     locale: FFAppState().locale,
         //   ),
         child: ValueListenableBuilder<bool>(
-          builder: (BuildContext context, bool value, Widget? child) {
-            columnPropertyResponse['isBookmarked'] =
-                fav[widget.propertyId.toString()] ?? false;
+          builder: (BuildContext context, bool value, Widget? child){
             return isLoading.value
                 ? Center(
                     child: Padding(
@@ -548,6 +548,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     logFirebaseEvent(
                                                         'IconButton_back');
                                                     //  dispose();
+                                                    FavouriteList.instance.setFavourite(fav);
                                                     context.pop();
                                                   },
                                                 ),
@@ -605,8 +606,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           logFirebaseEvent(
                                                               'HOME_SCREEN_Container_jprwonvd_ON_TAP');
                                                           if (loggedIn) {
-                                                            if (columnPropertyResponse[
-                                                                'isBookmarked']) {
+                                                            if (fav[widget.propertyId.toString()]??false) {
                                                               logFirebaseEvent(
                                                                   'Container_Backend-Call');
                                                               final bookmarkApiResponse =
@@ -631,9 +631,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 fav.remove(widget
                                                                     .propertyId
                                                                     .toString());
-                                                                columnPropertyResponse[
-                                                                        'isBookmarked'] =
-                                                                    false;
+
                                                               } else {
                                                                 logFirebaseEvent(
                                                                     'Icon_Show-Snack-Bar');
@@ -693,9 +691,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 fav[widget
                                                                     .propertyId
                                                                     .toString()] = true;
-                                                                columnPropertyResponse[
-                                                                        'isBookmarked'] =
-                                                                    true;
                                                               } else {
                                                                 logFirebaseEvent(
                                                                     'Icon_Show-Snack-Bar');
@@ -747,7 +742,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           width: 35,
                                                           decoration:
                                                               BoxDecoration(
-                                                                  color: columnPropertyResponse['isBookmarked'] ?FlutterFlowTheme.of(context).primaryRed:Colors
+                                                                  color: (fav[widget.propertyId.toString()]??false) ?FlutterFlowTheme.of(context).primaryRed:Colors
                                                                       .white,
                                                                   shape: BoxShape
                                                                       .circle),
@@ -760,10 +755,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         2,
                                                                         5),
                                                             child: Icon(
-                                                              Manzel.favorite,
+                                                              Manzel.favourite,
                                                               color:
-                                                              columnPropertyResponse[
-                                                              "isBookmarked"]
+                                                              (fav[widget.propertyId.toString()]??false)
                                                                   ? Colors.white:Colors.black,
                                                               size: 18,
                                                             ),
@@ -3856,7 +3850,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       ),
                                                     );
                                                   } else {
-                                                    Navigator.pop(context);
+                                                    context.pop();
                                                     logFirebaseEvent(
                                                         'Button_Show-Snack-Bar');
                                                     ScaffoldMessenger.of(
@@ -3970,8 +3964,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                         ],
                       ),
                     ],
-                  );
-          },
+                  );},
+
           valueListenable: isLoading,
         ),
       ),

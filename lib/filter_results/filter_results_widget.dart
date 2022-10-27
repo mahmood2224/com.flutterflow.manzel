@@ -19,16 +19,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FilterResultsWidget extends StatefulWidget {
-  const FilterResultsWidget(
-      {Key? key,
-      this.cityName,
-      this.furnishingType,
-      this.propertyType,
-      this.minInstallment,
-      this.maxInstallment,
-      this.homeScreenLength,
-      })
-      : super(key: key);
+  const FilterResultsWidget({
+    Key? key,
+    this.cityName,
+    this.furnishingType,
+    this.propertyType,
+    this.minInstallment,
+    this.maxInstallment,
+    this.homeScreenLength,
+  }) : super(key: key);
 
   final String? cityName;
   final String? furnishingType;
@@ -36,7 +35,6 @@ class FilterResultsWidget extends StatefulWidget {
   final String? minInstallment;
   final String? maxInstallment;
   final int? homeScreenLength;
-
 
   @override
   _FilterResultsWidgetState createState() => _FilterResultsWidgetState();
@@ -56,7 +54,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
   ValueNotifier<bool> bookMarkTapped = ValueNotifier<bool>(false);
   VideoPlayerController? _currentController;
   int currentPropertyindex = 0;
-  Map<String,bool> fav = {};
+  Map<String, bool> fav = {};
   var tapped_index;
 
   Map<String, VideoPlayerController> videocontrollerMap = {};
@@ -67,7 +65,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
     logFirebaseEvent('view_search_results');
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'filterResults'});
-    fav =FavoriteList.instance.favorite;
+    fav = FavouriteList.instance.favourite;
   }
 
   @override
@@ -96,7 +94,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                 onTap: () async {
                   logFirebaseEvent('FILTER_RESULTS_PAGE_Icon_n6g5zub7_ON_TAP');
                   logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
-                  FavoriteList.instance.setFavourite(fav);
+                  FavouriteList.instance.setFavourite(fav);
                   context.pop();
                 },
                 child: Icon(
@@ -947,15 +945,27 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                             propertiesIndex ==
                                                                 tapped_index)
                                                         ? SizedBox(
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              valueColor: AlwaysStoppedAnimation(
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor),
-                                                              // strokeWidth: 5,
+                                                            child: Container(
+                                                            width: 40,
+                                                            height: 40,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: propertiesItem[
+                                                                      "isBookmarked"]
+                                                                  ? Color(
+                                                                      0x4DFF0000)
+                                                                  : Color(
+                                                                      0x4D000000),
+                                                              shape: BoxShape
+                                                                  .circle,
                                                             ),
-                                                          )
+                                                            child: Icon(
+                                                              Manzel.favourite,
+                                                              color:
+                                                                  Colors.white,
+                                                              size: 20,
+                                                            ),
+                                                          ))
                                                         : InkWell(
                                                             onTap: () async {
                                                               tapped_index =
@@ -1129,7 +1139,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                     .circle,
                                                               ),
                                                               child: Icon(
-                                                                Manzel.favorite,
+                                                                Manzel
+                                                                    .favourite,
                                                                 color: Colors
                                                                     .white,
                                                                 size: 20,

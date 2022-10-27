@@ -39,7 +39,7 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
             FFAppState().locale = FFLocalizations.of(context).languageCode);
       } else {
         logFirebaseEvent('OnboardingView_Navigate-To');
-
+        dispose();
         context.goNamed('HomeScreen');
       }
 

@@ -866,7 +866,7 @@ class EmplymentTypeCall {
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/employement-statuses?',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'',
+        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {
         'locale': locale,

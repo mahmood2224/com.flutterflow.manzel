@@ -142,7 +142,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(6, 6, 6, 6),
                               child: Icon(
-                                Manzel.favorite,
+                                Manzel.favourite,
                                 color: Colors.black,
                                 size: 16,
                               )
