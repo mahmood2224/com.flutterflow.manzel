@@ -385,7 +385,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: Text('Ok'),
+                                                    child: Text(FFAppState().locale=='en'?'Ok':'موافق'),
                                                   ),
                                                 ],
                                               );

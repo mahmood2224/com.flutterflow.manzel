@@ -1,5 +1,9 @@
+import 'package:flutter/scheduler.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
@@ -23,13 +27,39 @@ class MyPropertiesWidget extends StatefulWidget {
 
 class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   ApiCallResponse? bookmarkApiResponse;
+  StopWatchTimer timerController = StopWatchTimer(
+    mode: StopWatchMode.countDown,
+  );
+  String? timerValue;
+  int? timerMilliseconds;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  ValueNotifier<int> changeTimer = ValueNotifier<int>(0);
+  ValueNotifier<int> changeText = ValueNotifier<int>(0);
 
   @override
   void initState() {
     super.initState();
+    // On page load action.
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'MyProperties'});
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('MY_PROPERTIES_MyProperties_ON_LOAD');
+      logFirebaseEvent('MyProperties_timer');
+      timerController.onStartTimer();
+    });
+
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'MyProperties'});
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+
+  }
+
+
+
+  @override
+  void dispose() {
+    timerController.dispose();
+    super.dispose();
   }
 
   Future<void> configurePaymentSdk() async {
@@ -214,7 +244,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       width: 50,
                                       height: 50,
                                       child: SpinKitRipple(
-                                        color: FlutterFlowTheme.of(context).primaryColor,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
                                         size: 50,
                                       ),
                                     ),
@@ -222,6 +253,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                 }
                                 final propertiesListBookedPropertiesResponse =
                                     snapshot.data!;
+
                                 return Builder(
                                   builder: (context) {
                                     final bookedProperties =
@@ -230,6 +262,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                           .jsonBody,
                                     ).toList();
                                     print("************* ${bookedProperties}");
+
                                     if (bookedProperties.isEmpty) {
                                       return Center(
                                         child: Container(
@@ -263,6 +296,13 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                         final bookedPropertiesItem =
                                             bookedProperties[
                                                 bookedPropertiesIndex];
+                                          var diffValue = (getJsonField(
+                                            bookedPropertiesItem,
+                                            r'''$.booking_expiry_date._seconds''',
+                                          )-((DateTime.now().millisecondsSinceEpoch*0.001).toInt()));
+                                        timerController..setPresetSecondTime(diffValue,add:false);
+                                        timerController.onStartTimer();
+                                        print(">>>>>>>>>>>>>>>>>>>>> diffTime = ${diffValue}");
                                         return Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -355,332 +395,423 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
                                                                         .start,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
                                                                 children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0,
                                                                             0,
                                                                             0,
-                                                                            2),
-                                                                    child:
-                                                                        SingleChildScrollView(
-                                                                      scrollDirection:
-                                                                          Axis.horizontal,
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          if (functions.conditionalVisibility(
-                                                                              getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.order_status''',
-                                                                              ).toString(),
-                                                                              'offer_accepted'))
-                                                                            Container(
-                                                                              width: 130,
-                                                                              height: 23,
-                                                                              decoration: BoxDecoration(
-                                                                                color: Color(0xFF328B0B),
-                                                                                borderRadius: BorderRadius.circular(7),
-                                                                              ),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    FFLocalizations.of(context).getText(
-                                                                                      'sfs0xn10' /* Offer Accepted */,
+                                                                            0),
+                                                                        child:
+                                                                            SingleChildScrollView(
+                                                                          scrollDirection:
+                                                                              Axis.horizontal,
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Row(children: [
+                                                                                if (functions.conditionalVisibility(
+                                                                                    getJsonField(
+                                                                                      bookedPropertiesItem,
+                                                                                      r'''$.order_status''',
+                                                                                    ).toString(),
+                                                                                    'offer_accepted'))
+                                                                                  Container(
+                                                                                    width: 130,
+                                                                                    height: 23,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: Color(0xFF328B0B),
+                                                                                      borderRadius: BorderRadius.circular(7),
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                          fontFamily: 'AvenirArabic',
-                                                                                          color: FlutterFlowTheme.of(context).white,
-                                                                                          fontSize: 12,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          useGoogleFonts: false,
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          FFLocalizations.of(context).getText(
+                                                                                            'sfs0xn10' /* Offer Accepted */,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                fontFamily: 'AvenirArabic',
+                                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                                fontSize: 12,
+                                                                                                fontWeight: FontWeight.w500,
+                                                                                                useGoogleFonts: false,
+                                                                                              ),
                                                                                         ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          if (functions.conditionalVisibility(
-                                                                              getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.order_status''',
-                                                                              ).toString(),
-                                                                              'waiting_offer_acceptance'))
-                                                                            Container(
-                                                                              width: 202,
-                                                                              height: 23,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).primaryOrange,
-                                                                                borderRadius: BorderRadius.circular(7),
-                                                                              ),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    FFLocalizations.of(context).getText(
-                                                                                      '55a9qb7p' /* Waiting for customer acceptanc... */,
+                                                                                      ],
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                          fontFamily: 'AvenirArabic',
-                                                                                          color: FlutterFlowTheme.of(context).white,
-                                                                                          fontSize: 12,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          useGoogleFonts: false,
-                                                                                        ),
                                                                                   ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          if (functions.conditionalVisibility(
-                                                                              getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.order_status''',
-                                                                              ).toString(),
-                                                                              'collect_offers'))
-                                                                            Container(
-                                                                              width: 98,
-                                                                              height: 23,
-                                                                              decoration: BoxDecoration(
-                                                                                color: Color(0xFF41566C),
-                                                                                borderRadius: BorderRadius.circular(7),
-                                                                              ),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    FFLocalizations.of(context).getText(
-                                                                                      'hv5vj04i' /* Collect Offer */,
+                                                                                if (functions.conditionalVisibility(
+                                                                                    getJsonField(
+                                                                                      bookedPropertiesItem,
+                                                                                      r'''$.order_status''',
+                                                                                    ).toString(),
+                                                                                    'waiting_offer_acceptance'))
+                                                                                  Container(
+                                                                                    width: 202,
+                                                                                    height: 23,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: FlutterFlowTheme.of(context).primaryOrange,
+                                                                                      borderRadius: BorderRadius.circular(7),
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                          fontFamily: 'AvenirArabic',
-                                                                                          color: FlutterFlowTheme.of(context).white,
-                                                                                          fontSize: 12,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          useGoogleFonts: false,
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          FFLocalizations.of(context).getText(
+                                                                                            '55a9qb7p' /* Waiting for customer acceptanc... */,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                fontFamily: 'AvenirArabic',
+                                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                                fontSize: 12,
+                                                                                                fontWeight: FontWeight.w500,
+                                                                                                useGoogleFonts: false,
+                                                                                              ),
                                                                                         ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          if (functions.conditionalVisibility(
-                                                                              getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.order_status''',
-                                                                              ).toString(),
-                                                                              'ownership_transferred'))
-                                                                            Container(
-                                                                              width: 89,
-                                                                              height: 23,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryGreen,
-                                                                                borderRadius: BorderRadius.circular(7),
-                                                                              ),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    FFLocalizations.of(context).getText(
-                                                                                      'r3xdvf7i' /* Completed */,
+                                                                                      ],
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                          fontFamily: 'AvenirArabic',
-                                                                                          color: FlutterFlowTheme.of(context).white,
-                                                                                          fontSize: 12,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          useGoogleFonts: false,
-                                                                                        ),
                                                                                   ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          if (functions.conditionalVisibility(
-                                                                              functions.myPropertiesBookedStatus(
-                                                                                  getJsonField(
-                                                                                    bookedPropertiesItem,
-                                                                                    r'''$.transaction_id''',
-                                                                                  ).toString(),
-                                                                                  getJsonField(
-                                                                                    bookedPropertiesItem,
-                                                                                    r'''$.order_status''',
-                                                                                  ).toString()),
-                                                                              'pending_payment'))
-                                                                            Container(
-                                                                              width: 125,
-                                                                              height: 23,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).primaryOrange,
-                                                                                borderRadius: BorderRadius.circular(7),
-                                                                              ),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    FFLocalizations.of(context).getText(
-                                                                                      '0pgvkbhl' /* Pending Payment */,
+                                                                                if (functions.conditionalVisibility(
+                                                                                    getJsonField(
+                                                                                      bookedPropertiesItem,
+                                                                                      r'''$.order_status''',
+                                                                                    ).toString(),
+                                                                                    'collect_offers'))
+                                                                                  Container(
+                                                                                    width: 98,
+                                                                                    height: 23,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: Color(0xFF41566C),
+                                                                                      borderRadius: BorderRadius.circular(7),
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                          fontFamily: 'AvenirArabic',
-                                                                                          color: FlutterFlowTheme.of(context).white,
-                                                                                          fontSize: 12,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          useGoogleFonts: false,
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          FFLocalizations.of(context).getText(
+                                                                                            'hv5vj04i' /* Collect Offer */,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                fontFamily: 'AvenirArabic',
+                                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                                fontSize: 12,
+                                                                                                fontWeight: FontWeight.w500,
+                                                                                                useGoogleFonts: false,
+                                                                                              ),
                                                                                         ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          if (functions.conditionalVisibility(
-                                                                              getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.order_status''',
-                                                                              ).toString(),
-                                                                              'cancelled'))
-                                                                            Container(
-                                                                              width: 74,
-                                                                              height: 23,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryRed,
-                                                                                borderRadius: BorderRadius.circular(7),
-                                                                              ),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    FFLocalizations.of(context).getText(
-                                                                                      'cwzirftq' /* Cancelled */,
+                                                                                      ],
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                          fontFamily: 'AvenirArabic',
-                                                                                          color: FlutterFlowTheme.of(context).white,
-                                                                                          fontSize: 12,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          useGoogleFonts: false,
-                                                                                        ),
                                                                                   ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          if (functions.conditionalVisibility(
-                                                                              functions.myPropertiesBookedStatus(
-                                                                                  getJsonField(
-                                                                                    bookedPropertiesItem,
-                                                                                    r'''$.transaction_id''',
-                                                                                  ).toString(),
-                                                                                  getJsonField(
-                                                                                    bookedPropertiesItem,
-                                                                                    r'''$.order_status''',
-                                                                                  ).toString()),
-                                                                              'reserved'))
-                                                                            Container(
-                                                                              width: 82,
-                                                                              height: 23,
-                                                                              decoration: BoxDecoration(
-                                                                                color: Color(0xFF389688),
-                                                                                borderRadius: BorderRadius.circular(7),
-                                                                              ),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    FFLocalizations.of(context).getText(
-                                                                                      'ksi1ofk3' /* Reserved */,
+                                                                                if (functions.conditionalVisibility(
+                                                                                    getJsonField(
+                                                                                      bookedPropertiesItem,
+                                                                                      r'''$.order_status''',
+                                                                                    ).toString(),
+                                                                                    'ownership_transferred'))
+                                                                                  Container(
+                                                                                    width: 89,
+                                                                                    height: 23,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: FlutterFlowTheme.of(context).secondaryGreen,
+                                                                                      borderRadius: BorderRadius.circular(7),
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                          fontFamily: 'AvenirArabic',
-                                                                                          color: FlutterFlowTheme.of(context).white,
-                                                                                          fontSize: 12,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          useGoogleFonts: false,
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          FFLocalizations.of(context).getText(
+                                                                                            'r3xdvf7i' /* Completed */,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                fontFamily: 'AvenirArabic',
+                                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                                fontSize: 12,
+                                                                                                fontWeight: FontWeight.w500,
+                                                                                                useGoogleFonts: false,
+                                                                                              ),
                                                                                         ),
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          if (functions.conditionalVisibility(
-                                                                              getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.order_status''',
-                                                                              ).toString(),
-                                                                              'disqualified'))
-                                                                            Container(
-                                                                              width: 74,
-                                                                              height: 23,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryRed,
-                                                                                borderRadius: BorderRadius.circular(7),
-                                                                              ),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    FFLocalizations.of(context).getText(
-                                                                                      '9svos0f4' /* Disqualified */,
+                                                                                      ],
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                          fontFamily: 'AvenirArabic',
-                                                                                          color: FlutterFlowTheme.of(context).white,
-                                                                                          fontSize: 12,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          useGoogleFonts: false,
-                                                                                        ),
                                                                                   ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          if (functions.conditionalVisibility(
-                                                                              getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.order_status''',
-                                                                              ).toString(),
-                                                                              'expired'))
-                                                                            Container(
-                                                                              width: 100,
-                                                                              height: 23,
-                                                                              decoration: BoxDecoration(
-                                                                                color: FlutterFlowTheme.of(context).secondaryRed,
-                                                                                borderRadius: BorderRadius.circular(7),
-                                                                              ),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    FFLocalizations.of(context).getText(
-                                                                                      '1ky73fb2' /* Expired */,
+                                                                                if (functions.conditionalVisibility(
+                                                                                    functions.myPropertiesBookedStatus(
+                                                                                        getJsonField(
+                                                                                          bookedPropertiesItem,
+                                                                                          r'''$.transaction_id''',
+                                                                                        ).toString(),
+                                                                                        getJsonField(
+                                                                                          bookedPropertiesItem,
+                                                                                          r'''$.order_status''',
+                                                                                        ).toString()),
+                                                                                    'pending_payment'))
+                                                                                  Container(
+                                                                                    width: 125,
+                                                                                    height: 23,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: FlutterFlowTheme.of(context).primaryOrange,
+                                                                                      borderRadius: BorderRadius.circular(7),
                                                                                     ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                          fontFamily: 'AvenirArabic',
-                                                                                          color: FlutterFlowTheme.of(context).white,
-                                                                                          fontSize: 12,
-                                                                                          fontWeight: FontWeight.w500,
-                                                                                          useGoogleFonts: false,
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          FFLocalizations.of(context).getText(
+                                                                                            '0pgvkbhl' /* Pending Payment */,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                fontFamily: 'AvenirArabic',
+                                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                                fontSize: 12,
+                                                                                                fontWeight: FontWeight.w500,
+                                                                                                useGoogleFonts: false,
+                                                                                              ),
                                                                                         ),
+                                                                                      ],
+                                                                                    ),
                                                                                   ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                        ],
+                                                                                if (functions.conditionalVisibility(
+                                                                                    getJsonField(
+                                                                                      bookedPropertiesItem,
+                                                                                      r'''$.order_status''',
+                                                                                    ).toString(),
+                                                                                    'cancelled'))
+                                                                                  Container(
+                                                                                    width: 74,
+                                                                                    height: 23,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: FlutterFlowTheme.of(context).secondaryRed,
+                                                                                      borderRadius: BorderRadius.circular(7),
+                                                                                    ),
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          FFLocalizations.of(context).getText(
+                                                                                            'cwzirftq' /* Cancelled */,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                fontFamily: 'AvenirArabic',
+                                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                                fontSize: 12,
+                                                                                                fontWeight: FontWeight.w500,
+                                                                                                useGoogleFonts: false,
+                                                                                              ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                if (functions.conditionalVisibility(
+                                                                                    functions.myPropertiesBookedStatus(
+                                                                                        getJsonField(
+                                                                                          bookedPropertiesItem,
+                                                                                          r'''$.transaction_id''',
+                                                                                        ).toString(),
+                                                                                        getJsonField(
+                                                                                          bookedPropertiesItem,
+                                                                                          r'''$.order_status''',
+                                                                                        ).toString()),
+                                                                                    'reserved'))
+                                                                                  Container(
+                                                                                    width: 82,
+                                                                                    height: 23,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: Color(0xFF389688),
+                                                                                      borderRadius: BorderRadius.circular(7),
+                                                                                    ),
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          FFLocalizations.of(context).getText(
+                                                                                            'ksi1ofk3' /* Reserved */,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                fontFamily: 'AvenirArabic',
+                                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                                fontSize: 12,
+                                                                                                fontWeight: FontWeight.w500,
+                                                                                                useGoogleFonts: false,
+                                                                                              ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                if (functions.conditionalVisibility(
+                                                                                    getJsonField(
+                                                                                      bookedPropertiesItem,
+                                                                                      r'''$.order_status''',
+                                                                                    ).toString(),
+                                                                                    'disqualified'))
+                                                                                  Container(
+                                                                                    width: 74,
+                                                                                    height: 23,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: FlutterFlowTheme.of(context).secondaryRed,
+                                                                                      borderRadius: BorderRadius.circular(7),
+                                                                                    ),
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          FFLocalizations.of(context).getText(
+                                                                                            '9svos0f4' /* Disqualified */,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                fontFamily: 'AvenirArabic',
+                                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                                fontSize: 12,
+                                                                                                fontWeight: FontWeight.w500,
+                                                                                                useGoogleFonts: false,
+                                                                                              ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                if (functions.conditionalVisibility(
+                                                                                    getJsonField(
+                                                                                      bookedPropertiesItem,
+                                                                                      r'''$.order_status''',
+                                                                                    ).toString(),
+                                                                                    'expired'))
+                                                                                  Container(
+                                                                                    width: 100,
+                                                                                    height: 23,
+                                                                                    decoration: BoxDecoration(
+                                                                                      color: FlutterFlowTheme.of(context).secondaryRed,
+                                                                                      borderRadius: BorderRadius.circular(7),
+                                                                                    ),
+                                                                                    child: Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          FFLocalizations.of(context).getText(
+                                                                                            '1ky73fb2' /* Expired */,
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                                fontFamily: 'AvenirArabic',
+                                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                                fontSize: 12,
+                                                                                                fontWeight: FontWeight.w500,
+                                                                                                useGoogleFonts: false,
+                                                                                              ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                              ]),
+                                                                            ],
+                                                                          ),
+                                                                        ),
                                                                       ),
-                                                                    ),
+                                                                      if (functions.conditionalVisibility(
+                                                                          functions.myPropertiesBookedStatus(
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.transaction_id''',
+                                                                              ).toString(),
+                                                                              getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.order_status''',
+                                                                              ).toString()),
+                                                                          'pending_payment'))
+                                                                      Container(
+                                                                        child:
+                                                                            Stack(
+                                                                          children: [
+                                                                            Align(
+                                                                              alignment: AlignmentDirectional(0, 0),
+                                                                              child: StreamBuilder<int>(
+                                                                                  stream: timerController.minuteTime,
+                                                                                  initialData: 0,
+                                                                                  builder: (context, snap) {
+                                                                                    final value = snap.data;
+                                                                                    print(">>>>>>>>>>>>>>>>>>> value = ${value}");
+                                                                                    final displayTime = StopWatchTimer.getDisplayTime(
+                                                                                      value!,
+                                                                                      hours: true,
+                                                                                      minute: true,
+                                                                                      second: false,
+                                                                                      milliSecond: false,
+                                                                                    );
+
+                                                                                    return CircularPercentIndicator(
+                                                                                      linearGradient: LinearGradient(begin: Alignment.centerRight, end: Alignment.centerLeft, colors: <Color>[
+                                                                                        Color(0xFFFBE947),
+                                                                                        Color(0xFFFF5A5A)
+                                                                                      ]),
+                                                                                      center: Text(
+                                                                                        FFAppState().locale == 'en' ? '${displayTime} h' : '${displayTime} ساعة',
+                                                                                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                              fontFamily: 'AvenirArabic',
+                                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                                              fontSize: 6,
+                                                                                              fontWeight: FontWeight.bold,
+                                                                                              useGoogleFonts: false,
+                                                                                            ),
+                                                                                      ),
+                                                                                      percent:remainingTime(getJsonField(
+                                                                                        bookedPropertiesItem,
+                                                                                        r'''$.booking_expiry_date._seconds''',
+                                                                                      ),getJsonField(
+                                                                                        bookedPropertiesItem,
+                                                                                        r'''$.created_at._seconds''',
+                                                                                      )),
+                                                                                      radius: 15,
+                                                                                      lineWidth: 4,
+                                                                                      animation: false,
+                                                                                      backgroundColor: FlutterFlowTheme.of(context).white,
+                                                                                    );
+                                                                                  }),
+                                                                            ),
+                                                                            Align(
+                                                                              alignment: AlignmentDirectional(1, 1),
+                                                                              child: ValueListenableBuilder<int>(
+                                                                                builder: (BuildContext context, int value, Widget? child) {
+                                                                                  return timerWidget((getJsonField(
+                                                                                    bookedPropertiesItem,
+                                                                                    r'''$.booking_expiry_date._seconds''',
+                                                                                  )-((DateTime.now().millisecondsSinceEpoch*0.001).toInt())));
+                                                                                },
+                                                                                valueListenable: changeTimer,
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                   Padding(
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0,
-                                                                            9,
+                                                                            4,
                                                                             0,
-                                                                            4),
+                                                                            0),
                                                                     child: Row(
                                                                       mainAxisSize:
                                                                           MainAxisSize
@@ -746,7 +877,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0,
-                                                                            4,
+                                                                            0,
                                                                             0,
                                                                             2),
                                                                     child: Row(
@@ -781,7 +912,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             .max,
                                                                     crossAxisAlignment:
                                                                         CrossAxisAlignment
-                                                                            .start,
+                                                                            .center,
                                                                     children: [
                                                                       Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -855,12 +986,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     BorderRadius
                                                                         .circular(
                                                                             8),
-                                                                border:
-                                                                    Border.all(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryColor,
-                                                                ),
+                                                                border: Border.all(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryColor),
                                                               ),
                                                               child: InkWell(
                                                                 onTap:
@@ -1031,46 +1160,50 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 FFButtonWidget(
                                                               onPressed:
                                                                   () async {
-                                                                    await configurePaymentSdk();
-                                                                    await showModalBottomSheet(
-                                                                      isScrollControlled:
-                                                                          true,
-                                                                      backgroundColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .white,
-                                                                      context:
-                                                                          context,
-                                                                      builder:
-                                                                          (context) {
-                                                                        return Padding(
-                                                                          padding:
-                                                                              MediaQuery.of(context).viewInsets,
-                                                                          child:
-                                                                              Container(
-                                                                            height:
-                                                                                MediaQuery.of(context).size.height * 0.89,
-                                                                            child:
-                                                                                ReservationBottomSheetWidget(
-                                                                              reservationCost: getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.reservation_amount''',
-                                                                              ),
-                                                                              propertyId: functions.bookinPagePropertyIdToInt(getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.property_id''',
-                                                                              ).toString()),
-                                                                              orderId: getJsonField(
-                                                                                bookedPropertiesItem,
-                                                                                r'''$.order_id''',
-                                                                              ),
-                                                                            ),
+                                                                await configurePaymentSdk();
+                                                                await showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .white,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return Padding(
+                                                                      padding: MediaQuery.of(
+                                                                              context)
+                                                                          .viewInsets,
+                                                                      child:
+                                                                          Container(
+                                                                        height: MediaQuery.of(context).size.height *
+                                                                            0.89,
+                                                                        child:
+                                                                            ReservationBottomSheetWidget(
+                                                                          reservationCost:
+                                                                              getJsonField(
+                                                                            bookedPropertiesItem,
+                                                                            r'''$.reservation_amount''',
                                                                           ),
-                                                                        );
-                                                                      },
-                                                                    ).then((value) =>
-                                                                        setState(
-                                                                            () {}));
-
+                                                                          propertyId:
+                                                                              functions.bookinPagePropertyIdToInt(getJsonField(
+                                                                            bookedPropertiesItem,
+                                                                            r'''$.property_id''',
+                                                                          ).toString()),
+                                                                          orderId:
+                                                                              getJsonField(
+                                                                            bookedPropertiesItem,
+                                                                            r'''$.order_id''',
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    setState(
+                                                                        () {}));
                                                               },
                                                               text: FFLocalizations
                                                                       .of(context)
@@ -1143,7 +1276,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       width: 50,
                                       height: 50,
                                       child: SpinKitRipple(
-                                        color: FlutterFlowTheme.of(context).primaryColor,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
                                         size: 50,
                                       ),
                                     ),
@@ -1192,7 +1326,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                             bookmarkedProperties[
                                                 bookmarkedPropertiesIndex];
                                         return InkWell(
-                                          onTap: ()async{
+                                          onTap: () async {
                                             context.pushNamed(
                                               'PropertyDetails',
                                               queryParams: {
@@ -1220,8 +1354,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Padding(
-                                                    padding: EdgeInsetsDirectional
-                                                        .fromSTEB(0, 0, 0, 20),
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 0, 0, 20),
                                                     child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -1235,11 +1371,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                         Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0, 0, 0, 2),
+                                                                  .fromSTEB(0,
+                                                                      0, 0, 2),
                                                           child: Row(
                                                             mainAxisSize:
-                                                                MainAxisSize.min,
+                                                                MainAxisSize
+                                                                    .min,
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
                                                                     .start,
@@ -1252,7 +1389,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             5,
                                                                             3,
                                                                             0),
-                                                                child: ClipRRect(
+                                                                child:
+                                                                    ClipRRect(
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
@@ -1335,8 +1473,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               3),
                                                                           child:
                                                                               Icon(
-                                                                            Manzel
-                                                                                .location_pin,
+                                                                            Manzel.location_pin,
                                                                             color:
                                                                                 Colors.black,
                                                                             size:
@@ -1344,19 +1481,18 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           ),
                                                                         ),
                                                                         Padding(
-                                                                          padding: const EdgeInsets.only(left: 3),
-                                                                          child: Text(
-                                                                            valueOrDefault<
-                                                                                String>(
+                                                                          padding:
+                                                                              const EdgeInsets.only(left: 3),
+                                                                          child:
+                                                                              Text(
+                                                                            valueOrDefault<String>(
                                                                               getJsonField(
                                                                                 bookmarkedPropertiesItem,
                                                                                 r'''$.property_data.property_city''',
                                                                               ).toString(),
                                                                               'null',
                                                                             ),
-                                                                            style: FlutterFlowTheme.of(context)
-                                                                                .bodyText1
-                                                                                .override(
+                                                                            style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
                                                                                   fontSize: 12,
                                                                                   fontWeight: FontWeight.w300,
@@ -1415,26 +1551,16 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               MainAxisSize.max,
                                                                           children: [
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                  0,
-                                                                                  0,
-                                                                                  9,
-                                                                                  0),
-                                                                              child:
-                                                                                  Icon(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 9, 0),
+                                                                              child: Icon(
                                                                                 Manzel.bed,
                                                                                 color: Colors.black,
                                                                                 size: 10,
                                                                               ),
                                                                             ),
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                  4,
-                                                                                  0,
-                                                                                  20,
-                                                                                  0),
-                                                                              child:
-                                                                                  Text(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(4, 0, 20, 0),
+                                                                              child: Text(
                                                                                 valueOrDefault<String>(
                                                                                   getJsonField(
                                                                                     bookmarkedPropertiesItem,
@@ -1452,26 +1578,16 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               ),
                                                                             ),
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                  0,
-                                                                                  0,
-                                                                                  9,
-                                                                                  0),
-                                                                              child:
-                                                                                  Icon(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 9, 0),
+                                                                              child: Icon(
                                                                                 Manzel.bath,
                                                                                 color: Colors.black,
                                                                                 size: 16,
                                                                               ),
                                                                             ),
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                  0,
-                                                                                  0,
-                                                                                  20,
-                                                                                  0),
-                                                                              child:
-                                                                                  Text(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                                                                              child: Text(
                                                                                 valueOrDefault<String>(
                                                                                   getJsonField(
                                                                                     bookmarkedPropertiesItem,
@@ -1490,13 +1606,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               ),
                                                                             ),
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                  0,
-                                                                                  0,
-                                                                                  9,
-                                                                                  0),
-                                                                              child:
-                                                                                  Icon(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 9, 0),
+                                                                              child: Icon(
                                                                                 Manzel.size,
                                                                                 color: Colors.black,
                                                                                 size: 16,
@@ -1519,13 +1630,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                   ),
                                                                             ),
                                                                             Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                  4,
-                                                                                  0,
-                                                                                  4,
-                                                                                  0),
-                                                                              child:
-                                                                                  Text(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
+                                                                              child: Text(
                                                                                 FFLocalizations.of(context).getText(
                                                                                   '747xbn3l' /* sqm */,
                                                                                 ),
@@ -1549,7 +1655,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                         ),
                                                         InkWell(
                                                           onTap: () async {
-                                                            logFirebaseEvent('view_cart');
+                                                            logFirebaseEvent(
+                                                                'view_cart');
                                                             logFirebaseEvent(
                                                                 'MY_PROPERTIES_PAGE_Icon_0lkum35u_ON_TAP');
                                                             logFirebaseEvent(
@@ -1557,7 +1664,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                             bookmarkApiResponse =
                                                                 await BookmarkPropertyCall
                                                                     .call(
-                                                                  authorazationToken: FFAppState().authToken,
+                                                              authorazationToken:
+                                                                  FFAppState()
+                                                                      .authToken,
                                                               userId:
                                                                   currentUserUid,
                                                               propertyId:
@@ -1569,7 +1678,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 ).toString(),
                                                                 '0',
                                                               ),
-                                                                  version: FFAppState().apiVersion,
+                                                              version:
+                                                                  FFAppState()
+                                                                      .apiVersion,
                                                             );
                                                             if ((bookmarkApiResponse
                                                                         ?.statusCode ??
@@ -1648,8 +1759,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                           },
                                                           child: Icon(
                                                             Manzel.bookmark,
-                                                            color:
-                                                            FlutterFlowTheme.of(context).secondaryRed,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryRed,
                                                             size: 24,
                                                           ),
                                                         ),
@@ -1682,5 +1794,48 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
         ),
       ),
     );
+  }
+
+  Widget timerWidget(int duration) {
+    return FlutterFlowTimer(
+      timerValue: timerValue ??= StopWatchTimer.getDisplayTime(
+        timerMilliseconds ??= duration,
+        hours: true,
+        minute: true,
+        second: false,
+        milliSecond: false,
+      ),
+      timer: timerController ,
+      //??= StopWatchTimer(
+      //   mode: StopWatchMode.countDown,
+      //   presetMillisecond: timerMilliseconds ??= duration,
+      //   onChange: (value) {
+      //     changeTimer.value += 1;
+      //     changeText.value += 1;
+      //     timerMilliseconds = value;
+      //     timerValue = StopWatchTimer.getDisplayTime(
+      //       value,
+      //       hours: false,
+      //       minute: false,
+      //       second: true,
+      //       milliSecond: false,
+      //     );
+      //   },
+      // ),
+      textAlign: TextAlign.start,
+      style: FlutterFlowTheme.of(context).bodyText1.override(
+            fontFamily: 'AvenirArabic',
+            color: Colors.white.withOpacity(0),
+            fontSize: 7,
+            fontWeight: FontWeight.bold,
+            useGoogleFonts: false,
+          ),
+      onEnded: () {},
+    );
+  }
+  double remainingTime(int expiryDate,int createdAt){
+    double remaingValue = (expiryDate-(DateTime.now().millisecondsSinceEpoch*0.001).toInt())/(expiryDate-createdAt);
+    if(remaingValue<0){return 0;}
+    return remaingValue;
   }
 }

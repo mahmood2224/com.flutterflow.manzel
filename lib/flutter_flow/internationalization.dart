@@ -1716,6 +1716,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // BookingDetails
   {
+    'offerButtonBookingDetails': {
+      'en': 'View Offers',
+      'ar': 'مشاهدة العروض',
+    },
     'trw95gom': {
       'en': 'Booking Ref. :',
       'ar': 'مرجع الحجز :',

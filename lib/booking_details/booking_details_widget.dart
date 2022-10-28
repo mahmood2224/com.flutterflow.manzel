@@ -472,129 +472,105 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                                       false,
                                                                 ),
                                                       ),
-                                                      InkWell(
-                                                        onTap: () async {
-                                                          logFirebaseEvent(
-                                                              'BOOKING_DETAILS_Container_arq4cwwe_ON_TA');
-                                                          logFirebaseEvent(
-                                                              'Container_Navigate-To');
-
-                                                          context.pushNamed(
-                                                            'Offers',
-                                                            queryParams: {
-                                                              'propertyId':
-                                                                  serializeParam(
-                                                                      getJsonField(
-                                                                        columnOrderDetailsResponse
-                                                                            .jsonBody,
-                                                                        r'''$.result.property_id''',
-                                                                      )
-                                                                          .toString(),
-                                                                      ParamType
-                                                                          .String),
-                                                            }.withoutNulls,
-                                                          );
-                                                        },
-                                                        child: Directionality(
-                                                            textDirection:
-                                                                material
-                                                                    .TextDirection
-                                                                    .ltr,
-                                                            child: Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .white,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8),
-                                                              ),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      getJsonField(
-                                                                        columnOrderDetailsResponse
-                                                                            .jsonBody,
-                                                                        r'''$.result.offer_count''',
-                                                                      ).toString(),
-                                                                      '0',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'AvenirArabic',
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
-                                                                          fontSize:
-                                                                              16,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
+                                                      Directionality(
+                                                          textDirection:
+                                                              material
+                                                                  .TextDirection
+                                                                  .ltr,
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .white,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          8),
+                                                            ),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    getJsonField(
+                                                                      columnOrderDetailsResponse
+                                                                          .jsonBody,
+                                                                      r'''$.result.offer_count''',
+                                                                    ).toString(),
+                                                                    '0',
                                                                   ),
-                                                                  Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'hho1grz4' /* / */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'AvenirArabic',
-                                                                          fontSize:
-                                                                              16,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'AvenirArabic',
+                                                                        color:
+                                                                            FlutterFlowTheme.of(context).primaryText,
+                                                                        fontSize:
+                                                                            16,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                                Text(
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'hho1grz4' /* / */,
                                                                   ),
-                                                                  Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      functions
-                                                                          .bookingScreenCountOffers(
-                                                                              getJsonField(
-                                                                        columnOrderDetailsResponse
-                                                                            .jsonBody,
-                                                                        r'''$.result.bank_ids''',
-                                                                      )),
-                                                                      '0',
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'AvenirArabic',
-                                                                          fontSize:
-                                                                              16,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'AvenirArabic',
+                                                                        fontSize:
+                                                                            16,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                                Text(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    functions
+                                                                        .bookingScreenCountOffers(
+                                                                            getJsonField(
+                                                                      columnOrderDetailsResponse
+                                                                          .jsonBody,
+                                                                      r'''$.result.bank_ids''',
+                                                                    )),
+                                                                    '0',
                                                                   ),
-                                                                ],
-                                                              ),
-                                                            )),
-                                                      ),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'AvenirArabic',
+                                                                        fontSize:
+                                                                            16,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        useGoogleFonts:
+                                                                            false,
+                                                                      ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          )),
                                                     ],
                                                   ),
                                                   if (functions
@@ -743,6 +719,93 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                         ),
                                                       ],
                                                     ),
+                                                  if (functions
+                                                      .conditionalVisibility(
+                                                      getJsonField(
+                                                        columnOrderDetailsResponse
+                                                            .jsonBody,
+                                                        r'''$.result.order_status''',
+                                                      ).toString(),
+                                                      'collect_offers'))
+                                                  Padding(
+                                                    padding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                        0,
+                                                        5,
+                                                        0,
+                                                        0),
+                                                    child:
+                                                    FFButtonWidget(
+                                                      onPressed:
+                                                          () async {
+                                                        logFirebaseEvent(
+                                                            'MY_PROPERTIES_VIEW_OFFERS_BTN_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Button_Navigate-To');
+
+                                                        context
+                                                            .pushNamed(
+                                                          'Offers',
+                                                          queryParams:
+                                                          {
+                                                            'propertyId': serializeParam(
+                                                                valueOrDefault<String>(
+                                                                  getJsonField(
+                                                                    columnOrderDetailsResponse
+                                                                        .jsonBody,
+                                                                    r'''$.property_id''',
+                                                                  ).toString(),
+                                                                  'null',
+                                                                ),
+                                                                ParamType.String),
+                                                          }.withoutNulls,
+                                                        );
+                                                      },
+                                                      text: FFLocalizations.of(
+                                                          context)
+                                                          .getText(
+                                                        'offerButtonBookingDetails' /* View Offers */,
+                                                      ),
+                                                      options:
+                                                      FFButtonOptions(
+                                                        height: 28,
+                                                        padding: EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                            9,
+                                                            0,
+                                                            9,
+                                                            0),
+                                                        color: FlutterFlowTheme.of(
+                                                            context)
+                                                            .primaryColor,
+                                                        textStyle: FlutterFlowTheme.of(
+                                                            context)
+                                                            .subtitle2
+                                                            .override(
+                                                          fontFamily:
+                                                          'AvenirArabic',
+                                                          color:
+                                                          Colors.white,
+                                                          fontSize:
+                                                          7,
+                                                          fontWeight:
+                                                          FontWeight.w500,
+                                                          useGoogleFonts:
+                                                          false,
+                                                        ),
+                                                        borderSide:
+                                                        BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1,
+                                                        ),
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(8),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                             ),

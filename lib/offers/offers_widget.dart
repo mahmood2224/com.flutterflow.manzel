@@ -1,8 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:sendbird_sdk/constant/enums.dart';
 import 'package:sendbird_sdk/query/channel_list/group_channel_list_query.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
@@ -52,6 +55,11 @@ class _OffersWidgetState extends State<OffersWidget> {
   //Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> channels = {};
+StopWatchTimer timerController = StopWatchTimer(
+  mode: StopWatchMode.countDown,
+  );
+  String? timerValue;
+  int? timerMilliseconds;
 
   Future<List<GroupChannel>?> getUnreadMessage() async {
     try {
@@ -93,9 +101,13 @@ class _OffersWidgetState extends State<OffersWidget> {
   @override
   void initState() {
     super.initState();
+
     // On page load action.
    // inAppReview.openStoreListing(appStoreId: '1630341481');
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      var diffValue = 60;
+      timerController..setPresetSecondTime(diffValue,add:false);
+      timerController.onStartTimer();
       final _sendbird = await sendbird.SendbirdSdk(
           appId: "${EnvVariables.instance.sendbirdAppId}");
       final _ = await _sendbird.connect(currentUserUid);
@@ -160,6 +172,12 @@ class _OffersWidgetState extends State<OffersWidget> {
     });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Offers'});
+
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    timerController?.dispose();
   }
 
   @override
@@ -1050,6 +1068,147 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                 ),
                                                               ),
                                                           ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                if (functions
+                                                    .chatButtonVisibility(
+                                                    getJsonField(
+                                                      activeOffersItem,
+                                                      r'''$.status''',
+                                                    ).toString()))
+                                                Padding(
+                                                  padding:
+                                                  EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      0, 0, 0, 15),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 30,
+                                                    decoration:
+                                                    BoxDecoration(
+                                                      color:
+                                                      Color(0xFFFADA6B),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                      MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .center,
+                                                      children: [
+                                                        Text(
+                                                          FFLocalizations.of(
+                                                              context)
+                                                              .getText(
+                                                            'y42wn8bh' /* You have  */,
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                              .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                            fontFamily:
+                                                            'AvenirArabic',
+                                                            fontSize:
+                                                            12,
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .bold,
+                                                            useGoogleFonts:
+                                                            false,
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          child:
+                                                          Stack(
+                                                            children: [
+                                                              Align(
+                                                                alignment: AlignmentDirectional(0, 0),
+                                                                child: StreamBuilder<int>(
+                                                                    stream: timerController.rawTime,
+                                                                    initialData: 0,
+                                                                    builder: (context, snap) {
+                                                                      final value = snap.data;
+                                                                      print(">>>>>>>>>>>>>>>>>>> value = ${value}");
+                                                                      final displayTime = StopWatchTimer.getDisplayTime(
+                                                                        value!,
+                                                                        hours: false,
+                                                                        minute: true,
+                                                                        second: true,
+                                                                        milliSecond: false,
+                                                                      );
+
+                                                                      return  Text(
+                                                                          '${displayTime}',
+                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                            fontFamily: 'AvenirArabic',
+                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                            fontSize: 12,
+                                                                            fontWeight: FontWeight.bold,
+                                                                            useGoogleFonts: false,
+                                                                          ),
+                                                                        );
+                                                                    }),
+                                                              ),
+                                                              Align(
+                                                                alignment: AlignmentDirectional(1, 1),
+                                                                child: timerWidget(60),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                              2,
+                                                              0,
+                                                              2,
+                                                              0),
+                                                          child: Text(
+                                                            FFLocalizations.of(
+                                                                context)
+                                                                .getText(
+                                                              '9j4qhgy0' /* min. */,
+                                                            ),
+                                                            style: FlutterFlowTheme.of(
+                                                                context)
+                                                                .bodyText1
+                                                                .override(
+                                                              fontFamily:
+                                                              'AvenirArabic',
+                                                              fontSize:
+                                                              12,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                              useGoogleFonts:
+                                                              false,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          FFLocalizations.of(
+                                                              context)
+                                                              .getText(
+                                                            'f82o9diq' /* to accept offer */,
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                              .of(context)
+                                                              .bodyText1
+                                                              .override(
+                                                            fontFamily:
+                                                            'AvenirArabic',
+                                                            fontSize:
+                                                            12,
+                                                            fontWeight:
+                                                            FontWeight
+                                                                .bold,
+                                                            useGoogleFonts:
+                                                            false,
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -2243,4 +2402,41 @@ class _OffersWidgetState extends State<OffersWidget> {
 //       }
 //     }
 //   }
+  Widget timerWidget(int duration) {
+    return FlutterFlowTimer(
+      timerValue: timerValue ??= StopWatchTimer.getDisplayTime(
+        timerMilliseconds ??= duration,
+        hours: false,
+        minute: true,
+        second: true,
+        milliSecond: false,
+      ),
+      timer: timerController ,
+      //??= StopWatchTimer(
+      //   mode: StopWatchMode.countDown,
+      //   presetMillisecond: timerMilliseconds ??= duration,
+      //   onChange: (value) {
+      //     changeTimer.value += 1;
+      //     changeText.value += 1;
+      //     timerMilliseconds = value;
+      //     timerValue = StopWatchTimer.getDisplayTime(
+      //       value,
+      //       hours: false,
+      //       minute: false,
+      //       second: true,
+      //       milliSecond: false,
+      //     );
+      //   },
+      // ),
+      textAlign: TextAlign.start,
+      style: FlutterFlowTheme.of(context).bodyText1.override(
+        fontFamily: 'AvenirArabic',
+        color: Colors.white.withOpacity(0),
+        fontSize: 7,
+        fontWeight: FontWeight.bold,
+        useGoogleFonts: false,
+      ),
+      onEnded: () {},
+    );
+  }
  }

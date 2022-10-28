@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/backend.dart';
@@ -138,7 +140,7 @@ class _HelpAndSupportWidgetState extends State<HelpAndSupportWidget> {
                           ),
                         ),
                         child: Icon(
-                          Icons.email_outlined,
+                          Manzel.mail_icon,
                           color: Colors.black,
                           size: 24,
                         ),
