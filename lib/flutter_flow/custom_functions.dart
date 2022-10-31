@@ -778,9 +778,9 @@ bool pastOfferColumnVisibility(
     return false;
   }
   if (status == "cancelled") {
-    if (((installmentPeriod != null) ||
-            installmentRange != null ||
-            totalPrice != null) &&
+    if (((installmentPeriod != null && installmentPeriod.isNotEmpty) &&
+        (installmentRange != null && installmentRange.isNotEmpty) &&
+        (totalPrice != null && totalPrice.isNotEmpty)) &&
         (agentName != null && agentName.isNotEmpty)) {
       return true;
     } else {
@@ -788,9 +788,9 @@ bool pastOfferColumnVisibility(
     }
   }
   if (status == "rejected") {
-    if ((installmentPeriod != null ||
-            installmentRange != null ||
-            totalPrice != null) &&
+    if (((installmentPeriod != null && installmentPeriod.isNotEmpty) &&
+        (installmentRange != null && installmentRange.isNotEmpty) &&
+        (totalPrice != null && totalPrice.isNotEmpty)) &&
         (agentName != null && agentName.isNotEmpty)) {
       return true;
     } else {
