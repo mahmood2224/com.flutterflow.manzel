@@ -772,7 +772,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     widget.homeScreenLength ?? 0,
                                     ParamType.int),
                                 'cityName': serializeParam(
-                                    citiesListValue, ParamType.String),
+                                    citiesListValue ?? 'All', ParamType.String),
                                 'minInstallment': serializeParam(
                                     valueOrDefault<String>(
                                       functions
