@@ -47,7 +47,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(14, 22, 14, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(14, 22, 14, 22),
                 child: Container(
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.07,
@@ -68,7 +68,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(23, 0, 0, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(23, 0, 0,0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             'qlysszro' /* Where are you  looking ? */,
@@ -170,7 +170,7 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                               final citiesItem = cities[citiesIndex];
                               return Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 33, 0, 0),
+                                    EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
                                 child: InkWell(
                                   onTap: () async {
                                     logFirebaseEvent(
@@ -197,181 +197,186 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                       }.withoutNulls,
                                     );
                                   },
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 52,
-                                    decoration: BoxDecoration(),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            width: 100,
-                                            height: 100,
-                                            decoration: BoxDecoration(),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Container(
-                                                  width: 46,
-                                                  height: 46,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      child: getJsonField(
-                                                                  citiesItem,
-                                                                  r'''$.image''') ==
-                                                              ''
-                                                          ? Image.network(
-                                                              getJsonField(
-                                                                citiesItem,
-                                                                r'''$.image''',
-                                                              ),
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.46,
-                                                              height: 46,
-                                                              fit: BoxFit.cover,
-                                                            )
-                                                          : Icon(
-                                                              Manzel
-                                                                  .location_pin,
-                                                              size: 33,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryColor,
-                                                            )),),
-
-                                                Expanded(
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                10, 0, 0, 0),
-                                                    child: Container(
-                                                      width: 100,
-                                                      height: 100,
-                                                      decoration:
-                                                          BoxDecoration(),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            getJsonField(
-                                                              citiesItem,
-                                                              r'''$.name''',
-                                                            ).toString(),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText2
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'AvenirArabic',
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                          ),
-                                                          Expanded(
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .min,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        height: 52,
+                                        decoration: BoxDecoration(),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                width: 100,
+                                                height: 100,
+                                                decoration: BoxDecoration(),
+                                                child: Row(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  children: [
+                                                    Container(
+                                                      width: 46,
+                                                      height: 46,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                5),
+                                                      ),
+                                                      child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  5),
+                                                          child: getJsonField(
+                                                                      citiesItem,
+                                                                      r'''$.image''') ==
+                                                                  ''
+                                                              ? Image.network(
                                                                   getJsonField(
                                                                     citiesItem,
-                                                                    r'''$.count''',
-                                                                  ).toString(),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText2
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        color: Color(
-                                                                            0xFF6B6B6B),
-                                                                        fontWeight:
-                                                                            FontWeight.w300,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          4,
-                                                                          0,
-                                                                          4,
-                                                                          0),
-                                                                  child: Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'wptanz77' /* properties available  */,
-                                                                    ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'AvenirArabic',
-                                                                          color:
-                                                                              Color(0xFF676767),
-                                                                          useGoogleFonts:
-                                                                              false,
-                                                                        ),
+                                                                    r'''$.image''',
                                                                   ),
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.46,
+                                                                  height: 46,
+                                                                  fit: BoxFit.cover,
+                                                                )
+                                                              : Icon(
+                                                                  Manzel
+                                                                      .location_pin,
+                                                                  size: 33,
+                                                                  color: FlutterFlowTheme
+                                                                          .of(context)
+                                                                      .primaryColor,
+                                                                )),),
+
+                                                    Expanded(
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    10, 0, 0, 0),
+                                                        child: Container(
+                                                          width: 100,
+                                                          height: 100,
+                                                          decoration:
+                                                              BoxDecoration(),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize.max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                getJsonField(
+                                                                  citiesItem,
+                                                                  r'''$.name''',
+                                                                ).toString(),
+                                                                style: FlutterFlowTheme
+                                                                        .of(context)
+                                                                    .bodyText2
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize: 16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                              Expanded(
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .min,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      getJsonField(
+                                                                        citiesItem,
+                                                                        r'''$.count''',
+                                                                      ).toString(),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText2
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'AvenirArabic',
+                                                                            color: Color(
+                                                                                0xFF6B6B6B),
+                                                                            fontWeight:
+                                                                                FontWeight.w300,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                          ),
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              4,
+                                                                              0,
+                                                                              4,
+                                                                              0),
+                                                                      child: Text(
+                                                                        FFLocalizations.of(
+                                                                                context)
+                                                                            .getText(
+                                                                          'wptanz77' /* properties available  */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(
+                                                                                context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily:
+                                                                                  'AvenirArabic',
+                                                                              color:
+                                                                                  Color(0xFF676767),
+                                                                              useGoogleFonts:
+                                                                                  false,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                              ],
-                                                            ),
+                                                              ),
+                                                            ],
                                                           ),
-                                                        ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
+                                            Container(
+                                              width: 20,
+                                              height: 20,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.rectangle,
+                                              ),
+                                              child: Icon(
+                                                Icons.arrow_forward_ios_outlined,
+                                                color: Colors.black,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        Container(
-                                          width: 20,
-                                          height: 20,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.rectangle,
-                                          ),
-                                          child: Icon(
-                                            Icons.arrow_forward_ios_outlined,
-                                            color: Colors.black,
-                                            size: 20,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      Divider()
+                                    ],
                                   ),
                                 ),
                               );
