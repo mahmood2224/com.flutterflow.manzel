@@ -300,8 +300,19 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                             bookedPropertiesItem,
                                             r'''$.booking_expiry_date._seconds''',
                                           )-((DateTime.now().millisecondsSinceEpoch*0.001).toInt()));
+                                        if (functions.conditionalVisibility(
+                                            functions.myPropertiesBookedStatus(
+                                                getJsonField(
+                                                  bookedPropertiesItem,
+                                                  r'''$.transaction_id''',
+                                                ).toString(),
+                                                getJsonField(
+                                                  bookedPropertiesItem,
+                                                  r'''$.order_status''',
+                                                ).toString()),
+                                            'pending_payment')){
                                         timerController..setPresetSecondTime(diffValue,add:false);
-                                        timerController.onStartTimer();
+                                        timerController.onStartTimer();}
                                         print(">>>>>>>>>>>>>>>>>>>>> diffTime = ${diffValue}");
                                         return Padding(
                                           padding:
@@ -746,11 +757,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             Align(
                                                                               alignment: AlignmentDirectional(0, 0),
                                                                               child: StreamBuilder<int>(
-                                                                                  stream: timerController.minuteTime,
-                                                                                  initialData: 0,
+                                                                                  stream: timerController.rawTime,
+                                                                                  initialData: 10,
                                                                                   builder: (context, snap) {
                                                                                     final value = snap.data;
                                                                                     print(">>>>>>>>>>>>>>>>>>> value = ${value}");
+                                                                                    print('${snap.data.runtimeType}');
                                                                                     final displayTime = StopWatchTimer.getDisplayTime(
                                                                                       value!,
                                                                                       hours: true,
@@ -758,6 +770,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                       second: false,
                                                                                       milliSecond: false,
                                                                                     );
+                                                                                    print(">>>>>>>>>>>>>>>>>>>> display time : ${displayTime}");
 
                                                                                     return CircularPercentIndicator(
                                                                                       linearGradient: LinearGradient(begin: Alignment.centerRight, end: Alignment.centerLeft, colors: <Color>[
@@ -781,7 +794,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                         bookedPropertiesItem,
                                                                                         r'''$.created_at._seconds''',
                                                                                       )),
-                                                                                      radius: 15,
+                                                                                      radius: 17,
                                                                                       lineWidth: 4,
                                                                                       animation: false,
                                                                                       backgroundColor: FlutterFlowTheme.of(context).white,
@@ -792,10 +805,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               alignment: AlignmentDirectional(1, 1),
                                                                               child: ValueListenableBuilder<int>(
                                                                                 builder: (BuildContext context, int value, Widget? child) {
-                                                                                  return timerWidget((getJsonField(
-                                                                                    bookedPropertiesItem,
-                                                                                    r'''$.booking_expiry_date._seconds''',
-                                                                                  )-((DateTime.now().millisecondsSinceEpoch*0.001).toInt())));
+                                                                                  return timerWidget(6000);
                                                                                 },
                                                                                 valueListenable: changeTimer,
                                                                               ),

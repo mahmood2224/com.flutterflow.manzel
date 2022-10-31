@@ -480,8 +480,8 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                           child: Container(
                                                             decoration:
                                                                 BoxDecoration(
-                                                              color: FlutterFlowTheme.of(
-                                                                      context)
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
                                                                   .white,
                                                               borderRadius:
                                                                   BorderRadius
@@ -512,8 +512,8 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                                       .override(
                                                                         fontFamily:
                                                                             'AvenirArabic',
-                                                                        color:
-                                                                            FlutterFlowTheme.of(context).primaryText,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
                                                                         fontSize:
                                                                             16,
                                                                         fontWeight:
@@ -719,36 +719,19 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                         ),
                                                       ],
                                                     ),
-                                                  if (functions
-                                                      .conditionalVisibility(
-                                                      getJsonField(
-                                                        columnOrderDetailsResponse
-                                                            .jsonBody,
-                                                        r'''$.result.order_status''',
-                                                      ).toString(),
-                                                      'collect_offers'))
                                                   Padding(
-                                                    padding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                        0,
-                                                        5,
-                                                        0,
-                                                        0),
-                                                    child:
-                                                    FFButtonWidget(
-                                                      onPressed:
-                                                          () async {
+                                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                                        0, 5, 0, 0),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () async {
                                                         logFirebaseEvent(
                                                             'MY_PROPERTIES_VIEW_OFFERS_BTN_ON_TAP');
                                                         logFirebaseEvent(
                                                             'Button_Navigate-To');
 
-                                                        context
-                                                            .pushNamed(
+                                                        context.pushNamed(
                                                           'Offers',
-                                                          queryParams:
-                                                          {
+                                                          queryParams: {
                                                             'propertyId': serializeParam(
                                                                 valueOrDefault<String>(
                                                                   getJsonField(
@@ -762,47 +745,33 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                           }.withoutNulls,
                                                         );
                                                       },
-                                                      text: FFLocalizations.of(
-                                                          context)
-                                                          .getText(
+                                                      text:
+                                                      FFLocalizations.of(context).getText(
                                                         'offerButtonBookingDetails' /* View Offers */,
                                                       ),
-                                                      options:
-                                                      FFButtonOptions(
+                                                      options: FFButtonOptions(
                                                         height: 28,
-                                                        padding: EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                            9,
-                                                            0,
-                                                            9,
-                                                            0),
-                                                        color: FlutterFlowTheme.of(
-                                                            context)
+                                                        padding:
+                                                        EdgeInsetsDirectional.fromSTEB(
+                                                            9, 0, 9, 0),
+                                                        color: FlutterFlowTheme.of(context)
                                                             .primaryColor,
-                                                        textStyle: FlutterFlowTheme.of(
-                                                            context)
+                                                        textStyle:
+                                                        FlutterFlowTheme.of(context)
                                                             .subtitle2
                                                             .override(
-                                                          fontFamily:
-                                                          'AvenirArabic',
-                                                          color:
-                                                          Colors.white,
-                                                          fontSize:
-                                                          7,
-                                                          fontWeight:
-                                                          FontWeight.w500,
-                                                          useGoogleFonts:
-                                                          false,
+                                                          fontFamily: 'AvenirArabic',
+                                                          color: Colors.white,
+                                                          fontSize: 7,
+                                                          fontWeight: FontWeight.w500,
+                                                          useGoogleFonts: false,
                                                         ),
-                                                        borderSide:
-                                                        BorderSide(
-                                                          color: Colors
-                                                              .transparent,
+                                                        borderSide: BorderSide(
+                                                          color: Colors.transparent,
                                                           width: 1,
                                                         ),
                                                         borderRadius:
-                                                        BorderRadius
-                                                            .circular(8),
+                                                        BorderRadius.circular(8),
                                                       ),
                                                     ),
                                                   ),
@@ -1492,7 +1461,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    FFAppState().locale=='ar'?10:0, 4, 9, 0),
+                                                    FFAppState().locale == 'ar'
+                                                        ? 10
+                                                        : 0,
+                                                    4,
+                                                    9,
+                                                    0),
                                             child: Icon(
                                               Manzel.bed,
                                               color:
@@ -1504,7 +1478,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    FFAppState().locale=='ar'?0:9, 0, 20, 0),
+                                                    FFAppState().locale == 'ar'
+                                                        ? 0
+                                                        : 9,
+                                                    0,
+                                                    20,
+                                                    0),
                                             child: Text(
                                               valueOrDefault<String>(
                                                 getJsonField(
@@ -1686,164 +1665,102 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                     indent: 20,
                     endIndent: 20,
                   ),
-                  if(getJsonField(
-                    columnOrderDetailsResponse.jsonBody,
-                    r'''$.result.order_status''',
-                  ).toString()!="pending")
-                  Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 25, 20, 20),
-                        child: Row(
+                  if (getJsonField(
+                        columnOrderDetailsResponse.jsonBody,
+                        r'''$.result.order_status''',
+                      ).toString() !=
+                      "pending")
+                    Column(
+                      children: [
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 25, 20, 20),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'qkoz8020' /* Transaction details */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'AvenirArabic',
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w300,
+                                        useGoogleFonts: false,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Expanded(
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'qkoz8020' /* Transaction details */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'AvenirArabic',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w300,
-                                      useGoogleFonts: false,
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 20, 20, 12),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 5),
-                                          child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              '0ck5hck8' /* Payment Method */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  color: Color(0xFF6B6B6B),
-                                                  fontWeight: FontWeight.w300,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ),
-                                        Text(
-                                          valueOrDefault<String>(
-                                            getJsonField(
-                                              columnOrderDetailsResponse
-                                                  .jsonBody,
-                                              r'''$.result.transaction_data.transaction_method''',
-                                            ).toString(),
-                                            'null',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                                lineHeight: 1.5,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 5),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            'qxs4ycvd' /* Transaction Ref. */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'AvenirArabic',
-                                                color: Color(0xFF6B6B6B),
-                                                fontWeight: FontWeight.w300,
-                                                useGoogleFonts: false,
-                                              ),
-                                        ),
-                                      ),
-                                      Row(
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20, 20, 20, 12),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 5, 0),
+                                      child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Expanded(
-                                            child: AutoSizeText(
-                                              functions.orderIdFormatter(
-                                                  getJsonField(
-                                                columnOrderDetailsResponse
-                                                    .jsonBody,
-                                                r'''$.result.id''',
-                                              ).toString()),
-                                              maxLines: 2,
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 5),
+                                            child: Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '0ck5hck8' /* Payment Method */,
+                                              ),
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyText1
                                                   .override(
                                                     fontFamily: 'AvenirArabic',
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500,
+                                                    color: Color(0xFF6B6B6B),
+                                                    fontWeight: FontWeight.w300,
                                                     useGoogleFonts: false,
                                                   ),
                                             ),
                                           ),
+                                          Text(
+                                            valueOrDefault<String>(
+                                              getJsonField(
+                                                columnOrderDetailsResponse
+                                                    .jsonBody,
+                                                r'''$.result.transaction_data.transaction_method''',
+                                              ).toString(),
+                                              'null',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts: false,
+                                                  lineHeight: 1.5,
+                                                ),
+                                          ),
                                         ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 22),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 5, 0),
+                                  Expanded(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -1855,7 +1772,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                   0, 0, 0, 5),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
-                                              'zagvs0yx' /* Amount */,
+                                              'qxs4ycvd' /* Transaction Ref. */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
@@ -1869,23 +1786,18 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                         ),
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 5, 0),
-                                              child: Text(
-                                                valueOrDefault<String>(
-                                                  functions.formatAmount(
-                                                      valueOrDefault<String>(
+                                            Expanded(
+                                              child: AutoSizeText(
+                                                functions.orderIdFormatter(
                                                     getJsonField(
-                                                      columnOrderDetailsResponse
-                                                          .jsonBody,
-                                                      r'''$.result.transaction_data.paid_amount''',
-                                                    ).toString(),
-                                                    '0',
-                                                  )),
-                                                  '0',
-                                                ),
+                                                  columnOrderDetailsResponse
+                                                      .jsonBody,
+                                                  r'''$.result.id''',
+                                                ).toString()),
+                                                maxLines: 2,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText1
@@ -1899,83 +1811,164 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                         ),
                                               ),
                                             ),
-                                            Text(
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 22),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 5, 0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 5),
+                                            child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                '17eaou67' /* SAR */,
+                                                'zagvs0yx' /* Amount */,
                                               ),
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyText1
                                                   .override(
                                                     fontFamily: 'AvenirArabic',
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w500,
+                                                    color: Color(0xFF6B6B6B),
+                                                    fontWeight: FontWeight.w300,
                                                     useGoogleFonts: false,
                                                   ),
                                             ),
-                                          ],
-                                        ),
-                                      ],
+                                          ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 5, 0),
+                                                child: Text(
+                                                  valueOrDefault<String>(
+                                                    functions.formatAmount(
+                                                        valueOrDefault<String>(
+                                                      getJsonField(
+                                                        columnOrderDetailsResponse
+                                                            .jsonBody,
+                                                        r'''$.result.transaction_data.paid_amount''',
+                                                      ).toString(),
+                                                      '0',
+                                                    )),
+                                                    '0',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'AvenirArabic',
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                              ),
+                                              Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '17eaou67' /* SAR */,
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'AvenirArabic',
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: false,
+                                                        ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 5),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            'x0ed6u9h' /* Date & Time */,
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 5),
+                                          child: Text(
+                                            FFLocalizations.of(context).getText(
+                                              'x0ed6u9h' /* Date & Time */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  color: Color(0xFF6B6B6B),
+                                                  fontWeight: FontWeight.w300,
+                                                  useGoogleFonts: false,
+                                                ),
+                                          ),
+                                        ),
+                                        Text(
+                                          valueOrDefault<String>(
+                                            functions.formatDateTime(
+                                                valueOrDefault<int>(
+                                                  getJsonField(
+                                                    columnOrderDetailsResponse
+                                                        .jsonBody,
+                                                    r'''$.result.transaction_data.created_at._seconds''',
+                                                  ),
+                                                  0,
+                                                ),
+                                                FFAppState().locale),
+                                            '0',
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
                                                 fontFamily: 'AvenirArabic',
-                                                color: Color(0xFF6B6B6B),
-                                                fontWeight: FontWeight.w300,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
                                               ),
                                         ),
-                                      ),
-                                      Text(
-                                        valueOrDefault<String>(
-                                          functions.formatDateTime(
-                                              valueOrDefault<int>(
-                                                getJsonField(
-                                                  columnOrderDetailsResponse
-                                                      .jsonBody,
-                                                  r'''$.result.transaction_data.created_at._seconds''',
-                                                ),
-                                                0,
-                                              ),
-                                              FFAppState().locale),
-                                          '0',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'AvenirArabic',
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              useGoogleFonts: false,
-                                            ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                          ],
+                        ),
+                      ],
+                    ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 22, 20, 30),
                     child: Row(

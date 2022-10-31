@@ -383,6 +383,17 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                     propertiesIndex]
                                                                 .initialize()
                                                                 .then((value) {
+                                                              isMuted.value
+                                                                  ? videoPlayers[
+                                                              widget.homeScreenLength! +
+                                                                  propertiesIndex]
+                                                                  .setVolume(
+                                                                  0)
+                                                                  : videoPlayers[
+                                                              widget.homeScreenLength! +
+                                                                  propertiesIndex]
+                                                                  .setVolume(
+                                                                  100);
                                                               currentPropertyindex =
                                                                   widget.homeScreenLength! +
                                                                       propertiesIndex;
@@ -391,17 +402,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                       propertiesIndex]
                                                                   .play();
                                                               isPaused = false;
-                                                              isMuted.value
-                                                                  ? videoPlayers[
-                                                                          widget.homeScreenLength! +
-                                                                              propertiesIndex]
-                                                                      .setVolume(
-                                                                          0)
-                                                                  : videoPlayers[
-                                                                          widget.homeScreenLength! +
-                                                                              propertiesIndex]
-                                                                      .setVolume(
-                                                                          100);
+
                                                               setState(() {
                                                                 videoPlayers
                                                                     .forEach(
@@ -467,22 +468,23 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                             //   }
                                                             // });
                                                           } else {
+                                                            isMuted.value
+                                                                ? videoPlayers[widget
+                                                                .homeScreenLength! +
+                                                                propertiesIndex]
+                                                                .setVolume(
+                                                                0)
+                                                                : videoPlayers[widget
+                                                                .homeScreenLength! +
+                                                                propertiesIndex]
+                                                                .setVolume(
+                                                                100);
                                                             videoPlayers[widget
                                                                         .homeScreenLength! +
                                                                     propertiesIndex]
                                                                 .play();
                                                             isPaused = false;
-                                                            isMuted.value
-                                                                ? videoPlayers[widget
-                                                                            .homeScreenLength! +
-                                                                        propertiesIndex]
-                                                                    .setVolume(
-                                                                        0)
-                                                                : videoPlayers[widget
-                                                                            .homeScreenLength! +
-                                                                        propertiesIndex]
-                                                                    .setVolume(
-                                                                        100);
+
                                                             currentPropertyindex =
                                                                 widget.homeScreenLength! +
                                                                     propertiesIndex;
@@ -1438,21 +1440,28 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  0, 0, 8, 0),
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(11),
-                                                        child: Image.network(
-                                                          getJsonField(
-                                                            banksItem,
-                                                            r'''$.attributes.bank_logo.data.attributes.url''',
+                                                                  0, 0, 1, 0),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                            shape: BoxShape.circle,
+                                                            border: Border.all(
+                                                              color: Color(0xFF8C8C8C),
+                                                            ),
                                                           ),
-                                                          width: 22,
-                                                          height: 22,
-                                                          fit: BoxFit.cover,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                            BorderRadius.circular(11),
+                                                            child: Image.network(
+                                                              getJsonField(
+                                                                banksItem,
+                                                                r'''$.attributes.bank_logo.data.attributes.url''',
+                                                              ),
+                                                              width: 22,
+                                                              height: 22,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
                                                     );
                                                   }),
                                                 );
