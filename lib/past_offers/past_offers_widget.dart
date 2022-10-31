@@ -1093,7 +1093,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                   FFLocalizations.of(
                                                                           context)
                                                                       .getText(
-                                                                    '3htsv7vx' /* Total price */,
+                                                                    'lastInstallment' /* Total price */,
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)

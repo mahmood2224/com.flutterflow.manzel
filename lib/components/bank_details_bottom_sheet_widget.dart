@@ -51,8 +51,8 @@ class _BankDetailsBottomSheetWidgetState
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(0),
                 bottomRight: Radius.circular(0),
-                topLeft: Radius.circular(17),
-                topRight: Radius.circular(17),
+                topLeft: Radius.circular(0),
+                topRight: Radius.circular(0),
               ),
               border: Border.all(
                 color: Color(0xFFECECEC),

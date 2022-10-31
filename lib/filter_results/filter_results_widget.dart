@@ -1497,7 +1497,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  0, 0, 1, 0),
+                                                                  0, 0, 2, 0),
                                                         child: Container(
                                                           decoration: BoxDecoration(
                                                             shape: BoxShape.circle,
