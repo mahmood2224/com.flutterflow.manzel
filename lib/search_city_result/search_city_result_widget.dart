@@ -219,7 +219,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                 city: widget.cityName,
                                 locale: FFAppState().locale,
                                 populate:
-                                    '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
+                                    '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
                               )))
                             .future,
                     builder: (context, snapshot) {

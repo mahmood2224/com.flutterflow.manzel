@@ -144,7 +144,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                       minimumPrice: widget.minInstallment,
                       maximumPrice: widget.maxInstallment,
                       populate:
-                          '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
+                          '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -280,7 +280,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                       minimumPrice: widget.minInstallment,
                       maximumPrice: widget.maxInstallment,
                       populate:
-                          '*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
+                          '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
