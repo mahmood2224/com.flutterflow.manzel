@@ -58,6 +58,7 @@ class _OffersWidgetState extends State<OffersWidget> {
 StopWatchTimer timerController = StopWatchTimer(
   mode: StopWatchMode.countDown,
   );
+Map<int,StopWatchTimer> timerControllersMap = {};
   String? timerValue;
   int? timerMilliseconds;
 
@@ -105,9 +106,6 @@ StopWatchTimer timerController = StopWatchTimer(
     // On page load action.
    // inAppReview.openStoreListing(appStoreId: '1630341481');
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      var diffValue = 60;
-      timerController..setPresetSecondTime(diffValue,add:false);
-      timerController.onStartTimer();
       final _sendbird = await sendbird.SendbirdSdk(
           appId: "${EnvVariables.instance.sendbirdAppId}");
       final _ = await _sendbird.connect(currentUserUid);
@@ -502,6 +500,24 @@ StopWatchTimer timerController = StopWatchTimer(
                                           (context, activeOffersIndex) {
                                         final activeOffersItem =
                                             activeOffers[activeOffersIndex];
+                                        if (functions
+                                            .chatButtonVisibility(
+                                            getJsonField(
+                                              activeOffersItem,
+                                              r'''$.status''',
+                                            ).toString())){
+                                          var diffValue = (getJsonField(
+                                            activeOffersItem,
+                                            r'''$.booking_acceptance_expiry_time._seconds''',
+                                          )-((DateTime.now().millisecondsSinceEpoch*0.001).toInt()));
+                                          timerControllersMap[activeOffersIndex] =  StopWatchTimer(
+                                            mode: StopWatchMode.countDown,
+                                              presetMillisecond: diffValue*1000
+                                          );
+                                        // timerController..setPresetSecondTime(diffValue,add:false);
+                                        //timerController.onStartTimer();
+                                          timerControllersMap[activeOffersIndex]!.onStartTimer();
+                                        }
                                         return Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -1127,8 +1143,8 @@ StopWatchTimer timerController = StopWatchTimer(
                                                               Align(
                                                                 alignment: AlignmentDirectional(0, 0),
                                                                 child: StreamBuilder<int>(
-                                                                    stream: timerController.rawTime,
-                                                                    initialData: 0,
+                                                                    initialData: 10,
+                                                                    stream: timerControllersMap[activeOffersIndex]!.rawTime,
                                                                     builder: (context, snap) {
                                                                       final value = snap.data;
                                                                       print(">>>>>>>>>>>>>>>>>>> value = ${value}");
@@ -1154,7 +1170,7 @@ StopWatchTimer timerController = StopWatchTimer(
                                                               ),
                                                               Align(
                                                                 alignment: AlignmentDirectional(1, 1),
-                                                                child: timerWidget(60),
+                                                                child: timerWidget(6000),
                                                               ),
                                                             ],
                                                           ),
