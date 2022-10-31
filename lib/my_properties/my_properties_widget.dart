@@ -746,7 +746,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             Align(
                                                                               alignment: AlignmentDirectional(0, 0),
                                                                               child: StreamBuilder<int>(
-                                                                                  stream: timerController.minuteTime,
+                                                                                  stream: timerController.rawTime,
                                                                                   initialData: 0,
                                                                                   builder: (context, snap) {
                                                                                     final value = snap.data;
