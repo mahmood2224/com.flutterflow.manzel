@@ -1151,7 +1151,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                                       if(value!<=0){
                                                                         timerControllersMap[activeOffersIndex]!.onStopTimer();
                                                                         timerStoppedMap[activeOffersIndex] = false;
-                                                                        //timerCompleted.value= false;
+                                                                        timerCompleted.value= false;
 
                                                                       }
                                                                       print(">>>>>>>>>>>>>>>>>>> value = ${value}");
