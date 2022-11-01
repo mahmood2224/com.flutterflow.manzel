@@ -719,6 +719,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                         ),
                                                       ],
                                                     ),
+                                                  if (functions
+                                                      .conditionalVisibility(
+                                                      getJsonField(
+                                                        columnOrderDetailsResponse
+                                                            .jsonBody,
+                                                        r'''$.result.order_status''',
+                                                      ).toString(),
+                                                      'collect_offers'))
                                                   Padding(
                                                     padding: EdgeInsetsDirectional.fromSTEB(
                                                         0, 5, 0, 0),
@@ -1667,9 +1675,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                   ),
                   if (getJsonField(
                         columnOrderDetailsResponse.jsonBody,
-                        r'''$.result.order_status''',
+                        r'''$.result.transaction_data.transaction_id''',
                       ).toString() !=
-                      "pending")
+                      null && getJsonField(
+                    columnOrderDetailsResponse.jsonBody,
+                    r'''$.result.transaction_data.transaction_id''',
+                  ).toString().isNotEmpty )
                     Column(
                       children: [
                         Padding(

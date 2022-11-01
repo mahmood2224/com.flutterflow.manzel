@@ -1219,9 +1219,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 )
                                               : InkWell(
                                                   onTap: () async {
+                                                    propertiesItem[
+                                                    "isBookmarked"] = propertiesItem[
+                                                    "isBookmarked"]?
+                                                    true:false;
+                                                    setState(() {});
                                                     tapped_index =
                                                         propertiesIndex;
                                                     bookMarkTapped.value = true;
+
                                                     logFirebaseEvent(
                                                         'add_to_wishlist');
                                                     logFirebaseEvent(

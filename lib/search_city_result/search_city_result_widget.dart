@@ -916,6 +916,11 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                           ))
                                                         : InkWell(
                                                             onTap: () async {
+                                                              propertiesItem[
+                                                              "isBookmarked"] = propertiesItem[
+                                                              "isBookmarked"]?
+                                                              true:false;
+                                                              setState(() {});
                                                               tapped_index =
                                                                   propertiesIndex;
                                                               bookMarkTapped

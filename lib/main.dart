@@ -389,7 +389,6 @@ class _NavBarPageState extends State<NavBarPage> {
         }
       }
     }
-
   }
 
   @override
@@ -428,8 +427,8 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.sticky_note_2_outlined,
-              size: 24,
+              Manzel.my_properties_nav_bar,
+              size: 22,
             ),
             label: FFLocalizations.of(context).getText(
               'lhqoha7d' /* My Properties */,

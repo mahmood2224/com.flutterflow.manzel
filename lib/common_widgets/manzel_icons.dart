@@ -54,7 +54,7 @@ class Manzel {
   static const IconData group_1808 = IconData(0xe81f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData group_1817 = IconData(0xe820, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData group_1810 = IconData(0xe821, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData group_1812 = IconData(0xe822, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData my_properties_nav_bar = IconData(0xe822, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData group_1818 = IconData(0xe823, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData receipt = IconData(0xe824, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData request_visit = IconData(0xe825, fontFamily: _kFontFam, fontPackage: _kFontPkg);

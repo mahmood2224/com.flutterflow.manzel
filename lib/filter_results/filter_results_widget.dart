@@ -973,6 +973,11 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                           ))
                                                         : InkWell(
                                                             onTap: () async {
+                                                              propertiesItem[
+                                                              "isBookmarked"] = propertiesItem[
+                                                              "isBookmarked"]?
+                                                              true:false;
+                                                              setState(() {});
                                                               tapped_index =
                                                                   propertiesIndex;
                                                               bookMarkTapped
