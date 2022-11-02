@@ -7,11 +7,11 @@ import '../../flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 
 // Begin custom action code
-Future<String> formatCurrency(String amount) async {
+Future<String> formatCurrency(String? amount) async {
   final _currencyFormat = NumberFormat.simpleCurrency(
     decimalDigits: 0,
   );
-  if (amount.trim().isEmpty ?? true) {
+  if (amount!.trim().isEmpty ?? true) {
     return '';
   }
   String price = _currencyFormat.format(amount);

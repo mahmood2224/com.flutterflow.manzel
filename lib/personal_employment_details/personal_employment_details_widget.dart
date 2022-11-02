@@ -11,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class PersonalEmploymentDetailsWidget extends StatefulWidget {
-  const PersonalEmploymentDetailsWidget({Key key}) : super(key: key);
+  const PersonalEmploymentDetailsWidget({Key? key}) : super(key: key);
 
   @override
   _PersonalEmploymentDetailsWidgetState createState() =>
@@ -20,11 +20,11 @@ class PersonalEmploymentDetailsWidget extends StatefulWidget {
 
 class _PersonalEmploymentDetailsWidgetState
     extends State<PersonalEmploymentDetailsWidget> {
-  String bankValue;
-  String monthlyIncomeValue;
-  String privateSectorValue;
-  TextEditingController emailController;
-  TextEditingController fullNameController;
+  String? bankValue;
+  String? monthlyIncomeValue;
+  String? privateSectorValue;
+  TextEditingController? emailController;
+  TextEditingController? fullNameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -34,6 +34,13 @@ class _PersonalEmploymentDetailsWidgetState
     fullNameController = TextEditingController(text: currentUserDisplayName);
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PersonalEmploymentDetails'});
+  }
+
+  @override
+  void dispose() {
+    emailController?.dispose();
+    fullNameController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -73,6 +80,7 @@ class _PersonalEmploymentDetailsWidgetState
                 logFirebaseEvent('PERSONAL_EMPLOYMENT_DETAILS_backIcon_ON_');
                 // goToKYC
                 logFirebaseEvent('backIcon_goToKYC');
+
                 context.pushNamed('KYC');
               },
             ),
@@ -96,7 +104,7 @@ class _PersonalEmploymentDetailsWidgetState
                   width: 338,
                   lineHeight: 4,
                   animation: true,
-                  progressColor: Color(0xFF81D05C),
+                  progressColor: FlutterFlowTheme.of(context).secondaryGreen,
                   backgroundColor: Color(0xFFF8F8F8),
                   barRadius: Radius.circular(6),
                   padding: EdgeInsets.zero,
@@ -113,7 +121,7 @@ class _PersonalEmploymentDetailsWidgetState
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 12,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -135,7 +143,7 @@ class _PersonalEmploymentDetailsWidgetState
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 17,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -159,7 +167,7 @@ class _PersonalEmploymentDetailsWidgetState
                               Duration(milliseconds: 2000),
                               () => setState(() {}),
                             ),
-                            autofocus: true,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: FFLocalizations.of(context).getText(
@@ -179,10 +187,24 @@ class _PersonalEmploymentDetailsWidgetState
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                             ),
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       fontWeight: FontWeight.w300,
                                       useGoogleFonts: false,
                                     ),
@@ -205,7 +227,7 @@ class _PersonalEmploymentDetailsWidgetState
                             Duration(milliseconds: 2000),
                             () => setState(() {}),
                           ),
-                          autofocus: true,
+                          autofocus: false,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: FFLocalizations.of(context).getText(
@@ -225,10 +247,24 @@ class _PersonalEmploymentDetailsWidgetState
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
@@ -441,7 +477,7 @@ class _PersonalEmploymentDetailsWidgetState
                           'araxruq2' /* Does the Sakani loan cover you... */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               fontSize: 16,
                               fontWeight: FontWeight.w300,
                               useGoogleFonts: false,
@@ -470,7 +506,7 @@ class _PersonalEmploymentDetailsWidgetState
                             color: Colors.white,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500,
                                       useGoogleFonts: false,
@@ -496,7 +532,7 @@ class _PersonalEmploymentDetailsWidgetState
                           color: Colors.white,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
@@ -530,7 +566,7 @@ class _PersonalEmploymentDetailsWidgetState
                           color: FlutterFlowTheme.of(context).primaryColor,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,

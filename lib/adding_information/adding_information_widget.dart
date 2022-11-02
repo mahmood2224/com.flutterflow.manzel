@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/terms_conditions_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -9,7 +10,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddingInformationWidget extends StatefulWidget {
-  const AddingInformationWidget({Key key}) : super(key: key);
+  const AddingInformationWidget({Key? key}) : super(key: key);
 
   @override
   _AddingInformationWidgetState createState() =>
@@ -17,7 +18,7 @@ class AddingInformationWidget extends StatefulWidget {
 }
 
 class _AddingInformationWidgetState extends State<AddingInformationWidget> {
-  TextEditingController fullNameController;
+  TextEditingController? fullNameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -26,6 +27,12 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
     fullNameController = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AddingInformation'});
+  }
+
+  @override
+  void dispose() {
+    fullNameController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -121,6 +128,8 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                           ),
                                       enabledBorder: InputBorder.none,
                                       focusedBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      focusedErrorBorder: InputBorder.none,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
@@ -173,7 +182,23 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               'ADDING_INFORMATION_PAGE_terms_ON_TAP');
                           // termsAndConditions
                           logFirebaseEvent('terms_termsAndConditions');
-                          context.goNamed('TermsConditions');
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: FlutterFlowTheme.of(context).white,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.95,
+                                  child: TermsConditionsBottomSheetWidget(
+                                    pageType: 5,
+                                  ),
+                                ),
+                              );
+                            },
+                          ).then((value) => setState(() {}));
                         },
                         child: Text(
                           FFLocalizations.of(context).getText(
@@ -182,7 +207,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 fontWeight: FontWeight.w500,
@@ -196,6 +221,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               'ADDING_INFORMATION_PAGE_and_ON_TAP');
                           // termsAndConditions
                           logFirebaseEvent('and_termsAndConditions');
+
                           context.goNamed('TermsConditions');
                         },
                         child: Text(
@@ -205,7 +231,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 fontWeight: FontWeight.w500,
@@ -219,7 +245,23 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               'ADDING_INFORMATION_privacyPolicy_ON_TAP');
                           // termsAndConditions
                           logFirebaseEvent('privacyPolicy_termsAndConditions');
-                          context.goNamed('TermsConditions');
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: FlutterFlowTheme.of(context).white,
+                            context: context,
+                            builder: (context) {
+                              return Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.95,
+                                  child: TermsConditionsBottomSheetWidget(
+                                    pageType: 6,
+                                  ),
+                                ),
+                              );
+                            },
+                          ).then((value) => setState(() {}));
                         },
                         child: Text(
                           FFLocalizations.of(context).getText(
@@ -228,7 +270,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color:
                                     FlutterFlowTheme.of(context).primaryColor,
                                 fontWeight: FontWeight.w500,
@@ -250,8 +292,8 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           onPressed: () async {
                             logFirebaseEvent(
                                 'ADDING_INFORMATION_submitInfo_ON_TAP');
-                            if ((fullNameController.text == null ||
-                                fullNameController.text == '')) {
+                            if (fullNameController!.text == null ||
+                                fullNameController!.text == '') {
                               logFirebaseEvent('submitInfo_Show-Snack-Bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -271,10 +313,12 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               logFirebaseEvent('submitInfo_submitInfo');
 
                               final userUpdateData = createUserRecordData(
-                                name: fullNameController.text,
+                                name: fullNameController!.text,
                               );
-                              await currentUserReference.update(userUpdateData);
+                              await currentUserReference!
+                                  .update(userUpdateData);
                               logFirebaseEvent('submitInfo_Navigate-To');
+
                               context.goNamed('HomeScreen');
                             }
                           },
@@ -284,10 +328,10 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 56,
-                            color: Color(0xFF2971FB),
+                            color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       color: Colors.white,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w800,

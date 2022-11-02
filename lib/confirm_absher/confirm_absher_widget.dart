@@ -10,14 +10,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ConfirmAbsherWidget extends StatefulWidget {
-  const ConfirmAbsherWidget({Key key}) : super(key: key);
+  const ConfirmAbsherWidget({Key? key}) : super(key: key);
 
   @override
   _ConfirmAbsherWidgetState createState() => _ConfirmAbsherWidgetState();
 }
 
 class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
-  TextEditingController enterOTPController;
+  TextEditingController? enterOTPController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -26,6 +26,12 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
     enterOTPController = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ConfirmAbsher'});
+  }
+
+  @override
+  void dispose() {
+    enterOTPController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -104,7 +110,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                   width: 338,
                   lineHeight: 4,
                   animation: true,
-                  progressColor: Color(0xFF81D05C),
+                  progressColor: FlutterFlowTheme.of(context).secondaryGreen,
                   backgroundColor: Color(0xFFF8F8F8),
                   barRadius: Radius.circular(6),
                   padding: EdgeInsets.zero,
@@ -119,7 +125,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                           'jbeldlu4' /* OTP Absher */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               fontSize: 25,
                               fontWeight: FontWeight.w800,
                               useGoogleFonts: false,
@@ -140,7 +146,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 16,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -160,7 +166,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                           currentPhoneNumber,
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: false,
@@ -189,7 +195,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                             // verifySMSCode
                             logFirebaseEvent('enterOTP_verifySMSCode');
                             GoRouter.of(context).prepareAuthEvent();
-                            final smsCodeVal = enterOTPController.text;
+                            final smsCodeVal = enterOTPController!.text;
                             if (smsCodeVal == null || smsCodeVal.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -228,10 +234,24 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
@@ -260,7 +280,7 @@ class _ConfirmAbsherWidgetState extends State<ConfirmAbsherWidget> {
                           color: FlutterFlowTheme.of(context).primaryColor,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,

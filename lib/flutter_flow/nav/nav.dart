@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
+import '../../zoom_image/zoom_image_widget.dart';
 import '../flutter_flow_theme.dart';
 import '../../backend/backend.dart';
 import '../../auth/firebase_user_provider.dart';
 import '../../backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
-
+import '';
 import '../../index.dart';
 import '../../main.dart';
 import 'serialization_util.dart';
@@ -20,10 +21,10 @@ export 'serialization_util.dart';
 const kTransitionInfoKey = '__transition_info__';
 
 class AppStateNotifier extends ChangeNotifier {
-  ManzelFirebaseUser initialUser;
-  ManzelFirebaseUser user;
+  ManzelFirebaseUser? initialUser;
+  ManzelFirebaseUser? user;
   bool showSplashImage = true;
-  String _redirectLocation;
+  String? _redirectLocation;
 
   /// Determines whether the app will refresh and build again when a sign
   /// in or sign out happens. This is useful when the app is launched or
@@ -42,7 +43,7 @@ class AppStateNotifier extends ChangeNotifier {
 
   bool get shouldRedirect => loggedIn && _redirectLocation != null;
 
-  String getRedirectLocation() => _redirectLocation;
+  String getRedirectLocation() => _redirectLocation!;
 
   bool hasRedirect() => _redirectLocation != null;
 
@@ -98,7 +99,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'ConfirmOTP',
               path: 'confirmOTP',
-              builder: (context, params) => ConfirmOTPWidget(),
+              builder: (context, params) => ConfirmOTPWidget(
+              ),
             ),
             FFRoute(
               name: 'Profile',
@@ -120,7 +122,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'EditPersonallInfo',
               path: 'editPersonallInfo',
-              builder: (context, params) => EditPersonallInfoWidget(),
+              builder: (context, params) => EditPersonallInfoWidget(
+                screenName: params.getParam('screenName', ParamType.String),
+              ),
             ),
             FFRoute(
               name: 'EditMobileNumber',
@@ -134,7 +138,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   ? NavBarPage(initialPage: 'ConfirmNewNumberOTPWidget')
                   : ConfirmNewNumberOTPWidget(
                       phoneNumber:
-                          params.getParam('phoneNumber', ParamType.String)),
+                          params.getParam('phoneNumber', ParamType.String),
+                      isFromUpdate:
+                          params.getParam('isFromUpdate', ParamType.String)),
+            ),
+
+            FFRoute(
+              name: 'HelpAndSupport',
+              path: 'helpAndSupport',
+              builder: (context, params) => HelpAndSupportWidget(),
             ),
             FFRoute(
               name: 'HomeScreen',
@@ -156,16 +168,44 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => NotificationsWidget(),
             ),
             FFRoute(
+              name: 'Offers',
+              path: 'offers',
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Offers')
+                  : OffersWidget(
+                      propertyId:
+                          params.getParam('propertyId', ParamType.String),
+                    ),
+            ),
+            FFRoute(
               name: 'Filter',
               path: 'filter',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Filter')
-                  : FilterWidget(),
+              builder: (context, params) => FilterWidget(
+                homeScreenLength:
+                    params.getParam('homeScreenLength', ParamType.int),
+                //cityList : params.getParam('cityList',ParamType.JSON),
+              ),
+            ),
+            FFRoute(
+              name: 'PastOffers',
+              path: 'pastOffers',
+              builder: (context, params) => PastOffersWidget(),
             ),
             FFRoute(
               name: 'filterResults',
               path: 'filterResults',
-              builder: (context, params) => FilterResultsWidget(),
+              builder: (context, params) => FilterResultsWidget(
+                homeScreenLength:
+                    params.getParam('homeScreenLength', ParamType.int),
+                cityName: params.getParam('cityName', ParamType.String),
+                furnishingType:
+                    params.getParam('furnishingType', ParamType.String),
+                propertyType: params.getParam('propertyType', ParamType.String),
+                minInstallment:
+                    params.getParam('minInstallment', ParamType.String),
+                maxInstallment:
+                    params.getParam('maxInstallment', ParamType.String),
+              ),
             ),
             FFRoute(
               name: 'MyProperties',
@@ -175,18 +215,53 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   ? NavBarPage(initialPage: 'MyProperties')
                   : MyPropertiesWidget(),
             ),
+
+            FFRoute(
+              name: 'PropertyDetails',
+              path: 'propertyDetails',
+              builder: (context, params) => PropertyDetailsWidget(
+                  propertyId: params.getParam('propertyId', ParamType.int),
+                  jsonData: params.getParam('jsonData', ParamType.JSON),
+                  path: params.getParam('path', ParamType.String)),
+            ),
+            FFRoute(
+              name: 'propertyVideo',
+              path: 'propertyVideo',
+              builder: (context, params) => PropertyVideoWidget(
+                videoURL: params.getParam('videoURL', ParamType.String),
+                propertyName: params.getParam('propertyName', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'FloorPlan',
+              path: 'floorPlan',
+              builder: (context, params) => FloorPlanWidget(
+                propertyId: params.getParam('propertyId', ParamType.int),
+              ),
+            ),
+            FFRoute(
+              name: 'ThreeSixtyView',
+              path: 'threeSixtyView',
+              builder: (context, params) => ThreeSixtyViewWidget(
+                url: params.getParam('url', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'imageGalleryView',
+              path: 'imageGalleryView',
+              builder: (context, params) => ImageGalleryViewWidget(
+                propertyId: params.getParam('propertyId', ParamType.int),
+                  screenName: params.getParam('screenName', ParamType.String),
+                  imageList: params.getParam('imageList', ParamType.JSON)
+              ),
+            ),
             FFRoute(
               name: 'WhereAreYouLooking',
               path: 'whereAreYouLooking',
               builder: (context, params) => WhereAreYouLookingWidget(
                 city: params.getParam('city', ParamType.String),
-              ),
-            ),
-            FFRoute(
-              name: 'PropertyDetails',
-              path: 'propertyDetails',
-              builder: (context, params) => PropertyDetailsWidget(
-                propertyId: params.getParam('propertyId', ParamType.int),
+                homeScreenLength:
+                    params.getParam('homeScreenLength', ParamType.int),
               ),
             ),
             FFRoute(
@@ -194,16 +269,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'searchCityResult',
               builder: (context, params) => SearchCityResultWidget(
                 cityName: params.getParam('cityName', ParamType.String),
-                peropertiesAvailable:
-                    params.getParam('peropertiesAvailable', ParamType.int),
-              ),
-            ),
-            FFRoute(
-              name: 'bankDetails',
-              path: 'bankDetails',
-              builder: (context, params) => BankDetailsWidget(
-                bankId: params.getParam('bankId', ParamType.int),
-                propertyId: params.getParam('propertyId', ParamType.int),
+                propertiesAvailable:
+                    params.getParam('propertiesAvailable', ParamType.int),
+                homeScreenLength:
+                    params.getParam('homeScreenLength', ParamType.int),
               ),
             ),
             FFRoute(
@@ -220,7 +289,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 propertyId: params.getParam('propertyId', ParamType.int),
                 paymentMethod:
                     params.getParam('paymentMethod', ParamType.String),
-                orderId: params.getParam('orderId', ParamType.int),
+                orderId: params.getParam('orderId', ParamType.String),
+                transactionId:
+                    params.getParam('transactionId', ParamType.String),
+                  transactionCase:
+                  params.getParam('transactionCase', ParamType.String)
+              ),
+            ),
+            FFRoute(
+              name: 'bankDetails',
+              path: 'bankDetails',
+              builder: (context, params) => BankDetailsWidget(
+                bankId: params.getParam('bankId', ParamType.int),
+                propertyId: params.getParam('propertyId', ParamType.int),
               ),
             ),
             FFRoute(
@@ -229,6 +310,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => OrderDetailsWidget(
                 propertId: params.getParam('propertId', ParamType.int),
               ),
+            ),
+            FFRoute(
+              name: 'AddCardDetails',
+              path: 'addCardDetails',
+              builder: (context, params) => AddCardDetailsWidget(),
             ),
             FFRoute(
               name: 'KYC',
@@ -249,15 +335,43 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'PersonalEmploymentDetails',
               path: 'personalEmploymentDetails',
               builder: (context, params) => PersonalEmploymentDetailsWidget(),
+            ),
+            FFRoute(
+              name: 'Chat',
+              path: 'chat',
+              builder: (context, params) => ChatWidget(
+                bankJson: params.getParam('bankJson', ParamType.JSON),
+              ),
+            ),
+            FFRoute(
+              name: 'BookingDetails',
+              path: 'bookingDetails',
+              builder: (context, params) => BookingDetailsWidget(
+                orderId: params.getParam('orderId', ParamType.String),
+              ),
+            ),
+
+            FFRoute(
+              name: 'depositeRecipt',
+              path: 'depositeRecipt',
+              builder: (context, params) => DepositeReciptWidget(
+                depositeRecpit:
+                    params.getParam('depositeRecpit', ParamType.String),
+                propertyName: params.getParam('propertyName', ParamType.String),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
       ],
+      urlPathStrategy: UrlPathStrategy.path,
     );
 
-extension NavParamExtensions on Map<String, String> {
-  Map<String, String> get withoutNulls =>
-      Map.fromEntries(entries.where((e) => e.value != null));
+extension NavParamExtensions on Map<String, String?> {
+  Map<String, String> get withoutNulls => Map.fromEntries(
+        entries
+            .where((e) => e.value != null)
+            .map((e) => MapEntry(e.key, e.value!)),
+      );
 }
 
 extension NavigationExtensions on BuildContext {
@@ -266,7 +380,7 @@ extension NavigationExtensions on BuildContext {
     bool mounted, {
     Map<String, String> params = const <String, String>{},
     Map<String, String> queryParams = const <String, String>{},
-    Object extra,
+    Object? extra,
     bool ignoreRedirect = false,
   }) =>
       !mounted || GoRouter.of(this).shouldRedirect(ignoreRedirect)
@@ -283,7 +397,7 @@ extension NavigationExtensions on BuildContext {
     bool mounted, {
     Map<String, String> params = const <String, String>{},
     Map<String, String> queryParams = const <String, String>{},
-    Object extra,
+    Object? extra,
     bool ignoreRedirect = false,
   }) =>
       !mounted || GoRouter.of(this).shouldRedirect(ignoreRedirect)
@@ -335,7 +449,12 @@ class FFParameters {
 
   Map<String, dynamic> futureParamValues = {};
 
-  bool get isEmpty => state.allParams.isEmpty;
+  // Parameters are empty if the params map is empty or if the only parameter
+  // present is the special extra parameter reserved for the transition info.
+  bool get isEmpty =>
+      state.allParams.isEmpty ||
+      (state.extraMap.length == 1 &&
+          state.extraMap.containsKey(kTransitionInfoKey));
 
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
@@ -345,7 +464,7 @@ class FFParameters {
   Future<bool> completeFutures() => Future.wait(
         state.allParams.entries.where(isAsyncParam).map(
           (param) async {
-            final doc = await asyncParams[param.key](param.value)
+            final doc = await asyncParams[param.key]!(param.value)
                 .onError((_, __) => null);
             if (doc != null) {
               futureParamValues[param.key] = doc;
@@ -359,7 +478,7 @@ class FFParameters {
   dynamic getParam(
     String paramName,
     ParamType type, [
-    String collectionName,
+    String? collectionName,
   ]) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -379,9 +498,9 @@ class FFParameters {
 
 class FFRoute {
   const FFRoute({
-    @required this.name,
-    @required this.path,
-    @required this.builder,
+    required this.name,
+    required this.path,
+    required this.builder,
     this.requireAuth = false,
     this.asyncParams = const {},
     this.routes = const [],
@@ -421,11 +540,9 @@ class FFRoute {
           final child = appStateNotifier.loading
               ? Container(
                   color: FlutterFlowTheme.of(context).primaryBackground,
-                  child: Builder(
-                    builder: (context) => Image.asset(
-                      'assets/images/Group_4_(2).png',
-                      fit: BoxFit.scaleDown,
-                    ),
+                  child: Image.asset(
+                    'assets/images/Group_4_(2).png',
+                    fit: BoxFit.scaleDown,
                   ),
                 )
               : PushNotificationsHandler(child: page);
@@ -452,7 +569,7 @@ class FFRoute {
 
 class TransitionInfo {
   const TransitionInfo({
-    this.hasTransition,
+    required this.hasTransition,
     this.transitionType = PageTransitionType.fade,
     this.duration = const Duration(milliseconds: 300),
     this.alignment,
@@ -461,7 +578,7 @@ class TransitionInfo {
   final bool hasTransition;
   final PageTransitionType transitionType;
   final Duration duration;
-  final Alignment alignment;
+  final Alignment? alignment;
 
   static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }

@@ -1,14 +1,18 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/no_results_found_widget.dart';
+import '../components/no_result_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NotificationsWidget extends StatefulWidget {
-  const NotificationsWidget({Key key}) : super(key: key);
+  const NotificationsWidget({Key? key}) : super(key: key);
 
   @override
   _NotificationsWidgetState createState() => _NotificationsWidgetState();
@@ -36,7 +40,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
             'nm3bcvix' /* Notifications */,
           ),
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'Sofia Pro By Khuzaimah',
+                fontFamily: 'AvenirArabic',
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
@@ -49,8 +53,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
             child: InkWell(
               onTap: () async {
                 logFirebaseEvent('NOTIFICATIONS_PAGE_cancel_ON_TAP');
-                logFirebaseEvent('cancel_Navigate-To');
-                context.pushNamed('HomeScreen');
+                logFirebaseEvent('cancel_Close-Dialog,-Drawer,-Etc');
+                Navigator.pop(context);
               },
               child: Icon(
                 Icons.clear_sharp,
@@ -76,7 +80,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                   child: StreamBuilder<List<NotificationsRecord>>(
                     stream: queryNotificationsRecord(
                       queryBuilder: (notificationsRecord) => notificationsRecord
-                          .where('u_id', isEqualTo: currentUserReference),
+                          .where('user_id', isEqualTo: currentUserReference)
+                          .orderBy('created_at', descending: true),
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -86,7 +91,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                             width: 50,
                             height: 50,
                             child: SpinKitRipple(
-                              color: Color(0xFF2971FB),
+                              color: FlutterFlowTheme.of(context).primaryColor,
                               size: 50,
                             ),
                           ),
@@ -94,17 +99,16 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                       }
                       List<NotificationsRecord>
                           notificationsListNotificationsRecordList =
-                          snapshot.data;
+                          snapshot.data!;
                       if (notificationsListNotificationsRecordList.isEmpty) {
                         return Center(
                           child: Container(
-                            width: 280,
-                            height: 169,
-                            child: NoResultsFoundWidget(
-                              titleText: 'No notifications yet',
-                              subtitleText: ' ',
-                              isBottonVisible: false,
-                              screenName: 'Notification',
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.7,
+                            child: NoResultWidget(
+                              titleText: functions.emptyListWidgetTitle(
+                                  'notifications', FFAppState().locale),
+                              screenName: 'notification',
                             ),
                           ),
                         );
@@ -118,110 +122,314 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                           final notificationsListNotificationsRecord =
                               notificationsListNotificationsRecordList[
                                   notificationsListIndex];
-                          return Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(15, 0, 15, 1),
+                          return InkWell(
+                            onTap: () async {
+                              logFirebaseEvent(
+                                  'NOTIFICATIONS_Container_h34e593u_ON_TAP');
+                              if (notificationsListNotificationsRecord
+                                      .notificationType ==
+                                  'Offers') {
+                                logFirebaseEvent('Container_Navigate-To');
+
+                                context.pushNamed(
+                                  'Offers',
+                                  queryParams: {
+                                    'propertyId': serializeParam(
+                                        notificationsListNotificationsRecord
+                                            .propertyId,
+                                        ParamType.String),
+                                  }.withoutNulls,
+                                );
+                              } else {
+                                logFirebaseEvent('Container_Navigate-To');
+
+                                context.pushNamed(
+                                  'BookingDetails',
+                                  queryParams: {
+                                    'orderId': serializeParam(
+                                        notificationsListNotificationsRecord
+                                            .orderId
+                                            ?.toString(),
+                                        ParamType.String),
+                                  }.withoutNulls,
+                                );
+                              }
+
+                              logFirebaseEvent('Container_Backend-Call');
+
+                              final notificationsUpdateData =
+                                  createNotificationsRecordData(
+                                isRead: 1,
+                              );
+                              await notificationsListNotificationsRecord
+                                  .reference
+                                  .update(notificationsUpdateData);
+                            },
                             child: Container(
                               width: 100,
                               decoration: BoxDecoration(
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 0,
-                                    color:
-                                        FlutterFlowTheme.of(context).lineColor,
-                                    offset: Offset(0, 1),
-                                  )
-                                ],
+                                color: FlutterFlowTheme.of(context).white,
                               ),
-                              child: Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 10, 0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(30),
-                                        child: Image.network(
-                                          'https://customercarecontacts.com/wp-content/uploads/2017/09/Al-Rajhi-Bank.jpg',
-                                          width: 35,
-                                          height: 35,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10, 0, 0, 0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  IntrinsicHeight(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        if (notificationsListNotificationsRecord
+                                                .isRead ==
+                                            0)
+                                          Padding(
+                                            padding: const EdgeInsets.only(top:0,bottom: 10),
+                                            child: Container(
+                                              width: 8,
+                                              height: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: FlutterFlowTheme.of(context)
+                                                    .primaryColor,
+                                              ),
+                                            ),
+                                          ),
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5, 0, 0, 0),
+                                            child: Column(
                                               mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
                                               children: [
-                                                Expanded(
-                                                  child: Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'azq2kgbb' /* A new proposal received from  ... */,
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 15, 15),
+                                                  child: Container(
+                                                    width: 100,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
                                                     ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .subtitle1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 9, 0, 0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding: EdgeInsetsDirectional.fromSTEB(11, 0, 10, 0),
+                                                            child: Container(
+                                                              width: 35,
+                                                              height: 35,
+                                                              decoration: BoxDecoration(
+                                                                color: Colors.white,
+                                                                shape: BoxShape.circle,
+                                                                border: Border.all(
+                                                                  color: Color(0xFF8C8C8C),
+                                                                ),
+                                                              ),
+                                                              child: Icon(
+                                                                Manzel.notification,
+                                                                color: Colors.black,
+                                                                size: 20,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                if (functions.notificationConditionalVisibilty(
+                                                                    FFAppState()
+                                                                        .locale,
+                                                                    notificationsListNotificationsRecord
+                                                                        .isRead,
+                                                                    'ar',
+                                                                    0))
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Text(
+                                                                          notificationsListNotificationsRecord
+                                                                              .messageAr!,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .subtitle1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: Colors.black,
+                                                                                fontSize: 14,
+                                                                                fontWeight: FontWeight.w600,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                if (functions.notificationConditionalVisibilty(
+                                                                    FFAppState()
+                                                                        .locale,
+                                                                    notificationsListNotificationsRecord
+                                                                        .isRead,
+                                                                    'en',
+                                                                    0))
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Text(
+                                                                          notificationsListNotificationsRecord
+                                                                              .messageEn!,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .subtitle1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: Colors.black,
+                                                                                fontSize: 14,
+                                                                                fontWeight: FontWeight.w600,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                if (functions.notificationConditionalVisibilty(
+                                                                    FFAppState()
+                                                                        .locale,
+                                                                    notificationsListNotificationsRecord
+                                                                        .isRead,
+                                                                    'ar',
+                                                                    1))
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Text(
+                                                                          notificationsListNotificationsRecord
+                                                                              .messageAr!,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .subtitle1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: Colors.black,
+                                                                                fontSize: 14,
+                                                                                fontWeight: FontWeight.w300,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                if (functions.notificationConditionalVisibilty(
+                                                                    FFAppState()
+                                                                        .locale,
+                                                                    notificationsListNotificationsRecord
+                                                                        .isRead,
+                                                                    'en',
+                                                                    1))
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child:
+                                                                            Text(
+                                                                          notificationsListNotificationsRecord
+                                                                              .messageEn!,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .subtitle1
+                                                                              .override(
+                                                                                fontFamily: 'AvenirArabic',
+                                                                                color: Colors.black,
+                                                                                fontSize: 14,
+                                                                                fontWeight: FontWeight.w300,
+                                                                                useGoogleFonts: false,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                Padding(
+                                                                  padding:
+                                                                      EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              0,
+                                                                              6,
+                                                                              0,
+                                                                              0),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      Text(
+                                                                        functions.notificationsDateTime(
+                                                                            FFAppState()
+                                                                                .locale,
+                                                                            notificationsListNotificationsRecord
+                                                                                .createdAt),
+                                                                        style: FlutterFlowTheme.of(
+                                                                                context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                              fontFamily:
+                                                                                  'AvenirArabic',
+                                                                              color:
+                                                                                  FlutterFlowTheme.of(context).secondaryText,
+                                                                              fontSize:
+                                                                                  12,
+                                                                              fontWeight:
+                                                                                  FontWeight.w300,
+                                                                              useGoogleFonts:
+                                                                                  false,
+                                                                            ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
                                                   ),
+                                                ),
+                                                Divider(
+                                                  thickness: 1,
+                                                  indent: 11,
+                                                  color: Color(0xFFECECEC),
                                                 ),
                                               ],
                                             ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 6, 0, 0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'muysw2pl' /* Today */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
-                                                          fontSize: 12,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          useGoogleFonts: false,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           );

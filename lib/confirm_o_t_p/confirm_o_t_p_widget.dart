@@ -9,14 +9,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ConfirmOTPWidget extends StatefulWidget {
-  const ConfirmOTPWidget({Key key}) : super(key: key);
+  const ConfirmOTPWidget({Key? key}) : super(key: key);
 
   @override
   _ConfirmOTPWidgetState createState() => _ConfirmOTPWidgetState();
 }
 
 class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
-  TextEditingController phoneNumberController;
+  TextEditingController? phoneNumberController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -24,6 +24,12 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'ConfirmOTP'});
     phoneNumberController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    phoneNumberController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -47,6 +53,7 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
             logFirebaseEvent('CONFIRM_O_T_P_PAGE_back_ON_TAP');
             // Back to login
             logFirebaseEvent('back_Backtologin');
+
             context.pushNamed('Login');
           },
         ),
@@ -154,6 +161,20 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color(0x00000000),
+                              width: 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Sofia Pro By Khuzaimah',
@@ -178,7 +199,7 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
                         // verifyOTP
                         logFirebaseEvent('verifyOTP_verifyOTP');
                         GoRouter.of(context).prepareAuthEvent();
-                        final smsCodeVal = phoneNumberController.text;
+                        final smsCodeVal = phoneNumberController!.text;
                         if (smsCodeVal == null || smsCodeVal.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -203,7 +224,7 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
                       options: FFButtonOptions(
                         width: 343,
                         height: 56,
-                        color: Color(0xFF2971FB),
+                        color: FlutterFlowTheme.of(context).primaryColor,
                         textStyle:
                             FlutterFlowTheme.of(context).subtitle2.override(
                                   fontFamily: 'Sofia Pro By Khuzaimah',

@@ -11,20 +11,17 @@ abstract class UserPropertiesRecord
   static Serializer<UserPropertiesRecord> get serializer =>
       _$userPropertiesRecordSerializer;
 
-  @nullable
   @BuiltValueField(wireName: 'u_id')
-  DocumentReference get uId;
+  DocumentReference? get uId;
 
-  @nullable
   @BuiltValueField(wireName: 'p_id')
-  int get pId;
+  int? get pId;
 
-  @nullable
-  String get status;
+  String? get status;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(UserPropertiesRecordBuilder builder) => builder
     ..pId = 0
@@ -35,11 +32,11 @@ abstract class UserPropertiesRecord
 
   static Stream<UserPropertiesRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<UserPropertiesRecord> getDocumentOnce(DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   UserPropertiesRecord._();
   factory UserPropertiesRecord(
@@ -49,17 +46,23 @@ abstract class UserPropertiesRecord
   static UserPropertiesRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createUserPropertiesRecordData({
-  DocumentReference uId,
-  int pId,
-  String status,
-}) =>
-    serializers.toFirestore(
-        UserPropertiesRecord.serializer,
-        UserPropertiesRecord((u) => u
-          ..uId = uId
-          ..pId = pId
-          ..status = status));
+  DocumentReference? uId,
+  int? pId,
+  String? status,
+}) {
+  final firestoreData = serializers.toFirestore(
+    UserPropertiesRecord.serializer,
+    UserPropertiesRecord(
+      (u) => u
+        ..uId = uId
+        ..pId = pId
+        ..status = status,
+    ),
+  );
+
+  return firestoreData;
+}

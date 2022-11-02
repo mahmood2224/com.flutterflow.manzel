@@ -11,64 +11,55 @@ abstract class TransactionsRecord
   static Serializer<TransactionsRecord> get serializer =>
       _$transactionsRecordSerializer;
 
-  @nullable
   @BuiltValueField(wireName: 'user_id')
-  DocumentReference get userId;
+  DocumentReference? get userId;
 
-  @nullable
   @BuiltValueField(wireName: 'order_id')
-  int get orderId;
+  int? get orderId;
 
-  @nullable
   @BuiltValueField(wireName: 'paid_amount')
-  String get paidAmount;
+  String? get paidAmount;
 
-  @nullable
   @BuiltValueField(wireName: 'transaction_type')
-  String get transactionType;
+  String? get transactionType;
 
-  @nullable
   @BuiltValueField(wireName: 'transaction_method')
-  String get transactionMethod;
+  String? get transactionMethod;
 
-  @nullable
-  @BuiltValueField(wireName: 'transaction_id')
-  int get transactionId;
-
-  @nullable
   @BuiltValueField(wireName: 'transaction_status')
-  String get transactionStatus;
+  String? get transactionStatus;
 
-  @nullable
   @BuiltValueField(wireName: 'created_at')
-  DateTime get createdAt;
+  DateTime? get createdAt;
 
-  @nullable
   @BuiltValueField(wireName: 'updated_at')
-  DateTime get updatedAt;
+  DateTime? get updatedAt;
 
-  @nullable
+  @BuiltValueField(wireName: 'transaction_id')
+  String? get transactionId;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(TransactionsRecordBuilder builder) => builder
     ..orderId = 0
     ..paidAmount = ''
     ..transactionType = ''
     ..transactionMethod = ''
-    ..transactionId = 0
-    ..transactionStatus = '';
+    ..transactionStatus = ''
+    ..transactionId = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Transactions');
 
   static Stream<TransactionsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<TransactionsRecord> getDocumentOnce(DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   TransactionsRecord._();
   factory TransactionsRecord(
@@ -78,29 +69,35 @@ abstract class TransactionsRecord
   static TransactionsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createTransactionsRecordData({
-  DocumentReference userId,
-  int orderId,
-  String paidAmount,
-  String transactionType,
-  String transactionMethod,
-  int transactionId,
-  String transactionStatus,
-  DateTime createdAt,
-  DateTime updatedAt,
-}) =>
-    serializers.toFirestore(
-        TransactionsRecord.serializer,
-        TransactionsRecord((t) => t
-          ..userId = userId
-          ..orderId = orderId
-          ..paidAmount = paidAmount
-          ..transactionType = transactionType
-          ..transactionMethod = transactionMethod
-          ..transactionId = transactionId
-          ..transactionStatus = transactionStatus
-          ..createdAt = createdAt
-          ..updatedAt = updatedAt));
+  DocumentReference? userId,
+  int? orderId,
+  String? paidAmount,
+  String? transactionType,
+  String? transactionMethod,
+  String? transactionStatus,
+  DateTime? createdAt,
+  DateTime? updatedAt,
+  String? transactionId,
+}) {
+  final firestoreData = serializers.toFirestore(
+    TransactionsRecord.serializer,
+    TransactionsRecord(
+      (t) => t
+        ..userId = userId
+        ..orderId = orderId
+        ..paidAmount = paidAmount
+        ..transactionType = transactionType
+        ..transactionMethod = transactionMethod
+        ..transactionStatus = transactionStatus
+        ..createdAt = createdAt
+        ..updatedAt = updatedAt
+        ..transactionId = transactionId,
+    ),
+  );
+
+  return firestoreData;
+}

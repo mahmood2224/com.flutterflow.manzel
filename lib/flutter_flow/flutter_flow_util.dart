@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -26,10 +25,10 @@ export 'internationalization.dart' show FFLocalizations;
 export '../backend/firebase_analytics/analytics.dart';
 export 'nav/nav.dart';
 
-T valueOrDefault<T>(T value, T defaultValue) =>
+T valueOrDefault<T>(T? value, T defaultValue) =>
     (value is String && value.isEmpty) || value == null ? defaultValue : value;
 
-String dateTimeFormat(String format, DateTime dateTime) {
+String dateTimeFormat(String format, DateTime? dateTime) {
   if (dateTime == null) {
     return '';
   }
@@ -49,10 +48,10 @@ Future launchURL(String url) async {
 }
 
 Future launchMap({
-  MapType mapType,
-  LatLng location,
-  String address,
-  title,
+  MapType? mapType,
+  LatLng? location,
+  String? address,
+  required title,
 }) async {
   final coords = location != null
       ? Coords(location.latitude, location.longitude)
@@ -69,7 +68,7 @@ Future launchMap({
     );
   }
   return MapLauncher.showMarker(
-    mapType: mapType,
+    mapType: mapType!,
     coords: coords,
     title: title,
     extraParams: extraParams,
@@ -92,18 +91,21 @@ enum DecimalType {
 }
 
 String formatNumber(
-  num value, {
-  FormatType formatType,
-  DecimalType decimalType,
-  String currency,
+  num? value, {
+  required FormatType formatType,
+  DecimalType? decimalType,
+  String? currency,
   bool toLowerCase = false,
-  String format,
-  String locale,
+  String? format,
+  String? locale,
 }) {
+  if (value == null) {
+    return '';
+  }
   var formattedValue = '';
   switch (formatType) {
     case FormatType.decimal:
-      switch (decimalType) {
+      switch (decimalType!) {
         case DecimalType.automatic:
           formattedValue = NumberFormat.decimalPattern().format(value);
           break;
@@ -159,20 +161,27 @@ extension DateTimeComparisonOperators on DateTime {
   bool operator >=(DateTime other) => this > other || isAtSameMomentAs(other);
 }
 
-dynamic getJsonField(dynamic response, String jsonPath) {
+dynamic getJsonField(
+  dynamic response,
+  String jsonPath, [
+  bool isForList = false,
+]) {
   final field = JsonPath(jsonPath).read(response);
-  return field.isNotEmpty
-      ? field.length > 1
-          ? field.map((f) => f.value).toList()
-          : field.first.value
-      : null;
+  if (field.isEmpty) {
+    return null;
+  }
+  if (field.length > 1) {
+    return field.map((f) => f.value).toList();
+  }
+  final value = field.first.value;
+  return isForList && value is! Iterable ? [value] : value;
 }
 
 bool get isAndroid => !kIsWeb && Platform.isAndroid;
 bool get isiOS => !kIsWeb && Platform.isIOS;
 bool get isWeb => kIsWeb;
 bool responsiveVisibility({
-  @required BuildContext context,
+  required BuildContext context,
   bool phone = true,
   bool tablet = true,
   bool tabletLandscape = true,
@@ -196,54 +205,12 @@ const kTextValidatorEmailRegex =
 const kTextValidatorWebsiteRegex =
     r'(https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)';
 
-LatLng cachedUserLocation;
-Future<LatLng> getCurrentUserLocation(
-    {LatLng defaultLocation, bool cached = false}) async {
-  if (cached && cachedUserLocation != null) {
-    return cachedUserLocation;
-  }
-  return queryCurrentUserLocation().then((loc) {
-    if (loc != null) {
-      cachedUserLocation = loc;
-    }
-    return loc ?? defaultLocation;
-  }).onError((error, _) {
-    print("Error querying user location: $error");
-    return defaultLocation;
-  });
-}
-
-Future<LatLng> queryCurrentUserLocation() async {
-  final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) {
-    return Future.error('Location services are disabled.');
-  }
-
-  var permission = await Geolocator.checkPermission();
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.denied) {
-      return Future.error('Location permissions are denied');
-    }
-  }
-
-  if (permission == LocationPermission.deniedForever) {
-    return Future.error(
-        'Location permissions are permanently denied, we cannot request permissions.');
-  }
-
-  final position = await Geolocator.getCurrentPosition();
-  return position != null && position.latitude != 0 && position.longitude != 0
-      ? LatLng(position.latitude, position.longitude)
-      : null;
-}
-
 extension StringDocRef on String {
   DocumentReference get ref => FirebaseFirestore.instance.doc(this);
 }
 
 void setAppLanguage(BuildContext context, String language) =>
-    MyApp.of(context).setLocale(Locale(language, ''));
+    MyApp.of(context).setLocale(language);
 
 void setDarkModeSetting(BuildContext context, ThemeMode themeMode) =>
     MyApp.of(context).setThemeMode(themeMode);
@@ -279,7 +246,7 @@ void showSnackbar(
 }
 
 extension FFStringExt on String {
-  String maybeHandleOverflow({int maxChars, String replacement = ''}) =>
+  String maybeHandleOverflow({int? maxChars, String replacement = ''}) =>
       maxChars != null && length > maxChars
           ? replaceRange(maxChars, null, replacement)
           : this;

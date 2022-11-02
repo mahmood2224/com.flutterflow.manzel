@@ -9,13 +9,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BankDetailsWidget extends StatefulWidget {
   const BankDetailsWidget({
-    Key key,
+    Key? key,
     this.bankId,
     this.propertyId,
   }) : super(key: key);
 
-  final int bankId;
-  final int propertyId;
+  final int? bankId;
+  final int? propertyId;
 
   @override
   _BankDetailsWidgetState createState() => _BankDetailsWidgetState();
@@ -161,13 +161,13 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                     width: 50,
                                     height: 50,
                                     child: SpinKitRipple(
-                                      color: Color(0xFF2971FB),
+                                      color: FlutterFlowTheme.of(context).primaryColor,
                                       size: 50,
                                     ),
                                   ),
                                 );
                               }
-                              final columnBankDetailsResponse = snapshot.data;
+                              final columnBankDetailsResponse = snapshot.data!;
                               return Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -187,6 +187,7 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                                   'BANK_DETAILS_PAGE_Icon_w5gr2oec_ON_TAP');
                                               logFirebaseEvent(
                                                   'Icon_Navigate-To');
+
                                               context.goNamed(
                                                 'PropertyDetails',
                                                 queryParams: {
@@ -210,17 +211,15 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                           child: Text(
                                             valueOrDefault<String>(
                                               BankDetailsCall.bankName(
-                                                (columnBankDetailsResponse
-                                                        ?.jsonBody ??
-                                                    ''),
+                                                columnBankDetailsResponse
+                                                    .jsonBody,
                                               ).toString(),
                                               'Un-Known',
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
+                                                  fontFamily: 'AvenirArabic',
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
                                                   useGoogleFonts: false,
@@ -245,9 +244,7 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                       children: [
                                         Image.network(
                                           BankDetailsCall.bankLogo(
-                                            (columnBankDetailsResponse
-                                                    ?.jsonBody ??
-                                                ''),
+                                            columnBankDetailsResponse.jsonBody,
                                           ),
                                           width: 130,
                                           height: 94,
@@ -266,17 +263,15 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                           child: Text(
                                             valueOrDefault<String>(
                                               BankDetailsCall.bankDescription(
-                                                (columnBankDetailsResponse
-                                                        ?.jsonBody ??
-                                                    ''),
+                                                columnBankDetailsResponse
+                                                    .jsonBody,
                                               ).toString(),
                                               'Un-Known',
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
+                                                  fontFamily: 'AvenirArabic',
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.w300,
                                                   useGoogleFonts: false,
@@ -296,17 +291,15 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                           child: Text(
                                             valueOrDefault<String>(
                                               BankDetailsCall.bankRules(
-                                                (columnBankDetailsResponse
-                                                        ?.jsonBody ??
-                                                    ''),
+                                                columnBankDetailsResponse
+                                                    .jsonBody,
                                               ).toString(),
                                               'Un-Known',
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
-                                                  fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
+                                                  fontFamily: 'AvenirArabic',
                                                   fontWeight: FontWeight.w500,
                                                   useGoogleFonts: false,
                                                 ),
@@ -338,17 +331,15 @@ class _BankDetailsWidgetState extends State<BankDetailsWidget> {
                                             height: 46,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily:
-                                                          'Sofia Pro By Khuzaimah',
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      useGoogleFonts: false,
-                                                    ),
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .subtitle2
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w800,
+                                                  useGoogleFonts: false,
+                                                ),
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1,

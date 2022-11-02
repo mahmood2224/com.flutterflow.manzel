@@ -1,3 +1,5 @@
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -6,7 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class KycWidget extends StatefulWidget {
-  const KycWidget({Key key}) : super(key: key);
+  const KycWidget({Key? key}) : super(key: key);
 
   @override
   _KycWidgetState createState() => _KycWidgetState();
@@ -76,6 +78,7 @@ class _KycWidgetState extends State<KycWidget> {
                                       logFirebaseEvent(
                                           'KYC_PAGE_Icon_wn5vw9qi_ON_TAP');
                                       logFirebaseEvent('Icon_Navigate-To');
+
                                       context.pushNamed('PropertyDetails');
                                     },
                                     child: Icon(
@@ -106,8 +109,7 @@ class _KycWidgetState extends State<KycWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             fontSize: 22,
                                             fontWeight: FontWeight.w500,
                                             useGoogleFonts: false,
@@ -133,7 +135,7 @@ class _KycWidgetState extends State<KycWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 15,
                                           fontWeight: FontWeight.w300,
                                           useGoogleFonts: false,
@@ -175,8 +177,7 @@ class _KycWidgetState extends State<KycWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
@@ -194,14 +195,13 @@ class _KycWidgetState extends State<KycWidget> {
                                         options: FFButtonOptions(
                                           width: 60,
                                           height: 21,
-                                          color: Color(0x3381D05C),
+                                          color: FlutterFlowTheme.of(context).secondaryGreen,
                                           textStyle:
                                               FlutterFlowTheme.of(context)
                                                   .subtitle2
                                                   .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
-                                                    color: Color(0xFF81D05C),
+                                                    fontFamily: 'AvenirArabic',
+                                                    color: FlutterFlowTheme.of(context).secondaryGreen,
                                                     fontSize: 11,
                                                     fontWeight: FontWeight.w500,
                                                     useGoogleFonts: false,
@@ -239,8 +239,7 @@ class _KycWidgetState extends State<KycWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               useGoogleFonts: false,
@@ -256,7 +255,7 @@ class _KycWidgetState extends State<KycWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 10, 0),
                                       child: Icon(
-                                        Icons.location_on_outlined,
+                                        Manzel.location_pin,
                                         color: Color(0xFF33840D),
                                         size: 35,
                                       ),
@@ -268,8 +267,7 @@ class _KycWidgetState extends State<KycWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                            fontFamily: 'AvenirArabic',
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
                                             useGoogleFonts: false,
@@ -293,6 +291,7 @@ class _KycWidgetState extends State<KycWidget> {
                                     // goToAbsherVerification
                                     logFirebaseEvent(
                                         'goToAbsherVerification_goToAbsherVerific');
+
                                     context.goNamed('AbsherVerification');
                                   },
                                   text: FFLocalizations.of(context).getText(
@@ -306,7 +305,7 @@ class _KycWidgetState extends State<KycWidget> {
                                     textStyle: FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: Colors.white,
                                           fontSize: 18,
                                           fontWeight: FontWeight.w800,
@@ -343,7 +342,7 @@ class _KycWidgetState extends State<KycWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           color: Color(0xFF6B6B6B),
                                           fontSize: 17,
                                           fontWeight: FontWeight.w300,

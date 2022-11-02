@@ -11,17 +11,15 @@ abstract class PropertyRecord
   static Serializer<PropertyRecord> get serializer =>
       _$propertyRecordSerializer;
 
-  @nullable
   @BuiltValueField(wireName: 'p_id')
-  int get pId;
+  int? get pId;
 
-  @nullable
   @BuiltValueField(wireName: 'property_city')
-  String get propertyCity;
+  String? get propertyCity;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(PropertyRecordBuilder builder) => builder
     ..pId = 0
@@ -32,25 +30,25 @@ abstract class PropertyRecord
 
   static Stream<PropertyRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<PropertyRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static PropertyRecord fromAlgolia(AlgoliaObjectSnapshot snapshot) =>
       PropertyRecord(
         (c) => c
           ..pId = snapshot.data['p_id']?.round()
           ..propertyCity = snapshot.data['property_city']
-          ..reference = PropertyRecord.collection.doc(snapshot.objectID),
+          ..ffRef = PropertyRecord.collection.doc(snapshot.objectID),
       );
 
   static Future<List<PropertyRecord>> search(
-          {String term,
-          FutureOr<LatLng> location,
-          int maxResults,
-          double searchRadiusMeters}) =>
+          {String? term,
+          FutureOr<LatLng>? location,
+          int? maxResults,
+          double? searchRadiusMeters}) =>
       FFAlgoliaManager.instance
           .algoliaQuery(
             index: 'Property',
@@ -68,15 +66,21 @@ abstract class PropertyRecord
   static PropertyRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createPropertyRecordData({
-  int pId,
-  String propertyCity,
-}) =>
-    serializers.toFirestore(
-        PropertyRecord.serializer,
-        PropertyRecord((p) => p
-          ..pId = pId
-          ..propertyCity = propertyCity));
+  int? pId,
+  String? propertyCity,
+}) {
+  final firestoreData = serializers.toFirestore(
+    PropertyRecord.serializer,
+    PropertyRecord(
+      (p) => p
+        ..pId = pId
+        ..propertyCity = propertyCity,
+    ),
+  );
+
+  return firestoreData;
+}

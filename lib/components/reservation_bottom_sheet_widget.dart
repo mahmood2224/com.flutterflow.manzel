@@ -1,28 +1,34 @@
+import 'package:flutter/services.dart';
+import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
+import 'package:go_sell_sdk_flutter/model/models.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
+
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
+import '../common_widgets/overlay.dart';
+import '../components/terms_conditions_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import '../flutter_flow/random_data_util.dart' as random_data;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ReservationBottomSheetWidget extends StatefulWidget {
   const ReservationBottomSheetWidget({
-    Key key,
+    Key? key,
     this.reservationCost,
-    this.propertyJSON,
     this.propertyId,
+    this.orderId
   }) : super(key: key);
 
-  final int reservationCost;
-  final dynamic propertyJSON;
-  final int propertyId;
+  final int? reservationCost;
+  final int? propertyId;
+  final int? orderId;
 
   @override
   _ReservationBottomSheetWidgetState createState() =>
@@ -31,11 +37,233 @@ class ReservationBottomSheetWidget extends StatefulWidget {
 
 class _ReservationBottomSheetWidgetState
     extends State<ReservationBottomSheetWidget> {
-  ApiCallResponse bookingStatus;
-  ApiCallResponse propertyStatus;
-  OrdersRecord orderDetails;
-  TransactionsRecord transactionDetails;
-  String paymentMethodValue;
+  ApiCallResponse? addOrderApiResponse;
+  ApiCallResponse? transactionApiResponse;
+  String? paymentMethodValue;
+  Map<dynamic, dynamic>? tapSDKResult;
+  OverlayEntry? entry;
+
+  Future<void> setupSDKSession(int paymentType) async {
+    try {
+      GoSellSdkFlutter.sessionConfigurations(
+          trxMode: TransactionMode.PURCHASE,
+          transactionCurrency: "SAR",
+          amount: widget.reservationCost.toString(),
+          customer: Customer(
+              customerId: "", // customer id is important to retrieve cards saved for this customer
+              email: currentUserDocument?.email ?? '',
+              isdNumber: "+966",
+              number: '123456789',
+              firstName: currentUserDocument?.name ?? '',
+              middleName: "",
+              lastName: "",
+              metaData: null),
+          paymentItems: <PaymentItem>[],
+          // // List of taxes
+          taxes: [],
+          // List of shippnig
+          shippings: [],
+          // Post URL
+          postURL: "https://tap.company",
+          // Payment description
+          paymentDescription: "${widget.propertyId} number property purchased",
+          // Payment Metadata
+          paymentMetaData: {},
+          // Payment Reference
+          paymentReference: Reference(
+              payment: "payment", order: widget.orderId.toString()),
+          // payment Descriptor
+          paymentStatementDescriptor: "paymentStatementDescriptor",
+          // Save Card Switch
+          isUserAllowedToSaveCard: false,
+          // Enable/Disable 3DSecure
+          isRequires3DSecure: true,
+          // Receipt SMS/Email
+          receipt: Receipt(false, false),
+          // Authorize Action [Capture - Void]
+          authorizeAction: AuthorizeAction(type: AuthorizeActionType.CAPTURE, timeInHours: 10),
+          // Destinations
+          //   destinations: null,
+          // merchant id
+          merchantID: "",
+          // Allowed cards
+          allowedCadTypes: CardType.ALL,
+          applePayMerchantID: "merchant.com.flutterflow.manzel",
+          allowsToSaveSameCardMoreThanOnce: false,
+          // pass the card holder name to the SDK
+          cardHolderName: "",
+          // disable changing the card holder name by the user
+          allowsToEditCardHolderName: true,
+          // select payments you need to show [Default is all, and you can choose between WEB-CARD-APPLEPAY ]
+          paymentType: paymentType == 0 ? PaymentType.CARD : PaymentType.DEVICE,
+          // Transaction mode
+          sdkMode: SDKMode.Sandbox);
+    } on PlatformException {
+      // platformVersion = 'Failed to get platform version.';
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      //   tapSDKResult = {};
+    });
+  }
+
+  Future<void> startSDK(BuildContext context, Map<String, String> query,) async {
+
+
+    tapSDKResult = await GoSellSdkFlutter.startPaymentSDK;
+
+
+    print('>>>> ${tapSDKResult!['sdk_result']}');
+    switch (tapSDKResult!['sdk_result']) {
+      case "SUCCESS":
+      // sdkStatus = "SUCCESS";
+      // handleSDKResult();
+      // context.pushNamed(
+      //   'Confirmation',
+      //   queryParams: query
+      // );
+      logFirebaseEvent('purchase');
+        transactionApiResponse = await AddTransactionCall.call(
+          amountPaid: widget.reservationCost.toString(),
+          transactionMethod: ((paymentMethodValue?.toLowerCase() == 'mada' || paymentMethodValue?.toLowerCase() == 'مدى' ) ?"Mada":"ApplePay"),
+          orderId: widget.orderId,
+          userId: currentUserReference?.id,
+          transactionStatus: 'completed',
+          transactionId: tapSDKResult!['charge_id'],
+          authorazationToken: FFAppState().authToken,
+          version: FFAppState().apiVersion
+        );
+
+        if (((transactionApiResponse?.statusCode ?? 200)) ==
+            200) {
+          logFirebaseEvent('Button_Bottom-Sheet');
+          Navigator.pop(context);
+          logFirebaseEvent('Button_Navigate-To');
+          context.goNamed(
+            'Confirmation',
+            queryParams: {
+              'propertyId': serializeParam(
+                  widget.propertyId, ParamType.int),
+              'orderId': serializeParam(
+                  widget.orderId,
+                  ParamType.int),
+              'paymentMethod': serializeParam(
+                  paymentMethodValue, ParamType.String),
+              'transactionId':
+              serializeParam(tapSDKResult!['charge_id'], ParamType.String),
+              'transactionCase': serializeParam("SUCCESS", ParamType.String),
+            }.withoutNulls,
+          );
+
+        }else{
+          Navigator.pop(context);
+          logFirebaseEvent('Button_Navigate-To');
+          context.goNamed(
+            'Confirmation',
+            queryParams: {
+              'propertyId': serializeParam(
+                  widget.propertyId, ParamType.int),
+              'orderId': serializeParam(
+                  widget.orderId,
+                  ParamType.int),
+              'paymentMethod': serializeParam(
+                  paymentMethodValue, ParamType.String),
+              'transactionId':
+              serializeParam(tapSDKResult!['charge_id'], ParamType.String),
+              'transactionCase': serializeParam("FAILURE", ParamType.String),
+            }.withoutNulls,
+          );
+        }
+        entry!.remove();
+        break;
+      case "FAILED":
+        transactionApiResponse = await AddTransactionCall.call(
+          amountPaid: widget.reservationCost.toString(),
+          transactionMethod: ((paymentMethodValue?.toLowerCase() == 'mada' || paymentMethodValue?.toLowerCase() == 'مدى' ) ?"Mada":"ApplePay"),
+          orderId: widget.orderId,
+          userId: currentUserReference?.id,
+          transactionStatus: 'failed',
+          transactionId: tapSDKResult!['charge_id'],
+          authorazationToken: FFAppState().authToken,
+          version: FFAppState().apiVersion
+        );
+        // if (((transactionApiResponse?.statusCode ?? 200)) ==
+        //     200) {
+        Navigator.pop(context);
+        logFirebaseEvent('Button_Navigate-To');
+        context.goNamed(
+          'Confirmation',
+          queryParams: {
+            'propertyId': serializeParam(
+                widget.propertyId, ParamType.int),
+            'orderId': serializeParam(
+                widget.orderId,
+                ParamType.int),
+            'paymentMethod': serializeParam(
+                paymentMethodValue, ParamType.String),
+            'transactionId':
+            serializeParam(tapSDKResult!['charge_id'], ParamType.String),
+          }.withoutNulls,
+        );
+        entry!.remove();
+   // }
+          break;
+        case "SDK_ERROR":
+          print('sdk error............');
+          print(tapSDKResult!['sdk_error_code']);
+          print(tapSDKResult!['sdk_error_message']);
+          print(tapSDKResult!['sdk_error_description']);
+          print('sdk error............');
+          // sdkErrorCode = tapSDKResult['sdk_error_code'].toString();
+          // sdkErrorMessage = tapSDKResult['sdk_error_message'];
+          // sdkErrorDescription = tapSDKResult['sdk_error_description'];
+          Navigator.pop(context);
+          logFirebaseEvent('Button_Show-Snack-Bar');
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Payment Failed',
+                  style: TextStyle(
+                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+                duration: Duration(milliseconds: 4000),
+                backgroundColor: FlutterFlowTheme.of(context).primaryRed,
+              ));
+          entry!.remove();
+          break;
+
+        case "NOT_IMPLEMENTED":
+        //  sdkStatus = "NOT_IMPLEMENTED";
+          Navigator.pop(context);
+          logFirebaseEvent('Button_Show-Snack-Bar');
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Payment Failed',
+                  style: TextStyle(
+                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                  ),
+                ),
+                duration: Duration(milliseconds: 4000),
+                backgroundColor: FlutterFlowTheme.of(context).primaryRed,
+              ));
+          entry!.remove();
+          break;
+      default:
+        entry!.remove();
+
+      }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,9 +314,9 @@ class _ReservationBottomSheetWidgetState
                         Navigator.pop(context);
                       },
                       child: Icon(
-                        Icons.clear,
+                        Manzel.clear,
                         color: Colors.black,
-                        size: 24,
+                        size: 20,
                       ),
                     ),
                   ),
@@ -108,7 +336,7 @@ class _ReservationBottomSheetWidgetState
                             ),
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'AvenirArabic',
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
                                       useGoogleFonts: false,
@@ -130,7 +358,7 @@ class _ReservationBottomSheetWidgetState
               ),
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'AvenirArabic',
                     fontSize: 13,
                     useGoogleFonts: false,
                   ),
@@ -142,44 +370,99 @@ class _ReservationBottomSheetWidgetState
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  FFLocalizations.of(context).getText(
-                    'njswqwdn' /* agree to our  */,
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 3, 0),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'njswqwdn' /* agree to our  */,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'AvenirArabic',
+                          fontSize: 13,
+                          useGoogleFonts: false,
+                        ),
                   ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
-                        fontSize: 13,
-                        useGoogleFonts: false,
-                      ),
                 ),
                 InkWell(
                   onTap: () async {
                     logFirebaseEvent(
                         'RESERVATION_BOTTOM_SHEET_Text_qhlvmiqm_O');
-                    logFirebaseEvent('Text_Navigate-To');
-                    context.pushNamed(
-                      'TermsConditions',
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 0),
-                        ),
+                    logFirebaseEvent('Text_Bottom-Sheet');
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: FlutterFlowTheme.of(context).white,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.of(context).viewInsets,
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.95,
+                            child: TermsConditionsBottomSheetWidget(
+                              pageType: 5,
+                            ),
+                          ),
+                        );
                       },
-                    );
+                    ).then((value) => setState(() {}));
                   },
                   child: Text(
                     FFLocalizations.of(context).getText(
                       '0gizrv8a' /* terms & conditions  */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
-                          color: Color(0xFF2971FB),
+                          fontFamily: 'AvenirArabic',
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           fontSize: 13,
                           useGoogleFonts: false,
                         ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 2,left: 2),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'reservationAnd'  ,
+                    ), style: FlutterFlowTheme.of(context).bodyText1.override(
+                    fontFamily: 'AvenirArabic',
+                    fontSize: 13,
+                    useGoogleFonts: false,
+                  ),),
+                ),
+                InkWell(
+                  onTap: () async {
+                    logFirebaseEvent(
+                        'RESERVATION_BOTTOM_SHEET_Text_qhlvmiqm_O');
+                    logFirebaseEvent('Text_Bottom-Sheet');
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: FlutterFlowTheme.of(context).white,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.of(context).viewInsets,
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.95,
+                            child: TermsConditionsBottomSheetWidget(
+                              pageType: 6,
+                            ),
+                          ),
+                        );
+                      },
+                    ).then((value) => setState(() {}));
+                  },
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'reservationPrivacyPolicy' /* privacy policy  */,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'AvenirArabic',
+                      color: FlutterFlowTheme.of(context).primaryColor,
+                      fontSize: 13,
+                      useGoogleFonts: false,
+                    ),
+                  ),
+                ),
+
               ],
             ),
           ),
@@ -191,7 +474,7 @@ class _ReservationBottomSheetWidgetState
               ),
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'AvenirArabic',
                     fontSize: 18,
                     useGoogleFonts: false,
                   ),
@@ -205,20 +488,9 @@ class _ReservationBottomSheetWidgetState
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  widget.reservationCost.toString(),
+                  functions.formatAmount(widget.reservationCost?.toString()),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        useGoogleFonts: false,
-                      ),
-                ),
-                Text(
-                  FFLocalizations.of(context).getText(
-                    'ovajaogv' /* .00 */,
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
+                        fontFamily: 'AvenirArabic',
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
                         useGoogleFonts: false,
@@ -231,7 +503,7 @@ class _ReservationBottomSheetWidgetState
                       'wqlgaavg' /* SAR */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'AvenirArabic',
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           useGoogleFonts: false,
@@ -247,7 +519,7 @@ class _ReservationBottomSheetWidgetState
             ),
             textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).bodyText1.override(
-                  fontFamily: 'Sofia Pro By Khuzaimah',
+                  fontFamily: 'AvenirArabic',
                   color: Color(0xFFDC5D5C),
                   fontSize: 13,
                   useGoogleFonts: false,
@@ -260,7 +532,7 @@ class _ReservationBottomSheetWidgetState
                 'p0n3wi8y' /* Select Payment Method */,
               ),
               style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'AvenirArabic',
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     useGoogleFonts: false,
@@ -292,7 +564,7 @@ class _ReservationBottomSheetWidgetState
                       optionHeight: 56,
                       textStyle:
                           FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -302,7 +574,7 @@ class _ReservationBottomSheetWidgetState
                       selectedTextStyle: FlutterFlowTheme.of(context)
                           .bodyText1
                           .override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
+                            fontFamily: 'AvenirArabic',
                             color: FlutterFlowTheme.of(context).primaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -327,19 +599,21 @@ class _ReservationBottomSheetWidgetState
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
                           child: Image.asset(
-                            'assets/images/visa:mada.png',
-                            height: 20,
-                            fit: BoxFit.cover,
+                            'assets/images/MadaPay.png',
+                            height: 30,
+                            width: 80,
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                          child: Image.asset(
-                            'assets/images/applepay.png',
-                            height: 20,
-                            fit: BoxFit.cover,
+                          child: SvgPicture.asset(
+                            'assets/images/apple.svg',
+                            width: 80,
+                            height: 28,
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
                       ],
@@ -349,7 +623,7 @@ class _ReservationBottomSheetWidgetState
               ],
             ),
           ),
-          if ((paymentMethodValue != null && paymentMethodValue != ''))
+          if (paymentMethodValue != null && paymentMethodValue != '')
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(20, 100, 20, 20),
               child: StreamBuilder<List<OrdersRecord>>(
@@ -367,135 +641,32 @@ class _ReservationBottomSheetWidgetState
                         width: 50,
                         height: 50,
                         child: SpinKitRipple(
-                          color: Color(0xFF2971FB),
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           size: 50,
                         ),
                       ),
                     );
                   }
-                  List<OrdersRecord> buttonOrdersRecordList = snapshot.data;
+                  List<OrdersRecord> buttonOrdersRecordList = snapshot.data!;
                   return FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent(
                           'RESERVATION_BOTTOM_SHEET_PAY_BTN_ON_TAP');
+                      logFirebaseEvent('add_payment_info');
+                      logFirebaseEvent('begin_checkout');
                       var _shouldSetState = false;
                       logFirebaseEvent('Button_Backend-Call');
-                      propertyStatus = await PropertStatusCall.call(
-                        propertyId: widget.propertyId,
-                      );
-                      _shouldSetState = true;
-                      if (functions
-                          .isPropertyAvailable(PropertStatusCall.propertyStatus(
-                        (propertyStatus?.jsonBody ?? ''),
-                      ).toString())) {
-                        if (functions.queryCollectionHasValue(
-                            buttonOrdersRecordList.toList())) {
-                          logFirebaseEvent('Button_Show-Snack-Bar');
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'This property is not avaiable currently',
-                                style: TextStyle(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor: Color(0xFFFF0000),
-                            ),
-                          );
-                          if (_shouldSetState) setState(() {});
-                          return;
-                        } else {
-                          logFirebaseEvent('Button_Backend-Call');
+    _shouldSetState = true;
+                        logFirebaseEvent('Button_Backend-Call');
+                        setupSDKSession((paymentMethodValue?.toLowerCase() == 'mada' || paymentMethodValue?.toLowerCase() == 'مدى' ) ? 0 : 1);
+                        entry = showOverlay(context);
+                        startSDK(context, {
+                          'propertyId': serializeParam(
+                              widget.propertyId, ParamType.int),
+                          'paymentMethod': serializeParam(
+                              paymentMethodValue, ParamType.String),
+                        }.withoutNulls);
 
-                          final ordersCreateData = createOrdersRecordData(
-                            orderId: functions.orderIdGenerator(
-                                random_data.randomInteger(0, 1000000)),
-                            createdAt: getCurrentTimestamp,
-                            updatedAt: getCurrentTimestamp,
-                            userId: currentUserReference,
-                            reservationAmount: getJsonField(
-                              widget.propertyJSON,
-                              r'''$.data.attributes.property_reservation_cost''',
-                            ).toString(),
-                            propertyId: widget.propertyId,
-                            orderStatus: 'Booked',
-                            bookingExpiryDate: random_data.randomDate(),
-                            cammundaInstanceId: 'cammunda_id',
-                            depositReceipt: 'on the process',
-                          );
-                          var ordersRecordReference =
-                              OrdersRecord.collection.doc();
-                          await ordersRecordReference.set(ordersCreateData);
-                          orderDetails = OrdersRecord.getDocumentFromData(
-                              ordersCreateData, ordersRecordReference);
-                          _shouldSetState = true;
-                          logFirebaseEvent('Button_Backend-Call');
-                          bookingStatus = await PropertStatusCall.call(
-                            propertyId: widget.propertyId,
-                          );
-                          _shouldSetState = true;
-                          logFirebaseEvent('Button_Backend-Call');
-
-                          final transactionsCreateData =
-                              createTransactionsRecordData(
-                            userId: currentUserReference,
-                            orderId: orderDetails.orderId,
-                            transactionMethod: paymentMethodValue,
-                            createdAt: getCurrentTimestamp,
-                            updatedAt: getCurrentTimestamp,
-                            paidAmount: widget.reservationCost.toString(),
-                            transactionType: 'Installment',
-                            transactionId: functions.orderIdGenerator(
-                                random_data.randomInteger(0, 1000000)),
-                            transactionStatus: 'Ongiong',
-                          );
-                          var transactionsRecordReference =
-                              TransactionsRecord.collection.doc();
-                          await transactionsRecordReference
-                              .set(transactionsCreateData);
-                          transactionDetails =
-                              TransactionsRecord.getDocumentFromData(
-                                  transactionsCreateData,
-                                  transactionsRecordReference);
-                          _shouldSetState = true;
-                        }
-
-                        logFirebaseEvent('Button_Navigate-To');
-                        context.pushNamed(
-                          'Confirmation',
-                          queryParams: {
-                            'propertyId': serializeParam(
-                                widget.propertyId, ParamType.int),
-                            'paymentMethod': serializeParam(
-                                paymentMethodValue, ParamType.String),
-                            'orderId': serializeParam(
-                                orderDetails.orderId, ParamType.int),
-                          }.withoutNulls,
-                        );
-                      } else {
-                        logFirebaseEvent('Button_Show-Snack-Bar');
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              'This property is not avaiable currently',
-                              style: TextStyle(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor: Color(0xFFFF0000),
-                          ),
-                        );
-                        if (_shouldSetState) setState(() {});
-                        return;
-                      }
 
                       if (_shouldSetState) setState(() {});
                     },
@@ -508,7 +679,7 @@ class _ReservationBottomSheetWidgetState
                       color: FlutterFlowTheme.of(context).primaryColor,
                       textStyle:
                           FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'AvenirArabic',
                                 color: Colors.white,
                                 fontSize: 18,
                                 useGoogleFonts: false,
@@ -527,4 +698,12 @@ class _ReservationBottomSheetWidgetState
       ),
     );
   }
+}
+OverlayEntry showOverlay(BuildContext context) {
+  var overlayState = Overlay.of(context);
+  var overlayEntry = OverlayEntry(
+    builder: (context) => CircularProgressOverlay(),
+  );
+  overlayState?.insert(overlayEntry);
+  return overlayEntry;
 }

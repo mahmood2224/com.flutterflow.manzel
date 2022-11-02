@@ -5,7 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TermsConditionsWidget extends StatefulWidget {
-  const TermsConditionsWidget({Key key}) : super(key: key);
+  const TermsConditionsWidget({Key? key}) : super(key: key);
 
   @override
   _TermsConditionsWidgetState createState() => _TermsConditionsWidgetState();
@@ -75,8 +75,9 @@ class _TermsConditionsWidgetState extends State<TermsConditionsWidget> {
                                     onTap: () async {
                                       logFirebaseEvent(
                                           'TERMS_CONDITIONS_Icon_30sitq7s_ON_TAP');
-                                      logFirebaseEvent('Icon_Navigate-To');
-                                      context.pushNamed('PropertyDetails');
+                                      logFirebaseEvent(
+                                          'Icon_Close-Dialog,-Drawer,-Etc');
+                                      Navigator.pop(context);
                                     },
                                     child: Icon(
                                       Icons.close,
@@ -96,7 +97,7 @@ class _TermsConditionsWidgetState extends State<TermsConditionsWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'AvenirArabic',
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,
                                           useGoogleFonts: false,

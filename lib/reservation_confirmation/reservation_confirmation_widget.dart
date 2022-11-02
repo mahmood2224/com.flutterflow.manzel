@@ -13,11 +13,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ReservationConfirmationWidget extends StatefulWidget {
   const ReservationConfirmationWidget({
-    Key key,
+    Key? key,
     this.propertyId,
   }) : super(key: key);
 
-  final int propertyId;
+  final int? propertyId;
 
   @override
   _ReservationConfirmationWidgetState createState() =>
@@ -26,9 +26,9 @@ class ReservationConfirmationWidget extends StatefulWidget {
 
 class _ReservationConfirmationWidgetState
     extends State<ReservationConfirmationWidget> {
-  ApiCallResponse initiateOrder;
-  OrdersRecord createOrder;
-  String paymentMethodsValue;
+  ApiCallResponse? initiateOrder;
+  OrdersRecord? createOrder;
+  String? paymentMethodsValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -52,13 +52,13 @@ class _ReservationConfirmationWidgetState
               width: 50,
               height: 50,
               child: SpinKitRipple(
-                color: Color(0xFF2971FB),
+                color: FlutterFlowTheme.of(context).primaryColor,
                 size: 50,
               ),
             ),
           );
         }
-        final reservationConfirmationPropertyResponse = snapshot.data;
+        final reservationConfirmationPropertyResponse = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: Colors.white,
@@ -123,6 +123,7 @@ class _ReservationConfirmationWidgetState
                                                 'RESERVATION_CONFIRMATION_Icon_n0mpifh9_O');
                                             logFirebaseEvent(
                                                 'Icon_Navigate-To');
+
                                             context.pushNamed(
                                               'PropertyDetails',
                                               queryParams: {
@@ -149,8 +150,7 @@ class _ReservationConfirmationWidgetState
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold,
                                                 useGoogleFonts: false,
@@ -180,8 +180,7 @@ class _ReservationConfirmationWidgetState
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 13,
                                                 fontWeight: FontWeight.w300,
                                                 useGoogleFonts: false,
@@ -208,8 +207,7 @@ class _ReservationConfirmationWidgetState
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                fontFamily: 'AvenirArabic',
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w300,
                                                 useGoogleFonts: false,
@@ -229,17 +227,15 @@ class _ReservationConfirmationWidgetState
                                       Text(
                                         valueOrDefault<String>(
                                           PropertyCall.reservationsCost(
-                                            (reservationConfirmationPropertyResponse
-                                                    ?.jsonBody ??
-                                                ''),
+                                            reservationConfirmationPropertyResponse
+                                                .jsonBody,
                                           ).toString(),
                                           '?',
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 40,
                                               fontWeight: FontWeight.bold,
                                               useGoogleFonts: false,
@@ -253,8 +249,7 @@ class _ReservationConfirmationWidgetState
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 40,
                                               fontWeight: FontWeight.bold,
                                               useGoogleFonts: false,
@@ -277,8 +272,7 @@ class _ReservationConfirmationWidgetState
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               color: Color(0xFFDC5D5C),
                                               fontWeight: FontWeight.w300,
                                               useGoogleFonts: false,
@@ -300,8 +294,7 @@ class _ReservationConfirmationWidgetState
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               useGoogleFonts: false,
@@ -333,8 +326,7 @@ class _ReservationConfirmationWidgetState
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               color: Colors.black,
                                               useGoogleFonts: false,
                                             ),
@@ -342,8 +334,7 @@ class _ReservationConfirmationWidgetState
                                                 context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
+                                              fontFamily: 'AvenirArabic',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
@@ -374,8 +365,8 @@ class _ReservationConfirmationWidgetState
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      if ((paymentMethodsValue != null &&
-                                          paymentMethodsValue != ''))
+                                      if (paymentMethodsValue != null &&
+                                          paymentMethodsValue != '')
                                         FFButtonWidget(
                                           onPressed: () async {
                                             logFirebaseEvent(
@@ -411,6 +402,7 @@ class _ReservationConfirmationWidgetState
                                               propertyID:
                                                   widget.propertyId.toString(),
                                               userID: currentUserUid,
+                                                  version: FFAppState().apiVersion
                                             );
                                             _shouldSetState = true;
                                             if ((initiateOrder?.succeeded ??
@@ -418,6 +410,7 @@ class _ReservationConfirmationWidgetState
                                               // OrderConfirmed
                                               logFirebaseEvent(
                                                   'pay_OrderConfirmed');
+
                                               context.goNamed(
                                                 'Confirmation',
                                                 queryParams: {
@@ -448,18 +441,16 @@ class _ReservationConfirmationWidgetState
                                             height: 52,
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryColor,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .subtitle2
-                                                    .override(
-                                                      fontFamily:
-                                                          'Sofia Pro By Khuzaimah',
-                                                      color: Colors.white,
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      useGoogleFonts: false,
-                                                    ),
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .subtitle2
+                                                .override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  color: Colors.white,
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w800,
+                                                  useGoogleFonts: false,
+                                                ),
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1,

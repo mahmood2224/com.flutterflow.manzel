@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class AbsherVerificationWidget extends StatefulWidget {
-  const AbsherVerificationWidget({Key key}) : super(key: key);
+  const AbsherVerificationWidget({Key? key}) : super(key: key);
 
   @override
   _AbsherVerificationWidgetState createState() =>
@@ -17,8 +17,8 @@ class AbsherVerificationWidget extends StatefulWidget {
 }
 
 class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
-  TextEditingController birthdayController;
-  TextEditingController idNumberController;
+  TextEditingController? birthdayController;
+  TextEditingController? idNumberController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -28,6 +28,13 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
     idNumberController = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AbsherVerification'});
+  }
+
+  @override
+  void dispose() {
+    birthdayController?.dispose();
+    idNumberController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -89,7 +96,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                   width: 338,
                   lineHeight: 4,
                   animation: true,
-                  progressColor: Color(0xFF81D05C),
+                  progressColor: FlutterFlowTheme.of(context).secondaryGreen,
                   backgroundColor: Color(0xFFF8F8F8),
                   barRadius: Radius.circular(6),
                   padding: EdgeInsets.zero,
@@ -104,7 +111,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                           'ch5dgyyj' /* Absher Verification */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'AvenirArabic',
                               fontSize: 25,
                               fontWeight: FontWeight.w800,
                               useGoogleFonts: false,
@@ -125,7 +132,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontSize: 15,
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
@@ -168,10 +175,24 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
@@ -214,6 +235,20 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
                             suffixIcon: Icon(
                               Icons.date_range_outlined,
                               color: Color(0xFF6B6B6B),
@@ -222,7 +257,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     fontWeight: FontWeight.w300,
                                     useGoogleFonts: false,
                                   ),
@@ -245,6 +280,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                           // goToConfirmAbsher
                           logFirebaseEvent(
                               'goToConfirmAbsher_goToConfirmAbsher');
+
                           context.pushNamed('ConfirmAbsher');
                         },
                         text: FFLocalizations.of(context).getText(
@@ -256,7 +292,7 @@ class _AbsherVerificationWidgetState extends State<AbsherVerificationWidget> {
                           color: FlutterFlowTheme.of(context).primaryColor,
                           textStyle:
                               FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'AvenirArabic',
                                     color: Colors.white,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,

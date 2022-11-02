@@ -7,11 +7,11 @@ import 'lat_lng.dart';
 
 class FlutterFlowStaticMap extends StatelessWidget {
   const FlutterFlowStaticMap({
-    @required this.location,
-    @required this.apiKey,
-    @required this.style,
-    @required this.width,
-    @required this.height,
+    required this.location,
+    required this.apiKey,
+    required this.style,
+    required this.width,
+    required this.height,
     this.fit,
     this.borderRadius = BorderRadius.zero,
     this.markerColor,
@@ -27,10 +27,10 @@ class FlutterFlowStaticMap extends StatelessWidget {
   final MapBoxStyle style;
   final double width;
   final double height;
-  final BoxFit fit;
+  final BoxFit? fit;
   final BorderRadius borderRadius;
-  final Color markerColor;
-  final String markerUrl;
+  final Color? markerColor;
+  final String? markerUrl;
   final bool cached;
   final int zoom;
   final int tilt;
@@ -64,11 +64,11 @@ class FlutterFlowStaticMap extends StatelessWidget {
 String getStaticMapImageURL(
   LatLng location,
   String apiKey,
-  MapBoxStyle style,
+  MapBoxStyle mapStyle,
   int width,
   int height,
-  Color markerColor,
-  String markerURL,
+  Color? markerColor,
+  String? markerURL,
   int zoom,
   int rotation,
   int tilt,
@@ -80,7 +80,6 @@ String getStaticMapImageURL(
   final finalRotation = rotation.clamp(-180, 180).round();
   final finalTilt = tilt.clamp(0, 60).round();
   final finalZoom = zoom.clamp(0, 22).round();
-  final mapStyle = style ?? MapBoxStyle.Light;
   final image = StaticImage(apiKey: apiKey);
   if (markerColor == null && (markerURL == null || markerURL.trim().isEmpty)) {
     return image.getStaticUrlWithoutMarker(
@@ -97,7 +96,7 @@ String getStaticMapImageURL(
       marker: markerURL == null || markerURL.trim().isEmpty
           ? MapBoxMarker(
               markerColor: RgbColor(
-                markerColor.red,
+                markerColor!.red,
                 markerColor.green,
                 markerColor.blue,
               ),

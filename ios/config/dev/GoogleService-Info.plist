@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>759428031201-k7qi1pon75trh5pmroqccg3saf38jqds.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.759428031201-k7qi1pon75trh5pmroqccg3saf38jqds</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBvLfl7mY2o8eU4Q8XJHE4CsxALja0nlVI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>759428031201</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.flutterflow.manzel</string>
+	<key>PROJECT_ID</key>
+	<string>manzel-dev</string>
+	<key>STORAGE_BUCKET</key>
+	<string>manzel-dev.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:759428031201:ios:9eef0a9e0e1c946f13cda0</string>
+</dict>
+</plist>
