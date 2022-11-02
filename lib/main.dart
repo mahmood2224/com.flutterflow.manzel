@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:manzel/map_screen/map_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -395,11 +396,13 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'HomeScreen': HomeScreenWidget(),
+
+     'HomeScreen': HomeScreenWidget(),
       'MyProperties': MyPropertiesWidget(),
       'Offers': OffersWidget(),
       'Profile': ProfileWidget(),
     };
+    //'MapScreen' : MapScreen(),
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
       body: _currentPage ?? tabs[_currentPageName],

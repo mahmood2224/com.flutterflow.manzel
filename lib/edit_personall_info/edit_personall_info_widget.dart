@@ -133,10 +133,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 controller: fullNameController,
                                 autofocus: false,
                                 obscureText: false,
-                                onTap: (){
-                                  setState(() {
-
-                                  });
+                                onTap: () {
+                                  setState(() {});
                                 },
                                 decoration: InputDecoration(
                                   labelText:
@@ -297,15 +295,17 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           FFLocalizations.of(context).getText(
                             'lbyulmrk' /* Edit */,
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).subtitle1.override(
-                                    fontFamily: 'AvenirArabic',
-                                    color: FlutterFlowTheme.of(context).primaryColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    decoration: TextDecoration.underline,
-                                    useGoogleFonts: false,
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .subtitle1
+                              .override(
+                                fontFamily: 'AvenirArabic',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                decoration: TextDecoration.underline,
+                                useGoogleFonts: false,
+                              ),
                         ),
                       ),
                     ],
@@ -387,7 +387,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                           width: 50,
                                           height: 50,
                                           child: SpinKitRipple(
-                                            color: FlutterFlowTheme.of(context).primaryColor,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
                                             size: 50,
                                           ),
                                         ),
@@ -399,12 +400,9 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                           functions
                                               .editProfileDropDownInitalVal(
                                                   (EmplymentTypeCall
-                                                          .emplymentTypes(
+                                                      .emplymentData(
                                                     emplymentList!.jsonBody,
-                                                  ) as List)
-                                                      .map<String>(
-                                                          (s) => s.toString())
-                                                      .toList(),
+                                                  ) as List),
                                                   valueOrDefault(
                                                       currentUserDocument
                                                           ?.employmentStatus,
@@ -533,7 +531,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                           width: 50,
                                           height: 50,
                                           child: SpinKitRipple(
-                                            color: FlutterFlowTheme.of(context).primaryColor,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
                                             size: 50,
                                           ),
                                         ),
@@ -543,12 +542,9 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     return FlutterFlowDropDown(
                                       initialOption: bankValue ??= functions
                                           .editProfileDropDownInitalVal(
-                                              (GetBanksCall.bankNames(
+                                              (GetBanksCall.bankData(
                                                 bankList!.jsonBody,
-                                              ) as List)
-                                                  .map<String>(
-                                                      (s) => s.toString())
-                                                  .toList(),
+                                              ) as List),
                                               valueOrDefault(
                                                   currentUserDocument?.bank,
                                                   '')),
@@ -729,8 +725,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   ),
                                 ),
                                 duration: Duration(milliseconds: 4000),
-                                backgroundColor: FlutterFlowTheme.of(context)
-                                    .primaryRed,
+                                backgroundColor:
+                                    FlutterFlowTheme.of(context).primaryRed,
                               ),
                             );
                           } else {
@@ -764,7 +760,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                               .toList(),
                                           privateSectorValue),
                                   bank: functions.editProfileindexReturn(
-                                      (GetBanksCall.bankNames(
+                                      (GetBanksCall.bankData(
                                         (bankList?.jsonBody ?? ''),
                                       ) as List)
                                           .map<String>((s) => s.toString())
@@ -794,7 +790,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     ),
                                     duration: Duration(milliseconds: 4000),
                                     backgroundColor:
-                                    FlutterFlowTheme.of(context).primaryRed,
+                                        FlutterFlowTheme.of(context).primaryRed,
                                   ),
                                 );
                               }
@@ -812,18 +808,14 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     FFAppState().locale),
                                 employmentStatus:
                                     functions.editProfileindexReturn(
-                                        (EmplymentTypeCall.emplymentTypes(
+                                        (EmplymentTypeCall.emplymentData(
                                           (emplymentList?.jsonBody ?? ''),
-                                        ) as List)
-                                            .map<String>((s) => s.toString())
-                                            .toList(),
+                                        ) as List),
                                         privateSectorValue),
                                 bank: functions.editProfileindexReturn(
-                                    (GetBanksCall.bankNames(
+                                    (GetBanksCall.bankData(
                                       (bankList?.jsonBody ?? ''),
-                                    ) as List)
-                                        .map<String>((s) => s.toString())
-                                        .toList(),
+                                    ) as List),
                                     bankValue),
                                 sakaniLoanCoverage:
                                     functions.sakaniLoan(choiceChipsValue),

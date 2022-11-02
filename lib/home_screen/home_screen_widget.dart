@@ -1,3 +1,4 @@
+import 'package:manzel/map_screen/map_screen.dart';
 import 'package:video_player/video_player.dart';
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
@@ -244,6 +245,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       snapshot.data!;
                                   return InkWell(
                                     onTap: () async {
+
                                       videoPlayers[currentPropertyindex!]
                                           ?.pause();
                                       logFirebaseEvent(
@@ -364,33 +366,34 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       InkWell(
                                         onTap: () async {
                                           logFirebaseEvent('search');
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'HomeScreenAlertTitle',
-                                                  ),
-                                                ),
-                                                content: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'HomeScreenAlertMessage',
-                                                  ),
-                                                ),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text(FFAppState().locale=='en'?'Ok':'موافق'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
+                                          GoRouter.of(context).pushNamed('MapScreen');
+                                          // await showDialog(
+                                          //   context: context,
+                                          //   builder: (alertDialogContext) {
+                                          //     return AlertDialog(
+                                          //       title: Text(
+                                          //         FFLocalizations.of(context)
+                                          //             .getText(
+                                          //           'HomeScreenAlertTitle',
+                                          //         ),
+                                          //       ),
+                                          //       content: Text(
+                                          //         FFLocalizations.of(context)
+                                          //             .getText(
+                                          //           'HomeScreenAlertMessage',
+                                          //         ),
+                                          //       ),
+                                          //       actions: [
+                                          //         TextButton(
+                                          //           onPressed: () =>
+                                          //               Navigator.pop(
+                                          //                   alertDialogContext),
+                                          //           child: Text(FFAppState().locale=='en'?'Ok':'موافق'),
+                                          //         ),
+                                          //       ],
+                                          //     );
+                                          //   },
+                                          // );
                                         },
                                         child: Padding(
                                           padding:
