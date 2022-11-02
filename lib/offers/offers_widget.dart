@@ -1096,7 +1096,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                       activeOffersItem,
                                                       r'''$.status''',
                                                     ).toString()))
-                                                Padding(
+                                                  timerStoppedMap[activeOffersIndex]??true?Padding(
                                                   padding:
                                                   EdgeInsetsDirectional
                                                       .fromSTEB(
@@ -1151,7 +1151,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                                       if(value!<=0){
                                                                         timerControllersMap[activeOffersIndex]!.onStopTimer();
                                                                         timerStoppedMap[activeOffersIndex] = false;
-                                                                        timerCompleted.value= false;
+
 
                                                                       }
                                                                       print(">>>>>>>>>>>>>>>>>>> value = ${value}");
@@ -1239,7 +1239,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                       ],
                                                     ),
                                                   ),
-                                                ),
+                                                ):SizedBox.shrink(),
                                                 Divider(
                                                   thickness: 1,
                                                   color: Color(0xFFF1F1F1),

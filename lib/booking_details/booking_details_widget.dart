@@ -720,69 +720,96 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                       ],
                                                     ),
                                                   if (functions
-                                                      .conditionalVisibility(
-                                                      getJsonField(
-                                                        columnOrderDetailsResponse
-                                                            .jsonBody,
-                                                        r'''$.result.order_status''',
-                                                      ).toString(),
-                                                      'collect_offers'))
-                                                  Padding(
-                                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                                        0, 5, 0, 0),
-                                                    child: FFButtonWidget(
-                                                      onPressed: () async {
-                                                        logFirebaseEvent(
-                                                            'MY_PROPERTIES_VIEW_OFFERS_BTN_ON_TAP');
-                                                        logFirebaseEvent(
-                                                            'Button_Navigate-To');
+                                                          .conditionalVisibility(
+                                                              getJsonField(
+                                                                columnOrderDetailsResponse
+                                                                    .jsonBody,
+                                                                r'''$.result.order_status''',
+                                                              ).toString(),
+                                                              'collect_offers') ||
+                                                      (functions
+                                                          .conditionalVisibility(
+                                                              getJsonField(
+                                                                columnOrderDetailsResponse
+                                                                    .jsonBody,
+                                                                r'''$.result.order_status''',
+                                                              ).toString(),
+                                                              'waiting_offer_acceptance')))
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0, 5, 0, 0),
+                                                      child: FFButtonWidget(
+                                                        onPressed: () async {
+                                                          logFirebaseEvent(
+                                                              'MY_PROPERTIES_VIEW_OFFERS_BTN_ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'Button_Navigate-To');
 
-                                                        context.pushNamed(
-                                                          'Offers',
-                                                          queryParams: {
-                                                            'propertyId': serializeParam(
-                                                                valueOrDefault<String>(
-                                                                  getJsonField(
-                                                                    columnOrderDetailsResponse
-                                                                        .jsonBody,
-                                                                    r'''$.property_id''',
-                                                                  ).toString(),
-                                                                  'null',
-                                                                ),
-                                                                ParamType.String),
-                                                          }.withoutNulls,
-                                                        );
-                                                      },
-                                                      text:
-                                                      FFLocalizations.of(context).getText(
-                                                        'offerButtonBookingDetails' /* View Offers */,
-                                                      ),
-                                                      options: FFButtonOptions(
-                                                        height: 28,
-                                                        padding:
-                                                        EdgeInsetsDirectional.fromSTEB(
-                                                            9, 0, 9, 0),
-                                                        color: FlutterFlowTheme.of(context)
-                                                            .primaryColor,
-                                                        textStyle:
-                                                        FlutterFlowTheme.of(context)
-                                                            .subtitle2
-                                                            .override(
-                                                          fontFamily: 'AvenirArabic',
-                                                          color: Colors.white,
-                                                          fontSize: 7,
-                                                          fontWeight: FontWeight.w500,
-                                                          useGoogleFonts: false,
+                                                          context.pushNamed(
+                                                            'Offers',
+                                                            queryParams: {
+                                                              'propertyId':
+                                                                  serializeParam(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          columnOrderDetailsResponse
+                                                                              .jsonBody,
+                                                                          r'''$.property_id''',
+                                                                        ).toString(),
+                                                                        'null',
+                                                                      ),
+                                                                      ParamType
+                                                                          .String),
+                                                            }.withoutNulls,
+                                                          );
+                                                        },
+                                                        text:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                          'offerButtonBookingDetails' /* View Offers */,
                                                         ),
-                                                        borderSide: BorderSide(
-                                                          color: Colors.transparent,
-                                                          width: 1,
+                                                        options:
+                                                            FFButtonOptions(
+                                                          height: 28,
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(9,
+                                                                      0, 9, 0),
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'AvenirArabic',
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize: 7,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(8),
                                                         ),
-                                                        borderRadius:
-                                                        BorderRadius.circular(8),
                                                       ),
                                                     ),
-                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -1674,13 +1701,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                     endIndent: 20,
                   ),
                   if (getJsonField(
+                            columnOrderDetailsResponse.jsonBody,
+                            r'''$.result.transaction_data.transaction_id''',
+                          ).toString() !=
+                          null &&
+                      getJsonField(
                         columnOrderDetailsResponse.jsonBody,
                         r'''$.result.transaction_data.transaction_id''',
-                      ).toString() !=
-                      null && getJsonField(
-                    columnOrderDetailsResponse.jsonBody,
-                    r'''$.result.transaction_data.transaction_id''',
-                  ).toString().isNotEmpty )
+                      ).toString().isNotEmpty)
                     Column(
                       children: [
                         Padding(
