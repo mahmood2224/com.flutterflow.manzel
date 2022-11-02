@@ -288,7 +288,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                 children: [
                                   Image.asset(
                                     'assets/images/offerScreenNoResult.png',
-                                    width: 37,
+                                    width: 40,
                                     height: 38,
                                     fit: BoxFit.cover,
                                   ),

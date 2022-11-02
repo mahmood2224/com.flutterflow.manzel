@@ -54,15 +54,15 @@ class _NoResultsFoundWidgetState extends State<NoResultsFoundWidget> {
             if (widget.screenName == 'myPropertiesBooked')
               Image.asset(
                 'assets/images/myPropertiesBooked.png',
-                width: 37,
+                width: 40,
                 height: 36,
                 fit: BoxFit.cover,
               ),
             if (widget.screenName == 'myPropertiesFavorite')
               Image.asset(
                 'assets/images/myPropertiesFavorite.png',
-                width: 37,
-                height: 36,
+                width: 40,
+                height: 38,
                 fit: BoxFit.cover,
               ),
           ],
