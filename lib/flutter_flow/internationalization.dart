@@ -1063,11 +1063,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'propertyName': {
       'en': 'Property name',
-      'ar': 'اسم الخاصية',
+      'ar': 'اسم العقار',
     },
     'propertyRef': {
       'en': 'Property Ref.',
-      'ar': 'مرجع الملكية.',
+      'ar': 'رقم العقار',
     },
     'propertyAdd': {
       'en': 'Property address.',
@@ -1075,7 +1075,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'opening': {
       'en': 'Hello ! I want to request a visit to',
-      'ar': 'أهلا وسهلا ! أريد أن أطلب زيارة إلى',
+      'ar': 'مرحبًا ! أريد أن أطلب زيارة للعقار المذكور في الأسفل',
     },
     'requestVisit': {
       'en': 'Request Visit',
