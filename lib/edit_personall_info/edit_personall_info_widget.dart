@@ -753,18 +753,14 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       FFAppState().locale),
                                   employmentStatus:
                                       functions.editProfileindexReturn(
-                                          (EmplymentTypeCall.emplymentTypes(
+                                          (EmplymentTypeCall.emplymentData(
                                             (emplymentList?.jsonBody ?? ''),
-                                          ) as List)
-                                              .map<String>((s) => s.toString())
-                                              .toList(),
+                                          ) as List),
                                           privateSectorValue),
                                   bank: functions.editProfileindexReturn(
                                       (GetBanksCall.bankData(
                                         (bankList?.jsonBody ?? ''),
-                                      ) as List)
-                                          .map<String>((s) => s.toString())
-                                          .toList(),
+                                      ) as List),
                                       bankValue),
                                   sakaniLoanCoverage:
                                       functions.sakaniLoan(choiceChipsValue),
