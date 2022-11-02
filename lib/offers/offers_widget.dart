@@ -51,10 +51,11 @@ class _OffersWidgetState extends State<OffersWidget> {
   var acceptOfferTappedIndex;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   final InAppReview inAppReview = InAppReview.instance;
-
+  ValueNotifier<bool> timerCompleted = ValueNotifier<bool>(true);
   //Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> channels = {};
+  Map<int,bool> timerStoppedMap = {};
 StopWatchTimer timerController = StopWatchTimer(
   mode: StopWatchMode.countDown,
   );
@@ -287,7 +288,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                 children: [
                                   Image.asset(
                                     'assets/images/offerScreenNoResult.png',
-                                    width: 37,
+                                    width: 40,
                                     height: 38,
                                     fit: BoxFit.cover,
                                   ),
@@ -1095,7 +1096,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                       activeOffersItem,
                                                       r'''$.status''',
                                                     ).toString()))
-                                                Padding(
+                                                  timerStoppedMap[activeOffersIndex]??true?Padding(
                                                   padding:
                                                   EdgeInsetsDirectional
                                                       .fromSTEB(
@@ -1147,10 +1148,16 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                                     stream: timerControllersMap[activeOffersIndex]!.rawTime,
                                                                     builder: (context, snap) {
                                                                       final value = snap.data;
+                                                                      if(value!<=0){
+                                                                        timerControllersMap[activeOffersIndex]!.onStopTimer();
+                                                                        timerStoppedMap[activeOffersIndex] = false;
+
+
+                                                                      }
                                                                       print(">>>>>>>>>>>>>>>>>>> value = ${value}");
                                                                       final displayTime = StopWatchTimer.getDisplayTime(
                                                                         value!,
-                                                                        hours: false,
+                                                                        hours: true,
                                                                         minute: true,
                                                                         second: true,
                                                                         milliSecond: false,
@@ -1175,22 +1182,46 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                             ],
                                                           ),
                                                         ),
+                                                        // Padding(
+                                                        //   padding:
+                                                        //   EdgeInsetsDirectional
+                                                        //       .fromSTEB(
+                                                        //       2,
+                                                        //       0,
+                                                        //       2,
+                                                        //       0),
+                                                        //   child: Text(
+                                                        //     FFLocalizations.of(
+                                                        //         context)
+                                                        //         .getText(
+                                                        //       '9j4qhgy0' /* min. */,
+                                                        //     ),
+                                                        //     style: FlutterFlowTheme.of(
+                                                        //         context)
+                                                        //         .bodyText1
+                                                        //         .override(
+                                                        //       fontFamily:
+                                                        //       'AvenirArabic',
+                                                        //       fontSize:
+                                                        //       12,
+                                                        //       fontWeight:
+                                                        //       FontWeight
+                                                        //           .bold,
+                                                        //       useGoogleFonts:
+                                                        //       false,
+                                                        //     ),
+                                                        //   ),
+                                                        // ),
                                                         Padding(
-                                                          padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                              2,
-                                                              0,
-                                                              2,
-                                                              0),
+                                                          padding: const EdgeInsets.only(right: 4.0,left: 4),
                                                           child: Text(
                                                             FFLocalizations.of(
                                                                 context)
                                                                 .getText(
-                                                              '9j4qhgy0' /* min. */,
+                                                              'f82o9diq' /* to accept offer */,
                                                             ),
-                                                            style: FlutterFlowTheme.of(
-                                                                context)
+                                                            style: FlutterFlowTheme
+                                                                .of(context)
                                                                 .bodyText1
                                                                 .override(
                                                               fontFamily:
@@ -1205,31 +1236,10 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                             ),
                                                           ),
                                                         ),
-                                                        Text(
-                                                          FFLocalizations.of(
-                                                              context)
-                                                              .getText(
-                                                            'f82o9diq' /* to accept offer */,
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                              .of(context)
-                                                              .bodyText1
-                                                              .override(
-                                                            fontFamily:
-                                                            'AvenirArabic',
-                                                            fontSize:
-                                                            12,
-                                                            fontWeight:
-                                                            FontWeight
-                                                                .bold,
-                                                            useGoogleFonts:
-                                                            false,
-                                                          ),
-                                                        ),
                                                       ],
                                                     ),
                                                   ),
-                                                ),
+                                                ):SizedBox.shrink(),
                                                 Divider(
                                                   thickness: 1,
                                                   color: Color(0xFFF1F1F1),
@@ -1982,315 +1992,319 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                               activeOffersItem,
                                                               r'''$.status''',
                                                             ).toString()))
-                                                              Container(
-                                                                width: 130,
-                                                                height: 42,
-                                                                child:
-                                                                    ElevatedButton(
-                                                                  onPressed:
-                                                                      () async {if(isLoading.value == false){
-                                                                    logFirebaseEvent(
-                                                                        'OFFERS_PAGE_ACCEPT_OFFER_BTN_ON_TAP');
-                                                                    logFirebaseEvent('select_item');
-                                                                    if (FFAppState()
-                                                                            .locale ==
-                                                                        'en') {
-                                                                      logFirebaseEvent(
-                                                                          'Button_Alert-Dialog');
-                                                                      var confirmDialogResponse = await showDialog<
-                                                                              bool>(
-                                                                            context:
-                                                                                context,
-                                                                            builder:
-                                                                                (alertDialogContext) {
-                                                                              return AlertDialog(
-                                                                                title: Text('Accept offer'),
-                                                                                content: Text('Are you sure you want to accept the offer? we will reject all other offers if you accepted'),
-                                                                                actions: [
-                                                                                  TextButton(
-                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                    child: Text('No'),
-                                                                                  ),
-                                                                                  TextButton(
-                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                    child: Text('Accept'),
-                                                                                  ),
-                                                                                ],
-                                                                              );
-                                                                            },
-                                                                          ) ??
-                                                                          false;
-                                                                      if (confirmDialogResponse) {acceptOfferTappedIndex = activeOffersIndex;
-                                                                        isLoading.value =
-                                                                            true;
-                                                                        logFirebaseEvent(
-                                                                            'Button_Backend-Call');
-                                                                        acceptOfferResponse =
-                                                                            await AcceptOfferCall.call(
-                                                                          userId:
-                                                                              currentUserUid,
-                                                                          authorazationToken:
-                                                                              FFAppState().authToken,
-                                                                          offerId:
-                                                                              valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$.id''',
-                                                                            ).toString(),
-                                                                            'null',
-                                                                          ),
-                                                                              version: FFAppState().apiVersion
-                                                                        );
-                                                                        if ((acceptOfferResponse?.statusCode ??
-                                                                                200) ==
-                                                                            200) {
-                                                                          logFirebaseEvent(
-                                                                              'Button_Show-Snack-Bar');
-                                                                          ScaffoldMessenger.of(context)
-                                                                              .showSnackBar(
-                                                                            SnackBar(
-                                                                              content: Text(
-                                                                                functions.snackBarMessage('offerAccepted', FFAppState().locale),
-                                                                                style: TextStyle(
-                                                                                  color: FlutterFlowTheme.of(context).white,
-                                                                                  fontWeight: FontWeight.bold,
-                                                                                  fontSize: 16,
-                                                                                ),
-                                                                              ),
-                                                                              duration: Duration(milliseconds: 4000),
-                                                                              backgroundColor: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          );
-                                                                          // Future.delayed(const Duration(seconds: 5), () {
-                                                                          if (mounted)
-                                                                            setState(() {});
-
-                                                                          // });
-                                                                          isLoading.value =
-                                                                              false;
-                                                                          if (await inAppReview.isAvailable()) {
-                                                                            Future.delayed(const Duration(seconds: 2), () {
-                                                                              inAppReview.requestReview();
-                                                                            });
-                                                                          }
-                                                                        } else {
-                                                                          logFirebaseEvent(
-                                                                              'Button_Show-Snack-Bar');
-                                                                          ScaffoldMessenger.of(context)
-                                                                              .showSnackBar(
-                                                                            SnackBar(
-                                                                              content: Text(
-                                                                                functions.snackBarMessage('error', FFAppState().locale),
-                                                                                style: TextStyle(
-                                                                                  color: FlutterFlowTheme.of(context).white,
-                                                                                  fontWeight: FontWeight.bold,
-                                                                                  fontSize: 16,
-                                                                                ),
-                                                                              ),
-                                                                              duration: Duration(milliseconds: 4000),
-                                                                              backgroundColor: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          );
-                                                                          isLoading.value =
-                                                                              false;
-                                                                        }
-                                                                      }
-                                                                    } else {
-                                                                      logFirebaseEvent(
-                                                                          'Button_Alert-Dialog');
-                                                                      var confirmDialogResponse = await showDialog<
-                                                                              bool>(
-                                                                            context:
-                                                                                context,
-                                                                            builder:
-                                                                                (alertDialogContext) {
-                                                                              return AlertDialog(
-                                                                                title: Text('اقبل العرض'),
-                                                                                content: Text('هل أنت متأكد أنك تريد قبول العرض؟ سيتم رفض جميع العروض الأخرى بعد قبول هذا العرض'),
-                                                                                actions: [
-                                                                                  TextButton(
-                                                                                    onPressed: () => Navigator.pop(alertDialogContext, false),
-                                                                                    child: Text('لا، احتاج بعض من الوقت'),
-                                                                                  ),
-                                                                                  TextButton(
-                                                                                    onPressed: () => Navigator.pop(alertDialogContext, true),
-                                                                                    child: Text('قبول العرض'),
-                                                                                  ),
-                                                                                ],
-                                                                              );
-                                                                            },
-                                                                          ) ??
-                                                                          false;
-                                                                      if (confirmDialogResponse) {
-                                                                        acceptOfferTappedIndex = activeOffersIndex;isLoading.value =
-                                                                            true;
-                                                                        logFirebaseEvent(
-                                                                            'Button_Backend-Call');
-                                                                        acceptOfferResponseAr =
-                                                                            await AcceptOfferCall.call(
-                                                                          userId:
-                                                                              currentUserUid,
-                                                                          authorazationToken:
-                                                                              FFAppState().authToken,
-                                                                          offerId:
-                                                                              valueOrDefault<String>(
-                                                                            getJsonField(
-                                                                              activeOffersItem,
-                                                                              r'''$.id''',
-                                                                            ).toString(),
-                                                                            'null',
-                                                                          ),
-                                                                              version: FFAppState().apiVersion
-                                                                        );
-                                                                        if ((acceptOfferResponseAr?.statusCode ??
-                                                                                200) ==
-                                                                            200) {
-                                                                          logFirebaseEvent(
-                                                                              'Button_Show-Snack-Bar');
-                                                                          ScaffoldMessenger.of(context)
-                                                                              .showSnackBar(
-                                                                            SnackBar(
-                                                                              content: Text(
-                                                                                functions.snackBarMessage('offerAccepted', FFAppState().locale),
-                                                                                style: TextStyle(
-                                                                                  color: FlutterFlowTheme.of(context).white,
-                                                                                  fontWeight: FontWeight.bold,
-                                                                                  fontSize: 16,
-                                                                                ),
-                                                                              ),
-                                                                              duration: Duration(milliseconds: 4000),
-                                                                              backgroundColor: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          );
-                                                                          if (mounted)
-                                                                            setState(() {});
-                                                                          isLoading.value =
-                                                                              false;
-                                                                        } else {
-                                                                          logFirebaseEvent(
-                                                                              'Button_Show-Snack-Bar');
-                                                                          ScaffoldMessenger.of(context)
-                                                                              .showSnackBar(
-                                                                            SnackBar(
-                                                                              content: Text(
-                                                                                functions.snackBarMessage('error', FFAppState().locale),
-                                                                                style: TextStyle(
-                                                                                  color: FlutterFlowTheme.of(context).white,
-                                                                                  fontWeight: FontWeight.bold,
-                                                                                  fontSize: 16,
-                                                                                ),
-                                                                              ),
-                                                                              duration: Duration(milliseconds: 4000),
-                                                                              backgroundColor: FlutterFlowTheme.of(context).primaryText,
-                                                                            ),
-                                                                          );
-                                                                          isLoading.value =
-                                                                              false;
-                                                                        }
-                                                                      }
-                                                                    }
-                                                                    if (mounted)
-                                                                      setState(
-                                                                          () {});
-                                                                  }},
+                                                              ValueListenableBuilder<bool>(
+                                                                  builder: (BuildContext context, bool value, Widget? child) {
+                                                                return ((timerStoppedMap[activeOffersIndex]??true))?Container(
+                                                                  width: 130,
+                                                                  height: 42,
                                                                   child:
-                                                                      ValueListenableBuilder<
-                                                                          bool>(
-                                                                    builder: (BuildContext
-                                                                            context,
-                                                                        bool
-                                                                            value,
-                                                                        Widget?
-                                                                            child) {
-                                                                      return
-                                                                        (((activeOffersIndex!=acceptOfferTappedIndex) && (isLoading
-                                                                              .value==true))? false:
-                                                                        isLoading
-                                                                              .value)
-                                                                          ? Padding(
-                                                                              padding: const EdgeInsets.all(5.0),
-                                                                              child: Row(
-                                                                                mainAxisSize: MainAxisSize.min,
-                                                                                children: [
-                                                                                  SizedBox(
-                                                                                    height: 30,
-                                                                                    width: 30,
-                                                                                    child: CircularProgressIndicator(
-                                                                                      valueColor: AlwaysStoppedAnimation(Colors.white),
-                                                                                      strokeWidth: 5,
+                                                                      ElevatedButton(
+                                                                    onPressed:
+                                                                        () async {if(isLoading.value == false){
+                                                                      logFirebaseEvent(
+                                                                          'OFFERS_PAGE_ACCEPT_OFFER_BTN_ON_TAP');
+                                                                      logFirebaseEvent('select_item');
+                                                                      if (FFAppState()
+                                                                              .locale ==
+                                                                          'en') {
+                                                                        logFirebaseEvent(
+                                                                            'Button_Alert-Dialog');
+                                                                        var confirmDialogResponse = await showDialog<
+                                                                                bool>(
+                                                                              context:
+                                                                                  context,
+                                                                              builder:
+                                                                                  (alertDialogContext) {
+                                                                                return AlertDialog(
+                                                                                  title: Text('Accept offer'),
+                                                                                  content: Text('Are you sure you want to accept the offer? we will reject all other offers if you accepted'),
+                                                                                  actions: [
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                      child: Text('No'),
                                                                                     ),
-                                                                                  )
-                                                                                ],
-                                                                              ),
-                                                                            )
-                                                                          : AutoSizeText(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'y0qb0uvi' /* Accept offer */,
-                                                                              ),
-                                                                              style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'AvenirArabic',
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                      child: Text('Accept'),
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              },
+                                                                            ) ??
+                                                                            false;
+                                                                        if (confirmDialogResponse) {acceptOfferTappedIndex = activeOffersIndex;
+                                                                          isLoading.value =
+                                                                              true;
+                                                                          logFirebaseEvent(
+                                                                              'Button_Backend-Call');
+                                                                          acceptOfferResponse =
+                                                                              await AcceptOfferCall.call(
+                                                                            userId:
+                                                                                currentUserUid,
+                                                                            authorazationToken:
+                                                                                FFAppState().authToken,
+                                                                            offerId:
+                                                                                valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.id''',
+                                                                              ).toString(),
+                                                                              'null',
+                                                                            ),
+                                                                                version: FFAppState().apiVersion
+                                                                          );
+                                                                          if ((acceptOfferResponse?.statusCode ??
+                                                                                  200) ==
+                                                                              200) {
+                                                                            logFirebaseEvent(
+                                                                                'Button_Show-Snack-Bar');
+                                                                            ScaffoldMessenger.of(context)
+                                                                                .showSnackBar(
+                                                                              SnackBar(
+                                                                                content: Text(
+                                                                                  functions.snackBarMessage('offerAccepted', FFAppState().locale),
+                                                                                  style: TextStyle(
                                                                                     color: FlutterFlowTheme.of(context).white,
-                                                                                    fontSize: 15,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ));
-                                                                    },
-                                                                    valueListenable:
-                                                                        isLoading,
-                                                                  ),
-                                                                  style:
-                                                                      ButtonStyle(
-                                                                    foregroundColor:
-                                                                        MaterialStateProperty.resolveWith<
-                                                                            Color?>(
-                                                                      (states) {
-                                                                        if (states
-                                                                            .contains(MaterialState.disabled)) {
+                                                                                    fontWeight: FontWeight.bold,
+                                                                                    fontSize: 16,
+                                                                                  ),
+                                                                                ),
+                                                                                duration: Duration(milliseconds: 4000),
+                                                                                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                              ),
+                                                                            );
+                                                                            // Future.delayed(const Duration(seconds: 5), () {
+                                                                            if (mounted)
+                                                                              setState(() {});
+
+                                                                            // });
+                                                                            isLoading.value =
+                                                                                false;
+                                                                            if (await inAppReview.isAvailable()) {
+                                                                              Future.delayed(const Duration(seconds: 2), () {
+                                                                                inAppReview.requestReview();
+                                                                              });
+                                                                            }
+                                                                          } else {
+                                                                            logFirebaseEvent(
+                                                                                'Button_Show-Snack-Bar');
+                                                                            ScaffoldMessenger.of(context)
+                                                                                .showSnackBar(
+                                                                              SnackBar(
+                                                                                content: Text(
+                                                                                  functions.snackBarMessage('error', FFAppState().locale),
+                                                                                  style: TextStyle(
+                                                                                    color: FlutterFlowTheme.of(context).white,
+                                                                                    fontWeight: FontWeight.bold,
+                                                                                    fontSize: 16,
+                                                                                  ),
+                                                                                ),
+                                                                                duration: Duration(milliseconds: 4000),
+                                                                                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                              ),
+                                                                            );
+                                                                            isLoading.value =
+                                                                                false;
+                                                                          }
+                                                                        }
+                                                                      } else {
+                                                                        logFirebaseEvent(
+                                                                            'Button_Alert-Dialog');
+                                                                        var confirmDialogResponse = await showDialog<
+                                                                                bool>(
+                                                                              context:
+                                                                                  context,
+                                                                              builder:
+                                                                                  (alertDialogContext) {
+                                                                                return AlertDialog(
+                                                                                  title: Text('اقبل العرض'),
+                                                                                  content: Text('هل أنت متأكد أنك تريد قبول العرض؟ سيتم رفض جميع العروض الأخرى بعد قبول هذا العرض'),
+                                                                                  actions: [
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext, false),
+                                                                                      child: Text('لا، احتاج بعض من الوقت'),
+                                                                                    ),
+                                                                                    TextButton(
+                                                                                      onPressed: () => Navigator.pop(alertDialogContext, true),
+                                                                                      child: Text('قبول العرض'),
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              },
+                                                                            ) ??
+                                                                            false;
+                                                                        if (confirmDialogResponse) {
+                                                                          acceptOfferTappedIndex = activeOffersIndex;isLoading.value =
+                                                                              true;
+                                                                          logFirebaseEvent(
+                                                                              'Button_Backend-Call');
+                                                                          acceptOfferResponseAr =
+                                                                              await AcceptOfferCall.call(
+                                                                            userId:
+                                                                                currentUserUid,
+                                                                            authorazationToken:
+                                                                                FFAppState().authToken,
+                                                                            offerId:
+                                                                                valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                activeOffersItem,
+                                                                                r'''$.id''',
+                                                                              ).toString(),
+                                                                              'null',
+                                                                            ),
+                                                                                version: FFAppState().apiVersion
+                                                                          );
+                                                                          if ((acceptOfferResponseAr?.statusCode ??
+                                                                                  200) ==
+                                                                              200) {
+                                                                            logFirebaseEvent(
+                                                                                'Button_Show-Snack-Bar');
+                                                                            ScaffoldMessenger.of(context)
+                                                                                .showSnackBar(
+                                                                              SnackBar(
+                                                                                content: Text(
+                                                                                  functions.snackBarMessage('offerAccepted', FFAppState().locale),
+                                                                                  style: TextStyle(
+                                                                                    color: FlutterFlowTheme.of(context).white,
+                                                                                    fontWeight: FontWeight.bold,
+                                                                                    fontSize: 16,
+                                                                                  ),
+                                                                                ),
+                                                                                duration: Duration(milliseconds: 4000),
+                                                                                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                              ),
+                                                                            );
+                                                                            if (mounted)
+                                                                              setState(() {});
+                                                                            isLoading.value =
+                                                                                false;
+                                                                          } else {
+                                                                            logFirebaseEvent(
+                                                                                'Button_Show-Snack-Bar');
+                                                                            ScaffoldMessenger.of(context)
+                                                                                .showSnackBar(
+                                                                              SnackBar(
+                                                                                content: Text(
+                                                                                  functions.snackBarMessage('error', FFAppState().locale),
+                                                                                  style: TextStyle(
+                                                                                    color: FlutterFlowTheme.of(context).white,
+                                                                                    fontWeight: FontWeight.bold,
+                                                                                    fontSize: 16,
+                                                                                  ),
+                                                                                ),
+                                                                                duration: Duration(milliseconds: 4000),
+                                                                                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                              ),
+                                                                            );
+                                                                            isLoading.value =
+                                                                                false;
+                                                                          }
+                                                                        }
+                                                                      }
+                                                                      if (mounted)
+                                                                        setState(
+                                                                            () {});
+                                                                    }},
+                                                                    child:
+                                                                        ValueListenableBuilder<
+                                                                            bool>(
+                                                                      builder: (BuildContext
+                                                                              context,
+                                                                          bool
+                                                                              value,
+                                                                          Widget?
+                                                                              child) {
+                                                                        return
+                                                                          (((activeOffersIndex!=acceptOfferTappedIndex) && (isLoading
+                                                                                .value==true))? false:
+                                                                          isLoading
+                                                                                .value)
+                                                                            ? Padding(
+                                                                                padding: const EdgeInsets.all(5.0),
+                                                                                child: Row(
+                                                                                  mainAxisSize: MainAxisSize.min,
+                                                                                  children: [
+                                                                                    SizedBox(
+                                                                                      height: 30,
+                                                                                      width: 30,
+                                                                                      child: CircularProgressIndicator(
+                                                                                        valueColor: AlwaysStoppedAnimation(FlutterFlowTheme.of(context).primaryColor),
+                                                                                        strokeWidth: 5,
+                                                                                      ),
+                                                                                    )
+                                                                                  ],
+                                                                                ),
+                                                                              )
+                                                                            : AutoSizeText(
+                                                                                FFLocalizations.of(context).getText(
+                                                                                  'y0qb0uvi' /* Accept offer */,
+                                                                                ),
+                                                                                style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                      fontFamily: 'AvenirArabic',
+                                                                                      color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                      fontSize: 15,
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                      useGoogleFonts: false,
+                                                                                    ));
+                                                                      },
+                                                                      valueListenable:
+                                                                          isLoading,
+                                                                    ),
+                                                                    style:
+                                                                        ButtonStyle(
+                                                                      foregroundColor:
+                                                                          MaterialStateProperty.resolveWith<
+                                                                              Color?>(
+                                                                        (states) {
+                                                                          if (states
+                                                                              .contains(MaterialState.disabled)) {
+                                                                            FlutterFlowTheme.of(context)
+                                                                                .subtitle2
+                                                                                .override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  color: FlutterFlowTheme.of(context).primaryColor,
+                                                                                  useGoogleFonts: false,
+                                                                                );
+                                                                          }
                                                                           FlutterFlowTheme.of(context)
                                                                               .subtitle2
                                                                               .override(
                                                                                 fontFamily: 'AvenirArabic',
-                                                                                color: Colors.white,
+                                                                                color: FlutterFlowTheme.of(context).primaryColor,
                                                                                 useGoogleFonts: false,
                                                                               );
+                                                                        },
+                                                                      ),
+                                                                      backgroundColor:
+                                                                          MaterialStateProperty.resolveWith<
+                                                                              Color?>(
+                                                                        (states) {
+                                                                          if (states
+                                                                              .contains(MaterialState.disabled)) {
+                                                                            return Colors.white;
                                                                         }
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .subtitle2
-                                                                            .override(
-                                                                              fontFamily: 'AvenirArabic',
-                                                                              color: Colors.white,
-                                                                              useGoogleFonts: false,
-                                                                            );
+                                                                        return Colors.white;
                                                                       },
                                                                     ),
-                                                                    backgroundColor:
-                                                                        MaterialStateProperty.resolveWith<
-                                                                            Color?>(
-                                                                      (states) {
-                                                                        if (states
-                                                                            .contains(MaterialState.disabled)) {
-                                                                          return FlutterFlowTheme.of(context).primaryColor;
-                                                                      }
-                                                                      return FlutterFlowTheme.of(context).primaryColor;
-                                                                    },
-                                                                  ),
-                                                                  shape: MaterialStateProperty
-                                                                      .all<
-                                                                          OutlinedBorder>(
-                                                                    RoundedRectangleBorder(
-                                                                        borderRadius: BorderRadius.circular(
-                                                                            8),
-                                                                        side:
-                                                                            BorderSide(
-                                                                          color:
-                                                                              Colors.transparent,
-                                                                          width:
-                                                                              1,
-                                                                        )),
+                                                                    shape: MaterialStateProperty
+                                                                        .all<
+                                                                            OutlinedBorder>(
+                                                                      RoundedRectangleBorder(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              8),
+                                                                          side:
+                                                                              BorderSide(
+                                                                            color:
+                                                                            FlutterFlowTheme.of(context).primaryColor,
+                                                                            width:
+                                                                                1,
+                                                                          )),
+                                                                    ),
                                                                   ),
                                                                 ),
+                                                            ):SizedBox.shrink();},
+                                                                valueListenable: timerCompleted,
                                                               ),
-                                                            ),
                                                         ],
                                                       ),
                                                     ),
@@ -2422,7 +2436,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
     return FlutterFlowTimer(
       timerValue: timerValue ??= StopWatchTimer.getDisplayTime(
         timerMilliseconds ??= duration,
-        hours: false,
+        hours: true,
         minute: true,
         second: true,
         milliSecond: false,

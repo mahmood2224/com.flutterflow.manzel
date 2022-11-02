@@ -96,7 +96,7 @@ class _ZoomImageState extends State<ZoomImage> {
                     children: [
                       InkWell(
                         onTap :(){
-                          context.pop();
+                          Navigator.pop(context);
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(top:8 ,left:20 ),

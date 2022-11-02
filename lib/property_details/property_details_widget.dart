@@ -618,6 +618,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           logFirebaseEvent(
                                                               'HOME_SCREEN_Container_jprwonvd_ON_TAP');
                                                           if (loggedIn) {
+                                                            fav[widget.propertyId.toString()]??false?fav[widget
+                                                                .propertyId
+                                                                .toString()] = true:fav[widget
+                                                                .propertyId
+                                                                .toString()] = false;
                                                             if (fav[widget.propertyId.toString()]??false) {
                                                               logFirebaseEvent(
                                                                   'Container_Backend-Call');

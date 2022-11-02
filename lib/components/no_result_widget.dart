@@ -34,7 +34,7 @@ class _NoResultWidgetState extends State<NoResultWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 3, 0, 0),
                 child: Image.asset(
                   'assets/images/NoResultsFound.png',
-                  width: 38,
+                  width: 40,
                   height: 37,
                   fit: BoxFit.contain,
                 ),
@@ -42,14 +42,14 @@ class _NoResultWidgetState extends State<NoResultWidget> {
             if (widget.screenName == 'notification')
               Image.asset(
                 'assets/images/NoNotificationFound.png',
-                width: 38,
+                width: 40,
                 height: 37,
                 fit: BoxFit.contain,
               ),
             if (widget.screenName == 'offer')
               Image.asset(
                 'assets/images/offerScreenNoResult.png',
-                width: 38,
+                width: 40,
                 height: 37,
                 fit: BoxFit.cover,
               ),
