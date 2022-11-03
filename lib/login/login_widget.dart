@@ -50,21 +50,27 @@ class _LoginWidgetState extends State<LoginWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBtnText,
         automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30,
-          borderWidth: 1,
-          buttonSize: 60,
-          icon: Icon(
-            Manzel.back_icon,
-            color: Colors.black,
-            size: 15,
+        leading: RotatedBox(
+          quarterTurns:
+          FFAppState().locale == 'en'
+              ? 0
+              : 2,
+          child: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Manzel.back_icon,
+              color: Colors.black,
+              size: 15,
+            ),
+            onPressed: () async {
+              logFirebaseEvent('LOGIN_PAGE_back_ON_TAP');
+              logFirebaseEvent('back_Navigate-Back');
+              context.pop();
+            },
           ),
-          onPressed: () async {
-            logFirebaseEvent('LOGIN_PAGE_back_ON_TAP');
-            logFirebaseEvent('back_Navigate-Back');
-            context.pop();
-          },
         ),
         actions: [
           Padding(
