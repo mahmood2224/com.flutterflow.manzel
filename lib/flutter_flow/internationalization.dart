@@ -1904,8 +1904,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
 // reservationBottomSheet
   {
     'reservationAnd' : {
-      'ar':'&',
-      'en':'و',
+      'ar':'و',
+      'en':'&',
     },
     'reservationPrivacyPolicy' : {
       'en':"privacy policy",

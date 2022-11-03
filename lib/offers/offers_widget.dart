@@ -208,7 +208,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
               widget.propertyId != '')
             InkWell(
               child: Padding(
-                padding: const EdgeInsets.only(right:20),
+                padding: const EdgeInsets.only(right:10,left: 10),
                 child: Container(
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
