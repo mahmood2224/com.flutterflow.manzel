@@ -1073,6 +1073,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Property address.',
       'ar': 'عنوان العقار',
     },
+    'propertyLink': {
+      'en': 'Property link',
+      'ar': 'ارتباط الملكية',
+    },
     'opening': {
       'en': 'Hello ! I want to request a visit to',
       'ar': 'مرحبًا ! أريد أن أطلب زيارة للعقار المذكور في الأسفل',
