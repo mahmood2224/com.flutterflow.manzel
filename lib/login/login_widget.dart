@@ -204,7 +204,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 counterText: "",
-                                hintText: "XXXXXXXXXX",
+                                hintText: "XXXXXXXXX",
                                 prefixText: FFLocalizations.of(context).getText(
                                   'f4tpckti' /* +966 */,),
                               labelText: FFLocalizations.of(context).getText(
