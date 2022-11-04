@@ -719,22 +719,31 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                         // ),
                                                       ],
                                                     ),
-                                                  if (functions
-                                                          .conditionalVisibility(
-                                                              getJsonField(
-                                                                columnOrderDetailsResponse
-                                                                    .jsonBody,
-                                                                r'''$.result.order_status''',
-                                                              ).toString(),
-                                                              'collect_offers') ||
+                                                  if ((functions
+                                                      .conditionalVisibility(
+                                                      getJsonField(
+                                                        columnOrderDetailsResponse
+                                                            .jsonBody,
+                                                        r'''$.result.order_status''',
+                                                      ).toString(),
+                                                      'collect_offers') ||
                                                       (functions
                                                           .conditionalVisibility(
-                                                              getJsonField(
-                                                                columnOrderDetailsResponse
-                                                                    .jsonBody,
-                                                                r'''$.result.order_status''',
-                                                              ).toString(),
-                                                              'waiting_offer_acceptance')))
+                                                          getJsonField(
+                                                            columnOrderDetailsResponse
+                                                                .jsonBody,
+                                                            r'''$.result.order_status''',
+                                                          ).toString(),
+                                                          'waiting_offer_acceptance')))&&(functions
+                                                      .conditionalVisibility(
+                                                      functions
+                                                          .bookingScreenCountOffers(
+                                                          getJsonField(
+                                                            columnOrderDetailsResponse
+                                                                .jsonBody,
+                                                            r'''$.result.bank_ids''',
+                                                          )),
+                                                      '0')))
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
