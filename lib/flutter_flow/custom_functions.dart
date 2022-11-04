@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -1235,27 +1236,66 @@ String sakaniLoanInitialValue(
   }
 }
 
+//updated code
 String? editProfileDropDownInitalVal(
-  List<String>? optionsList,
-  String? index,
+  List optionsList,
+  String? id,
 ) {
-  if (index != 'null' && index != null && index!.isNotEmpty) {
-    int indx = int.parse(index!);
-    return optionsList![indx];
-  } else {
-    return null;
+  if(optionsList!=null) {
+    if (optionsList[0]["attributes"].containsKey('bank_name')) {
+      if (id != null && id!.isNotEmpty) {
+        for (var element in optionsList) {
+          if (element['id'].toString() == id)
+            return element['attributes']['bank_name'].toString();
+        }
+      }
+      return null;
+    }
+    else {
+      if (id != null && id!.isNotEmpty) {
+        for (var element in optionsList) {
+          if (element['id'].toString() == id)
+            return element['attributes']['Name'].toString();
+        }
+      }
+      return null;
+    }
   }
-  // Add your function code here!
+  else
+    return null;
 }
 
-String editProfileindexReturn(
-  List<String>? optionsArray,
-  String? selectedItem,
-) {
-  int ind = optionsArray!.indexOf(selectedItem!);
-  return ind.toString();
-  // Add your function code here!
+
+//updated code
+String? editProfileindexReturn(
+    List optionsArray,
+    String? selectedItem,
+    ) {
+  if (optionsArray != null) {
+    if (optionsArray[0]["attributes"].containsKey('bank_name')) {
+      if (selectedItem != null && selectedItem!.isNotEmpty) {
+        for (var element in optionsArray) {
+          if (element["attributes"]["bank_name"] == selectedItem)
+            return element["id"].toString();
+        }
+        return null;
+      }
+      return null;
+    }
+    else {
+      if (selectedItem != null && selectedItem!.isNotEmpty) {
+        for (var element in optionsArray) {
+          if (element['attributes']['Name'] == selectedItem)
+            return element["id"].toString();
+        }
+      }
+      return null;
+    }
+  }
+  else
+    return null;
 }
+
 
 String? monthlyIncome(
   String? functionType,
