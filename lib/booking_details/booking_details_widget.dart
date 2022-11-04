@@ -734,7 +734,13 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                                 .jsonBody,
                                                             r'''$.result.order_status''',
                                                           ).toString(),
-                                                          'waiting_offer_acceptance'))))
+                                                          'waiting_offer_acceptance')))&&(
+                                                      getJsonField(
+                                                    columnOrderDetailsResponse
+                                                        .jsonBody,
+                                                    r'''$.result.offer_count''',
+                                                  ).toString()
+                                                          !='0'))
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
@@ -901,6 +907,13 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
+                                              color:functions.orderProcessStatus(
+                                                  getJsonField(
+                                                    columnOrderDetailsResponse.jsonBody,
+                                                    r'''$.result.order_status''',
+                                                  ).toString(),
+                                                  'waiting_offer_acceptance',
+                                                  'unchecked')?Color(0xFF57636C):Color(0xFF000000)
                                               ),
                                         ),
                                         if (functions.conditionalVisibility(
@@ -998,7 +1011,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'oqathjmt' /* Transfer Ownership */,
+                                            'oqathjmt' /* Approval of the request */,
                                           ),
                                           maxLines: 2,
                                           style: FlutterFlowTheme.of(context)
@@ -1008,6 +1021,13 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
+                                              color:functions.orderProcessStatus(
+                                                  getJsonField(
+                                                    columnOrderDetailsResponse.jsonBody,
+                                                    r'''$.result.order_status''',
+                                                  ).toString(),
+                                                  'offer_accepted',
+                                                  'unchecked')?Color(0xFF57636C):Color(0xFF000000)
                                               ),
                                         ),
                                         if (functions.conditionalVisibility(
@@ -1092,7 +1112,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'nhrc354h' /* Completed */,
+                                            'nhrc354h' /* Deal completed successfully */,
                                           ),
                                           maxLines: 2,
                                           style: FlutterFlowTheme.of(context)
@@ -1102,6 +1122,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
+                                              color:functions.orderProcessStatus(
+                                                  getJsonField(
+                                                    columnOrderDetailsResponse.jsonBody,
+                                                    r'''$.result.order_status''',
+                                                  ).toString(),
+                                                  'ownership_transferred',
+                                                  'unchecked')?Color(0xFF57636C):Color(0xFF000000)
+
                                               ),
                                         ),
                                         if (functions.conditionalVisibility(
