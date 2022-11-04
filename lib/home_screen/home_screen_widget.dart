@@ -244,6 +244,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       snapshot.data!;
                                   return InkWell(
                                     onTap: () async {
+
                                       videoPlayers[currentPropertyindex!]
                                           ?.pause();
                                       logFirebaseEvent(

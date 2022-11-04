@@ -855,6 +855,12 @@ class GetBanksCall {
         r'''$.data..attributes.bank_name''',
         true,
       );
+
+  static dynamic bankData(dynamic response) => getJsonField(
+    response,
+    r'''$.data''',
+    true,
+  );
 }
 
 class EmplymentTypeCall {
@@ -880,6 +886,12 @@ class EmplymentTypeCall {
         r'''$.data..attributes.Name''',
         true,
       );
+
+  static dynamic emplymentData(dynamic response) => getJsonField(
+    response,
+    r'''$.data''',
+    true,
+  );
 }
 
 class ApiPagingParams {
