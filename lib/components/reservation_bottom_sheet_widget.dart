@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:go_sell_sdk_flutter/model/models.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
-
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
@@ -274,7 +273,7 @@ class _ReservationBottomSheetWidgetState
         children: [
           Container(
             width: double.infinity,
-            height: 75,
+            height: 60,
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -295,7 +294,7 @@ class _ReservationBottomSheetWidgetState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.04, 22, 0, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.04, 0, 0, 0),
                   child: Container(
                     width: 24.06,
                     height: 23.76,
@@ -329,7 +328,7 @@ class _ReservationBottomSheetWidgetState
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 22, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                           child: Text(
                             FFLocalizations.of(context).getText(
                               'jaefs5yd' /* Reservation confirmation */,
