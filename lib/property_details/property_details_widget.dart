@@ -2710,6 +2710,20 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             )} : ${PropertyCall.propertyEntranceDirection(
                                                               columnPropertyResponse,
                                                             ).toString()}
+                                                            ${FFLocalizations.of(context).getText(
+                                                              'propertyLink',
+                                                            )} : ${await generateDynamicLink({
+                                                              'propertyId':
+                                                              widget.propertyId,
+                                                            },
+                                                                description:
+                                                                PropertyCall
+                                                                    .propertyName(
+                                                                  columnPropertyResponse,
+                                                                ).toString(),
+                                                                thumbnailUrl: PropertyCall
+                                                                    .thumbnailImage(
+                                                                    columnPropertyResponse))}
                                                         ''';
                                                             openWhatsapp(
                                                                 context,
