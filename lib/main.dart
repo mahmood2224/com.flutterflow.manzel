@@ -394,11 +394,13 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'HomeScreen': HomeScreenWidget(),
+
+     'HomeScreen': HomeScreenWidget(),
       'MyProperties': MyPropertiesWidget(),
       'Offers': OffersWidget(),
       'Profile': ProfileWidget(),
     };
+    //'MapScreen' : MapScreen(),
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
       body: _currentPage ?? tabs[_currentPageName],
