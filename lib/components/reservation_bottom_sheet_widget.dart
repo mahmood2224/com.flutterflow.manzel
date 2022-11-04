@@ -601,7 +601,7 @@ class _ReservationBottomSheetWidgetState
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
                           child: Image.asset(
-                            'assets/images/MadaPay.png',
+                            'assets/images/mada_final.png',
                             height: 30,
                             width: 80,
                             fit: BoxFit.scaleDown,
