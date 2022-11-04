@@ -608,115 +608,115 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                                 ),
                                                           ),
                                                         ),
-                                                        Directionality(
-                                                          textDirection:
-                                                              material
-                                                                  .TextDirection
-                                                                  .ltr,
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'pdhga106' /* ( */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1,
-                                                                ),
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    getJsonField(
-                                                                      columnOrderDetailsResponse
-                                                                          .jsonBody,
-                                                                      r'''$.result.offer_count''',
-                                                                    ).toString(),
-                                                                    '0',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontSize:
-                                                                            12,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'awjba3l0' /* / */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontSize:
-                                                                            12,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    functions
-                                                                        .bookingScreenCountOffers(
-                                                                            getJsonField(
-                                                                      columnOrderDetailsResponse
-                                                                          .jsonBody,
-                                                                      r'''$.result.bank_ids''',
-                                                                    )),
-                                                                    '0',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontSize:
-                                                                            12,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'mehsn231' /* ) */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontSize:
-                                                                            12,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
+                                                        // Directionality(
+                                                        //   textDirection:
+                                                        //       material
+                                                        //           .TextDirection
+                                                        //           .ltr,
+                                                        //   child: Container(
+                                                        //     decoration:
+                                                        //         BoxDecoration(),
+                                                        //     child: Row(
+                                                        //       mainAxisSize:
+                                                        //           MainAxisSize
+                                                        //               .max,
+                                                        //       children: [
+                                                        //         Text(
+                                                        //           FFLocalizations.of(
+                                                        //                   context)
+                                                        //               .getText(
+                                                        //             'pdhga106' /* ( */,
+                                                        //           ),
+                                                        //           style: FlutterFlowTheme.of(
+                                                        //                   context)
+                                                        //               .bodyText1,
+                                                        //         ),
+                                                        //         Text(
+                                                        //           valueOrDefault<
+                                                        //               String>(
+                                                        //             getJsonField(
+                                                        //               columnOrderDetailsResponse
+                                                        //                   .jsonBody,
+                                                        //               r'''$.result.offer_count''',
+                                                        //             ).toString(),
+                                                        //             '0',
+                                                        //           ),
+                                                        //           style: FlutterFlowTheme.of(
+                                                        //                   context)
+                                                        //               .bodyText1
+                                                        //               .override(
+                                                        //                 fontFamily:
+                                                        //                     'AvenirArabic',
+                                                        //                 fontSize:
+                                                        //                     12,
+                                                        //                 useGoogleFonts:
+                                                        //                     false,
+                                                        //               ),
+                                                        //         ),
+                                                        //         Text(
+                                                        //           FFLocalizations.of(
+                                                        //                   context)
+                                                        //               .getText(
+                                                        //             'awjba3l0' /* / */,
+                                                        //           ),
+                                                        //           style: FlutterFlowTheme.of(
+                                                        //                   context)
+                                                        //               .bodyText1
+                                                        //               .override(
+                                                        //                 fontFamily:
+                                                        //                     'AvenirArabic',
+                                                        //                 fontSize:
+                                                        //                     12,
+                                                        //                 useGoogleFonts:
+                                                        //                     false,
+                                                        //               ),
+                                                        //         ),
+                                                        //         Text(
+                                                        //           valueOrDefault<
+                                                        //               String>(
+                                                        //             functions
+                                                        //                 .bookingScreenCountOffers(
+                                                        //                     getJsonField(
+                                                        //               columnOrderDetailsResponse
+                                                        //                   .jsonBody,
+                                                        //               r'''$.result.bank_ids''',
+                                                        //             )),
+                                                        //             '0',
+                                                        //           ),
+                                                        //           style: FlutterFlowTheme.of(
+                                                        //                   context)
+                                                        //               .bodyText1
+                                                        //               .override(
+                                                        //                 fontFamily:
+                                                        //                     'AvenirArabic',
+                                                        //                 fontSize:
+                                                        //                     12,
+                                                        //                 useGoogleFonts:
+                                                        //                     false,
+                                                        //               ),
+                                                        //         ),
+                                                        //         Text(
+                                                        //           FFLocalizations.of(
+                                                        //                   context)
+                                                        //               .getText(
+                                                        //             'mehsn231' /* ) */,
+                                                        //           ),
+                                                        //           style: FlutterFlowTheme.of(
+                                                        //                   context)
+                                                        //               .bodyText1
+                                                        //               .override(
+                                                        //                 fontFamily:
+                                                        //                     'AvenirArabic',
+                                                        //                 fontSize:
+                                                        //                     12,
+                                                        //                 useGoogleFonts:
+                                                        //                     false,
+                                                        //               ),
+                                                        //         ),
+                                                        //       ],
+                                                        //     ),
+                                                        //   ),
+                                                        // ),
                                                       ],
                                                     ),
                                                   if (functions
