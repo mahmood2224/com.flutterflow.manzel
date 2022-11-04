@@ -1297,16 +1297,6 @@ String? editProfileindexReturn(
 }
 
 
-// String editProfileindexReturn(
-//   List optionsArray,
-//   String? selectedItem,
-// ) {
-//   int index = optionsArray!.indexOf(selectedItem!);
-//   int id = optionsArray[index];
-//   return id.toString();
-//   // Add your function code here!
-// }
-
 String? monthlyIncome(
   String? functionType,
   String? intialValue,
