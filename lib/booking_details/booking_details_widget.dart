@@ -734,16 +734,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                                 .jsonBody,
                                                             r'''$.result.order_status''',
                                                           ).toString(),
-                                                          'waiting_offer_acceptance')))&&(functions
-                                                      .conditionalVisibility(
-                                                      functions
-                                                          .bookingScreenCountOffers(
-                                                          getJsonField(
-                                                            columnOrderDetailsResponse
-                                                                .jsonBody,
-                                                            r'''$.result.bank_ids''',
-                                                          )),
-                                                      '0')))
+                                                          'waiting_offer_acceptance'))))
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
