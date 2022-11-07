@@ -88,7 +88,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     super.initState();
     //initializePlayer();
     fav = FavouriteList.instance.favourite;
-    if (widget?.jsonData != null) {
+    if (widget.jsonData != null) {
       isLoading.value = true;
       columnPropertyResponse = widget.jsonData;
       isLoading.value = false;
@@ -651,8 +651,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         .apiVersion,
                                                               );
                                                               if ((bookmarkApiResponse
-                                                                          ?.statusCode ??
-                                                                      200) ==
+                                                                          .statusCode) ==
                                                                   200) {
                                                                 fav.remove(widget
                                                                     .propertyId
@@ -710,8 +709,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         .apiVersion,
                                                               );
                                                               if ((bookmarkApiResponse
-                                                                          ?.statusCode ??
-                                                                      200) ==
+                                                                          .statusCode
+                                                              ) ==
                                                                   200) {
                                                                 fav[widget
                                                                     .propertyId
@@ -3499,7 +3498,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               addOrderApiResponse =
                                                   await AddOrderCall.call(
                                                       propertyId:
-                                                          widget!
+                                                          widget
                                                               .propertyId
                                                               .toString(),
                                                       userId:

@@ -1243,7 +1243,7 @@ String? editProfileDropDownInitalVal(
 ) {
   if(optionsList!=null) {
     if (optionsList[0]["attributes"].containsKey('bank_name')) {
-      if (id != null && id!.isNotEmpty) {
+      if (id != null && id.isNotEmpty) {
         for (var element in optionsList) {
           if (element['id'].toString() == id)
             return element['attributes']['bank_name'].toString();
@@ -1252,7 +1252,7 @@ String? editProfileDropDownInitalVal(
       return null;
     }
     else {
-      if (id != null && id!.isNotEmpty) {
+      if (id != null && id.isNotEmpty) {
         for (var element in optionsList) {
           if (element['id'].toString() == id)
             return element['attributes']['Name'].toString();
@@ -1273,7 +1273,7 @@ String? editProfileindexReturn(
     ) {
   if (optionsArray != null) {
     if (optionsArray[0]["attributes"].containsKey('bank_name')) {
-      if (selectedItem != null && selectedItem!.isNotEmpty) {
+      if (selectedItem != null && selectedItem.isNotEmpty) {
         for (var element in optionsArray) {
           if (element["attributes"]["bank_name"] == selectedItem)
             return element["id"].toString();
@@ -1283,7 +1283,7 @@ String? editProfileindexReturn(
       return null;
     }
     else {
-      if (selectedItem != null && selectedItem!.isNotEmpty) {
+      if (selectedItem != null && selectedItem.isNotEmpty) {
         for (var element in optionsArray) {
           if (element['attributes']['Name'] == selectedItem)
             return element["id"].toString();
@@ -1368,7 +1368,7 @@ String bedroomsText(
       if (num == 2) {
         return "غرفتين";
       }
-      if (num! >= 3 && num <= 11) {
+      if (num >= 3 && num <= 11) {
         return "غرف";
       } else {
         return "غرفة";
@@ -1486,8 +1486,8 @@ String resultText(
   String? locale,
 ) {
   // Add your function code here!
-  if (locale!.isNotEmpty && count!.isNotEmpty) {
-    int results = int.parse(count!);
+  if (locale!.isNotEmpty && (count?.isNotEmpty??false)) {
+    int results = int.parse(count??'0');
     if (locale == 'en') {
       if (results == 1) {
         return "1 Result Found ";

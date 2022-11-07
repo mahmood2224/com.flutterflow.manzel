@@ -643,12 +643,11 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                             Align(
                                               alignment:
                                                   AlignmentDirectional(0, 0),
-                                              child: (propertiesIndex ?? 0) ==
-                                                      ((currentPropertyindex ??
-                                                                      0) ==
+                                              child: (propertiesIndex) ==
+                                                      ((currentPropertyindex) ==
                                                                   0
                                                               ? currentPropertyindex =
-                                                                  widget!
+                                                                  widget
                                                                       .homeScreenLength!
                                                               : currentPropertyindex =
                                                                   currentPropertyindex) -
@@ -706,49 +705,22 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                   valueListenable: isMuted,
                                                 ),
                                                 onTap: () {
-                                                  if (videoPlayers[
-                                                          propertiesIndex] !=
-                                                      null) {
-                                                    if (videoPlayers[widget
-                                                                    .homeScreenLength! +
-                                                                propertiesIndex]!
-                                                            .value
-                                                            .volume >
-                                                        0) {
-                                                      videoPlayers[widget
-                                                                  .homeScreenLength! +
+                                                  if (videoPlayers[widget
+                                                                  .homeScreenLength??0 +
                                                               propertiesIndex]
-                                                          ?.setVolume(0);
-                                                      isMuted.value = true;
-                                                    } else {
-                                                      videoPlayers[widget
-                                                                  .homeScreenLength! +
-                                                              propertiesIndex]
-                                                          ?.setVolume(100);
-                                                      isMuted.value = false;
-                                                    }
-                                                    //   setState(() {
-
-                                                    //     Future.delayed(
-                                                    //             Duration(seconds: 3))
-                                                    //         .then((value) {
-                                                    //       isMutedIcon.value = false;
-                                                    //       setState(() {});
-                                                    //     });
-                                                    //   });
-                                                    // } else {
-                                                    //   videoPlayers[propertiesIndex]
-                                                    //       ?.setVolume(100);
-                                                    //   setState(() {
-                                                    //     isMuted = false;
-                                                    //     Future.delayed(
-                                                    //             Duration(seconds: 3))
-                                                    //         .then((value) {
-                                                    //       isMutedIcon.value = false;
-                                                    //       setState(() {});
-                                                    //     });
-                                                    //   });
-                                                    // }
+                                                          .value
+                                                          .volume >
+                                                      0) {
+                                                    videoPlayers[widget
+                                                                .homeScreenLength??0 +
+                                                            propertiesIndex].setVolume(0);
+                                                    isMuted.value = true;
+                                                  } else {
+                                                    videoPlayers[widget
+                                                                .homeScreenLength! +
+                                                            propertiesIndex]
+                                                        ?.setVolume(100);
+                                                    isMuted.value = false;
                                                   }
                                                 },
                                               ),
@@ -956,8 +928,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                             .apiVersion,
                                                                   );
                                                                   if ((bookmarkApiResponse
-                                                                              ?.statusCode ??
-                                                                          200) ==
+                                                                              .statusCode ) ==
                                                                       200) {
                                                                     fav.remove(propertiesItem[
                                                                             "id"]
@@ -1021,8 +992,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                             .apiVersion,
                                                                   );
                                                                   if ((bookmarkApiResponse
-                                                                              ?.statusCode ??
-                                                                          200) ==
+                                                                              .statusCode ) ==
                                                                       200) {
                                                                     fav[propertiesItem[
                                                                             "id"]

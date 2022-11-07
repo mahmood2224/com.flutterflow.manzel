@@ -176,7 +176,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
   @override
   void dispose() {
     super.dispose();
-    timerController?.dispose();
+    timerController.dispose();
   }
 
   @override
@@ -1156,7 +1156,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                                       }
                                                                       print(">>>>>>>>>>>>>>>>>>> value = ${value}");
                                                                       final displayTime = StopWatchTimer.getDisplayTime(
-                                                                        value!,
+                                                                        value,
                                                                         hours: true,
                                                                         minute: true,
                                                                         second: true,
