@@ -699,7 +699,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'hy8565b9': {
       'en': 'Filter',
-      'ar': 'فرز',
+      'ar': 'تصفية',
     },
     'b8bqw4hw': {
       'en': 'City',
@@ -779,7 +779,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '2m2ni5iy': {
       'en': 'Furnishing',
-      'ar': 'مفروشة',
+      'ar': 'التأثيث',
     },
     'jrw6qvww': {
       'en': 'All',
@@ -787,7 +787,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'skyj7jpv': {
       'en': 'Furnished',
-      'ar': 'التأثيث',
+      'ar': 'مفروشة',
     },
     '8x7rkqnv': {
       'en': 'Un-furnished',
@@ -1231,8 +1231,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // ThreeSixtyView
   {
     'e6q07s67': {
-      'en': '360° View',
-      'ar': 'عرض 360 درجة',
+      'en': 'Virtual Tour',
+      'ar': 'جولة افتراضية',
     },
     '9e175bwt': {
       'en': 'Home',
@@ -1419,8 +1419,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'عرض تفاصيل العقار',
     },
     '6on06i4j': {
-      'en': 'Order Process',
-      'ar': 'مراحل الطلب',
+      'en': 'Order Status',
+      'ar': 'حالة الطلب',
     },
     'nkd2c7wt': {
       'en': 'Reservation & Payment Confirmed',
@@ -1830,7 +1830,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'qkoz8020': {
       'en': 'Transaction details',
-      'ar': 'تفاصيل الصفقه',
+      'ar': 'تفاصيل الصفقة',
     },
     '0ck5hck8': {
       'en': 'Payment Method',
