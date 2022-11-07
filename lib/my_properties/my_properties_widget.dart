@@ -1359,7 +1359,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    16, 23, 19, 0),
+                                                    16, 23, 16, 0),
                                             child: Container(
                                               width: 100,
                                               decoration: BoxDecoration(
