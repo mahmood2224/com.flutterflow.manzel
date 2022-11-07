@@ -113,7 +113,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                           children: [
                             Image.asset(
                               'assets/images/offerScreenNoResult.png',
-                              width: 37,
+                              width: 40,
                               height: 38,
                               fit: BoxFit.cover,
                             ),
