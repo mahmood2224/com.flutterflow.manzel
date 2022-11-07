@@ -36,9 +36,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   ValueNotifier<int> changeTimer = ValueNotifier<int>(0);
   ValueNotifier<int> changeText = ValueNotifier<int>(0);
   ValueNotifier<bool> timerOver = ValueNotifier<bool>(true);
+  var height;
 
   @override
   void initState() {
+
     super.initState();
     // On page load action.
     logFirebaseEvent('screen_view',
@@ -52,6 +54,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'MyProperties'});
    // WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+
 
   }
 
@@ -74,32 +77,41 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
 
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
+      appBar: AppBar(
+        centerTitle: false,
+        titleSpacing: 16,
+        leadingWidth: 0,
+        title:Text(
+          FFLocalizations.of(context).getText(
+            '21gpsvgr' /* Offers */,
+          ),
+          style: FlutterFlowTheme.of(context)
+              .title2
+              .override(
+            fontFamily: 'AvenirArabic',
+            color: Colors.black,
+            fontSize: 25,
+            fontWeight: FontWeight.w800,
+            useGoogleFonts: false,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        actions: [
+        ],
+      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 8, 15, 0),
-              child: Text(
-                FFLocalizations.of(context).getText(
-                  '21gpsvgr' /* My Properties */,
-                ),
-                style: FlutterFlowTheme.of(context).title2.override(
-                      fontFamily: 'AvenirArabic',
-                      color: Colors.black,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w800,
-                      useGoogleFonts: false,
-                    ),
-              ),
-            ),
             if (!loggedIn)
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 260, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, height/2.8, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,

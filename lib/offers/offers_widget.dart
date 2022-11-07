@@ -56,6 +56,7 @@ class _OffersWidgetState extends State<OffersWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> channels = {};
   Map<int,bool> timerStoppedMap = {};
+  var height;
 StopWatchTimer timerController = StopWatchTimer(
   mode: StopWatchMode.countDown,
   );
@@ -181,6 +182,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
 
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -273,7 +275,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                 children: [
                   if (!loggedIn)
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 260, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0,height/2.8, 0, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
