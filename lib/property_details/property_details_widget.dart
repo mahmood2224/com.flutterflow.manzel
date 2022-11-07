@@ -85,8 +85,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
 
   @override
   void initState() {
+   // makeProeprtyApiCall();
     super.initState();
-    //initializePlayer();
+    // //initializePlayer();
     fav = FavouriteList.instance.favourite;
     if (widget?.jsonData != null) {
       isLoading.value = true;

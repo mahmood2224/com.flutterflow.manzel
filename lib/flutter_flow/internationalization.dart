@@ -1087,7 +1087,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'pinCode': {
       'en': 'Pin code ',
-      'ar': 'كود PIN ',
+      'ar': 'رمز الدخول',
     },
     'ak0ss5un': {
       'en': 'Last updated: ',
@@ -1139,7 +1139,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6brswcwm': {
       'en': 'Ref no.',
-      'ar': 'رقم',
+      'ar': 'رقم العقار',
     },
     'ku7u4p9w': {
       'en': 'Floors',
@@ -1187,7 +1187,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '67qymqb4': {
       'en': 'Photos',
-      'ar': 'الصور',
+      'ar': 'المعرض',
     },
     'i17ddd6l': {
       'en': 'Installment starting from',
@@ -1377,8 +1377,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'failure': {
       'en': 'We are unable to process payment please try again later',
-      'ar':
-          'نحن غير قادرين على معالجة الدفع في هذا الوقت. الرجاء معاودة المحاولة في وقت لاحق'
+      'ar': 'حدث خطأ ما، الرجاء المحاولة مرة أخرى'
     },
     'fnewib0l': {
       'en': 'Your Booking Confirmed',
