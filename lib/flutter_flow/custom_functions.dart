@@ -1168,7 +1168,7 @@ bool videoPlayerVisibilty(String? videoURL) {
   }
 }
 bool requestButtonVisibilty(String? pincode){
-  if((pincode!=null)&&((pincode??'').isNotEmpty)){
+  if((pincode!=null)&&((pincode).isNotEmpty)){
     return false;
   }else{return true;}
 }
@@ -1427,7 +1427,7 @@ String livingroomText(
       if (num == 2) {
         return "غرفتان معيشة";
       }
-      if (num! >= 3 && num <= 11) {
+      if (num >= 3 && num <= 11) {
         return "غرف معيشة";
       } else {
         return "غرفة معيشة";

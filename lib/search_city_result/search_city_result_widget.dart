@@ -719,7 +719,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                     videoPlayers[widget
                                                                 .homeScreenLength! +
                                                             propertiesIndex]
-                                                        ?.setVolume(100);
+                                                        .setVolume(100);
                                                     isMuted.value = false;
                                                   }
                                                 },
