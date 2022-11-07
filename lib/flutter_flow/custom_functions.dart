@@ -1161,7 +1161,7 @@ bool notificationConditionalVisibilty(
 
 bool videoPlayerVisibilty(String? videoURL) {
   // Add your function code here!
-  if (videoURL!.isNotEmpty) {
+  if (videoURL?.isNotEmpty??false) {
     return true;
   } else {
     return false;
