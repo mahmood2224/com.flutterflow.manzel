@@ -1372,13 +1372,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // Confirmation
   {
     'failureButton': {
-      'en': 'Explore more properties',
-      'ar': 'اكتشف المزيد من الخصائص'
+      'en': 'Try Again',
+      'ar': 'محاولة مرة اخرى'
     },
     'failure': {
-      'en': 'We are unable to process payment please try again later',
-      'ar':
-          'نحن غير قادرين على معالجة الدفع في هذا الوقت. الرجاء معاودة المحاولة في وقت لاحق'
+      'en': 'Something went wrong, please try again.',
+      'ar': 'حدث خطأ ما، الرجاء المحاولة مرة أخرى'
     },
     'fnewib0l': {
       'en': 'Your Booking Confirmed',
