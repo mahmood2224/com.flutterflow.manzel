@@ -551,8 +551,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // Offers
   {
     'y42wn8bh': {
-      'en': 'You have ',
-      'ar': 'عندك',
+      'en': 'You have',
+      'ar': 'لديك',
     },
     '9j4qhgy0': {
       'en': 'min.',
