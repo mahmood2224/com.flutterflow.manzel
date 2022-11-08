@@ -124,14 +124,14 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Image.asset(
-                              'assets/images/offerScreenNoResult.png',
-                              width: 40,
-                              height: 38,
-                              fit: BoxFit.cover,
+                              'assets/images/myPropertiesBooked.png',
+                              width: 45,
+                              height: 45,
+                              fit: BoxFit.fill,
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 15, 10, 0),
+                                  EdgeInsetsDirectional.fromSTEB(10, 8, 10, 0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   'w4bgagrv' /* You need to create an account ... */,
