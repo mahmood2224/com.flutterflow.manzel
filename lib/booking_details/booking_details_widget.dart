@@ -1731,7 +1731,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                   if (getJsonField(
                             columnOrderDetailsResponse.jsonBody,
                             r'''$.result.transaction_data.transaction_id''',
-                          ).toString() !=
+                          ) !=
                           null &&
                       getJsonField(
                         columnOrderDetailsResponse.jsonBody,
@@ -1862,7 +1862,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                     getJsonField(
                                                   columnOrderDetailsResponse
                                                       .jsonBody,
-                                                  r'''$.result.id''',
+                                                  r'''$.result.transaction_data.transaction_id''',
                                                 ).toString()),
                                                 maxLines: 2,
                                                 style:
@@ -2034,93 +2034,94 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 22, 20, 30),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FFButtonWidget(
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'BOOKING_DETAILS_PAGE_receipt_ON_TAP');
-                            if (functions.depositReciptSnackBar(
-                                OrderDetailsCall.depositreceipt(
-                              columnOrderDetailsResponse.jsonBody,
-                            ).toString())) {
-                              logFirebaseEvent('receipt_Show-Snack-Bar');
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    functions.snackBarMessage(
-                                        'depositReceipt', FFAppState().locale),
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context).white,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).primaryRed,
-                                ),
-                              );
-                            } else {
-                              logFirebaseEvent('receipt_Navigate-To');
-
-                              context.pushNamed(
-                                'depositeRecipt',
-                                queryParams: {
-                                  'depositeRecpit': serializeParam(
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(20, 22, 20, 30),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  logFirebaseEvent(
+                                      'BOOKING_DETAILS_PAGE_receipt_ON_TAP');
+                                  if (functions.depositReciptSnackBar(
                                       OrderDetailsCall.depositreceipt(
                                         columnOrderDetailsResponse.jsonBody,
-                                      ).toString(),
-                                      ParamType.String),
-                                  'propertyName': serializeParam(
-                                      valueOrDefault<String>(
-                                          getJsonField(
-                                            columnOrderDetailsResponse.jsonBody,
-                                            r'''$.result.property_data.property_name''',
-                                          ).toString(),
-                                          'null'),
-                                      ParamType.String),
-                                }.withoutNulls,
-                              );
-                            }
-                          },
-                          text: FFLocalizations.of(context).getText(
-                            'i7w1em00' /* View Receipt Transaction */,
-                          ),
-                          icon: Icon(
-                            Manzel.receipt,
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            size: 20,
-                          ),
-                          options: FFButtonOptions(
-                            width: 230,
-                            height: 45,
-                            color: Colors.white,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .subtitle2
-                                .override(
-                                  fontFamily: 'AvenirArabic',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: false,
+                                      ).toString())) {
+                                    logFirebaseEvent('receipt_Show-Snack-Bar');
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          functions.snackBarMessage(
+                                              'depositReceipt', FFAppState().locale),
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context).white,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                        FlutterFlowTheme.of(context).primaryRed,
+                                      ),
+                                    );
+                                  } else {
+                                    logFirebaseEvent('receipt_Navigate-To');
+
+                                    context.pushNamed(
+                                      'depositeRecipt',
+                                      queryParams: {
+                                        'depositeRecpit': serializeParam(
+                                            OrderDetailsCall.depositreceipt(
+                                              columnOrderDetailsResponse.jsonBody,
+                                            ).toString(),
+                                            ParamType.String),
+                                        'propertyName': serializeParam(
+                                            valueOrDefault<String>(
+                                                getJsonField(
+                                                  columnOrderDetailsResponse.jsonBody,
+                                                  r'''$.result.property_data.property_name''',
+                                                ).toString(),
+                                                'null'),
+                                            ParamType.String),
+                                      }.withoutNulls,
+                                    );
+                                  }
+                                },
+                                text: FFLocalizations.of(context).getText(
+                                  'i7w1em00' /* View Receipt Transaction */,
                                 ),
-                            borderSide: BorderSide(
-                              color: Color(0x1A2971FB),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(12),
+                                icon: Icon(
+                                  Manzel.receipt,
+                                  color: FlutterFlowTheme.of(context).primaryColor,
+                                  size: 20,
+                                ),
+                                options: FFButtonOptions(
+                                  width: 230,
+                                  height: 45,
+                                  color: Colors.white,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                    fontFamily: 'AvenirArabic',
+                                    color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Color(0x1A2971FB),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                  ),
+
                 ],
               ),
             );
