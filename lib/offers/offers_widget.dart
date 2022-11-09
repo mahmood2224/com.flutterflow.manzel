@@ -105,13 +105,14 @@ class _OffersWidgetState extends State<OffersWidget> {
     // On page load action.
    // inAppReview.openStoreListing(appStoreId: '1630341481');
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      final _sendbird = await sendbird.SendbirdSdk(
-          appId: "${EnvVariables.instance.sendbirdAppId}");
-      final _ = await _sendbird.connect(currentUserUid);
+      if(loggedIn){
+        final _sendbird = await sendbird.SendbirdSdk(
+            appId: "${EnvVariables.instance.sendbirdAppId}");
+        final _ = await _sendbird.connect(currentUserUid);
+        final _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);
+        getUnreadMessage();
+      }
       // Future.delayed(Duration(seconds: 5));
-      final _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);
-      getUnreadMessage();
-
       logFirebaseEvent('OFFERS_PAGE_Offers_ON_PAGE_LOAD');
       if (loggedIn) {
         if (valueOrDefault(currentUserDocument?.status, '') == 'Active') {
