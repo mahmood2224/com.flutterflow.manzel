@@ -5,7 +5,7 @@ import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import '../components/no_result_widget.dart';
-import 'package:manzel/app_state.dart'as globalVar;
+import 'package:manzel/app_state.dart' as globalVar;
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
@@ -68,8 +68,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   static const _pageSize = 20;
   final PagingController<int, dynamic> _pagingController =
-      PagingController(firstPageKey: 0);
-
+  PagingController(firstPageKey: 0);
 
   @override
   void initState() {
@@ -80,9 +79,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
       logFirebaseEvent('HomeScreen_Set-App-Language');
       setAppLanguage(context, await FFAppState().locale);
-      Future.delayed(const Duration(milliseconds: 500), () {
-        setAppLanguage(context, FFAppState().locale);
-      });
+      // Future.delayed(const Duration(milliseconds: 500), () {
+      //   setAppLanguage(context, FFAppState().locale);
+      // });
     });
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});
     videoPlayers.clear();
@@ -92,40 +91,37 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         _fetchPage(pageKey);
       });
     });
-
   }
+
   watchRouteChange() {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (!GoRouter
-          .of(context)
-          .location
-          .contains(
-          "fav")) { // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
+      if (!GoRouter.of(context).location.contains("fav")) {
+        // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
         // do something
         favourites = FavouriteList.instance.favourite;
-        if(mounted){
-        setState(() {});}
-        GoRouter.of(context).removeListener(
-            watchRouteChange); // remove listener
+        if (mounted) {
+          setState(() {});
+        }
+
+        GoRouter.of(context)
+            .removeListener(watchRouteChange); // remove listener
       }
     });
   }
 
   Future<void> callBookmarkListApi() async {
-      final result = await BookmarkListCall.call(
-        userId: currentUserUid,
-        authorazationToken: await FFAppState().authToken,
-        version: await FFAppState().apiVersion,
-      );
-      print("REsult>>>>>>>>>>>>>${result.jsonBody}");
-      List<dynamic> favList = await result.jsonBody['result'];
-      favList.forEach((element) {
-        favourites[element] = true;
-      });
-      FavouriteList.instance.setFavourite(favourites);
-      if(mounted)
-      setState(() {
-      });
+    final result = await BookmarkListCall.call(
+      userId: currentUserUid,
+      authorazationToken: await FFAppState().authToken,
+      version: await FFAppState().apiVersion,
+    );
+    print("REsult>>>>>>>>>>>>>${result.jsonBody}");
+    List<dynamic> favList = await result.jsonBody['result'];
+    favList.forEach((element) {
+      favourites[element] = true;
+    });
+    FavouriteList.instance.setFavourite(favourites);
+    if (mounted) setState(() {});
   }
 
   Future<void> _fetchPage(int pageKey) async {
@@ -137,13 +133,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         // propertyType: FFAppState().filterPropertyType,
         pageNumber: pageKey.toString(),
         pageSize: _pageSize.toString(),
-        locale:  FFAppState().locale,
+        locale: FFAppState().locale,
       );
       apiData = apiResponse;
       final newItems = getJsonField(
-            (apiResponse.jsonBody ?? ''),
-            r'''$.data''',
-          )?.toList() ??
+        (apiResponse.jsonBody ?? ''),
+        r'''$.data''',
+      )?.toList() ??
           [];
       final isLastPage = newItems.length < _pageSize;
       if (isLastPage) {
@@ -226,7 +222,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   queryBuilder: (notificationsRecord) =>
                                       notificationsRecord
                                           .where('user_id',
-                                              isEqualTo: currentUserReference)
+                                          isEqualTo: currentUserReference)
                                           .where('is_read', isEqualTo: 0),
                                 ),
                                 builder: (context, snapshot) {
@@ -241,11 +237,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     );
                                   }
                                   List<NotificationsRecord>
-                                      notificationsBadgeNotificationsRecordList =
-                                      snapshot.data!;
+                                  notificationsBadgeNotificationsRecordList =
+                                  snapshot.data!;
                                   return InkWell(
                                     onTap: () async {
-
                                       videoPlayers[currentPropertyindex]
                                           .pause();
                                       logFirebaseEvent(
@@ -266,16 +261,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'AvenirArabic',
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal,
-                                              useGoogleFonts: false,
-                                            ),
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.normal,
+                                          useGoogleFonts: false,
+                                        ),
                                       ),
                                       showBadge: functions.notificationBadgeCount(
-                                              notificationsBadgeNotificationsRecordList
-                                                  .toList()) !=
+                                          notificationsBadgeNotificationsRecordList
+                                              .toList()) !=
                                           '0',
                                       shape: BadgeShape.circle,
                                       badgeColor: FlutterFlowTheme.of(context)
@@ -319,14 +314,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                 kTransitionInfoKey: TransitionInfo(
                                   hasTransition: true,
                                   transitionType:
-                                      PageTransitionType.bottomToTop,
+                                  PageTransitionType.bottomToTop,
                                 ),
                               },
                             );
-    GoRouter.of(context).addListener(() {
-    watchRouteChange();
-    });
-
+                            GoRouter.of(context).addListener(() {
+                              watchRouteChange();
+                            });
                           },
                           child: Container(
                             width: double.infinity,
@@ -346,11 +340,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             alignment: AlignmentDirectional(0, 0),
                             child: Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(23, 0, 12, 0),
+                              EdgeInsetsDirectional.fromSTEB(23, 0, 12, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -358,7 +352,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     ),
                                     textAlign: TextAlign.start,
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                    FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -387,7 +381,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: Text(FFAppState().locale=='en'?'Ok':'موافق'),
+                                                    child: Text(
+                                                        FFAppState().locale ==
+                                                            'en'
+                                                            ? 'Ok'
+                                                            : 'موافق'),
                                                   ),
                                                 ],
                                               );
@@ -396,8 +394,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         },
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 10, 0),
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0, 0, 10, 0),
                                           child: Container(
                                             width: 36,
                                             height: 36,
@@ -430,9 +428,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             'Filter',
                                             queryParams: {
                                               'homeScreenLength':
-                                                  serializeParam(
-                                                      videoPlayers.length,
-                                                      ParamType.int),
+                                              serializeParam(
+                                                  videoPlayers.length,
+                                                  ParamType.int),
                                               //     'cityList':serializeParam(
                                               // getJsonField(
                                               //       apiData!.jsonBody,
@@ -442,11 +440,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             }.withoutNulls,
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
-                                                  TransitionInfo(
+                                              TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:
-                                                    PageTransitionType
-                                                        .bottomToTop,
+                                                PageTransitionType
+                                                    .bottomToTop,
                                               ),
                                             },
                                           );
@@ -591,7 +589,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 scrollDirection: Axis.vertical,
                 builderDelegate: PagedChildBuilderDelegate<dynamic>(
                   itemBuilder: (context, propertiesItem, propertiesIndex) {
-                    print('PROPERTIES INDEX >>>>>>>>>>>>>>$propertiesIndex');
                     Future.delayed(Duration(seconds: 2));
                     propertiesItem['isBookmarked'] =
                         favourites[propertiesItem['id'].toString()] ?? false;
@@ -672,81 +669,58 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       borderRadius: BorderRadius.circular(12),
                                       child: Container(
                                         width:
-                                            MediaQuery.of(context).size.width *
-                                                0.95,
+                                        MediaQuery.of(context).size.width *
+                                            0.95,
                                         height:
-                                            MediaQuery.of(context).size.height *
-                                                0.4,
+                                        MediaQuery.of(context).size.height *
+                                            0.4,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(12),
+                                          BorderRadius.circular(12),
                                         ),
                                         child: VisibilityDetector(
                                           key: Key(propertiesIndex.toString()),
                                           onVisibilityChanged: (visibility) {
-                                            if (visibility.visibleFraction *
-                                                        100 ==
-                                                    100 &&
-                                                this.mounted) {
-                                              if (!(videoPlayers[
-                                                      propertiesIndex]
-                                                  .value
-                                                  .isInitialized)) {
-                                                videoPlayers[propertiesIndex]
-                                                    .initialize()
-                                                    .then((value) {
+                                            if (visibility.visibleFraction * 100 == 100 && this.mounted) {
+                                              if (!(videoPlayers[propertiesIndex].value.isInitialized)) {
+                                                videoPlayers[propertiesIndex].initialize().then((value) {
                                                   isPaused = false;
-                                                  isMuted.value
-                                                      ? videoPlayers[
-                                                              propertiesIndex]
-                                                          .setVolume(0)
-                                                      : videoPlayers[
-                                                              propertiesIndex]
-                                                          .setVolume(100);
-                                                  currentPropertyindex =
-                                                      propertiesIndex;
-                                                  videoPlayers[propertiesIndex]
-                                                      .play();
+                                                  isMuted.value ? videoPlayers[propertiesIndex].setVolume(0) : videoPlayers[propertiesIndex].setVolume(100);
+                                                  currentPropertyindex = propertiesIndex;
+                                                  videoPlayers[propertiesIndex].play();
                                                   setState(() {
-                                                    videoPlayers
-                                                        .forEach((otherPlayer) {
-                                                      if (otherPlayer !=
-                                                          videoPlayers[
-                                                              propertiesIndex]) {
-                                                        if (otherPlayer.value
-                                                            .isInitialized) {
-                                                          otherPlayer
-                                                              .setVolume(0.0);
+                                                    videoPlayers.forEach((otherPlayer) {
+                                                      if (otherPlayer != videoPlayers[propertiesIndex]) {
+                                                        if (otherPlayer.value.isInitialized) {
+                                                          otherPlayer.setVolume(0.0);
                                                           otherPlayer.pause();
                                                           // var dataSource = otherPlayer.dataSource;
                                                           // otherPlayer.dispose();
                                                           // otherPlayer =
                                                           //     VideoPlayerController.network(dataSource);
-
-                                                        } else {
-                                                          otherPlayer
-                                                              .initialize()
-                                                              .then((value) =>
-                                                                  otherPlayer
-                                                                      .pause());
-                                                          isPaused = false;
-                                                          isMuted.value
-                                                              ? videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(0)
-                                                              : videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(
-                                                                      100);
-                                                          isPaused = false;
-                                                          isMuted.value
-                                                              ? videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(0)
-                                                              : videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(
-                                                                      100);
+                                                        }
+                                                        else {
+                                                          if(currentPropertyindex>=0&&currentPropertyindex<videoPlayers.length){
+                                                            if(currentPropertyindex!=0)
+                                                              videoPlayers[currentPropertyindex-1].initialize();
+                                                            if(currentPropertyindex!=videoPlayers.length-1)
+                                                              videoPlayers[currentPropertyindex+1].initialize();
+                                                            var currentPlayerIndex= videoPlayers.indexOf(otherPlayer);
+                                                            if((currentPlayerIndex!=currentPropertyindex+1) && (currentPlayerIndex!=currentPropertyindex-1)){
+                                                              if(otherPlayer.value.isInitialized)
+                                                                otherPlayer.dispose();
+                                                            }
+                                                          }
+                                                          // if(propertiesIndex>1){
+                                                          //   videoPlayers[propertiesIndex-1].dispose();
+                                                          // }
+                                                          // otherPlayer.initialize().then((value) => otherPlayer.pause());
+                                                          // isPaused = false;
+                                                          // isMuted.value ? videoPlayers[propertiesIndex].setVolume(0) : videoPlayers[propertiesIndex].setVolume(100);
+                                                          // isPaused = false;
+                                                          // isMuted.value ? videoPlayers[propertiesIndex].setVolume(0) : videoPlayers[propertiesIndex]
+                                                          //     .setVolume(
+                                                          //     100);
                                                         }
                                                       }
                                                     });
@@ -790,37 +764,20 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 // });
                                               } else {
                                                 isPaused = false;
-                                                isMuted.value
-                                                    ? videoPlayers[
-                                                            propertiesIndex]
-                                                        .setVolume(0)
-                                                    : videoPlayers[
-                                                            propertiesIndex]
-                                                        .setVolume(100);
-                                                videoPlayers[propertiesIndex]
-                                                    .play();
-                                                currentPropertyindex =
-                                                    propertiesIndex;
+                                                isMuted.value ? videoPlayers[propertiesIndex].setVolume(0) : videoPlayers[propertiesIndex].setVolume(100);
+                                                videoPlayers[propertiesIndex].play();
+                                                currentPropertyindex = propertiesIndex;
                                                 setState(() {
-                                                  videoPlayers
-                                                      .forEach((otherPlayer) {
-                                                    if (otherPlayer !=
-                                                        videoPlayers[
-                                                            propertiesIndex]) {
-                                                      if (otherPlayer.value
-                                                          .isInitialized) {
-                                                        otherPlayer
-                                                            .setVolume(0.0);
+                                                  videoPlayers.forEach((otherPlayer) {
+                                                    if (otherPlayer != videoPlayers[propertiesIndex]) {
+                                                      if (otherPlayer.value.isInitialized) {
+                                                        otherPlayer.setVolume(0.0);
                                                         otherPlayer.pause();
                                                         // var dataSource = otherPlayer.dataSource;
                                                         // otherPlayer.dispose();
                                                         // otherPlayer =
                                                         //     VideoPlayerController.network(dataSource);
-
-                                                      }
-                                                    }
-                                                  });
-                                                });
+                                                      }}});});
                                               }
                                               //autoplayVal = false;
                                             }
@@ -898,12 +855,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             ),
                                             videoType: VideoType.network,
                                             width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
+                                                .size
+                                                .width *
                                                 95,
                                             height: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
+                                                .size
+                                                .width /
                                                 1.8,
                                             aspectRatio: 1.7,
                                             autoPlay: false,
@@ -926,17 +883,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
                                         isPaused
                                             ? videoPlayers[propertiesIndex]
-                                                .pause()
+                                            .pause()
                                             : videoPlayers[propertiesIndex]
-                                                .play();
+                                            .play();
                                         setState(() {});
                                       },
                                       child: Container(
                                         width:
-                                            MediaQuery.of(context).size.width,
+                                        MediaQuery.of(context).size.width,
                                         height:
-                                            MediaQuery.of(context).size.height *
-                                                0.3,
+                                        MediaQuery.of(context).size.height *
+                                            0.3,
                                         // color: Colors.transparent,
                                         // child: ValueListenableBuilder(
                                         //   builder: (BuildContext context,
@@ -951,9 +908,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             decoration: BoxDecoration(
                                               color: isPaused
                                                   ? Colors.black
-                                                      .withOpacity(1.0)
+                                                  .withOpacity(1.0)
                                                   : Colors.black
-                                                      .withOpacity(0.0),
+                                                  .withOpacity(0.0),
                                               shape: BoxShape.circle,
                                             ),
                                             child: Icon(
@@ -962,9 +919,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   : Icons.pause,
                                               color: isPaused
                                                   ? Colors.white
-                                                      .withOpacity(1.0)
+                                                  .withOpacity(1.0)
                                                   : Colors.white
-                                                      .withOpacity(0.0),
+                                                  .withOpacity(0.0),
                                               size: 40,
                                             ),
                                             // );
@@ -979,37 +936,37 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     Align(
                                       alignment: AlignmentDirectional(0, 0),
                                       child: ((propertiesIndex) ==
-                                              (currentPropertyindex)
+                                          (currentPropertyindex)
                                           ? Container()
                                           : Container(
-                                              //margin: EdgeInsets.all(100),
+                                        //margin: EdgeInsets.all(100),
 
-                                              constraints: BoxConstraints(
-                                                  minWidth: 50, maxWidth: 50),
-                                              decoration: BoxDecoration(
-                                                color: (videoPlayers[
-                                                            currentPropertyindex]
-                                                        .value
-                                                        .isInitialized)
-                                                    ? Colors.black
-                                                        .withOpacity(1.0)
-                                                    : Colors.black
-                                                        .withOpacity(0.0),
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Icon(
-                                                Icons.play_arrow_rounded,
-                                                color: (videoPlayers[
-                                                            currentPropertyindex]
-                                                        .value
-                                                        .isInitialized)
-                                                    ? Colors.white
-                                                        .withOpacity(1.0)
-                                                    : Colors.white
-                                                        .withOpacity(0.0),
-                                                size: 40,
-                                              ),
-                                            )),
+                                        constraints: BoxConstraints(
+                                            minWidth: 50, maxWidth: 50),
+                                        decoration: BoxDecoration(
+                                          color: (videoPlayers[
+                                          currentPropertyindex]
+                                              .value
+                                              .isInitialized)
+                                              ? Colors.black
+                                              .withOpacity(1.0)
+                                              : Colors.black
+                                              .withOpacity(0.0),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(
+                                          Icons.play_arrow_rounded,
+                                          color: (videoPlayers[
+                                          currentPropertyindex]
+                                              .value
+                                              .isInitialized)
+                                              ? Colors.white
+                                              .withOpacity(1.0)
+                                              : Colors.white
+                                              .withOpacity(0.0),
+                                          size: 40,
+                                        ),
+                                      )),
                                     ),
                                   Align(
                                     alignment: AlignmentDirectional(0.9, 0.8),
@@ -1022,7 +979,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             width: 30,
                                             decoration: BoxDecoration(
                                               color:
-                                                  Colors.black.withOpacity(0.5),
+                                              Colors.black.withOpacity(0.5),
                                               shape: BoxShape.circle,
                                             ),
                                             child: Icon(
@@ -1030,7 +987,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   ? Icons.volume_off_rounded
                                                   : Icons.volume_up_rounded,
                                               color:
-                                                  Colors.white.withOpacity(1.0),
+                                              Colors.white.withOpacity(1.0),
                                               size: 20,
                                             ),
                                           );
@@ -1041,8 +998,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         if (videoPlayers[propertiesIndex] !=
                                             null) {
                                           if (videoPlayers[propertiesIndex]
-                                                  .value
-                                                  .volume >
+                                              .value
+                                              .volume >
                                               0) {
                                             videoPlayers[propertiesIndex]
                                                 .setVolume(0);
@@ -1092,55 +1049,55 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
                                         return Container(
                                           width:
-                                              MediaQuery.of(context).size.width,
+                                          MediaQuery.of(context).size.width,
                                           height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
+                                              .size
+                                              .height *
                                               0.3,
                                           child: Stack(
                                             children: [
                                               PageView.builder(
                                                 controller:
-                                                    pageViewController ??=
-                                                        PageController(
-                                                            initialPage: min(
-                                                                0,
-                                                                propertyImages
-                                                                        .length -
-                                                                    1)),
+                                                pageViewController ??=
+                                                    PageController(
+                                                        initialPage: min(
+                                                            0,
+                                                            propertyImages
+                                                                .length -
+                                                                1)),
                                                 scrollDirection:
-                                                    Axis.horizontal,
+                                                Axis.horizontal,
                                                 itemCount:
-                                                    propertyImages.length,
+                                                propertyImages.length,
                                                 itemBuilder: (context,
                                                     propertyImagesIndex) {
                                                   final propertyImagesItem =
-                                                      propertyImages[
-                                                          propertyImagesIndex];
+                                                  propertyImages[
+                                                  propertyImagesIndex];
                                                   return Visibility(
                                                     visible: !functions
                                                         .videoPlayerVisibilty(
-                                                            getJsonField(
-                                                      propertyImagesItem,
-                                                      r'''$.attributes.video_manifest_uri''',
-                                                    )),
+                                                        getJsonField(
+                                                          propertyImagesItem,
+                                                          r'''$.attributes.video_manifest_uri''',
+                                                        )),
                                                     child: ClipRRect(
                                                       borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
+                                                      BorderRadius.circular(
+                                                          8),
                                                       child: CachedNetworkImage(
                                                         imageUrl: getJsonField(
                                                           propertyImagesItem,
                                                           r'''$.attributes.formats.medium.url''',
                                                         ),
                                                         width: MediaQuery.of(
-                                                                context)
+                                                            context)
                                                             .size
                                                             .width,
                                                         height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
+                                                            context)
+                                                            .size
+                                                            .height *
                                                             0.3,
                                                         fit: BoxFit.cover,
                                                       ),
@@ -1153,16 +1110,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     0, 0.7),
                                                 child: SmoothPageIndicator(
                                                   controller:
-                                                      pageViewController ??=
-                                                          PageController(
-                                                              initialPage: min(
-                                                                  0,
-                                                                  propertyImages
-                                                                          .length -
-                                                                      1)),
+                                                  pageViewController ??=
+                                                      PageController(
+                                                          initialPage: min(
+                                                              0,
+                                                              propertyImages
+                                                                  .length -
+                                                                  1)),
                                                   count: propertyImages.length,
                                                   axisDirection:
-                                                      Axis.horizontal,
+                                                  Axis.horizontal,
                                                   onDotClicked: (i) {
                                                     pageViewController!
                                                         .animateToPage(
@@ -1179,9 +1136,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     dotHeight: 6,
                                                     dotColor: Color(0x80FFFFFF),
                                                     activeDotColor:
-                                                        Colors.white,
+                                                    Colors.white,
                                                     paintStyle:
-                                                        PaintingStyle.fill,
+                                                    PaintingStyle.fill,
                                                   ),
                                                 ),
                                               ),
@@ -1199,8 +1156,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         builder: (BuildContext context, value,
                                             Widget? child) {
                                           return (bookMarkTapped.value &&
-                                                  propertiesIndex ==
-                                                      tapped_index)
+                                              propertiesIndex ==
+                                                  tapped_index)
                                               ? SizedBox(
                                               child: Container(
                                                 width: 40,
@@ -1217,192 +1174,193 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   color: Colors.white,
                                                   size: 20,
                                                 ),
-                                              )
-                                                )
+                                              ))
                                               : InkWell(
-                                                  onTap: () async {
-                                                    propertiesItem[
-                                                    "isBookmarked"] = propertiesItem[
-                                                    "isBookmarked"]?
-                                                    true:false;
-                                                    setState(() {});
-                                                    tapped_index =
-                                                        propertiesIndex;
-                                                    bookMarkTapped.value = true;
+                                              onTap: () async {
+                                                propertiesItem[
+                                                "isBookmarked"] =
+                                                propertiesItem[
+                                                "isBookmarked"]
+                                                    ? true
+                                                    : false;
+                                                setState(() {});
+                                                tapped_index =
+                                                    propertiesIndex;
+                                                bookMarkTapped.value = true;
 
+                                                logFirebaseEvent(
+                                                    'add_to_wishlist');
+                                                logFirebaseEvent(
+                                                    'HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                                if (loggedIn) {
+                                                  if (propertiesItem[
+                                                  "isBookmarked"]) {
                                                     logFirebaseEvent(
-                                                        'add_to_wishlist');
-                                                    logFirebaseEvent(
-                                                        'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                                    if (loggedIn) {
-                                                      if (propertiesItem[
-                                                          "isBookmarked"]) {
-                                                        logFirebaseEvent(
-                                                            'Container_Backend-Call');
-                                                        final bookmarkApiResponse =
-                                                            await BookmarkPropertyCall
-                                                                .call(
-                                                          userId:
-                                                              currentUserUid,
-                                                          authorazationToken:
-                                                              FFAppState()
-                                                                  .authToken,
-                                                          propertyId:
-                                                              valueOrDefault<
-                                                                  String>(
-                                                            getJsonField(
-                                                              propertiesItem,
-                                                              r'''$.id''',
-                                                            ).toString(),
-                                                            '0',
-                                                          ),
-                                                          version: FFAppState()
-                                                              .apiVersion,
-                                                        );
-                                                        if ((bookmarkApiResponse
-                                                                    .statusCode ) ==
-                                                            200) {
-                                                          favourites.remove(
-                                                              propertiesItem[
-                                                                      "id"]
-                                                                  .toString());
+                                                        'Container_Backend-Call');
+                                                    final bookmarkApiResponse =
+                                                    await BookmarkPropertyCall
+                                                        .call(
+                                                      userId:
+                                                      currentUserUid,
+                                                      authorazationToken:
+                                                      FFAppState()
+                                                          .authToken,
+                                                      propertyId:
+                                                      valueOrDefault<
+                                                          String>(
+                                                        getJsonField(
+                                                          propertiesItem,
+                                                          r'''$.id''',
+                                                        ).toString(),
+                                                        '0',
+                                                      ),
+                                                      version: FFAppState()
+                                                          .apiVersion,
+                                                    );
+                                                    if ((bookmarkApiResponse
+                                                        .statusCode) ==
+                                                        200) {
+                                                      favourites.remove(
                                                           propertiesItem[
-                                                                  "isBookmarked"] =
-                                                              false;
-                                                          bookMarkTapped.value =
-                                                              false;
-                                                          setState(() {});
-                                                        } else {
-                                                          logFirebaseEvent(
-                                                              'Icon_Show-Snack-Bar');
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                            SnackBar(
-                                                              content: Text(
-                                                                functions.snackBarMessage(
-                                                                    'error',
-                                                                    FFAppState()
-                                                                        .locale),
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .white,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 16,
-                                                                  height: 2,
-                                                                ),
-                                                              ),
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      4000),
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryRed,
-                                                            ),
-                                                          );
-                                                        }
-                                                      } else {
-                                                        logFirebaseEvent(
-                                                            'Container_Backend-Call');
-                                                        final bookmarkApiResponse =
-                                                            await BookmarkPropertyCall
-                                                                .call(
-                                                          userId:
-                                                              currentUserUid,
-                                                          authorazationToken:
-                                                              FFAppState()
-                                                                  .authToken,
-                                                          propertyId:
-                                                              valueOrDefault<
-                                                                  String>(
-                                                            getJsonField(
-                                                              propertiesItem,
-                                                              r'''$.id''',
-                                                            ).toString(),
-                                                            '0',
-                                                          ),
-                                                          version: FFAppState()
-                                                              .apiVersion,
-                                                        );
-                                                        if ((bookmarkApiResponse
-                                                                    .statusCode ) ==
-                                                            200) {
-                                                          favourites[propertiesItem[
-                                                                      "id"]
-                                                                  .toString()] =
-                                                              true;
-                                                          propertiesItem[
-                                                                  "isBookmarked"] =
-                                                              true;
-                                                          bookMarkTapped.value =
-                                                              false;
-                                                          setState(() {});
-                                                        } else {
-                                                          logFirebaseEvent(
-                                                              'Icon_Show-Snack-Bar');
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                            SnackBar(
-                                                              content: Text(
-                                                                functions.snackBarMessage(
-                                                                    'error',
-                                                                    FFAppState()
-                                                                        .locale),
-                                                                style:
-                                                                    TextStyle(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .white,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 16,
-                                                                  height: 2,
-                                                                ),
-                                                              ),
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      4000),
-                                                              backgroundColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryRed,
-                                                            ),
-                                                          );
-                                                        }
-                                                      }
+                                                          "id"]
+                                                              .toString());
+                                                      propertiesItem[
+                                                      "isBookmarked"] =
+                                                      false;
+                                                      bookMarkTapped.value =
+                                                      false;
+                                                      setState(() {});
                                                     } else {
-                                                      videoPlayers[
-                                                              propertiesIndex]
-                                                          .pause();
                                                       logFirebaseEvent(
-                                                          'Container_Navigate-To');
-                                                      context
-                                                          .pushNamed('Login');
+                                                          'Icon_Show-Snack-Bar');
+                                                      ScaffoldMessenger.of(
+                                                          context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            functions.snackBarMessage(
+                                                                'error',
+                                                                FFAppState()
+                                                                    .locale),
+                                                            style:
+                                                            TextStyle(
+                                                              color: FlutterFlowTheme.of(
+                                                                  context)
+                                                                  .white,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                              fontSize: 16,
+                                                              height: 2,
+                                                            ),
+                                                          ),
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                              4000),
+                                                          backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                              context)
+                                                              .primaryRed,
+                                                        ),
+                                                      );
                                                     }
-                                                  },
-                                                  child: Container(
-                                                    width: 40,
-                                                    height: 40,
-                                                    decoration: BoxDecoration(
-                                                      color: propertiesItem[
-                                                              "isBookmarked"]
-                                                          ? Color(0x4DFF0000)
-                                                          : Color(0x4D000000),
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: Icon(
-                                                      Manzel.favourite,
-                                                      color: Colors.white,
-                                                      size: 20,
-                                                    ),
-                                                  ));
+                                                  } else {
+                                                    logFirebaseEvent(
+                                                        'Container_Backend-Call');
+                                                    final bookmarkApiResponse =
+                                                    await BookmarkPropertyCall
+                                                        .call(
+                                                      userId:
+                                                      currentUserUid,
+                                                      authorazationToken:
+                                                      FFAppState()
+                                                          .authToken,
+                                                      propertyId:
+                                                      valueOrDefault<
+                                                          String>(
+                                                        getJsonField(
+                                                          propertiesItem,
+                                                          r'''$.id''',
+                                                        ).toString(),
+                                                        '0',
+                                                      ),
+                                                      version: FFAppState()
+                                                          .apiVersion,
+                                                    );
+                                                    if ((bookmarkApiResponse
+                                                        .statusCode) ==
+                                                        200) {
+                                                      favourites[propertiesItem[
+                                                      "id"]
+                                                          .toString()] =
+                                                      true;
+                                                      propertiesItem[
+                                                      "isBookmarked"] =
+                                                      true;
+                                                      bookMarkTapped.value =
+                                                      false;
+                                                      setState(() {});
+                                                    } else {
+                                                      logFirebaseEvent(
+                                                          'Icon_Show-Snack-Bar');
+                                                      ScaffoldMessenger.of(
+                                                          context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            functions.snackBarMessage(
+                                                                'error',
+                                                                FFAppState()
+                                                                    .locale),
+                                                            style:
+                                                            TextStyle(
+                                                              color: FlutterFlowTheme.of(
+                                                                  context)
+                                                                  .white,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                              fontSize: 16,
+                                                              height: 2,
+                                                            ),
+                                                          ),
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                              4000),
+                                                          backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                              context)
+                                                              .primaryRed,
+                                                        ),
+                                                      );
+                                                    }
+                                                  }
+                                                } else {
+                                                  videoPlayers[
+                                                  propertiesIndex]
+                                                      .pause();
+                                                  logFirebaseEvent(
+                                                      'Container_Navigate-To');
+                                                  context
+                                                      .pushNamed('Login');
+                                                }
+                                              },
+                                              child: Container(
+                                                width: 40,
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                  color: propertiesItem[
+                                                  "isBookmarked"]
+                                                      ? Color(0x4DFF0000)
+                                                      : Color(0x4D000000),
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Icon(
+                                                  Manzel.favourite,
+                                                  color: Colors.white,
+                                                  size: 20,
+                                                ),
+                                              ));
                                         },
                                         valueListenable: bookMarkTapped,
                                       ),
@@ -1426,7 +1384,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         ),
                                         child: ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(30),
+                                          BorderRadius.circular(30),
                                           child: Image.network(
                                             getJsonField(
                                               propertiesItem,
@@ -1496,19 +1454,19 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       'Booked'))
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(-0.9, -0.89),
+                                      AlignmentDirectional(-0.9, -0.89),
                                       child: Container(
                                         width: 80,
                                         height: 26,
                                         decoration: BoxDecoration(
                                           color: Color(0xFFD7D7D7),
                                           borderRadius:
-                                              BorderRadius.circular(7),
+                                          BorderRadius.circular(7),
                                         ),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                           children: [
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -1519,19 +1477,19 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   'qtso45vv' /* Booked */,
                                                 ),
                                                 style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .white,
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1
+                                                    .override(
+                                                  fontFamily:
+                                                  'AvenirArabic',
+                                                  color: FlutterFlowTheme
+                                                      .of(context)
+                                                      .white,
+                                                  fontSize: 13,
+                                                  fontWeight:
+                                                  FontWeight.w500,
+                                                  useGoogleFonts: false,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -1546,7 +1504,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       'Soon'))
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(-0.9, -0.89),
+                                      AlignmentDirectional(-0.9, -0.89),
                                       child: Container(
                                         width: 80,
                                         height: 26,
@@ -1554,12 +1512,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                           borderRadius:
-                                              BorderRadius.circular(7),
+                                          BorderRadius.circular(7),
                                         ),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                           children: [
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -1570,19 +1528,19 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   'juw40663' /* Coming soon */,
                                                 ),
                                                 style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'AvenirArabic',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .white,
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts: false,
-                                                        ),
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1
+                                                    .override(
+                                                  fontFamily:
+                                                  'AvenirArabic',
+                                                  color: FlutterFlowTheme
+                                                      .of(context)
+                                                      .white,
+                                                  fontSize: 13,
+                                                  fontWeight:
+                                                  FontWeight.w500,
+                                                  useGoogleFonts: false,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -1594,11 +1552,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(4, 14, 0, 0),
+                              EdgeInsetsDirectional.fromSTEB(4, 14, 0, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -1610,11 +1568,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
+                                      fontFamily: 'AvenirArabic',
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -1624,23 +1582,23 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'AvenirArabic',
-                                          color: Color(0xFF474747),
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
+                                      fontFamily: 'AvenirArabic',
+                                      color: Color(0xFF474747),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(4, 1, 0, 14),
+                              EdgeInsetsDirectional.fromSTEB(4, 1, 0, 14),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -1661,11 +1619,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w300,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w300,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ),
                                       Padding(
@@ -1678,11 +1636,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w300,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w300,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ),
                                       Text(
@@ -1693,11 +1651,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily: 'AvenirArabic',
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w300,
-                                              useGoogleFonts: false,
-                                            ),
+                                          fontFamily: 'AvenirArabic',
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w300,
+                                          useGoogleFonts: false,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -1711,35 +1669,35 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       return Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: List.generate(banks.length,
-                                            (banksIndex) {
-                                          final banksItem = banks[banksIndex];
-                                          return Padding(
-                                            padding:
+                                                (banksIndex) {
+                                              final banksItem = banks[banksIndex];
+                                              return Padding(
+                                                padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0, 0, 2, 0),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                  color: Color(0xFF8C8C8C),
-                                                ),
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(11),
-                                                child: Image.network(
-                                                  getJsonField(
-                                                    banksItem,
-                                                    r'''$.attributes.bank_logo.data.attributes.url''',
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                      color: Color(0xFF8C8C8C),
+                                                    ),
                                                   ),
-                                                  width: 22,
-                                                  height: 22,
-                                                  fit: BoxFit.cover,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                    BorderRadius.circular(11),
+                                                    child: Image.network(
+                                                      getJsonField(
+                                                        banksItem,
+                                                        r'''$.attributes.bank_logo.data.attributes.url''',
+                                                      ),
+                                                      width: 22,
+                                                      height: 22,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                          );
-                                        }),
+                                              );
+                                            }),
                                       );
                                     },
                                   ),
@@ -1748,11 +1706,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+                              EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -1761,13 +1719,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .title3
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -1776,23 +1734,23 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText2
                                         .override(
-                                          fontFamily: 'AvenirArabic',
-                                          color: Color(0xFF474747),
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
+                                      fontFamily: 'AvenirArabic',
+                                      color: Color(0xFF474747),
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(4, 1, 0, 20),
+                              EdgeInsetsDirectional.fromSTEB(4, 1, 0, 20),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1808,15 +1766,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
-                                              useGoogleFonts: false,
-                                            ),
+                                          fontFamily:
+                                          'Sofia Pro By Khuzaimah',
+                                          color:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: false,
+                                        ),
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -1829,14 +1787,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            color:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -1851,24 +1809,24 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           valueOrDefault<String>(
                                             functions
                                                 .formatAmountWithoutDecimal(
-                                                    valueOrDefault<String>(
-                                              getJsonField(
-                                                propertiesItem,
-                                                r'''$..property_price''',
-                                              ).toString(),
-                                              '0',
-                                            )),
+                                                valueOrDefault<String>(
+                                                  getJsonField(
+                                                    propertiesItem,
+                                                    r'''$..property_price''',
+                                                  ).toString(),
+                                                  '0',
+                                                )),
                                             '0',
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText2
                                               .override(
-                                                fontFamily: 'AvenirArabic',
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                useGoogleFonts: false,
-                                              ),
+                                            fontFamily: 'AvenirArabic',
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            useGoogleFonts: false,
+                                          ),
                                         ),
                                       ),
                                       Text(
@@ -1878,12 +1836,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'AvenirArabic',
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              useGoogleFonts: false,
-                                            ),
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: false,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -1935,3 +1893,4 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     }
   }
 }
+
