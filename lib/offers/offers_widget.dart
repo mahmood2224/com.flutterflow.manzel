@@ -1169,7 +1169,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                             milliSecond: false,
                           );
                                                     return    Container(
-                                                          child:   Text('${displayTime}',
+                                                          child:   Text(' ${displayTime}',
                                                                       style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                         fontFamily: 'AvenirArabic',
                                                                         color: FlutterFlowTheme.of(context).primaryText,
@@ -1248,7 +1248,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                         //   ),
                                                         // ),
                                                         Padding(
-                                                          padding: const EdgeInsets.only(right: 4.0,left: 4),
+                                                          padding: const EdgeInsets.only(right: 4.0,left: 4.0),
                                                           child: Text(
                                                             FFLocalizations.of(
                                                                 context)
