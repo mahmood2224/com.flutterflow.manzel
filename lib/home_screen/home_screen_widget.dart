@@ -684,45 +684,52 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           onVisibilityChanged: (visibility) {
                                             if (visibility.visibleFraction * 100 == 100 && this.mounted) {
                                               if (!(videoPlayers[propertiesIndex].value.isInitialized)) {
-                                                videoPlayers[propertiesIndex].initialize().then((value) {
+                                                videoPlayers[propertiesIndex] =  VideoPlayerController.network('https://cdn.manzel.app/transcoded_output/Exceptional_Beachfront_Villa_on_Palm_Jumeirah_17c5c2695a/manifest.m3u8');
+                                                 videoPlayers[propertiesIndex].initialize().then((value) {
                                                   isPaused = false;
                                                   isMuted.value ? videoPlayers[propertiesIndex].setVolume(0) : videoPlayers[propertiesIndex].setVolume(100);
                                                   currentPropertyindex = propertiesIndex;
                                                   videoPlayers[propertiesIndex].play();
                                                   setState(() {
                                                     videoPlayers.forEach((otherPlayer) {
-                                                      if (otherPlayer != videoPlayers[propertiesIndex]) {
-                                                        if (otherPlayer.value.isInitialized) {
-                                                          otherPlayer.setVolume(0.0);
-                                                          otherPlayer.pause();
-                                                          // var dataSource = otherPlayer.dataSource;
-                                                          // otherPlayer.dispose();
-                                                          // otherPlayer =
-                                                          //     VideoPlayerController.network(dataSource);
-                                                        }
-                                                        else {
-                                                          if(currentPropertyindex>=0&&currentPropertyindex<videoPlayers.length){
-                                                            if(currentPropertyindex!=0)
-                                                              videoPlayers[currentPropertyindex-1].initialize();
-                                                            if(currentPropertyindex!=videoPlayers.length-1)
-                                                              videoPlayers[currentPropertyindex+1].initialize();
+                                                      try {
+                                                        if (otherPlayer != videoPlayers[propertiesIndex]) {
+                                                          if (otherPlayer.value.isInitialized) {
                                                             var currentPlayerIndex= videoPlayers.indexOf(otherPlayer);
                                                             if((currentPlayerIndex!=currentPropertyindex+1) && (currentPlayerIndex!=currentPropertyindex-1)){
                                                               if(otherPlayer.value.isInitialized)
                                                                 otherPlayer.dispose();
-                                                            }
+                                                            // otherPlayer.setVolume(0.0);
+                                                            // otherPlayer.pause();
+                                                            // var dataSource = otherPlayer.dataSource;
+                                                            // otherPlayer.dispose();
+                                                            // otherPlayer =
+                                                            //     VideoPlayerController.network(dataSource);
                                                           }
-                                                          // if(propertiesIndex>1){
-                                                          //   videoPlayers[propertiesIndex-1].dispose();
-                                                          // }
-                                                          // otherPlayer.initialize().then((value) => otherPlayer.pause());
-                                                          // isPaused = false;
-                                                          // isMuted.value ? videoPlayers[propertiesIndex].setVolume(0) : videoPlayers[propertiesIndex].setVolume(100);
-                                                          // isPaused = false;
-                                                          // isMuted.value ? videoPlayers[propertiesIndex].setVolume(0) : videoPlayers[propertiesIndex]
-                                                          //     .setVolume(
-                                                          //     100);
+                                                          else {
+                                                            if(currentPropertyindex>=0&&currentPropertyindex<videoPlayers.length){
+                                                              if(currentPropertyindex!=0)
+                                                                videoPlayers[currentPropertyindex-1].initialize();
+                                                              if(currentPropertyindex!=videoPlayers.length-1)
+                                                                videoPlayers[currentPropertyindex+1].initialize();
+
+
+                                                              }
+                                                            }
+                                                            // if(propertiesIndex>1){
+                                                            //   videoPlayers[propertiesIndex-1].dispose();
+                                                            // }
+                                                            // otherPlayer.initialize().then((value) => otherPlayer.pause());
+                                                            // isPaused = false;
+                                                            // isMuted.value ? videoPlayers[propertiesIndex].setVolume(0) : videoPlayers[propertiesIndex].setVolume(100);
+                                                            // isPaused = false;
+                                                            // isMuted.value ? videoPlayers[propertiesIndex].setVolume(0) : videoPlayers[propertiesIndex]
+                                                            //     .setVolume(
+                                                            //     100);
+                                                          }
                                                         }
+                                                      } on Exception catch (e) {
+                                                        print('HomeScreen exception is $e');
                                                       }
                                                     });
                                                     print(
