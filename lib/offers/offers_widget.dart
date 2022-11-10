@@ -51,15 +51,13 @@ class _OffersWidgetState extends State<OffersWidget> {
   var acceptOfferTappedIndex;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   final InAppReview inAppReview = InAppReview.instance;
-  ValueNotifier<bool> timerCompleted = ValueNotifier<bool>(true);
+ // ValueNotifier<bool> timerCompleted = ValueNotifier<bool>(true);
   //Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   Map<String, String> channels = {};
-  Map<int,bool> timerStoppedMap = {};
-StopWatchTimer timerController = StopWatchTimer(
-  mode: StopWatchMode.countDown,
-  );
-Map<int,StopWatchTimer> timerControllersMap = {};
+  Map<int,ValueNotifier<bool>> timerStoppedMap = {};
+  Map<int,StopWatchTimer> timerControllersMap = {};
+  Map<int,ValueNotifier<int>> timerMap = {};
   String? timerValue;
   int? timerMilliseconds;
 
@@ -176,7 +174,6 @@ Map<int,StopWatchTimer> timerControllersMap = {};
   @override
   void dispose() {
     super.dispose();
-    timerController.dispose();
   }
 
   @override
@@ -506,18 +503,41 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                             getJsonField(
                                               activeOffersItem,
                                               r'''$.status''',
-                                            ).toString())){
+                                            ).toString())) {
                                           var diffValue = (getJsonField(
                                             activeOffersItem,
                                             r'''$.booking_acceptance_expiry_time._seconds''',
-                                          )-((DateTime.now().millisecondsSinceEpoch*0.001).toInt()));
-                                          timerControllersMap[activeOffersIndex] =  StopWatchTimer(
-                                            mode: StopWatchMode.countDown,
-                                              presetMillisecond: diffValue*1000
-                                          );
-                                        // timerController..setPresetSecondTime(diffValue,add:false);
-                                        //timerController.onStartTimer();
-                                          timerControllersMap[activeOffersIndex]!.onStartTimer();
+                                          ) - ((DateTime
+                                              .now()
+                                              .millisecondsSinceEpoch * 0.001)
+                                              .toInt()));
+                                          if (diffValue > 0) {
+                                            timerStoppedMap[activeOffersIndex] =
+                                                ValueNotifier(true);
+                                            timerControllersMap[activeOffersIndex] =
+                                                StopWatchTimer(
+                                                    mode: StopWatchMode
+                                                        .countDown,
+                                                    presetMillisecond: diffValue *
+                                                        1000
+                                                );
+                                            timerMap[activeOffersIndex] =
+                                                ValueNotifier(diffValue * 1000);
+                                            timerControllersMap[activeOffersIndex]!
+                                                .onStartTimer();
+                                            timerControllersMap[activeOffersIndex]
+                                                ?.rawTime.listen((event) {
+                                              if (event <= 0) {
+                                                timerControllersMap[activeOffersIndex]!
+                                                    .onStopTimer();
+                                                timerStoppedMap[activeOffersIndex]
+                                                    ?.value = false;
+                                              } else {
+                                                timerMap[activeOffersIndex]
+                                                    ?.value = event;
+                                              }
+                                            });
+                                          }
                                         }
                                         return Padding(
                                           padding:
@@ -1090,13 +1110,15 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                     ),
                                                   ),
                                                 ),
+
                                                 if (functions
                                                     .chatButtonVisibility(
                                                     getJsonField(
                                                       activeOffersItem,
                                                       r'''$.status''',
                                                     ).toString()))
-                                                  timerStoppedMap[activeOffersIndex]??true?Padding(
+                                                  ValueListenableBuilder(valueListenable: timerStoppedMap[activeOffersIndex] ?? ValueNotifier(true), builder: (BuildContext context, bool value, Widget? child) {
+                                                 return timerStoppedMap[activeOffersIndex]?.value??false?  Padding(
                                                   padding:
                                                   EdgeInsetsDirectional
                                                       .fromSTEB(
@@ -1137,50 +1159,62 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                             false,
                                                           ),
                                                         ),
-                                                        Container(
-                                                          child:
-                                                          Stack(
-                                                            children: [
-                                                              Align(
-                                                                alignment: AlignmentDirectional(0, 0),
-                                                                child: StreamBuilder<int>(
-                                                                    initialData: 10,
-                                                                    stream: timerControllersMap[activeOffersIndex]!.rawTime,
-                                                                    builder: (context, snap) {
-                                                                      final value = snap.data;
-                                                                      if(value!<=0){
-                                                                        timerControllersMap[activeOffersIndex]!.onStopTimer();
-                                                                        timerStoppedMap[activeOffersIndex] = false;
+                ValueListenableBuilder(valueListenable: timerMap[activeOffersIndex] ?? ValueNotifier(true), builder: (BuildContext context,  value, child) {
+                          final displayTime = StopWatchTimer.getDisplayTime(
+                           value as int,
+                            hours: true,
+                            minute: true,
+                            second: true,
+                            milliSecond: false,
+                          );
+                                                    return    Container(
+                                                          child:   Text(' ${displayTime}',
+                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                        fontFamily: 'AvenirArabic',
+                                                                        color: FlutterFlowTheme.of(context).primaryText,
+                                                                        fontSize: 12,
+                                                                        fontWeight: FontWeight.bold,
+                                                                        useGoogleFonts: false,
+                                                                      )));},
+                                                     //     Stack(
+                                                      //      children: [
+                                                              // Align(
+                                                              //   alignment: AlignmentDirectional(0, 0),
+                                                              //   child: StreamBuilder<int>(
+                                                              //       initialData: 10,
+                                                              //       stream: timerControllersMap[activeOffersIndex]!.rawTime,
+                                                              //       builder: (context, snap) {
+                                                              //         final value = snap.data;
+                                                              //         if(value!<=0){
+                                                              //           timerControllersMap[activeOffersIndex]!.onStopTimer();
+                                                              //           timerStoppedMap[activeOffersIndex]?.value = false;
+                                                              //         //  timerCompleted.value = true;
+                                                              //           return SizedBox.shrink();
+                                                              //         }
+                                                              //       // print(">>>>>>>>>>>>>>>>>>> value = ${value}");
+                                                              //         final displayTime = StopWatchTimer.getDisplayTime(
+                                                              //           value,
+                                                              //           hours: true,
+                                                              //           minute: true,
+                                                              //           second: true,
+                                                              //           milliSecond: false,
+                                                              //         );
+                                                              //
+                                                              //         return  Text(
+                                                              //             '${displayTime}',
+                                                              //             style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                              //               fontFamily: 'AvenirArabic',
+                                                              //               color: FlutterFlowTheme.of(context).primaryText,
+                                                              //               fontSize: 12,
+                                                              //               fontWeight: FontWeight.bold,
+                                                              //               useGoogleFonts: false,
+                                                              //             ),
+                                                              //           );
+                                                              //       }),
+                                                            //  ),
 
-
-                                                                      }
-                                                                      print(">>>>>>>>>>>>>>>>>>> value = ${value}");
-                                                                      final displayTime = StopWatchTimer.getDisplayTime(
-                                                                        value,
-                                                                        hours: true,
-                                                                        minute: true,
-                                                                        second: true,
-                                                                        milliSecond: false,
-                                                                      );
-
-                                                                      return  Text(
-                                                                          '${displayTime}',
-                                                                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                            fontFamily: 'AvenirArabic',
-                                                                            color: FlutterFlowTheme.of(context).primaryText,
-                                                                            fontSize: 12,
-                                                                            fontWeight: FontWeight.bold,
-                                                                            useGoogleFonts: false,
-                                                                          ),
-                                                                        );
-                                                                    }),
-                                                              ),
-                                                              Align(
-                                                                alignment: AlignmentDirectional(1, 1),
-                                                                child: timerWidget(6000),
-                                                              ),
-                                                            ],
-                                                          ),
+                                                        //    ],
+                                                       //   ),
                                                         ),
                                                         // Padding(
                                                         //   padding:
@@ -1213,7 +1247,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                         //   ),
                                                         // ),
                                                         Padding(
-                                                          padding: const EdgeInsets.only(right: 4.0,left: 4),
+                                                          padding: const EdgeInsets.only(right: 4.0,left: 4.0),
                                                           child: Text(
                                                             FFLocalizations.of(
                                                                 context)
@@ -1239,7 +1273,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                       ],
                                                     ),
                                                   ),
-                                                ):SizedBox.shrink(),
+                                                ):SizedBox.shrink();},),
                                                 Divider(
                                                   thickness: 1,
                                                   color: Color(0xFFF1F1F1),
@@ -1994,7 +2028,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                             ).toString()))
                                                               ValueListenableBuilder<bool>(
                                                                   builder: (BuildContext context, bool value, Widget? child) {
-                                                                return ((timerStoppedMap[activeOffersIndex]??true))?Container(
+                                                                return ((timerStoppedMap[activeOffersIndex]?.value??false))?Container(
                                                                   width: 130,
                                                                   height: 42,
                                                                   child:
@@ -2303,7 +2337,7 @@ Map<int,StopWatchTimer> timerControllersMap = {};
                                                                   ),
                                                                 ),
                                                             ):SizedBox.shrink();},
-                                                                valueListenable: timerCompleted,
+                                                                valueListenable: timerStoppedMap[activeOffersIndex] ?? ValueNotifier(false),
                                                               ),
                                                         ],
                                                       ),
@@ -2432,41 +2466,5 @@ Map<int,StopWatchTimer> timerControllersMap = {};
 //       }
 //     }
 //   }
-  Widget timerWidget(int duration) {
-    return FlutterFlowTimer(
-      timerValue: timerValue ??= StopWatchTimer.getDisplayTime(
-        timerMilliseconds ??= duration,
-        hours: true,
-        minute: true,
-        second: true,
-        milliSecond: false,
-      ),
-      timer: timerController ,
-      //??= StopWatchTimer(
-      //   mode: StopWatchMode.countDown,
-      //   presetMillisecond: timerMilliseconds ??= duration,
-      //   onChange: (value) {
-      //     changeTimer.value += 1;
-      //     changeText.value += 1;
-      //     timerMilliseconds = value;
-      //     timerValue = StopWatchTimer.getDisplayTime(
-      //       value,
-      //       hours: false,
-      //       minute: false,
-      //       second: true,
-      //       milliSecond: false,
-      //     );
-      //   },
-      // ),
-      textAlign: TextAlign.start,
-      style: FlutterFlowTheme.of(context).bodyText1.override(
-        fontFamily: 'AvenirArabic',
-        color: Colors.white.withOpacity(0),
-        fontSize: 7,
-        fontWeight: FontWeight.bold,
-        useGoogleFonts: false,
-      ),
-      onEnded: () {},
-    );
-  }
+
  }

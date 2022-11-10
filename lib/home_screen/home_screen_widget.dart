@@ -96,7 +96,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   }
   watchRouteChange() {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (!GoRouter
+
+      if (mounted && !GoRouter
           .of(context)
           .location
           .contains(
