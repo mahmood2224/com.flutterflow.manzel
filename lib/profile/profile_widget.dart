@@ -184,7 +184,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             // login
                             logFirebaseEvent('logIn_login');
 
-                            context.goNamed('Login');
+                            context.pushNamed('Login');
                           },
                           text: FFLocalizations.of(context).getText(
                             'vjemd3mv' /* Login */,
