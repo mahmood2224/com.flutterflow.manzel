@@ -724,29 +724,29 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           //     VideoPlayerController.network(dataSource);
 
                                                         } else {
-                                                          otherPlayer
-                                                              .initialize()
-                                                              .then((value) =>
-                                                                  otherPlayer
-                                                                      .pause());
-                                                          isPaused = false;
-                                                          isMuted.value
-                                                              ? videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(0)
-                                                              : videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(
-                                                                      100);
-                                                          isPaused = false;
-                                                          isMuted.value
-                                                              ? videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(0)
-                                                              : videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(
-                                                                      100);
+                                                          // otherPlayer
+                                                          //     .initialize()
+                                                          //     .then((value) =>
+                                                          //         otherPlayer
+                                                          //             .pause());
+                                                          // isPaused = false;
+                                                          // isMuted.value
+                                                          //     ? videoPlayers[
+                                                          //             propertiesIndex]
+                                                          //         .setVolume(0)
+                                                          //     : videoPlayers[
+                                                          //             propertiesIndex]
+                                                          //         .setVolume(
+                                                          //             100);
+                                                          // isPaused = false;
+                                                          // isMuted.value
+                                                          //     ? videoPlayers[
+                                                          //             propertiesIndex]
+                                                          //         .setVolume(0)
+                                                          //     : videoPlayers[
+                                                          //             propertiesIndex]
+                                                          //         .setVolume(
+                                                          //             100);
                                                         }
                                                       }
                                                     });

@@ -422,10 +422,10 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                       //     VideoPlayerController.network(dataSource);
 
                                                                     } else {
-                                                                      otherPlayer
-                                                                          .initialize()
-                                                                          .then((value) =>
-                                                                              otherPlayer.pause());
+                                                                      // otherPlayer
+                                                                      //     .initialize()
+                                                                      //     .then((value) =>
+                                                                      //         otherPlayer.pause());
                                                                     }
                                                                   }
                                                                 });

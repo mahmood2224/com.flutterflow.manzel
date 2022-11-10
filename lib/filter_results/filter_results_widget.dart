@@ -479,10 +479,10 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                       //     VideoPlayerController.network(dataSource);
 
                                                                     } else {
-                                                                      otherPlayer
-                                                                          .initialize()
-                                                                          .then((value) =>
-                                                                              otherPlayer.pause());
+                                                                      // otherPlayer
+                                                                      //     .initialize()
+                                                                      //     .then((value) =>
+                                                                      //         otherPlayer.pause());
                                                                     }
                                                                   }
                                                                 });
