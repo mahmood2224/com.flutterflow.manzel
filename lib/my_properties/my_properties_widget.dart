@@ -764,11 +764,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                     final value = snap.data;
                                                                                     print(">>>>>>>>>>>>>>>>>>> value = ${value}");
                                                                                     print('${snap.data.runtimeType}');
-                                                                                    if(value!<=0){
+                                                                                    if((value??0)<=0){
                                                                                       timerController.onStopTimer();
                                                                                       timerOver.value= false;}
                                                                                     final displayTime = StopWatchTimer.getDisplayTime(
-                                                                                      value!,
+                                                                                      value??0,
                                                                                       hours: true,
                                                                                       minute: true,
                                                                                       second: true,

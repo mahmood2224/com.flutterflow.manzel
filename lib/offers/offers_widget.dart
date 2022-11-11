@@ -1193,7 +1193,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                               //         }
                                                               //       // print(">>>>>>>>>>>>>>>>>>> value = ${value}");
                                                               //         final displayTime = StopWatchTimer.getDisplayTime(
-                                                              //           value!,
+                                                              //           value,
                                                               //           hours: true,
                                                               //           minute: true,
                                                               //           second: true,
