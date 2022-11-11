@@ -96,7 +96,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   }
   watchRouteChange() {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (!GoRouter
+
+      if (mounted && !GoRouter
           .of(context)
           .location
           .contains(
@@ -123,6 +124,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         favourites[element] = true;
       });
       FavouriteList.instance.setFavourite(favourites);
+      if(mounted)
       setState(() {
       });
   }
@@ -140,7 +142,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       );
       apiData = apiResponse;
       final newItems = getJsonField(
-            (apiResponse?.jsonBody ?? ''),
+            (apiResponse.jsonBody ?? ''),
             r'''$.data''',
           )?.toList() ??
           [];
@@ -244,8 +246,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       snapshot.data!;
                                   return InkWell(
                                     onTap: () async {
-                                      videoPlayers[currentPropertyindex!]
-                                          ?.pause();
+
+                                      videoPlayers[currentPropertyindex]
+                                          .pause();
                                       logFirebaseEvent(
                                           'HOME_SCREEN_notificationsBadge_ON_TAP');
                                       logFirebaseEvent(
@@ -311,7 +314,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               'WhereAreYouLooking',
                               queryParams: {
                                 'homeScreenLength': serializeParam(
-                                    videoPlayers.length ?? 0, ParamType.int),
+                                    videoPlayers.length, ParamType.int),
                               }.withoutNulls,
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: TransitionInfo(
@@ -429,7 +432,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             queryParams: {
                                               'homeScreenLength':
                                                   serializeParam(
-                                                      videoPlayers.length ?? 0,
+                                                      videoPlayers.length,
                                                       ParamType.int),
                                               //     'cityList':serializeParam(
                                               // getJsonField(
@@ -722,29 +725,29 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           //     VideoPlayerController.network(dataSource);
 
                                                         } else {
-                                                          otherPlayer
-                                                              .initialize()
-                                                              .then((value) =>
-                                                                  otherPlayer
-                                                                      .pause());
-                                                          isPaused = false;
-                                                          isMuted.value
-                                                              ? videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(0)
-                                                              : videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(
-                                                                      100);
-                                                          isPaused = false;
-                                                          isMuted.value
-                                                              ? videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(0)
-                                                              : videoPlayers[
-                                                                      propertiesIndex]
-                                                                  .setVolume(
-                                                                      100);
+                                                          // otherPlayer
+                                                          //     .initialize()
+                                                          //     .then((value) =>
+                                                          //         otherPlayer
+                                                          //             .pause());
+                                                          // isPaused = false;
+                                                          // isMuted.value
+                                                          //     ? videoPlayers[
+                                                          //             propertiesIndex]
+                                                          //         .setVolume(0)
+                                                          //     : videoPlayers[
+                                                          //             propertiesIndex]
+                                                          //         .setVolume(
+                                                          //             100);
+                                                          // isPaused = false;
+                                                          // isMuted.value
+                                                          //     ? videoPlayers[
+                                                          //             propertiesIndex]
+                                                          //         .setVolume(0)
+                                                          //     : videoPlayers[
+                                                          //             propertiesIndex]
+                                                          //         .setVolume(
+                                                          //             100);
                                                         }
                                                       }
                                                     });
@@ -871,9 +874,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           //
                                           // },
                                           child: FlutterFlowVideoPlayer(
-                                            currentPropertyindex: currentPropertyindex,
-                                            propertiesIndex: propertiesIndex,
-                                            lazyLoad: false,
                                             // videoControllerSet =
                                             //     videoControllerValue;
                                             //
@@ -976,7 +976,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   //     ),
                                   //   ),
                                   // ),
-                                  // if ((videoPlayers ?? []).length >= 1)
+                                  // if ((videoPlayers).length >= 1)
                                   //   Align(
                                   //     alignment: AlignmentDirectional(0, 0),
                                   //     child: ((propertiesIndex) ==
@@ -1261,8 +1261,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                               .apiVersion,
                                                         );
                                                         if ((bookmarkApiResponse
-                                                                    ?.statusCode ??
-                                                                200) ==
+                                                                    .statusCode ) ==
                                                             200) {
                                                           favourites.remove(
                                                               propertiesItem[
@@ -1332,8 +1331,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                               .apiVersion,
                                                         );
                                                         if ((bookmarkApiResponse
-                                                                    ?.statusCode ??
-                                                                200) ==
+                                                                    .statusCode ) ==
                                                             200) {
                                                           favourites[propertiesItem[
                                                                       "id"]

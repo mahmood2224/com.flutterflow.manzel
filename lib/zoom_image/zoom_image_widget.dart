@@ -64,14 +64,14 @@ class _ZoomImageState extends State<ZoomImage> {
                     pageNumber = v;
                   });
                 },
-                itemCount: imageLinks?.length??0,
+                itemCount: imageLinks.length,
                 itemBuilder: (_, int index) {
                   return
                     PinchZoom(child:  CachedNetworkImage(
                       height: MediaQuery.of(context).size.height,
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.contain,
-                      imageUrl: imageLinks![index]!,
+                      imageUrl: imageLinks[index],
                     ),
                       //for pinch zoom
                       resetDuration:
@@ -120,7 +120,7 @@ class _ZoomImageState extends State<ZoomImage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top:17 ,right:20 ),
-                        child: Text('${(pageNumber??-1)+1} / ${imageLinks?.length??0}',style: FlutterFlowTheme.of(context)
+                        child: Text('${(pageNumber??-1)+1} / ${imageLinks.length}',style: FlutterFlowTheme.of(context)
                             .bodyText1
                             .override(
                           fontFamily: 'AvenirArabic',
