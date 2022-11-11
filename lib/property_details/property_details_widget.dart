@@ -900,10 +900,24 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     ),
                                                                   ),
                                                                   Text(
-                                                                    PropertyCall
-                                                                        .propertyUpdatedAt(
-                                                                      columnPropertyResponse,
-                                                                    ).toString(),
+                                                                      valueOrDefault<
+                                                                        String>(
+                                                                      functions.offerScreenTime(
+                                                                          PropertyCall
+                                                                          .propertyUpdatedAt(
+                                                                        columnPropertyResponse,
+                                                                      )
+                                                                         ,
+                                                                          valueOrDefault<String>(
+                                                                            FFAppState().locale,
+                                                                            'en',
+                                                                          )),
+                                                                      '0',
+                                                                    ),
+                                                                    // PropertyCall
+                                                                    //     .propertyUpdatedAt(
+                                                                    //   columnPropertyResponse,
+                                                                    // ).toString(),
                                                                     maxLines: 2,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)

@@ -362,6 +362,9 @@ String offerScreenTime(
       }
       return "${dayDiffrence} Days ago";
     } else if (hrsDiffrence > 0) {
+      if (hrsDiffrence == 1){
+        return '1 hr ago';
+      }
       return "${hrsDiffrence} hrs ago";
     } else if (minuteDiffrence > 0) {
       return "${minuteDiffrence} min ago";
