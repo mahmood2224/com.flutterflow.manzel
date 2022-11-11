@@ -159,9 +159,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                     FFAppState()
                                         .apiVersion,
                                   );
-                                  if ((bookmarkApiResponse
-                                      ?.statusCode ??
-                                      200) ==
+                                  if ((bookmarkApiResponse.statusCode) ==
                                       200) {
                                     fav.remove(widget
                                         .propertyId
@@ -220,8 +218,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                         .apiVersion,
                                   );
                                   if ((bookmarkApiResponse
-                                      ?.statusCode ??
-                                      200) ==
+                                      .statusCode ) ==
                                       200) {
                                     fav[widget
                                         .propertyId
