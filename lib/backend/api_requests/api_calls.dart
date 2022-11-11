@@ -96,6 +96,12 @@ class PropertyCall {
     response,
     r'''$.attributes.property_district''',
   );
+
+  static dynamic propertyStreet(dynamic response) => getJsonField(
+    response,
+    r'''$.attributes.property_street''',
+  );
+
   static dynamic propertyDescription(dynamic response) => getJsonField(
     response,
     r'''$.attributes.property_description''',

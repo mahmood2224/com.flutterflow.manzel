@@ -3050,22 +3050,28 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         PropertyCall
                                                             .propertyCity(
                                                           columnPropertyResponse,
-                                                        ).toString(),
+                                                        ).toString()+', ${PropertyCall
+                                                            .propertyDistrict(
+                                                          columnPropertyResponse,
+                                                        ).toString()}'+ ', ${PropertyCall
+                                                            .propertyStreet(
+                                                          columnPropertyResponse,
+                                                        ).toString()}',
                                                         style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'AvenirArabic',
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w300,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                      ),
+                                                        FlutterFlowTheme.of(
+                                                            context)
+                                                            .bodyText1
+                                                            .override(
+                                                          fontFamily:
+                                                          'AvenirArabic',
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w300,
+                                                          useGoogleFonts:
+                                                          false,
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
