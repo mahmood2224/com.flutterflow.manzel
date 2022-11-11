@@ -608,133 +608,30 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                                 ),
                                                           ),
                                                         ),
-                                                        Directionality(
-                                                          textDirection:
-                                                              material
-                                                                  .TextDirection
-                                                                  .ltr,
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'pdhga106' /* ( */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1,
-                                                                ),
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    getJsonField(
-                                                                      columnOrderDetailsResponse
-                                                                          .jsonBody,
-                                                                      r'''$.result.offer_count''',
-                                                                    ).toString(),
-                                                                    '0',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontSize:
-                                                                            12,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'awjba3l0' /* / */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontSize:
-                                                                            12,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    functions
-                                                                        .bookingScreenCountOffers(
-                                                                            getJsonField(
-                                                                      columnOrderDetailsResponse
-                                                                          .jsonBody,
-                                                                      r'''$.result.bank_ids''',
-                                                                    )),
-                                                                    '0',
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontSize:
-                                                                            12,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'mehsn231' /* ) */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        fontSize:
-                                                                            12,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
                                                       ],
                                                     ),
-                                                  if (functions
-                                                          .conditionalVisibility(
-                                                              getJsonField(
-                                                                columnOrderDetailsResponse
-                                                                    .jsonBody,
-                                                                r'''$.result.order_status''',
-                                                              ).toString(),
-                                                              'collect_offers') ||
+                                                  if ((functions
+                                                      .conditionalVisibility(
+                                                      getJsonField(
+                                                        columnOrderDetailsResponse
+                                                            .jsonBody,
+                                                        r'''$.result.order_status''',
+                                                      ).toString(),
+                                                      'collect_offers') ||
                                                       (functions
                                                           .conditionalVisibility(
-                                                              getJsonField(
-                                                                columnOrderDetailsResponse
-                                                                    .jsonBody,
-                                                                r'''$.result.order_status''',
-                                                              ).toString(),
-                                                              'waiting_offer_acceptance')))
+                                                          getJsonField(
+                                                            columnOrderDetailsResponse
+                                                                .jsonBody,
+                                                            r'''$.result.order_status''',
+                                                          ).toString(),
+                                                          'waiting_offer_acceptance')))&&(
+                                                      getJsonField(
+                                                    columnOrderDetailsResponse
+                                                        .jsonBody,
+                                                    r'''$.result.offer_count''',
+                                                  ).toString()
+                                                          !='0'))
                                                     Padding(
                                                       padding:
                                                           EdgeInsetsDirectional
@@ -901,6 +798,13 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
+                                              color:functions.orderProcessStatus(
+                                                  getJsonField(
+                                                    columnOrderDetailsResponse.jsonBody,
+                                                    r'''$.result.order_status''',
+                                                  ).toString(),
+                                                  'waiting_offer_acceptance',
+                                                  'unchecked')?Color(0xFF57636C):Color(0xFF000000)
                                               ),
                                         ),
                                         if (functions.conditionalVisibility(
@@ -998,7 +902,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'oqathjmt' /* Transfer Ownership */,
+                                            'oqathjmt' /* Approval of the request */,
                                           ),
                                           maxLines: 2,
                                           style: FlutterFlowTheme.of(context)
@@ -1008,6 +912,13 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
+                                              color:functions.orderProcessStatus(
+                                                  getJsonField(
+                                                    columnOrderDetailsResponse.jsonBody,
+                                                    r'''$.result.order_status''',
+                                                  ).toString(),
+                                                  'offer_accepted',
+                                                  'unchecked')?Color(0xFF57636C):Color(0xFF000000)
                                               ),
                                         ),
                                         if (functions.conditionalVisibility(
@@ -1092,7 +1003,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
-                                            'nhrc354h' /* Completed */,
+                                            'nhrc354h' /* Deal completed successfully */,
                                           ),
                                           maxLines: 2,
                                           style: FlutterFlowTheme.of(context)
@@ -1102,6 +1013,14 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
                                                 useGoogleFonts: false,
+                                              color:functions.orderProcessStatus(
+                                                  getJsonField(
+                                                    columnOrderDetailsResponse.jsonBody,
+                                                    r'''$.result.order_status''',
+                                                  ).toString(),
+                                                  'ownership_transferred',
+                                                  'unchecked')?Color(0xFF57636C):Color(0xFF000000)
+
                                               ),
                                         ),
                                         if (functions.conditionalVisibility(
@@ -1706,9 +1625,9 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                   ) !=
                           null &&
                       getJsonField(
-            columnOrderDetailsResponse.jsonBody,
-            r'''$.result.transaction_data.transaction_id''',
-            ).toString().isNotEmpty)
+                        columnOrderDetailsResponse.jsonBody,
+                        r'''$.result.transaction_data.transaction_id''',
+                      ).toString().isNotEmpty)
                     Column(
                       children: [
                         Padding(

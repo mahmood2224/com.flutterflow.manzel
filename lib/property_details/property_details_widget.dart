@@ -85,8 +85,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
 
   @override
   void initState() {
+   // makeProeprtyApiCall();
     super.initState();
-    //initializePlayer();
+    // //initializePlayer();
     fav = FavouriteList.instance.favourite;
     if (widget?.jsonData != null) {
       isLoading.value = true;
@@ -1637,7 +1638,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         12),
                                                             border: Border.all(
                                                               color: Color(
-                                                                  0xFFEED260),
+                                                                  0xFF4598D4),
                                                               width: 1,
                                                             ),
                                                           ),
@@ -1729,7 +1730,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         12),
                                                             border: Border.all(
                                                               color: Color(
-                                                                  0xFFEED260),
+                                                                  0xFF4598D4),
                                                               width: 1,
                                                             ),
                                                           ),
@@ -1818,7 +1819,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         12),
                                                             border: Border.all(
                                                               color: Color(
-                                                                  0xFFEED260),
+                                                                  0xFF4598D4),
                                                               width: 1,
                                                             ),
                                                           ),
@@ -1906,7 +1907,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         12),
                                                             border: Border.all(
                                                               color: Color(
-                                                                  0xFFEED260),
+                                                                  0xFF4598D4),
                                                               width: 1,
                                                             ),
                                                           ),
@@ -1996,7 +1997,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         12),
                                                             border: Border.all(
                                                               color: Color(
-                                                                  0xFFEED260),
+                                                                  0xFF4598D4),
                                                               width: 1,
                                                             ),
                                                           ),
@@ -3047,7 +3048,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     children: [
                                                       Text(
                                                         PropertyCall
-                                                            .propertyEntranceDirection(
+                                                            .propertyCity(
                                                           columnPropertyResponse,
                                                         ).toString(),
                                                         style:

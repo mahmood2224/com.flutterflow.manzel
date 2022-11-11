@@ -41,7 +41,7 @@ void main() async {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     runApp(MyApp());
   }, (error, stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -119,8 +119,10 @@ class _MyAppState extends State<MyApp> {
     } else {
       // Else only enable it in non-debug builds.
       // You could additionally extend this to allow users to opt-in.
+   //   await FirebaseCrashlytics.instance
+      //    .setCrashlyticsCollectionEnabled(!kDebugMode);
       await FirebaseCrashlytics.instance
-          .setCrashlyticsCollectionEnabled(!kDebugMode);
+          .setCrashlyticsCollectionEnabled(true);
     }
 
     // if (_kShouldTestAsyncErrorOnInit) {
