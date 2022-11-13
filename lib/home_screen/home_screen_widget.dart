@@ -874,25 +874,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           //
                                           // },
                                           child: FlutterFlowVideoPlayer(
-                                            // videoControllerSet =
-                                            //     videoControllerValue;
-                                            //
-                                            // print(
-                                            //     "videoControllerSet : ${videoControllerSet}");
-                                            // print(
-                                            //     "videoControllerSet_items : ${videoControllerSet?.length}");
-                                            // //print("videoControllerSet.last :  ${videoControllerSet.last}");
-                                            // //print("propertiesIndex : ${propertiesIndex.toString()}");
-                                            // //print("videocontrollerMap : ${videocontrollerMap.length}");
-                                            // videocontrollerMap[propertiesIndex
-                                            //         .toString()] =
-                                            //     videoControllerSet!.last;
-                                            // print(
-                                            //     "videocontrollerMap : ${videocontrollerMap.length}");
-                                            // _currentController =
-                                            //     videocontrollerMap['0'];
-                                            //
-
                                             path: getJsonField(
                                               propertiesItem,
                                               r'''$.attributes.video_manifest_uri''',
@@ -912,106 +893,31 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             showControls: false,
                                             allowFullScreen: true,
                                             allowPlaybackSpeedMenu: false,
+                                            isPaused: isPaused,
+                                            propertiesIndex: propertiesIndex,
+                                            currentPropertyindex: currentPropertyindex,
+                                            screenName: 'home',
                                           ),
                                         ),
                                         //),
                                       ),
                                     ),
-                                  //),
-                                  // Align(
-                                  //   alignment: AlignmentDirectional(0, 0),
-                                  //   child: InkWell(
-                                  //     onTap: () {
-                                  //       //print("pause value>>>>>>>>>>>>> $isPaused");
-                                  //       isPaused = isPaused ? false : true;
-                                  //
-                                  //       isPaused
-                                  //           ? videoPlayers[propertiesIndex]
-                                  //               .pause()
-                                  //           : videoPlayers[propertiesIndex]
-                                  //               .play();
-                                  //       setState(() {});
-                                  //     },
-                                  //     child: Container(
-                                  //       width:
-                                  //           MediaQuery.of(context).size.width,
-                                  //       height:
-                                  //           MediaQuery.of(context).size.height *
-                                  //               0.3,
-                                  //       // color: Colors.transparent,
-                                  //       // child: ValueListenableBuilder(
-                                  //       //   builder: (BuildContext context,
-                                  //       //       bool value, Widget? child) {
-                                  //       //     return
-                                  //       child: Center(
-                                  //         child: Container(
-                                  //           //margin: EdgeInsets.all(100),
-                                  //
-                                  //           constraints: BoxConstraints(
-                                  //               minWidth: 50, maxWidth: 50),
-                                  //           decoration: BoxDecoration(
-                                  //             color: isPaused
-                                  //                 ? Colors.black
-                                  //                     .withOpacity(1.0)
-                                  //                 : Colors.black
-                                  //                     .withOpacity(0.0),
-                                  //             shape: BoxShape.circle,
-                                  //           ),
-                                  //           child: Icon(
-                                  //             isPaused
-                                  //                 ? Icons.play_arrow_rounded
-                                  //                 : Icons.pause,
-                                  //             color: isPaused
-                                  //                 ? Colors.white
-                                  //                     .withOpacity(1.0)
-                                  //                 : Colors.white
-                                  //                     .withOpacity(0.0),
-                                  //             size: 40,
-                                  //           ),
-                                  //           // );
-                                  //           //},
-                                  //           //valueListenable: isPaused,
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  // ),
+
+                                  //code above if in FlutterFlow
                                   // if ((videoPlayers).length >= 1)
-                                  //   Align(
-                                  //     alignment: AlignmentDirectional(0, 0),
-                                  //     child: ((propertiesIndex) ==
-                                  //             (currentPropertyindex)
-                                  //         ? Container()
-                                  //         : Container(
-                                  //             //margin: EdgeInsets.all(100),
-                                  //
-                                  //             constraints: BoxConstraints(
-                                  //                 minWidth: 50, maxWidth: 50),
-                                  //             decoration: BoxDecoration(
-                                  //               color: (videoPlayers[
-                                  //                           currentPropertyindex]
-                                  //                       .value
-                                  //                       .isInitialized)
-                                  //                   ? Colors.black
-                                  //                       .withOpacity(1.0)
-                                  //                   : Colors.black
-                                  //                       .withOpacity(0.0),
-                                  //               shape: BoxShape.circle,
-                                  //             ),
-                                  //             child: Icon(
-                                  //               Icons.play_arrow_rounded,
-                                  //               color: (videoPlayers[
-                                  //                           currentPropertyindex]
-                                  //                       .value
-                                  //                       .isInitialized)
-                                  //                   ? Colors.white
-                                  //                       .withOpacity(1.0)
-                                  //                   : Colors.white
-                                  //                       .withOpacity(0.0),
-                                  //               size: 40,
-                                  //             ),
-                                  //           )),
-                                  //   ),
+                                  //code below if in FlutterFlow
+
+
+
+
+
+
+
+
+
+
+
+
                                   Align(
                                     alignment: AlignmentDirectional(0.9, 0.8),
                                     child: InkWell(

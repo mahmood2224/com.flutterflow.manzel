@@ -563,116 +563,96 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                         allowFullScreen: true,
                                                         allowPlaybackSpeedMenu:
                                                             false,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              child: InkWell(
-                                                onTap: () {
-                                                  //print("pause value>>>>>>>>>>>>> $isPaused");
-                                                  isPaused =
-                                                      isPaused ? false : true;
+                                                              screenName: 'search',
+                                                            propertiesIndex: propertiesIndex,
+                                                            currentPropertyindex: currentPropertyindex,
+                                                            homeScreenLength: widget.homeScreenLength,
 
-                                                  isPaused
-                                                      ? videoPlayers[widget
-                                                                  .homeScreenLength! +
-                                                              propertiesIndex]
-                                                          .pause()
-                                                      : videoPlayers[widget
-                                                                  .homeScreenLength! +
-                                                              propertiesIndex]
-                                                          .play();
-                                                  setState(() {});
-                                                },
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.3,
-                                                  // color: Colors.transparent,
-                                                  // child: ValueListenableBuilder(
-                                                  //   builder: (BuildContext context,
-                                                  //       bool value, Widget? child) {
-                                                  //     return
-                                                  child: Center(
-                                                    child: Container(
-                                                      constraints:
-                                                          BoxConstraints(
-                                                              minWidth: 50,
-                                                              maxWidth: 50),
-                                                      decoration: BoxDecoration(
-                                                        color: isPaused
-                                                            ? Colors.black
-                                                                .withOpacity(
-                                                                    0.5)
-                                                            : Colors.black
-                                                                .withOpacity(
-                                                                    0.0),
-                                                        shape: BoxShape.circle,
+
                                                       ),
-                                                      child: Icon(
-                                                        isPaused
-                                                            ? Icons
-                                                                .play_arrow_rounded
-                                                            : Icons.pause,
-                                                        color: isPaused
-                                                            ? Colors.white
-                                                                .withOpacity(
-                                                                    1.0)
-                                                            : Colors.white
-                                                                .withOpacity(
-                                                                    0.0),
-                                                        size: 40,
-                                                      ),
-                                                      // );
-                                                      //},
-                                                      //valueListenable: isPaused,
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                            Align(
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              child: (propertiesIndex) ==
-                                                      ((currentPropertyindex) ==
-                                                                  0
-                                                              ? currentPropertyindex =
-                                                                  widget
-                                                                      .homeScreenLength!
-                                                              : currentPropertyindex =
-                                                                  currentPropertyindex) -
-                                                          widget
-                                                              .homeScreenLength!
-                                                  ? Container()
-                                                  : Container(
-                                                      constraints:
-                                                          BoxConstraints(
-                                                              minWidth: 50,
-                                                              maxWidth: 50),
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.black
-                                                            .withOpacity(1.0),
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: Icon(
-                                                        Icons
-                                                            .play_arrow_rounded,
-                                                        color: Colors.white
-                                                            .withOpacity(1.0),
-                                                        size: 40,
-                                                      ),
-                                                    ),
-                                            ),
+                                            // Align(
+                                            //   alignment: AlignmentDirectional(0, 0),
+                                            //   child: InkWell(
+                                            //     onTap: () {
+                                            //       isPaused = isPaused ? false : true;
+                                            //       isPaused
+                                            //           ? videoPlayers[widget.homeScreenLength! + propertiesIndex].pause()
+                                            //           : videoPlayers[widget.homeScreenLength! + propertiesIndex].play();
+                                            //       setState(() {});
+                                            //     },
+                                            //     child: Container(
+                                            //       width: MediaQuery.of(context)
+                                            //           .size
+                                            //           .width,
+                                            //       height: MediaQuery.of(context)
+                                            //               .size
+                                            //               .height *
+                                            //           0.3,
+                                            //       child: Center(
+                                            //         child: Container(
+                                            //           constraints:
+                                            //               BoxConstraints(
+                                            //                   minWidth: 50,
+                                            //                   maxWidth: 50),
+                                            //           decoration: BoxDecoration(
+                                            //             color: isPaused
+                                            //                 ? Colors.black
+                                            //                     .withOpacity(
+                                            //                         0.5)
+                                            //                 : Colors.black
+                                            //                     .withOpacity(
+                                            //                         0.0),
+                                            //             shape: BoxShape.circle,
+                                            //           ),
+                                            //           child: Icon(
+                                            //             isPaused
+                                            //                 ? Icons
+                                            //                     .play_arrow_rounded
+                                            //                 : Icons.pause,
+                                            //             color: isPaused
+                                            //                 ? Colors.white
+                                            //                     .withOpacity(
+                                            //                         1.0)
+                                            //                 : Colors.white
+                                            //                     .withOpacity(
+                                            //                         0.0),
+                                            //             size: 40,
+                                            //           ),
+                                            //         ),
+                                            //       ),
+                                            //     ),
+                                            //   ),
+                                            // ),
+                                            //if(dummy code remove later)
+                                            // Align(
+                                            //   alignment:
+                                            //       AlignmentDirectional(0, 0),
+                                            //   child: (propertiesIndex) == ((currentPropertyindex) == 0 ? currentPropertyindex = widget.homeScreenLength! : currentPropertyindex = currentPropertyindex) - widget.homeScreenLength!
+                                            //       ? Container()
+                                            //       : Container(
+                                            //           constraints:
+                                            //               BoxConstraints(
+                                            //                   minWidth: 50,
+                                            //                   maxWidth: 50),
+                                            //           decoration: BoxDecoration(
+                                            //             color: Colors.black
+                                            //                 .withOpacity(1.0),
+                                            //             shape: BoxShape.circle,
+                                            //           ),
+                                            //           child: Icon(
+                                            //             Icons
+                                            //                 .play_arrow_rounded,
+                                            //             color: Colors.white
+                                            //                 .withOpacity(1.0),
+                                            //             size: 40,
+                                            //           ),
+                                            //         ),
+                                            // ),
                                             Align(
                                               alignment: AlignmentDirectional(
                                                   0.9, 0.8),

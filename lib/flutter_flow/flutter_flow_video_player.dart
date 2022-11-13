@@ -14,7 +14,7 @@ enum VideoType {
 List<VideoPlayerController> videoPlayers = [];
 
 class FlutterFlowVideoPlayer extends StatefulWidget {
-  const FlutterFlowVideoPlayer({
+  FlutterFlowVideoPlayer({
     required this.path,
     this.videoType = VideoType.network,
     this.width,
@@ -29,7 +29,9 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
     this.isFromPropertyDetail = false,
     this.propertiesIndex,
     this.currentPropertyindex,
-    this.isPaused, this.homeScreenLength=0,
+    this.isPaused,
+    this.homeScreenLength,
+    required this.screenName,
   });
 
   final String path;
@@ -45,17 +47,17 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
   final bool lazyLoad;
   final bool isFromPropertyDetail;
   final int? propertiesIndex;
-  final int? currentPropertyindex;
+  int? currentPropertyindex;
   final bool? isPaused;
   final int? homeScreenLength;
-
+  final String screenName;
 
   @override
   State<StatefulWidget> createState() => _FlutterFlowVideoPlayerState();
 }
 
 class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
-  bool? isPaused;
+  bool isPaused = false;
   VideoPlayerController? _videoPlayerController;
   ChewieController? _chewieController;
   bool _loggedError = false;
@@ -63,7 +65,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
   @override
   void initState() {
     super.initState();
-    isPaused=widget.isPaused;
+    // isPaused=widget.isPaused;
     initializePlayer();
   }
 
@@ -85,7 +87,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
           : widget.height!;
 
   double? get aspectRatio =>
-      _chewieController?.videoPlayerController.value.aspectRatio ;
+      _chewieController?.videoPlayerController.value.aspectRatio;
 
   void enterFullScreen() {
     _chewieController?.enterFullScreen();
@@ -118,13 +120,11 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
       showControls: widget.showControls,
       allowFullScreen: widget.allowFullScreen,
       allowPlaybackSpeedChanging: widget.allowPlaybackSpeedMenu,
-
     );
     setState(() {});
 
     print("Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
     videoPlayers.add(_videoPlayerController!);
-
 
     print("_chewieController: ${_chewieController}");
     _videoPlayerController!.addListener(() {
@@ -160,138 +160,147 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
 
   @override
   Widget build(BuildContext context) => Container(
-    width: MediaQuery.of(context).size.width,
-    height:
-    MediaQuery.of(context).size.height*0.4,
-    child: FittedBox(
-      fit: BoxFit.cover,
-      child: Container(
-        height: height,
-        width: width,
-        child: (_chewieController != null &&
-            (widget.lazyLoad ||
-                _chewieController!
-                    .videoPlayerController.value.isInitialized))
-            ?  Stack(
-          alignment: Alignment.center,
-          children: [
-            Chewie(controller: _chewieController!),
-            // Align(
-            //   alignment: AlignmentDirectional(0, 0),
-            //   child: InkWell(
-            //     onTap: () {
-            //       //print("pause value>>>>>>>>>>>>> $isPaused");
-            //       isPaused = isPaused? false : true;
-            //
-            //       isPaused
-            //           ? videoPlayers[widget.propertiesIndex!]
-            //           .pause()
-            //           : videoPlayers[widget.propertiesIndex!]
-            //           .play();
-            //       setState(() {});
-            //     },
-            //     child: Container(
-            //       width:
-            //       MediaQuery.of(context).size.width,
-            //       height:
-            //       MediaQuery.of(context).size.height *
-            //           0.3,
-            //
-            //       child: Center(
-            //         child: Container(
-            //             constraints: BoxConstraints(
-            //                 minWidth: 50, maxWidth: 50),
-            //             decoration: BoxDecoration(
-            //               color: isPaused
-            //                   ? Colors.black
-            //                   .withOpacity(1.0)
-            //                   : Colors.black
-            //                   .withOpacity(0.0),
-            //               shape: BoxShape.circle,
-            //             ),
-            //             child:
-            //             Icon(
-            //               isPaused
-            //                   ? Icons.play_arrow_rounded
-            //                   : Icons.pause,
-            //               color: isPaused
-            //                   ? Colors.white
-            //                   .withOpacity(1.0)
-            //                   : Colors.white
-            //                   .withOpacity(0.0),
-            //               size: 40,
-            //             )
-            //           // );
-            //           //},
-            //           //valueListenable: isPaused,
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            if ((videoPlayers ?? []).length >= 1)
-              Align(
-                alignment: AlignmentDirectional(0, 0),
-                child: ((widget.propertiesIndex) ==
-                    (widget.currentPropertyindex)
-                    ? Container()
-                    : Container(
-                  //margin: EdgeInsets.all(100),
-
-                  constraints: BoxConstraints(
-                      minWidth: 50, maxWidth: 50),
-                  decoration: BoxDecoration(
-                    color: (videoPlayers[
-                    widget.currentPropertyindex! + widget.homeScreenLength!]
-                        .value
-                        .isInitialized)
-                        ? Colors.black
-                        .withOpacity(1.0)
-                        : Colors.black
-                        .withOpacity(0.0),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.play_arrow_rounded,
-                    color: (videoPlayers[
-                    widget.currentPropertyindex! + widget.homeScreenLength!]
-                        .value
-                        .isInitialized)
-                        ? Colors.white
-                        .withOpacity(1.0)
-                        : Colors.white
-                        .withOpacity(0.0),
-                    size: 40,
-                  ),
-                )),
-              ),
-          ],
-        )
-            : (_chewieController != null &&
-            _chewieController!.videoPlayerController.value.hasError)
-            ? Text('Error playing video')
-            : Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:  [
-            Container(
-                height: (!widget.lazyLoad && widget.isFromPropertyDetail)?25:35,
-                width: (!widget.lazyLoad && widget.isFromPropertyDetail)?25:35,
-                child: CircularProgressIndicator()),
-            SizedBox(height: 25),
-            (!widget.lazyLoad && widget.isFromPropertyDetail)? Text('Loading'):SizedBox.shrink(),
-          ],
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.4,
+        child: FittedBox(
+          fit: BoxFit.cover,
+          child: Container(
+            height: height,
+            width: width,
+            child: (_chewieController != null &&
+                    (widget.lazyLoad ||
+                        _chewieController!
+                            .videoPlayerController.value.isInitialized))
+                ? Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Chewie(controller: _chewieController!),
+                      Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: InkWell(
+                          onTap: () {
+                            isPaused = isPaused ? false : true;
+                            isPaused
+                                ? videoPlayers[returnsIndexBasedOnScreen(
+                                            widget.screenName,
+                                            widget.homeScreenLength,
+                                            widget.propertiesIndex) ??
+                                        0]
+                                    .pause()
+                                : videoPlayers[returnsIndexBasedOnScreen(
+                                            widget.screenName,
+                                            widget.homeScreenLength,
+                                            widget.propertiesIndex) ??
+                                        0]
+                                    .play();
+                            // ? videoPlayers[widget.propertiesIndex??0]
+                            // .pause()
+                            // : videoPlayers[widget.propertiesIndex??0]
+                            // .play();
+                            setState(() {});
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.3,
+                            child: Center(
+                              child: Container(
+                                constraints:
+                                    BoxConstraints(minWidth: 50, maxWidth: 50),
+                                decoration: BoxDecoration(
+                                  color: isPaused
+                                      ? Colors.black.withOpacity(1.0)
+                                      : Colors.black.withOpacity(0.0),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  isPaused
+                                      ? Icons.play_arrow_rounded
+                                      : Icons.pause,
+                                  color: isPaused
+                                      ? Colors.white.withOpacity(1.0)
+                                      : Colors.white.withOpacity(0.0),
+                                  size: 40,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      //if ((videoPlayers).length >= 1)
+                      Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: ((widget.propertiesIndex) ==
+                                ((widget.screenName == 'home')
+                                    ? (widget.currentPropertyindex)
+                                    : ((widget.currentPropertyindex) == 0
+                                            ? widget.currentPropertyindex =
+                                                widget.homeScreenLength!
+                                            : widget.currentPropertyindex =
+                                                widget.currentPropertyindex)! -
+                                        widget.homeScreenLength!)
+                            ? Container()
+                            : Container(
+                                constraints:
+                                    BoxConstraints(minWidth: 50, maxWidth: 50),
+                                decoration: BoxDecoration(
+                                  color: (videoPlayers[
+                                              widget.currentPropertyindex ?? 0]
+                                          .value
+                                          .isInitialized)
+                                      ? Colors.black.withOpacity(1.0)
+                                      : Colors.black.withOpacity(0.0),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  Icons.play_arrow_rounded,
+                                  color: (videoPlayers[
+                                              widget.currentPropertyindex ?? 0]
+                                          .value
+                                          .isInitialized)
+                                      ? Colors.white.withOpacity(1.0)
+                                      : Colors.white.withOpacity(0.0),
+                                  size: 40,
+                                ),
+                              )),
+                      ),
+                    ],
+                  )
+                : (_chewieController != null &&
+                        _chewieController!.videoPlayerController.value.hasError)
+                    ? Text('Error playing video')
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              height: (!widget.lazyLoad &&
+                                      widget.isFromPropertyDetail)
+                                  ? 25
+                                  : 35,
+                              width: (!widget.lazyLoad &&
+                                      widget.isFromPropertyDetail)
+                                  ? 25
+                                  : 35,
+                              child: CircularProgressIndicator()),
+                          SizedBox(height: 25),
+                          (!widget.lazyLoad && widget.isFromPropertyDetail)
+                              ? Text('Loading')
+                              : SizedBox.shrink(),
+                        ],
+                      ),
+          ),
         ),
-      ),
-    ),
-  );
+      );
+
+  int? returnsIndexBasedOnScreen(String? screenName, int? homeScreenLength, int? propertiesIndex) {
+    if (screenName == 'home')
+      return propertiesIndex;
+    else if (screenName == 'search')
+      return homeScreenLength! + propertiesIndex!;
+    else if (screenName == 'filter')
+      return homeScreenLength! + propertiesIndex!;
+    return null;
+  }
 }
-
-
-
-
-
-
-
 
 // import 'package:chewie/chewie.dart';
 // import 'package:flutter/foundation.dart';
