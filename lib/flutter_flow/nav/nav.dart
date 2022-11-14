@@ -215,7 +215,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   ? NavBarPage(initialPage: 'MyProperties')
                   : MyPropertiesWidget(),
             ),
-
             FFRoute(
               name: 'PropertyDetails',
               path: 'propertyDetails',
