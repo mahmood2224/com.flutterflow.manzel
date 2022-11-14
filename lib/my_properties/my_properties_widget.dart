@@ -1,6 +1,7 @@
 import 'package:flutter/scheduler.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/confirmation/confirmation_widget.dart';
 import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -776,11 +777,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                     final value = snap.data;
                                                                                     print(">>>>>>>>>>>>>>>>>>> value = ${value}");
                                                                                     print('${snap.data.runtimeType}');
-                                                                                    if(value!<=0){
+                                                                                    if((value??0)<=0){
                                                                                       timerController.onStopTimer();
                                                                                       timerOver.value= false;}
                                                                                     final displayTime = StopWatchTimer.getDisplayTime(
-                                                                                      value!,
+                                                                                      value??0,
                                                                                       hours: true,
                                                                                       minute: true,
                                                                                       second: true,
@@ -1187,50 +1188,88 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                               timerOver.value?FFButtonWidget(
                                                                 onPressed:
                                                                     () async {
-                                                                  await configurePaymentSdk();
-                                                                  await showModalBottomSheet(
-                                                                    isScrollControlled:
-                                                                        true,
-                                                                    backgroundColor:
-                                                                        FlutterFlowTheme.of(
-                                                                                context)
-                                                                            .white,
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (context) {
-                                                                      return Padding(
-                                                                        padding: MediaQuery.of(
-                                                                                context)
-                                                                            .viewInsets,
-                                                                        child:
-                                                                            Container(
-                                                                          height: MediaQuery.of(context).size.height *
-                                                                              0.89,
-                                                                          child:
-                                                                              ReservationBottomSheetWidget(
-                                                                            reservationCost:
-                                                                                getJsonField(
-                                                                              bookedPropertiesItem,
-                                                                              r'''$.reservation_amount''',
-                                                                            ),
-                                                                            propertyId:
-                                                                                functions.bookinPagePropertyIdToInt(getJsonField(
-                                                                              bookedPropertiesItem,
-                                                                              r'''$.property_id''',
-                                                                            ).toString()),
-                                                                            orderId:
-                                                                                getJsonField(
-                                                                              bookedPropertiesItem,
-                                                                              r'''$.order_id''',
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                  ).then((value) =>
-                                                                      setState(
-                                                                          () {}));
+                                                                       var addOrderApiResponse =
+                                                                      await AddOrderCall.call(
+                                                                          propertyId:getJsonField(
+                                                                            bookedPropertiesItem,
+                                                                            r'''$.property_id''',
+                                                                          ).toString(),
+                                                                          userId:
+                                                                          currentUserReference
+                                                                              ?.id,
+                                                                          authorazationToken:
+                                                                          FFAppState()
+                                                                              .authToken,
+                                                                          version: FFAppState()
+                                                                              .apiVersion);
+
+                                                                       if ((addOrderApiResponse
+                                                                           ?.statusCode ??
+                                                                           398) ==
+                                                                           398){
+                                                                         Navigator.push(
+                                                                           context,
+                                                                           MaterialPageRoute(
+                                                                             builder: (context) =>
+                                                                                 ConfirmationWidget(
+                                                                                     orderId:getJsonField(
+                                                                                       bookedPropertiesItem,
+                                                                                       r'''$.order_id''',
+                                                                                     ).toString(),
+                                                                                     transactionCase:'SUCCESS',
+                                                                                 ),
+                                                                           ),
+                                                                         );
+                                                                     }
+                                                                      else{
+                                                                         await configurePaymentSdk();
+                                                                         await showModalBottomSheet(
+                                                                           isScrollControlled:
+                                                                           true,
+                                                                           backgroundColor:
+                                                                           FlutterFlowTheme.of(
+                                                                               context)
+                                                                               .white,
+                                                                           context:
+                                                                           context,
+                                                                           builder:
+                                                                               (context) {
+                                                                             return Padding(
+                                                                               padding: MediaQuery.of(
+                                                                                   context)
+                                                                                   .viewInsets,
+                                                                               child:
+                                                                               Container(
+                                                                                 height: MediaQuery.of(context).size.height *
+                                                                                     0.89,
+                                                                                 child:
+                                                                                 ReservationBottomSheetWidget(
+                                                                                   reservationCost:
+                                                                                   getJsonField(
+                                                                                     bookedPropertiesItem,
+                                                                                     r'''$.reservation_amount''',
+                                                                                   ),
+                                                                                   propertyId:
+                                                                                   functions.bookinPagePropertyIdToInt(getJsonField(
+                                                                                     bookedPropertiesItem,
+                                                                                     r'''$.property_id''',
+                                                                                   ).toString()),
+                                                                                   orderId:
+                                                                                   getJsonField(
+                                                                                     bookedPropertiesItem,
+                                                                                     r'''$.order_id''',
+                                                                                   ),
+                                                                                 ),
+                                                                               ),
+                                                                             );
+                                                                           },
+                                                                         ).then((value) =>
+                                                                             setState(
+                                                                                     () {}));
+
+                                                                       }
+
+
                                                                 },
                                                                 text: FFLocalizations
                                                                         .of(context)
