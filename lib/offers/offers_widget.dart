@@ -1471,7 +1471,7 @@ StopWatchTimer timerController = StopWatchTimer(
                                                                     Text(
                                                                       FFLocalizations.of(context)
                                                                           .getText(
-                                                                        'ez8wbssn' /* Total price */,
+                                                                        'ez8wbssn' /* Installment Amount */,
                                                                       ),
                                                                       style: FlutterFlowTheme.of(context)
                                                                           .bodyText1
