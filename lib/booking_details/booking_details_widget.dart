@@ -169,7 +169,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                       children: [
                         Text(
                           FFLocalizations.of(context).getText(
-                            '8eahonhl' /* Order Process */,
+                            '6on06i4j' /* Order Status */,
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(

@@ -636,7 +636,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ez8wbssn': {
       'en': 'Installment Amount',
-      'ar': 'القسط الأولي',
+      'ar': 'مبلغ القسط',
     },
     'z7x7wv59': {
       'en': 'SAR',
@@ -858,7 +858,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'tpwleczh': {
       'en': 'Installment Amount',
-      'ar': 'القسط الأولي',
+      'ar': 'مبلغ القسط',
     },
     '2szdgt5y': {
       'en': 'SAR',
