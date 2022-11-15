@@ -1622,7 +1622,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                   if (getJsonField(
                             columnOrderDetailsResponse.jsonBody,
                             r'''$.result.transaction_data.transaction_id''',
-                          ) !=
+                  ) !=
                           null &&
                       getJsonField(
                         columnOrderDetailsResponse.jsonBody,

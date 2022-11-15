@@ -291,8 +291,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             );
                             await currentUserReference!.update(userUpdateData);
                           }
-
-                          setState(() {});
+                          if (mounted) setState(() {});
                         },
                         child: Text(
                           FFLocalizations.of(context).getVariableText(
@@ -465,7 +464,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                     icon: Transform(
                       alignment: Alignment.center,
-                      transform: FFAppState().locale=='en'?Matrix4.rotationY(0):Matrix4.rotationY(math.pi),
+                      transform: FFAppState().locale == 'en'
+                          ? Matrix4.rotationY(0)
+                          : Matrix4.rotationY(math.pi),
                       child: Icon(
                         Manzel.whatsApp_icon,
                         size: 26,
@@ -669,51 +670,48 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ],
                     ),
                   ),
-                Padding(padding: EdgeInsetsDirectional.fromSTEB(22, 10, 0, 31),
-                  child:Row(
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(22, 10, 0, 31),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text( FFLocalizations.of(context).getText(
-                          'appBuild' /* Appbuild */),
-                        style: FlutterFlowTheme.of(context)
-                            .subtitle2
-                            .override(
-                          fontFamily:
-                          'Sofia Pro By Khuzaimah',
-                          color: Color(0xFFA5A5A5),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                          useGoogleFonts: false,
-                        ),
+                      Text(
+                        FFLocalizations.of(context)
+                            .getText('appBuild' /* Appbuild */),
+                        style: FlutterFlowTheme.of(context).subtitle2.override(
+                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              color: Color(0xFFA5A5A5),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300,
+                              useGoogleFonts: false,
+                            ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 3,right: 3),
-                        child: Text("${FFAppState().buildVersion}",
-                          style: FlutterFlowTheme.of(context)
-                              .subtitle2
-                              .override(
-                            fontFamily:
-                            'Sofia Pro By Khuzaimah',
-                            color: Color(0xFFA5A5A5),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w300,
-                            useGoogleFonts: false,
-                          ),
+                        padding: const EdgeInsets.only(left: 3, right: 3),
+                        child: Text(
+                          "${FFAppState().buildVersion}",
+                          style:
+                              FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    color: Color(0xFFA5A5A5),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w300,
+                                    useGoogleFonts: false,
+                                  ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 2),
-                        child: Text("(${FFAppState().buildNo})",
-                          style: FlutterFlowTheme.of(context)
-                              .subtitle2
-                              .override(
-                            fontFamily:
-                            'Sofia Pro By Khuzaimah',
-                            color: Color(0xFFA5A5A5),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w300,
-                            useGoogleFonts: false,
-                          ),
+                        child: Text(
+                          "(${FFAppState().buildNo})",
+                          style:
+                              FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    color: Color(0xFFA5A5A5),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w300,
+                                    useGoogleFonts: false,
+                                  ),
                         ),
                       ),
                     ],
@@ -729,8 +727,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
   Future<void> buildInfo() async {
     PackageInfo info = await PackageInfo.fromPlatform();
-     appVersion = await int.parse(info.version);
-     appBuildNo = await int.parse(info.buildNumber);
+    appVersion = await int.parse(info.version);
+    appBuildNo = await int.parse(info.buildNumber);
   }
 
   static void openWhatsapp(BuildContext context) async {

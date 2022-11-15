@@ -479,10 +479,10 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                       //     VideoPlayerController.network(dataSource);
 
                                                                     } else {
-                                                                      otherPlayer
-                                                                          .initialize()
-                                                                          .then((value) =>
-                                                                              otherPlayer.pause());
+                                                                      // otherPlayer
+                                                                      //     .initialize()
+                                                                      //     .then((value) =>
+                                                                      //         otherPlayer.pause());
                                                                     }
                                                                   }
                                                                 });
@@ -700,12 +700,12 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                             Align(
                                               alignment:
                                                   AlignmentDirectional(0, 0),
-                                              child: (propertiesIndex ?? 0) ==
-                                                      ((currentPropertyindex ??
-                                                                      0) ==
+                                              child: (propertiesIndex) ==
+                                                      ((currentPropertyindex
+                                                                      ) ==
                                                                   0
                                                               ? currentPropertyindex =
-                                                                  widget!
+                                                                  widget
                                                                       .homeScreenLength!
                                                               : currentPropertyindex =
                                                                   currentPropertyindex) -
@@ -768,20 +768,20 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                       null) {
                                                     if (videoPlayers[widget
                                                                     .homeScreenLength! +
-                                                                propertiesIndex]!
+                                                                propertiesIndex]
                                                             .value
                                                             .volume >
                                                         0) {
                                                       videoPlayers[widget
                                                                   .homeScreenLength! +
                                                               propertiesIndex]
-                                                          ?.setVolume(0);
+                                                          .setVolume(0);
                                                       isMuted.value = true;
                                                     } else {
                                                       videoPlayers[widget
                                                                   .homeScreenLength! +
                                                               propertiesIndex]
-                                                          ?.setVolume(100);
+                                                          .setVolume(100);
                                                       isMuted.value = false;
                                                     }
                                                     //   setState(() {
@@ -1013,8 +1013,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                             .apiVersion,
                                                                   );
                                                                   if ((bookmarkApiResponse
-                                                                              ?.statusCode ??
-                                                                          200) ==
+                                                                              .statusCode) ==
                                                                       200) {
                                                                     fav.remove(propertiesItem[
                                                                             "id"]
@@ -1078,8 +1077,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                             .apiVersion,
                                                                   );
                                                                   if ((bookmarkApiResponse
-                                                                              ?.statusCode ??
-                                                                          200) ==
+                                                                              .statusCode) ==
                                                                       200) {
                                                                     fav[propertiesItem[
                                                                             "id"]

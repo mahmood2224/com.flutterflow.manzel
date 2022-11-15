@@ -1075,7 +1075,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'propertyLink': {
       'en': 'Property link',
-      'ar': 'ارتباط الملكية',
+      'ar': 'رابط العقار',
     },
     'opening': {
       'en': 'Hello ! I want to request a visit to',
@@ -1372,11 +1372,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // Confirmation
   {
     'failureButton': {
-      'en': 'Explore more properties',
-      'ar': 'اكتشف المزيد من الخصائص'
+      'en': 'Try Again',
+      'ar': 'محاولة مرة اخرى'
     },
     'failure': {
-      'en': 'We are unable to process payment please try again later',
+      'en': 'Something went wrong, please try again.',
       'ar': 'حدث خطأ ما، الرجاء المحاولة مرة أخرى'
     },
     'fnewib0l': {

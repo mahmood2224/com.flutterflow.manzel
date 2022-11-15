@@ -31,12 +31,13 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
     //await versionCheck(context);
       logFirebaseEvent('ONBOARDING_VIEW_OnboardingView_ON_LOAD');
+      if(mounted)
       Future.delayed(const Duration(milliseconds: 100), () {
         setAppLanguage(context, FFAppState().locale);
       if (FFAppState().isInitailLaunch) {
         logFirebaseEvent('OnboardingView_Update-Local-State');
-        setState(() =>
-            FFAppState().locale = FFLocalizations.of(context).languageCode);
+        // setState(() =>
+        //     FFAppState().locale = FFLocalizations.of(context).languageCode);
       } else {
         logFirebaseEvent('OnboardingView_Navigate-To');
         context.goNamed('HomeScreen');
