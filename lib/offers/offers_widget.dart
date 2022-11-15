@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
 import 'package:rxdart/rxdart.dart';
@@ -169,8 +170,26 @@ class _OffersWidgetState extends State<OffersWidget> {
     });
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Offers'});
-
+    checkInternet();
   }
+
+  Future<void> checkInternet() async {
+    bool isInternetAvailable = await functions.isInternetConnected();
+    if(!(isInternetAvailable))
+    {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          alertBoxTitle: 'Please Check Your Internet Connection',
+          onSubmit: () {},
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();

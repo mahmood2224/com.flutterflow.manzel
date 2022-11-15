@@ -1,6 +1,8 @@
 import 'package:flutter/scheduler.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
+import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/flutter_flow/custom_functions.dart';
 import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -36,6 +38,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   ValueNotifier<int> changeTimer = ValueNotifier<int>(0);
   ValueNotifier<int> changeText = ValueNotifier<int>(0);
   ValueNotifier<bool> timerOver = ValueNotifier<bool>(true);
+  bool? isInternetAvailable;
 
   @override
   void initState() {
@@ -52,10 +55,25 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'MyProperties'});
    // WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    checkInternet();
 
   }
-
-
+  Future<void> checkInternet() async {
+    isInternetAvailable = await isInternetConnected();
+    if(!(isInternetAvailable!))
+    {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          alertBoxTitle: 'Please Check Your Internet Connection',
+          onSubmit: () {},
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
+  }
 
   @override
   void dispose() {
@@ -228,7 +246,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                         ],
                       ),
                       Expanded(
-                        child: TabBarView(
+                        child:
+                        TabBarView(
                           children: [
                             FutureBuilder<ApiCallResponse>(
                               future: BookedPropertiesCall.call(

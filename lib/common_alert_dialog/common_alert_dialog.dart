@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:manzel/flutter_flow/flutter_flow_theme.dart';
+import 'package:manzel/flutter_flow/flutter_flow_util.dart';
+import 'package:manzel/flutter_flow/flutter_flow_widgets.dart';
+import 'package:manzel/flutter_flow/nav/serialization_util.dart';
 
 class CommonAlertDialog extends StatefulWidget {
+
   final String? alertBoxTitle;
   final VoidCallback? onSubmit;
   final VoidCallback? onCancel;
@@ -30,31 +35,79 @@ class _CommonAlertDialogState extends State<CommonAlertDialog> {
       ),
       actions: [
         SizedBox(
-          width: 80, // <-- Your width
-          height: 40, // <-- Your height
-          child: ElevatedButton(
-            onPressed: widget.onCancel,
-            child: Text('Cancel'),
-            style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).errorColor.withOpacity(0.5),
-              textStyle:
-              const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
-          ),
+            width: 120, // <-- Your width
+            height: 40, // <-- Your height
+            child: FFButtonWidget(
+              onPressed: widget.onCancel!,
+              text: FFLocalizations.of(context).getText(
+                't7s7qd09' /* Cancel */,
+              ),
+              options: FFButtonOptions(
+                height: 38,
+                padding: EdgeInsetsDirectional.fromSTEB(9, 0, 0, 0),
+                color: FlutterFlowTheme.of(context).primaryColor,
+                textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                  fontFamily: 'AvenirArabic',
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  useGoogleFonts: false,
+                ),
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+            )
+
+          // ElevatedButton(
+          //   onPressed: widget.onSubmit,
+          //   child: Text('Submit'),
+          //   style: ElevatedButton.styleFrom(
+          //     primary: Theme.of(context).primaryColor,
+          //     textStyle:
+          //     const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          //   ),
+          // ),
         ),
-        SizedBox(
-          width: 80, // <-- Your width
-          height: 40, // <-- Your height
-          child: ElevatedButton(
-            onPressed: widget.onSubmit,
-            child: Text('Submit'),
-            style: ElevatedButton.styleFrom(
-              primary: Theme.of(context).primaryColor,
-              textStyle:
-              const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-            ),
-          ),
-        )
+        // SizedBox(
+        //     width: 120, // <-- Your width
+        //     height: 40, // <-- Your height
+        //     child: FFButtonWidget(
+        //       onPressed: widget.onSubmit!,
+        //       text: FFLocalizations.of(context).getText(
+        //         'submit' /* Submit */,
+        //       ),
+        //       options: FFButtonOptions(
+        //         height: 38,
+        //         padding: EdgeInsetsDirectional.fromSTEB(9, 0, 0, 0),
+        //         color: FlutterFlowTheme.of(context).primaryColor,
+        //         textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+        //               fontFamily: 'AvenirArabic',
+        //               color: Colors.white,
+        //               fontSize: 15,
+        //               fontWeight: FontWeight.w500,
+        //               useGoogleFonts: false,
+        //             ),
+        //         borderSide: BorderSide(
+        //           color: Colors.transparent,
+        //           width: 1,
+        //         ),
+        //         borderRadius: BorderRadius.circular(8),
+        //       ),
+        //     )
+        //
+        //     // ElevatedButton(
+        //     //   onPressed: widget.onSubmit,
+        //     //   child: Text('Submit'),
+        //     //   style: ElevatedButton.styleFrom(
+        //     //     primary: Theme.of(context).primaryColor,
+        //     //     textStyle:
+        //     //     const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        //     //   ),
+        //     // ),
+        //     )
       ],
     );
   }

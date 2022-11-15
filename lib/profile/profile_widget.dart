@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:math' as math;
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/flutter_flow/custom_functions.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -41,6 +43,24 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     super.initState();
     //buildInfo();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Profile'});
+    checkInternet();
+  }
+
+  Future<void> checkInternet() async {
+    bool isInternetAvailable = await isInternetConnected();
+    if(!(isInternetAvailable))
+    {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          alertBoxTitle: 'Please Check Your Internet Connection',
+          onSubmit: () {},
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
   }
 
   @override

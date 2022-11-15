@@ -2080,5 +2080,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
       'ar': '',
     },
+    //Common Alert Dialog
+    'submit': {
+      'en': 'Submit',
+      'ar': 'يُقدِّم',
+    },
+
   },
 ].reduce((a, b) => a..addAll(b));
