@@ -1067,7 +1067,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'propertyRef': {
       'en': 'Property Ref.',
-      'ar': 'رقم العقار',
+      'ar': ' رقم العقار ',
     },
     'propertyAdd': {
       'en': 'Property address.',
