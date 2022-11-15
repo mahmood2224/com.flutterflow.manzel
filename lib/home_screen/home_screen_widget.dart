@@ -95,7 +95,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         _fetchPage(pageKey);
       });
     });
+    checkInternetStatus();
   }
+
+  Future<void> checkInternetStatus() async{
+    internetStatus = await isInternetConnected();
+  }
+
   watchRouteChange() {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
 
@@ -132,9 +138,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
 
 
+
+
   Future<void> _fetchPage(int pageKey) async {
     try {
-      internetStatus = await isInternetConnected();
+
       callBookmarkListApi();
       final apiResponse = await PropertiesCall.call(
         // city: FFAppState().filterCity,
