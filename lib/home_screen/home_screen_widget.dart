@@ -1,3 +1,4 @@
+import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
 import 'package:video_player/video_player.dart';
 import '../auth/auth_util.dart';
@@ -6,7 +7,7 @@ import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import '../components/no_result_widget.dart';
-import 'package:manzel/app_state.dart'as globalVar;
+import 'package:manzel/app_state.dart' as globalVar;
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
@@ -73,7 +74,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   var internetStatus;
 
-
   @override
   void initState() {
     super.initState();
@@ -98,75 +98,80 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     checkInternetStatus();
   }
 
-  Future<void> checkInternetStatus() async{
+  Future<void> checkInternetStatus() async {
     internetStatus = await isInternetConnected();
   }
 
   watchRouteChange() {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-
-      if (mounted && !GoRouter
-          .of(context)
-          .location
-          .contains(
-          "fav")) { // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
+      if (mounted && !GoRouter.of(context).location.contains("fav")) {
+        // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
         // do something
         favourites = FavouriteList.instance.favourite;
-        if(mounted){
-        setState(() {});}
-        GoRouter.of(context).removeListener(
-            watchRouteChange); // remove listener
+        if (mounted) {
+          setState(() {});
+        }
+        GoRouter.of(context)
+            .removeListener(watchRouteChange); // remove listener
       }
     });
   }
 
   Future<void> callBookmarkListApi() async {
-      final result = await BookmarkListCall.call(
-        userId: currentUserUid,
-        authorazationToken: await FFAppState().authToken,
-        version: await FFAppState().apiVersion,
-      );
-      print("REsult>>>>>>>>>>>>>${result.jsonBody}");
-      List<dynamic> favList = await result.jsonBody['result'];
-      favList.forEach((element) {
-        favourites[element] = true;
-      });
-      FavouriteList.instance.setFavourite(favourites);
-      setState(() {
-      });
+    final result = await BookmarkListCall.call(
+      userId: currentUserUid,
+      authorazationToken: await FFAppState().authToken,
+      version: await FFAppState().apiVersion,
+    );
+    print("REsult>>>>>>>>>>>>>${result.jsonBody}");
+    List<dynamic> favList = await result.jsonBody['result'];
+    favList.forEach((element) {
+      favourites[element] = true;
+    });
+    FavouriteList.instance.setFavourite(favourites);
+    setState(() {});
   }
-
-
-
-
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-
       callBookmarkListApi();
-      final apiResponse = await PropertiesCall.call(
-        // city: FFAppState().filterCity,
-        // furnishingType: FFAppState().filterFurnishingType,
-        // propertyType: FFAppState().filterPropertyType,
-        pageNumber: pageKey.toString(),
-        pageSize: _pageSize.toString(),
-        locale:  FFAppState().locale,
-      );
-      apiData = apiResponse;
-      final newItems = getJsonField(
-            (apiResponse?.jsonBody ?? ''),
-            r'''$.data''',
-          )?.toList() ??
-          [];
-      final isLastPage = newItems.length < _pageSize;
-      if (isLastPage) {
-        _pagingController.appendLastPage(newItems);
+      bool isInternetAvailable = await isInternetConnected();
+      if (isInternetAvailable) {
+        final apiResponse = await PropertiesCall.call(
+          // city: FFAppState().filterCity,
+          // furnishingType: FFAppState().filterFurnishingType,
+          // propertyType: FFAppState().filterPropertyType,
+          pageNumber: pageKey.toString(),
+          pageSize: _pageSize.toString(),
+          locale: FFAppState().locale,
+        );
+        apiData = apiResponse;
+        final newItems = getJsonField(
+              (apiResponse?.jsonBody ?? ''),
+              r'''$.data''',
+            )?.toList() ??
+            [];
+        final isLastPage = newItems.length < _pageSize;
+        if (isLastPage) {
+          _pagingController.appendLastPage(newItems);
+        } else {
+          // 3.1 Use this for offset based pagination
+          // final nextPageKey = pageKey + newItems.length;
+          // 3.2 Use this for page based pagination
+          final nextPageKey = ++pageKey;
+          _pagingController.appendPage(newItems, nextPageKey);
+        }
       } else {
-        // 3.1 Use this for offset based pagination
-        // final nextPageKey = pageKey + newItems.length;
-        // 3.2 Use this for page based pagination
-        final nextPageKey = ++pageKey;
-        _pagingController.appendPage(newItems, nextPageKey);
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => CommonAlertDialog(
+            alertBoxTitle: 'Please Check Your Internet Connection',
+            onSubmit: () {},
+            onCancel: () {
+              Navigator.pop(context);
+            },
+          ),
+        );
       }
     } catch (error) {
       _pagingController.error = error;
@@ -258,7 +263,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       snapshot.data!;
                                   return InkWell(
                                     onTap: () async {
-
                                       videoPlayers[currentPropertyindex!]
                                           ?.pause();
                                       logFirebaseEvent(
@@ -336,10 +340,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                 ),
                               },
                             );
-    GoRouter.of(context).addListener(() {
-    watchRouteChange();
-    });
-
+                            GoRouter.of(context).addListener(() {
+                              watchRouteChange();
+                            });
                           },
                           child: Container(
                             width: double.infinity,
@@ -400,7 +403,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: Text(FFAppState().locale=='en'?'Ok':'موافق'),
+                                                    child: Text(
+                                                        FFAppState().locale ==
+                                                                'en'
+                                                            ? 'Ok'
+                                                            : 'موافق'),
                                                   ),
                                                 ],
                                               );
@@ -1215,29 +1222,30 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   propertiesIndex ==
                                                       tapped_index)
                                               ? SizedBox(
-                                              child: Container(
-                                                width: 40,
-                                                height: 40,
-                                                decoration: BoxDecoration(
-                                                  color: propertiesItem[
-                                                  "isBookmarked"]
-                                                      ? Color(0x4DFF0000)
-                                                      : Color(0x4D000000),
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Icon(
-                                                  Manzel.favourite,
-                                                  color: Colors.white,
-                                                  size: 20,
-                                                ),
-                                              )
-                                                )
+                                                  child: Container(
+                                                  width: 40,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                    color: propertiesItem[
+                                                            "isBookmarked"]
+                                                        ? Color(0x4DFF0000)
+                                                        : Color(0x4D000000),
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: Icon(
+                                                    Manzel.favourite,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                ))
                                               : InkWell(
                                                   onTap: () async {
                                                     propertiesItem[
-                                                    "isBookmarked"] = propertiesItem[
-                                                    "isBookmarked"]?
-                                                    true:false;
+                                                            "isBookmarked"] =
+                                                        propertiesItem[
+                                                                "isBookmarked"]
+                                                            ? true
+                                                            : false;
                                                     setState(() {});
                                                     tapped_index =
                                                         propertiesIndex;
