@@ -1,3 +1,4 @@
+import 'package:manzel/flutter_flow/custom_functions.dart';
 import 'package:video_player/video_player.dart';
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
@@ -70,6 +71,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   final PagingController<int, dynamic> _pagingController =
       PagingController(firstPageKey: 0);
 
+  var internetStatus;
+
 
   @override
   void initState() {
@@ -92,7 +95,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         _fetchPage(pageKey);
       });
     });
-
   }
   watchRouteChange() {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -128,8 +130,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       });
   }
 
+
+
   Future<void> _fetchPage(int pageKey) async {
     try {
+      internetStatus = await isInternetConnected();
       callBookmarkListApi();
       final apiResponse = await PropertiesCall.call(
         // city: FFAppState().filterCity,
