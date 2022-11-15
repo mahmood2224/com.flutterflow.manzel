@@ -717,7 +717,9 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  'Please fill all the information fields',
+                                  FFLocalizations.of(context).getText(
+                                    'pleaseFillInfo' /* Please fill all the information fields */,
+                                  ),
                                   style: TextStyle(
                                     color: FlutterFlowTheme.of(context).white,
                                     fontWeight: FontWeight.w500,
@@ -775,8 +777,11 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     'updatePersonalInfo_Show-Snack-Bar');
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text(
-                                      'Please fill all the information fields',
+                                    content:
+                                    Text(
+                                      FFLocalizations.of(context).getText(
+                                        'pleaseFillInfo' /* Please fill all the information fields */,
+                                      ),
                                       style: TextStyle(
                                         color:
                                         FlutterFlowTheme.of(context).white,
