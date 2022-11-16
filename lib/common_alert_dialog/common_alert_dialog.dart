@@ -6,12 +6,10 @@ import 'package:manzel/flutter_flow/flutter_flow_widgets.dart';
 class CommonAlertDialog extends StatefulWidget {
 
   final String? alertBoxTitle;
-  final VoidCallback? onSubmit;
   final VoidCallback? onCancel;
 
   const CommonAlertDialog({
     Key? key,
-    required this.onSubmit,
     required this.onCancel,
     this.alertBoxTitle,
   }) : super(key: key);
@@ -25,7 +23,9 @@ class _CommonAlertDialogState extends State<CommonAlertDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        widget.alertBoxTitle ?? '',
+        widget.alertBoxTitle ?? FFLocalizations.of(context).getText(
+          'pleaseCheckInternet' /* Please Check */,
+        ),
         style: Theme.of(context)
             .textTheme
             .titleLarge!

@@ -2085,6 +2085,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Submit',
       'ar': 'يُقدِّم',
     },
+    'pleaseCheckInternet': {
+      'en': 'Please Check Your Internet Connection',
+      'ar': 'الرجاء التحقق من اتصال الانترنت الخاص بك',
+    },
+
 
   },
 ].reduce((a, b) => a..addAll(b));

@@ -90,8 +90,6 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
         showDialog(
           context: context,
           builder: (BuildContext context) => CommonAlertDialog(
-            alertBoxTitle: 'Please Check Your Internet Connection',
-            onSubmit: () {},
             onCancel: () {
               alertCalled = 0;
               setState(() {});
@@ -128,7 +126,6 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
           context: context,
           builder: (BuildContext context) => CommonAlertDialog(
             alertBoxTitle: 'Please Check Your Internet Connection',
-            onSubmit: () {},
             onCancel: () {
               Navigator.pop(context);
               alertCalled = 0;
@@ -181,7 +178,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
             ),
             if (!loggedIn)
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 260, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, MediaQuery.of(context).size.height/2.8, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,

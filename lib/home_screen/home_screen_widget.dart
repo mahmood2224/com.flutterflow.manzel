@@ -165,8 +165,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         showDialog(
           context: context,
           builder: (BuildContext context) => CommonAlertDialog(
-            alertBoxTitle: 'Please Check Your Internet Connection',
-            onSubmit: () {},
             onCancel: () {
               Navigator.pop(context);
             },
