@@ -5,6 +5,7 @@ import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
 import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../auth/auth_util.dart';
@@ -92,6 +93,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
           alertBoxTitle: 'Please Check Your Internet Connection',
           onSubmit: () {},
           onCancel: () {
+            alertCalled=0;
+            setState(() {});
             Navigator.pop(context);
           },
         ),
@@ -128,6 +131,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
           onSubmit: () {},
           onCancel: () {
             Navigator.pop(context);
+            alertCalled=0;
+            setState(() {});
           },
         ),
       );
@@ -309,7 +314,20 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                           children: [
                             Builder(
                               builder: (context) {
-                                if (bookedProperties?.isEmpty ?? false) {
+                                if (isLoading) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: SpinKitRipple(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 50,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                else if (bookedProperties?.isEmpty ?? false) {
                                   return Center(
                                     child: Container(
                                       width: MediaQuery.of(context).size.width,
@@ -331,7 +349,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                   );
                                 }
                                 else if ((bookedProperties != null) &&
-                                    (bookedProperties?.isNotEmpty ?? false)) {
+                                    (bookedProperties?.isNotEmpty ?? false) && bookedPropertiesApiResponse?.statusCode ==200) {
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
@@ -1330,24 +1348,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     },
                                   );
                                 }
-                                else if (isLoading) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitRipple(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                return Container(
-                                  height: 100,
-                                  width: 100,
-                                  color: Colors.white,
-                                );
+                                return SizedBox();
                               },
                             ),
                             Builder(
