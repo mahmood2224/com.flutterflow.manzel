@@ -37,11 +37,11 @@ const _kTestingCrashlytics = false;
 void main() async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp();
-   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+   // await Firebase.initializeApp();
+   // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     runApp(MyApp());
   }, (error, stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
+   // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -112,23 +112,23 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
-  Future<void> _initializeFlutterFire() async {
-    if (_kTestingCrashlytics) {
-      // Force enable crashlytics collection enabled if we're testing it.
-      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-    } else {
-      // Else only enable it in non-debug builds.
-      // You could additionally extend this to allow users to opt-in.
-   //   await FirebaseCrashlytics.instance
-      //    .setCrashlyticsCollectionEnabled(!kDebugMode);
-      await FirebaseCrashlytics.instance
-          .setCrashlyticsCollectionEnabled(true);
-    }
-
-    // if (_kShouldTestAsyncErrorOnInit) {
-    //   await _testAsyncErrorOnInit();
-    // }
-  }
+  // Future<void> _initializeFlutterFire() async {
+  //   if (_kTestingCrashlytics) {
+  //     // Force enable crashlytics collection enabled if we're testing it.
+  //     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  //   } else {
+  //     // Else only enable it in non-debug builds.
+  //     // You could additionally extend this to allow users to opt-in.
+  //  //   await FirebaseCrashlytics.instance
+  //     //    .setCrashlyticsCollectionEnabled(!kDebugMode);
+  //     await FirebaseCrashlytics.instance
+  //         .setCrashlyticsCollectionEnabled(true);
+  //   }
+  //
+  //   // if (_kShouldTestAsyncErrorOnInit) {
+  //   //   await _testAsyncErrorOnInit();
+  //   // }
+  // }
 
   void setLocale(String language) =>
       setState(() => _locale = createLocale(language));

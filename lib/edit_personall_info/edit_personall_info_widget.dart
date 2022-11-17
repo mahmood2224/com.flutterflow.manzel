@@ -1,5 +1,7 @@
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
+import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/flutter_flow/custom_functions.dart';
 
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
@@ -40,6 +42,11 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
   String? choiceChipsValue;
   TextEditingController? emailController;
   TextEditingController? fullNameController;
+  bool? isInternetAvailable;
+  bool isEmploymentLoading = true;
+  bool isBankLoading = true;
+  int alertCalled = 0;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -50,14 +57,69 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
         text: valueOrDefault(currentUserDocument?.name, ''));
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'EditPersonallInfo'});
+    emplymentTypeCall();
+    getBanksCall();
   }
 
-  @override
-  void dispose() {
-    emailController?.dispose();
-    fullNameController?.dispose();
-    super.dispose();
+
+  Future<void> emplymentTypeCall() async {
+    isInternetAvailable = await isInternetConnected();
+    if (isInternetAvailable ?? false) {
+      emplymentList = await EmplymentTypeCall.call(
+        locale: FFAppState().locale,
+      );
+      isEmploymentLoading = false;
+      setState(() {});
+    }
+    else{
+      isEmploymentLoading = false;
+      setState(() {});
+      alertCalled++;
+      setState(() {});
+      if (alertCalled <= 1)
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            alertCalled=0;
+            setState(() {});
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
   }
+  Future<void> getBanksCall() async {
+    isInternetAvailable = await isInternetConnected();
+    if (isInternetAvailable ?? false) {
+      bankList = await GetBanksCall.call(
+        locale: FFAppState().locale,
+      );
+      isBankLoading = false;
+      setState(() {});
+    }
+    else{
+      isBankLoading = false;
+      setState(() {});
+      alertCalled++;
+      setState(() {});
+      if (alertCalled <= 1)
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            alertCalled=0;
+            setState(() {});
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
+  }
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -375,13 +437,9 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           children: [
                             Expanded(
                               child: AuthUserStreamWidget(
-                                child: FutureBuilder<ApiCallResponse>(
-                                  future: EmplymentTypeCall.call(
-                                    locale: FFAppState().locale,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
+                                child: Builder(
+                                  builder: (context) {
+                                    if (isEmploymentLoading) {
                                       return Center(
                                         child: SizedBox(
                                           width: 50,
@@ -394,56 +452,58 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                         ),
                                       );
                                     }
-                                    emplymentList = snapshot.data!;
-                                    return FlutterFlowDropDown(
-                                      initialOption: privateSectorValue ??=
-                                          functions
-                                              .editProfileDropDownInitalVal(
-                                                  (EmplymentTypeCall
-                                                      .emplymentData(
-                                                    emplymentList!.jsonBody,
-                                                  ) as List),
-                                                  valueOrDefault(
-                                                      currentUserDocument
-                                                          ?.employmentStatus,
-                                                      '')),
-                                      options:
-                                          (EmplymentTypeCall.emplymentTypes(
-                                        (emplymentList?.jsonBody ?? ''),
-                                      ) as List)
-                                              .map<String>((s) => s.toString())
-                                              .toList()
-                                              .toList(),
-                                      onChanged: (val) => setState(
-                                          () => privateSectorValue = val),
-                                      width: 335,
-                                      height: 55,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts: false,
-                                          ),
-                                      hintText:
-                                          FFLocalizations.of(context).getText(
-                                        'gerdd7rv' /* Employment status */,
-                                      ),
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down,
-                                        size: 15,
-                                      ),
-                                      fillColor: Colors.white,
-                                      elevation: 2,
-                                      borderColor: Color(0xFFA5A5A5),
-                                      borderWidth: 1,
-                                      borderRadius: 8,
-                                      margin: EdgeInsetsDirectional.fromSTEB(
-                                          12, 4, 12, 4),
-                                      hidesUnderline: true,
-                                    );
+                                    else if(emplymentList!=null&&emplymentList?.statusCode==200){
+                                      return FlutterFlowDropDown(
+                                        initialOption: privateSectorValue ??=
+                                            functions
+                                                .editProfileDropDownInitalVal(
+                                                (EmplymentTypeCall
+                                                    .emplymentData(
+                                                  emplymentList!.jsonBody,
+                                                ) as List),
+                                                valueOrDefault(
+                                                    currentUserDocument
+                                                        ?.employmentStatus,
+                                                    '')),
+                                        options:
+                                        (EmplymentTypeCall.emplymentTypes(
+                                          (emplymentList?.jsonBody ?? ''),
+                                        ) as List)
+                                            .map<String>((s) => s.toString())
+                                            .toList()
+                                            .toList(),
+                                        onChanged: (val) => setState(
+                                                () => privateSectorValue = val),
+                                        width: 335,
+                                        height: 55,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
+                                        hintText:
+                                        FFLocalizations.of(context).getText(
+                                          'gerdd7rv' /* Employment status */,
+                                        ),
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down,
+                                          size: 15,
+                                        ),
+                                        fillColor: Colors.white,
+                                        elevation: 2,
+                                        borderColor: Color(0xFFA5A5A5),
+                                        borderWidth: 1,
+                                        borderRadius: 8,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            12, 4, 12, 4),
+                                        hidesUnderline: true,
+                                      );
+                                    }
+                                    return SizedBox();
                                   },
                                 ),
                               ),
@@ -519,13 +579,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           children: [
                             Expanded(
                               child: AuthUserStreamWidget(
-                                child: FutureBuilder<ApiCallResponse>(
-                                  future: GetBanksCall.call(
-                                    locale: FFAppState().locale,
-                                  ),
-                                  builder: (context, snapshot) {
+                                child: Builder(
+                                  builder: (context) {
                                     // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
+                                    if (isBankLoading) {
                                       return Center(
                                         child: SizedBox(
                                           width: 50,
@@ -538,52 +595,55 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                         ),
                                       );
                                     }
-                                    bankList = snapshot.data!;
-                                    return FlutterFlowDropDown(
-                                      initialOption: bankValue ??= functions
-                                          .editProfileDropDownInitalVal(
-                                              (GetBanksCall.bankData(
-                                                bankList!.jsonBody,
-                                              ) as List),
-                                              valueOrDefault(
-                                                  currentUserDocument?.bank,
-                                                  '')),
-                                      options: (GetBanksCall.bankNames(
-                                        (bankList?.jsonBody ?? ''),
-                                      ) as List)
-                                          .map<String>((s) => s.toString())
-                                          .toList()
-                                          .toList(),
-                                      onChanged: (val) =>
-                                          setState(() => bankValue = val),
-                                      width: 335,
-                                      height: 55,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'AvenirArabic',
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts: false,
-                                          ),
-                                      hintText:
-                                          FFLocalizations.of(context).getText(
-                                        'nfhf8rho' /* Salary bank */,
-                                      ),
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down_rounded,
-                                        size: 15,
-                                      ),
-                                      fillColor: Colors.white,
-                                      elevation: 2,
-                                      borderColor: Color(0xFFA5A5A5),
-                                      borderWidth: 1,
-                                      borderRadius: 8,
-                                      margin: EdgeInsetsDirectional.fromSTEB(
-                                          12, 4, 12, 4),
-                                      hidesUnderline: true,
-                                    );
+                                    else if(bankList!=null&&bankList?.statusCode==200){
+                                      return FlutterFlowDropDown(
+                                        initialOption: bankValue ??= functions
+                                            .editProfileDropDownInitalVal(
+                                            (GetBanksCall.bankData(
+                                              bankList!.jsonBody,
+                                            ) as List),
+                                            valueOrDefault(
+                                                currentUserDocument?.bank,
+                                                '')),
+                                        options: (GetBanksCall.bankNames(
+                                          (bankList?.jsonBody ?? ''),
+                                        ) as List)
+                                            .map<String>((s) => s.toString())
+                                            .toList()
+                                            .toList(),
+                                        onChanged: (val) =>
+                                            setState(() => bankValue = val),
+                                        width: 335,
+                                        height: 55,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
+                                        hintText:
+                                        FFLocalizations.of(context).getText(
+                                          'nfhf8rho' /* Salary bank */,
+                                        ),
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down_rounded,
+                                          size: 15,
+                                        ),
+                                        fillColor: Colors.white,
+                                        elevation: 2,
+                                        borderColor: Color(0xFFA5A5A5),
+                                        borderWidth: 1,
+                                        borderRadius: 8,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            12, 4, 12, 4),
+                                        hidesUnderline: true,
+                                      );
+                                    }
+                                    return SizedBox();
+
                                   },
                                 ),
                               ),
@@ -714,6 +774,19 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   emailController!.text == '') ||
                               (fullNameController!.text == null ||
                                   fullNameController!.text == '')) {
+                            if(isInternetAvailable??false){}
+                            else{
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => CommonAlertDialog(
+                                    onCancel: () {
+                                      alertCalled = 0;
+                                      setState(() {});
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                );
+                            }
                           } else {
                             logFirebaseEvent(
                                 'EDIT_PERSONALL_INFO_updatePersonalInfo_O');
@@ -728,6 +801,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 // updatePersonaInfo
                                 logFirebaseEvent(
                                     'updatePersonalInfo_updatePersonaInfo');
+
 
                                 final userUpdateData = createUserRecordData(
                                   email: emailController!.text,
@@ -750,11 +824,25 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   sakaniLoanCoverage:
                                       functions.sakaniLoan(choiceChipsValue),
                                 );
-                                await currentUserReference!
-                                    .update(userUpdateData);
-                                logFirebaseEvent(
-                                    'updatePersonalInfo_Close-Dialog,-Drawer,');
-                                Navigator.pop(context);
+                                if(isInternetAvailable??false){
+                                  await currentUserReference!
+                                      .update(userUpdateData);
+
+                                  logFirebaseEvent(
+                                      'updatePersonalInfo_Close-Dialog,-Drawer,');
+                                  Navigator.pop(context);
+                                }
+                                else{
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) => CommonAlertDialog(
+                                        onCancel: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    );
+                                }
+
                               } else {
                                 logFirebaseEvent(
                                     'updatePersonalInfo_Show-Snack-Bar');
@@ -785,8 +873,21 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 sakaniLoanCoverage:
                                     functions.sakaniLoan(choiceChipsValue),
                               );
-                              await currentUserReference!
-                                  .update(userUpdateData);
+                              if(isInternetAvailable??false){
+                                await currentUserReference!
+                                    .update(userUpdateData);
+                              }
+                              else{
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) => CommonAlertDialog(
+                                      onCancel: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  );
+                              }
+
                               logFirebaseEvent(
                                   'updatePersonalInfo_Close-Dialog,-Drawer,');
                               Navigator.pop(context);
@@ -850,5 +951,12 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
       sandBoxsecretKey: 'sk_test_2r5JvPVafKxklSn6LRpqWycQ',
       lang: FFAppState().locale,
     );
+  }
+
+  @override
+  void dispose() {
+    emailController?.dispose();
+    fullNameController?.dispose();
+    super.dispose();
   }
 }
