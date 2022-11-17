@@ -37,11 +37,11 @@ const _kTestingCrashlytics = false;
 void main() async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+   await Firebase.initializeApp();
+   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     runApp(MyApp());
   }, (error, stackTrace) {
-   // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
+    FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -101,7 +101,7 @@ class _MyAppState extends State<MyApp> {
     //   print('Your FCM token:- $value');
     // });
     handleDynamicLinks();
-    _initializeFlutterFire();
+   // _initializeFlutterFire();
 
   }
 
@@ -312,6 +312,7 @@ class _NavBarPageState extends State<NavBarPage> {
     // Future.delayed(Duration(milliseconds: 100));
     PackageInfo info = await PackageInfo.fromPlatform();
     final appPackageName = info.packageName;
+
     RemoteConfig remoteConfig = await RemoteConfig.instance;
     await remoteConfig.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: const Duration(seconds: 5),

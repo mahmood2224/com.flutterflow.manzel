@@ -146,9 +146,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Profile
   {
-    'appBuild':{
-      'en':'App build',
-      'ar':' رقم بناء التطبيق',
+    'appBuild': {
+      'en': 'App build',
+      'ar': ' رقم بناء التطبيق',
     },
     'zpi4cs66': {
       'en': 'Account',
@@ -472,17 +472,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // HomeScreen
   {
-    'HomeScreenAlertTitle':{
+    'HomeScreenAlertTitle': {
       'en': 'Coming Soon',
-      'ar':'قريبًا',
+      'ar': 'قريبًا',
     },
-    'HomeScreenAlertMessage':{
-      'en':'The map feature will be availiable soon',
-      'ar':'ستكون ميزة الخريطة متاحة قريبًا'
+    'HomeScreenAlertMessage': {
+      'en': 'The map feature will be availiable soon',
+      'ar': 'ستكون ميزة الخريطة متاحة قريبًا'
     },
-    'HomeScreenAlertOk':{
-      'en':'Ok',
-      'ar':'موافق',
+    'HomeScreenAlertOk': {
+      'en': 'Ok',
+      'ar': 'موافق',
     },
     '2cud1oqj': {
       'en': 'Available',
@@ -562,9 +562,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'to accept offer',
       'ar': 'لقبول العرض',
     },
-    'lastInstallmentOffer':{
-      'en':'Last Installment',
-      'ar':'القسط الأخير',
+    'lastInstallmentOffer': {
+      'en': 'Last Installment',
+      'ar': 'القسط الأخير',
     },
     'mthnzz7x': {
       'en': 'Offers',
@@ -812,9 +812,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PastOffers
   {
-    'lastInstallment':{
-      'en':'Last Installment',
-      'ar':'القسط الأخير',
+    'lastInstallment': {
+      'en': 'Last Installment',
+      'ar': 'القسط الأخير',
     },
     'qvv3lsb7': {
       'en': 'Past Offers',
@@ -1057,7 +1057,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // PropertyDetails
   {
-    'floorPlan' : {
+    'floorPlan': {
       'en': 'Floor plan',
       'ar': 'المخطط',
     },
@@ -1201,10 +1201,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Reserve',
       'ar': 'حجز',
     },
-    'buttonSoon':{
-      'en':'Soon',
-      'ar':'قريبًا'
-    },
+    'buttonSoon': {'en': 'Soon', 'ar': 'قريبًا'},
     'wzirx8i7': {
       'en': 'Booked',
       'ar': 'محجوز',
@@ -1906,13 +1903,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
 // reservationBottomSheet
   {
-    'reservationAnd' : {
-      'ar':'و',
-      'en':'&',
+    'reservationAnd': {
+      'ar': 'و',
+      'en': '&',
     },
-    'reservationPrivacyPolicy' : {
-      'en':"privacy policy",
-      'ar':'سياسة الخصوصية',
+    'reservationPrivacyPolicy': {
+      'en': "privacy policy",
+      'ar': 'سياسة الخصوصية',
     },
     'jaefs5yd': {
       'en': 'Reservation confirmation',
@@ -2089,7 +2086,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Please Check Your Internet Connection',
       'ar': 'الرجاء التحقق من اتصال الانترنت الخاص بك',
     },
-
-
+    'somethingWent': {
+      'en': 'Something went wrong',
+      'ar': 'هناك خطأ ما',
+    },
+    'tryAgain': {
+      'en': 'Try again',
+      'ar': 'حاول مرة أخرى',
+    },
   },
 ].reduce((a, b) => a..addAll(b));

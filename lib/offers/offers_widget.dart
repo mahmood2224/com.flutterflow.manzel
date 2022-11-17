@@ -67,33 +67,53 @@ class _OffersWidgetState extends State<OffersWidget> {
   List? activeOffers;
   bool? isInternetAvailable;
   bool isPageLoading = true;
+  var alertCalled = 0;
 
   Future<List<GroupChannel>?> getUnreadMessage() async {
-    try {
-      //String channel_url = channelUrl.toString();
-      //final aChannel = await GroupChannel.getChannel(channel_url);
-      final query = GroupChannelListQuery()
-        ..userIdsIncludeIn = [currentUserUid]
-        ..order = GroupChannelListOrder.chronological;
-      final result = await query.loadNext();
-      result.forEach((element) {
-        channels[element.channelUrl.toString()] =
-            element.unreadMessageCount.toString();
-      });
-      // print(aChannel.unreadMessageCount);
-      // var channel = aChannel.unreadMessageCount.toString();
-      // unreadMsg.value = channel;
-      // return channel;
+    isInternetAvailable = await isInternetConnected();
+    if(isInternetAvailable??false){
+      try {
+        //String channel_url = channelUrl.toString();
+        //final aChannel = await GroupChannel.getChannel(channel_url);
+        final query = GroupChannelListQuery()
+          ..userIdsIncludeIn = [currentUserUid]
+          ..order = GroupChannelListOrder.chronological;
+        final result = await query.loadNext();
+        result.forEach((element) {
+          channels[element.channelUrl.toString()] =
+              element.unreadMessageCount.toString();
+        });
+        // print(aChannel.unreadMessageCount);
+        // var channel = aChannel.unreadMessageCount.toString();
+        // unreadMsg.value = channel;
+        // return channel;
 
 // print("unread Messages ${unreadMessage}");
 //   return   unreadMessage.toString();
 
-    } catch (error) {
-      print("*********************************************************");
-      print(error);
-      print("*********************************************************");
+      } catch (error) {
+        print("*********************************************************");
+        print(error);
+        print("*********************************************************");
+      }
+      if (mounted) setState(() {});
     }
-    if (mounted) setState(() {});
+    else{
+      isPageLoading = false;
+      setState(() {});
+      alertCalled++;
+      setState(() {});
+      if (alertCalled <= 1)
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
+
   }
 
   types.User asChatUiUser(sendbird.User user) {
@@ -112,13 +132,18 @@ class _OffersWidgetState extends State<OffersWidget> {
     // On page load action.
     // inAppReview.openStoreListing(appStoreId: '1630341481');
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      final _sendbird = await sendbird.SendbirdSdk(
-          appId: "${EnvVariables.instance.sendbirdAppId}");
-      final _ = await _sendbird.connect(currentUserUid);
-      // Future.delayed(Duration(seconds: 5));
-      final _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);
-      getUnreadMessage();
+      isInternetAvailable = await isInternetConnected();
+      if(isInternetAvailable??false){
+        final _sendbird = await sendbird.SendbirdSdk(
+            appId: "${EnvVariables.instance.sendbirdAppId}");
+        final _ = await _sendbird.connect(currentUserUid);
+        // Future.delayed(Duration(seconds: 5));
+        final _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);
+      }
+      else{
 
+      }
+      getUnreadMessage();
       logFirebaseEvent('OFFERS_PAGE_Offers_ON_PAGE_LOAD');
       if (loggedIn) {
         if (valueOrDefault(currentUserDocument?.status, '') == 'Active') {
@@ -196,6 +221,8 @@ class _OffersWidgetState extends State<OffersWidget> {
           getOfferResponse?.jsonBody["result"].toList();
 
     } else {
+      alertCalled++;
+      setState(() {});
       isPageLoading = false;
       setState(() {});
       showDialog(
@@ -406,7 +433,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                 if (functions.offerScreenConitionalVisibilty(
                                     loggedIn,
                                     valueOrDefault(
-                                        currentUserDocument?.status, '')))
+                                        currentUserDocument?.status, ''))&&(isInternetAvailable??false))
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 16, 20),
                                     child: AuthUserStreamWidget(
@@ -2344,15 +2371,61 @@ class _OffersWidgetState extends State<OffersWidget> {
                                     }
                                     else if((getOfferResponse?.statusCode!=200)&&(getOfferResponse!=null)){
                                       return Center(
-                                        child: SizedBox(
-                                            width: 50,
-                                            height: 50,
-                                            child: Column(
-                                              children: [
-                                                Text('Status Code Not 200'),
-                                              ],
-                                            )),
-                                      );
+                                        child: Container(
+                                          height: 100,
+                                          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            borderRadius: new BorderRadius.all(
+                                              Radius.circular(10.0),
+                                            ),
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                FFLocalizations.of(context).getText(
+                                                  'somethingWent' /* Something Went Wrong  */,
+                                                ),
+                                                style: FlutterFlowTheme.of(context).subtitle2.override(
+                                                  fontFamily: 'AvenirArabic',
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts: false,
+                                                ),
+                                              ),
+                                              SizedBox(height: 10,),
+                                              SizedBox(
+                                                width: 100,
+                                                child: FFButtonWidget(
+                                                  onPressed:(){
+                                                  },
+                                                  text: FFLocalizations.of(context).getText(
+                                                    't7s7qd09' /* Cancel */,
+                                                  ),
+                                                  options: FFButtonOptions(
+                                                    height: 38,
+                                                    padding: EdgeInsetsDirectional.fromSTEB(9, 0, 0, 0),
+                                                    color: FlutterFlowTheme.of(context).primaryColor,
+                                                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                                                      fontFamily: 'AvenirArabic',
+                                                      color: Colors.white,
+                                                      fontSize: 15,
+                                                      fontWeight: FontWeight.w500,
+                                                      useGoogleFonts: false,
+                                                    ),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    ),
+                                                    borderRadius: BorderRadius.circular(8),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );//Something Went Wrong
                                     }
                                     return SizedBox();
                                   },
