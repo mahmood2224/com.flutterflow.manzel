@@ -89,7 +89,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     super.initState();
     // //initializePlayer();
     fav = FavouriteList.instance.favourite;
-    if (widget?.jsonData != null) {
+    if (widget.jsonData != null) {
       isLoading.value = true;
       columnPropertyResponse = widget.jsonData;
       isLoading.value = false;
@@ -652,8 +652,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         .apiVersion,
                                                               );
                                                               if ((bookmarkApiResponse
-                                                                          ?.statusCode ??
-                                                                      200) ==
+                                                                          .statusCode) ==
                                                                   200) {
                                                                 fav.remove(widget
                                                                     .propertyId
@@ -711,8 +710,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         .apiVersion,
                                                               );
                                                               if ((bookmarkApiResponse
-                                                                          ?.statusCode ??
-                                                                      200) ==
+                                                                          .statusCode
+                                                              ) ==
                                                                   200) {
                                                                 fav[widget
                                                                     .propertyId
@@ -901,10 +900,24 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     ),
                                                                   ),
                                                                   Text(
-                                                                    PropertyCall
-                                                                        .propertyUpdatedAt(
-                                                                      columnPropertyResponse,
-                                                                    ).toString(),
+                                                                      valueOrDefault<
+                                                                        String>(
+                                                                      functions.offerScreenTime(
+                                                                          PropertyCall
+                                                                          .propertyUpdatedAt(
+                                                                        columnPropertyResponse,
+                                                                      )
+                                                                         ,
+                                                                          valueOrDefault<String>(
+                                                                            FFAppState().locale,
+                                                                            'en',
+                                                                          )),
+                                                                      '0',
+                                                                    ),
+                                                                    // PropertyCall
+                                                                    //     .propertyUpdatedAt(
+                                                                    //   columnPropertyResponse,
+                                                                    // ).toString(),
                                                                     maxLines: 2,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -3048,24 +3061,30 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     children: [
                                                       Text(
                                                         PropertyCall
-                                                            .propertyEntranceDirection(
+                                                            .propertyCity(
                                                           columnPropertyResponse,
-                                                        ).toString(),
+                                                        ).toString()+', ${PropertyCall
+                                                            .propertyDistrict(
+                                                          columnPropertyResponse,
+                                                        ).toString()}'+ ', ${PropertyCall
+                                                            .propertyStreet(
+                                                          columnPropertyResponse,
+                                                        ).toString()}',
                                                         style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'AvenirArabic',
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w300,
-                                                                  useGoogleFonts:
-                                                                      false,
-                                                                ),
-                                                      ),
+                                                        FlutterFlowTheme.of(
+                                                            context)
+                                                            .bodyText1
+                                                            .override(
+                                                          fontFamily:
+                                                          'AvenirArabic',
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w300,
+                                                          useGoogleFonts:
+                                                          false,
+                                                        ),
+                                                      )
                                                     ],
                                                   ),
                                                 ),
@@ -3500,7 +3519,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                               addOrderApiResponse =
                                                   await AddOrderCall.call(
                                                       propertyId:
-                                                          widget!
+                                                          widget
                                                               .propertyId
                                                               .toString(),
                                                       userId:
