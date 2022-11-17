@@ -37,9 +37,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   ValueNotifier<int> changeTimer = ValueNotifier<int>(0);
   ValueNotifier<int> changeText = ValueNotifier<int>(0);
   ValueNotifier<bool> timerOver = ValueNotifier<bool>(true);
+  var height;
 
   @override
   void initState() {
+
     super.initState();
     // On page load action.
     logFirebaseEvent('screen_view',
@@ -53,6 +55,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'MyProperties'});
    // WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+
 
   }
 
@@ -75,32 +78,41 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
 
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
+      appBar: AppBar(
+        centerTitle: false,
+        titleSpacing: 16,
+        leadingWidth: 0,
+        title:Text(
+          FFLocalizations.of(context).getText(
+            '21gpsvgr' /* Offers */,
+          ),
+          style: FlutterFlowTheme.of(context)
+              .title2
+              .override(
+            fontFamily: 'AvenirArabic',
+            color: Colors.black,
+            fontSize: 25,
+            fontWeight: FontWeight.w800,
+            useGoogleFonts: false,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        actions: [
+        ],
+      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 8, 15, 0),
-              child: Text(
-                FFLocalizations.of(context).getText(
-                  '21gpsvgr' /* My Properties */,
-                ),
-                style: FlutterFlowTheme.of(context).title2.override(
-                      fontFamily: 'AvenirArabic',
-                      color: Colors.black,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w800,
-                      useGoogleFonts: false,
-                    ),
-              ),
-            ),
             if (!loggedIn)
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 260, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, height/2.8, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -113,14 +125,14 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Image.asset(
-                              'assets/images/offerScreenNoResult.png',
-                              width: 37,
-                              height: 38,
-                              fit: BoxFit.cover,
+                              'assets/images/myPropertiesBooked.png',
+                              width: 45,
+                              height: 45,
+                              fit: BoxFit.fill,
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 15, 10, 0),
+                                  EdgeInsetsDirectional.fromSTEB(10, 8, 10, 0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   'w4bgagrv' /* You need to create an account ... */,
@@ -1398,7 +1410,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    16, 23, 19, 0),
+                                                    16, 23, 16, 0),
                                             child: Container(
                                               width: 100,
                                               decoration: BoxDecoration(
@@ -1478,48 +1490,44 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                             0),
                                                                 child: Column(
                                                                   mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
+                                                                  MainAxisSize
+                                                                      .max,
                                                                   crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
+                                                                  CrossAxisAlignment
+                                                                      .start,
                                                                   children: [
-                                                                    Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .min,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            getJsonField(
-                                                                              bookmarkedPropertiesItem,
-                                                                              r'''$.property_data.property_name''',
-                                                                            ).toString(),
-                                                                            'null',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                fontSize: 16,
-                                                                                fontWeight: FontWeight.bold,
-                                                                                useGoogleFonts: false,
-                                                                                lineHeight: 2,
-                                                                              ),
+                                                                    SizedBox(
+                                                                      width: (MediaQuery.of(context).size.width)/2,
+                                                                      child: Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          getJsonField(
+                                                                            bookmarkedPropertiesItem,
+                                                                            r'''$.property_data.property_name''',
+                                                                          ).toString(),
+                                                                          'null',
                                                                         ),
-                                                                      ],
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyText1
+                                                                            .override(
+                                                                          fontFamily: 'AvenirArabic',
+                                                                          fontSize: 16,
+                                                                          fontWeight: FontWeight.bold,
+                                                                          useGoogleFonts: false,
+                                                                          lineHeight: 1.25,
+
+                                                                        ),
+                                                                        maxLines: 2,
+                                                                        overflow: TextOverflow.ellipsis,
+                                                                      ),
                                                                     ),
                                                                     Row(
                                                                       mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
+                                                                      MainAxisSize
+                                                                          .max,
                                                                       crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .center,
+                                                                      CrossAxisAlignment
+                                                                          .center,
                                                                       children: [
                                                                         Padding(
                                                                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -1528,19 +1536,19 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               3,
                                                                               3),
                                                                           child:
-                                                                              Icon(
+                                                                          Icon(
                                                                             Manzel.location_pin,
                                                                             color:
-                                                                                Colors.black,
+                                                                            Colors.black,
                                                                             size:
-                                                                                13,
+                                                                            13,
                                                                           ),
                                                                         ),
                                                                         Padding(
                                                                           padding:
-                                                                              const EdgeInsets.only(left: 3),
+                                                                          const EdgeInsets.only(left: 3),
                                                                           child:
-                                                                              Text(
+                                                                          Text(
                                                                             valueOrDefault<String>(
                                                                               getJsonField(
                                                                                 bookmarkedPropertiesItem,
@@ -1549,11 +1557,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               'null',
                                                                             ),
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                  fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 12,
-                                                                                  fontWeight: FontWeight.w300,
-                                                                                  useGoogleFonts: false,
-                                                                                ),
+                                                                              fontFamily: 'AvenirArabic',
+                                                                              fontSize: 12,
+                                                                              fontWeight: FontWeight.w300,
+                                                                              useGoogleFonts: false,
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                         Text(
@@ -1564,11 +1572,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyText1
                                                                               .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                fontSize: 12,
-                                                                                fontWeight: FontWeight.w300,
-                                                                                useGoogleFonts: false,
-                                                                              ),
+                                                                            fontFamily: 'AvenirArabic',
+                                                                            fontSize: 12,
+                                                                            fontWeight: FontWeight.w300,
+                                                                            useGoogleFonts: false,
+                                                                          ),
                                                                         ),
                                                                         Text(
                                                                           valueOrDefault<
@@ -1582,29 +1590,29 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyText1
                                                                               .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                fontSize: 12,
-                                                                                fontWeight: FontWeight.w300,
-                                                                                useGoogleFonts: false,
-                                                                              ),
+                                                                            fontFamily: 'AvenirArabic',
+                                                                            fontSize: 12,
+                                                                            fontWeight: FontWeight.w300,
+                                                                            useGoogleFonts: false,
+                                                                          ),
                                                                         ),
                                                                       ],
                                                                     ),
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional
                                                                           .fromSTEB(
-                                                                              0,
-                                                                              13,
-                                                                              0,
-                                                                              0),
+                                                                          0,
+                                                                          13,
+                                                                          0,
+                                                                          0),
                                                                       child:
-                                                                          SingleChildScrollView(
+                                                                      SingleChildScrollView(
                                                                         scrollDirection:
-                                                                            Axis.horizontal,
+                                                                        Axis.horizontal,
                                                                         child:
-                                                                            Row(
+                                                                        Row(
                                                                           mainAxisSize:
-                                                                              MainAxisSize.max,
+                                                                          MainAxisSize.max,
                                                                           children: [
                                                                             Padding(
                                                                               padding: EdgeInsetsDirectional.fromSTEB(FFAppState().locale=='en'?0:9, 0, 9, 0),
@@ -1625,12 +1633,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                   '0',
                                                                                 ),
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                      color: Colors.black,
-                                                                                      fontSize: 12,
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
+                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                  color: Colors.black,
+                                                                                  fontSize: 12,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
                                                                               ),
                                                                             ),
                                                                             Padding(
@@ -1653,12 +1661,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 ),
                                                                                 maxLines: 2,
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                      color: Colors.black,
-                                                                                      fontSize: 12,
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
+                                                                                  fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                  color: Colors.black,
+                                                                                  fontSize: 12,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
                                                                               ),
                                                                             ),
                                                                             Padding(
@@ -1678,12 +1686,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 '0',
                                                                               ),
                                                                               style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                                                                    color: Colors.black,
-                                                                                    fontSize: 12,
-                                                                                    fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
-                                                                                  ),
+                                                                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                                                                color: Colors.black,
+                                                                                fontSize: 12,
+                                                                                fontWeight: FontWeight.w500,
+                                                                                useGoogleFonts: false,
+                                                                              ),
                                                                             ),
                                                                             Padding(
                                                                               padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
@@ -1692,11 +1700,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                   '747xbn3l' /* sqm */,
                                                                                 ),
                                                                                 style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                      fontFamily: 'AvenirArabic',
-                                                                                      fontSize: 12,
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      useGoogleFonts: false,
-                                                                                    ),
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  fontSize: 12,
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  useGoogleFonts: false,
+                                                                                ),
                                                                               ),
                                                                             ),
                                                                           ],
@@ -1704,7 +1712,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       ),
                                                                     ),
                                                                   ],
-                                                                ),
+                                                                )
+                                                                ,
                                                               ),
                                                             ],
                                                           ),

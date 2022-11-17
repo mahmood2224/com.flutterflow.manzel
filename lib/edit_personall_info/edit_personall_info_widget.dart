@@ -41,6 +41,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
   TextEditingController? emailController;
   TextEditingController? fullNameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  bool? isProfileUpdated;
 
   @override
   void initState() {
@@ -81,7 +82,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
             onPressed: () async {
               logFirebaseEvent('EDIT_PERSONALL_INFO_PAGE_back_ON_TAP');
               logFirebaseEvent('back_Close-Dialog,-Drawer,-Etc');
-              Navigator.pop(context);
+              isProfileUpdated=false;
+              Navigator.pop(context,isProfileUpdated);
             },
           ),
         ),
@@ -714,6 +716,23 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   emailController!.text == '') ||
                               (fullNameController!.text == null ||
                                   fullNameController!.text == '')) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'pleaseFillInfo' /* Please fill all the information fields */,
+                                  ),
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context).white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                FlutterFlowTheme.of(context).primaryRed,
+                              ),
+                            );
                           } else {
                             logFirebaseEvent(
                                 'EDIT_PERSONALL_INFO_updatePersonalInfo_O');
@@ -754,10 +773,30 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     .update(userUpdateData);
                                 logFirebaseEvent(
                                     'updatePersonalInfo_Close-Dialog,-Drawer,');
-                                Navigator.pop(context);
+                                isProfileUpdated = true;
+                                Navigator.pop(context,isProfileUpdated);
                               } else {
                                 logFirebaseEvent(
                                     'updatePersonalInfo_Show-Snack-Bar');
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                    Text(
+                                      FFLocalizations.of(context).getText(
+                                        'pleaseFillInfo' /* Please fill all the information fields */,
+                                      ),
+                                      style: TextStyle(
+                                        color:
+                                        FlutterFlowTheme.of(context).white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                    FlutterFlowTheme.of(context).primaryRed,
+                                  ),
+                                );
                               }
                             } else {
                               // updatePersonaInfo
@@ -790,6 +829,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               logFirebaseEvent(
                                   'updatePersonalInfo_Close-Dialog,-Drawer,');
                               Navigator.pop(context);
+
                             }
                           }
                         },
