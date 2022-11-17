@@ -1140,7 +1140,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                   context)
                                                                   .getText(
                                                                 'y42wn8bh' /* You have  */,
-                                                                                                                                         style: FlutterFlowTheme
+                                                              ),
+                                                              style: FlutterFlowTheme
                                                                   .of(context)
                                                                   .bodyText1
                                                                   .override(
