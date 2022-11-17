@@ -787,6 +787,23 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   ),
                                 );
                             }
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'pleaseFillInfo' /* Please fill all the information fields */,
+                                  ),
+                                  style: TextStyle(
+                                    color: FlutterFlowTheme.of(context).white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 4000),
+                                backgroundColor:
+                                FlutterFlowTheme.of(context).primaryRed,
+                              ),
+                            );
                           } else {
                             logFirebaseEvent(
                                 'EDIT_PERSONALL_INFO_updatePersonalInfo_O');
@@ -846,6 +863,25 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               } else {
                                 logFirebaseEvent(
                                     'updatePersonalInfo_Show-Snack-Bar');
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                    Text(
+                                      FFLocalizations.of(context).getText(
+                                        'pleaseFillInfo' /* Please fill all the information fields */,
+                                      ),
+                                      style: TextStyle(
+                                        color:
+                                        FlutterFlowTheme.of(context).white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                    FlutterFlowTheme.of(context).primaryRed,
+                                  ),
+                                );
                               }
                             } else {
                               // updatePersonaInfo

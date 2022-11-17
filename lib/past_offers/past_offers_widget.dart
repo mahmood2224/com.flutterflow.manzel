@@ -1030,7 +1030,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                 FFLocalizations.of(
                                                                     context)
                                                                     .getText(
-                                                                  'tpwleczh' /* Initial installment */,
+                                                                  'tpwleczh' /* Installment Amount */,
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
                                                                     context)

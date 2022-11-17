@@ -4,6 +4,7 @@ import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
+import 'package:manzel/confirmation/confirmation_widget.dart';
 import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -47,9 +48,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   List? bookmarkedProperties;
   bool isLoading = true;
   var alertCalled = 0;
+  var height;
 
   @override
   void initState() {
+
     super.initState();
     // On page load action.
     logFirebaseEvent('screen_view',
@@ -66,6 +69,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
     bookedPropertiesCall();
     getBookMarkedPropertiesCall();
   }
+
 
   Future<void> bookedPropertiesCall() async {
     isInternetAvailable = await isInternetConnected();
@@ -153,32 +157,41 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
 
   @override
   Widget build(BuildContext context) {
+    height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: scaffoldKey,
+      appBar: AppBar(
+        centerTitle: false,
+        titleSpacing: 16,
+        leadingWidth: 0,
+        title:Text(
+          FFLocalizations.of(context).getText(
+            '21gpsvgr' /* Offers */,
+          ),
+          style: FlutterFlowTheme.of(context)
+              .title2
+              .override(
+            fontFamily: 'AvenirArabic',
+            color: Colors.black,
+            fontSize: 25,
+            fontWeight: FontWeight.w800,
+            useGoogleFonts: false,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        actions: [
+        ],
+      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(15, 8, 15, 0),
-              child: Text(
-                FFLocalizations.of(context).getText(
-                  '21gpsvgr' /* My Properties */,
-                ),
-                style: FlutterFlowTheme.of(context).title2.override(
-                      fontFamily: 'AvenirArabic',
-                      color: Colors.black,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w800,
-                      useGoogleFonts: false,
-                    ),
-              ),
-            ),
             if (!loggedIn)
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, MediaQuery.of(context).size.height/2.8, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, height/2.8, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -191,14 +204,14 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Image.asset(
-                              'assets/images/offerScreenNoResult.png',
-                              width: 37,
-                              height: 38,
-                              fit: BoxFit.cover,
+                              'assets/images/myPropertiesBooked.png',
+                              width: 45,
+                              height: 45,
+                              fit: BoxFit.fill,
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 15, 10, 0),
+                                  EdgeInsetsDirectional.fromSTEB(10, 8, 10, 0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   'w4bgagrv' /* You need to create an account ... */,
@@ -828,12 +841,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                     final value = snap.data;
                                                                                     print(">>>>>>>>>>>>>>>>>>> value = ${value}");
                                                                                     print('${snap.data.runtimeType}');
-                                                                                    if (value! <= 0) {
+                                                                                    if ((value?? 0) <=0){
                                                                                       timerController.onStopTimer();
                                                                                       timerOver.value = false;
                                                                                     }
                                                                                     final displayTime = StopWatchTimer.getDisplayTime(
-                                                                                      value!,
+                                                                                      value??0,
                                                                                       hours: true,
                                                                                       minute: true,
                                                                                       second: true,
@@ -1261,7 +1274,40 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                   ? FFButtonWidget(
                                                                       onPressed:
                                                                           () async {
-                                                                        await configurePaymentSdk();
+                                                                        var addOrderApiResponse =
+                                                                      await AddOrderCall.call(
+                                                                          propertyId:getJsonField(
+                                                                            bookedPropertiesItem,
+                                                                            r'''$.property_id''',
+                                                                          ).toString(),
+                                                                          userId:
+                                                                          currentUserReference
+                                                                              ?.id,
+                                                                          authorazationToken:
+                                                                          FFAppState()
+                                                                              .authToken,
+                                                                          version: FFAppState()
+                                                                              .apiVersion);
+
+                                                                       if ((addOrderApiResponse
+                                                                           ?.statusCode ??
+                                                                           398) ==
+                                                                           398){
+                                                                         Navigator.push(
+                                                                           context,
+                                                                           MaterialPageRoute(
+                                                                             builder: (context) =>
+                                                                                 ConfirmationWidget(
+                                                                                     orderId:getJsonField(
+                                                                                       bookedPropertiesItem,
+                                                                                       r'''$.order_id''',
+                                                                                     ).toString(),
+                                                                                     transactionCase:'SUCCESS',
+                                                                                 ),
+                                                                           ),
+                                                                         );
+                                                                     }
+                                                                      else{await configurePaymentSdk();
                                                                         await showModalBottomSheet(
                                                                           isScrollControlled:
                                                                               true,
@@ -1294,6 +1340,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           },
                                                                         ).then((value) =>
                                                                             setState(() {}));
+
+                                                                       }
                                                                       },
                                                                       text: FFLocalizations.of(
                                                                               context)
@@ -1407,7 +1455,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16, 23, 19, 0),
+                                                  16, 23, 16, 0),
                                           child: Container(
                                             width: 100,
                                             decoration: BoxDecoration(
@@ -1489,14 +1537,9 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                     CrossAxisAlignment
                                                                         .start,
                                                                 children: [
-                                                                  Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .min,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .start,
-                                                                    children: [
+                                                                  SizedBox(
+                                                                    width: (MediaQuery.of(context).size.width)/2,
+                                                                            child:
                                                                       Text(
                                                                         valueOrDefault<
                                                                             String>(
@@ -1513,10 +1556,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               fontSize: 16,
                                                                               fontWeight: FontWeight.bold,
                                                                               useGoogleFonts: false,
-                                                                              lineHeight: 2,
-                                                                            ),
-                                                                      ),
-                                                                    ],
+                                                                              lineHeight: 1.25,
+
+                                                                        ),
+                                                                        maxLines:2,
+                                                                            overflow: TextOverflow.ellipsis,
+                                                                    ),
                                                                   ),
                                                                   Row(
                                                                     mainAxisSize:
@@ -1734,16 +1779,16 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                     fontFamily: 'AvenirArabic',
                                                                                     fontSize: 12,
                                                                                     fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,
+                                                                                    useGoogleFonts: false,),
                                                                                   ),
                                                                             ),
-                                                                          ),
-                                                                        ],
+                                                                          ],
+                                                                        ),
                                                                       ),
                                                                     ),
-                                                                  ),
-                                                                ],
-                                                              ),
+                                                                  ],
+                                                                )
+                                                              ,
                                                             ),
                                                           ],
                                                         ),

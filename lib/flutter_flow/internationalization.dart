@@ -347,6 +347,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Are you eligible for Salani support?',
       'ar': 'هل انت مستحق للدعم السكني؟',
     },
+    'pleaseFillInfo':{
+      'en': 'Please fill all the information fields',
+      'ar': 'يرجى ملء جميع حقول المعلومات',
+    },
     'ag8peu33': {
       'en': 'Yes',
       'ar': 'نعم',
@@ -636,7 +640,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ez8wbssn': {
       'en': 'Installment Amount',
-      'ar': 'القسط الأولي',
+      'ar': 'مبلغ القسط',
     },
     'z7x7wv59': {
       'en': 'SAR',
@@ -858,7 +862,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'tpwleczh': {
       'en': 'Installment Amount',
-      'ar': 'القسط الأولي',
+      'ar': 'مبلغ القسط',
     },
     '2szdgt5y': {
       'en': 'SAR',
@@ -1067,7 +1071,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'propertyRef': {
       'en': 'Property Ref.',
-      'ar': 'رقم العقار',
+      'ar': ' رقم العقار ',
     },
     'propertyAdd': {
       'en': 'Property address.',
@@ -1075,7 +1079,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'propertyLink': {
       'en': 'Property link',
-      'ar': 'ارتباط الملكية',
+      'ar': 'رابط العقار',
     },
     'opening': {
       'en': 'Hello ! I want to request a visit to',
@@ -1369,11 +1373,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // Confirmation
   {
     'failureButton': {
-      'en': 'Explore more properties',
-      'ar': 'اكتشف المزيد من الخصائص'
+      'en': 'Try Again',
+      'ar': 'محاولة مرة اخرى'
     },
     'failure': {
-      'en': 'We are unable to process payment please try again later',
+      'en': 'Something went wrong, please try again.',
       'ar': 'حدث خطأ ما، الرجاء المحاولة مرة أخرى'
     },
     'fnewib0l': {

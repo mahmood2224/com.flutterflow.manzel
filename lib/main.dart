@@ -433,7 +433,7 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Manzel.my_properties_nav_bar,
-              size: 22,
+              size: 20,
             ),
             label: FFLocalizations.of(context).getText(
               'lhqoha7d' /* My Properties */,
