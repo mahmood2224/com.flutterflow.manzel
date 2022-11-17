@@ -756,7 +756,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     .update(userUpdateData);
                                 logFirebaseEvent(
                                     'updatePersonalInfo_Close-Dialog,-Drawer,');
-                                Navigator.pop(context);
+                                isProfileUpdated = true;
+                                Navigator.pop(context,isProfileUpdated);
                               } else {
                                 logFirebaseEvent(
                                     'updatePersonalInfo_Show-Snack-Bar');
@@ -791,8 +792,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   .update(userUpdateData);
                               logFirebaseEvent(
                                   'updatePersonalInfo_Close-Dialog,-Drawer,');
-                              isProfileUpdated = true;
-                              Navigator.pop(context,isProfileUpdated);
+                              Navigator.pop(context);
+
                             }
                           }
                         },
