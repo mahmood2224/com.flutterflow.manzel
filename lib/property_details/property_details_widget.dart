@@ -3669,148 +3669,152 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 ),
                                               ).then(
                                                 (value) async {
-                                                  logFirebaseEvent(
-                                                      'reserved_Bottom-Sheet');
-                                                  addOrderApiResponse =
-                                                      await AddOrderCall.call(
-                                                          propertyId: widget
-                                                              .propertyId
-                                                              .toString(),
-                                                          userId: currentUserReference
-                                                              ?.id,
-                                                          authorazationToken:
-                                                              FFAppState()
-                                                                  .authToken,
-                                                          version: FFAppState()
-                                                              .apiVersion);
-
-                                                  if ((addOrderApiResponse
-                                                              ?.statusCode ??
-                                                          200) ==
-                                                      200) {
-                                                    await configurePaymentSdk();
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.white,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return Padding(
-                                                          padding:
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .viewInsets,
-                                                          child: Container(
-                                                            height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .height *
-                                                                0.9,
-                                                            child:
-                                                                ReservationBottomSheetWidget(
-                                                              reservationCost:
-                                                                  PropertyCall
-                                                                      .reservationsCost(
-                                                                columnPropertyResponse,
+                                                  bool isProfileUpdated = value;
+                                                  if(isProfileUpdated){
+                                                    logFirebaseEvent(
+                                                        'reserved_Bottom-Sheet');
+                                                    addOrderApiResponse =
+                                                    await AddOrderCall.call(
+                                                        propertyId: widget
+                                                            .propertyId
+                                                            .toString(),
+                                                        userId: currentUserReference
+                                                            ?.id,
+                                                        authorazationToken:
+                                                        FFAppState()
+                                                            .authToken,
+                                                        version: FFAppState()
+                                                            .apiVersion);
+                                                    if ((addOrderApiResponse
+                                                        ?.statusCode ??
+                                                        200) ==
+                                                        200) {
+                                                      await configurePaymentSdk();
+                                                      await showModalBottomSheet(
+                                                        isScrollControlled: true,
+                                                        backgroundColor:
+                                                        Colors.white,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return Padding(
+                                                            padding:
+                                                            MediaQuery.of(
+                                                                context)
+                                                                .viewInsets,
+                                                            child: Container(
+                                                              height: MediaQuery.of(
+                                                                  context)
+                                                                  .size
+                                                                  .height *
+                                                                  0.9,
+                                                              child:
+                                                              ReservationBottomSheetWidget(
+                                                                reservationCost:
+                                                                PropertyCall
+                                                                    .reservationsCost(
+                                                                  columnPropertyResponse,
+                                                                ),
+                                                                propertyId: widget
+                                                                    .propertyId,
+                                                                orderId:
+                                                                addOrderApiResponse
+                                                                    ?.jsonBody[
+                                                                'result'],
                                                               ),
-                                                              propertyId: widget
-                                                                  .propertyId,
-                                                              orderId:
-                                                                  addOrderApiResponse
-                                                                          ?.jsonBody[
-                                                                      'result'],
+                                                            ),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          setState(() {}));
+                                                      //.then((value) => _chewieController?.play());
+                                                    } else if (addOrderApiResponse!
+                                                        .statusCode ==
+                                                        399) {
+                                                      //Navigator.pop(context);
+                                                      logFirebaseEvent(
+                                                          'Button_Show-Snack-Bar');
+                                                      ScaffoldMessenger.of(
+                                                          context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            addOrderApiResponse!
+                                                                .jsonBody[
+                                                            'error'],
+                                                            style: TextStyle(
+                                                              color: FlutterFlowTheme
+                                                                  .of(context)
+                                                                  .white,
                                                             ),
                                                           ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        setState(() {}));
-                                                    //.then((value) => _chewieController?.play());
-                                                  } else if (addOrderApiResponse!
-                                                          .statusCode ==
-                                                      399) {
-                                                    //Navigator.pop(context);
-                                                    logFirebaseEvent(
-                                                        'Button_Show-Snack-Bar');
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          addOrderApiResponse!
-                                                                  .jsonBody[
-                                                              'error'],
-                                                          style: TextStyle(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .white,
-                                                          ),
+                                                          duration: Duration(
+                                                              milliseconds: 4000),
+                                                          backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                              context)
+                                                              .primaryRed,
                                                         ),
-                                                        duration: Duration(
-                                                            milliseconds: 4000),
-                                                        backgroundColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryRed,
-                                                      ),
-                                                    );
-                                                  } else if (addOrderApiResponse!
-                                                          .statusCode ==
-                                                      400) {
-                                                    //  Navigator.pop(context);
-                                                    logFirebaseEvent(
-                                                        'Button_Show-Snack-Bar');
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          FFAppState().locale ==
-                                                                  'en'
-                                                              ? "Something went wrong. Please try again."
-                                                              : "هناك خطأ ما. حاول مرة اخرى.",
-                                                          style: TextStyle(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .white,
+                                                      );
+                                                    } else if (addOrderApiResponse!
+                                                        .statusCode ==
+                                                        400) {
+                                                      //  Navigator.pop(context);
+                                                      logFirebaseEvent(
+                                                          'Button_Show-Snack-Bar');
+                                                      ScaffoldMessenger.of(
+                                                          context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            FFAppState().locale ==
+                                                                'en'
+                                                                ? "Something went wrong. Please try again."
+                                                                : "هناك خطأ ما. حاول مرة اخرى.",
+                                                            style: TextStyle(
+                                                              color: FlutterFlowTheme
+                                                                  .of(context)
+                                                                  .white,
+                                                            ),
                                                           ),
+                                                          duration: Duration(
+                                                              milliseconds: 4000),
+                                                          backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                              context)
+                                                              .primaryRed,
                                                         ),
-                                                        duration: Duration(
-                                                            milliseconds: 4000),
-                                                        backgroundColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryRed,
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    context.pop();
-                                                    logFirebaseEvent(
-                                                        'Button_Show-Snack-Bar');
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      SnackBar(
-                                                        content: Text(
-                                                          functions.snackBarMessage(
-                                                              'reservationConfirmed',
-                                                              FFAppState()
-                                                                  .locale),
-                                                          style: TextStyle(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .white,
+                                                      );
+                                                    }
+                                                    else {
+                                                      context.pop();
+                                                      logFirebaseEvent(
+                                                          'Button_Show-Snack-Bar');
+                                                      ScaffoldMessenger.of(
+                                                          context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            functions.snackBarMessage(
+                                                                'reservationConfirmed',
+                                                                FFAppState()
+                                                                    .locale),
+                                                            style: TextStyle(
+                                                              color: FlutterFlowTheme
+                                                                  .of(context)
+                                                                  .white,
+                                                            ),
                                                           ),
+                                                          duration: Duration(
+                                                              milliseconds: 4000),
+                                                          backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                              context)
+                                                              .primaryRed,
                                                         ),
-                                                        duration: Duration(
-                                                            milliseconds: 4000),
-                                                        backgroundColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryRed,
-                                                      ),
-                                                    );
+                                                      );
+                                                    }
                                                   }
+
                                                 },
                                               );
                                             }

@@ -48,6 +48,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
   int alertCalled = 0;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  bool? isProfileUpdated;
 
   @override
   void initState() {
@@ -143,7 +144,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
             onPressed: () async {
               logFirebaseEvent('EDIT_PERSONALL_INFO_PAGE_back_ON_TAP');
               logFirebaseEvent('back_Close-Dialog,-Drawer,-Etc');
-              Navigator.pop(context);
+              isProfileUpdated=false;
+              Navigator.pop(context,isProfileUpdated);
             },
           ),
         ),
@@ -847,7 +849,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
 
                                   logFirebaseEvent(
                                       'updatePersonalInfo_Close-Dialog,-Drawer,');
-                                  Navigator.pop(context);
+                                  isProfileUpdated = true;
+                                Navigator.pop(context,isProfileUpdated);
                                 }
                                 else{
                                     showDialog(
@@ -859,7 +862,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       ),
                                     );
                                 }
-
                               } else {
                                 logFirebaseEvent(
                                     'updatePersonalInfo_Show-Snack-Bar');
@@ -927,6 +929,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               logFirebaseEvent(
                                   'updatePersonalInfo_Close-Dialog,-Drawer,');
                               Navigator.pop(context);
+
                             }
                           }
                         },
