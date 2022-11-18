@@ -43,23 +43,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     super.initState();
     //buildInfo();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Profile'});
-    checkInternet();
   }
 
-  Future<void> checkInternet() async {
-    bool isInternetAvailable = await isInternetConnected();
-    if((!isInternetAvailable)&&(loggedIn))
-    {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => CommonAlertDialog(
-          onCancel: () {
-            Navigator.pop(context);
-          },
-        ),
-      );
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
