@@ -742,7 +742,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
                                                         } else {
                                                          int indexOfOtherPlayer= videoPlayers.indexOf(otherPlayer);
-                                                          if(((propertiesIndex+1)<=(videoPlayers.length))&&(indexOfOtherPlayer==(currentPropertyindex+1))){
+                                                          if(((propertiesIndex+1)<(videoPlayers.length))&&(indexOfOtherPlayer==(currentPropertyindex+1))){
                                                             if(!(videoPlayers[propertiesIndex+1].value.isInitialized)){
                                                               videoPlayers[propertiesIndex+1]
                                                                   .initialize();
@@ -834,7 +834,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     .play();
                                                 currentPropertyindex = propertiesIndex;
 
-                                                if((propertiesIndex+1)<=(videoPlayers.length)){
+                                                if((propertiesIndex+1)<(videoPlayers.length)){
                                                   if(!(videoPlayers[propertiesIndex+1].value.isInitialized)){
                                                     videoPlayers[propertiesIndex+1]
                                                         .initialize();
