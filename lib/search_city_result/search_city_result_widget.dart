@@ -422,6 +422,13 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                       //     VideoPlayerController.network(dataSource);
 
                                                                     } else {
+                                                                      int indexOfOtherPlayer= videoPlayers.indexOf(otherPlayer);
+                                                                      if(((currentPropertyindex+1)<=(videoPlayers.length))&&(indexOfOtherPlayer==(currentPropertyindex+1))){
+                                                                        if(!(videoPlayers[currentPropertyindex+1].value.isInitialized)){
+                                                                          videoPlayers[currentPropertyindex+1]
+                                                                              .initialize();
+                                                                        }
+                                                                      }
                                                                       // otherPlayer
                                                                       //     .initialize()
                                                                       //     .then((value) =>
@@ -488,6 +495,14 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                             currentPropertyindex =
                                                                 widget.homeScreenLength! +
                                                                     propertiesIndex;
+
+                                                            if((currentPropertyindex+1)<=(videoPlayers.length)){
+                                                              if(!videoPlayers[currentPropertyindex+1].value.isInitialized){
+                                                                videoPlayers[currentPropertyindex+1]
+                                                                    .initialize();
+                                                              }
+                                                            }
+
                                                             setState(() {
                                                               videoPlayers.forEach(
                                                                   (otherPlayer) {
