@@ -689,13 +689,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         100 ==
                                                     100 &&
                                                 this.mounted) {
-                                              if (!(videoPlayers[
-                                                      propertiesIndex]
-                                                  .value
-                                                  .isInitialized)) {
-                                                videoPlayers[propertiesIndex]
-                                                    .initialize()
-                                                    .then((value) {
+                                              if (!(videoPlayers[propertiesIndex].value.isInitialized)) {
+                                                videoPlayers[propertiesIndex].initialize().then((value) {
                                                   isPaused = false;
                                                   isMuted.value
                                                       ? videoPlayers[
@@ -704,8 +699,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       : videoPlayers[
                                                               propertiesIndex]
                                                           .setVolume(100);
-                                                  currentPropertyindex =
-                                                      propertiesIndex;
+                                                  currentPropertyindex = propertiesIndex;
                                                   videoPlayers[propertiesIndex]
                                                       .play();
                                                   setState(() {
@@ -725,6 +719,18 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           //     VideoPlayerController.network(dataSource);
 
                                                         } else {
+                                                         int indexOfOtherPlayer= videoPlayers.indexOf(otherPlayer);
+                                                          if(((propertiesIndex+1)<=(videoPlayers.length))&&(indexOfOtherPlayer==(currentPropertyindex+1))){
+                                                            if(!(videoPlayers[propertiesIndex+1].value.isInitialized)){
+                                                              videoPlayers[propertiesIndex+1]
+                                                                  .initialize();
+                                                            }
+                                                          }
+                                                          // var indexOfPlayer = videoPlayers.indexOf(otherPlayer);
+                                                          // indexOfPlayer
+
+
+
                                                           // otherPlayer
                                                           //     .initialize()
                                                           //     .then((value) =>
@@ -748,7 +754,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           //             propertiesIndex]
                                                           //         .setVolume(
                                                           //             100);
+
                                                         }
+
                                                       }
                                                     });
                                                     print(
@@ -756,6 +764,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   });
                                                   ;
                                                 });
+
+
 
                                                 print(
                                                     "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
@@ -800,8 +810,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         .setVolume(100);
                                                 videoPlayers[propertiesIndex]
                                                     .play();
-                                                currentPropertyindex =
-                                                    propertiesIndex;
+                                                currentPropertyindex = propertiesIndex;
+
+                                                if((propertiesIndex+1)<=(videoPlayers.length)){
+                                                  if(!(videoPlayers[propertiesIndex+1].value.isInitialized)){
+                                                    videoPlayers[propertiesIndex+1]
+                                                        .initialize();
+                                                  }
+                                                }
+
                                                 setState(() {
                                                   videoPlayers
                                                       .forEach((otherPlayer) {
