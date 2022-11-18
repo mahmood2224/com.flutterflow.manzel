@@ -60,7 +60,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
           onCancel: () {
             setState(() {});
             Navigator.pop(context);
-          },
+          }, onSettings: () {  },
         ),
       );
     }

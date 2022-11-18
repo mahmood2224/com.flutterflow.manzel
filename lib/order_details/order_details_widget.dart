@@ -57,7 +57,7 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
          onCancel: () {
            setState(() {});
            Navigator.pop(context);
-         },
+         }, onSettings: () {  },
        ),
      );
    }

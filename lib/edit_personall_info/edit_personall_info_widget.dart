@@ -1,4 +1,5 @@
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
+import 'package:manzel/auth/firebase_user_provider.dart';
 import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
@@ -90,6 +91,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
       );
     }
   }
+
   Future<void> getBanksCall() async {
     isInternetAvailable = await isInternetConnected();
     if (isInternetAvailable ?? false) {
@@ -99,7 +101,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
       isBankLoading = false;
       setState(() {});
     }
-    else{
+    else if(loggedIn){
       isBankLoading = false;
       setState(() {});
       alertCalled++;
@@ -117,10 +119,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
       );
     }
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -785,7 +783,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       alertCalled = 0;
                                       setState(() {});
                                       Navigator.pop(context);
-                                    },
+                                    }, onSettings: () {  },
                                   ),
                                 );
                             }
@@ -858,7 +856,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       builder: (BuildContext context) => CommonAlertDialog(
                                         onCancel: () {
                                           Navigator.pop(context);
-                                        },
+                                        }, onSettings: () {  },
                                       ),
                                     );
                                 }
@@ -921,7 +919,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     builder: (BuildContext context) => CommonAlertDialog(
                                       onCancel: () {
                                         Navigator.pop(context);
-                                      },
+                                      }, onSettings: () {  },
                                     ),
                                   );
                               }

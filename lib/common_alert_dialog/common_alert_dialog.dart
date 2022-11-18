@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:manzel/flutter_flow/flutter_flow_theme.dart';
@@ -7,12 +8,13 @@ import 'package:manzel/flutter_flow/flutter_flow_widgets.dart';
 class CommonAlertDialog extends StatefulWidget {
 
   final String? alertBoxTitle;
-  final VoidCallback? onCancel;
+  final VoidCallback onCancel;
+  final VoidCallback? onSettings;
 
   const CommonAlertDialog({
     Key? key,
     required this.onCancel,
-    this.alertBoxTitle,
+    this.alertBoxTitle, this.onSettings,
   }) : super(key: key);
 
   @override
@@ -41,10 +43,18 @@ class _CommonAlertDialogState extends State<CommonAlertDialog> {
       actions: [
         CupertinoDialogAction(
           isDefaultAction: true,
-          onPressed: widget.onCancel!,
+          onPressed: widget.onCancel,
           child: Text(FFLocalizations.of(context).getText(
               't7s7qd09'), /* Cancel */
               ),
+        ),
+        CupertinoDialogAction(
+          isDefaultAction: true,
+          onPressed: widget.onSettings??
+            AppSettings.openWIFISettings,
+          child: Text(FFLocalizations.of(context).getText(
+              'settings'), /* Cancel */
+          ),
         ),
           // FFButtonWidget(
           //   onPressed: widget.onCancel!,

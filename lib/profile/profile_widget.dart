@@ -48,7 +48,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
   Future<void> checkInternet() async {
     bool isInternetAvailable = await isInternetConnected();
-    if(!(isInternetAvailable))
+    if((!isInternetAvailable)&&(loggedIn))
     {
       showDialog(
         context: context,

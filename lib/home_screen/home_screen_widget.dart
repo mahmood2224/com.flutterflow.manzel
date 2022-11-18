@@ -23,6 +23,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:app_settings/app_settings.dart';
+
+
+
 
 import '../flutter_flow/flutter_flow_widgets.dart';
 
@@ -161,13 +165,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           final nextPageKey = ++pageKey;
           _pagingController.appendPage(newItems, nextPageKey);
         }
-      } else {
+      } else if((!isInternetAvailable)&&loggedIn){
         showDialog(
           context: context,
           builder: (BuildContext context) => CommonAlertDialog(
             onCancel: () {
               Navigator.pop(context);
-            },
+            }, onSettings:
+            AppSettings.openWIFISettings,
           ),
         );
       }

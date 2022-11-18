@@ -227,6 +227,7 @@ class _NavBarPageState extends State<NavBarPage> {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+
       await versionCheck(context);});
     _currentPageName = widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;

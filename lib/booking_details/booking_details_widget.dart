@@ -64,7 +64,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
           onCancel: () {
             setState(() {});
             Navigator.pop(context);
-          },
+          }, onSettings: () {  },
         ),
       );
     }

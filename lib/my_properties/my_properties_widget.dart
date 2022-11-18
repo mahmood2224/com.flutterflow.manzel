@@ -85,7 +85,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
       bookedProperties = BookedPropertiesCall.result(
         bookedPropertiesApiResponse?.jsonBody,
       ).toList();
-    } else {
+    } else if((!(isInternetAvailable??false))&&loggedIn) {
       isLoading = false;
       setState(() {});
       bookedPropertiesApiResponse = null;
@@ -120,7 +120,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
       bookmarkedProperties = GetBookMarkedPropertiesCall.result(
         getBookMarkedPropertiesApiResponse?.jsonBody,
       ).toList();
-    } else {
+    } else if(loggedIn) {
       isLoading = false;
       setState(() {});
       getBookMarkedPropertiesApiResponse = null;
@@ -191,11 +191,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
           children: [
             if (!loggedIn)
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, height/2.8, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, height/3, 0,0 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                 // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
                       child: Padding(
@@ -361,6 +361,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     bookedPropertiesApiResponse?.statusCode ==
                                         200) {
                                   return ListView.builder(
+                                    shrinkWrap: true,
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
                                     itemCount: bookedProperties?.length ?? 0,
@@ -1430,6 +1431,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     (bookmarkedProperties?.isNotEmpty ??
                                         false)) {
                                   return ListView.builder(
+                                    shrinkWrap: true,
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
                                     itemCount: bookmarkedProperties?.length,

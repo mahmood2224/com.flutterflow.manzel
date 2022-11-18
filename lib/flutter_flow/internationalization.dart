@@ -2098,5 +2098,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Try again',
       'ar': 'حاول مرة أخرى',
     },
+    'settings': {
+      'en': 'Settings',
+      'ar': 'إعدادات',
+    },
   },
 ].reduce((a, b) => a..addAll(b));
