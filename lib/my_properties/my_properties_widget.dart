@@ -336,7 +336,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       ),
                                     ),
                                   );
-                                } else if (bookedProperties?.isEmpty ?? false) {
+                                }
+                                else if (bookedProperties?.isEmpty ?? false) {
                                   return Center(
                                     child: Container(
                                       width: MediaQuery.of(context).size.width,
@@ -356,7 +357,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       ),
                                     ),
                                   );
-                                } else if ((bookedProperties != null) &&
+                                }
+                                else if ((bookedProperties != null) &&
                                     (bookedProperties?.isNotEmpty ?? false) &&
                                     bookedPropertiesApiResponse?.statusCode ==
                                         200) {
@@ -1393,7 +1395,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       );
                                     },
                                   );
-                                } else if ((bookedPropertiesApiResponse
+                                }
+                                else if ((bookedPropertiesApiResponse
                                             ?.statusCode !=
                                         200) &&
                                     (bookedPropertiesApiResponse?.statusCode !=
