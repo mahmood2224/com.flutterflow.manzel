@@ -28,8 +28,11 @@ class FilterWidget extends StatefulWidget {
 
 class _FilterWidgetState extends State<FilterWidget> {
   ApiCallResponse? columnPropertiesResponse;
-  bool? isInternetAvailable;
   bool isPropertiesLoading = true;
+  ApiCallResponse? citiesListCityListResponse;
+  bool isCitiesLoading = true;
+  bool? isInternetAvailable;
+
   List<String>? isFurnishingValues;
   List<String>? propertyTypeListValues;
   String? citiesListValue;
@@ -38,6 +41,7 @@ class _FilterWidgetState extends State<FilterWidget> {
   SfRangeValues? installmentRange;
   double? mxRange;
   ApiCallResponse? response;
+  var alertCalled = 0;
 
   //= SfRangeValues(0, 2000000);
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -49,6 +53,7 @@ class _FilterWidgetState extends State<FilterWidget> {
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
     //installmentRange = SfRangeValues(start, end)
     propertiesCall();
+    cityListCall();
   }
 
   Future<void> propertiesCall() async {
@@ -65,10 +70,13 @@ class _FilterWidgetState extends State<FilterWidget> {
     else{
       isPropertiesLoading = false;
       setState(() {});
+      alertCalled++;
+      if (alertCalled <= 1)
       showDialog(
         context: context,
         builder: (BuildContext context) => CommonAlertDialog(
           onCancel: () {
+            alertCalled=0;
             Navigator.pop(context);
           },
         ),
@@ -78,21 +86,64 @@ class _FilterWidgetState extends State<FilterWidget> {
   }
 
 
-  void reset() {
-    setState(() {
-      print("Reset should work");
-      isFurnishingValues!.clear();
-      propertyTypeListValues!.clear();
-      if (FFAppState().locale == 'en') {
-        isFurnishingValues!.add("All");
-        propertyTypeListValues!.add("All");
-      } else {
-        isFurnishingValues!.add("الكل");
-        propertyTypeListValues!.add("الكل");
-      }
-      installmentRange = SfRangeValues(0,mxRange);
-      citiesListValue= null;
-    });
+  void reset() async{
+    isInternetAvailable = await isInternetConnected();
+    if (isInternetAvailable ?? false) {
+      setState(() {
+        print("Reset should work");
+        isFurnishingValues!.clear();
+        propertyTypeListValues!.clear();
+        if (FFAppState().locale == 'en') {
+          isFurnishingValues!.add("All");
+          propertyTypeListValues!.add("All");
+        } else {
+          isFurnishingValues!.add("الكل");
+          propertyTypeListValues!.add("الكل");
+        }
+        installmentRange = SfRangeValues(0,mxRange);
+        citiesListValue= null;
+      });
+    }else{
+      alertCalled++;
+      if (alertCalled <= 1)
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => CommonAlertDialog(
+            onCancel: () {
+              alertCalled=0;
+              Navigator.pop(context);
+            },
+          ),
+        );
+    }
+
+  }
+
+  Future<void> cityListCall() async {
+    isInternetAvailable = await isInternetConnected();
+    if (isInternetAvailable ?? false) {
+      citiesListCityListResponse = await CityListCall.call(
+        locale: FFAppState().locale,
+      );
+      isCitiesLoading = false;
+      setState(() {});
+    }
+    else{
+      isCitiesLoading = false;
+      setState(() {});
+      alertCalled++;
+      if (alertCalled <= 1)
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            alertCalled=0;
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
+
   }
 
   @override
@@ -104,7 +155,7 @@ class _FilterWidgetState extends State<FilterWidget> {
         automaticallyImplyLeading: false,
         leading: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(6, 18, 0, 0),
-          child: InkWell(
+          child:  InkWell(
             onTap: () async {
               logFirebaseEvent('FILTER_PAGE_Text_re50sdm2_ON_TAP');
               logFirebaseEvent('Text_Update-Local-State');
@@ -123,14 +174,31 @@ class _FilterWidgetState extends State<FilterWidget> {
                 functions.formattedDouble(
                     valueOrDefault<int>(
                       getJsonField(
-                        response!.jsonBody,
+                        columnPropertiesResponse!.jsonBody,
                         r'''$.meta.max_price''',
                       ),
                       1,
                     )),
                 1.0,
               );
-              reset();
+              isInternetAvailable = await isInternetConnected();
+              if(isInternetAvailable??false){
+                reset();
+              }
+              else{
+                alertCalled++;
+                if (alertCalled <= 1)
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => CommonAlertDialog(
+                      onCancel: () {
+                        alertCalled=0;
+                        Navigator.pop(context);
+                      },
+                    ),
+                  );
+              }
+
             },
             child: Text(
               FFLocalizations.of(context).getText(
@@ -238,13 +306,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                               child: Padding(
                                 padding:
                                 EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
-                                child: FutureBuilder<ApiCallResponse>(
-                                  future: CityListCall.call(
-                                    locale: FFAppState().locale,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
+                                child: Builder(
+                                  builder: (context) {
+                                    if (isCitiesLoading) {
                                       return Center(
                                         child: SizedBox(
                                           width: 50,
@@ -256,49 +320,62 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         ),
                                       );
                                     }
-                                    final citiesListCityListResponse =
-                                    snapshot.data!;
-                                    return FlutterFlowDropDown(
-                                      initialOption: citiesListValue ??
-                                          'Select city',
-                                      options: functions
-                                          .cityListBuilder(
-                                          (getJsonField(
-                                            citiesListCityListResponse
-                                                .jsonBody,
-                                            r'''$.cities''',
-                                          ) as List)
-                                              .map<String>(
-                                                  (s) => s.toString())
-                                              .toList(),
-                                          FFAppState().locale)
-                                          .toList(),
-                                      onChanged: (val) =>
-                                          setState(() => citiesListValue = val),
-                                      width: double.infinity,
-                                      height: 55,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
-                                      ),
-                                      hintText:
-                                      FFLocalizations.of(context).getText(
-                                        'le1j7gvf' /* Select City */,
-                                      ),
-                                      fillColor: Colors.white,
-                                      elevation: 2,
-                                      borderColor: Color(0xFFA5A5A5),
-                                      borderWidth: 1,
-                                      borderRadius: 8,
-                                      margin: EdgeInsetsDirectional.fromSTEB(
-                                          12, 4, 12, 4),
-                                      hidesUnderline: true,
-                                    );
+                                    else if ((citiesListCityListResponse != null) &&
+                                        citiesListCityListResponse?.statusCode ==
+                                            200){
+                                      return FlutterFlowDropDown(
+                                        initialOption: citiesListValue ??
+                                            'Select city',
+                                        options: functions
+                                            .cityListBuilder(
+                                            (getJsonField(
+                                              citiesListCityListResponse?.jsonBody,
+                                              r'''$.cities''',
+                                            ) as List)
+                                                .map<String>(
+                                                    (s) => s.toString())
+                                                .toList(),
+                                            FFAppState().locale)
+                                            .toList(),
+                                        onChanged: (val) =>
+                                            setState(() => citiesListValue = val),
+                                        width: double.infinity,
+                                        height: 55,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: false,
+                                        ),
+                                        hintText:
+                                        FFLocalizations.of(context).getText(
+                                          'le1j7gvf' /* Select City */,
+                                        ),
+                                        fillColor: Colors.white,
+                                        elevation: 2,
+                                        borderColor: Color(0xFFA5A5A5),
+                                        borderWidth: 1,
+                                        borderRadius: 8,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            12, 4, 12, 4),
+                                        hidesUnderline: true,
+                                      );
+                                    }
+                                    else if ((citiesListCityListResponse
+                                        ?.statusCode !=
+                                        200) &&
+                                        (citiesListCityListResponse?.statusCode !=
+                                            null)) {
+                                      return SomethingWentWrongWidget(
+                                        onTryAgain: (){
+                                        },
+                                      );
+                                    }
+                                    return SizedBox();
+
                                   },
                                 ),
                               ),
@@ -788,83 +865,100 @@ class _FilterWidgetState extends State<FilterWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(20, 80, 20, 10),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
-                            if (functions.validateInstallmentRange(
-                                double.parse(installmentRange!.start.toString()),
-                                double.parse(installmentRange!.end.toString()))) {
-                              logFirebaseEvent('apllyFilter_Navigate-To');
+                            isInternetAvailable = await isInternetConnected();
+                            if(isInternetAvailable??false){
+                              logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
+                              if (functions.validateInstallmentRange(
+                                  double.parse(installmentRange!.start.toString()),
+                                  double.parse(installmentRange!.end.toString()))) {
+                                logFirebaseEvent('apllyFilter_Navigate-To');
 
-                              context.pushNamed(
-                                'filterResults',
-                                queryParams: {
-                                  'homeScreenLength': serializeParam(
-                                      widget.homeScreenLength ?? 0,
-                                      ParamType.int),
-                                  'cityName': serializeParam(
-                                      citiesListValue ?? 'All', ParamType.String),
-                                  'minInstallment': serializeParam(
-                                      valueOrDefault<String>(
+                                context.pushNamed(
+                                  'filterResults',
+                                  queryParams: {
+                                    'homeScreenLength': serializeParam(
+                                        widget.homeScreenLength ?? 0,
+                                        ParamType.int),
+                                    'cityName': serializeParam(
+                                        citiesListValue ?? 'All', ParamType.String),
+                                    'minInstallment': serializeParam(
+                                        valueOrDefault<String>(
+                                          functions
+                                              .sliderToApi(double.parse(
+                                              installmentRange!.start
+                                                  .toString()))
+                                              .toString(),
+                                          '0',
+                                        ),
+                                        ParamType.String),
+                                    'maxInstallment': serializeParam(
                                         functions
                                             .sliderToApi(double.parse(
-                                            installmentRange!.start
-                                                .toString()))
+                                            installmentRange!.end.toString()))
                                             .toString(),
-                                        '0',
-                                      ),
-                                      ParamType.String),
-                                  'maxInstallment': serializeParam(
-                                      functions
-                                          .sliderToApi(double.parse(
-                                          installmentRange!.end.toString()))
-                                          .toString(),
-                                      ParamType.String),
-                                  'furnishingType': serializeParam(
-                                      functions.listToApiParameters(functions
-                                          .choicechipUnselected(
-                                          isFurnishingValues?.toList(),
-                                          FFAppState().locale)
-                                          .toList()),
-                                      ParamType.String),
-                                  'propertyType': serializeParam(
-                                      functions.listToApiParameters(functions
-                                          .choicechipUnselected(
-                                          propertyTypeListValues?.toList(),
-                                          FFAppState().locale)
-                                          .toList()),
-                                      ParamType.String),
-                                }.withoutNulls,
-                                extra: <String, dynamic>{
-                                  kTransitionInfoKey: TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType: PageTransitionType.fade,
-                                    duration: Duration(milliseconds: 0),
-                                  ),
-                                },
-                              );
-                            } else {
-                              logFirebaseEvent('apllyFilter_Show-Snack-Bar');
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    functions.snackBarMessage(
-                                        'invalidInstallmentRange',
-                                        FFAppState().locale),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText2
-                                        .override(
-                                      fontFamily: 'AvenirArabic',
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                      useGoogleFonts: false,
+                                        ParamType.String),
+                                    'furnishingType': serializeParam(
+                                        functions.listToApiParameters(functions
+                                            .choicechipUnselected(
+                                            isFurnishingValues?.toList(),
+                                            FFAppState().locale)
+                                            .toList()),
+                                        ParamType.String),
+                                    'propertyType': serializeParam(
+                                        functions.listToApiParameters(functions
+                                            .choicechipUnselected(
+                                            propertyTypeListValues?.toList(),
+                                            FFAppState().locale)
+                                            .toList()),
+                                        ParamType.String),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                      duration: Duration(milliseconds: 0),
                                     ),
+                                  },
+                                );
+                              }
+                              else {
+                                logFirebaseEvent('apllyFilter_Show-Snack-Bar');
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      functions.snackBarMessage(
+                                          'invalidInstallmentRange',
+                                          FFAppState().locale),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText2
+                                          .override(
+                                        fontFamily: 'AvenirArabic',
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                        useGoogleFonts: false,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                    FlutterFlowTheme.of(context).primaryRed,
                                   ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                  FlutterFlowTheme.of(context).primaryRed,
+                                );
+                              }
+                            }
+                            else{
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) => CommonAlertDialog(
+                                  onCancel: () {
+                                    alertCalled = 0;
+                                    setState(() {});
+                                    Navigator.pop(context);
+                                  },
                                 ),
                               );
                             }
+
                           },
                           text: FFLocalizations.of(context).getText(
                             'dgzjfbdt' /* Show  Properties */,

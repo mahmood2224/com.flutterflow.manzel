@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:manzel/backend/backend.dart';
 
 class NotificationsWidget extends StatefulWidget {
   const NotificationsWidget({Key? key}) : super(key: key);
@@ -20,13 +21,27 @@ class NotificationsWidget extends StatefulWidget {
 
 class _NotificationsWidgetState extends State<NotificationsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  List<NotificationsRecord>? notificationsListNotificationsRecordList;
+  Stream? queryNotifications;
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'Notifications'});
+    queryNotificationsFunction();
   }
+
+  Stream<void>? queryNotificationsFunction(){
+    queryNotifications = queryNotificationsRecord(
+    queryBuilder: (notificationsRecord) => notificationsRecord
+        .where('user_id', isEqualTo: currentUserReference)
+        .orderBy('created_at', descending: true),
+    );
+    notificationsListNotificationsRecordList = [];
+    return null;
+  }
+
 
   @override
   Widget build(BuildContext context) {

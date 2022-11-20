@@ -4,6 +4,7 @@ import 'package:chewie/chewie.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/edit_personall_info/edit_personall_info_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
@@ -18,9 +19,11 @@ import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
+import '../common_alert_dialog/common_alert_dialog.dart';
 import '../common_widgets/overlay.dart';
 import '../components/bank_details_bottom_sheet_widget.dart';
 import '../components/reservation_bottom_sheet_widget.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_static_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -59,7 +62,7 @@ class PropertyDetailsWidget extends StatefulWidget {
 
   final int? propertyId;
   final String? path;
-  final dynamic? jsonData;
+ final dynamic? jsonData;
 
   @override
   _PropertyDetailsWidgetState createState() => _PropertyDetailsWidgetState();
@@ -76,6 +79,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   Map<String, bool> fav = {};
   bool? bookMarkTapped;
   late ValueNotifier<bool> isLoading = ValueNotifier<bool>(true);
+  bool? isInternetAvailable;
+
 
   // VideoPlayerController? _currentController;
   // VideoPlayerController? videoPlayerController;
@@ -98,6 +103,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     }
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PropertyDetails'});
+    checkInternetStatus();
+  }
+  Future<void> checkInternetStatus() async {
+    isInternetAvailable = await isInternetConnected();
+    setState(() {});
   }
 
   watchRouteChange() {
@@ -115,16 +125,29 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   }
 
   Future<void> makeProeprtyApiCall() async {
-    isLoading.value = true;
-    //Future.delayed(Duration(seconds: 5));
-    final callResult = await PropertyCall.call(
-      propertyId: widget.propertyId,
-      locale: FFAppState().locale,
-    );
-    final callResultToJson = callResult.jsonBody['data'];
-    columnPropertyResponse = callResultToJson;
-    print("++++");
-    isLoading.value = false;
+    isInternetAvailable = await isInternetConnected();
+    if(isInternetAvailable??false){
+      isLoading.value = true;
+      //Future.delayed(Duration(seconds: 5));
+      final callResult = await PropertyCall.call(
+        propertyId: widget.propertyId,
+        locale: FFAppState().locale,
+      );
+      final callResultToJson = callResult.jsonBody['data'];
+      columnPropertyResponse = callResultToJson;
+      print("++++");
+      isLoading.value = false;
+    }else{
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
+setState((){});
   }
 
   // void enterFullScreen() {
@@ -204,6 +227,30 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+    //   appBar: isInternetAvailable??false?AppBar(
+    //     toolbarHeight: 2,
+    //   backgroundColor: Colors.white,
+    //   elevation: 0,
+    // ):AppBar(
+    //     backgroundColor: Colors.white,
+    //     elevation: 0,
+    //     leading: Padding(
+    //       padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 10),
+    //       child: FlutterFlowIconButton(
+    //         borderColor: Colors.transparent,
+    //         borderRadius: 30,
+    //         buttonSize: 48,
+    //         icon: Icon(
+    //           Manzel.clear,
+    //           color: FlutterFlowTheme.of(context).secondaryText,
+    //           size: 15,
+    //         ),
+    //         onPressed: () async {
+    //           Navigator.pop(context);
+    //         },
+    //       ),
+    //     ),
+    //   ),
       body: GestureDetector(
         // onTap: () => FocusScope.of(context).unfocus(),
         // child: FutureBuilder<ApiCallResponse>(
@@ -620,138 +667,151 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                           logFirebaseEvent(
                                                               'HOME_SCREEN_Container_jprwonvd_ON_TAP');
                                                           if (loggedIn) {
-                                                            fav[widget.propertyId
-                                                                        .toString()] ??
-                                                                    false
-                                                                ? fav[widget
-                                                                        .propertyId
-                                                                        .toString()] =
-                                                                    true
-                                                                : fav[widget
-                                                                    .propertyId
-                                                                    .toString()] = false;
-                                                            if (fav[widget
-                                                                    .propertyId
-                                                                    .toString()] ??
-                                                                false) {
-                                                              logFirebaseEvent(
-                                                                  'Container_Backend-Call');
-                                                              final bookmarkApiResponse =
-                                                                  await BookmarkPropertyCall
-                                                                      .call(
-                                                                userId:
-                                                                    currentUserUid,
-                                                                authorazationToken:
-                                                                    FFAppState()
-                                                                        .authToken,
-                                                                propertyId: widget
-                                                                    .propertyId
-                                                                    .toString(),
-                                                                version:
-                                                                    FFAppState()
-                                                                        .apiVersion,
-                                                              );
-                                                              if ((bookmarkApiResponse
-                                                                          .statusCode) ==
-                                                                  200) {
-                                                                fav.remove(widget
-                                                                    .propertyId
-                                                                    .toString());
+                                                            if(isInternetAvailable??false){
+                                                              fav[widget.propertyId
+                                                                  .toString()] ??
+                                                                  false
+                                                                  ? fav[widget
+                                                                  .propertyId
+                                                                  .toString()] =
+                                                              true
+                                                                  : fav[widget
+                                                                  .propertyId
+                                                                  .toString()] = false;
+                                                              if (fav[widget
+                                                                  .propertyId
+                                                                  .toString()] ??
+                                                                  false) {
+                                                                logFirebaseEvent(
+                                                                    'Container_Backend-Call');
+                                                                final bookmarkApiResponse =
+                                                                await BookmarkPropertyCall
+                                                                    .call(
+                                                                  userId:
+                                                                  currentUserUid,
+                                                                  authorazationToken:
+                                                                  FFAppState()
+                                                                      .authToken,
+                                                                  propertyId: widget
+                                                                      .propertyId
+                                                                      .toString(),
+                                                                  version:
+                                                                  FFAppState()
+                                                                      .apiVersion,
+                                                                );
+                                                                if ((bookmarkApiResponse
+                                                                    .statusCode) ==
+                                                                    200) {
+                                                                  fav.remove(widget
+                                                                      .propertyId
+                                                                      .toString());
+                                                                } else {
+                                                                  logFirebaseEvent(
+                                                                      'Icon_Show-Snack-Bar');
+                                                                  ScaffoldMessenger.of(
+                                                                      context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                      Text(
+                                                                        functions.snackBarMessage(
+                                                                            'error',
+                                                                            FFAppState()
+                                                                                .locale),
+                                                                        style:
+                                                                        TextStyle(
+                                                                          color: FlutterFlowTheme.of(context)
+                                                                              .white,
+                                                                          fontWeight:
+                                                                          FontWeight.bold,
+                                                                          fontSize:
+                                                                          16,
+                                                                          height:
+                                                                          2,
+                                                                        ),
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                          4000),
+                                                                      backgroundColor:
+                                                                      FlutterFlowTheme.of(context)
+                                                                          .primaryRed,
+                                                                    ),
+                                                                  );
+                                                                }
                                                               } else {
                                                                 logFirebaseEvent(
-                                                                    'Icon_Show-Snack-Bar');
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      functions.snackBarMessage(
-                                                                          'error',
-                                                                          FFAppState()
-                                                                              .locale),
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        fontSize:
-                                                                            16,
-                                                                        height:
-                                                                            2,
-                                                                      ),
-                                                                    ),
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            4000),
-                                                                    backgroundColor:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .primaryRed,
-                                                                  ),
+                                                                    'Container_Backend-Call');
+                                                                final bookmarkApiResponse =
+                                                                await BookmarkPropertyCall
+                                                                    .call(
+                                                                  userId:
+                                                                  currentUserUid,
+                                                                  authorazationToken:
+                                                                  FFAppState()
+                                                                      .authToken,
+                                                                  propertyId: widget
+                                                                      .propertyId
+                                                                      .toString(),
+                                                                  version:
+                                                                  FFAppState()
+                                                                      .apiVersion,
                                                                 );
-                                                              }
-                                                            } else {
-                                                              logFirebaseEvent(
-                                                                  'Container_Backend-Call');
-                                                              final bookmarkApiResponse =
-                                                                  await BookmarkPropertyCall
-                                                                      .call(
-                                                                userId:
-                                                                    currentUserUid,
-                                                                authorazationToken:
-                                                                    FFAppState()
-                                                                        .authToken,
-                                                                propertyId: widget
-                                                                    .propertyId
-                                                                    .toString(),
-                                                                version:
-                                                                    FFAppState()
-                                                                        .apiVersion,
-                                                              );
-                                                              if ((bookmarkApiResponse
-                                                                          .statusCode
-                                                              ) ==
-                                                                  200) {
-                                                                fav[widget
-                                                                    .propertyId
-                                                                    .toString()] = true;
-                                                              } else {
-                                                                logFirebaseEvent(
-                                                                    'Icon_Show-Snack-Bar');
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      functions.snackBarMessage(
-                                                                          'error',
-                                                                          FFAppState()
-                                                                              .locale),
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        fontSize:
-                                                                            16,
-                                                                        height:
-                                                                            2,
+                                                                if ((bookmarkApiResponse
+                                                                    .statusCode
+                                                                ) ==
+                                                                    200) {
+                                                                  fav[widget
+                                                                      .propertyId
+                                                                      .toString()] = true;
+                                                                } else {
+                                                                  logFirebaseEvent(
+                                                                      'Icon_Show-Snack-Bar');
+                                                                  ScaffoldMessenger.of(
+                                                                      context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                      Text(
+                                                                        functions.snackBarMessage(
+                                                                            'error',
+                                                                            FFAppState()
+                                                                                .locale),
+                                                                        style:
+                                                                        TextStyle(
+                                                                          color: FlutterFlowTheme.of(context)
+                                                                              .white,
+                                                                          fontWeight:
+                                                                          FontWeight.bold,
+                                                                          fontSize:
+                                                                          16,
+                                                                          height:
+                                                                          2,
+                                                                        ),
                                                                       ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                          4000),
+                                                                      backgroundColor:
+                                                                      FlutterFlowTheme.of(context)
+                                                                          .primaryRed,
                                                                     ),
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            4000),
-                                                                    backgroundColor:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .primaryRed,
-                                                                  ),
-                                                                );
+                                                                  );
+                                                                }
                                                               }
                                                             }
-                                                          } else {
+                                                            else{
+                                                              showDialog(
+                                                                context: context,
+                                                                builder: (BuildContext context) => CommonAlertDialog(
+                                                                  onCancel: () {
+                                                                    Navigator.pop(context);
+                                                                  },
+                                                                ),
+                                                              );
+                                                            }
+                                                          }
+                                                          else {
                                                             logFirebaseEvent(
                                                                 'Container_Navigate-To');
                                                             context.pushNamed(
@@ -1118,23 +1178,36 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         0),
                                                             child: InkWell(
                                                               onTap: () async {
-                                                                //_chewieController?.pause();
-                                                                logFirebaseEvent(
-                                                                    'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
-                                                                logFirebaseEvent(
-                                                                    'Container_Navigate-To');
-                                                                context
-                                                                    .pushNamed(
-                                                                  'ThreeSixtyView',
-                                                                  queryParams: {
-                                                                    'url': serializeParam(
-                                                                        getJsonField(
-                                                                          columnPropertyResponse,
-                                                                          r'''$.attributes.threesixty_degree_view''',
-                                                                        ).toString(),
-                                                                        ParamType.String),
-                                                                  }.withoutNulls,
-                                                                );
+                                                                if(isInternetAvailable??false){
+                                                                  //_chewieController?.pause();
+                                                                  logFirebaseEvent(
+                                                                      'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
+                                                                  logFirebaseEvent(
+                                                                      'Container_Navigate-To');
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'ThreeSixtyView',
+                                                                    queryParams: {
+                                                                      'url': serializeParam(
+                                                                          getJsonField(
+                                                                            columnPropertyResponse,
+                                                                            r'''$.attributes.threesixty_degree_view''',
+                                                                          ).toString(),
+                                                                          ParamType.String),
+                                                                    }.withoutNulls,
+                                                                  );
+                                                                }
+                                                                else{
+                                                                  showDialog(
+                                                                    context: context,
+                                                                    builder: (BuildContext context) => CommonAlertDialog(
+                                                                      onCancel: () {
+                                                                        Navigator.pop(context);
+                                                                      },
+                                                                    ),
+                                                                  );
+                                                                }
+
                                                               },
                                                               child: Container(
                                                                 width: 80,
@@ -1530,29 +1603,41 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     1, 0, 0, 0),
                                                         child: InkWell(
                                                           onTap: () async {
-                                                            logFirebaseEvent(
-                                                                'PROPERTY_DETAILS_Text_ytdaqx1p_ON_TAP');
-                                                            logFirebaseEvent(
-                                                                'Text_Launch-Map');
-                                                            await launchMap(
-                                                              mapType: $ml
-                                                                  .MapType
-                                                                  .google,
-                                                              location: functions
-                                                                  .propertyLocation(
-                                                                      PropertyCall
-                                                                          .propertyLat(
-                                                                        columnPropertyResponse,
-                                                                      ),
-                                                                      PropertyCall
-                                                                          .propertylng(
-                                                                        columnPropertyResponse,
-                                                                      )),
-                                                              title: PropertyCall
-                                                                  .propertyName(
-                                                                columnPropertyResponse,
-                                                              ).toString(),
-                                                            );
+                                                            if(isInternetAvailable??false){
+                                                              logFirebaseEvent(
+                                                                  'PROPERTY_DETAILS_Text_ytdaqx1p_ON_TAP');
+                                                              logFirebaseEvent(
+                                                                  'Text_Launch-Map');
+                                                              await launchMap(
+                                                                mapType: $ml
+                                                                    .MapType
+                                                                    .google,
+                                                                location: functions
+                                                                    .propertyLocation(
+                                                                    PropertyCall
+                                                                        .propertyLat(
+                                                                      columnPropertyResponse,
+                                                                    ),
+                                                                    PropertyCall
+                                                                        .propertylng(
+                                                                      columnPropertyResponse,
+                                                                    )),
+                                                                title: PropertyCall
+                                                                    .propertyName(
+                                                                  columnPropertyResponse,
+                                                                ).toString(),
+                                                              );
+                                                            }else{
+                                                              showDialog(
+                                                                context: context,
+                                                                builder: (BuildContext context) => CommonAlertDialog(
+                                                                  onCancel: () {
+                                                                    Navigator.pop(context);
+                                                                  },
+                                                                ),
+                                                              );
+                                                            }
+
                                                           },
                                                           child: Text(
                                                             FFLocalizations.of(
@@ -2698,56 +2783,70 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       children: [
                                                         FFButtonWidget(
                                                           onPressed: () async {
-                                                            final phoneNumber =
-                                                                getJsonField(
-                                                              columnPropertyResponse,
-                                                              r'''$.attributes.managed_by.data.attributes.Company_phone''',
-                                                            );
-                                                            print(
-                                                                ">>>>>>>>>>>>>>>>>>>>>>phone number = ${phoneNumber}");
-                                                            final message = '''
+                                                            if(isInternetAvailable??false){
+                                                              final phoneNumber =
+                                                              getJsonField(
+                                                                columnPropertyResponse,
+                                                                r'''$.attributes.managed_by.data.attributes.Company_phone''',
+                                                              );
+                                                              print(
+                                                                  ">>>>>>>>>>>>>>>>>>>>>>phone number = ${phoneNumber}");
+                                                              final message = '''
                                                         ${FFLocalizations.of(context).getText(
-                                                              'opening',
-                                                            )}
+                                                                'opening',
+                                                              )}
                                                          ${FFLocalizations.of(context).getText(
-                                                              'propertyName',
-                                                            )} : ${PropertyCall.propertyName(
-                                                              columnPropertyResponse,
-                                                            ).toString()}
+                                                                'propertyName',
+                                                              )} : ${PropertyCall.propertyName(
+                                                                columnPropertyResponse,
+                                                              ).toString()}
                                                         ${FFLocalizations.of(context).getText(
-                                                              'propertyRef',
-                                                            )} : ${PropertyCall.propertyRef(
-                                                              columnPropertyResponse,
-                                                            ).toString()}
+                                                                'propertyRef',
+                                                              )} : ${PropertyCall.propertyRef(
+                                                                columnPropertyResponse,
+                                                              ).toString()}
                                                        ${FFLocalizations.of(context).getText(
-                                                              'propertyAdd',
-                                                            )} : ${PropertyCall.propertyEntranceDirection(
-                                                              columnPropertyResponse,
-                                                            ).toString()}
+                                                                'propertyAdd',
+                                                              )} : ${PropertyCall.propertyEntranceDirection(
+                                                                columnPropertyResponse,
+                                                              ).toString()}
                                                             ${FFLocalizations.of(context).getText(
-                                                              'propertyLink',
-                                                            )} : ${await generateDynamicLink({
-                                                              'propertyId':
-                                                              widget.propertyId,
-                                                            },
-                                                                description:
-                                                                PropertyCall
-                                                                    .propertyName(
-                                                                  columnPropertyResponse,
-                                                                ).toString(),
-                                                                thumbnailUrl: PropertyCall
-                                                                    .thumbnailImage(
-                                                                    columnPropertyResponse))}
+                                                                'propertyLink',
+                                                              )} : ${await generateDynamicLink({
+                                                                'propertyId':
+                                                                widget.propertyId,
+                                                              },
+                                                                  description:
+                                                                  PropertyCall
+                                                                      .propertyName(
+                                                                    columnPropertyResponse,
+                                                                  ).toString(),
+                                                                  thumbnailUrl: PropertyCall
+                                                                      .thumbnailImage(
+                                                                      columnPropertyResponse))}
                                                         ''';
-                                                            openWhatsapp(
-                                                                context,
-                                                                message,
-                                                                phoneNumber);
+                                                              openWhatsapp(
+                                                                  context,
+                                                                  message,
+                                                                  phoneNumber);
+
+                                                            }
+                                                            else{
+                                                              showDialog(
+                                                                context: context,
+                                                                builder: (BuildContext context) => CommonAlertDialog(
+                                                                  onCancel: () {
+                                                                    Navigator.pop(context);
+                                                                  },
+                                                                ),
+                                                              );
+                                                            }
+
                                                           },
                                                           text: FFLocalizations
                                                                   .of(context)
                                                               .getText(
-                                                            'requestVisit' /* Logout */,
+                                                            'requestVisit' /* Request Visit */,
                                                           ),
                                                           options:
                                                               FFButtonOptions(
