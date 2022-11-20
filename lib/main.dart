@@ -21,7 +21,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 import 'backend/push_notifications/push_notifications_util.dart';
+import 'common_alert_dialog/common_alert_dialog.dart';
 import 'enviorment/env_variables.dart';
+import 'flutter_flow/custom_functions.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
@@ -227,8 +229,23 @@ class _NavBarPageState extends State<NavBarPage> {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+bool isInternetAvailable = await isInternetConnected();
+if(isInternetAvailable){
+  await versionCheck(context);
 
-      await versionCheck(context);});
+}
+else{
+  showDialog(
+    context: context,
+    builder: (BuildContext context) => CommonAlertDialog(
+      onCancel: () {
+        Navigator.pop(context);
+      },
+    ),
+  );
+}
+
+    });
     _currentPageName = widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
   }

@@ -1831,8 +1831,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                       ?.statusCode ??
                                                                   200) ==
                                                               200) {
+                                                            getBookMarkedPropertiesCall();
                                                             logFirebaseEvent(
                                                                 'Icon_Show-Snack-Bar');
+                                                            isInternetAvailable = await isInternetConnected();
+                                                            if(isInternetAvailable??false)
                                                             ScaffoldMessenger
                                                                     .of(context)
                                                                 .showSnackBar(

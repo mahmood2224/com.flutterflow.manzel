@@ -155,7 +155,7 @@ class _FilterWidgetState extends State<FilterWidget> {
         automaticallyImplyLeading: false,
         leading: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(6, 18, 0, 0),
-          child:  InkWell(
+          child:  (citiesListCityListResponse!=null)?InkWell(
             onTap: () async {
               logFirebaseEvent('FILTER_PAGE_Text_re50sdm2_ON_TAP');
               logFirebaseEvent('Text_Update-Local-State');
@@ -213,7 +213,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                     useGoogleFonts: false,
                   ),
             ),
-          ),
+          ):SizedBox(),
         ),
         title: Text(
           FFLocalizations.of(context).getText(
@@ -866,7 +866,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             isInternetAvailable = await isInternetConnected();
-                            if(isInternetAvailable??false){
+                            if(true??false){
                               logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
                               if (functions.validateInstallmentRange(
                                   double.parse(installmentRange!.start.toString()),
