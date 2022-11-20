@@ -646,7 +646,8 @@ setState((){});
                                                           logFirebaseEvent(
                                                               'HOME_SCREEN_Container_jprwonvd_ON_TAP');
                                                           if (loggedIn) {
-                                                            if(isInternetAvailable??false){
+                                                            bool isInternetAvailable = await isInternetConnected();
+                                                            if(isInternetAvailable){
                                                               fav[widget.propertyId
                                                                   .toString()] ??
                                                                   false

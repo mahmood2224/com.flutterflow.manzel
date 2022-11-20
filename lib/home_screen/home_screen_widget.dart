@@ -138,9 +138,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      callBookmarkListApi();
       bool isInternetAvailable = await isInternetConnected();
       if (isInternetAvailable) {
+        callBookmarkListApi();
         final apiResponse = await PropertiesCall.call(
           // city: FFAppState().filterCity,
           // furnishingType: FFAppState().filterFurnishingType,
@@ -165,14 +165,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           final nextPageKey = ++pageKey;
           _pagingController.appendPage(newItems, nextPageKey);
         }
-      } else if((!isInternetAvailable)&&loggedIn){
+      } else{
         showDialog(
           context: context,
           builder: (BuildContext context) => CommonAlertDialog(
             onCancel: () {
               Navigator.pop(context);
-            }, onSettings:
-            AppSettings.openWIFISettings,
+            },
           ),
         );
       }

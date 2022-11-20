@@ -232,17 +232,6 @@ class _NavBarPageState extends State<NavBarPage> {
 bool isInternetAvailable = await isInternetConnected();
 if(isInternetAvailable){
   await versionCheck(context);
-
-}
-else{
-  showDialog(
-    context: context,
-    builder: (BuildContext context) => CommonAlertDialog(
-      onCancel: () {
-        Navigator.pop(context);
-      },
-    ),
-  );
 }
 
     });

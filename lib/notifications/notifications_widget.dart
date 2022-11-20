@@ -2,7 +2,9 @@ import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../common_alert_dialog/common_alert_dialog.dart';
 import '../components/no_result_widget.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -157,7 +159,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                 );
                               } else {
                                 logFirebaseEvent('Container_Navigate-To');
-
                                 context.pushNamed(
                                   'BookingDetails',
                                   queryParams: {
@@ -176,9 +177,23 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                   createNotificationsRecordData(
                                 isRead: 1,
                               );
-                              await notificationsListNotificationsRecord
-                                  .reference
-                                  .update(notificationsUpdateData);
+                              bool isInternetAvailable = await isInternetConnected();
+                              if(isInternetAvailable){
+                                await notificationsListNotificationsRecord
+                                    .reference
+                                    .update(notificationsUpdateData);
+                              }
+                              else{
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => CommonAlertDialog(
+                                    onCancel: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                );
+                              }
+
                             },
                             child: Container(
                               width: 100,

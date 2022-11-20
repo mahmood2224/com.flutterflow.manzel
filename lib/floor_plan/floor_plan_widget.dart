@@ -37,6 +37,7 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'FloorPlan'});
     propertyCall();
   }
+
   Future<void> propertyCall() async {
     isInternetAvailable = await isInternetConnected();
     if(isInternetAvailable??false){

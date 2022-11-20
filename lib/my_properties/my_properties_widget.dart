@@ -1277,74 +1277,87 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                   ? FFButtonWidget(
                                                                       onPressed:
                                                                           () async {
-                                                                        var addOrderApiResponse =
-                                                                      await AddOrderCall.call(
-                                                                          propertyId:getJsonField(
-                                                                            bookedPropertiesItem,
-                                                                            r'''$.property_id''',
-                                                                          ).toString(),
-                                                                          userId:
-                                                                          currentUserReference
-                                                                              ?.id,
-                                                                          authorazationToken:
-                                                                          FFAppState()
-                                                                              .authToken,
-                                                                          version: FFAppState()
-                                                                              .apiVersion);
-
-                                                                       if ((addOrderApiResponse
-                                                                           ?.statusCode ??
-                                                                           398) ==
-                                                                           398){
-                                                                         Navigator.push(
-                                                                           context,
-                                                                           MaterialPageRoute(
-                                                                             builder: (context) =>
-                                                                                 ConfirmationWidget(
-                                                                                     orderId:getJsonField(
-                                                                                       bookedPropertiesItem,
-                                                                                       r'''$.order_id''',
-                                                                                     ).toString(),
-                                                                                     transactionCase:'SUCCESS',
-                                                                                 ),
-                                                                           ),
-                                                                         );
-                                                                     }
-                                                                      else{await configurePaymentSdk();
-                                                                        await showModalBottomSheet(
-                                                                          isScrollControlled:
-                                                                              true,
-                                                                          backgroundColor:
-                                                                              FlutterFlowTheme.of(context).white,
-                                                                          context:
+                                                                        bool isInternetAvailable = await isInternetConnected();
+                                                                        if(isInternetAvailable){
+                                                                          var addOrderApiResponse =
+                                                                          await AddOrderCall.call(
+                                                                              propertyId:getJsonField(
+                                                                                bookedPropertiesItem,
+                                                                                r'''$.property_id''',
+                                                                              ).toString(),
+                                                                              userId:
+                                                                              currentUserReference
+                                                                                  ?.id,
+                                                                              authorazationToken:
+                                                                              FFAppState()
+                                                                                  .authToken,
+                                                                              version: FFAppState()
+                                                                                  .apiVersion);
+                                                                          if ((addOrderApiResponse
+                                                                              ?.statusCode ??
+                                                                              398) ==
+                                                                              398){
+                                                                            Navigator.push(
                                                                               context,
-                                                                          builder:
-                                                                              (context) {
-                                                                            return Padding(
-                                                                              padding: MediaQuery.of(context).viewInsets,
-                                                                              child: Container(
-                                                                                height: MediaQuery.of(context).size.height * 0.89,
-                                                                                child: ReservationBottomSheetWidget(
-                                                                                  reservationCost: getJsonField(
-                                                                                    bookedPropertiesItem,
-                                                                                    r'''$.reservation_amount''',
-                                                                                  ),
-                                                                                  propertyId: functions.bookinPagePropertyIdToInt(getJsonField(
-                                                                                    bookedPropertiesItem,
-                                                                                    r'''$.property_id''',
-                                                                                  ).toString()),
-                                                                                  orderId: getJsonField(
-                                                                                    bookedPropertiesItem,
-                                                                                    r'''$.order_id''',
-                                                                                  ),
-                                                                                ),
+                                                                              MaterialPageRoute(
+                                                                                builder: (context) =>
+                                                                                    ConfirmationWidget(
+                                                                                      orderId:getJsonField(
+                                                                                        bookedPropertiesItem,
+                                                                                        r'''$.order_id''',
+                                                                                      ).toString(),
+                                                                                      transactionCase:'SUCCESS',
+                                                                                    ),
                                                                               ),
                                                                             );
-                                                                          },
-                                                                        ).then((value) =>
-                                                                            setState(() {}));
+                                                                          }
+                                                                          else{await configurePaymentSdk();
+                                                                          await showModalBottomSheet(
+                                                                            isScrollControlled:
+                                                                            true,
+                                                                            backgroundColor:
+                                                                            FlutterFlowTheme.of(context).white,
+                                                                            context:
+                                                                            context,
+                                                                            builder:
+                                                                                (context) {
+                                                                              return Padding(
+                                                                                padding: MediaQuery.of(context).viewInsets,
+                                                                                child: Container(
+                                                                                  height: MediaQuery.of(context).size.height * 0.89,
+                                                                                  child: ReservationBottomSheetWidget(
+                                                                                    reservationCost: getJsonField(
+                                                                                      bookedPropertiesItem,
+                                                                                      r'''$.reservation_amount''',
+                                                                                    ),
+                                                                                    propertyId: functions.bookinPagePropertyIdToInt(getJsonField(
+                                                                                      bookedPropertiesItem,
+                                                                                      r'''$.property_id''',
+                                                                                    ).toString()),
+                                                                                    orderId: getJsonField(
+                                                                                      bookedPropertiesItem,
+                                                                                      r'''$.order_id''',
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              );
+                                                                            },
+                                                                          ).then((value) =>
+                                                                              setState(() {}));
 
-                                                                       }
+                                                                          }
+                                                                        }else
+                                                                        {
+                                                                          showDialog(
+                                                                            context: context,
+                                                                            builder: (BuildContext context) => CommonAlertDialog(
+                                                                              onCancel: () {
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                            ),
+                                                                          );
+                                                                        }
+
                                                                       },
                                                                       text: FFLocalizations.of(
                                                                               context)
