@@ -1,6 +1,9 @@
 import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../backend/api_requests/api_calls.dart';
+import '../common_alert_dialog/common_alert_dialog.dart';
+import '../components/something_went_wrong_widget.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -23,11 +26,39 @@ class FloorPlanWidget extends StatefulWidget {
 
 class _FloorPlanWidgetState extends State<FloorPlanWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  ApiCallResponse? columnPropertyResponse;
+  bool? isInternetAvailable;
+  bool isLoading = true;
+
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'FloorPlan'});
+    propertyCall();
+  }
+
+  Future<void> propertyCall() async {
+    isInternetAvailable = await isInternetConnected();
+    if(isInternetAvailable??false){
+      columnPropertyResponse = await PropertyCall.call(
+        propertyId: widget.propertyId,
+        locale: FFAppState().locale,
+      );
+      isLoading=false;
+      setState(() {});
+    }else{
+      isLoading=false;
+      setState(() {});
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
   }
 
   @override
@@ -71,14 +102,10 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: FutureBuilder<ApiCallResponse>(
-            future: PropertyCall.call(
-              propertyId: widget.propertyId,
-              locale: FFAppState().locale,
-            ),
-            builder: (context, snapshot) {
+          child: Builder(
+            builder: (context) {
               // Customize what your widget looks like when it's loading.
-              if (!snapshot.hasData) {
+              if (isLoading) {
                 return Center(
                   child: SizedBox(
                     width: 50,
@@ -90,61 +117,76 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
                   ),
                 );
               }
-              final columnPropertyResponse = snapshot.data!;
-              return SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 30, 20, 30),
-                      child: InkWell(
-                        onTap: () async {
-                          logFirebaseEvent(
-                              'FLOOR_PLAN_PAGE_Image_762wwk00_ON_TAP');
-                          logFirebaseEvent('Image_Expand-Image');
-                          await Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.fade,
-                              child: FlutterFlowExpandedImageView(
-                                image: Image.network(
-                                  getJsonField(
-                                    columnPropertyResponse.jsonBody,
-                                    r'''$.data.attributes.property_floor_plan.data.attributes.formats.medium.url''',
+              else if(columnPropertyResponse!=null&&columnPropertyResponse?.statusCode==200){
+                return SomethingWentWrongWidget(
+                  onTryAgain: (){
+                  },
+                );
+                return SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 30, 20, 30),
+                        child: InkWell(
+                          onTap: () async {
+                            logFirebaseEvent(
+                                'FLOOR_PLAN_PAGE_Image_762wwk00_ON_TAP');
+                            logFirebaseEvent('Image_Expand-Image');
+                            await Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                child: FlutterFlowExpandedImageView(
+                                  image: Image.network(
+                                    getJsonField(
+                                      columnPropertyResponse?.jsonBody,
+                                      r'''$.data.attributes.property_floor_plan.data.attributes.formats.medium.url''',
+                                    ),
+                                    fit: BoxFit.contain,
                                   ),
-                                  fit: BoxFit.contain,
+                                  allowRotation: false,
+                                  tag: getJsonField(
+                                    columnPropertyResponse?.jsonBody,
+                                    r'''$.data.attributes.property_floor_plan.data.attributes.url''',
+                                  ),
+                                  useHeroAnimation: true,
                                 ),
-                                allowRotation: false,
-                                tag: getJsonField(
-                                  columnPropertyResponse.jsonBody,
-                                  r'''$.data.attributes.property_floor_plan.data.attributes.url''',
-                                ),
-                                useHeroAnimation: true,
                               ),
-                            ),
-                          );
-                        },
-                        child: Hero(
-                          tag: getJsonField(
-                            columnPropertyResponse.jsonBody,
-                            r'''$.data.attributes.property_floor_plan.data.attributes.url''',
-                          ),
-                          transitionOnUserGestures: true,
-                          child: Image.network(
-                            getJsonField(
-                              columnPropertyResponse.jsonBody,
+                            );
+                          },
+                          child: Hero(
+                            tag: getJsonField(
+                              columnPropertyResponse?.jsonBody,
                               r'''$.data.attributes.property_floor_plan.data.attributes.url''',
                             ),
-                            width: double.infinity,
-                            height: 500,
-                            fit: BoxFit.cover,
+                            transitionOnUserGestures: true,
+                            child: Image.network(
+                              getJsonField(
+                                columnPropertyResponse?.jsonBody,
+                                r'''$.data.attributes.property_floor_plan.data.attributes.url''',
+                              ),
+                              width: double.infinity,
+                              height: 500,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              );
+                    ],
+                  ),
+                );
+              }
+              else if ((columnPropertyResponse?.statusCode !=
+                  200) &&
+                  (columnPropertyResponse?.statusCode !=
+                      null)){
+                return SomethingWentWrongWidget(
+                  onTryAgain: (){
+                  },
+                );
+              }
+              return SizedBox();
             },
           ),
         ),

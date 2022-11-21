@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/backend.dart';
+import '../common_alert_dialog/common_alert_dialog.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -200,90 +202,119 @@ class _HelpAndSupportBottomSheetWidgetState
                         'HELP_AND_SUPPORT_BOTTOM_SHEET_Container_');
                     Function() _navigate = () {};
                     if (FFAppState().locale == 'en') {
-                      logFirebaseEvent('Container_Alert-Dialog');
-                      var confirmDialogResponse = await showDialog<bool>(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('Delete Account '),
-                                content: Text(
-                                    'Your account deletion will be processed soon'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () => Navigator.pop(
-                                        alertDialogContext, false),
-                                    child: Text('Cancel'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext, true),
-                                    child: Text('Confirm'),
-                                  ),
-                                ],
-                              );
-                            },
-                          ) ??
-                          false;
-                      if (confirmDialogResponse) {
-                        logFirebaseEvent('Container_Backend-Call');
+                      bool isInternetAvailable = await isInternetConnected();
+                      if(isInternetAvailable){
+                        logFirebaseEvent('Container_Alert-Dialog');
+                        var confirmDialogResponse = await showDialog<bool>(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('Delete Account '),
+                              content: Text(
+                                  'Your account deletion will be processed soon'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(
+                                      alertDialogContext, false),
+                                  child: Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('Confirm'),
+                                ),
+                              ],
+                            );
+                          },
+                        ) ??
+                            false;
 
-                        final userUpdateData = createUserRecordData(
-                          isDeleted: 1,
-                        );
-                        await currentUserReference!.update(userUpdateData);
-                        logFirebaseEvent('Container_Auth');
-                        GoRouter.of(context).prepareAuthEvent();
-                        await signOut();
-                        _navigate = () =>
-                            context.goNamedAuth('OnboardingView', mounted);
-                      } else {
-                        logFirebaseEvent('Container_Wait-Delay');
-                        await Future.delayed(const Duration(milliseconds: 100));
-                        logFirebaseEvent('Container_Bottom-Sheet');
-                        Navigator.pop(context);
+                        if (confirmDialogResponse) {
+                          logFirebaseEvent('Container_Backend-Call');
+                          final userUpdateData = createUserRecordData(
+                            isDeleted: 1,
+                          );
+                          await currentUserReference!.update(userUpdateData);
+                          logFirebaseEvent('Container_Auth');
+                          GoRouter.of(context).prepareAuthEvent();
+                          await signOut();
+                          _navigate = () =>
+                              context.goNamedAuth('OnboardingView', mounted);
+
+                        } else {
+                          logFirebaseEvent('Container_Wait-Delay');
+                          await Future.delayed(const Duration(milliseconds: 100));
+                          logFirebaseEvent('Container_Bottom-Sheet');
+                          Navigator.pop(context);
+                        }
                       }
+                      else{
+                        showDialog(
+                        context: context,
+                        builder: (BuildContext context) => CommonAlertDialog(
+                          onCancel: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      );
+                      }
+
                     } else {
                       logFirebaseEvent('Container_Alert-Dialog');
-                      var confirmDialogResponse = await showDialog<bool>(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('حذف حسابي'),
-                                content: Text('سيتم معالجة حذف حسابك قريبًا'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () => Navigator.pop(
-                                        alertDialogContext, false),
-                                    child: Text('إلغاء'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext, true),
-                                    child: Text('تأكيد'),
-                                  ),
-                                ],
-                              );
-                            },
-                          ) ??
-                          false;
-                      if (confirmDialogResponse) {
-                        logFirebaseEvent('Container_Backend-Call');
+                      bool isInternetAvailable = await isInternetConnected();
+                      if(isInternetAvailable){
+                        var confirmDialogResponse = await showDialog<bool>(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text('حذف حسابي'),
+                              content: Text('سيتم معالجة حذف حسابك قريبًا'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(
+                                      alertDialogContext, false),
+                                  child: Text('إلغاء'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('تأكيد'),
+                                ),
+                              ],
+                            );
+                          },
+                        ) ??
+                            false;
+                        if (confirmDialogResponse) {
+                          logFirebaseEvent('Container_Backend-Call');
 
-                        final userUpdateData = createUserRecordData(
-                          isDeleted: 1,
-                        );
-                        await currentUserReference!.update(userUpdateData);
-                        logFirebaseEvent('Container_Auth');
-                        GoRouter.of(context).prepareAuthEvent();
-                        await signOut();
-                        _navigate = () =>
-                            context.goNamedAuth('OnboardingView', mounted);
-                      } else {
-                        logFirebaseEvent('Container_Wait-Delay');
-                        await Future.delayed(const Duration(milliseconds: 100));
-                        logFirebaseEvent('Container_Bottom-Sheet');
-                        Navigator.pop(context);
+                          final userUpdateData = createUserRecordData(
+                            isDeleted: 1,
+                          );
+                          await currentUserReference!.update(userUpdateData);
+                          logFirebaseEvent('Container_Auth');
+                          GoRouter.of(context).prepareAuthEvent();
+                          await signOut();
+                          _navigate = () =>
+                              context.goNamedAuth('OnboardingView', mounted);
+                        } else {
+                          logFirebaseEvent('Container_Wait-Delay');
+                          await Future.delayed(const Duration(milliseconds: 100));
+                          logFirebaseEvent('Container_Bottom-Sheet');
+                          Navigator.pop(context);
+                        }
                       }
+                      else{
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => CommonAlertDialog(
+                            onCancel: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        );
+                      }
+
                     }
 
                     _navigate();

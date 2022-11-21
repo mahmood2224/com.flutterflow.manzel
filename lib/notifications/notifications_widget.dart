@@ -2,7 +2,9 @@ import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../common_alert_dialog/common_alert_dialog.dart';
 import '../components/no_result_widget.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -10,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:manzel/backend/backend.dart';
 
 class NotificationsWidget extends StatefulWidget {
   const NotificationsWidget({Key? key}) : super(key: key);
@@ -20,13 +23,27 @@ class NotificationsWidget extends StatefulWidget {
 
 class _NotificationsWidgetState extends State<NotificationsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  List<NotificationsRecord>? notificationsListNotificationsRecordList;
+  Stream? queryNotifications;
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'Notifications'});
+    queryNotificationsFunction();
   }
+
+  Stream<void>? queryNotificationsFunction(){
+    queryNotifications = queryNotificationsRecord(
+    queryBuilder: (notificationsRecord) => notificationsRecord
+        .where('user_id', isEqualTo: currentUserReference)
+        .orderBy('created_at', descending: true),
+    );
+    notificationsListNotificationsRecordList = [];
+    return null;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +159,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                 );
                               } else {
                                 logFirebaseEvent('Container_Navigate-To');
-
                                 context.pushNamed(
                                   'BookingDetails',
                                   queryParams: {
@@ -161,9 +177,23 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                   createNotificationsRecordData(
                                 isRead: 1,
                               );
-                              await notificationsListNotificationsRecord
-                                  .reference
-                                  .update(notificationsUpdateData);
+                              bool isInternetAvailable = await isInternetConnected();
+                              if(isInternetAvailable){
+                                await notificationsListNotificationsRecord
+                                    .reference
+                                    .update(notificationsUpdateData);
+                              }
+                              else{
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => CommonAlertDialog(
+                                    onCancel: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                );
+                              }
+
                             },
                             child: Container(
                               width: 100,
