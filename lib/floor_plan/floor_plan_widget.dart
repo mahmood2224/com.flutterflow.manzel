@@ -2,7 +2,6 @@ import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
-import '../components/something_went_wrong_widget.dart';
 import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -117,11 +116,6 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
                   ),
                 );
               }
-              else if(columnPropertyResponse!=null&&columnPropertyResponse?.statusCode==200){
-                return SomethingWentWrongWidget(
-                  onTryAgain: (){
-                  },
-                );
                 return SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -176,16 +170,6 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
                     ],
                   ),
                 );
-              }
-              else if ((columnPropertyResponse?.statusCode !=
-                  200) &&
-                  (columnPropertyResponse?.statusCode !=
-                      null)){
-                return SomethingWentWrongWidget(
-                  onTryAgain: (){
-                  },
-                );
-              }
               return SizedBox();
             },
           ),

@@ -3,7 +3,6 @@ import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_result_widget.dart';
-import '../components/something_went_wrong_widget.dart';
 import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -409,13 +408,6 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                                 );
                               },
                             );
-                          },
-                        );
-                      } else if (listViewSearchPageCitiesResponse?.statusCode !=
-                              null &&
-                          listViewSearchPageCitiesResponse != null) {
-                        return SomethingWentWrongWidget(
-                          onTryAgain: () {
                           },
                         );
                       }

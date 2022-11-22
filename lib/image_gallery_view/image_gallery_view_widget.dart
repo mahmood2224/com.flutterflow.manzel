@@ -3,7 +3,6 @@ import 'package:manzel/auth/firebase_user_provider.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/zoom_image/zoom_image_widget.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
-import '../components/something_went_wrong_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/custom_functions.dart';

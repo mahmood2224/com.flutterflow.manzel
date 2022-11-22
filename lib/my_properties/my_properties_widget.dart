@@ -2,7 +2,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
-import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
 import 'package:manzel/confirmation/confirmation_widget.dart';
 import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
@@ -1406,16 +1405,6 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                           ),
                                         ),
                                       );
-                                    },
-                                  );
-                                }
-                                else if ((bookedPropertiesApiResponse
-                                            ?.statusCode !=
-                                        200) &&
-                                    (bookedPropertiesApiResponse?.statusCode !=
-                                        null)) {
-                                  return SomethingWentWrongWidget(
-                                    onTryAgain: (){
                                     },
                                   );
                                 }

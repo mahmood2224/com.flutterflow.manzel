@@ -5,7 +5,6 @@ import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
 import '../components/no_result_widget.dart';
-import '../components/something_went_wrong_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -1412,16 +1411,6 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                               );
                             },
                           ),
-                        );
-                      }
-                      else if ((apiRequest
-                          ?.statusCode !=
-                          200) &&
-                          (apiRequest?.statusCode !=
-                              null)) {
-                        return SomethingWentWrongWidget(
-                          onTryAgain: (){
-                          },
                         );
                       }
                       return SizedBox();

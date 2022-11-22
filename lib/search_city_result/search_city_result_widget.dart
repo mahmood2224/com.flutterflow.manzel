@@ -6,7 +6,6 @@ import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
 import '../components/no_results_found_widget.dart';
-import '../components/something_went_wrong_widget.dart';
 import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -1672,16 +1671,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                 );
                               },
                             );
-                          },
-                        );
-                      }
-                      else if ((listViewPropertiesResponse
-                          ?.statusCode !=
-                          200) &&
-                          (listViewPropertiesResponse?.statusCode !=
-                              null)) {
-                        return SomethingWentWrongWidget(
-                          onTryAgain: (){
                           },
                         );
                       }
