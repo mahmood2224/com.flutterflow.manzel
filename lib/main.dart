@@ -21,7 +21,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 import 'backend/push_notifications/push_notifications_util.dart';
+import 'common_alert_dialog/common_alert_dialog.dart';
 import 'enviorment/env_variables.dart';
+import 'flutter_flow/custom_functions.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
@@ -44,7 +46,7 @@ void main() async {
     FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+ // await Firebase.initializeApp();
   await EnvVariables.instance.initialise();
   //await printBuildNumber();
   Eraser.resetBadgeCountButKeepNotificationsInCenter();
@@ -227,7 +229,12 @@ class _NavBarPageState extends State<NavBarPage> {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await versionCheck(context);});
+bool isInternetAvailable = await isInternetConnected();
+if(isInternetAvailable){
+  await versionCheck(context);
+}
+
+    });
     _currentPageName = widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
   }
@@ -312,6 +319,7 @@ class _NavBarPageState extends State<NavBarPage> {
     // Future.delayed(Duration(milliseconds: 100));
     PackageInfo info = await PackageInfo.fromPlatform();
     final appPackageName = info.packageName;
+
     RemoteConfig remoteConfig = await RemoteConfig.instance;
     await remoteConfig.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: const Duration(seconds: 5),

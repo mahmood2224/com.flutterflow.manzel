@@ -2,14 +2,15 @@ import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../common_alert_dialog/common_alert_dialog.dart';
 import '../components/no_result_widget.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:manzel/backend/backend.dart';
 
 class NotificationsWidget extends StatefulWidget {
   const NotificationsWidget({Key? key}) : super(key: key);
@@ -20,12 +21,37 @@ class NotificationsWidget extends StatefulWidget {
 
 class _NotificationsWidgetState extends State<NotificationsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  List<NotificationsRecord>? notificationsListNotificationsRecordList;
+  Stream? queryNotifications;
+  bool? isInternetAvailable;
+  bool isPageLoading = false;
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'Notifications'});
+    checkInternetStatus();
+  }
+
+  Future<void> checkInternetStatus() async {
+    isInternetAvailable = await isInternetConnected();
+    if((isInternetAvailable??false)){
+      isPageLoading=true;
+      setState((){});
+    }
+    else{
+      isPageLoading=false;
+      setState((){});
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
   }
 
   @override
@@ -40,12 +66,12 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
             'nm3bcvix' /* Notifications */,
           ),
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'AvenirArabic',
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                useGoogleFonts: false,
-              ),
+            fontFamily: 'AvenirArabic',
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            useGoogleFonts: false,
+          ),
         ),
         actions: [
           Padding(
@@ -77,7 +103,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: StreamBuilder<List<NotificationsRecord>>(
+                  child: isPageLoading?StreamBuilder<List<NotificationsRecord>>(
                     stream: queryNotificationsRecord(
                       queryBuilder: (notificationsRecord) => notificationsRecord
                           .where('user_id', isEqualTo: currentUserReference)
@@ -98,8 +124,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                         );
                       }
                       List<NotificationsRecord>
-                          notificationsListNotificationsRecordList =
-                          snapshot.data!;
+                      notificationsListNotificationsRecordList =
+                      snapshot.data!;
                       if (notificationsListNotificationsRecordList.isEmpty) {
                         return Center(
                           child: Container(
@@ -117,17 +143,17 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                         padding: EdgeInsets.zero,
                         scrollDirection: Axis.vertical,
                         itemCount:
-                            notificationsListNotificationsRecordList.length,
+                        notificationsListNotificationsRecordList.length,
                         itemBuilder: (context, notificationsListIndex) {
                           final notificationsListNotificationsRecord =
-                              notificationsListNotificationsRecordList[
-                                  notificationsListIndex];
+                          notificationsListNotificationsRecordList[
+                          notificationsListIndex];
                           return InkWell(
                             onTap: () async {
                               logFirebaseEvent(
                                   'NOTIFICATIONS_Container_h34e593u_ON_TAP');
                               if (notificationsListNotificationsRecord
-                                      .notificationType ==
+                                  .notificationType ==
                                   'Offers') {
                                 logFirebaseEvent('Container_Navigate-To');
 
@@ -142,7 +168,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                 );
                               } else {
                                 logFirebaseEvent('Container_Navigate-To');
-
                                 context.pushNamed(
                                   'BookingDetails',
                                   queryParams: {
@@ -158,12 +183,26 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                               logFirebaseEvent('Container_Backend-Call');
 
                               final notificationsUpdateData =
-                                  createNotificationsRecordData(
+                              createNotificationsRecordData(
                                 isRead: 1,
                               );
-                              await notificationsListNotificationsRecord
-                                  .reference
-                                  .update(notificationsUpdateData);
+                              bool isInternetAvailable = await isInternetConnected();
+                              if(isInternetAvailable){
+                                await notificationsListNotificationsRecord
+                                    .reference
+                                    .update(notificationsUpdateData);
+                              }
+                              else{
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => CommonAlertDialog(
+                                    onCancel: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                );
+                              }
+
                             },
                             child: Container(
                               width: 100,
@@ -177,10 +216,10 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         if (notificationsListNotificationsRecord
-                                                .isRead ==
+                                            .isRead ==
                                             0)
                                           Padding(
                                             padding: const EdgeInsets.only(top:0,bottom: 10),
@@ -196,12 +235,12 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                         Expanded(
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 0, 0, 0),
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                5, 0, 0, 0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.stretch,
+                                              CrossAxisAlignment.stretch,
                                               children: [
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
@@ -213,15 +252,15 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 9, 0, 0),
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                          0, 9, 0, 0),
                                                       child: Row(
                                                         mainAxisSize:
-                                                            MainAxisSize.max,
+                                                        MainAxisSize.max,
                                                         crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                         children: [
                                                           Padding(
                                                             padding: EdgeInsetsDirectional.fromSTEB(11, 0, 10, 0),
@@ -245,11 +284,11 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                           Expanded(
                                                             child: Column(
                                                               mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
+                                                              MainAxisSize
+                                                                  .max,
                                                               crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                               children: [
                                                                 if (functions.notificationConditionalVisibilty(
                                                                     FFAppState()
@@ -260,23 +299,23 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                     0))
                                                                   Row(
                                                                     mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
+                                                                    MainAxisSize
+                                                                        .max,
                                                                     children: [
                                                                       Expanded(
                                                                         child:
-                                                                            Text(
+                                                                        Text(
                                                                           notificationsListNotificationsRecord
                                                                               .messageAr!,
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .subtitle1
                                                                               .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                color: Colors.black,
-                                                                                fontSize: 14,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: false,
-                                                                              ),
+                                                                            fontFamily: 'AvenirArabic',
+                                                                            color: Colors.black,
+                                                                            fontSize: 14,
+                                                                            fontWeight: FontWeight.w600,
+                                                                            useGoogleFonts: false,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ],
@@ -290,23 +329,23 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                     0))
                                                                   Row(
                                                                     mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
+                                                                    MainAxisSize
+                                                                        .max,
                                                                     children: [
                                                                       Expanded(
                                                                         child:
-                                                                            Text(
+                                                                        Text(
                                                                           notificationsListNotificationsRecord
                                                                               .messageEn!,
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .subtitle1
                                                                               .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                color: Colors.black,
-                                                                                fontSize: 14,
-                                                                                fontWeight: FontWeight.w600,
-                                                                                useGoogleFonts: false,
-                                                                              ),
+                                                                            fontFamily: 'AvenirArabic',
+                                                                            color: Colors.black,
+                                                                            fontSize: 14,
+                                                                            fontWeight: FontWeight.w600,
+                                                                            useGoogleFonts: false,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ],
@@ -320,23 +359,23 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                     1))
                                                                   Row(
                                                                     mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
+                                                                    MainAxisSize
+                                                                        .max,
                                                                     children: [
                                                                       Expanded(
                                                                         child:
-                                                                            Text(
+                                                                        Text(
                                                                           notificationsListNotificationsRecord
                                                                               .messageAr!,
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .subtitle1
                                                                               .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                color: Colors.black,
-                                                                                fontSize: 14,
-                                                                                fontWeight: FontWeight.w300,
-                                                                                useGoogleFonts: false,
-                                                                              ),
+                                                                            fontFamily: 'AvenirArabic',
+                                                                            color: Colors.black,
+                                                                            fontSize: 14,
+                                                                            fontWeight: FontWeight.w300,
+                                                                            useGoogleFonts: false,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ],
@@ -350,39 +389,39 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                     1))
                                                                   Row(
                                                                     mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
+                                                                    MainAxisSize
+                                                                        .max,
                                                                     children: [
                                                                       Expanded(
                                                                         child:
-                                                                            Text(
+                                                                        Text(
                                                                           notificationsListNotificationsRecord
                                                                               .messageEn!,
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .subtitle1
                                                                               .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                color: Colors.black,
-                                                                                fontSize: 14,
-                                                                                fontWeight: FontWeight.w300,
-                                                                                useGoogleFonts: false,
-                                                                              ),
+                                                                            fontFamily: 'AvenirArabic',
+                                                                            color: Colors.black,
+                                                                            fontSize: 14,
+                                                                            fontWeight: FontWeight.w300,
+                                                                            useGoogleFonts: false,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ],
                                                                   ),
                                                                 Padding(
                                                                   padding:
-                                                                      EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              6,
-                                                                              0,
-                                                                              0),
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      0,
+                                                                      6,
+                                                                      0,
+                                                                      0),
                                                                   child: Row(
                                                                     mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
+                                                                    MainAxisSize
+                                                                        .max,
                                                                     children: [
                                                                       Text(
                                                                         functions.notificationsDateTime(
@@ -391,20 +430,20 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                             notificationsListNotificationsRecord
                                                                                 .createdAt),
                                                                         style: FlutterFlowTheme.of(
-                                                                                context)
+                                                                            context)
                                                                             .bodyText1
                                                                             .override(
-                                                                              fontFamily:
-                                                                                  'AvenirArabic',
-                                                                              color:
-                                                                                  FlutterFlowTheme.of(context).secondaryText,
-                                                                              fontSize:
-                                                                                  12,
-                                                                              fontWeight:
-                                                                                  FontWeight.w300,
-                                                                              useGoogleFonts:
-                                                                                  false,
-                                                                            ),
+                                                                          fontFamily:
+                                                                          'AvenirArabic',
+                                                                          color:
+                                                                          FlutterFlowTheme.of(context).secondaryText,
+                                                                          fontSize:
+                                                                          12,
+                                                                          fontWeight:
+                                                                          FontWeight.w300,
+                                                                          useGoogleFonts:
+                                                                          false,
+                                                                        ),
                                                                       ),
                                                                     ],
                                                                   ),
@@ -436,7 +475,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                         },
                       );
                     },
-                  ),
+                  ):SizedBox(),
                 ),
               ),
             ],
