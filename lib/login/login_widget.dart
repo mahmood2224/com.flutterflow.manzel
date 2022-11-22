@@ -1,9 +1,12 @@
 import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:manzel/backend/api_requests/api_calls.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import '../auth/auth_util.dart';
+import '../common_alert_dialog/common_alert_dialog.dart';
 import '../common_widgets/overlay.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -29,12 +32,28 @@ class _LoginWidgetState extends State<LoginWidget> {
   OverlayEntry? entry;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   int count =0;
+  bool? isInternetAvailable;
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Login'});
     phoneNumberController = TextEditingController();
+    checkInternetStatus();
+  }
+  Future<void> checkInternetStatus() async {
+    isInternetAvailable = await isInternetConnected();
+    if(!(isInternetAvailable??false)){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
+    setState((){});
   }
 
   @override
@@ -391,8 +410,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                       child: Container(
                         width: double.infinity,
                         height: 56,
-                        child: ElevatedButton(
+                        child: (isInternetAvailable??false)?ElevatedButton(
                           onPressed: () async {
+                            isInternetAvailable = await isInternetConnected();
+                            setState((){});
                             isLoading.value = true;
                             logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
                             if (functions.checkPhoneNumberFormat(
@@ -415,15 +436,32 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 return;
                               }
                               //entry = showOverlay(context);
-                              await beginPhoneAuth(
-                                context: context,
-                                phoneNumber: phoneNumberVal,
-                                onCodeSent: () async {
-                              //    entry.remove();
-                                  isLoading.value = false;
-                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberVal});
-                                  },
+                              if(isInternetAvailable??false){
+                                ApiCallResponse generateOtpResponse = await GenerateOtp.call(phoneNumber: phoneNumberController!.text);
+                                if((PropertyCall.generateSuccess(generateOtpResponse.jsonBody))=='success') {
+                                  String verificationKey = PropertyCall.generateKey(generateOtpResponse.jsonBody);
+                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberController!.text,'verificationKey':verificationKey});
+                                }
+                                // await beginPhoneAuth(
+                                //   context: context,
+                                //   phoneNumber: phoneNumberController!.text,
+                                //   onCodeSent: () async {
+                                // //    entry.remove();
+                                //     isLoading.value = false;
+                                //     context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberVal});
+                                //     },
+                                //   );
+                              }
+                              else{
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => CommonAlertDialog(
+                                    onCancel: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
                                 );
+                              }
                               } else {
                                 // Invalid_phone_number_action
                                 logFirebaseEvent(
@@ -445,7 +483,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                             child:
                                 ValueListenableBuilder<bool>(
                                     builder: (BuildContext context, bool value, Widget? child){
-
                                       return isLoading.value?Padding(
                                         padding: const EdgeInsets.all(5.0),
                                         child: Row(
@@ -481,8 +518,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     },
                                     valueListenable: isLoading,
                                     ),
-
-
                             style: ButtonStyle(
                               foregroundColor: MaterialStateProperty.resolveWith<Color?>(
                                     (states) {
@@ -518,7 +553,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               )),
                             ),
                             ),
-                          ),
+                          ):SizedBox(),
                       ),
                       ),
                     ),

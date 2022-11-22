@@ -1,11 +1,13 @@
 import '../../enviorment/env_variables.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
-
+import 'dart:convert';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
+
+
 
 
 class PropertiesCall {
@@ -213,6 +215,22 @@ class PropertyCall {
   static dynamic thumbnailImage(dynamic response) => getJsonField(
     response,
     r'''$.attributes.property_images.data[0].attributes.formats.small.url''',
+  );
+  static dynamic generateSuccess(dynamic response) => getJsonField(
+    response,
+    r'''$.success''',
+  );
+  static dynamic generateKey(dynamic response) => getJsonField(
+    response,
+    r'''$.key''',
+  );
+  static dynamic verifyOtpStatus(dynamic response) => getJsonField(
+    response,
+    r'''$.error''',
+  );
+  static dynamic tokenFromOtp(dynamic response) => getJsonField(
+    response,
+    r'''$.error''',
   );
 }
 
@@ -914,4 +932,54 @@ class ApiPagingParams {
   @override
   String toString() =>
       'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
+}
+
+
+class GenerateOtp {
+  static Future<ApiCallResponse> call({
+  String phoneNumber ='',
+  }) {
+final body = '''
+{
+  "phoneNumber": "${phoneNumber}"
+}''';
+    String basicAuth =
+        'Basic ' + base64.encode(utf8.encode('${EnvVariables.instance.jetAdminUserName}:${EnvVariables.instance.jetAdminPassword}'));
+    return ApiManager.instance.generateOtpApiCall(
+      callName: 'generateOtp',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/generateOtp',
+      callType: ApiCallType.POST,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      body: body,
+      headers: <String, String>{'authorization': basicAuth},
+    );
+  }
+}
+
+
+class VerifyOtp {
+  static Future<ApiCallResponse> call({
+    String phoneNumber ='',
+    String otp = '',
+    String key = '',
+  }) {
+    final body = '''
+{
+  "phoneNumber": "${phoneNumber}",
+  "otp": "${otp}",
+  "key": "${key}"
+}''';
+    String basicAuth =
+        'Basic ' + base64.encode(utf8.encode('${EnvVariables.instance.jetAdminUserName}:${EnvVariables.instance.jetAdminPassword}'));
+    return ApiManager.instance.generateOtpApiCall(
+      callName: 'verifyOtp',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/verifyOtp',
+      callType: ApiCallType.POST,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      body: body,
+      headers: <String, String>{'authorization': basicAuth},
+    );
+  }
 }

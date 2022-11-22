@@ -1,12 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
+import 'package:manzel/backend/api_requests/api_calls.dart';
 import 'package:manzel/backend/backend.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:sendbird_sdk/sdk/sendbird_sdk_api.dart';
 import '../../enviorment/env_variables.dart';
 import '../auth/auth_util.dart';
+import '../common_alert_dialog/common_alert_dialog.dart';
 import '../common_widgets/overlay.dart';
 import '../common_widgets/timer_widget.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -23,9 +26,10 @@ import '../notification_handler/firebase_cloud_messaging.dart';
 class ConfirmNewNumberOTPWidget extends StatefulWidget {
   final String? phoneNumber;
   final String? isFromUpdate;
+  final String? verificationKey;
 
   const ConfirmNewNumberOTPWidget(
-      {Key? key, this.phoneNumber, this.isFromUpdate})
+      {Key? key, this.phoneNumber, this.isFromUpdate, this.verificationKey})
       : super(key: key);
 
   @override
@@ -42,6 +46,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   ValueNotifier<String> _showOtpError = ValueNotifier('');
   final scaffoldKey = GlobalKey<ScaffoldState>();
   OverlayEntry? entry;
+  var userCredential;
+  bool? isInternetAvailable;
 
   void resendOTP() async {
     await resendOtpFromFirebse(
@@ -86,12 +92,22 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
     isFromUpdate = widget.isFromUpdate == "true" ? true : false;
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ConfirmNewNumberOTP'});
+    checkInternetStatus();
   }
 
-  @override
-  void dispose() {
-    enterOTPController?.dispose();
-    super.dispose();
+  Future<void> checkInternetStatus() async {
+    isInternetAvailable = await isInternetConnected();
+    if(!(isInternetAvailable??false)){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
+    setState((){});
   }
 
   @override
@@ -206,7 +222,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                 // if (otp.length == 6) {
                                 //   _showOtpError.value = "Working";
                                 // }
-
                                  entry = showOverlay(context);
                                 if (isFromUpdate ?? false) {
                                   final phoneVerifiedUser = await verifySmsCode(
@@ -216,17 +231,46 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                   );
                                   entry?.remove();
                                  context.pop();
-                                } else {
-                                  final phoneVerifiedUser = await verifySmsCode(
-                                    context: context,
-                                    smsCode: otp,
-                                  );
+                                }
+                                else {
+                                  // final phoneVerifiedUser = await verifySmsCode(
+                                  //   context: context,
+                                  //   smsCode: otp,
+                                  // );
+                                  ApiCallResponse verifyOtpResponse= await VerifyOtp.call(phoneNumber: widget.phoneNumber??'',otp:otp,key:widget.verificationKey??'');
+                                  String otpStatus = PropertyCall.verifyOtpStatus(verifyOtpResponse.jsonBody);
+                                  if((verifyOtpResponse.statusCode==200)&&(otpStatus=="success")){
+                                    String tokenFromOtpSuccess = '123456';//PropertyCall.tokenFromOtp(verifyOtpResponse.jsonBody);
+                                    try {
+                                      userCredential =
+                                      await FirebaseAuth.instance.signInWithCustomToken(tokenFromOtpSuccess);
+                                      print("Sign-in successful.");
+                                      print(userCredential);
+                                    } on FirebaseAuthException catch (e) {
+                                      switch (e.code) {
+                                        case "invalid-custom-token":
+                                          print("The supplied token is not a Firebase custom auth token.");
+                                          break;
+                                        case "custom-token-mismatch":
+                                          print("The supplied token is for a different Firebase project.");
+                                          break;
+                                        default:
+                                          print("Unkown error.");
+                                      }
+                                    }
+
+                                  }
                                   entry?.remove();
-                                  if (phoneVerifiedUser == null) {
+                                  if (userCredential == null) {
                                     _showOtpError.value =
                                         "You entered OTP incorrect";
                                     return;
                                   }
+                                  // if (phoneVerifiedUser == null) {
+                                  //   _showOtpError.value =
+                                  //       "You entered OTP incorrect";
+                                  //   return;
+                                  // }
                                   Future.delayed(
                                       const Duration(milliseconds: 600),
                                       () async {
@@ -312,7 +356,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                         context.goNamedAuth(
                                             'HomeScreen', mounted);
                                       }
-
                                       //  else {
                                       //   await showDialog(
                                       //     context: context,
@@ -515,5 +558,11 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
     );
     overlayState?.insert(overlayEntry);
     return overlayEntry;
+  }
+
+  @override
+  void dispose() {
+    enterOTPController?.dispose();
+    super.dispose();
   }
 }
