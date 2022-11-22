@@ -437,9 +437,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                               }
                               //entry = showOverlay(context);
                               if(isInternetAvailable??false){
-                                ApiCallResponse generateOtpResponse = await GenerateOtp.call(phoneNumber: phoneNumberController!.text);
-                                if((PropertyCall.generateSuccess(generateOtpResponse.jsonBody))=='success') {
-                                  String verificationKey = PropertyCall.generateKey(generateOtpResponse.jsonBody);
+                                ApiCallResponse generateOtpResponse = await OtpCalls.generateOtp(phoneNumber: phoneNumberController!.text);
+                                if((OtpCalls.generateSuccess(generateOtpResponse.jsonBody))=='success') {
+                                  String verificationKey = OtpCalls.generateKey(generateOtpResponse.jsonBody);
                                   context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberController!.text,'verificationKey':verificationKey});
                                 }
                                 // await beginPhoneAuth(

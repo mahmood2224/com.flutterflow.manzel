@@ -216,22 +216,8 @@ class PropertyCall {
     response,
     r'''$.attributes.property_images.data[0].attributes.formats.small.url''',
   );
-  static dynamic generateSuccess(dynamic response) => getJsonField(
-    response,
-    r'''$.success''',
-  );
-  static dynamic generateKey(dynamic response) => getJsonField(
-    response,
-    r'''$.key''',
-  );
-  static dynamic verifyOtpStatus(dynamic response) => getJsonField(
-    response,
-    r'''$.error''',
-  );
-  static dynamic tokenFromOtp(dynamic response) => getJsonField(
-    response,
-    r'''$.error''',
-  );
+
+
 }
 
 class FilterCall {
@@ -935,11 +921,11 @@ class ApiPagingParams {
 }
 
 
-class GenerateOtp {
-  static Future<ApiCallResponse> call({
-  String phoneNumber ='',
+class OtpCalls{
+  static Future<ApiCallResponse> generateOtp({
+    String phoneNumber ='',
   }) {
-final body = '''
+    final body = '''
 {
   "phoneNumber": "${phoneNumber}"
 }''';
@@ -955,11 +941,8 @@ final body = '''
       headers: <String, String>{'authorization': basicAuth},
     );
   }
-}
 
-
-class VerifyOtp {
-  static Future<ApiCallResponse> call({
+  static Future<ApiCallResponse> verifyOtp({
     String phoneNumber ='',
     String otp = '',
     String key = '',
@@ -982,4 +965,44 @@ class VerifyOtp {
       headers: <String, String>{'authorization': basicAuth},
     );
   }
+
+  static Future<ApiCallResponse> updatePhone({
+    String newPhoneNumber ='',
+    String idToken ='',
+
+  }) {
+    final body = '''
+{
+  "newPhoneNumber": "$newPhoneNumber"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'updatePhone',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/updatePhone',
+      headers: {
+        'Authorization': 'Bearer $idToken',
+      },
+      callType: ApiCallType.POST,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      body: body,
+    );
+  }
+
+
+  static dynamic tokenFromOtp(dynamic response) => getJsonField(
+    response,
+    r'''$.tokenKey''',
+  );
+  static dynamic generateSuccess(dynamic response) => getJsonField(
+    response,
+    r'''$.success''',
+  );
+  static dynamic generateKey(dynamic response) => getJsonField(
+    response,
+    r'''$.key''',
+  );
+  static dynamic verifyOtpStatus(dynamic response) => getJsonField(
+    response,
+    r'''$.error''',
+  );
 }

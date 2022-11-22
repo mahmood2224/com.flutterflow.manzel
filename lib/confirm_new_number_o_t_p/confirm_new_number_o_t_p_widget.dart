@@ -48,16 +48,27 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   OverlayEntry? entry;
   var userCredential;
   bool? isInternetAvailable;
+  var idToken;
 
   void resendOTP() async {
-    await resendOtpFromFirebse(
-      isFromUpdate: isFromUpdate,
-      context: context,
-      phoneNumber: widget.phoneNumber!,
-      onCodeSent: () async {
-        print('Otp sent sucessfullly');
-      },
-    );
+  //  if(isFromUpdate??false){
+      String newPhoneNumber = widget.phoneNumber??'';
+      String idToken= FFAppState().authToken;
+      ApiCallResponse? response = await OtpCalls.updatePhone(idToken: idToken,newPhoneNumber: newPhoneNumber);
+     print(response);
+  //  }
+     // else{
+     // ApiCallResponse? response = await OtpCalls.generateOtp(phoneNumber: widget.phoneNumber??'');
+     // print(response);
+     // }
+    // await resendOtpFromFirebse(
+    //   isFromUpdate: isFromUpdate,
+    //   context: context,
+    //   phoneNumber: widget.phoneNumber!,
+    //   onCodeSent: () async {
+    //     print('Otp sent sucessfullly');
+    //   },
+    // );
     // await FirebaseAuth.instance.verifyPhoneNumber(
     //   phoneNumber: '+918901523415',
     //   timeout: Duration(seconds: 40),
@@ -93,6 +104,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'ConfirmNewNumberOTP'});
     checkInternetStatus();
+    resendOTP();
   }
 
   Future<void> checkInternetStatus() async {
@@ -237,13 +249,19 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                   //   context: context,
                                   //   smsCode: otp,
                                   // );
-                                  ApiCallResponse verifyOtpResponse= await VerifyOtp.call(phoneNumber: widget.phoneNumber??'',otp:otp,key:widget.verificationKey??'');
-                                  String otpStatus = PropertyCall.verifyOtpStatus(verifyOtpResponse.jsonBody);
-                                  if((verifyOtpResponse.statusCode==200)&&(otpStatus=="success")){
-                                    String tokenFromOtpSuccess = '123456';//PropertyCall.tokenFromOtp(verifyOtpResponse.jsonBody);
+                                  ApiCallResponse verifyOtpResponse= await OtpCalls.verifyOtp(phoneNumber: widget.phoneNumber??'',otp:otp,key:widget.verificationKey??'');
+                                   //String otpStatus = OtpCalls.verifyOtpStatus(verifyOtpResponse.jsonBody);
+                                  if((verifyOtpResponse.statusCode==200)){
+                                    String tokenFromOtpSuccess = OtpCalls.tokenFromOtp(verifyOtpResponse.jsonBody);
                                     try {
                                       userCredential =
                                       await FirebaseAuth.instance.signInWithCustomToken(tokenFromOtpSuccess);
+                                      final user = await FirebaseAuth
+                                          .instance.currentUser;
+                                      final idToken =
+                                      await user?.getIdToken();
+                                      FFAppState().authToken = idToken!;
+                                      print(idToken);
                                       print("Sign-in successful.");
                                       print(userCredential);
                                     } on FirebaseAuthException catch (e) {

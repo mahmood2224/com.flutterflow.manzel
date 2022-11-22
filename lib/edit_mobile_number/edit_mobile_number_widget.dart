@@ -252,16 +252,18 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 return;
                               }
                               //entry = showOverlay(context);
-                              await beginPhoneAuth(
-                                isFromUpdate: true,
-                                context: context,
-                                phoneNumber: phoneNumberVal,
-                                onCodeSent: () async {
-                                  //    entry.remove();
-                                  isLoading.value = false;
-                                  context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': phoneNumberVal,'isFromUpdate': 'true' });
-                                },
-                              );
+
+                              //generate  OYp call
+                              // await beginPhoneAuth(
+                              //   isFromUpdate: true,
+                              //   context: context,
+                              //   phoneNumber: phoneNumberVal,
+                              //   onCodeSent: () async {
+                              //     //    entry.remove();
+                              //     isLoading.value = false;
+                              //     context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': phoneNumberVal,'isFromUpdate': 'true' });
+                              //   },
+                              // );
 
                             } else {
                               // Invalid_phone_number_action
