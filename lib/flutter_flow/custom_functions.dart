@@ -19,23 +19,21 @@ import 'package:sendbird_sdk/sendbird_sdk.dart' as sendbird;
 //    return getUnreadMessage(channelUrl).toString();
 // }
 Future<String?> getUnreadMessage(String channelUrl) async {
-  try{
+  try {
     String channel_url = channelUrl.toString();
     final aChannel = await GroupChannel.getChannel(channel_url);
     print(aChannel.unreadMessageCount);
-    var channel= aChannel.unreadMessageCount.toString();
+    var channel = aChannel.unreadMessageCount.toString();
     return channel;
 
 // print("unread Messages ${unreadMessage}");
 //   return   unreadMessage.toString();
 
-  }
-  catch(error){
+  } catch (error) {
     print("*********************************************************");
     print(error);
     print("*********************************************************");
   }
-
 }
 
 bool checkPhoneNumberFormat(String? phoneNumber) {
@@ -46,7 +44,6 @@ bool checkPhoneNumberFormat(String? phoneNumber) {
     return true;
   }
 }
-
 
 int calculate(String? builtIn) {
   // convert date to age
@@ -353,17 +350,17 @@ String offerScreenTime(
   int secondDiffence = diff.inSeconds;
   if (locale == "en") {
     if (dayDiffrence > 0) {
-      if ((dayDiffrence>=365) &&((dayDiffrence % 365) > 0)) {
+      if ((dayDiffrence >= 365) && ((dayDiffrence % 365) > 0)) {
         yearsAgo = dayDiffrence % 365;
         return "${yearsAgo} Years ago";
       }
-      if ((dayDiffrence>30) && ((dayDiffrence % 30) > 0)) {
+      if ((dayDiffrence > 30) && ((dayDiffrence % 30) > 0)) {
         monthsAgo = dayDiffrence % 30;
         return "${monthsAgo} Months ago";
       }
       return "${dayDiffrence} Days ago";
     } else if (hrsDiffrence > 0) {
-      if (hrsDiffrence == 1){
+      if (hrsDiffrence == 1) {
         return '1 hr ago';
       }
       return "${hrsDiffrence} hrs ago";
@@ -383,10 +380,9 @@ String offerScreenTime(
         if (yearsAgo == 2) {
           return "قبل سنتين";
         }
-        if(yearsAgo >= 3 && yearsAgo <= 10){
+        if (yearsAgo >= 3 && yearsAgo <= 10) {
           return "منذ ${yearsAgo} سنوات";
-        }
-        else {
+        } else {
           return "قبل ${yearsAgo} سنة";
         }
       }
@@ -398,17 +394,16 @@ String offerScreenTime(
         if (monthsAgo == 2) {
           return "منذ شهرين";
         }
-        if(monthsAgo >= 3 && monthsAgo <= 10){
+        if (monthsAgo >= 3 && monthsAgo <= 10) {
           return "منذ ${monthsAgo} أشهر";
-        }
-        else {
+        } else {
           return "قبل ${monthsAgo} شهر";
         }
       }
       if (dayDiffrence == 1) {
         return "قبل يوم";
       }
-      if(dayDiffrence==2){
+      if (dayDiffrence == 2) {
         return "منذ يومين";
       }
       if (dayDiffrence >= 3 && dayDiffrence <= 10) {
@@ -628,19 +623,19 @@ bool orderProcessStatus(
       break;
     case "ownership_transferred":
       if ((processStage == "reserved" ||
-          processStage == "collect_offers" ||
-          processStage == "waiting_offer_acceptance" ||
-          processStage == "offer_accepted" ||
-          processStage == "completed" ||
-          processStage == "ownership_transferred") &&
+              processStage == "collect_offers" ||
+              processStage == "waiting_offer_acceptance" ||
+              processStage == "offer_accepted" ||
+              processStage == "completed" ||
+              processStage == "ownership_transferred") &&
           setType == "checked") {
         return true;
       } else if ((processStage != "reserved" &&
-          processStage != "collect_offers" &&
-          processStage != "waiting_offer_acceptance" &&
-          processStage != "offer_accepted" &&
-          processStage != "ownership_transferred" &&
-          processStage != "completed") &&
+              processStage != "collect_offers" &&
+              processStage != "waiting_offer_acceptance" &&
+              processStage != "offer_accepted" &&
+              processStage != "ownership_transferred" &&
+              processStage != "completed") &&
           setType == "unchecked") {
         return true;
       } else {
@@ -650,19 +645,19 @@ bool orderProcessStatus(
       break;
     case "completed":
       if ((processStage == "reserved" ||
-          processStage == "collect_offers" ||
-          processStage == "waiting_offer_acceptance" ||
-          processStage == "offer_accepted" ||
-          processStage == "completed" ||
-          processStage == "ownership_transferred") &&
+              processStage == "collect_offers" ||
+              processStage == "waiting_offer_acceptance" ||
+              processStage == "offer_accepted" ||
+              processStage == "completed" ||
+              processStage == "ownership_transferred") &&
           setType == "checked") {
         return true;
       } else if ((processStage != "reserved" &&
-          processStage != "collect_offers" &&
-          processStage != "waiting_offer_acceptance" &&
-          processStage != "offer_accepted" &&
-          processStage != "ownership_transferred" &&
-          processStage != "completed") &&
+              processStage != "collect_offers" &&
+              processStage != "waiting_offer_acceptance" &&
+              processStage != "offer_accepted" &&
+              processStage != "ownership_transferred" &&
+              processStage != "completed") &&
           setType == "unchecked") {
         return true;
       } else {
@@ -784,8 +779,8 @@ bool pastOfferColumnVisibility(
   }
   if (status == "cancelled") {
     if (((installmentPeriod != null && installmentPeriod.isNotEmpty) &&
-        (installmentRange != null && installmentRange.isNotEmpty) &&
-        (totalPrice != null && totalPrice.isNotEmpty)) &&
+            (installmentRange != null && installmentRange.isNotEmpty) &&
+            (totalPrice != null && totalPrice.isNotEmpty)) &&
         (agentName != null && agentName.isNotEmpty)) {
       return true;
     } else {
@@ -794,8 +789,8 @@ bool pastOfferColumnVisibility(
   }
   if (status == "rejected") {
     if (((installmentPeriod != null && installmentPeriod.isNotEmpty) &&
-        (installmentRange != null && installmentRange.isNotEmpty) &&
-        (totalPrice != null && totalPrice.isNotEmpty)) &&
+            (installmentRange != null && installmentRange.isNotEmpty) &&
+            (totalPrice != null && totalPrice.isNotEmpty)) &&
         (agentName != null && agentName.isNotEmpty)) {
       return true;
     } else {
@@ -1165,17 +1160,21 @@ bool notificationConditionalVisibilty(
 
 bool videoPlayerVisibilty(String? videoURL) {
   // Add your function code here!
-  if (videoURL?.isNotEmpty??false) {
+  if (videoURL?.isNotEmpty ?? false) {
     return true;
   } else {
     return false;
   }
 }
-bool requestButtonVisibilty(String? pincode){
-  if((pincode!=null)&&((pincode).isNotEmpty)){
+
+bool requestButtonVisibilty(String? pincode) {
+  if ((pincode != null) && ((pincode).isNotEmpty)) {
     return false;
-  }else{return true;}
+  } else {
+    return true;
+  }
 }
+
 bool propertyStatusConditionalVisibilty(String? propertyStatus) {
   // Add your function code here!
   if (propertyStatus == "Available") {
@@ -1245,7 +1244,7 @@ String? editProfileDropDownInitalVal(
   List optionsList,
   String? id,
 ) {
-  if(optionsList!=null) {
+  if (optionsList != null) {
     if (optionsList[0]["attributes"].containsKey('bank_name')) {
       if (id != null && id.isNotEmpty) {
         for (var element in optionsList) {
@@ -1254,8 +1253,7 @@ String? editProfileDropDownInitalVal(
         }
       }
       return null;
-    }
-    else {
+    } else {
       if (id != null && id.isNotEmpty) {
         for (var element in optionsList) {
           if (element['id'].toString() == id)
@@ -1264,17 +1262,15 @@ String? editProfileDropDownInitalVal(
       }
       return null;
     }
-  }
-  else
+  } else
     return null;
 }
 
-
 //updated code
 String? editProfileindexReturn(
-    List optionsArray,
-    String? selectedItem,
-    ) {
+  List optionsArray,
+  String? selectedItem,
+) {
   if (optionsArray != null) {
     if (optionsArray[0]["attributes"].containsKey('bank_name')) {
       if (selectedItem != null && selectedItem.isNotEmpty) {
@@ -1285,8 +1281,7 @@ String? editProfileindexReturn(
         return null;
       }
       return null;
-    }
-    else {
+    } else {
       if (selectedItem != null && selectedItem.isNotEmpty) {
         for (var element in optionsArray) {
           if (element['attributes']['Name'] == selectedItem)
@@ -1295,11 +1290,9 @@ String? editProfileindexReturn(
       }
       return null;
     }
-  }
-  else
+  } else
     return null;
 }
-
 
 String? monthlyIncome(
   String? functionType,
@@ -1319,8 +1312,7 @@ String? monthlyIncome(
   ];
   if (locale == 'en') {
     if (functionType == 'initialValue') {
-      if(intialValue == "" )
-        intialValue =  '-1';
+      if (intialValue == "") intialValue = '-1';
       int ind = int.parse(intialValue!);
       if (ind == -1) {
         return null;
@@ -1332,8 +1324,7 @@ String? monthlyIncome(
     }
   } else {
     if (functionType == 'initialValue') {
-      if(intialValue == "" )
-        intialValue =  '-1';
+      if (intialValue == "") intialValue = '-1';
       int ind = int.parse(intialValue!);
       if (ind == -1) {
         return null;
@@ -1490,8 +1481,8 @@ String resultText(
   String? locale,
 ) {
   // Add your function code here!
-  if (locale!.isNotEmpty && (count?.isNotEmpty??false)) {
-    int results = int.parse(count??'0');
+  if (locale!.isNotEmpty && (count?.isNotEmpty ?? false)) {
+    int results = int.parse(count ?? '0');
     if (locale == 'en') {
       if (results == 1) {
         return "1 Result Found ";
@@ -1525,14 +1516,12 @@ String intToString(int? num) {
   }
 }
 
-
 Future<bool> isInternetConnected() async {
   return true;
   var connectivityResult = await (Connectivity().checkConnectivity());
-  if (connectivityResult == ConnectivityResult.mobile||connectivityResult == ConnectivityResult.wifi) {
+  if (connectivityResult == ConnectivityResult.mobile ||
+      connectivityResult == ConnectivityResult.wifi) {
     return true;
   }
   return false;
 }
-
-

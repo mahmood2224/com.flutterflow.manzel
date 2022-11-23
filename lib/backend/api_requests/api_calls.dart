@@ -7,13 +7,10 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
-
-
-
 class PropertiesCall {
   static Future<ApiCallResponse> call({
     String? populate =
-    '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
+        '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
     String? city = '',
     String? furnishingType = '',
     String? propertyType = '',
@@ -28,7 +25,7 @@ class PropertiesCall {
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {
         'populate': populate,
@@ -46,9 +43,9 @@ class PropertiesCall {
   }
 
   static dynamic properties(dynamic response) => getJsonField(
-    response,
-    r'''$.data''',
-  );
+        response,
+        r'''$.data''',
+      );
 }
 
 class PropertyCall {
@@ -58,10 +55,11 @@ class PropertyCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'Property',
-      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/${propertyId}',
+      apiUrl:
+          '${EnvVariables.instance.strapiBaseURl}/api/properties/${propertyId}',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {
         'locale': locale,
@@ -71,153 +69,151 @@ class PropertyCall {
   }
 
   static dynamic property(dynamic response) => getJsonField(
-    response,
-    r'''$''',
-  );
+        response,
+        r'''$''',
+      );
   static dynamic propertyRef(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_reference''',
-  );
+        response,
+        r'''$.attributes.property_reference''',
+      );
   static dynamic propertyStatus(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_status''',
-  );
+        response,
+        r'''$.attributes.property_status''',
+      );
   static dynamic propertyUpdatedAt(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.updatedAt''',
-  );
+        response,
+        r'''$.attributes.updatedAt''',
+      );
   static dynamic propertyName(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_name''',
-  );
+        response,
+        r'''$.attributes.property_name''',
+      );
   static dynamic propertyCity(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.city.data.attributes.city_name''',
-  );
+        response,
+        r'''$.attributes.city.data.attributes.city_name''',
+      );
   static dynamic propertyDistrict(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_district''',
-  );
+        response,
+        r'''$.attributes.property_district''',
+      );
 
   static dynamic propertyStreet(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_street''',
-  );
+        response,
+        r'''$.attributes.property_street''',
+      );
 
   static dynamic propertyDescription(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_description''',
-  );
+        response,
+        r'''$.attributes.property_description''',
+      );
   static dynamic propertyBedrooms(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_bedrooms''',
-  );
+        response,
+        r'''$.attributes.property_bedrooms''',
+      );
   static dynamic propertyBathrooms(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_bathrooms''',
-  );
+        response,
+        r'''$.attributes.property_bathrooms''',
+      );
   static dynamic propertySize(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_size''',
-  );
+        response,
+        r'''$.attributes.property_size''',
+      );
   static dynamic propertyBuiltIn(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_built_in''',
-  );
+        response,
+        r'''$.attributes.property_built_in''',
+      );
   static dynamic propertyLivingrooms(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_livingroom''',
-  );
+        response,
+        r'''$.attributes.property_livingroom''',
+      );
   static dynamic propertyFloors(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_floors''',
-  );
+        response,
+        r'''$.attributes.property_floors''',
+      );
   static dynamic propertyFurnishingType(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_furnishing_type''',
-  );
+        response,
+        r'''$.attributes.property_furnishing_type''',
+      );
   static dynamic propertyStreetWidth(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_street_width''',
-  );
+        response,
+        r'''$.attributes.property_street_width''',
+      );
   static dynamic propertyPrice(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_price''',
-  );
+        response,
+        r'''$.attributes.property_price''',
+      );
   static dynamic propertyEntranceDirection(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_address''',
-  );
+        response,
+        r'''$.attributes.property_address''',
+      );
   static dynamic propertyType(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_type''',
-  );
+        response,
+        r'''$.attributes.property_type''',
+      );
   static dynamic propertyInitialInstallment(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_initial_installment''',
-  );
+        response,
+        r'''$.attributes.property_initial_installment''',
+      );
   static dynamic propertyFloorNumber(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_floor_number''',
-  );
+        response,
+        r'''$.attributes.property_floor_number''',
+      );
   static dynamic propertyLat(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_lat''',
-  );
+        response,
+        r'''$.attributes.property_lat''',
+      );
   static dynamic propertylng(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_lng''',
-  );
+        response,
+        r'''$.attributes.property_lng''',
+      );
   static dynamic propertyCoordinates(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_coordinates''',
-  );
+        response,
+        r'''$.attributes.property_coordinates''',
+      );
   static dynamic banks(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.banks.data''',
-  );
+        response,
+        r'''$.attributes.banks.data''',
+      );
   static dynamic bankName(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.banks.data..bank_name''',
-  );
+        response,
+        r'''$.attributes.banks.data..bank_name''',
+      );
   static dynamic bankDescription(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.banks.data..bank_description''',
-  );
+        response,
+        r'''$.attributes.banks.data..bank_description''',
+      );
   static dynamic bankRules(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.banks.data..bank_rules''',
-  );
+        response,
+        r'''$.attributes.banks.data..bank_rules''',
+      );
   static dynamic mangedBy(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.managed_by.data.attributes.company_name''',
-  );
+        response,
+        r'''$.attributes.managed_by.data.attributes.company_name''',
+      );
   static dynamic propertyImg(dynamic response) => getJsonField(
-    response,
-    r'''$..property_images.data[0].attributes.formats.medium.url''',
-  );
+        response,
+        r'''$..property_images.data[0].attributes.formats.medium.url''',
+      );
   static dynamic companyLogo(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
-  );
+        response,
+        r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
+      );
   static dynamic reservationsCost(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_reservation_cost''',
-  );
+        response,
+        r'''$.attributes.property_reservation_cost''',
+      );
   static dynamic propertyImages(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_images.data''',
-  );
+        response,
+        r'''$.attributes.property_images.data''',
+      );
   static dynamic propertyId(dynamic response) => getJsonField(
-    response,
-    r'''$.id''',
-  );
+        response,
+        r'''$.id''',
+      );
   static dynamic thumbnailImage(dynamic response) => getJsonField(
-    response,
-    r'''$.attributes.property_images.data[0].attributes.formats.small.url''',
-  );
-
-
+        response,
+        r'''$.attributes.property_images.data[0].attributes.formats.small.url''',
+      );
 }
 
 class FilterCall {
@@ -226,10 +222,11 @@ class FilterCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'filter',
-      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/?city=${city}',
+      apiUrl:
+          '${EnvVariables.instance.strapiBaseURl}/api/properties/?city=${city}',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {},
       returnBody: true,
@@ -237,9 +234,9 @@ class FilterCall {
   }
 
   static dynamic city(dynamic response) => getJsonField(
-    response,
-    r'''$..[?(@.city == "[city]")]''',
-  );
+        response,
+        r'''$..[?(@.city == "[city]")]''',
+      );
 }
 
 class InitiateOrderCall {
@@ -255,7 +252,7 @@ class InitiateOrderCall {
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',
-        'version' : version
+        'version': version
       },
       params: {
         'userID': userID,
@@ -275,7 +272,7 @@ class BankDetailsCall {
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/banks/${bankId}?',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {},
       returnBody: true,
@@ -283,21 +280,21 @@ class BankDetailsCall {
   }
 
   static dynamic bankName(dynamic response) => getJsonField(
-    response,
-    r'''$.data.attributes.bank_name''',
-  );
+        response,
+        r'''$.data.attributes.bank_name''',
+      );
   static dynamic bankDescription(dynamic response) => getJsonField(
-    response,
-    r'''$.data.attributes.bank_description''',
-  );
+        response,
+        r'''$.data.attributes.bank_description''',
+      );
   static dynamic bankRules(dynamic response) => getJsonField(
-    response,
-    r'''$.data.attributes.bank_rules''',
-  );
+        response,
+        r'''$.data.attributes.bank_rules''',
+      );
   static dynamic bankLogo(dynamic response) => getJsonField(
-    response,
-    r'''$.data.attributes.bank_logo.data.attributes.name''',
-  );
+        response,
+        r'''$.data.attributes.bank_logo.data.attributes.name''',
+      );
 }
 
 class StartInstanceCall {
@@ -309,7 +306,7 @@ class StartInstanceCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Start Instance',
       apiUrl:
-      '${EnvVariables.instance.firebaseBaseUrl}/booking-process-best-case-scenario-test',
+          '${EnvVariables.instance.firebaseBaseUrl}/booking-process-best-case-scenario-test',
       callType: ApiCallType.GET,
       headers: {},
       params: {
@@ -331,7 +328,7 @@ class CityListCall {
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/cities/?',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {
         'locale': locale,
@@ -341,9 +338,9 @@ class CityListCall {
   }
 
   static dynamic cityNames(dynamic response) => getJsonField(
-    response,
-    r'''$.data..attributes.city_name''',
-  );
+        response,
+        r'''$.data..attributes.city_name''',
+      );
 }
 
 class FilterParamsCall {
@@ -351,10 +348,10 @@ class FilterParamsCall {
     return ApiManager.instance.makeApiCall(
       callName: 'filterParams',
       apiUrl:
-      '${EnvVariables.instance.strapiBaseURl}/api/properties/?locale=en&populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
+          '${EnvVariables.instance.strapiBaseURl}/api/properties/?locale=en&populate=*,banks.bank_logo,managed_by.prob_company_logo,property_images,city',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {},
       returnBody: true,
@@ -372,7 +369,7 @@ class SearchPageCitiesCall {
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/property/search',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {
         'locale': locale,
@@ -383,17 +380,17 @@ class SearchPageCitiesCall {
   }
 
   static dynamic cityName(dynamic response) => getJsonField(
-    response,
-    r'''$.results..name''',
-  );
+        response,
+        r'''$.results..name''',
+      );
   static dynamic numberOfProperties(dynamic response) => getJsonField(
-    response,
-    r'''$.results..count''',
-  );
+        response,
+        r'''$.results..count''',
+      );
   static dynamic cityImage(dynamic response) => getJsonField(
-    response,
-    r'''$.results..image''',
-  );
+        response,
+        r'''$.results..image''',
+      );
 }
 
 class PropertStatusCall {
@@ -402,10 +399,11 @@ class PropertStatusCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'propertStatus',
-      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/property/status/${propertyId}',
+      apiUrl:
+          '${EnvVariables.instance.strapiBaseURl}/api/property/status/${propertyId}',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {},
       returnBody: true,
@@ -413,9 +411,9 @@ class PropertStatusCall {
   }
 
   static dynamic propertyStatus(dynamic response) => getJsonField(
-    response,
-    r'''$.status.property_status''',
-  );
+        response,
+        r'''$.status.property_status''',
+      );
 }
 
 class PropertyBookingStatusCall {
@@ -426,10 +424,11 @@ class PropertyBookingStatusCall {
 {"data": {"property_status": "Booked"}}''';
     return ApiManager.instance.makeApiCall(
       callName: 'propertyBookingStatus',
-      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/properties/${propertyId}',
+      apiUrl:
+          '${EnvVariables.instance.strapiBaseURl}/api/properties/${propertyId}',
       callType: ApiCallType.PUT,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {},
       body: body,
@@ -457,7 +456,7 @@ class AddOrderCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',
-        'version' : version
+        'version': version
       },
       params: {},
       body: body,
@@ -475,7 +474,7 @@ class AddTransactionCall {
     String? transactionMethod = '',
     String? transactionStatus = '',
     String? transactionId = '',
-    String ?authorazationToken='',
+    String? authorazationToken = '',
     String? version = '',
   }) {
     final body = '''
@@ -489,11 +488,12 @@ class AddTransactionCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'addTransaction',
-      apiUrl:
-      '${EnvVariables.instance.firebaseBaseUrl}/addTransaction',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/addTransaction',
       callType: ApiCallType.POST,
-      headers: {'Authorization': 'Bearer ${authorazationToken}',
-        'version' : version},
+      headers: {
+        'Authorization': 'Bearer ${authorazationToken}',
+        'version': version
+      },
       params: {},
       body: body,
       bodyType: BodyType.JSON,
@@ -517,13 +517,12 @@ class GetOffersCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getOffers',
-      apiUrl:
-      '${EnvVariables.instance.firebaseBaseUrl}/getActiveOffers',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/getActiveOffers',
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
         'Authorization': 'Bearer ${authorazationToken}',
-        'version' : version
+        'version': version
       },
       params: {},
       body: body,
@@ -533,54 +532,53 @@ class GetOffersCall {
   }
 
   static dynamic bankLogo(dynamic response) => getJsonField(
-    response,
-    r'''$.result..bank_logo''',
-  );
+        response,
+        r'''$.result..bank_logo''',
+      );
   static dynamic bankName(dynamic response) => getJsonField(
-    response,
-    r'''$.result..bank_name''',
-  );
+        response,
+        r'''$.result..bank_name''',
+      );
   static dynamic orderId(dynamic response) => getJsonField(
-    response,
-    r'''$.result..order_id''',
-  );
+        response,
+        r'''$.result..order_id''',
+      );
   static dynamic installmentAmount(dynamic response) => getJsonField(
-    response,
-    r'''$.result..offered_installment_amount''',
-  );
+        response,
+        r'''$.result..offered_installment_amount''',
+      );
   static dynamic installmentPeriod(dynamic response) => getJsonField(
-    response,
-    r'''$.result..offered_installment_period''',
-  );
+        response,
+        r'''$.result..offered_installment_period''',
+      );
   static dynamic agentName(dynamic response) => getJsonField(
-    response,
-    r'''$.result..agent_name''',
-  );
+        response,
+        r'''$.result..agent_name''',
+      );
   static dynamic updatedAt(dynamic response) => getJsonField(
-    response,
-    r'''$.result..updated_at._seconds''',
-  );
+        response,
+        r'''$.result..updated_at._seconds''',
+      );
   static dynamic createdAt(dynamic response) => getJsonField(
-    response,
-    r'''$.result..created_at''',
-  );
+        response,
+        r'''$.result..created_at''',
+      );
   static dynamic offerStatus(dynamic response) => getJsonField(
-    response,
-    r'''$.result..property_id''',
-  );
+        response,
+        r'''$.result..property_id''',
+      );
   static dynamic result(dynamic response) => getJsonField(
-    response,
-    r'''$.result''',
-  );
+        response,
+        r'''$.result''',
+      );
 }
 
 class AcceptOfferCall {
-  static Future<ApiCallResponse> call({
-    String? userId = '',
-    String? offerId = '',
-    String? authorazationToken = '',
-    String? version = ''
-  }) {
+  static Future<ApiCallResponse> call(
+      {String? userId = '',
+      String? offerId = '',
+      String? authorazationToken = '',
+      String? version = ''}) {
     final body = '''
 {
   "userID": "${userId}",
@@ -592,7 +590,7 @@ class AcceptOfferCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',
-        'version' : version
+        'version': version
       },
       params: {},
       body: body,
@@ -607,7 +605,7 @@ class ArchivedOffersCall {
     String? userId = '',
     String? locale = '',
     String? authorazationToken = '',
-    String? version ='',
+    String? version = '',
   }) {
     final body = '''
 {
@@ -615,13 +613,12 @@ class ArchivedOffersCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'archivedOffers',
-      apiUrl:
-      '${EnvVariables.instance.firebaseBaseUrl}/getArchivedOffers',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/getArchivedOffers',
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
         'Authorization': 'Bearer ${authorazationToken}',
-        'version' : version
+        'version': version
       },
       params: {},
       body: body,
@@ -631,17 +628,16 @@ class ArchivedOffersCall {
   }
 
   static dynamic result(dynamic response) => getJsonField(
-    response,
-    r'''$.result''',
-  );
+        response,
+        r'''$.result''',
+      );
 }
 
 class BookmarkListCall {
-  static Future<ApiCallResponse> call({
-    String? userId = '',
-    String? authorazationToken = '',
-    String? version = ''
-  }) {
+  static Future<ApiCallResponse> call(
+      {String? userId = '',
+      String? authorazationToken = '',
+      String? version = ''}) {
     final body = '''
 {
   "userId": "${userId}"
@@ -649,7 +645,7 @@ class BookmarkListCall {
     return ApiManager.instance.makeApiCall(
       callName: 'bookmarkList',
       apiUrl:
-      '${EnvVariables.instance.firebaseBaseUrl}/getBookMarkedPropertyIds',
+          '${EnvVariables.instance.firebaseBaseUrl}/getBookMarkedPropertyIds',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',
@@ -667,8 +663,7 @@ class BookedPropertiesCall {
     String? userId = '',
     String? locale = '',
     String? authorazationToken = '',
-    String? version ='',
-
+    String? version = '',
   }) {
     final body = '''
 {
@@ -676,13 +671,12 @@ class BookedPropertiesCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'bookedProperties',
-      apiUrl:
-      '${EnvVariables.instance.firebaseBaseUrl}/getBookedProperties',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/getBookedProperties',
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
         'Authorization': 'Bearer ${authorazationToken}',
-        'version' : version
+        'version': version
       },
       params: {},
       body: body,
@@ -692,9 +686,9 @@ class BookedPropertiesCall {
   }
 
   static dynamic result(dynamic response) => getJsonField(
-    response,
-    r'''$.result''',
-  );
+        response,
+        r'''$.result''',
+      );
 }
 
 class OrderDetailsCall {
@@ -703,7 +697,7 @@ class OrderDetailsCall {
     String? userid = '',
     String? locale = '',
     String? authorazationToken = '',
-    String? version ='',
+    String? version = '',
   }) {
     final body = '''
 {
@@ -712,13 +706,12 @@ class OrderDetailsCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'orderDetails',
-      apiUrl:
-      '${EnvVariables.instance.firebaseBaseUrl}/getOrderDetail',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/getOrderDetail',
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
         'Authorization': 'Bearer ${authorazationToken}',
-        'version' : version
+        'version': version
       },
       params: {},
       body: body,
@@ -739,7 +732,7 @@ class BookmarkPropertyCall {
     String? propertyId = '',
     String? locale = '',
     String? authorazationToken = '',
-    String? version ='',
+    String? version = '',
   }) {
     final body = '''
 {
@@ -752,7 +745,7 @@ class BookmarkPropertyCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',
-        'version' : version
+        'version': version
       },
       params: {},
       body: body,
@@ -776,12 +769,12 @@ class GetBookMarkedPropertiesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'getBookMarkedProperties',
       apiUrl:
-      '${EnvVariables.instance.firebaseBaseUrl}/getBookMarkedProperties',
+          '${EnvVariables.instance.firebaseBaseUrl}/getBookMarkedProperties',
       callType: ApiCallType.POST,
       headers: {
         'Accept-Language': '${locale}',
         'Authorization': 'Bearer ${authorazationToken}',
-        'version' : version
+        'version': version
       },
       params: {},
       body: body,
@@ -791,9 +784,9 @@ class GetBookMarkedPropertiesCall {
   }
 
   static dynamic result(dynamic response) => getJsonField(
-    response,
-    r'''$.result''',
-  );
+        response,
+        r'''$.result''',
+      );
 }
 
 class CancelOrderCall {
@@ -829,10 +822,11 @@ class TermsConitionsAndPrivacyPoliciesCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'termsConitionsAndPrivacyPolicies',
-      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/in-app-contents/${pageType}',
+      apiUrl:
+          '${EnvVariables.instance.strapiBaseURl}/api/in-app-contents/${pageType}',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {
         'locale': locale,
@@ -851,7 +845,7 @@ class GetBanksCall {
       apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/banks?',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {
         'locale': locale,
@@ -867,10 +861,10 @@ class GetBanksCall {
       );
 
   static dynamic bankData(dynamic response) => getJsonField(
-    response,
-    r'''$.data''',
-    true,
-  );
+        response,
+        r'''$.data''',
+        true,
+      );
 }
 
 class EmplymentTypeCall {
@@ -879,10 +873,11 @@ class EmplymentTypeCall {
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'emplymentType',
-      apiUrl: '${EnvVariables.instance.strapiBaseURl}/api/employement-statuses?',
+      apiUrl:
+          '${EnvVariables.instance.strapiBaseURl}/api/employement-statuses?',
       callType: ApiCallType.GET,
       headers: {
-        'x-api-key':'06db164b-46ff-44e8-a0b8-c08f8eaa069f',
+        'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
       params: {
         'locale': locale,
@@ -898,10 +893,10 @@ class EmplymentTypeCall {
       );
 
   static dynamic emplymentData(dynamic response) => getJsonField(
-    response,
-    r'''$.data''',
-    true,
-  );
+        response,
+        r'''$.data''',
+        true,
+      );
 }
 
 class ApiPagingParams {
@@ -920,17 +915,17 @@ class ApiPagingParams {
       'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
 }
 
-
-class OtpCalls{
+class OtpCalls {
   static Future<ApiCallResponse> generateOtp({
-    String phoneNumber ='',
+    String phoneNumber = '',
   }) {
     final body = '''
 {
   "phoneNumber": "${phoneNumber}"
 }''';
-    String basicAuth =
-        'Basic ' + base64.encode(utf8.encode('${EnvVariables.instance.jetAdminUserName}:${EnvVariables.instance.jetAdminPassword}'));
+    String basicAuth = 'Basic ' +
+        base64.encode(utf8.encode(
+            '${EnvVariables.instance.jetAdminUserName}:${EnvVariables.instance.jetAdminPassword}'));
     return ApiManager.instance.generateOtpApiCall(
       callName: 'generateOtp',
       apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/generateOtp',
@@ -943,7 +938,7 @@ class OtpCalls{
   }
 
   static Future<ApiCallResponse> verifyOtp({
-    String phoneNumber ='',
+    String phoneNumber = '',
     String otp = '',
     String key = '',
   }) {
@@ -953,8 +948,9 @@ class OtpCalls{
   "otp": "${otp}",
   "key": "${key}"
 }''';
-    String basicAuth =
-        'Basic ' + base64.encode(utf8.encode('${EnvVariables.instance.jetAdminUserName}:${EnvVariables.instance.jetAdminPassword}'));
+    String basicAuth = 'Basic ' +
+        base64.encode(utf8.encode(
+            '${EnvVariables.instance.jetAdminUserName}:${EnvVariables.instance.jetAdminPassword}'));
     return ApiManager.instance.generateOtpApiCall(
       callName: 'verifyOtp',
       apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/verifyOtp',
@@ -965,12 +961,13 @@ class OtpCalls{
       headers: <String, String>{'authorization': basicAuth},
     );
   }
+
   static Future<ApiCallResponse> verifyPhone({
-    String phoneNumber ='',
+    String phoneNumber = '',
     String otp = '',
     String key = '',
   }) {
-    String idToken =  FFAppState().authToken;
+    String idToken = FFAppState().authToken;
     final body = '''
 {
   "phoneNumber": "${phoneNumber}",
@@ -991,11 +988,10 @@ class OtpCalls{
   }
 
   static Future<ApiCallResponse> updatePhone({
-    String newPhoneNumber ='',
-    String idToken ='',
-
+    String newPhoneNumber = '',
+    String idToken = '',
   }) {
-    String idToken =  FFAppState().authToken;
+    String idToken = FFAppState().authToken;
     final body = '''
 {
   "newPhoneNumber": "$newPhoneNumber"
@@ -1013,21 +1009,20 @@ class OtpCalls{
     );
   }
 
-
   static dynamic tokenFromOtp(dynamic response) => getJsonField(
-    response,
-    r'''$.tokenKey''',
-  );
+        response,
+        r'''$.tokenKey''',
+      );
   static dynamic generateSuccess(dynamic response) => getJsonField(
-    response,
-    r'''$.success''',
-  );
+        response,
+        r'''$.success''',
+      );
   static dynamic generateKey(dynamic response) => getJsonField(
-    response,
-    r'''$.key''',
-  );
+        response,
+        r'''$.key''',
+      );
   static dynamic verifyOtpStatus(dynamic response) => getJsonField(
-    response,
-    r'''$.error''',
-  );
+        response,
+        r'''$.error''',
+      );
 }

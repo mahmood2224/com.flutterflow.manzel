@@ -12,6 +12,7 @@ import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_result_widget.dart';
+import '../components/something_went_wrong_widget.dart';
 import '../enviorment/env_variables.dart';
 import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -182,6 +183,8 @@ class _OffersWidgetState extends State<OffersWidget> {
   }
 
   Future<void> getOffersCall() async {
+    isPageLoading = true;
+    setState(() {});
     isInternetAvailable = await isInternetConnected();
     if (isInternetAvailable ?? false) {
       getOfferResponse = await GetOffersCall?.call(
@@ -381,6 +384,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                           ),
                         ),
                       );
+                    } else if (getOfferResponse?.statusCode != 200 &&
+                        getOfferResponse?.statusCode != null) {
+                      return SomethingWentWrongWidget(onTryAgain: () {
+                        getOffersCall();
+                      });
                     }
                     return Expanded(
                       child: AuthUserStreamWidget(
@@ -2354,11 +2362,14 @@ class _OffersWidgetState extends State<OffersWidget> {
                                           );
                                         },
                                       );
-                                    } else if ((activeOffers?.isNotEmpty ??
-                                            false) &&
-                                        (activeOffers != null) &&
-                                        (getOfferResponse?.statusCode ==
-                                            200)) {}
+                                    } else if (getOfferResponse?.statusCode !=
+                                            200 &&
+                                        getOfferResponse?.statusCode != null) {
+                                      return SomethingWentWrongWidget(
+                                          onTryAgain: () {
+                                        // bookedPropertiesCall();
+                                      });
+                                    }
                                     return SizedBox();
                                   },
                                 ),

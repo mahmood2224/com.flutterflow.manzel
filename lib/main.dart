@@ -40,13 +40,13 @@ void main() async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
-   // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     runApp(MyApp());
   }, (error, stackTrace) {
     //FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
- // await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   await EnvVariables.instance.initialise();
   //await printBuildNumber();
   Eraser.resetBadgeCountButKeepNotificationsInCenter();
@@ -103,8 +103,8 @@ class _MyAppState extends State<MyApp> {
     //   print('Your FCM token:- $value');
     // });
     handleDynamicLinks();
-   // _initializeFlutterFire();
-
+    //   _initializeFlutterFire();
+    _initializeFlutterFire();
   }
 
   @override
@@ -114,23 +114,22 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
-  // Future<void> _initializeFlutterFire() async {
-  //   if (_kTestingCrashlytics) {
-  //     // Force enable crashlytics collection enabled if we're testing it.
-  //     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  //   } else {
-  //     // Else only enable it in non-debug builds.
-  //     // You could additionally extend this to allow users to opt-in.
-  //  //   await FirebaseCrashlytics.instance
-  //     //    .setCrashlyticsCollectionEnabled(!kDebugMode);
-  //     await FirebaseCrashlytics.instance
-  //         .setCrashlyticsCollectionEnabled(true);
-  //   }
-  //
-  //   // if (_kShouldTestAsyncErrorOnInit) {
-  //   //   await _testAsyncErrorOnInit();
-  //   // }
-  // }
+  Future<void> _initializeFlutterFire() async {
+    if (_kTestingCrashlytics) {
+      // Force enable crashlytics collection enabled if we're testing it.
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    } else {
+      // Else only enable it in non-debug builds.
+      // You could additionally extend this to allow users to opt-in.
+      //   await FirebaseCrashlytics.instance
+      //    .setCrashlyticsCollectionEnabled(!kDebugMode);
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    }
+
+    // if (_kShouldTestAsyncErrorOnInit) {
+    //   await _testAsyncErrorOnInit();
+    // }
+  }
 
   void setLocale(String language) =>
       setState(() => _locale = createLocale(language));
@@ -173,8 +172,6 @@ class _MyAppState extends State<MyApp> {
       debugPrint('Error while deeplinking ###### ${error.toString()}');
     });
   }
-
-
 
   void _handleDeepLinks(PendingDynamicLinkData? data) {
     Uri? deeplinkUri = data?.link;
@@ -229,15 +226,15 @@ class _NavBarPageState extends State<NavBarPage> {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-bool isInternetAvailable = await isInternetConnected();
-if(isInternetAvailable){
-  await versionCheck(context);
-}
-
+      bool isInternetAvailable = await isInternetConnected();
+      if (isInternetAvailable) {
+        await versionCheck(context);
+      }
     });
     _currentPageName = widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
   }
+
   Future<void> showUpdateDialog(
       BuildContext context, bool isForceUpdate, String packageName) async {
     await showDialog<void>(
@@ -250,24 +247,24 @@ if(isInternetAvailable){
                 ? "New Update Available"
                 : " تحديث جديد متاح ",
             style: FlutterFlowTheme.of(context).subtitle2.override(
-              fontFamily: 'AvenirArabic',
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.w800,
-              useGoogleFonts: false,
-            ),
+                  fontFamily: 'AvenirArabic',
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  useGoogleFonts: false,
+                ),
           ),
           content: Text(
             FFAppState().locale == 'en'
                 ? 'Your version of app is out of date kindly update'
                 : 'يتوفر تحديث جديد لتطبيق منزل، يرجى تحديث التطبيق الى الإصدار الأحدث',
             style: FlutterFlowTheme.of(context).subtitle2.override(
-              fontFamily: 'AvenirArabic',
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.w300,
-              useGoogleFonts: false,
-            ),
+                  fontFamily: 'AvenirArabic',
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                  useGoogleFonts: false,
+                ),
           ),
           actions: [
             TextButton(
@@ -285,30 +282,30 @@ if(isInternetAvailable){
                 child: Text(
                   FFAppState().locale == 'en' ? 'Update' : 'تحديث',
                   style: FlutterFlowTheme.of(context).subtitle2.override(
-                    fontFamily: 'AvenirArabic',
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w300,
-                    useGoogleFonts: false,
-                  ),
+                        fontFamily: 'AvenirArabic',
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                        useGoogleFonts: false,
+                      ),
                 )),
             isForceUpdate
                 ? SizedBox.shrink()
                 : TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                FFAppState().locale == 'en' ? 'Later' : 'في وقت لاحق',
-                style: FlutterFlowTheme.of(context).subtitle2.override(
-                  fontFamily: 'AvenirArabic',
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300,
-                  useGoogleFonts: false,
-                ),
-              ),
-            ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      FFAppState().locale == 'en' ? 'Later' : 'في وقت لاحق',
+                      style: FlutterFlowTheme.of(context).subtitle2.override(
+                            fontFamily: 'AvenirArabic',
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300,
+                            useGoogleFonts: false,
+                          ),
+                    ),
+                  ),
           ],
         );
       },
@@ -329,9 +326,9 @@ if(isInternetAvailable){
     await remoteConfig.activate();
     await remoteConfig.fetchAndActivate();
     final remote_config_settings =
-    await remoteConfig.getValue('application_version').asString();
+        await remoteConfig.getValue('application_version').asString();
     final current_remote_version_JSON =
-    jsonDecode(remote_config_settings) as Map;
+        jsonDecode(remote_config_settings) as Map;
     FFAppState().buildNo = int.parse(info.buildNumber);
     FFAppState().buildVersion = info.version;
     bool isAndriod = Platform.isAndroid ? true : false;
@@ -341,13 +338,13 @@ if(isInternetAvailable){
         : 'minimum_app_supported_version_iOS');
     //android_version or iOS version inside application_version JSON
     final recent_version = current_remote_version_JSON[
-    isAndriod ? 'android_version' : 'iOS_version'];
+        isAndriod ? 'android_version' : 'iOS_version'];
     //Build Number
     final current_remote_build = current_remote_version_JSON[
-    isAndriod ? 'android_build_number' : 'i0S_build_number'];
+        isAndriod ? 'android_build_number' : 'i0S_build_number'];
     //Backend version
     final current_remote_backend_version =
-    current_remote_version_JSON['supported_backend_version'];
+        current_remote_version_JSON['supported_backend_version'];
     //Force Update
     final isForceUpdate = current_remote_version_JSON['is_force_update'];
     //Installed App version
@@ -379,8 +376,7 @@ if(isInternetAvailable){
             int.parse(arr_installed_version[2])) {
           showUpdateDialog(context, true, appPackageName);
           return;
-        }
-        else if (recent_version != installed_app_version) {
+        } else if (recent_version != installed_app_version) {
           if (int.parse(arr_current_version[0]) >
               int.parse(arr_installed_version[0])) {
             showUpdateDialog(context, false, appPackageName);
@@ -404,8 +400,7 @@ if(isInternetAvailable){
   @override
   Widget build(BuildContext context) {
     final tabs = {
-
-     'HomeScreen': HomeScreenWidget(),
+      'HomeScreen': HomeScreenWidget(),
       'MyProperties': MyPropertiesWidget(),
       'Offers': OffersWidget(),
       'Profile': ProfileWidget(),
