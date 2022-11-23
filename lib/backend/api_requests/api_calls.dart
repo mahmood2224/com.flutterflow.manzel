@@ -965,12 +965,37 @@ class OtpCalls{
       headers: <String, String>{'authorization': basicAuth},
     );
   }
+  static Future<ApiCallResponse> verifyPhone({
+    String phoneNumber ='',
+    String otp = '',
+    String key = '',
+  }) {
+    String idToken =  FFAppState().authToken;
+    final body = '''
+{
+  "phoneNumber": "${phoneNumber}",
+  "otp": "${otp}",
+  "key": "${key}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'verifyPhone',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/verifyPhone',
+      callType: ApiCallType.POST,
+      bodyType: BodyType.JSON,
+      headers: {
+        'Authorization': 'Bearer $idToken',
+      },
+      returnBody: true,
+      body: body,
+    );
+  }
 
   static Future<ApiCallResponse> updatePhone({
     String newPhoneNumber ='',
     String idToken ='',
 
   }) {
+    String idToken =  FFAppState().authToken;
     final body = '''
 {
   "newPhoneNumber": "$newPhoneNumber"
