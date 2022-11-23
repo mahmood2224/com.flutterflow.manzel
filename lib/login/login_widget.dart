@@ -33,6 +33,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   int count =0;
   bool? isInternetAvailable;
+  bool isApiCalled = false;
 
   @override
   void initState() {
@@ -441,6 +442,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 if((OtpCalls.generateSuccess(generateOtpResponse.jsonBody))=='success') {
                                   String verificationKey = OtpCalls.generateKey(generateOtpResponse.jsonBody);
                                   context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberController!.text,'verificationKey':verificationKey});
+                                  isApiCalled = true;
+                                  setState((){});
                                 }
                                 // await beginPhoneAuth(
                                 //   context: context,
@@ -483,7 +486,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                             child:
                                 ValueListenableBuilder<bool>(
                                     builder: (BuildContext context, bool value, Widget? child){
-                                      return isLoading.value?Padding(
+                                      return (isLoading.value&&isApiCalled)?Padding(
                                         padding: const EdgeInsets.all(5.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
