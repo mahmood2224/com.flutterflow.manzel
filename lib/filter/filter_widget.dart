@@ -3,7 +3,6 @@ import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
-import '../components/something_went_wrong_widget.dart';
 import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -14,13 +13,10 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class FilterWidget extends StatefulWidget {
   const FilterWidget({Key? key, this.homeScreenLength}) : super(key: key);
   final int? homeScreenLength;
-  //final dynamic cityList;
 
   @override
   _FilterWidgetState createState() => _FilterWidgetState();
@@ -42,8 +38,6 @@ class _FilterWidgetState extends State<FilterWidget> {
   double? mxRange;
   ApiCallResponse? response;
   var alertCalled = 0;
-
-  //= SfRangeValues(0, 2000000);
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -51,7 +45,6 @@ class _FilterWidgetState extends State<FilterWidget> {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Filter'});
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-    //installmentRange = SfRangeValues(start, end)
     propertiesCall();
     cityListCall();
   }
@@ -364,16 +357,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         hidesUnderline: true,
                                       );
                                     }
-                                    else if ((citiesListCityListResponse
-                                        ?.statusCode !=
-                                        200) &&
-                                        (citiesListCityListResponse?.statusCode !=
-                                            null)) {
-                                      return SomethingWentWrongWidget(
-                                        onTryAgain: (){
-                                        },
-                                      );
-                                    }
                                     return SizedBox();
 
                                   },
@@ -646,15 +629,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                                                 )),
                                             1.0,
                                           )),
-                                      //interval: 2000,
-                                      //stepSize: 1,
                                       showTicks: false,
                                       showLabels: false,
-                                      //enableTooltip: true,
                                       activeColor: FlutterFlowTheme.of(context)
                                           .primaryColor,
-                                      //inactiveColor: AppColors.colorDBDBDB,
-                                      //minorTicksPerInterval: 1,
                                       onChanged: (SfRangeValues values) {
                                         setState(() {
                                           installmentRange = values;
@@ -666,86 +644,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 ),
                               ),
                             ),
-                            // Expanded(
-                            //   child: Padding(
-                            //     padding:
-                            //         EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                            //     child: Column(
-                            //       mainAxisSize: MainAxisSize.max,
-                            //       crossAxisAlignment: CrossAxisAlignment.start,
-                            //       children: [
-                            //         Text(
-                            //           FFLocalizations.of(context).getText(
-                            //             'q62w4vtf' /* Minimum */,
-                            //           ),
-                            //           style: FlutterFlowTheme.of(context)
-                            //               .bodyText1
-                            //               .override(
-                            //                 fontFamily: 'AvenirArabic',
-                            //                 fontWeight: FontWeight.normal,
-                            //                 useGoogleFonts: false,
-                            //               ),
-                            //         ),
-                            //         Slider(
-                            //           activeColor: FlutterFlowTheme.of(context)
-                            //               .primaryColor,
-                            //           inactiveColor: Color(0xFF9E9E9E),
-                            //           min: 0,
-                            //           max: 200000,
-                            //           value: sliderValue1 ??=
-                            //               valueOrDefault<double>(
-                            //             functions
-                            //                 .formattedDouble(valueOrDefault<int>(
-                            //               getJsonField(
-                            //                 columnPropertiesResponse.jsonBody,
-                            //                 r'''$.meta.max_price''',
-                            //               ),
-                            //               1,
-                            //             )),
-                            //             1.0,
-                            //           ),
-                            //           onChanged: (newValue) {
-                            //             setState(() => sliderValue1 = newValue);
-                            //           },
-                            //         ),
-                            //         Text(
-                            //           FFLocalizations.of(context).getText(
-                            //             'wlsjihmj' /* Maximum */,
-                            //           ),
-                            //           style: FlutterFlowTheme.of(context)
-                            //               .bodyText1
-                            //               .override(
-                            //                 fontFamily: 'AvenirArabic',
-                            //                 fontWeight: FontWeight.normal,
-                            //                 useGoogleFonts: false,
-                            //               ),
-                            //         ),
-                            //         Slider(
-                            //           activeColor: FlutterFlowTheme.of(context)
-                            //               .primaryColor,
-                            //           inactiveColor: Color(0xFF9E9E9E),
-                            //           min: 0,
-                            //           max: 200000,
-                            //           value: sliderValue2 ??=
-                            //               valueOrDefault<double>(
-                            //             functions
-                            //                 .formattedDouble(valueOrDefault<int>(
-                            //               getJsonField(
-                            //                 columnPropertiesResponse.jsonBody,
-                            //                 r'''$.meta.max_price''',
-                            //               ),
-                            //               1,
-                            //             )),
-                            //             1.0,
-                            //           ),
-                            //           onChanged: (newValue) {
-                            //             setState(() => sliderValue2 = newValue);
-                            //           },
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
@@ -812,10 +710,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                                             FFLocalizations.of(context).getText(
                                               '8x7rkqnv' /* Un-furnished */,
                                             )),
-                                        // ChipData(
-                                        //     FFLocalizations.of(context).getText(
-                                        //   'mhyiav30' /* Semi-furnished */,
-                                        // ))
                                       ],
                                       onChanged: (val) => setState(
                                               () => isFurnishingValues = val),
@@ -866,7 +760,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             isInternetAvailable = await isInternetConnected();
-                            if(true??false){
+                            if(isInternetAvailable??false){
                               logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
                               if (functions.validateInstallmentRange(
                                   double.parse(installmentRange!.start.toString()),
@@ -985,20 +879,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                   ),
                 );
               }
-              else if ((columnPropertiesResponse
-                  ?.statusCode !=
-                  200) &&
-                  (columnPropertiesResponse?.statusCode !=
-                      null)) {
-                return SomethingWentWrongWidget(
-                  onTryAgain: (){
-                  },
-                );
-              }
               return SizedBox();
-             // final columnPropertiesResponse = snapshot.data!;
-             // response = columnPropertiesResponse;
-
             },
           ),
         ),

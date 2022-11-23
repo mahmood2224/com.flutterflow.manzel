@@ -6,19 +6,15 @@ import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
 import '../components/no_result_widget.dart';
-import '../components/something_went_wrong_widget.dart';
 import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:manzel/app_state.dart' as globalVar;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FilterResultsWidget extends StatefulWidget {
@@ -179,7 +175,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                 children: [
                   Builder(
                     builder: (context) {
-                      // Customize what your widget looks like when it's loading.
                       if (isPropertiesLoading) {
                         return Center(
                           child: SizedBox(
@@ -310,7 +305,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 14, 0, 0),
                   child: Builder(
                     builder: (context) {
-                      // Customize what your widget looks like when it's loading.
                       if (isPropertiesLoading) {
                         return Center(
                           child: SizedBox(
@@ -323,7 +317,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                           ),
                         );
                       }
-                   //   final listViewPropertiesResponse = snapshot.data!;
                       return Builder(
                         builder: (context) {
                           if (properties?.isEmpty??false) {
@@ -363,12 +356,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                       16, 0, 16, 25),
                                   child: InkWell(
                                     onTap: () async {
-                                      // if (!functions.conditionalVisibility(
-                                      //     getJsonField(
-                                      //       propertiesItem,
-                                      //       r'''$.attributes.property_status''',
-                                      //     ).toString(),
-                                      //     'Soon')) {
                                       videoPlayers[propertiesIndex +
                                           widget.homeScreenLength!]
                                           .pause();
@@ -502,11 +489,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                               .isInitialized) {
                                                                             otherPlayer
                                                                                 .pause();
-                                                                            // var dataSource = otherPlayer.dataSource;
-                                                                            // otherPlayer.dispose();
-                                                                            // otherPlayer =
-                                                                            //     VideoPlayerController.network(dataSource);
-
                                                                           } else {
                                                                             int indexOfOtherPlayer= videoPlayers.indexOf(otherPlayer);
                                                                             if(((currentPropertyindex+1)<=(videoPlayers.length))&&(indexOfOtherPlayer==(currentPropertyindex+1))){
@@ -515,10 +497,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                                     .initialize();
                                                                               }
                                                                             }
-                                                                            // otherPlayer
-                                                                            //     .initialize()
-                                                                            //     .then((value) =>
-                                                                            //         otherPlayer.pause());
                                                                           }
                                                                         }
                                                                       });
@@ -530,36 +508,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
 
                                                               print(
                                                                   "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
-                                                              // Future.delayed(const Duration(
-                                                              //     seconds: 6), () {
-                                                              //   _currentController =
-                                                              //   videocontrollerMap[(propertiesIndex)
-                                                              //       .toString()];
-                                                              //   _currentController?.play();
-                                                              // });
-                                                              // setState(() {
-                                                              //   if (_currentController !=
-                                                              //       null) {
-                                                              //     _currentController =
-                                                              //         videocontrollerMap[
-                                                              //             (propertiesIndex)
-                                                              //                 .toString()];
-                                                              //     _currentController?.play();
-                                                              //     videoControllerSet!
-                                                              //         .forEach((otherPlayer) {
-                                                              //       if (otherPlayer !=
-                                                              //               _currentController &&
-                                                              //           otherPlayer
-                                                              //               .value.isPlaying) {
-                                                              //         setState(() {
-                                                              //           otherPlayer.pause();
-                                                              //         });
-                                                              //       }
-                                                              //     });
-                                                              //     print(
-                                                              //         "Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
-                                                              //   }
-                                                              // });
                                                             } else {
                                                               isMuted.value
                                                                   ? videoPlayers[widget
@@ -601,10 +549,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                             .isInitialized) {
                                                                           otherPlayer
                                                                               .pause();
-                                                                          // var dataSource = otherPlayer.dataSource;
-                                                                          // otherPlayer.dispose();
-                                                                          // otherPlayer =
-                                                                          //     VideoPlayerController.network(dataSource);
 
                                                                         }
                                                                       }
@@ -613,34 +557,9 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                             }
                                                             //autoplayVal = false;
                                                           }
-                                                          //onVisibilityChanged: (visibilityInfo) {
-                                                          // var visiblePercentage =
-                                                          //     visibilityInfo.visibleFraction *
-                                                          //         100;
-                                                          // debugPrint(
-                                                          //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
                                                         },
                                                         child:
                                                         FlutterFlowVideoPlayer(
-                                                          // videoControllerSet =
-                                                          //     videoControllerValue;
-                                                          //
-                                                          // print(
-                                                          //     "videoControllerSet : ${videoControllerSet}");
-                                                          // print(
-                                                          //     "videoControllerSet_items : ${videoControllerSet?.length}");
-                                                          // //print("videoControllerSet.last :  ${videoControllerSet.last}");
-                                                          // //print("propertiesIndex : ${propertiesIndex.toString()}");
-                                                          // //print("videocontrollerMap : ${videocontrollerMap.length}");
-                                                          // videocontrollerMap[propertiesIndex
-                                                          //         .toString()] =
-                                                          //     videoControllerSet!.last;
-                                                          // print(
-                                                          //     "videocontrollerMap : ${videocontrollerMap.length}");
-                                                          // _currentController =
-                                                          //     videocontrollerMap['0'];
-                                                          //
-
                                                           path: getJsonField(
                                                             propertiesItem,
                                                             r'''$.attributes.video_manifest_uri''',
@@ -675,7 +594,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                 AlignmentDirectional(0, 0),
                                                 child: InkWell(
                                                   onTap: () {
-                                                    //print("pause value>>>>>>>>>>>>> $isPaused");
                                                     isPaused =
                                                     isPaused ? false : true;
 
@@ -698,11 +616,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                         .size
                                                         .height *
                                                         0.3,
-                                                    // color: Colors.transparent,
-                                                    // child: ValueListenableBuilder(
-                                                    //   builder: (BuildContext context,
-                                                    //       bool value, Widget? child) {
-                                                    //     return
                                                     child: Center(
                                                       child: Container(
                                                         constraints:
@@ -733,9 +646,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                               0.0),
                                                           size: 40,
                                                         ),
-                                                        // );
-                                                        //},
-                                                        //valueListenable: isPaused,
                                                       ),
                                                     ),
                                                   ),
@@ -828,28 +738,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                             .setVolume(100);
                                                         isMuted.value = false;
                                                       }
-                                                      //   setState(() {
-
-                                                      //     Future.delayed(
-                                                      //             Duration(seconds: 3))
-                                                      //         .then((value) {
-                                                      //       isMutedIcon.value = false;
-                                                      //       setState(() {});
-                                                      //     });
-                                                      //   });
-                                                      // } else {
-                                                      //   videoPlayers[propertiesIndex]
-                                                      //       ?.setVolume(100);
-                                                      //   setState(() {
-                                                      //     isMuted = false;
-                                                      //     Future.delayed(
-                                                      //             Duration(seconds: 3))
-                                                      //         .then((value) {
-                                                      //       isMutedIcon.value = false;
-                                                      //       setState(() {});
-                                                      //     });
-                                                      //   });
-                                                      // }
                                                     }
                                                   },
                                                 ),
@@ -1236,56 +1124,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                   ),
                                                 ),
                                               ),
-                                              // if (functions.conditionalVisibility(
-                                              //     getJsonField(
-                                              //       propertiesItem,
-                                              //       r'''$.attributes.property_status''',
-                                              //     ).toString(),
-                                              //     'Available'))
-                                              // Align(
-                                              //   alignment:
-                                              //   AlignmentDirectional(-0.85, -0.89),
-                                              //   child: Container(
-                                              //     width: 80,
-                                              //     height: 26,
-                                              //     decoration: BoxDecoration(
-                                              //       color: FlutterFlowTheme.of(context).secondaryGreen,
-                                              //       borderRadius:
-                                              //       BorderRadius.circular(7),
-                                              //     ),
-                                              //     child: Row(
-                                              //       mainAxisSize: MainAxisSize.max,
-                                              //       mainAxisAlignment:
-                                              //       MainAxisAlignment.center,
-                                              //       children: [
-                                              //         Padding(
-                                              //           padding: EdgeInsetsDirectional
-                                              //               .fromSTEB(10, 1, 10, 1),
-                                              //           child: Text(
-                                              //             FFLocalizations.of(context)
-                                              //                 .getText(
-                                              //               '2cud1oqj' /* Available */,
-                                              //             ),
-                                              //             style:
-                                              //             FlutterFlowTheme.of(context)
-                                              //                 .bodyText1
-                                              //                 .override(
-                                              //               fontFamily:
-                                              //               'AvenirArabic',
-                                              //               color: FlutterFlowTheme
-                                              //                   .of(context)
-                                              //                   .white,
-                                              //               fontSize: 13,
-                                              //               fontWeight:
-                                              //               FontWeight.w500,
-                                              //               useGoogleFonts: false,
-                                              //             ),
-                                              //           ),
-                                              //         ),
-                                              //       ],
-                                              //     ),
-                                              //   ),
-                                              // ),
                                               if (functions.conditionalVisibility(
                                                   getJsonField(
                                                     propertiesItem,
@@ -1747,15 +1585,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                     ),
                                   ),
                                 );
-                              },
-                            );
-                          }else if ((listViewPropertiesResponse
-                              ?.statusCode !=
-                              200) &&
-                              (listViewPropertiesResponse?.statusCode !=
-                                  null)) {
-                            return SomethingWentWrongWidget(
-                              onTryAgain: (){
                               },
                             );
                           }

@@ -104,6 +104,7 @@ class _MyAppState extends State<MyApp> {
     // });
     handleDynamicLinks();
  //   _initializeFlutterFire();
+    _initializeFlutterFire();
 
   }
 
@@ -114,23 +115,23 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
-  // Future<void> _initializeFlutterFire() async {
-  //   if (_kTestingCrashlytics) {
-  //     // Force enable crashlytics collection enabled if we're testing it.
-  //     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  //   } else {
-  //     // Else only enable it in non-debug builds.
-  //     // You could additionally extend this to allow users to opt-in.
-  //  //   await FirebaseCrashlytics.instance
-  //     //    .setCrashlyticsCollectionEnabled(!kDebugMode);
-  //     await FirebaseCrashlytics.instance
-  //         .setCrashlyticsCollectionEnabled(true);
-  //   }
-  //
-  //   // if (_kShouldTestAsyncErrorOnInit) {
-  //   //   await _testAsyncErrorOnInit();
-  //   // }
-  // }
+  Future<void> _initializeFlutterFire() async {
+    if (_kTestingCrashlytics) {
+      // Force enable crashlytics collection enabled if we're testing it.
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    } else {
+      // Else only enable it in non-debug builds.
+      // You could additionally extend this to allow users to opt-in.
+   //   await FirebaseCrashlytics.instance
+      //    .setCrashlyticsCollectionEnabled(!kDebugMode);
+      await FirebaseCrashlytics.instance
+          .setCrashlyticsCollectionEnabled(true);
+    }
+
+    // if (_kShouldTestAsyncErrorOnInit) {
+    //   await _testAsyncErrorOnInit();
+    // }
+  }
 
   void setLocale(String language) =>
       setState(() => _locale = createLocale(language));

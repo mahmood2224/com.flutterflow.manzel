@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
-import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sendbird_sdk/constant/enums.dart';
@@ -2355,11 +2354,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                           );
                                         },
                                       );
-                                    }
-                                    else if((getOfferResponse?.statusCode!=200)&&(getOfferResponse!=null)){
-                                      return SomethingWentWrongWidget(onTryAgain: (){
-
-                                      });
                                     }
                                     return SizedBox();
                                   },

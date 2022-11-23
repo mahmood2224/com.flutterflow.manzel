@@ -56,30 +56,6 @@ class _CommonAlertDialogState extends State<CommonAlertDialog> {
               'settings'), /* Cancel */
           ),
         ),
-          // FFButtonWidget(
-          //   onPressed: widget.onCancel!,
-          //   text: FFLocalizations.of(context).getText(
-          //     't7s7qd09' /* Cancel */,
-          //   ),
-          //   options: FFButtonOptions(
-          //     height: 38,
-          //     padding: EdgeInsetsDirectional.fromSTEB(9, 0, 0, 0),
-          //     color: FlutterFlowTheme.of(context).primaryColor,
-          //     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-          //       fontFamily: 'AvenirArabic',
-          //       color: Colors.white,
-          //       fontSize: 15,
-          //       fontWeight: FontWeight.w500,
-          //       useGoogleFonts: false,
-          //     ),
-          //     borderSide: BorderSide(
-          //       color: Colors.transparent,
-          //       width: 1,
-          //     ),
-          //     borderRadius: BorderRadius.circular(8),
-          //   ),
-          // ),
-
       ],
     );
   }
