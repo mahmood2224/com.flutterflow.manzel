@@ -367,14 +367,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  // Text(
-                                  //   FFLocalizations.of(context).getText(
-                                  //     'qnr0o42y' /* Where are you looking? */,
-                                  //   ),
-                                  //   textAlign: TextAlign.start,
-                                  //   style:
-                                  //       FlutterFlowTheme.of(context).bodyText1,
-                                  // ),
+                                  Text(
+                                    FFLocalizations.of(context).getText(
+                                      'qnr0o42y' /* Where are you looking? */,
+                                    ),
+                                    textAlign: TextAlign.start,
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
