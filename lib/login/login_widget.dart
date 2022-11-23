@@ -410,7 +410,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       child: Container(
                         width: double.infinity,
                         height: 56,
-                        child: (isInternetAvailable??false)?ElevatedButton(
+                        child: ElevatedButton(
                           onPressed: () async {
                             isInternetAvailable = await isInternetConnected();
                             setState((){});
@@ -553,7 +553,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               )),
                             ),
                             ),
-                          ):SizedBox(),
+                          ),
                       ),
                       ),
                     ),
