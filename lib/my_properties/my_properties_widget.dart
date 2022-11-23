@@ -2,6 +2,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
 import 'package:manzel/confirmation/confirmation_widget.dart';
 import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
@@ -45,7 +46,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   bool? isInternetAvailable;
   List? bookedProperties;
   List? bookmarkedProperties;
-  bool isLoading = true;
+  bool isBookedPropertiesLoading = true;
+  bool isBookMarkedProperties =true;
   var alertCalled = 0;
   var height;
 
@@ -71,21 +73,23 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
 
 
   Future<void> bookedPropertiesCall() async {
+    isBookedPropertiesLoading = true;
+    setState((){});
     isInternetAvailable = await isInternetConnected();
     if (isInternetAvailable ?? false) {
       bookedPropertiesApiResponse = await BookedPropertiesCall.call(
-        userId: currentUserUid,
+        userId:currentUserUid,
         locale: FFAppState().locale,
         authorazationToken: FFAppState().authToken,
         version: FFAppState().apiVersion,
       );
-      isLoading = false;
+      isBookedPropertiesLoading = false;
       setState(() {});
       bookedProperties = BookedPropertiesCall.result(
         bookedPropertiesApiResponse?.jsonBody,
       ).toList();
     } else if((!(isInternetAvailable??false))&&loggedIn) {
-      isLoading = false;
+      isBookedPropertiesLoading = false;
       setState(() {});
       bookedPropertiesApiResponse = null;
       alertCalled++;
@@ -105,22 +109,24 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   }
 
   Future<void> getBookMarkedPropertiesCall() async {
+    isBookMarkedProperties = true;
+    setState((){});
     isInternetAvailable = await isInternetConnected();
     if (isInternetAvailable ?? false) {
       getBookMarkedPropertiesApiResponse =
           await GetBookMarkedPropertiesCall.call(
-        userId: currentUserUid,
+        userId: '',//currentUserUid,
         locale: FFAppState().locale,
         authorazationToken: FFAppState().authToken,
         version: FFAppState().apiVersion,
       );
-      isLoading = false;
+      isBookMarkedProperties = false;
       setState(() {});
       bookmarkedProperties = GetBookMarkedPropertiesCall.result(
         getBookMarkedPropertiesApiResponse?.jsonBody,
       ).toList();
     } else if(loggedIn) {
-      isLoading = false;
+      isBookMarkedProperties = false;
       setState(() {});
       getBookMarkedPropertiesApiResponse = null;
       alertCalled++;
@@ -323,7 +329,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                           children: [
                             Builder(
                               builder: (context) {
-                                if (isLoading) {
+                                if (isBookedPropertiesLoading) {
                                   return Center(
                                     child: SizedBox(
                                       width: 50,
@@ -1408,12 +1414,31 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     },
                                   );
                                 }
+                                else if(bookedPropertiesApiResponse?.statusCode!=200&&bookedPropertiesApiResponse?.statusCode!=null){
+                                  return SomethingWentWrongWidget(
+                                      onTryAgain: (){
+                                        bookedPropertiesCall();
+                                      });
+                                }
                                 return SizedBox();
                               },
                             ),
                             Builder(
                               builder: (context) {
-                                if (bookmarkedProperties?.isEmpty ?? false) {
+                                if (isBookMarkedProperties) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: SpinKitRipple(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 50,
+                                      ),
+                                    ),
+                                  );
+                                }
+                               else if (bookmarkedProperties?.isEmpty ?? false) {
                                   return Center(
                                     child: Container(
                                       width: MediaQuery.of(context).size.width,
@@ -1432,7 +1457,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       ),
                                     ),
                                   );
-                                } else if ((bookmarkedProperties != null) &&
+                                }
+                                else if ((bookmarkedProperties != null) &&
                                     (bookmarkedProperties?.isNotEmpty ??
                                         false)) {
                                   return ListView.builder(
@@ -1938,24 +1964,14 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       );
                                     },
                                   );
-                                } else if (isLoading) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitRipple(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
-                                      ),
-                                    ),
-                                  );
                                 }
-                                return Container(
-                                  height: 100,
-                                  width: 100,
-                                  color: Colors.white,
-                                );
+                                else if(bookedPropertiesApiResponse?.statusCode!=200&&bookedPropertiesApiResponse?.statusCode!=null){
+                                  return SomethingWentWrongWidget(
+                                      onTryAgain: (){
+                                        bookedPropertiesCall();
+                                      });
+                                }
+                                return SizedBox();
                               },
                             )
                           ],
