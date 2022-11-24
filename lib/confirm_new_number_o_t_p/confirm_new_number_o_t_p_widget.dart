@@ -56,10 +56,15 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
       String newPhoneNumber = widget.phoneNumber ?? '';
       ApiCallResponse? response = await OtpCalls.updatePhone(
           idToken: idToken, newPhoneNumber: newPhoneNumber);
-      print(response);
+      if(response.statusCode==403){
+        unAuthorizedUser(context,mounted);
+      }
     } else {
       ApiCallResponse? generateOtpResponse =
           await OtpCalls.generateOtp(phoneNumber: widget.phoneNumber ?? '');
+      if(generateOtpResponse.statusCode==403){
+        unAuthorizedUser(context,mounted);
+      }
       veriKey = OtpCalls.generateKey(generateOtpResponse.jsonBody);
       setState(() {});
     }
@@ -244,37 +249,39 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                           otp: otp,
                                           key: veriKey ?? '');
                                   if ((verifyOtpResponse.statusCode == 200)) {
-                                    String tokenFromOtpSuccess =
-                                        OtpCalls.tokenFromOtp(
-                                            verifyOtpResponse.jsonBody);
-                                    try {
-                                      userCredential = await FirebaseAuth
-                                          .instance
-                                          .signInWithCustomToken(
-                                              tokenFromOtpSuccess);
-                                      final user = await FirebaseAuth
-                                          .instance.currentUser;
-                                      final idToken = await user?.getIdToken();
-                                      FFAppState().authToken = idToken!;
-                                      print(idToken);
-                                      print("Sign-in successful.");
-                                      print(userCredential);
-                                    } on FirebaseAuthException catch (e) {
-                                      switch (e.code) {
-                                        case "invalid-custom-token":
-                                          print(
-                                              "The supplied token is not a Firebase custom auth token.");
-                                          break;
-                                        case "custom-token-mismatch":
-                                          print(
-                                              "The supplied token is for a different Firebase project.");
-                                          break;
-                                        default:
-                                          print("Unkown error.");
-                                      }
-                                    }
+                                    // String tokenFromOtpSuccess =
+                                    //     OtpCalls.tokenFromOtp(
+                                    //         verifyOtpResponse.jsonBody);
+                                    // try {
+                                    //   userCredential = await FirebaseAuth
+                                    //       .instance
+                                    //       .signInWithCustomToken(
+                                    //           tokenFromOtpSuccess);
+                                    //   final user = await FirebaseAuth
+                                    //       .instance.currentUser;
+                                    //   final idToken = await user?.getIdToken();
+                                    //   FFAppState().authToken = idToken!;
+                                    //   print(idToken);
+                                    //   print("Sign-in successful.");
+                                    //   print(userCredential);
+                                    // } on FirebaseAuthException catch (e) {
+                                    //   switch (e.code) {
+                                    //     case "invalid-custom-token":
+                                    //       print(
+                                    //           "The supplied token is not a Firebase custom auth token.");
+                                    //       break;
+                                    //     case "custom-token-mismatch":
+                                    //       print(
+                                    //           "The supplied token is for a different Firebase project.");
+                                    //       break;
+                                    //     default:
+                                    //       print("Unkown error.");
+                                    //   }
+                                    // }
                                   } else if (verifyOtpResponse.statusCode ==
-                                      403) {}
+                                      403) {
+                                    unAuthorizedUser(context,mounted);
+                                  }
                                   // final phoneVerifiedUser = await verifySmsCode(
                                   //   isFromUpdate: true,
                                   //   context: context,
@@ -496,11 +503,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     }
                                   } else if (verifyOtpResponse.statusCode ==
                                       403) {
-                                    GoRouter.of(context).prepareAuthEvent();
-                                    await signOut();
-                                    FFAppState().authToken = '';
-
-                                    context.goNamedAuth('Login', mounted);
+                                    unAuthorizedUser(context,mounted);
+                                   // context.goNamedAuth('Login', mounted);
                                   }
                                   entry?.remove();
                                   if (userCredential == null) {

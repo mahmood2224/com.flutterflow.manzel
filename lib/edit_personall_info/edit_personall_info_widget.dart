@@ -505,7 +505,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                             12, 4, 12, 4),
                                         hidesUnderline: true,
                                       );
-                                    } else if (emplymentList != null &&
+                                    }
+                                    else if (emplymentList != null &&
                                         emplymentList?.statusCode != 200) {
                                       return SomethingWentWrongWidget(
                                           onTryAgain: () {

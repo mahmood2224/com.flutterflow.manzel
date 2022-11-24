@@ -2099,5 +2099,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Settings',
       'ar': 'إعدادات',
     },
+    'unAuthorizedUser': {
+      'en': 'You are logged-in, in some other device',
+      'ar': 'لقد قمت بتسجيل الدخول ، في بعض الأجهزة الأخرى',
+    },
   },
 ].reduce((a, b) => a..addAll(b));

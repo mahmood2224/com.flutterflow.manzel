@@ -453,6 +453,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 }
                                 //entry = showOverlay(context);
                                 if (isInternetAvailable ?? false) {
+                                  isApiCalled = true;
+                                  setState(() {});
                                   ApiCallResponse generateOtpResponse =
                                       await OtpCalls.generateOtp(
                                           phoneNumber:
@@ -471,10 +473,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               phoneNumberController!.text,
                                           'verificationKey': verificationKey
                                         });
-                                    isApiCalled = true;
+                                    isApiCalled = false;
                                     setState(() {});
                                   }
-
+                                  else if((generateOtpResponse.statusCode == 403)){
+                                    unAuthorizedUser(context,mounted);
+                                  }
                                   // await beginPhoneAuth(
                                   //   context: context,
                                   //   phoneNumber: phoneNumberController!.text,
@@ -496,6 +500,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   );
                                 }
                               } else {
+                                isApiCalled = false;
+                                setState(() {});
                                 // Invalid_phone_number_action
                                 logFirebaseEvent(
                                     'sendOTP_Invalid_phone_number_action');

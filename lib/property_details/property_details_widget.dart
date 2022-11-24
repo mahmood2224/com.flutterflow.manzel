@@ -98,6 +98,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       columnPropertyResponse = widget.jsonData;
       isLoading.value = false;
     } else {
+      isLoading.value = true;
       makeProeprtyApiCall();
     }
     logFirebaseEvent('screen_view',
@@ -128,6 +129,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     isInternetAvailable = await isInternetConnected();
     if(isInternetAvailable??false){
       isLoading.value = true;
+      setState((){});
       //Future.delayed(Duration(seconds: 5));
       final callResult = await PropertyCall.call(
         propertyId: widget.propertyId,
@@ -135,10 +137,13 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       );
       final callResultToJson = callResult.jsonBody['data'];
       columnPropertyResponse = callResultToJson;
+      setState((){});
       print("++++");
       isLoading.value = false;
+      setState((){});
     }else{
       isLoading.value = false;
+      setState((){});
       showDialog(
         context: context,
         builder: (BuildContext context) => CommonAlertDialog(
@@ -255,8 +260,8 @@ setState((){});
                         ],
                       ),
                     ),
-                  )
-                : columnPropertyResponse!=null?
+                  ):
+                // : columnPropertyResponse!=null?
             Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -3628,7 +3633,8 @@ setState((){});
                                                 if ((addOrderApiResponse
                                                     ?.statusCode ??
                                                     200) ==
-                                                    200) {
+                                                    200)
+                                                {
                                                   await configurePaymentSdk();
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
@@ -3665,7 +3671,10 @@ setState((){});
                                                   ).then(
                                                           (value) => setState(() {}));
                                                   //.then((value) => _chewieController?.play());
-                                                } else if (addOrderApiResponse!
+                                                }  else if(addOrderApiResponse?.statusCode ==403){
+                                                  unAuthorizedUser(context, mounted);
+                                                }
+                                                else if (addOrderApiResponse!
                                                     .statusCode ==
                                                     399) {
                                                   //   Navigator.pop(context);
@@ -3821,7 +3830,11 @@ setState((){});
                                                         ).then((value) =>
                                                             setState(() {}));
                                                         //.then((value) => _chewieController?.play());
-                                                      } else if (addOrderApiResponse!
+                                                      }
+                                                      else if(addOrderApiResponse?.statusCode ==403){
+                                                        unAuthorizedUser(context, mounted);
+                                                      }
+                                                      else if (addOrderApiResponse!
                                                           .statusCode ==
                                                           399) {
                                                         //Navigator.pop(context);
@@ -4047,21 +4060,22 @@ setState((){});
                         ],
                       ),
                     ],
-                  ):SafeArea(
-                    child: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30,
-                      buttonSize: 48,
-                      icon: Icon(
-                        Manzel.clear,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        size: 15,
-                      ),
-                      onPressed: () async {
-                        Navigator.pop(context);
-                      },
-                    ),
                   );
+            // :SafeArea(
+            //         child: FlutterFlowIconButton(
+            //           borderColor: Colors.transparent,
+            //           borderRadius: 30,
+            //           buttonSize: 48,
+            //           icon: Icon(
+            //             Manzel.clear,
+            //             color: FlutterFlowTheme.of(context).secondaryText,
+            //             size: 15,
+            //           ),
+            //           onPressed: () async {
+            //             Navigator.pop(context);
+            //           },
+            //         ),
+            //       );
           },
           valueListenable: isLoading,
         ),

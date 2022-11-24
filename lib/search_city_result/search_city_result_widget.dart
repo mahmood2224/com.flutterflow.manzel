@@ -85,22 +85,24 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                       '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
                 )))
               .future;
-      properties = PropertiesCall.properties(
-        listViewPropertiesResponse?.jsonBody,
-      ).toList();
       isLoading = false;
+      if(mounted)
       setState(() {});
+      if(listViewPropertiesResponse!=null){
+        properties = PropertiesCall.properties(
+          listViewPropertiesResponse?.jsonBody,
+        ).toList();
+      }
     } else {
+      listViewPropertiesResponse=null;
       isLoading = false;
       setState(() {});
       showDialog(
         context: context,
         builder: (BuildContext context) => CommonAlertDialog(
           onCancel: () {
-            setState(() {});
             Navigator.pop(context);
           },
-          onSettings: () {},
         ),
       );
     }
@@ -278,7 +280,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                             ),
                           ),
                         );
-                      } else if ((listViewPropertiesResponse != null) &&
+                      }
+                      else if ((listViewPropertiesResponse != null) &&
                           (listViewPropertiesResponse?.statusCode == 200)) {
                         return Builder(
                           builder: (context) {
@@ -1731,9 +1734,12 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                             );
                           },
                         );
-                      } else if ((listViewPropertiesResponse != null) &&
+                      }
+                      else if ((listViewPropertiesResponse != null) &&
                           (listViewPropertiesResponse?.statusCode != 200)) {
-                        return SomethingWentWrongWidget(onTryAgain: () {});
+                        return SomethingWentWrongWidget(onTryAgain: () {
+                         apiRequestCompleterFunction();
+                        });
                       }
                       return SizedBox();
                     },

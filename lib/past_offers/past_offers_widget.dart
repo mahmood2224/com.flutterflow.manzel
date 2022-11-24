@@ -1437,7 +1437,11 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                             },
                           ),
                         );
-                      } else if ((apiRequest?.statusCode != null) &&
+                      }else if ((apiRequest?.statusCode != null) &&
+                          (apiRequest?.statusCode == 403)) {
+                        unAuthorizedUser(context,mounted);
+                      }
+                      else if ((apiRequest?.statusCode != null) &&
                           apiRequest?.statusCode != 200) {
                         return SomethingWentWrongWidget(onTryAgain: () {
                           apiRequestCompleterFunction();

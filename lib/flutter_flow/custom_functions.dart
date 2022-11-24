@@ -5,7 +5,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:manzel/flutter_flow/flutter_flow_theme.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'flutter_flow_util.dart';
 import 'lat_lng.dart';
 import 'place.dart';
 import '../backend/backend.dart';
@@ -1523,4 +1525,33 @@ Future<bool> isInternetConnected() async {
     return true;
   }
   return false;
+}
+
+void unAuthorizedUser(context,mounted) async {
+ // Function() _navigate = () {};
+ GoRouter.of(context).prepareAuthEvent();
+  await signOut();
+  FFAppState().authToken = '';
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(
+        FFLocalizations.of(context).getText(
+          'unAuthorizedUser' /* You are logged - in*/,
+        ),
+        style: TextStyle(
+          fontFamily: 'Sofia Pro By Khuzaimah',
+          color: Colors.white,
+          fontWeight: FontWeight.w600,
+          fontSize: 18,
+        ),
+      ),
+      duration: Duration(milliseconds: 4000),
+      backgroundColor: FlutterFlowTheme.of(context).primaryRed,
+      ),
+  );
+
+ // _navigate = () =>
+ //     context.goNamedAuth('Login', mounted);
+ // _navigate();
+  //context.goNamed('Login', mounted);
 }

@@ -336,7 +336,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       ),
                                     ),
                                   );
-                                } else if (bookedProperties?.isEmpty ?? false) {
+                                }
+                                else if (bookedProperties?.isEmpty ?? false) {
                                   return Center(
                                     child: Container(
                                       width: MediaQuery.of(context).size.width,
@@ -1287,7 +1288,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                               userId: currentUserReference?.id,
                                                                               authorazationToken: FFAppState().authToken,
                                                                               version: FFAppState().apiVersion);
-                                                                          if ((addOrderApiResponse?.statusCode ?? 398) ==
+                                                                          if ((addOrderApiResponse.statusCode ?? 398) ==
                                                                               398) {
                                                                             Navigator.push(
                                                                               context,
@@ -1301,7 +1302,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                 ),
                                                                               ),
                                                                             );
-                                                                          } else {
+                                                                          }
+                                                                          else if(addOrderApiResponse.statusCode ==403){
+                                                                            unAuthorizedUser(context, mounted);
+                                                                          }
+                                                                          else {
                                                                             await configurePaymentSdk();
                                                                             await showModalBottomSheet(
                                                                               isScrollControlled: true,
@@ -1394,16 +1399,23 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       );
                                     },
                                   );
-                                } else if (bookedPropertiesApiResponse
+                                } else if(bookedPropertiesApiResponse
+                                    ?.statusCode ==403){
+                                  unAuthorizedUser(context, mounted);
+
+                                }
+                                else if (bookedPropertiesApiResponse
                                             ?.statusCode !=
                                         200 &&
                                     bookedPropertiesApiResponse?.statusCode !=
-                                        null) {
+                                        null&&bookedPropertiesApiResponse
+                                    ?.statusCode !=403) {
                                   return SomethingWentWrongWidget(
                                       onTryAgain: () {
                                     bookedPropertiesCall();
                                   });
                                 }
+
                                 return SizedBox();
                               },
                             ),
@@ -1848,10 +1860,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 FFAppState()
                                                                     .apiVersion,
                                                           );
-                                                          if ((bookmarkApiResponse
-                                                                      ?.statusCode ??
-                                                                  200) ==
-                                                              200) {
+                                                          if ((bookmarkApiResponse?.statusCode) == 200) {
                                                             getBookMarkedPropertiesCall();
                                                             logFirebaseEvent(
                                                                 'Icon_Show-Snack-Bar');
@@ -1890,7 +1899,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           .primaryGreen,
                                                                 ),
                                                               );
-                                                          } else {
+                                                          }
+                                                          else if((bookmarkApiResponse?.statusCode) == 403){
+                                                            unAuthorizedUser(context,mounted);
+                                                          }
+                                                          else {
                                                             logFirebaseEvent(
                                                                 'Icon_Show-Snack-Bar');
                                                             ScaffoldMessenger
@@ -1959,7 +1972,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       );
                                     },
                                   );
-                                } else if (getBookMarkedPropertiesApiResponse
+                                } else if (getBookMarkedPropertiesApiResponse?.statusCode == 403){
+                                  unAuthorizedUser(context,mounted);
+                                }
+                                else if (getBookMarkedPropertiesApiResponse
                                             ?.statusCode !=
                                         200 &&
                                     getBookMarkedPropertiesApiResponse
@@ -1970,6 +1986,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                     getBookMarkedPropertiesCall();
                                   });
                                 }
+
                                 return SizedBox();
                               },
                             )

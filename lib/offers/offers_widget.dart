@@ -384,7 +384,10 @@ class _OffersWidgetState extends State<OffersWidget> {
                           ),
                         ),
                       );
-                    } else if (getOfferResponse?.statusCode != 200 &&
+                    }else if (getOfferResponse?.statusCode == 403) {
+                      unAuthorizedUser(context,mounted);
+                    }
+                    else if (getOfferResponse?.statusCode != 200 &&
                         getOfferResponse?.statusCode != null) {
                       return SomethingWentWrongWidget(onTryAgain: () {
                         getOffersCall();
@@ -2367,7 +2370,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                         getOfferResponse?.statusCode != null) {
                                       return SomethingWentWrongWidget(
                                           onTryAgain: () {
-                                        // bookedPropertiesCall();
+                                            getOffersCall();
                                       });
                                     }
                                     return SizedBox();

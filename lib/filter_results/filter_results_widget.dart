@@ -88,6 +88,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
         populate:
             '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
       );
+      if(listViewPropertiesResponse?.statusCode==200)
       properties = PropertiesCall.properties(
         listViewPropertiesResponse?.jsonBody,
       ).toList();
@@ -189,7 +190,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                           ),
                         );
                       } else if (listViewPropertiesResponse?.statusCode !=
-                          null) {
+                          null&&listViewPropertiesResponse?.statusCode==200) {
                         return Text(
                           functions.resultText(
                               valueOrDefault<String>(
