@@ -347,7 +347,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Are you eligible for Salani support?',
       'ar': 'هل انت مستحق للدعم السكني؟',
     },
-    'pleaseFillInfo':{
+    'pleaseFillInfo': {
       'en': 'Please fill all the information fields',
       'ar': 'يرجى ملء جميع حقول المعلومات',
     },
@@ -1372,10 +1372,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Confirmation
   {
-    'failureButton': {
-      'en': 'Try Again',
-      'ar': 'محاولة مرة اخرى'
-    },
+    'failureButton': {'en': 'Try Again', 'ar': 'محاولة مرة اخرى'},
     'failure': {
       'en': 'Something went wrong, please try again.',
       'ar': 'حدث خطأ ما، الرجاء المحاولة مرة أخرى'

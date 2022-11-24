@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart' as material;
+
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
 
@@ -31,7 +32,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   OverlayEntry? entry;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
-  int count =0;
+  int count = 0;
   bool? isInternetAvailable;
   bool isApiCalled = false;
 
@@ -42,9 +43,10 @@ class _LoginWidgetState extends State<LoginWidget> {
     phoneNumberController = TextEditingController();
     checkInternetStatus();
   }
+
   Future<void> checkInternetStatus() async {
     isInternetAvailable = await isInternetConnected();
-    if(!(isInternetAvailable??false)){
+    if (!(isInternetAvailable ?? false)) {
       showDialog(
         context: context,
         builder: (BuildContext context) => CommonAlertDialog(
@@ -54,7 +56,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
       );
     }
-    setState((){});
+    setState(() {});
   }
 
   @override
@@ -71,10 +73,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBtnText,
         automaticallyImplyLeading: false,
         leading: RotatedBox(
-          quarterTurns:
-          FFAppState().locale == 'en'
-              ? 0
-              : 2,
+          quarterTurns: FFAppState().locale == 'en' ? 0 : 2,
           child: FlutterFlowIconButton(
             borderColor: Colors.transparent,
             borderRadius: 30,
@@ -199,131 +198,138 @@ class _LoginWidgetState extends State<LoginWidget> {
                           child: Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
-                    child: Directionality(
-                      textDirection: material.TextDirection.ltr,
-                            child: TextFormField(
-                              maxLength: 9,
-                              //buildCounter: Container(),
-                              controller: phoneNumberController,
-                              onChanged: (val) { EasyDebounce.debounce(
-                                'phoneNumberController',
-                                Duration(milliseconds: 2000),
-                                () => setState(() {}),
-                              );
-                              if (count == val.length && val.length<9) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      backgroundColor: FlutterFlowTheme.of(context).primaryRed,
-                                        content: Text(FFAppState().locale ==
-                                            'en'
-                                            ? 'Please enter English numbers!'
-                                            : 'الرجاء إدخال الأرقام الإنجليزية!')));
-                              }
-                              count = val.length;
-
-                              },
-                              autofocus: true,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                counterText: "",
-                                hintText: "XXXXXXXXX",
-                                prefixText: FFLocalizations.of(context).getText(
-                                  'f4tpckti' /* +966 */,),
-                              labelText: FFLocalizations.of(context).getText(
-                                '4m2r1iwr' /* Mobile Number */,
-
-                              ),
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
-                                    useGoogleFonts: false,
+                            child: Directionality(
+                              textDirection: material.TextDirection.ltr,
+                              child: TextFormField(
+                                maxLength: 9,
+                                //buildCounter: Container(),
+                                controller: phoneNumberController,
+                                onChanged: (val) {
+                                  EasyDebounce.debounce(
+                                    'phoneNumberController',
+                                    Duration(milliseconds: 2000),
+                                    () => setState(() {}),
+                                  );
+                                  if (count == val.length && val.length < 9) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryRed,
+                                            content: Text(FFAppState().locale ==
+                                                    'en'
+                                                ? 'Please enter English numbers!'
+                                                : 'الرجاء إدخال الأرقام الإنجليزية!')));
+                                  }
+                                  count = val.length;
+                                },
+                                autofocus: true,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  counterText: "",
+                                  hintText: "XXXXXXXXX",
+                                  prefixText:
+                                      FFLocalizations.of(context).getText(
+                                    'f4tpckti' /* +966 */,
                                   ),
-                              // hintText: FFLocalizations.of(context).getText(
-                              //   'f4tpckti' /* +966 */,
-                              // ),
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    '4m2r1iwr' /* Mobile Number */,
                                   ),
-                              enabledBorder: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
-                                focusedErrorBorder: InputBorder.none,suffixIcon: phoneNumberController!.text.isNotEmpty
-                                  ? InkWell(
-                                      onTap: () async {
-                                         phoneNumberController?.clear();
-                                              setState(() {});
-                                      },
-                                      child: Icon(
-                                        Manzel.clear,
-                                        color: Color(0xFF757575),
-                                        size: 12,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w300,
+                                        useGoogleFonts: false,
                                       ),
-                                    )
-                                  : null,
-                            ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
+                                  // hintText: FFLocalizations.of(context).getText(
+                                  //   'f4tpckti' /* +966 */,
+                                  // ),
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
+                                      ),
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  focusedErrorBorder: InputBorder.none,
+                                  suffixIcon:
+                                      phoneNumberController!.text.isNotEmpty
+                                          ? InkWell(
+                                              onTap: () async {
+                                                phoneNumberController?.clear();
+                                                setState(() {});
+                                              },
+                                              child: Icon(
+                                                Manzel.clear,
+                                                color: Color(0xFF757575),
+                                                size: 12,
+                                              ),
+                                            )
+                                          : null,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
                                       fontFamily: 'Sofia Pro By Khuzaimah',
                                       color: Colors.black,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
                                       useGoogleFonts: false,
                                     ),
-                            maxLines: 1,
-                            keyboardType: TextInputType.phone,
+                                maxLines: 1,
+                                keyboardType: TextInputType.phone,
+                              ),
+                            ),
                           ),
-                    ),
                         ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 110, 24, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        FFLocalizations.of(context).getText(
+                          'gr1za5xy' /* By clicking continue, you agre... */,
+                        ),
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
+                              useGoogleFonts: false,
+                            ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 110, 24, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        'gr1za5xy' /* By clicking continue, you agre... */,
-                      ),
-                      textAlign: TextAlign.start,
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
-                            color: Colors.black,
-                            fontWeight: FontWeight.w300,
-                            useGoogleFonts: false,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16, 2, 0, 0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    InkWell(
-                      onTap: () async {
-                        logFirebaseEvent('LOGIN_PAGE_terms_ON_TAP');
-                        // termsAndConditions
-                        logFirebaseEvent('terms_termsAndConditions');
-                        await showModalBottomSheet(
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 2, 0, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          logFirebaseEvent('LOGIN_PAGE_terms_ON_TAP');
+                          // termsAndConditions
+                          logFirebaseEvent('terms_termsAndConditions');
+                          await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor: FlutterFlowTheme.of(context).white,
                             context: context,
@@ -338,37 +344,41 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   ),
                                 ),
                               );
-                            },).then((value) => setState(() {}));
-                      },
-                      child: Text(
+                            },
+                          ).then((value) => setState(() {}));
+                        },
+                        child: Text(
+                          FFLocalizations.of(context).getText(
+                            '5t0jhzug' /* terms & conditions */,
+                          ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'AvenirArabic',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                fontWeight: FontWeight.w500,
+                                useGoogleFonts: false,
+                              ),
+                        ),
+                      ),
+                      Text(
                         FFLocalizations.of(context).getText(
-                          '5t0jhzug' /* terms & conditions */,
+                          '5ard5tmn' /*  &  */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'AvenirArabic',
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
                               useGoogleFonts: false,
                             ),
                       ),
-                    ),
-                    Text(
-                      FFLocalizations.of(context).getText(
-                        '5ard5tmn' /*  &  */,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'AvenirArabic',
-                            color: Colors.black,
-                            fontWeight: FontWeight.w300,
-                            useGoogleFonts: false,
-                          ),
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        logFirebaseEvent('LOGIN_PAGE_terms_ON_TAP');
-                        // termsAndConditions
-                        logFirebaseEvent('terms_termsAndConditions');
-                        await showModalBottomSheet(
+                      InkWell(
+                        onTap: () async {
+                          logFirebaseEvent('LOGIN_PAGE_terms_ON_TAP');
+                          // termsAndConditions
+                          logFirebaseEvent('terms_termsAndConditions');
+                          await showModalBottomSheet(
                             isScrollControlled: true,
                             backgroundColor: FlutterFlowTheme.of(context).white,
                             context: context,
@@ -383,88 +393,108 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   ),
                                 ),
                               );
-                            },).then((value) => setState(() {}));
-                      },
-                      child: Text(
-                        FFLocalizations.of(context).getText(
-                          'irbrz9hi' /* privacy policy */,
+                            },
+                          ).then((value) => setState(() {}));
+                        },
+                        child: Text(
+                          FFLocalizations.of(context).getText(
+                            'irbrz9hi' /* privacy policy */,
+                          ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'AvenirArabic',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                fontWeight: FontWeight.w500,
+                                useGoogleFonts: false,
+                              ),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'AvenirArabic',
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 13, 16, 0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 56,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            isInternetAvailable = await isInternetConnected();
-                            setState((){});
-                            isLoading.value = true;
-                            logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
-                            if (functions.checkPhoneNumberFormat(
-                                phoneNumberController!.text)) {
-                              // sendOTP
-                              logFirebaseEvent('sendOTP_sendOTP');
-                              final phoneNumberVal =   functions.getFormattedMobileNumber(
-                                  phoneNumberController!.text);
-                              if (phoneNumberVal == null ||
-                                  phoneNumberVal.isEmpty ||
-                                  !phoneNumberVal.startsWith('+')) {
-                                isLoading.value = false;
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                        'Phone Number is required and has to start with +.'),
-                                  ),
-                                );
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(16, 13, 16, 0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 56,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              isInternetAvailable = await isInternetConnected();
+                              setState(() {});
+                              isLoading.value = true;
+                              logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
+                              if (functions.checkPhoneNumberFormat(
+                                  phoneNumberController!.text)) {
+                                // sendOTP
+                                logFirebaseEvent('sendOTP_sendOTP');
+                                final phoneNumberVal =
+                                    functions.getFormattedMobileNumber(
+                                        phoneNumberController!.text);
+                                if (phoneNumberVal == null ||
+                                    phoneNumberVal.isEmpty ||
+                                    !phoneNumberVal.startsWith('+')) {
+                                  isLoading.value = false;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                          'Phone Number is required and has to start with +.'),
+                                    ),
+                                  );
 
-                                return;
-                              }
-                              //entry = showOverlay(context);
-                              if(isInternetAvailable??false){
-                                ApiCallResponse generateOtpResponse = await OtpCalls.generateOtp(phoneNumber: phoneNumberController!.text);
-                                if((OtpCalls.generateSuccess(generateOtpResponse.jsonBody))=='success') {
-                                  String verificationKey = OtpCalls.generateKey(generateOtpResponse.jsonBody);
-                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberController!.text,'verificationKey':verificationKey});
-                                  isApiCalled = true;
-                                  setState((){});
+                                  return;
                                 }
-                                // await beginPhoneAuth(
-                                //   context: context,
-                                //   phoneNumber: phoneNumberController!.text,
-                                //   onCodeSent: () async {
-                                // //    entry.remove();
-                                //     isLoading.value = false;
-                                //     context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberVal});
-                                //     },
-                                //   );
-                              }
-                              else{
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) => CommonAlertDialog(
-                                    onCancel: () {
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                );
-                              }
+                                //entry = showOverlay(context);
+                                if (isInternetAvailable ?? false) {
+                                  ApiCallResponse generateOtpResponse =
+                                      await OtpCalls.generateOtp(
+                                          phoneNumber:
+                                              phoneNumberController!.text);
+                                  if ((generateOtpResponse.statusCode == 200) &&
+                                      (OtpCalls.generateSuccess(
+                                              generateOtpResponse.jsonBody)) ==
+                                          'success') {
+                                    String verificationKey =
+                                        OtpCalls.generateKey(
+                                            generateOtpResponse.jsonBody);
+                                    context.goNamedAuth(
+                                        'ConfirmNewNumberOTP', mounted,
+                                        queryParams: {
+                                          'phoneNumber':
+                                              phoneNumberController!.text,
+                                          'verificationKey': verificationKey
+                                        });
+                                    isApiCalled = true;
+                                    setState(() {});
+                                  }
+
+                                  // await beginPhoneAuth(
+                                  //   context: context,
+                                  //   phoneNumber: phoneNumberController!.text,
+                                  //   onCodeSent: () async {
+                                  // //    entry.remove();
+                                  //     isLoading.value = false;
+                                  //     context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberVal});
+                                  //     },
+                                  //   );
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        CommonAlertDialog(
+                                      onCancel: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  );
+                                }
                               } else {
                                 // Invalid_phone_number_action
                                 logFirebaseEvent(
@@ -474,8 +504,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   SnackBar(
                                     content: Text(
                                       'The phone number format should be +966123456789',
-                                      style:
-                                          FlutterFlowTheme.of(context).subtitle1,
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle1,
                                     ),
                                     duration: Duration(milliseconds: 4000),
                                     backgroundColor: Color(0xFF777777),
@@ -483,10 +513,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 );
                               }
                             },
-                            child:
-                                ValueListenableBuilder<bool>(
-                                    builder: (BuildContext context, bool value, Widget? child){
-                                      return (isLoading.value&&isApiCalled)?Padding(
+                            child: ValueListenableBuilder<bool>(
+                              builder: (BuildContext context, bool value,
+                                  Widget? child) {
+                                return (isLoading.value && isApiCalled)
+                                    ? Padding(
                                         padding: const EdgeInsets.all(5.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
@@ -495,69 +526,77 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               height: 30,
                                               width: 30,
                                               child: CircularProgressIndicator(
-                                                valueColor: AlwaysStoppedAnimation(Colors.white),
+                                                valueColor:
+                                                    AlwaysStoppedAnimation(
+                                                        Colors.white),
                                                 strokeWidth: 5,
                                               ),
                                             )
                                           ],
                                         ),
                                       )
-                                          : AutoSizeText(
+                                    : AutoSizeText(
                                         FFLocalizations.of(context).getText(
                                           'l3ozn1az' /* Continue */,
                                         ),
-                                        style: FlutterFlowTheme.of(context).subtitle2.override(
-
-                                          fontSize: 18,
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontSize: 18,
+                                              fontFamily: 'AvenirArabic',
+                                              color: Colors.white,
+                                              useGoogleFonts: false,
+                                            ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      );
+                              },
+                              valueListenable: isLoading,
+                            ),
+                            style: ButtonStyle(
+                              foregroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (states) {
+                                  if (states.contains(MaterialState.disabled)) {
+                                    FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
                                           fontFamily: 'AvenirArabic',
                                           color: Colors.white,
                                           useGoogleFonts: false,
-                                        ),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-
+                                        );
+                                  }
+                                  FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'AvenirArabic',
+                                        color: Colors.white,
+                                        useGoogleFonts: false,
                                       );
-
-                                    },
-                                    valueListenable: isLoading,
-                                    ),
-                            style: ButtonStyle(
-                              foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-                                    (states) {
-                                  if (states.contains(MaterialState.disabled)) {
-                                    FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'AvenirArabic',
-                                      color: Colors.white,
-                                      useGoogleFonts: false,
-                                    );
-                                  }
-                                  FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'AvenirArabic',
-                                    color: Colors.white,
-                                    useGoogleFonts: false,
-                                  );
                                 },
                               ),
-                              backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                                    (states) {
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (states) {
                                   if (states.contains(MaterialState.disabled)) {
-                                    return FlutterFlowTheme.of(context).primaryColor;
+                                    return FlutterFlowTheme.of(context)
+                                        .primaryColor;
                                   }
-                                  return FlutterFlowTheme.of(context).primaryColor;
+                                  return FlutterFlowTheme.of(context)
+                                      .primaryColor;
                                 },
                               ),
-
                               shape: MaterialStateProperty.all<OutlinedBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:BorderRadius.circular(12),
-                              side: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              )),
-                            ),
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    side: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    )),
+                              ),
                             ),
                           ),
-                      ),
+                        ),
                       ),
                     ),
                   ],
@@ -569,6 +608,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       ),
     );
   }
+
   OverlayEntry showOverlay(BuildContext context) {
     var overlayState = Overlay.of(context);
     var overlayEntry = OverlayEntry(

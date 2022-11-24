@@ -1,5 +1,6 @@
 import 'package:manzel/auth/auth_util.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import '../auth/firebase_user_provider.dart';
@@ -73,9 +74,11 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
   }
 
   Future<void> propertiesCall() async {
+    isPropertiesLoading = true;
+    setState(() {});
     isInternetAvailable = await isInternetConnected();
     if (isInternetAvailable ?? false) {
-      listViewPropertiesResponse= await   PropertiesCall.call(
+      listViewPropertiesResponse = await PropertiesCall.call(
         locale: FFAppState().locale,
         city: widget.cityName,
         furnishingType: widget.furnishingType,
@@ -83,27 +86,25 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
         minimumPrice: widget.minInstallment,
         maximumPrice: widget.maxInstallment,
         populate:
-        '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
+            '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
       );
       properties = PropertiesCall.properties(
         listViewPropertiesResponse?.jsonBody,
       ).toList();
       isPropertiesLoading = false;
       setState(() {});
-    }
-    else{
+    } else {
       isPropertiesLoading = false;
       setState(() {});
-        showDialog(
-          context: context,
-          builder: (BuildContext context) => CommonAlertDialog(
-            onCancel: () {
-              Navigator.pop(context);
-            },
-          ),
-        );
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
     }
-
   }
 
   @override
@@ -116,7 +117,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
         leading: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(18, 0, 0, 0),
           child: RotatedBox(
-            quarterTurns: FFAppState().locale=='en'?0:2,
+            quarterTurns: FFAppState().locale == 'en' ? 0 : 2,
             child: Container(
               width: 34,
               height: 34,
@@ -132,7 +133,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                 child: InkWell(
                   onTap: () async {
-                    logFirebaseEvent('FILTER_RESULTS_PAGE_Icon_n6g5zub7_ON_TAP');
+                    logFirebaseEvent(
+                        'FILTER_RESULTS_PAGE_Icon_n6g5zub7_ON_TAP');
                     logFirebaseEvent('Icon_Close-Dialog,-Drawer,-Etc');
                     FavouriteList.instance.setFavourite(fav);
                     context.pop();
@@ -186,27 +188,27 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                             ),
                           ),
                         );
-                      }
-                      else if(listViewPropertiesResponse?.statusCode!=null){
+                      } else if (listViewPropertiesResponse?.statusCode !=
+                          null) {
                         return Text(
                           functions.resultText(
                               valueOrDefault<String>(
-                                functions.countJsonData(PropertiesCall.properties(
+                                functions
+                                    .countJsonData(PropertiesCall.properties(
                                   listViewPropertiesResponse?.jsonBody,
                                 ).toList()),
                                 '0',
                               ),
                               FFAppState().locale),
-                          style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'AvenirArabic',
-                            color: Color(0xFF6B6B6B),
-                            useGoogleFonts: false,
-                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'AvenirArabic',
+                                    color: Color(0xFF6B6B6B),
+                                    useGoogleFonts: false,
+                                  ),
                         );
                       }
                       return SizedBox();
-
-
                     },
                   ),
                 ],
@@ -233,70 +235,75 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        (listViewPropertiesResponse?.statusCode!=null)?
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                              child: FlutterFlowChoiceChips(
-                                initiallySelected:
-                                    filteredParametesValues != null
-                                        ? filteredParametesValues
-                                        : [],
-                                options: functions
-                                    .filteredResultChioceChipsBuilder(
-                                        widget.cityName,
-                                        widget.propertyType,
-                                        widget.furnishingType,
-                                        FFAppState().locale)
-                                    .map((label) => ChipData(label))
-                                    .toList(),
-                                onChanged: (val) => setState(
-                                    () => filteredParametesValues = val),
-                                selectedChipStyle: ChipStyle(
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.normal,
-                                        useGoogleFonts: false,
+                        (listViewPropertiesResponse?.statusCode != null)
+                            ? Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 0, 0),
+                                    child: FlutterFlowChoiceChips(
+                                      initiallySelected:
+                                          filteredParametesValues != null
+                                              ? filteredParametesValues
+                                              : [],
+                                      options: functions
+                                          .filteredResultChioceChipsBuilder(
+                                              widget.cityName,
+                                              widget.propertyType,
+                                              widget.furnishingType,
+                                              FFAppState().locale)
+                                          .map((label) => ChipData(label))
+                                          .toList(),
+                                      onChanged: (val) => setState(
+                                          () => filteredParametesValues = val),
+                                      selectedChipStyle: ChipStyle(
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'AvenirArabic',
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.normal,
+                                              useGoogleFonts: false,
+                                            ),
+                                        iconColor: Colors.white,
+                                        iconSize: 0,
+                                        elevation: 2,
                                       ),
-                                  iconColor: Colors.white,
-                                  iconSize: 0,
-                                  elevation: 2,
-                                ),
-                                unselectedChipStyle: ChipStyle(
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: FlutterFlowTheme.of(context)
+                                      unselectedChipStyle: ChipStyle(
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'AvenirArabic',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBtnText,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
+                                        iconColor: FlutterFlowTheme.of(context)
                                             .primaryBtnText,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts: false,
+                                        iconSize: 0,
+                                        elevation: 1,
                                       ),
-                                  iconColor: FlutterFlowTheme.of(context)
-                                      .primaryBtnText,
-                                  iconSize: 0,
-                                  elevation: 1,
-                                ),
-                                chipSpacing: 8,
-                                multiselect: true,
-                                initialized: filteredParametesValues != null,
-                                alignment: WrapAlignment.center,
-                              ),
-                            ),
-                          ],
-                        ):SizedBox.shrink(),
+                                      chipSpacing: 8,
+                                      multiselect: true,
+                                      initialized:
+                                          filteredParametesValues != null,
+                                      alignment: WrapAlignment.center,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : SizedBox.shrink(),
                       ],
                     ),
                   ),
@@ -316,1281 +323,1381 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                             ),
                           ),
                         );
-                      }
-                      return Builder(
-                        builder: (context) {
-                          if (properties?.isEmpty??false) {
-                            return Center(
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.5,
-                                child: NoResultWidget(
-                                  titleText: functions.emptyListWidgetTitle(
-                                      'filterResult', FFAppState().locale),
-                                  screenName: 'result',
-                                ),
-                              ),
-                            );
-                          }
-                          else if((listViewPropertiesResponse
-                              ?.statusCode ==
+                      } else if ((listViewPropertiesResponse?.statusCode ==
                               200) &&
-                              (listViewPropertiesResponse?.statusCode !=
-                                  null)&&(properties!=null)){
-                            return ListView.builder(
-                              padding: EdgeInsets.zero,
-                              primary: false,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemCount: properties?.length,
-                              itemBuilder: (context, propertiesIndex) {
-                                var propertiesItem = properties?[propertiesIndex];
-                                var res = (properties?[propertiesIndex]['id'])
-                                    .toString();
-                                propertiesItem['isBookmarked'] =
-                                    fav[res] ?? false;
+                          (listViewPropertiesResponse?.statusCode != null)) {
+                        return Builder(
+                          builder: (context) {
+                            if (properties?.isEmpty ?? false) {
+                              return Center(
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.5,
+                                  child: NoResultWidget(
+                                    titleText: functions.emptyListWidgetTitle(
+                                        'filterResult', FFAppState().locale),
+                                    screenName: 'result',
+                                  ),
+                                ),
+                              );
+                            } else if ((listViewPropertiesResponse
+                                        ?.statusCode ==
+                                    200) &&
+                                (listViewPropertiesResponse?.statusCode !=
+                                    null) &&
+                                (properties != null)) {
+                              return ListView.builder(
+                                padding: EdgeInsets.zero,
+                                primary: false,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: properties?.length,
+                                itemBuilder: (context, propertiesIndex) {
+                                  var propertiesItem =
+                                      properties?[propertiesIndex];
+                                  var res = (properties?[propertiesIndex]['id'])
+                                      .toString();
+                                  propertiesItem['isBookmarked'] =
+                                      fav[res] ?? false;
 
-                                return Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 16, 25),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      videoPlayers[propertiesIndex +
-                                          widget.homeScreenLength!]
-                                          .pause();
-                                      logFirebaseEvent(
-                                          'FILTER_RESULTS_PAGE_propertyCard_ON_TAP');
-                                      // propertyDetails
-                                      logFirebaseEvent(
-                                          'propertyCard_propertyDetails');
+                                  return Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 0, 16, 25),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        videoPlayers[propertiesIndex +
+                                                widget.homeScreenLength!]
+                                            .pause();
+                                        logFirebaseEvent(
+                                            'FILTER_RESULTS_PAGE_propertyCard_ON_TAP');
+                                        // propertyDetails
+                                        logFirebaseEvent(
+                                            'propertyCard_propertyDetails');
 
-                                      context.pushNamed(
-                                        'PropertyDetails',
-                                        queryParams: {
-                                          'propertyId': serializeParam(
-                                              getJsonField(
-                                                propertiesItem,
-                                                r'''$.id''',
-                                              ),
-                                              ParamType.int),
-                                          'jsonData': serializeParam(
-                                              propertiesItem, ParamType.JSON),
-                                          'path': serializeParam(
-                                              getJsonField(
-                                                propertiesItem,
-                                                r'''$.attributes.video_manifest_uri''',
-                                              ),
-                                              ParamType.String),
-                                        }.withoutNulls,
-                                      );
-                                      //                              }
-                                    },
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width:
-                                          MediaQuery.of(context).size.width,
-                                          height:
-                                          MediaQuery.of(context).size.height *
-                                              0.3,
-                                          child: Stack(
-                                            children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: MediaQuery.of(context)
+                                        context.pushNamed(
+                                          'PropertyDetails',
+                                          queryParams: {
+                                            'propertyId': serializeParam(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.id''',
+                                                ),
+                                                ParamType.int),
+                                            'jsonData': serializeParam(
+                                                propertiesItem, ParamType.JSON),
+                                            'path': serializeParam(
+                                                getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.video_manifest_uri''',
+                                                ),
+                                                ParamType.String),
+                                          }.withoutNulls,
+                                        );
+                                        //                              }
+                                      },
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: MediaQuery.of(context)
                                                     .size
                                                     .height *
-                                                    0.35,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                  BorderRadius.circular(12),
-                                                ),
-                                                child: Visibility(
-                                                  visible: functions
-                                                      .videoPlayerVisibilty(
-                                                      getJsonField(
-                                                        propertiesItem,
-                                                        r'''$.attributes.video_manifest_uri''',
-                                                      )),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                    BorderRadius.circular(12),
-                                                    child: Container(
-                                                      width:
-                                                      MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                          0.95,
-                                                      height:
-                                                      MediaQuery.of(context)
+                                                0.3,
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  height: MediaQuery.of(context)
                                                           .size
                                                           .height *
-                                                          0.4,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
+                                                      0.35,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
                                                         BorderRadius.circular(
                                                             12),
-                                                      ),
-                                                      child: VisibilityDetector(
-                                                        key: Key(propertiesIndex
-                                                            .toString()),
-                                                        onVisibilityChanged:
-                                                            (visibility) {
-                                                          if (visibility.visibleFraction *
-                                                              100 ==
-                                                              100 &&
-                                                              this.mounted) {
-                                                            if (!(videoPlayers[widget
-                                                                .homeScreenLength! +
-                                                                propertiesIndex]
-                                                                .value
-                                                                .isInitialized)) {
-                                                              videoPlayers[widget
-                                                                  .homeScreenLength! +
-                                                                  propertiesIndex]
-                                                                  .initialize()
-                                                                  .then((value) {
-                                                                isMuted.value
-                                                                    ? videoPlayers[
-                                                                widget.homeScreenLength! +
-                                                                    propertiesIndex]
-                                                                    .setVolume(
-                                                                    0)
-                                                                    : videoPlayers[
-                                                                widget.homeScreenLength! +
-                                                                    propertiesIndex]
-                                                                    .setVolume(
-                                                                    100);
-                                                                currentPropertyindex =
-                                                                    widget.homeScreenLength! +
-                                                                        propertiesIndex;
+                                                  ),
+                                                  child: Visibility(
+                                                    visible: functions
+                                                        .videoPlayerVisibilty(
+                                                            getJsonField(
+                                                      propertiesItem,
+                                                      r'''$.attributes.video_manifest_uri''',
+                                                    )),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                      child: Container(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            0.95,
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.4,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                        ),
+                                                        child:
+                                                            VisibilityDetector(
+                                                          key: Key(
+                                                              propertiesIndex
+                                                                  .toString()),
+                                                          onVisibilityChanged:
+                                                              (visibility) {
+                                                            if (visibility.visibleFraction *
+                                                                        100 ==
+                                                                    100 &&
+                                                                this.mounted) {
+                                                              if (!(videoPlayers[
+                                                                      widget.homeScreenLength! +
+                                                                          propertiesIndex]
+                                                                  .value
+                                                                  .isInitialized)) {
                                                                 videoPlayers[widget
-                                                                    .homeScreenLength! +
-                                                                    propertiesIndex]
-                                                                    .play();
-                                                                isPaused = false;
+                                                                            .homeScreenLength! +
+                                                                        propertiesIndex]
+                                                                    .initialize()
+                                                                    .then(
+                                                                        (value) {
+                                                                  isMuted.value
+                                                                      ? videoPlayers[widget.homeScreenLength! +
+                                                                              propertiesIndex]
+                                                                          .setVolume(
+                                                                              0)
+                                                                      : videoPlayers[widget.homeScreenLength! +
+                                                                              propertiesIndex]
+                                                                          .setVolume(
+                                                                              100);
+                                                                  currentPropertyindex =
+                                                                      widget.homeScreenLength! +
+                                                                          propertiesIndex;
+                                                                  videoPlayers[widget
+                                                                              .homeScreenLength! +
+                                                                          propertiesIndex]
+                                                                      .play();
+                                                                  isPaused =
+                                                                      false;
 
-                                                                setState(() {
-                                                                  videoPlayers
-                                                                      .forEach(
-                                                                          (otherPlayer) {
-                                                                        if (otherPlayer !=
-                                                                            videoPlayers[
-                                                                            widget.homeScreenLength! +
-                                                                                propertiesIndex]) {
-                                                                          if (otherPlayer
-                                                                              .value
-                                                                              .isInitialized) {
-                                                                            otherPlayer
-                                                                                .pause();
-                                                                          } else {
-                                                                            int indexOfOtherPlayer= videoPlayers.indexOf(otherPlayer);
-                                                                            if(((currentPropertyindex+1)<=(videoPlayers.length))&&(indexOfOtherPlayer==(currentPropertyindex+1))){
-                                                                              if(!(videoPlayers[currentPropertyindex+1].value.isInitialized)){
-                                                                                videoPlayers[currentPropertyindex+1]
-                                                                                    .initialize();
-                                                                              }
-                                                                            }
-                                                                          }
-                                                                        }
-                                                                      });
-                                                                  print(
-                                                                      'propertyindex - $propertiesIndex');
-                                                                });
-                                                                ;
-                                                              });
-
-                                                              print(
-                                                                  "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
-                                                            } else {
-                                                              isMuted.value
-                                                                  ? videoPlayers[widget
-                                                                  .homeScreenLength! +
-                                                                  propertiesIndex]
-                                                                  .setVolume(
-                                                                  0)
-                                                                  : videoPlayers[widget
-                                                                  .homeScreenLength! +
-                                                                  propertiesIndex]
-                                                                  .setVolume(
-                                                                  100);
-                                                              videoPlayers[widget
-                                                                  .homeScreenLength! +
-                                                                  propertiesIndex]
-                                                                  .play();
-                                                              isPaused = false;
-
-                                                              currentPropertyindex =
-                                                                  widget.homeScreenLength! +
-                                                                      propertiesIndex;
-
-                                                              if((currentPropertyindex+1)<=(videoPlayers.length)){
-                                                                if(!videoPlayers[currentPropertyindex+1].value.isInitialized){
-                                                                  videoPlayers[currentPropertyindex+1]
-                                                                      .initialize();
-                                                                }
-                                                              }
-
-                                                              setState(() {
-                                                                videoPlayers.forEach(
-                                                                        (otherPlayer) {
+                                                                  setState(() {
+                                                                    videoPlayers
+                                                                        .forEach(
+                                                                            (otherPlayer) {
                                                                       if (otherPlayer !=
-                                                                          videoPlayers[
-                                                                          widget.homeScreenLength! +
+                                                                          videoPlayers[widget.homeScreenLength! +
                                                                               propertiesIndex]) {
                                                                         if (otherPlayer
                                                                             .value
                                                                             .isInitialized) {
                                                                           otherPlayer
                                                                               .pause();
-
+                                                                        } else {
+                                                                          int indexOfOtherPlayer =
+                                                                              videoPlayers.indexOf(otherPlayer);
+                                                                          if (((currentPropertyindex + 1) <= (videoPlayers.length)) &&
+                                                                              (indexOfOtherPlayer == (currentPropertyindex + 1))) {
+                                                                            if (!(videoPlayers[currentPropertyindex + 1].value.isInitialized)) {
+                                                                              videoPlayers[currentPropertyindex + 1].initialize();
+                                                                            }
+                                                                          }
                                                                         }
                                                                       }
                                                                     });
-                                                              });
-                                                            }
-                                                            //autoplayVal = false;
-                                                          }
-                                                        },
-                                                        child:
-                                                        FlutterFlowVideoPlayer(
-                                                          path: getJsonField(
-                                                            propertiesItem,
-                                                            r'''$.attributes.video_manifest_uri''',
-                                                          ),
-                                                          videoType:
-                                                          VideoType.network,
-                                                          width: MediaQuery.of(
-                                                              context)
-                                                              .size
-                                                              .width *
-                                                              95,
-                                                          height: MediaQuery.of(
-                                                              context)
-                                                              .size
-                                                              .width /
-                                                              1.8,
-                                                          aspectRatio: 1.70,
-                                                          autoPlay: false,
-                                                          looping: true,
-                                                          showControls: false,
-                                                          allowFullScreen: true,
-                                                          allowPlaybackSpeedMenu:
-                                                          false,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment:
-                                                AlignmentDirectional(0, 0),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    isPaused =
-                                                    isPaused ? false : true;
+                                                                    print(
+                                                                        'propertyindex - $propertiesIndex');
+                                                                  });
+                                                                  ;
+                                                                });
 
-                                                    isPaused
-                                                        ? videoPlayers[widget
-                                                        .homeScreenLength! +
-                                                        propertiesIndex]
-                                                        .pause()
-                                                        : videoPlayers[widget
-                                                        .homeScreenLength! +
-                                                        propertiesIndex]
-                                                        .play();
-                                                    setState(() {});
-                                                  },
-                                                  child: Container(
-                                                    width: MediaQuery.of(context)
-                                                        .size
-                                                        .width,
-                                                    height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                        0.3,
-                                                    child: Center(
-                                                      child: Container(
-                                                        constraints:
-                                                        BoxConstraints(
-                                                            minWidth: 50,
-                                                            maxWidth: 50),
-                                                        decoration: BoxDecoration(
-                                                          color: isPaused
-                                                              ? Colors.black
-                                                              .withOpacity(
-                                                              0.5)
-                                                              : Colors.black
-                                                              .withOpacity(
-                                                              0.0),
-                                                          shape: BoxShape.circle,
-                                                        ),
-                                                        child: Icon(
-                                                          isPaused
-                                                              ? Icons
-                                                              .play_arrow_rounded
-                                                              : Icons.pause,
-                                                          color: isPaused
-                                                              ? Colors.white
-                                                              .withOpacity(
-                                                              1.0)
-                                                              : Colors.white
-                                                              .withOpacity(
-                                                              0.0),
-                                                          size: 40,
+                                                                print(
+                                                                    "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
+                                                              } else {
+                                                                isMuted.value
+                                                                    ? videoPlayers[widget.homeScreenLength! +
+                                                                            propertiesIndex]
+                                                                        .setVolume(
+                                                                            0)
+                                                                    : videoPlayers[widget.homeScreenLength! +
+                                                                            propertiesIndex]
+                                                                        .setVolume(
+                                                                            100);
+                                                                videoPlayers[widget
+                                                                            .homeScreenLength! +
+                                                                        propertiesIndex]
+                                                                    .play();
+                                                                isPaused =
+                                                                    false;
+
+                                                                currentPropertyindex =
+                                                                    widget.homeScreenLength! +
+                                                                        propertiesIndex;
+
+                                                                if ((currentPropertyindex +
+                                                                        1) <=
+                                                                    (videoPlayers
+                                                                        .length)) {
+                                                                  if (!videoPlayers[
+                                                                          currentPropertyindex +
+                                                                              1]
+                                                                      .value
+                                                                      .isInitialized) {
+                                                                    videoPlayers[
+                                                                            currentPropertyindex +
+                                                                                1]
+                                                                        .initialize();
+                                                                  }
+                                                                }
+
+                                                                setState(() {
+                                                                  videoPlayers
+                                                                      .forEach(
+                                                                          (otherPlayer) {
+                                                                    if (otherPlayer !=
+                                                                        videoPlayers[widget.homeScreenLength! +
+                                                                            propertiesIndex]) {
+                                                                      if (otherPlayer
+                                                                          .value
+                                                                          .isInitialized) {
+                                                                        otherPlayer
+                                                                            .pause();
+                                                                      }
+                                                                    }
+                                                                  });
+                                                                });
+                                                              }
+                                                              //autoplayVal = false;
+                                                            }
+                                                          },
+                                                          child:
+                                                              FlutterFlowVideoPlayer(
+                                                            path: getJsonField(
+                                                              propertiesItem,
+                                                              r'''$.attributes.video_manifest_uri''',
+                                                            ),
+                                                            videoType: VideoType
+                                                                .network,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                95,
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width /
+                                                                1.8,
+                                                            aspectRatio: 1.70,
+                                                            autoPlay: false,
+                                                            looping: true,
+                                                            showControls: false,
+                                                            allowFullScreen:
+                                                                true,
+                                                            allowPlaybackSpeedMenu:
+                                                                false,
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                              Align(
-                                                alignment:
-                                                AlignmentDirectional(0, 0),
-                                                child: (propertiesIndex) ==
-                                                    ((currentPropertyindex
-                                                    ) ==
-                                                        0
-                                                        ? currentPropertyindex =
-                                                    widget
-                                                        .homeScreenLength!
-                                                        : currentPropertyindex =
-                                                        currentPropertyindex) -
-                                                        widget
-                                                            .homeScreenLength!
-                                                    ? Container()
-                                                    : Container(
-                                                  constraints:
-                                                  BoxConstraints(
-                                                      minWidth: 50,
-                                                      maxWidth: 50),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.black
-                                                        .withOpacity(1.0),
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: Icon(
-                                                    Icons
-                                                        .play_arrow_rounded,
-                                                    color: Colors.white
-                                                        .withOpacity(1.0),
-                                                    size: 40,
-                                                  ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.9, 0.8),
-                                                child: InkWell(
-                                                  child: ValueListenableBuilder(
-                                                    builder:
-                                                        (BuildContext context,
-                                                        bool value,
-                                                        Widget? child) {
-                                                      return Container(
-                                                        height: 30,
-                                                        width: 30,
-                                                        decoration: BoxDecoration(
-                                                          color: Colors.black
-                                                              .withOpacity(0.5),
-                                                          shape: BoxShape.circle,
-                                                        ),
-                                                        child: Icon(
-                                                          isMuted.value
-                                                              ? Icons
-                                                              .volume_off_rounded
-                                                              : Icons
-                                                              .volume_up_rounded,
-                                                          color: Colors.white
-                                                              .withOpacity(1.0),
-                                                          size: 20,
-                                                        ),
-                                                      );
-                                                    },
-                                                    valueListenable: isMuted,
-                                                  ),
-                                                  onTap: () {
-                                                    if (videoPlayers[
-                                                    propertiesIndex] !=
-                                                        null) {
-                                                      if (videoPlayers[widget
-                                                          .homeScreenLength! +
-                                                          propertiesIndex]
-                                                          .value
-                                                          .volume >
-                                                          0) {
-                                                        videoPlayers[widget
-                                                            .homeScreenLength! +
-                                                            propertiesIndex]
-                                                            .setVolume(0);
-                                                        isMuted.value = true;
-                                                      } else {
-                                                        videoPlayers[widget
-                                                            .homeScreenLength! +
-                                                            propertiesIndex]
-                                                            .setVolume(100);
-                                                        isMuted.value = false;
-                                                      }
-                                                    }
-                                                  },
-                                                ),
-                                              ),
-                                              if (!functions.videoPlayerVisibilty(
-                                                  getJsonField(
-                                                    propertiesItem,
-                                                    r'''$.attributes.video_manifest_uri''',
-                                                  )))
                                                 Align(
                                                   alignment:
-                                                  AlignmentDirectional(0, 0),
-                                                  child: Builder(
-                                                    builder: (context) {
-                                                      final propertyImages =
-                                                      getJsonField(
-                                                        propertiesItem,
-                                                        r'''$..property_images.data''',
-                                                      ).toList();
-                                                      return Container(
-                                                        width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                        height:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .height *
-                                                            0.3,
-                                                        child: Stack(
-                                                          children: [
-                                                            PageView.builder(
-                                                              controller: pageViewController ??=
-                                                                  PageController(
-                                                                      initialPage: min(
-                                                                          0,
-                                                                          propertyImages.length -
-                                                                              1)),
-                                                              scrollDirection:
-                                                              Axis.horizontal,
-                                                              itemCount:
-                                                              propertyImages
-                                                                  .length,
-                                                              itemBuilder: (context,
-                                                                  propertyImagesIndex) {
-                                                                final propertyImagesItem =
-                                                                propertyImages[
-                                                                propertyImagesIndex];
-                                                                return ClipRRect(
-                                                                  borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                      8),
-                                                                  child:
-                                                                  CachedNetworkImage(
-                                                                    imageUrl:
-                                                                    getJsonField(
-                                                                      propertyImagesItem,
-                                                                      r'''$.attributes.url''',
-                                                                    ),
-                                                                    width: MediaQuery.of(
-                                                                        context)
-                                                                        .size
-                                                                        .width,
-                                                                    height: MediaQuery.of(
-                                                                        context)
-                                                                        .size
-                                                                        .height *
-                                                                        0.3,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                );
-                                                              },
-                                                            ),
-                                                            Align(
-                                                              alignment:
-                                                              AlignmentDirectional(
-                                                                  0, 0.7),
-                                                              child:
-                                                              SmoothPageIndicator(
+                                                      AlignmentDirectional(
+                                                          0, 0),
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      isPaused = isPaused
+                                                          ? false
+                                                          : true;
+
+                                                      isPaused
+                                                          ? videoPlayers[widget
+                                                                      .homeScreenLength! +
+                                                                  propertiesIndex]
+                                                              .pause()
+                                                          : videoPlayers[widget
+                                                                      .homeScreenLength! +
+                                                                  propertiesIndex]
+                                                              .play();
+                                                      setState(() {});
+                                                    },
+                                                    child: Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.3,
+                                                      child: Center(
+                                                        child: Container(
+                                                          constraints:
+                                                              BoxConstraints(
+                                                                  minWidth: 50,
+                                                                  maxWidth: 50),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: isPaused
+                                                                ? Colors.black
+                                                                    .withOpacity(
+                                                                        0.5)
+                                                                : Colors.black
+                                                                    .withOpacity(
+                                                                        0.0),
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: Icon(
+                                                            isPaused
+                                                                ? Icons
+                                                                    .play_arrow_rounded
+                                                                : Icons.pause,
+                                                            color: isPaused
+                                                                ? Colors.white
+                                                                    .withOpacity(
+                                                                        1.0)
+                                                                : Colors.white
+                                                                    .withOpacity(
+                                                                        0.0),
+                                                            size: 40,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0, 0),
+                                                  child: (propertiesIndex) ==
+                                                          ((currentPropertyindex) ==
+                                                                      0
+                                                                  ? currentPropertyindex =
+                                                                      widget
+                                                                          .homeScreenLength!
+                                                                  : currentPropertyindex =
+                                                                      currentPropertyindex) -
+                                                              widget
+                                                                  .homeScreenLength!
+                                                      ? Container()
+                                                      : Container(
+                                                          constraints:
+                                                              BoxConstraints(
+                                                                  minWidth: 50,
+                                                                  maxWidth: 50),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors.black
+                                                                .withOpacity(
+                                                                    1.0),
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: Icon(
+                                                            Icons
+                                                                .play_arrow_rounded,
+                                                            color: Colors.white
+                                                                .withOpacity(
+                                                                    1.0),
+                                                            size: 40,
+                                                          ),
+                                                        ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.9, 0.8),
+                                                  child: InkWell(
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                      builder:
+                                                          (BuildContext context,
+                                                              bool value,
+                                                              Widget? child) {
+                                                        return Container(
+                                                          height: 30,
+                                                          width: 30,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: Colors.black
+                                                                .withOpacity(
+                                                                    0.5),
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: Icon(
+                                                            isMuted.value
+                                                                ? Icons
+                                                                    .volume_off_rounded
+                                                                : Icons
+                                                                    .volume_up_rounded,
+                                                            color: Colors.white
+                                                                .withOpacity(
+                                                                    1.0),
+                                                            size: 20,
+                                                          ),
+                                                        );
+                                                      },
+                                                      valueListenable: isMuted,
+                                                    ),
+                                                    onTap: () {
+                                                      if (videoPlayers[
+                                                              propertiesIndex] !=
+                                                          null) {
+                                                        if (videoPlayers[widget
+                                                                        .homeScreenLength! +
+                                                                    propertiesIndex]
+                                                                .value
+                                                                .volume >
+                                                            0) {
+                                                          videoPlayers[widget
+                                                                      .homeScreenLength! +
+                                                                  propertiesIndex]
+                                                              .setVolume(0);
+                                                          isMuted.value = true;
+                                                        } else {
+                                                          videoPlayers[widget
+                                                                      .homeScreenLength! +
+                                                                  propertiesIndex]
+                                                              .setVolume(100);
+                                                          isMuted.value = false;
+                                                        }
+                                                      }
+                                                    },
+                                                  ),
+                                                ),
+                                                if (!functions
+                                                    .videoPlayerVisibilty(
+                                                        getJsonField(
+                                                  propertiesItem,
+                                                  r'''$.attributes.video_manifest_uri''',
+                                                )))
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0, 0),
+                                                    child: Builder(
+                                                      builder: (context) {
+                                                        final propertyImages =
+                                                            getJsonField(
+                                                          propertiesItem,
+                                                          r'''$..property_images.data''',
+                                                        ).toList();
+                                                        return Container(
+                                                          width: MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width,
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height *
+                                                              0.3,
+                                                          child: Stack(
+                                                            children: [
+                                                              PageView.builder(
                                                                 controller: pageViewController ??=
                                                                     PageController(
                                                                         initialPage: min(
                                                                             0,
                                                                             propertyImages.length -
                                                                                 1)),
-                                                                count:
-                                                                propertyImages
-                                                                    .length,
-                                                                axisDirection: Axis
-                                                                    .horizontal,
-                                                                onDotClicked:
-                                                                    (i) {
-                                                                  pageViewController!
-                                                                      .animateToPage(
-                                                                    i,
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                        500),
-                                                                    curve: Curves
-                                                                        .ease,
+                                                                scrollDirection:
+                                                                    Axis.horizontal,
+                                                                itemCount:
+                                                                    propertyImages
+                                                                        .length,
+                                                                itemBuilder:
+                                                                    (context,
+                                                                        propertyImagesIndex) {
+                                                                  final propertyImagesItem =
+                                                                      propertyImages[
+                                                                          propertyImagesIndex];
+                                                                  return ClipRRect(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(8),
+                                                                    child:
+                                                                        CachedNetworkImage(
+                                                                      imageUrl:
+                                                                          getJsonField(
+                                                                        propertyImagesItem,
+                                                                        r'''$.attributes.url''',
+                                                                      ),
+                                                                      width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width,
+                                                                      height: MediaQuery.of(context)
+                                                                              .size
+                                                                              .height *
+                                                                          0.3,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
                                                                   );
                                                                 },
-                                                                effect:
-                                                                SlideEffect(
-                                                                  spacing: 8,
-                                                                  radius: 3,
-                                                                  dotWidth: 6,
-                                                                  dotHeight: 6,
-                                                                  dotColor: Color(
-                                                                      0x80FFFFFF),
-                                                                  activeDotColor:
-                                                                  Colors
-                                                                      .white,
-                                                                  paintStyle:
-                                                                  PaintingStyle
-                                                                      .fill,
+                                                              ),
+                                                              Align(
+                                                                alignment:
+                                                                    AlignmentDirectional(
+                                                                        0, 0.7),
+                                                                child:
+                                                                    SmoothPageIndicator(
+                                                                  controller: pageViewController ??=
+                                                                      PageController(
+                                                                          initialPage: min(
+                                                                              0,
+                                                                              propertyImages.length - 1)),
+                                                                  count:
+                                                                      propertyImages
+                                                                          .length,
+                                                                  axisDirection:
+                                                                      Axis.horizontal,
+                                                                  onDotClicked:
+                                                                      (i) {
+                                                                    pageViewController!
+                                                                        .animateToPage(
+                                                                      i,
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                      curve: Curves
+                                                                          .ease,
+                                                                    );
+                                                                  },
+                                                                  effect:
+                                                                      SlideEffect(
+                                                                    spacing: 8,
+                                                                    radius: 3,
+                                                                    dotWidth: 6,
+                                                                    dotHeight:
+                                                                        6,
+                                                                    dotColor: Color(
+                                                                        0x80FFFFFF),
+                                                                    activeDotColor:
+                                                                        Colors
+                                                                            .white,
+                                                                    paintStyle:
+                                                                        PaintingStyle
+                                                                            .fill,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          1, -0.95),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 12, 15, 0),
+                                                    child:
+                                                        ValueListenableBuilder<
+                                                            bool>(
+                                                      builder:
+                                                          (BuildContext context,
+                                                              value,
+                                                              Widget? child) {
+                                                        return (bookMarkTapped
+                                                                    .value &&
+                                                                propertiesIndex ==
+                                                                    tapped_index)
+                                                            ? SizedBox(
+                                                                child:
+                                                                    Container(
+                                                                width: 40,
+                                                                height: 40,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: propertiesItem[
+                                                                          "isBookmarked"]
+                                                                      ? Color(
+                                                                          0x4DFF0000)
+                                                                      : Color(
+                                                                          0x4D000000),
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                ),
+                                                                child: Icon(
+                                                                  Manzel
+                                                                      .favourite,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  size: 20,
+                                                                ),
+                                                              ))
+                                                            : InkWell(
+                                                                onTap:
+                                                                    () async {
+                                                                  propertiesItem[
+                                                                          "isBookmarked"] =
+                                                                      propertiesItem[
+                                                                              "isBookmarked"]
+                                                                          ? true
+                                                                          : false;
+                                                                  setState(
+                                                                      () {});
+                                                                  tapped_index =
+                                                                      propertiesIndex;
+                                                                  bookMarkTapped
+                                                                          .value =
+                                                                      true;
+                                                                  logFirebaseEvent(
+                                                                      'add_to_wishlist');
+                                                                  logFirebaseEvent(
+                                                                      'HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                                                  if (loggedIn) {
+                                                                    if (propertiesItem[
+                                                                        "isBookmarked"]) {
+                                                                      logFirebaseEvent(
+                                                                          'Container_Backend-Call');
+                                                                      final bookmarkApiResponse =
+                                                                          await BookmarkPropertyCall
+                                                                              .call(
+                                                                        userId:
+                                                                            currentUserUid,
+                                                                        authorazationToken:
+                                                                            FFAppState().authToken,
+                                                                        propertyId:
+                                                                            valueOrDefault<String>(
+                                                                          getJsonField(
+                                                                            propertiesItem,
+                                                                            r'''$.id''',
+                                                                          ).toString(),
+                                                                          '0',
+                                                                        ),
+                                                                        version:
+                                                                            FFAppState().apiVersion,
+                                                                      );
+                                                                      if ((bookmarkApiResponse
+                                                                              .statusCode) ==
+                                                                          200) {
+                                                                        fav.remove(
+                                                                            propertiesItem["id"].toString());
+                                                                        propertiesItem["isBookmarked"] =
+                                                                            false;
+                                                                      } else {
+                                                                        logFirebaseEvent(
+                                                                            'Icon_Show-Snack-Bar');
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                              functions.snackBarMessage('error', FFAppState().locale),
+                                                                              style: TextStyle(
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
+                                                                                height: 2,
+                                                                              ),
+                                                                            ),
+                                                                            duration:
+                                                                                Duration(milliseconds: 4000),
+                                                                            backgroundColor:
+                                                                                FlutterFlowTheme.of(context).primaryRed,
+                                                                          ),
+                                                                        );
+                                                                      }
+                                                                    } else {
+                                                                      logFirebaseEvent(
+                                                                          'Container_Backend-Call');
+                                                                      final bookmarkApiResponse =
+                                                                          await BookmarkPropertyCall
+                                                                              .call(
+                                                                        userId:
+                                                                            currentUserUid,
+                                                                        authorazationToken:
+                                                                            FFAppState().authToken,
+                                                                        propertyId:
+                                                                            valueOrDefault<String>(
+                                                                          getJsonField(
+                                                                            propertiesItem,
+                                                                            r'''$.id''',
+                                                                          ).toString(),
+                                                                          '0',
+                                                                        ),
+                                                                        version:
+                                                                            FFAppState().apiVersion,
+                                                                      );
+                                                                      if ((bookmarkApiResponse
+                                                                              .statusCode) ==
+                                                                          200) {
+                                                                        fav[propertiesItem["id"].toString()] =
+                                                                            true;
+                                                                        propertiesItem["isBookmarked"] =
+                                                                            true;
+                                                                      } else {
+                                                                        logFirebaseEvent(
+                                                                            'Icon_Show-Snack-Bar');
+                                                                        ScaffoldMessenger.of(context)
+                                                                            .showSnackBar(
+                                                                          SnackBar(
+                                                                            content:
+                                                                                Text(
+                                                                              functions.snackBarMessage('error', FFAppState().locale),
+                                                                              style: TextStyle(
+                                                                                color: FlutterFlowTheme.of(context).white,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                fontSize: 16,
+                                                                                height: 2,
+                                                                              ),
+                                                                            ),
+                                                                            duration:
+                                                                                Duration(milliseconds: 4000),
+                                                                            backgroundColor:
+                                                                                FlutterFlowTheme.of(context).primaryRed,
+                                                                          ),
+                                                                        );
+                                                                      }
+                                                                    }
+                                                                  } else {
+                                                                    videoPlayers[
+                                                                            propertiesIndex]
+                                                                        .pause();
+                                                                    logFirebaseEvent(
+                                                                        'Container_Navigate-To');
+                                                                    context.pushNamed(
+                                                                        'Login');
+                                                                  }
+                                                                  bookMarkTapped
+                                                                          .value =
+                                                                      false;
+                                                                  setState(
+                                                                      () {});
+                                                                },
+                                                                child:
+                                                                    Container(
+                                                                  width: 40,
+                                                                  height: 40,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: propertiesItem[
+                                                                            "isBookmarked"]
+                                                                        ? Color(
+                                                                            0x4DFF0000)
+                                                                        : Color(
+                                                                            0x4D000000),
+                                                                    shape: BoxShape
+                                                                        .circle,
+                                                                  ),
+                                                                  child: Icon(
+                                                                    Manzel
+                                                                        .favourite,
+                                                                    color: Colors
+                                                                        .white,
+                                                                    size: 20,
+                                                                  ),
+                                                                ));
+                                                      },
+                                                      valueListenable:
+                                                          bookMarkTapped,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          -0.9, 1),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 0, 18, 18),
+                                                    child: Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            Color(0x80F3F1F1),
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                          color:
+                                                              Color(0x80F3F1F1),
+                                                          width: 2,
                                                         ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    1, -0.95),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 12, 15, 0),
-                                                  child: ValueListenableBuilder<
-                                                      bool>(
-                                                    builder:
-                                                        (BuildContext context,
-                                                        value,
-                                                        Widget? child) {
-                                                      return (bookMarkTapped
-                                                          .value &&
-                                                          propertiesIndex ==
-                                                              tapped_index)
-                                                          ? SizedBox(
-                                                          child: Container(
-                                                            width: 40,
-                                                            height: 40,
-                                                            decoration:
-                                                            BoxDecoration(
-                                                              color: propertiesItem[
-                                                              "isBookmarked"]
-                                                                  ? Color(
-                                                                  0x4DFF0000)
-                                                                  : Color(
-                                                                  0x4D000000),
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                            ),
-                                                            child: Icon(
-                                                              Manzel.favourite,
-                                                              color:
-                                                              Colors.white,
-                                                              size: 20,
-                                                            ),
-                                                          ))
-                                                          : InkWell(
-                                                          onTap: () async {
-                                                            propertiesItem[
-                                                            "isBookmarked"] = propertiesItem[
-                                                            "isBookmarked"]?
-                                                            true:false;
-                                                            setState(() {});
-                                                            tapped_index =
-                                                                propertiesIndex;
-                                                            bookMarkTapped
-                                                                .value = true;
-                                                            logFirebaseEvent(
-                                                                'add_to_wishlist');
-                                                            logFirebaseEvent(
-                                                                'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                                            if (loggedIn) {
-                                                              if (propertiesItem[
-                                                              "isBookmarked"]) {
-                                                                logFirebaseEvent(
-                                                                    'Container_Backend-Call');
-                                                                final bookmarkApiResponse =
-                                                                await BookmarkPropertyCall
-                                                                    .call(
-                                                                  userId:
-                                                                  currentUserUid,
-                                                                  authorazationToken:
-                                                                  FFAppState()
-                                                                      .authToken,
-                                                                  propertyId:
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    getJsonField(
-                                                                      propertiesItem,
-                                                                      r'''$.id''',
-                                                                    ).toString(),
-                                                                    '0',
-                                                                  ),
-                                                                  version:
-                                                                  FFAppState()
-                                                                      .apiVersion,
-                                                                );
-                                                                if ((bookmarkApiResponse
-                                                                    .statusCode) ==
-                                                                    200) {
-                                                                  fav.remove(propertiesItem[
-                                                                  "id"]
-                                                                      .toString());
-                                                                  propertiesItem[
-                                                                  "isBookmarked"] =
-                                                                  false;
-                                                                } else {
-                                                                  logFirebaseEvent(
-                                                                      'Icon_Show-Snack-Bar');
-                                                                  ScaffoldMessenger.of(
-                                                                      context)
-                                                                      .showSnackBar(
-                                                                    SnackBar(
-                                                                      content:
-                                                                      Text(
-                                                                        functions.snackBarMessage(
-                                                                            'error',
-                                                                            FFAppState().locale),
-                                                                        style:
-                                                                        TextStyle(
-                                                                          color:
-                                                                          FlutterFlowTheme.of(context).white,
-                                                                          fontWeight:
-                                                                          FontWeight.bold,
-                                                                          fontSize:
-                                                                          16,
-                                                                          height:
-                                                                          2,
-                                                                        ),
-                                                                      ),
-                                                                      duration:
-                                                                      Duration(milliseconds: 4000),
-                                                                      backgroundColor:
-                                                                      FlutterFlowTheme.of(context).primaryRed,
-                                                                    ),
-                                                                  );
-                                                                }
-                                                              } else {
-                                                                logFirebaseEvent(
-                                                                    'Container_Backend-Call');
-                                                                final bookmarkApiResponse =
-                                                                await BookmarkPropertyCall
-                                                                    .call(
-                                                                  userId:
-                                                                  currentUserUid,
-                                                                  authorazationToken:
-                                                                  FFAppState()
-                                                                      .authToken,
-                                                                  propertyId:
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    getJsonField(
-                                                                      propertiesItem,
-                                                                      r'''$.id''',
-                                                                    ).toString(),
-                                                                    '0',
-                                                                  ),
-                                                                  version:
-                                                                  FFAppState()
-                                                                      .apiVersion,
-                                                                );
-                                                                if ((bookmarkApiResponse
-                                                                    .statusCode) ==
-                                                                    200) {
-                                                                  fav[propertiesItem[
-                                                                  "id"]
-                                                                      .toString()] = true;
-                                                                  propertiesItem[
-                                                                  "isBookmarked"] =
-                                                                  true;
-                                                                } else {
-                                                                  logFirebaseEvent(
-                                                                      'Icon_Show-Snack-Bar');
-                                                                  ScaffoldMessenger.of(
-                                                                      context)
-                                                                      .showSnackBar(
-                                                                    SnackBar(
-                                                                      content:
-                                                                      Text(
-                                                                        functions.snackBarMessage(
-                                                                            'error',
-                                                                            FFAppState().locale),
-                                                                        style:
-                                                                        TextStyle(
-                                                                          color:
-                                                                          FlutterFlowTheme.of(context).white,
-                                                                          fontWeight:
-                                                                          FontWeight.bold,
-                                                                          fontSize:
-                                                                          16,
-                                                                          height:
-                                                                          2,
-                                                                        ),
-                                                                      ),
-                                                                      duration:
-                                                                      Duration(milliseconds: 4000),
-                                                                      backgroundColor:
-                                                                      FlutterFlowTheme.of(context).primaryRed,
-                                                                    ),
-                                                                  );
-                                                                }
-                                                              }
-                                                            } else {
-                                                              videoPlayers[
-                                                              propertiesIndex]
-                                                                  .pause();
-                                                              logFirebaseEvent(
-                                                                  'Container_Navigate-To');
-                                                              context
-                                                                  .pushNamed(
-                                                                  'Login');
-                                                            }
-                                                            bookMarkTapped
-                                                                .value =
-                                                            false;
-                                                            setState(() {});
-                                                          },
-                                                          child: Container(
-                                                            width: 40,
-                                                            height: 40,
-                                                            decoration:
-                                                            BoxDecoration(
-                                                              color: propertiesItem[
-                                                              "isBookmarked"]
-                                                                  ? Color(
-                                                                  0x4DFF0000)
-                                                                  : Color(
-                                                                  0x4D000000),
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                            ),
-                                                            child: Icon(
-                                                              Manzel
-                                                                  .favourite,
-                                                              color: Colors
-                                                                  .white,
-                                                              size: 20,
-                                                            ),
-                                                          ));
-                                                    },
-                                                    valueListenable:
-                                                    bookMarkTapped,
-                                                  ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment:
-                                                AlignmentDirectional(-0.9, 1),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 18, 18),
-                                                  child: Container(
-                                                    width: 50,
-                                                    height: 50,
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0x80F3F1F1),
-                                                      shape: BoxShape.circle,
-                                                      border: Border.all(
-                                                        color: Color(0x80F3F1F1),
-                                                        width: 2,
+                                                      ),
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30),
+                                                        child: Image.network(
+                                                          getJsonField(
+                                                            propertiesItem,
+                                                            r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
+                                                          ),
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
                                                     ),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          30),
-                                                      child: Image.network(
+                                                  ),
+                                                ),
+                                                if (functions
+                                                    .conditionalVisibility(
                                                         getJsonField(
                                                           propertiesItem,
-                                                          r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
-                                                        ),
-                                                        fit: BoxFit.cover,
+                                                          r'''$.attributes.property_status''',
+                                                        ).toString(),
+                                                        'Booked'))
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            -0.85, -0.89),
+                                                    child: Container(
+                                                      width: 80,
+                                                      height: 26,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            Color(0xFFD7D7D7),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(7),
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10,
+                                                                        1,
+                                                                        10,
+                                                                        1),
+                                                            child: Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'qtso45vv' /* Booked */,
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'AvenirArabic',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .white,
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                              if (functions.conditionalVisibility(
-                                                  getJsonField(
-                                                    propertiesItem,
-                                                    r'''$.attributes.property_status''',
-                                                  ).toString(),
-                                                  'Booked'))
-                                                Align(
-                                                  alignment: AlignmentDirectional(
-                                                      -0.85, -0.89),
-                                                  child: Container(
-                                                    width: 80,
-                                                    height: 26,
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0xFFD7D7D7),
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          7),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                      MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .center,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(10, 1,
-                                                              10, 1),
-                                                          child: Text(
-                                                            FFLocalizations.of(
-                                                                context)
-                                                                .getText(
-                                                              'qtso45vv' /* Booked */,
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                              fontFamily:
-                                                              'AvenirArabic',
-                                                              color: FlutterFlowTheme.of(
-                                                                  context)
-                                                                  .white,
-                                                              fontSize: 13,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w500,
-                                                              useGoogleFonts:
-                                                              false,
+                                                if (functions
+                                                    .conditionalVisibility(
+                                                        getJsonField(
+                                                          propertiesItem,
+                                                          r'''$.attributes.property_status''',
+                                                        ).toString(),
+                                                        'Soon'))
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            -0.85, -0.89),
+                                                    child: Container(
+                                                      width: 80,
+                                                      height: 26,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(7),
+                                                      ),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10,
+                                                                        1,
+                                                                        10,
+                                                                        1),
+                                                            child: Text(
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                'juw40663' /* Coming soon */,
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'AvenirArabic',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .white,
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    useGoogleFonts:
+                                                                        false,
+                                                                  ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              if (functions.conditionalVisibility(
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    4, 14, 0, 0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
                                                   getJsonField(
                                                     propertiesItem,
-                                                    r'''$.attributes.property_status''',
+                                                    r'''$.attributes.property_name''',
                                                   ).toString(),
-                                                  'Soon'))
-                                                Align(
-                                                  alignment: AlignmentDirectional(
-                                                      -0.85, -0.89),
-                                                  child: Container(
-                                                    width: 80,
-                                                    height: 26,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme.of(
+                                                  maxLines: 1,
+                                                  style: FlutterFlowTheme.of(
                                                           context)
-                                                          .primaryColor,
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          7),
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'AvenirArabic',
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'y61ahqus' /* Approved Banks */,
+                                                  ),
+                                                  textAlign: TextAlign.end,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'AvenirArabic',
+                                                        color:
+                                                            Color(0xFF474747),
+                                                        fontSize: 11,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    4, 1, 0, 14),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Icon(
+                                                      Manzel.location_pin,
+                                                      color: Color(0xFF130F26),
+                                                      size: 14,
                                                     ),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                      MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .center,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
+                                                    Padding(
+                                                      padding:
                                                           EdgeInsetsDirectional
-                                                              .fromSTEB(10, 1,
-                                                              10, 1),
-                                                          child: Text(
-                                                            FFLocalizations.of(
-                                                                context)
-                                                                .getText(
-                                                              'juw40663' /* Coming soon */,
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                .of(context)
+                                                              .fromSTEB(
+                                                                  4, 0, 0, 0),
+                                                      child: Text(
+                                                        getJsonField(
+                                                          propertiesItem,
+                                                          r'''$..attributes.city.data.attributes.city_name''',
+                                                        ).toString(),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
                                                                 .bodyText1
                                                                 .override(
-                                                              fontFamily:
-                                                              'AvenirArabic',
-                                                              color: FlutterFlowTheme.of(
-                                                                  context)
-                                                                  .white,
-                                                              fontSize: 13,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w500,
-                                                              useGoogleFonts:
-                                                              false,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
+                                                                  fontFamily:
+                                                                      'AvenirArabic',
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                      ),
                                                     ),
-                                                  ),
-                                                ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              4, 14, 0, 0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                getJsonField(
-                                                  propertiesItem,
-                                                  r'''$.attributes.property_name''',
-                                                ).toString(),
-                                                maxLines: 1,
-                                                style: FlutterFlowTheme.of(
-                                                    context)
-                                                    .bodyText1
-                                                    .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                              ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'y61ahqus' /* Approved Banks */,
-                                                ),
-                                                textAlign: TextAlign.end,
-                                                style: FlutterFlowTheme.of(
-                                                    context)
-                                                    .bodyText1
-                                                    .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  color: Color(0xFF474747),
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              4, 1, 0, 14),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Icon(
-                                                    Manzel.location_pin,
-                                                    color: Color(0xFF130F26),
-                                                    size: 14,
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsetsDirectional
-                                                        .fromSTEB(4, 0, 0, 0),
-                                                    child: Text(
+                                                    Text(
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'n8poxzbo' /* ,  */,
+                                                      ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'AvenirArabic',
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                                FontWeight.w300,
+                                                            useGoogleFonts:
+                                                                false,
+                                                          ),
+                                                    ),
+                                                    Text(
                                                       getJsonField(
                                                         propertiesItem,
-                                                        r'''$..attributes.city.data.attributes.city_name''',
+                                                        r'''$..property_district''',
                                                       ).toString(),
-                                                      style: FlutterFlowTheme.of(
-                                                          context)
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
                                                           .bodyText1
                                                           .override(
-                                                        fontFamily:
-                                                        'AvenirArabic',
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                        FontWeight.w300,
-                                                        useGoogleFonts: false,
-                                                      ),
+                                                            fontFamily:
+                                                                'AvenirArabic',
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                                FontWeight.w300,
+                                                            useGoogleFonts:
+                                                                false,
+                                                          ),
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      'n8poxzbo' /* ,  */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                        context)
-                                                        .bodyText1
-                                                        .override(
-                                                      fontFamily:
-                                                      'AvenirArabic',
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                      FontWeight.w300,
-                                                      useGoogleFonts: false,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    getJsonField(
+                                                  ],
+                                                ),
+                                                Builder(
+                                                  builder: (context) {
+                                                    final banks = getJsonField(
                                                       propertiesItem,
-                                                      r'''$..property_district''',
-                                                    ).toString(),
-                                                    style: FlutterFlowTheme.of(
-                                                        context)
-                                                        .bodyText1
-                                                        .override(
-                                                      fontFamily:
-                                                      'AvenirArabic',
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                      FontWeight.w300,
-                                                      useGoogleFonts: false,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Builder(
-                                                builder: (context) {
-                                                  final banks = getJsonField(
-                                                    propertiesItem,
-                                                    r'''$.attributes.banks.data''',
-                                                  ).toList();
-                                                  return Row(
-                                                    mainAxisSize:
-                                                    MainAxisSize.max,
-                                                    children: List.generate(
-                                                        banks.length,
-                                                            (banksIndex) {
-                                                          final banksItem =
-                                                          banks[banksIndex];
-                                                          return Padding(
-                                                            padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                0, 0, 2, 0),
-                                                            child: Container(
-                                                              decoration: BoxDecoration(
-                                                                shape: BoxShape.circle,
-                                                                border: Border.all(
-                                                                  color: Color(0xFF8C8C8C),
-                                                                ),
-                                                              ),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                BorderRadius.circular(11),
-                                                                child: Image.network(
-                                                                  getJsonField(
-                                                                    banksItem,
-                                                                    r'''$.attributes.bank_logo.data.attributes.url''',
-                                                                  ),
-                                                                  width: 22,
-                                                                  height: 22,
-                                                                  fit: BoxFit.cover,
-                                                                ),
+                                                      r'''$.attributes.banks.data''',
+                                                    ).toList();
+                                                    return Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: List.generate(
+                                                          banks.length,
+                                                          (banksIndex) {
+                                                        final banksItem =
+                                                            banks[banksIndex];
+                                                        return Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 2, 0),
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              border:
+                                                                  Border.all(
+                                                                color: Color(
+                                                                    0xFF8C8C8C),
                                                               ),
                                                             ),
-                                                          );
-                                                        }),
-                                                  );
-                                                },
-                                              ),
-                                            ],
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          11),
+                                                              child:
+                                                                  Image.network(
+                                                                getJsonField(
+                                                                  banksItem,
+                                                                  r'''$.attributes.bank_logo.data.attributes.url''',
+                                                                ),
+                                                                width: 22,
+                                                                height: 22,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
+                                                    );
+                                                  },
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              4, 0, 0, 0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  '4ib4fmbw' /* Installment starting from */,
-                                                ),
-                                                style: FlutterFlowTheme.of(
-                                                    context)
-                                                    .title3
-                                                    .override(
-                                                  fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                                  color: FlutterFlowTheme.of(
-                                                      context)
-                                                      .primaryColor,
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                              ),
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'df86lsot' /* Total property price */,
-                                                ),
-                                                style: FlutterFlowTheme.of(
-                                                    context)
-                                                    .bodyText2
-                                                    .override(
-                                                  fontFamily: 'AvenirArabic',
-                                                  color: Color(0xFF474747),
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: false,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                              4, 1, 0, 25),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    valueOrDefault<String>(
-                                                      functions.formatAmount(
-                                                          valueOrDefault<String>(
-                                                            getJsonField(
-                                                              propertiesItem,
-                                                              r'''$.attributes.property_initial_installment''',
-                                                            ).toString(),
-                                                            '0',
-                                                          )),
-                                                      '0',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                        context)
-                                                        .bodyText1
-                                                        .override(
-                                                      fontFamily:
-                                                      'Sofia Pro By Khuzaimah',
-                                                      color:
-                                                      FlutterFlowTheme.of(
-                                                          context)
-                                                          .primaryColor,
-                                                      fontSize: 24,
-                                                      fontWeight:
-                                                      FontWeight.bold,
-                                                      useGoogleFonts: false,
-                                                    ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    4, 0, 0, 0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    '4ib4fmbw' /* Installment starting from */,
                                                   ),
-                                                  Padding(
-                                                    padding: EdgeInsetsDirectional
-                                                        .fromSTEB(5, 10, 0, 0),
-                                                    child: Text(
-                                                      FFLocalizations.of(context)
-                                                          .getText(
-                                                        'xk3izs5s' /*  SAR/Monthly */,
-                                                      ),
-                                                      textAlign: TextAlign.start,
-                                                      style: FlutterFlowTheme.of(
+                                                  style: FlutterFlowTheme.of(
                                                           context)
-                                                          .bodyText1
-                                                          .override(
+                                                      .title3
+                                                      .override(
                                                         fontFamily:
-                                                        'AvenirArabic',
-                                                        color: FlutterFlowTheme
-                                                            .of(context)
-                                                            .primaryColor,
-                                                        fontSize: 12,
+                                                            'Sofia Pro By Khuzaimah',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        fontSize: 11,
                                                         fontWeight:
-                                                        FontWeight.w500,
+                                                            FontWeight.w500,
                                                         useGoogleFonts: false,
                                                       ),
-                                                    ),
+                                                ),
+                                                Text(
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'df86lsot' /* Total property price */,
                                                   ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    valueOrDefault<String>(
-                                                      functions
-                                                          .formatAmountWithoutDecimal(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            getJsonField(
-                                                              propertiesItem,
-                                                              r'''$..property_price''',
-                                                            ).toString(),
-                                                            '0',
-                                                          )),
-                                                      '0',
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                        context)
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily:
-                                                      'AvenirArabic',
-                                                      color: Colors.black,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                      FontWeight.bold,
-                                                      useGoogleFonts: false,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    FFLocalizations.of(context)
-                                                        .getText(
-                                                      '66rkg6uk' /*  SAR */,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                        context)
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily:
-                                                      'AvenirArabic',
-                                                      color: Colors.black,
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                      FontWeight.bold,
-                                                      useGoogleFonts: false,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            'AvenirArabic',
+                                                        color:
+                                                            Color(0xFF474747),
+                                                        fontSize: 11,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        Divider(
-                                          thickness: 1,
-                                          color: Color(0xFFECECEC),
-                                        ),
-                                      ],
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    4, 1, 0, 25),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      valueOrDefault<String>(
+                                                        functions.formatAmount(
+                                                            valueOrDefault<
+                                                                String>(
+                                                          getJsonField(
+                                                            propertiesItem,
+                                                            r'''$.attributes.property_initial_installment''',
+                                                          ).toString(),
+                                                          '0',
+                                                        )),
+                                                        '0',
+                                                      ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Sofia Pro By Khuzaimah',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                fontSize: 24,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                useGoogleFonts:
+                                                                    false,
+                                                              ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  5, 10, 0, 0),
+                                                      child: Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'xk3izs5s' /*  SAR/Monthly */,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'AvenirArabic',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryColor,
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts:
+                                                                      false,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      valueOrDefault<String>(
+                                                        functions
+                                                            .formatAmountWithoutDecimal(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                          getJsonField(
+                                                            propertiesItem,
+                                                            r'''$..property_price''',
+                                                          ).toString(),
+                                                          '0',
+                                                        )),
+                                                        '0',
+                                                      ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText2
+                                                          .override(
+                                                            fontFamily:
+                                                                'AvenirArabic',
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            useGoogleFonts:
+                                                                false,
+                                                          ),
+                                                    ),
+                                                    Text(
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        '66rkg6uk' /*  SAR */,
+                                                      ),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText2
+                                                          .override(
+                                                            fontFamily:
+                                                                'AvenirArabic',
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            useGoogleFonts:
+                                                                false,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Divider(
+                                            thickness: 1,
+                                            color: Color(0xFFECECEC),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                            );
-                          }
-                          return SizedBox();
-                        },
-                      );
+                                  );
+                                },
+                              );
+                            } else if ((listViewPropertiesResponse
+                                        ?.statusCode !=
+                                    200) &&
+                                (listViewPropertiesResponse?.statusCode !=
+                                    null)) {
+                              return SomethingWentWrongWidget(onTryAgain: () {
+                                propertiesCall();
+                              });
+                            }
+                            return SizedBox();
+                          },
+                        );
+                      }
+                      return SizedBox();
                     },
                   ),
                 ),

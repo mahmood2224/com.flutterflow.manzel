@@ -137,7 +137,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     try {
       bool isInternetAvailable = await isInternetConnected();
       if (isInternetAvailable) {
-        callBookmarkListApi();
+        // if (loggedIn) {
+        //    callBookmarkListApi();
+        // }
         final apiResponse = await PropertiesCall.call(
           // city: FFAppState().filterCity,
           // furnishingType: FFAppState().filterFurnishingType,

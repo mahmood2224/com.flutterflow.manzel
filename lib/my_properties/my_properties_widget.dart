@@ -74,7 +74,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
     isBookedPropertiesLoading = true;
     setState(() {});
     isInternetAvailable = await isInternetConnected();
-    if (isInternetAvailable ?? false) {
+    if ((isInternetAvailable ?? false) && loggedIn) {
       bookedPropertiesApiResponse = await BookedPropertiesCall.call(
         userId: currentUserUid,
         locale: FFAppState().locale,
@@ -110,7 +110,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
     isBookMarkedProperties = true;
     setState(() {});
     isInternetAvailable = await isInternetConnected();
-    if (isInternetAvailable ?? false) {
+    if ((isInternetAvailable ?? false) && loggedIn) {
       getBookMarkedPropertiesApiResponse =
           await GetBookMarkedPropertiesCall.call(
         userId: currentUserUid,
@@ -123,7 +123,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
       bookmarkedProperties = GetBookMarkedPropertiesCall.result(
         getBookMarkedPropertiesApiResponse?.jsonBody,
       ).toList();
-    } else if (loggedIn) {
+    } else if ((!(isInternetAvailable ?? false)) && loggedIn) {
       isBookMarkedProperties = false;
       setState(() {});
       getBookMarkedPropertiesApiResponse = null;

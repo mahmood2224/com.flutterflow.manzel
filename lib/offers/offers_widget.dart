@@ -186,7 +186,7 @@ class _OffersWidgetState extends State<OffersWidget> {
     isPageLoading = true;
     setState(() {});
     isInternetAvailable = await isInternetConnected();
-    if (isInternetAvailable ?? false) {
+    if ((isInternetAvailable ?? false) && loggedIn) {
       getOfferResponse = await GetOffersCall?.call(
           userId: currentUserUid,
           propertyId: functions.offerScreenPropertyIdisNull(widget.propertyId),
