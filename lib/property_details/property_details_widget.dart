@@ -4,7 +4,6 @@ import 'package:chewie/chewie.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
-import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/edit_personall_info/edit_personall_info_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
