@@ -745,27 +745,28 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           //     VideoPlayerController.network(dataSource);
 
                                                         } else {
-                                                          int indexOfOtherPlayer =
-                                                              videoPlayers.indexOf(
-                                                                  otherPlayer);
-                                                          if (((propertiesIndex +
-                                                                      1) <
-                                                                  (videoPlayers
-                                                                      .length)) &&
-                                                              (indexOfOtherPlayer ==
-                                                                  (currentPropertyindex +
-                                                                      1))) {
-                                                            if (!(videoPlayers[
-                                                                    propertiesIndex +
-                                                                        1]
-                                                                .value
-                                                                .isInitialized)) {
-                                                              videoPlayers[
-                                                                      propertiesIndex +
-                                                                          1]
-                                                                  .initialize();
-                                                            }
-                                                          }
+                                                          // int indexOfOtherPlayer =
+                                                          //     videoPlayers.indexOf(
+                                                          //         otherPlayer);
+                                                          // if (((propertiesIndex +
+                                                          //             1) <
+                                                          //         (videoPlayers
+                                                          //             .length)) &&
+                                                          //     (indexOfOtherPlayer ==
+                                                          //         (currentPropertyindex +
+                                                          //             1))) {
+                                                          //   if (!(videoPlayers[
+                                                          //           propertiesIndex +
+                                                          //               1]
+                                                          //       .value
+                                                          //       .isInitialized)) {
+                                                          //     videoPlayers[
+                                                          //             propertiesIndex +
+                                                          //                 1]
+                                                          //         .initialize();
+                                                          //   }
+                                                          // }
+
                                                           // var indexOfPlayer = videoPlayers.indexOf(otherPlayer);
                                                           // indexOfPlayer
 
@@ -848,17 +849,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 currentPropertyindex =
                                                     propertiesIndex;
 
-                                                if ((propertiesIndex + 1) <
-                                                    (videoPlayers.length)) {
-                                                  if (!(videoPlayers[
-                                                          propertiesIndex + 1]
-                                                      .value
-                                                      .isInitialized)) {
-                                                    videoPlayers[
-                                                            propertiesIndex + 1]
-                                                        .initialize();
-                                                  }
-                                                }
+                                                // if ((propertiesIndex + 1) <
+                                                //     (videoPlayers.length)) {
+                                                //   if (!(videoPlayers[
+                                                //           propertiesIndex + 1]
+                                                //       .value
+                                                //       .isInitialized)) {
+                                                //     videoPlayers[
+                                                //             propertiesIndex + 1]
+                                                //         .initialize();
+                                                //   }
+                                                // }
 
                                                 setState(() {
                                                   videoPlayers

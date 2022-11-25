@@ -467,17 +467,17 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                         //     VideoPlayerController.network(dataSource);
 
                                                                       } else {
-                                                                        int indexOfOtherPlayer =
-                                                                            videoPlayers.indexOf(otherPlayer);
-                                                                        if (((currentPropertyindex + 1) <= (videoPlayers.length)) &&
-                                                                            (indexOfOtherPlayer ==
-                                                                                (currentPropertyindex + 1))) {
-                                                                          if (!(videoPlayers[currentPropertyindex + 1]
-                                                                              .value
-                                                                              .isInitialized)) {
-                                                                            videoPlayers[currentPropertyindex + 1].initialize();
-                                                                          }
-                                                                        }
+                                                                        // int indexOfOtherPlayer =
+                                                                        //     videoPlayers.indexOf(otherPlayer);
+                                                                        // if (((currentPropertyindex + 1) <= (videoPlayers.length)) &&
+                                                                        //     (indexOfOtherPlayer ==
+                                                                        //         (currentPropertyindex + 1))) {
+                                                                        //   if (!(videoPlayers[currentPropertyindex + 1]
+                                                                        //       .value
+                                                                        //       .isInitialized)) {
+                                                                        //     videoPlayers[currentPropertyindex + 1].initialize();
+                                                                        //   }
+                                                                        // }
                                                                         // otherPlayer
                                                                         //     .initialize()
                                                                         //     .then((value) =>
@@ -541,25 +541,25 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                   .play();
                                                               isPaused = false;
 
-                                                              currentPropertyindex =
-                                                                  widget.homeScreenLength! +
-                                                                      propertiesIndex;
+                                                              // currentPropertyindex =
+                                                              //     widget.homeScreenLength! +
+                                                              //         propertiesIndex;
 
-                                                              if ((currentPropertyindex +
-                                                                      1) <=
-                                                                  (videoPlayers
-                                                                      .length)) {
-                                                                if (!videoPlayers[
-                                                                        currentPropertyindex +
-                                                                            1]
-                                                                    .value
-                                                                    .isInitialized) {
-                                                                  videoPlayers[
-                                                                          currentPropertyindex +
-                                                                              1]
-                                                                      .initialize();
-                                                                }
-                                                              }
+                                                              // if ((currentPropertyindex +
+                                                              //         1) <=
+                                                              //     (videoPlayers
+                                                              //         .length)) {
+                                                              //   if (!videoPlayers[
+                                                              //           currentPropertyindex +
+                                                              //               1]
+                                                              //       .value
+                                                              //       .isInitialized) {
+                                                              //     videoPlayers[
+                                                              //             currentPropertyindex +
+                                                              //                 1]
+                                                              //         .initialize();
+                                                              //   }
+                                                              // }
 
                                                               setState(() {
                                                                 videoPlayers
