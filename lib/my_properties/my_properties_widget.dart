@@ -2,6 +2,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
 import 'package:manzel/confirmation/confirmation_widget.dart';
 import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
@@ -45,13 +46,13 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   bool? isInternetAvailable;
   List? bookedProperties;
   List? bookmarkedProperties;
-  bool isLoading = true;
+  bool isBookedPropertiesLoading = true;
+  bool isBookMarkedProperties = true;
   var alertCalled = 0;
   var height;
 
   @override
   void initState() {
-
     super.initState();
     // On page load action.
     logFirebaseEvent('screen_view',
@@ -69,23 +70,24 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
     getBookMarkedPropertiesCall();
   }
 
-
   Future<void> bookedPropertiesCall() async {
+    isBookedPropertiesLoading = true;
+    setState(() {});
     isInternetAvailable = await isInternetConnected();
-    if (isInternetAvailable ?? false) {
+    if ((isInternetAvailable ?? false) && loggedIn) {
       bookedPropertiesApiResponse = await BookedPropertiesCall.call(
         userId: currentUserUid,
         locale: FFAppState().locale,
         authorazationToken: FFAppState().authToken,
         version: FFAppState().apiVersion,
       );
-      isLoading = false;
+      isBookedPropertiesLoading = false;
       setState(() {});
       bookedProperties = BookedPropertiesCall.result(
         bookedPropertiesApiResponse?.jsonBody,
       ).toList();
-    } else if((!(isInternetAvailable??false))&&loggedIn) {
-      isLoading = false;
+    } else if ((!(isInternetAvailable ?? false)) && loggedIn) {
+      isBookedPropertiesLoading = false;
       setState(() {});
       bookedPropertiesApiResponse = null;
       alertCalled++;
@@ -105,8 +107,10 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
   }
 
   Future<void> getBookMarkedPropertiesCall() async {
+    isBookMarkedProperties = true;
+    setState(() {});
     isInternetAvailable = await isInternetConnected();
-    if (isInternetAvailable ?? false) {
+    if ((isInternetAvailable ?? false) && loggedIn) {
       getBookMarkedPropertiesApiResponse =
           await GetBookMarkedPropertiesCall.call(
         userId: currentUserUid,
@@ -114,13 +118,13 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
         authorazationToken: FFAppState().authToken,
         version: FFAppState().apiVersion,
       );
-      isLoading = false;
+      isBookMarkedProperties = false;
       setState(() {});
       bookmarkedProperties = GetBookMarkedPropertiesCall.result(
         getBookMarkedPropertiesApiResponse?.jsonBody,
       ).toList();
-    } else if(loggedIn) {
-      isLoading = false;
+    } else if ((!(isInternetAvailable ?? false)) && loggedIn) {
+      isBookMarkedProperties = false;
       setState(() {});
       getBookMarkedPropertiesApiResponse = null;
       alertCalled++;
@@ -163,24 +167,21 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
         centerTitle: false,
         titleSpacing: 16,
         leadingWidth: 0,
-        title:Text(
+        title: Text(
           FFLocalizations.of(context).getText(
             '21gpsvgr' /* Offers */,
           ),
-          style: FlutterFlowTheme.of(context)
-              .title2
-              .override(
-            fontFamily: 'AvenirArabic',
-            color: Colors.black,
-            fontSize: 25,
-            fontWeight: FontWeight.w800,
-            useGoogleFonts: false,
-          ),
+          style: FlutterFlowTheme.of(context).title2.override(
+                fontFamily: 'AvenirArabic',
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.w800,
+                useGoogleFonts: false,
+              ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
-        actions: [
-        ],
+        actions: [],
       ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
@@ -190,11 +191,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
           children: [
             if (!loggedIn)
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, height/3, 0,0 ),
+                padding: EdgeInsetsDirectional.fromSTEB(0, height / 3, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                 // crossAxisAlignment: CrossAxisAlignment.center,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
                       child: Padding(
@@ -323,7 +324,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                           children: [
                             Builder(
                               builder: (context) {
-                                if (isLoading) {
+                                if (isBookedPropertiesLoading) {
                                   return Center(
                                     child: SizedBox(
                                       width: 50,
@@ -356,8 +357,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       ),
                                     ),
                                   );
-                                }
-                                else if ((bookedProperties != null) &&
+                                } else if ((bookedProperties != null) &&
                                     (bookedProperties?.isNotEmpty ?? false) &&
                                     bookedPropertiesApiResponse?.statusCode ==
                                         200) {
@@ -843,12 +843,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                     final value = snap.data;
                                                                                     print(">>>>>>>>>>>>>>>>>>> value = ${value}");
                                                                                     print('${snap.data.runtimeType}');
-                                                                                    if ((value?? 0) <=0){
+                                                                                    if ((value ?? 0) <= 0) {
                                                                                       timerController.onStopTimer();
                                                                                       timerOver.value = false;
                                                                                     }
                                                                                     final displayTime = StopWatchTimer.getDisplayTime(
-                                                                                      value??0,
+                                                                                      value ?? 0,
                                                                                       hours: true,
                                                                                       minute: true,
                                                                                       second: true,
@@ -1276,87 +1276,79 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                   ? FFButtonWidget(
                                                                       onPressed:
                                                                           () async {
-                                                                        bool isInternetAvailable = await isInternetConnected();
-                                                                        if(isInternetAvailable){
-                                                                          var addOrderApiResponse =
-                                                                          await AddOrderCall.call(
-                                                                              propertyId:getJsonField(
+                                                                        bool
+                                                                            isInternetAvailable =
+                                                                            await isInternetConnected();
+                                                                        if (isInternetAvailable) {
+                                                                          var addOrderApiResponse = await AddOrderCall.call(
+                                                                              propertyId: getJsonField(
                                                                                 bookedPropertiesItem,
                                                                                 r'''$.property_id''',
                                                                               ).toString(),
-                                                                              userId:
-                                                                              currentUserReference
-                                                                                  ?.id,
-                                                                              authorazationToken:
-                                                                              FFAppState()
-                                                                                  .authToken,
-                                                                              version: FFAppState()
-                                                                                  .apiVersion);
-                                                                          if ((addOrderApiResponse
-                                                                              ?.statusCode ??
-                                                                              398) ==
-                                                                              398){
+                                                                              userId: currentUserReference?.id,
+                                                                              authorazationToken: FFAppState().authToken,
+                                                                              version: FFAppState().apiVersion);
+                                                                          if ((addOrderApiResponse.statusCode ?? 398) ==
+                                                                              398) {
                                                                             Navigator.push(
                                                                               context,
                                                                               MaterialPageRoute(
-                                                                                builder: (context) =>
-                                                                                    ConfirmationWidget(
-                                                                                      orderId:getJsonField(
-                                                                                        bookedPropertiesItem,
-                                                                                        r'''$.order_id''',
-                                                                                      ).toString(),
-                                                                                      transactionCase:'SUCCESS',
-                                                                                    ),
+                                                                                builder: (context) => ConfirmationWidget(
+                                                                                  orderId: getJsonField(
+                                                                                    bookedPropertiesItem,
+                                                                                    r'''$.order_id''',
+                                                                                  ).toString(),
+                                                                                  transactionCase: 'SUCCESS',
+                                                                                ),
                                                                               ),
                                                                             );
                                                                           }
-                                                                          else{await configurePaymentSdk();
-                                                                          await showModalBottomSheet(
-                                                                            isScrollControlled:
-                                                                            true,
-                                                                            backgroundColor:
-                                                                            FlutterFlowTheme.of(context).white,
-                                                                            context:
-                                                                            context,
-                                                                            builder:
-                                                                                (context) {
-                                                                              return Padding(
-                                                                                padding: MediaQuery.of(context).viewInsets,
-                                                                                child: Container(
-                                                                                  height: MediaQuery.of(context).size.height * 0.89,
-                                                                                  child: ReservationBottomSheetWidget(
-                                                                                    reservationCost: getJsonField(
-                                                                                      bookedPropertiesItem,
-                                                                                      r'''$.reservation_amount''',
-                                                                                    ),
-                                                                                    propertyId: functions.bookinPagePropertyIdToInt(getJsonField(
-                                                                                      bookedPropertiesItem,
-                                                                                      r'''$.property_id''',
-                                                                                    ).toString()),
-                                                                                    orderId: getJsonField(
-                                                                                      bookedPropertiesItem,
-                                                                                      r'''$.order_id''',
+                                                                          else if(addOrderApiResponse.statusCode ==403){
+                                                                            unAuthorizedUser(context, mounted);
+                                                                          }
+                                                                          else {
+                                                                            await configurePaymentSdk();
+                                                                            await showModalBottomSheet(
+                                                                              isScrollControlled: true,
+                                                                              backgroundColor: FlutterFlowTheme.of(context).white,
+                                                                              context: context,
+                                                                              builder: (context) {
+                                                                                return Padding(
+                                                                                  padding: MediaQuery.of(context).viewInsets,
+                                                                                  child: Container(
+                                                                                    height: MediaQuery.of(context).size.height * 0.89,
+                                                                                    child: ReservationBottomSheetWidget(
+                                                                                      reservationCost: getJsonField(
+                                                                                        bookedPropertiesItem,
+                                                                                        r'''$.reservation_amount''',
+                                                                                      ),
+                                                                                      propertyId: functions.bookinPagePropertyIdToInt(getJsonField(
+                                                                                        bookedPropertiesItem,
+                                                                                        r'''$.property_id''',
+                                                                                      ).toString()),
+                                                                                      orderId: getJsonField(
+                                                                                        bookedPropertiesItem,
+                                                                                        r'''$.order_id''',
+                                                                                      ),
                                                                                     ),
                                                                                   ),
-                                                                                ),
-                                                                              );
-                                                                            },
-                                                                          ).then((value) =>
-                                                                              setState(() {}));
-
+                                                                                );
+                                                                              },
+                                                                            ).then((value) =>
+                                                                                setState(() {}));
                                                                           }
-                                                                        }else
-                                                                        {
+                                                                        } else {
                                                                           showDialog(
-                                                                            context: context,
-                                                                            builder: (BuildContext context) => CommonAlertDialog(
+                                                                            context:
+                                                                                context,
+                                                                            builder: (BuildContext context) =>
+                                                                                CommonAlertDialog(
                                                                               onCancel: () {
                                                                                 Navigator.pop(context);
                                                                               },
                                                                             ),
                                                                           );
                                                                         }
-
                                                                       },
                                                                       text: FFLocalizations.of(
                                                                               context)
@@ -1407,13 +1399,42 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       );
                                     },
                                   );
+                                } else if(bookedPropertiesApiResponse
+                                    ?.statusCode ==403){
+                                  unAuthorizedUser(context, mounted);
+
                                 }
+                                else if (bookedPropertiesApiResponse
+                                            ?.statusCode !=
+                                        200 &&
+                                    bookedPropertiesApiResponse?.statusCode !=
+                                        null&&bookedPropertiesApiResponse
+                                    ?.statusCode !=403) {
+                                  return SomethingWentWrongWidget(
+                                      onTryAgain: () {
+                                    bookedPropertiesCall();
+                                  });
+                                }
+
                                 return SizedBox();
                               },
                             ),
                             Builder(
                               builder: (context) {
-                                if (bookmarkedProperties?.isEmpty ?? false) {
+                                if (isBookMarkedProperties) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: SpinKitRipple(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 50,
+                                      ),
+                                    ),
+                                  );
+                                } else if (bookmarkedProperties?.isEmpty ??
+                                    false) {
                                   return Center(
                                     child: Container(
                                       width: MediaQuery.of(context).size.width,
@@ -1545,29 +1566,39 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                         .start,
                                                                 children: [
                                                                   SizedBox(
-                                                                    width: (MediaQuery.of(context).size.width)/2,
-                                                                            child:
-                                                                      Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          getJsonField(
-                                                                            bookmarkedPropertiesItem,
-                                                                            r'''$.property_data.property_name''',
-                                                                          ).toString(),
-                                                                          'null',
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'AvenirArabic',
-                                                                              fontSize: 16,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: false,
-                                                                              lineHeight: 1.25,
-
-                                                                        ),
-                                                                        maxLines:2,
-                                                                            overflow: TextOverflow.ellipsis,
+                                                                    width: (MediaQuery.of(context)
+                                                                            .size
+                                                                            .width) /
+                                                                        2,
+                                                                    child: Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          bookmarkedPropertiesItem,
+                                                                          r'''$.property_data.property_name''',
+                                                                        ).toString(),
+                                                                        'null',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'AvenirArabic',
+                                                                            fontSize:
+                                                                                16,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            useGoogleFonts:
+                                                                                false,
+                                                                            lineHeight:
+                                                                                1.25,
+                                                                          ),
+                                                                      maxLines:
+                                                                          2,
+                                                                      overflow:
+                                                                          TextOverflow
+                                                                              .ellipsis,
                                                                     ),
                                                                   ),
                                                                   Row(
@@ -1786,16 +1817,16 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                     fontFamily: 'AvenirArabic',
                                                                                     fontSize: 12,
                                                                                     fontWeight: FontWeight.w500,
-                                                                                    useGoogleFonts: false,),
+                                                                                    useGoogleFonts: false,
                                                                                   ),
                                                                             ),
-                                                                          ],
-                                                                        ),
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ),
-                                                                  ],
-                                                                )
-                                                              ,
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -1829,47 +1860,50 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                 FFAppState()
                                                                     .apiVersion,
                                                           );
-                                                          if ((bookmarkApiResponse
-                                                                      ?.statusCode ??
-                                                                  200) ==
-                                                              200) {
+                                                          if ((bookmarkApiResponse?.statusCode) == 200) {
                                                             getBookMarkedPropertiesCall();
                                                             logFirebaseEvent(
                                                                 'Icon_Show-Snack-Bar');
-                                                            isInternetAvailable = await isInternetConnected();
-                                                            if(isInternetAvailable??false)
-                                                            ScaffoldMessenger
-                                                                    .of(context)
-                                                                .showSnackBar(
-                                                              SnackBar(
-                                                                content: Text(
-                                                                  functions.snackBarMessage(
-                                                                      'bookmarkRemoved',
-                                                                      FFAppState()
-                                                                          .locale),
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .white,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        16,
-                                                                    height: 2,
+                                                            isInternetAvailable =
+                                                                await isInternetConnected();
+                                                            if (isInternetAvailable ??
+                                                                false)
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    functions.snackBarMessage(
+                                                                        'bookmarkRemoved',
+                                                                        FFAppState()
+                                                                            .locale),
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .white,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          16,
+                                                                      height: 2,
+                                                                    ),
                                                                   ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          4000),
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryGreen,
                                                                 ),
-                                                                duration: Duration(
-                                                                    milliseconds:
-                                                                        4000),
-                                                                backgroundColor:
-                                                                    FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryGreen,
-                                                              ),
-                                                            );
-                                                          } else {
+                                                              );
+                                                          }
+                                                          else if((bookmarkApiResponse?.statusCode) == 403){
+                                                            unAuthorizedUser(context,mounted);
+                                                          }
+                                                          else {
                                                             logFirebaseEvent(
                                                                 'Icon_Show-Snack-Bar');
                                                             ScaffoldMessenger
@@ -1938,24 +1972,22 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       );
                                     },
                                   );
-                                } else if (isLoading) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitRipple(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
-                                      ),
-                                    ),
-                                  );
+                                } else if (getBookMarkedPropertiesApiResponse?.statusCode == 403){
+                                  unAuthorizedUser(context,mounted);
                                 }
-                                return Container(
-                                  height: 100,
-                                  width: 100,
-                                  color: Colors.white,
-                                );
+                                else if (getBookMarkedPropertiesApiResponse
+                                            ?.statusCode !=
+                                        200 &&
+                                    getBookMarkedPropertiesApiResponse
+                                            ?.statusCode !=
+                                        null) {
+                                  return SomethingWentWrongWidget(
+                                      onTryAgain: () {
+                                    getBookMarkedPropertiesCall();
+                                  });
+                                }
+
+                                return SizedBox();
                               },
                             )
                           ],
@@ -2019,4 +2051,3 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
     return remaingValue;
   }
 }
-

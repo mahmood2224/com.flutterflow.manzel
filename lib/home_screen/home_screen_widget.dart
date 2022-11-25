@@ -25,9 +25,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:app_settings/app_settings.dart';
 
-
-
-
 import '../flutter_flow/flutter_flow_widgets.dart';
 
 class HomeScreenWidget extends StatefulWidget {
@@ -133,14 +130,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       favourites[element] = true;
     });
     FavouriteList.instance.setFavourite(favourites);
-    if(mounted)setState(() {});
+    if (mounted) setState(() {});
   }
 
   Future<void> _fetchPage(int pageKey) async {
     try {
       bool isInternetAvailable = await isInternetConnected();
       if (isInternetAvailable) {
-        callBookmarkListApi();
+        if (loggedIn) {
+           callBookmarkListApi();
+        }
         final apiResponse = await PropertiesCall.call(
           // city: FFAppState().filterCity,
           // furnishingType: FFAppState().filterFurnishingType,
@@ -165,7 +164,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           final nextPageKey = ++pageKey;
           _pagingController.appendPage(newItems, nextPageKey);
         }
-      } else{
+      } else {
         showDialog(
           context: context,
           builder: (BuildContext context) => CommonAlertDialog(
@@ -710,8 +709,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         100 ==
                                                     100 &&
                                                 this.mounted) {
-                                              if (!(videoPlayers[propertiesIndex].value.isInitialized)) {
-                                                videoPlayers[propertiesIndex].initialize().then((value) {
+                                              if (!(videoPlayers[
+                                                      propertiesIndex]
+                                                  .value
+                                                  .isInitialized)) {
+                                                videoPlayers[propertiesIndex]
+                                                    .initialize()
+                                                    .then((value) {
                                                   isPaused = false;
                                                   isMuted.value
                                                       ? videoPlayers[
@@ -720,7 +724,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       : videoPlayers[
                                                               propertiesIndex]
                                                           .setVolume(100);
-                                                  currentPropertyindex = propertiesIndex;
+                                                  currentPropertyindex =
+                                                      propertiesIndex;
                                                   videoPlayers[propertiesIndex]
                                                       .play();
                                                   setState(() {
@@ -740,17 +745,29 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           //     VideoPlayerController.network(dataSource);
 
                                                         } else {
-                                                         int indexOfOtherPlayer= videoPlayers.indexOf(otherPlayer);
-                                                          if(((propertiesIndex+1)<(videoPlayers.length))&&(indexOfOtherPlayer==(currentPropertyindex+1))){
-                                                            if(!(videoPlayers[propertiesIndex+1].value.isInitialized)){
-                                                              videoPlayers[propertiesIndex+1]
+                                                          int indexOfOtherPlayer =
+                                                              videoPlayers.indexOf(
+                                                                  otherPlayer);
+                                                          if (((propertiesIndex +
+                                                                      1) <
+                                                                  (videoPlayers
+                                                                      .length)) &&
+                                                              (indexOfOtherPlayer ==
+                                                                  (currentPropertyindex +
+                                                                      1))) {
+                                                            if (!(videoPlayers[
+                                                                    propertiesIndex +
+                                                                        1]
+                                                                .value
+                                                                .isInitialized)) {
+                                                              videoPlayers[
+                                                                      propertiesIndex +
+                                                                          1]
                                                                   .initialize();
                                                             }
                                                           }
                                                           // var indexOfPlayer = videoPlayers.indexOf(otherPlayer);
                                                           // indexOfPlayer
-
-
 
                                                           // otherPlayer
                                                           //     .initialize()
@@ -777,7 +794,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           //             100);
 
                                                         }
-
                                                       }
                                                     });
                                                     print(
@@ -785,8 +801,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   });
                                                   ;
                                                 });
-
-
 
                                                 print(
                                                     "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
@@ -831,11 +845,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         .setVolume(100);
                                                 videoPlayers[propertiesIndex]
                                                     .play();
-                                                currentPropertyindex = propertiesIndex;
+                                                currentPropertyindex =
+                                                    propertiesIndex;
 
-                                                if((propertiesIndex+1)<(videoPlayers.length)){
-                                                  if(!(videoPlayers[propertiesIndex+1].value.isInitialized)){
-                                                    videoPlayers[propertiesIndex+1]
+                                                if ((propertiesIndex + 1) <
+                                                    (videoPlayers.length)) {
+                                                  if (!(videoPlayers[
+                                                          propertiesIndex + 1]
+                                                      .value
+                                                      .isInitialized)) {
+                                                    videoPlayers[
+                                                            propertiesIndex + 1]
                                                         .initialize();
                                                   }
                                                 }
@@ -1185,46 +1205,55 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           "isBookmarked"]) {
                                                         logFirebaseEvent(
                                                             'Container_Backend-Call');
-                                                        isInternetAvailable= await isInternetConnected();
-                                                        if(isInternetAvailable??false){
+                                                        isInternetAvailable =
+                                                            await isInternetConnected();
+                                                        if (isInternetAvailable ??
+                                                            false) {
                                                           final bookmarkApiResponse =
-                                                          await BookmarkPropertyCall
-                                                              .call(
+                                                              await BookmarkPropertyCall
+                                                                  .call(
                                                             userId:
-                                                            currentUserUid,
+                                                                currentUserUid,
                                                             authorazationToken:
-                                                            FFAppState()
-                                                                .authToken,
+                                                                FFAppState()
+                                                                    .authToken,
                                                             propertyId:
-                                                            valueOrDefault<
-                                                                String>(
+                                                                valueOrDefault<
+                                                                    String>(
                                                               getJsonField(
                                                                 propertiesItem,
                                                                 r'''$.id''',
                                                               ).toString(),
                                                               '0',
                                                             ),
-                                                            version: FFAppState()
-                                                                .apiVersion,
+                                                            version:
+                                                                FFAppState()
+                                                                    .apiVersion,
                                                           );
                                                           if ((bookmarkApiResponse
-                                                              .statusCode ) ==
+                                                                  .statusCode) ==
                                                               200) {
                                                             favourites.remove(
                                                                 propertiesItem[
-                                                                "id"]
+                                                                        "id"]
                                                                     .toString());
                                                             propertiesItem[
-                                                            "isBookmarked"] =
-                                                            false;
-                                                            bookMarkTapped.value =
-                                                            false;
+                                                                    "isBookmarked"] =
+                                                                false;
+                                                            bookMarkTapped
+                                                                .value = false;
                                                             setState(() {});
-                                                          } else {
+                                                          }
+                                                          else if((bookmarkApiResponse
+                                                              .statusCode) ==
+                                                              403){
+                                                            unAuthorizedUser(context, mounted);
+                                                          }
+                                                          else {
                                                             logFirebaseEvent(
                                                                 'Icon_Show-Snack-Bar');
-                                                            ScaffoldMessenger.of(
-                                                                context)
+                                                            ScaffoldMessenger
+                                                                    .of(context)
                                                                 .showSnackBar(
                                                               SnackBar(
                                                                 content: Text(
@@ -1233,33 +1262,37 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                                       FFAppState()
                                                                           .locale),
                                                                   style:
-                                                                  TextStyle(
+                                                                      TextStyle(
                                                                     color: FlutterFlowTheme.of(
-                                                                        context)
+                                                                            context)
                                                                         .white,
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                    fontSize: 16,
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        16,
                                                                     height: 2,
                                                                   ),
                                                                 ),
                                                                 duration: Duration(
                                                                     milliseconds:
-                                                                    4000),
+                                                                        4000),
                                                                 backgroundColor:
-                                                                FlutterFlowTheme.of(
-                                                                    context)
-                                                                    .primaryRed,
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryRed,
                                                               ),
                                                             );
                                                           }
-                                                        }else{
+                                                        } else {
                                                           showDialog(
                                                             context: context,
-                                                            builder: (BuildContext context) => CommonAlertDialog(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                CommonAlertDialog(
                                                               onCancel: () {
-                                                                Navigator.pop(context);
+                                                                Navigator.pop(
+                                                                    context);
                                                               },
                                                             ),
                                                           );
@@ -1267,45 +1300,52 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       } else {
                                                         logFirebaseEvent(
                                                             'Container_Backend-Call');
-                                                        if(isInternetAvailable??false){
+                                                        if (isInternetAvailable ??
+                                                            false) {
                                                           final bookmarkApiResponse =
-                                                          await BookmarkPropertyCall
-                                                              .call(
+                                                              await BookmarkPropertyCall
+                                                                  .call(
                                                             userId:
-                                                            currentUserUid,
+                                                                currentUserUid,
                                                             authorazationToken:
-                                                            FFAppState()
-                                                                .authToken,
+                                                                FFAppState()
+                                                                    .authToken,
                                                             propertyId:
-                                                            valueOrDefault<
-                                                                String>(
+                                                                valueOrDefault<
+                                                                    String>(
                                                               getJsonField(
                                                                 propertiesItem,
                                                                 r'''$.id''',
                                                               ).toString(),
                                                               '0',
                                                             ),
-                                                            version: FFAppState()
-                                                                .apiVersion,
+                                                            version:
+                                                                FFAppState()
+                                                                    .apiVersion,
                                                           );
                                                           if ((bookmarkApiResponse
-                                                              .statusCode ) ==
+                                                                  .statusCode) ==
                                                               200) {
                                                             favourites[propertiesItem[
-                                                            "id"]
-                                                                .toString()] =
-                                                            true;
+                                                                        "id"]
+                                                                    .toString()] =
+                                                                true;
                                                             propertiesItem[
-                                                            "isBookmarked"] =
-                                                            true;
-                                                            bookMarkTapped.value =
-                                                            false;
+                                                                    "isBookmarked"] =
+                                                                true;
+                                                            bookMarkTapped
+                                                                .value = false;
                                                             setState(() {});
-                                                          } else {
+                                                          }  else if((bookmarkApiResponse
+                                                              .statusCode) ==
+                                                              403){
+                                                            unAuthorizedUser(context, mounted);
+                                                          }
+                                                          else {
                                                             logFirebaseEvent(
                                                                 'Icon_Show-Snack-Bar');
-                                                            ScaffoldMessenger.of(
-                                                                context)
+                                                            ScaffoldMessenger
+                                                                    .of(context)
                                                                 .showSnackBar(
                                                               SnackBar(
                                                                 content: Text(
@@ -1314,40 +1354,43 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                                       FFAppState()
                                                                           .locale),
                                                                   style:
-                                                                  TextStyle(
+                                                                      TextStyle(
                                                                     color: FlutterFlowTheme.of(
-                                                                        context)
+                                                                            context)
                                                                         .white,
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                    fontSize: 16,
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        16,
                                                                     height: 2,
                                                                   ),
                                                                 ),
                                                                 duration: Duration(
                                                                     milliseconds:
-                                                                    4000),
+                                                                        4000),
                                                                 backgroundColor:
-                                                                FlutterFlowTheme.of(
-                                                                    context)
-                                                                    .primaryRed,
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryRed,
                                                               ),
                                                             );
                                                           }
-                                                        }else{
+                                                        } else {
                                                           showDialog(
                                                             context: context,
-                                                            builder: (BuildContext context) => CommonAlertDialog(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                CommonAlertDialog(
                                                               onCancel: () {
-                                                                Navigator.pop(context);
+                                                                Navigator.pop(
+                                                                    context);
                                                               },
                                                             ),
                                                           );
                                                         }
                                                       }
-                                                    }
-                                                    else {
+                                                    } else {
                                                       videoPlayers[
                                                               propertiesIndex]
                                                           .pause();

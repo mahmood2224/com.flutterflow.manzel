@@ -1,4 +1,5 @@
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/components/something_went_wrong_widget.dart';
 
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
@@ -38,6 +39,8 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
   }
 
   Future<void> propertyCall() async {
+    isLoading = true;
+    setState((){});
     isInternetAvailable = await isInternetConnected();
     if(isInternetAvailable??false){
       columnPropertyResponse = await PropertyCall.call(
@@ -116,6 +119,12 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
                   ),
                 );
               }
+              else if(columnPropertyResponse?.statusCode!=200&&columnPropertyResponse?.statusCode!=null){
+                return SomethingWentWrongWidget(onTryAgain: (){
+                  propertyCall();
+                });
+              }
+    else if(columnPropertyResponse?.statusCode==200&&columnPropertyResponse?.statusCode!=null){
                 return SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -170,6 +179,7 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
                     ],
                   ),
                 );
+              }
               return SizedBox();
             },
           ),

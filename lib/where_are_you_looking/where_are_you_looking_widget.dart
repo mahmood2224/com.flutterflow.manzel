@@ -1,5 +1,6 @@
 import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/components/something_went_wrong_widget.dart';
 
 import '../backend/api_requests/api_calls.dart';
 import '../components/no_result_widget.dart';
@@ -42,22 +43,25 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
   }
 
   Future<void> bookedPropertiesCall() async {
+    isLoading = true;
+    setState(() {});
     isInternetAvailable = await isInternetConnected();
     if (isInternetAvailable ?? false) {
       isLoading = false;
-      setState((){});
+      setState(() {});
       listViewSearchPageCitiesResponse = await SearchPageCitiesCall.call(
         locale: FFAppState().locale,
         populate: 'city',
       );
-      citiesList = getJsonField(
-        listViewSearchPageCitiesResponse?.jsonBody,
-        r'''$.results''',
-      ).toList();
+      if (listViewSearchPageCitiesResponse?.jsonBody != null)
+        citiesList = getJsonField(
+          listViewSearchPageCitiesResponse?.jsonBody,
+          r'''$.results''',
+        ).toList();
       isLoading = false;
       setState(() {});
     } else {
-      listViewSearchPageCitiesResponse=null;
+      listViewSearchPageCitiesResponse = null;
       isLoading = false;
       setState(() {});
       showDialog(
@@ -410,6 +414,12 @@ class _WhereAreYouLookingWidgetState extends State<WhereAreYouLookingWidget> {
                             );
                           },
                         );
+                      } else if (listViewSearchPageCitiesResponse?.statusCode !=
+                              200 &&
+                          listViewSearchPageCitiesResponse != null) {
+                        return SomethingWentWrongWidget(onTryAgain: () {
+                          bookedPropertiesCall();
+                        });
                       }
                       return SizedBox();
                     },
