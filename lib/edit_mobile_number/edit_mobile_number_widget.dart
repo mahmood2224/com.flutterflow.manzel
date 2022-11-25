@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/flutter_flow/custom_functions.dart';
 
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
@@ -28,6 +30,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
   TextEditingController? mobileNumberController;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  bool? isInternetAvailable;
 
   @override
   void initState() {
@@ -233,6 +236,8 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                         height: 56,
                         child: ElevatedButton(
                           onPressed: () async {
+                            isInternetAvailable = await isInternetConnected();
+                            setState(() {});
                             logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
                             if (functions.checkPhoneNumberFormat(
                                 mobileNumberController!.text)) {
@@ -266,12 +271,29 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               //     context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': phoneNumberVal,'isFromUpdate': 'true' });
                               //   },
                               // );
-                              ApiCallResponse updatePhoneResponse = await OtpCalls.updatePhone(newPhoneNumber: mobileNumberController!.text);
-                              if((OtpCalls.generateSuccess(updatePhoneResponse.jsonBody))=='success') {
-                                String verificationKey = OtpCalls.generateKey(updatePhoneResponse.jsonBody);
-                                context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': mobileNumberController!.text,'verificationKey':verificationKey,'isFromUpdate': 'true'});
+                              if(isInternetAvailable??false){
+                               isLoading.value = true;
+                                ApiCallResponse updatePhoneResponse = await OtpCalls.updatePhone(newPhoneNumber: mobileNumberController!.text);
+                                if((OtpCalls.generateSuccess(updatePhoneResponse.jsonBody))=='success') {
+                                  String verificationKey = OtpCalls.generateKey(updatePhoneResponse.jsonBody);
+                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': mobileNumberController!.text,'verificationKey':verificationKey,'isFromUpdate': 'true'});
+                                }
+                                else if(updatePhoneResponse.statusCode==403){
+                                  functions.unAuthorizedUser(context, mounted);
+                                }
                               }
-
+                              else {
+                               isLoading.value = false;
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      CommonAlertDialog(
+                                        onCancel: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                );
+                              }
                             } else {
                               // Invalid_phone_number_action
                               logFirebaseEvent(
