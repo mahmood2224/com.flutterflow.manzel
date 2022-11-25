@@ -57,7 +57,7 @@ class PropertyCall {
       callName: 'Property',
       apiUrl:
           '${EnvVariables.instance.strapiBaseURl}/api/properties/${propertyId}',
-      callType: ApiCallType.POST,
+      callType: ApiCallType.GET,
       headers: {
         'x-api-key': '06db164b-46ff-44e8-a0b8-c08f8eaa069f',
       },
