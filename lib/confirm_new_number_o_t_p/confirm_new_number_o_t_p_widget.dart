@@ -305,15 +305,26 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                         OtpCalls.tokenFromOtp(
                                             verifyOtpResponse.jsonBody);
                                     try {
+                                      DateTime loginDate = DateTime.now();
                                       userCredential = await FirebaseAuth
                                           .instance
                                           .signInWithCustomToken(
                                               tokenFromOtpSuccess);
                                       print("Sign-in successful.");
-                                      //  final user = await FirebaseAuth.instance.currentUser;
-                                      // final idToken = await user?.getIdToken();
-                                      // FFAppState().authToken = idToken!;
-                                      // print(idToken);
+                                      if (FirebaseAuth
+                                          .instance.currentUser !=
+                                          null) {
+                                        final user = await FirebaseAuth
+                                            .instance.currentUser;
+                                        final idToken =
+                                        await user?.getIdToken();
+                                        print(
+                                            "************* token Id ${idToken}");
+                                        FFAppState().authToken = idToken!;
+                                      } else {
+                                        print(
+                                            "*********************ERROR***");
+                                      }
                                       if (userCredential != null) {
                                         final user = userCredential.user;
                                         var record =
@@ -335,16 +346,16 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                         FFLocalizations.of(
                                                                 context)
                                                             .languageCode,
-                                                    lastLogin: DateTime.now(),
+                                                    lastLogin: loginDate,
                                                     isDeleted: 0);
                                             if (currentUserDocument!
                                                 .status!.isEmpty) {
                                               logFirebaseEvent('sign_up');
                                               userUpdateData.addAll({
-                                                'created_time': DateTime.now()
+                                                'created_time': loginDate
                                               });
                                               userUpdateData.addAll({
-                                                'last_login': DateTime.now()
+                                                'last_login': loginDate
                                               });
                                             }
 
@@ -376,20 +387,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                   .doc()
                                                   .set(userNotificationRecord);
                                             }
-                                            if (FirebaseAuth
-                                                    .instance.currentUser !=
-                                                null) {
-                                              final user = await FirebaseAuth
-                                                  .instance.currentUser;
-                                              final idToken =
-                                                  await user?.getIdToken();
-                                              print(
-                                                  "************* token Id ${idToken}");
-                                              FFAppState().authToken = idToken!;
-                                            } else {
-                                              print(
-                                                  "*********************ERROR***");
-                                            }
+
                                             // if (FirebaseAuth.instance.currentUser != null) {
                                             // final user = FirebaseAuth.instance.currentUser;
                                             // final idTokenResult = await user!.getIdTokenResult(true);
