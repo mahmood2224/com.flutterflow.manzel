@@ -139,8 +139,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding:
-                          EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
                           child: Directionality(
                             textDirection: material.TextDirection.ltr,
                             child: TextFormField(
@@ -150,7 +149,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               onChanged: (_) => EasyDebounce.debounce(
                                 'phoneNumberController',
                                 Duration(milliseconds: 2000),
-                                    () => setState(() {}),
+                                () => setState(() {}),
                               ),
                               autofocus: true,
                               inputFormatters: [
@@ -162,57 +161,60 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 counterText: "",
                                 hintText: "XXXXXXXXXX",
                                 prefixText: FFLocalizations.of(context).getText(
-                                  'dkoyvgce' /* +966 */,),
+                                  'dkoyvgce' /* +966 */,
+                                ),
                                 labelText: FFLocalizations.of(context).getText(
                                   'por97wlv' /* Mobile Number */,
-
                                 ),
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                  color: Colors.black,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w300,
-                                  useGoogleFonts: false,
-                                ),
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w300,
+                                      useGoogleFonts: false,
+                                    ),
                                 // hintText: FFLocalizations.of(context).getText(
                                 //   'f4tpckti' /* +966 */,
                                 // ),
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: false,
-                                ),
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 errorBorder: InputBorder.none,
-                                focusedErrorBorder: InputBorder.none,suffixIcon: mobileNumberController!.text.isNotEmpty
-                                  ? InkWell(
-                                onTap: () async {
-                                  mobileNumberController?.clear();
-                                  setState(() {});
-                                },
-                                child: Icon(
-                                  Manzel.clear,
-                                  color: Color(0xFF757575),
-                                  size: 15,
-                                ),
-                              )
-                                  : null,
+                                focusedErrorBorder: InputBorder.none,
+                                suffixIcon:
+                                    mobileNumberController!.text.isNotEmpty
+                                        ? InkWell(
+                                            onTap: () async {
+                                              mobileNumberController?.clear();
+                                              setState(() {});
+                                            },
+                                            child: Icon(
+                                              Manzel.clear,
+                                              color: Color(0xFF757575),
+                                              size: 15,
+                                            ),
+                                          )
+                                        : null,
                               ),
-                              style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: false,
-                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
                               maxLines: 1,
                               keyboardType: TextInputType.phone,
                             ),
@@ -243,8 +245,9 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 mobileNumberController!.text)) {
                               // sendOTP
                               logFirebaseEvent('sendOTP_sendOTP');
-                              final phoneNumberVal =   functions.getFormattedMobileNumber(
-                                  mobileNumberController!.text);
+                              final phoneNumberVal =
+                                  functions.getFormattedMobileNumber(
+                                      mobileNumberController!.text);
                               if (phoneNumberVal == null ||
                                   phoneNumberVal.isEmpty ||
                                   !phoneNumberVal.startsWith('+')) {
@@ -271,27 +274,39 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               //     context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': phoneNumberVal,'isFromUpdate': 'true' });
                               //   },
                               // );
-                              if(isInternetAvailable??false){
-                               isLoading.value = true;
-                                ApiCallResponse updatePhoneResponse = await OtpCalls.updatePhone(newPhoneNumber: mobileNumberController!.text);
-                                if((OtpCalls.generateSuccess(updatePhoneResponse.jsonBody))=='success') {
-                                  String verificationKey = OtpCalls.generateKey(updatePhoneResponse.jsonBody);
-                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': mobileNumberController!.text,'verificationKey':verificationKey,'isFromUpdate': 'true'});
-                                }
-                                else if(updatePhoneResponse.statusCode==403){
+                              if (isInternetAvailable ?? false) {
+                                isLoading.value = true;
+                                ApiCallResponse updatePhoneResponse =
+                                    await OtpCalls.updatePhone(
+                                        newPhoneNumber:
+                                            mobileNumberController!.text);
+                                if ((OtpCalls.generateSuccess(
+                                        updatePhoneResponse.jsonBody)) ==
+                                    'success') {
+                                  String verificationKey = OtpCalls.generateKey(
+                                      updatePhoneResponse.jsonBody);
+                                  context.goNamedAuth(
+                                      'ConfirmNewNumberOTP', mounted,
+                                      queryParams: {
+                                        'phoneNumber':
+                                            mobileNumberController!.text,
+                                        'verificationKey': verificationKey,
+                                        'isFromUpdate': 'true'
+                                      });
+                                } else if (updatePhoneResponse.statusCode ==
+                                    403) {
                                   functions.unAuthorizedUser(context, mounted);
                                 }
-                              }
-                              else {
-                               isLoading.value = false;
+                              } else {
+                                isLoading.value = false;
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) =>
                                       CommonAlertDialog(
-                                        onCancel: () {
-                                          Navigator.pop(context);
-                                        },
-                                      ),
+                                    onCancel: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
                                 );
                               }
                             } else {
@@ -304,82 +319,89 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                   content: Text(
                                     'The phone number format should be +966123456789',
                                     style:
-                                    FlutterFlowTheme.of(context).subtitle1,
+                                        FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                   duration: Duration(milliseconds: 4000),
-                                  backgroundColor: FlutterFlowTheme.of(
-                                      context)
-                                      .primaryRed,
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).primaryRed,
                                 ),
                               );
                             }
                           },
-                          child:
-    ValueListenableBuilder<bool>(
-    builder: (BuildContext context, bool value, Widget? child){
-                         return isLoading.value?
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation(Colors.white),
-                                    strokeWidth: 5,
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                              : AutoSizeText(
-                            FFLocalizations.of(context).getText(
-                              'l3ozn1az' /* Continue */,
-                            ),
-                            style: FlutterFlowTheme.of(context).subtitle2.override(
-
-                              fontSize: 18,
-                              fontFamily: 'AvenirArabic',
-                              color: Colors.white,
-                              useGoogleFonts: false,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-
-                          );},
-      valueListenable: isLoading,
-    ),
+                          child: ValueListenableBuilder<bool>(
+                            builder: (BuildContext context, bool value,
+                                Widget? child) {
+                              return isLoading.value
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          SizedBox(
+                                            height: 30,
+                                            width: 30,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation(
+                                                      Colors.white),
+                                              strokeWidth: 5,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  : AutoSizeText(
+                                      FFLocalizations.of(context).getText(
+                                        'l3ozn1az' /* Continue */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontSize: 18,
+                                            fontFamily: 'AvenirArabic',
+                                            color: Colors.white,
+                                            useGoogleFonts: false,
+                                          ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    );
+                            },
+                            valueListenable: isLoading,
+                          ),
                           style: ButtonStyle(
-                            foregroundColor: MaterialStateProperty.resolveWith<Color?>(
-                                  (states) {
+                            foregroundColor:
+                                MaterialStateProperty.resolveWith<Color?>(
+                              (states) {
                                 if (states.contains(MaterialState.disabled)) {
-                                  FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'AvenirArabic',
-                                    color: Colors.white,
-                                    useGoogleFonts: false,
-                                  );
+                                  FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'AvenirArabic',
+                                        color: Colors.white,
+                                        useGoogleFonts: false,
+                                      );
                                 }
                                 FlutterFlowTheme.of(context).subtitle2.override(
-                                  fontFamily: 'AvenirArabic',
-                                  color: Colors.white,
-                                  useGoogleFonts: false,
-                                );
+                                      fontFamily: 'AvenirArabic',
+                                      color: Colors.white,
+                                      useGoogleFonts: false,
+                                    );
                               },
                             ),
-                            backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-                                  (states) {
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith<Color?>(
+                              (states) {
                                 if (states.contains(MaterialState.disabled)) {
-                                  return FlutterFlowTheme.of(context).primaryColor;
+                                  return FlutterFlowTheme.of(context)
+                                      .primaryColor;
                                 }
-                                return FlutterFlowTheme.of(context).primaryColor;
+                                return FlutterFlowTheme.of(context)
+                                    .primaryColor;
                               },
                             ),
-
                             shape: MaterialStateProperty.all<OutlinedBorder>(
                               RoundedRectangleBorder(
-                                  borderRadius:BorderRadius.circular(12),
+                                  borderRadius: BorderRadius.circular(12),
                                   side: BorderSide(
                                     color: Colors.transparent,
                                     width: 1,
