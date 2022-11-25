@@ -2,8 +2,10 @@ import 'package:manzel/auth/auth_util.dart';
 import 'package:manzel/auth/firebase_user_provider.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/zoom_image/zoom_image_widget.dart';
+import '../common_alert_dialog/common_alert_dialog.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../backend/api_requests/api_calls.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -35,6 +37,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
   List<dynamic> imageList = [];
   Map<String, bool> fav = {};
   bool? bookMarkTapped;
+  bool? isInternetAvailable;
 
   @override
   void initState() {
@@ -42,6 +45,36 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
     fav = FavouriteList.instance.favourite;
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'imageGalleryView'});
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      checkimageListUrl();
+    });
+  }
+  void checkimageListUrl() async{
+    isInternetAvailable = await isInternetConnected();
+    if(widget.imageList.length==1){
+      imageList=
+      [getJsonField(
+          widget.imageList,
+          r'''$..attributes.formats.medium.url''')];
+    }else{
+      imageList=
+          getJsonField(
+          widget.imageList,
+          r'''$..attributes.formats.medium.url''');
+    }
+
+    if(imageList.isEmpty&&(!(isInternetAvailable??false))){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
+    if(mounted)
+    setState((){});
   }
 
   @override
@@ -141,124 +174,139 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                               logFirebaseEvent(
                                   'HOME_SCREEN_Container_jprwonvd_ON_TAP');
                               if (loggedIn) {
-                                if (fav[widget.propertyId.toString()]??false) {
-                                  logFirebaseEvent(
-                                      'Container_Backend-Call');
-                                  final bookmarkApiResponse =
-                                  await BookmarkPropertyCall
-                                      .call(
-                                    userId:
-                                    currentUserUid,
-                                    authorazationToken:
-                                    FFAppState()
-                                        .authToken,
-                                    propertyId: widget
-                                        .propertyId
-                                        .toString(),
-                                    version:
-                                    FFAppState()
-                                        .apiVersion,
-                                  );
-                                  if ((bookmarkApiResponse.statusCode) ==
-                                      200) {
-                                    fav.remove(widget
-                                        .propertyId
-                                        .toString());
+                                bool isInternetAvailable = await isInternetConnected();
+                                if(isInternetAvailable){
+                                  if (fav[widget.propertyId.toString()]??false) {
+                                    logFirebaseEvent(
+                                        'Container_Backend-Call');
+                                    final bookmarkApiResponse =
+                                    await BookmarkPropertyCall
+                                        .call(
+                                      userId:
+                                      currentUserUid,
+                                      authorazationToken:
+                                      FFAppState()
+                                          .authToken,
+                                      propertyId: widget
+                                          .propertyId
+                                          .toString(),
+                                      version:
+                                      FFAppState()
+                                          .apiVersion,
+                                    );
+                                    if ((bookmarkApiResponse.statusCode) ==
+                                        200) {
+                                      fav.remove(widget
+                                          .propertyId
+                                          .toString());
 
-                                  } else {
-                                    logFirebaseEvent(
-                                        'Icon_Show-Snack-Bar');
-                                    ScaffoldMessenger.of(
-                                        context)
-                                        .showSnackBar(
-                                      SnackBar(
-                                        content:
-                                        Text(
-                                          functions.snackBarMessage(
-                                              'error',
-                                              FFAppState()
-                                                  .locale),
-                                          style:
-                                          TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .white,
-                                            fontWeight:
-                                            FontWeight.bold,
-                                            fontSize:
-                                            16,
-                                            height:
-                                            2,
+                                    } else {
+                                      logFirebaseEvent(
+                                          'Icon_Show-Snack-Bar');
+                                      ScaffoldMessenger.of(
+                                          context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content:
+                                          Text(
+                                            functions.snackBarMessage(
+                                                'error',
+                                                FFAppState()
+                                                    .locale),
+                                            style:
+                                            TextStyle(
+                                              color: FlutterFlowTheme.of(context)
+                                                  .white,
+                                              fontWeight:
+                                              FontWeight.bold,
+                                              fontSize:
+                                              16,
+                                              height:
+                                              2,
+                                            ),
                                           ),
+                                          duration: Duration(
+                                              milliseconds:
+                                              4000),
+                                          backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryRed,
                                         ),
-                                        duration: Duration(
-                                            milliseconds:
-                                            4000),
-                                        backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryRed,
-                                      ),
-                                    );
+                                      );
+                                    }
                                   }
-                                } else {
-                                  logFirebaseEvent(
-                                      'Container_Backend-Call');
-                                  final bookmarkApiResponse =
-                                  await BookmarkPropertyCall
-                                      .call(
-                                    userId:
-                                    currentUserUid,
-                                    authorazationToken:
-                                    FFAppState()
-                                        .authToken,
-                                    propertyId: widget
-                                        .propertyId
-                                        .toString(),
-                                    version:
-                                    FFAppState()
-                                        .apiVersion,
-                                  );
-                                  if ((bookmarkApiResponse
-                                      .statusCode ) ==
-                                      200) {
-                                    fav[widget
-                                        .propertyId
-                                        .toString()] = true;
-                                  } else {
+                                  else {
                                     logFirebaseEvent(
-                                        'Icon_Show-Snack-Bar');
-                                    ScaffoldMessenger.of(
-                                        context)
-                                        .showSnackBar(
-                                      SnackBar(
-                                        content:
-                                        Text(
-                                          functions.snackBarMessage(
-                                              'error',
-                                              FFAppState()
-                                                  .locale),
-                                          style:
-                                          TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .white,
-                                            fontWeight:
-                                            FontWeight.bold,
-                                            fontSize:
-                                            16,
-                                            height:
-                                            2,
-                                          ),
-                                        ),
-                                        duration: Duration(
-                                            milliseconds:
-                                            4000),
-                                        backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryRed,
-                                      ),
+                                        'Container_Backend-Call');
+                                    final bookmarkApiResponse =
+                                    await BookmarkPropertyCall
+                                        .call(
+                                      userId:
+                                      currentUserUid,
+                                      authorazationToken:
+                                      FFAppState()
+                                          .authToken,
+                                      propertyId: widget
+                                          .propertyId
+                                          .toString(),
+                                      version:
+                                      FFAppState()
+                                          .apiVersion,
                                     );
+                                    if ((bookmarkApiResponse
+                                        .statusCode ) ==
+                                        200) {
+                                      fav[widget
+                                          .propertyId
+                                          .toString()] = true;
+                                    } else {
+                                      logFirebaseEvent(
+                                          'Icon_Show-Snack-Bar');
+                                      ScaffoldMessenger.of(
+                                          context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content:
+                                          Text(
+                                            functions.snackBarMessage(
+                                                'error',
+                                                FFAppState()
+                                                    .locale),
+                                            style:
+                                            TextStyle(
+                                              color: FlutterFlowTheme.of(context)
+                                                  .white,
+                                              fontWeight:
+                                              FontWeight.bold,
+                                              fontSize:
+                                              16,
+                                              height:
+                                              2,
+                                            ),
+                                          ),
+                                          duration: Duration(
+                                              milliseconds:
+                                              4000),
+                                          backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryRed,
+                                        ),
+                                      );
+                                    }
                                   }
                                 }
-                              }else {
+                                else{
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) => CommonAlertDialog(
+                                      onCancel: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  );
+                                }
+                              }
+                              else {
                                 logFirebaseEvent(
                                     'Container_Navigate-To');
                                 context
@@ -305,17 +353,19 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
               Expanded(
                 child: Builder(
                       builder: (context) {
-
-                         imageList = widget.imageList.length==1?
-                         [getJsonField(
-                             widget.imageList,
-                             r'''$..attributes.formats.medium.url''')]:getJsonField(
-                             widget.imageList,
-                             r'''$..attributes.formats.medium.url''');
+                        if(imageList.isEmpty&&(isInternetAvailable??false)){
+                          return SizedBox();
+                        }
+                         // imageList = widget.imageList.length==1?
+                         // [getJsonField(
+                         //     widget.imageList,
+                         //     r'''$..attributes.formats.medium.url''')]:getJsonField(
+                         //     widget.imageList,
+                         //     r'''$..attributes.formats.medium.url''');
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.vertical,
-                          itemCount: widget.imageList.length,
+                          itemCount: imageList.length,
                           itemBuilder: (context, imagesIndex) {
                             final imagesItem = widget.imageList[imagesIndex];
                             return Padding(

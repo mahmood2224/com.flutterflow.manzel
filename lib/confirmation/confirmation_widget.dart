@@ -242,9 +242,9 @@ class _ConfirmationWidgetState extends State<ConfirmationWidget> {
                                           logFirebaseEvent(
                                               'viewBookingDetails_Close-Dialog,-Drawer,');
                                           Navigator.pop(context);
-                                          //Navigator.pop(context);
                                           logFirebaseEvent(
                                               'viewBookingDetails_Navigate-To');
+                                          context.goNamed('MyProperties');
                                         },
                                         text:
                                             FFLocalizations.of(context).getText(
