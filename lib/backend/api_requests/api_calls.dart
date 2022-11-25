@@ -1025,4 +1025,8 @@ class OtpCalls {
         response,
         r'''$.error''',
       );
+  static dynamic phoneNumberError(dynamic response) => getJsonField(
+    response,
+    r'''$.error''',
+  );
 }

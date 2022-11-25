@@ -280,6 +280,8 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                     await OtpCalls.updatePhone(
                                         newPhoneNumber:
                                             mobileNumberController!.text);
+                                String errorMessage = OtpCalls.phoneNumberError(updatePhoneResponse.jsonBody);
+
                                 if ((OtpCalls.generateSuccess(
                                         updatePhoneResponse.jsonBody)) ==
                                     'success') {
@@ -296,6 +298,23 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 } else if (updatePhoneResponse.statusCode ==
                                     403) {
                                   functions.unAuthorizedUser(context, mounted);
+                                }
+                                else {
+                                  isLoading.value=false;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(errorMessage,
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context).white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          height: 2,
+                                        ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                    ),
+                                  );
                                 }
                               } else {
                                 isLoading.value = false;
