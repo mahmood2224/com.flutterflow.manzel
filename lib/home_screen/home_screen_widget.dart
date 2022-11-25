@@ -1337,7 +1337,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                             bookMarkTapped
                                                                 .value = false;
                                                             setState(() {});
-                                                          } else {
+                                                          }
+                                                          else if((bookmarkApiResponse
+                                                              .statusCode) ==
+                                                              403){
+                                                            unAuthorizedUser(context, mounted);
+                                                          }
+                                                          else {
                                                             logFirebaseEvent(
                                                                 'Icon_Show-Snack-Bar');
                                                             ScaffoldMessenger
@@ -1424,7 +1430,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                             bookMarkTapped
                                                                 .value = false;
                                                             setState(() {});
-                                                          } else {
+                                                          }  else if((bookmarkApiResponse
+                                                              .statusCode) ==
+                                                              403){
+                                                            unAuthorizedUser(context, mounted);
+                                                          }
+                                                          else {
                                                             logFirebaseEvent(
                                                                 'Icon_Show-Snack-Bar');
                                                             ScaffoldMessenger
