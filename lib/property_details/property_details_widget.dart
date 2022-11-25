@@ -129,7 +129,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     isInternetAvailable = await isInternetConnected();
     if(isInternetAvailable??false){
       isLoading.value = true;
-      setState((){});
       //Future.delayed(Duration(seconds: 5));
       final callResult = await PropertyCall.call(
         propertyId: widget.propertyId,
@@ -137,13 +136,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       );
       final callResultToJson = callResult.jsonBody['data'];
       columnPropertyResponse = callResultToJson;
-      setState((){});
       print("++++");
       isLoading.value = false;
-      setState((){});
     }else{
       isLoading.value = false;
-      setState((){});
       showDialog(
         context: context,
         builder: (BuildContext context) => CommonAlertDialog(
@@ -153,7 +149,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         ),
       );
     }
-setState((){});
   }
 
   // void enterFullScreen() {
