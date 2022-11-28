@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:math' as math;
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/flutter_flow/custom_functions.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -314,22 +316,35 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
                   child: InkWell(
                     onTap: () async {
-                      logFirebaseEvent('PROFILE_PAGE_Row_u1wgoua7_ON_TAP');
-                      logFirebaseEvent('Row_Bottom-Sheet');
-                      await showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: FlutterFlowTheme.of(context).white,
-                        context: context,
-                        builder: (context) {
-                          return Padding(
-                            padding: MediaQuery.of(context).viewInsets,
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.95,
-                              child: HelpAndSupportBottomSheetWidget(),
-                            ),
-                          );
-                        },
-                      ).then((value) => setState(() {}));
+                      bool isInternetAvailable = await isInternetConnected();
+                      if (isInternetAvailable) {
+                        logFirebaseEvent('PROFILE_PAGE_Row_u1wgoua7_ON_TAP');
+                        logFirebaseEvent('Row_Bottom-Sheet');
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: FlutterFlowTheme.of(context).white,
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: MediaQuery.of(context).viewInsets,
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.95,
+                                child: HelpAndSupportBottomSheetWidget(),
+                              ),
+                            );
+                          },
+                        ).then((value) => setState(() {}));
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => CommonAlertDialog(
+                            onCancel: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        );
+                      }
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -360,24 +375,37 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
                   child: InkWell(
                     onTap: () async {
-                      logFirebaseEvent('PROFILE_PAGE_Row_m107mnbe_ON_TAP');
-                      logFirebaseEvent('Row_Bottom-Sheet');
-                      await showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (context) {
-                          return Padding(
-                            padding: MediaQuery.of(context).viewInsets,
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.5,
-                              child: TermsConditionsBottomSheetWidget(
-                                pageType: 7,
+                      bool isInternetAvailable = await isInternetConnected();
+                      if (isInternetAvailable) {
+                        logFirebaseEvent('PROFILE_PAGE_Row_m107mnbe_ON_TAP');
+                        logFirebaseEvent('Row_Bottom-Sheet');
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: MediaQuery.of(context).viewInsets,
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.5,
+                                child: TermsConditionsBottomSheetWidget(
+                                  pageType: 7,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ).then((value) => setState(() {}));
+                            );
+                          },
+                        ).then((value) => setState(() {}));
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => CommonAlertDialog(
+                            onCancel: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        );
+                      }
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -408,24 +436,37 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(20, 25, 26, 0),
                   child: InkWell(
                     onTap: () async {
-                      logFirebaseEvent('PROFILE_PAGE_Row_szhcvid3_ON_TAP');
-                      logFirebaseEvent('Row_Bottom-Sheet');
-                      await showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: FlutterFlowTheme.of(context).white,
-                        context: context,
-                        builder: (context) {
-                          return Padding(
-                            padding: MediaQuery.of(context).viewInsets,
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.95,
-                              child: TermsConditionsBottomSheetWidget(
-                                pageType: 5,
+                      bool isInternetAvailable = await isInternetConnected();
+                      if (isInternetAvailable) {
+                        logFirebaseEvent('PROFILE_PAGE_Row_szhcvid3_ON_TAP');
+                        logFirebaseEvent('Row_Bottom-Sheet');
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: FlutterFlowTheme.of(context).white,
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: MediaQuery.of(context).viewInsets,
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.95,
+                                child: TermsConditionsBottomSheetWidget(
+                                  pageType: 5,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ).then((value) => setState(() {}));
+                            );
+                          },
+                        ).then((value) => setState(() {}));
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => CommonAlertDialog(
+                            onCancel: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        );
+                      }
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
@@ -455,9 +496,21 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
-                      openWhatsapp(context);
+                    onPressed: () async {
+                      bool isInternetAvailable = await isInternetConnected();
+                      if (isInternetAvailable) {
+                        print('Button pressed ...');
+                        openWhatsapp(context);
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => CommonAlertDialog(
+                            onCancel: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        );
+                      }
                     },
                     text: FFLocalizations.of(context).getText(
                       'u6lrslui' /* Chat Manzel in Whatsapp */,
@@ -541,9 +594,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   logFirebaseEvent('logout_Logout');
                                   GoRouter.of(context).prepareAuthEvent();
                                   await signOut();
+                                  FFAppState().authToken = '';
                                   isLoading.value = false;
-                                  context.goNamedAuth(
-                                      'OnboardingView', mounted);
+                                  context.goNamedAuth('Login', mounted);
                                 }
                               } else {
                                 logFirebaseEvent('Button_Alert-Dialog');

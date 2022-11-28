@@ -21,7 +21,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 import 'backend/push_notifications/push_notifications_util.dart';
+import 'common_alert_dialog/common_alert_dialog.dart';
 import 'enviorment/env_variables.dart';
+import 'flutter_flow/custom_functions.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
@@ -38,13 +40,13 @@ void main() async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     runApp(MyApp());
   }, (error, stackTrace) {
    // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   await EnvVariables.instance.initialise();
   //await printBuildNumber();
   Eraser.resetBadgeCountButKeepNotificationsInCenter();
@@ -101,8 +103,8 @@ class _MyAppState extends State<MyApp> {
     //   print('Your FCM token:- $value');
     // });
     handleDynamicLinks();
+    //   _initializeFlutterFire();
     _initializeFlutterFire();
-
   }
 
   @override
@@ -121,8 +123,7 @@ class _MyAppState extends State<MyApp> {
       // You could additionally extend this to allow users to opt-in.
    //   await FirebaseCrashlytics.instance
       //    .setCrashlyticsCollectionEnabled(!kDebugMode);
-      await FirebaseCrashlytics.instance
-          .setCrashlyticsCollectionEnabled(true);
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     }
 
     // if (_kShouldTestAsyncErrorOnInit) {
@@ -171,8 +172,6 @@ class _MyAppState extends State<MyApp> {
       debugPrint('Error while deeplinking ###### ${error.toString()}');
     });
   }
-
-
 
   void _handleDeepLinks(PendingDynamicLinkData? data) {
     Uri? deeplinkUri = data?.link;
@@ -227,10 +226,15 @@ class _NavBarPageState extends State<NavBarPage> {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await versionCheck(context);});
+      bool isInternetAvailable = await isInternetConnected();
+      if (isInternetAvailable) {
+        await versionCheck(context);
+      }
+    });
     _currentPageName = widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
   }
+
   Future<void> showUpdateDialog(
       BuildContext context, bool isForceUpdate, String packageName) async {
     await showDialog<void>(
@@ -243,24 +247,24 @@ class _NavBarPageState extends State<NavBarPage> {
                 ? "New Update Available"
                 : " تحديث جديد متاح ",
             style: FlutterFlowTheme.of(context).subtitle2.override(
-              fontFamily: 'AvenirArabic',
-              color: Colors.black,
-              fontSize: 18,
-              fontWeight: FontWeight.w800,
-              useGoogleFonts: false,
-            ),
+                  fontFamily: 'AvenirArabic',
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  useGoogleFonts: false,
+                ),
           ),
           content: Text(
             FFAppState().locale == 'en'
                 ? 'Your version of app is out of date kindly update'
                 : 'يتوفر تحديث جديد لتطبيق منزل، يرجى تحديث التطبيق الى الإصدار الأحدث',
             style: FlutterFlowTheme.of(context).subtitle2.override(
-              fontFamily: 'AvenirArabic',
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.w300,
-              useGoogleFonts: false,
-            ),
+                  fontFamily: 'AvenirArabic',
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w300,
+                  useGoogleFonts: false,
+                ),
           ),
           actions: [
             TextButton(
@@ -278,30 +282,30 @@ class _NavBarPageState extends State<NavBarPage> {
                 child: Text(
                   FFAppState().locale == 'en' ? 'Update' : 'تحديث',
                   style: FlutterFlowTheme.of(context).subtitle2.override(
-                    fontFamily: 'AvenirArabic',
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w300,
-                    useGoogleFonts: false,
-                  ),
+                        fontFamily: 'AvenirArabic',
+                        color: FlutterFlowTheme.of(context).primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300,
+                        useGoogleFonts: false,
+                      ),
                 )),
             isForceUpdate
                 ? SizedBox.shrink()
                 : TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                FFAppState().locale == 'en' ? 'Later' : 'في وقت لاحق',
-                style: FlutterFlowTheme.of(context).subtitle2.override(
-                  fontFamily: 'AvenirArabic',
-                  color: FlutterFlowTheme.of(context).primaryColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300,
-                  useGoogleFonts: false,
-                ),
-              ),
-            ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      FFAppState().locale == 'en' ? 'Later' : 'في وقت لاحق',
+                      style: FlutterFlowTheme.of(context).subtitle2.override(
+                            fontFamily: 'AvenirArabic',
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300,
+                            useGoogleFonts: false,
+                          ),
+                    ),
+                  ),
           ],
         );
       },
@@ -312,6 +316,7 @@ class _NavBarPageState extends State<NavBarPage> {
     // Future.delayed(Duration(milliseconds: 100));
     PackageInfo info = await PackageInfo.fromPlatform();
     final appPackageName = info.packageName;
+
     RemoteConfig remoteConfig = await RemoteConfig.instance;
     await remoteConfig.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: const Duration(seconds: 5),
@@ -321,9 +326,9 @@ class _NavBarPageState extends State<NavBarPage> {
     await remoteConfig.activate();
     await remoteConfig.fetchAndActivate();
     final remote_config_settings =
-    await remoteConfig.getValue('application_version').asString();
+        await remoteConfig.getValue('application_version').asString();
     final current_remote_version_JSON =
-    jsonDecode(remote_config_settings) as Map;
+        jsonDecode(remote_config_settings) as Map;
     FFAppState().buildNo = int.parse(info.buildNumber);
     FFAppState().buildVersion = info.version;
     bool isAndriod = Platform.isAndroid ? true : false;
@@ -333,13 +338,13 @@ class _NavBarPageState extends State<NavBarPage> {
         : 'minimum_app_supported_version_iOS');
     //android_version or iOS version inside application_version JSON
     final recent_version = current_remote_version_JSON[
-    isAndriod ? 'android_version' : 'iOS_version'];
+        isAndriod ? 'android_version' : 'iOS_version'];
     //Build Number
     final current_remote_build = current_remote_version_JSON[
-    isAndriod ? 'android_build_number' : 'i0S_build_number'];
+        isAndriod ? 'android_build_number' : 'i0S_build_number'];
     //Backend version
     final current_remote_backend_version =
-    current_remote_version_JSON['supported_backend_version'];
+        current_remote_version_JSON['supported_backend_version'];
     //Force Update
     final isForceUpdate = current_remote_version_JSON['is_force_update'];
     //Installed App version
@@ -371,8 +376,7 @@ class _NavBarPageState extends State<NavBarPage> {
             int.parse(arr_installed_version[2])) {
           showUpdateDialog(context, true, appPackageName);
           return;
-        }
-        else if (recent_version != installed_app_version) {
+        } else if (recent_version != installed_app_version) {
           if (int.parse(arr_current_version[0]) >
               int.parse(arr_installed_version[0])) {
             showUpdateDialog(context, false, appPackageName);
@@ -396,8 +400,7 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-
-     'HomeScreen': HomeScreenWidget(),
+      'HomeScreen': HomeScreenWidget(),
       'MyProperties': MyPropertiesWidget(),
       'Offers': OffersWidget(),
       'Profile': ProfileWidget(),
@@ -432,7 +435,7 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Manzel.my_properties_nav_bar,
-              size: 22,
+              size: 20,
             ),
             label: FFLocalizations.of(context).getText(
               'lhqoha7d' /* My Properties */,

@@ -140,7 +140,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                       phoneNumber:
                           params.getParam('phoneNumber', ParamType.String),
                       isFromUpdate:
-                          params.getParam('isFromUpdate', ParamType.String)),
+                          params.getParam('isFromUpdate', ParamType.String),
+                      verificationKey:  params.getParam('verificationKey', ParamType.String),
+              ),
             ),
 
             FFRoute(

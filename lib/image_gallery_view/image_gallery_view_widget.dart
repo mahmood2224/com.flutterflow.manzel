@@ -2,8 +2,10 @@ import 'package:manzel/auth/auth_util.dart';
 import 'package:manzel/auth/firebase_user_provider.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/zoom_image/zoom_image_widget.dart';
+import '../common_alert_dialog/common_alert_dialog.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../backend/api_requests/api_calls.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -35,6 +37,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
   List<dynamic> imageList = [];
   Map<String, bool> fav = {};
   bool? bookMarkTapped;
+  bool? isInternetAvailable;
 
   @override
   void initState() {
@@ -42,6 +45,33 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
     fav = FavouriteList.instance.favourite;
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'imageGalleryView'});
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      checkimageListUrl();
+    });
+  }
+
+  void checkimageListUrl() async {
+    isInternetAvailable = await isInternetConnected();
+    if (widget.imageList.length == 1) {
+      imageList = [
+        getJsonField(widget.imageList, r'''$..attributes.formats.medium.url''')
+      ];
+    } else {
+      imageList = getJsonField(
+          widget.imageList, r'''$..attributes.formats.medium.url''');
+    }
+
+    if (imageList.isEmpty && (!(isInternetAvailable ?? false))) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
+    if (mounted) setState(() {});
   }
 
   @override
@@ -83,7 +113,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                             context.pop();
                           },
                           child: RotatedBox(
-                            quarterTurns: FFAppState().locale=='en'?0:2,
+                            quarterTurns: FFAppState().locale == 'en' ? 0 : 2,
                             child: Icon(
                               Manzel.back_icon,
                               color: Colors.black,
@@ -136,161 +166,135 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                           ),
                           InkWell(
                             onTap: () async {
-                              logFirebaseEvent(
-                                  'add_to_wishlist');
+                              logFirebaseEvent('add_to_wishlist');
                               logFirebaseEvent(
                                   'HOME_SCREEN_Container_jprwonvd_ON_TAP');
                               if (loggedIn) {
-                                if (fav[widget.propertyId.toString()]??false) {
-                                  logFirebaseEvent(
-                                      'Container_Backend-Call');
-                                  final bookmarkApiResponse =
-                                  await BookmarkPropertyCall
-                                      .call(
-                                    userId:
-                                    currentUserUid,
-                                    authorazationToken:
-                                    FFAppState()
-                                        .authToken,
-                                    propertyId: widget
-                                        .propertyId
-                                        .toString(),
-                                    version:
-                                    FFAppState()
-                                        .apiVersion,
-                                  );
-                                  if ((bookmarkApiResponse.statusCode) ==
-                                      200) {
-                                    fav.remove(widget
-                                        .propertyId
-                                        .toString());
-
-                                  } else {
-                                    logFirebaseEvent(
-                                        'Icon_Show-Snack-Bar');
-                                    ScaffoldMessenger.of(
-                                        context)
-                                        .showSnackBar(
-                                      SnackBar(
-                                        content:
-                                        Text(
-                                          functions.snackBarMessage(
-                                              'error',
-                                              FFAppState()
-                                                  .locale),
-                                          style:
-                                          TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .white,
-                                            fontWeight:
-                                            FontWeight.bold,
-                                            fontSize:
-                                            16,
-                                            height:
-                                            2,
-                                          ),
-                                        ),
-                                        duration: Duration(
-                                            milliseconds:
-                                            4000),
-                                        backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryRed,
-                                      ),
+                                bool isInternetAvailable =
+                                    await isInternetConnected();
+                                if (isInternetAvailable) {
+                                  if (fav[widget.propertyId.toString()] ??
+                                      false) {
+                                    logFirebaseEvent('Container_Backend-Call');
+                                    final bookmarkApiResponse =
+                                        await BookmarkPropertyCall.call(
+                                      userId: currentUserUid,
+                                      authorazationToken:
+                                          FFAppState().authToken,
+                                      propertyId: widget.propertyId.toString(),
+                                      version: FFAppState().apiVersion,
                                     );
+                                    if ((bookmarkApiResponse.statusCode) ==
+                                        200) {
+                                      fav.remove(widget.propertyId.toString());
+                                    } else if ((bookmarkApiResponse
+                                            .statusCode) ==
+                                        403) {
+                                      unAuthorizedUser(context, mounted);
+                                    } else {
+                                      logFirebaseEvent('Icon_Show-Snack-Bar');
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            functions.snackBarMessage(
+                                                'error', FFAppState().locale),
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                              height: 2,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryRed,
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    logFirebaseEvent('Container_Backend-Call');
+                                    final bookmarkApiResponse =
+                                        await BookmarkPropertyCall.call(
+                                      userId: currentUserUid,
+                                      authorazationToken:
+                                          FFAppState().authToken,
+                                      propertyId: widget.propertyId.toString(),
+                                      version: FFAppState().apiVersion,
+                                    );
+                                    if ((bookmarkApiResponse.statusCode) ==
+                                        200) {
+                                      fav[widget.propertyId.toString()] = true;
+                                    } else if ((bookmarkApiResponse
+                                            .statusCode) ==
+                                        403) {
+                                      unAuthorizedUser(context, mounted);
+                                    } else {
+                                      logFirebaseEvent('Icon_Show-Snack-Bar');
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            functions.snackBarMessage(
+                                                'error', FFAppState().locale),
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                              height: 2,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryRed,
+                                        ),
+                                      );
+                                    }
                                   }
                                 } else {
-                                  logFirebaseEvent(
-                                      'Container_Backend-Call');
-                                  final bookmarkApiResponse =
-                                  await BookmarkPropertyCall
-                                      .call(
-                                    userId:
-                                    currentUserUid,
-                                    authorazationToken:
-                                    FFAppState()
-                                        .authToken,
-                                    propertyId: widget
-                                        .propertyId
-                                        .toString(),
-                                    version:
-                                    FFAppState()
-                                        .apiVersion,
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        CommonAlertDialog(
+                                      onCancel: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
                                   );
-                                  if ((bookmarkApiResponse
-                                      .statusCode ) ==
-                                      200) {
-                                    fav[widget
-                                        .propertyId
-                                        .toString()] = true;
-                                  } else {
-                                    logFirebaseEvent(
-                                        'Icon_Show-Snack-Bar');
-                                    ScaffoldMessenger.of(
-                                        context)
-                                        .showSnackBar(
-                                      SnackBar(
-                                        content:
-                                        Text(
-                                          functions.snackBarMessage(
-                                              'error',
-                                              FFAppState()
-                                                  .locale),
-                                          style:
-                                          TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .white,
-                                            fontWeight:
-                                            FontWeight.bold,
-                                            fontSize:
-                                            16,
-                                            height:
-                                            2,
-                                          ),
-                                        ),
-                                        duration: Duration(
-                                            milliseconds:
-                                            4000),
-                                        backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryRed,
-                                      ),
-                                    );
-                                  }
                                 }
-                              }else {
-                                logFirebaseEvent(
-                                    'Container_Navigate-To');
-                                context
-                                    .pushNamed(
-                                    'Login');
+                              } else {
+                                logFirebaseEvent('Container_Navigate-To');
+                                context.pushNamed('Login');
                               }
-                              bookMarkTapped =
-                              false;
+                              bookMarkTapped = false;
                               setState(() {});
                             },
                             child: Container(
                               height: 35,
                               width: 35,
-                              decoration:
-                              BoxDecoration(
-                                  color: (fav[widget.propertyId.toString()]??false) ?FlutterFlowTheme.of(context).primaryRed:Colors
-                                      .white,
-                                  shape: BoxShape
-                                      .circle),
+                              decoration: BoxDecoration(
+                                  color: (fav[widget.propertyId.toString()] ??
+                                          false)
+                                      ? FlutterFlowTheme.of(context).primaryRed
+                                      : Colors.white,
+                                  shape: BoxShape.circle),
                               child: Padding(
                                 padding:
-                                EdgeInsetsDirectional
-                                    .fromSTEB(
-                                    2,
-                                    5,
-                                    2,
-                                    5),
+                                    EdgeInsetsDirectional.fromSTEB(2, 5, 2, 5),
                                 child: Icon(
                                   Manzel.favourite,
-                                  color:
-                                  (fav[widget.propertyId.toString()]??false)
-                                      ? Colors.white:Colors.black,
+                                  color: (fav[widget.propertyId.toString()] ??
+                                          false)
+                                      ? Colors.white
+                                      : Colors.black,
                                   size: 18,
                                 ),
                               ),
@@ -304,102 +308,104 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
               ),
               Expanded(
                 child: Builder(
-                      builder: (context) {
-
-                         imageList = widget.imageList.length==1?
-                         [getJsonField(
-                             widget.imageList,
-                             r'''$..attributes.formats.medium.url''')]:getJsonField(
-                             widget.imageList,
-                             r'''$..attributes.formats.medium.url''');
-                        return ListView.builder(
-                          padding: EdgeInsets.zero,
-                          scrollDirection: Axis.vertical,
-                          itemCount: widget.imageList.length,
-                          itemBuilder: (context, imagesIndex) {
-                            final imagesItem = widget.imageList[imagesIndex];
-                            return Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 6, 8, 6),
-                              child: InkWell(
-                                onTap: () async {
-                                  //PageTransition(
-                                    //   type: PageTransitionType.fade,
-                                    //   child: FlutterFlowExpandedImageView(
-                                    //     image: Image.network(
-                                    //       getJsonField(
-                                    //         imagesItem,
-                                    //         r'''$.attributes.formats.medium.url''',
-                                    //       ),
-                                    //       fit: BoxFit.contain,
-                                    //     ),
-                                    //     allowRotation: false,
-                                    //     tag: getJsonField(
-                                    //       imagesItem,
-                                    //       r'''$.attributes.formats.medium.url''',
-                                    //     ),
-                                    //     useHeroAnimation: true,
-                                    //   ),
-                                  logFirebaseEvent(
-                                      'IMAGE_GALLERY_VIEW_Image_xq7pxmei_ON_TAP');
-                                  logFirebaseEvent('Image_Expand-Image');
-                                  Map<int,String> dataList = {} ;
-                                  int count = 1;
-                                  imageList.forEach((element) {
-                                    dataList[count] = element.toString();
-                                    count +=1;
-                                  });
-                                  await Navigator.push(
-                                    context,
-                                  MaterialPageRoute(
-                                  builder: (context) =>
-                                  ZoomImage(
-                                  data:
-                                  dataList,
+                  builder: (context) {
+                    if (imageList.isEmpty && (isInternetAvailable ?? false)) {
+                      return SizedBox();
+                    }
+                    // imageList = widget.imageList.length==1?
+                    // [getJsonField(
+                    //     widget.imageList,
+                    //     r'''$..attributes.formats.medium.url''')]:getJsonField(
+                    //     widget.imageList,
+                    //     r'''$..attributes.formats.medium.url''');
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      itemCount: imageList.length,
+                      itemBuilder: (context, imagesIndex) {
+                        final imagesItem = widget.imageList[imagesIndex];
+                        return Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(8, 6, 8, 6),
+                          child: InkWell(
+                            onTap: () async {
+                              //PageTransition(
+                              //   type: PageTransitionType.fade,
+                              //   child: FlutterFlowExpandedImageView(
+                              //     image: Image.network(
+                              //       getJsonField(
+                              //         imagesItem,
+                              //         r'''$.attributes.formats.medium.url''',
+                              //       ),
+                              //       fit: BoxFit.contain,
+                              //     ),
+                              //     allowRotation: false,
+                              //     tag: getJsonField(
+                              //       imagesItem,
+                              //       r'''$.attributes.formats.medium.url''',
+                              //     ),
+                              //     useHeroAnimation: true,
+                              //   ),
+                              logFirebaseEvent(
+                                  'IMAGE_GALLERY_VIEW_Image_xq7pxmei_ON_TAP');
+                              logFirebaseEvent('Image_Expand-Image');
+                              Map<int, String> dataList = {};
+                              int count = 1;
+                              imageList.forEach((element) {
+                                dataList[count] = element.toString();
+                                count += 1;
+                              });
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ZoomImage(
+                                    data: dataList,
                                     index: imagesIndex,
                                   ),
-                                  ),
-                                  );
-                                },
-                                child: Hero(
-                                  tag: getJsonField(
+                                ),
+                              );
+                            },
+                            child: Hero(
+                              tag: getJsonField(
+                                imagesItem,
+                                r'''$.attributes.formats.medium.url''',
+                              ),
+                              transitionOnUserGestures: true,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  getJsonField(
                                     imagesItem,
                                     r'''$.attributes.formats.medium.url''',
                                   ),
-                                  transitionOnUserGestures: true,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.network(
-                                      getJsonField(
-                                        imagesItem,
-                                        r'''$.attributes.formats.medium.url''',
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                loadingProgress
+                                                    .expectedTotalBytes!
+                                            : null,
                                       ),
-                                      loadingBuilder: (BuildContext context, Widget child,
-                                          ImageChunkEvent? loadingProgress) {
-                                        if (loadingProgress == null) return child;
-                                        return Center(
-                                          child: CircularProgressIndicator(
-                                            value: loadingProgress.expectedTotalBytes != null
-                                                ? loadingProgress.cumulativeBytesLoaded /
-                                                loadingProgress.expectedTotalBytes!
-                                                : null,
-                                          ),
-                                        );
-                                      },
-
-                                      width: 100,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.27,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                                    );
+                                  },
+                                  width: 100,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.27,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                            );
-                          },
+                            ),
+                          ),
                         );
                       },
+                    );
+                  },
                 ),
               ),
             ],

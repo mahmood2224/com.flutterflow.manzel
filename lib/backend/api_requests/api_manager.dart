@@ -33,7 +33,6 @@ class ApiCallRecord extends Equatable {
   final String? body;
   final BodyType? bodyType;
 
-
   @override
   List<Object?> get props =>
       [callName, apiUrl, headers, params, body, bodyType];
@@ -110,10 +109,14 @@ class ApiManager {
     final makeRequest = callType == ApiCallType.GET ? http.get : http.delete;
     final response =
         await makeRequest(Uri.parse(apiUrl), headers: toStringMap(headers));
-    if(response.statusCode != null &&response.statusCode==401){
+    if (response.statusCode != null && response.statusCode == 401) {
       final updatedHeader = await refreshToken(headers);
-      final updatedResponse = await makeRequest(Uri.parse(apiUrl), headers: toStringMap(updatedHeader));
-      if(updatedResponse.statusCode!=null && updatedResponse.statusCode==401){signOut();}
+      final updatedResponse = await makeRequest(Uri.parse(apiUrl),
+          headers: toStringMap(updatedHeader));
+      if (updatedResponse.statusCode != null &&
+          updatedResponse.statusCode == 401) {
+        signOut();
+      }
       return ApiCallResponse.fromHttpResponse(updatedResponse, returnBody);
     }
     return ApiCallResponse.fromHttpResponse(response, returnBody);
@@ -138,13 +141,20 @@ class ApiManager {
       ApiCallType.PUT: http.put,
       ApiCallType.PATCH: http.patch,
     }[type]!;
-    final response = await requestFn(Uri.parse(apiUrl),
-        headers: toStringMap(headers), body: postBody);
-    if(response.statusCode != null &&response.statusCode==401){
+
+    final response = await requestFn(
+      Uri.parse(apiUrl),
+      headers: toStringMap(headers),
+      body: postBody,
+    );
+    if (response.statusCode != null && response.statusCode == 401) {
       final updatedHeader = await refreshToken(headers);
       final updatedResponse = await requestFn(Uri.parse(apiUrl),
           headers: toStringMap(updatedHeader), body: postBody);
-      if(updatedResponse.statusCode != null &&updatedResponse.statusCode==401){signOut();}
+      if (updatedResponse.statusCode != null &&
+          updatedResponse.statusCode == 401) {
+        signOut();
+      }
       return ApiCallResponse.fromHttpResponse(updatedResponse, returnBody);
     }
     return ApiCallResponse.fromHttpResponse(response, returnBody);
@@ -230,16 +240,66 @@ class ApiManager {
 
     return result;
   }
+
+  Future<ApiCallResponse> generateOtpApiCall({
+    required String callName,
+    required String apiUrl,
+    required ApiCallType callType,
+    Map<String, dynamic> headers = const {},
+    Map<String, dynamic> params = const {},
+    String? body,
+    BodyType? bodyType,
+    bool returnBody = true,
+    bool cache = false,
+  }) async {
+    final callRecord =
+        ApiCallRecord(callName, apiUrl, headers, params, body, bodyType);
+    // Modify for your specific needs if this differs from your API.
+    // if (_accessToken != null) {
+    //   headers[HttpHeaders.authorizationHeader] = 'Token $_accessToken';
+    // }
+    if (!apiUrl.startsWith('http')) {
+      apiUrl = 'https://$apiUrl';
+    }
+
+    // If we've already made this exact call before and caching is on,
+    // return the cached result.
+    if (cache && _apiCache.containsKey(callRecord)) {
+      return _apiCache[callRecord]!;
+    }
+
+    ApiCallResponse result;
+    switch (callType) {
+      case ApiCallType.GET:
+      case ApiCallType.DELETE:
+        result =
+            await urlRequest(callType, apiUrl, headers, params, returnBody);
+        break;
+      case ApiCallType.POST:
+      case ApiCallType.PUT:
+      case ApiCallType.PATCH:
+        result = await requestWithBody(
+            callType, apiUrl, headers, params, body, bodyType, returnBody);
+        break;
+    }
+
+    // If caching is on, cache the result (if present).
+    if (cache) {
+      _apiCache[callRecord] = result;
+    }
+
+    return result;
+  }
 }
 
-Future<Map<String,dynamic>> refreshToken(Map<String,dynamic> header) async {
+Future<Map<String, dynamic>> refreshToken(Map<String, dynamic> header) async {
   if (FirebaseAuth.instance.currentUser != null) {
-  final user = FirebaseAuth.instance.currentUser;
-  final idTokenResult = await user!.getIdTokenResult(true);
-  final token = idTokenResult.token;
-  FFAppState().authToken ='';
-  FFAppState().authToken = token!;
+    final user = FirebaseAuth.instance.currentUser;
+    final idTokenResult = await user!.getIdTokenResult(true);
+    final token = idTokenResult.token;
+    FFAppState().authToken = '';
+    FFAppState().authToken = token!;
   }
-  header['Authorization'] = "Bearer "+FFAppState().authToken;
+  header['Authorization'] = "Bearer " + FFAppState().authToken;
   return header;
 }
