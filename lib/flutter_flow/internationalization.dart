@@ -347,9 +347,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Are you eligible for Salani support?',
       'ar': 'هل انت مستحق للدعم السكني؟',
     },
-    'pleaseFillInfo': {
-      'en': 'Please fill all the information fields',
-      'ar': 'يرجى ملء جميع حقول المعلومات',
+    'allFields': {
+      'en': 'All fields are mandatory.',
+      'ar': 'كل الحقول إلزامية.',
     },
     'ag8peu33': {
       'en': 'Yes',

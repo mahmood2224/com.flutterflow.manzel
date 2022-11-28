@@ -794,7 +794,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         widget.homeScreenLength ?? 0,
                                         ParamType.int),
                                     'cityName': serializeParam(
-                                        citiesListValue ?? 'All',
+                                        citiesListValue ??  (FFAppState().locale=='en'?'All':'الكل'),
                                         ParamType.String),
                                     'minInstallment': serializeParam(
                                         valueOrDefault<String>(

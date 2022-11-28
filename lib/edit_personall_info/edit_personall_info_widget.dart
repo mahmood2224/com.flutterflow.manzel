@@ -808,7 +808,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               SnackBar(
                                 content: Text(
                                   FFLocalizations.of(context).getText(
-                                    'pleaseFillInfo' /* Please fill all the information fields */,
+                                    'allFields' /* Please fill all the information fields */,
                                   ),
                                   style: TextStyle(
                                     color: FlutterFlowTheme.of(context).white,
@@ -873,7 +873,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       onCancel: () {
                                         Navigator.pop(context);
                                       },
-                                      onSettings: () {},
                                     ),
                                   );
                                 }
@@ -884,7 +883,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   SnackBar(
                                     content: Text(
                                       FFLocalizations.of(context).getText(
-                                        'pleaseFillInfo' /* Please fill all the information fields */,
+                                        'allFields' /* Please fill all the information fields */,
                                       ),
                                       style: TextStyle(
                                         color:
@@ -936,7 +935,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     onCancel: () {
                                       Navigator.pop(context);
                                     },
-                                    onSettings: () {},
                                   ),
                                 );
                               }
