@@ -445,15 +445,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   isApiCalled = true;
                                   setState((){});
                                 }
-                                // await beginPhoneAuth(
-                                //   context: context,
-                                //   phoneNumber: phoneNumberController!.text,
-                                //   onCodeSent: () async {
-                                // //    entry.remove();
-                                //     isLoading.value = false;
-                                //     context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberVal});
-                                //     },
-                                //   );
                               }
                               else{
                                 showDialog(

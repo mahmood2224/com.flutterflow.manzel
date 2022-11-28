@@ -930,7 +930,7 @@ class OtpCalls{
   "phoneNumber": "${phoneNumber}"
 }''';
     String basicAuth =
-        'Basic ' + base64.encode(utf8.encode('${EnvVariables.instance.jetAdminUserName}:${EnvVariables.instance.jetAdminPassword}'));
+        'Basic ' + base64.encode(utf8.encode('${EnvVariables.instance.basicAuthUserName}:${EnvVariables.instance.basicAuthPassword}'));
     return ApiManager.instance.generateOtpApiCall(
       callName: 'generateOtp',
       apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/generateOtp',
@@ -954,7 +954,7 @@ class OtpCalls{
   "key": "${key}"
 }''';
     String basicAuth =
-        'Basic ' + base64.encode(utf8.encode('${EnvVariables.instance.jetAdminUserName}:${EnvVariables.instance.jetAdminPassword}'));
+        'Basic ' + base64.encode(utf8.encode('${EnvVariables.instance.basicAuthUserName}:${EnvVariables.instance.basicAuthPassword}'));
     return ApiManager.instance.generateOtpApiCall(
       callName: 'verifyOtp',
       apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/verifyOtp',
