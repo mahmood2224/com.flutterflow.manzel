@@ -2766,7 +2766,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               .center,
                                                       children: [
                                                         FFButtonWidget(
-                                                          onPressed: () async {
+                                                        isFromRequestVisitButton:true,
+                                                                      onPressed: () async {
                                                             if(isInternetAvailable??false){
                                                               final phoneNumber =
                                                               getJsonField(
@@ -2827,7 +2828,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             }
 
                                                           },
-                                                          text: FFLocalizations
+                                                          text:
+                                                              FFLocalizations
                                                                   .of(context)
                                                               .getText(
                                                             'requestVisit' /* Request Visit */,
@@ -2867,11 +2869,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     .circular(
                                                                         8),
                                                           ),
-                                                          icon: Icon(
-                                                            Manzel
-                                                                .request_visit,
-                                                            size: 22,
-                                                          ),
+                                                          // icon: Icon(
+                                                          //   Manzel
+                                                          //       .request_visit,
+                                                          //   size: 22,
+                                                          // ),
                                                         ),
                                                       ],
                                                     ),
