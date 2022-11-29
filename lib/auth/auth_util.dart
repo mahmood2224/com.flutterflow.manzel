@@ -112,59 +112,6 @@ int? _resendToken ;
 // Set when using phone sign in in web mode (ignored otherwise).
 ConfirmationResult? _webPhoneAuthConfirmationResult;
 
-// Future beginPhoneAuth({
-//   bool? isFromUpdate ,
-//   required BuildContext context,
-//   required String phoneNumber,
-//   required VoidCallback onCodeSent,
-// }) async {
-//   if (kIsWeb) {
-//     await GenerateOtp.call(phoneNumber: phoneNumber);
-//     // _webPhoneAuthConfirmationResult =
-//     //     await FirebaseAuth.instance.signInWithPhoneNumber(phoneNumber);
-//     onCodeSent();
-//     return;
-//   }
-//   // If you'd like auto-verification, without the user having to enter the SMS
-//   // code manually. Follow these instructions:
-//   // * For Android: https://firebase.google.com/docs/auth/android/phone-auth?authuser=0#enable-app-verification (SafetyNet set up)
-//   // * For iOS: https://firebase.google.com/docs/auth/ios/phone-auth?authuser=0#start-receiving-silent-notifications
-//   // * Finally modify verificationCompleted below as instructed.
-//    ApiCallResponse value  =  await GenerateOtp.call(phoneNumber: phoneNumber);
-//   print(value);
-//   return;
-//   // await FirebaseAuth.instance.verifyPhoneNumber(
-//   //   phoneNumber: phoneNumber,
-//   //   timeout: Duration(seconds: 40),
-//   //   verificationCompleted: (phoneAuthCredential) async {
-//   //     if(isFromUpdate??false){
-//   //       await FirebaseAuth.instance.currentUser!.updatePhoneNumber(phoneAuthCredential);
-//   //     }
-//   //     else
-//   //     await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
-//   //     // If you've implemented auto-verification, navigate to home page or
-//   //     // onboarding page here manually. Uncomment the lines below and replace
-//   //     // DestinationPage() with the desired widget.
-//   //     // await Navigator.push(
-//   //     //   context,
-//   //     //   MaterialPageRoute(builder: (_) => DestinationPage()),
-//   //     // );
-//   //   },
-//   //   verificationFailed: (e) {
-//   //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//   //       content: Text('Error: ${e.message!}'),
-//   //     ));
-//   //   },
-//   //   codeSent: (String? verificationId,int? resendToken ) {
-//   //     _phoneAuthVerificationCode = verificationId;
-//   //     _resendToken = resendToken;
-//   //     onCodeSent();
-//   //   },
-//   //   codeAutoRetrievalTimeout: (_) {},
-//   // );
-// }
-
-
 Future resendOtpFromFirebse({
   bool? isFromUpdate ,
   required BuildContext context,

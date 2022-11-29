@@ -262,6 +262,11 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 return;
                               }
                               //entry = showOverlay(context);
+                              ApiCallResponse updatePhoneResponse = await OtpCalls.updatePhone(newPhoneNumber: mobileNumberController!.text);
+                              if((OtpCalls.generateSuccess(updatePhoneResponse.jsonBody))=='success') {
+                                String verificationKey = OtpCalls.generateKey(updatePhoneResponse.jsonBody);
+                                context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': mobileNumberController!.text,'verificationKey':verificationKey,'isFromUpdate': 'true'});
+                              }
 
                               //generate  OYp call
                               // await beginPhoneAuth(
