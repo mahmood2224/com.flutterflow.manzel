@@ -254,18 +254,6 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 return;
                               }
                               //entry = showOverlay(context);
-
-                              //generate  OYp call
-                              // await beginPhoneAuth(
-                              //   isFromUpdate: true,
-                              //   context: context,
-                              //   phoneNumber: phoneNumberVal,
-                              //   onCodeSent: () async {
-                              //     //    entry.remove();
-                              //     isLoading.value = false;
-                              //     context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': phoneNumberVal,'isFromUpdate': 'true' });
-                              //   },
-                              // );
                               ApiCallResponse updatePhoneResponse = await OtpCalls.updatePhone(newPhoneNumber: mobileNumberController!.text);
                               if((OtpCalls.generateSuccess(updatePhoneResponse.jsonBody))=='success') {
                                 String verificationKey = OtpCalls.generateKey(updatePhoneResponse.jsonBody);

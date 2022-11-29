@@ -55,7 +55,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
    if(isFromUpdate??false){
       String newPhoneNumber = widget.phoneNumber??'';
       ApiCallResponse? response = await OtpCalls.updatePhone(idToken: idToken,newPhoneNumber: newPhoneNumber);
-     print(response);
    }
      else{
      ApiCallResponse? generateOtpResponse = await OtpCalls.generateOtp(phoneNumber: widget.phoneNumber??'');
