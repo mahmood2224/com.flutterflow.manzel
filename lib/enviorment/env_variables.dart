@@ -8,6 +8,8 @@ class EnvVariables {
   String _strapiBaseUrl = '';
   String _firebaseBaseUrl = '';
   String _sendbirdAppId = '';
+  String _basicAuthUserName = '';
+  String _basicAuthPassword = '';
 
 
   EnvVariables._();
@@ -18,6 +20,8 @@ class EnvVariables {
      _strapiBaseUrl = dotenv.get('STRAPI_BASE_URL', fallback: '');
      _firebaseBaseUrl = dotenv.get('FIREBASE_BASE_URL', fallback: '');
     _sendbirdAppId = dotenv.get('SENDBIRD_APP_ID', fallback: '');
+    _basicAuthUserName = dotenv.get('BASIC_AUTH_USER_NAME', fallback: '');
+    _basicAuthPassword = dotenv.get('BASIC_AUTH_PASSWORD', fallback: '');
 
   }
 
@@ -28,5 +32,10 @@ class EnvVariables {
   String get firebaseBaseUrl => _firebaseBaseUrl;
 
   String get sendbirdAppId => _sendbirdAppId;
+
+  String get basicAuthUserName => _basicAuthUserName;
+
+  String get basicAuthPassword => _basicAuthPassword;
+
 
 }

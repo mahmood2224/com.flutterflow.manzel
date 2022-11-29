@@ -1,11 +1,13 @@
 import '../../enviorment/env_variables.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
-
+import 'dart:convert';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
+
+
 
 
 class PropertiesCall {
@@ -214,6 +216,8 @@ class PropertyCall {
     response,
     r'''$.attributes.property_images.data[0].attributes.formats.small.url''',
   );
+
+
 }
 
 class FilterCall {
@@ -914,4 +918,116 @@ class ApiPagingParams {
   @override
   String toString() =>
       'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
+}
+
+
+class OtpCalls{
+  static Future<ApiCallResponse> generateOtp({
+    String phoneNumber ='',
+  }) {
+    final body = '''
+{
+  "phoneNumber": "${phoneNumber}"
+}''';
+    String basicAuth =
+        'Basic ' + base64.encode(utf8.encode('${EnvVariables.instance.basicAuthUserName}:${EnvVariables.instance.basicAuthPassword}'));
+    return ApiManager.instance.generateOtpApiCall(
+      callName: 'generateOtp',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/generateOtp',
+      callType: ApiCallType.POST,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      body: body,
+      headers: <String, String>{'authorization': basicAuth},
+    );
+  }
+
+  static Future<ApiCallResponse> verifyOtp({
+    String phoneNumber ='',
+    String otp = '',
+    String key = '',
+  }) {
+    final body = '''
+{
+  "phoneNumber": "${phoneNumber}",
+  "otp": "${otp}",
+  "key": "${key}"
+}''';
+    String basicAuth =
+        'Basic ' + base64.encode(utf8.encode('${EnvVariables.instance.basicAuthUserName}:${EnvVariables.instance.basicAuthPassword}'));
+    return ApiManager.instance.generateOtpApiCall(
+      callName: 'verifyOtp',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/verifyOtp',
+      callType: ApiCallType.POST,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      body: body,
+      headers: <String, String>{'authorization': basicAuth},
+    );
+  }
+  static Future<ApiCallResponse> verifyPhone({
+    String phoneNumber ='',
+    String otp = '',
+    String key = '',
+  }) {
+    String idToken =  FFAppState().authToken;
+    final body = '''
+{
+  "phoneNumber": "${phoneNumber}",
+  "otp": "${otp}",
+  "key": "${key}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'verifyPhone',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/verifyPhone',
+      callType: ApiCallType.POST,
+      bodyType: BodyType.JSON,
+      headers: {
+        'Authorization': 'Bearer $idToken',
+      },
+      returnBody: true,
+      body: body,
+    );
+  }
+
+  static Future<ApiCallResponse> updatePhone({
+    String newPhoneNumber ='',
+    String idToken ='',
+
+  }) {
+    String idToken =  FFAppState().authToken;
+    final body = '''
+{
+  "newPhoneNumber": "$newPhoneNumber"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'updatePhone',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/updatePhone',
+      headers: {
+        'Authorization': 'Bearer $idToken',
+      },
+      callType: ApiCallType.POST,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      body: body,
+    );
+  }
+
+
+  static dynamic tokenFromOtp(dynamic response) => getJsonField(
+    response,
+    r'''$.tokenKey''',
+  );
+  static dynamic generateSuccess(dynamic response) => getJsonField(
+    response,
+    r'''$.success''',
+  );
+  static dynamic generateKey(dynamic response) => getJsonField(
+    response,
+    r'''$.key''',
+  );
+  static dynamic verifyOtpStatus(dynamic response) => getJsonField(
+    response,
+    r'''$.error''',
+  );
 }

@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
+import '../backend/api_requests/api_manager.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -252,16 +254,11 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 return;
                               }
                               //entry = showOverlay(context);
-                              await beginPhoneAuth(
-                                isFromUpdate: true,
-                                context: context,
-                                phoneNumber: phoneNumberVal,
-                                onCodeSent: () async {
-                                  //    entry.remove();
-                                  isLoading.value = false;
-                                  context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': phoneNumberVal,'isFromUpdate': 'true' });
-                                },
-                              );
+                              ApiCallResponse updatePhoneResponse = await OtpCalls.updatePhone(newPhoneNumber: mobileNumberController!.text);
+                              if((OtpCalls.generateSuccess(updatePhoneResponse.jsonBody))=='success') {
+                                String verificationKey = OtpCalls.generateKey(updatePhoneResponse.jsonBody);
+                                context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': mobileNumberController!.text,'verificationKey':verificationKey,'isFromUpdate': 'true'});
+                              }
 
                             } else {
                               // Invalid_phone_number_action

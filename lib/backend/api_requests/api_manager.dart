@@ -127,6 +127,7 @@ class ApiManager {
     String? body,
     BodyType? bodyType,
     bool returnBody,
+
   ) async {
     assert(
       {ApiCallType.POST, ApiCallType.PUT, ApiCallType.PATCH}.contains(type),
@@ -138,8 +139,9 @@ class ApiManager {
       ApiCallType.PUT: http.put,
       ApiCallType.PATCH: http.patch,
     }[type]!;
+
     final response = await requestFn(Uri.parse(apiUrl),
-        headers: toStringMap(headers), body: postBody);
+        headers: toStringMap(headers), body: postBody,);
     if(response.statusCode != null &&response.statusCode==401){
       final updatedHeader = await refreshToken(headers);
       final updatedResponse = await requestFn(Uri.parse(apiUrl),
@@ -214,6 +216,54 @@ class ApiManager {
       case ApiCallType.DELETE:
         result =
             await urlRequest(callType, apiUrl, headers, params, returnBody);
+        break;
+      case ApiCallType.POST:
+      case ApiCallType.PUT:
+      case ApiCallType.PATCH:
+        result = await requestWithBody(
+            callType, apiUrl, headers, params, body, bodyType, returnBody);
+        break;
+    }
+
+    // If caching is on, cache the result (if present).
+    if (cache) {
+      _apiCache[callRecord] = result;
+    }
+
+    return result;
+  }
+
+
+  Future<ApiCallResponse> generateOtpApiCall({
+    required String callName,
+    required String apiUrl,
+    required ApiCallType callType,
+    Map<String, dynamic> headers = const {},
+    Map<String, dynamic> params = const {},
+    String? body,
+    BodyType? bodyType,
+    bool returnBody = true,
+    bool cache = false,
+
+  }) async {
+    final callRecord =
+    ApiCallRecord(callName, apiUrl, headers, params, body, bodyType);
+    if (!apiUrl.startsWith('http')) {
+      apiUrl = 'https://$apiUrl';
+    }
+
+    // If we've already made this exact call before and caching is on,
+    // return the cached result.
+    if (cache && _apiCache.containsKey(callRecord)) {
+      return _apiCache[callRecord]!;
+    }
+
+    ApiCallResponse result;
+    switch (callType) {
+      case ApiCallType.GET:
+      case ApiCallType.DELETE:
+        result =
+        await urlRequest(callType, apiUrl, headers, params, returnBody);
         break;
       case ApiCallType.POST:
       case ApiCallType.PUT:
