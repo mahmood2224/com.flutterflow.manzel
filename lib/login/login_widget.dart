@@ -222,6 +222,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                 : 'الرجاء إدخال الأرقام الإنجليزية!')));
                                   }
                                   count = val.length;
+                                  count++;
                                 },
                                 autofocus: true,
                                 inputFormatters: [
