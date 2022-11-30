@@ -1040,23 +1040,46 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                           String>(
                                                                         getJsonField(
                                                                           bookedPropertiesItem,
-                                                                          r'''$.property_address''',
+                                                                          r'''$.property_city''',
+                                                                        ).toString()+', ',
+                                                                        'null',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                        fontFamily:
+                                                                        'AvenirArabic',
+                                                                        fontSize:
+                                                                        12,
+                                                                        fontWeight:
+                                                                        FontWeight.w300,
+                                                                        useGoogleFonts:
+                                                                        false,
+                                                                      ),
+                                                                    ),
+                                                                    Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        getJsonField(
+                                                                          bookedPropertiesItem,
+                                                                          r'''$.property_district''',
                                                                         ).toString(),
                                                                         'null',
                                                                       ),
                                                                       style: FlutterFlowTheme.of(
-                                                                              context)
+                                                                          context)
                                                                           .bodyText1
                                                                           .override(
-                                                                            fontFamily:
-                                                                                'AvenirArabic',
-                                                                            fontSize:
-                                                                                12,
-                                                                            fontWeight:
-                                                                                FontWeight.w300,
-                                                                            useGoogleFonts:
-                                                                                false,
-                                                                          ),
+                                                                        fontFamily:
+                                                                        'AvenirArabic',
+                                                                        fontSize:
+                                                                        12,
+                                                                        fontWeight:
+                                                                        FontWeight.w300,
+                                                                        useGoogleFonts:
+                                                                        false,
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),
