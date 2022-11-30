@@ -215,6 +215,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     isEnterEnglishNumberSnackNotShown=false;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
+                                          duration: Duration(milliseconds: 3000),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryRed,
