@@ -866,10 +866,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     print("Successfully completed ${data.length}");
                                     if(data.length>0&&nonSimilarUidCount(data)){
                                       thisEmailExists=true;
-                                      setState((){});
                                     }else{
                                       thisEmailExists=false;
-                                      setState((){});
                                     }
                                   },
                                   onError: (e) => print("Error completing: $e"),);
@@ -889,13 +887,13 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                             .primaryRed,
                                       ),
                                     );
-                                  }else{
+                                  } else{
                                     await currentUserReference!
                                         .update(userUpdateData);
                                     logFirebaseEvent(
                                         'updatePersonalInfo_Close-Dialog,-Drawer,');
                                     isProfileUpdated = true;
-                                   // Navigator.pop(context, isProfileUpdated);
+                                    Navigator.pop(context, isProfileUpdated);
                                   }
                                 } else {
                                   showDialog(
@@ -991,6 +989,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 }else{
                                   await currentUserReference!
                                       .update(userUpdateData);
+                                  Navigator.pop(context);
                                 }
                               } else {
                                 showDialog(
@@ -1004,9 +1003,9 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 );
                               }
 
-                              logFirebaseEvent(
-                                  'updatePersonalInfo_Close-Dialog,-Drawer,');
-                              Navigator.pop(context);
+                              // logFirebaseEvent(
+                              //     'updatePersonalInfo_Close-Dialog,-Drawer,');
+                              // Navigator.pop(context);
                             }
                           }
                         },
