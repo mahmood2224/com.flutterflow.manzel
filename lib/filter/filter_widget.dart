@@ -1,4 +1,5 @@
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import '../backend/api_requests/api_calls.dart';
@@ -50,36 +51,35 @@ class _FilterWidgetState extends State<FilterWidget> {
   }
 
   Future<void> propertiesCall() async {
+    isPropertiesLoading = true;
+    setState(() {});
     isInternetAvailable = await isInternetConnected();
     if (isInternetAvailable ?? false) {
-      columnPropertiesResponse= await PropertiesCall.call(
+      columnPropertiesResponse = await PropertiesCall.call(
         populate:
-        'populate=*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
+            'populate=*,banks.Bank_logo,managed_by.Company_logo,property_images,city',
         locale: FFAppState().locale,
       );
       isPropertiesLoading = false;
       setState(() {});
-    }
-    else{
+    } else {
       isPropertiesLoading = false;
       setState(() {});
       alertCalled++;
       if (alertCalled <= 1)
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => CommonAlertDialog(
-          onCancel: () {
-            alertCalled=0;
-            Navigator.pop(context);
-          },
-        ),
-      );
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => CommonAlertDialog(
+            onCancel: () {
+              alertCalled = 0;
+              Navigator.pop(context);
+            },
+          ),
+        );
     }
-
   }
 
-
-  void reset() async{
+  void reset() async {
     isInternetAvailable = await isInternetConnected();
     if (isInternetAvailable ?? false) {
       setState(() {
@@ -93,26 +93,27 @@ class _FilterWidgetState extends State<FilterWidget> {
           isFurnishingValues!.add("الكل");
           propertyTypeListValues!.add("الكل");
         }
-        installmentRange = SfRangeValues(0,mxRange);
-        citiesListValue= null;
+        installmentRange = SfRangeValues(0, mxRange);
+        citiesListValue = null;
       });
-    }else{
+    } else {
       alertCalled++;
       if (alertCalled <= 1)
         showDialog(
           context: context,
           builder: (BuildContext context) => CommonAlertDialog(
             onCancel: () {
-              alertCalled=0;
+              alertCalled = 0;
               Navigator.pop(context);
             },
           ),
         );
     }
-
   }
 
   Future<void> cityListCall() async {
+    isCitiesLoading = true;
+    setState(() {});
     isInternetAvailable = await isInternetConnected();
     if (isInternetAvailable ?? false) {
       citiesListCityListResponse = await CityListCall.call(
@@ -120,23 +121,21 @@ class _FilterWidgetState extends State<FilterWidget> {
       );
       isCitiesLoading = false;
       setState(() {});
-    }
-    else{
+    } else {
       isCitiesLoading = false;
       setState(() {});
       alertCalled++;
       if (alertCalled <= 1)
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => CommonAlertDialog(
-          onCancel: () {
-            alertCalled=0;
-            Navigator.pop(context);
-          },
-        ),
-      );
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => CommonAlertDialog(
+            onCancel: () {
+              alertCalled = 0;
+              Navigator.pop(context);
+            },
+          ),
+        );
     }
-
   }
 
   @override
@@ -148,65 +147,64 @@ class _FilterWidgetState extends State<FilterWidget> {
         automaticallyImplyLeading: false,
         leading: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(6, 18, 0, 0),
-          child:  (citiesListCityListResponse!=null)?InkWell(
-            onTap: () async {
-              logFirebaseEvent('FILTER_PAGE_Text_re50sdm2_ON_TAP');
-              logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterCity = '');
-              logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterPropertyType = []);
-              logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterFurnishingType = []);
-              logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterCity = '');
-              logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterMinPrice = 0);
-              logFirebaseEvent('Text_Update-Local-State');
-              setState(() => FFAppState().filterMaxPrice = 0);
-              mxRange = valueOrDefault<double>(
-                functions.formattedDouble(
-                    valueOrDefault<int>(
-                      getJsonField(
-                        columnPropertiesResponse!.jsonBody,
-                        r'''$.meta.max_price''',
-                      ),
-                      1,
-                    )),
-                1.0,
-              );
-              isInternetAvailable = await isInternetConnected();
-              if(isInternetAvailable??false){
-                reset();
-              }
-              else{
-                alertCalled++;
-                if (alertCalled <= 1)
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) => CommonAlertDialog(
-                      onCancel: () {
-                        alertCalled=0;
-                        Navigator.pop(context);
-                      },
+          child: (citiesListCityListResponse != null)
+              ? InkWell(
+                  onTap: () async {
+                    logFirebaseEvent('FILTER_PAGE_Text_re50sdm2_ON_TAP');
+                    logFirebaseEvent('Text_Update-Local-State');
+                    setState(() => FFAppState().filterCity = '');
+                    logFirebaseEvent('Text_Update-Local-State');
+                    setState(() => FFAppState().filterPropertyType = []);
+                    logFirebaseEvent('Text_Update-Local-State');
+                    setState(() => FFAppState().filterFurnishingType = []);
+                    logFirebaseEvent('Text_Update-Local-State');
+                    setState(() => FFAppState().filterCity = '');
+                    logFirebaseEvent('Text_Update-Local-State');
+                    setState(() => FFAppState().filterMinPrice = 0);
+                    logFirebaseEvent('Text_Update-Local-State');
+                    setState(() => FFAppState().filterMaxPrice = 0);
+                    mxRange = valueOrDefault<double>(
+                      functions.formattedDouble(valueOrDefault<int>(
+                        getJsonField(
+                          columnPropertiesResponse!.jsonBody,
+                          r'''$.meta.max_price''',
+                        ),
+                        1,
+                      )),
+                      1.0,
+                    );
+                    isInternetAvailable = await isInternetConnected();
+                    if (isInternetAvailable ?? false) {
+                      reset();
+                    } else {
+                      alertCalled++;
+                      if (alertCalled <= 1)
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => CommonAlertDialog(
+                            onCancel: () {
+                              alertCalled = 0;
+                              Navigator.pop(context);
+                            },
+                          ),
+                        );
+                    }
+                  },
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'h84toi7e' /* Reset */,
                     ),
-                  );
-              }
-
-            },
-            child: Text(
-              FFLocalizations.of(context).getText(
-                'h84toi7e' /* Reset */,
-              ),
-              textAlign: TextAlign.center,
-              maxLines: 1,
-              style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'AvenirArabic',
-                    fontSize: 17,
-                    fontWeight: FontWeight.w800,
-                    useGoogleFonts: false,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'AvenirArabic',
+                          fontSize: 17,
+                          fontWeight: FontWeight.w800,
+                          useGoogleFonts: false,
+                        ),
                   ),
-            ),
-          ):SizedBox(),
+                )
+              : SizedBox(),
         ),
         title: Text(
           FFLocalizations.of(context).getText(
@@ -260,10 +258,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                     ),
                   ),
                 );
-              }
-              else if((columnPropertiesResponse != null) &&
-                  columnPropertiesResponse?.statusCode ==
-                      200){
+              } else if ((columnPropertiesResponse != null) &&
+                  columnPropertiesResponse?.statusCode == 200) {
                 return SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -273,19 +269,21 @@ class _FilterWidgetState extends State<FilterWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                             child: Text(
                               FFLocalizations.of(context).getText(
                                 'b8bqw4hw' /* City */,
                               ),
-                              style:
-                              FlutterFlowTheme.of(context).subtitle1.override(
-                                fontFamily: 'AvenirArabic',
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                useGoogleFonts: false,
-                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'AvenirArabic',
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: false,
+                                  ),
                             ),
                           ),
                         ],
@@ -297,8 +295,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                           children: [
                             Expanded(
                               child: Padding(
-                                padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 0, 20, 0),
                                 child: Builder(
                                   builder: (context) {
                                     if (isCitiesLoading) {
@@ -307,44 +305,47 @@ class _FilterWidgetState extends State<FilterWidget> {
                                           width: 50,
                                           height: 50,
                                           child: SpinKitRipple(
-                                            color: FlutterFlowTheme.of(context).primaryColor,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
                                             size: 50,
                                           ),
                                         ),
                                       );
-                                    }
-                                    else if ((citiesListCityListResponse != null) &&
-                                        citiesListCityListResponse?.statusCode ==
-                                            200){
+                                    } else if ((citiesListCityListResponse !=
+                                            null) &&
+                                        citiesListCityListResponse
+                                                ?.statusCode ==
+                                            200) {
                                       return FlutterFlowDropDown(
-                                        initialOption: citiesListValue ??
-                                            'Select city',
+                                        initialOption:
+                                            citiesListValue ?? 'Select city',
                                         options: functions
                                             .cityListBuilder(
-                                            (getJsonField(
-                                              citiesListCityListResponse?.jsonBody,
-                                              r'''$.cities''',
-                                            ) as List)
-                                                .map<String>(
-                                                    (s) => s.toString())
-                                                .toList(),
-                                            FFAppState().locale)
+                                                (getJsonField(
+                                                  citiesListCityListResponse
+                                                      ?.jsonBody,
+                                                  r'''$.cities''',
+                                                ) as List)
+                                                    .map<String>(
+                                                        (s) => s.toString())
+                                                    .toList(),
+                                                FFAppState().locale)
                                             .toList(),
-                                        onChanged: (val) =>
-                                            setState(() => citiesListValue = val),
+                                        onChanged: (val) => setState(
+                                            () => citiesListValue = val),
                                         width: double.infinity,
                                         height: 55,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                          fontFamily: 'AvenirArabic',
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
+                                              fontFamily: 'AvenirArabic',
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
                                         hintText:
-                                        FFLocalizations.of(context).getText(
+                                            FFLocalizations.of(context).getText(
                                           'le1j7gvf' /* Select City */,
                                         ),
                                         fillColor: Colors.white,
@@ -356,9 +357,17 @@ class _FilterWidgetState extends State<FilterWidget> {
                                             12, 4, 12, 4),
                                         hidesUnderline: true,
                                       );
+                                    } else if ((citiesListCityListResponse !=
+                                            null) &&
+                                        citiesListCityListResponse
+                                                ?.statusCode !=
+                                            200) {
+                                      return SomethingWentWrongWidget(
+                                          onTryAgain: () {
+                                        cityListCall();
+                                      });
                                     }
                                     return SizedBox();
-
                                   },
                                 ),
                               ),
@@ -376,14 +385,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                               FFLocalizations.of(context).getText(
                                 'n51panna' /* Type */,
                               ),
-                              style:
-                              FlutterFlowTheme.of(context).subtitle1.override(
-                                fontFamily: 'AvenirArabic',
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                useGoogleFonts: false,
-                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'AvenirArabic',
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: false,
+                                  ),
                             ),
                           ],
                         ),
@@ -403,40 +413,41 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         20, 0, 0, 0),
                                     child: FlutterFlowChoiceChips(
                                       initiallySelected:
-                                      propertyTypeListValues != null
-                                          ? propertyTypeListValues
-                                          : functions.choicechipUnselected(
-                                          FFAppState()
-                                              .filterPropertyType
-                                              .toList(),
-                                          FFAppState().locale),
+                                          propertyTypeListValues != null
+                                              ? propertyTypeListValues
+                                              : functions.choicechipUnselected(
+                                                  FFAppState()
+                                                      .filterPropertyType
+                                                      .toList(),
+                                                  FFAppState().locale),
                                       options: functions
                                           .propertTypeBuilder(
-                                          (getJsonField(
-                                            columnPropertiesResponse?.jsonBody,
-                                            r'''$.meta.property_type''',
-                                          ) as List)
-                                              .map<String>(
-                                                  (s) => s.toString())
-                                              .toList(),
-                                          FFAppState().locale)
+                                              (getJsonField(
+                                                columnPropertiesResponse
+                                                    ?.jsonBody,
+                                                r'''$.meta.property_type''',
+                                              ) as List)
+                                                  .map<String>(
+                                                      (s) => s.toString())
+                                                  .toList(),
+                                              FFAppState().locale)
                                           .map((label) => ChipData(label))
                                           .toList(),
                                       onChanged: (val) => setState(
-                                              () => propertyTypeListValues = val),
+                                          () => propertyTypeListValues = val),
                                       selectedChipStyle: ChipStyle(
                                         backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                          fontFamily: 'AvenirArabic',
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: false,
-                                        ),
+                                              fontFamily: 'AvenirArabic',
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.normal,
+                                              useGoogleFonts: false,
+                                            ),
                                         iconColor: Colors.white,
                                         iconSize: 0,
                                         elevation: 2,
@@ -446,18 +457,19 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
                                         iconColor: Color(0xFF323B45),
                                         iconSize: 0,
                                         elevation: 1,
                                       ),
                                       chipSpacing: 8,
                                       multiselect: true,
-                                      initialized: propertyTypeListValues != null,
+                                      initialized:
+                                          propertyTypeListValues != null,
                                       alignment: WrapAlignment.center,
                                     ),
                                   ),
@@ -482,16 +494,16 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .subtitle1
                                     .override(
-                                  fontFamily: 'AvenirArabic',
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
-                                ),
+                                      fontFamily: 'AvenirArabic',
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      useGoogleFonts: false,
+                                    ),
                               ),
                               Padding(
                                 padding:
-                                EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
+                                    EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -499,23 +511,23 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       valueOrDefault<String>(
                                         functions.formattedSliderOutput(
                                             valueOrDefault<double>(
-                                              double.parse(
-                                                  (installmentRange?.start ?? '0')
-                                                      .toString()),
-                                              1.0,
-                                            )),
+                                          double.parse(
+                                              (installmentRange?.start ?? '0')
+                                                  .toString()),
+                                          1.0,
+                                        )),
                                         '1',
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        useGoogleFonts: false,
-                                      ),
+                                            fontFamily: 'AvenirArabic',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            useGoogleFonts: false,
+                                          ),
                                     ),
                                     Text(
                                       FFLocalizations.of(context).getText(
@@ -524,45 +536,46 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        useGoogleFonts: false,
-                                      ),
+                                            fontFamily: 'AvenirArabic',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            useGoogleFonts: false,
+                                          ),
                                     ),
                                     Text(
                                       valueOrDefault<String>(
                                         functions.formattedSliderOutput(
                                             valueOrDefault<double>(
-                                              double.parse((installmentRange?.end ??
+                                          double.parse((installmentRange?.end ??
                                                   valueOrDefault<double>(
                                                     functions.formattedDouble(
                                                         valueOrDefault<int>(
-                                                          getJsonField(
-                                                            columnPropertiesResponse?.jsonBody,
-                                                            r'''$.meta.max_price''',
-                                                          ),
-                                                          1,
-                                                        )),
+                                                      getJsonField(
+                                                        columnPropertiesResponse
+                                                            ?.jsonBody,
+                                                        r'''$.meta.max_price''',
+                                                      ),
+                                                      1,
+                                                    )),
                                                     1.0,
                                                   ))
-                                                  .toString()),
-                                              1.0,
-                                            )),
+                                              .toString()),
+                                          1.0,
+                                        )),
                                         '1',
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        useGoogleFonts: false,
-                                      ),
+                                            fontFamily: 'AvenirArabic',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            useGoogleFonts: false,
+                                          ),
                                     ),
                                     Text(
                                       FFLocalizations.of(context).getText(
@@ -571,13 +584,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        useGoogleFonts: false,
-                                      ),
+                                            fontFamily: 'AvenirArabic',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            useGoogleFonts: false,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -595,12 +608,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                             Expanded(
                               child: Padding(
                                 padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                                    EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                                 child: Container(
                                   child: SliderTheme(
                                     data: SliderThemeData(
-                                      rangeThumbShape: RoundRangeSliderThumbShape(
-                                          enabledThumbRadius: 15),
+                                      rangeThumbShape:
+                                          RoundRangeSliderThumbShape(
+                                              enabledThumbRadius: 15),
                                       trackHeight: 6,
                                     ),
                                     child: SfRangeSlider(
@@ -608,27 +622,29 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       max: valueOrDefault<double>(
                                         functions.formattedDouble(
                                             valueOrDefault<int>(
-                                              getJsonField(
-                                                columnPropertiesResponse?.jsonBody,
-                                                r'''$.meta.max_price''',
-                                              ),
-                                              20000000,
-                                            )),
+                                          getJsonField(
+                                            columnPropertiesResponse?.jsonBody,
+                                            r'''$.meta.max_price''',
+                                          ),
+                                          20000000,
+                                        )),
                                         20000000.0,
                                       ),
-                                      values: installmentRange ??= SfRangeValues(
-                                          0,
-                                          valueOrDefault<double>(
-                                            functions.formattedDouble(
-                                                valueOrDefault<int>(
+                                      values: installmentRange ??=
+                                          SfRangeValues(
+                                              0,
+                                              valueOrDefault<double>(
+                                                functions.formattedDouble(
+                                                    valueOrDefault<int>(
                                                   getJsonField(
-                                                    columnPropertiesResponse?.jsonBody,
+                                                    columnPropertiesResponse
+                                                        ?.jsonBody,
                                                     r'''$.meta.max_price''',
                                                   ),
                                                   1,
                                                 )),
-                                            1.0,
-                                          )),
+                                                1.0,
+                                              )),
                                       showTicks: false,
                                       showLabels: false,
                                       activeColor: FlutterFlowTheme.of(context)
@@ -656,14 +672,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                               FFLocalizations.of(context).getText(
                                 '2m2ni5iy' /* Furnishing */,
                               ),
-                              style:
-                              FlutterFlowTheme.of(context).subtitle1.override(
-                                fontFamily: 'AvenirArabic',
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                useGoogleFonts: false,
-                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .subtitle1
+                                  .override(
+                                    fontFamily: 'AvenirArabic',
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: false,
+                                  ),
                             ),
                           ],
                         ),
@@ -690,41 +707,41 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         20, 0, 0, 0),
                                     child: FlutterFlowChoiceChips(
                                       initiallySelected:
-                                      isFurnishingValues != null
-                                          ? isFurnishingValues
-                                          : functions.choicechipUnselected(
-                                          FFAppState()
-                                              .filterFurnishingType
-                                              .toList(),
-                                          FFAppState().locale),
+                                          isFurnishingValues != null
+                                              ? isFurnishingValues
+                                              : functions.choicechipUnselected(
+                                                  FFAppState()
+                                                      .filterFurnishingType
+                                                      .toList(),
+                                                  FFAppState().locale),
                                       options: [
                                         ChipData(
                                             FFLocalizations.of(context).getText(
-                                              'jrw6qvww' /* All */,
-                                            )),
+                                          'jrw6qvww' /* All */,
+                                        )),
                                         ChipData(
                                             FFLocalizations.of(context).getText(
-                                              'skyj7jpv' /* Furnished */,
-                                            )),
+                                          'skyj7jpv' /* Furnished */,
+                                        )),
                                         ChipData(
                                             FFLocalizations.of(context).getText(
-                                              '8x7rkqnv' /* Un-furnished */,
-                                            )),
+                                          '8x7rkqnv' /* Un-furnished */,
+                                        )),
                                       ],
                                       onChanged: (val) => setState(
-                                              () => isFurnishingValues = val),
+                                          () => isFurnishingValues = val),
                                       selectedChipStyle: ChipStyle(
                                         backgroundColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                                            FlutterFlowTheme.of(context)
+                                                .primaryColor,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                          fontFamily: 'AvenirArabic',
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: false,
-                                        ),
+                                              fontFamily: 'AvenirArabic',
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.normal,
+                                              useGoogleFonts: false,
+                                            ),
                                         iconColor: Colors.white,
                                         iconSize: 0,
                                         elevation: 1,
@@ -734,11 +751,11 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         textStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
-                                          fontFamily: 'AvenirArabic',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
+                                              fontFamily: 'AvenirArabic',
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts: false,
+                                            ),
                                         iconColor: Color(0xFF323B45),
                                         iconSize: 0,
                                         elevation: 2,
@@ -760,11 +777,14 @@ class _FilterWidgetState extends State<FilterWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             isInternetAvailable = await isInternetConnected();
-                            if(isInternetAvailable??false){
-                              logFirebaseEvent('FILTER_PAGE_apllyFilter_ON_TAP');
+                            if (isInternetAvailable ?? false) {
+                              logFirebaseEvent(
+                                  'FILTER_PAGE_apllyFilter_ON_TAP');
                               if (functions.validateInstallmentRange(
-                                  double.parse(installmentRange!.start.toString()),
-                                  double.parse(installmentRange!.end.toString()))) {
+                                  double.parse(
+                                      installmentRange!.start.toString()),
+                                  double.parse(
+                                      installmentRange!.end.toString()))) {
                                 logFirebaseEvent('apllyFilter_Navigate-To');
 
                                 context.pushNamed(
@@ -774,13 +794,14 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         widget.homeScreenLength ?? 0,
                                         ParamType.int),
                                     'cityName': serializeParam(
-                                        citiesListValue ?? 'All', ParamType.String),
+                                        citiesListValue ?? 'All',
+                                        ParamType.String),
                                     'minInstallment': serializeParam(
                                         valueOrDefault<String>(
                                           functions
                                               .sliderToApi(double.parse(
-                                              installmentRange!.start
-                                                  .toString()))
+                                                  installmentRange!.start
+                                                      .toString()))
                                               .toString(),
                                           '0',
                                         ),
@@ -788,21 +809,23 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     'maxInstallment': serializeParam(
                                         functions
                                             .sliderToApi(double.parse(
-                                            installmentRange!.end.toString()))
+                                                installmentRange!.end
+                                                    .toString()))
                                             .toString(),
                                         ParamType.String),
                                     'furnishingType': serializeParam(
                                         functions.listToApiParameters(functions
                                             .choicechipUnselected(
-                                            isFurnishingValues?.toList(),
-                                            FFAppState().locale)
+                                                isFurnishingValues?.toList(),
+                                                FFAppState().locale)
                                             .toList()),
                                         ParamType.String),
                                     'propertyType': serializeParam(
                                         functions.listToApiParameters(functions
                                             .choicechipUnselected(
-                                            propertyTypeListValues?.toList(),
-                                            FFAppState().locale)
+                                                propertyTypeListValues
+                                                    ?.toList(),
+                                                FFAppState().locale)
                                             .toList()),
                                         ParamType.String),
                                   }.withoutNulls,
@@ -814,8 +837,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     ),
                                   },
                                 );
-                              }
-                              else {
+                              } else {
                                 logFirebaseEvent('apllyFilter_Show-Snack-Bar');
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -826,24 +848,24 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText2
                                           .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                        useGoogleFonts: false,
-                                      ),
+                                            fontFamily: 'AvenirArabic',
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                            useGoogleFonts: false,
+                                          ),
                                     ),
                                     duration: Duration(milliseconds: 4000),
                                     backgroundColor:
-                                    FlutterFlowTheme.of(context).primaryRed,
+                                        FlutterFlowTheme.of(context).primaryRed,
                                   ),
                                 );
                               }
-                            }
-                            else{
+                            } else {
                               showDialog(
                                 context: context,
-                                builder: (BuildContext context) => CommonAlertDialog(
+                                builder: (BuildContext context) =>
+                                    CommonAlertDialog(
                                   onCancel: () {
                                     alertCalled = 0;
                                     setState(() {});
@@ -852,7 +874,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 ),
                               );
                             }
-
                           },
                           text: FFLocalizations.of(context).getText(
                             'dgzjfbdt' /* Show  Properties */,
@@ -862,11 +883,11 @@ class _FilterWidgetState extends State<FilterWidget> {
                             height: 56,
                             color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
-                            FlutterFlowTheme.of(context).subtitle1.override(
-                              fontFamily: 'AvenirArabic',
-                              fontWeight: FontWeight.w800,
-                              useGoogleFonts: false,
-                            ),
+                                FlutterFlowTheme.of(context).subtitle1.override(
+                                      fontFamily: 'AvenirArabic',
+                                      fontWeight: FontWeight.w800,
+                                      useGoogleFonts: false,
+                                    ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1,
@@ -878,6 +899,11 @@ class _FilterWidgetState extends State<FilterWidget> {
                     ],
                   ),
                 );
+              } else if ((columnPropertiesResponse != null) &&
+                  columnPropertiesResponse?.statusCode != 200) {
+                return SomethingWentWrongWidget(onTryAgain: () {
+                  propertiesCall();
+                });
               }
               return SizedBox();
             },

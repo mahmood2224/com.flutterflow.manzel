@@ -98,6 +98,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
       columnPropertyResponse = widget.jsonData;
       isLoading.value = false;
     } else {
+      isLoading.value = true;
       makeProeprtyApiCall();
     }
     logFirebaseEvent('screen_view',
@@ -148,7 +149,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
         ),
       );
     }
-setState((){});
   }
 
   // void enterFullScreen() {
@@ -255,8 +255,8 @@ setState((){});
                         ],
                       ),
                     ),
-                  )
-                : columnPropertyResponse!=null?
+                  ):
+                // : columnPropertyResponse!=null?
             Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -2718,27 +2718,6 @@ setState((){});
                                                                     ),
                                                               ),
                                                             ),
-                                                            // Text(
-                                                            //   FFLocalizations.of(
-                                                            //           context)
-                                                            //       .getText(
-                                                            //     've2ud2ws' /*  SAR */,
-                                                            //   ),
-                                                            //   style:
-                                                            //       FlutterFlowTheme.of(
-                                                            //               context)
-                                                            //           .bodyText1
-                                                            //           .override(
-                                                            //             fontFamily:
-                                                            //                 'AvenirArabic',
-                                                            //             fontSize: 16,
-                                                            //             fontWeight:
-                                                            //                 FontWeight
-                                                            //                     .bold,
-                                                            //             useGoogleFonts:
-                                                            //                 false,
-                                                            //           ),
-                                                            // ),
                                                           ],
                                                         ),
                                                       ],
@@ -2768,8 +2747,6 @@ setState((){});
                                                                 columnPropertyResponse,
                                                                 r'''$.attributes.managed_by.data.attributes.Company_phone''',
                                                               );
-                                                              print(
-                                                                  ">>>>>>>>>>>>>>>>>>>>>>phone number = ${phoneNumber}");
                                                               final message = '''
                                                         ${FFLocalizations.of(context).getText(
                                                                 'opening',
@@ -3628,7 +3605,8 @@ setState((){});
                                                 if ((addOrderApiResponse
                                                     ?.statusCode ??
                                                     200) ==
-                                                    200) {
+                                                    200)
+                                                {
                                                   await configurePaymentSdk();
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
@@ -3665,7 +3643,10 @@ setState((){});
                                                   ).then(
                                                           (value) => setState(() {}));
                                                   //.then((value) => _chewieController?.play());
-                                                } else if (addOrderApiResponse!
+                                                }  else if(addOrderApiResponse?.statusCode ==403){
+                                                  unAuthorizedUser(context, mounted);
+                                                }
+                                                else if (addOrderApiResponse!
                                                     .statusCode ==
                                                     399) {
                                                   //   Navigator.pop(context);
@@ -3821,7 +3802,11 @@ setState((){});
                                                         ).then((value) =>
                                                             setState(() {}));
                                                         //.then((value) => _chewieController?.play());
-                                                      } else if (addOrderApiResponse!
+                                                      }
+                                                      else if(addOrderApiResponse?.statusCode ==403){
+                                                        unAuthorizedUser(context, mounted);
+                                                      }
+                                                      else if (addOrderApiResponse!
                                                           .statusCode ==
                                                           399) {
                                                         //Navigator.pop(context);
@@ -4047,20 +4032,6 @@ setState((){});
                         ],
                       ),
                     ],
-                  ):SafeArea(
-                    child: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30,
-                      buttonSize: 48,
-                      icon: Icon(
-                        Manzel.clear,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        size: 15,
-                      ),
-                      onPressed: () async {
-                        Navigator.pop(context);
-                      },
-                    ),
                   );
           },
           valueListenable: isLoading,
