@@ -226,19 +226,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                             useGoogleFonts: false,
                           ),
                     ),
-                    // Padding(
-                    //   padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
-                    //   child: Text(
-                    //     FFLocalizations.of(context).getText(
-                    //       'nukctvmg' /* properties found */,
-                    //     ),
-                    //     style: FlutterFlowTheme.of(context).bodyText1.override(
-                    //           fontFamily: 'AvenirArabic',
-                    //           color: Color(0xFF6B6B6B),
-                    //           useGoogleFonts: false,
-                    //         ),
-                    //   ),
-                    // ),
                   ],
                 ),
             ],
@@ -259,15 +246,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 14, 0, 0),
                   child: Builder(
-                    //future:
-                    // (_apiRequestCompleter ??= Completer<ApiCallResponse>()
-                    //       ..complete(PropertiesCall.call(
-                    //         city: widget.cityName,
-                    //         locale: FFAppState().locale,
-                    //         populate:
-                    //             '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
-                    //       )))
-                    //     .future,
                     builder: (context) {
                       if (isLoading) {
                         return Center(
@@ -321,12 +299,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                       16, 0, 16, 25),
                                   child: InkWell(
                                     onTap: () async {
-                                      // if (!functions.conditionalVisibility(
-                                      //     getJsonField(
-                                      //       propertiesItem,
-                                      //       r'''$.attributes.property_status''',
-                                      //     ).toString(),
-                                      //     'Soon')) {
                                       videoPlayers[propertiesIndex +
                                               widget.homeScreenLength!]
                                           .pause();
@@ -485,14 +457,11 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                       }
                                                                     }
                                                                   });
-                                                                  print(
-                                                                      'propertyindex - $propertiesIndex');
                                                                 });
                                                                 ;
                                                               });
 
-                                                              print(
-                                                                  "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
+
                                                               // Future.delayed(const Duration(
                                                               //     seconds: 6), () {
                                                               //   _currentController =
