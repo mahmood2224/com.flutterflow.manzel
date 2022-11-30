@@ -864,7 +864,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       (res) {
                                     var data = res.docs;
                                     print("Successfully completed ${data.length}");
-                                    if(data.length>1){
+                                    if(data.length>0&&nonSimilarUidCount(data)){
                                       thisEmailExists=true;
                                       setState((){});
                                     }else{
@@ -971,6 +971,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   }
                                 },
                                 onError: (e) => print("Error completing: $e"),);
+
+
                               if (isInternetAvailable ?? false) {
                                 if((thisEmailExists??false)){
                                   ScaffoldMessenger.of(context).showSnackBar(
