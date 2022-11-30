@@ -2157,10 +2157,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                               color: FlutterFlowTheme.of(context).white,
                                                                                               fontWeight: FontWeight.bold,
                                                                                               fontSize: 16,
+                                                                                              height: 2,
                                                                                             ),
                                                                                           ),
                                                                                           duration: Duration(milliseconds: 4000),
-                                                                                          backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                                          backgroundColor: FlutterFlowTheme.of(context).primaryGreen,
                                                                                         ),
                                                                                       );
                                                                                       // Future.delayed(const Duration(seconds: 5), () {
@@ -2185,10 +2186,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                               color: FlutterFlowTheme.of(context).white,
                                                                                               fontWeight: FontWeight.bold,
                                                                                               fontSize: 16,
+                                                                                              height: 2,
                                                                                             ),
                                                                                           ),
                                                                                           duration: Duration(milliseconds: 4000),
-                                                                                          backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                                          backgroundColor: FlutterFlowTheme.of(context).primaryRed,
                                                                                         ),
                                                                                       );
                                                                                       isLoading.value = false;

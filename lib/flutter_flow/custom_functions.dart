@@ -498,7 +498,7 @@ String myPropertiesFormatDate(
   }
   if (locale == "en") {
     bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
-    return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime)}. ${DateFormat.y().format(bookingTime)}';
+    return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime).substring(0,3)} ${DateFormat.y().format(bookingTime)}';
   } else {
     bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
     return '${DateFormat.d("ar_SA").format(bookingTime)} ${DateFormat.MMMM("ar_SA").format(bookingTime)}. ${DateFormat.y("ar_SA").format(bookingTime)}';
@@ -1519,6 +1519,7 @@ String intToString(int? num) {
 }
 
 Future<bool> isInternetConnected() async {
+  return true;
   var connectivityResult = await (Connectivity().checkConnectivity());
   if (connectivityResult == ConnectivityResult.mobile ||
       connectivityResult == ConnectivityResult.wifi) {
