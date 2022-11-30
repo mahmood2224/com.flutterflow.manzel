@@ -958,11 +958,11 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               );
 
                               await FirebaseFirestore.instance.collection('User').where(
-                                  'email', isEqualTo: emailController?.text).get().then(
+                                  'email', isEqualTo: emailController?.text).where('uid',isNotEqualTo:currentUserDocument?.uid).get().then(
                                     (res) {
                                   var data = res.docs;
                                   print("Successfully completed ${data.length}");
-                                  if(data.length>1){
+                                  if(data.length>0){
                                     thisEmailExists=true;
                                     setState((){});
                                   }else{
