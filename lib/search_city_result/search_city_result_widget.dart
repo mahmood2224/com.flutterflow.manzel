@@ -595,6 +595,10 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                         },
                                                         child:
                                                             FlutterFlowVideoPlayer(
+                                                              posterImage: getJsonField(
+                                                                propertiesItem,
+                                                                r'''$.attributes.video_poster_image''',
+                                                              ),
                                                           // videoControllerSet =
                                                           //     videoControllerValue;
                                                           //

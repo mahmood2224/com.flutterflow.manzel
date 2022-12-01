@@ -31,7 +31,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
     this.currentPropertyindex,
     this.isPaused,
     this.homeScreenLength,
-    required this.screenName,
+    required this.screenName, required this.posterImage,
   });
 
   final String path;
@@ -51,6 +51,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
   final bool? isPaused;
   final int? homeScreenLength;
   final String screenName;
+  final String posterImage;
 
   @override
   State<StatefulWidget> createState() => _FlutterFlowVideoPlayerState();
@@ -280,7 +281,14 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
                                       widget.isFromPropertyDetail)
                                   ? 25
                                   : 35,
-                              child: CircularProgressIndicator()),
+                              child: Container(
+                                  decoration: new BoxDecoration(
+                                      image: new DecorationImage(
+                                        image: new AssetImage(widget.posterImage),
+                                        fit: BoxFit.fill,
+                                      )
+                                  )
+                              )),
                           SizedBox(height: 25),
                           (!widget.lazyLoad && widget.isFromPropertyDetail)
                               ? Text('Loading')

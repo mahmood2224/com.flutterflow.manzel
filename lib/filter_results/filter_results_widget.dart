@@ -593,6 +593,10 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                       },
                                                       child:
                                                           FlutterFlowVideoPlayer(
+                                                            posterImage: getJsonField(
+                                                              propertiesItem,
+                                                              r'''$.attributes.video_poster_image''',
+                                                            ),
                                                         // videoControllerSet =
                                                         //     videoControllerValue;
                                                         //
