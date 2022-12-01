@@ -68,6 +68,7 @@ class _OffersWidgetState extends State<OffersWidget> {
   List? activeOffers;
   bool? isInternetAvailable;
   bool isPageLoading = true;
+  var diffValue;
 
   Future<List<GroupChannel>?> getUnreadMessage() async {
     try {
@@ -531,7 +532,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             activeOffersItem,
                                             r'''$.status''',
                                           ).toString())) {
-                                            var diffValue = (getJsonField(
+                                            diffValue = (getJsonField(
                                                   activeOffersItem,
                                                   r'''$.booking_acceptance_expiry_time._seconds''',
                                                 ) -
@@ -1224,19 +1225,21 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 context,
                                                                             value,
                                                                             child) {
-                                                                          final displayTime =
-                                                                              StopWatchTimer.getDisplayTime(
-                                                                            value
-                                                                                as int,
-                                                                            hours:
-                                                                                true,
-                                                                            minute:
-                                                                                true,
-                                                                            second:
-                                                                                true,
-                                                                            milliSecond:
-                                                                                false,
-                                                                          );
+
+                                                                          diffValue
+                                                                          // final displayTime =
+                                                                          //     StopWatchTimer.getDisplayTime(
+                                                                          //   value
+                                                                          //       as int,
+                                                                          //   hours:
+                                                                          //       true,
+                                                                          //   minute:
+                                                                          //       true,
+                                                                          //   second:
+                                                                          //       true,
+                                                                          //   milliSecond:
+                                                                          //       false,
+                                                                          // );
                                                                           return Container(
                                                                               child: Text(' ${displayTime}',
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
