@@ -864,12 +864,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       (res) {
                                     var data = res.docs;
                                     print("Successfully completed ${data.length}");
-                                    if(data.length>1){
+                                    if(data.length>0&&nonSimilarUidCount(data)){
                                       thisEmailExists=true;
-                                      setState((){});
                                     }else{
                                       thisEmailExists=false;
-                                      setState((){});
                                     }
                                   },
                                   onError: (e) => print("Error completing: $e"),);
@@ -889,13 +887,13 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                             .primaryRed,
                                       ),
                                     );
-                                  }else{
+                                  } else{
                                     await currentUserReference!
                                         .update(userUpdateData);
                                     logFirebaseEvent(
                                         'updatePersonalInfo_Close-Dialog,-Drawer,');
                                     isProfileUpdated = true;
-                                   // Navigator.pop(context, isProfileUpdated);
+                                    Navigator.pop(context, isProfileUpdated);
                                   }
                                 } else {
                                   showDialog(
@@ -958,11 +956,11 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               );
 
                               await FirebaseFirestore.instance.collection('User').where(
-                                  'email', isEqualTo: emailController?.text).where('uid',isNotEqualTo:currentUserDocument?.uid).get().then(
+                                  'email', isEqualTo: emailController?.text).get().then(
                                     (res) {
                                   var data = res.docs;
                                   print("Successfully completed ${data.length}");
-                                  if(data.length>0){
+                                  if(data.length>0&&nonSimilarUidCount(data)){
                                     thisEmailExists=true;
                                     setState((){});
                                   }else{
@@ -971,6 +969,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   }
                                 },
                                 onError: (e) => print("Error completing: $e"),);
+
+
                               if (isInternetAvailable ?? false) {
                                 if((thisEmailExists??false)){
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -989,6 +989,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 }else{
                                   await currentUserReference!
                                       .update(userUpdateData);
+                                  Navigator.pop(context);
                                 }
                               } else {
                                 showDialog(
@@ -1002,9 +1003,9 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 );
                               }
 
-                              logFirebaseEvent(
-                                  'updatePersonalInfo_Close-Dialog,-Drawer,');
-                              Navigator.pop(context);
+                              // logFirebaseEvent(
+                              //     'updatePersonalInfo_Close-Dialog,-Drawer,');
+                              // Navigator.pop(context);
                             }
                           }
                         },
@@ -1056,6 +1057,15 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
         ),
       ),
     );
+  }
+  bool nonSimilarUidCount(List<QueryDocumentSnapshot> records){
+  int count = 0;
+  records.forEach((record) {
+    if(record['uid']!=currentUserUid){
+      count+=1;
+    }
+  });
+  return (count>0)?true:false;
   }
 
   Future<void> configurePaymentSdk() async {
