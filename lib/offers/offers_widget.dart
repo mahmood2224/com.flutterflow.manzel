@@ -1227,7 +1227,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             child) {
                                                                           CurrentRemainingTime time = milliSecondsToDay(value);
                                                                           return Container(
-                                                                              child:Text(' ${time.days} : ${time.hours} : ${time.minutes}',
+                                                                              child:Text(' ${time.days} days : ${time.hours} hrs : ${time.minutes} min : ${time.seconds} sec',
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'AvenirArabic',
                                                                                         color: FlutterFlowTheme.of(context).primaryText,
@@ -1479,6 +1479,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                       ),
                                                                       Wrap(
+                                                                      crossAxisAlignment:WrapCrossAlignment.end,
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -1495,7 +1496,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 2,
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 19,
+                                                                                  fontSize: 17,
                                                                                   fontWeight: FontWeight.bold,
                                                                                   useGoogleFonts: false,
                                                                                 ),
@@ -1556,6 +1557,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                       ),
                                                                       Wrap(
+                                                                        crossAxisAlignment: WrapCrossAlignment.end,
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -1570,7 +1572,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 19,
+                                                                                  fontSize: 17,
                                                                                   fontWeight: FontWeight.bold,
                                                                                   useGoogleFonts: false,
                                                                                 ),
@@ -1733,6 +1735,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                       ),
                                                                       Wrap(
+                                                                        crossAxisAlignment:WrapCrossAlignment.end,
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -1749,7 +1752,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 2,
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 19,
+                                                                                  fontSize: 17,
                                                                                   fontWeight: FontWeight.bold,
                                                                                   useGoogleFonts: false,
                                                                                 ),
