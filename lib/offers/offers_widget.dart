@@ -1225,8 +1225,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 context,
                                                                             value,
                                                                             child) {
-
-                                                                          diffValue
+                                                                          print(value);
+                                                                         // diffValue
                                                                           // final displayTime =
                                                                           //     StopWatchTimer.getDisplayTime(
                                                                           //   value
@@ -1240,8 +1240,11 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           //   milliSecond:
                                                                           //       false,
                                                                           // );
+                                                                          ;
+                                                                          final displayTime = calculateCurrentRemainingTime(diffValue);
+                                                                          print('${displayTime?.days } days ${displayTime?.hours } hours ${displayTime?.min } min ${displayTime?.sec } sec ');
                                                                           return Container(
-                                                                              child: Text(' ${displayTime}',
+                                                                              child: Text(' ${calculateCurrentRemainingTime}',
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'AvenirArabic',
                                                                                         color: FlutterFlowTheme.of(context).primaryText,
