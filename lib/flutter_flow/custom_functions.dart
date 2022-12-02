@@ -374,7 +374,7 @@ String offerScreenTime(
   } else {
     //Day diffrence
     if (dayDiffrence > 0) {
-      if ((dayDiffrence % 365) > 0) {
+      if ((dayDiffrence >= 365) && ((dayDiffrence % 365) > 0)) {
         yearsAgo = dayDiffrence % 365;
         if (yearsAgo == 1) {
           return "قبل سنة";
@@ -388,7 +388,7 @@ String offerScreenTime(
           return "قبل ${yearsAgo} سنة";
         }
       }
-      if ((dayDiffrence % 30) > 0) {
+      if ((dayDiffrence > 30) && ((dayDiffrence % 30) > 0)) {
         monthsAgo = dayDiffrence % 30;
         if (monthsAgo == 1) {
           return "منذ شهر";
@@ -1556,3 +1556,62 @@ void unAuthorizedUser(context,mounted) async {
  // _navigate();
   //context.goNamed('Login', mounted);
 }
+
+
+///Seconds in a day
+int _daySecond = 60 * 60 * 24;
+///Seconds in an hour
+int _hourSecond = 60 * 60;
+///Seconds in a minute
+int _minuteSecond = 60;
+CurrentRemainingTime? calculateCurrentRemainingTime(int remainingTimeStamp) {
+  // int remainingTimeStamp =
+  // ((endTime - DateTime.now().millisecondsSinceEpoch) / 1000).floor();
+  if (remainingTimeStamp <= 0) {
+    return null;
+  }
+  int? days, hours, min, sec;
+
+  ///Calculate the number of days remaining.
+  if (remainingTimeStamp >= _daySecond) {
+    days = (remainingTimeStamp / _daySecond).floor();
+    remainingTimeStamp -= days * _daySecond;
+  }
+
+  ///Calculate remaining hours.
+  if (remainingTimeStamp >= _hourSecond) {
+    hours = (remainingTimeStamp / _hourSecond).floor();
+    remainingTimeStamp -= hours * _hourSecond;
+  } else if (days != null) {
+    hours = 0;
+  }
+
+  ///Calculate remaining minutes.
+  if (remainingTimeStamp >= _minuteSecond) {
+    min = (remainingTimeStamp / _minuteSecond).floor();
+    remainingTimeStamp -= min * _minuteSecond;
+  } else if (hours != null) {
+    min = 0;
+  }
+
+  ///Calculate remaining second.
+  sec = remainingTimeStamp.toInt();
+  return CurrentRemainingTime(days: days, hours: hours, min: min, sec: sec);
+}
+
+class CurrentRemainingTime {
+  final int? days;
+  final int? hours;
+  final int? min;
+  final int? sec;
+  final Animation<double>? milliseconds;
+
+  CurrentRemainingTime({this.days, this.hours, this.min, this.sec, this.milliseconds});
+
+  @override
+  String toString() {
+    return 'CurrentRemainingTime{days: $days, hours: $hours, min: $min, sec: $sec, milliseconds: ${milliseconds?.value}';
+  }
+}
+
+

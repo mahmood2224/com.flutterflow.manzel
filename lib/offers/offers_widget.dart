@@ -68,6 +68,7 @@ class _OffersWidgetState extends State<OffersWidget> {
   List? activeOffers;
   bool? isInternetAvailable;
   bool isPageLoading = true;
+  var diffValue;
 
   Future<List<GroupChannel>?> getUnreadMessage() async {
     try {
@@ -531,7 +532,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                             activeOffersItem,
                                             r'''$.status''',
                                           ).toString())) {
-                                            var diffValue = (getJsonField(
+                                            diffValue = (getJsonField(
                                                   activeOffersItem,
                                                   r'''$.booking_acceptance_expiry_time._seconds''',
                                                 ) -
@@ -1224,6 +1225,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 context,
                                                                             value,
                                                                             child) {
+                                                                          print(value);
                                                                           final displayTime =
                                                                               StopWatchTimer.getDisplayTime(
                                                                             value
@@ -1237,8 +1239,10 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             milliSecond:
                                                                                 false,
                                                                           );
+                                                                          ;
+
                                                                           return Container(
-                                                                              child: Text(' ${displayTime}',
+                                                                              child:Text(' $displayTime',
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'AvenirArabic',
                                                                                         color: FlutterFlowTheme.of(context).primaryText,
@@ -1557,11 +1561,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               useGoogleFonts: false,
                                                                             ),
                                                                       ),
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.end,
+                                                                      Wrap(
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -1638,11 +1638,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               useGoogleFonts: false,
                                                                             ),
                                                                       ),
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.end,
+                                                                      Wrap(
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -1819,11 +1815,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               useGoogleFonts: false,
                                                                             ),
                                                                       ),
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.end,
+                                                                      Wrap(
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
