@@ -48,6 +48,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
   bool isEmploymentLoading = true;
   bool isBankLoading = true;
   int alertCalled = 0;
+  bool? thisEmailExists;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool? isProfileUpdated;
@@ -863,14 +864,43 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   sakaniLoanCoverage:
                                       functions.sakaniLoan(choiceChipsValue),
                                 );
-                                if (isInternetAvailable ?? false) {
-                                  await currentUserReference!
-                                      .update(userUpdateData);
 
-                                  logFirebaseEvent(
-                                      'updatePersonalInfo_Close-Dialog,-Drawer,');
-                                  isProfileUpdated = true;
-                                  Navigator.pop(context, isProfileUpdated);
+                                await FirebaseFirestore.instance.collection('User').where(
+                                    'email', isEqualTo: emailController?.text).get().then(
+                                      (res) {
+                                    var data = res.docs;
+                                    print("Successfully completed ${data.length}");
+                                    if(data.length>0&&nonSimilarUidCount(data)){
+                                      thisEmailExists=true;
+                                    }else{
+                                      thisEmailExists=false;
+                                    }
+                                  },
+                                  onError: (e) => print("Error completing: $e"),);
+
+                                if (isInternetAvailable ?? false) {
+                                  if((thisEmailExists??false)){
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Email Already Exists',
+                                          style:
+                                          FlutterFlowTheme.of(context).subtitle1,
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: FlutterFlowTheme.of(
+                                            context)
+                                            .primaryRed,
+                                      ),
+                                    );
+                                  } else{
+                                    await currentUserReference!
+                                        .update(userUpdateData);
+                                    logFirebaseEvent(
+                                        'updatePersonalInfo_Close-Dialog,-Drawer,');
+                                    isProfileUpdated = true;
+                                    Navigator.pop(context, isProfileUpdated);
+                                  }
                                 } else {
                                   showDialog(
                                     context: context,
@@ -930,9 +960,43 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 sakaniLoanCoverage:
                                     functions.sakaniLoan(choiceChipsValue),
                               );
+
+                              await FirebaseFirestore.instance.collection('User').where(
+                                  'email', isEqualTo: emailController?.text).get().then(
+                                    (res) {
+                                  var data = res.docs;
+                                  print("Successfully completed ${data.length}");
+                                  if(data.length>0&&nonSimilarUidCount(data)){
+                                    thisEmailExists=true;
+                                    setState((){});
+                                  }else{
+                                    thisEmailExists=false;
+                                    setState((){});
+                                  }
+                                },
+                                onError: (e) => print("Error completing: $e"),);
+
+
                               if (isInternetAvailable ?? false) {
-                                await currentUserReference!
-                                    .update(userUpdateData);
+                                if((thisEmailExists??false)){
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                       'Email Already Exists',
+                                        style:
+                                        FlutterFlowTheme.of(context).subtitle1,
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor: FlutterFlowTheme.of(
+                                          context)
+                                          .primaryRed,
+                                    ),
+                                  );
+                                }else{
+                                  await currentUserReference!
+                                      .update(userUpdateData);
+                                  Navigator.pop(context);
+                                }
                               } else {
                                 showDialog(
                                   context: context,
@@ -945,9 +1009,9 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 );
                               }
 
-                              logFirebaseEvent(
-                                  'updatePersonalInfo_Close-Dialog,-Drawer,');
-                              Navigator.pop(context);
+                              // logFirebaseEvent(
+                              //     'updatePersonalInfo_Close-Dialog,-Drawer,');
+                              // Navigator.pop(context);
                             }
                           }
                         },
@@ -999,6 +1063,15 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
         ),
       ),
     );
+  }
+  bool nonSimilarUidCount(List<QueryDocumentSnapshot> records){
+  int count = 0;
+  records.forEach((record) {
+    if(record['uid']!=currentUserUid){
+      count+=1;
+    }
+  });
+  return (count>0)?true:false;
   }
 
   Future<void> configurePaymentSdk() async {
