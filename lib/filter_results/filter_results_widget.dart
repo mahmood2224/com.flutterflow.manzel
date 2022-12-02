@@ -508,14 +508,14 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                               .pause();
                                                                         } else {
 
-                                                                          // int indexOfOtherPlayer =
-                                                                          //     videoPlayers.indexOf(otherPlayer);
-                                                                          // if (((currentPropertyindex + 1) <= (videoPlayers.length)) &&
-                                                                          //     (indexOfOtherPlayer == (currentPropertyindex + 1))) {
-                                                                          //   if (!(videoPlayers[currentPropertyindex + 1].value.isInitialized)) {
-                                                                          //     videoPlayers[currentPropertyindex + 1].initialize();
-                                                                          //   }
-                                                                          // }
+                                                                          int indexOfOtherPlayer =
+                                                                              videoPlayers.indexOf(otherPlayer);
+                                                                          if (((currentPropertyindex + 1) <= (videoPlayers.length)) &&
+                                                                              (indexOfOtherPlayer == (currentPropertyindex + 1))) {
+                                                                            if (!(videoPlayers[currentPropertyindex + 1].value.isInitialized)) {
+                                                                              videoPlayers[currentPropertyindex + 1].initialize();
+                                                                            }
+                                                                          }
                                                                         }
                                                                       }
                                                                     });
@@ -544,25 +544,25 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                 isPaused =
                                                                     false;
 
-                                                                // currentPropertyindex =
-                                                                //     widget.homeScreenLength! +
-                                                                //         propertiesIndex;
-                                                                //
-                                                                // if ((currentPropertyindex +
-                                                                //         1) <=
-                                                                //     (videoPlayers
-                                                                //         .length)) {
-                                                                //   if (!videoPlayers[
-                                                                //           currentPropertyindex +
-                                                                //               1]
-                                                                //       .value
-                                                                //       .isInitialized) {
-                                                                //     videoPlayers[
-                                                                //             currentPropertyindex +
-                                                                //                 1]
-                                                                //         .initialize();
-                                                                //   }
-                                                                // }
+                                                                currentPropertyindex =
+                                                                    widget.homeScreenLength! +
+                                                                        propertiesIndex;
+
+                                                                if ((currentPropertyindex +
+                                                                        1) <=
+                                                                    (videoPlayers
+                                                                        .length)) {
+                                                                  if (!videoPlayers[
+                                                                          currentPropertyindex +
+                                                                              1]
+                                                                      .value
+                                                                      .isInitialized) {
+                                                                    videoPlayers[
+                                                                            currentPropertyindex +
+                                                                                1]
+                                                                        .initialize();
+                                                                  }
+                                                                }
 
                                                               setState(() {
                                                                 videoPlayers.forEach(
