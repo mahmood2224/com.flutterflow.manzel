@@ -374,7 +374,7 @@ String offerScreenTime(
   } else {
     //Day diffrence
     if (dayDiffrence > 0) {
-      if ((dayDiffrence % 365) > 0) {
+      if ((dayDiffrence >= 365) && ((dayDiffrence % 365) > 0)) {
         yearsAgo = dayDiffrence % 365;
         if (yearsAgo == 1) {
           return "قبل سنة";
@@ -388,7 +388,7 @@ String offerScreenTime(
           return "قبل ${yearsAgo} سنة";
         }
       }
-      if ((dayDiffrence % 30) > 0) {
+      if ((dayDiffrence > 30) && ((dayDiffrence % 30) > 0)) {
         monthsAgo = dayDiffrence % 30;
         if (monthsAgo == 1) {
           return "منذ شهر";
@@ -1564,9 +1564,9 @@ int _daySecond = 60 * 60 * 24;
 int _hourSecond = 60 * 60;
 ///Seconds in a minute
 int _minuteSecond = 60;
-CurrentRemainingTime? calculateCurrentRemainingTime(int endTime) {
-  int remainingTimeStamp =
-  ((endTime - DateTime.now().millisecondsSinceEpoch) / 1000).floor();
+CurrentRemainingTime? calculateCurrentRemainingTime(int remainingTimeStamp) {
+  // int remainingTimeStamp =
+  // ((endTime - DateTime.now().millisecondsSinceEpoch) / 1000).floor();
   if (remainingTimeStamp <= 0) {
     return null;
   }
