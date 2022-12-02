@@ -1225,23 +1225,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 context,
                                                                             value,
                                                                             child) {
-                                                                          print(value);
                                                                           CurrentRemainingTime time = milliSecondsToDay(value);
-                                                                          // final displayTime =
-                                                                          //     StopWatchTimer.getDisplayTime(
-                                                                          //   value
-                                                                          //       as int,
-                                                                          //   hours:
-                                                                          //       true,
-                                                                          //   minute:
-                                                                          //       true,
-                                                                          //   second:
-                                                                          //       true,
-                                                                          //   milliSecond:
-                                                                          //       false,
-                                                                          // );
                                                                           return Container(
-                                                                              child:Text(' ${time.days} : ${time.hours} : ${time.minutes}',
+                                                                              child:Text(' ${time.days} days : ${time.hours} hrs : ${time.minutes} min : ${time.seconds} sec',
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'AvenirArabic',
                                                                                         color: FlutterFlowTheme.of(context).primaryText,
@@ -1250,76 +1236,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                         useGoogleFonts: false,
                                                                                       )));
                                                                         },
-                                                                        //     Stack(
-                                                                        //      children: [
-                                                                        //Align(
-                                                                        //  alignment: AlignmentDirectional(0, 0),
-                                                                        //  child: StreamBuilder<int>(
-                                                                        //      initialData: 10,
-                                                                        //      stream: timerControllersMap[activeOffersIndex]!.rawTime,
-                                                                        //      builder: (context, snap) {
-                                                                        //        final value = snap.data;
-                                                                        //        if(value!<=0){
-                                                                        //          timerControllersMap[activeOffersIndex]!.onStopTimer();
-                                                                        //           timerStoppedMap[activeOffersIndex]?.value = false;
-                                                                        //         //  timerCompleted.value = true;
-                                                                        //           return SizedBox.shrink();
-                                                                        //        }
-                                                                        //       // print(">>>>>>>>>>>>>>>>>>> value = ${value}");
-                                                                        //        final displayTime = StopWatchTimer.getDisplayTime(
-                                                                        //          value,
-                                                                        //          hours: true,
-                                                                        //          minute: true,
-                                                                        //          second: true,
-                                                                        //          milliSecond: false,
-                                                                        //         );
-                                                                        //
-                                                                        //         return  Text(
-                                                                        //             '${displayTime}',
-                                                                        //             style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                        //               fontFamily: 'AvenirArabic',
-                                                                        //               color: FlutterFlowTheme.of(context).primaryText,
-                                                                        //               fontSize: 12,
-                                                                        //               fontWeight: FontWeight.bold,
-                                                                        //               useGoogleFonts: false,
-                                                                        //             ),
-                                                                        //          );
-                                                                        //      }),
-                                                                        //),
 
-                                                                        //    ],
-                                                                        //   ),
                                                                       ),
-                                                                      // Padding(
-                                                                      //   padding:
-                                                                      //   EdgeInsetsDirectional
-                                                                      //       .fromSTEB(
-                                                                      //       2,
-                                                                      //       0,
-                                                                      //       2,
-                                                                      //       0),
-                                                                      //   child: Text(
-                                                                      //     FFLocalizations.of(
-                                                                      //         context)
-                                                                      //         .getText(
-                                                                      //       '9j4qhgy0' /* min. */,
-                                                                      //     ),
-                                                                      //     style: FlutterFlowTheme.of(
-                                                                      //         context)
-                                                                      //         .bodyText1
-                                                                      //         .override(
-                                                                      //       fontFamily:
-                                                                      //       'AvenirArabic',
-                                                                      //       fontSize:
-                                                                      //       12,
-                                                                      //       fontWeight:
-                                                                      //       FontWeight
-                                                                      //           .bold,
-                                                                      //       useGoogleFonts:
-                                                                      //       false,
-                                                                      //     ),
-                                                                      //   ),
-                                                                      // ),
                                                                       Padding(
                                                                         padding: const EdgeInsets.only(
                                                                             right:
@@ -1561,6 +1479,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                       ),
                                                                       Wrap(
+                                                                      crossAxisAlignment:WrapCrossAlignment.end,
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -1577,7 +1496,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 2,
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 19,
+                                                                                  fontSize: 17,
                                                                                   fontWeight: FontWeight.bold,
                                                                                   useGoogleFonts: false,
                                                                                 ),
@@ -1638,6 +1557,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                       ),
                                                                       Wrap(
+                                                                        crossAxisAlignment: WrapCrossAlignment.end,
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -1652,7 +1572,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 19,
+                                                                                  fontSize: 17,
                                                                                   fontWeight: FontWeight.bold,
                                                                                   useGoogleFonts: false,
                                                                                 ),
@@ -1815,6 +1735,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                       ),
                                                                       Wrap(
+                                                                        crossAxisAlignment:WrapCrossAlignment.end,
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -1831,7 +1752,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 2,
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
-                                                                                  fontSize: 19,
+                                                                                  fontSize: 17,
                                                                                   fontWeight: FontWeight.bold,
                                                                                   useGoogleFonts: false,
                                                                                 ),
