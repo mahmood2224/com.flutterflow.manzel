@@ -254,10 +254,6 @@ class ApiManager {
   }) async {
     final callRecord =
         ApiCallRecord(callName, apiUrl, headers, params, body, bodyType);
-    // Modify for your specific needs if this differs from your API.
-    // if (_accessToken != null) {
-    //   headers[HttpHeaders.authorizationHeader] = 'Token $_accessToken';
-    // }
     if (!apiUrl.startsWith('http')) {
       apiUrl = 'https://$apiUrl';
     }
