@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
     // });
     handleDynamicLinks();
     //   _initializeFlutterFire();
-    _initializeFlutterFire();
+   // _initializeFlutterFire();
   }
 
   @override
@@ -122,7 +122,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       // Else only enable it in non-debug builds.
       // You could additionally extend this to allow users to opt-in.
-      //   await FirebaseCrashlytics.instance
+   //   await FirebaseCrashlytics.instance
       //    .setCrashlyticsCollectionEnabled(!kDebugMode);
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     }
@@ -437,7 +437,7 @@ class _NavBarPageState extends State<NavBarPage> {
             icon: SvgPicture.asset(
               'assets/images/my_properties_icon.svg',
               height: 20,
-              color: currentIndex == 1 ? Colors.blue : Colors.black,
+              color: currentIndex == 1 ? Color(0xFF3b95d6) : Colors.black,
             ),
             label: FFLocalizations.of(context).getText(
               'lhqoha7d' /* My Properties */,
