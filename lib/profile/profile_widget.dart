@@ -630,6 +630,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   logFirebaseEvent('logout_Logout');
                                   GoRouter.of(context).prepareAuthEvent();
                                   await signOut();
+                                  FFAppState().authToken = '';
                                   isLoading.value = false;
                                   context.goNamedAuth(
                                       'OnboardingView', mounted);

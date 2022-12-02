@@ -41,10 +41,10 @@ void main() async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
-     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    runApp(MyApp());
+    // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  //  runApp(MyApp());
   }, (error, stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
+   // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
@@ -59,7 +59,7 @@ void main() async {
   );
   // FirebaseCloudMessaging().init();
 
-  FFAppState(); // Initialize FFAppState
+  FFAppState().initializePersistedState(); // Initialize FFAppState
   //versionCheck();
   runApp(MyApp());
 }
