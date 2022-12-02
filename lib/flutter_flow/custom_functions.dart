@@ -1558,60 +1558,33 @@ void unAuthorizedUser(context,mounted) async {
 }
 
 
-///Seconds in a day
-int _daySecond = 60 * 60 * 24;
-///Seconds in an hour
-int _hourSecond = 60 * 60;
-///Seconds in a minute
-int _minuteSecond = 60;
-CurrentRemainingTime? calculateCurrentRemainingTime(int remainingTimeStamp) {
-  // int remainingTimeStamp =
-  // ((endTime - DateTime.now().millisecondsSinceEpoch) / 1000).floor();
-  if (remainingTimeStamp <= 0) {
-    return null;
-  }
-  int? days, hours, min, sec;
-
-  ///Calculate the number of days remaining.
-  if (remainingTimeStamp >= _daySecond) {
-    days = (remainingTimeStamp / _daySecond).floor();
-    remainingTimeStamp -= days * _daySecond;
-  }
-
-  ///Calculate remaining hours.
-  if (remainingTimeStamp >= _hourSecond) {
-    hours = (remainingTimeStamp / _hourSecond).floor();
-    remainingTimeStamp -= hours * _hourSecond;
-  } else if (days != null) {
-    hours = 0;
-  }
-
-  ///Calculate remaining minutes.
-  if (remainingTimeStamp >= _minuteSecond) {
-    min = (remainingTimeStamp / _minuteSecond).floor();
-    remainingTimeStamp -= min * _minuteSecond;
-  } else if (hours != null) {
-    min = 0;
-  }
-
-  ///Calculate remaining second.
-  sec = remainingTimeStamp.toInt();
-  return CurrentRemainingTime(days: days, hours: hours, min: min, sec: sec);
-}
 
 class CurrentRemainingTime {
   final int? days;
   final int? hours;
-  final int? min;
-  final int? sec;
+  final int? minutes;
+  final int? seconds;
   final Animation<double>? milliseconds;
 
-  CurrentRemainingTime({this.days, this.hours, this.min, this.sec, this.milliseconds});
+  CurrentRemainingTime({this.days, this.hours, this.minutes, this.seconds, this.milliseconds});
 
   @override
   String toString() {
-    return 'CurrentRemainingTime{days: $days, hours: $hours, min: $min, sec: $sec, milliseconds: ${milliseconds?.value}';
+    return 'CurrentRemainingTime{days: $days, hours: $hours, min: $minutes, sec: $seconds, milliseconds: ${milliseconds?.value}';
   }
+}
+
+
+CurrentRemainingTime milliSecondsToDay(value){
+  int seconds = (int.parse(value.toString())/1000).floor();
+  int days= (seconds~/(3600 *24));
+  int remainingSeconds= (seconds%(3600 *24));
+  int hours = (remainingSeconds~/3600);
+  remainingSeconds = (remainingSeconds%3600);
+
+  int minutes = remainingSeconds~/60;
+  remainingSeconds = (remainingSeconds%60);
+  return CurrentRemainingTime(days: days,hours: hours,minutes:minutes,seconds: remainingSeconds);
 }
 
 

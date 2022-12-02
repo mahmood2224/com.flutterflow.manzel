@@ -1226,23 +1226,22 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             value,
                                                                             child) {
                                                                           print(value);
-                                                                          final displayTime =
-                                                                              StopWatchTimer.getDisplayTime(
-                                                                            value
-                                                                                as int,
-                                                                            hours:
-                                                                                true,
-                                                                            minute:
-                                                                                true,
-                                                                            second:
-                                                                                true,
-                                                                            milliSecond:
-                                                                                false,
-                                                                          );
-                                                                          ;
-
+                                                                          CurrentRemainingTime time = milliSecondsToDay(value);
+                                                                          // final displayTime =
+                                                                          //     StopWatchTimer.getDisplayTime(
+                                                                          //   value
+                                                                          //       as int,
+                                                                          //   hours:
+                                                                          //       true,
+                                                                          //   minute:
+                                                                          //       true,
+                                                                          //   second:
+                                                                          //       true,
+                                                                          //   milliSecond:
+                                                                          //       false,
+                                                                          // );
                                                                           return Container(
-                                                                              child:Text(' $displayTime',
+                                                                              child:Text(' ${time.days} : ${time.hours} : ${time.minutes}',
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'AvenirArabic',
                                                                                         color: FlutterFlowTheme.of(context).primaryText,
