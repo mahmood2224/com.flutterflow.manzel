@@ -1226,7 +1226,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             value,
                                                                             child) {
                                                                           print(value);
-                                                                         //diffValue
                                                                           final displayTime =
                                                                               StopWatchTimer.getDisplayTime(
                                                                             value
@@ -1241,8 +1240,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 false,
                                                                           );
                                                                           ;
-                                                                          // final displayTime = calculateCurrentRemainingTime(diffValue);
-                                                                          // print('${displayTime?.days } days ${displayTime?.hours } hours ${displayTime?.min } min ${displayTime?.sec } sec ');
                                                                           return Container(
                                                                               child:Text('$displayTime',
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
