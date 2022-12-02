@@ -1560,17 +1560,16 @@ void unAuthorizedUser(context,mounted) async {
 
 
 class CurrentRemainingTime {
-  final int? days;
-  final int? hours;
-  final int? minutes;
-  final int? seconds;
-  final Animation<double>? milliseconds;
+  final String? days;
+  final String? hours;
+  final String? minutes;
+  final String? seconds;
 
-  CurrentRemainingTime({this.days, this.hours, this.minutes, this.seconds, this.milliseconds});
+  CurrentRemainingTime({this.days, this.hours, this.minutes, this.seconds});
 
   @override
   String toString() {
-    return 'CurrentRemainingTime{days: $days, hours: $hours, min: $minutes, sec: $seconds, milliseconds: ${milliseconds?.value}';
+    return 'CurrentRemainingTime{days: $days, hours: $hours, min: $minutes, sec: $seconds';
   }
 }
 
@@ -1581,10 +1580,9 @@ CurrentRemainingTime milliSecondsToDay(value){
   int remainingSeconds= (seconds%(3600 *24));
   int hours = (remainingSeconds~/3600);
   remainingSeconds = (remainingSeconds%3600);
-
   int minutes = remainingSeconds~/60;
   remainingSeconds = (remainingSeconds%60);
-  return CurrentRemainingTime(days: days,hours: hours,minutes:minutes,seconds: remainingSeconds);
+  return CurrentRemainingTime(days: days.toString().padLeft(2, '0'),hours: hours.toString().padLeft(2, '0'),minutes:minutes.toString().padLeft(2, '0'),seconds: remainingSeconds.toString().padLeft(2, '0'));
 }
 
 
