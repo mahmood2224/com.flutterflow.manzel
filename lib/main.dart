@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,7 +44,7 @@ void main() async {
     // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     runApp(MyApp());
   }, (error, stackTrace) {
-   // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
+    // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
@@ -121,7 +122,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       // Else only enable it in non-debug builds.
       // You could additionally extend this to allow users to opt-in.
-   //   await FirebaseCrashlytics.instance
+      //   await FirebaseCrashlytics.instance
       //    .setCrashlyticsCollectionEnabled(!kDebugMode);
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     }
@@ -433,9 +434,10 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Manzel.my_properties_nav_bar,
-              size: 20,
+            icon: SvgPicture.asset(
+              'assets/images/my_properties_icon.svg',
+              height: 20,
+              color: currentIndex == 1 ? Colors.blue : Colors.black,
             ),
             label: FFLocalizations.of(context).getText(
               'lhqoha7d' /* My Properties */,
