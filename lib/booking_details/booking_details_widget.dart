@@ -1454,7 +1454,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       valueOrDefault<String>(
                                         getJsonField(
                                           columnOrderDetailsResponse?.jsonBody,
-                                          r'''$.result.property_data.property_address''',
+                                          r'''$.result.property_data.property_city''',
                                         ).toString(),
                                         'null',
                                       ),
@@ -1466,6 +1466,27 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             fontWeight: FontWeight.w300,
                                             useGoogleFonts: false,
                                           ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        3, 3, 0, 0),
+                                    child: Text(
+                                      valueOrDefault<String>(
+                                        getJsonField(
+                                          columnOrderDetailsResponse?.jsonBody,
+                                          r'''$.result.property_data.property_district''',
+                                        ).toString(),
+                                        'null',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                        fontFamily: 'AvenirArabic',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                        useGoogleFonts: false,
+                                      ),
                                     ),
                                   ),
                                 ],

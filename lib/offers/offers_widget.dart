@@ -1240,8 +1240,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                 false,
                                                                           );
                                                                           ;
+
                                                                           return Container(
-                                                                              child:Text('$displayTime',
+                                                                              child:Text(' $displayTime',
                                                                                   style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                         fontFamily: 'AvenirArabic',
                                                                                         color: FlutterFlowTheme.of(context).primaryText,
