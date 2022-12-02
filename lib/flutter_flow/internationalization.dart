@@ -349,7 +349,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'allFields': {
       'en': 'All fields are mandatory.',
-      'ar': 'الرجاء تعبئة جميع الحقول المطلوبة',
+      'ar': 'كل الحقول إلزامية.',
     },
     'ag8peu33': {
       'en': 'Yes',
