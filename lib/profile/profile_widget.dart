@@ -592,9 +592,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       'PROFILE_PAGE_logout_ON_TAP');
                                   // Logout
                                   logFirebaseEvent('logout_Logout');
+                                  final userUpdateData =
+                                  await createUserRecordData(
+                                      deviceToken: '' );
+                                  await currentUserReference
+                                      ?.update(userUpdateData);
                                   GoRouter.of(context).prepareAuthEvent();
                                   await signOut();
                                   FFAppState().authToken = '';
+
                                   isLoading.value = false;
                                   context.goNamedAuth('Login', mounted);
                                 }
@@ -628,6 +634,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       'PROFILE_PAGE_logout_ON_TAP');
                                   // Logout
                                   logFirebaseEvent('logout_Logout');
+                                  final userUpdateData =
+                                  await createUserRecordData(
+                                      deviceToken: '' );
+                                  await currentUserReference
+                                      ?.update(userUpdateData);
                                   GoRouter.of(context).prepareAuthEvent();
                                   await signOut();
                                   FFAppState().authToken = '';
