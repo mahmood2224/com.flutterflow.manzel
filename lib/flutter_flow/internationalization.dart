@@ -1729,26 +1729,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Order Process',
       'ar': 'مراحل الطلب',
     },
-    'w2795v66': {
-      'en': 'Property reservation',
-      'ar': 'حجز العقار',
-    },
-    'm30m3lz9': {
-      'en': 'Pay the reservation amount',
-      'ar': 'دفع مبلغ الحجز',
-    },
-    'zpv0x3sj': {
-      'en': 'Offers',
-      'ar': 'العروض',
-    },
+
+
+
     'hho1grz4': {
       'en': '/',
       'ar': '/',
     },
-    'xa9e1t5y': {
-      'en': 'Waiting for banks to submit offers ',
-      'ar': 'في انتظار البنوك لتقديم العروض',
-    },
+
     'pdhga106': {
       'en': '(',
       'ar': '(',
@@ -1761,29 +1749,42 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': ')',
       'ar': ')',
     },
+
+    'w2795v66': {
+      'en': 'Property reservation',
+      'ar': 'حجز العقار',
+    },
+    'm30m3lz9': {
+      'en': 'Pay the reservation amount',
+      'ar': 'دفع مبلغ الحجز',
+    },
+    'zpv0x3sj': {
+      'en': 'Offers',
+      'ar': 'العروض',
+    },
+    'xa9e1t5y': {
+      'en': 'Waiting for banks to submit offers ',
+      'ar': 'في انتظار البنوك لتقديم العروض',
+    },
     '3a3j0qu5': {
       'en': 'Accept a suitable offer',
       'ar': 'قبول عرض مناسب',
     },
     'ver0de4k': {
       'en': 'Waiting for you to accept one of the offers provided by banks',
-      'ar': 'في انتظارك لقبول أحد العروض المقدمة من البنوك',
+      'ar': 'في انتظارك لقبول أحد العروض المقدمة لك من البنوك',
     },
     'oqathjmt': {
       'en': 'Approval of the request',
       'ar': 'إعتماد الطلب',
     },
     'k64pcuyr': {
-      'en': 'Transferring the ownership of the property to you ',
-      'ar': 'نقل ملكية العقار لك',
+      'en': 'Waiting for the bank to approve your request',
+      'ar': 'في انتظار إعتماد طلبك من قبل البنك'
     },
     'nhrc354h': {
       'en': 'Deal completed successfully',
       'ar': 'تمت الصفقة بنجاح',
-    },
-    'ubpscf43': {
-      'en': 'Ownership transferred successfully ',
-      'ar': 'تم نقل الملكية بنجاح',
     },
     'dd079ljk': {
       'en': 'Cancelled',
@@ -1799,7 +1800,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'zaua3lqi': {
       'en': 'You have been disqualified from all supported banks',
-      'ar': 'لقد تم استبعادك من جميع البنوك المدعومة',
+      'ar': 'لقد تم استبعادك من جميع البنوك الداعمة',
     },
     'zv5c32ls': {
       'en': 'Expired',
@@ -1807,7 +1808,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'cgacbnp0': {
       'en': 'Your offer has been expired',
-      'ar': 'لقد انتهت صلاحية عرضك',
+      'ar': 'لقد انتهت صلاحية طلبك',
+    },
+    'ubpscf43': {
+      'en': 'Ownership transferred successfully ',
+      'ar': 'تم نقل الملكية بنجاح',
     },
     'nxmc61bl': {
       'en': 'Property details',
