@@ -70,12 +70,12 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
             'nm3bcvix' /* Notifications */,
           ),
           style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: 'AvenirArabic',
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                useGoogleFonts: false,
-              ),
+            fontFamily: 'AvenirArabic',
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            useGoogleFonts: false,
+          ),
         ),
         actions: [
           ValueListenableBuilder(
@@ -244,9 +244,16 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                 onTap: () async {
                                   logFirebaseEvent(
                                       'NOTIFICATIONS_Container_h34e593u_ON_TAP');
-                                  if (notificationsListNotificationsRecord
+                                  if(notificationsListNotificationsRecord
                                           ?.notificationType ==
-                                      'Offers') {
+                                      'MyProperties'){
+                                context.pushNamed(
+                                  'MyProperties',
+                                );
+                              }
+                              else if (notificationsListNotificationsRecord
+                                      ?.notificationType ==
+                                  'Offers') {
                                     logFirebaseEvent('Container_Navigate-To');
                                     context.pushNamed(
                                       'Offers',
@@ -271,7 +278,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                     );
                                   }
 
-                                  logFirebaseEvent('Container_Backend-Call');
+                              logFirebaseEvent('Container_Backend-Call');
 
                                   notificationsUpdateData =
                                       createNotificationsRecordData(

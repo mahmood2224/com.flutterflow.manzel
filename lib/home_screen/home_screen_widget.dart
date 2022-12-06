@@ -745,54 +745,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           //     VideoPlayerController.network(dataSource);
 
                                                         } else {
-                                                          // int indexOfOtherPlayer =
-                                                          //     videoPlayers.indexOf(
-                                                          //         otherPlayer);
-                                                          // if (((propertiesIndex +
-                                                          //             1) <
-                                                          //         (videoPlayers
-                                                          //             .length)) &&
-                                                          //     (indexOfOtherPlayer ==
-                                                          //         (currentPropertyindex +
-                                                          //             1))) {
-                                                          //   if (!(videoPlayers[
-                                                          //           propertiesIndex +
-                                                          //               1]
-                                                          //       .value
-                                                          //       .isInitialized)) {
-                                                          //     videoPlayers[
-                                                          //             propertiesIndex +
-                                                          //                 1]
-                                                          //         .initialize();
-                                                          //   }
-                                                          // }
-
-                                                          // var indexOfPlayer = videoPlayers.indexOf(otherPlayer);
-                                                          // indexOfPlayer
-
-                                                          // otherPlayer
-                                                          //     .initialize()
-                                                          //     .then((value) =>
-                                                          //         otherPlayer
-                                                          //             .pause());
-                                                          // isPaused = false;
-                                                          // isMuted.value
-                                                          //     ? videoPlayers[
-                                                          //             propertiesIndex]
-                                                          //         .setVolume(0)
-                                                          //     : videoPlayers[
-                                                          //             propertiesIndex]
-                                                          //         .setVolume(
-                                                          //             100);
-                                                          // isPaused = false;
-                                                          // isMuted.value
-                                                          //     ? videoPlayers[
-                                                          //             propertiesIndex]
-                                                          //         .setVolume(0)
-                                                          //     : videoPlayers[
-                                                          //             propertiesIndex]
-                                                          //         .setVolume(
-                                                          //             100);
 
                                                         }
                                                       }
@@ -805,36 +757,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
                                                 print(
                                                     "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
-                                                // Future.delayed(const Duration(
-                                                //     seconds: 6), () {
-                                                //   _currentController =
-                                                //   videocontrollerMap[(propertiesIndex)
-                                                //       .toString()];
-                                                //   _currentController?.play();
-                                                // });
-                                                // setState(() {
-                                                //   if (_currentController !=
-                                                //       null) {
-                                                //     _currentController =
-                                                //         videocontrollerMap[
-                                                //             (propertiesIndex)
-                                                //                 .toString()];
-                                                //     _currentController?.play();
-                                                //     videoControllerSet!
-                                                //         .forEach((otherPlayer) {
-                                                //       if (otherPlayer !=
-                                                //               _currentController &&
-                                                //           otherPlayer
-                                                //               .value.isPlaying) {
-                                                //         setState(() {
-                                                //           otherPlayer.pause();
-                                                //         });
-                                                //       }
-                                                //     });
-                                                //     print(
-                                                //         "Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
-                                                //   }
-                                                // });
                                               } else {
                                                 isPaused = false;
                                                 isMuted.value
@@ -848,19 +770,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     .play();
                                                 currentPropertyindex =
                                                     propertiesIndex;
-
-                                                // if ((propertiesIndex + 1) <
-                                                //     (videoPlayers.length)) {
-                                                //   if (!(videoPlayers[
-                                                //           propertiesIndex + 1]
-                                                //       .value
-                                                //       .isInitialized)) {
-                                                //     videoPlayers[
-                                                //             propertiesIndex + 1]
-                                                //         .initialize();
-                                                //   }
-                                                // }
-
                                                 setState(() {
                                                   videoPlayers
                                                       .forEach((otherPlayer) {
@@ -872,67 +781,22 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         otherPlayer
                                                             .setVolume(0.0);
                                                         otherPlayer.pause();
-                                                        // var dataSource = otherPlayer.dataSource;
-                                                        // otherPlayer.dispose();
-                                                        // otherPlayer =
-                                                        //     VideoPlayerController.network(dataSource);
 
                                                       }
                                                     }
                                                   });
                                                 });
                                               }
-                                              //autoplayVal = false;
                                             }
-                                            //onVisibilityChanged: (visibilityInfo) {
-                                            // var visiblePercentage =
-                                            //     visibilityInfo.visibleFraction *
-                                            //         100;
-                                            // debugPrint(
-                                            //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
+
                                           },
 
-                                          //child: InkWell(
-                                          // onTap: () {
-                                          //   isMuted?isMuted = false:isMuted = true;
-                                          //   isMutedIcon.value = true;
-                                          //   ValueListenableBuilder<bool>(
-                                          //     builder: (BuildContext context,
-                                          //         bool value, Widget? child) {
-                                          //       return Align(
-                                          //         alignment :,
-                                          //         Container(
-                                          //         height: 50,
-                                          //         width: 50,
-                                          //         decoration: BoxDecoration(
-                                          //           color: isMutedIcon.value
-                                          //               ? Colors.black
-                                          //                   .withOpacity(0.5)
-                                          //               : Colors.black
-                                          //                   .withOpacity(0.0),
-                                          //           shape: BoxShape.circle,
-                                          //         ),
-                                          //         child: Icon(
-                                          //           Icons.volume_mute_rounded,
-                                          //           color: isMutedIcon.value
-                                          //               ? Colors.white
-                                          //                   .withOpacity(1.0)
-                                          //               : Colors.black
-                                          //                   .withOpacity(0.0),
-                                          //           size: 40,
-                                          //         ),
-                                          //       ),);
-                                          //     },
-                                          //     valueListenable: isMutedIcon,
-                                          //   );
-                                          //   Future.delayed(
-                                          //           Duration(seconds: 2))
-                                          //       .then((value) {
-                                          //     isMutedIcon.value = false;
-                                          //   });
-                                          //
-                                          // },
+
                                           child: FlutterFlowVideoPlayer(
+                                            posterImage: getJsonField(
+                                              propertiesItem,
+                                              r'''$.attributes.video_poster_image''',
+                                            ),
                                             path: getJsonField(
                                               propertiesItem,
                                               r'''$.attributes.video_manifest_uri''',
@@ -961,21 +825,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         //),
                                       ),
                                     ),
-
-                                  //code above if in FlutterFlow
-                                  // if ((videoPlayers).length >= 1)
-                                  //code below if in FlutterFlow
-
-
-
-
-
-
-
-
-
-
-
 
                                   Align(
                                     alignment: AlignmentDirectional(0.9, 0.8),
@@ -1018,28 +867,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 .setVolume(100);
                                             isMuted.value = false;
                                           }
-                                          //   setState(() {
-
-                                          //     Future.delayed(
-                                          //             Duration(seconds: 3))
-                                          //         .then((value) {
-                                          //       isMutedIcon.value = false;
-                                          //       setState(() {});
-                                          //     });
-                                          //   });
-                                          // } else {
-                                          //   videoPlayers[propertiesIndex]
-                                          //       ?.setVolume(100);
-                                          //   setState(() {
-                                          //     isMuted = false;
-                                          //     Future.delayed(
-                                          //             Duration(seconds: 3))
-                                          //         .then((value) {
-                                          //       isMutedIcon.value = false;
-                                          //       setState(() {});
-                                          //     });
-                                          //   });
-                                          // }
                                         }
                                       },
                                     ),

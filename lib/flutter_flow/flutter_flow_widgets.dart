@@ -1,6 +1,7 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:manzel/common_widgets/manzel_icons.dart';
 
 class FFButtonOptions {
   const FFButtonOptions({
@@ -45,6 +46,7 @@ class FFButtonWidget extends StatefulWidget {
     this.iconData,
     required this.options,
     this.showLoadingIndicator = true,
+    this.isFromRequestVisitButton = false,
   }) : super(key: key);
 
   final String text;
@@ -53,6 +55,7 @@ class FFButtonWidget extends StatefulWidget {
   final Function() onPressed;
   final FFButtonOptions options;
   final bool showLoadingIndicator;
+  final bool isFromRequestVisitButton;
 
   @override
   State<FFButtonWidget> createState() => _FFButtonWidgetState();
@@ -75,12 +78,31 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
               ),
             ),
           )
-        : AutoSizeText(
-            widget.text,
-            style: widget.options.textStyle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          );
+        : (widget.isFromRequestVisitButton)
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Manzel.request_visit,
+                    size: 22,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  AutoSizeText(
+                    widget.text,
+                    style: widget.options.textStyle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  )
+                ],
+              )
+            : AutoSizeText(
+                widget.text,
+                style: widget.options.textStyle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              );
 
     final onPressed = widget.showLoadingIndicator
         ? () async {

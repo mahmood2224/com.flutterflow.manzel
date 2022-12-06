@@ -1,6 +1,7 @@
 import 'package:manzel/auth/auth_util.dart';
 import 'package:manzel/auth/firebase_user_provider.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:manzel/zoom_image/zoom_image_widget.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -129,41 +130,36 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
+
                         children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 26, 0),
-                            child: InkWell(
-                              onTap: () async {
-                                logFirebaseEvent(
-                                    'IMAGE_GALLERY_VIEW_Container_sx0hx6fk_ON');
-                                // shareProperty
-                                logFirebaseEvent('Container_shareProperty');
-                                await Share.share(
-                                    'manzel://manzel.com${GoRouter.of(context).location}');
-                              },
-                              child: Container(
-                                width: 34,
-                                height: 34,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).white,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: Color(0xFFF3F2F2),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      6, 6, 6, 6),
-                                  child: Icon(
-                                    Manzel.share,
-                                    color: Colors.black,
-                                    size: 16,
-                                  ),
+                          InkWell(
+                            onTap: () async {
+                              logFirebaseEvent(
+                                  'IMAGE_GALLERY_VIEW_Container_sx0hx6fk_ON');
+                              // shareProperty
+                              logFirebaseEvent('Container_shareProperty');
+                              await Share.share(
+                                  'manzel://manzel.com${GoRouter.of(context).location}');
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade200,width:1),
+                                color: Colors.white,
+                                shape: BoxShape.circle,),
+                              child: Padding(
+                                padding:
+                                EdgeInsetsDirectional.fromSTEB(2, 5, 2, 5),
+                                child: Icon(
+                                  Manzel.share,
+                                  color: Colors.black,
+                                  size: 14,
                                 ),
                               ),
                             ),
                           ),
+                          SizedBox(width: 16,),
                           InkWell(
                             onTap: () async {
                               logFirebaseEvent('add_to_wishlist');
@@ -281,11 +277,12 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                               height: 35,
                               width: 35,
                               decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey.shade200,width:1),
                                   color: (fav[widget.propertyId.toString()] ??
                                           false)
                                       ? FlutterFlowTheme.of(context).primaryRed
                                       : Colors.white,
-                                  shape: BoxShape.circle),
+                                  shape: BoxShape.circle,),
                               child: Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(2, 5, 2, 5),

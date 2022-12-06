@@ -226,19 +226,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                             useGoogleFonts: false,
                           ),
                     ),
-                    // Padding(
-                    //   padding: EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
-                    //   child: Text(
-                    //     FFLocalizations.of(context).getText(
-                    //       'nukctvmg' /* properties found */,
-                    //     ),
-                    //     style: FlutterFlowTheme.of(context).bodyText1.override(
-                    //           fontFamily: 'AvenirArabic',
-                    //           color: Color(0xFF6B6B6B),
-                    //           useGoogleFonts: false,
-                    //         ),
-                    //   ),
-                    // ),
                   ],
                 ),
             ],
@@ -259,15 +246,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 14, 0, 0),
                   child: Builder(
-                    //future:
-                    // (_apiRequestCompleter ??= Completer<ApiCallResponse>()
-                    //       ..complete(PropertiesCall.call(
-                    //         city: widget.cityName,
-                    //         locale: FFAppState().locale,
-                    //         populate:
-                    //             '*,banks.Bank_logo,managed_by.Company_logo,property_images,city,property_floor_plan',
-                    //       )))
-                    //     .future,
                     builder: (context) {
                       if (isLoading) {
                         return Center(
@@ -321,12 +299,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                       16, 0, 16, 25),
                                   child: InkWell(
                                     onTap: () async {
-                                      // if (!functions.conditionalVisibility(
-                                      //     getJsonField(
-                                      //       propertiesItem,
-                                      //       r'''$.attributes.property_status''',
-                                      //     ).toString(),
-                                      //     'Soon')) {
                                       videoPlayers[propertiesIndex +
                                               widget.homeScreenLength!]
                                           .pause();
@@ -467,17 +439,17 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                         //     VideoPlayerController.network(dataSource);
 
                                                                       } else {
-                                                                        // int indexOfOtherPlayer =
-                                                                        //     videoPlayers.indexOf(otherPlayer);
-                                                                        // if (((currentPropertyindex + 1) <= (videoPlayers.length)) &&
-                                                                        //     (indexOfOtherPlayer ==
-                                                                        //         (currentPropertyindex + 1))) {
-                                                                        //   if (!(videoPlayers[currentPropertyindex + 1]
-                                                                        //       .value
-                                                                        //       .isInitialized)) {
-                                                                        //     videoPlayers[currentPropertyindex + 1].initialize();
-                                                                        //   }
-                                                                        // }
+                                                                        int indexOfOtherPlayer =
+                                                                            videoPlayers.indexOf(otherPlayer);
+                                                                        if (((currentPropertyindex + 1) <= (videoPlayers.length)) &&
+                                                                            (indexOfOtherPlayer ==
+                                                                                (currentPropertyindex + 1))) {
+                                                                          if (!(videoPlayers[currentPropertyindex + 1]
+                                                                              .value
+                                                                              .isInitialized)) {
+                                                                            videoPlayers[currentPropertyindex + 1].initialize();
+                                                                          }
+                                                                        }
                                                                         // otherPlayer
                                                                         //     .initialize()
                                                                         //     .then((value) =>
@@ -485,14 +457,11 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                       }
                                                                     }
                                                                   });
-                                                                  print(
-                                                                      'propertyindex - $propertiesIndex');
                                                                 });
                                                                 ;
                                                               });
 
-                                                              print(
-                                                                  "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
+
                                                               // Future.delayed(const Duration(
                                                               //     seconds: 6), () {
                                                               //   _currentController =
@@ -541,25 +510,25 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                   .play();
                                                               isPaused = false;
 
-                                                              // currentPropertyindex =
-                                                              //     widget.homeScreenLength! +
-                                                              //         propertiesIndex;
+                                                              currentPropertyindex =
+                                                                  widget.homeScreenLength! +
+                                                                      propertiesIndex;
 
-                                                              // if ((currentPropertyindex +
-                                                              //         1) <=
-                                                              //     (videoPlayers
-                                                              //         .length)) {
-                                                              //   if (!videoPlayers[
-                                                              //           currentPropertyindex +
-                                                              //               1]
-                                                              //       .value
-                                                              //       .isInitialized) {
-                                                              //     videoPlayers[
-                                                              //             currentPropertyindex +
-                                                              //                 1]
-                                                              //         .initialize();
-                                                              //   }
-                                                              // }
+                                                              if ((currentPropertyindex +
+                                                                      1) <=
+                                                                  (videoPlayers
+                                                                      .length)) {
+                                                                if (!videoPlayers[
+                                                                        currentPropertyindex +
+                                                                            1]
+                                                                    .value
+                                                                    .isInitialized) {
+                                                                  videoPlayers[
+                                                                          currentPropertyindex +
+                                                                              1]
+                                                                      .initialize();
+                                                                }
+                                                              }
 
                                                               setState(() {
                                                                 videoPlayers
@@ -595,6 +564,10 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                         },
                                                         child:
                                                             FlutterFlowVideoPlayer(
+                                                              posterImage: getJsonField(
+                                                                propertiesItem,
+                                                                r'''$.attributes.video_poster_image''',
+                                                              ),
                                                           // videoControllerSet =
                                                           //     videoControllerValue;
                                                           //
