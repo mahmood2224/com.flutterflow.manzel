@@ -1965,8 +1965,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                           setState(() {});
                                                         },
                                                         child: Container(
-                                                          width: 30,
-                                                          height: 30,
+                                                          width: 35,
+                                                          height: 35,
                                                           decoration:
                                                               BoxDecoration(
                                                             color: Color(

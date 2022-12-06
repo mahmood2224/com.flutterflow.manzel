@@ -996,8 +996,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       tapped_index)
                                               ? SizedBox(
                                                   child: Container(
-                                                  width: 40,
-                                                  height: 40,
+                                                  width: 50,
+                                                  height: 50,
                                                   decoration: BoxDecoration(
                                                     color: propertiesItem[
                                                             "isBookmarked"]
@@ -1229,8 +1229,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     }
                                                   },
                                                   child: Container(
-                                                    width: 40,
-                                                    height: 40,
+                                                    width: 50,
+                                                    height: 50,
                                                     decoration: BoxDecoration(
                                                       color: propertiesItem[
                                                               "isBookmarked"]

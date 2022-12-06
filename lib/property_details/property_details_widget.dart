@@ -572,7 +572,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                   borderColor:
                                                       Colors.transparent,
                                                   borderRadius: 30,
-                                                  buttonSize: 34,
+                                                  buttonSize: 40,
                                                   fillColor: Colors.white,
                                                   icon: Icon(
                                                     Manzel.back_icon,
@@ -643,7 +643,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  SizedBox(width:16),
+                                                  SizedBox(width:20),
                                                   InkWell(
                                                     onTap: () async {
                                                       logFirebaseEvent(
@@ -807,8 +807,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       setState(() {});
                                                     },
                                                     child: Container(
-                                                      height: 35,
-                                                      width: 35,
+                                                      height: 40,
+                                                      width: 40,
                                                       decoration: BoxDecoration(
                                                           color: (fav[widget
                                                                       .propertyId
