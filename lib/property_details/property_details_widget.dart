@@ -2769,9 +2769,16 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                               ).toString()}
                                                        ${FFLocalizations.of(context).getText(
                                                                 'propertyAdd',
-                                                              )} : ${PropertyCall.propertyEntranceDirection(
+                                                              )} : ${PropertyCall
+                                                                  .propertyCity(
                                                                 columnPropertyResponse,
-                                                              ).toString()}
+                                                              ).toString()+', ${PropertyCall
+                                                                  .propertyDistrict(
+                                                                columnPropertyResponse,
+                                                              ).toString()}'+ ', ${PropertyCall
+                                                                  .propertyStreet(
+                                                                columnPropertyResponse,
+                                                              ).toString()}'}
                                                             ${FFLocalizations.of(context).getText(
                                                                 'propertyLink',
                                                               )} : ${await generateDynamicLink({
