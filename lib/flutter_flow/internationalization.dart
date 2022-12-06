@@ -74,8 +74,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بالنقر فوق متابعة ، فإنك توافق على',
     },
     '5t0jhzug': {
-      'en': 'terms & conditions',
-      'ar': 'الشروط و الأحكام',
+      'en': 'terms and conditions',
+      'ar': 'الأحكام والشروط',
     },
     '5ard5tmn': {
       'en': ' & ',

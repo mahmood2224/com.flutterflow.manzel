@@ -354,7 +354,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         },
                         child: Text(
                           FFLocalizations.of(context).getText(
-                            '5t0jhzug' /* terms & conditions */,
+                            '5t0jhzug' /* terms and conditions */,
                           ),
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
