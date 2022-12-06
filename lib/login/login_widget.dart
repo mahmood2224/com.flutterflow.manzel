@@ -236,11 +236,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   counterText: "",
-                                  hintText: "XXXXXXXXX",
-                                  prefixText:
-                                      FFLocalizations.of(context).getText(
-                                    'f4tpckti' /* +966 */,
-                                  ),
+                                  hintText: "05XXXXXXXX",
+                                  // prefixText:
+                                  //     FFLocalizations.of(context).getText(
+                                  //   'f4tpckti' /* +966 */,
+                                  // ),
                                   labelText:
                                       FFLocalizations.of(context).getText(
                                     '4m2r1iwr' /* Mobile Number */,
