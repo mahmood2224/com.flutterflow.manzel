@@ -242,7 +242,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
                       : widget.currentPropertyindex =
                       widget.currentPropertyindex)! -
                       widget.homeScreenLength!)
-                  ? Container()
+                  ? Container(height:0, width: 0,child: Text('error'),)
                   : Container(
                 constraints:
                 BoxConstraints(minWidth: 50, maxWidth: 50),

@@ -58,6 +58,10 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
 
   @BuiltValueField(wireName: 'firebase_device_token')
   String? get deviceToken ;
+
+  @BuiltValueField(wireName: 'updated_at')
+  DateTime? get updatedAt ;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -122,6 +126,7 @@ Map<String, dynamic> createUserRecordData({
   bool? sakaniLoanCoverage,
   DateTime? lastLogin,
   String? deviceToken,
+  DateTime? updateAt
 }) {
   final firestoreData = serializers.toFirestore(
     UserRecord.serializer,
@@ -145,7 +150,8 @@ Map<String, dynamic> createUserRecordData({
         ..isDeleted = isDeleted
         ..sakaniLoanCoverage = sakaniLoanCoverage
         ..lastLogin = lastLogin
-        ..deviceToken = deviceToken,
+        ..deviceToken = deviceToken
+        ..updatedAt = updateAt,
     ),
   );
 
