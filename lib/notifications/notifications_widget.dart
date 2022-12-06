@@ -29,7 +29,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
   bool isPageLoading = true;
   var notificationsUpdateData;
   List<int> notificationReadCount=[];
-  ValueNotifier<bool> showMarkButton = ValueNotifier(false);
 
   @override
   void initState() {
@@ -78,46 +77,38 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
           ),
         ),
         actions: [
-          ValueListenableBuilder(
-            valueListenable: showMarkButton,
-                builder: (context,bool value,child){
-              if(((isInternetAvailable ?? false)&&(value)))
-                  return InkWell(
-                    onTap: () async {
-                      notificationsListNotificationsRecordList
-                          ?.forEach((notification) async {
-                        await notification.reference
-                            .update(createNotificationsRecordData(
-                          isRead: 1,
-                        ));
-                      });
-                      showMarkButton.value=false;
-                    },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      child: value?Text(
-                        FFLocalizations.of(context).getText(
-                          'markAll' /* Mark All */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'AvenirArabic',
-                          color: FlutterFlowTheme.of(context).white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                          useGoogleFonts: false,
-                        ),
-                      ):Text('hello'),
-                    ),
-                  );
-              return SizedBox();
-                },
+          isInternetAvailable ?? false?InkWell(
+            onTap: () async {
+              notificationsListNotificationsRecordList
+                  ?.forEach((notification) async {
+                await notification.reference
+                    .update(createNotificationsRecordData(
+                  isRead: 1,
+                ));
+              });
+            },
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(7),
               ),
+              child: Text(
+                FFLocalizations.of(context).getText(
+                  'markAll' /* Mark All */,
+                ),
+                style: FlutterFlowTheme.of(context).bodyText1.override(
+                  fontFamily: 'AvenirArabic',
+                  color: FlutterFlowTheme.of(context).white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  useGoogleFonts: false,
+                ),
+              ),
+            ),
+          ):SizedBox(),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
             child: InkWell(
@@ -166,9 +157,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                           notificationsListNotificationsRecordList?.forEach((notification) {
                             notification.reference.get().then((res) {
                               int count= (res.data() as dynamic)['is_read'];
-                              if(notification.isRead==0){
-                                showMarkButton.value = true;
-                              }
                               notificationReadCount.add(count);
                               print('NotificationReadCount${notificationReadCount[0]}');
                               //(res.data() as dynamic)['is_read'];
