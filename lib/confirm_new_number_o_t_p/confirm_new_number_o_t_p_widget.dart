@@ -347,6 +347,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                                 context)
                                                             .languageCode,
                                                     lastLogin: loginDate,
+                                                    deviceToken:await FirebaseMessagingUtils
+                                                        .getPushNotificationToken() ,
                                                     isDeleted: 0);
                                             if (currentUserDocument!
                                                 .status!.isEmpty) {
@@ -358,42 +360,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                 'last_login': loginDate
                                               });
                                             }
-
-                                            final userNotificationRecord =
-                                                createUsersDeviceTokenRecordData(
-                                              deviceToken:
-                                                  await FirebaseMessagingUtils
-                                                      .getPushNotificationToken(),
-                                              userId: currentUserReference,
-                                            );
-                                            final QuerySnapshot result =
-                                                await UsersDeviceTokenRecord
-                                                    .collection
-                                                    .where('user_id',
-                                                        isEqualTo:
-                                                            currentUserReference)
-                                                    .limit(1)
-                                                    .get();
-
-                                            if (result.docs.isNotEmpty) {
-                                              await UsersDeviceTokenRecord
-                                                  .collection
-                                                  .doc(result.docs[0].id)
-                                                  .update(
-                                                      userNotificationRecord);
-                                            } else {
-                                              await UsersDeviceTokenRecord
-                                                  .collection
-                                                  .doc()
-                                                  .set(userNotificationRecord);
-                                            }
-
-                                            // if (FirebaseAuth.instance.currentUser != null) {
-                                            // final user = FirebaseAuth.instance.currentUser;
-                                            // final idTokenResult = await user!.getIdTokenResult(true);
-                                            // final token = idTokenResult.token;
-                                            //
-                                            // print( "********************* Resend auth token wala code${token}");}
 
                                             await currentUserReference
                                                 ?.update(userUpdateData);

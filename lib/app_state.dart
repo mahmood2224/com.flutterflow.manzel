@@ -31,7 +31,7 @@ class FFAppState {
 
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
-    _isInitailLaunch =  prefs.getBool('ff_isInitailLaunch') ?? _isInitailLaunch;
+    _isInitailLaunch =  await prefs.getBool('ff_isInitailLaunch') ?? _isInitailLaunch;
     _locale = await prefs.getString('ff_locale') ?? _locale;
     _authToken = prefs.getString('ff_authToken') ?? _authToken;
     _apiVersion = prefs.getString('ff__apiVersion') ?? _apiVersion;

@@ -41,7 +41,7 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
     // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    runApp(MyApp());
+  //  runApp(MyApp());
   }, (error, stackTrace) {
    // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
@@ -58,7 +58,7 @@ void main() async {
   );
   // FirebaseCloudMessaging().init();
 
-  FFAppState(); // Initialize FFAppState
+  FFAppState().initializePersistedState(); // Initialize FFAppState
   //versionCheck();
   runApp(MyApp());
 }
