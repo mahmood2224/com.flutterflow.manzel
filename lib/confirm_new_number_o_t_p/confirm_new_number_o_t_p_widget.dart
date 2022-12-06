@@ -68,35 +68,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
       veriKey = OtpCalls.generateKey(generateOtpResponse.jsonBody);
       setState(() {});
     }
-    // await resendOtpFromFirebse(
-    //   isFromUpdate: isFromUpdate,
-    //   context: context,
-    //   phoneNumber: widget.phoneNumber!,
-    //   onCodeSent: () async {
-    //     print('Otp sent sucessfullly');
-    //   },
-    // );
-    // await FirebaseAuth.instance.verifyPhoneNumber(
-    //   phoneNumber: '+918901523415',
-    //   timeout: Duration(seconds: 40),
-    //   verificationCompleted: (phoneAuthCredential) async {
-    //     if (isFromUpdate ?? false) {
-    //       await FirebaseAuth.instance.currentUser!
-    //           .updatePhoneNumber(phoneAuthCredential);
-    //     } else {
-    //       await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
-    //     }
-    //   },
-    //   verificationFailed: (e) {
-    //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //       content: Text('Error: ${e.message}'),
-    //     ));
-    //   },
-    //   codeSent: (verificationId, _) {
-    //     _phoneAuthVerificationCode = verificationId;
-    //   },
-    //   codeAutoRetrievalTimeout: (_) {},
-    // );
     if (_otpResendTimes > 0) {
       _showResendOtp.value = false;
       _otpResendTimes--;
@@ -327,9 +298,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                       }
                                       if (userCredential != null) {
                                         final user = userCredential.user;
-                                        var record =
-                                            await maybeCreateUser(user);
-                                        print(record);
+                                        var record = await maybeCreateUser(user);
                                         Future.delayed(
                                             const Duration(milliseconds: 200),
                                             () async {
@@ -361,8 +330,41 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                               });
                                             }
 
-                                            await currentUserReference
-                                                ?.update(userUpdateData);
+                                                final userNotificationRecord =
+                                                createUsersDeviceTokenRecordData(
+                                                  deviceToken:
+                                                  await FirebaseMessagingUtils
+                                                      .getPushNotificationToken(),
+                                                  userId: currentUserReference,
+                                                );
+                                                final QuerySnapshot result =
+                                                await UsersDeviceTokenRecord
+                                                    .collection
+                                                    .where('user_id',
+                                                    isEqualTo:
+                                                    currentUserReference)
+                                                    .limit(1)
+                                                    .get();
+
+                                                if (result.docs.isNotEmpty) {
+                                                  await UsersDeviceTokenRecord.collection
+                                                      .doc(result.docs[0].id)
+                                                      .update(userNotificationRecord);
+                                                } else {
+                                                  await UsersDeviceTokenRecord.collection
+                                                      .doc()
+                                                      .set(userNotificationRecord);
+                                                }
+                                                if (FirebaseAuth.instance.currentUser !=
+                                                    null) {
+                                                  final user = await FirebaseAuth
+                                                      .instance.currentUser;
+                                                  final idToken =
+                                                  await user?.getIdToken();
+                                                  FFAppState().authToken = idToken!;
+                                                } else {
+
+                                            }
 
                                             if (currentUserDisplayName
                                                     .isEmpty &&
@@ -448,7 +450,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                           }
                                         });
                                       }
-                                      print(userCredential);
                                       context.goNamedAuth(
                                           'HomeScreen', mounted);
                                     } on FirebaseAuthException catch (e) {
@@ -476,23 +477,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                         "You entered OTP incorrect";
                                     return;
                                   }
-                                  // if (phoneVerifiedUser == null) {
-                                  //   _showOtpError.value =
-                                  //       "You entered OTP incorrect";
-                                  //   return;
-                                  // }
+
 
                                 }
-
-                                // FirebaseFirestore.instance
-                                //     .collection('User')
-                                //     .doc()
-                                //     .get()
-                                //     .then((DocumentSnapshot documentSnapshot) {
-                                //   if (documentSnapshot.exists) {
-                                //     print('Document exists on the database');
-                                //   }
-                                // });
                               },
                               autofocus: true,
                               length: 6,
@@ -573,18 +560,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     onComplete: (VoidCallback restart) {
                                       _showResendOtp.value = true;
                                     }),
-                                // child: RichText(
-                                //   text: TextSpan(
-                                //     recognizer: TapGestureRecognizer()
-                                //       ..onTap = resendOTP,
-                                //     text: 'Resend Otp',
-                                //     style: TextStyle(
-                                //         decoration: TextDecoration.underline,
-                                //         fontFamily: 'Sofia Pro By Khuzaimah',
-                                //         fontSize: 16,
-                                //         fontWeight: FontWeight.w700),
-                                //   ),
-                                // ),
                                 child: GestureDetector(
                                   onTap: resendOTP,
                                   child: Text(

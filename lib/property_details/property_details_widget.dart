@@ -2723,27 +2723,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                     ),
                                                               ),
                                                             ),
-                                                            // Text(
-                                                            //   FFLocalizations.of(
-                                                            //           context)
-                                                            //       .getText(
-                                                            //     've2ud2ws' /*  SAR */,
-                                                            //   ),
-                                                            //   style:
-                                                            //       FlutterFlowTheme.of(
-                                                            //               context)
-                                                            //           .bodyText1
-                                                            //           .override(
-                                                            //             fontFamily:
-                                                            //                 'AvenirArabic',
-                                                            //             fontSize: 16,
-                                                            //             fontWeight:
-                                                            //                 FontWeight
-                                                            //                     .bold,
-                                                            //             useGoogleFonts:
-                                                            //                 false,
-                                                            //           ),
-                                                            // ),
                                                           ],
                                                         ),
                                                       ],
@@ -2773,8 +2752,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                 columnPropertyResponse,
                                                                 r'''$.attributes.managed_by.data.attributes.Company_phone''',
                                                               );
-                                                              print(
-                                                                  ">>>>>>>>>>>>>>>>>>>>>>phone number = ${phoneNumber}");
                                                               final message = '''
                                                         ${FFLocalizations.of(context).getText(
                                                                 'opening',
@@ -4060,21 +4037,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                       ),
                     ],
                   );
-            // :SafeArea(
-            //         child: FlutterFlowIconButton(
-            //           borderColor: Colors.transparent,
-            //           borderRadius: 30,
-            //           buttonSize: 48,
-            //           icon: Icon(
-            //             Manzel.clear,
-            //             color: FlutterFlowTheme.of(context).secondaryText,
-            //             size: 15,
-            //           ),
-            //           onPressed: () async {
-            //             Navigator.pop(context);
-            //           },
-            //         ),
-            //       );
           },
           valueListenable: isLoading,
         ),

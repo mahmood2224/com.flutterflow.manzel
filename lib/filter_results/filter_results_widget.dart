@@ -507,15 +507,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                           otherPlayer
                                                                               .pause();
                                                                         } else {
-
-                                                                          // int indexOfOtherPlayer =
-                                                                          //     videoPlayers.indexOf(otherPlayer);
-                                                                          // if (((currentPropertyindex + 1) <= (videoPlayers.length)) &&
-                                                                          //     (indexOfOtherPlayer == (currentPropertyindex + 1))) {
-                                                                          //   if (!(videoPlayers[currentPropertyindex + 1].value.isInitialized)) {
-                                                                          //     videoPlayers[currentPropertyindex + 1].initialize();
-                                                                          //   }
-                                                                          // }
                                                                         }
                                                                       }
                                                                     });
@@ -543,27 +534,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                     .play();
                                                                 isPaused =
                                                                     false;
-
-                                                                // currentPropertyindex =
-                                                                //     widget.homeScreenLength! +
-                                                                //         propertiesIndex;
-                                                                //
-                                                                // if ((currentPropertyindex +
-                                                                //         1) <=
-                                                                //     (videoPlayers
-                                                                //         .length)) {
-                                                                //   if (!videoPlayers[
-                                                                //           currentPropertyindex +
-                                                                //               1]
-                                                                //       .value
-                                                                //       .isInitialized) {
-                                                                //     videoPlayers[
-                                                                //             currentPropertyindex +
-                                                                //                 1]
-                                                                //         .initialize();
-                                                                //   }
-                                                                // }
-
                                                               setState(() {
                                                                 videoPlayers.forEach(
                                                                         (otherPlayer) {
@@ -584,34 +554,10 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                           }
                                                           //autoplayVal = false;
                                                         }
-                                                        //onVisibilityChanged: (visibilityInfo) {
-                                                        // var visiblePercentage =
-                                                        //     visibilityInfo.visibleFraction *
-                                                        //         100;
-                                                        // debugPrint(
-                                                        //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
+
                                                       },
                                                       child:
                                                           FlutterFlowVideoPlayer(
-                                                        // videoControllerSet =
-                                                        //     videoControllerValue;
-                                                        //
-                                                        // print(
-                                                        //     "videoControllerSet : ${videoControllerSet}");
-                                                        // print(
-                                                        //     "videoControllerSet_items : ${videoControllerSet?.length}");
-                                                        // //print("videoControllerSet.last :  ${videoControllerSet.last}");
-                                                        // //print("propertiesIndex : ${propertiesIndex.toString()}");
-                                                        // //print("videocontrollerMap : ${videocontrollerMap.length}");
-                                                        // videocontrollerMap[propertiesIndex
-                                                        //         .toString()] =
-                                                        //     videoControllerSet!.last;
-                                                        // print(
-                                                        //     "videocontrollerMap : ${videocontrollerMap.length}");
-                                                        // _currentController =
-                                                        //     videocontrollerMap['0'];
-                                                        //
-
                                                         path: getJsonField(
                                                           propertiesItem,
                                                           r'''$.attributes.video_manifest_uri''',
@@ -645,94 +591,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                 ),
                                               ),
                                             ),
-                                            // Align(
-                                            //   alignment:
-                                                  //       AlignmentDirectional(0, 0),
-                                            //   child: InkWell(
-                                            //     onTap: () {
-                                            //       isPaused = isPaused ? false : true;
-                                            //       isPaused
-                                            //           ? videoPlayers[widget.homeScreenLength! + propertiesIndex].pause()
-                                            //           : videoPlayers[widget.homeScreenLength! + propertiesIndex].play();
-                                            //       setState(() {});
-                                            //     },
-                                            //     child: Container(
-                                            //       width: MediaQuery.of(context)
-                                            //           .size
-                                            //           .width,
-                                            //       height:MediaQuery.of(context)
-                                                      //               .size
-                                            //               .height *
-                                            //           0.3,
-                                            //       // color: Colors.transparent,
-                                            //       // child: ValueListenableBuilder(
-                                            //       //   builder: (BuildContext context,
-                                            //       //       bool value, Widget? child) {
-                                            //       //     return
-                                            //       child: Center(
-                                            //         child: Container(
-                                            //           constraints:
-                                                  //               BoxConstraints(
-                                            //                   minWidth: 50,
-                                            //                   maxWidth: 50),
-                                            //           decoration: BoxDecoration(
-                                            //             color: isPaused
-                                            //                 ? Colors.black
-                                                  //                     .withOpacity(
-                                            //                         0.5)
-                                            //                 : Colors.black
-                                                  //                     .withOpacity(
-                                            //                         0.0),
-                                            //             shape: BoxShape.circle,
-                                            //           ),
-                                            //           child: Icon(
-                                            //             isPaused
-                                            //                 ? Icons
-                                                  //                     .play_arrow_rounded
-                                            //                 : Icons.pause,
-                                            //             color: isPaused
-                                            //                 ? Colors.white
-                                                  //                     .withOpacity(
-                                            //                         1.0)
-                                            //                 : Colors.white
-                                                  //                     .withOpacity(
-                                            //                         0.0),
-                                            //             size: 40,
-                                            //           ),
-                                            //           // );
-                                            //           //},
-                                            //           //valueListenable: isPaused,
-                                            //         ),
-                                            //       ),
-                                            //     ),
-                                            //   ),
-                                            // ),
-                                            //if() dummy code remove later
-                                            // Align(
-                                            //   alignment:
-                                                  //       AlignmentDirectional(0, 0),
-                                            //   child: (propertiesIndex) ==
-                                                  //           ((currentPropertyindex) == 0 ? currentPropertyindex = widget.homeScreenLength! : currentPropertyindex = currentPropertyindex) - widget.homeScreenLength!
-                                            //       ? Container()
-                                            //       : Container(
-                                                    //           constraints:
-                                            //               BoxConstraints(
-                                            //                   minWidth: 50,
-                                            //                   maxWidth: 50),
-                                            //           decoration: BoxDecoration(
-                                            //             color: Colors.black
-                                            //                 .withOpacity(1.0),
-                                            //             shape: BoxShape.circle,
-                                            //           ),
-                                            //           child: Icon(
-                                            //             Icons
-                                            //                 .play_arrow_rounded,
-                                            //             color: Colors.white
-                                            //                 .withOpacity(1.0),
-                                            //             size: 40,
-                                            //           ),
-                                            //         ),
-                                            // ),
                                             Align(
                                               alignment: AlignmentDirectional(
                                                   0.9, 0.8),
@@ -786,28 +644,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                           .setVolume(100);
                                                       isMuted.value = false;
                                                     }
-                                                    //   setState(() {
 
-                                                    //     Future.delayed(
-                                                    //             Duration(seconds: 3))
-                                                    //         .then((value) {
-                                                    //       isMutedIcon.value = false;
-                                                    //       setState(() {});
-                                                    //     });
-                                                    //   });
-                                                    // } else {
-                                                    //   videoPlayers[propertiesIndex]
-                                                    //       ?.setVolume(100);
-                                                    //   setState(() {
-                                                    //     isMuted = false;
-                                                    //     Future.delayed(
-                                                    //             Duration(seconds: 3))
-                                                    //         .then((value) {
-                                                    //       isMutedIcon.value = false;
-                                                    //       setState(() {});
-                                                    //     });
-                                                    //   });
-                                                    // }
                                                   }
                                                 },
                                               ),
