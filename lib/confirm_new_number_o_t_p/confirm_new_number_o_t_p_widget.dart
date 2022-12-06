@@ -448,7 +448,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                           }
                                         });
                                       }
-                                      print(userCredential);
                                       context.goNamedAuth(
                                           'HomeScreen', mounted);
                                     } on FirebaseAuthException catch (e) {
@@ -476,23 +475,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                         "You entered OTP incorrect";
                                     return;
                                   }
-                                  // if (phoneVerifiedUser == null) {
-                                  //   _showOtpError.value =
-                                  //       "You entered OTP incorrect";
-                                  //   return;
-                                  // }
+
 
                                 }
-
-                                // FirebaseFirestore.instance
-                                //     .collection('User')
-                                //     .doc()
-                                //     .get()
-                                //     .then((DocumentSnapshot documentSnapshot) {
-                                //   if (documentSnapshot.exists) {
-                                //     print('Document exists on the database');
-                                //   }
-                                // });
                               },
                               autofocus: true,
                               length: 6,
@@ -573,18 +558,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     onComplete: (VoidCallback restart) {
                                       _showResendOtp.value = true;
                                     }),
-                                // child: RichText(
-                                //   text: TextSpan(
-                                //     recognizer: TapGestureRecognizer()
-                                //       ..onTap = resendOTP,
-                                //     text: 'Resend Otp',
-                                //     style: TextStyle(
-                                //         decoration: TextDecoration.underline,
-                                //         fontFamily: 'Sofia Pro By Khuzaimah',
-                                //         fontSize: 16,
-                                //         fontWeight: FontWeight.w700),
-                                //   ),
-                                // ),
                                 child: GestureDetector(
                                   onTap: resendOTP,
                                   child: Text(
