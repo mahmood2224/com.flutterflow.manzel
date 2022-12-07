@@ -208,10 +208,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                             textDirection: material.TextDirection.ltr,
                             child: Pinput(
                               onCompleted: (String otp) async {
-                                // print(otp);
-                                // if (otp.length == 6) {
-                                //   _showOtpError.value = "Working";
-                                // }
                                 entry = showOverlay(context);
                                 if (isFromUpdate ?? false) {
                                   ApiCallResponse verifyOtpResponse =
@@ -220,57 +216,18 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                           otp: otp,
                                           key: veriKey ?? '');
                                   if ((verifyOtpResponse.statusCode == 200)) {
-                                    // String tokenFromOtpSuccess =
-                                    //     OtpCalls.tokenFromOtp(
-                                    //         verifyOtpResponse.jsonBody);
-                                    // try {
-                                    //   userCredential = await FirebaseAuth
-                                    //       .instance
-                                    //       .signInWithCustomToken(
-                                    //           tokenFromOtpSuccess);
-                                    //   final user = await FirebaseAuth
-                                    //       .instance.currentUser;
-                                    //   final idToken = await user?.getIdToken();
-                                    //   FFAppState().authToken = idToken!;
-                                    //   print(idToken);
-                                    //   print("Sign-in successful.");
-                                    //   print(userCredential);
-                                    // } on FirebaseAuthException catch (e) {
-                                    //   switch (e.code) {
-                                    //     case "invalid-custom-token":
-                                    //       print(
-                                    //           "The supplied token is not a Firebase custom auth token.");
-                                    //       break;
-                                    //     case "custom-token-mismatch":
-                                    //       print(
-                                    //           "The supplied token is for a different Firebase project.");
-                                    //       break;
-                                    //     default:
-                                    //       print("Unkown error.");
-                                    //   }
-                                    // }
                                   } else if (verifyOtpResponse.statusCode ==
                                       403) {
                                     unAuthorizedUser(context,mounted);
                                   }
-                                  // final phoneVerifiedUser = await verifySmsCode(
-                                  //   isFromUpdate: true,
-                                  //   context: context,
-                                  //   smsCode: otp,
-                                  // );
                                   entry?.remove();
                                   context.pop();
                                 } else {
-                                  // final phoneVerifiedUser = await verifySmsCode(
-                                  //   context: context,
-                                  //   smsCode: otp,
-                                  // );
                                   ApiCallResponse verifyOtpResponse =
                                       await OtpCalls.verifyOtp(
                                           phoneNumber: widget.phoneNumber ?? '',
                                           otp: otp,
                                           key: veriKey ?? '');
-                                  //String otpStatus = OtpCalls.verifyOtpStatus(verifyOtpResponse.jsonBody);
                                   if ((verifyOtpResponse.statusCode == 200)) {
                                     String tokenFromOtpSuccess =
                                         OtpCalls.tokenFromOtp(
@@ -289,8 +246,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                             .instance.currentUser;
                                         final idToken =
                                         await user?.getIdToken();
-                                        print(
-                                            "************* token Id ${idToken}");
                                         FFAppState().authToken = idToken!;
                                       } else {
                                         print(
@@ -381,37 +336,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                               context.goNamedAuth(
                                                   'HomeScreen', mounted);
                                             }
-                                            //  else {
-                                            //   await showDialog(
-                                            //     context: context,
-                                            //     builder: (alertDialogContext) {
-                                            //       return AlertDialog(
-                                            //         title: Text(FFLocalizations.of(context).getText(
-                                            //           'OTPDeactivated' ,
-                                            //         )),
-                                            //         content: Text(FFLocalizations.of(context).getText(
-                                            //           'OTPDeactivatedText' ,
-                                            //         )),
-                                            //         actions: [
-                                            //           TextButton(
-                                            //             onPressed: () async{
-                                            //               await signOut();
-                                            //               Navigator.pop(alertDialogContext);
-                                            //               context.pop();
-                                            //             },
-                                            //             child: Text(FFLocalizations.of(context).getText(
-                                            //               'OTPOk' ,
-                                            //             )),
-                                            //           ),
-                                            //         ],
-                                            //       );
-                                            //       },
-                                            //   );
-                                            // }
                                           } else {
-                                            // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                            //   content: Text('Your account is not active. Kindly connect to support for more information.'),
-                                            // ));
                                             await showDialog(
                                               context: context,
                                               builder: (alertDialogContext) {
