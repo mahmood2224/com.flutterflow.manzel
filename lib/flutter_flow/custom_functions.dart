@@ -1585,4 +1585,17 @@ CurrentRemainingTime milliSecondsToDay(value){
   return CurrentRemainingTime(days: days.toString().padLeft(2, '0'),hours: hours.toString().padLeft(2, '0'),minutes:minutes.toString().padLeft(2, '0'),seconds: remainingSeconds.toString().padLeft(2, '0'));
 }
 
+bool validateMobileNumber(String text)  {
+  final RegExp _saudiArabiaMobileRegex = RegExp(r'^(05|5)[0-9]{8}$');
+  if (text == null || text == '') {
+    return false;
+  } else {
+    if (_saudiArabiaMobileRegex.hasMatch(text)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
 

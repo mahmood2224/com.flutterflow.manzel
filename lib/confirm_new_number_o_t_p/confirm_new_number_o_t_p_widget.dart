@@ -51,6 +51,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   var idToken;
   String? veriKey;
 
+
   void resendOTP() async {
     if (isFromUpdate ?? false) {
       String newPhoneNumber = widget.phoneNumber ?? '';

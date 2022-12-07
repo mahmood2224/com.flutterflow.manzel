@@ -515,6 +515,20 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     else if((generateOtpResponse.statusCode == 403)){
                                       unAuthorizedUser(context,mounted);
                                     }
+                                    else{
+                                      isLoading.value = false;
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Something Went Wrong',
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle1,
+                                          ),
+                                          duration: Duration(milliseconds: 4000),
+                                          backgroundColor: FlutterFlowTheme.of(context).primaryRed,
+                                        ),
+                                      );
+                                    }
 
                                   } else {
                                     showDialog(
@@ -668,15 +682,3 @@ class _LoginWidgetState extends State<LoginWidget> {
   }
 }
 
-bool validateMobileNumber(String text)  {
-  final RegExp _saudiArabiaMobileRegex = RegExp(r'^(05|5)[0-9]{8}$');
-  if (text == null || text == '') {
-    return false;
-  } else {
-    if (_saudiArabiaMobileRegex.hasMatch(text)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-}

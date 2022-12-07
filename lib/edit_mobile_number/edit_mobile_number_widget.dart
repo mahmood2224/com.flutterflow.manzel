@@ -31,6 +31,9 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool? isInternetAvailable;
+  FocusNode contactNoFocusNode = FocusNode();
+  bool isPhoneNumberValid=true;
+  bool isButtonTappable=false;
 
   @override
   void initState() {
@@ -38,6 +41,12 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'EditMobileNumber'});
     mobileNumberController = TextEditingController();
+    contactNoFocusNode.addListener(() {
+      if(!contactNoFocusNode.hasFocus){
+        isPhoneNumberValid= validateMobileNumber(mobileNumberController!.text);
+        setState((){});
+      }
+    });
   }
 
   @override
@@ -143,26 +152,31 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                           child: Directionality(
                             textDirection: material.TextDirection.ltr,
                             child: TextFormField(
-                              maxLength: 9,
+                              maxLength: 10,
                               //buildCounter: Container(),
                               controller: mobileNumberController,
-                              onChanged: (_) => EasyDebounce.debounce(
-                                'phoneNumberController',
-                                Duration(milliseconds: 2000),
-                                () => setState(() {}),
-                              ),
+                              onChanged:(val){
+                                isButtonTappable = validateMobileNumber(mobileNumberController!.text);
+                                EasyDebounce.debounce(
+                                  'phoneNumberController',
+                                  Duration(milliseconds: 2000),
+                                      () => setState(() {}),
+                                );
+                                setState((){});
+                              },
                               autofocus: true,
+                              focusNode: contactNoFocusNode,
                               inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
+                               // FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                                LengthLimitingTextInputFormatter(10),
                               ],
                               obscureText: false,
                               decoration: InputDecoration(
                                 counterText: "",
-                                hintText: "XXXXXXXXXX",
-                                prefixText: FFLocalizations.of(context).getText(
-                                  'dkoyvgce' /* +966 */,
-                                ),
+                                hintText: "05XXXXXXXX",
+                                // prefixText: FFLocalizations.of(context).getText(
+                                //   'dkoyvgce' /* +966 */,
+                                // ),
                                 labelText: FFLocalizations.of(context).getText(
                                   'por97wlv' /* Mobile Number */,
                                 ),
@@ -225,6 +239,29 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                   ),
                 ),
               ),
+              Directionality(
+                textDirection: material.TextDirection.ltr,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    if (!isPhoneNumberValid)
+                      Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
+                          child: Text(
+                            FFLocalizations.of(context).getText(
+                              'enterValidPhone' /* Please enter a valid Phone num... */,
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              color: Colors.red,
+                              fontWeight: FontWeight.w300,
+                              useGoogleFonts: false,
+                            ),
+                          )
+                      ),
+                  ],
+                ),
+              ),
               Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -238,118 +275,133 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                         height: 56,
                         child: ElevatedButton(
                           onPressed: () async {
-                            isInternetAvailable = await isInternetConnected();
-                            setState(() {});
-                            logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
-                            if (functions.checkPhoneNumberFormat(
-                                mobileNumberController!.text)) {
-                              // sendOTP
-                              logFirebaseEvent('sendOTP_sendOTP');
-                              final phoneNumberVal =
-                                  functions.getFormattedMobileNumber(
+                            if(isButtonTappable){
+                              isInternetAvailable = await isInternetConnected();
+                              setState(() {});
+                              logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
+                              if (functions.checkPhoneNumberFormat(
+                                  mobileNumberController!.text)) {
+                                // sendOTP
+                                logFirebaseEvent('sendOTP_sendOTP');
+                                // final phoneNumberVal =
+                                // functions.getFormattedMobileNumber(
+                                //     mobileNumberController!.text);
+                                // if (phoneNumberVal == null ||
+                                //     phoneNumberVal.isEmpty ||
+                                //     !phoneNumberVal.startsWith('+')) {
+                                //   isLoading.value = false;
+                                //   ScaffoldMessenger.of(context).showSnackBar(
+                                //     SnackBar(
+                                //       content: Text(
+                                //           'Phone Number is required and has to start with +.'),
+                                //     ),
+                                //   );
+                                //
+                                //   return;
+                                // }
+                                //entry = showOverlay(context);
+                                ApiCallResponse updatePhoneResponse = await OtpCalls.updatePhone(newPhoneNumber: mobileNumberController!.text);
+                                if((OtpCalls.generateSuccess(updatePhoneResponse.jsonBody))=='success') {
+                                  String verificationKey = OtpCalls.generateKey(updatePhoneResponse.jsonBody);
+                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': mobileNumberController!.text,'verificationKey':verificationKey,'isFromUpdate': 'true'});
+                                }
+
+                                //generate  OYp call
+                                // await beginPhoneAuth(
+                                //   isFromUpdate: true,
+                                //   context: context,
+                                //   phoneNumber: phoneNumberVal,
+                                //   onCodeSent: () async {
+                                //     //    entry.remove();
+                                //     isLoading.value = false;
+                                //     context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': phoneNumberVal,'isFromUpdate': 'true' });
+                                //   },
+                                // );
+                                if (isInternetAvailable ?? false) {
+                                  isLoading.value = true;
+                                  ApiCallResponse updatePhoneResponse =
+                                  await OtpCalls.updatePhone(
+                                      newPhoneNumber:
                                       mobileNumberController!.text);
-                              if (phoneNumberVal == null ||
-                                  phoneNumberVal.isEmpty ||
-                                  !phoneNumberVal.startsWith('+')) {
+                                  if ((OtpCalls.generateSuccess(
+                                      updatePhoneResponse.jsonBody)) ==
+                                      'success') {
+                                    String verificationKey = OtpCalls.generateKey(
+                                        updatePhoneResponse.jsonBody);
+                                    context.goNamedAuth(
+                                        'ConfirmNewNumberOTP', mounted,
+                                        queryParams: {
+                                          'phoneNumber':
+                                          mobileNumberController!.text,
+                                          'verificationKey': verificationKey,
+                                          'isFromUpdate': 'true'
+                                        });
+                                  } else if (updatePhoneResponse.statusCode ==
+                                      403) {
+                                    functions.unAuthorizedUser(context, mounted);
+                                  }
+                                  else {
+                                    String errorMessage = OtpCalls.phoneNumberError(updatePhoneResponse.jsonBody);
+                                    isLoading.value=false;
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(errorMessage,
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context).white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            height: 2,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  isLoading.value = false;
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        CommonAlertDialog(
+                                          onCancel: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                  );
+                                }
+                              } else {
+                                // Invalid_phone_number_action
+                                logFirebaseEvent(
+                                    'sendOTP_Invalid_phone_number_action');
                                 isLoading.value = false;
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                        'Phone Number is required and has to start with +.'),
-                                  ),
-                                );
-
-                                return;
-                              }
-                              //entry = showOverlay(context);
-                              ApiCallResponse updatePhoneResponse = await OtpCalls.updatePhone(newPhoneNumber: mobileNumberController!.text);
-                              if((OtpCalls.generateSuccess(updatePhoneResponse.jsonBody))=='success') {
-                                String verificationKey = OtpCalls.generateKey(updatePhoneResponse.jsonBody);
-                                context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': mobileNumberController!.text,'verificationKey':verificationKey,'isFromUpdate': 'true'});
-                              }
-
-                              //generate  OYp call
-                              // await beginPhoneAuth(
-                              //   isFromUpdate: true,
-                              //   context: context,
-                              //   phoneNumber: phoneNumberVal,
-                              //   onCodeSent: () async {
-                              //     //    entry.remove();
-                              //     isLoading.value = false;
-                              //     context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': phoneNumberVal,'isFromUpdate': 'true' });
-                              //   },
-                              // );
-                              if (isInternetAvailable ?? false) {
-                                isLoading.value = true;
-                                ApiCallResponse updatePhoneResponse =
-                                    await OtpCalls.updatePhone(
-                                        newPhoneNumber:
-                                            mobileNumberController!.text);
-                                if ((OtpCalls.generateSuccess(
-                                        updatePhoneResponse.jsonBody)) ==
-                                    'success') {
-                                  String verificationKey = OtpCalls.generateKey(
-                                      updatePhoneResponse.jsonBody);
-                                  context.goNamedAuth(
-                                      'ConfirmNewNumberOTP', mounted,
-                                      queryParams: {
-                                        'phoneNumber':
-                                            mobileNumberController!.text,
-                                        'verificationKey': verificationKey,
-                                        'isFromUpdate': 'true'
-                                      });
-                                } else if (updatePhoneResponse.statusCode ==
-                                    403) {
-                                  functions.unAuthorizedUser(context, mounted);
-                                }
-                                else {
-                                  String errorMessage = OtpCalls.phoneNumberError(updatePhoneResponse.jsonBody);
-                                  isLoading.value=false;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(errorMessage,
-                                        style: TextStyle(
-                                          color: FlutterFlowTheme.of(context).white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                          height: 2,
-                                        ),
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                      'The phone number format should be +966123456789',
+                                      style:
+                                      FlutterFlowTheme.of(context).subtitle1,
                                     ),
-                                  );
-                                }
-                              } else {
-                                isLoading.value = false;
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      CommonAlertDialog(
-                                    onCancel: () {
-                                      Navigator.pop(context);
-                                    },
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                    FlutterFlowTheme.of(context).primaryRed,
                                   ),
                                 );
                               }
-                            } else {
-                              // Invalid_phone_number_action
-                              logFirebaseEvent(
-                                  'sendOTP_Invalid_phone_number_action');
-                              isLoading.value = false;
+                            }else{
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'The phone number format should be +966123456789',
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                    'The phone number format should be 05XXXXXXXX',
+                                    style: FlutterFlowTheme.of(context)
+                                        .subtitle1,
                                   ),
                                   duration: Duration(milliseconds: 4000),
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).primaryRed,
+                                  backgroundColor: Color(0xFF777777),
                                 ),
                               );
                             }
+
                           },
                           child: ValueListenableBuilder<bool>(
                             builder: (BuildContext context, bool value,
@@ -415,11 +467,11 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 MaterialStateProperty.resolveWith<Color?>(
                               (states) {
                                 if (states.contains(MaterialState.disabled)) {
-                                  return FlutterFlowTheme.of(context)
-                                      .primaryColor;
+                                  return isButtonTappable?FlutterFlowTheme.of(context)
+                                      .primaryColor:Color(0xFF8C8C8C);
                                 }
-                                return FlutterFlowTheme.of(context)
-                                    .primaryColor;
+                                return isButtonTappable?FlutterFlowTheme.of(context)
+                                    .primaryColor:Color(0xFF8C8C8C);
                               },
                             ),
                             shape: MaterialStateProperty.all<OutlinedBorder>(
