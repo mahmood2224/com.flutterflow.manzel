@@ -231,7 +231,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 autofocus: true,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]'))
+                                 // RegExp(r'^(05|5)[0-9]{8}$'))
+                                     RegExp(r'[0-9]'))
                                 ],
                                 obscureText: false,
                                 decoration: InputDecoration(

@@ -385,10 +385,9 @@ class _OffersWidgetState extends State<OffersWidget> {
                           ),
                         ),
                       );
-                    }else if (getOfferResponse?.statusCode == 403) {
-                      unAuthorizedUser(context,mounted);
-                    }
-                    else if (getOfferResponse?.statusCode != 200 &&
+                    } else if (getOfferResponse?.statusCode == 403) {
+                      unAuthorizedUser(context, mounted);
+                    } else if (getOfferResponse?.statusCode != 200 &&
                         getOfferResponse?.statusCode != null) {
                       return SomethingWentWrongWidget(onTryAgain: () {
                         getOffersCall();
@@ -1189,78 +1188,178 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                     Container(
                                                                   width: double
                                                                       .infinity,
-                                                                  height: 30,
+                                                                   height: 46,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     color: Color(
                                                                         0xFFFADA6B),
                                                                   ),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'y42wn8bh' /* You have  */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'AvenirArabic',
-                                                                              fontSize: 12,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: false,
-                                                                            ),
-                                                                      ),
+                                                                  child:
                                                                       ValueListenableBuilder(
-                                                                        valueListenable:
-                                                                            timerMap[activeOffersIndex] ??
-                                                                                ValueNotifier(true),
-                                                                        builder: (BuildContext
-                                                                                context,
-                                                                            value,
-                                                                            child) {
-                                                                          CurrentRemainingTime time = milliSecondsToDay(value);
-                                                                          return Container(
-                                                                              child:Text(' ${time.days} days : ${time.hours} hrs : ${time.minutes} min : ${time.seconds} sec',
-                                                                                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                                        fontFamily: 'AvenirArabic',
-                                                                                        color: FlutterFlowTheme.of(context).primaryText,
-                                                                                        fontSize: 12,
-                                                                                        fontWeight: FontWeight.bold,
-                                                                                        useGoogleFonts: false,
-                                                                                      )));
-                                                                        },
-
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: const EdgeInsets.only(
-                                                                            right:
-                                                                                4.0,
-                                                                            left:
-                                                                                4.0),
-                                                                        child:
-                                                                            Text(
-                                                                          FFLocalizations.of(context)
-                                                                              .getText(
-                                                                            'f82o9diq' /* to accept offer */,
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyText1
-                                                                              .override(
-                                                                                fontFamily: 'AvenirArabic',
-                                                                                fontSize: 12,
-                                                                                fontWeight: FontWeight.bold,
-                                                                                useGoogleFonts: false,
+                                                                    valueListenable: timerMap[
+                                                                            activeOffersIndex] ??
+                                                                        ValueNotifier(
+                                                                            true),
+                                                                    builder: (BuildContext
+                                                                            context,
+                                                                        value,
+                                                                        child) {
+                                                                      CurrentRemainingTime
+                                                                          time =
+                                                                          milliSecondsToDay(
+                                                                              value);
+                                                                      return Column(
+                                                                        //mainAxisAlignment: MainAxisAlignment.center,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.center,
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: [
+                                                                          Row(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            children: [
+                                                                              Column(
+                                                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                children: [
+                                                                                  Text('${time.days}',
+                                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: 'AvenirArabic',
+                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                            fontSize: 18,
+                                                                                            fontWeight: FontWeight.bold,
+                                                                                            useGoogleFonts: false,
+                                                                                          )),
+                                                                                  Text('DAYS',
+                                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: 'AvenirArabic',
+                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                            fontSize: 8,
+                                                                                            fontWeight: FontWeight.bold,
+                                                                                            useGoogleFonts: false,
+                                                                                          ))
+                                                                                ],
                                                                               ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
+                                                                              Padding(padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 13),
+                                                                                child: Text(':', style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  fontSize: 18,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  useGoogleFonts: false,
+                                                                                )),
+                                                                              ),
+                                                                              Column(
+                                                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                children: [
+                                                                                  Text('${time.hours}',
+                                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: 'AvenirArabic',
+                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                            fontSize: 18,
+                                                                                            fontWeight: FontWeight.bold,
+                                                                                            useGoogleFonts: false,
+                                                                                          )),
+                                                                                  Text('HOURS',
+                                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: 'AvenirArabic',
+                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                            fontSize: 8,
+                                                                                            fontWeight: FontWeight.bold,
+                                                                                            useGoogleFonts: false,
+                                                                                          ))
+                                                                                ],
+                                                                              ),
+                                                                              Padding(padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 13),
+                                                                                child: Text(':', style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  fontSize: 18,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  useGoogleFonts: false,
+                                                                                )),
+                                                                              ),
+                                                                              Column(
+                                                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                children: [
+                                                                                  Text('${time.minutes}',
+                                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: 'AvenirArabic',
+                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                            fontSize: 18,
+                                                                                            fontWeight: FontWeight.bold,
+                                                                                            useGoogleFonts: false,
+                                                                                          )),
+                                                                                  Text('MINUTES',
+                                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: 'AvenirArabic',
+                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                            fontSize: 8,
+                                                                                            fontWeight: FontWeight.bold,
+                                                                                            useGoogleFonts: false,
+                                                                                          ))
+                                                                                ],
+                                                                              ),
+                                                                              Padding(padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 13),
+                                                                                child: Text(':', style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                  fontFamily: 'AvenirArabic',
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  fontSize: 18,
+                                                                                  fontWeight: FontWeight.bold,
+                                                                                  useGoogleFonts: false,
+                                                                                )),
+                                                                              ),
+                                                                              Column(
+                                                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                children: [
+                                                                                  Text('${time.seconds}',
+                                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: 'AvenirArabic',
+                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                            fontSize: 18,
+                                                                                            fontWeight: FontWeight.bold,
+                                                                                            useGoogleFonts: false,
+                                                                                          )),
+                                                                                  Text('SECONDS',
+                                                                                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                                            fontFamily: 'AvenirArabic',
+                                                                                            color: FlutterFlowTheme.of(context).primaryText,
+                                                                                            fontSize: 8,
+                                                                                            fontWeight: FontWeight.bold,
+                                                                                            useGoogleFonts: false,
+                                                                                          ))
+                                                                                ],
+                                                                              )
+                                                                            ],
+                                                                          ),
+                                                                          // Row(
+                                                                          //  // mainAxisAlignment: MainAxisAlignment.center,
+                                                                          // // mainAxisSize: MainAxisSize.min,
+                                                                          //   children: [
+                                                                          //     SizedBox(width: 95,),
+                                                                          //   SizedBox(width: 35,), Text('Hrs',style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                          //       fontFamily: 'AvenirArabic',
+                                                                          //       color: FlutterFlowTheme.of(context).primaryText,
+                                                                          //       fontSize: 8,
+                                                                          //       fontWeight: FontWeight.bold,
+                                                                          //       useGoogleFonts: false,
+                                                                          //     )),SizedBox(width: 35,), Text('min',style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                          //       fontFamily: 'AvenirArabic',
+                                                                          //       color: FlutterFlowTheme.of(context).primaryText,
+                                                                          //       fontSize: 8,
+                                                                          //       fontWeight: FontWeight.bold,
+                                                                          //       useGoogleFonts: false,
+                                                                          //     )),SizedBox(width: 35,), Text('seconds',style: FlutterFlowTheme.of(context).bodyText1.override(
+                                                                          //       fontFamily: 'AvenirArabic',
+                                                                          //       color: FlutterFlowTheme.of(context).primaryText,
+                                                                          //       fontSize: 8,
+                                                                          //       fontWeight: FontWeight.bold,
+                                                                          //       useGoogleFonts: false,
+                                                                          //     )),
+                                                                          //   ],
+                                                                          // )
+                                                                        ],
+                                                                      );
+                                                                    },
                                                                   ),
                                                                 ),
                                                               )
@@ -1479,7 +1578,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                       ),
                                                                       Wrap(
-                                                                      crossAxisAlignment:WrapCrossAlignment.end,
+                                                                        crossAxisAlignment:
+                                                                            WrapCrossAlignment.end,
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -1557,7 +1657,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                       ),
                                                                       Wrap(
-                                                                        crossAxisAlignment: WrapCrossAlignment.end,
+                                                                        crossAxisAlignment:
+                                                                            WrapCrossAlignment.end,
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -1735,7 +1836,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             ),
                                                                       ),
                                                                       Wrap(
-                                                                        crossAxisAlignment:WrapCrossAlignment.end,
+                                                                        crossAxisAlignment:
+                                                                            WrapCrossAlignment.end,
                                                                         children: [
                                                                           Text(
                                                                             valueOrDefault<String>(
@@ -2284,7 +2386,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                         getOfferResponse?.statusCode != null) {
                                       return SomethingWentWrongWidget(
                                           onTryAgain: () {
-                                            getOffersCall();
+                                        getOffersCall();
                                       });
                                     }
                                     return SizedBox();
