@@ -2111,6 +2111,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'markAll':{
       'en': 'Mark all as read',
       'ar': 'اشر عليها بانها قرات',
+    },
+    'enterValidPhone':{
+      'en': 'Please Enter Valid Mobile Number',
+      'ar': 'الرجاء إدخال رقم هاتف محمول صحيح',
     }
   },
 ].reduce((a, b) => a..addAll(b));
