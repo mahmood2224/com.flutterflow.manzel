@@ -632,7 +632,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       ),
                                       values: installmentRange ??=
                                           SfRangeValues(
-                                              0,
+                                              0.0,
                                               valueOrDefault<double>(
                                                 functions.formattedDouble(
                                                     valueOrDefault<int>(

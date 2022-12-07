@@ -507,14 +507,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                           otherPlayer
                                                                               .pause();
                                                                         } else {
-                                                                          int indexOfOtherPlayer =
-                                                                              videoPlayers.indexOf(otherPlayer);
-                                                                          if (((currentPropertyindex + 1) <= (videoPlayers.length)) &&
-                                                                              (indexOfOtherPlayer == (currentPropertyindex + 1))) {
-                                                                            if (!(videoPlayers[currentPropertyindex + 1].value.isInitialized)) {
-                                                                              videoPlayers[currentPropertyindex + 1].initialize();
-                                                                            }
-                                                                          }
                                                                         }
                                                                       }
                                                                     });
@@ -543,100 +535,135 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                 isPaused =
                                                                     false;
 
-                                                                currentPropertyindex =
-                                                                    widget.homeScreenLength! +
-                                                                        propertiesIndex;
+                                                              setState(() {
+                                                                videoPlayers.forEach(
+                                                                        (otherPlayer) {
+                                                                      if (otherPlayer !=
+                                                                          videoPlayers[
+                                                                          widget.homeScreenLength! +
+                                                                              propertiesIndex]) {
+                                                                        if (otherPlayer
+                                                                            .value
+                                                                            .isInitialized) {
+                                                                          otherPlayer
+                                                                              .pause();
 
-                                                                if ((currentPropertyindex +
-                                                                        1) <=
-                                                                    (videoPlayers
-                                                                        .length)) {
-                                                                  if (!videoPlayers[
-                                                                          currentPropertyindex +
-                                                                              1]
-                                                                      .value
-                                                                      .isInitialized) {
-                                                                    videoPlayers[
-                                                                            currentPropertyindex +
-                                                                                1]
-                                                                        .initialize();
                                                                   }
                                                                 }
-
-                                                                setState(() {
-                                                                  videoPlayers
-                                                                      .forEach(
-                                                                          (otherPlayer) {
-                                                                    if (otherPlayer !=
-                                                                        videoPlayers[widget.homeScreenLength! +
-                                                                            propertiesIndex]) {
-                                                                      if (otherPlayer
-                                                                          .value
-                                                                          .isInitialized) {
-                                                                        otherPlayer
-                                                                            .pause();
-                                                                      }
-                                                                    }
-                                                                  });
-                                                                });
-                                                              }
-                                                              //autoplayVal = false;
-                                                            }
-                                                          },
-                                                          child:
-                                                              FlutterFlowVideoPlayer(
-                                                            path: getJsonField(
-                                                              propertiesItem,
-                                                              r'''$.attributes.video_manifest_uri''',
-                                                            ),
-                                                            videoType: VideoType
-                                                                .network,
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                95,
-                                                            height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                1.8,
-                                                            aspectRatio: 1.70,
-                                                            autoPlay: false,
-                                                            looping: true,
-                                                            showControls: false,
-                                                            allowFullScreen:
-                                                                true,
-                                                            allowPlaybackSpeedMenu:
-                                                                false,
-                                                          ),
+                                                              });
+                                                            });
+                                                          }
+                                                          //autoplayVal = false;
+                                                        }
+                                                      },
+                                                      child:
+                                                          FlutterFlowVideoPlayer(
+                                                        path: getJsonField(
+                                                          propertiesItem,
+                                                          r'''$.attributes.video_manifest_uri''',
                                                         ),
+                                                        videoType:VideoType
+                                                            .network,
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            95,
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            1.8,
+                                                        aspectRatio: 1.70,
+                                                        autoPlay: false,
+                                                        looping: true,
+                                                        showControls: false,
+                                                        allowFullScreen: true,
+                                                        allowPlaybackSpeedMenu:
+                                                            false,
+                                                            screenName: 'filter',
+                                                            propertiesIndex: propertiesIndex,
+                                                            currentPropertyindex: currentPropertyindex,
+                                                            homeScreenLength: widget.homeScreenLength,
                                                       ),
                                                     ),
                                                   ),
                                                 ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0, 0),
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      isPaused = isPaused
-                                                          ? false
-                                                          : true;
-
-                                                      isPaused
-                                                          ? videoPlayers[widget
-                                                                      .homeScreenLength! +
-                                                                  propertiesIndex]
-                                                              .pause()
-                                                          : videoPlayers[widget
-                                                                      .homeScreenLength! +
-                                                                  propertiesIndex]
-                                                              .play();
-                                                      setState(() {});
-                                                    },
-                                                    child: Container(
+                                              ),
+                                            ),
+                                            Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.9, 0.8),
+                                              child: InkWell(
+                                                child: ValueListenableBuilder(
+                                                  builder:
+                                                      (BuildContext context,
+                                                          bool value,
+                                                          Widget? child) {
+                                                    return Container(
+                                                      height: 30,
+                                                      width: 30,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.black
+                                                            .withOpacity(0.5),
+                                                        shape: BoxShape.circle,
+                                                      ),
+                                                      child: Icon(
+                                                        isMuted.value
+                                                            ? Icons
+                                                                .volume_off_rounded
+                                                            : Icons
+                                                                .volume_up_rounded,
+                                                        color: Colors.white
+                                                            .withOpacity(1.0),
+                                                        size: 20,
+                                                      ),
+                                                    );
+                                                  },
+                                                  valueListenable: isMuted,
+                                                ),
+                                                onTap: () {
+                                                  if (videoPlayers[
+                                                          propertiesIndex] !=
+                                                      null) {
+                                                    if (videoPlayers[widget
+                                                                    .homeScreenLength! +
+                                                                propertiesIndex]
+                                                            .value
+                                                            .volume >
+                                                        0) {
+                                                      videoPlayers[widget
+                                                                  .homeScreenLength! +
+                                                              propertiesIndex]
+                                                          .setVolume(0);
+                                                      isMuted.value = true;
+                                                    } else {
+                                                      videoPlayers[widget
+                                                                  .homeScreenLength! +
+                                                              propertiesIndex]
+                                                          .setVolume(100);
+                                                      isMuted.value = false;
+                                                    }
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                            if (!functions.videoPlayerVisibilty(
+                                                getJsonField(
+                                              propertiesItem,
+                                              r'''$.attributes.video_manifest_uri''',
+                                            )))
+                                              Align(
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: Builder(
+                                                  builder: (context) {
+                                                    final propertyImages =
+                                                        getJsonField(
+                                                      propertiesItem,
+                                                      r'''$..property_images.data''',
+                                                    ).toList();
+                                                    return Container(
                                                       width:
                                                           MediaQuery.of(context)
                                                               .size
@@ -646,319 +673,147 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                   .size
                                                                   .height *
                                                               0.3,
-                                                      child: Center(
-                                                        child: Container(
-                                                          constraints:
-                                                              BoxConstraints(
-                                                                  minWidth: 50,
-                                                                  maxWidth: 50),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: isPaused
-                                                                ? Colors.black
-                                                                    .withOpacity(
-                                                                        0.5)
-                                                                : Colors.black
-                                                                    .withOpacity(
-                                                                        0.0),
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                          child: Icon(
-                                                            isPaused
-                                                                ? Icons
-                                                                    .play_arrow_rounded
-                                                                : Icons.pause,
-                                                            color: isPaused
-                                                                ? Colors.white
-                                                                    .withOpacity(
-                                                                        1.0)
-                                                                : Colors.white
-                                                                    .withOpacity(
-                                                                        0.0),
-                                                            size: 40,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0, 0),
-                                                  child: (propertiesIndex) ==
-                                                          ((currentPropertyindex) ==
-                                                                      0
-                                                                  ? currentPropertyindex =
-                                                                      widget
-                                                                          .homeScreenLength!
-                                                                  : currentPropertyindex =
-                                                                      currentPropertyindex) -
-                                                              widget
-                                                                  .homeScreenLength!
-                                                      ? Container()
-                                                      : Container(
-                                                          constraints:
-                                                              BoxConstraints(
-                                                                  minWidth: 50,
-                                                                  maxWidth: 50),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Colors.black
-                                                                .withOpacity(
-                                                                    1.0),
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                          child: Icon(
-                                                            Icons
-                                                                .play_arrow_rounded,
-                                                            color: Colors.white
-                                                                .withOpacity(
-                                                                    1.0),
-                                                            size: 40,
-                                                          ),
-                                                        ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.9, 0.8),
-                                                  child: InkWell(
-                                                    child:
-                                                        ValueListenableBuilder(
-                                                      builder:
-                                                          (BuildContext context,
-                                                              bool value,
-                                                              Widget? child) {
-                                                        return Container(
-                                                          height: 30,
-                                                          width: 30,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: Colors.black
-                                                                .withOpacity(
-                                                                    0.5),
-                                                            shape:
-                                                                BoxShape.circle,
-                                                          ),
-                                                          child: Icon(
-                                                            isMuted.value
-                                                                ? Icons
-                                                                    .volume_off_rounded
-                                                                : Icons
-                                                                    .volume_up_rounded,
-                                                            color: Colors.white
-                                                                .withOpacity(
-                                                                    1.0),
-                                                            size: 20,
-                                                          ),
-                                                        );
-                                                      },
-                                                      valueListenable: isMuted,
-                                                    ),
-                                                    onTap: () {
-                                                      if (videoPlayers[
-                                                              propertiesIndex] !=
-                                                          null) {
-                                                        if (videoPlayers[widget
-                                                                        .homeScreenLength! +
-                                                                    propertiesIndex]
-                                                                .value
-                                                                .volume >
-                                                            0) {
-                                                          videoPlayers[widget
-                                                                      .homeScreenLength! +
-                                                                  propertiesIndex]
-                                                              .setVolume(0);
-                                                          isMuted.value = true;
-                                                        } else {
-                                                          videoPlayers[widget
-                                                                      .homeScreenLength! +
-                                                                  propertiesIndex]
-                                                              .setVolume(100);
-                                                          isMuted.value = false;
-                                                        }
-                                                      }
-                                                    },
-                                                  ),
-                                                ),
-                                                if (!functions
-                                                    .videoPlayerVisibilty(
-                                                        getJsonField(
-                                                  propertiesItem,
-                                                  r'''$.attributes.video_manifest_uri''',
-                                                )))
-                                                  Align(
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                            0, 0),
-                                                    child: Builder(
-                                                      builder: (context) {
-                                                        final propertyImages =
-                                                            getJsonField(
-                                                          propertiesItem,
-                                                          r'''$..property_images.data''',
-                                                        ).toList();
-                                                        return Container(
-                                                          width: MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width,
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.3,
-                                                          child: Stack(
-                                                            children: [
-                                                              PageView.builder(
-                                                                controller: pageViewController ??=
-                                                                    PageController(
-                                                                        initialPage: min(
-                                                                            0,
-                                                                            propertyImages.length -
-                                                                                1)),
-                                                                scrollDirection:
-                                                                    Axis.horizontal,
-                                                                itemCount:
-                                                                    propertyImages
-                                                                        .length,
-                                                                itemBuilder:
-                                                                    (context,
-                                                                        propertyImagesIndex) {
-                                                                  final propertyImagesItem =
-                                                                      propertyImages[
-                                                                          propertyImagesIndex];
-                                                                  return ClipRRect(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(8),
-                                                                    child:
-                                                                        CachedNetworkImage(
-                                                                      imageUrl:
-                                                                          getJsonField(
-                                                                        propertyImagesItem,
-                                                                        r'''$.attributes.url''',
-                                                                      ),
-                                                                      width: MediaQuery.of(
+                                                      child: Stack(
+                                                        children: [
+                                                          PageView.builder(
+                                                            controller: pageViewController ??=
+                                                                PageController(
+                                                                    initialPage: min(
+                                                                        0,
+                                                                        propertyImages.length -
+                                                                            1)),
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            itemCount:
+                                                                propertyImages
+                                                                    .length,
+                                                            itemBuilder: (context,
+                                                                propertyImagesIndex) {
+                                                              final propertyImagesItem =
+                                                                  propertyImages[
+                                                                      propertyImagesIndex];
+                                                              return ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8),
+                                                                child:
+                                                                    CachedNetworkImage(
+                                                                  imageUrl:
+                                                                      getJsonField(
+                                                                    propertyImagesItem,
+                                                                    r'''$.attributes.url''',
+                                                                  ),
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                                  height: MediaQuery.of(
                                                                               context)
                                                                           .size
-                                                                          .width,
-                                                                      height: MediaQuery.of(context)
-                                                                              .size
-                                                                              .height *
-                                                                          0.3,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              ),
-                                                              Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        0, 0.7),
-                                                                child:
-                                                                    SmoothPageIndicator(
-                                                                  controller: pageViewController ??=
-                                                                      PageController(
-                                                                          initialPage: min(
-                                                                              0,
-                                                                              propertyImages.length - 1)),
-                                                                  count:
-                                                                      propertyImages
-                                                                          .length,
-                                                                  axisDirection:
-                                                                      Axis.horizontal,
-                                                                  onDotClicked:
-                                                                      (i) {
-                                                                    pageViewController!
-                                                                        .animateToPage(
-                                                                      i,
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              500),
-                                                                      curve: Curves
-                                                                          .ease,
-                                                                    );
-                                                                  },
-                                                                  effect:
-                                                                      SlideEffect(
-                                                                    spacing: 8,
-                                                                    radius: 3,
-                                                                    dotWidth: 6,
-                                                                    dotHeight:
-                                                                        6,
-                                                                    dotColor: Color(
-                                                                        0x80FFFFFF),
-                                                                    activeDotColor:
-                                                                        Colors
-                                                                            .white,
-                                                                    paintStyle:
-                                                                        PaintingStyle
-                                                                            .fill,
-                                                                  ),
+                                                                          .height *
+                                                                      0.3,
+                                                                  fit: BoxFit
+                                                                      .cover,
                                                                 ),
-                                                              ),
-                                                            ],
+                                                              );
+                                                            },
                                                           ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
-                                                Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          1, -0.95),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                0, 12, 15, 0),
-                                                    child:
-                                                        ValueListenableBuilder<
-                                                            bool>(
-                                                      builder:
-                                                          (BuildContext context,
-                                                              value,
-                                                              Widget? child) {
-                                                        return (bookMarkTapped
-                                                                    .value &&
-                                                                propertiesIndex ==
-                                                                    tapped_index)
-                                                            ? SizedBox(
-                                                                child:
-                                                                    Container(
-                                                                width: 40,
-                                                                height: 40,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: propertiesItem[
-                                                                          "isBookmarked"]
-                                                                      ? Color(
-                                                                          0x4DFF0000)
-                                                                      : Color(
-                                                                          0x4D000000),
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                ),
-                                                                child: Icon(
-                                                                  Manzel
-                                                                      .favourite,
-                                                                  color: Colors
-                                                                      .white,
-                                                                  size: 20,
-                                                                ),
-                                                              ))
-                                                            : InkWell(
-                                                                onTap:
-                                                                    () async {
-                                                                  propertiesItem[
-                                                                          "isBookmarked"] =
-                                                                      propertiesItem[
-                                                                              "isBookmarked"]
+                                                          Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    0, 0.7),
+                                                            child:
+                                                                SmoothPageIndicator(
+                                                              controller: pageViewController ??=
+                                                                  PageController(
+                                                                      initialPage: min(
+                                                                          0,
+                                                                          propertyImages.length -
+                                                                              1)),
+                                                              count:
+                                                                  propertyImages
+                                                                      .length,
+                                                              axisDirection:
+                                                                  Axis.horizontal,
+                                                              onDotClicked:
+                                                                  (i) {
+                                                                pageViewController!
+                                                                    .animateToPage(
+                                                                  i,
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          500),
+                                                                  curve: Curves
+                                                                      .ease,
+                                                                );
+                                                              },
+                                                              effect:
+                                                                  SlideEffect(
+                                                                spacing: 8,
+                                                                radius: 3,
+                                                                dotWidth: 6,
+                                                                dotHeight: 6,
+                                                                dotColor: Color(
+                                                                    0x80FFFFFF),
+                                                                activeDotColor:
+                                                                    Colors
+                                                                        .white,
+                                                                paintStyle:
+                                                                    PaintingStyle
+                                                                        .fill,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              ),
+                                            Align(
+                                              alignment: AlignmentDirectional(
+                                                  1, -0.95),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 12, 15, 0),
+                                                child: ValueListenableBuilder<
+                                                    bool>(
+                                                  builder:
+                                                      (BuildContext context,
+                                                          value,
+                                                          Widget? child) {
+                                                    return (bookMarkTapped
+                                                                .value &&
+                                                            propertiesIndex ==
+                                                                tapped_index)
+                                                        ? SizedBox(
+                                                            child: Container(
+                                                            width: 40,
+                                                            height: 40,
+                                                            decoration:
+                                                            BoxDecoration(
+                                                              color: propertiesItem[
+                                                              "isBookmarked"]
+                                                                  ? Color(
+                                                                  0x4DFF0000)
+                                                                  : Color(
+                                                                  0x4D000000),
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                            ),
+                                                            child: Icon(
+                                                              Manzel.favourite,
+                                                              color:
+                                                              Colors.white,
+                                                              size: 20,
+                                                            ),
+                                                          ))
+                                                          : InkWell(
+                                                          onTap: () async {
+                                                            propertiesItem[
+                                                            "isBookmarked"] = propertiesItem[
+                                                            "isBookmarked"]
                                                                           ? true
                                                                           : false;
                                                                   setState(

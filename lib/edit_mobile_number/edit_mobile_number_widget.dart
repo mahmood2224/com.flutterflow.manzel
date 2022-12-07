@@ -285,8 +285,6 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                     await OtpCalls.updatePhone(
                                         newPhoneNumber:
                                             mobileNumberController!.text);
-                                String errorMessage = OtpCalls.phoneNumberError(updatePhoneResponse.jsonBody);
-
                                 if ((OtpCalls.generateSuccess(
                                         updatePhoneResponse.jsonBody)) ==
                                     'success') {
@@ -305,6 +303,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                   functions.unAuthorizedUser(context, mounted);
                                 }
                                 else {
+                                  String errorMessage = OtpCalls.phoneNumberError(updatePhoneResponse.jsonBody);
                                   isLoading.value=false;
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
