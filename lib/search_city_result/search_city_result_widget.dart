@@ -433,27 +433,9 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                           .isInitialized) {
                                                                         otherPlayer
                                                                             .pause();
-                                                                        // var dataSource = otherPlayer.dataSource;
-                                                                        // otherPlayer.dispose();
-                                                                        // otherPlayer =
-                                                                        //     VideoPlayerController.network(dataSource);
 
                                                                       } else {
-                                                                        // int indexOfOtherPlayer =
-                                                                        //     videoPlayers.indexOf(otherPlayer);
-                                                                        // if (((currentPropertyindex + 1) <= (videoPlayers.length)) &&
-                                                                        //     (indexOfOtherPlayer ==
-                                                                        //         (currentPropertyindex + 1))) {
-                                                                        //   if (!(videoPlayers[currentPropertyindex + 1]
-                                                                        //       .value
-                                                                        //       .isInitialized)) {
-                                                                        //     videoPlayers[currentPropertyindex + 1].initialize();
-                                                                        //   }
-                                                                        // }
-                                                                        // otherPlayer
-                                                                        //     .initialize()
-                                                                        //     .then((value) =>
-                                                                        //         otherPlayer.pause());
+
                                                                       }
                                                                     }
                                                                   });
@@ -461,37 +443,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                 ;
                                                               });
 
-
-                                                              // Future.delayed(const Duration(
-                                                              //     seconds: 6), () {
-                                                              //   _currentController =
-                                                              //   videocontrollerMap[(propertiesIndex)
-                                                              //       .toString()];
-                                                              //   _currentController?.play();
-                                                              // });
-                                                              // setState(() {
-                                                              //   if (_currentController !=
-                                                              //       null) {
-                                                              //     _currentController =
-                                                              //         videocontrollerMap[
-                                                              //             (propertiesIndex)
-                                                              //                 .toString()];
-                                                              //     _currentController?.play();
-                                                              //     videoControllerSet!
-                                                              //         .forEach((otherPlayer) {
-                                                              //       if (otherPlayer !=
-                                                              //               _currentController &&
-                                                              //           otherPlayer
-                                                              //               .value.isPlaying) {
-                                                              //         setState(() {
-                                                              //           otherPlayer.pause();
-                                                              //         });
-                                                              //       }
-                                                              //     });
-                                                              //     print(
-                                                              //         "Object_Key : ${ObjectKey(FlutterFlowVideoPlayer).toString()}");
-                                                              //   }
-                                                              // });
+                                                              print(
+                                                                  "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
                                                             } else {
                                                               isMuted.value
                                                                   ? videoPlayers[
@@ -509,27 +462,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                       propertiesIndex]
                                                                   .play();
                                                               isPaused = false;
-
-                                                              // currentPropertyindex =
-                                                              //     widget.homeScreenLength! +
-                                                              //         propertiesIndex;
-
-                                                              // if ((currentPropertyindex +
-                                                              //         1) <=
-                                                              //     (videoPlayers
-                                                              //         .length)) {
-                                                              //   if (!videoPlayers[
-                                                              //           currentPropertyindex +
-                                                              //               1]
-                                                              //       .value
-                                                              //       .isInitialized) {
-                                                              //     videoPlayers[
-                                                              //             currentPropertyindex +
-                                                              //                 1]
-                                                              //         .initialize();
-                                                              //   }
-                                                              // }
-
                                                               setState(() {
                                                                 videoPlayers
                                                                     .forEach(
@@ -543,46 +475,15 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                         .isInitialized) {
                                                                       otherPlayer
                                                                           .pause();
-                                                                      // var dataSource = otherPlayer.dataSource;
-                                                                      // otherPlayer.dispose();
-                                                                      // otherPlayer =
-                                                                      //     VideoPlayerController.network(dataSource);
-
                                                                     }
                                                                   }
                                                                 });
                                                               });
                                                             }
-                                                            //autoplayVal = false;
                                                           }
-                                                          //onVisibilityChanged: (visibilityInfo) {
-                                                          // var visiblePercentage =
-                                                          //     visibilityInfo.visibleFraction *
-                                                          //         100;
-                                                          // debugPrint(
-                                                          //     'Widget ${visibilityInfo.key} is ${visiblePercentage}% visible');
                                                         },
                                                         child:
                                                             FlutterFlowVideoPlayer(
-                                                          // videoControllerSet =
-                                                          //     videoControllerValue;
-                                                          //
-                                                          // print(
-                                                          //     "videoControllerSet : ${videoControllerSet}");
-                                                          // print(
-                                                          //     "videoControllerSet_items : ${videoControllerSet?.length}");
-                                                          // //print("videoControllerSet.last :  ${videoControllerSet.last}");
-                                                          // //print("propertiesIndex : ${propertiesIndex.toString()}");
-                                                          // //print("videocontrollerMap : ${videocontrollerMap.length}");
-                                                          // videocontrollerMap[propertiesIndex
-                                                          //         .toString()] =
-                                                          //     videoControllerSet!.last;
-                                                          // print(
-                                                          //     "videocontrollerMap : ${videocontrollerMap.length}");
-                                                          // _currentController =
-                                                          //     videocontrollerMap['0'];
-                                                          //
-
                                                         path: getJsonField(
                                                           propertiesItem,
                                                           r'''$.attributes.video_manifest_uri''',
@@ -617,84 +518,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                 ),
                                               ),
                                             ),
-                                            // Align(
-                                            //   alignment: AlignmentDirectional(0, 0),
-                                            //   child: InkWell(
-                                            //     onTap: () {
-                                              //       isPaused = isPaused ? false : true;
-                                            //       isPaused
-                                            //           ? videoPlayers[widget.homeScreenLength! + propertiesIndex].pause()
-                                            //           : videoPlayers[widget.homeScreenLength! + propertiesIndex].play();
-                                            //       setState(() {});
-                                            //     },
-                                            //     child: Container(
-                                            //       width: MediaQuery.of(context)
-                                            //           .size
-                                            //           .width,
-                                            //       height:MediaQuery.of(context)
-                                                    //               .size
-                                            //               .height *
-                                            //           0.3,
-                                            //       child: Center(
-                                            //         child: Container(
-                                            //           constraints:
-                                                //               BoxConstraints(
-                                            //                   minWidth: 50,
-                                            //                   maxWidth: 50),
-                                            //           decoration: BoxDecoration(
-                                            //             color: isPaused
-                                            //                 ? Colors.black
-                                                //                     .withOpacity(
-                                            //                         0.5)
-                                            //                 : Colors.black
-                                                //                     .withOpacity(
-                                            //                         0.0),
-                                            //             shape: BoxShape.circle,
-                                            //           ),
-                                            //           child: Icon(
-                                            //             isPaused
-                                            //                 ? Icons
-                                                //                     .play_arrow_rounded
-                                            //                 : Icons.pause,
-                                            //             color: isPaused
-                                            //                 ? Colors.white
-                                                //                     .withOpacity(
-                                            //                         1.0)
-                                            //                 : Colors.white
-                                                //                     .withOpacity(
-                                            //                         0.0),
-                                            //             size: 40,
-                                            //           ),
-                                            //         ),
-                                            //       ),
-                                            //     ),
-                                            //   ),
-                                            // ),
-                                            //if(dummy code remove later)
-                                              // Align(
-                                            //   alignment:
-                                                //       AlignmentDirectional(0, 0),
-                                            //   child: (propertiesIndex) == ((currentPropertyindex) == 0 ? currentPropertyindex = widget.homeScreenLength! : currentPropertyindex = currentPropertyindex) - widget.homeScreenLength!
-                                            //       ? Container()
-                                            //       : Container(
-                                                  //           constraints:
-                                            //               BoxConstraints(
-                                            //                   minWidth: 50,
-                                            //                   maxWidth: 50),
-                                            //           decoration: BoxDecoration(
-                                            //             color: Colors.black
-                                            //                 .withOpacity(1.0),
-                                            //             shape: BoxShape.circle,
-                                            //           ),
-                                            //           child: Icon(
-                                            //             Icons
-                                            //                 .play_arrow_rounded,
-                                            //             color: Colors.white
-                                            //                 .withOpacity(1.0),
-                                            //             size: 40,
-                                            //           ),
-                                            //         ),
-                                            // ),
                                             Align(
                                               alignment: AlignmentDirectional(
                                                   0.9, 0.8),
@@ -1122,56 +945,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                   ),
                                                 ),
                                               ),
-                                              // if (functions.conditionalVisibility(
-                                              //     getJsonField(
-                                              //       propertiesItem,
-                                              //       r'''$.attributes.property_status''',
-                                              //     ).toString(),
-                                              //     'Available'))
-                                              // Align(
-                                              //   alignment:
-                                              //   AlignmentDirectional(-0.85, -0.89),
-                                              //   child: Container(
-                                              //     width: 80,
-                                              //     height: 26,
-                                              //     decoration: BoxDecoration(
-                                              //       color: FlutterFlowTheme.of(context).secondaryGreen,
-                                              //       borderRadius:
-                                              //       BorderRadius.circular(7),
-                                              //     ),
-                                              //     child: Row(
-                                              //       mainAxisSize: MainAxisSize.max,
-                                              //       mainAxisAlignment:
-                                              //       MainAxisAlignment.center,
-                                              //       children: [
-                                              //         Padding(
-                                              //           padding: EdgeInsetsDirectional
-                                              //               .fromSTEB(10, 1, 10, 1),
-                                              //           child: Text(
-                                              //             FFLocalizations.of(context)
-                                              //                 .getText(
-                                              //               '2cud1oqj' /* Available */,
-                                              //             ),
-                                              //             style:
-                                              //             FlutterFlowTheme.of(context)
-                                              //                 .bodyText1
-                                              //                 .override(
-                                              //               fontFamily:
-                                              //               'AvenirArabic',
-                                              //               color: FlutterFlowTheme
-                                              //                   .of(context)
-                                              //                   .white,
-                                              //               fontSize: 13,
-                                              //               fontWeight:
-                                              //               FontWeight.w500,
-                                              //               useGoogleFonts: false,
-                                              //             ),
-                                              //           ),
-                                              //         ),
-                                              //       ],
-                                              //     ),
-                                              //   ),
-                                              // ),
                                               if (functions
                                                   .conditionalVisibility(
                                                       getJsonField(
