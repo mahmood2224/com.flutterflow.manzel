@@ -439,8 +439,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                       }
                                                                     }
                                                                   });
-                                                                  print(
-                                                                      'propertyindex - $propertiesIndex');
                                                                 });
                                                                 ;
                                                               });
