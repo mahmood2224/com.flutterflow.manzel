@@ -14,8 +14,6 @@ enum VideoType {
 List<VideoPlayerController> videoPlayers = [];
 
 class FlutterFlowVideoPlayer extends StatefulWidget {
-
-
   FlutterFlowVideoPlayer({
     required this.path,
     this.videoType = VideoType.network,
@@ -102,10 +100,6 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
         ? VideoPlayerController.network(widget.path)
         : VideoPlayerController.asset(widget.path);
     if (kIsWeb && widget.autoPlay) {
-      // Browsers generally don't allow autoplay unless it's muted.
-      // Ideally this should be configurable, but for now we just automatically
-      // mute on web.
-      // See https://pub.dev/packages/video_player_web#autoplay
       _videoPlayerController!.setVolume(0);
     }
     if (!widget.lazyLoad && widget.isFromPropertyDetail) {
@@ -137,26 +131,6 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
             'Error playing video: ${_videoPlayerController!.value.errorDescription}');
         _loggedError = true;
       }
-      //Stop all other players when one video is playing.
-      // if (_videoPlayerController!.value.isPlaying) {
-      //   videoPlayers.forEach((otherPlayer) {
-      //     if (otherPlayer != _videoPlayerController &&
-      //         otherPlayer.value.isPlaying) {
-      //       setState(() {
-      //
-      //         if(otherPlayer.value.isInitialized) {
-      //           otherPlayer.pause();
-      //           var dataSource = otherPlayer.dataSource;
-      //           otherPlayer.dispose();
-      //           otherPlayer = widget.videoType == VideoType.network
-      //               ? VideoPlayerController.network(dataSource)
-      //               : VideoPlayerController.asset(dataSource);
-      //         }
-      //
-      //       });
-      //      }
-      //    });
-      // }
     });
 
     setState(() {});
@@ -197,10 +171,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
                       widget.propertiesIndex) ??
                       0]
                       .play();
-                  // ? videoPlayers[widget.propertiesIndex??0]
-                  // .pause()
-                  // : videoPlayers[widget.propertiesIndex??0]
-                  // .play();
+
                   setState(() {});
                 },
                 child: Container(
