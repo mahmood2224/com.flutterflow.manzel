@@ -1729,9 +1729,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Order Process',
       'ar': 'مراحل الطلب',
     },
-
-
-
+    'w2795v66': {
+      'en': 'Property reservation',
+      'ar': 'حجز العقار',
+    },
+    'm30m3lz9': {
+      'en': 'Pay the reservation amount',
+      'ar': 'دفع مبلغ الحجز',
+    },
+    'zpv0x3sj': {
+      'en': 'Offers',
+      'ar': 'العروض',
+    },
     'hho1grz4': {
       'en': '/',
       'ar': '/',
@@ -1748,23 +1757,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'mehsn231': {
       'en': ')',
       'ar': ')',
-    },
-
-    'w2795v66': {
-      'en': 'Property reservation',
-      'ar': 'حجز العقار',
-    },
-    'm30m3lz9': {
-      'en': 'Pay the reservation amount',
-      'ar': 'دفع مبلغ الحجز',
-    },
-    'zpv0x3sj': {
-      'en': 'Offers',
-      'ar': 'العروض',
-    },
-    'xa9e1t5y': {
-      'en': 'Waiting for banks to submit offers ',
-      'ar': 'في انتظار البنوك لتقديم العروض',
     },
     '3a3j0qu5': {
       'en': 'Accept a suitable offer',
@@ -1785,6 +1777,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'nhrc354h': {
       'en': 'Deal completed successfully',
       'ar': 'تمت الصفقة بنجاح',
+    },
+    'ubpscf43': {
+      'en': 'Ownership transferred successfully ',
+      'ar': 'تم نقل الملكية بنجاح',
     },
     'dd079ljk': {
       'en': 'Cancelled',
@@ -1808,11 +1804,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'cgacbnp0': {
       'en': 'Your offer has been expired',
-      'ar': 'لقد انتهت صلاحية طلبك',
-    },
-    'ubpscf43': {
-      'en': 'Ownership transferred successfully ',
-      'ar': 'تم نقل الملكية بنجاح',
+      'ar': 'لقد انتهت صلاحية عرضك',
     },
     'nxmc61bl': {
       'en': 'Property details',
@@ -2115,6 +2107,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'enterValidPhone':{
       'en': 'Please Enter Valid Mobile Number',
       'ar': 'الرجاء إدخال رقم هاتف محمول صحيح',
+    },
+    'emailAlreadyExists': {
+      'en': 'Email Already Exists',
+      'ar': 'البريد الالكتروني موجود بالفعل',
+    },
+    'all':{
+      'en': 'All',
+      'ar': 'الكل',
     }
   },
 ].reduce((a, b) => a..addAll(b));
