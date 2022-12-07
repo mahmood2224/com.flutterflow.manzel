@@ -56,6 +56,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
   @BuiltValueField(wireName: 'last_login')
   DateTime? get lastLogin;
 
+  @BuiltValueField(wireName: 'firebase_device_token')
+  String? get deviceToken ;
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -76,7 +78,9 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
     ..displayName = ''
     ..language = ''
     ..isDeleted = 0
+    ..deviceToken = ''
     ..sakaniLoanCoverage = false;
+
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('User');
@@ -117,6 +121,7 @@ Map<String, dynamic> createUserRecordData({
   int? isDeleted,
   bool? sakaniLoanCoverage,
   DateTime? lastLogin,
+  String? deviceToken,
 }) {
   final firestoreData = serializers.toFirestore(
     UserRecord.serializer,
@@ -139,7 +144,8 @@ Map<String, dynamic> createUserRecordData({
         ..language = language
         ..isDeleted = isDeleted
         ..sakaniLoanCoverage = sakaniLoanCoverage
-        ..lastLogin = lastLogin,
+        ..lastLogin = lastLogin
+        ..deviceToken = deviceToken,
     ),
   );
 
