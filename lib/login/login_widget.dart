@@ -484,15 +484,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   else if((generateOtpResponse.statusCode == 403)){
                                     unAuthorizedUser(context,mounted);
                                   }
-                                  // await beginPhoneAuth(
-                                  //   context: context,
-                                  //   phoneNumber: phoneNumberController!.text,
-                                  //   onCodeSent: () async {
-                                  // //    entry.remove();
-                                  //     isLoading.value = false;
-                                  //     context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': phoneNumberVal});
-                                  //     },
-                                  //   );
+
                                 } else {
                                   showDialog(
                                     context: context,
