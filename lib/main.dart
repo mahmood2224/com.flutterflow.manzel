@@ -41,7 +41,7 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    runApp(MyApp());
+  //  runApp(MyApp());
   }, (error, stackTrace) {
     FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
@@ -58,7 +58,7 @@ void main() async {
   );
   // FirebaseCloudMessaging().init();
 
-  FFAppState(); // Initialize FFAppState
+  FFAppState().initializePersistedState(); // Initialize FFAppState
   //versionCheck();
   runApp(MyApp());
 }
@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       // Else only enable it in non-debug builds.
       // You could additionally extend this to allow users to opt-in.
-      //   await FirebaseCrashlytics.instance
+   //   await FirebaseCrashlytics.instance
       //    .setCrashlyticsCollectionEnabled(!kDebugMode);
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     }

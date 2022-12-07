@@ -152,8 +152,15 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                             onTap: () async {
                               logFirebaseEvent(
                                   'NOTIFICATIONS_Container_h34e593u_ON_TAP');
-                              if (notificationsListNotificationsRecord
+                              if(notificationsListNotificationsRecord
                                   .notificationType ==
+                                  'MyProperties'){
+                                context.pushNamed(
+                                  'MyProperties',
+                                );
+                              }
+                              else if (notificationsListNotificationsRecord
+                                      .notificationType ==
                                   'Offers') {
                                 logFirebaseEvent('Container_Navigate-To');
 

@@ -68,15 +68,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
       veriKey = OtpCalls.generateKey(generateOtpResponse.jsonBody);
       setState(() {});
     }
-   if(isFromUpdate??false){
-      String newPhoneNumber = widget.phoneNumber??'';
-      ApiCallResponse? response = await OtpCalls.updatePhone(idToken: idToken,newPhoneNumber: newPhoneNumber);
-   }
-     else{
-     ApiCallResponse? generateOtpResponse = await OtpCalls.generateOtp(phoneNumber: widget.phoneNumber??'');
-     veriKey = OtpCalls.generateKey(generateOtpResponse.jsonBody);
-     setState((){});
-     }
     if (_otpResendTimes > 0) {
       _showResendOtp.value = false;
       _otpResendTimes--;
@@ -217,57 +208,62 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                             textDirection: material.TextDirection.ltr,
                             child: Pinput(
                               onCompleted: (String otp) async {
-
                                 entry = showOverlay(context);
                                 if (isFromUpdate ?? false) {
-                                  ApiCallResponse verifyOtpResponse= await OtpCalls.verifyPhone(phoneNumber: widget.phoneNumber??'',otp:otp,key:veriKey??'');
-                                  if((verifyOtpResponse.statusCode==200)){
-                                    String tokenFromOtpSuccess = OtpCalls.tokenFromOtp(verifyOtpResponse.jsonBody);
-                                    try {
-                                      //DateTime loginDate = DateTime.now();
-                                      userCredential =
-                                      await FirebaseAuth.instance.signInWithCustomToken(tokenFromOtpSuccess);
-                                      final user = await FirebaseAuth
-                                          .instance.currentUser;
-                                      final idToken =
-                                      await user?.getIdToken();
-                                      FFAppState().authToken = idToken!;
-                                    } on FirebaseAuthException catch (e) {
-                                      switch (e.code) {
-                                        case "invalid-custom-token":
-                                          print("The supplied token is not a Firebase custom auth token.");
-                                          break;
-                                        case "custom-token-mismatch":
-                                          print("The supplied token is for a different Firebase project.");
-                                          break;
-                                        default:
-                                          print("Unkown error.");
-                                      }
-                                    }
-
+                                  ApiCallResponse verifyOtpResponse =
+                                      await OtpCalls.verifyPhone(
+                                          phoneNumber: widget.phoneNumber ?? '',
+                                          otp: otp,
+                                          key: veriKey ?? '');
+                                  if ((verifyOtpResponse.statusCode == 200)) {
+                                  } else if (verifyOtpResponse.statusCode ==
+                                      403) {
+                                    unAuthorizedUser(context,mounted);
                                   }
                                   entry?.remove();
-                                 context.pop();
-                                }
-                                else {
-                                  ApiCallResponse verifyOtpResponse= await OtpCalls.verifyOtp(phoneNumber: widget.phoneNumber??'',otp:otp,key:veriKey??'');
-                                  if((verifyOtpResponse.statusCode==200)){
-                                    String tokenFromOtpSuccess = OtpCalls.tokenFromOtp(verifyOtpResponse.jsonBody);
+                                  context.pop();
+                                } else {
+                                  ApiCallResponse verifyOtpResponse =
+                                      await OtpCalls.verifyOtp(
+                                          phoneNumber: widget.phoneNumber ?? '',
+                                          otp: otp,
+                                          key: veriKey ?? '');
+                                  if ((verifyOtpResponse.statusCode == 200)) {
+                                    String tokenFromOtpSuccess =
+                                        OtpCalls.tokenFromOtp(
+                                            verifyOtpResponse.jsonBody);
                                     try {
                                       DateTime loginDate = DateTime.now();
-                                      userCredential = await FirebaseAuth.instance.signInWithCustomToken(tokenFromOtpSuccess);
-                                      if(userCredential!=null){
+                                      userCredential = await FirebaseAuth
+                                          .instance
+                                          .signInWithCustomToken(
+                                              tokenFromOtpSuccess);
+                                      print("Sign-in successful.");
+                                      if (FirebaseAuth
+                                          .instance.currentUser !=
+                                          null) {
+                                        final user = await FirebaseAuth
+                                            .instance.currentUser;
+                                        final idToken =
+                                        await user?.getIdToken();
+                                        FFAppState().authToken = idToken!;
+                                      } else {
+                                        print(
+                                            "*********************ERROR***");
+                                      }
+                                      if (userCredential != null) {
                                         final user = userCredential.user;
                                         var record = await maybeCreateUser(user);
                                         Future.delayed(
-                                            const Duration(milliseconds:200),
-                                                () async {
-                                              if (currentUserDocument!.status!.isEmpty ||
-                                                  currentUserDocument!.status!
+                                            const Duration(milliseconds: 200),
+                                            () async {
+                                          if (currentUserDocument!
+                                                  .status!.isEmpty ||
+                                              currentUserDocument!.status!
                                                       .toLowerCase() ==
-                                                      'active') {
-                                                logFirebaseEvent('login');
-                                                final userUpdateData =
+                                                  'active') {
+                                            logFirebaseEvent('login');
+                                            final userUpdateData =
                                                 await createUserRecordData(
                                                     status: 'Active',
                                                     language:
@@ -275,6 +271,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                                 context)
                                                             .languageCode,
                                                     lastLogin: loginDate,
+                                                    deviceToken:await FirebaseMessagingUtils
+                                                        .getPushNotificationToken() ,
                                                     isDeleted: 0);
                                             if (currentUserDocument!
                                                 .status!.isEmpty) {
@@ -338,12 +336,12 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                               context.goNamedAuth(
                                                   'HomeScreen', mounted);
                                             }
-                                            }  else {
-                                               await showDialog(
-                                                 context: context,
-                                                 builder: (alertDialogContext) {
-                                                   return AlertDialog(
-                                                     title: Text(
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text(
                                                       FFLocalizations.of(
                                                               context)
                                                           .getText(

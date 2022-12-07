@@ -347,9 +347,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Are you eligible for Salani support?',
       'ar': 'هل انت مستحق للدعم السكني؟',
     },
-    'pleaseFillInfo': {
-      'en': 'Please fill all the information fields',
-      'ar': 'يرجى ملء جميع حقول المعلومات',
+    'allFields': {
+      'en': 'All fields are mandatory.',
+      'ar': 'الرجاء تعبئة جميع الحقول المطلوبة',
     },
     'ag8peu33': {
       'en': 'Yes',
@@ -2103,5 +2103,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'You are logged-in, in some other device',
       'ar': 'لقد قمت بتسجيل الدخول ، في بعض الأجهزة الأخرى',
     },
+    'emailAlreadyExists': {
+      'en': 'Email Already Exists',
+      'ar': 'البريد الالكتروني موجود بالفعل',
+    },
+    'all':{
+      'en': 'All',
+      'ar': 'الكل',
+    }
   },
 ].reduce((a, b) => a..addAll(b));
