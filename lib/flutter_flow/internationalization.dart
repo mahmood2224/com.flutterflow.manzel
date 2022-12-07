@@ -2103,5 +2103,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'You are logged-in, in some other device',
       'ar': 'لقد قمت بتسجيل الدخول ، في بعض الأجهزة الأخرى',
     },
+    'emailAlreadyExists': {
+      'en': 'Email Already Exists',
+      'ar': 'البريد الالكتروني موجود بالفعل',
+    },
+    'all':{
+      'en': 'All',
+      'ar': 'الكل',
+    }
   },
 ].reduce((a, b) => a..addAll(b));

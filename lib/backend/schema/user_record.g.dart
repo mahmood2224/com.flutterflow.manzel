@@ -144,6 +144,13 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
+    value = object.deviceToken;
+    if (value != null) {
+      result
+        ..add('firebase_device_token')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -238,6 +245,10 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.lastLogin = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime?;
           break;
+        case 'firebase_device_token':
+          result.deviceToken = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -289,6 +300,8 @@ class _$UserRecord extends UserRecord {
   @override
   final DateTime? lastLogin;
   @override
+  final String? deviceToken;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UserRecord([void Function(UserRecordBuilder)? updates]) =>
@@ -313,6 +326,7 @@ class _$UserRecord extends UserRecord {
       this.isDeleted,
       this.sakaniLoanCoverage,
       this.lastLogin,
+      this.deviceToken,
       this.ffRef})
       : super._();
 
@@ -345,6 +359,7 @@ class _$UserRecord extends UserRecord {
         isDeleted == other.isDeleted &&
         sakaniLoanCoverage == other.sakaniLoanCoverage &&
         lastLogin == other.lastLogin &&
+        deviceToken == other.deviceToken &&
         ffRef == other.ffRef;
   }
 
@@ -368,31 +383,25 @@ class _$UserRecord extends UserRecord {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            $jc(
-                                                                                0,
-                                                                                email
-                                                                                    .hashCode),
-                                                                            uid
-                                                                                .hashCode),
-                                                                        createdTime
-                                                                            .hashCode),
-                                                                    phoneNumber
-                                                                        .hashCode),
-                                                                employmentStatus
-                                                                    .hashCode),
-                                                            bank.hashCode),
-                                                        monthlyIncome.hashCode),
-                                                    photoUrl.hashCode),
-                                                status.hashCode),
-                                            name.hashCode),
-                                        countryCode.hashCode),
-                                    roleId.hashCode),
-                                gender.hashCode),
-                            displayName.hashCode),
-                        language.hashCode),
-                    isDeleted.hashCode),
-                sakaniLoanCoverage.hashCode),
-            lastLogin.hashCode),
+                                                                            $jc($jc(0, email.hashCode),
+                                                                                uid.hashCode),
+                                                                            createdTime.hashCode),
+                                                                        phoneNumber.hashCode),
+                                                                    employmentStatus.hashCode),
+                                                                bank.hashCode),
+                                                            monthlyIncome.hashCode),
+                                                        photoUrl.hashCode),
+                                                    status.hashCode),
+                                                name.hashCode),
+                                            countryCode.hashCode),
+                                        roleId.hashCode),
+                                    gender.hashCode),
+                                displayName.hashCode),
+                            language.hashCode),
+                        isDeleted.hashCode),
+                    sakaniLoanCoverage.hashCode),
+                lastLogin.hashCode),
+            deviceToken.hashCode),
         ffRef.hashCode));
   }
 
@@ -417,6 +426,7 @@ class _$UserRecord extends UserRecord {
           ..add('isDeleted', isDeleted)
           ..add('sakaniLoanCoverage', sakaniLoanCoverage)
           ..add('lastLogin', lastLogin)
+          ..add('deviceToken', deviceToken)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -500,6 +510,10 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   DateTime? get lastLogin => _$this._lastLogin;
   set lastLogin(DateTime? lastLogin) => _$this._lastLogin = lastLogin;
 
+  String? _deviceToken;
+  String? get deviceToken => _$this._deviceToken;
+  set deviceToken(String? deviceToken) => _$this._deviceToken = deviceToken;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -529,6 +543,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _isDeleted = $v.isDeleted;
       _sakaniLoanCoverage = $v.sakaniLoanCoverage;
       _lastLogin = $v.lastLogin;
+      _deviceToken = $v.deviceToken;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -570,6 +585,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
             isDeleted: isDeleted,
             sakaniLoanCoverage: sakaniLoanCoverage,
             lastLogin: lastLogin,
+            deviceToken: deviceToken,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

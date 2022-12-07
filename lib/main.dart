@@ -44,7 +44,7 @@ void main() async {
     // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   //  runApp(MyApp());
   }, (error, stackTrace) {
-    // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
+   // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
