@@ -277,18 +277,13 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Container(
-             // color: Colors.red,
-                height: MediaQuery.of(context).size.height/4,
-                width: MediaQuery.of(context).size.width,
-                decoration: new BoxDecoration(
-                    image: new DecorationImage(
-                      image: new NetworkImage(widget.posterImage),
-                      fit: BoxFit.fitWidth,
-                    )
-                )
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.24,
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: Image.network(widget.posterImage),
             ),
-
-           // SizedBox(height: 25),
+            ),
             (!widget.lazyLoad && widget.isFromPropertyDetail)
                 ? Text('Loading')
                 : SizedBox.shrink(),
