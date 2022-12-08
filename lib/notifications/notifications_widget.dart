@@ -36,6 +36,20 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'Notifications'});
     checkInternetStatus();
+    fetchFirstTenNotifications();
+  }
+  Future fetchFirstTenNotifications() async{
+    var response = await FirebaseProvider.fetchFirstList();
+    List notifications= response.toList();
+    print(notifications);
+    print(response);
+    queryNotificationsRecord(
+      queryBuilder: (notificationsRecord) =>
+          notificationsRecord
+              .where('user_id',
+              isEqualTo: currentUserReference)
+              .orderBy('created_at', descending: true),
+    );
   }
 
   Future<void> checkInternetStatus() async {
@@ -567,3 +581,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
     );
   }
 }
+
+
+

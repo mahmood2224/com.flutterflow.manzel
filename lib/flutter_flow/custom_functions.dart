@@ -1597,5 +1597,25 @@ bool validateMobileNumber(String text)  {
     }
   }
 }
+class FirebaseProvider {
+  static Future<List<DocumentSnapshot>> fetchFirstList() async {
+    return (await FirebaseFirestore.instance
+        .collection("Notifications")
+        .orderBy('created_at')
+        .limit(10).get()).docs;
+  }
+
+  // Future<List<DocumentSnapshot>> fetchNextList(
+  //     List<DocumentSnapshot> documentList) async {
+  //   return (await Firestore.instance
+  //       .collection("movies")
+  //       .orderBy("rank")
+  //       .startAfterDocument(documentList[documentList.length - 1])
+  //       .limit(10)
+  //       .getDocuments())
+  //       .documents;
+  // }
+}
+
 
 
