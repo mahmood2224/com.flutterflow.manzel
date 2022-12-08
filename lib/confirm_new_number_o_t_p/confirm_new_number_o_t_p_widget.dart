@@ -61,7 +61,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
       }
     } else {
       ApiCallResponse? generateOtpResponse =
-          await OtpCalls.generateOtp(phoneNumber: widget.phoneNumber ?? '');
+      await OtpCalls.generateOtp(phoneNumber: widget.phoneNumber ?? '');
       if(generateOtpResponse.statusCode==403){
         unAuthorizedUser(context,mounted);
       }
@@ -147,11 +147,11 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                           'nzqyszrd' /* Confirm your mobile number */,
                         ),
                         style: FlutterFlowTheme.of(context).title1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              fontSize: 25,
-                              fontWeight: FontWeight.w800,
-                              useGoogleFonts: false,
-                            ),
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontSize: 25,
+                          fontWeight: FontWeight.w800,
+                          useGoogleFonts: false,
+                        ),
                       ),
                     ],
                   ),
@@ -166,11 +166,11 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                           '0qmluaen' /* We've sent you a 6 digital cod... */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300,
-                              useGoogleFonts: false,
-                            ),
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                          useGoogleFonts: false,
+                        ),
                       ),
                     ],
                   ),
@@ -188,11 +188,11 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
-                                  ),
+                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                useGoogleFonts: false,
+                              ),
                             )),
                       ),
                     ],
@@ -233,8 +233,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                       key: veriKey ?? '');
                                   if ((verifyOtpResponse.statusCode == 200)) {
                                     String tokenFromOtpSuccess =
-                                        OtpCalls.tokenFromOtp(
-                                            verifyOtpResponse.jsonBody);
+                                    OtpCalls.tokenFromOtp(
+                                        verifyOtpResponse.jsonBody);
                                     try {
                                       DateTime loginDate = DateTime.now();
                                       userCredential = await FirebaseAuth
@@ -259,34 +259,34 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                         var record = await maybeCreateUser(user);
                                         Future.delayed(
                                             const Duration(milliseconds: 200),
-                                            () async {
-                                          if (currentUserDocument!
+                                                () async {
+                                              if (currentUserDocument!
                                                   .status!.isEmpty ||
-                                              currentUserDocument!.status!
+                                                  currentUserDocument!.status!
                                                       .toLowerCase() ==
-                                                  'active') {
-                                            logFirebaseEvent('login');
-                                            final userUpdateData =
+                                                      'active') {
+                                                logFirebaseEvent('login');
+                                                final userUpdateData =
                                                 await createUserRecordData(
                                                     status: 'Active',
                                                     language:
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .languageCode,
+                                                    FFLocalizations.of(
+                                                        context)
+                                                        .languageCode,
                                                     lastLogin: loginDate,
                                                     deviceToken:await FirebaseMessagingUtils
                                                         .getPushNotificationToken() ,
                                                     isDeleted: 0);
-                                            if (currentUserDocument!
-                                                .status!.isEmpty) {
-                                              logFirebaseEvent('sign_up');
-                                              userUpdateData.addAll({
-                                                'created_time': loginDate
-                                              });
-                                              userUpdateData.addAll({
-                                                'last_login': loginDate
-                                              });
-                                            }
+                                                if (currentUserDocument!
+                                                    .status!.isEmpty) {
+                                                  logFirebaseEvent('sign_up');
+                                                  userUpdateData.addAll({
+                                                    'created_time': loginDate
+                                                  });
+                                                  userUpdateData.addAll({
+                                                    'last_login': loginDate
+                                                  });
+                                                }
 
                                                 await currentUserReference
                                                     ?.update(userUpdateData);
@@ -306,7 +306,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                   context.goNamedAuth(
                                                       'HomeScreen', mounted);
                                                 }
-                                                }  else {
+                                              }  else {
                                                    await showDialog(
                                                      context: context,
                                                      builder: (alertDialogContext) {
@@ -369,7 +369,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                   entry?.remove();
                                   if (userCredential == null) {
                                     _showOtpError.value =
-                                    "You entered OTP incorrect";
+                                        "You entered OTP incorrect";
                                     return;
                                   }
 
