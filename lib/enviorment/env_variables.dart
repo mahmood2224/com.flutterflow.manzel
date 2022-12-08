@@ -10,6 +10,7 @@ class EnvVariables {
   String _sendbirdAppId = '';
   String _basicAuthUserName = '';
   String _basicAuthPassword = '';
+  String _sentryEnvironment ='';
 
 
   EnvVariables._();
@@ -22,7 +23,7 @@ class EnvVariables {
     _sendbirdAppId = dotenv.get('SENDBIRD_APP_ID', fallback: '');
     _basicAuthUserName = dotenv.get('BASIC_AUTH_USER_NAME', fallback: '');
     _basicAuthPassword = dotenv.get('BASIC_AUTH_PASSWORD', fallback: '');
-
+    _sentryEnvironment = dotenv.get('SENTRY_ENVIRONMENT', fallback: '');
   }
 
 
@@ -36,6 +37,8 @@ class EnvVariables {
   String get basicAuthUserName => _basicAuthUserName;
 
   String get basicAuthPassword => _basicAuthPassword;
+
+  String get sentryEnvironment => _sentryEnvironment;
 
 
 }
