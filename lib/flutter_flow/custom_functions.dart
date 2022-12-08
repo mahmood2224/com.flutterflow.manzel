@@ -1592,117 +1592,128 @@ bool validateMobileNumber(String text)  {
     }
   }
 }
-class FirebaseProvider {
-  Future<List<DocumentSnapshot>> fetchFirstList() async {
-    return (await FirebaseFirestore.instance
-        .collection("Notifications")
-        .orderBy('created_at')
-        .limit(10).get()).docs;
-  }
-
-  Future<List<DocumentSnapshot>> fetchNextList(
-      List<DocumentSnapshot> documentList) async {
-    return (await FirebaseFirestore.instance
-        .collection("Notifications")
-        .orderBy('created_at').startAfterDocument(documentList[documentList.length - 1])
-        .limit(10)
-        .get()).docs;
-  }
-}
-class NotificationListBloc {
-  late FirebaseProvider firebaseProvider;
-
-  bool showIndicator = false;
-  List<DocumentSnapshot> documentList=[];
-
-  late BehaviorSubject<List> notificationController;
-
-  late BehaviorSubject<bool> showIndicatorController;
-
-
-
-  NotificationListBloc() {
-    notificationController = BehaviorSubject<List>();
-    showIndicatorController = BehaviorSubject<bool>();
-    firebaseProvider = FirebaseProvider();
-  }
-
-  Stream get getShowIndicatorStream => showIndicatorController.stream;
-
-  Stream<List> get notificationStream => notificationController.stream;
-
-/*This method will automatically fetch first 10 elements from the document list */
-  Future fetchFirstList() async {
-    try {
-      documentList = await firebaseProvider.fetchFirstList();
-      print(documentList);
-     List notificationsListNotificationsRecordList=[];
-      await Future.forEach (documentList,(dynamic notification) async{
-         await notification.reference.get().then((res) {
-          notificationsListNotificationsRecordList.add(res.data());
-          // int count= (res.data() as dynamic)['is_read'];
-          // notificationReadCount.add(count);
-          //print('NotificationReadCount${notificationReadCount[0]}');
-        },
-        );
-      });
-      notificationController.sink.add(notificationsListNotificationsRecordList);
-      try {
-        if (documentList.length == 0) {
-          notificationController.sink.addError("No Data Available");
-        }
-      } catch (e) {}
-    } on SocketException {
-      notificationController.sink.addError(SocketException("No Internet Connection"));
-    } catch (e) {
-      print(e.toString());
-      notificationController.sink.addError(e);
-    }
-  }
-
-/*This will automatically fetch the next 10 elements from the list*/
-  fetchNextMovies() async {
-    try {
-      updateIndicator(true);
-      List<DocumentSnapshot> newDocumentList =
-      await firebaseProvider.fetchNextList(documentList);
-      documentList.addAll(newDocumentList);
-      notificationController.sink.add(documentList);
-      try {
-        if (documentList.length == 0) {
-          notificationController.sink.addError("No Data Available");
-          updateIndicator(false);
-        }
-      } catch (e) {
-        updateIndicator(false);
-      }
-    } on SocketException {
-      notificationController.sink.addError(SocketException("No Internet Connection"));
-      updateIndicator(false);
-    } catch (e) {
-      updateIndicator(false);
-      print(e.toString());
-      notificationController.sink.addError(e);
-    }
-  }
-
-/*For updating the indicator below every list and paginate*/
-  updateIndicator(bool value) async {
-    showIndicator = value;
-    showIndicatorController.sink.add(value);
-  }
-
-  void dispose() {
-    notificationController.close();
-    showIndicatorController.close();
-  }
-}
-class Notification {
-  String? messageEn;
-  int? isRead;
-
-  Notification({this.messageEn,this.isRead});
-}
+// class FirebaseProvider {
+//   Future<List<DocumentSnapshot>> fetchFirstList() async {
+//     return (await FirebaseFirestore.instance
+//         .collection("Notifications")
+//         .orderBy('created_at')
+//         .limit(7).get()).docs;
+//   }
+//
+//   Future<List<DocumentSnapshot>> fetchNextList(
+//       List<DocumentSnapshot> documentList) async {
+//     return (await FirebaseFirestore.instance
+//         .collection("Notifications")
+//         .orderBy('created_at').startAfterDocument(documentList[documentList.length - 1])
+//         .limit(10)
+//         .get()).docs;
+//   }
+//
+// }
+// class NotificationListBloc {
+//   late FirebaseProvider firebaseProvider;
+//
+//   bool showIndicator = false;
+//   List<DocumentSnapshot> documentList=[];
+//
+//   late BehaviorSubject<List> notificationController;
+//
+//   late BehaviorSubject<bool> showIndicatorController;
+//
+//
+//
+//   NotificationListBloc() {
+//     notificationController = BehaviorSubject<List>();
+//     showIndicatorController = BehaviorSubject<bool>();
+//     firebaseProvider = FirebaseProvider();
+//   }
+//
+//   Stream get getShowIndicatorStream => showIndicatorController.stream;
+//
+//   Stream<List> get notificationStream => notificationController.stream;
+//
+// /*This method will automatically fetch first 10 elements from the document list */
+//   Future fetchFirstList() async {
+//     try {
+//       documentList = await firebaseProvider.fetchFirstList();
+//       print(documentList);
+//      List notificationsListNotificationsRecordList=[];
+//       await Future.forEach (documentList,(dynamic notification) async{
+//          await notification.reference.get().then((res) {
+//            documentList.forEach((notification) {
+//              //     int count= (res.data() as dynamic)['is_read'];
+//              //     notificationReadCount.add(count);
+//              //     print('NotificationReadCount${notificationReadCount[0]}');
+//             // notification.data()
+//            });
+//           notificationsListNotificationsRecordList.add(res.data());
+//           // int count= (res.data() as dynamic)['is_read'];
+//           // notificationReadCount.add(count);
+//           //print('NotificationReadCount${notificationReadCount[0]}');
+//         },
+//         );
+//       });
+//       notificationController.sink.add(notificationsListNotificationsRecordList);
+//       try {
+//         if (documentList.length == 0) {
+//           notificationController.sink.addError("No Data Available");
+//         }
+//       } catch (e) {}
+//     } on SocketException {
+//       notificationController.sink.addError(SocketException("No Internet Connection"));
+//     } catch (e) {
+//       print(e.toString());
+//       notificationController.sink.addError(e);
+//     }
+//   }
+//
+// /*This will automatically fetch the next 10 elements from the list*/
+//   fetchNextMovies() async {
+//     try {
+//       updateIndicator(true);
+//       List<DocumentSnapshot> newDocumentList =
+//       await firebaseProvider.fetchNextList(documentList);
+//       documentList.addAll(newDocumentList);
+//       notificationController.sink.add(documentList);
+//       try {
+//         if (documentList.length == 0) {
+//           notificationController.sink.addError("No Data Available");
+//           updateIndicator(false);
+//         }
+//       } catch (e) {
+//         updateIndicator(false);
+//       }
+//     } on SocketException {
+//       notificationController.sink.addError(SocketException("No Internet Connection"));
+//       updateIndicator(false);
+//     } catch (e) {
+//       updateIndicator(false);
+//       print(e.toString());
+//       notificationController.sink.addError(e);
+//     }
+//   }
+//
+// /*For updating the indicator below every list and paginate*/
+//   updateIndicator(bool value) async {
+//     showIndicator = value;
+//     showIndicatorController.sink.add(value);
+//   }
+//
+//   void dispose() {
+//     notificationController.close();
+//     showIndicatorController.close();
+//   }
+// }
+//
+// class Notification {
+//   String? messageEn;
+//   int? isRead;
+//   String? notificationType;
+//   int? propertyId;
+//   int? orderId;
+//
+//   Notification({this.messageEn,this.isRead,this.notificationType,this.propertyId,this.orderId});
+// }
 
 
 

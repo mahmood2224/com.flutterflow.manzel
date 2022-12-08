@@ -44,14 +44,14 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await EnvVariables.instance.initialise();
     if(EnvVariables.instance.sentryEnvironment=='dev'){
-      SentryAnalytics().init(logOnServer: true);
+     // SentryAnalytics().init(logOnServer: true);
     }
     await Firebase.initializeApp();
     // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   //  runApp(MyApp());
   }, (error, stackTrace) {
     if(EnvVariables.instance.sentryEnvironment=='dev'){
-      SentryAnalytics().captureException(error, stackTrace);
+    //  SentryAnalytics().captureException(error, stackTrace);
     }
     FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
    // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
