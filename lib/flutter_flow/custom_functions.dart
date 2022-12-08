@@ -1615,26 +1615,38 @@ class NotificationListBloc {
   bool showIndicator = false;
   List<DocumentSnapshot> documentList=[];
 
-  late BehaviorSubject<List<DocumentSnapshot>> notificationController;
+  late BehaviorSubject<List> notificationController;
 
   late BehaviorSubject<bool> showIndicatorController;
 
+
+
   NotificationListBloc() {
-    notificationController = BehaviorSubject<List<DocumentSnapshot>>();
+    notificationController = BehaviorSubject<List>();
     showIndicatorController = BehaviorSubject<bool>();
     firebaseProvider = FirebaseProvider();
   }
 
   Stream get getShowIndicatorStream => showIndicatorController.stream;
 
-  Stream<List<DocumentSnapshot>> get notificationStream => notificationController.stream;
+  Stream<List> get notificationStream => notificationController.stream;
 
 /*This method will automatically fetch first 10 elements from the document list */
   Future fetchFirstList() async {
     try {
       documentList = await firebaseProvider.fetchFirstList();
       print(documentList);
-      notificationController.sink.add(documentList);
+     List notificationsListNotificationsRecordList=[];
+      await Future.forEach (documentList,(dynamic notification) async{
+         await notification.reference.get().then((res) {
+          notificationsListNotificationsRecordList.add(res.data());
+          // int count= (res.data() as dynamic)['is_read'];
+          // notificationReadCount.add(count);
+          //print('NotificationReadCount${notificationReadCount[0]}');
+        },
+        );
+      });
+      notificationController.sink.add(notificationsListNotificationsRecordList);
       try {
         if (documentList.length == 0) {
           notificationController.sink.addError("No Data Available");
@@ -1684,6 +1696,12 @@ class NotificationListBloc {
     notificationController.close();
     showIndicatorController.close();
   }
+}
+class Notification {
+  String? messageEn;
+  int? isRead;
+
+  Notification({this.messageEn,this.isRead});
 }
 
 
