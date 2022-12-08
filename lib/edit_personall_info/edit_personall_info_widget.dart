@@ -863,6 +863,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       bankValue),
                                   sakaniLoanCoverage:
                                       functions.sakaniLoan(choiceChipsValue),
+                                  updateAt: DateTime.now(),
                                 );
 
                                 await FirebaseFirestore.instance.collection('User').where(
@@ -961,6 +962,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     bankValue),
                                 sakaniLoanCoverage:
                                     functions.sakaniLoan(choiceChipsValue),
+                                  updateAt: DateTime.now(),
                               );
 
                               await FirebaseFirestore.instance.collection('User').where(

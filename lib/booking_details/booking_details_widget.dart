@@ -1089,28 +1089,6 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                       ? Color(0xFF57636C)
                                                       : Color(0xFF000000)),
                                         ),
-                                        if (functions.conditionalVisibility(
-                                            getJsonField(
-                                              columnOrderDetailsResponse
-                                                  ?.jsonBody,
-                                                r'''$.result.order_status''',
-                                              ).toString(),
-                                              'ownership_transferred'))
-                                            Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'ubpscf43' /* Ownership transferred successf... */,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'AvenirArabic',
-                                                        fontSize: 12,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                            ),
                                         ],
                                       ),
                                     ),

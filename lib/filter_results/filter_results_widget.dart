@@ -553,7 +553,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                               });
                                                             });
                                                           }
-                                                          //autoplayVal = false;
                                                         }
                                                       },
                                                       child:

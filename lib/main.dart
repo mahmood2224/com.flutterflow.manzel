@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
     // });
     handleDynamicLinks();
     //   _initializeFlutterFire();
-   // _initializeFlutterFire();
+    _initializeFlutterFire();
   }
 
   @override
@@ -122,7 +122,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       // Else only enable it in non-debug builds.
       // You could additionally extend this to allow users to opt-in.
-   //   await FirebaseCrashlytics.instance
+      //   await FirebaseCrashlytics.instance
       //    .setCrashlyticsCollectionEnabled(!kDebugMode);
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     }

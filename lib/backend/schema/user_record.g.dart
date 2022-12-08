@@ -151,6 +151,13 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.updatedAt;
+    if (value != null) {
+      result
+        ..add('updated_at')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -249,6 +256,10 @@ class _$UserRecordSerializer implements StructuredSerializer<UserRecord> {
           result.deviceToken = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'updated_at':
+          result.updatedAt = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -302,6 +313,8 @@ class _$UserRecord extends UserRecord {
   @override
   final String? deviceToken;
   @override
+  final DateTime? updatedAt;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UserRecord([void Function(UserRecordBuilder)? updates]) =>
@@ -327,6 +340,7 @@ class _$UserRecord extends UserRecord {
       this.sakaniLoanCoverage,
       this.lastLogin,
       this.deviceToken,
+      this.updatedAt,
       this.ffRef})
       : super._();
 
@@ -360,6 +374,7 @@ class _$UserRecord extends UserRecord {
         sakaniLoanCoverage == other.sakaniLoanCoverage &&
         lastLogin == other.lastLogin &&
         deviceToken == other.deviceToken &&
+        updatedAt == other.updatedAt &&
         ffRef == other.ffRef;
   }
 
@@ -383,25 +398,25 @@ class _$UserRecord extends UserRecord {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            $jc($jc(0, email.hashCode),
-                                                                                uid.hashCode),
-                                                                            createdTime.hashCode),
-                                                                        phoneNumber.hashCode),
-                                                                    employmentStatus.hashCode),
-                                                                bank.hashCode),
-                                                            monthlyIncome.hashCode),
-                                                        photoUrl.hashCode),
-                                                    status.hashCode),
-                                                name.hashCode),
-                                            countryCode.hashCode),
-                                        roleId.hashCode),
-                                    gender.hashCode),
-                                displayName.hashCode),
-                            language.hashCode),
-                        isDeleted.hashCode),
-                    sakaniLoanCoverage.hashCode),
-                lastLogin.hashCode),
-            deviceToken.hashCode),
+                                                                            $jc($jc($jc(0, email.hashCode), uid.hashCode),
+                                                                                createdTime.hashCode),
+                                                                            phoneNumber.hashCode),
+                                                                        employmentStatus.hashCode),
+                                                                    bank.hashCode),
+                                                                monthlyIncome.hashCode),
+                                                            photoUrl.hashCode),
+                                                        status.hashCode),
+                                                    name.hashCode),
+                                                countryCode.hashCode),
+                                            roleId.hashCode),
+                                        gender.hashCode),
+                                    displayName.hashCode),
+                                language.hashCode),
+                            isDeleted.hashCode),
+                        sakaniLoanCoverage.hashCode),
+                    lastLogin.hashCode),
+                deviceToken.hashCode),
+            updatedAt.hashCode),
         ffRef.hashCode));
   }
 
@@ -427,6 +442,7 @@ class _$UserRecord extends UserRecord {
           ..add('sakaniLoanCoverage', sakaniLoanCoverage)
           ..add('lastLogin', lastLogin)
           ..add('deviceToken', deviceToken)
+          ..add('updatedAt', updatedAt)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -514,6 +530,10 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
   String? get deviceToken => _$this._deviceToken;
   set deviceToken(String? deviceToken) => _$this._deviceToken = deviceToken;
 
+  DateTime? _updatedAt;
+  DateTime? get updatedAt => _$this._updatedAt;
+  set updatedAt(DateTime? updatedAt) => _$this._updatedAt = updatedAt;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -544,6 +564,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
       _sakaniLoanCoverage = $v.sakaniLoanCoverage;
       _lastLogin = $v.lastLogin;
       _deviceToken = $v.deviceToken;
+      _updatedAt = $v.updatedAt;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -586,6 +607,7 @@ class UserRecordBuilder implements Builder<UserRecord, UserRecordBuilder> {
             sakaniLoanCoverage: sakaniLoanCoverage,
             lastLogin: lastLogin,
             deviceToken: deviceToken,
+            updatedAt: updatedAt,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
