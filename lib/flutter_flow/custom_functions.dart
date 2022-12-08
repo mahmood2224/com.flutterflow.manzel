@@ -361,18 +361,21 @@ String offerScreenTime(
         return "${monthsAgo} Months ago";
       }
       return "${dayDiffrence} Days ago";
-    } else if (hrsDiffrence > 0) {
+    }
+    else if (hrsDiffrence > 0) {
       if (hrsDiffrence == 1) {
         return '1 hr ago';
       }
       return "${hrsDiffrence} hrs ago";
-    } else if (minuteDiffrence > 0) {
+    }
+    else if (minuteDiffrence > 0) {
       return "${minuteDiffrence} min ago";
-    } else {
+    }
+    else {
       return "${secondDiffence} sec ago";
     }
   } else {
-    //Day diffrence
+    //in arabic
     if (dayDiffrence > 0) {
       if ((dayDiffrence >= 365) && ((dayDiffrence % 365) > 0)) {
         yearsAgo = dayDiffrence % 365;
@@ -384,7 +387,8 @@ String offerScreenTime(
         }
         if (yearsAgo >= 3 && yearsAgo <= 10) {
           return "منذ ${yearsAgo} سنوات";
-        } else {
+        }
+        else {
           return "قبل ${yearsAgo} سنة";
         }
       }
@@ -410,11 +414,11 @@ String offerScreenTime(
       }
       if (dayDiffrence >= 3 && dayDiffrence <= 10) {
         return "منذ ${dayDiffrence} أيام";
-      } else {
+      }
+      else {
         return "منذ ${dayDiffrence} يوم";
       }
     }
-    //Hour diffrence
     else if (hrsDiffrence > 0) {
       if (hrsDiffrence == 1) {
         return "قبل ساعة";
@@ -428,7 +432,6 @@ String offerScreenTime(
         return "منذ ${hrsDiffrence} ساعة";
       }
     }
-    //Minute diffrence
     else if (minuteDiffrence > 0) {
       if (minuteDiffrence == 1) {
         return "قبل دقيقة";
@@ -441,19 +444,9 @@ String offerScreenTime(
       } else {
         return "منذ ${minuteDiffrence} دقيقة";
       }
-    } else {
-      //Second diffrence
-      if (secondDiffence == 1) {
-        return "قبل ثانية";
-      }
-      if (secondDiffence == 2) {
-        return "قبل ثانيتين";
-      }
-      if (secondDiffence >= 3 && secondDiffence <= 10) {
-        return "منذ ${secondDiffence} ثواني";
-      } else {
-        return "منذ ${secondDiffence} ثانية";
-      }
+    }
+    else {
+      return "منذ ${secondDiffence} ثانية";
     }
   }
 }

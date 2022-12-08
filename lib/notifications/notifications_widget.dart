@@ -165,18 +165,12 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                   .orderBy('created_at', descending: true),
                         ),
                         builder: (context, snapshot) {
-                          // print(
-                          //     'NotificationReadCount${notificationReadCount?[0]??''}');
                           notificationsListNotificationsRecordList = snapshot.data;
                           notificationsListNotificationsRecordList?.forEach((notification) {
                             notification.reference.get().then((res) {
                               int count= (res.data() as dynamic)['is_read'];
                               notificationReadCount.add(count);
                               print('NotificationReadCount${notificationReadCount[0]}');
-                              //(res.data() as dynamic)['is_read'];
-                              // setState((){});
-                              // print(
-                              //     'NotificationReadCount$notificationReadCount');
                             },
                             );
                           });

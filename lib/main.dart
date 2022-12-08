@@ -47,13 +47,14 @@ void main() async {
       SentryAnalytics().init(logOnServer: true);
     }
     await Firebase.initializeApp();
-     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   //  runApp(MyApp());
   }, (error, stackTrace) {
     if(EnvVariables.instance.sentryEnvironment=='dev'){
       SentryAnalytics().captureException(error, stackTrace);
     }
     FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
+   // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
@@ -484,10 +485,5 @@ class _NavBarPageState extends State<NavBarPage> {
         ],
       ),
     );
-  }
-}
-void validate_age(int age) {
-  if(age < 0) {
-    throw new FormatException();
   }
 }
