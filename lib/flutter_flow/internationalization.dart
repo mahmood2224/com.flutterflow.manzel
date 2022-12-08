@@ -2108,6 +2108,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'You are logged-in, in some other device',
       'ar': 'لقد قمت بتسجيل الدخول ، في بعض الأجهزة الأخرى',
     },
+    'markAll':{
+      'en': 'Mark all as read',
+      'ar': 'اشر عليها بانها قرات',
+    },
     'emailAlreadyExists': {
       'en': 'Email Already Exists',
       'ar': 'البريد الالكتروني موجود بالفعل',

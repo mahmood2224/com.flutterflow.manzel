@@ -848,18 +848,18 @@ String notificationsDateTime(
   DateTime? timestamp,
 ) {
   if (locale == "en") {
-    if ((DateFormat.yMd().format(timestamp!)) ==
+    if ((DateFormat.yMd().format(timestamp??DateTime.now())) ==
         (DateFormat.yMd().format(DateTime.now()))) {
       return "Today";
-    } else if ((DateFormat.yMd().format(timestamp)) ==
+    } else if ((DateFormat.yMd().format(timestamp??DateTime.now())) ==
         (DateFormat.yMd().format(DateTime.now()))) {
       return "Yesterday";
     } else {
-      String result = DateFormat.d().format(timestamp) +
+      String result = DateFormat.d().format(timestamp??DateTime.now()) +
           " " +
-          DateFormat.MMM().format(timestamp) +
+          DateFormat.MMM().format(timestamp??DateTime.now()) +
           " " +
-          DateFormat.y().format(timestamp);
+          DateFormat.y().format(timestamp??DateTime.now());
       return result;
     }
   } else {
