@@ -23,12 +23,16 @@ class NotificationsWidget extends StatefulWidget {
 
 class _NotificationsWidgetState extends State<NotificationsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  List<NotificationsRecord>? notificationsListNotificationsRecordList;
+  //List<NotificationsRecord>? notificationsListNotificationsRecordList;
+  List notificationsListNotificationsRecordList=[];
   Stream? queryNotifications;
   bool? isInternetAvailable;
   bool isPageLoading = true;
   var notificationsUpdateData;
   List<int> notificationReadCount=[];
+  NotificationListBloc? notificationListBloc;
+  ScrollController controller = ScrollController();
+  List? notificationDetails;
 
   @override
   void initState() {
@@ -36,21 +40,23 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'Notifications'});
     checkInternetStatus();
-    fetchFirstTenNotifications();
+    notificationListBloc = NotificationListBloc();
+    notificationListBloc?.fetchFirstList();
+    controller.addListener(_scrollListener);
   }
-  Future fetchFirstTenNotifications() async{
-    var response = await FirebaseProvider.fetchFirstList();
-    List notifications= response.toList();
-    print(notifications);
-    print(response);
-    queryNotificationsRecord(
-      queryBuilder: (notificationsRecord) =>
-          notificationsRecord
-              .where('user_id',
-              isEqualTo: currentUserReference)
-              .orderBy('created_at', descending: true),
-    );
-  }
+  // Future fetchFirstTenNotifications() async{
+  //   var response = await FirebaseProvider().fetchFirstList();
+  //   List notifications= response.toList();
+  //   print(notifications);
+  //   print(response);
+  //   queryNotificationsRecord(
+  //     queryBuilder: (notificationsRecord) =>
+  //         notificationsRecord
+  //             .where('user_id',
+  //             isEqualTo: currentUserReference)
+  //             .orderBy('created_at', descending: true),
+  //   );
+  // }
 
   Future<void> checkInternetStatus() async {
     isInternetAvailable = await isInternetConnected();
@@ -156,18 +162,20 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                     if (isPageLoading) {
                       return SizedBox();
                     } else {
-                      return StreamBuilder<List<NotificationsRecord>>(
-                        stream: queryNotificationsRecord(
-                          queryBuilder: (notificationsRecord) =>
-                              notificationsRecord
-                                  .where('user_id',
-                                      isEqualTo: currentUserReference)
-                                  .orderBy('created_at', descending: true),
-                        ),
+                      return StreamBuilder<List>(
+                        stream: notificationListBloc?.notificationStream,
+                        // queryNotificationsRecord(
+                        //   queryBuilder: (notificationsRecord) =>
+                        //       notificationsRecord
+                        //           .where('user_id',
+                        //               isEqualTo: currentUserReference)
+                        //           .orderBy('created_at', descending: true),
+                        // ),
                         builder: (context, snapshot) {
-                          notificationsListNotificationsRecordList = snapshot.data;
-                          notificationsListNotificationsRecordList?.forEach((notification) {
+                          notificationDetails = snapshot.data;
+                          notificationDetails?.forEach((notification) {
                             notification.reference.get().then((res) {
+                              notificationsListNotificationsRecordList.add(res.data());
                               int count= (res.data() as dynamic)['is_read'];
                               notificationReadCount.add(count);
                               print('NotificationReadCount${notificationReadCount[0]}');
@@ -187,7 +195,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                               ),
                             );
                           }
-
                           if (notificationsListNotificationsRecordList
                                   ?.isEmpty ??
                               false) {
@@ -203,7 +210,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                 ),
                               ),
                             );
-                          } else if (notificationsListNotificationsRecordList ==
+                          }
+                          else if (notificationsListNotificationsRecordList ==
                               null) {
                             WidgetsBinding.instance.addPostFrameCallback((_) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -574,7 +582,16 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
       ),
     );
   }
+  void _scrollListener() {
+    if (controller.offset >= controller.position.maxScrollExtent &&
+        !controller.position.outOfRange) {
+      print("at the end of list");
+      notificationListBloc?.fetchNextMovies();
+    }
+  }
 }
+
+
 
 
 
