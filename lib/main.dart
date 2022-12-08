@@ -48,7 +48,6 @@ void main() async {
     }
     await Firebase.initializeApp();
      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    validate_age(-10);
   //  runApp(MyApp());
   }, (error, stackTrace) {
     if(EnvVariables.instance.sentryEnvironment=='dev'){
