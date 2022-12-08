@@ -117,7 +117,7 @@ class _HelpAndSupportBottomSheetWidgetState
                               await Clipboard.setData(
                                       ClipboardData(text: "Support@manzel.app"))
                                   .then((_) {
-                                Navigator.pop(context);
+                               // Navigator.pop(context);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content: Text(FFAppState().locale ==

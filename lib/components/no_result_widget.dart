@@ -34,8 +34,8 @@ class _NoResultWidgetState extends State<NoResultWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0, 3, 0, 0),
                 child: Image.asset(
                   'assets/images/NoResultsFound.png',
-                  width: 40,
-                  height: 37,
+                  width: 65,
+                  height: 65,
                   fit: BoxFit.contain,
                 ),
               ),

@@ -168,7 +168,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+        //  onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -198,7 +198,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 controller: fullNameController,
                                 autofocus: false,
                                 obscureText: false,
-                                onTap: () {
+                                // onTap: () {
+                                //   setState(() {});
+                                // },
+                                onChanged: (value){
                                   setState(() {});
                                 },
                                 decoration: InputDecoration(
@@ -271,7 +274,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                             child: TextFormField(
-                              onTap: () {
+                              // onTap: () {
+                              //   setState(() {});
+                              // },
+                              onChanged: (value){
                                 setState(() {});
                               },
                               controller: emailController,

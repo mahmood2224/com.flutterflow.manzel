@@ -35,6 +35,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   int count = 0;
   bool? isInternetAvailable;
   bool isApiCalled = false;
+  bool isEnterEnglishNumberSnackNotShown = true;
 
   @override
   void initState() {
@@ -210,9 +211,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     Duration(milliseconds: 2000),
                                     () => setState(() {}),
                                   );
-                                  if (count == val.length && val.length < 9) {
+                                  if ((count == val.length && val.length < 9)&&isEnterEnglishNumberSnackNotShown) {
+                                    isEnterEnglishNumberSnackNotShown=false;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
+                                          duration: Duration(milliseconds: 3000),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryRed,
@@ -222,6 +225,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                 : 'الرجاء إدخال الأرقام الإنجليزية!')));
                                   }
                                   count = val.length;
+
+                                //  count++;
                                 },
                                 autofocus: true,
                                 inputFormatters: [

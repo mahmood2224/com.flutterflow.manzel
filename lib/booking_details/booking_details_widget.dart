@@ -1089,28 +1089,6 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                       ? Color(0xFF57636C)
                                                       : Color(0xFF000000)),
                                         ),
-                                        if (functions.conditionalVisibility(
-                                            getJsonField(
-                                              columnOrderDetailsResponse
-                                                  ?.jsonBody,
-                                                r'''$.result.order_status''',
-                                              ).toString(),
-                                              'ownership_transferred'))
-                                            Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'ubpscf43' /* Ownership transferred successf... */,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'AvenirArabic',
-                                                        fontSize: 12,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                            ),
                                         ],
                                       ),
                                     ),
@@ -1454,7 +1432,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                       valueOrDefault<String>(
                                         getJsonField(
                                           columnOrderDetailsResponse?.jsonBody,
-                                          r'''$.result.property_data.property_address''',
+                                          r'''$.result.property_data.property_city''',
                                         ).toString(),
                                         'null',
                                       ),
@@ -1466,6 +1444,27 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                             fontWeight: FontWeight.w300,
                                             useGoogleFonts: false,
                                           ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        3, 3, 0, 0),
+                                    child: Text(
+                                      valueOrDefault<String>(
+                                        getJsonField(
+                                          columnOrderDetailsResponse?.jsonBody,
+                                          r'''$.result.property_data.property_district''',
+                                        ).toString(),
+                                        'null',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                        fontFamily: 'AvenirArabic',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                        useGoogleFonts: false,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -1587,24 +1586,31 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                 size: 16,
                                               ),
                                             ),
-                                            Text(
-                                              getJsonField(
-                                                columnOrderDetailsResponse
-                                                    ?.jsonBody,
-                                                r'''$.result.property_data.property_size''',
-                                              ).toString(),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryColor,
-                                                    fontWeight: FontWeight.w500,
-                                                    useGoogleFonts: false,
-                                                  ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                .fromSTEB(0, 0, FFAppState().locale ==
+                                                  'ar'
+                                                  ? 9
+                                                  : 0, 0),
+                                              child: Text(
+                                                getJsonField(
+                                                  columnOrderDetailsResponse
+                                                      ?.jsonBody,
+                                                  r'''$.result.property_data.property_size''',
+                                                ).toString(),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily:
+                                                          'Sofia Pro By Khuzaimah',
+                                                      color: FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryColor,
+                                                      fontWeight: FontWeight.w500,
+                                                      useGoogleFonts: false,
+                                                    ),
+                                              ),
                                             ),
                                             Text(
                                               FFLocalizations.of(context)

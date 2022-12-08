@@ -374,7 +374,7 @@ String offerScreenTime(
   } else {
     //Day diffrence
     if (dayDiffrence > 0) {
-      if ((dayDiffrence % 365) > 0) {
+      if ((dayDiffrence >= 365) && ((dayDiffrence % 365) > 0)) {
         yearsAgo = dayDiffrence % 365;
         if (yearsAgo == 1) {
           return "قبل سنة";
@@ -388,7 +388,7 @@ String offerScreenTime(
           return "قبل ${yearsAgo} سنة";
         }
       }
-      if ((dayDiffrence % 30) > 0) {
+      if ((dayDiffrence > 30) && ((dayDiffrence % 30) > 0)) {
         monthsAgo = dayDiffrence % 30;
         if (monthsAgo == 1) {
           return "منذ شهر";
@@ -498,7 +498,7 @@ String myPropertiesFormatDate(
   }
   if (locale == "en") {
     bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
-    return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime)}. ${DateFormat.y().format(bookingTime)}';
+    return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime).substring(0,3)} ${DateFormat.y().format(bookingTime)}';
   } else {
     bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
     return '${DateFormat.d("ar_SA").format(bookingTime)} ${DateFormat.MMMM("ar_SA").format(bookingTime)}. ${DateFormat.y("ar_SA").format(bookingTime)}';
@@ -1519,6 +1519,7 @@ String intToString(int? num) {
 }
 
 Future<bool> isInternetConnected() async {
+  return true;
   var connectivityResult = await (Connectivity().checkConnectivity());
   if (connectivityResult == ConnectivityResult.mobile ||
       connectivityResult == ConnectivityResult.wifi) {
@@ -1555,3 +1556,33 @@ void unAuthorizedUser(context,mounted) async {
  // _navigate();
   //context.goNamed('Login', mounted);
 }
+
+
+
+class CurrentRemainingTime {
+  final String? days;
+  final String? hours;
+  final String? minutes;
+  final String? seconds;
+
+  CurrentRemainingTime({this.days, this.hours, this.minutes, this.seconds});
+
+  @override
+  String toString() {
+    return 'CurrentRemainingTime{days: $days, hours: $hours, min: $minutes, sec: $seconds';
+  }
+}
+
+
+CurrentRemainingTime milliSecondsToDay(value){
+  int seconds = (int.parse(value.toString())/1000).floor();
+  int days= (seconds~/(3600 *24));
+  int remainingSeconds= (seconds%(3600 *24));
+  int hours = (remainingSeconds~/3600);
+  remainingSeconds = (remainingSeconds%3600);
+  int minutes = remainingSeconds~/60;
+  remainingSeconds = (remainingSeconds%60);
+  return CurrentRemainingTime(days: days.toString().padLeft(2, '0'),hours: hours.toString().padLeft(2, '0'),minutes:minutes.toString().padLeft(2, '0'),seconds: remainingSeconds.toString().padLeft(2, '0'));
+}
+
+

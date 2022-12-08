@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -104,7 +105,7 @@ class _MyAppState extends State<MyApp> {
     // });
     handleDynamicLinks();
     //   _initializeFlutterFire();
-    _initializeFlutterFire();
+   // _initializeFlutterFire();
   }
 
   @override
@@ -433,9 +434,10 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Manzel.my_properties_nav_bar,
-              size: 20,
+            icon: SvgPicture.asset(
+              'assets/images/my_properties_icon.svg',
+              height: 20,
+              color: currentIndex == 1 ? Color(0xFF3b95d6) : Colors.black,
             ),
             label: FFLocalizations.of(context).getText(
               'lhqoha7d' /* My Properties */,
