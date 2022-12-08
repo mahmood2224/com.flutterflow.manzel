@@ -2111,7 +2111,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'markAll':{
       'en': 'Mark all as read',
       'ar': 'اشر عليها بانها قرات',
-    }
+    },
     'emailAlreadyExists': {
       'en': 'Email Already Exists',
       'ar': 'البريد الالكتروني موجود بالفعل',
