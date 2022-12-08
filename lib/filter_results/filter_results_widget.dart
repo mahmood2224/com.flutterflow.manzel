@@ -534,6 +534,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                                     .play();
                                                                 isPaused =
                                                                     false;
+
                                                               setState(() {
                                                                 videoPlayers.forEach(
                                                                         (otherPlayer) {
@@ -554,7 +555,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                           }
                                                           //autoplayVal = false;
                                                         }
-
                                                       },
                                                       child:
                                                           FlutterFlowVideoPlayer(
@@ -667,7 +667,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                           .setVolume(100);
                                                       isMuted.value = false;
                                                     }
-
                                                   }
                                                 },
                                               ),

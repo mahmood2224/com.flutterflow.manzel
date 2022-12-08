@@ -2112,5 +2112,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Mark all as read',
       'ar': 'اشر عليها بانها قرات',
     }
+    'emailAlreadyExists': {
+      'en': 'Email Already Exists',
+      'ar': 'البريد الالكتروني موجود بالفعل',
+    },
+    'all':{
+      'en': 'All',
+      'ar': 'الكل',
+    }
   },
 ].reduce((a, b) => a..addAll(b));

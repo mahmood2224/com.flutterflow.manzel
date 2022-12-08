@@ -454,12 +454,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   serializeParam(
                                                       videoPlayers.length,
                                                       ParamType.int),
-                                              //     'cityList':serializeParam(
-                                              // getJsonField(
-                                              //       apiData!.jsonBody,
-                                              //       r'''$.attributes.property_status''',
-                                              //     )
-                                              //     , ParamType.JSON)
                                             }.withoutNulls,
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
@@ -616,35 +610,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     Future.delayed(Duration(seconds: 2));
                     propertiesItem['isBookmarked'] =
                         favourites[propertiesItem['id'].toString()] ?? false;
-
-                    // ListView.builder(
-                    // padding: EdgeInsets.zero,
-                    // shrinkWrap: true,
-                    // scrollDirection: Axis.vertical,
-                    // itemCount: properties.length,
-                    // itemBuilder: (context, propertiesIndex) {
-                    //   final propertiesItem = properties[propertiesIndex];
-                    //   return
-
-                    // if (propertiesIndex == (videocontrollerMap.length) + 1) {
-                    //   Future.delayed(const Duration(seconds: 8), () {
-                    //     if (_currentController != null &&
-                    //         videoControllerSet!.isNotEmpty) {
-                    //       _currentController = videoControllerSet?.first;
-                    //       _currentController?.play();
-                    //     }
-                    //   });
-                    //}
                     return Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                       child: InkWell(
                         onTap: () async {
-                          // if (!functions.conditionalVisibility(
-                          //     getJsonField(
-                          //       propertiesItem,
-                          //       r'''$.attributes.property_status''',
-                          //     ).toString(),
-                          //     'Soon')) {
                           videoPlayers[currentPropertyindex].pause();
                           logFirebaseEvent('view_item');
                           logFirebaseEvent(
@@ -739,13 +708,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                           otherPlayer
                                                               .setVolume(0.0);
                                                           otherPlayer.pause();
-                                                          // var dataSource = otherPlayer.dataSource;
-                                                          // otherPlayer.dispose();
-                                                          // otherPlayer =
-                                                          //     VideoPlayerController.network(dataSource);
 
                                                         } else {
-
                                                         }
                                                       }
                                                     });
@@ -770,6 +734,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                     .play();
                                                 currentPropertyindex =
                                                     propertiesIndex;
+
                                                 setState(() {
                                                   videoPlayers
                                                       .forEach((otherPlayer) {
@@ -781,7 +746,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         otherPlayer
                                                             .setVolume(0.0);
                                                         otherPlayer.pause();
-
                                                       }
                                                     }
                                                   });
@@ -790,8 +754,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             }
 
                                           },
-
-
                                           child: FlutterFlowVideoPlayer(
                                             posterImage: getJsonField(
                                               propertiesItem,
@@ -825,7 +787,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         //),
                                       ),
                                     ),
-
                                   Align(
                                     alignment: AlignmentDirectional(0.9, 0.8),
                                     child: InkWell(
@@ -1279,56 +1240,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       ),
                                     ),
                                   ),
-                                  // if (functions.conditionalVisibility(
-                                  //     getJsonField(
-                                  //       propertiesItem,
-                                  //       r'''$.attributes.property_status''',
-                                  //     ).toString(),
-                                  //     'Available'))
-                                  //   Align(
-                                  //     alignment:
-                                  //         AlignmentDirectional(-0.9, -0.89),
-                                  //     child: Container(
-                                  //       width: 80,
-                                  //       height: 26,
-                                  //       decoration: BoxDecoration(
-                                  //         color: FlutterFlowTheme.of(context).secondaryGreen,
-                                  //         borderRadius:
-                                  //             BorderRadius.circular(7),
-                                  //       ),
-                                  //       child: Row(
-                                  //         mainAxisSize: MainAxisSize.max,
-                                  //         mainAxisAlignment:
-                                  //             MainAxisAlignment.center,
-                                  //         children: [
-                                  //           Padding(
-                                  //             padding: EdgeInsetsDirectional
-                                  //                 .fromSTEB(10, 1, 10, 1),
-                                  //             child: Text(
-                                  //               FFLocalizations.of(context)
-                                  //                   .getText(
-                                  //                 '2cud1oqj' /* Available */,
-                                  //               ),
-                                  //               style:
-                                  //                   FlutterFlowTheme.of(context)
-                                  //                       .bodyText1
-                                  //                       .override(
-                                  //                         fontFamily:
-                                  //                             'AvenirArabic',
-                                  //                         color: FlutterFlowTheme
-                                  //                                 .of(context)
-                                  //                             .white,
-                                  //                         fontSize: 13,
-                                  //                         fontWeight:
-                                  //                             FontWeight.w500,
-                                  //                         useGoogleFonts: false,
-                                  //                       ),
-                                  //             ),
-                                  //           ),
-                                  //         ],
-                                  //       ),
-                                  //     ),
-                                  //   ),
                                   if (functions.conditionalVisibility(
                                       getJsonField(
                                         propertiesItem,
