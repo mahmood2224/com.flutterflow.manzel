@@ -484,6 +484,10 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                         },
                                                         child:
                                                             FlutterFlowVideoPlayer(
+                                                              posterImage: getJsonField(
+                                                                propertiesItem,
+                                                                r'''$.attributes.video_poster_image''',
+                                                              ),
                                                         path: getJsonField(
                                                           propertiesItem,
                                                           r'''$.attributes.video_manifest_uri''',

@@ -211,11 +211,14 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                 entry = showOverlay(context);
                                 if (isFromUpdate ?? false) {
                                   ApiCallResponse verifyOtpResponse =
-                                      await OtpCalls.verifyPhone(
-                                          phoneNumber: widget.phoneNumber ?? '',
-                                          otp: otp,
-                                          key: veriKey ?? '');
+                                  await OtpCalls.verifyPhone(
+                                      phoneNumber: widget.phoneNumber ?? '',
+                                      otp: otp,
+                                      key: veriKey ?? '');
                                   if ((verifyOtpResponse.statusCode == 200)) {
+                                    createUserRecordData(
+                                       updateAt:DateTime.now() ,
+                                    );
                                   } else if (verifyOtpResponse.statusCode ==
                                       403) {
                                     unAuthorizedUser(context,mounted);
@@ -224,20 +227,20 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                   context.pop();
                                 } else {
                                   ApiCallResponse verifyOtpResponse =
-                                      await OtpCalls.verifyOtp(
-                                          phoneNumber: widget.phoneNumber ?? '',
-                                          otp: otp,
-                                          key: veriKey ?? '');
+                                  await OtpCalls.verifyOtp(
+                                      phoneNumber: widget.phoneNumber ?? '',
+                                      otp: otp,
+                                      key: veriKey ?? '');
                                   if ((verifyOtpResponse.statusCode == 200)) {
                                     String tokenFromOtpSuccess =
-                                        OtpCalls.tokenFromOtp(
-                                            verifyOtpResponse.jsonBody);
+                                    OtpCalls.tokenFromOtp(
+                                        verifyOtpResponse.jsonBody);
                                     try {
                                       DateTime loginDate = DateTime.now();
                                       userCredential = await FirebaseAuth
                                           .instance
                                           .signInWithCustomToken(
-                                              tokenFromOtpSuccess);
+                                          tokenFromOtpSuccess);
                                       print("Sign-in successful.");
                                       if (FirebaseAuth
                                           .instance.currentUser !=
@@ -253,127 +256,96 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                       }
                                       if (userCredential != null) {
                                         final user = userCredential.user;
-                                        var record = await maybeCreateUser(user);
+                                        var record =
+                                        await maybeCreateUser(user);
+                                        print(record);
                                         Future.delayed(
                                             const Duration(milliseconds: 200),
-                                            () async {
-                                          if (currentUserDocument!
+                                                () async {
+                                              if (currentUserDocument!
                                                   .status!.isEmpty ||
-                                              currentUserDocument!.status!
+                                                  currentUserDocument!.status!
                                                       .toLowerCase() ==
-                                                  'active') {
-                                            logFirebaseEvent('login');
-                                            final userUpdateData =
+                                                      'active') {
+                                                logFirebaseEvent('login');
+                                                final userUpdateData =
                                                 await createUserRecordData(
                                                     status: 'Active',
                                                     language:
-                                                        FFLocalizations.of(
-                                                                context)
-                                                            .languageCode,
+                                                    FFLocalizations.of(
+                                                        context)
+                                                        .languageCode,
                                                     lastLogin: loginDate,
                                                     deviceToken:await FirebaseMessagingUtils
                                                         .getPushNotificationToken() ,
                                                     isDeleted: 0);
-                                            if (currentUserDocument!
-                                                .status!.isEmpty) {
-                                              logFirebaseEvent('sign_up');
-                                              userUpdateData.addAll({
-                                                'created_time': loginDate
-                                              });
-                                              userUpdateData.addAll({
-                                                'last_login': loginDate
-                                              });
-                                            }
-
-                                                final userNotificationRecord =
-                                                createUsersDeviceTokenRecordData(
-                                                  deviceToken:
-                                                  await FirebaseMessagingUtils
-                                                      .getPushNotificationToken(),
-                                                  userId: currentUserReference,
-                                                );
-                                                final QuerySnapshot result =
-                                                await UsersDeviceTokenRecord
-                                                    .collection
-                                                    .where('user_id',
-                                                    isEqualTo:
-                                                    currentUserReference)
-                                                    .limit(1)
-                                                    .get();
-
-                                                if (result.docs.isNotEmpty) {
-                                                  await UsersDeviceTokenRecord.collection
-                                                      .doc(result.docs[0].id)
-                                                      .update(userNotificationRecord);
-                                                } else {
-                                                  await UsersDeviceTokenRecord.collection
-                                                      .doc()
-                                                      .set(userNotificationRecord);
+                                                if (currentUserDocument!
+                                                    .status!.isEmpty) {
+                                                  logFirebaseEvent('sign_up');
+                                                  userUpdateData.addAll({
+                                                    'created_time': loginDate
+                                                  });
+                                                  userUpdateData.addAll({
+                                                    'last_login': loginDate
+                                                  });
                                                 }
-                                                if (FirebaseAuth.instance.currentUser !=
-                                                    null) {
-                                                  final user = await FirebaseAuth
-                                                      .instance.currentUser;
-                                                  final idToken =
-                                                  await user?.getIdToken();
-                                                  FFAppState().authToken = idToken!;
-                                                } else {
 
-                                            }
+                                                await currentUserReference
+                                                    ?.update(userUpdateData);
 
-                                            if (currentUserDisplayName
+                                                if (currentUserDisplayName
                                                     .isEmpty &&
-                                                currentUserDocument!
-                                                    .name!.isEmpty) {
-                                              final _sendbird = await SendbirdSdk(
-                                                  appId:
+                                                    currentUserDocument!
+                                                        .name!.isEmpty) {
+                                                  final _sendbird = await SendbirdSdk(
+                                                      appId:
                                                       "${EnvVariables.instance.sendbirdAppId}");
-                                              final _ = await _sendbird
-                                                  .connect(currentUserUid);
-                                              context.goNamedAuth(
-                                                  'AddingInformation', mounted);
-                                            } else {
-                                              context.goNamedAuth(
-                                                  'HomeScreen', mounted);
-                                            }
-                                          } else {
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                    'OTPBlocked',
-                                                  )),
-                                                  content: Text(
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                    'OTPBlockedText',
-                                                  )),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () async {
-                                                        await signOut();
-                                                        Navigator.pop(
-                                                            alertDialogContext);
-                                                        context.pop();
-                                                      },
-                                                      child: Text(
+                                                  final _ = await _sendbird
+                                                      .connect(currentUserUid);
+                                                  context.goNamedAuth(
+                                                      'AddingInformation', mounted);
+                                                } else {
+                                                  context.goNamedAuth(
+                                                      'HomeScreen', mounted);
+                                                }
+                                              } else {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder: (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text(
                                                           FFLocalizations.of(
-                                                                  context)
+                                                              context)
                                                               .getText(
-                                                        'OTPOk',
-                                                      )),
-                                                    ),
-                                                  ],
+                                                            'OTPBlocked',
+                                                          )),
+                                                      content: Text(
+                                                          FFLocalizations.of(
+                                                              context)
+                                                              .getText(
+                                                            'OTPBlockedText',
+                                                          )),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () async {
+                                                            await signOut();
+                                                            Navigator.pop(
+                                                                alertDialogContext);
+                                                            context.pop();
+                                                          },
+                                                          child: Text(
+                                                              FFLocalizations.of(
+                                                                  context)
+                                                                  .getText(
+                                                                'OTPOk',
+                                                              )),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
                                                 );
-                                              },
-                                            );
-                                          }
-                                        });
+                                              }
+                                            });
                                       }
                                       context.goNamedAuth(
                                           'HomeScreen', mounted);

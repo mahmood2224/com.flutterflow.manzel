@@ -1486,6 +1486,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               functions.formatAmount(valueOrDefault<String>(
                                                                                 getJsonField(
                                                                                   activeOffersItem,
+
                                                                                   r'''$.offered_installment_amount''',
                                                                                 ).toString(),
                                                                                 '0',
