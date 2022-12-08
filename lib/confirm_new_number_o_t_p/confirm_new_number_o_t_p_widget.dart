@@ -219,35 +219,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     createUserRecordData(
                                        updateAt:DateTime.now() ,
                                     );
-                                    // String tokenFromOtpSuccess =
-                                    //     OtpCalls.tokenFromOtp(
-                                    //         verifyOtpResponse.jsonBody);
-                                    // try {
-                                    //   userCredential = await FirebaseAuth
-                                    //       .instance
-                                    //       .signInWithCustomToken(
-                                    //           tokenFromOtpSuccess);
-                                    //   final user = await FirebaseAuth
-                                    //       .instance.currentUser;
-                                    //   final idToken = await user?.getIdToken();
-                                    //   FFAppState().authToken = idToken!;
-                                    //   print(idToken);
-                                    //   print("Sign-in successful.");
-                                    //   print(userCredential);
-                                    // } on FirebaseAuthException catch (e) {
-                                    //   switch (e.code) {
-                                    //     case "invalid-custom-token":
-                                    //       print(
-                                    //           "The supplied token is not a Firebase custom auth token.");
-                                    //       break;
-                                    //     case "custom-token-mismatch":
-                                    //       print(
-                                    //           "The supplied token is for a different Firebase project.");
-                                    //       break;
-                                    //     default:
-                                    //       print("Unkown error.");
-                                    //   }
-                                    // }
                                   } else if (verifyOtpResponse.statusCode ==
                                       403) {
                                     unAuthorizedUser(context,mounted);
@@ -337,37 +308,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                   context.goNamedAuth(
                                                       'HomeScreen', mounted);
                                                 }
-                                                //  else {
-                                                //   await showDialog(
-                                                //     context: context,
-                                                //     builder: (alertDialogContext) {
-                                                //       return AlertDialog(
-                                                //         title: Text(FFLocalizations.of(context).getText(
-                                                //           'OTPDeactivated' ,
-                                                //         )),
-                                                //         content: Text(FFLocalizations.of(context).getText(
-                                                //           'OTPDeactivatedText' ,
-                                                //         )),
-                                                //         actions: [
-                                                //           TextButton(
-                                                //             onPressed: () async{
-                                                //               await signOut();
-                                                //               Navigator.pop(alertDialogContext);
-                                                //               context.pop();
-                                                //             },
-                                                //             child: Text(FFLocalizations.of(context).getText(
-                                                //               'OTPOk' ,
-                                                //             )),
-                                                //           ),
-                                                //         ],
-                                                //       );
-                                                //       },
-                                                //   );
-                                                // }
                                               } else {
-                                                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                                //   content: Text('Your account is not active. Kindly connect to support for more information.'),
-                                                // ));
                                                 await showDialog(
                                                   context: context,
                                                   builder: (alertDialogContext) {
@@ -406,7 +347,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                               }
                                             });
                                       }
-                                      print(userCredential);
                                       context.goNamedAuth(
                                           'HomeScreen', mounted);
                                     } on FirebaseAuthException catch (e) {
