@@ -276,6 +276,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                         child: ElevatedButton(
                           onPressed: () async {
                             if(isButtonTappable){
+                              isLoading.value = true;
                               isInternetAvailable = await isInternetConnected();
                               setState(() {});
                               logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
@@ -308,6 +309,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                         });
                                   } else if (updatePhoneResponse.statusCode ==
                                       403) {
+                                    isLoading.value=false;
                                     functions.unAuthorizedUser(context, mounted);
                                   }
                                   else {
