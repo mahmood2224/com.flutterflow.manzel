@@ -52,6 +52,12 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool? isProfileUpdated;
+  FocusNode nameNoFocusNode = FocusNode();
+  FocusNode emailNoFocusNode = FocusNode();
+  bool isNameValid = true;
+  bool isEmailValid = true;
+
+
 
   @override
   void initState() {
@@ -63,6 +69,19 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
         parameters: {'screen_name': 'EditPersonallInfo'});
     emplymentTypeCall();
     getBanksCall();
+    nameNoFocusNode.addListener(() {
+      if(!nameNoFocusNode.hasFocus){
+        isNameValid= isNameValidFunction(fullNameController!.text);
+        setState((){});
+      }
+    });
+    emailNoFocusNode.addListener(() {
+      if(!emailNoFocusNode.hasFocus){
+        isEmailValid= isEmailValidFunction(emailController!.text);
+        setState((){});
+      }
+    });
+
   }
 
   Future<void> emplymentTypeCall() async {
@@ -195,6 +214,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                             child: AuthUserStreamWidget(
                               child: TextFormField(
+                                focusNode: nameNoFocusNode,
                                 controller: fullNameController,
                                 autofocus: false,
                                 obscureText: false,
@@ -202,6 +222,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 //   setState(() {});
                                 // },
                                 onChanged: (value){
+                                 isNameValid= isNameValidFunction(value);
+                                  //focus node error handling
+                                  //button handling
+
                                   setState(() {});
                                 },
                                 decoration: InputDecoration(
@@ -253,6 +277,29 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                     ),
                   ),
                 ),
+                Directionality(
+                  textDirection: material.TextDirection.ltr,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      if (!isNameValid)
+                        Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'pleaseEnterValidName' /* Please enter a valid Phone num... */,
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                color: Colors.red,
+                                fontWeight: FontWeight.w300,
+                                useGoogleFonts: false,
+                              ),
+                            )
+                        ),
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 25),
                   child: Container(
@@ -274,10 +321,12 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                             child: TextFormField(
+                              focusNode: emailNoFocusNode,
                               // onTap: () {
                               //   setState(() {});
                               // },
                               onChanged: (value){
+                                isEmailValid = isEmailValidFunction(value);
                                 setState(() {});
                               },
                               controller: emailController,
@@ -328,6 +377,29 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                         ),
                       ],
                     ),
+                  ),
+                ),
+                Directionality(
+                  textDirection: material.TextDirection.ltr,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      if (!isEmailValid)
+                        Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'pleaseEnterValidEmail' /* Please enter a valid Email... */,
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                color: Colors.red,
+                                fontWeight: FontWeight.w300,
+                                useGoogleFonts: false,
+                              ),
+                            )
+                        ),
+                    ],
                   ),
                 ),
                 Divider(

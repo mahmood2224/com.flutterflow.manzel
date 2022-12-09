@@ -1590,5 +1590,27 @@ bool validateMobileNumber(String text)  {
     }
   }
 }
-
+bool isNameValidFunction(String text) {
+  final RegExp _nameRegex = RegExp(
+      r'^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+(?:\s[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+)*$');
+  if (text != null || text != '') {
+    if (_nameRegex.hasMatch(text)) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+}
+bool isEmailValidFunction(String text) {
+  final RegExp _emialRegex = RegExp(
+      r"^[a-z0-9.a-z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-z0-9]+\.[a-z]+");
+  if (text != null || text != '') {
+    if (_emialRegex.hasMatch(text)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  return false;
+}
 
