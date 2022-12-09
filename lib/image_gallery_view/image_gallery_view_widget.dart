@@ -95,8 +95,8 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 6, 0, 6),
                       child: Container(
-                        width: 34,
-                        height: 34,
+                        width: 40,
+                        height: 40,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).white,
                           shape: BoxShape.circle,
@@ -142,8 +142,8 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                   'manzel://manzel.com${GoRouter.of(context).location}');
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 40,
+                              width: 40,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.grey.shade200,width:1),
                                 color: Colors.white,
@@ -159,7 +159,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                               ),
                             ),
                           ),
-                          SizedBox(width: 16,),
+                          SizedBox(width: 20,),
                           InkWell(
                             onTap: () async {
                               logFirebaseEvent('add_to_wishlist');
@@ -274,8 +274,8 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                               setState(() {});
                             },
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 40,
+                              width: 40,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.grey.shade200,width:1),
                                   color: (fav[widget.propertyId.toString()] ??

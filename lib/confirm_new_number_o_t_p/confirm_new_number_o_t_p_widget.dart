@@ -217,7 +217,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                       key: veriKey ?? '');
                                   if ((verifyOtpResponse.statusCode == 200)) {
                                     createUserRecordData(
-                                       updateAt:DateTime.now() ,
+                                      updateAt:DateTime.now() ,
                                     );
                                   } else if (verifyOtpResponse.statusCode ==
                                       403) {
@@ -320,30 +320,30 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                       content: Text(
                                                           FFLocalizations.of(
                                                               context)
-                                                              .getText(
-                                                            'OTPBlockedText',
-                                                          )),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () async {
-                                                            await signOut();
-                                                            Navigator.pop(
-                                                                alertDialogContext);
-                                                            context.pop();
-                                                          },
-                                                          child: Text(
-                                                              FFLocalizations.of(
+                                                          .getText(
+                                                    'OTPBlockedText',
+                                                  )),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () async {
+                                                        await signOut();
+                                                        Navigator.pop(
+                                                            alertDialogContext);
+                                                        context.pop();
+                                                      },
+                                                      child: Text(
+                                                          FFLocalizations.of(
                                                                   context)
-                                                                  .getText(
-                                                                'OTPOk',
-                                                              )),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
+                                                              .getText(
+                                                        'OTPOk',
+                                                      )),
+                                                    ),
+                                                  ],
                                                 );
-                                              }
-                                            });
+                                              },
+                                            );
+                                          }
+                                        });
                                       }
                                       context.goNamedAuth(
                                           'HomeScreen', mounted);

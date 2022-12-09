@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mapbox_search/mapbox_search.dart';
 
 import '../flutter_flow/internationalization.dart';
 
@@ -50,8 +49,6 @@ class _TimerWidgetState extends State<TimerWidget> {
   @override
   Widget build(BuildContext context) {
     String strDigits(int n) => n.toString().padLeft(2, '0');
-    final days = strDigits(start!.inDays.remainder(60));
-    final hours = strDigits(start!.inHours.remainder(60));
     final minutes = strDigits(start!.inMinutes.remainder(60));
     final seconds = strDigits(start!.inSeconds.remainder(60));
     //return Text('Resend OTP${minutes.toString()}:${seconds.toString()}',style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).primaryColor,fontWeight: FontWeight.w700),);
@@ -67,7 +64,7 @@ class _TimerWidgetState extends State<TimerWidget> {
             fontWeight: FontWeight.w300),
         children: <TextSpan>[
           TextSpan(
-            text: '${days.toString()}${hours.toString()}${minutes.toString()}:${seconds.toString()}',
+            text: '${minutes.toString()}:${seconds.toString()}',
             style: TextStyle(
               fontFamily: 'Sofia Pro By Khuzaimah',
               fontSize: 16,
@@ -79,3 +76,4 @@ class _TimerWidgetState extends State<TimerWidget> {
     );
   }
 }
+

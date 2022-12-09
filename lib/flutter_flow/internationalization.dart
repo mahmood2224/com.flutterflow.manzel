@@ -74,8 +74,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'بالنقر فوق متابعة ، فإنك توافق على',
     },
     '5t0jhzug': {
-      'en': 'terms & conditions',
-      'ar': 'الشروط و الأحكام',
+      'en': 'terms and conditions',
+      'ar': 'الأحكام والشروط',
     },
     '5ard5tmn': {
       'en': ' & ',
@@ -1786,6 +1786,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Deal completed successfully',
       'ar': 'تمت الصفقة بنجاح',
     },
+    'ubpscf43': {
+      'en': 'Ownership transferred successfully ',
+      'ar': 'تم نقل الملكية بنجاح',
+    },
     'dd079ljk': {
       'en': 'Cancelled',
       'ar': 'ألغيت',
@@ -2108,9 +2112,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'You are logged-in, in some other device',
       'ar': 'لقد قمت بتسجيل الدخول ، في بعض الأجهزة الأخرى',
     },
-    'markAll':{
+    'markAll': {
       'en': 'Mark all as read',
       'ar': 'اشر عليها بانها قرات',
+    },
+    'enterValidPhone':{
+      'en': 'Please Enter Valid Mobile Number',
+      'ar': 'الرجاء إدخال رقم هاتف محمول صحيح',
     },
     'emailAlreadyExists': {
       'en': 'Email Already Exists',

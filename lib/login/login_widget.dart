@@ -33,15 +33,25 @@ class _LoginWidgetState extends State<LoginWidget> {
   OverlayEntry? entry;
   ValueNotifier<bool> isLoading = ValueNotifier<bool>(false);
   int count = 0;
+  FocusNode contactNoFocusNode = FocusNode();
   bool? isInternetAvailable;
   bool isApiCalled = false;
   bool isEnterEnglishNumberSnackNotShown = true;
+  bool isPhoneNumberValid=true;
+  bool isButtonTappable=false;
 
   @override
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Login'});
     phoneNumberController = TextEditingController();
+    contactNoFocusNode.addListener(() {
+      if(!contactNoFocusNode.hasFocus){
+        isPhoneNumberValid= validateMobileNumber(phoneNumberController!.text);
+        setState((){});
+
+      }
+    });
     checkInternetStatus();
   }
 
@@ -202,15 +212,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                             child: Directionality(
                               textDirection: material.TextDirection.ltr,
                               child: TextFormField(
-                                maxLength: 9,
+                                maxLength: 10,
                                 //buildCounter: Container(),
                                 controller: phoneNumberController,
                                 onChanged: (val) {
-                                  EasyDebounce.debounce(
-                                    'phoneNumberController',
-                                    Duration(milliseconds: 2000),
-                                    () => setState(() {}),
-                                  );
+                                  isButtonTappable = validateMobileNumber(phoneNumberController!.text);
                                   if ((count == val.length && val.length < 9)&&isEnterEnglishNumberSnackNotShown) {
                                     isEnterEnglishNumberSnackNotShown=false;
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -225,22 +231,23 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                 : 'الرجاء إدخال الأرقام الإنجليزية!')));
                                   }
                                   count = val.length;
-
+                                  setState((){});
                                 //  count++;
                                 },
                                 autofocus: true,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]'))
+                                 FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                                  LengthLimitingTextInputFormatter(10),
                                 ],
+                                focusNode: contactNoFocusNode,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   counterText: "",
-                                  hintText: "XXXXXXXXX",
-                                  prefixText:
-                                      FFLocalizations.of(context).getText(
-                                    'f4tpckti' /* +966 */,
-                                  ),
+                                  hintText: "05XXXXXXXX",
+                                  // prefixText:
+                                  //     FFLocalizations.of(context).getText(
+                                  //   'f4tpckti' /* +966 */,
+                                  // ),
                                   labelText:
                                       FFLocalizations.of(context).getText(
                                     '4m2r1iwr' /* Mobile Number */,
@@ -304,6 +311,29 @@ class _LoginWidgetState extends State<LoginWidget> {
                     ),
                   ),
                 ),
+                Directionality(
+                  textDirection: material.TextDirection.ltr,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      if (!isPhoneNumberValid)
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
+                          child: Text(
+                                FFLocalizations.of(context).getText(
+                                  'enterValidPhone' /* Please enter a valid Phone num... */,
+                                ),
+                            style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              color: Colors.red,
+                              fontWeight: FontWeight.w300,
+                              useGoogleFonts: false,
+                            ),
+                              )
+                        ),
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16, 110, 24, 0),
                   child: Row(
@@ -354,7 +384,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         },
                         child: Text(
                           FFLocalizations.of(context).getText(
-                            '5t0jhzug' /* terms & conditions */,
+                            '5t0jhzug' /* terms and conditions */,
                           ),
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
@@ -432,81 +462,109 @@ class _LoginWidgetState extends State<LoginWidget> {
                           height: 56,
                           child: ElevatedButton(
                             onPressed: () async {
-                              isInternetAvailable = await isInternetConnected();
-                              setState(() {});
-                              isLoading.value = true;
-                              logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
-                              if (functions.checkPhoneNumberFormat(
-                                  phoneNumberController!.text)) {
-                                // sendOTP
-                                logFirebaseEvent('sendOTP_sendOTP');
-                                final phoneNumberVal =
-                                    functions.getFormattedMobileNumber(
+                              if(isButtonTappable){
+                                isInternetAvailable = await isInternetConnected();
+                                setState(() {});
+                                isLoading.value = true;
+                                logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
+                                if (functions.checkPhoneNumberFormat(
+                                    phoneNumberController!.text)) {
+                                  // sendOTP
+                                  logFirebaseEvent('sendOTP_sendOTP');
+                                  final phoneNumberVal =
+                                  functions.getFormattedMobileNumber(
+                                      phoneNumberController!.text);
+                                  if (phoneNumberVal == null ||
+                                      phoneNumberVal.isEmpty ||
+                                      !phoneNumberVal.startsWith('+')) {
+                                    isLoading.value = false;
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            'Phone Number is required and has to start with +.'),
+                                      ),
+                                    );
+
+                                    return;
+                                  }
+                                  //entry = showOverlay(context);
+                                  if (isInternetAvailable ?? false) {
+                                    isApiCalled = true;
+                                    setState(() {});
+                                    ApiCallResponse generateOtpResponse =
+                                    await OtpCalls.generateOtp(
+                                        phoneNumber:
                                         phoneNumberController!.text);
-                                if (phoneNumberVal == null ||
-                                    phoneNumberVal.isEmpty ||
-                                    !phoneNumberVal.startsWith('+')) {
+                                    if ((generateOtpResponse.statusCode == 200) &&
+                                        (OtpCalls.generateSuccess(
+                                            generateOtpResponse.jsonBody)) ==
+                                            'success') {
+                                      String verificationKey =
+                                      OtpCalls.generateKey(
+                                          generateOtpResponse.jsonBody);
+                                      context.goNamedAuth(
+                                          'ConfirmNewNumberOTP', mounted,
+                                          queryParams: {
+                                            'phoneNumber':
+                                            phoneNumberController!.text,
+                                            'verificationKey': verificationKey
+                                          });
+                                      isApiCalled = false;
+                                      setState(() {});
+                                    }
+                                    else if((generateOtpResponse.statusCode == 403)){
+                                      unAuthorizedUser(context,mounted);
+                                    }
+                                    else{
+                                      isLoading.value = false;
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Something Went Wrong',
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle1,
+                                          ),
+                                          duration: Duration(milliseconds: 4000),
+                                          backgroundColor: FlutterFlowTheme.of(context).primaryRed,
+                                        ),
+                                      );
+                                    }
+
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          CommonAlertDialog(
+                                            onCancel: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                    );
+                                  }
+                                } else {
+                                  isApiCalled = false;
+                                  setState(() {});
+                                  // Invalid_phone_number_action
+                                  logFirebaseEvent(
+                                      'sendOTP_Invalid_phone_number_action');
                                   isLoading.value = false;
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                          'Phone Number is required and has to start with +.'),
-                                    ),
-                                  );
-
-                                  return;
-                                }
-                                //entry = showOverlay(context);
-                                if (isInternetAvailable ?? false) {
-                                  isApiCalled = true;
-                                  setState(() {});
-                                  ApiCallResponse generateOtpResponse =
-                                      await OtpCalls.generateOtp(
-                                          phoneNumber:
-                                              phoneNumberController!.text);
-                                  if ((generateOtpResponse.statusCode == 200) &&
-                                      (OtpCalls.generateSuccess(
-                                              generateOtpResponse.jsonBody)) ==
-                                          'success') {
-                                    String verificationKey =
-                                        OtpCalls.generateKey(
-                                            generateOtpResponse.jsonBody);
-                                    context.goNamedAuth(
-                                        'ConfirmNewNumberOTP', mounted,
-                                        queryParams: {
-                                          'phoneNumber':
-                                              phoneNumberController!.text,
-                                          'verificationKey': verificationKey
-                                        });
-                                    isApiCalled = false;
-                                    setState(() {});
-                                  }
-                                  else if((generateOtpResponse.statusCode == 403)){
-                                    unAuthorizedUser(context,mounted);
-                                  }
-
-                                } else {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        CommonAlertDialog(
-                                      onCancel: () {
-                                        Navigator.pop(context);
-                                      },
+                                        'The phone number format should be +966123456789',
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle1,
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor: Color(0xFF777777),
                                     ),
                                   );
                                 }
-                              } else {
-                                isApiCalled = false;
-                                setState(() {});
-                                // Invalid_phone_number_action
-                                logFirebaseEvent(
-                                    'sendOTP_Invalid_phone_number_action');
-                                isLoading.value = false;
+                              }else{
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      'The phone number format should be +966123456789',
+                                      'The phone number format should be 05XXXXXXXX',
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1,
                                     ),
@@ -515,6 +573,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   ),
                                 );
                               }
+
+
                             },
                             child: ValueListenableBuilder<bool>(
                               builder: (BuildContext context, bool value,
@@ -582,11 +642,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   MaterialStateProperty.resolveWith<Color?>(
                                 (states) {
                                   if (states.contains(MaterialState.disabled)) {
-                                    return FlutterFlowTheme.of(context)
-                                        .primaryColor;
+                                    return isButtonTappable?FlutterFlowTheme.of(context)
+                                        .primaryColor: Color(0xFF8C8C8C);
                                   }
-                                  return FlutterFlowTheme.of(context)
-                                      .primaryColor;
+                                  return isButtonTappable?FlutterFlowTheme.of(context)
+                                      .primaryColor:Color(0xFF8C8C8C);
                                 },
                               ),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -621,3 +681,4 @@ class _LoginWidgetState extends State<LoginWidget> {
     return overlayEntry;
   }
 }
+
