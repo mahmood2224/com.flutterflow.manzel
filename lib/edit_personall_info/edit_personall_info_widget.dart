@@ -916,7 +916,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     'updatePersonalInfo_updatePersonaInfo');
 
                                 final userUpdateData = createUserRecordData(
-                                  email: emailController!.text,
+                                  email: emailController!.text.toLowerCase(),
                                   name: fullNameController!.text,
                                   monthlyIncome: functions.monthlyIncome(
                                       'getIndex',
@@ -1015,7 +1015,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   'updatePersonalInfo_updatePersonaInfo');
 
                               final userUpdateData = createUserRecordData(
-                                email: emailController!.text,
+                                email: emailController!.text.toLowerCase(),
                                 name: fullNameController!.text,
                                 monthlyIncome: functions.monthlyIncome(
                                     'getIndex',
@@ -1038,7 +1038,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               );
 
                               await FirebaseFirestore.instance.collection('User').where(
-                                  'email', isEqualTo: emailController?.text).get().then(
+                                  'email', isEqualTo: emailController?.text.toLowerCase()).get().then(
                                     (res) {
                                   var data = res.docs;
                                   print("Successfully completed ${data.length}");
