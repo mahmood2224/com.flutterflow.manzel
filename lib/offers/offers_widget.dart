@@ -328,41 +328,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                       ),
                                 ),
                               ),
-                              // Padding(
-                              //   padding: EdgeInsetsDirectional.fromSTEB(
-                              //       20, 10, 20, 10),
-                              //   child: FFButtonWidget(
-                              //     onPressed: () async {
-                              //       logFirebaseEvent(
-                              //           'OFFERS_PAGE_LOGIN_BTN_ON_TAP');
-                              //       logFirebaseEvent('Button_Navigate-To');
-                              //
-                              //       context.pushNamed('Login');
-                              //     },
-                              //     text: FFLocalizations.of(context).getText(
-                              //       '1cb5at0r' /* Login */,
-                              //     ),
-                              //     options: FFButtonOptions(
-                              //       width: 215,
-                              //       height: 40,
-                              //       color: Color(0xFF2971FB),
-                              //       textStyle: FlutterFlowTheme.of(context)
-                              //           .subtitle2
-                              //           .override(
-                              //         fontFamily: 'AvenirArabic',
-                              //         color: FlutterFlowTheme.of(context)
-                              //             .white,
-                              //         fontSize: 14,
-                              //         useGoogleFonts: false,
-                              //       ),
-                              //       borderSide: BorderSide(
-                              //         color: Colors.transparent,
-                              //         width: 1,
-                              //       ),
-                              //       borderRadius: BorderRadius.circular(12),
-                              //     ),
-                              //   ),
-                              //),
                             ],
                           ),
                         ),
@@ -1331,32 +1296,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                               )
                                                                             ],
                                                                           ),
-                                                                          // Row(
-                                                                          //  // mainAxisAlignment: MainAxisAlignment.center,
-                                                                          // // mainAxisSize: MainAxisSize.min,
-                                                                          //   children: [
-                                                                          //     SizedBox(width: 95,),
-                                                                          //   SizedBox(width: 35,), Text('Hrs',style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                          //       fontFamily: 'AvenirArabic',
-                                                                          //       color: FlutterFlowTheme.of(context).primaryText,
-                                                                          //       fontSize: 8,
-                                                                          //       fontWeight: FontWeight.bold,
-                                                                          //       useGoogleFonts: false,
-                                                                          //     )),SizedBox(width: 35,), Text('min',style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                          //       fontFamily: 'AvenirArabic',
-                                                                          //       color: FlutterFlowTheme.of(context).primaryText,
-                                                                          //       fontSize: 8,
-                                                                          //       fontWeight: FontWeight.bold,
-                                                                          //       useGoogleFonts: false,
-                                                                          //     )),SizedBox(width: 35,), Text('seconds',style: FlutterFlowTheme.of(context).bodyText1.override(
-                                                                          //       fontFamily: 'AvenirArabic',
-                                                                          //       color: FlutterFlowTheme.of(context).primaryText,
-                                                                          //       fontSize: 8,
-                                                                          //       fontWeight: FontWeight.bold,
-                                                                          //       useGoogleFonts: false,
-                                                                          //     )),
-                                                                          //   ],
-                                                                          // )
                                                                         ],
                                                                       );
                                                                     },
