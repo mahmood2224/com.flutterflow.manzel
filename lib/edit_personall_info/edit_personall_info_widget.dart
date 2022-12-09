@@ -301,7 +301,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 25),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
                   child: Container(
                     width: double.infinity,
                     height: 65,

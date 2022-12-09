@@ -1193,8 +1193,8 @@ bool profileCompletetionCheck(
   String? loanCoverage,
 ) {
   // Add your function code here!
-  if ((email != null && email.isNotEmpty) &&
-      (name != null && name.isNotEmpty) &&
+  if ((isEmailValidFunction(email??'')) &&
+      (isNameValidFunction(name??'')) &&
       (bank != null && bank.isNotEmpty) &&
       (employment != null && employment.isNotEmpty) &&
       (income != null && income.isNotEmpty) &&
@@ -1601,11 +1601,12 @@ bool isNameValidFunction(String text) {
   }
   return false;
 }
+
 bool isEmailValidFunction(String text) {
-  final RegExp _emialRegex = RegExp(
-      r"^[a-z0-9.a-z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-z0-9]+\.[a-z]+");
+  final RegExp _emailRegex = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   if (text != null || text != '') {
-    if (_emialRegex.hasMatch(text)) {
+    if (_emailRegex.hasMatch(text)) {
       return true;
     } else {
       return false;
