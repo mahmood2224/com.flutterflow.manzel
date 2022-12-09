@@ -141,9 +141,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
            callBookmarkListApi();
         }
         final apiResponse = await PropertiesCall.call(
-          // city: FFAppState().filterCity,
-          // furnishingType: FFAppState().filterFurnishingType,
-          // propertyType: FFAppState().filterPropertyType,
           pageNumber: pageKey.toString(),
           pageSize: _pageSize.toString(),
           locale: FFAppState().locale,
@@ -499,104 +496,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   ],
                 ),
               ),
-              // Padding(
-              //   padding: EdgeInsetsDirectional.fromSTEB(15, 15, 16, 3),
-              //   child: Row(
-              //     mainAxisSize: MainAxisSize.max,
-              //     children: [
-              //       Image.asset(
-              //         'assets/images/Swap.png',
-              //         width: 20,
-              //         height: 20,
-              //         fit: BoxFit.cover,
-              //       ),
-              //       Padding(
-              //         padding: EdgeInsetsDirectional.fromSTEB(7, 0, 0, 0),
-              //         child: Text(
-              //           FFLocalizations.of(context).getText(
-              //             'fei6w05f' /* Sort By */,
-              //           ),
-              //           style: FlutterFlowTheme.of(context).bodyText2.override(
-              //                 fontFamily: 'AvenirArabic',
-              //                 color: Colors.black,
-              //                 fontWeight: FontWeight.w500,
-              //                 useGoogleFonts: false,
-              //               ),
-              //         ),
-              //       ),
-              //       Padding(
-              //         padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-              //         child: Container(
-              //           width: 101,
-              //           height: 30,
-              //           decoration: BoxDecoration(
-              //             color: Color(0x192971FB),
-              //             borderRadius: BorderRadius.circular(100),
-              //             border: Border.all(
-              //               color: FlutterFlowTheme.of(context).primaryColor,
-              //               width: 1,
-              //             ),
-              //           ),
-              //           child: Padding(
-              //             padding: EdgeInsetsDirectional.fromSTEB(0, 1, 0, 0),
-              //             child: Text(
-              //               FFLocalizations.of(context).getText(
-              //                 'jxwg61ha' /* Near to me */,
-              //               ),
-              //               textAlign: TextAlign.center,
-              //               style:
-              //                   FlutterFlowTheme.of(context).subtitle2.override(
-              //                         fontFamily: 'AvenirArabic',
-              //                         color: FlutterFlowTheme.of(context).primaryColor,
-              //                         fontSize: 13,
-              //                         fontWeight: FontWeight.bold,
-              //                         useGoogleFonts: false,
-              //                       ),
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // FutureBuilder<ApiCallResponse>(
-              //   future: PropertiesCall.call(
-              //     city: FFAppState().filterCity,
-              //     furnishingType: FFAppState().filterFurnishingType,
-              //     propertyType: FFAppState().filterPropertyType,
-              //   ),
-              //   builder: (context, snapshot) {
-              //     // Customize what your widget looks like when it's loading.
-              //     if (!snapshot.hasData) {
-              //       return Center(
-              //         child: SizedBox(
-              //           width: 50,
-              //           height: 50,
-              //           child: SpinKitRipple(
-              //             color: FlutterFlowTheme.of(context).primaryColor,
-              //             size: 50,
-              //           ),
-              //         ),
-              //       );
-              //     }
-              //  final listViewPropertiesResponse = snapshot.data;
-              //   return Builder(
-              //     builder: (context) {
-              //       final properties = PropertiesCall.properties(
-              //             (listViewPropertiesResponse?.jsonBody ?? ''),
-              //           )?.toList() ??
-              //           [];
-              //       if (properties.isEmpty) {
-              // return Center(
-              // child: NoResultsFoundWidget(
-              // titleText: 'No results found',
-              // subtitleText: '     abc',
-              // isBottonVisible: false,
-              // screenName: 'Results',
-              // ),
-              // );
-              // }
-              //
               PagedListView<int, dynamic>(
                 physics: NeverScrollableScrollPhysics(),
                 pagingController: _pagingController,
