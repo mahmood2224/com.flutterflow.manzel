@@ -1229,7 +1229,7 @@ String sakaniLoanInitialValue(
     if (loanCoverage == true) {
       return 'نعم';
     } else {
-      return 'رقم';
+      return 'لا';
     }
   }
 }
@@ -1512,7 +1512,7 @@ String intToString(int? num) {
 }
 
 Future<bool> isInternetConnected() async {
-  return true;
+ // return true;
   var connectivityResult = await (Connectivity().checkConnectivity());
   if (connectivityResult == ConnectivityResult.mobile ||
       connectivityResult == ConnectivityResult.wifi) {
