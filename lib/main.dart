@@ -47,7 +47,7 @@ void main() async {
       SentryAnalytics().init(logOnServer: true);
     }
     await Firebase.initializeApp();
-     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   //  runApp(MyApp());
   }, (error, stackTrace) {
     if(EnvVariables.instance.sentryEnvironment=='dev'){
@@ -156,9 +156,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      // navigatorObservers: [
-      //   SentryNavigatorObserver()
-      // ],
       debugShowCheckedModeBanner: false,
       title: 'Manzel',
       localizationsDelegates: [
@@ -484,10 +481,5 @@ class _NavBarPageState extends State<NavBarPage> {
         ],
       ),
     );
-  }
-}
-void validate_age(int age) {
-  if(age < 0) {
-    throw new FormatException();
   }
 }

@@ -281,42 +281,12 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
                               if (functions.checkPhoneNumberFormat(
                                   mobileNumberController!.text)) {
-                                // sendOTP
                                 logFirebaseEvent('sendOTP_sendOTP');
-                                // final phoneNumberVal =
-                                // functions.getFormattedMobileNumber(
-                                //     mobileNumberController!.text);
-                                // if (phoneNumberVal == null ||
-                                //     phoneNumberVal.isEmpty ||
-                                //     !phoneNumberVal.startsWith('+')) {
-                                //   isLoading.value = false;
-                                //   ScaffoldMessenger.of(context).showSnackBar(
-                                //     SnackBar(
-                                //       content: Text(
-                                //           'Phone Number is required and has to start with +.'),
-                                //     ),
-                                //   );
-                                //
-                                //   return;
-                                // }
-                                //entry = showOverlay(context);
                                 ApiCallResponse updatePhoneResponse = await OtpCalls.updatePhone(newPhoneNumber: mobileNumberController!.text);
                                 if((OtpCalls.generateSuccess(updatePhoneResponse.jsonBody))=='success') {
                                   String verificationKey = OtpCalls.generateKey(updatePhoneResponse.jsonBody);
                                   context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': mobileNumberController!.text,'verificationKey':verificationKey,'isFromUpdate': 'true'});
                                 }
-
-                                //generate  OYp call
-                                // await beginPhoneAuth(
-                                //   isFromUpdate: true,
-                                //   context: context,
-                                //   phoneNumber: phoneNumberVal,
-                                //   onCodeSent: () async {
-                                //     //    entry.remove();
-                                //     isLoading.value = false;
-                                //     context.pushNamed('ConfirmNewNumberOTP',queryParams:{'phoneNumber': phoneNumberVal,'isFromUpdate': 'true' });
-                                //   },
-                                // );
                                 if (isInternetAvailable ?? false) {
                                   isLoading.value = true;
                                   ApiCallResponse updatePhoneResponse =

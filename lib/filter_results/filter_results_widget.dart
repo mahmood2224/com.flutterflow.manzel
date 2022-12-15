@@ -553,7 +553,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                               });
                                                             });
                                                           }
-                                                          //autoplayVal = false;
                                                         }
                                                       },
                                                       child:
@@ -562,25 +561,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                               propertiesItem,
                                                               r'''$.attributes.video_poster_image''',
                                                             ),
-                                                        // videoControllerSet =
-                                                        //     videoControllerValue;
-                                                        //
-                                                        // print(
-                                                        //     "videoControllerSet : ${videoControllerSet}");
-                                                        // print(
-                                                        //     "videoControllerSet_items : ${videoControllerSet?.length}");
-                                                        // //print("videoControllerSet.last :  ${videoControllerSet.last}");
-                                                        // //print("propertiesIndex : ${propertiesIndex.toString()}");
-                                                        // //print("videocontrollerMap : ${videocontrollerMap.length}");
-                                                        // videocontrollerMap[propertiesIndex
-                                                        //         .toString()] =
-                                                        //     videoControllerSet!.last;
-                                                        // print(
-                                                        //     "videocontrollerMap : ${videocontrollerMap.length}");
-                                                        // _currentController =
-                                                        //     videocontrollerMap['0'];
-                                                        //
-
                                                         path: getJsonField(
                                                           propertiesItem,
                                                           r'''$.attributes.video_manifest_uri''',
