@@ -588,7 +588,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                     //  dispose();
                                                     FavouriteList.instance
                                                         .setFavourite(fav);
-                                                    context.pop();
+                                                    Navigator.pop(context);
                                                   },
                                                 ),
                                               ),
@@ -1283,7 +1283,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                         'ScreenName': serializeParam(
                                                                             "FloorPlan",
                                                                             ParamType
-                                                                                .String)
+                                                                                .String),
+                                                                            'jsonData':serializeParam(
+                                                                                columnPropertyResponse,
+                                                                                ParamType
+                                                                                    .JSON),
                                                                       }.withoutNulls,
                                                                     );
                                                                   },
@@ -3345,7 +3349,11 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                                       'ScreenName': serializeParam(
                                                                           "PropertyImages",
                                                                           ParamType
-                                                                              .String)
+                                                                              .String),
+                                                                          'jsonData':serializeParam(
+                                                                              columnPropertyResponse,
+                                                                              ParamType
+                                                                                  .JSON),
                                                                     }.withoutNulls,
                                                                   );
                                                                   GoRouter.of(

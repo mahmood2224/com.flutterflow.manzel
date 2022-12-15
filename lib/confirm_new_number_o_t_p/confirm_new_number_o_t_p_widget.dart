@@ -219,12 +219,21 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     createUserRecordData(
                                       updateAt:DateTime.now() ,
                                     );
+                                    entry?.remove();
+                                    context.pop();
                                   } else if (verifyOtpResponse.statusCode ==
                                       403) {
                                     unAuthorizedUser(context,mounted);
+                                    entry?.remove();
+                                    context.pop();
                                   }
-                                  entry?.remove();
-                                  context.pop();
+                                  else{
+                                    if (userCredential == null) {
+                                      _showOtpError.value = verifyOtpResponse.jsonBody['error'];
+                                      entry?.remove();
+                                      return;
+                                    }
+                                  }
                                 } else {
                                   ApiCallResponse verifyOtpResponse =
                                   await OtpCalls.verifyOtp(

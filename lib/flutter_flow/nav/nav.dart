@@ -256,7 +256,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ImageGalleryViewWidget(
                 propertyId: params.getParam('propertyId', ParamType.int),
                   screenName: params.getParam('screenName', ParamType.String),
-                  imageList: params.getParam('imageList', ParamType.JSON)
+                  imageList: params.getParam('imageList', ParamType.JSON),
+                  jsonData:  params.getParam('jsonData', ParamType.JSON),
               ),
             ),
             FFRoute(

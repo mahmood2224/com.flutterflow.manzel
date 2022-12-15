@@ -509,8 +509,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                             MainAxisSize.max,
                                                                         children: [
                                                                           Text(
-                                                                            functions.notificationsDateTime(FFAppState().locale,
-                                                                                notificationsListNotificationsRecord?.createdAt),
+                                                                            functions.offerScreenTime((notificationsListNotificationsRecord?.createdAt?.millisecondsSinceEpoch ?? 0)~/1000,FFAppState().locale),
                                                                             style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                   fontFamily: 'AvenirArabic',
                                                                                   color: FlutterFlowTheme.of(context).secondaryText,
