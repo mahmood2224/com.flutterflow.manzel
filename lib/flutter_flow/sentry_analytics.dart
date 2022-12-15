@@ -15,21 +15,25 @@ class SentryAnalytics {
   SentryAnalytics._internal();
 
   Future<void> init({bool logOnServer = false}) async {
-    _logOnServer = logOnServer;
-    if (_logOnServer) {
-      await SentryFlutter.init((options) {
-        options.dsn =
-        'https://27bb4cae130a4b4bb52cb929a4917066@o4504208651124736.ingest.sentry.io/4504208680747008';
-        options.tracesSampleRate = 1.0;
-        options.environment = EnvVariables.instance.sentryEnvironment;
-        options.enableAutoSessionTracking = true;
-        options.tracesSampler = (samplingContext) {
-          // return a number between 0 and 1 or null (to fallback to configured value)
-        };
-      });
-    } else {
-      print('Not initialising Sentry in debug mode');
-      //LoggingService().printLog(message: 'Not initialising Sentry in debug mode');
+    try {
+      _logOnServer = logOnServer;
+      if (_logOnServer) {
+        await SentryFlutter.init((options) {
+          options.dsn =
+          'https://27bb4cae130a4b4bb52cb929a4917066@o4504208651124736.ingest.sentry.io/4504208680747008';
+          options.tracesSampleRate = 1.0;
+          options.environment = EnvVariables.instance.sentryEnvironment;
+          options.enableAutoSessionTracking = true;
+          options.tracesSampler = (samplingContext) {
+            // return a number between 0 and 1 or null (to fallback to configured value)
+          };
+        });
+      } else {
+        print('Not initialising Sentry in debug mode');
+        //LoggingService().printLog(message: 'Not initialising Sentry in debug mode');
+      }
+    } on Exception catch (e) {
+      print(e);
     }
   }
 

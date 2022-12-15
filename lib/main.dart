@@ -53,7 +53,7 @@ void main() async {
     if(EnvVariables.instance.sentryEnvironment=='dev'){
       SentryAnalytics().captureException(error, stackTrace);
     }
-    FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
+  //  FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
