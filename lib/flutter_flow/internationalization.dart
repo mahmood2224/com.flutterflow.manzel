@@ -2114,7 +2114,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'markAll': {
       'en': 'Mark all as read',
-      'ar': 'اشر عليها بانها قرات',
+      'ar': 'وضع علامة مقروء للكل',
     },
     'enterValidPhone':{
       'en': 'Please Enter Valid Mobile Number',
