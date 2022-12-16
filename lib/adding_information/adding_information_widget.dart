@@ -1,3 +1,6 @@
+import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
+import 'package:manzel/flutter_flow/custom_functions.dart';
+
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
@@ -19,6 +22,7 @@ class AddingInformationWidget extends StatefulWidget {
 
 class _AddingInformationWidgetState extends State<AddingInformationWidget> {
   TextEditingController? fullNameController;
+  bool? isInternetAvailable;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -27,6 +31,20 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
     fullNameController = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AddingInformation'});
+  }
+
+  Future<void> checkInternetStatus() async {
+    isInternetAvailable = await isInternetConnected();
+    if (!(isInternetAvailable ?? false)) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
   }
 
   @override
@@ -60,12 +78,12 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           '3zqs9v1q' /* Add your information */,
                         ),
                         style: FlutterFlowTheme.of(context).title1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              color: Colors.black,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w800,
-                              useGoogleFonts: false,
-                            ),
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Colors.black,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w800,
+                          useGoogleFonts: false,
+                        ),
                       ),
                     ],
                   ),
@@ -99,33 +117,33 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText:
-                                          FFLocalizations.of(context).getText(
+                                      FFLocalizations.of(context).getText(
                                         '2xw55n00' /* Full name */,
                                       ),
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
-                                            color: Colors.black,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w300,
-                                            useGoogleFonts: false,
-                                          ),
+                                        fontFamily:
+                                        'Sofia Pro By Khuzaimah',
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w300,
+                                        useGoogleFonts: false,
+                                      ),
                                       hintText:
-                                          FFLocalizations.of(context).getText(
+                                      FFLocalizations.of(context).getText(
                                         'iegnrogi' /*   */,
                                       ),
                                       hintStyle: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
-                                            fontFamily:
-                                                'Sofia Pro By Khuzaimah',
-                                            color: Colors.black,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts: false,
-                                          ),
+                                        fontFamily:
+                                        'Sofia Pro By Khuzaimah',
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
+                                      ),
                                       enabledBorder: InputBorder.none,
                                       focusedBorder: InputBorder.none,
                                       errorBorder: InputBorder.none,
@@ -134,12 +152,12 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: false,
-                                        ),
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
                                     maxLines: 1,
                                     keyboardType: TextInputType.name,
                                   ),
@@ -162,11 +180,11 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           'dr5dq8mr' /* By clicking continue, you agre... */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              color: Colors.black,
-                              fontWeight: FontWeight.w300,
-                              useGoogleFonts: false,
-                            ),
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Colors.black,
+                          fontWeight: FontWeight.w300,
+                          useGoogleFonts: false,
+                        ),
                       ),
                     ],
                   ),
@@ -191,7 +209,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.95,
+                                  MediaQuery.of(context).size.height * 0.95,
                                   child: TermsConditionsBottomSheetWidget(
                                     pageType: 5,
                                   ),
@@ -207,12 +225,12 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'AvenirArabic',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: false,
-                              ),
+                            fontFamily: 'AvenirArabic',
+                            color:
+                            FlutterFlowTheme.of(context).primaryColor,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: false,
+                          ),
                         ),
                       ),
                       InkWell(
@@ -231,12 +249,12 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'AvenirArabic',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: false,
-                              ),
+                            fontFamily: 'AvenirArabic',
+                            color:
+                            FlutterFlowTheme.of(context).primaryColor,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: false,
+                          ),
                         ),
                       ),
                       InkWell(
@@ -254,7 +272,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.95,
+                                  MediaQuery.of(context).size.height * 0.95,
                                   child: TermsConditionsBottomSheetWidget(
                                     pageType: 6,
                                   ),
@@ -270,12 +288,12 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                                fontFamily: 'AvenirArabic',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: false,
-                              ),
+                            fontFamily: 'AvenirArabic',
+                            color:
+                            FlutterFlowTheme.of(context).primaryColor,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: false,
+                          ),
                         ),
                       ),
                     ],
@@ -290,6 +308,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
+                            isInternetAvailable = await isInternetConnected();
                             logFirebaseEvent(
                                 'ADDING_INFORMATION_submitInfo_ON_TAP');
                             if (fullNameController!.text == null ||
@@ -298,28 +317,32 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'Please enter full name',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
+                                    FFLocalizations.of(context).getText(
+                                      'pleaseEnterFull' /* Please enter full name */,
                                     ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .subtitle1,
                                   ),
                                   duration: Duration(milliseconds: 4000),
-                                  backgroundColor: Color(0x00000000),
+                                  backgroundColor: Color(0xFF777777),
                                 ),
                               );
                             } else {
-                              // submitInfo
-                              logFirebaseEvent('submitInfo_submitInfo');
+                              if(isInternetAvailable??false){
+                                // submitInfo
+                                logFirebaseEvent('submitInfo_submitInfo');
 
-                              final userUpdateData = createUserRecordData(
-                                name: fullNameController!.text,
-                              );
-                              await currentUserReference!
-                                  .update(userUpdateData);
-                              logFirebaseEvent('submitInfo_Navigate-To');
-
-                              context.goNamed('HomeScreen');
+                                final userUpdateData = createUserRecordData(
+                                  name: fullNameController!.text,
+                                );
+                                await currentUserReference!
+                                    .update(userUpdateData);
+                                logFirebaseEvent('submitInfo_Navigate-To');
+                                context.goNamed('HomeScreen');
+                              }
+                              else{
+                                checkInternetStatus();
+                              }
                             }
                           },
                           text: FFLocalizations.of(context).getText(
@@ -330,13 +353,13 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                             height: 56,
                             color: FlutterFlowTheme.of(context).primaryColor,
                             textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'AvenirArabic',
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w800,
-                                      useGoogleFonts: false,
-                                    ),
+                            FlutterFlowTheme.of(context).subtitle2.override(
+                              fontFamily: 'AvenirArabic',
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w800,
+                              useGoogleFonts: false,
+                            ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1,
@@ -356,3 +379,4 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
     );
   }
 }
+
