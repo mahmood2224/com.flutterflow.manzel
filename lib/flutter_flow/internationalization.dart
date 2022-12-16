@@ -2135,6 +2135,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'pleaseEnterValidEmail':{
       'en': 'Please enter a valid email',
       'ar': 'يرجى إدخال البريد الإلكتروني الصحيح',
+    },
+    'enterValidNameAndEmail':{
+      'en': 'Enter valid name and email',
+      'ar': 'يرجى إدخال البريد الإلكتروني الصحيح',
     }
 
   },

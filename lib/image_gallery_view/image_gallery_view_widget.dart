@@ -142,22 +142,36 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                         children: [
                           InkWell(
                             onTap: () async {
+                              isInternetAvailable= await isInternetConnected();
                               logFirebaseEvent(
                                   'IMAGE_GALLERY_VIEW_Container_sx0hx6fk_ON');
                               // shareProperty
                               logFirebaseEvent('Container_shareProperty');
-                              await Share.share(await generateDynamicLink({
-                                'propertyId':
-                                widget.propertyId,
-                              },
-                                  description:
-                                  PropertyCall
-                                      .propertyName(
-                                    columnPropertyResponse,
-                                  ).toString(),
-                                  thumbnailUrl: PropertyCall
-                                      .thumbnailImage(
-                                      columnPropertyResponse)));
+                              if(isInternetAvailable??false){
+                                await Share.share(await generateDynamicLink({
+                                  'propertyId':
+                                  widget.propertyId,
+                                },
+                                    description:
+                                    PropertyCall
+                                        .propertyName(
+                                      columnPropertyResponse,
+                                    ).toString(),
+                                    thumbnailUrl: PropertyCall
+                                        .thumbnailImage(
+                                        columnPropertyResponse)));
+                              }else{
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      CommonAlertDialog(
+                                        onCancel: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                );
+                              }
+
                             },
                             child: Container(
                               height: 40,
