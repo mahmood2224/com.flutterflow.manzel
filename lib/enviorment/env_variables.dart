@@ -11,6 +11,7 @@ class EnvVariables {
   String _basicAuthUserName = '';
   String _basicAuthPassword = '';
   String _sentryEnvironment ='';
+  String _dynamicLinkUrl = '';
 
 
   EnvVariables._();
@@ -24,6 +25,7 @@ class EnvVariables {
     _basicAuthUserName = dotenv.get('BASIC_AUTH_USER_NAME', fallback: '');
     _basicAuthPassword = dotenv.get('BASIC_AUTH_PASSWORD', fallback: '');
     _sentryEnvironment = dotenv.get('SENTRY_ENVIRONMENT', fallback: '');
+    _dynamicLinkUrl = dotenv.get('DYNAMIC_LINK_URL', fallback: '');
   }
 
 
@@ -39,6 +41,8 @@ class EnvVariables {
   String get basicAuthPassword => _basicAuthPassword;
 
   String get sentryEnvironment => _sentryEnvironment;
+
+  String get dynamicLinkUrl => _dynamicLinkUrl;
 
 
 }
