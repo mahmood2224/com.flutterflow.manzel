@@ -1,3 +1,6 @@
+import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
+import 'package:manzel/flutter_flow/custom_functions.dart';
+
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
@@ -19,6 +22,7 @@ class AddingInformationWidget extends StatefulWidget {
 
 class _AddingInformationWidgetState extends State<AddingInformationWidget> {
   TextEditingController? fullNameController;
+  bool? isInternetAvailable;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -27,6 +31,20 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
     fullNameController = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AddingInformation'});
+  }
+
+  Future<void> checkInternetStatus() async {
+    isInternetAvailable = await isInternetConnected();
+    if (!(isInternetAvailable ?? false)) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CommonAlertDialog(
+          onCancel: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
   }
 
   @override
@@ -298,28 +316,32 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'Please enter full name',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
+                                    FFLocalizations.of(context).getText(
+                                      'pleaseEnterFull' /* Please enter full name */,
                                     ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .subtitle1,
                                   ),
                                   duration: Duration(milliseconds: 4000),
-                                  backgroundColor: Color(0x00000000),
+                                  backgroundColor: Color(0xFF777777),
                                 ),
                               );
                             } else {
-                              // submitInfo
-                              logFirebaseEvent('submitInfo_submitInfo');
+                              if(isInternetAvailable??false){
+                                // submitInfo
+                                logFirebaseEvent('submitInfo_submitInfo');
 
-                              final userUpdateData = createUserRecordData(
-                                name: fullNameController!.text,
-                              );
-                              await currentUserReference!
-                                  .update(userUpdateData);
-                              logFirebaseEvent('submitInfo_Navigate-To');
-
-                              context.goNamed('HomeScreen');
+                                final userUpdateData = createUserRecordData(
+                                  name: fullNameController!.text,
+                                );
+                                await currentUserReference!
+                                    .update(userUpdateData);
+                                logFirebaseEvent('submitInfo_Navigate-To');
+                                context.goNamed('HomeScreen');
+                              }
+                              else{
+                                checkInternetStatus();
+                              }
                             }
                           },
                           text: FFLocalizations.of(context).getText(

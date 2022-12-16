@@ -2135,7 +2135,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'pleaseEnterValidEmail':{
       'en': 'Please enter a valid email',
       'ar': 'يرجى إدخال البريد الإلكتروني الصحيح',
+    },
+    'pleaseEnterFull':{
+      'en': 'Please enter full name',
+      'ar': 'الرجاء إدخال الاسم الكامل',
+    },
+    'somethingWentWrong':{
+      'en': 'Something Went Wrong',
+      'ar': 'هناك خطأ ما',
+    },
+    'phoneNumberFormat':{
+      'en': 'The phone number format should be 05XXXXXXXX',
+      'ar': 'يجب أن يكون تنسيق رقم الهاتف هو 05XXXXXXXX',
     }
-
   },
 ].reduce((a, b) => a..addAll(b));

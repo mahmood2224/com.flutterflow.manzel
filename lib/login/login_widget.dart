@@ -512,7 +512,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
                                           content: Text(
-                                            'Something Went Wrong',
+                                            FFLocalizations.of(context).getText(
+                                              'somethingWentWrong' /* Something Went Wrong */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1,
                                           ),
@@ -526,7 +528,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      'The phone number format should be 05XXXXXXXX',
+                                      FFLocalizations.of(context).getText(
+                                        'phoneNumberFormat' /* The phone number format should be 05XXXXXXXX */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1,
                                     ),
