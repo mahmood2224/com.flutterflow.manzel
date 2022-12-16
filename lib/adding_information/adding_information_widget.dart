@@ -308,6 +308,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                       Expanded(
                         child: FFButtonWidget(
                           onPressed: () async {
+                            isInternetAvailable = await isInternetConnected();
                             logFirebaseEvent(
                                 'ADDING_INFORMATION_submitInfo_ON_TAP');
                             if (fullNameController!.text == null ||

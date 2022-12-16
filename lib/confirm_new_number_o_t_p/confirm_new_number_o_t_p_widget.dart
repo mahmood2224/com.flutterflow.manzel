@@ -96,7 +96,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
         ),
       );
     }
-    setState(() {});
   }
 
   @override
@@ -470,7 +469,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               return Visibility(
                                 visible: value,
                                 replacement: TimerWidget(
-                                    duration: Duration(seconds: 60),
+                                    duration: Duration(seconds: 5),
                                     onComplete: (VoidCallback restart) {
                                       _showResendOtp.value = true;
                                     }),
