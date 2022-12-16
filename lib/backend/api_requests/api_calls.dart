@@ -991,7 +991,7 @@ class OtpCalls {
     String newPhoneNumber = '',
     String idToken = '',
   }) {
-    String idToken = FFAppState().authToken;
+    idToken = FFAppState().authToken;
     final body = '''
 {
   "newPhoneNumber": "$newPhoneNumber"

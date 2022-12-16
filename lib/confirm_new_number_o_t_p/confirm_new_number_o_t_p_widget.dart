@@ -57,8 +57,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
       _otpResendTimes--;
       if (isFromUpdate ?? false) {
         String newPhoneNumber = widget.phoneNumber ?? '';
-        ApiCallResponse? response = await OtpCalls.updatePhone(
-            idToken: idToken, newPhoneNumber: newPhoneNumber);
+        ApiCallResponse? response = await OtpCalls.updatePhone(newPhoneNumber: newPhoneNumber);
         if(response.statusCode==403){
           unAuthorizedUser(context,mounted);
         }
@@ -360,8 +359,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                           }
                                         });
                                       }
-                                      context.goNamedAuth(
-                                          'HomeScreen', mounted);
+                                      // context.goNamedAuth(
+                                      //     'HomeScreen', mounted);
                                     } on FirebaseAuthException catch (e) {
                                       switch (e.code) {
                                         case "invalid-custom-token":
@@ -381,14 +380,19 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     unAuthorizedUser(context,mounted);
                                     // context.goNamedAuth('Login', mounted);
                                   }
-                                  entry?.remove();
-                                  if (userCredential == null) {
-                                    _showOtpError.value =
-                                        "You entered OTP incorrect";
-                                    return;
+                                  else{
+                                    if (userCredential == null) {
+                                      _showOtpError.value = verifyOtpResponse.jsonBody['error'];
+                                      entry?.remove();
+                                      return;
+                                    }
                                   }
-
-
+                                  entry?.remove();
+                                  // if (userCredential == null) {
+                                  //   _showOtpError.value =
+                                  //       "You entered OTP incorrect";
+                                  //   return;
+                                  // }
                                 }
                               },
                               autofocus: true,
@@ -466,7 +470,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               return Visibility(
                                 visible: value,
                                 replacement: TimerWidget(
-                                    duration: Duration(seconds: 5),
+                                    duration: Duration(seconds: 60),
                                     onComplete: (VoidCallback restart) {
                                       _showResendOtp.value = true;
                                     }),

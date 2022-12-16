@@ -66,7 +66,6 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
       );
     }
-    setState(() {});
   }
 
   @override
@@ -465,28 +464,25 @@ class _LoginWidgetState extends State<LoginWidget> {
                               if(isButtonTappable&&isLoading.value==false&&(isInternetAvailable??false)){
                                 isLoading.value = true;
                                 logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
-                                if (functions.checkPhoneNumberFormat(
-                                    phoneNumberController!.text)) {
                                   // sendOTP
                                   logFirebaseEvent('sendOTP_sendOTP');
-                                  final phoneNumberVal =
-                                  functions.getFormattedMobileNumber(
-                                      phoneNumberController!.text);
-                                  if (phoneNumberVal == null ||
-                                      phoneNumberVal.isEmpty ||
-                                      !phoneNumberVal.startsWith('+')) {
-                                    isLoading.value = false;
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                            'Phone Number is required and has to start with +.'),
-                                      ),
-                                    );
-
-                                    return;
-                                  }
+                                  // final phoneNumberVal =
+                                  // functions.getFormattedMobileNumber(
+                                  //     phoneNumberController!.text);
+                                  // if (phoneNumberVal == null ||
+                                  //     phoneNumberVal.isEmpty ||
+                                  //     !phoneNumberVal.startsWith('+')) {
+                                  //   isLoading.value = false;
+                                  //   ScaffoldMessenger.of(context).showSnackBar(
+                                  //     SnackBar(
+                                  //       content: Text(
+                                  //           'Phone Number is required and has to start with +.'),
+                                  //     ),
+                                  //   );
+                                  //
+                                  //   return;
+                                  // }
                                   //entry = showOverlay(context);
-                                  if (isInternetAvailable ?? false) {
                                     isLoading.value=true;
                                     ApiCallResponse generateOtpResponse =
                                     await OtpCalls.generateOtp(
@@ -525,36 +521,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         ),
                                       );
                                     }
-
-                                  } else {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          CommonAlertDialog(
-                                            onCancel: () {
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                    );
-                                  }
-                                } else {
-                                  isLoading.value=false;
-                                  // Invalid_phone_number_action
-                                  logFirebaseEvent(
-                                      'sendOTP_Invalid_phone_number_action');
-                                  isLoading.value = false;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'The phone number format should be 05XXXXXXXX',
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle1,
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor: Color(0xFF777777),
-                                    ),
-                                  );
-                                }
                               }
                               else if(!isButtonTappable){
                                 ScaffoldMessenger.of(context).showSnackBar(

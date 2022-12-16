@@ -278,7 +278,6 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                           onPressed: () async {
                             isInternetAvailable = await isInternetConnected();
                             if(isButtonTappable&&isLoading.value==false&&(isInternetAvailable??false)){
-                              print('Button Was Tappable');
                               isLoading.value = true;
                               logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
                               if (functions.checkPhoneNumberFormat(
@@ -308,7 +307,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                     functions.unAuthorizedUser(context, mounted);
                                   }
                                   else {
-                                    String errorMessage = OtpCalls.phoneNumberError(updatePhoneResponse.jsonBody);
+                                    String errorMessage= OtpCalls.phoneNumberError(updatePhoneResponse.jsonBody);
                                     isLoading.value=false;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
