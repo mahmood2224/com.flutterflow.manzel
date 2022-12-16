@@ -109,12 +109,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
   }
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state == AppLifecycleState.inactive && loggedIn) {
-      // print('Heloo Hi BYe Bye');
-      // final userUpdateData =
-      //      createUserRecordData(
-      //          updateAt:DateTime.now());
-      //  currentUserReference?.update(userUpdateData);
+    if(state == AppLifecycleState.detached && loggedIn) {
       CancelOrderCall.call(
         orderId: null,
         userId: currentUserUid,
