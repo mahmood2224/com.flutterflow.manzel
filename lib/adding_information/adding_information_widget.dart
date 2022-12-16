@@ -338,7 +338,8 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                 await currentUserReference!
                                     .update(userUpdateData);
                                 logFirebaseEvent('submitInfo_Navigate-To');
-                                context.goNamed('HomeScreen');
+                                context.go('/');
+                               // context.goNamed('HomeScreen');
                               }
                               else{
                                 checkInternetStatus();

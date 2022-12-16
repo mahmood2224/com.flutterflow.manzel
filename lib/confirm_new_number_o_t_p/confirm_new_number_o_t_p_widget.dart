@@ -316,8 +316,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                   context.goNamedAuth(
                                                       'AddingInformation', mounted);
                                                 } else {
-                                                  context.goNamedAuth(
-                                                      'HomeScreen', mounted);
+                                                  context.go('/');
+                                                  // context.goNamedAuth(
+                                                  //     'HomeScreen', mounted);
                                                 }
                                               }  else {
                                                    await showDialog(
