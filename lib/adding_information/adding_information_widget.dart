@@ -7,6 +7,7 @@ import '../components/terms_conditions_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -24,6 +25,8 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
   TextEditingController? fullNameController;
   bool? isInternetAvailable;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  FocusNode nameNoFocusNode = FocusNode();
+  bool isNameValid = true;
 
   @override
   void initState() {
@@ -31,6 +34,12 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
     fullNameController = TextEditingController();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'AddingInformation'});
+    nameNoFocusNode.addListener(() {
+      if(!nameNoFocusNode.hasFocus){
+        isNameValid= isNameValidFunction(fullNameController!.text);
+        setState((){});
+      }
+    });
   }
 
   Future<void> checkInternetStatus() async {
@@ -113,6 +122,13 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                       12, 0, 0, 0),
                                   child: TextFormField(
                                     controller: fullNameController,
+                                    onChanged: (value) async {
+                                      isNameValid= isNameValidFunction(value);
+                                      //focus node error handling
+                                      //button handling
+
+                                      setState(() {});
+                                    },
                                     autofocus: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -167,6 +183,29 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           ),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+                Directionality(
+                  textDirection: material.TextDirection.ltr,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      if (!isNameValid)
+                        Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'pleaseEnterValidName' /* Please enter a valid Phone num... */,
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                color: Colors.red,
+                                fontWeight: FontWeight.w300,
+                                useGoogleFonts: false,
+                              ),
+                            )
+                        ),
                     ],
                   ),
                 ),
@@ -328,17 +367,38 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                 ),
                               );
                             } else {
-                              if(isInternetAvailable??false){
+                              if((isInternetAvailable??false)){
                                 // submitInfo
                                 logFirebaseEvent('submitInfo_submitInfo');
-
-                                final userUpdateData = createUserRecordData(
-                                  name: fullNameController!.text,
-                                );
-                                await currentUserReference!
-                                    .update(userUpdateData);
-                                logFirebaseEvent('submitInfo_Navigate-To');
-                                context.go('/');
+                                if(isNameValid){
+                                  final userUpdateData = createUserRecordData(
+                                    name: fullNameController!.text,
+                                  );
+                                  await currentUserReference!
+                                      .update(userUpdateData);
+                                  logFirebaseEvent('submitInfo_Navigate-To');
+                                  context.go('/');
+                                }
+                                else{
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        FFLocalizations.of(context).getText(
+                                          'allFields' /* Please fill all the information fields */,
+                                        ),
+                                        style: TextStyle(
+                                          color:
+                                          FlutterFlowTheme.of(context).white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                      FlutterFlowTheme.of(context).primaryRed,
+                                    ),
+                                  );
+                                }
                                // context.goNamed('HomeScreen');
                               }
                               else{
@@ -352,7 +412,8 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 56,
-                            color: FlutterFlowTheme.of(context).primaryColor,
+                            color:  isNameValid ? FlutterFlowTheme.of(context).primaryColor
+                        : Color(0xFF8C8C8C),
                             textStyle:
                                 FlutterFlowTheme.of(context).subtitle2.override(
                                       fontFamily: 'AvenirArabic',
