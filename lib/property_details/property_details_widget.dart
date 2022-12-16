@@ -67,7 +67,7 @@ class PropertyDetailsWidget extends StatefulWidget {
   _PropertyDetailsWidgetState createState() => _PropertyDetailsWidgetState();
 }
 
-class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
+class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with WidgetsBindingObserver {
   PageController? pageViewController;
   UserSavedRecord? saveProperty;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -104,6 +104,24 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'PropertyDetails'});
     checkInternetStatus();
+    WidgetsBinding.instance.addObserver(this);
+
+  }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state == AppLifecycleState.inactive && loggedIn) {
+      // print('Heloo Hi BYe Bye');
+      // final userUpdateData =
+      //      createUserRecordData(
+      //          updateAt:DateTime.now());
+      //  currentUserReference?.update(userUpdateData);
+      CancelOrderCall.call(
+        orderId: null,
+        userId: currentUserUid,
+         authorazationToken: FFAppState().authToken,
+         version: FFAppState().apiVersion
+      );
+    }
   }
 
   Future<void> checkInternetStatus() async {
@@ -220,6 +238,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   @override
   void dispose() {
     pageViewController?.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -3661,8 +3680,20 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                         ),
                                                       );
                                                     },
+
                                                   ).then(
-                                                          (value) => setState(() {}));
+                                                          (value) {
+                                                            if(value == null){
+                                                              Future<ApiCallResponse?> cancelOrder =  CancelOrderCall.call(
+                                                                  orderId:  addOrderApiResponse
+                                                                      ?.jsonBody[
+                                                                  'result'].toString(),
+                                                                  userId: currentUserUid,
+                                                                  authorazationToken: FFAppState().authToken,
+                                                                  version: FFAppState().apiVersion
+                                                              );
+                                                            }
+                                                            setState(() {});});
                                                   //.then((value) => _chewieController?.play());
                                                 }  else if(addOrderApiResponse?.statusCode ==403){
                                                   unAuthorizedUser(context, mounted);
