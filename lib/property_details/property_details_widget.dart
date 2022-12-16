@@ -5,6 +5,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/edit_personall_info/edit_personall_info_widget.dart';
+import 'package:manzel/enviorment/env_variables.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 import 'package:manzel/profile/profile_widget.dart';
@@ -4094,8 +4095,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
           title: "Join Manzel to see what I've been upto",
           imageUrl: Uri.parse(thumbnailUrl!),
           description: description),
-      // uriPrefix: 'https://manzelprod.page.link',
-      uriPrefix: 'https://manzeldev.page.link',
+      uriPrefix:  '${EnvVariables.instance.dynamicLinkUrl}',
       link: Uri.parse(url),
       androidParameters: const AndroidParameters(
         packageName: 'com.flutterflow.manzel',
