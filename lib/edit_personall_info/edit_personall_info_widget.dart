@@ -1058,7 +1058,9 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                       'Email Already Exists',
+                                        FFLocalizations.of(context).getText(
+                                          'emailAlreadyExists' /* Please fill all the information fields */,
+                                        ),
                                         style:
                                         FlutterFlowTheme.of(context).subtitle1,
                                       ),
