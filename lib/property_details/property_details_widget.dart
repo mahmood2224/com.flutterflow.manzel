@@ -597,6 +597,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                 children: [
                                                   InkWell(
                                                     onTap: () async {
+                                                      isInternetAvailable= await isInternetConnected();
                                                       logFirebaseEvent(
                                                           'share');
                                                       logFirebaseEvent(
@@ -604,19 +605,30 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                       // shareProperty
                                                       logFirebaseEvent(
                                                           'share_shareProperty');
-
-                                                      await Share.share(await generateDynamicLink({
-                                                        'propertyId':
-                                                        widget.propertyId,
-                                                      },
-                                                          description:
-                                                          PropertyCall
-                                                              .propertyName(
-                                                            columnPropertyResponse,
-                                                          ).toString(),
-                                                          thumbnailUrl: PropertyCall
-                                                              .thumbnailImage(
-                                                              columnPropertyResponse)));
+                                                      if(isInternetAvailable??false){
+                                                        await Share.share(await generateDynamicLink({
+                                                          'propertyId':
+                                                          widget.propertyId,
+                                                        },
+                                                            description:
+                                                            PropertyCall
+                                                                .propertyName(
+                                                              columnPropertyResponse,
+                                                            ).toString(),
+                                                            thumbnailUrl: PropertyCall
+                                                                .thumbnailImage(
+                                                                columnPropertyResponse)));
+                                                      }else{
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext context) =>
+                                                              CommonAlertDialog(
+                                                                onCancel: () {
+                                                                  Navigator.pop(context);
+                                                                },
+                                                              ),
+                                                        );
+                                                      }
                                                     },
                                                     child: Container(
                                                       height: 35,

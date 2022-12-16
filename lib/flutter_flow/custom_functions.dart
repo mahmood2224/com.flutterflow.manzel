@@ -1512,7 +1512,7 @@ String intToString(int? num) {
 }
 
 Future<bool> isInternetConnected() async {
- // return true;
+  return false;
   var connectivityResult = await (Connectivity().checkConnectivity());
   if (connectivityResult == ConnectivityResult.mobile ||
       connectivityResult == ConnectivityResult.wifi) {
