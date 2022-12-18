@@ -483,7 +483,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   //   return;
                                   // }
                                   //entry = showOverlay(context);
-                                    isLoading.value=true;
                                     ApiCallResponse generateOtpResponse =
                                     await OtpCalls.generateOtp(
                                         phoneNumber:
