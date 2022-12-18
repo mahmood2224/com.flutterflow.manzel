@@ -470,7 +470,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               return Visibility(
                                 visible: value,
                                 replacement: TimerWidget(
-                                    duration: Duration(seconds: 5),
+                                    duration: Duration(seconds: 60),
                                     onComplete: (VoidCallback restart) {
                                       _showResendOtp.value = true;
                                     }),
