@@ -51,7 +51,7 @@ void main() async {
   //  runApp(MyApp());
   }, (error, stackTrace) {
     if(EnvVariables.instance.sentryEnvironment=='dev'){
-      SentryAnalytics().captureException(error, stackTrace);
+    //  SentryAnalytics().captureException(error, stackTrace);
     }
   //  FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });

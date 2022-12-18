@@ -576,129 +576,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
-                                        child: VisibilityDetector(
-                                          key:  ObjectKey(flickMultiManager),
-                                          onVisibilityChanged: (visibility) {
-                                            if (visibility.visibleFraction *
-                                                        100 ==
-                                                    100 &&
-                                                this.mounted) {
-                                              if (!(videoPlayers[
-                                                      propertiesIndex]
-                                                  .value
-                                                  .isInitialized)) {
-                                                videoPlayers[propertiesIndex]
-                                                    .initialize()
-                                                    .then((value) {
-                                                  isPaused = false;
-                                                  isMuted.value
-                                                      ? videoPlayers[
-                                                              propertiesIndex]
-                                                          .setVolume(0)
-                                                      : videoPlayers[
-                                                              propertiesIndex]
-                                                          .setVolume(100);
-                                                  currentPropertyindex =
-                                                      propertiesIndex;
-                                                  videoPlayers[propertiesIndex]
-                                                      .play();
-                                                  setState(() {
-                                                    videoPlayers
-                                                        .forEach((otherPlayer) {
-                                                      if (otherPlayer !=
-                                                          videoPlayers[
-                                                              propertiesIndex]) {
-                                                        if (otherPlayer.value
-                                                            .isInitialized) {
-                                                          otherPlayer
-                                                              .setVolume(0.0);
-                                                          otherPlayer.pause();
-
-                                                        } else {
-                                                        }
-                                                      }
-                                                    });
-                                                    print(
-                                                        'propertyindex - $propertiesIndex');
-                                                  });
-                                                  ;
-                                                });
-
-                                                print(
-                                                    "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
-                                              } else {
-                                                isPaused = false;
-                                                isMuted.value
-                                                    ? videoPlayers[
-                                                            propertiesIndex]
-                                                        .setVolume(0)
-                                                    : videoPlayers[
-                                                            propertiesIndex]
-                                                        .setVolume(100);
-                                                videoPlayers[propertiesIndex]
-                                                    .play();
-                                                currentPropertyindex =
-                                                    propertiesIndex;
-
-                                                setState(() {
-                                                  videoPlayers
-                                                      .forEach((otherPlayer) {
-                                                    if (otherPlayer !=
-                                                        videoPlayers[
-                                                            propertiesIndex]) {
-                                                      if (otherPlayer.value
-                                                          .isInitialized) {
-                                                        otherPlayer
-                                                            .setVolume(0.0);
-                                                        otherPlayer.pause();
-                                                      }
-                                                    }
-                                                  });
-                                                });
-                                              }
-                                            }
-
-                                          },
-                                          child:FlickMultiPlayer(
-                                            url: getJsonField(
-                                              propertiesItem,
-                                              r'''$.attributes.video_manifest_uri''',
-                                            ),//items[index]['trailer_url'],
-                                            flickMultiManager: flickMultiManager,//flickMultiManager,
-                                            image: getJsonField(
-                                              propertiesItem,
-                                              r'''$.attributes.video_poster_image''',
-                                            ),//items[index]['image'],
-                                          ),
-                                          // FlutterFlowVideoPlayer(
-                                          //  posterImage: getJsonField(
-                                          //     propertiesItem,
-                                          //     r'''$.attributes.video_poster_image''',
-                                          //   ),
-                                          //   path: getJsonField(
-                                          //     propertiesItem,
-                                          //     r'''$.attributes.video_manifest_uri''',
-                                          //   ),
-                                          //   videoType: VideoType.network,
-                                          //   width: MediaQuery.of(context)
-                                          //           .size
-                                          //           .width *
-                                          //       95,
-                                          //   height: MediaQuery.of(context)
-                                          //           .size
-                                          //           .width /
-                                          //       1.8,
-                                          //   aspectRatio: 1.7,
-                                          //   autoPlay: false,
-                                          //   looping: true,
-                                          //   showControls: false,
-                                          //   allowFullScreen: true,
-                                          //   allowPlaybackSpeedMenu: false,
-                                          //   isPaused: isPaused,
-                                          //   propertiesIndex: propertiesIndex,
-                                          //   currentPropertyindex: currentPropertyindex,
-                                          //   screenName: 'home',
-                                          // ),
+                                        child:
+                                        FlickMultiPlayer(
+                                          url: getJsonField(
+                                            propertiesItem,
+                                            r'''$.attributes.video_manifest_uri''',
+                                          ), //items[index]['trailer_url'],
+                                          flickMultiManager: flickMultiManager,//flickMultiManager,
+                                          image: getJsonField(
+                                            propertiesItem,
+                                            r'''$.attributes.video_poster_image''',
+                                          ),//items[index]['image'],
                                         ),
                                         //),
                                       ),
@@ -868,272 +756,272 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
 
                                   ///************************ bookmark icon button on video player*******************************
-                                  // Align(
-                                  //   alignment: AlignmentDirectional(1, -0.95),
-                                  //   child: Padding(
-                                  //     padding: EdgeInsetsDirectional.fromSTEB(
-                                  //         0, 12, 15, 0),
-                                  //     child: ValueListenableBuilder<bool>(
-                                  //       builder: (BuildContext context, value,
-                                  //           Widget? child) {
-                                  //         return (bookMarkTapped.value &&
-                                  //                 propertiesIndex ==
-                                  //                     tapped_index)
-                                  //             ? SizedBox(
-                                  //                 child: Container(
-                                  //                 width: 50,
-                                  //                 height: 50,
-                                  //                 decoration: BoxDecoration(
-                                  //                   color: propertiesItem[
-                                  //                           "isBookmarked"]
-                                  //                       ? Color(0x4DFF0000)
-                                  //                       : Color(0x4D000000),
-                                  //                   shape: BoxShape.circle,
-                                  //                 ),
-                                  //                 child: Icon(
-                                  //                   Manzel.favourite,
-                                  //                   color: Colors.white,
-                                  //                   size: 20,
-                                  //                 ),
-                                  //               ))
-                                  //             : InkWell(
-                                  //                 onTap: () async {
-                                  //                   propertiesItem[
-                                  //                           "isBookmarked"] =
-                                  //                       propertiesItem[
-                                  //                               "isBookmarked"]
-                                  //                           ? true
-                                  //                           : false;
-                                  //                   setState(() {});
-                                  //                   tapped_index =
-                                  //                       propertiesIndex;
-                                  //                   bookMarkTapped.value = true;
-                                  //
-                                  //                   logFirebaseEvent(
-                                  //                       'add_to_wishlist');
-                                  //                   logFirebaseEvent(
-                                  //                       'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                  //                   if (loggedIn) {
-                                  //                     if (propertiesItem[
-                                  //                         "isBookmarked"]) {
-                                  //                       logFirebaseEvent(
-                                  //                           'Container_Backend-Call');
-                                  //                       isInternetAvailable =
-                                  //                           await isInternetConnected();
-                                  //                       if (isInternetAvailable ??
-                                  //                           false) {
-                                  //                         final bookmarkApiResponse =
-                                  //                             await BookmarkPropertyCall
-                                  //                                 .call(
-                                  //                           userId:
-                                  //                               currentUserUid,
-                                  //                           authorazationToken:
-                                  //                               FFAppState()
-                                  //                                   .authToken,
-                                  //                           propertyId:
-                                  //                               valueOrDefault<
-                                  //                                   String>(
-                                  //                             getJsonField(
-                                  //                               propertiesItem,
-                                  //                               r'''$.id''',
-                                  //                             ).toString(),
-                                  //                             '0',
-                                  //                           ),
-                                  //                           version:
-                                  //                               FFAppState()
-                                  //                                   .apiVersion,
-                                  //                         );
-                                  //                         if ((bookmarkApiResponse
-                                  //                                 .statusCode) ==
-                                  //                             200) {
-                                  //                           favourites.remove(
-                                  //                               propertiesItem[
-                                  //                                       "id"]
-                                  //                                   .toString());
-                                  //                           propertiesItem[
-                                  //                                   "isBookmarked"] =
-                                  //                               false;
-                                  //                           bookMarkTapped
-                                  //                               .value = false;
-                                  //                           setState(() {});
-                                  //                         }
-                                  //                         else if((bookmarkApiResponse
-                                  //                             .statusCode) ==
-                                  //                             403){
-                                  //                           unAuthorizedUser(context, mounted);
-                                  //                         }
-                                  //                         else {
-                                  //                           logFirebaseEvent(
-                                  //                               'Icon_Show-Snack-Bar');
-                                  //                           ScaffoldMessenger
-                                  //                                   .of(context)
-                                  //                               .showSnackBar(
-                                  //                             SnackBar(
-                                  //                               content: Text(
-                                  //                                 functions.snackBarMessage(
-                                  //                                     'error',
-                                  //                                     FFAppState()
-                                  //                                         .locale),
-                                  //                                 style:
-                                  //                                     TextStyle(
-                                  //                                   color: FlutterFlowTheme.of(
-                                  //                                           context)
-                                  //                                       .white,
-                                  //                                   fontWeight:
-                                  //                                       FontWeight
-                                  //                                           .bold,
-                                  //                                   fontSize:
-                                  //                                       16,
-                                  //                                   height: 2,
-                                  //                                 ),
-                                  //                               ),
-                                  //                               duration: Duration(
-                                  //                                   milliseconds:
-                                  //                                       4000),
-                                  //                               backgroundColor:
-                                  //                                   FlutterFlowTheme.of(
-                                  //                                           context)
-                                  //                                       .primaryRed,
-                                  //                             ),
-                                  //                           );
-                                  //                         }
-                                  //                       } else {
-                                  //                         showDialog(
-                                  //                           context: context,
-                                  //                           builder: (BuildContext
-                                  //                                   context) =>
-                                  //                               CommonAlertDialog(
-                                  //                             onCancel: () {
-                                  //                               Navigator.pop(
-                                  //                                   context);
-                                  //                             },
-                                  //                           ),
-                                  //                         );
-                                  //                       }
-                                  //                     } else {
-                                  //                       logFirebaseEvent(
-                                  //                           'Container_Backend-Call');
-                                  //                       if (isInternetAvailable ??
-                                  //                           false) {
-                                  //                         final bookmarkApiResponse =
-                                  //                             await BookmarkPropertyCall
-                                  //                                 .call(
-                                  //                           userId:
-                                  //                               currentUserUid,
-                                  //                           authorazationToken:
-                                  //                               FFAppState()
-                                  //                                   .authToken,
-                                  //                           propertyId:
-                                  //                               valueOrDefault<
-                                  //                                   String>(
-                                  //                             getJsonField(
-                                  //                               propertiesItem,
-                                  //                               r'''$.id''',
-                                  //                             ).toString(),
-                                  //                             '0',
-                                  //                           ),
-                                  //                           version:
-                                  //                               FFAppState()
-                                  //                                   .apiVersion,
-                                  //                         );
-                                  //                         if ((bookmarkApiResponse
-                                  //                                 .statusCode) ==
-                                  //                             200) {
-                                  //                           favourites[propertiesItem[
-                                  //                                       "id"]
-                                  //                                   .toString()] =
-                                  //                               true;
-                                  //                           propertiesItem[
-                                  //                                   "isBookmarked"] =
-                                  //                               true;
-                                  //                           bookMarkTapped
-                                  //                               .value = false;
-                                  //                           setState(() {});
-                                  //                         }  else if((bookmarkApiResponse
-                                  //                             .statusCode) ==
-                                  //                             403){
-                                  //                           unAuthorizedUser(context, mounted);
-                                  //                         }
-                                  //                         else {
-                                  //                           logFirebaseEvent(
-                                  //                               'Icon_Show-Snack-Bar');
-                                  //                           ScaffoldMessenger
-                                  //                                   .of(context)
-                                  //                               .showSnackBar(
-                                  //                             SnackBar(
-                                  //                               content: Text(
-                                  //                                 functions.snackBarMessage(
-                                  //                                     'error',
-                                  //                                     FFAppState()
-                                  //                                         .locale),
-                                  //                                 style:
-                                  //                                     TextStyle(
-                                  //                                   color: FlutterFlowTheme.of(
-                                  //                                           context)
-                                  //                                       .white,
-                                  //                                   fontWeight:
-                                  //                                       FontWeight
-                                  //                                           .bold,
-                                  //                                   fontSize:
-                                  //                                       16,
-                                  //                                   height: 2,
-                                  //                                 ),
-                                  //                               ),
-                                  //                               duration: Duration(
-                                  //                                   milliseconds:
-                                  //                                       4000),
-                                  //                               backgroundColor:
-                                  //                                   FlutterFlowTheme.of(
-                                  //                                           context)
-                                  //                                       .primaryRed,
-                                  //                             ),
-                                  //                           );
-                                  //                         }
-                                  //                       } else {
-                                  //                         showDialog(
-                                  //                           context: context,
-                                  //                           builder: (BuildContext
-                                  //                                   context) =>
-                                  //                               CommonAlertDialog(
-                                  //                             onCancel: () {
-                                  //                               Navigator.pop(
-                                  //                                   context);
-                                  //                             },
-                                  //                           ),
-                                  //                         );
-                                  //                       }
-                                  //                     }
-                                  //                   } else {
-                                  //                     videoPlayers[
-                                  //                             propertiesIndex]
-                                  //                         .pause();
-                                  //                     logFirebaseEvent(
-                                  //                         'Container_Navigate-To');
-                                  //                     context
-                                  //                         .pushNamed('Login');
-                                  //                   }
-                                  //                 },
-                                  //                 child: Container(
-                                  //                   width: 50,
-                                  //                   height: 50,
-                                  //                   decoration: BoxDecoration(
-                                  //                     color: propertiesItem[
-                                  //                             "isBookmarked"]
-                                  //                         ? Color(0x4DFF0000)
-                                  //                         : Color(0x4D000000),
-                                  //                     shape: BoxShape.circle,
-                                  //                   ),
-                                  //                   child: Icon(
-                                  //                     Manzel.favourite,
-                                  //                     color: Colors.white,
-                                  //                     size: 20,
-                                  //                   ),
-                                  //                 ));
-                                  //       },
-                                  //       valueListenable: bookMarkTapped,
-                                  //     ),
-                                  //   ),
-                                  // ),
+                                  Align(
+                                    alignment: AlignmentDirectional(1, -0.95),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 12, 15, 0),
+                                      child: ValueListenableBuilder<bool>(
+                                        builder: (BuildContext context, value,
+                                            Widget? child) {
+                                          return (bookMarkTapped.value &&
+                                                  propertiesIndex ==
+                                                      tapped_index)
+                                              ? SizedBox(
+                                                  child: Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    color: propertiesItem[
+                                                            "isBookmarked"]
+                                                        ? Color(0x4DFF0000)
+                                                        : Color(0x4D000000),
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: Icon(
+                                                    Manzel.favourite,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                ))
+                                              : InkWell(
+                                                  onTap: () async {
+                                                    propertiesItem[
+                                                            "isBookmarked"] =
+                                                        propertiesItem[
+                                                                "isBookmarked"]
+                                                            ? true
+                                                            : false;
+                                                    setState(() {});
+                                                    tapped_index =
+                                                        propertiesIndex;
+                                                    bookMarkTapped.value = true;
+
+                                                    logFirebaseEvent(
+                                                        'add_to_wishlist');
+                                                    logFirebaseEvent(
+                                                        'HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                                    if (loggedIn) {
+                                                      if (propertiesItem[
+                                                          "isBookmarked"]) {
+                                                        logFirebaseEvent(
+                                                            'Container_Backend-Call');
+                                                        isInternetAvailable =
+                                                            await isInternetConnected();
+                                                        if (isInternetAvailable ??
+                                                            false) {
+                                                          final bookmarkApiResponse =
+                                                              await BookmarkPropertyCall
+                                                                  .call(
+                                                            userId:
+                                                                currentUserUid,
+                                                            authorazationToken:
+                                                                FFAppState()
+                                                                    .authToken,
+                                                            propertyId:
+                                                                valueOrDefault<
+                                                                    String>(
+                                                              getJsonField(
+                                                                propertiesItem,
+                                                                r'''$.id''',
+                                                              ).toString(),
+                                                              '0',
+                                                            ),
+                                                            version:
+                                                                FFAppState()
+                                                                    .apiVersion,
+                                                          );
+                                                          if ((bookmarkApiResponse
+                                                                  .statusCode) ==
+                                                              200) {
+                                                            favourites.remove(
+                                                                propertiesItem[
+                                                                        "id"]
+                                                                    .toString());
+                                                            propertiesItem[
+                                                                    "isBookmarked"] =
+                                                                false;
+                                                            bookMarkTapped
+                                                                .value = false;
+                                                            setState(() {});
+                                                          }
+                                                          else if((bookmarkApiResponse
+                                                              .statusCode) ==
+                                                              403){
+                                                            unAuthorizedUser(context, mounted);
+                                                          }
+                                                          else {
+                                                            logFirebaseEvent(
+                                                                'Icon_Show-Snack-Bar');
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  functions.snackBarMessage(
+                                                                      'error',
+                                                                      FFAppState()
+                                                                          .locale),
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        16,
+                                                                    height: 2,
+                                                                  ),
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryRed,
+                                                              ),
+                                                            );
+                                                          }
+                                                        } else {
+                                                          showDialog(
+                                                            context: context,
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                CommonAlertDialog(
+                                                              onCancel: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                            ),
+                                                          );
+                                                        }
+                                                      } else {
+                                                        logFirebaseEvent(
+                                                            'Container_Backend-Call');
+                                                        if (isInternetAvailable ??
+                                                            false) {
+                                                          final bookmarkApiResponse =
+                                                              await BookmarkPropertyCall
+                                                                  .call(
+                                                            userId:
+                                                                currentUserUid,
+                                                            authorazationToken:
+                                                                FFAppState()
+                                                                    .authToken,
+                                                            propertyId:
+                                                                valueOrDefault<
+                                                                    String>(
+                                                              getJsonField(
+                                                                propertiesItem,
+                                                                r'''$.id''',
+                                                              ).toString(),
+                                                              '0',
+                                                            ),
+                                                            version:
+                                                                FFAppState()
+                                                                    .apiVersion,
+                                                          );
+                                                          if ((bookmarkApiResponse
+                                                                  .statusCode) ==
+                                                              200) {
+                                                            favourites[propertiesItem[
+                                                                        "id"]
+                                                                    .toString()] =
+                                                                true;
+                                                            propertiesItem[
+                                                                    "isBookmarked"] =
+                                                                true;
+                                                            bookMarkTapped
+                                                                .value = false;
+                                                            setState(() {});
+                                                          }  else if((bookmarkApiResponse
+                                                              .statusCode) ==
+                                                              403){
+                                                            unAuthorizedUser(context, mounted);
+                                                          }
+                                                          else {
+                                                            logFirebaseEvent(
+                                                                'Icon_Show-Snack-Bar');
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              SnackBar(
+                                                                content: Text(
+                                                                  functions.snackBarMessage(
+                                                                      'error',
+                                                                      FFAppState()
+                                                                          .locale),
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    fontSize:
+                                                                        16,
+                                                                    height: 2,
+                                                                  ),
+                                                                ),
+                                                                duration: Duration(
+                                                                    milliseconds:
+                                                                        4000),
+                                                                backgroundColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryRed,
+                                                              ),
+                                                            );
+                                                          }
+                                                        } else {
+                                                          showDialog(
+                                                            context: context,
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                CommonAlertDialog(
+                                                              onCancel: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                            ),
+                                                          );
+                                                        }
+                                                      }
+                                                    } else {
+                                                      videoPlayers[
+                                                              propertiesIndex]
+                                                          .pause();
+                                                      logFirebaseEvent(
+                                                          'Container_Navigate-To');
+                                                      context
+                                                          .pushNamed('Login');
+                                                    }
+                                                  },
+                                                  child: Container(
+                                                    width: 50,
+                                                    height: 50,
+                                                    decoration: BoxDecoration(
+                                                      color: propertiesItem[
+                                                              "isBookmarked"]
+                                                          ? Color(0x4DFF0000)
+                                                          : Color(0x4D000000),
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Icon(
+                                                      Manzel.favourite,
+                                                      color: Colors.white,
+                                                      size: 20,
+                                                    ),
+                                                  ));
+                                        },
+                                        valueListenable: bookMarkTapped,
+                                      ),
+                                    ),
+                                  ),
 
 
                                   ///************************ bookmark icon button on video player*******************************

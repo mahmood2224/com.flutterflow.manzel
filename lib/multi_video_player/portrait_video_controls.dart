@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:manzel/multi_video_player/data_manager.dart';
+import 'package:manzel/multi_video_player/flick_auto_hide_child.dart';
 import 'package:provider/provider.dart';
 
 class AnimationPlayerPortraitVideoControls extends StatelessWidget {
@@ -19,7 +20,7 @@ class AnimationPlayerPortraitVideoControls extends StatelessWidget {
 
     return Container(
       child: AnimatedSwitcher(
-        duration: Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 0),
         transitionBuilder: (child, animation) {
           Animation<Offset> animationOffset;
           Animation<Offset> inAnimation =
