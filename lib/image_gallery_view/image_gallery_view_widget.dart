@@ -1,6 +1,8 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:manzel/auth/auth_util.dart';
 import 'package:manzel/auth/firebase_user_provider.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/enviorment/env_variables.dart';
 import 'package:manzel/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:manzel/zoom_image/zoom_image_widget.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
@@ -23,11 +25,14 @@ class ImageGalleryViewWidget extends StatefulWidget {
     this.propertyId,
     this.screenName,
     this.imageList,
+    this.jsonData
+
   }) : super(key: key);
 
   final int? propertyId;
   final String? screenName;
   final dynamic imageList;
+  final dynamic? jsonData;
 
   @override
   _ImageGalleryViewWidgetState createState() => _ImageGalleryViewWidgetState();
@@ -39,11 +44,15 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
   Map<String, bool> fav = {};
   bool? bookMarkTapped;
   bool? isInternetAvailable;
+  var columnPropertyResponse;
 
   @override
   void initState() {
     super.initState();
     fav = FavouriteList.instance.favourite;
+    if (widget.jsonData != null) {
+      columnPropertyResponse = widget.jsonData;
+    }
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'imageGalleryView'});
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -134,12 +143,36 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                         children: [
                           InkWell(
                             onTap: () async {
+                              isInternetAvailable= await isInternetConnected();
                               logFirebaseEvent(
                                   'IMAGE_GALLERY_VIEW_Container_sx0hx6fk_ON');
                               // shareProperty
                               logFirebaseEvent('Container_shareProperty');
-                              await Share.share(
-                                  'manzel://manzel.com${GoRouter.of(context).location}');
+                              if(isInternetAvailable??false){
+                                await Share.share(await generateDynamicLink({
+                                  'propertyId':
+                                  widget.propertyId,
+                                },
+                                    description:
+                                    PropertyCall
+                                        .propertyName(
+                                      columnPropertyResponse,
+                                    ).toString(),
+                                    thumbnailUrl: PropertyCall
+                                        .thumbnailImage(
+                                        columnPropertyResponse)));
+                              }else{
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      CommonAlertDialog(
+                                        onCancel: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                );
+                              }
+
                             },
                             child: Container(
                               height: 40,
@@ -410,5 +443,42 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
         ),
       ),
     );
+  }
+
+  Future<String> generateDynamicLink(Map<String, dynamic> params,
+      {required String description, required String? thumbnailUrl}) async {
+    String url = 'https://www.manzel.app/';
+
+    if (params.isNotEmpty) {
+      url = '$url?';
+    }
+
+    List<String> keys = params.keys.toList();
+    for (int i = 0; i < keys.length; i++) {
+      url += '${keys[i]}=${params[keys[i]]}';
+      if (i < keys.length - 1) {
+        url += '&';
+      }
+    }
+
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      socialMetaTagParameters: SocialMetaTagParameters(
+          title: "Join Manzel to see what I've been upto",
+          imageUrl: Uri.parse(thumbnailUrl!),
+          description: description),
+      uriPrefix:  '${EnvVariables.instance.dynamicLinkUrl}',
+      link: Uri.parse(url),
+      androidParameters: const AndroidParameters(
+        packageName: 'com.flutterflow.manzel',
+        minimumVersion: 1,
+      ),
+      iosParameters: const IOSParameters(
+        bundleId: 'com.flutterflow.manzel',
+        minimumVersion: '1',
+      ),
+    );
+    ShortDynamicLink uri = await FirebaseDynamicLinks.instance
+        .buildShortLink(parameters, shortLinkType: ShortDynamicLinkType.short);
+    return uri.shortUrl.toString();
   }
 }

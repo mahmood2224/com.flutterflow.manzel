@@ -6,6 +6,7 @@ import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
 import 'package:manzel/confirmation/confirmation_widget.dart';
 import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
+import 'package:manzel/index.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
@@ -1491,17 +1492,20 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                               bookmarkedPropertiesIndex];
                                       return InkWell(
                                         onTap: () async {
-                                          context.pushNamed(
-                                            'PropertyDetails',
-                                            queryParams: {
-                                              'propertyId': serializeParam(
-                                                  getJsonField(
-                                                    bookmarkedPropertiesItem,
-                                                    r'''$..property_id''',
-                                                  ),
-                                                  ParamType.int),
-                                            }.withoutNulls,
-                                          );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                 PropertyDetailsWidget(
+                                                   propertyId: 
+                                                       int.parse(getJsonField(
+                                                         bookmarkedPropertiesItem,
+                                                         r'''$..property_id''',
+                                                       ),)
+                                                 ),
+                                            ),
+                                          ).then((value) =>   getBookMarkedPropertiesCall());
+
                                         },
                                         child: Padding(
                                           padding:

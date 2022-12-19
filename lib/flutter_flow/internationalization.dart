@@ -2127,6 +2127,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'all':{
       'en': 'All',
       'ar': 'الكل',
+    },
+    'pleaseEnterValidName':{
+      'en': 'Please enter a valid name',
+      'ar': 'رجاء ادخل اسما صحيحا',
+    },
+    'pleaseEnterValidEmail':{
+      'en': 'Please enter a valid email',
+      'ar': 'يرجى إدخال البريد الإلكتروني الصحيح',
+    },
+    'enterValidNameAndEmail':{
+      'en': 'Enter valid name and email',
+      'ar': 'يرجى إدخال البريد الإلكتروني الصحيح',
     }
+
   },
 ].reduce((a, b) => a..addAll(b));

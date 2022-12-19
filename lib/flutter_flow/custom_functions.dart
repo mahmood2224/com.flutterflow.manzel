@@ -1193,8 +1193,8 @@ bool profileCompletetionCheck(
   String? loanCoverage,
 ) {
   // Add your function code here!
-  if ((email != null && email.isNotEmpty) &&
-      (name != null && name.isNotEmpty) &&
+  if ((isEmailValidFunction(email??'')) &&
+      (isNameValidFunction(name??'')) &&
       (bank != null && bank.isNotEmpty) &&
       (employment != null && employment.isNotEmpty) &&
       (income != null && income.isNotEmpty) &&
@@ -1229,7 +1229,7 @@ String sakaniLoanInitialValue(
     if (loanCoverage == true) {
       return 'نعم';
     } else {
-      return 'رقم';
+      return 'لا';
     }
   }
 }
@@ -1512,7 +1512,6 @@ String intToString(int? num) {
 }
 
 Future<bool> isInternetConnected() async {
-  return true;
   var connectivityResult = await (Connectivity().checkConnectivity());
   if (connectivityResult == ConnectivityResult.mobile ||
       connectivityResult == ConnectivityResult.wifi) {
@@ -1590,5 +1589,28 @@ bool validateMobileNumber(String text)  {
     }
   }
 }
+bool isNameValidFunction(String text) {
+  final RegExp _nameRegex = RegExp(
+      r'^[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+(?:\s[\u0600-\u065F\u066A-\u06EF\u06FA-\u06FFa-zA-Z]+)*$');
+  if (text != null || text != '') {
+    if (_nameRegex.hasMatch(text)) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+}
 
+bool isEmailValidFunction(String text) {
+  final RegExp _emailRegex = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  if (text != null || text != '') {
+    if (_emailRegex.hasMatch(text)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  return false;
+}
 

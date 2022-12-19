@@ -52,6 +52,12 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool? isProfileUpdated;
+  FocusNode nameNoFocusNode = FocusNode();
+  FocusNode emailNoFocusNode = FocusNode();
+  bool isNameValid = true;
+  bool isEmailValid = true;
+
+
 
   @override
   void initState() {
@@ -63,6 +69,19 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
         parameters: {'screen_name': 'EditPersonallInfo'});
     emplymentTypeCall();
     getBanksCall();
+    nameNoFocusNode.addListener(() {
+      if(!nameNoFocusNode.hasFocus){
+        isNameValid= isNameValidFunction(fullNameController!.text);
+        setState((){});
+      }
+    });
+    emailNoFocusNode.addListener(() {
+      if(!emailNoFocusNode.hasFocus){
+        isEmailValid= isEmailValidFunction(emailController!.text);
+        setState((){});
+      }
+    });
+
   }
 
   Future<void> emplymentTypeCall() async {
@@ -195,6 +214,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                             child: AuthUserStreamWidget(
                               child: TextFormField(
+                                focusNode: nameNoFocusNode,
                                 controller: fullNameController,
                                 autofocus: false,
                                 obscureText: false,
@@ -202,6 +222,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 //   setState(() {});
                                 // },
                                 onChanged: (value){
+                                 isNameValid= isNameValidFunction(value);
+                                  //focus node error handling
+                                  //button handling
+
                                   setState(() {});
                                 },
                                 decoration: InputDecoration(
@@ -253,8 +277,31 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                     ),
                   ),
                 ),
+                Directionality(
+                  textDirection: material.TextDirection.ltr,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      if (!isNameValid)
+                        Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'pleaseEnterValidName' /* Please enter a valid Phone num... */,
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                color: Colors.red,
+                                fontWeight: FontWeight.w300,
+                                useGoogleFonts: false,
+                              ),
+                            )
+                        ),
+                    ],
+                  ),
+                ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 25),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
                   child: Container(
                     width: double.infinity,
                     height: 65,
@@ -274,10 +321,12 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                             child: TextFormField(
+                              focusNode: emailNoFocusNode,
                               // onTap: () {
                               //   setState(() {});
                               // },
                               onChanged: (value){
+                                isEmailValid = isEmailValidFunction(value);
                                 setState(() {});
                               },
                               controller: emailController,
@@ -328,6 +377,29 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                         ),
                       ],
                     ),
+                  ),
+                ),
+                Directionality(
+                  textDirection: material.TextDirection.ltr,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      if (!isEmailValid)
+                        Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'pleaseEnterValidEmail' /* Please enter a valid Email... */,
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyText1.override(
+                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                color: Colors.red,
+                                fontWeight: FontWeight.w300,
+                                useGoogleFonts: false,
+                              ),
+                            )
+                        ),
+                    ],
                   ),
                 ),
                 Divider(
@@ -785,30 +857,27 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
+                          isInternetAvailable = await  isInternetConnected();
                           if ((bankValue == null || bankValue == '') &&
-                                  (privateSectorValue == null ||
-                                      privateSectorValue == '') ||
+                              (privateSectorValue == null ||
+                                  privateSectorValue == '') ||
                               (monthlyIncomeValue == null ||
-                                      monthlyIncomeValue == '') &&
+                                  monthlyIncomeValue == '') &&
                                   (choiceChipsValue == null ||
                                       choiceChipsValue == '') ||
                               (emailController!.text == null ||
                                   emailController!.text == '') ||
                               (fullNameController!.text == null ||
                                   fullNameController!.text == '')) {
-                            if (isInternetAvailable ?? false) {
-                            } else {
+                            if(!(isInternetAvailable??false)){
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) =>
                                     CommonAlertDialog(
-                                  onCancel: () {
-                                    alertCalled = 0;
-                                    setState(() {});
-                                    Navigator.pop(context);
-                                  },
-                                  onSettings: () {},
-                                ),
+                                      onCancel: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
                               );
                             }
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -825,7 +894,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 ),
                                 duration: Duration(milliseconds: 4000),
                                 backgroundColor:
-                                    FlutterFlowTheme.of(context).primaryRed,
+                                FlutterFlowTheme.of(context).primaryRed,
                               ),
                             );
                           } else {
@@ -844,25 +913,25 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     'updatePersonalInfo_updatePersonaInfo');
 
                                 final userUpdateData = createUserRecordData(
-                                  email: emailController!.text,
+                                  email: emailController!.text.toLowerCase(),
                                   name: fullNameController!.text,
                                   monthlyIncome: functions.monthlyIncome(
                                       'getIndex',
                                       monthlyIncomeValue,
                                       FFAppState().locale),
                                   employmentStatus:
-                                      functions.editProfileindexReturn(
-                                          (EmplymentTypeCall.emplymentData(
-                                            (emplymentList?.jsonBody ?? ''),
-                                          ) as List),
-                                          privateSectorValue),
+                                  functions.editProfileindexReturn(
+                                      (EmplymentTypeCall.emplymentData(
+                                        (emplymentList?.jsonBody ?? ''),
+                                      ) as List),
+                                      privateSectorValue),
                                   bank: functions.editProfileindexReturn(
                                       (GetBanksCall.bankData(
                                         (bankList?.jsonBody ?? ''),
                                       ) as List),
                                       bankValue),
                                   sakaniLoanCoverage:
-                                      functions.sakaniLoan(choiceChipsValue),
+                                  functions.sakaniLoan(choiceChipsValue),
                                   updateAt: DateTime.now(),
                                 );
 
@@ -909,10 +978,10 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                     context: context,
                                     builder: (BuildContext context) =>
                                         CommonAlertDialog(
-                                      onCancel: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ),
+                                          onCancel: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
                                   );
                                 }
                               } else {
@@ -926,14 +995,14 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                       ),
                                       style: TextStyle(
                                         color:
-                                            FlutterFlowTheme.of(context).white,
+                                        FlutterFlowTheme.of(context).white,
                                         fontWeight: FontWeight.w500,
                                         fontSize: 16,
                                       ),
                                     ),
                                     duration: Duration(milliseconds: 4000),
                                     backgroundColor:
-                                        FlutterFlowTheme.of(context).primaryRed,
+                                    FlutterFlowTheme.of(context).primaryRed,
                                   ),
                                 );
                               }
@@ -942,76 +1011,97 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               logFirebaseEvent(
                                   'updatePersonalInfo_updatePersonaInfo');
 
-                              final userUpdateData = createUserRecordData(
-                                email: emailController!.text,
-                                name: fullNameController!.text,
-                                monthlyIncome: functions.monthlyIncome(
-                                    'getIndex',
-                                    monthlyIncomeValue,
-                                    FFAppState().locale),
-                                employmentStatus:
-                                    functions.editProfileindexReturn(
-                                        (EmplymentTypeCall.emplymentData(
-                                          (emplymentList?.jsonBody ?? ''),
-                                        ) as List),
-                                        privateSectorValue),
-                                bank: functions.editProfileindexReturn(
-                                    (GetBanksCall.bankData(
-                                      (bankList?.jsonBody ?? ''),
-                                    ) as List),
-                                    bankValue),
-                                sakaniLoanCoverage:
-                                    functions.sakaniLoan(choiceChipsValue),
+                              if(isEmailValid&&isNameValid){
+                                final userUpdateData = createUserRecordData(
+                                  email: emailController!.text.toLowerCase(),
+                                  name: fullNameController!.text,
+                                  monthlyIncome: functions.monthlyIncome(
+                                      'getIndex',
+                                      monthlyIncomeValue,
+                                      FFAppState().locale),
+                                  employmentStatus:
+                                  functions.editProfileindexReturn(
+                                      (EmplymentTypeCall.emplymentData(
+                                        (emplymentList?.jsonBody ?? ''),
+                                      ) as List),
+                                      privateSectorValue),
+                                  bank: functions.editProfileindexReturn(
+                                      (GetBanksCall.bankData(
+                                        (bankList?.jsonBody ?? ''),
+                                      ) as List),
+                                      bankValue),
+                                  sakaniLoanCoverage:
+                                  functions.sakaniLoan(choiceChipsValue),
                                   updateAt: DateTime.now(),
-                              );
+                                );
 
-                              await FirebaseFirestore.instance.collection('User').where(
-                                  'email', isEqualTo: emailController?.text).get().then(
-                                    (res) {
-                                  var data = res.docs;
-                                  print("Successfully completed ${data.length}");
-                                  if(data.length>0&&nonSimilarUidCount(data)){
-                                    thisEmailExists=true;
-                                    setState((){});
-                                  }else{
-                                    thisEmailExists=false;
-                                    setState((){});
-                                  }
-                                },
-                                onError: (e) => print("Error completing: $e"),);
+                                await FirebaseFirestore.instance.collection('User').where(
+                                    'email', isEqualTo: emailController?.text.toLowerCase()).get().then(
+                                      (res) {
+                                    var data = res.docs;
+                                    print("Successfully completed ${data.length}");
+                                    if(data.length>0&&nonSimilarUidCount(data)){
+                                      thisEmailExists=true;
+                                      setState((){});
+                                    }else{
+                                      thisEmailExists=false;
+                                      setState((){});
+                                    }
+                                  },
+                                  onError: (e) => print("Error completing: $e"),);
 
 
-                              if (isInternetAvailable ?? false) {
-                                if((thisEmailExists??false)){
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                       'Email Already Exists',
-                                        style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                if (isInternetAvailable ?? false) {
+                                  if((thisEmailExists??false)){
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'emailAlreadyExists' /* EMAIL ALREADY EXISTS */,
+                                          ),
+                                          style:
+                                          FlutterFlowTheme.of(context).subtitle1,
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: FlutterFlowTheme.of(
+                                            context)
+                                            .primaryRed,
                                       ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor: FlutterFlowTheme.of(
-                                          context)
-                                          .primaryRed,
-                                    ),
+                                    );
+                                  }else{
+                                    await currentUserReference!
+                                        .update(userUpdateData);
+                                    Navigator.pop(context);
+                                  }
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        CommonAlertDialog(
+                                          onCancel: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
                                   );
-                                }else{
-                                  await currentUserReference!
-                                      .update(userUpdateData);
-                                  Navigator.pop(context);
                                 }
-                              } else {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      CommonAlertDialog(
-                                    onCancel: () {
-                                      Navigator.pop(context);
-                                    },
+                              }else{
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'enterValidNameAndEmail' /* Enter Valid Name And Email */,
+                                      ),
+                                      style:
+                                      FlutterFlowTheme.of(context).subtitle1,
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor: FlutterFlowTheme.of(
+                                        context)
+                                        .primaryRed,
                                   ),
                                 );
                               }
+
 
                               // logFirebaseEvent(
                               //     'updatePersonalInfo_Close-Dialog,-Drawer,');
@@ -1032,25 +1122,25 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                           // monthlyIncomeValue,
                           // choiceChipsValue
                           color: ((bankValue != null && bankValue != '') &&
-                                  (privateSectorValue != null &&
-                                      privateSectorValue != '') &&
-                                  (monthlyIncomeValue != null &&
-                                      monthlyIncomeValue != '') &&
-                                  (choiceChipsValue != null &&
-                                      choiceChipsValue != '') &&
-                                  (emailController!.text != null &&
-                                      emailController!.text != '') &&
-                                  (fullNameController!.text != null &&
-                                      fullNameController!.text != ''))
+                              (privateSectorValue != null &&
+                                  privateSectorValue != '') &&
+                              (monthlyIncomeValue != null &&
+                                  monthlyIncomeValue != '') &&
+                              (choiceChipsValue != null &&
+                                  choiceChipsValue != '') &&
+                              (emailController!.text != null &&
+                                  emailController!.text != '') &&
+                              (fullNameController!.text != null &&
+                                  fullNameController!.text != '')&&isNameValid&&isEmailValid)
                               ? FlutterFlowTheme.of(context).primaryColor
                               : Color(0xFF8C8C8C),
                           textStyle:
-                              FlutterFlowTheme.of(context).subtitle1.override(
-                                    fontFamily: 'AvenirArabic',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w800,
-                                    useGoogleFonts: false,
-                                  ),
+                          FlutterFlowTheme.of(context).subtitle1.override(
+                            fontFamily: 'AvenirArabic',
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                            useGoogleFonts: false,
+                          ),
                           borderSide: BorderSide(
                             color: Colors.transparent,
                             width: 1,
