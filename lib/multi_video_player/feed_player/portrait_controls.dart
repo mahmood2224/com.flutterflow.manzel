@@ -28,7 +28,6 @@ class _FeedPlayerPortraitControlsState extends State<FeedPlayerPortraitControls>
       color: Colors.transparent,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Stack(
-     //   crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           if(!videoManager.isPlaying)
             Align(
@@ -53,21 +52,6 @@ class _FeedPlayerPortraitControlsState extends State<FeedPlayerPortraitControls>
                 ),
               ),
             ),
-          // FlickAutoHideChild(
-          //   autoHide: true,
-          //   showIfVideoNotInitialized: false,
-          //   child: Align(
-          //     alignment: Alignment.topRight,
-          //     child: Container(
-          //       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-          //       decoration: BoxDecoration(
-          //         color: Colors.black38,
-          //         borderRadius: BorderRadius.circular(20),
-          //       ),
-          //       child: FlickLeftDuration(),
-          //     ),
-          //   ),
-          // ),
           FlickShowControlsAction(
             handleVideoTap: () {
               widget.flickMultiManager?.togglePlay(widget.flickManager!);
@@ -94,24 +78,6 @@ class _FeedPlayerPortraitControlsState extends State<FeedPlayerPortraitControls>
               ),
             ),
           ),
-          // if(widget.isPlayButtonVisible)
-          //   Container(
-          //     constraints:
-          //     BoxConstraints(minWidth: 50, maxWidth: 50),
-          //     decoration: BoxDecoration(
-          //       color:
-          //           Colors.black.withOpacity(1.0),
-          //       shape: BoxShape.circle,
-          //     ),
-          //     child: Icon(
-          //       Icons.play_arrow_rounded,
-          //       color:
-          //           Colors.white.withOpacity(1.0),
-          //          // :
-          //         //Colors.white.withOpacity(0.0),
-          //       size: 40,
-          //     ),
-          //   )
         ],
       ),
     );

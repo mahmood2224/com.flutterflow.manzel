@@ -70,8 +70,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   int currentPropertyindex = 0;
   String? res;
   Map<String, VideoPlayerController> videocontrollerMap = {};
+  ScrollController? _scrollController;
 
-  static const _pageSize = 2;
+  static const _pageSize = 4;
 
   // final PagingController<int, dynamic> _pagingController =
   //     PagingController(firstPageKey: 0);
@@ -106,6 +107,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     // });
     checkInternetStatus();
     flickMultiManager = FlickMultiManager();
+    _scrollController= ScrollController();
   }
 
   Future<void> checkInternetStatus() async {
@@ -507,6 +509,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             ),
             Expanded(
               child: ListView.separated(
+                controller: _scrollController,
                 separatorBuilder: (context, int) => Container(
                   height: 50,
                 ),
