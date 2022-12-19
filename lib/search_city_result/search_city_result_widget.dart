@@ -1,6 +1,8 @@
 import 'package:manzel/auth/auth_util.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/components/something_went_wrong_widget.dart';
+import 'package:manzel/multi_video_player/feed_player/multi_manager/flick_multi_manager.dart';
+import 'package:manzel/multi_video_player/feed_player/multi_manager/flick_multi_player.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import '../auth/firebase_user_provider.dart';
@@ -60,6 +62,8 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
   List? properties;
 
   Map<String, VideoPlayerController> videocontrollerMap = {};
+  late FlickMultiManager flickMultiManager;
+
 
   @override
   void initState() {
@@ -69,6 +73,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
         parameters: {'screen_name': 'SearchCityResult'});
     fav = FavouriteList.instance.favourite;
     apiRequestCompleterFunction();
+    flickMultiManager = FlickMultiManager();
   }
 
   Future<void> apiRequestCompleterFunction() async {
@@ -299,9 +304,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                       16, 0, 16, 25),
                                   child: InkWell(
                                     onTap: () async {
-                                      videoPlayers[propertiesIndex +
-                                              widget.homeScreenLength!]
-                                          .pause();
+                                      flickMultiManager.pause();
                                       logFirebaseEvent(
                                           'FILTER_RESULTS_PAGE_propertyCard_ON_TAP');
                                       // propertyDetails
@@ -382,196 +385,19 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                             BorderRadius
                                                                 .circular(12),
                                                       ),
-                                                      child: VisibilityDetector(
-                                                        key: Key(propertiesIndex
-                                                            .toString()),
-                                                        onVisibilityChanged:
-                                                            (visibility) {
-                                                          if (visibility.visibleFraction *
-                                                                      100 ==
-                                                                  100 &&
-                                                              this.mounted) {
-                                                            if (!(videoPlayers[widget
-                                                                        .homeScreenLength! +
-                                                                    propertiesIndex]
-                                                                .value
-                                                                .isInitialized)) {
-                                                              videoPlayers[widget
-                                                                          .homeScreenLength! +
-                                                                      propertiesIndex]
-                                                                  .initialize()
-                                                                  .then(
-                                                                      (value) {
-                                                                isMuted.value
-                                                                    ? videoPlayers[widget.homeScreenLength! +
-                                                                            propertiesIndex]
-                                                                        .setVolume(
-                                                                            0)
-                                                                    : videoPlayers[widget.homeScreenLength! +
-                                                                            propertiesIndex]
-                                                                        .setVolume(
-                                                                            100);
-                                                                currentPropertyindex =
-                                                                    widget.homeScreenLength! +
-                                                                        propertiesIndex;
-                                                                videoPlayers[widget
-                                                                            .homeScreenLength! +
-                                                                        propertiesIndex]
-                                                                    .play();
-                                                                isPaused =
-                                                                    false;
-
-                                                                setState(() {
-                                                                  videoPlayers
-                                                                      .forEach(
-                                                                          (otherPlayer) {
-                                                                    if (otherPlayer !=
-                                                                        videoPlayers[widget.homeScreenLength! +
-                                                                            propertiesIndex]) {
-                                                                      if (otherPlayer
-                                                                          .value
-                                                                          .isInitialized) {
-                                                                        otherPlayer
-                                                                            .pause();
-
-                                                                      } else {
-
-                                                                      }
-                                                                    }
-                                                                  });
-                                                                });
-                                                                ;
-                                                              });
-
-                                                              print(
-                                                                  "propertiesIndex.toString() : ${propertiesIndex.toString()},visibility.visibleFraction*100 = ${visibility.visibleFraction * 100}");
-                                                            } else {
-                                                              isMuted.value
-                                                                  ? videoPlayers[
-                                                                          widget.homeScreenLength! +
-                                                                              propertiesIndex]
-                                                                      .setVolume(
-                                                                          0)
-                                                                  : videoPlayers[
-                                                                          widget.homeScreenLength! +
-                                                                              propertiesIndex]
-                                                                      .setVolume(
-                                                                          100);
-                                                              videoPlayers[widget
-                                                                          .homeScreenLength! +
-                                                                      propertiesIndex]
-                                                                  .play();
-                                                              isPaused = false;
-                                                              setState(() {
-                                                                videoPlayers
-                                                                    .forEach(
-                                                                        (otherPlayer) {
-                                                                  if (otherPlayer !=
-                                                                      videoPlayers[
-                                                                          widget.homeScreenLength! +
-                                                                              propertiesIndex]) {
-                                                                    if (otherPlayer
-                                                                        .value
-                                                                        .isInitialized) {
-                                                                      otherPlayer
-                                                                          .pause();
-                                                                    }
-                                                                  }
-                                                                });
-                                                              });
-                                                            }
-                                                          }
-                                                        },
-                                                        child:
-                                                            FlutterFlowVideoPlayer(
-                                                              posterImage: getJsonField(
-                                                                propertiesItem,
-                                                                r'''$.attributes.video_poster_image''',
-                                                              ),
-                                                        path: getJsonField(
+                                                      child: FlickMultiPlayer(
+                                                        url: getJsonField(
                                                           propertiesItem,
                                                           r'''$.attributes.video_manifest_uri''',
                                                         ),
-                                                        videoType:
-                                                            VideoType.network,
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            95,
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            1.8,
-                                                        aspectRatio: 1.70,
-                                                        autoPlay: false,
-                                                        looping: true,
-                                                        showControls: false,
-                                                        allowFullScreen: true,
-                                                        allowPlaybackSpeedMenu:
-                                                            false,
-                                                              screenName: 'search',
-                                                            propertiesIndex: propertiesIndex,
-                                                            currentPropertyindex: currentPropertyindex,
-                                                            homeScreenLength: widget.homeScreenLength,
-
+                                                        flickMultiManager: flickMultiManager,//flickMultiManager,
+                                                        image: getJsonField(
+                                                          propertiesItem,
+                                                          r'''$.attributes.video_poster_image''',
+                                                        )
                                                       ),
-                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.9, 0.8),
-                                              child: InkWell(
-                                                child: ValueListenableBuilder(
-                                                  builder:
-                                                      (BuildContext context,
-                                                          bool value,
-                                                          Widget? child) {
-                                                    return Container(
-                                                      height: 30,
-                                                      width: 30,
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.black
-                                                            .withOpacity(0.5),
-                                                        shape: BoxShape.circle,
-                                                      ),
-                                                      child: Icon(
-                                                        isMuted.value
-                                                            ? Icons
-                                                                .volume_off_rounded
-                                                            : Icons
-                                                                .volume_up_rounded,
-                                                        color: Colors.white
-                                                            .withOpacity(1.0),
-                                                        size: 20,
-                                                      ),
-                                                    );
-                                                  },
-                                                  valueListenable: isMuted,
-                                                ),
-                                                onTap: () {
-                                                  if (videoPlayers[widget
-                                                                  .homeScreenLength??
-                                                              0 +propertiesIndex]
-                                                          .value
-                                                          .volume >
-                                                      0) {
-                                                    videoPlayers[widget
-                                                                .homeScreenLength??0 +propertiesIndex]
-                                                            .setVolume(0);
-                                                    isMuted.value = true;
-                                                  } else {
-                                                    videoPlayers[widget
-                                                                .homeScreenLength! +
-                                                            propertiesIndex]
-                                                        .setVolume(100);
-                                                    isMuted.value = false;
-                                                  }
-                                                },
                                               ),
                                             ),
                                             if (!functions.videoPlayerVisibilty(
@@ -875,9 +701,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                     }
                                                                   }
                                                                 } else {
-                                                                  videoPlayers[
-                                                                          propertiesIndex]
-                                                                      .pause();
+                                                                  flickMultiManager.pause();
                                                                   logFirebaseEvent(
                                                                       'Container_Navigate-To');
                                                                   context.pushNamed(
@@ -886,7 +710,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                 bookMarkTapped
                                                                         .value =
                                                                     false;
-                                                                setState(() {});
                                                               },
                                                               child: Container(
                                                                 width: 40,

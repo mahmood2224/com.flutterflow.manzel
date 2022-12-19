@@ -72,7 +72,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   Map<String, VideoPlayerController> videocontrollerMap = {};
   ScrollController controller = ScrollController();
 
-  static const _pageSize = 20;
+  static const _pageSize = 6;
 
   // final PagingController<int, dynamic> _pagingController =
   //     PagingController(firstPageKey: 0);
