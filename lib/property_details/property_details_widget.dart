@@ -113,7 +113,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
   }
 
   watchRouteChange() {
-    if (!GoRouter.of(context).location.contains("fav")) {
+    if (!GoRouter.of(context).location.contains("fav")&&mounted) {
       // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
       // do something
       fav = FavouriteList.instance.favourite;
