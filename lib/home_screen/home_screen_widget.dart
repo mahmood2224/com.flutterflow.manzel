@@ -70,9 +70,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   int currentPropertyindex = 0;
   String? res;
   Map<String, VideoPlayerController> videocontrollerMap = {};
-  ScrollController? _scrollController;
+  ScrollController controller = ScrollController();
 
-  static const _pageSize = 4;
+  static const _pageSize = 20;
 
   // final PagingController<int, dynamic> _pagingController =
   //     PagingController(firstPageKey: 0);
@@ -80,8 +80,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   bool? isInternetAvailable;
 
   late FlickMultiManager flickMultiManager;
-  List newItems=[];
-  int pageNumber=0;
+  List propertyListData=[];
+  int pageNumber=1;
+  bool isNewPageFetched=false;
+  bool isLastPage=false;
 
 
   @override
@@ -98,7 +100,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       });
     });
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});
-    videoPlayers.clear();
     _fetchPage(pageNumber);
     // _pagingController.addPageRequestListener((pageKey) {
     //   Future.delayed(const Duration(milliseconds: 500), () {
@@ -107,7 +108,23 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     // });
     checkInternetStatus();
     flickMultiManager = FlickMultiManager();
-    _scrollController= ScrollController();
+    controller.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+
+    if (controller.offset >= controller.position.maxScrollExtent &&
+        !controller.position.outOfRange) {
+      if(!isLastPage){
+        setState(() {
+          isNewPageFetched = true;
+        });
+        print("at the end of list");
+        _fetchPage(pageNumber++);
+
+      }
+
+    }
   }
 
   Future<void> checkInternetStatus() async {
@@ -160,20 +177,23 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           locale: FFAppState().locale,
         );
         apiData = apiResponse;
-        newItems = getJsonField(
+        final listData = getJsonField(
               (apiResponse.jsonBody ?? ''),
               r'''$.data''',
             )?.toList() ??
             [];
-        setState((){});
-        final isLastPage = newItems.length < _pageSize;
+          isNewPageFetched = false;
+        isLastPage = listData.length < _pageSize;
         if (isLastPage) {
+          propertyListData.addAll(listData);
+          setState((){});
          // _pagingController.appendLastPage(newItems);
         } else {
           // 3.1 Use this for offset based pagination
           // final nextPageKey = pageKey + newItems.length;
           // 3.2 Use this for page based pagination
-          final nextPageKey = ++pageKey;
+          propertyListData.addAll(listData);
+          setState((){});
         //  _pagingController.appendPage(newItems, nextPageKey);
         }
       } else {
@@ -509,14 +529,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             ),
             Expanded(
               child: ListView.separated(
-                controller: _scrollController,
+                controller: controller,
                 separatorBuilder: (context, int) => Container(
                   height: 50,
                 ),
-                itemCount: newItems.length,
+                itemCount: propertyListData.length,
                 itemBuilder: (context, index) {
-                  newItems[index]['isBookmarked'] =
-                      favourites[newItems[index]['id'].toString()] ?? false;
+                  propertyListData[index]['isBookmarked'] =
+                      favourites[propertyListData[index]['id']] ?? false;
                   return Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                     child: InkWell(
@@ -532,15 +552,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           queryParams: {
                             'propertyId': serializeParam(
                                 getJsonField(
-                                  newItems[index],
+                                  propertyListData[index],
                                   r'''$.id''',
                                 ),
                                 ParamType.int),
                             'jsonData': serializeParam(
-                                newItems[index], ParamType.JSON),
+                                propertyListData[index], ParamType.JSON),
                             'path': serializeParam(
                                 getJsonField(
-                                  newItems[index],
+                                  propertyListData[index],
                                   r'''$.attributes.video_manifest_uri''',
                                 ),
                                 ParamType.String),
@@ -562,7 +582,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               children: [
                                 if (functions
                                     .videoPlayerVisibilty(getJsonField(
-                                  newItems[index],
+                                  propertyListData[index],
                                   r'''$.attributes.video_manifest_uri''',
                                 )))
                                   ClipRRect(
@@ -581,12 +601,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       child:
                                       FlickMultiPlayer(
                                         url: getJsonField(
-                                          newItems[index],
+                                          propertyListData[index],
                                           r'''$.attributes.video_manifest_uri''',
                                         ),
                                         flickMultiManager: flickMultiManager,//flickMultiManager,
                                         image: getJsonField(
-                                          newItems[index],
+                                          propertyListData[index],
                                           r'''$.attributes.video_poster_image''',
                                         ),
                                       ),
@@ -597,13 +617,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
                                 if (!functions
                                     .videoPlayerVisibilty(getJsonField(
-                                  newItems[index],
+                                  propertyListData[index],
                                   r'''$.attributes.video_manifest_uri''',
                                 )))
                                   Builder(
                                     builder: (context) {
                                       final propertyImages = getJsonField(
-                                        newItems[index],
+                                        propertyListData[index],
                                         r'''$..property_images.data''',
                                       ).toList();
 
@@ -720,7 +740,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       builder: (BuildContext context, value,
                                           Widget? child) {
                                         return (bookMarkTapped.value &&
-                                            newItems[index] ==
+                                            propertyListData[index] ==
                                                 tapped_index)
                                             ? SizedBox(
                                             child: Container(
@@ -741,8 +761,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             ))
                                             : InkWell(
                                             onTap: () async {
-                                              newItems[index]['isBookmarked'] =
-                                              newItems[index]['isBookmarked']
+                                              propertyListData[index]['isBookmarked'] =
+                                              propertyListData[index]['isBookmarked']
                                                   ? true
                                                   : false;
                                               tapped_index = index;
@@ -753,7 +773,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               logFirebaseEvent(
                                                   'HOME_SCREEN_Container_jprwonvd_ON_TAP');
                                               if (loggedIn) {
-                                                if (newItems[index]['isBookmarked']) {
+                                                if (propertyListData[index]['isBookmarked']) {
                                                   logFirebaseEvent(
                                                       'Container_Backend-Call');
                                                   isInternetAvailable =
@@ -772,7 +792,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       valueOrDefault<
                                                           String>(
                                                         getJsonField(
-                                                          newItems[index],
+                                                          propertyListData[index],
                                                           r'''$.id''',
                                                         ).toString(),
                                                         '0',
@@ -785,10 +805,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         .statusCode) ==
                                                         200) {
                                                       favourites.remove(
-                                                          newItems[index][
+                                                          propertyListData[index][
                                                           "id"]
                                                               .toString());
-                                                      newItems[index][
+                                                      propertyListData[index][
                                                       "isBookmarked"] =
                                                       false;
                                                       bookMarkTapped
@@ -864,7 +884,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                       valueOrDefault<
                                                           String>(
                                                         getJsonField(
-                                                          newItems[index],
+                                                          propertyListData[index],
                                                           r'''$.id''',
                                                         ).toString(),
                                                         '0',
@@ -877,9 +897,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         .statusCode) ==
                                                         200) {
                                                       favourites[
-                                                        newItems[index]['id'].toString()] =
+                                                        propertyListData[index]['id'].toString()] =
                                                       true;
-                                                      newItems[index][
+                                                      propertyListData[index][
                                                       "isBookmarked"] =
                                                       true;
                                                       bookMarkTapped
@@ -952,7 +972,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               width: 50,
                                               height: 50,
                                               decoration: BoxDecoration(
-                                                color:  newItems[index][
+                                                color:  propertyListData[index][
                                                 "isBookmarked"]
                                                     ? Color(0x4DFF0000)
                                                     : Color(0x4D000000),
@@ -991,7 +1011,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         BorderRadius.circular(30),
                                         child: Image.network(
                                           getJsonField(
-                                            newItems[index],
+                                            propertyListData[index],
                                             r'''$.attributes.managed_by.data.attributes.company_logo.data.attributes.url''',
                                           ),
                                           fit: BoxFit.cover,
@@ -1002,7 +1022,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                 ),
                                 if (functions.conditionalVisibility(
                                     getJsonField(
-                                      newItems[index],
+                                      propertyListData[index],
                                       r'''$.attributes.property_status''',
                                     ).toString(),
                                     'Booked'))
@@ -1052,7 +1072,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   ),
                                 if (functions.conditionalVisibility(
                                     getJsonField(
-                                      newItems[index],
+                                      propertyListData[index],
                                       r'''$.attributes.property_status''',
                                     ).toString(),
                                     'Soon'))
@@ -1115,7 +1135,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                               children: [
                                 Text(
                                   getJsonField(
-                                    newItems[index],
+                                    propertyListData[index],
                                     r'''$.attributes.property_name''',
                                   ).toString(),
                                   maxLines: 1,
@@ -1167,7 +1187,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           4, 0, 0, 0),
                                       child: Text(
                                         getJsonField(
-                                          newItems[index],
+                                          propertyListData[index],
                                           r'''$..attributes.city.data.attributes.city_name''',
                                         ).toString(),
                                         style: FlutterFlowTheme.of(context)
@@ -1199,7 +1219,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     ),
                                     Text(
                                       getJsonField(
-                                        newItems[index],
+                                        propertyListData[index],
                                         r'''$..property_district''',
                                       ).toString(),
                                       style: FlutterFlowTheme.of(context)
@@ -1217,7 +1237,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                 Builder(
                                   builder: (context) {
                                     final banks = getJsonField(
-                                      newItems[index],
+                                      propertyListData[index],
                                       r'''$.attributes.banks.data''',
                                     ).toList();
                                     return Row(
@@ -1312,7 +1332,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     Text(
                                       valueOrDefault<String>(
                                         functions.formatAmount(getJsonField(
-                                          newItems[index],
+                                          propertyListData[index],
                                           r'''$.attributes.property_initial_installment''',
                                         ).toString()),
                                         '0',
@@ -1365,7 +1385,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               .formatAmountWithoutDecimal(
                                               valueOrDefault<String>(
                                                 getJsonField(
-                                                  newItems[index],
+                                                  propertyListData[index],
                                                   r'''$..property_price''',
                                                 ).toString(),
                                                 '0',
@@ -1426,7 +1446,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             borderRadius: BorderRadius.circular(5),
                             child:
                             FlickMultiPlayer(
-                              url: newItems[index]['attributes']['video_manifest_uri'],
+                              url: propertyListData[index]['attributes']['video_manifest_uri'],
                               flickMultiManager: flickMultiManager,
                               image:  '',
                             ),
@@ -1437,6 +1457,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 },
               ),
             ),
+            if(isNewPageFetched)
+            CircularProgressIndicator()
           ],
         ),
       ),
