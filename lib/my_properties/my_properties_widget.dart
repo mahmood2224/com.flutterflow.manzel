@@ -867,7 +867,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                               style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                                     fontFamily: 'AvenirArabic',
                                                                                                     color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                    fontSize: 6,
+                                                                                                    fontSize: 8,
                                                                                                     fontWeight: FontWeight.bold,
                                                                                                     useGoogleFonts: false,
                                                                                                   ),
@@ -880,9 +880,8 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                                     getJsonField(
                                                                                                       bookedPropertiesItem,
                                                                                                       r'''$.created_at._seconds''',
-                                                                                                    )) /
-                                                                                                100,
-                                                                                            radius: 17,
+                                                                                                    )),
+                                                                                            radius: 22,
                                                                                             lineWidth: 4,
                                                                                             animation: false,
                                                                                             backgroundColor: FlutterFlowTheme.of(context).white,
