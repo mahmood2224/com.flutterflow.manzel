@@ -1194,7 +1194,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                             fontWeight: FontWeight.bold,
                                                                                             useGoogleFonts: false,
                                                                                           )),
-                                                                                  Text('DAYS',
+                                                                                  Text(  FFLocalizations.of(context).getText('days' /* Days */,),
                                                                                       style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                             fontFamily: 'AvenirArabic',
                                                                                             color: FlutterFlowTheme.of(context).primaryText,
@@ -1224,7 +1224,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                             fontWeight: FontWeight.bold,
                                                                                             useGoogleFonts: false,
                                                                                           )),
-                                                                                  Text('HOURS',
+                                                                                  Text(FFLocalizations.of(context).getText('hours' /* Hours */,),
                                                                                       style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                             fontFamily: 'AvenirArabic',
                                                                                             color: FlutterFlowTheme.of(context).primaryText,
@@ -1254,7 +1254,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                             fontWeight: FontWeight.bold,
                                                                                             useGoogleFonts: false,
                                                                                           )),
-                                                                                  Text('MINUTES',
+                                                                                  Text(FFLocalizations.of(context).getText('minutes' /* Minutes */,),
                                                                                       style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                             fontFamily: 'AvenirArabic',
                                                                                             color: FlutterFlowTheme.of(context).primaryText,
@@ -1284,7 +1284,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                             fontWeight: FontWeight.bold,
                                                                                             useGoogleFonts: false,
                                                                                           )),
-                                                                                  Text('SECONDS',
+                                                                                  Text(FFLocalizations.of(context).getText('seconds' /* Seconds */,),
                                                                                       style: FlutterFlowTheme.of(context).bodyText1.override(
                                                                                             fontFamily: 'AvenirArabic',
                                                                                             color: FlutterFlowTheme.of(context).primaryText,
