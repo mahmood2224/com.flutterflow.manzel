@@ -53,6 +53,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
 
   void resendOTP() async {
     if (_otpResendTimes > 0) {
+      enterOTPController?.clear();
+      _showOtpError.value='';
       _showResendOtp.value = false;
       _otpResendTimes--;
       if (isFromUpdate ?? false) {
@@ -470,7 +472,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               return Visibility(
                                 visible: value,
                                 replacement: TimerWidget(
-                                    duration: Duration(seconds: 60),
+                                    duration: Duration(seconds: 5),
                                     onComplete: (VoidCallback restart) {
                                       _showResendOtp.value = true;
                                     }),
