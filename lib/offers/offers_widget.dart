@@ -2200,7 +2200,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                             ),
                                                                                           ),
                                                                                           duration: Duration(milliseconds: 4000),
-                                                                                          backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                                          backgroundColor: FlutterFlowTheme.of(context).primaryGreen,
                                                                                         ),
                                                                                       );
                                                                                       if (mounted) setState(() {});
@@ -2218,7 +2218,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                             ),
                                                                                           ),
                                                                                           duration: Duration(milliseconds: 4000),
-                                                                                          backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                                                                                          backgroundColor: FlutterFlowTheme.of(context).primaryRed,
                                                                                         ),
                                                                                       );
                                                                                       isLoading.value = false;
