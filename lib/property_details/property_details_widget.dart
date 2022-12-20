@@ -1550,7 +1550,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> {
                                                             padding:
                                                                 EdgeInsetsDirectional
                                                                     .fromSTEB(
-                                                                        3,
+                                                                        0,
                                                                         0,
                                                                         3,
                                                                         0),

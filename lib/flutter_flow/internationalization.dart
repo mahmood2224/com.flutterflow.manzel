@@ -1110,7 +1110,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'المخطط',
     },
     '73rcbvl6': {
-      'en': ', ',
+      'en': ',',
       'ar': '،',
     },
     'regy8zap': {
