@@ -2,6 +2,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:manzel/auth/auth_util.dart';
 import 'package:manzel/auth/firebase_user_provider.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/enviorment/env_variables.dart';
 import 'package:manzel/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:manzel/zoom_image/zoom_image_widget.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
@@ -465,8 +466,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
           title: "Join Manzel to see what I've been upto",
           imageUrl: Uri.parse(thumbnailUrl!),
           description: description),
-      // uriPrefix: 'https://manzelprod.page.link',
-      uriPrefix: 'https://manzeldev.page.link',
+      uriPrefix:  '${EnvVariables.instance.dynamicLinkUrl}',
       link: Uri.parse(url),
       androidParameters: const AndroidParameters(
         packageName: 'com.flutterflow.manzel',
