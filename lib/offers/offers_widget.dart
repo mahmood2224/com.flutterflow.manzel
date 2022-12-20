@@ -185,7 +185,8 @@ class _OffersWidgetState extends State<OffersWidget> {
 
   Future<void> getOffersCall() async {
     isPageLoading = true;
-    setState(() {});
+    if(mounted)
+      setState(() {});
     isInternetAvailable = await isInternetConnected();
     if ((isInternetAvailable ?? false) && loggedIn) {
       getOfferResponse = await GetOffersCall?.call(
@@ -195,10 +196,12 @@ class _OffersWidgetState extends State<OffersWidget> {
           authorazationToken: FFAppState().authToken,
           version: FFAppState().apiVersion);
       isPageLoading = false;
+      if(mounted)
       setState(() {});
       activeOffers = getOfferResponse?.jsonBody["result"].toList();
     } else if ((!(isInternetAvailable ?? false)) && loggedIn) {
       isPageLoading = false;
+      if(mounted)
       setState(() {});
       showDialog(
         context: context,
