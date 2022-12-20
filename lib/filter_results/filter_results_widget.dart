@@ -639,8 +639,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                               "isBookmarked"]
                                                                   ? true
                                                                   : false;
-                                                              setState(
-                                                                      () {});
                                                               tapped_index =
                                                                   propertiesIndex;
                                                               bookMarkTapped

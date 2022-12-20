@@ -569,7 +569,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                                             "isBookmarked"]
                                                                         ? true
                                                                         : false;
-                                                                setState(() {});
                                                                 tapped_index =
                                                                     propertiesIndex;
                                                                 bookMarkTapped
