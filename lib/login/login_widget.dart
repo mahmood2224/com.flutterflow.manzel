@@ -227,7 +227,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   warningMessage='';
                                   isButtonTappable = validateMobileNumber(phoneNumberController!.text);
                                   if ((count == val.length && val.length < 9)&&isEnterEnglishNumberSnackNotShown) {
-                                    warningMessage= FFAppState().locale ==
+                                    warningMessage = FFAppState().locale ==
                                         'en'
                                         ? 'Please enter English numbers!'
                                         : 'الرجاء إدخال الأرقام الإنجليزية!';

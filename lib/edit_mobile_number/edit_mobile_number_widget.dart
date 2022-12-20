@@ -34,6 +34,9 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
   FocusNode contactNoFocusNode = FocusNode();
   bool isPhoneNumberValid=true;
   bool isButtonTappable=false;
+  String warningMessage ='';
+  int count = 0;
+  bool isEnterEnglishNumberSnackNotShown = true;
 
   @override
   void initState() {
@@ -44,6 +47,11 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
     contactNoFocusNode.addListener(() {
       if(!contactNoFocusNode.hasFocus){
         isPhoneNumberValid= validateMobileNumber(mobileNumberController!.text);
+        if(!isPhoneNumberValid){
+          warningMessage =  FFLocalizations.of(context).getText(
+            'enterValidPhone' /* Please enter a valid Phone num... */,
+          );
+        }
         setState((){});
       }
     });
@@ -157,7 +165,16 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               //buildCounter: Container(),
                               controller: mobileNumberController,
                               onChanged:(val){
+                                warningMessage='';
                                 isButtonTappable = validateMobileNumber(mobileNumberController!.text);
+                                if ((count == val.length && val.length < 9)&&isEnterEnglishNumberSnackNotShown) {
+                                  warningMessage = FFAppState().locale ==
+                                      'en'
+                                      ? 'Please enter English numbers!'
+                                      : 'الرجاء إدخال الأرقام الإنجليزية!';
+                                }
+                                count = val.length;
+                                setState((){});
                                 EasyDebounce.debounce(
                                   'phoneNumberController',
                                   Duration(milliseconds: 2000),
@@ -168,7 +185,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               autofocus: true,
                               focusNode: contactNoFocusNode,
                               inputFormatters: [
-                               // FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                                 LengthLimitingTextInputFormatter(10),
                               ],
                               obscureText: false,
@@ -210,6 +227,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                     mobileNumberController!.text.isNotEmpty
                                         ? InkWell(
                                             onTap: () async {
+                                              warningMessage='';
                                               mobileNumberController?.clear();
                                               setState(() {});
                                             },
@@ -245,13 +263,13 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    if (!isPhoneNumberValid)
                       Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
                           child: Text(
-                            FFLocalizations.of(context).getText(
-                              'enterValidPhone' /* Please enter a valid Phone num... */,
-                            ),
+                            warningMessage,
+                            // FFLocalizations.of(context).getText(
+                            //   'enterValidPhone' /* Please enter a valid Phone num... */,
+                            // ),
                             style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Sofia Pro By Khuzaimah',
                               color: Colors.red,
@@ -356,17 +374,21 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               }
                             }
                             else if(!isButtonTappable){
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'The phone number format should be 05XXXXXXXX',
-                                    style: FlutterFlowTheme.of(context)
-                                        .subtitle1,
-                                  ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor: Color(0xFF777777),
-                                ),
+                              warningMessage =  FFLocalizations.of(context).getText(
+                                'phoneNumberFormat' /* The phone number format should be 05XXXXXXXX  */,
                               );
+                              setState((){});
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //   SnackBar(
+                              //     content: Text(
+                              //       'The phone number format should be 05XXXXXXXX',
+                              //       style: FlutterFlowTheme.of(context)
+                              //           .subtitle1,
+                              //     ),
+                              //     duration: Duration(milliseconds: 4000),
+                              //     backgroundColor: Color(0xFF777777),
+                              //   ),
+                              // );
                             }
                             else if(!(isInternetAvailable??false)){
                               isLoading.value=false;
