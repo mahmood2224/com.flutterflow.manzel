@@ -531,7 +531,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               child: ListView.separated(
                 controller: controller,
                 separatorBuilder: (context, int) => Container(
-                  height: 50,
+                  height: 0,
                 ),
                 itemCount: propertyListData.length,
                 itemBuilder: (context, index) {
