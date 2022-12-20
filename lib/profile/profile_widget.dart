@@ -35,13 +35,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   static const String kWhatsAppAndroid = 'https://api.whatsapp.com/send?phone=';
   static const String kWhatsAppIOS = 'https://wa.me/';
-  int? appVersion;
+  String? appVersion;
   int? appBuildNo;
 
   @override
   void initState() {
     super.initState();
-    //buildInfo();
+    buildInfo();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Profile'});
   }
 
@@ -416,12 +416,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             'hyxsohqj' /* About manzel */,
                           ),
                           style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
+                          FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Sofia Pro By Khuzaimah',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: false,
+                          ),
                         ),
                         Icon(
                           Icons.arrow_forward_ios_rounded,
@@ -449,7 +449,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               padding: MediaQuery.of(context).viewInsets,
                               child: Container(
                                 height:
-                                    MediaQuery.of(context).size.height * 0.95,
+                                MediaQuery.of(context).size.height * 0.95,
                                 child: TermsConditionsBottomSheetWidget(
                                   pageType: 5,
                                 ),
@@ -477,12 +477,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             'n8o0zh47' /* Terms & Conditions */,
                           ),
                           style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
+                          FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'Sofia Pro By Khuzaimah',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            useGoogleFonts: false,
+                          ),
                         ),
                         Icon(
                           Icons.arrow_forward_ios_rounded,
@@ -531,12 +531,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       height: 52,
                       color: Colors.white,
                       textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
-                                fontFamily: 'AvenirArabic',
-                                color: Color(0xFF4FB26D),
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: false,
-                              ),
+                      FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'AvenirArabic',
+                        color: Color(0xFF4FB26D),
+                        fontWeight: FontWeight.w500,
+                        useGoogleFonts: false,
+                      ),
                       borderSide: BorderSide(
                         color: Color(0xFF4FB26D),
                         width: 1,
@@ -562,29 +562,29 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 logFirebaseEvent('Button_Alert-Dialog');
                                 var confirmDialogResponse =
                                     await showDialog<bool>(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Confirm Logout'),
-                                              content: Text(
-                                                  'Are you sure you want to logout?'),
-                                              actions: [
-                                                TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext,
-                                                            false),
-                                                    child: Text('No')),
-                                                TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext,
-                                                            true),
-                                                    child: Text('Yes')),
-                                              ],
-                                            );
-                                          },
-                                        ) ??
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('Confirm Logout'),
+                                          content: Text(
+                                              'Are you sure you want to logout?'),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(
+                                                        alertDialogContext,
+                                                        false),
+                                                child: Text('No')),
+                                            TextButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(
+                                                        alertDialogContext,
+                                                        true),
+                                                child: Text('Yes')),
+                                          ],
+                                        );
+                                      },
+                                    ) ??
                                         false;
                                 if (confirmDialogResponse) {
                                   isLoading.value = true;
@@ -607,26 +607,26 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               } else {
                                 logFirebaseEvent('Button_Alert-Dialog');
                                 var confirmDialogResponse = await showDialog<
-                                        bool>(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('قم بتأكيد تسجيل الخروج'),
-                                          content: Text(
-                                              'هل أنت متأكد أنك تريد تسجيل الخروج؟'),
-                                          actions: [
-                                            TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext, false),
-                                                child: Text('لا')),
-                                            TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext, true),
-                                                child: Text('نعم')),
-                                          ],
-                                        );
-                                      },
-                                    ) ??
+                                    bool>(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('قم بتأكيد تسجيل الخروج'),
+                                      content: Text(
+                                          'هل أنت متأكد أنك تريد تسجيل الخروج؟'),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext, false),
+                                            child: Text('لا')),
+                                        TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext, true),
+                                            child: Text('نعم')),
+                                      ],
+                                    );
+                                  },
+                                ) ??
                                     false;
                                 if (confirmDialogResponse) {
                                   isLoading.value = true;
@@ -654,67 +654,67 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   Widget? child) {
                                 return isLoading.value
                                     ? Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            SizedBox(
-                                              height: 30,
-                                              width: 30,
-                                              child: CircularProgressIndicator(
-                                                valueColor:
-                                                    AlwaysStoppedAnimation(
-                                                        Colors.black),
-                                                strokeWidth: 5,
-                                              ),
-                                            )
-                                          ],
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SizedBox(
+                                        height: 30,
+                                        width: 30,
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                          AlwaysStoppedAnimation(
+                                              Colors.black),
+                                          strokeWidth: 5,
                                         ),
                                       )
+                                    ],
+                                  ),
+                                )
                                     : AutoSizeText(
-                                        FFLocalizations.of(context).getText(
-                                          '2csoqw0t' /* Logout */,
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily:
-                                                  'Sofia Pro By Khuzaimah',
-                                              color: Colors.black,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w500,
-                                              useGoogleFonts: false,
-                                            ),
-                                        maxLines: 1,
-                                      );
+                                  FFLocalizations.of(context).getText(
+                                    '2csoqw0t' /* Logout */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                    fontFamily:
+                                    'Sofia Pro By Khuzaimah',
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                                  maxLines: 1,
+                                );
                               },
                               valueListenable: isLoading,
                             ),
                             style: ButtonStyle(
                               foregroundColor:
-                                  MaterialStateProperty.resolveWith<Color?>(
-                                (states) {
+                              MaterialStateProperty.resolveWith<Color?>(
+                                    (states) {
                                   if (states.contains(MaterialState.disabled)) {
                                     FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                          fontFamily: 'AvenirArabic',
-                                          color: Colors.black,
-                                          useGoogleFonts: false,
-                                        );
+                                      fontFamily: 'AvenirArabic',
+                                      color: Colors.black,
+                                      useGoogleFonts: false,
+                                    );
                                   }
                                   FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
-                                        fontFamily: 'AvenirArabic',
-                                        color: Colors.white,
-                                        useGoogleFonts: false,
-                                      );
+                                    fontFamily: 'AvenirArabic',
+                                    color: Colors.white,
+                                    useGoogleFonts: false,
+                                  );
                                 },
                               ),
                               backgroundColor:
-                                  MaterialStateProperty.resolveWith<Color?>(
-                                (states) {
+                              MaterialStateProperty.resolveWith<Color?>(
+                                    (states) {
                                   if (states.contains(MaterialState.disabled)) {
                                     return Colors.white;
                                   }
@@ -744,39 +744,39 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         FFLocalizations.of(context)
                             .getText('appBuild' /* Appbuild */),
                         style: FlutterFlowTheme.of(context).subtitle2.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
-                              color: Color(0xFFA5A5A5),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w300,
-                              useGoogleFonts: false,
-                            ),
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Color(0xFFA5A5A5),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300,
+                          useGoogleFonts: false,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 3, right: 3),
                         child: Text(
-                          "${FFAppState().buildVersion}",
+                          "$appVersion",
                           style:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Color(0xFFA5A5A5),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w300,
-                                    useGoogleFonts: false,
-                                  ),
+                          FlutterFlowTheme.of(context).subtitle2.override(
+                            fontFamily: 'Sofia Pro By Khuzaimah',
+                            color: Color(0xFFA5A5A5),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                            useGoogleFonts: false,
+                          ),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 2),
                         child: Text(
-                          "(${FFAppState().buildNo})",
+                          "($appBuildNo)",
                           style:
-                              FlutterFlowTheme.of(context).subtitle2.override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Color(0xFFA5A5A5),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w300,
-                                    useGoogleFonts: false,
-                                  ),
+                          FlutterFlowTheme.of(context).subtitle2.override(
+                            fontFamily: 'Sofia Pro By Khuzaimah',
+                            color: Color(0xFFA5A5A5),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                            useGoogleFonts: false,
+                          ),
                         ),
                       ),
                     ],
@@ -792,8 +792,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
   Future<void> buildInfo() async {
     PackageInfo info = await PackageInfo.fromPlatform();
-    appVersion = await int.parse(info.version);
-    appBuildNo = await int.parse(info.buildNumber);
+    appVersion = info.version;
+    appBuildNo = int.parse(info.buildNumber);
+      setState((){});
   }
 
   static void openWhatsapp(BuildContext context) async {
@@ -819,13 +820,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
-          'Cannot open whatsapp',
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall
-              ?.copyWith(color: Colors.white),
-        )));
+              'Cannot open whatsapp',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: Colors.white),
+            )));
       }
     }
   }
 }
+
