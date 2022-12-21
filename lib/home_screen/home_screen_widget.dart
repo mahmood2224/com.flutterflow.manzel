@@ -100,7 +100,13 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       });
     });
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});
-    _fetchPage(pageNumber);
+  //  _fetchPage(pageNumber);
+    Future.delayed(const Duration(milliseconds: 500), () {
+      _fetchPage(pageNumber);
+      getBookMarks();
+
+    });
+
     // _pagingController.addPageRequestListener((pageKey) {
     //   Future.delayed(const Duration(milliseconds: 500), () {
     //     _fetchPage(pageKey);
@@ -127,11 +133,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     }
   }
 
-  Future<void> checkInternetStatus() async {
+  Future<void> getBookMarks() async {
     isInternetAvailable = await isInternetConnected();
     if (loggedIn&&(isInternetAvailable??false)) {
       callBookmarkListApi();
     }
+  }
+
+  Future<void> checkInternetStatus() async {
+    isInternetAvailable = await isInternetConnected();
   }
 
   watchRouteChange() {
@@ -161,16 +171,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       favourites[element] = true;
     });
     FavouriteList.instance.setFavourite(favourites);
-    // if (mounted) setState(() {});
+     if (mounted) setState(() {});
   }
 
   Future<void> _fetchPage(int pageKey) async {
     try {
       bool isInternetAvailable = await isInternetConnected();
       if (isInternetAvailable) {
-        if (loggedIn) {
-           callBookmarkListApi();
-        }
+        // if (loggedIn) {
+        //    callBookmarkListApi();
+        // }
         final apiResponse = await PropertiesCall.call(
           pageNumber: pageKey.toString(),
           pageSize: _pageSize.toString(),
@@ -536,7 +546,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 itemCount: propertyListData.length,
                 itemBuilder: (context, index) {
                   propertyListData[index]['isBookmarked'] =
-                      favourites[propertyListData[index]['id']] ?? false;
+                      favourites[propertyListData[index]['id'].toString()] ?? false;
                   return Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                     child: InkWell(
