@@ -791,14 +791,12 @@ class GetBookMarkedPropertiesCall {
 
 class CancelOrderCall {
   static Future<ApiCallResponse> call({
-    String? orderId = '',
     String? userId = '',
     String? authorazationToken = '',
     String? version = '',
   }) {
     final body = '''
 {
-  "orderID": "${orderId}",
   "userID": "${userId}"
 }''';
     return ApiManager.instance.makeApiCall(

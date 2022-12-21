@@ -112,7 +112,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if(state == AppLifecycleState.detached && loggedIn) {
       CancelOrderCall.call(
-        orderId: null,
         userId: currentUserUid,
          authorazationToken: FFAppState().authToken,
          version: FFAppState().apiVersion
@@ -3693,9 +3692,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                           (value) {
                                                             if(value == null){
                                                               Future<ApiCallResponse?> cancelOrder =  CancelOrderCall.call(
-                                                                  orderId:  addOrderApiResponse
-                                                                      ?.jsonBody[
-                                                                  'result'].toString(),
                                                                   userId: currentUserUid,
                                                                   authorazationToken: FFAppState().authToken,
                                                                   version: FFAppState().apiVersion
@@ -3862,9 +3858,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                         ).then((value){
                                                           if(value == null){
                                                             Future<ApiCallResponse?> cancelOrder =  CancelOrderCall.call(
-                                                                orderId:  addOrderApiResponse
-                                                                    ?.jsonBody[
-                                                                'result'].toString(),
                                                                 userId: currentUserUid,
                                                                 authorazationToken: FFAppState().authToken,
                                                                 version: FFAppState().apiVersion

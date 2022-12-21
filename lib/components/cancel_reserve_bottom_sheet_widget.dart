@@ -64,7 +64,6 @@ class _CancelReserveBottomSheetWidgetState
               if (confirmDialogResponse) {
                 logFirebaseEvent('Button_Backend-Call');
                 cancelOrder = await CancelOrderCall.call(
-                  orderId: widget.orderId,
                   userId: currentUserUid,
                 );
                 if ((cancelOrder?.statusCode ?? 200) == 200) {
