@@ -3859,8 +3859,19 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                               ),
                                                             );
                                                           },
-                                                        ).then((value) =>
-                                                            setState(() {}));
+                                                        ).then((value){
+                                                          if(value == null){
+                                                            Future<ApiCallResponse?> cancelOrder =  CancelOrderCall.call(
+                                                                orderId:  addOrderApiResponse
+                                                                    ?.jsonBody[
+                                                                'result'].toString(),
+                                                                userId: currentUserUid,
+                                                                authorazationToken: FFAppState().authToken,
+                                                                version: FFAppState().apiVersion
+                                                            );
+                                                          }
+                                                          setState(() {});
+                                                        });
                                                         //.then((value) => _chewieController?.play());
                                                       }
                                                       else if(addOrderApiResponse?.statusCode ==403){
