@@ -138,7 +138,7 @@ class _ReservationBottomSheetWidgetState
         if (((transactionApiResponse?.statusCode ?? 200)) ==
             200) {
           logFirebaseEvent('Button_Bottom-Sheet');
-          Navigator.pop(context);
+          Navigator.pop(context,true);
           logFirebaseEvent('Button_Navigate-To');
           context.goNamed(
             'Confirmation',
@@ -157,7 +157,7 @@ class _ReservationBottomSheetWidgetState
           );
 
         }else{
-          Navigator.pop(context);
+          Navigator.pop(context,true);
           logFirebaseEvent('Button_Navigate-To');
           context.goNamed(
             'Confirmation',
@@ -190,7 +190,7 @@ class _ReservationBottomSheetWidgetState
         );
         // if (((transactionApiResponse?.statusCode ?? 200)) ==
         //     200) {
-        Navigator.pop(context);
+        Navigator.pop(context,true);
         logFirebaseEvent('Button_Navigate-To');
         context.goNamed(
           'Confirmation',
@@ -218,7 +218,7 @@ class _ReservationBottomSheetWidgetState
           // sdkErrorCode = tapSDKResult['sdk_error_code'].toString();
           // sdkErrorMessage = tapSDKResult['sdk_error_message'];
           // sdkErrorDescription = tapSDKResult['sdk_error_description'];
-          Navigator.pop(context);
+          Navigator.pop(context,true);
           logFirebaseEvent('Button_Show-Snack-Bar');
           ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

@@ -453,7 +453,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                             int>(
                                                                           getJsonField(
                                                                             allOffersItem,
-                                                                            r'''$.created_at._seconds''',
+                                                                            r'''$.updated_at._seconds''',
                                                                           ),
                                                                           0,
                                                                         ),
