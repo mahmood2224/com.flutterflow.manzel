@@ -791,21 +791,21 @@ class GetBookMarkedPropertiesCall {
 
 class CancelOrderCall {
   static Future<ApiCallResponse> call({
-    String? orderId = '',
     String? userId = '',
     String? authorazationToken = '',
+    String? version = '',
   }) {
     final body = '''
 {
-  "orderID": "${orderId}",
   "userID": "${userId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'cancelOrder',
-      apiUrl: 'https://asia-south1-manzel-prod.cloudfunctions.net/cancelOrder',
+      apiUrl: '${EnvVariables.instance.firebaseBaseUrl}/cancelOrder',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer ${authorazationToken}',
+        'version': version,
       },
       params: {},
       body: body,

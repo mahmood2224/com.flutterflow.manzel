@@ -1358,8 +1358,16 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                   ),
                                                                                 );
                                                                               },
-                                                                            ).then((value) =>
-                                                                                setState(() {}));
+                                                                            ).then((value) {
+    if(value == null){
+    Future<ApiCallResponse?> cancelOrder =  CancelOrderCall.call(
+    userId: currentUserUid,
+    authorazationToken: FFAppState().authToken,
+    version: FFAppState().apiVersion
+    );
+    }
+    setState(() {});});
+
                                                                           }
                                                                         } else {
                                                                           showDialog(
