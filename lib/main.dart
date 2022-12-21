@@ -14,10 +14,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:manzel/flutter_flow/sentry_analytics.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
@@ -40,15 +42,18 @@ const _kTestingCrashlytics = false;
 void main() async {
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    await EnvVariables.instance.initialise();
+      SentryAnalytics().init(logOnServer: true);
     await Firebase.initializeApp();
     // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   //  runApp(MyApp());
   }, (error, stackTrace) {
-   // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
+      SentryAnalytics().captureException(error, stackTrace);
+  //  FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
-  await EnvVariables.instance.initialise();
+  //await EnvVariables.instance.initialise();
   //await printBuildNumber();
   Eraser.resetBadgeCountButKeepNotificationsInCenter();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
@@ -61,7 +66,12 @@ void main() async {
 
   FFAppState().initializePersistedState(); // Initialize FFAppState
   //versionCheck();
-  runApp(MyApp());
+  runApp(
+      DefaultAssetBundle(
+        bundle: SentryAssetBundle(),
+        child: MyApp(),
+      ),
+  );
 }
 
 class MyApp extends StatefulWidget {

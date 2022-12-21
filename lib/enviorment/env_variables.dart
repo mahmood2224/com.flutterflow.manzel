@@ -10,7 +10,9 @@ class EnvVariables {
   String _sendbirdAppId = '';
   String _basicAuthUserName = '';
   String _basicAuthPassword = '';
+  String _sentryEnvironment ='';
   String _dynamicLinkUrl = '';
+  String _sentryDsn = '';
 
 
   EnvVariables._();
@@ -23,7 +25,9 @@ class EnvVariables {
     _sendbirdAppId = dotenv.get('SENDBIRD_APP_ID', fallback: '');
     _basicAuthUserName = dotenv.get('BASIC_AUTH_USER_NAME', fallback: '');
     _basicAuthPassword = dotenv.get('BASIC_AUTH_PASSWORD', fallback: '');
+    _sentryEnvironment = dotenv.get('SENTRY_ENVIRONMENT', fallback: '');
     _dynamicLinkUrl = dotenv.get('DYNAMIC_LINK_URL', fallback: '');
+    _sentryDsn = dotenv.get('SENTRY_DSN', fallback: '');
   }
 
 
@@ -38,7 +42,13 @@ class EnvVariables {
 
   String get basicAuthPassword => _basicAuthPassword;
 
+  String get sentryEnvironment => _sentryEnvironment;
+
   String get dynamicLinkUrl => _dynamicLinkUrl;
+
+  String get sentryDsn => _sentryDsn;
+
+
 
 
 }

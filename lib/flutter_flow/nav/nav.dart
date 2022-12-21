@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:manzel/app_state.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import '../../zoom_image/zoom_image_widget.dart';
 import '../flutter_flow_theme.dart';
 import '../../backend/backend.dart';
@@ -75,6 +76,7 @@ class AppStateNotifier extends ChangeNotifier {
 }
 
 GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
+    observers: [SentryNavigatorObserver()],
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
