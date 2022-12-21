@@ -3655,7 +3655,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                     200) ==
                                                     200)
                                                 {
-
+                                                  await configurePaymentSdk();
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor: Colors.white,
@@ -3702,7 +3702,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                               );
                                                             }
                                                             setState(() {});});
-                                                  await configurePaymentSdk();
                                                 }  else if(addOrderApiResponse?.statusCode ==403){
                                                   unAuthorizedUser(context, mounted);
                                                 }
@@ -3824,6 +3823,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                           ?.statusCode ??
                                                           200) ==
                                                           200) {
+                                                        await configurePaymentSdk();
                                                         await showModalBottomSheet(
                                                           isScrollControlled: true,
                                                           backgroundColor:
@@ -3871,8 +3871,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                           }
                                                           setState(() {});
                                                         });
-                                                        await configurePaymentSdk();
-
 
                                                         //.then((value) => _chewieController?.play());
                                                       }
