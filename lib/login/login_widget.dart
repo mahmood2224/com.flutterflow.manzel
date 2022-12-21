@@ -466,23 +466,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
                                   // sendOTP
                                   logFirebaseEvent('sendOTP_sendOTP');
-                                  // final phoneNumberVal =
-                                  // functions.getFormattedMobileNumber(
-                                  //     phoneNumberController!.text);
-                                  // if (phoneNumberVal == null ||
-                                  //     phoneNumberVal.isEmpty ||
-                                  //     !phoneNumberVal.startsWith('+')) {
-                                  //   isLoading.value = false;
-                                  //   ScaffoldMessenger.of(context).showSnackBar(
-                                  //     SnackBar(
-                                  //       content: Text(
-                                  //           'Phone Number is required and has to start with +.'),
-                                  //     ),
-                                  //   );
-                                  //
-                                  //   return;
-                                  // }
-                                  //entry = showOverlay(context);
                                     ApiCallResponse generateOtpResponse =
                                     await OtpCalls.generateOtp(
                                         phoneNumber:
