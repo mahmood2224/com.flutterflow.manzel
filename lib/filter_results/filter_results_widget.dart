@@ -184,8 +184,8 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                       if (isPropertiesLoading) {
                         return Center(
                           child: SizedBox(
-                            width: 50,
-                            height: 50,
+                            width: 40,
+                            height: 40,
                             child: SpinKitRipple(
                               color: FlutterFlowTheme.of(context).primaryColor,
                               size: 50,
