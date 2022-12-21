@@ -129,9 +129,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
   Future<void> checkInternetStatus() async {
     isInternetAvailable = await isInternetConnected();
-    if (loggedIn&&(isInternetAvailable??false)) {
-      callBookmarkListApi();
-    }
   }
 
   watchRouteChange() {
@@ -536,7 +533,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 itemCount: propertyListData.length,
                 itemBuilder: (context, index) {
                   propertyListData[index]['isBookmarked'] =
-                      favourites[propertyListData[index]['id']] ?? false;
+                      favourites[propertyListData[index]['id'].toString()] ?? false;
                   return Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                     child: InkWell(
