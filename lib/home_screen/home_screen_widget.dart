@@ -536,7 +536,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 itemCount: propertyListData.length,
                 itemBuilder: (context, index) {
                   propertyListData[index]['isBookmarked'] =
-                      favourites[propertyListData[index]['id']] ?? false;
+                      favourites[propertyListData[index]['id'].toString()] ?? false;
                   return Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                     child: InkWell(
@@ -747,11 +747,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               width: 50,
                                               height: 50,
                                               decoration: BoxDecoration(
-                                                // color: propertiesItem[
+                                                // color: propertyListData[index][
                                                 // "isBookmarked"]
                                                 //     ? Color(0x4DFF0000)
                                                 //     : Color(0x4D000000),
-                                                shape: BoxShape.circle,
+                                                // shape: BoxShape.circle,
                                               ),
                                               child: Icon(
                                                 Manzel.favourite,
@@ -767,7 +767,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   : false;
                                               tapped_index = index;
                                               bookMarkTapped.value = true;
-
                                               logFirebaseEvent(
                                                   'add_to_wishlist');
                                               logFirebaseEvent(
