@@ -3982,12 +3982,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                           'dpmrt150' /* Reserve */,
                                         ),
                                         options: FFButtonOptions(
-                                          width: FFAppState().locale == "en"
-                                              ? 140
-                                              : 120,
-                                          height: FFAppState().locale == "en"
-                                              ? 56
-                                              : 40,
+                                          width: 140,
+                                          // FFAppState().locale == "en"
+                                          //     ? 140
+                                          //     : 120,
+                                          height: 56,
+                                          // FFAppState().locale == "en"
+                                          //     ? 56
+                                          //     : 40,
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                           textStyle:
@@ -4022,12 +4024,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                           'wzirx8i7' /* Booked */,
                                         ),
                                         options: FFButtonOptions(
-                                          width: FFAppState().locale == "en"
-                                              ? 140
-                                              : 120,
-                                          height: FFAppState().locale == "en"
-                                              ? 56
-                                              : 40,
+                                          width: 140,
+                                          // FFAppState().locale == "en"
+                                          //     ? 140
+                                          //     : 120,
+                                          height: 56,
+                                          // FFAppState().locale == "en"
+                                          //     ? 56
+                                          //     : 40,
                                           color: Color(0xFF8C8C8C),
                                           textStyle:
                                               FlutterFlowTheme.of(context)
@@ -4061,12 +4065,14 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                           'buttonSoon' /* Booked */,
                                         ),
                                         options: FFButtonOptions(
-                                          width: FFAppState().locale == "en"
-                                              ? 140
-                                              : 120,
-                                          height: FFAppState().locale == "en"
-                                              ? 56
-                                              : 40,
+                                          width: 140,
+                                          // FFAppState().locale == "en"
+                                          //     ? 140
+                                          //     : 120,
+                                          height: 56,
+                                          // FFAppState().locale == "en"
+                                          //     ? 56
+                                          //     : 40,
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                           textStyle:
