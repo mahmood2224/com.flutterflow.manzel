@@ -100,12 +100,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       });
     });
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomeScreen'});
-    _fetchPage(pageNumber);
-    // _pagingController.addPageRequestListener((pageKey) {
-    //   Future.delayed(const Duration(milliseconds: 500), () {
-    //     _fetchPage(pageKey);
-    //   });
-    // });
+      Future.delayed(const Duration(milliseconds: 500), () {
+        _fetchPage(pageNumber);
+        getBookMarks();
+
+      });
     checkInternetStatus();
     flickMultiManager = FlickMultiManager();
     controller.addListener(_scrollListener);
@@ -126,12 +125,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
     }
   }
-
-  Future<void> checkInternetStatus() async {
+  Future<void> getBookMarks() async {
     isInternetAvailable = await isInternetConnected();
     if (loggedIn&&(isInternetAvailable??false)) {
       callBookmarkListApi();
     }
+  }
+
+
+  Future<void> checkInternetStatus() async {
+    isInternetAvailable = await isInternetConnected();
   }
 
   watchRouteChange() {
@@ -161,16 +164,16 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       favourites[element] = true;
     });
     FavouriteList.instance.setFavourite(favourites);
-    // if (mounted) setState(() {});
+     if (mounted) setState(() {});
   }
 
   Future<void> _fetchPage(int pageKey) async {
     try {
       bool isInternetAvailable = await isInternetConnected();
       if (isInternetAvailable) {
-        if (loggedIn) {
-           callBookmarkListApi();
-        }
+        // if (loggedIn&&pageNumber==1) {
+        //    callBookmarkListApi();
+        // }
         final apiResponse = await PropertiesCall.call(
           pageNumber: pageKey.toString(),
           pageSize: _pageSize.toString(),
