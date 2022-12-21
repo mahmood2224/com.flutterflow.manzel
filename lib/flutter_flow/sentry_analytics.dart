@@ -19,8 +19,7 @@ class SentryAnalytics {
       _logOnServer = logOnServer;
       if (_logOnServer) {
         await SentryFlutter.init((options) {
-          options.dsn =
-          'https://27bb4cae130a4b4bb52cb929a4917066@o4504208651124736.ingest.sentry.io/4504208680747008';
+          options.dsn = EnvVariables.instance.sentryDsn;
           options.tracesSampleRate = 1.0;
           options.environment = EnvVariables.instance.sentryEnvironment;
           options.enableAutoSessionTracking = true;
@@ -71,29 +70,4 @@ class SentryAnalytics {
     }
   }
 
-  // void unsetUserScope() {
-  //   if (_logOnServer) {
-  //     Sentry.configureScope((scope) => scope.user = null);
-  //   } else {
-  //     LoggingService().printLog(message: 'user data unset');
-  //   }
-  // }
-
-  // void addBreadCrumb({String? message, Map? data}) {
-  //   if (_logOnServer) {
-  //     Sentry.addBreadcrumb(Breadcrumb(message: message));
-  //   } else {
-  //     LoggingService().printLog(message: 'Breadcrumb: message');
-  //   }
-  // }
-
-  // void setContexts({required String event, Map? data}) {
-  //   if (_logOnServer) {
-  //     Sentry.configureScope((scope) => scope.setContexts(event, data));
-  //   } else {
-  //     LoggingService().printLog(
-  //         message:
-  //         'Event: $event, data: ${data != null ? data.toString() : 'null'}');
-  //   }
-  // }
 }
