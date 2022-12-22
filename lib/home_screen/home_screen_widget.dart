@@ -84,6 +84,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   int pageNumber=1;
   bool isNewPageFetched=false;
   bool isLastPage=false;
+  bool isVideoListLoaded = false;
+
 
 
   @override
@@ -181,11 +183,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         // if (loggedIn) {
         //    callBookmarkListApi();
         // }
+        if(pageNumber==1)
+          isVideoListLoaded= false;
         final apiResponse = await PropertiesCall.call(
           pageNumber: pageKey.toString(),
           pageSize: _pageSize.toString(),
           locale: FFAppState().locale,
         );
+        if(pageNumber==1)
+          isVideoListLoaded= true;
         apiData = apiResponse;
         final listData = getJsonField(
               (apiResponse.jsonBody ?? ''),
