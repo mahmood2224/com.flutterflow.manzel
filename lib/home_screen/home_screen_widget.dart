@@ -543,7 +543,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 ],
               ),
             ),
-            Expanded(
+            isVideoListLoaded? Expanded(
               child: ListView.separated(
                 controller: controller,
                 separatorBuilder: (context, int) => Container(
@@ -763,11 +763,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               width: 50,
                                               height: 50,
                                               decoration: BoxDecoration(
-                                                // color: propertiesItem[
+                                                // color: propertyListData[index][
                                                 // "isBookmarked"]
                                                 //     ? Color(0x4DFF0000)
                                                 //     : Color(0x4D000000),
-                                                shape: BoxShape.circle,
+                                                // shape: BoxShape.circle,
                                               ),
                                               child: Icon(
                                                 Manzel.favourite,
@@ -783,7 +783,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   : false;
                                               tapped_index = index;
                                               bookMarkTapped.value = true;
-
                                               logFirebaseEvent(
                                                   'add_to_wishlist');
                                               logFirebaseEvent(
@@ -913,7 +912,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         .statusCode) ==
                                                         200) {
                                                       favourites[
-                                                        propertyListData[index]['id'].toString()] =
+                                                      propertyListData[index]['id'].toString()] =
                                                       true;
                                                       propertyListData[index][
                                                       "isBookmarked"] =
@@ -1471,6 +1470,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     ],
                   );
                 },
+              ),
+            ):  Expanded(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height/1.5,
+                child: Center(
+                  child:SpinKitRipple(
+                    color: FlutterFlowTheme.of(context)
+                        .primaryColor,
+                    size: 50,
+                  ),
+                ),
               ),
             ),
             if(isNewPageFetched)
