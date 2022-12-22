@@ -1113,6 +1113,10 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                             ],
                                                           ),
                                                         ),
+                                                         if(!(getJsonField(
+                                                           allOffersItem,
+                                                           r'''$.last_installment_amount''',
+                                                         )==0))
                                                         Expanded(
                                                           child: Column(
                                                             mainAxisSize:
@@ -1126,7 +1130,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                 FFLocalizations.of(
                                                                         context)
                                                                     .getText(
-                                                                  'lastInstallment' /* Total price */,
+                                                                  'lastInstallment' /* Last Installment */,
                                                                 ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
