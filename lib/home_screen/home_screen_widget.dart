@@ -84,6 +84,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   int pageNumber=1;
   bool isNewPageFetched=false;
   bool isLastPage=false;
+  bool isVideoListLoaded = false;
 
 
   @override
@@ -174,11 +175,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         // if (loggedIn&&pageNumber==1) {
         //    callBookmarkListApi();
         // }
+        if(pageNumber==1)
+        isVideoListLoaded= false;
         final apiResponse = await PropertiesCall.call(
           pageNumber: pageKey.toString(),
           pageSize: _pageSize.toString(),
           locale: FFAppState().locale,
         );
+        if(pageNumber==1)
+        isVideoListLoaded= true;
         apiData = apiResponse;
         final listData = getJsonField(
               (apiResponse.jsonBody ?? ''),
@@ -530,7 +535,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 ],
               ),
             ),
-            Expanded(
+            isVideoListLoaded? Expanded(
               child: ListView.separated(
                 controller: controller,
                 separatorBuilder: (context, int) => Container(
@@ -899,7 +904,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                         .statusCode) ==
                                                         200) {
                                                       favourites[
-                                                        propertyListData[index]['id'].toString()] =
+                                                      propertyListData[index]['id'].toString()] =
                                                       true;
                                                       propertyListData[index][
                                                       "isBookmarked"] =
@@ -1457,6 +1462,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     ],
                   );
                 },
+              ),
+            ):  Expanded(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height/1.5,
+                child: Center(
+                  child:SpinKitRipple(
+                    color: FlutterFlowTheme.of(context)
+                        .primaryColor,
+                    size: 50,
+                  ),
+                ),
               ),
             ),
             if(isNewPageFetched)
