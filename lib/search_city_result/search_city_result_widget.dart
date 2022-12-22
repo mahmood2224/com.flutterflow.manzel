@@ -337,6 +337,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        SizedBox(height: 15,),
                                         Container(
                                           width:
                                               MediaQuery.of(context).size.width,
