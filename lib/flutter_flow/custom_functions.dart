@@ -486,11 +486,13 @@ String myPropertiesFormatDate(
   String today = "اليوم";
   // Add your function code here!
   DateTime bookingTime;
-  if (inputTimeStamp.toString().isEmpty) {
+  if (inputTimeStamp.toString().isEmpty||inputTimeStamp==null) {
     bookingTime = DateTime.now();
+    return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime).substring(0,3)} ${DateFormat.y().format(bookingTime)}';
+
   }
   if (locale == "en") {
-    bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
+    bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp!* 1000);
     return '${DateFormat.d().format(bookingTime)} ${DateFormat.MMMM().format(bookingTime).substring(0,3)} ${DateFormat.y().format(bookingTime)}';
   } else {
     bookingTime = DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
