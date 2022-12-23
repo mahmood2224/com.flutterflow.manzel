@@ -49,7 +49,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
         isPhoneNumberValid= validateMobileNumber(mobileNumberController!.text);
         if(!isPhoneNumberValid){
           warningMessage =  FFLocalizations.of(context).getText(
-            'enterValidPhone' /* Please enter a valid Phone num... */,
+            'phoneNumberFormat' /* The phone number format should be 05XXXXXXXX  */,
           );
         }
         setState((){});

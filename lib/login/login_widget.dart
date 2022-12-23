@@ -51,7 +51,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         isPhoneNumberValid= validateMobileNumber(phoneNumberController!.text);
         if(!isPhoneNumberValid){
           warningMessage =  FFLocalizations.of(context).getText(
-            'enterValidPhone' /* Please enter a valid Phone num... */,
+            'phoneNumberFormat' /* The phone number format should be 05XXXXXXXX */,
           );
         }
         //
