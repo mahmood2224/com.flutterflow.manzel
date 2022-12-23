@@ -53,8 +53,8 @@ class _ConfirmOTPWidgetState extends State<ConfirmOTPWidget> {
             logFirebaseEvent('CONFIRM_O_T_P_PAGE_back_ON_TAP');
             // Back to login
             logFirebaseEvent('back_Backtologin');
-
-            context.pushNamed('Login');
+            context.pop();
+            //context.pushNamed('Login');
           },
         ),
         actions: [],

@@ -49,6 +49,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
     });
   }
 
+
   @override
   void dispose() {
     mobileNumberController?.dispose();
@@ -275,18 +276,13 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                         height: 56,
                         child: ElevatedButton(
                           onPressed: () async {
-                            if(isButtonTappable){
-                              isInternetAvailable = await isInternetConnected();
-                              setState(() {});
+                            isInternetAvailable = await isInternetConnected();
+                            if(isButtonTappable&&isLoading.value==false&&(isInternetAvailable??false)){
+                              isLoading.value = true;
                               logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
                               if (functions.checkPhoneNumberFormat(
                                   mobileNumberController!.text)) {
                                 logFirebaseEvent('sendOTP_sendOTP');
-                                ApiCallResponse updatePhoneResponse = await OtpCalls.updatePhone(newPhoneNumber: mobileNumberController!.text);
-                                if((OtpCalls.generateSuccess(updatePhoneResponse.jsonBody))=='success') {
-                                  String verificationKey = OtpCalls.generateKey(updatePhoneResponse.jsonBody);
-                                  context.goNamedAuth('ConfirmNewNumberOTP',mounted,queryParams:{'phoneNumber': mobileNumberController!.text,'verificationKey':verificationKey,'isFromUpdate': 'true'});
-                                }
                                 if (isInternetAvailable ?? false) {
                                   isLoading.value = true;
                                   ApiCallResponse updatePhoneResponse =
@@ -311,7 +307,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                     functions.unAuthorizedUser(context, mounted);
                                   }
                                   else {
-                                    String errorMessage = OtpCalls.phoneNumberError(updatePhoneResponse.jsonBody);
+                                    String errorMessage= OtpCalls.phoneNumberError(updatePhoneResponse.jsonBody);
                                     isLoading.value=false;
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
@@ -358,7 +354,8 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                   ),
                                 );
                               }
-                            }else{
+                            }
+                            else if(!isButtonTappable){
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -370,6 +367,19 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                   backgroundColor: Color(0xFF777777),
                                 ),
                               );
+                            }
+                            else if(!(isInternetAvailable??false)){
+                              isLoading.value=false;
+                              if (!(isInternetAvailable ?? false)) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => CommonAlertDialog(
+                                    onCancel: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                );
+                              }
                             }
 
                           },

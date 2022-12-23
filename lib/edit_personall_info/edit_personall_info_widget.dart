@@ -894,7 +894,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 ),
                                 duration: Duration(milliseconds: 4000),
                                 backgroundColor:
-                                FlutterFlowTheme.of(context).primaryRed,
+                                    FlutterFlowTheme.of(context).primaryRed,
                               ),
                             );
                           } else {

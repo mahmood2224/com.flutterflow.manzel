@@ -35,7 +35,6 @@ class _LoginWidgetState extends State<LoginWidget> {
   int count = 0;
   FocusNode contactNoFocusNode = FocusNode();
   bool? isInternetAvailable;
-  bool isApiCalled = false;
   bool isEnterEnglishNumberSnackNotShown = true;
   bool isPhoneNumberValid=true;
   bool isButtonTappable=false;
@@ -67,7 +66,6 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
       );
     }
-    setState(() {});
   }
 
   @override
@@ -462,35 +460,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                           height: 56,
                           child: ElevatedButton(
                             onPressed: () async {
-                              if(isButtonTappable){
-                                isInternetAvailable = await isInternetConnected();
-                                setState(() {});
+                              isInternetAvailable = await isInternetConnected();
+                              if(isButtonTappable&&isLoading.value==false&&(isInternetAvailable??false)){
                                 isLoading.value = true;
                                 logFirebaseEvent('LOGIN_PAGE_sendOTP_ON_TAP');
-                                if (functions.checkPhoneNumberFormat(
-                                    phoneNumberController!.text)) {
                                   // sendOTP
                                   logFirebaseEvent('sendOTP_sendOTP');
-                                  final phoneNumberVal =
-                                  functions.getFormattedMobileNumber(
-                                      phoneNumberController!.text);
-                                  if (phoneNumberVal == null ||
-                                      phoneNumberVal.isEmpty ||
-                                      !phoneNumberVal.startsWith('+')) {
-                                    isLoading.value = false;
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                            'Phone Number is required and has to start with +.'),
-                                      ),
-                                    );
-
-                                    return;
-                                  }
-                                  //entry = showOverlay(context);
-                                  if (isInternetAvailable ?? false) {
-                                    isApiCalled = true;
-                                    setState(() {});
                                     ApiCallResponse generateOtpResponse =
                                     await OtpCalls.generateOtp(
                                         phoneNumber:
@@ -509,8 +484,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             phoneNumberController!.text,
                                             'verificationKey': verificationKey
                                           });
-                                      isApiCalled = false;
-                                      setState(() {});
+                                      isLoading.value=false;
                                     }
                                     else if((generateOtpResponse.statusCode == 403)){
                                       unAuthorizedUser(context,mounted);
@@ -520,7 +494,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
                                           content: Text(
-                                            'Something Went Wrong',
+                                            FFLocalizations.of(context).getText(
+                                              'somethingWentWrong' /* Something Went Wrong */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle1,
                                           ),
@@ -529,42 +505,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         ),
                                       );
                                     }
-
-                                  } else {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          CommonAlertDialog(
-                                            onCancel: () {
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                    );
-                                  }
-                                } else {
-                                  isApiCalled = false;
-                                  setState(() {});
-                                  // Invalid_phone_number_action
-                                  logFirebaseEvent(
-                                      'sendOTP_Invalid_phone_number_action');
-                                  isLoading.value = false;
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'The phone number format should be +966123456789',
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle1,
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor: Color(0xFF777777),
-                                    ),
-                                  );
-                                }
-                              }else{
+                              }
+                              else if(!isButtonTappable){
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      'The phone number format should be 05XXXXXXXX',
+                                      FFLocalizations.of(context).getText(
+                                        'phoneNumberFormat' /* The phone number format should be 05XXXXXXXX */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle1,
                                     ),
@@ -573,13 +521,25 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   ),
                                 );
                               }
-
+                              else if(!(isInternetAvailable??false)){
+                                isLoading.value=false;
+                                if (!(isInternetAvailable ?? false)) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) => CommonAlertDialog(
+                                      onCancel: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  );
+                                }
+                              }
 
                             },
                             child: ValueListenableBuilder<bool>(
                               builder: (BuildContext context, bool value,
                                   Widget? child) {
-                                return (isLoading.value && isApiCalled)
+                                return (isLoading.value)
                                     ? Padding(
                                         padding: const EdgeInsets.all(5.0),
                                         child: Row(

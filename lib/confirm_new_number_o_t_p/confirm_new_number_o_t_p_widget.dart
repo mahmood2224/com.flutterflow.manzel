@@ -52,25 +52,24 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   String? veriKey;
 
   void resendOTP() async {
-    if (isFromUpdate ?? false) {
-      String newPhoneNumber = widget.phoneNumber ?? '';
-      ApiCallResponse? response = await OtpCalls.updatePhone(
-          idToken: idToken, newPhoneNumber: newPhoneNumber);
-      if(response.statusCode==403){
-        unAuthorizedUser(context,mounted);
-      }
-    } else {
-      ApiCallResponse? generateOtpResponse =
-      await OtpCalls.generateOtp(phoneNumber: widget.phoneNumber ?? '');
-      if(generateOtpResponse.statusCode==403){
-        unAuthorizedUser(context,mounted);
-      }
-      veriKey = OtpCalls.generateKey(generateOtpResponse.jsonBody);
-      setState(() {});
-    }
     if (_otpResendTimes > 0) {
       _showResendOtp.value = false;
       _otpResendTimes--;
+      if (isFromUpdate ?? false) {
+        String newPhoneNumber = widget.phoneNumber ?? '';
+        ApiCallResponse? response = await OtpCalls.updatePhone(newPhoneNumber: newPhoneNumber);
+        if(response.statusCode==403){
+          unAuthorizedUser(context,mounted);
+        }
+      } else {
+        ApiCallResponse? generateOtpResponse =
+        await OtpCalls.generateOtp(phoneNumber: widget.phoneNumber ?? '');
+        if(generateOtpResponse.statusCode==403){
+          unAuthorizedUser(context,mounted);
+        }
+        veriKey = OtpCalls.generateKey(generateOtpResponse.jsonBody);
+        // setState(() {});
+      }
     }
   }
 
@@ -97,7 +96,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
         ),
       );
     }
-    setState(() {});
   }
 
   @override
@@ -121,8 +119,14 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
             logFirebaseEvent('CONFIRM_NEW_NUMBER_O_T_P_back_ON_TAP');
             // Back to login
             logFirebaseEvent('back_Backtologin');
+            if(isFromUpdate??false){
+              context.goNamed('EditMobileNumber');
+            }else{
+              context.goNamed('Login');
+            }
 
-            context.pop();
+
+           // context.pop();
           },
         ),
         actions: [],
@@ -312,8 +316,9 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                   context.goNamedAuth(
                                                       'AddingInformation', mounted);
                                                 } else {
-                                                  context.goNamedAuth(
-                                                      'HomeScreen', mounted);
+                                                  context.go('/');
+                                                  // context.goNamedAuth(
+                                                  //     'HomeScreen', mounted);
                                                 }
                                               }  else {
                                                    await showDialog(
@@ -354,8 +359,8 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                           }
                                         });
                                       }
-                                      context.goNamedAuth(
-                                          'HomeScreen', mounted);
+                                      // context.goNamedAuth(
+                                      //     'HomeScreen', mounted);
                                     } on FirebaseAuthException catch (e) {
                                       switch (e.code) {
                                         case "invalid-custom-token":
@@ -375,14 +380,19 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     unAuthorizedUser(context,mounted);
                                     // context.goNamedAuth('Login', mounted);
                                   }
-                                  entry?.remove();
-                                  if (userCredential == null) {
-                                    _showOtpError.value =
-                                        "You entered OTP incorrect";
-                                    return;
+                                  else{
+                                    if (userCredential == null) {
+                                      _showOtpError.value = verifyOtpResponse.jsonBody['error'];
+                                      entry?.remove();
+                                      return;
+                                    }
                                   }
-
-
+                                  entry?.remove();
+                                  // if (userCredential == null) {
+                                  //   _showOtpError.value =
+                                  //       "You entered OTP incorrect";
+                                  //   return;
+                                  // }
                                 }
                               },
                               autofocus: true,
@@ -460,12 +470,16 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               return Visibility(
                                 visible: value,
                                 replacement: TimerWidget(
-                                    duration: Duration(seconds: 40),
+                                    duration: Duration(seconds: 60),
                                     onComplete: (VoidCallback restart) {
                                       _showResendOtp.value = true;
                                     }),
-                                child: GestureDetector(
-                                  onTap: resendOTP,
+                                child: InkWell(
+                                  onTap:
+
+                                    (){
+                                    resendOTP();
+                                  },
                                   child: Text(
                                     FFLocalizations.of(context).getText(
                                       'Resend',
