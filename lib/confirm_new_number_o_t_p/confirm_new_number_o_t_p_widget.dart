@@ -235,7 +235,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                   }
                                   else{
                                     if (userCredential == null) {
-                                      _showOtpError.value = verifyOtpResponse.jsonBody['error'];
+                                      _showOtpError.value = otpErrorMessage(verifyOtpResponse.jsonBody['error'],FFAppState().locale);
                                       entry?.remove();
                                       return;
                                     }
@@ -384,7 +384,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                   }
                                   else{
                                     if (userCredential == null) {
-                                      _showOtpError.value = verifyOtpResponse.jsonBody['error'];
+                                      _showOtpError.value = otpErrorMessage(verifyOtpResponse.jsonBody['error'],FFAppState().locale);
                                       entry?.remove();
                                       return;
                                     }
@@ -450,7 +450,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                   valueListenable: _showOtpError,
                   builder: (context, String value, child) {
                     return Text(
-                      "${value}",
+                      "$value",
                       style: TextStyle(
                           fontFamily: 'Sofia Pro By Khuzaimah',
                           fontWeight: FontWeight.w300,

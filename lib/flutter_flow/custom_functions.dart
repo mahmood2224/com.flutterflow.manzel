@@ -1625,3 +1625,20 @@ bool isPropertyImagesNull(List? propertyImage) {
   }
 }
 
+String otpErrorMessage(
+    String? message,
+    String? locale,
+    ) {
+ if(locale=='en'){
+   return message??'';
+ }else{
+   if(message=='Invalid otp'){
+     return 'otp غير صالح';
+   }
+   else if(message=='Otp is expired!'){
+     return 'انتهت صلاحية Otp!';
+   }
+   return 'هناك خطأ ما';
+ }
+}
+
