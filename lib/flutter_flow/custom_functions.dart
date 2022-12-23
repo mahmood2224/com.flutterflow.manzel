@@ -1615,3 +1615,11 @@ bool isEmailValidFunction(String text) {
   return false;
 }
 
+bool isPropertyImagesNull(List? propertyImage) {
+  if ((propertyImage != null)) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
