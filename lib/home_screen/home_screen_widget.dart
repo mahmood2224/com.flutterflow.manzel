@@ -98,6 +98,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       logFirebaseEvent('HomeScreen_Set-App-Language');
       setAppLanguage(context, await FFAppState().locale);
       Future.delayed(const Duration(milliseconds: 500), () {
+        if(mounted)
         setAppLanguage(context, FFAppState().locale);
       });
     });
