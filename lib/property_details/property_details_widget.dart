@@ -3297,6 +3297,13 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                   indent: 10,
                                                   endIndent: 10,
                                                 ),
+                                                if(!isPropertyImagesNull(
+                                                    PropertyCall
+                                                    .propertyImages(
+                                                  columnPropertyResponse,
+                                                ).toList()
+                                                )
+                                                )
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(16, 20, 16, 0),
@@ -3328,6 +3335,13 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                     ],
                                                   ),
                                                 ),
+                                                if(!isPropertyImagesNull(
+                                                    PropertyCall
+                                                    .propertyImages(
+                                                  columnPropertyResponse,
+                                                ).toList()
+                                                )
+                                                )
                                                 Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(0, 12, 0, 55),
@@ -3349,8 +3363,8 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                               final propertyImages =
                                                                   PropertyCall
                                                                       .propertyImages(
-                                                                columnPropertyResponse,
-                                                              ).toList();
+                                                                    columnPropertyResponse,
+                                                              )?.toList()??[];
                                                               return InkWell(
                                                                 onTap:
                                                                     () async {
