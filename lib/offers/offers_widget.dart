@@ -754,7 +754,7 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                             valueOrDefault<int>(
                                                                               getJsonField(
                                                                                 activeOffersItem,
-                                                                                r'''$.created_at._seconds''',
+                                                                                r'''$.updated_at._seconds''',
                                                                               ),
                                                                               0,
                                                                             ),
