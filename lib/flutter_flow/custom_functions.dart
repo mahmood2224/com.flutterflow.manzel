@@ -516,7 +516,8 @@ bool myPropertiesViewOffersVisibility(String? status) {
       status == "offer_accepted" ||
       status == "ownership_transferred" ||
       status == "expired" ||
-      status == "accepted") {
+      status == "accepted"||
+      status == "disqualified") {
     return true;
   } else {
     return false;
