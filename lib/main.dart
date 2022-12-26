@@ -115,7 +115,7 @@ class _MyAppState extends State<MyApp> {
     // });
     handleDynamicLinks();
     //   _initializeFlutterFire();
-    //_initializeFlutterFire();
+    _initializeFlutterFire();
   }
 
   @override

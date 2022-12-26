@@ -87,6 +87,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   bool isVideoListLoaded = false;
 
 
+
   @override
   void initState() {
     super.initState();
@@ -97,6 +98,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       logFirebaseEvent('HomeScreen_Set-App-Language');
       setAppLanguage(context, await FFAppState().locale);
       Future.delayed(const Duration(milliseconds: 500), () {
+        if(mounted)
         setAppLanguage(context, FFAppState().locale);
       });
     });
@@ -132,7 +134,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       callBookmarkListApi();
     }
   }
-
 
   Future<void> checkInternetStatus() async {
     isInternetAvailable = await isInternetConnected();
@@ -176,14 +177,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         //    callBookmarkListApi();
         // }
         if(pageNumber==1)
-        isVideoListLoaded= false;
+          isVideoListLoaded= false;
         final apiResponse = await PropertiesCall.call(
           pageNumber: pageKey.toString(),
           pageSize: _pageSize.toString(),
           locale: FFAppState().locale,
         );
         if(pageNumber==1)
-        isVideoListLoaded= true;
+          isVideoListLoaded= true;
         apiData = apiResponse;
         final listData = getJsonField(
               (apiResponse.jsonBody ?? ''),

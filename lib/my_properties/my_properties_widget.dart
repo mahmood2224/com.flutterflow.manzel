@@ -375,7 +375,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                       var diffValue = (getJsonField(
                                             bookedPropertiesItem,
                                             r'''$.booking_expiry_date._seconds''',
-                                          ) -
+                                          )-
                                           ((DateTime.now()
                                                       .millisecondsSinceEpoch *
                                                   0.001)

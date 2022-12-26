@@ -51,7 +51,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         isPhoneNumberValid= validateMobileNumber(phoneNumberController!.text);
         if(!isPhoneNumberValid){
           warningMessage =  FFLocalizations.of(context).getText(
-            'enterValidPhone' /* Please enter a valid Phone num... */,
+            'phoneNumberFormat' /* The phone number format should be 05XXXXXXXX */,
           );
         }
         //
@@ -264,30 +264,30 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   //   'f4tpckti' /* +966 */,
                                   // ),
                                   labelText:
-                                  FFLocalizations.of(context).getText(
+                                      FFLocalizations.of(context).getText(
                                     '4m2r1iwr' /* Mobile Number */,
                                   ),
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w300,
-                                    useGoogleFonts: false,
-                                  ),
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w300,
+                                        useGoogleFonts: false,
+                                      ),
                                   // hintText: FFLocalizations.of(context).getText(
                                   //   'f4tpckti' /* +966 */,
                                   // ),
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
+                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
+                                      ),
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
                                   errorBorder: InputBorder.none,
@@ -311,12 +311,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                  fontFamily: 'Sofia Pro By Khuzaimah',
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: false,
-                                ),
+                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
                                 maxLines: 1,
                                 keyboardType: TextInputType.phone,
                               ),
@@ -346,8 +346,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                               fontWeight: FontWeight.w300,
                               useGoogleFonts: false,
                             ),
-                          )
-                      ),
+                              )
+                        ),
                     ],
                   ),
                 ),
@@ -362,11 +362,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                         textAlign: TextAlign.start,
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
-                          color: Colors.black,
-                          fontWeight: FontWeight.w300,
-                          useGoogleFonts: false,
-                        ),
+                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
+                              useGoogleFonts: false,
+                            ),
                       ),
                     ],
                   ),
@@ -390,7 +390,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: Container(
                                   height:
-                                  MediaQuery.of(context).size.height * 0.95,
+                                      MediaQuery.of(context).size.height * 0.95,
                                   child: TermsConditionsBottomSheetWidget(
                                     pageType: 5,
                                   ),
@@ -406,12 +406,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                            fontFamily: 'AvenirArabic',
-                            color:
-                            FlutterFlowTheme.of(context).primaryColor,
-                            fontWeight: FontWeight.w500,
-                            useGoogleFonts: false,
-                          ),
+                                fontFamily: 'AvenirArabic',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                fontWeight: FontWeight.w500,
+                                useGoogleFonts: false,
+                              ),
                         ),
                       ),
                       Text(
@@ -419,11 +419,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                           '5ard5tmn' /*  &  */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'AvenirArabic',
-                          color: Colors.black,
-                          fontWeight: FontWeight.w300,
-                          useGoogleFonts: false,
-                        ),
+                              fontFamily: 'AvenirArabic',
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
+                              useGoogleFonts: false,
+                            ),
                       ),
                       InkWell(
                         onTap: () async {
@@ -439,7 +439,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 padding: MediaQuery.of(context).viewInsets,
                                 child: Container(
                                   height:
-                                  MediaQuery.of(context).size.height * 0.95,
+                                      MediaQuery.of(context).size.height * 0.95,
                                   child: TermsConditionsBottomSheetWidget(
                                     pageType: 6,
                                   ),
@@ -455,12 +455,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(
-                            fontFamily: 'AvenirArabic',
-                            color:
-                            FlutterFlowTheme.of(context).primaryColor,
-                            fontWeight: FontWeight.w500,
-                            useGoogleFonts: false,
-                          ),
+                                fontFamily: 'AvenirArabic',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                fontWeight: FontWeight.w500,
+                                useGoogleFonts: false,
+                              ),
                         ),
                       ),
                     ],
@@ -564,66 +564,66 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   Widget? child) {
                                 return (isLoading.value)
                                     ? Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      SizedBox(
-                                        height: 30,
-                                        width: 30,
-                                        child: CircularProgressIndicator(
-                                          valueColor:
-                                          AlwaysStoppedAnimation(
-                                              Colors.white),
-                                          strokeWidth: 5,
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            SizedBox(
+                                              height: 30,
+                                              width: 30,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation(
+                                                        Colors.white),
+                                                strokeWidth: 5,
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       )
-                                    ],
-                                  ),
-                                )
                                     : AutoSizeText(
-                                  FFLocalizations.of(context).getText(
-                                    'l3ozn1az' /* Continue */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                    fontSize: 18,
-                                    fontFamily: 'AvenirArabic',
-                                    color: Colors.white,
-                                    useGoogleFonts: false,
-                                  ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                );
+                                        FFLocalizations.of(context).getText(
+                                          'l3ozn1az' /* Continue */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontSize: 18,
+                                              fontFamily: 'AvenirArabic',
+                                              color: Colors.white,
+                                              useGoogleFonts: false,
+                                            ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      );
                               },
                               valueListenable: isLoading,
                             ),
                             style: ButtonStyle(
                               foregroundColor:
-                              MaterialStateProperty.resolveWith<Color?>(
-                                    (states) {
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (states) {
                                   if (states.contains(MaterialState.disabled)) {
                                     FlutterFlowTheme.of(context)
                                         .subtitle2
                                         .override(
-                                      fontFamily: 'AvenirArabic',
-                                      color: Colors.white,
-                                      useGoogleFonts: false,
-                                    );
+                                          fontFamily: 'AvenirArabic',
+                                          color: Colors.white,
+                                          useGoogleFonts: false,
+                                        );
                                   }
                                   FlutterFlowTheme.of(context)
                                       .subtitle2
                                       .override(
-                                    fontFamily: 'AvenirArabic',
-                                    color: Colors.white,
-                                    useGoogleFonts: false,
-                                  );
+                                        fontFamily: 'AvenirArabic',
+                                        color: Colors.white,
+                                        useGoogleFonts: false,
+                                      );
                                 },
                               ),
                               backgroundColor:
-                              MaterialStateProperty.resolveWith<Color?>(
-                                    (states) {
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (states) {
                                   if (states.contains(MaterialState.disabled)) {
                                     return isButtonTappable?FlutterFlowTheme.of(context)
                                         .primaryColor: Color(0xFF8C8C8C);
