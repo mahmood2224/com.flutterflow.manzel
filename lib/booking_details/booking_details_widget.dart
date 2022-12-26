@@ -395,6 +395,12 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                 ],
                               ),
                             ),
+                          if (!functions.conditionalVisibility(
+                              getJsonField(
+                                columnOrderDetailsResponse?.jsonBody,
+                                r'''$.result.order_status''',
+                              ).toString(),
+                              'disqualified'))
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 21),
