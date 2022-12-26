@@ -175,12 +175,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                       'cp1d00ba' /* Enter your mobile number */,
                     ),
                     style: FlutterFlowTheme.of(context).title1.override(
-                      fontFamily: 'Sofia Pro By Khuzaimah',
-                      color: Colors.black,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w800,
-                      useGoogleFonts: false,
-                    ),
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Colors.black,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w800,
+                          useGoogleFonts: false,
+                        ),
                   ),
                 ),
                 Padding(
@@ -190,12 +190,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                       '364dhoh3' /* We'll send a verification code... */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'Sofia Pro By Khuzaimah',
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w300,
-                      useGoogleFonts: false,
-                    ),
+                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w300,
+                          useGoogleFonts: false,
+                        ),
                   ),
                 ),
                 Padding(
@@ -216,7 +216,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         Expanded(
                           child: Padding(
                             padding:
-                            EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+                                EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
                             child: Directionality(
                               textDirection: material.TextDirection.ltr,
                               child: TextFormField(
@@ -247,7 +247,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   }
                                   count = val.length;
                                   setState((){});
-                                  //  count++;
+                                //  count++;
                                 },
                                 autofocus: true,
                                 inputFormatters: [

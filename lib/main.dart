@@ -431,6 +431,8 @@ class _NavBarPageState extends State<NavBarPage> {
         unselectedItemColor: Colors.black,
         showSelectedLabels: true,
         showUnselectedLabels: true,
+        selectedLabelStyle: TextStyle(fontFamily: 'AvenirArabic'),
+        unselectedLabelStyle:  TextStyle(fontFamily: 'AvenirArabic'),
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
