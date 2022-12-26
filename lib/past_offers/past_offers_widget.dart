@@ -1044,13 +1044,9 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                           false,
                                                                     ),
                                                               ),
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
+                                                              Wrap(
                                                                 crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .end,
+                                                                WrapCrossAlignment.end,
                                                                 children: [
                                                                   Text(
                                                                     valueOrDefault<
@@ -1073,7 +1069,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                           fontFamily:
                                                                               'AvenirArabic',
                                                                           fontSize:
-                                                                              20,
+                                                                              17,
                                                                           fontWeight:
                                                                               FontWeight.bold,
                                                                           useGoogleFonts:
@@ -1147,13 +1143,9 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                           false,
                                                                     ),
                                                               ),
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
+                                                              Wrap(
                                                                 crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .end,
+                                                                WrapCrossAlignment.end,
                                                                 children: [
                                                                   Text(
                                                                     valueOrDefault<
@@ -1176,7 +1168,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                           fontFamily:
                                                                               'AvenirArabic',
                                                                           fontSize:
-                                                                              19,
+                                                                              17,
                                                                           fontWeight:
                                                                               FontWeight.bold,
                                                                           useGoogleFonts:
@@ -1230,101 +1222,95 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .spaceBetween,
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
                                                       children: [
                                                         Expanded(
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        5,
-                                                                        0,
-                                                                        0,
-                                                                        0),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Text(
-                                                                  FFLocalizations.of(
-                                                                          context)
-                                                                      .getText(
-                                                                    'yv9roric' /* Installment period */,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'AvenirArabic',
-                                                                        color: Color(
-                                                                            0xFF6B6B6B),
-                                                                        fontWeight:
-                                                                            FontWeight.w300,
-                                                                        useGoogleFonts:
-                                                                            false,
-                                                                      ),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'yv9roric' /* Installment period */,
                                                                 ),
-                                                                Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Text(
-                                                                      valueOrDefault<
-                                                                              String>(
-                                                                          getJsonField(
-                                                                            allOffersItem,
-                                                                            r'''$.offered_installment_period''',
-                                                                          ).toString(),
-                                                                          '0'),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'AvenirArabic',
+                                                                      color: Color(
+                                                                          0xFF6B6B6B),
+                                                                      fontWeight:
+                                                                          FontWeight.w300,
+                                                                      useGoogleFonts:
+                                                                          false,
+                                                                    ),
+                                                              ),
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Text(
+                                                                    valueOrDefault<
+                                                                            String>(
+                                                                        getJsonField(
+                                                                          allOffersItem,
+                                                                          r'''$.offered_installment_period''',
+                                                                        ).toString(),
+                                                                        '0'),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'AvenirArabic',
+                                                                          fontSize:
+                                                                              17,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                          useGoogleFonts:
+                                                                              false,
+                                                                        ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            4,
+                                                                            0,
+                                                                            0,
+                                                                            4),
+                                                                    child:
+                                                                        Text(
+                                                                      FFLocalizations.of(context)
+                                                                          .getText(
+                                                                        '3v67jmtb' /* Month */,
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(context)
                                                                           .bodyText1
                                                                           .override(
-                                                                            fontFamily:
-                                                                                'AvenirArabic',
-                                                                            fontSize:
-                                                                                20,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            useGoogleFonts:
-                                                                                false,
+                                                                            fontFamily: 'AvenirArabic',
+                                                                            fontSize: 10,
+                                                                            fontWeight: FontWeight.w500,
+                                                                            useGoogleFonts: false,
                                                                           ),
                                                                     ),
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              4,
-                                                                              0,
-                                                                              0,
-                                                                              4),
-                                                                      child:
-                                                                          Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          '3v67jmtb' /* Month */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyText1
-                                                                            .override(
-                                                                              fontFamily: 'AvenirArabic',
-                                                                              fontSize: 10,
-                                                                              fontWeight: FontWeight.w500,
-                                                                              useGoogleFonts: false,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
                                                         Expanded(
@@ -1357,13 +1343,9 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                           false,
                                                                     ),
                                                               ),
-                                                              Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
+                                                              Wrap(
                                                                 crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .end,
+                                                                WrapCrossAlignment.end,
                                                                 children: [
                                                                   Text(
                                                                     valueOrDefault<
@@ -1386,7 +1368,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                                                                           fontFamily:
                                                                               'AvenirArabic',
                                                                           fontSize:
-                                                                              19,
+                                                                              17,
                                                                           fontWeight:
                                                                               FontWeight.bold,
                                                                           useGoogleFonts:

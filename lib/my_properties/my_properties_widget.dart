@@ -588,7 +588,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                   ).toString(),
                                                                                   'collect_offers'))
                                                                                 Container(
-                                                                                  width: 98,
+                                                                                  width: 130,
                                                                                   height: 23,
                                                                                   decoration: BoxDecoration(
                                                                                     color: Color(0xFF41566C),
@@ -620,7 +620,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                   ).toString(),
                                                                                   'ownership_transferred'))
                                                                                 Container(
-                                                                                  width: 89,
+                                                                                  width: 130,
                                                                                   height: 23,
                                                                                   decoration: BoxDecoration(
                                                                                     color: FlutterFlowTheme.of(context).secondaryGreen,
@@ -657,7 +657,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                       ).toString()),
                                                                                   'pending_payment'))
                                                                                 Container(
-                                                                                  width: 125,
+                                                                                  width: 130,
                                                                                   height: 23,
                                                                                   decoration: BoxDecoration(
                                                                                     color: FlutterFlowTheme.of(context).primaryOrange,
@@ -689,7 +689,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                   ).toString(),
                                                                                   'cancelled'))
                                                                                 Container(
-                                                                                  width: 74,
+                                                                                  width: 130,
                                                                                   height: 23,
                                                                                   decoration: BoxDecoration(
                                                                                     color: FlutterFlowTheme.of(context).secondaryRed,
@@ -726,7 +726,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                       ).toString()),
                                                                                   'reserved'))
                                                                                 Container(
-                                                                                  width: 82,
+                                                                                  width: 130,
                                                                                   height: 23,
                                                                                   decoration: BoxDecoration(
                                                                                     color: Color(0xFF389688),
@@ -758,7 +758,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                   ).toString(),
                                                                                   'disqualified'))
                                                                                 Container(
-                                                                                  width: 74,
+                                                                                  width: 130,
                                                                                   height: 23,
                                                                                   decoration: BoxDecoration(
                                                                                     color: FlutterFlowTheme.of(context).secondaryRed,
@@ -790,7 +790,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                   ).toString(),
                                                                                   'expired'))
                                                                                 Container(
-                                                                                  width: 100,
+                                                                                  width: 130,
                                                                                   height: 23,
                                                                                   decoration: BoxDecoration(
                                                                                     color: FlutterFlowTheme.of(context).secondaryRed,
