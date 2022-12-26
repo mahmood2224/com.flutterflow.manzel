@@ -538,7 +538,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             ),
             isVideoListLoaded? Expanded(
               child: ListView.separated(
-                padding: EdgeInsets.zero,
                 controller: controller,
                 separatorBuilder: (context, int) => Container(
                   height: 0,
@@ -548,7 +547,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   propertyListData[index]['isBookmarked'] =
                       favourites[propertyListData[index]['id'].toString()] ?? false;
                   return Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                    padding: EdgeInsetsDirectional.fromSTEB(12,0, 12, 12),
                     child: InkWell(
                       onTap: () async {
                         flickMultiManager.pause();
@@ -741,265 +740,176 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
 
                                 ///************************ bookmark icon button on video player*******************************
-                                Align(
-                                  alignment: AlignmentDirectional(1, -0.95),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 15, 0),
-                                    child: ValueListenableBuilder<bool>(
-                                      builder: (BuildContext context, value,
-                                          Widget? child) {
-                                        return (bookMarkTapped.value &&
-                                            propertyListData[index] ==
-                                                tapped_index)
-                                            ? SizedBox(
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                // color: propertyListData[index][
-                                                // "isBookmarked"]
-                                                //     ? Color(0x4DFF0000)
-                                                //     : Color(0x4D000000),
-                                                // shape: BoxShape.circle,
-                                              ),
-                                              child: Icon(
-                                                Manzel.favourite,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ))
-                                            : InkWell(
-                                            onTap: () async {
-                                              propertyListData[index]['isBookmarked'] =
-                                              propertyListData[index]['isBookmarked']
-                                                  ? true
-                                                  : false;
-                                              tapped_index = index;
-                                              bookMarkTapped.value = true;
-                                              logFirebaseEvent(
-                                                  'add_to_wishlist');
-                                              logFirebaseEvent(
-                                                  'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                              if (loggedIn) {
-                                                if (propertyListData[index]['isBookmarked']) {
-                                                  logFirebaseEvent(
-                                                      'Container_Backend-Call');
-                                                  isInternetAvailable =
-                                                  await isInternetConnected();
-                                                  if (isInternetAvailable ??
-                                                      false) {
-                                                    final bookmarkApiResponse =
-                                                    await BookmarkPropertyCall
-                                                        .call(
-                                                      userId:
-                                                      currentUserUid,
-                                                      authorazationToken:
-                                                      FFAppState()
-                                                          .authToken,
-                                                      propertyId:
-                                                      valueOrDefault<
-                                                          String>(
-                                                        getJsonField(
-                                                          propertyListData[index],
-                                                          r'''$.id''',
-                                                        ).toString(),
-                                                        '0',
-                                                      ),
-                                                      version:
-                                                      FFAppState()
-                                                          .apiVersion,
-                                                    );
-                                                    if ((bookmarkApiResponse
-                                                        .statusCode) ==
-                                                        200) {
-                                                      favourites.remove(
-                                                          propertyListData[index][
-                                                          "id"]
-                                                              .toString());
-                                                      propertyListData[index][
-                                                      "isBookmarked"] =
-                                                      false;
-                                                      bookMarkTapped
-                                                          .value = false;
-                                                    }
-                                                    else if((bookmarkApiResponse
-                                                        .statusCode) ==
-                                                        403){
-                                                      unAuthorizedUser(context, mounted);
-                                                    }
-                                                    else {
-                                                      logFirebaseEvent(
-                                                          'Icon_Show-Snack-Bar');
-                                                      ScaffoldMessenger
-                                                          .of(context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            functions.snackBarMessage(
-                                                                'error',
-                                                                FFAppState()
-                                                                    .locale),
-                                                            style:
-                                                            TextStyle(
-                                                              color: FlutterFlowTheme.of(
-                                                                  context)
-                                                                  .white,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .bold,
-                                                              fontSize:
-                                                              16,
-                                                              height: 2,
+                                ValueListenableBuilder(
+                                    valueListenable:bookMarkTapped,
+                                    builder: (context,value,child) {
+                                      return Align(
+                                        alignment: AlignmentDirectional(1, -0.95),
+                                        child: Padding(
+                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                0, 12, 15, 0),
+                                            child: InkWell(
+                                                onTap: () async {
+                                                  propertyListData[index]['isBookmarked']=!propertyListData[index]['isBookmarked'];
+                                                  bookMarkTapped.value=!bookMarkTapped.value;
+                                                  logFirebaseEvent('add_to_wishlist');
+                                                  logFirebaseEvent('HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                                  if (loggedIn){
+                                                    isInternetAvailable =
+                                                    await isInternetConnected();
+                                                    if(isInternetAvailable??false){
+                                                      final bookmarkApiResponse = await BookmarkPropertyCall.call(userId: currentUserUid,
+                                                          authorazationToken: FFAppState().authToken,
+                                                          propertyId: valueOrDefault<String>(getJsonField(propertyListData[index], r'''$.id''',).toString(), '0',),
+                                                          version: FFAppState().apiVersion);
+                                                      if ((bookmarkApiResponse.statusCode) == 200) {
+                                                        if (propertyListData[index]['isBookmarked']){
+                                                          favourites[propertyListData[index]['id'].toString()] = true;
+                                                        }else{
+                                                          favourites.remove(propertyListData[index]["id"].toString());
+                                                        }
+                                                      }
+                                                      else if((bookmarkApiResponse
+                                                          .statusCode) ==
+                                                          403){
+                                                        unAuthorizedUser(context, mounted);
+                                                      }
+                                                      else {
+                                                        logFirebaseEvent(
+                                                            'Icon_Show-Snack-Bar');
+                                                        ScaffoldMessenger
+                                                            .of(context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            content: Text(
+                                                              functions.snackBarMessage(
+                                                                  'error',
+                                                                  FFAppState()
+                                                                      .locale),
+                                                              style:
+                                                              TextStyle(
+                                                                color: FlutterFlowTheme.of(
+                                                                    context)
+                                                                    .white,
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .bold,
+                                                                fontSize:
+                                                                16,
+                                                                height: 2,
+                                                              ),
                                                             ),
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                4000),
+                                                            backgroundColor:
+                                                            FlutterFlowTheme.of(
+                                                                context)
+                                                                .primaryRed,
                                                           ),
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                              4000),
-                                                          backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                              context)
-                                                              .primaryRed,
-                                                        ),
+                                                        );
+                                                      }
+                                                    }else {
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                        context) =>
+                                                            CommonAlertDialog(
+                                                              onCancel: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                            ),
                                                       );
                                                     }
-                                                  } else {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                      context) =>
-                                                          CommonAlertDialog(
-                                                            onCancel: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                          ),
-                                                    );
+
+                                                  }else{
+                                                    context
+                                                        .pushNamed('Login');
                                                   }
-                                                } else {
-                                                  logFirebaseEvent(
-                                                      'Container_Backend-Call');
-                                                  if (isInternetAvailable ??
-                                                      false) {
-                                                    final bookmarkApiResponse =
-                                                    await BookmarkPropertyCall
-                                                        .call(
-                                                      userId:
-                                                      currentUserUid,
-                                                      authorazationToken:
-                                                      FFAppState()
-                                                          .authToken,
-                                                      propertyId:
-                                                      valueOrDefault<
-                                                          String>(
-                                                        getJsonField(
-                                                          propertyListData[index],
-                                                          r'''$.id''',
-                                                        ).toString(),
-                                                        '0',
-                                                      ),
-                                                      version:
-                                                      FFAppState()
-                                                          .apiVersion,
-                                                    );
-                                                    if ((bookmarkApiResponse
-                                                        .statusCode) ==
-                                                        200) {
-                                                      favourites[
-                                                      propertyListData[index]['id'].toString()] =
-                                                      true;
-                                                      propertyListData[index][
-                                                      "isBookmarked"] =
-                                                      true;
-                                                      bookMarkTapped
-                                                          .value = false;
-                                                    }  else if((bookmarkApiResponse
-                                                        .statusCode) ==
-                                                        403){
-                                                      unAuthorizedUser(context, mounted);
-                                                    }
-                                                    else {
-                                                      logFirebaseEvent(
-                                                          'Icon_Show-Snack-Bar');
-                                                      ScaffoldMessenger
-                                                          .of(context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            functions.snackBarMessage(
-                                                                'error',
-                                                                FFAppState()
-                                                                    .locale),
-                                                            style:
-                                                            TextStyle(
-                                                              color: FlutterFlowTheme.of(
-                                                                  context)
-                                                                  .white,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .bold,
-                                                              fontSize:
-                                                              16,
-                                                              height: 2,
-                                                            ),
-                                                          ),
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                              4000),
-                                                          backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                              context)
-                                                              .primaryRed,
-                                                        ),
-                                                      );
-                                                    }
-                                                  } else {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                      context) =>
-                                                          CommonAlertDialog(
-                                                            onCancel: () {
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                          ),
-                                                    );
-                                                  }
-                                                }
-                                              } else {
-                                                // videoPlayers[
-                                                // propertiesIndex]
-                                                //     .pause();
-                                                // logFirebaseEvent(
-                                                //     'Container_Navigate-To');
-                                                context
-                                                    .pushNamed('Login');
-                                              }
-                                            },
-                                            child: Container(
-                                              width: 40,
-                                              height: 40,
-                                              decoration: BoxDecoration(
-                                                color:  propertyListData[index][
-                                                "isBookmarked"]
-                                                    ? Color(
-                                                    0x4DFF0000)
-                                                    : Color(
-                                                    0x4D000000),
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Icon(
-                                                Manzel.favourite,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ));
-                                      },
-                                      valueListenable: bookMarkTapped,
-                                    ),
-                                  ),
+                                                },
+                                                child: Container(
+                                                  width: 40,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                    color:  propertyListData[index][
+                                                    "isBookmarked"]
+                                                        ? Color(
+                                                        0x4DFF0000)
+                                                        : Color(
+                                                        0x4D000000),
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: Icon(
+                                                    Manzel.favourite,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                ))
+                                        ),
+                                      );
+                                    }
                                 ),
+
+                                // Align(
+                                //   alignment: AlignmentDirectional(1, -0.95),
+                                //   child: Padding(
+                                //       padding: EdgeInsetsDirectional.fromSTEB(
+                                //           0, 12, 15, 0),
+                                //       child: InkWell(
+                                //           onTap: () async {
+                                //             propertyListData[index]['isBookmarked']=!propertyListData[index]['isBookmarked'];
+                                //             setState((){});
+                                //             // bookMarkTapped.value = true;
+                                //             logFirebaseEvent('add_to_wishlist');
+                                //             logFirebaseEvent('HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                //             if (loggedIn){
+                                //               final bookmarkApiResponse = await BookmarkPropertyCall.call(userId: currentUserUid,
+                                //                   authorazationToken: FFAppState().authToken,
+                                //                   propertyId: valueOrDefault<String>(getJsonField(propertyListData[index], r'''$.id''',).toString(), '0',),
+                                //                   version: FFAppState().apiVersion);
+                                //               if ((bookmarkApiResponse.statusCode) == 200) {
+                                //                 if (propertyListData[index]['isBookmarked']){
+                                //                   favourites.remove(propertyListData[index]["id"].toString());
+                                //                   propertyListData[index]["isBookmarked"] = false;
+                                //                   setState((){});
+                                //                   //    propertyListData[index]["isBookmarked"] = false;
+                                //                   //  setState((){});
+                                //                   //  bookMarkTapped.value = false;
+                                //                 }else{
+                                //                   favourites[propertyListData[index]['id'].toString()] = true;
+                                //                   propertyListData[index]["isBookmarked"] = true;
+                                //                   setState((){});
+                                //                   // bookMarkTapped.value = true;
+                                //                 }
+                                //
+                                //               }
+                                //             }else{
+                                //               context
+                                //                   .pushNamed('Login');
+                                //             }
+                                //           },
+                                //           child: Container(
+                                //             width: 50,
+                                //             height: 50,
+                                //             decoration: BoxDecoration(
+                                //               color:  propertyListData[index][
+                                //               "isBookmarked"]
+                                //                   ? Color(0x4DFF0000)
+                                //                   : Color(0x4D000000),
+                                //               shape: BoxShape.circle,
+                                //             ),
+                                //             child: Icon(
+                                //               Manzel.favourite,
+                                //               color: Colors.white,
+                                //               size: 20,
+                                //             ),
+                                //           ))
+                                //   ),
+                                // ),
+
+
+
 
                                 Align(
                                   alignment: AlignmentDirectional(-0.9, 1),
