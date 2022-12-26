@@ -978,13 +978,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                               }
                                             },
                                             child: Container(
-                                              width: 50,
-                                              height: 50,
+                                              width: 40,
+                                              height: 40,
                                               decoration: BoxDecoration(
                                                 color:  propertyListData[index][
                                                 "isBookmarked"]
-                                                    ? Color(0x4DFF0000)
-                                                    : Color(0x4D000000),
+                                                    ? Color(
+                                                    0x4DFF0000)
+                                                    : Color(
+                                                    0x4D000000),
                                                 shape: BoxShape.circle,
                                               ),
                                               child: Icon(
