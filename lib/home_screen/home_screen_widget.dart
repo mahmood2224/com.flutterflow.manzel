@@ -547,7 +547,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   propertyListData[index]['isBookmarked'] =
                       favourites[propertyListData[index]['id'].toString()] ?? false;
                   return Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                    padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 12),
                     child: InkWell(
                       onTap: () async {
                         flickMultiManager.pause();
