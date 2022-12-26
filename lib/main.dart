@@ -45,11 +45,11 @@ void main() async {
     await EnvVariables.instance.initialise();
       SentryAnalytics().init(logOnServer: true);
     await Firebase.initializeApp();
-    // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   //  runApp(MyApp());
   }, (error, stackTrace) {
       SentryAnalytics().captureException(error, stackTrace);
-  //  FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
+     FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
