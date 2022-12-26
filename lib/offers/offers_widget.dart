@@ -1459,6 +1459,13 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                       ],
                                                     ),
                                                   ),
+                                                  if (!functions
+                                                      .conditionalVisibility(
+                                                      getJsonField(
+                                                        activeOffersItem,
+                                                        r'''$.status''',
+                                                      ).toString(),
+                                                      'disqualified'))
                                                   Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
