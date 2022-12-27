@@ -559,6 +559,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         context.pushNamed(
                           'PropertyDetails',
                           queryParams: {
+                            'propertyName': serializeParam(
+                                getJsonField(
+                                  propertyListData[index],
+                                  r'''$.attributes.property_name''',
+                                ),
+                                ParamType.String),
                             'propertyId': serializeParam(
                                 getJsonField(
                                   propertyListData[index],

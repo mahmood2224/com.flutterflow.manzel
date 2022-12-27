@@ -1641,3 +1641,14 @@ String otpErrorMessage(
  }
 }
 
+String paymentDescription(
+    String? paymentDes,
+    String? locale,
+    ) {
+  if(locale=='en'){
+    return '$paymentDes property purchased'??'';
+  }else{
+      return '$paymentDes شراء الممتلكات ';
+  }
+}
+
