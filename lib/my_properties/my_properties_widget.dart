@@ -1972,8 +1972,6 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                               ),
                                                             );
                                                           }
-
-                                                          setState(() {});
                                                         },
                                                         child: Container(
                                                           width: 35,
