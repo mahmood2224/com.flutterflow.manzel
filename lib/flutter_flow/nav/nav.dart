@@ -224,6 +224,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'PropertyDetails',
               path: 'propertyDetails',
               builder: (context, params) => PropertyDetailsWidget(
+                  propertyName: params.getParam('propertyName', ParamType.String),
                   propertyId: params.getParam('propertyId', ParamType.int),
                   jsonData: params.getParam('jsonData', ParamType.JSON),
                   path: params.getParam('path', ParamType.String)),
