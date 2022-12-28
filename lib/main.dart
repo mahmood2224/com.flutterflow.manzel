@@ -1,16 +1,11 @@
 import 'dart:io';
-
 import 'dart:async';
-
 import 'package:eraser/eraser.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,22 +15,16 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 import 'backend/push_notifications/push_notifications_util.dart';
-import 'common_alert_dialog/common_alert_dialog.dart';
 import 'enviorment/env_variables.dart';
 import 'flutter_flow/custom_functions.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
-import 'notification_handler/firebase_cloud_messaging.dart';
 
 const _kTestingCrashlytics = false;
 
@@ -46,15 +35,11 @@ void main() async {
       SentryAnalytics().init(logOnServer: true);
     await Firebase.initializeApp();
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  //  runApp(MyApp());
   }, (error, stackTrace) {
       SentryAnalytics().captureException(error, stackTrace);
       FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  //await EnvVariables.instance.initialise();
-  //await printBuildNumber();
   Eraser.resetBadgeCountButKeepNotificationsInCenter();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -62,10 +47,8 @@ void main() async {
     badge: true,
     sound: true,
   );
-  // FirebaseCloudMessaging().init();
 
   FFAppState().initializePersistedState(); // Initialize FFAppState
-  //versionCheck();
   runApp(
       DefaultAssetBundle(
         bundle: SentryAssetBundle(),
@@ -96,7 +79,6 @@ class _MyAppState extends State<MyApp> {
   final authUserSub = authenticatedUserStream.listen((_) {});
   final fcmTokenSub = fcmTokenUserStream.listen((_) {});
 
-  // final _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
   void initState() {
@@ -118,11 +100,7 @@ class _MyAppState extends State<MyApp> {
       Duration(seconds: 1),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
-    // _firebaseMessaging.getToken().then((value) {
-    //   print('Your FCM token:- $value');
-    // });
     handleDynamicLinks();
-    //   _initializeFlutterFire();
     _initializeFlutterFire();
   }
 
@@ -135,19 +113,10 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initializeFlutterFire() async {
     if (_kTestingCrashlytics) {
-      // Force enable crashlytics collection enabled if we're testing it.
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     } else {
-      // Else only enable it in non-debug builds.
-      // You could additionally extend this to allow users to opt-in.
-      //   await FirebaseCrashlytics.instance
-      //    .setCrashlyticsCollectionEnabled(!kDebugMode);
       await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
     }
-
-    // if (_kShouldTestAsyncErrorOnInit) {
-    //   await _testAsyncErrorOnInit();
-    // }
   }
 
   void setLocale(String language) =>
@@ -194,21 +163,9 @@ class _MyAppState extends State<MyApp> {
 
   void _handleDeepLinks(PendingDynamicLinkData? data) {
     Uri? deeplinkUri = data?.link;
-    // LoggingService().printLog(message: 'Deeplink Url - > $deeplinkUri',tag: _TAG);
     if (deeplinkUri != null) {
       Map<String, dynamic> params = deeplinkUri.queryParameters;
       if (params.isNotEmpty) {
-        // if(params[AppConstants.kVideoId]!=null) {
-        //   _sharedVideoAction(params[AppConstants.kVideoId]);
-        // }else if(params[AppConstants.kPropertyIdParam]!=null&&params[AppConstants.kOrderId]!=null){
-        //   if(GlobalVariables.isAuthenticated) {
-        //     _handleMyOrderAction(params[AppConstants.kOrderIdParam],
-        //         params[AppConstants.kPropertyIdParam]);
-        //   }
-        // } else if(params[AppConstants.kPropertyIdParam] != null || params[AppConstants.kProjectIdParam] != null){
-        //   _shareProjectOrPropertyAction(params);
-        // }
-        // Future.delayed(Duration(seconds: 5),(){
         BuildContext? ctx = _router.routerDelegate.navigatorKey.currentContext;
         ctx?.pushNamed(
           'PropertyDetails',
@@ -217,9 +174,6 @@ class _MyAppState extends State<MyApp> {
             'path': '',
           },
         );
-
-        //  });
-
       }
     }
   }
@@ -332,7 +286,6 @@ class _NavBarPageState extends State<NavBarPage> {
   }
 
   Future<void> versionCheck(BuildContext context) async {
-    // Future.delayed(Duration(milliseconds: 100));
     PackageInfo info = await PackageInfo.fromPlatform();
     final appPackageName = info.packageName;
 
@@ -424,7 +377,6 @@ class _NavBarPageState extends State<NavBarPage> {
       'Offers': OffersWidget(),
       'Profile': ProfileWidget(),
     };
-    //'MapScreen' : MapScreen(),
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
       body: _currentPage ?? tabs[_currentPageName],
