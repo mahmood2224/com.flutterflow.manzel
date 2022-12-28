@@ -77,9 +77,10 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
   ApiCallResponse? addOrderApiResponse;
   var columnPropertyResponse;
   Map<String, bool> fav = {};
-  bool? bookMarkTapped;
   late ValueNotifier<bool> isLoading = ValueNotifier<bool>(true);
   bool? isInternetAvailable;
+  ValueNotifier<bool> bookMarkTapped = ValueNotifier<bool>(false);
+
 
 
   // VideoPlayerController? _currentController;
@@ -670,205 +671,144 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                     ),
                                                   ),
                                                   SizedBox(width:20),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'add_to_wishlist');
-                                                      logFirebaseEvent(
-                                                          'HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                                      if (loggedIn) {
-                                                        bool isInternetAvailable = await isInternetConnected();
-                                                        if(isInternetAvailable){
-                                                          fav[widget.propertyId
-                                                              .toString()] ??
-                                                              false
-                                                              ? fav[widget
-                                                              .propertyId
-                                                              .toString()] =
-                                                          true
-                                                              : fav[widget
-                                                              .propertyId
-                                                              .toString()] = false;
-                                                          if (fav[widget
-                                                              .propertyId
-                                                              .toString()] ??
-                                                              false) {
-                                                            logFirebaseEvent(
-                                                                'Container_Backend-Call');
-                                                            final bookmarkApiResponse =
-                                                            await BookmarkPropertyCall
-                                                                .call(
-                                                              userId:
-                                                              currentUserUid,
-                                                              authorazationToken:
-                                                              FFAppState()
-                                                                  .authToken,
-                                                              propertyId: widget
-                                                                  .propertyId
-                                                                  .toString(),
-                                                              version:
-                                                              FFAppState()
-                                                                  .apiVersion,
-                                                            );
-                                                            if ((bookmarkApiResponse
-                                                                .statusCode) ==
-                                                                200) {
-                                                              fav.remove(widget
-                                                                  .propertyId
-                                                                  .toString());
-                                                            } else {
-                                                              logFirebaseEvent(
-                                                                  'Icon_Show-Snack-Bar');
-                                                              ScaffoldMessenger.of(
-                                                                  context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content:
-                                                                  Text(
-                                                                    functions.snackBarMessage(
-                                                                        'error',
-                                                                        FFAppState()
-                                                                            .locale),
-                                                                    style:
-                                                                    TextStyle(
-                                                                      color: FlutterFlowTheme.of(context)
-                                                                          .white,
-                                                                      fontWeight:
-                                                                      FontWeight.bold,
-                                                                      fontSize:
-                                                                      16,
-                                                                      height:
-                                                                      2,
+                                                  ValueListenableBuilder(
+                                                      valueListenable:bookMarkTapped,
+                                                      builder: (context,value,child) {
+                                                      return InkWell(
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'add_to_wishlist');
+                                                          logFirebaseEvent(
+                                                              'HOME_SCREEN_Container_jprwonvd_ON_TAP');
+                                                          bookMarkTapped.value=!bookMarkTapped.value;
+                                                          if (loggedIn) {
+                                                            bool isInternetAvailable = await isInternetConnected();
+                                                            if(isInternetAvailable){
+                                                              fav[widget.propertyId.toString()]=!(fav[widget.propertyId.toString()]??false);//? fav[widget.propertyId.toString()] = true : fav[widget.propertyId.toString()] = false;
+                                                             // if (fav[widget.propertyId.toString()] ?? false) {
+                                                                logFirebaseEvent(
+                                                                    'Container_Backend-Call');
+                                                                final bookmarkApiResponse =
+                                                                await BookmarkPropertyCall
+                                                                    .call(
+                                                                  userId:
+                                                                  currentUserUid,
+                                                                  authorazationToken:
+                                                                  FFAppState()
+                                                                      .authToken,
+                                                                  propertyId: widget
+                                                                      .propertyId
+                                                                      .toString(),
+                                                                  version:
+                                                                  FFAppState()
+                                                                      .apiVersion,
+                                                                );
+                                                                if ((bookmarkApiResponse
+                                                                    .statusCode) ==
+                                                                    200) {
+                                                                  if((fav[widget.propertyId.toString()] ?? false)){
+                                                                    fav[widget
+                                                                        .propertyId
+                                                                        .toString()] = true;
+                                                                  }else{
+                                                                    fav.remove(widget.propertyId.toString());
+                                                                  }
+
+                                                                } else {
+                                                                  logFirebaseEvent(
+                                                                      'Icon_Show-Snack-Bar');
+                                                                  ScaffoldMessenger.of(
+                                                                      context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                      Text(
+                                                                        functions.snackBarMessage(
+                                                                            'error',
+                                                                            FFAppState()
+                                                                                .locale),
+                                                                        style:
+                                                                        TextStyle(
+                                                                          color: FlutterFlowTheme.of(context)
+                                                                              .white,
+                                                                          fontWeight:
+                                                                          FontWeight.bold,
+                                                                          fontSize:
+                                                                          16,
+                                                                          height:
+                                                                          2,
+                                                                        ),
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                          4000),
+                                                                      backgroundColor:
+                                                                      FlutterFlowTheme.of(context)
+                                                                          .primaryRed,
                                                                     ),
-                                                                  ),
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                      4000),
-                                                                  backgroundColor:
-                                                                  FlutterFlowTheme.of(context)
-                                                                      .primaryRed,
-                                                                ),
-                                                              );
+                                                                  );
+                                                                }
                                                             }
-                                                          } else {
-                                                            logFirebaseEvent(
-                                                                'Container_Backend-Call');
-                                                            final bookmarkApiResponse =
-                                                            await BookmarkPropertyCall
-                                                                .call(
-                                                              userId:
-                                                              currentUserUid,
-                                                              authorazationToken:
-                                                              FFAppState()
-                                                                  .authToken,
-                                                              propertyId: widget
-                                                                  .propertyId
-                                                                  .toString(),
-                                                              version:
-                                                              FFAppState()
-                                                                  .apiVersion,
-                                                            );
-                                                            if ((bookmarkApiResponse
-                                                                .statusCode
-                                                            ) ==
-                                                                200) {
-                                                              fav[widget
-                                                                  .propertyId
-                                                                  .toString()] = true;
-                                                            } else {
-                                                              logFirebaseEvent(
-                                                                  'Icon_Show-Snack-Bar');
-                                                              ScaffoldMessenger.of(
-                                                                  context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content:
-                                                                  Text(
-                                                                    functions.snackBarMessage(
-                                                                        'error',
-                                                                        FFAppState()
-                                                                            .locale),
-                                                                    style:
-                                                                    TextStyle(
-                                                                      color: FlutterFlowTheme.of(context)
-                                                                          .white,
-                                                                      fontWeight:
-                                                                      FontWeight.bold,
-                                                                      fontSize:
-                                                                      16,
-                                                                      height:
-                                                                      2,
-                                                                    ),
-                                                                  ),
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                      4000),
-                                                                  backgroundColor:
-                                                                  FlutterFlowTheme.of(context)
-                                                                      .primaryRed,
+                                                            else{
+                                                              showDialog(
+                                                                context: context,
+                                                                builder: (BuildContext context) => CommonAlertDialog(
+                                                                  onCancel: () {
+                                                                    Navigator.pop(context);
+                                                                  },
                                                                 ),
                                                               );
                                                             }
                                                           }
-                                                        }
-                                                        else{
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (BuildContext context) => CommonAlertDialog(
-                                                              onCancel: () {
-                                                                Navigator.pop(context);
-                                                              },
+                                                          else {
+                                                            logFirebaseEvent(
+                                                                'Container_Navigate-To');
+                                                            context.pushNamed(
+                                                                'Login');
+                                                          }
+                                                          // bookMarkTapped =
+                                                          //     false;
+                                                          // setState(() {});
+                                                        },
+                                                        child: Container(
+                                                          height: 40,
+                                                          width: 40,
+                                                          decoration: BoxDecoration(
+                                                              color: (fav[widget
+                                                                          .propertyId
+                                                                          .toString()] ??
+                                                                      false)
+                                                                  ? FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryRed
+                                                                  : Colors
+                                                                      .white,
+                                                              shape: BoxShape
+                                                                  .circle),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        2,
+                                                                        5,
+                                                                        2,
+                                                                        5),
+                                                            child:
+                                                                Icon(
+                                                              Manzel.favourite,
+                                                              color: (fav[widget
+                                                                          .propertyId
+                                                                          .toString()] ??
+                                                                      false)
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .black,
+                                                              size: 18,
                                                             ),
-                                                          );
-                                                        }
-                                                      }
-                                                      else {
-                                                        logFirebaseEvent(
-                                                            'Container_Navigate-To');
-                                                        context.pushNamed(
-                                                            'Login');
-                                                      }
-                                                      bookMarkTapped =
-                                                          false;
-                                                      setState(() {});
-                                                    },
-                                                    child: Container(
-                                                      height: 40,
-                                                      width: 40,
-                                                      decoration: BoxDecoration(
-                                                          color: (fav[widget
-                                                                      .propertyId
-                                                                      .toString()] ??
-                                                                  false)
-                                                              ? FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .primaryRed
-                                                              : Colors
-                                                                  .white,
-                                                          shape: BoxShape
-                                                              .circle),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    2,
-                                                                    5,
-                                                                    2,
-                                                                    5),
-                                                        child:
-                                                            Icon(
-                                                          Manzel.favourite,
-                                                          color: (fav[widget
-                                                                      .propertyId
-                                                                      .toString()] ??
-                                                                  false)
-                                                              ? Colors.white
-                                                              : Colors
-                                                                  .black,
-                                                          size: 18,
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ),
+                                                      );
+                                                    }
                                                   ),
                                                 ],
                                               ),
