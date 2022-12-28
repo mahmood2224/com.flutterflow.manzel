@@ -83,6 +83,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
         version: FFAppState().apiVersion,
       );
       isBookedPropertiesLoading = false;
+      if(mounted)
       setState(() {});
       bookedProperties = BookedPropertiesCall.result(
         bookedPropertiesApiResponse?.jsonBody,

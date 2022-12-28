@@ -15,6 +15,7 @@ import '../../backend/push_notifications/push_notifications_handler.dart'
 import '';
 import '../../index.dart';
 import '../../main.dart';
+import '../flutter_flow_util.dart';
 import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -67,6 +68,7 @@ class AppStateNotifier extends ChangeNotifier {
     // Once again mark the notifier as needing to update on auth change
     // (in order to catch sign in / out events).
     updateNotifyOnAuthChange(true);
+
   }
 
   void stopShowingSplashImage() {
@@ -80,14 +82,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, _) =>
-          appStateNotifier.loggedIn || !FFAppState().isInitailLaunch ? NavBarPage() : OnboardingViewWidget(),
+      errorBuilder: (context, _) {
+        if(FFAppState().isInitailLaunch) {
+          return  OnboardingViewWidget();
+        }
+        else return appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch? NavBarPage() : OnboardingViewWidget();},
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch? NavBarPage() : OnboardingViewWidget(),
+          builder: (context, _){
+              if(FFAppState().isInitailLaunch) {
+              return  OnboardingViewWidget();
+              }
+              else return appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch? NavBarPage() : OnboardingViewWidget();},
           routes: [
             FFRoute(
               name: 'Login',
