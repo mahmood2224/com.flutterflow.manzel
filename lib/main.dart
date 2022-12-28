@@ -106,7 +106,7 @@ class _MyAppState extends State<MyApp> {
     _router = createRouter(_appStateNotifier);
     userStream = manzelFirebaseUserStream()
       ..listen((user) => _appStateNotifier.update(user));
-    Future.delayed(const Duration(milliseconds: 10), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       if(FFAppState().isInitailLaunch && loggedIn) {
         GoRouter.of(_router.routerDelegate.navigatorKey.currentContext!)
             .prepareAuthEvent();
