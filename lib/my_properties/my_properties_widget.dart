@@ -83,6 +83,7 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
         version: FFAppState().apiVersion,
       );
       isBookedPropertiesLoading = false;
+      if(mounted)
       setState(() {});
       bookedProperties = BookedPropertiesCall.result(
         bookedPropertiesApiResponse?.jsonBody,
@@ -411,6 +412,12 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                             context.pushNamed(
                                               'PropertyDetails',
                                               queryParams: {
+                                                'propertyName': serializeParam(
+                                                    getJsonField(
+                                                      bookedPropertiesItem,
+                                                      r'''$.property_name''',
+                                                    ),
+                                                    ParamType.String),
                                                 'propertyId': serializeParam(
                                                     getJsonField(
                                                       bookedPropertiesItem,

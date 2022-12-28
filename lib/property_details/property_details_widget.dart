@@ -55,11 +55,13 @@ enum VideoType {
 class PropertyDetailsWidget extends StatefulWidget {
   const PropertyDetailsWidget({
     Key? key,
+    this.propertyName,
     this.propertyId,
     this.path,
     this.jsonData,
   }) : super(key: key);
 
+  final String? propertyName;
   final int? propertyId;
   final String? path;
  final dynamic? jsonData;
@@ -3626,6 +3628,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                               0.9,
                                                           child:
                                                           ReservationBottomSheetWidget(
+                                                            propertyName: widget.propertyName,
                                                             reservationCost:
                                                             PropertyCall
                                                                 .reservationsCost(

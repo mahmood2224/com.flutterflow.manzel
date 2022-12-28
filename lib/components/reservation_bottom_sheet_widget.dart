@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:go_sell_sdk_flutter/model/models.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/flutter_flow/custom_functions.dart';
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
@@ -20,11 +21,13 @@ import 'package:google_fonts/google_fonts.dart';
 class ReservationBottomSheetWidget extends StatefulWidget {
   const ReservationBottomSheetWidget({
     Key? key,
+    this.propertyName,
     this.reservationCost,
     this.propertyId,
     this.orderId
   }) : super(key: key);
 
+  final String? propertyName;
   final int? reservationCost;
   final int? propertyId;
   final int? orderId;
@@ -65,7 +68,7 @@ class _ReservationBottomSheetWidgetState
           // Post URL
           postURL: "https://tap.company",
           // Payment description
-          paymentDescription: "${widget.propertyId} number property purchased",
+          paymentDescription: paymentDescription(widget.propertyName,FFAppState().locale),    // "${widget.propertyName} property purchased",
           // Payment Metadata
           paymentMetaData: {},
           // Payment Reference

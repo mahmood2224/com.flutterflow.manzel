@@ -96,8 +96,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       logFirebaseEvent('view_item_list');
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
       logFirebaseEvent('HomeScreen_Set-App-Language');
-      setAppLanguage(context, await FFAppState().locale);
-      Future.delayed(const Duration(milliseconds: 500), () {
+     // setAppLanguage(context, await FFAppState().locale);
+      await Future.delayed(const Duration(milliseconds: 0), () {
         if(mounted)
         setAppLanguage(context, FFAppState().locale);
       });
@@ -122,7 +122,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           isNewPageFetched = true;
         });
         print("at the end of list");
-        _fetchPage(pageNumber++);
+        _fetchPage(++pageNumber);
 
       }
 
@@ -559,6 +559,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         context.pushNamed(
                           'PropertyDetails',
                           queryParams: {
+                            'propertyName': serializeParam(
+                                getJsonField(
+                                  propertyListData[index],
+                                  r'''$.attributes.property_name''',
+                                ),
+                                ParamType.String),
                             'propertyId': serializeParam(
                                 getJsonField(
                                   propertyListData[index],
