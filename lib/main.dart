@@ -106,9 +106,18 @@ class _MyAppState extends State<MyApp> {
     _router = createRouter(_appStateNotifier);
     userStream = manzelFirebaseUserStream()
       ..listen((user) => _appStateNotifier.update(user));
+    Future.delayed(const Duration(milliseconds: 10), () {
+      if(FFAppState().isInitailLaunch && loggedIn) {
+        GoRouter.of(_router.routerDelegate.navigatorKey.currentContext!)
+            .prepareAuthEvent();
+        signOut();
+        print('SignOut called');
+      }
+    });
     Future.delayed(
       Duration(seconds: 1),
-      () => _appStateNotifier.stopShowingSplashImage(),
+      () {
+        _appStateNotifier.stopShowingSplashImage();}
     );
     // _firebaseMessaging.getToken().then((value) {
     //   print('Your FCM token:- $value');
