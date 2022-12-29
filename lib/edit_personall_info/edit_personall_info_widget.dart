@@ -4,11 +4,9 @@ import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
-
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
-import '../components/reservation_bottom_sheet_widget.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -16,11 +14,9 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class EditPersonallInfoWidget extends StatefulWidget {
   const EditPersonallInfoWidget({
@@ -187,7 +183,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
-        //  onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -218,14 +213,8 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 controller: fullNameController,
                                 autofocus: false,
                                 obscureText: false,
-                                // onTap: () {
-                                //   setState(() {});
-                                // },
                                 onChanged: (value){
                                  isNameValid= isNameValidFunction(value);
-                                  //focus node error handling
-                                  //button handling
-
                                   setState(() {});
                                 },
                                 decoration: InputDecoration(
@@ -322,9 +311,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                             child: TextFormField(
                               focusNode: emailNoFocusNode,
-                              // onTap: () {
-                              //   setState(() {});
-                              // },
                               onChanged: (value){
                                 isEmailValid = isEmailValidFunction(value);
                                 setState(() {});
@@ -670,7 +656,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               child: AuthUserStreamWidget(
                                 child: Builder(
                                   builder: (context) {
-                                    // Customize what your widget looks like when it's loading.
                                     if (isBankLoading) {
                                       return Center(
                                         child: SizedBox(
@@ -1101,11 +1086,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   ),
                                 );
                               }
-
-
-                              // logFirebaseEvent(
-                              //     'updatePersonalInfo_Close-Dialog,-Drawer,');
-                              // Navigator.pop(context);
                             }
                           }
                         },
@@ -1115,12 +1095,6 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                         options: FFButtonOptions(
                           width: 343,
                           height: 56,
-                          // emailController!.text,
-                          // fullNameController!.text,
-                          // bankValue,
-                          // privateSectorValue,
-                          // monthlyIncomeValue,
-                          // choiceChipsValue
                           color: ((bankValue != null && bankValue != '') &&
                               (privateSectorValue != null &&
                                   privateSectorValue != '') &&
