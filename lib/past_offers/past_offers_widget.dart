@@ -1,7 +1,6 @@
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
-
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
@@ -12,7 +11,6 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class PastOffersWidget extends StatefulWidget {
   const PastOffersWidget({Key? key}) : super(key: key);
@@ -145,7 +143,6 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(16, 17, 16, 0),
                   child: Builder(
                     builder: (context) {
-                      // Customize what your widget looks like when it's loading.
                       if (isLoading) {
                         return Center(
                           child: SizedBox(
@@ -1434,9 +1431,7 @@ class _PastOffersWidgetState extends State<PastOffersWidget> {
                         });
                       }
                       return SizedBox();
-
-                      //final listViewArchivedOffersResponse = snapshot.data!;
-                    },
+                      },
                   ),
                 ),
               ),
