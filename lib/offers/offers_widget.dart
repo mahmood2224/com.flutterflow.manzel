@@ -125,11 +125,11 @@ class _OffersWidgetState extends State<OffersWidget> {
 
       logFirebaseEvent('OFFERS_PAGE_Offers_ON_PAGE_LOAD');
       if (loggedIn) {
-        if (valueOrDefault(currentUserDocument?.status, '') == 'Active') {
+        if (valueOrDefault(currentUserDocument?.status, '') == 'Active' ||valueOrDefault(currentUserDocument?.status, '') == '' ) {
           return;
         }
 
-        if (FFAppState().locale == 'en') {
+       else if (FFAppState().locale == 'en' && valueOrDefault(currentUserDocument?.status, '') != 'Active') {
           logFirebaseEvent('Offers_Alert-Dialog');
           await showDialog(
             context: context,
@@ -175,7 +175,7 @@ class _OffersWidgetState extends State<OffersWidget> {
       } else {
         return;
       }
-
+      if(loggedIn && valueOrDefault(currentUserDocument?.status, '') != 'Active' )
       context.goNamedAuth('OnboardingView', mounted);
     });
 
