@@ -1,23 +1,16 @@
 import 'dart:io';
-
 import 'package:manzel/auth/auth_util.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
-
-import '../common_widgets/overlay.dart';
 import '../enviorment/env_variables.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:mime/mime.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -65,7 +58,6 @@ class _ChatWidgetState extends State<ChatWidget>
   @override
   onMessageReceived(channel, message) {
     setState(() {
-      // _SendBirdMessages.add(message);
       getNewMsg(message);
     });
     super.onMessageReceived(channel, message);
@@ -203,9 +195,6 @@ class _ChatWidgetState extends State<ChatWidget>
   void _addMessage(types.Message message) {
     setState(() {
       _messages.insert(0, message);
-
-      //_SendBirdMessages.add(sendBirdMessage);
-      // super.onMessageReceived(channel, sendBirdMessage);
     });
   }
 
@@ -264,8 +253,6 @@ class _ChatWidgetState extends State<ChatWidget>
 
   //Map message
   void asChatUIMessage(List<sendbird.BaseMessage> messages) {
-    //List<types.Message> result = [];
-
     try {
       if (messages != null) {
         messages.forEach((message) {
@@ -333,7 +320,6 @@ class _ChatWidgetState extends State<ChatWidget>
         types.Message.fromJson(jsonData as Map<String, dynamic>);
     setState(() {
       _messages.insert(0, chatMessage);
-      //_messages.add(chatMessage);
     });
   }
 
@@ -479,22 +465,8 @@ class _ChatWidgetState extends State<ChatWidget>
       final _sendbird = await sendbird.SendbirdSdk(
           appId: "${EnvVariables.instance.sendbirdAppId}");
       final _ = await _sendbird.connect(currentUserUid);
-      // Future.delayed(Duration(seconds: 5));
       _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);
-      // final query = sendbird.GroupChannelListQuery()
-      //   ..limit = 1
-      //   ..channelUrls = [channel_url];
-      //..userIdsExactlyIn = ["abhishek Sevarik","412216","admin","abhishek Visht","rhytham"];
-      // List<GroupChannel> channels = await query.loadNext();
-      // GroupChannel aChannel;
-      // if (channels.length == 0) {
-      //   aChannel = await GroupChannel.createChannel(sendbird.GroupChannelParams()
-      //     ..isPublic = true
-      //     ..userIds = ['']);
-      // } else {
       final aChannel = await GroupChannel.getChannel(channel_url);
-     // aChannel = channels[0];
-      //}
       List<sendbird.BaseMessage> messages =
           await aChannel.getMessagesByTimestamp(
               DateTime.now().millisecondsSinceEpoch * 1000,
