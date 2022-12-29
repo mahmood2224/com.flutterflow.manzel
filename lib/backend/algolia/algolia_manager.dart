@@ -1,11 +1,6 @@
 import 'dart:async';
-
-import 'package:algolia/algolia.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-
 import '../backend.dart';
-
 export 'package:algolia/algolia.dart';
 
 const kAlgoliaApplicationId = 'B3MI26Y97H';
