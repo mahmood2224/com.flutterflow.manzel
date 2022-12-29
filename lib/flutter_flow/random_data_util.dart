@@ -1,5 +1,4 @@
 import 'dart:math';
-
 final _random = Random();
 
 int randomInteger(int min, int max) {
@@ -30,11 +29,7 @@ String randomString(
   return List.generate(randomInteger(minLength, maxLength),
       (index) => chars[_random.nextInt(chars.length)]).join();
 }
-
-// Random date between 1970 and 2025.
 DateTime randomDate() {
-  // Random max must be in range 0 < max <= 2^32.
-  // So we have to generate the time in seconds and then convert to milliseconds.
   return DateTime.fromMillisecondsSinceEpoch(
       randomInteger(0, 1735689600) * 1000);
 }
