@@ -1,23 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
-
-import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
-import '../backend/api_requests/api_manager.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as material;
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class EditMobileNumberWidget extends StatefulWidget {
   const EditMobileNumberWidget({Key? key}) : super(key: key);
@@ -162,7 +155,6 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                             textDirection: material.TextDirection.ltr,
                             child: TextFormField(
                               maxLength: 10,
-                              //buildCounter: Container(),
                               controller: mobileNumberController,
                               onChanged:(val){
                                 warningMessage='';
@@ -192,9 +184,6 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               decoration: InputDecoration(
                                 counterText: "",
                                 hintText: "05XXXXXXXX",
-                                // prefixText: FFLocalizations.of(context).getText(
-                                //   'dkoyvgce' /* +966 */,
-                                // ),
                                 labelText: FFLocalizations.of(context).getText(
                                   'por97wlv' /* Mobile Number */,
                                 ),
@@ -207,9 +196,6 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                       fontWeight: FontWeight.w300,
                                       useGoogleFonts: false,
                                     ),
-                                // hintText: FFLocalizations.of(context).getText(
-                                //   'f4tpckti' /* +966 */,
-                                // ),
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -267,9 +253,6 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
                           child: Text(
                             warningMessage,
-                            // FFLocalizations.of(context).getText(
-                            //   'enterValidPhone' /* Please enter a valid Phone num... */,
-                            // ),
                             style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Sofia Pro By Khuzaimah',
                               color: Colors.red,
@@ -378,17 +361,6 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 'phoneNumberFormat' /* The phone number format should be 05XXXXXXXX  */,
                               );
                               setState((){});
-                              // ScaffoldMessenger.of(context).showSnackBar(
-                              //   SnackBar(
-                              //     content: Text(
-                              //       'The phone number format should be 05XXXXXXXX',
-                              //       style: FlutterFlowTheme.of(context)
-                              //           .subtitle1,
-                              //     ),
-                              //     duration: Duration(milliseconds: 4000),
-                              //     backgroundColor: Color(0xFF777777),
-                              //   ),
-                              // );
                             }
                             else if(!(isInternetAvailable??false)){
                               isLoading.value=false;
