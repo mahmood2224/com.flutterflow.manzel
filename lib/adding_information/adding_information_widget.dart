@@ -1,6 +1,5 @@
 import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
-
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
@@ -8,10 +7,8 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart' as material;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class AddingInformationWidget extends StatefulWidget {
   const AddingInformationWidget({Key? key}) : super(key: key);
@@ -124,9 +121,6 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                     controller: fullNameController,
                                     onChanged: (value) async {
                                       isNameValid= isNameValidFunction(value);
-                                      //focus node error handling
-                                      //button handling
-
                                       setState(() {});
                                     },
                                     autofocus: true,
@@ -399,7 +393,6 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                     ),
                                   );
                                 }
-                               // context.goNamed('HomeScreen');
                               }
                               else{
                                 checkInternetStatus();
