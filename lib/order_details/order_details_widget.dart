@@ -1,7 +1,6 @@
 import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
-
 import '../backend/api_requests/api_calls.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -11,7 +10,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class OrderDetailsWidget extends StatefulWidget {
   const OrderDetailsWidget({
@@ -69,7 +67,6 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        // Customize what your widget looks like when it's loading.
         if (isLoading) {
           return Center(
             child: SizedBox(
@@ -760,9 +757,6 @@ class _OrderDetailsWidgetState extends State<OrderDetailsWidget> {
           );
         }
         return SizedBox();
-
-       // final orderDetailsPropertyResponse = snapshot.data!;
-
       },
     );
   }
