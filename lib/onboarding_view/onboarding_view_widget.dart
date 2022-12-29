@@ -1,15 +1,8 @@
-import 'dart:io';
-
-import 'package:package_info_plus/package_info_plus.dart';
-
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingViewWidget extends StatefulWidget {
@@ -27,29 +20,11 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('tutorial_begin');
-    // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-    //await versionCheck(context);
       logFirebaseEvent('ONBOARDING_VIEW_OnboardingView_ON_LOAD');
       if(mounted)
-  // await Future.delayed(const Duration(milliseconds: 0), () async{
         setAppLanguage(context, FFAppState().locale);
-      // if (FFAppState().isInitailLaunch) {
-      //   logFirebaseEvent('OnboardingView_Update-Local-State');
-      //   // setState(() =>
-      //   //     FFAppState().locale = FFLocalizations.of(context).languageCode);
-      // } else {
-      //   logFirebaseEvent('OnboardingView_Navigate-To');
-      //   context.goNamed('HomeScreen');
-  //    }
-
       logFirebaseEvent('OnboardingView_Update-Local-State');
-    //   setState(
-    //       () => FFAppState().locale = FFLocalizations.of(context).languageCode);
-
-   //  });
-
-
     });
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'OnboardingView'});
