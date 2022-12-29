@@ -1,26 +1,16 @@
 import 'dart:io';
-
-import 'package:chewie/chewie.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/edit_personall_info/edit_personall_info_widget.dart';
 import 'package:manzel/enviorment/env_variables.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:video_player/video_player.dart';
-import 'package:manzel/profile/profile_widget.dart';
-import 'package:visibility_detector/visibility_detector.dart';
-import 'package:chewie/chewie.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:video_player/video_player.dart';
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
-import '../common_widgets/overlay.dart';
 import '../components/bank_details_bottom_sheet_widget.dart';
 import '../components/reservation_bottom_sheet_widget.dart';
 import '../flutter_flow/custom_functions.dart';
@@ -28,19 +18,11 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_static_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/lat_lng.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:flutter/material.dart' as material;
 import 'package:map_launcher/map_launcher.dart' as $ml;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mapbox_search/mapbox_search.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -50,7 +32,6 @@ enum VideoType {
   network,
 }
 
-// Set<VideoPlayerController> _videoPlayers = Set();
 
 class PropertyDetailsWidget extends StatefulWidget {
   const PropertyDetailsWidget({
@@ -83,19 +64,9 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
   bool? isInternetAvailable;
   ValueNotifier<bool> bookMarkTapped = ValueNotifier<bool>(false);
 
-
-
-  // VideoPlayerController? _currentController;
-  // VideoPlayerController? videoPlayerController;
-  // VideoPlayerController? _videoPlayerController;
-  // ChewieController? _chewieController;
-  // bool _loggedError = false;
-
   @override
   void initState() {
-   // makeProeprtyApiCall();
     super.initState();
-    // //initializePlayer();
     fav = FavouriteList.instance.favourite;
     if (widget.jsonData != null) {
       isLoading.value = true;
@@ -129,15 +100,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
 
   watchRouteChange() {
     if (!GoRouter.of(context).location.contains("fav")&&mounted) {
-      // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
-      // do something
       fav = FavouriteList.instance.favourite;
       if (mounted) {
         setState(() {});
       }
 
       GoRouter.of(context).removeListener(watchRouteChange);
-      // remove listener
     }
   }
 
@@ -145,14 +113,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
     isInternetAvailable = await isInternetConnected();
     if(isInternetAvailable??false){
       isLoading.value = true;
-      //Future.delayed(Duration(seconds: 5));
       final callResult = await PropertyCall.call(
         propertyId: widget.propertyId,
         locale: FFAppState().locale,
       );
       final callResultToJson = callResult.jsonBody['data'];
       columnPropertyResponse = callResultToJson;
-      print("++++");
       isLoading.value = false;
     }else{
       isLoading.value = false;
@@ -166,64 +132,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
       );
     }
   }
-
-  // void enterFullScreen() {
-  //   _chewieController?.enterFullScreen();
-  // }
-  // @override
-  // void dispose() {
-  //   _videoPlayers.remove(_videoPlayerController);
-  //   _videoPlayerController?.dispose();
-  //   _chewieController?.dispose();
-  //   _currentController = null;
-  //   super.dispose();
-  // }
-  //
-  //
-  // Future initializePlayer() async {
-  //
-  //   _videoPlayerController = VideoPlayerController.network(widget.path!);
-  //
-  //     await _videoPlayerController?.initialize();
-  //   _chewieController = ChewieController(
-  //     videoPlayerController: _videoPlayerController!,
-  //     deviceOrientationsOnEnterFullScreen: [
-  //       DeviceOrientation.landscapeLeft,
-  //       DeviceOrientation.landscapeRight,
-  //     ],
-  //     deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-  //     aspectRatio: MediaQuery.of(context).size.width/(MediaQuery.of(context).size.height*0.35),
-  //     autoPlay: true,
-  //     looping: true,
-  //     showControls: true,
-  //     allowFullScreen: true,
-  //     allowPlaybackSpeedChanging: false,
-  //
-  //   );
-  //   setState(() {});
-  //
-  //  _videoPlayers.add(_videoPlayerController!);
-  //
-  //   _videoPlayerController?.addListener(() {
-  //     if (_videoPlayerController!.value.hasError && !_loggedError) {
-  //       print(
-  //           'Error playing video: ${_videoPlayerController!.value.errorDescription}');
-  //       _loggedError = true;
-  //     }
-  //Stop all other players when one video is playing.
-  // if (_videoPlayerController.value.isPlaying) {
-  //   _videoPlayers.forEach((otherPlayer) {
-  //     if (otherPlayer != _videoPlayerController &&
-  //         otherPlayer.value.isPlaying) {
-  //       setState(() {
-  //         otherPlayer.pause();
-  //
-  //       });
-  //      }
-  //    });
-  // }
-  //});}
-
+  
   Future<void> configurePaymentSdk() async {
     GoSellSdkFlutter.configureApp(
       bundleId: 'com.flutterflow.manzel',
@@ -246,12 +155,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: GestureDetector(
-        // onTap: () => FocusScope.of(context).unfocus(),
-        // child: FutureBuilder<ApiCallResponse>(
-        //   future: PropertyCall.call(
-        //     propertyId: widget.propertyId,
-        //     locale: FFAppState().locale,
-        //   ),
         child: ValueListenableBuilder<bool>(
           builder: (BuildContext context, bool value, Widget? child) {
             return isLoading.value
@@ -264,16 +167,12 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                           SizedBox(
                             height: 30,
                             width: 30,
-                            child: CircularProgressIndicator(
-                                // valueColor: AlwaysStoppedAnimation(Colors.black),
-                                // strokeWidth: 5,
-                                ),
+                            child: CircularProgressIndicator(),
                           )
                         ],
                       ),
                     ),
                   ):
-                // : columnPropertyResponse!=null?
             Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -478,99 +377,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                               ),
                                             ),
                                           ),
-
-                                        //                               InkWell(
-                                        //                                 child: Container(
-                                        //                                   width: MediaQuery.of(context).size.width,
-                                        //                                   height:
-                                        //                                       MediaQuery.of(context).size.height,
-                                        //                                   decoration: BoxDecoration(),
-                                        //                                   child: Visibility(
-                                        //                                     visible: functions
-                                        //                                         .videoPlayerVisibilty(getJsonField(
-                                        //                                       columnPropertyResponse,
-                                        //                                       r'''$.attributes.video_manifest_uri''',
-                                        //                                     )),
-                                        //                                     child: Align(
-                                        //                                       alignment: Alignment.topRight,
-                                        //
-                                        //
-                                        // child: VisibilityDetector(
-                                        // key: ObjectKey(Chewie),
-                                        // onVisibilityChanged: (visibility) {
-                                        // if (visibility.visibleFraction *
-                                        // 100 != 100 && this.mounted) {
-                                        //   if(_chewieController!=null){
-                                        // _chewieController?.pause();}}else{if(_chewieController!=null){_chewieController?.play();}}
-                                        //
-                                        // },
-                                        //
-                                        //
-                                        //
-                                        // //         child: FlutterFlowVideoPlayer(
-                                        // // onTap: (videoControllerValue) {
-                                        // //         print("detail_screen controller set length  = ${videoControllerValue.length}");
-                                        // //         _currentController = videoControllerValue.last;
-                                        // //         },
-                                        // //                                         path: getJsonField(
-                                        // //                                           columnPropertyResponse,
-                                        // //                                           r'''$.attributes.video_manifest_uri''',
-                                        // //                                         ),
-                                        // //           height: MediaQuery.of(context).size.width/1.7777,
-                                        // //           width: MediaQuery.of(context)
-                                        // //               .size.width,
-                                        // //                                         videoType: VideoType.network,
-                                        // //                                         autoPlay: true,
-                                        // //                                         looping: true,
-                                        // //                                         showControls: false,
-                                        // //                                         //aspectRatio:  (MediaQuery.of(context).size.height*0.74 /MediaQuery.of(context).size.width),
-                                        // //                                         allowFullScreen: true,
-                                        // //                                         allowPlaybackSpeedMenu: false,
-                                        // //                                       ),
-                                        //  child: FittedBox(
-                                        //         fit: BoxFit.fitWidth,
-                                        //         child: Container(
-                                        //         height: MediaQuery.of(context)
-                                        //                        .size.height*0.35,
-                                        //         width: MediaQuery.of(context)
-                                        //                        .size.width,
-                                        //           // child: Theme(
-                                        //           //   data: ThemeData.light().copyWith(
-                                        //           //     platform: TargetPlatform.android,
-                                        //           //   ),
-                                        //             child:(_chewieController != null &&
-                                        //       _chewieController!
-                                        //               .videoPlayerController.value.isInitialized)
-                                        //       ? Chewie(controller: _chewieController!)
-                                        //       : (_chewieController != null &&
-                                        //       _chewieController!.videoPlayerController.value.hasError)
-                                        //       ? Text('Error playing video')
-                                        //       : Column(
-                                        //     mainAxisAlignment: MainAxisAlignment.center,
-                                        //     children:  [
-                                        //       Container(
-                                        //           height: 20,
-                                        //           width: 20,
-                                        //           child: CircularProgressIndicator()),
-                                        //       SizedBox(height: 20),
-                                        //       Text('Loading'),
-                                        //     ],
-                                        //   ),),
-                                        //
-                                        // ),),),
-                                        //         //),
-                                        //
-                                        //         //),
-                                        //         ),
-                                        //
-                                        //
-                                        //                                 ),
-                                        //                           onTap: () {
-                                        //                                  //_chewieController.enterFullScreen();
-                                        //                                  _chewieController?.toggleFullScreen();
-                                        //                                  // _currentController.enterFullScreen();
-                                        //                                 },
-                                        //                               ),
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -602,7 +408,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                     // back
                                                     logFirebaseEvent(
                                                         'IconButton_back');
-                                                    //  dispose();
                                                     FavouriteList.instance
                                                         .setFavourite(fav);
                                                     Navigator.pop(context);
@@ -686,8 +491,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                           if (loggedIn) {
                                                             bool isInternetAvailable = await isInternetConnected();
                                                             if(isInternetAvailable){
-                                                              fav[widget.propertyId.toString()]=!(fav[widget.propertyId.toString()]??false);//? fav[widget.propertyId.toString()] = true : fav[widget.propertyId.toString()] = false;
-                                                             // if (fav[widget.propertyId.toString()] ?? false) {
+                                                              fav[widget.propertyId.toString()]=!(fav[widget.propertyId.toString()]??false);
                                                                 logFirebaseEvent(
                                                                     'Container_Backend-Call');
                                                                 final bookmarkApiResponse =
@@ -768,9 +572,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                             context.pushNamed(
                                                                 'Login');
                                                           }
-                                                          // bookMarkTapped =
-                                                          //     false;
-                                                          // setState(() {});
                                                         },
                                                         child: Container(
                                                           height: 40,
@@ -926,10 +727,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                                           )),
                                                                       '0',
                                                                     ),
-                                                                    // PropertyCall
-                                                                    //     .propertyUpdatedAt(
-                                                                    //   columnPropertyResponse,
-                                                                    // ).toString(),
                                                                     maxLines: 2,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -984,124 +781,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                                         ),
                                                                   ),
                                                                 ),
-                                                                // if (functions
-                                                                //     .propertyStatusConditionalVisibilty(
-                                                                //         PropertyCall
-                                                                //             .propertyStatus(
-                                                                //   columnPropertyResponse
-                                                                //       ,
-                                                                // ).toString()))
-                                                                //   Container(
-                                                                //     height: 26,
-                                                                //     decoration:
-                                                                //         BoxDecoration(
-                                                                //       color: FlutterFlowTheme.of(context).secondaryGreen
-                                                                //           ,
-                                                                //       borderRadius:
-                                                                //           BorderRadius
-                                                                //               .circular(
-                                                                //                   7),
-                                                                //     ),
-                                                                //     child: Row(
-                                                                //       mainAxisSize:
-                                                                //           MainAxisSize
-                                                                //               .max,
-                                                                //       mainAxisAlignment:
-                                                                //           MainAxisAlignment
-                                                                //               .center,
-                                                                //       children: [
-                                                                //         Padding(
-                                                                //           padding: EdgeInsetsDirectional
-                                                                //               .fromSTEB(
-                                                                //                   10,
-                                                                //                   1,
-                                                                //                   10,
-                                                                //                   1),
-                                                                //           child: Text(
-                                                                //             FFLocalizations.of(
-                                                                //                     context)
-                                                                //                 .getText(
-                                                                //               'ccsmgbaf' /* Available */,
-                                                                //             ),
-                                                                //             style: FlutterFlowTheme.of(
-                                                                //                     context)
-                                                                //                 .bodyText1
-                                                                //                 .override(
-                                                                //                   fontFamily:
-                                                                //                       'AvenirArabic',
-                                                                //                   color:
-                                                                //                       FlutterFlowTheme.of(context).white,
-                                                                //                   fontSize:
-                                                                //                       13,
-                                                                //                   fontWeight:
-                                                                //                       FontWeight.w500,
-                                                                //                   useGoogleFonts:
-                                                                //                       false,
-                                                                //                 ),
-                                                                //           ),
-                                                                //          ),
-                                                                //       ],
-                                                                //     ),
-                                                                //  ),
-                                                                // if (!functions
-                                                                //     .propertyStatusConditionalVisibilty(
-                                                                //         PropertyCall
-                                                                //             .propertyStatus(
-                                                                //   columnPropertyResponse
-                                                                //       ,
-                                                                // ).toString()))
-                                                                //   Container(
-                                                                //     height: 26,
-                                                                //     decoration:
-                                                                //         BoxDecoration(
-                                                                //       color: Color(
-                                                                //           0xFFD7D7D7),
-                                                                //       borderRadius:
-                                                                //           BorderRadius
-                                                                //               .circular(
-                                                                //                   7),
-                                                                //     ),
-                                                                //     child: Row(
-                                                                //       mainAxisSize:
-                                                                //           MainAxisSize
-                                                                //               .max,
-                                                                //       mainAxisAlignment:
-                                                                //           MainAxisAlignment
-                                                                //               .center,
-                                                                //       children: [
-                                                                //         Padding(
-                                                                //           padding: EdgeInsetsDirectional
-                                                                //               .fromSTEB(
-                                                                //                   10,
-                                                                //                   1,
-                                                                //                   10,
-                                                                //                   1),
-                                                                //           child: Text(
-                                                                //             FFLocalizations.of(
-                                                                //                     context)
-                                                                //                 .getText(
-                                                                //               'ie4ye37b' /* Booked */,
-                                                                //             ),
-                                                                //             style: FlutterFlowTheme.of(
-                                                                //                     context)
-                                                                //                 .bodyText1
-                                                                //                 .override(
-                                                                //                   fontFamily:
-                                                                //                       'AvenirArabic',
-                                                                //                   color:
-                                                                //                       FlutterFlowTheme.of(context).white,
-                                                                //                   fontSize:
-                                                                //                       13,
-                                                                //                   fontWeight:
-                                                                //                       FontWeight.w500,
-                                                                //                   useGoogleFonts:
-                                                                //                       false,
-                                                                //                 ),
-                                                                //           ),
-                                                                //         ),
-                                                                //       ],
-                                                                //     ),
-                                                                //   ),
                                                               ],
                                                             ),
                                                           ],
@@ -1131,7 +810,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                             child: InkWell(
                                                               onTap: () async {
                                                                 if(isInternetAvailable??false){
-                                                                  //_chewieController?.pause();
                                                                   logFirebaseEvent(
                                                                       'PROPERTY_DETAILS_Container_5imdfn3l_ON_T');
                                                                   logFirebaseEvent(
@@ -1229,7 +907,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                                 child: InkWell(
                                                                   onTap:
                                                                       () async {
-                                                                    //_chewieController?.pause();
                                                                     logFirebaseEvent(
                                                                         'PROPERTY_DETAILS_Container_i2se6sfv_ON_T');
                                                                     logFirebaseEvent(
@@ -2825,11 +2502,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                                     .circular(
                                                                         8),
                                                           ),
-                                                          // icon: Icon(
-                                                          //   Manzel
-                                                          //       .request_visit,
-                                                          //   size: 22,
-                                                          // ),
                                                         ),
                                                       ],
                                                     ),
@@ -3562,7 +3234,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                       FFButtonWidget(
                                         onPressed: () async {
                                           logFirebaseEvent('add_to_cart');
-                                          //_chewieController?.pause();
                                           logFirebaseEvent(
                                               'PROPERTY_DETAILS_PAGE_reserved_ON_TAP');
                                           if (loggedIn) {
@@ -3661,7 +3332,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                 else if (addOrderApiResponse!
                                                     .statusCode ==
                                                     399) {
-                                                  //   Navigator.pop(context);
                                                   logFirebaseEvent(
                                                       'Button_Show-Snack-Bar');
                                                   ScaffoldMessenger.of(context)
@@ -3688,7 +3358,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                 } else if (addOrderApiResponse!
                                                     .statusCode ==
                                                     400) {
-                                                  //Navigator.pop(context);
                                                   logFirebaseEvent(
                                                       'Button_Show-Snack-Bar');
                                                   ScaffoldMessenger.of(context)
@@ -3715,7 +3384,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                     ),
                                                   );
                                                 } else {
-                                                  // Navigator.pop(context);
                                                   logFirebaseEvent(
                                                       'Button_Show-Snack-Bar');
                                                   ScaffoldMessenger.of(context)
@@ -3821,7 +3489,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                           }
                                                           setState(() {});
                                                         });
-                                                        //.then((value) => _chewieController?.play());
                                                       }
                                                       else if(addOrderApiResponse?.statusCode ==403){
                                                         unAuthorizedUser(context, mounted);
@@ -3829,7 +3496,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                       else if (addOrderApiResponse!
                                                           .statusCode ==
                                                           399) {
-                                                        //Navigator.pop(context);
                                                         logFirebaseEvent(
                                                             'Button_Show-Snack-Bar');
                                                         ScaffoldMessenger.of(
@@ -3857,7 +3523,6 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                       } else if (addOrderApiResponse!
                                                           .statusCode ==
                                                           400) {
-                                                        //  Navigator.pop(context);
                                                         logFirebaseEvent(
                                                             'Button_Show-Snack-Bar');
                                                         ScaffoldMessenger.of(
@@ -3940,13 +3605,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                         ),
                                         options: FFButtonOptions(
                                           width: 140,
-                                          // FFAppState().locale == "en"
-                                          //     ? 140
-                                          //     : 120,
                                           height: 56,
-                                          // FFAppState().locale == "en"
-                                          //     ? 56
-                                          //     : 40,
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                           textStyle:
@@ -3982,13 +3641,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                         ),
                                         options: FFButtonOptions(
                                           width: 140,
-                                          // FFAppState().locale == "en"
-                                          //     ? 140
-                                          //     : 120,
                                           height: 56,
-                                          // FFAppState().locale == "en"
-                                          //     ? 56
-                                          //     : 40,
                                           color: Color(0xFF8C8C8C),
                                           textStyle:
                                               FlutterFlowTheme.of(context)
@@ -4023,13 +3676,7 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                         ),
                                         options: FFButtonOptions(
                                           width: 140,
-                                          // FFAppState().locale == "en"
-                                          //     ? 140
-                                          //     : 120,
                                           height: 56,
-                                          // FFAppState().locale == "en"
-                                          //     ? 56
-                                          //     : 40,
                                           color: FlutterFlowTheme.of(context)
                                               .primaryColor,
                                           textStyle:
