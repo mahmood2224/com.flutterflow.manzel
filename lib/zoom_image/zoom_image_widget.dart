@@ -1,13 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:manzel/app_state.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/flutter_flow/flutter_flow_theme.dart';
 import 'package:manzel/flutter_flow/flutter_flow_util.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
-
-import '../backend/firebase_analytics/analytics.dart';
 
 
 class ZoomImage extends StatefulWidget {
@@ -50,7 +47,6 @@ class _ZoomImageState extends State<ZoomImage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
