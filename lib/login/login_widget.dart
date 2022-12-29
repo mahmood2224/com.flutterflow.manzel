@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:manzel/backend/api_requests/api_calls.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
-import '../auth/auth_util.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
 import '../common_widgets/overlay.dart';
 import '../components/terms_conditions_bottom_sheet_widget.dart';
@@ -10,13 +9,8 @@ import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/actions/index.dart' as actions;
-import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart' as material;
 
 class LoginWidget extends StatefulWidget {
@@ -54,9 +48,6 @@ class _LoginWidgetState extends State<LoginWidget> {
             'phoneNumberFormat' /* The phone number format should be 05XXXXXXXX */,
           );
         }
-        //
-        // if(!isPhoneNumberValid)
-        // textOtherThatEnglish=true;
         setState((){});
 
       }
@@ -221,7 +212,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                               textDirection: material.TextDirection.ltr,
                               child: TextFormField(
                                 maxLength: 10,
-                                //buildCounter: Container(),
                                 controller: phoneNumberController,
                                 onChanged: (val) {
                                   warningMessage='';
@@ -231,23 +221,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         'en'
                                         ? 'Please enter English numbers!'
                                         : 'الرجاء إدخال الأرقام الإنجليزية!';
-                                    // isEnterEnglishNumberSnackNotShown=false;
-                                    // textOtherThatEnglish=true;
-                                    // isPhoneNumberValid=!isPhoneNumberValid;
-                                    // ScaffoldMessenger.of(context).showSnackBar(
-                                    //     SnackBar(
-                                    //       duration: Duration(milliseconds: 3000),
-                                    //         backgroundColor:
-                                    //             FlutterFlowTheme.of(context)
-                                    //                 .primaryRed,
-                                    //         content: Text(FFAppState().locale ==
-                                    //                 'en'
-                                    //             ? 'Please enter English numbers!'
-                                    //             : 'الرجاء إدخال الأرقام الإنجليزية!')));
                                   }
                                   count = val.length;
                                   setState((){});
-                                //  count++;
                                 },
                                 autofocus: true,
                                 inputFormatters: [
@@ -259,10 +235,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 decoration: InputDecoration(
                                   counterText: "",
                                   hintText: "05XXXXXXXX",
-                                  // prefixText:
-                                  //     FFLocalizations.of(context).getText(
-                                  //   'f4tpckti' /* +966 */,
-                                  // ),
                                   labelText:
                                       FFLocalizations.of(context).getText(
                                     '4m2r1iwr' /* Mobile Number */,
@@ -276,9 +248,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         fontWeight: FontWeight.w300,
                                         useGoogleFonts: false,
                                       ),
-                                  // hintText: FFLocalizations.of(context).getText(
-                                  //   'f4tpckti' /* +966 */,
-                                  // ),
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
@@ -332,14 +301,10 @@ class _LoginWidgetState extends State<LoginWidget> {
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      // if (!isPhoneNumberValid)
                       Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(24, 4, 0, 0),
                           child: Text(
                             warningMessage,
-                            //   FFLocalizations.of(context).getText(
-                            //     'enterValidPhone' /* Please enter a valid Phone num... */,
-                            //   ),
                             style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'Sofia Pro By Khuzaimah',
                               color: Colors.red,
@@ -530,19 +495,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   'phoneNumberFormat' /* The phone number format should be 05XXXXXXXX */,
                                 );
                                 setState((){});
-                                // ScaffoldMessenger.of(context).showSnackBar(
-                                //   SnackBar(
-                                //     content: Text(
-                                //       FFLocalizations.of(context).getText(
-                                //         'phoneNumberFormat' /* The phone number format should be 05XXXXXXXX */,
-                                //       ),
-                                //       style: FlutterFlowTheme.of(context)
-                                //           .subtitle1,
-                                //     ),
-                                //     duration: Duration(milliseconds: 4000),
-                                //     backgroundColor: Color(0xFF777777),
-                                //   ),
-                                // );
                               }
                               else if(!(isInternetAvailable??false)){
                                 isLoading.value=false;
