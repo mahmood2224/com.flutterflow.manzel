@@ -3,20 +3,14 @@ import 'package:manzel/auth/auth_util.dart';
 import 'package:manzel/auth/firebase_user_provider.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/enviorment/env_variables.dart';
-import 'package:manzel/flutter_flow/flutter_flow_icon_button.dart';
 import 'package:manzel/zoom_image/zoom_image_widget.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/custom_functions.dart';
-import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ImageGalleryViewWidget extends StatefulWidget {
@@ -32,7 +26,7 @@ class ImageGalleryViewWidget extends StatefulWidget {
   final int? propertyId;
   final String? screenName;
   final dynamic imageList;
-  final dynamic? jsonData;
+  final dynamic jsonData;
 
   @override
   _ImageGalleryViewWidgetState createState() => _ImageGalleryViewWidgetState();
@@ -207,8 +201,7 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                     if (loggedIn) {
                                       bool isInternetAvailable = await isInternetConnected();
                                       if(isInternetAvailable){
-                                        fav[widget.propertyId.toString()]=!(fav[widget.propertyId.toString()]??false);//? fav[widget.propertyId.toString()] = true : fav[widget.propertyId.toString()] = false;
-                                        // if (fav[widget.propertyId.toString()] ?? false) {
+                                        fav[widget.propertyId.toString()]=!(fav[widget.propertyId.toString()]??false);
                                         logFirebaseEvent(
                                             'Container_Backend-Call');
                                         final bookmarkApiResponse =
@@ -289,9 +282,6 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                                       context.pushNamed(
                                           'Login');
                                     }
-                                    // bookMarkTapped =
-                                    //     false;
-                                    // setState(() {});
                                   },
                                   child: Container(
                                     height: 40,
@@ -331,12 +321,6 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                     if (imageList.isEmpty && (isInternetAvailable ?? false)) {
                       return SizedBox();
                     }
-                    // imageList = widget.imageList.length==1?
-                    // [getJsonField(
-                    //     widget.imageList,
-                    //     r'''$..attributes.formats.medium.url''')]:getJsonField(
-                    //     widget.imageList,
-                    //     r'''$..attributes.formats.medium.url''');
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
@@ -347,23 +331,6 @@ class _ImageGalleryViewWidgetState extends State<ImageGalleryViewWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(8, 6, 8, 6),
                           child: InkWell(
                             onTap: () async {
-                              //PageTransition(
-                              //   type: PageTransitionType.fade,
-                              //   child: FlutterFlowExpandedImageView(
-                              //     image: Image.network(
-                              //       getJsonField(
-                              //         imagesItem,
-                              //         r'''$.attributes.formats.medium.url''',
-                              //       ),
-                              //       fit: BoxFit.contain,
-                              //     ),
-                              //     allowRotation: false,
-                              //     tag: getJsonField(
-                              //       imagesItem,
-                              //       r'''$.attributes.formats.medium.url''',
-                              //     ),
-                              //     useHeroAnimation: true,
-                              //   ),
                               logFirebaseEvent(
                                   'IMAGE_GALLERY_VIEW_Image_xq7pxmei_ON_TAP');
                               logFirebaseEvent('Image_Expand-Image');
