@@ -1,7 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
-import 'package:manzel/components/something_went_wrong_widget.dart';
-
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
