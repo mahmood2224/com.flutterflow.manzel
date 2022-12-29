@@ -1,23 +1,12 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:go_router/go_router.dart';
-import 'package:manzel/app_state.dart';
-import 'package:page_transition/page_transition.dart';
-//import 'package:sentry_flutter/sentry_flutter.dart';
-import '../../zoom_image/zoom_image_widget.dart';
 import '../flutter_flow_theme.dart';
-import '../../backend/backend.dart';
 import '../../auth/firebase_user_provider.dart';
 import '../../backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
-import '';
 import '../../index.dart';
 import '../../main.dart';
 import '../flutter_flow_util.dart';
-import 'serialization_util.dart';
-
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
 
@@ -78,7 +67,6 @@ class AppStateNotifier extends ChangeNotifier {
 }
 
 GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
-   // observers: [SentryNavigatorObserver()],
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
@@ -194,9 +182,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Filter',
               path: 'filter',
               builder: (context, params) => FilterWidget(
-                homeScreenLength:
-                    params.getParam('homeScreenLength', ParamType.int),
-                //cityList : params.getParam('cityList',ParamType.JSON),
               ),
             ),
             FFRoute(
@@ -208,8 +193,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'filterResults',
               path: 'filterResults',
               builder: (context, params) => FilterResultsWidget(
-                homeScreenLength:
-                    params.getParam('homeScreenLength', ParamType.int),
                 cityName: params.getParam('cityName', ParamType.String),
                 furnishingType:
                     params.getParam('furnishingType', ParamType.String),
@@ -274,8 +257,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'whereAreYouLooking',
               builder: (context, params) => WhereAreYouLookingWidget(
                 city: params.getParam('city', ParamType.String),
-                homeScreenLength:
-                    params.getParam('homeScreenLength', ParamType.int),
               ),
             ),
             FFRoute(

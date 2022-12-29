@@ -3,8 +3,6 @@ import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/multi_video_player/feed_player/multi_manager/flick_multi_manager.dart';
 import 'package:manzel/multi_video_player/feed_player/multi_manager/flick_multi_player.dart';
-import 'package:video_player/video_player.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
@@ -13,7 +11,6 @@ import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -46,24 +43,16 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
   List<String>? filteredParametesValues;
   PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  int _currentItem = 0;
   bool isPaused = false;
   ValueNotifier<bool> isMuted = ValueNotifier<bool>(true);
   bool? autoplayVal;
-
-  //FlickMultiManager flickMultiManager;
-  Set<VideoPlayerController>? videoControllerSet;
   ValueNotifier<bool> bookMarkTapped = ValueNotifier<bool>(false);
-  VideoPlayerController? _currentController;
-  int currentPropertyindex = 0;
   Map<String, bool> fav = {};
-  var tapped_index;
   bool isPropertiesLoading = true;
   bool? isInternetAvailable;
   ApiCallResponse? listViewPropertiesResponse;
   List? properties;
   late FlickMultiManager flickMultiManager;
-  Map<String, VideoPlayerController> videocontrollerMap = {};
 
   @override
   void initState() {
@@ -397,7 +386,6 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                 ParamType.String),
                                           }.withoutNulls,
                                         );
-                                        //                              }
                                       },
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -461,7 +449,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                             propertiesItem,
                                                             r'''$.attributes.video_manifest_uri''',
                                                           ),
-                                                          flickMultiManager: flickMultiManager,//flickMultiManager,
+                                                          flickMultiManager: flickMultiManager,
                                                           image: getJsonField(
                                                             propertiesItem,
                                                             r'''$.attributes.video_poster_image''',

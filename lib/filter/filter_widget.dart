@@ -1,7 +1,6 @@
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
 import '../flutter_flow/custom_functions.dart';
@@ -16,8 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class FilterWidget extends StatefulWidget {
-  const FilterWidget({Key? key, this.homeScreenLength}) : super(key: key);
-  final int? homeScreenLength;
+  const FilterWidget({Key? key}) : super(key: key);
 
   @override
   _FilterWidgetState createState() => _FilterWidgetState();
@@ -246,7 +244,6 @@ class _FilterWidgetState extends State<FilterWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
           child: Builder(
             builder: (context) {
-              // Customize what your widget looks like when it's loading.
               if (isPropertiesLoading) {
                 return Center(
                   child: SizedBox(
@@ -790,9 +787,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 context.pushNamed(
                                   'filterResults',
                                   queryParams: {
-                                    'homeScreenLength': serializeParam(
-                                        widget.homeScreenLength ?? 0,
-                                        ParamType.int),
                                     'cityName': serializeParam(
                                         citiesListValue ??  FFLocalizations.of(context).getText(
                                           'all' /* All */,

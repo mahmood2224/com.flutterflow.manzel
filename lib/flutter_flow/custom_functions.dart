@@ -1,25 +1,11 @@
-import 'dart:convert';
-import 'dart:math' as math;
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:manzel/flutter_flow/flutter_flow_theme.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'flutter_flow_util.dart';
-import 'lat_lng.dart';
-import 'place.dart';
 import '../backend/backend.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 import 'package:sendbird_sdk/core/channel/group/group_channel.dart';
-import 'package:sendbird_sdk/sendbird_sdk.dart' as sendbird;
 
-//   Future<String> unreadMessage(channelUrl)  async {
-//
-//    return getUnreadMessage(channelUrl).toString();
-// }
 Future<String?> getUnreadMessage(String channelUrl) async {
   try {
     String channel_url = channelUrl.toString();
@@ -27,10 +13,6 @@ Future<String?> getUnreadMessage(String channelUrl) async {
     print(aChannel.unreadMessageCount);
     var channel = aChannel.unreadMessageCount.toString();
     return channel;
-
-// print("unread Messages ${unreadMessage}");
-//   return   unreadMessage.toString();
-
   } catch (error) {
     print("*********************************************************");
     print(error);
@@ -39,7 +21,6 @@ Future<String?> getUnreadMessage(String channelUrl) async {
 }
 
 bool checkPhoneNumberFormat(String? phoneNumber) {
-  // Add your function code here
   if (phoneNumber!.length < 9 || phoneNumber.length > 10) {
     return false;
   } else {
@@ -48,7 +29,6 @@ bool checkPhoneNumberFormat(String? phoneNumber) {
 }
 
 int calculate(String? builtIn) {
-  // convert date to age
   final now = DateTime.now();
   final difference = now.difference(DateTime.parse(builtIn!));
   final result = difference.inDays / 365.25;
@@ -82,13 +62,11 @@ String formatAmount(String? amount) {
 }
 
 double formattedDouble(int? maxRange) {
-  // Add your function code here!
   double value = maxRange!.toDouble();
   return value;
 }
 
 String formattedSliderOutput(double? rawSliderValue) {
-  // Add your function code here!
   double val = double.parse(rawSliderValue!.toStringAsFixed(0));
   String amount = val.toString();
   var format = NumberFormat('###,###', 'en_US');
@@ -97,14 +75,12 @@ String formattedSliderOutput(double? rawSliderValue) {
 }
 
 int sliderToApi(double? sliderValue) {
-  // Add your function code here!
   double val = double.parse(sliderValue!.toStringAsFixed(0));
   int res = val.toInt();
   return res;
 }
 
 String searchPagePropertyText(int? count) {
-  // Add your function code here!
   if (count! > 1) {
     return "${count.toString()} properties available";
   } else {
@@ -121,14 +97,12 @@ bool validateInstallmentRange(
   } else {
     return false;
   }
-  // Add your function code here!
 }
 
 List<String> cityListBuilder(
   List<String>? cityListApiResponse,
   String? locale,
 ) {
-  // Add your function code here!
   if (locale == "en") {
     var finalList = ["All"];
     finalList.addAll(cityListApiResponse!);
@@ -144,7 +118,6 @@ List<String> propertTypeBuilder(
   List<String>? propertyTypeApiResponse,
   String? locale,
 ) {
-  // Add your function code here!
   if (locale == "en") {
     var finalList = ["All"];
     finalList.addAll(propertyTypeApiResponse!);
@@ -190,11 +163,9 @@ List<String> filteredResultChioceChipsBuilder(
 String countJsonData(dynamic jsonResponse) {
   var len = jsonResponse.length;
   return len.toString();
-  // Add your function code here!
 }
 
 String listToApiParameters(List<String>? paramList) {
-  // Add your function code here!
   var param = paramList!.join(',');
   return param;
 }
@@ -203,7 +174,6 @@ bool propertyTypeCheckHouse(
   String? propertyType,
   String? locale,
 ) {
-  // Add your function code here!
   if (locale == "en") {
     if (propertyType == "House") {
       return true;
@@ -236,14 +206,12 @@ bool propertyTypeCheckApartment(
       return false;
     }
   }
-  // Add your function code here!
 }
 
 String noResultsCityName(
   String? cityName,
   String? locale,
 ) {
-  // Add your function code here!
   if (locale == "en") {
     return "No search results for “${cityName}”. Try a new search";
   } else {
@@ -264,7 +232,6 @@ bool isSimilarPropertyAvailable(List<dynamic> similarProperties) {
 }
 
 bool isPropertyAvailable(String? currentProprtyStatus) {
-  // Add your function code here!
   if (currentProprtyStatus == "Available") {
     return true;
   } else {
@@ -273,7 +240,6 @@ bool isPropertyAvailable(String? currentProprtyStatus) {
 }
 
 bool queryCollectionHasValue(List<OrdersRecord>? queryDocuments) {
-  // Add your function code here!
   if (queryDocuments!.length != 0) {
     return true;
   } else {
@@ -282,7 +248,6 @@ bool queryCollectionHasValue(List<OrdersRecord>? queryDocuments) {
 }
 
 int orderIdGenerator(int? randomNumber) {
-  // Add your function code here!
   String timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
   int randomNumberLength = randomNumber.toString().length;
   int requiredDigits = 10 - randomNumberLength;
@@ -296,7 +261,6 @@ String formatDateTime(
   int? inputTimeStamp,
   String? locale,
 ) {
-  // Add your function code here!
   if (locale == "en") {
     DateTime bookingTime =
         DateTime.fromMillisecondsSinceEpoch(inputTimeStamp! * 1000);
@@ -313,7 +277,6 @@ String formatDateTime(
 }
 
 String pastOfferScreenDateTime(int? inputDateTime) {
-  // Add your function code here!
   DateTime offerTime =
       DateTime.fromMillisecondsSinceEpoch(inputDateTime! * 1000);
   String formattedResult =
@@ -323,7 +286,6 @@ String pastOfferScreenDateTime(int? inputDateTime) {
 }
 
 bool pastOfferAcceptedStatusConditionalVisibilty(String? offerStatus) {
-  // Add your function code here!
   if (offerStatus == 'accepted') {
     return true;
   } else {
@@ -341,9 +303,7 @@ String offerScreenTime(
   } else {
     offerTime = DateTime.fromMillisecondsSinceEpoch(secondsTime! * 10000000);
   }
-  // Add your function code here!
   Duration diff = DateTime.now().difference(offerTime);
-  //int monthDiffrence = diff.i;
   int yearsAgo;
   int monthsAgo;
   int dayDiffrence = diff.inDays;
@@ -375,7 +335,6 @@ String offerScreenTime(
       return "${secondDiffence} sec ago";
     }
   } else {
-    //in arabic
     if (dayDiffrence > 0) {
       if ((dayDiffrence >= 365) && ((dayDiffrence % 365) > 0)) {
         yearsAgo = dayDiffrence % 365;
@@ -458,7 +417,6 @@ bool conditionalVisibility(
   if (apiResponseState == desiredWidgetState) {
     return true;
   } else {
-    // Add your function code here!
     return false;
   }
 }
@@ -467,7 +425,6 @@ List<String> choicechipUnselected(
   List<String>? choicechipValue,
   String? locale,
 ) {
-  // Add your function code here!
   if (choicechipValue!.length == 0) {
     if (locale == "en") {
       return ["All"];
@@ -484,7 +441,6 @@ String myPropertiesFormatDate(
   String? locale,
 ) {
   String today = "اليوم";
-  // Add your function code here!
   DateTime bookingTime;
   if (inputTimeStamp.toString().isEmpty||inputTimeStamp==null) {
     bookingTime = DateTime.now();
@@ -501,7 +457,6 @@ String myPropertiesFormatDate(
 }
 
 String offerScreenPropertyIdisNull(String? propertyId) {
-  // Add your function code here!
   if (propertyId != null && propertyId != "null") {
     return propertyId;
   } else {
@@ -510,7 +465,6 @@ String offerScreenPropertyIdisNull(String? propertyId) {
 }
 
 bool myPropertiesViewOffersVisibility(String? status) {
-  // Add your function code here!
   if (status == "cancelled" ||
       status == "completed" ||
       status == "offer_accepted" ||
@@ -525,7 +479,6 @@ bool myPropertiesViewOffersVisibility(String? status) {
 }
 
 bool cancelReverveButtonVisibility(String? bookingStatus) {
-  // Add your function code here!
   if (bookingStatus == "reserved" ||
       bookingStatus == "collect_offers" ||
       bookingStatus == "waiting_offer_acceptance") {
@@ -549,8 +502,6 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      // do something
-      break;
     case "collect_offers":
       if ((processStage == "reserved") && setType == "checked") {
         return true;
@@ -563,8 +514,6 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      // do something else
-      break;
     case "waiting_offer_acceptance":
       if ((processStage == "reserved" || processStage == "collect_offers") &&
           setType == "checked") {
@@ -580,7 +529,6 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      break;
     case "accepted":
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
@@ -598,8 +546,6 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      // do something else
-      break;
     case "offer_accepted":
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
@@ -617,8 +563,6 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      // do something else
-      break;
     case "ownership_transferred":
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
@@ -639,8 +583,6 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      // do something else
-      break;
     case "completed":
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
@@ -661,10 +603,7 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      // do something else
-      break;
     case "cancelled":
-      // do something else
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
               processStage == "cancelled") &&
@@ -678,9 +617,7 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      break;
     case "disqualified":
-      // do something else
       if ((processStage == "reserved" ||
               processStage == "collect_offers" ||
               processStage == "disqualified") &&
@@ -694,9 +631,7 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      break;
     case "expired":
-      // do something else
       if ((processStage == "reserved" || processStage == "expired") &&
           setType == "checked") {
         return true;
@@ -706,14 +641,12 @@ bool orderProcessStatus(
       } else {
         return false;
       }
-      break;
     default:
       if (setType == "unchecked") {
         return true;
       } else {
         return false;
       }
-      break;
   }
 }
 
@@ -721,7 +654,6 @@ bool offerStatusPaymentCompletedCheck(
   String? transactionId,
   String? status,
 ) {
-  // Add your function code here!
   if (transactionId != null && transactionId != "null") {
     return true;
   } else {
@@ -744,11 +676,9 @@ String myPropertiesBookedStatus(
   } else {
     return status!;
   }
-  // Add your function code here!
 }
 
 int bookinPagePropertyIdToInt(String? propertyId) {
-  // Add your function code here!
   if (propertyId == "null") {
     return 0;
   }
@@ -757,7 +687,6 @@ int bookinPagePropertyIdToInt(String? propertyId) {
 }
 
 bool chatButtonVisibility(String? status) {
-  // Add your function code here!
   if (status == "new") {
     return true;
   } else {
@@ -796,12 +725,10 @@ bool pastOfferColumnVisibility(
     }
   }
   return true;
-  // Add your function code here!
 }
 
 String bookingScreenCountOffers(List<dynamic> bankIds) {
   return bankIds.length.toString();
-  // Add your function code here!
 }
 
 bool offerScreenConitionalVisibilty(
@@ -817,7 +744,6 @@ bool offerScreenConitionalVisibilty(
   } else {
     return false;
   }
-  // Add your function code here!
 }
 
 bool bookingDeatilsViewOfferVisibilty(
@@ -836,7 +762,6 @@ bool bookingDeatilsViewOfferVisibilty(
   } else {
     return false;
   }
-  // Add your function code here!
 }
 
 String notificationsDateTime(
@@ -877,7 +802,6 @@ String notificationsDateTime(
 }
 
 String notificationBadgeCount(List<NotificationsRecord>? unreadNotifications) {
-  // Add your function code here!
   if (unreadNotifications!.isEmpty) {
     return '0';
   }
@@ -892,14 +816,12 @@ String emptyListWidgetTitle(
   switch (screenName) {
     case "homeScreen":
       {
-        // statements;
         if (locale == "en") {
           return "No properties avaiable";
         } else {
           return "لا توجد عقارات متاحة";
         }
       }
-      break;
 
     case "notifications":
       {
@@ -909,7 +831,6 @@ String emptyListWidgetTitle(
           return "لا توجد إشعارات حتى الآن";
         }
       }
-      break;
     case "cityList":
       {
         if (locale == "en") {
@@ -918,7 +839,6 @@ String emptyListWidgetTitle(
           return "لا توجد مدن متاحة حتى الان";
         }
       }
-      break;
     case "pastOffers":
       {
         if (locale == "en") {
@@ -927,7 +847,6 @@ String emptyListWidgetTitle(
           return "لا توجد عروض سابقة حتى الآن";
         }
       }
-      break;
     case "filterResult":
       {
         if (locale == "en") {
@@ -936,7 +855,6 @@ String emptyListWidgetTitle(
           return "لم يتم العثور على نتائج";
         }
       }
-      break;
     case "offers":
       {
         if (locale == "en") {
@@ -945,7 +863,6 @@ String emptyListWidgetTitle(
           return "لم تتم إضافة أي عروض حتى الآن";
         }
       }
-      break;
     case "bookedProperties":
       {
         if (locale == "en") {
@@ -954,7 +871,6 @@ String emptyListWidgetTitle(
           return "لا توجد عقارات محجوزة حتى الآن";
         }
       }
-      break;
     case "favorite":
       {
         if (locale == "en") {
@@ -963,7 +879,6 @@ String emptyListWidgetTitle(
           return "لا توجد عقارات مفضلة حتى الآن";
         }
       }
-      break;
 
     default:
       {
@@ -973,10 +888,8 @@ String emptyListWidgetTitle(
           return "تعذر جلب البيانات";
         }
       }
-      break;
   }
 
-  // Add your function code here!
 }
 
 String snackBarMessage(
@@ -1090,7 +1003,6 @@ String subTitleText(
 }
 
 String formatAmountWithoutDecimal(String? amount) {
-  // Add your function code here!
   if (amount == "null") {
     return '0';
   }
@@ -1153,11 +1065,9 @@ bool notificationConditionalVisibilty(
   } else {
     return false;
   }
-  // Add your function code here!
 }
 
 bool videoPlayerVisibilty(String? videoURL) {
-  // Add your function code here!
   if (videoURL?.isNotEmpty ?? false) {
     return true;
   } else {
@@ -1174,7 +1084,6 @@ bool requestButtonVisibilty(String? pincode) {
 }
 
 bool propertyStatusConditionalVisibilty(String? propertyStatus) {
-  // Add your function code here!
   if (propertyStatus == "Available") {
     return true;
   } else {
@@ -1183,7 +1092,6 @@ bool propertyStatusConditionalVisibilty(String? propertyStatus) {
 }
 
 String orderIdFormatter(String? orderId) {
-  // Add your function code here!
   return '#${orderId}';
 }
 
@@ -1195,7 +1103,6 @@ bool profileCompletetionCheck(
   String? income,
   String? loanCoverage,
 ) {
-  // Add your function code here!
   if ((isEmailValidFunction(email??'')) &&
       (isNameValidFunction(name??'')) &&
       (bank != null && bank.isNotEmpty) &&
@@ -1209,7 +1116,6 @@ bool profileCompletetionCheck(
 }
 
 bool sakaniLoan(String? chioceChipValue) {
-  // Add your function code here!
   if (chioceChipValue == 'Yes' || chioceChipValue == 'نعم') {
     return true;
   } else {
@@ -1221,7 +1127,6 @@ String sakaniLoanInitialValue(
   bool? loanCoverage,
   String? locale,
 ) {
-  // Add your function code here!
   if (locale == 'en') {
     if (loanCoverage == true) {
       return 'Yes';
@@ -1237,7 +1142,6 @@ String sakaniLoanInitialValue(
   }
 }
 
-//updated code
 String? editProfileDropDownInitalVal(
   List optionsList,
   String? id,
@@ -1264,7 +1168,6 @@ String? editProfileDropDownInitalVal(
     return null;
 }
 
-//updated code
 String? editProfileindexReturn(
   List optionsArray,
   String? selectedItem,
@@ -1297,7 +1200,6 @@ String? monthlyIncome(
   String? intialValue,
   String? locale,
 ) {
-  // Add your function code here!
   List<String> incomeEN = [
     '4,000 - 20,000 SAR',
     '21,000 - 50,000 SAR',
@@ -1336,7 +1238,6 @@ String? monthlyIncome(
 }
 
 bool depositReciptSnackBar(String? url) {
-  // Add your function code here!
   if (url == null || url.isEmpty || url == '') {
     return true;
   } else {
@@ -1370,14 +1271,12 @@ String bedroomsText(
   } else {
     return "Bedrooms";
   }
-  // Add your function code here!
 }
 
 String bathroomText(
   int? num,
   String? locale,
 ) {
-  // Add your function code here!
   if (locale!.isNotEmpty && num != null) {
     if (locale == 'en') {
       if (num == 1) {
@@ -1406,7 +1305,6 @@ String livingroomText(
   int? num,
   String? locale,
 ) {
-  // Add your function code here
   if (locale!.isNotEmpty && num != null) {
     if (locale == 'en') {
       if (num == 1) {
@@ -1435,7 +1333,6 @@ String intText(
   String? text,
   String? locale,
 ) {
-  // Add your function code here!
   if (locale!.isNotEmpty && text!.isNotEmpty) {
     if (locale == 'en') {
       final engRegex = RegExp(r'[^0-9].*', multiLine: true);
@@ -1456,7 +1353,6 @@ String agoTextDetailScreen(
   String? inputText,
   String? locale,
 ) {
-  // Add your function code here!
   if (locale!.isNotEmpty && inputText!.isNotEmpty) {
     if (locale == 'en') {
       final engRegex = RegExp(r'[^0-9].*', multiLine: true);
@@ -1478,7 +1374,6 @@ String resultText(
   String? count,
   String? locale,
 ) {
-  // Add your function code here!
   if (locale!.isNotEmpty && (count?.isNotEmpty ?? false)) {
     int results = int.parse(count ?? '0');
     if (locale == 'en') {
@@ -1506,7 +1401,6 @@ String resultText(
 }
 
 String intToString(int? num) {
-  // Add your function code here!
   if (num != null) {
     return num.toString();
   } else {
@@ -1524,7 +1418,6 @@ Future<bool> isInternetConnected() async {
 }
 
 void unAuthorizedUser(context,mounted) async {
- // Function() _navigate = () {};
  GoRouter.of(context).prepareAuthEvent();
   await signOut();
   FFAppState().authToken = '';
@@ -1545,11 +1438,6 @@ void unAuthorizedUser(context,mounted) async {
       backgroundColor: FlutterFlowTheme.of(context).primaryRed,
       ),
   );
-
- // _navigate = () =>
- //     context.goNamedAuth('Login', mounted);
- // _navigate();
-  //context.goNamed('Login', mounted);
 }
 
 

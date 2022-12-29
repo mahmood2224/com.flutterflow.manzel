@@ -10,7 +10,6 @@ import '../backend/backend.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:badges/badges.dart';
@@ -324,10 +323,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                           logFirebaseEvent('Text_Navigate-To');
                           context.pushNamed(
                             'WhereAreYouLooking',
-                            queryParams: {
-                              'homeScreenLength': serializeParam(
-                                  videoPlayers.length, ParamType.int),
-                            }.withoutNulls,
                             extra: <String, dynamic>{
                               kTransitionInfoKey: TransitionInfo(
                                 hasTransition: true,
@@ -443,12 +438,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                             'Container_Navigate-To');
                                         context.pushNamed(
                                           'Filter',
-                                          queryParams: {
-                                            'homeScreenLength':
-                                                serializeParam(
-                                                    videoPlayers.length,
-                                                    ParamType.int),
-                                          }.withoutNulls,
                                           extra: <String, dynamic>{
                                             kTransitionInfoKey:
                                                 TransitionInfo(
