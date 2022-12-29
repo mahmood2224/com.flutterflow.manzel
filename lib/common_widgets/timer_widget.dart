@@ -51,7 +51,6 @@ class _TimerWidgetState extends State<TimerWidget> {
     String strDigits(int n) => n.toString().padLeft(2, '0');
     final minutes = strDigits(start!.inMinutes.remainder(60));
     final seconds = strDigits(start!.inSeconds.remainder(60));
-    //return Text('Resend OTP${minutes.toString()}:${seconds.toString()}',style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Theme.of(context).primaryColor,fontWeight: FontWeight.w700),);
     return RichText(
       text: TextSpan(
         text: FFLocalizations.of(context).getText(
