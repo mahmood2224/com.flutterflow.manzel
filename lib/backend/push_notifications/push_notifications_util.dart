@@ -1,15 +1,9 @@
 import 'dart:io' show Platform;
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'serialization_util.dart';
 import '../../auth/auth_util.dart';
 import '../cloud_functions/cloud_functions.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 export 'push_notifications_handler.dart';
 export 'serialization_util.dart';
 

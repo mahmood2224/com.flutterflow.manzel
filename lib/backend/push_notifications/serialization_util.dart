@@ -1,11 +1,7 @@
 import 'dart:convert';
-
 import 'package:built_value/built_value.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../../backend/backend.dart';
-import '../../flutter_flow/lat_lng.dart';
 import '../../flutter_flow/place.dart';
 
 /// SERIALIZATION HELPERS

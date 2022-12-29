@@ -1,14 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'serialization_util.dart';
-import '../backend.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-
 import '../../index.dart';
 import '../../main.dart';
 
@@ -42,7 +37,6 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
     setState(() => _loading = true);
     try {
       final initialPageName = message.data['initialPageName'] as String;
-      //final initialParameterData = getInitialParameterData(message.data);
       final initialParameterData = message.data;
       final pageBuilder = pageBuilderMap[initialPageName];
       if (pageBuilder != null) {

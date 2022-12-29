@@ -1,9 +1,5 @@
-import 'package:built_value/serializer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../flutter_flow/flutter_flow_util.dart';
-
 import 'schema/user_record.dart';
 import 'schema/orders_record.dart';
 import 'schema/user_properties_record.dart';
@@ -14,12 +10,10 @@ import 'schema/saved_properties_record.dart';
 import 'schema/notifications_record.dart';
 import 'schema/users_device_token_record.dart';
 import 'schema/serializers.dart';
-
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'schema/index.dart';
 export 'schema/serializers.dart';
-
 export 'schema/user_record.dart';
 export 'schema/orders_record.dart';
 export 'schema/user_properties_record.dart';
