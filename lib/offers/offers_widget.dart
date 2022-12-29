@@ -2,12 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
-import 'package:manzel/flutter_flow/flutter_flow_timer.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:sendbird_sdk/constant/enums.dart';
 import 'package:sendbird_sdk/query/channel_list/group_channel_list_query.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
-
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
@@ -15,24 +12,16 @@ import '../components/no_result_widget.dart';
 import '../components/something_went_wrong_widget.dart';
 import '../enviorment/env_variables.dart';
 import '../flutter_flow/custom_functions.dart';
-import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-//import 'packnt_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sendbird_sdk/core/channel/group/group_channel.dart';
 import 'package:sendbird_sdk/sendbird_sdk.dart' as sendbird;
-
-//import 'package:sendbird_sdk/sendbird_sdk.dart';
-import 'package:uuid/uuid.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 class OffersWidget extends StatefulWidget {
@@ -72,8 +61,6 @@ class _OffersWidgetState extends State<OffersWidget> {
 
   Future<List<GroupChannel>?> getUnreadMessage() async {
     try {
-      //String channel_url = channelUrl.toString();
-      //final aChannel = await GroupChannel.getChannel(channel_url);
       final query = GroupChannelListQuery()
         ..userIdsIncludeIn = [currentUserUid]
         ..order = GroupChannelListOrder.chronological;
@@ -82,14 +69,6 @@ class _OffersWidgetState extends State<OffersWidget> {
         channels[element.channelUrl.toString()] =
             element.unreadMessageCount.toString();
       });
-      // print(aChannel.unreadMessageCount);
-      // var channel = aChannel.unreadMessageCount.toString();
-      // unreadMsg.value = channel;
-      // return channel;
-
-// print("unread Messages ${unreadMessage}");
-//   return   unreadMessage.toString();
-
     } catch (error) {
       print("*********************************************************");
       print(error);
@@ -110,15 +89,11 @@ class _OffersWidgetState extends State<OffersWidget> {
   @override
   void initState() {
     super.initState();
-
-    // On page load action.
-    // inAppReview.openStoreListing(appStoreId: '1630341481');
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (isInternetAvailable ?? false) {
         final _sendbird = await sendbird.SendbirdSdk(
             appId: "${EnvVariables.instance.sendbirdAppId}");
         final _ = await _sendbird.connect(currentUserUid);
-        // Future.delayed(Duration(seconds: 5));
         final _user = asChatUiUser(sendbird.SendbirdSdk().currentUser!);
         getUnreadMessage();
       }
@@ -460,8 +435,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                   ),
                                 Builder(
                                   builder: (context) {
-                                    // final activeOffers =
-                                    // getOfferResponse!.jsonBody["result"].toList();
                                     if (activeOffers?.isEmpty ?? false) {
                                       return Center(
                                         child: Container(
@@ -1177,7 +1150,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                           milliSecondsToDay(
                                                                               value);
                                                                       return Column(
-                                                                        //mainAxisAlignment: MainAxisAlignment.center,
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.center,
                                                                         mainAxisSize:
@@ -2128,12 +2100,8 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                           backgroundColor: FlutterFlowTheme.of(context).primaryGreen,
                                                                                         ),
                                                                                       );
-                                                                                      // Future.delayed(const Duration(seconds: 5), () {
                                                                                       if (mounted)
-                                                                                        //  setState(() {});
                                                                                         getOffersCall();
-
-                                                                                      // });
                                                                                       isLoading.value = false;
                                                                                       if (await inAppReview.isAvailable()) {
                                                                                         Future.delayed(const Duration(seconds: 2), () {
@@ -2236,7 +2204,6 @@ class _OffersWidgetState extends State<OffersWidget> {
                                                                                   }
                                                                                 }
                                                                                 if (mounted)
-                                                                                  //setState(() {});
                                                                                   getOffersCall();
                                                                               }
                                                                             },
@@ -2437,22 +2404,6 @@ class _OffersWidgetState extends State<OffersWidget> {
       ),
     );
   }
-
-//   Future waitForApiRequestCompleter({
-//     double minWait = 0,
-//     double maxWait = double.infinity,
-//   }) async {
-//     final stopwatch = Stopwatch()..start();
-//     while (true) {
-//       await Future.delayed(Duration(milliseconds: 50));
-//       final timeElapsed = stopwatch.elapsedMilliseconds;
-//       final requestComplete = _apiRequestCompleter?.isCompleted ?? false;
-//       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-//         break;
-//       }
-//     }
-//   }
-
   @override
   void dispose() {
     super.dispose();
