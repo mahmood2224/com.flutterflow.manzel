@@ -84,7 +84,6 @@ class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 child:FlickVideoPlayer(
@@ -97,18 +96,6 @@ class _PropertyVideoWidgetState extends State<PropertyVideoWidget> {
                     controls: FlickLandscapeControls(),
                   ),
                 ),
-                // FlutterFlowVideoPlayer(
-                //   path: widget.videoURL!,
-                //   videoType: VideoType.network,
-                //   width: double.infinity,
-                //   height: MediaQuery.of(context).size.height * 0.85,
-                //   autoPlay: true,
-                //   looping: true,
-                //   showControls: true,
-                //   allowFullScreen: true,
-                //   allowPlaybackSpeedMenu: false,
-                //   isFromPropertyDetail: true,
-                // ),
               ),
             ],
           ),
