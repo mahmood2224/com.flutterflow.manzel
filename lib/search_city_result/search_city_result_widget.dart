@@ -3,8 +3,6 @@ import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/multi_video_player/feed_player/multi_manager/flick_multi_manager.dart';
 import 'package:manzel/multi_video_player/feed_player/multi_manager/flick_multi_player.dart';
-import 'package:video_player/video_player.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
@@ -12,15 +10,11 @@ import '../components/no_results_found_widget.dart';
 import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_video_player.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:manzel/app_state.dart' as globalVar;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SearchCityResultWidget extends StatefulWidget {
@@ -44,24 +38,15 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
   ApiCallResponse? listViewPropertiesResponse;
   PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  int _currentItem = 0;
   bool isPaused = false;
   ValueNotifier<bool> isMuted = ValueNotifier<bool>(true);
   bool? autoplayVal;
   Map<String, bool> fav = {};
-  var tapped_index;
   ValueNotifier<bool> bookMarkTapped = ValueNotifier<bool>(false);
-
-  //FlickMultiManager flickMultiManager;
-  Set<VideoPlayerController>? videoControllerSet;
-
-  VideoPlayerController? _currentController;
   int currentPropertyindex = 0;
   bool? isInternetAvailable;
   bool isLoading = true;
   List? properties;
-
-  Map<String, VideoPlayerController> videocontrollerMap = {};
   late FlickMultiManager flickMultiManager;
 
 
@@ -307,7 +292,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                       flickMultiManager.pause();
                                       logFirebaseEvent(
                                           'FILTER_RESULTS_PAGE_propertyCard_ON_TAP');
-                                      // propertyDetails
                                       logFirebaseEvent(
                                           'propertyCard_propertyDetails');
 
@@ -330,7 +314,6 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                               ParamType.String),
                                         }.withoutNulls,
                                       );
-                                      //                              }
                                     },
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
@@ -391,7 +374,7 @@ class _SearchCityResultWidgetState extends State<SearchCityResultWidget> {
                                                           propertiesItem,
                                                           r'''$.attributes.video_manifest_uri''',
                                                         ),
-                                                        flickMultiManager: flickMultiManager,//flickMultiManager,
+                                                        flickMultiManager: flickMultiManager,
                                                         image: getJsonField(
                                                           propertiesItem,
                                                           r'''$.attributes.video_poster_image''',
