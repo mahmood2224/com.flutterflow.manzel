@@ -96,12 +96,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => OnboardingViewWidget(),
             ),
             FFRoute(
-              name: 'ConfirmOTP',
-              path: 'confirmOTP',
-              builder: (context, params) => ConfirmOTPWidget(
-              ),
-            ),
-            FFRoute(
               name: 'Profile',
               path: 'profile',
               builder: (context, params) => params.isEmpty
@@ -112,11 +106,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'AddingInformation',
               path: 'addingInformation',
               builder: (context, params) => AddingInformationWidget(),
-            ),
-            FFRoute(
-              name: 'TermsConditions',
-              path: 'termsConditions',
-              builder: (context, params) => TermsConditionsWidget(),
             ),
             FFRoute(
               name: 'EditPersonallInfo',
@@ -142,12 +131,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                           params.getParam('isFromUpdate', ParamType.String),
                       verificationKey:  params.getParam('verificationKey', ParamType.String),
               ),
-            ),
-
-            FFRoute(
-              name: 'HelpAndSupport',
-              path: 'helpAndSupport',
-              builder: (context, params) => HelpAndSupportWidget(),
             ),
             FFRoute(
               name: 'HomeScreen',
@@ -271,13 +254,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'ReservationConfirmation',
-              path: 'reservationConfirmation',
-              builder: (context, params) => ReservationConfirmationWidget(
-                propertyId: params.getParam('propertyId', ParamType.int),
-              ),
-            ),
-            FFRoute(
               name: 'Confirmation',
               path: 'confirmation',
               builder: (context, params) => ConfirmationWidget(
@@ -292,44 +268,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'bankDetails',
-              path: 'bankDetails',
-              builder: (context, params) => BankDetailsWidget(
-                bankId: params.getParam('bankId', ParamType.int),
-                propertyId: params.getParam('propertyId', ParamType.int),
-              ),
-            ),
-            FFRoute(
               name: 'OrderDetails',
               path: 'orderDetails',
               builder: (context, params) => OrderDetailsWidget(
                 propertId: params.getParam('propertId', ParamType.int),
               ),
-            ),
-            FFRoute(
-              name: 'AddCardDetails',
-              path: 'addCardDetails',
-              builder: (context, params) => AddCardDetailsWidget(),
-            ),
-            FFRoute(
-              name: 'KYC',
-              path: 'kyc',
-              builder: (context, params) => KycWidget(),
-            ),
-            FFRoute(
-              name: 'AbsherVerification',
-              path: 'absherVerification',
-              builder: (context, params) => AbsherVerificationWidget(),
-            ),
-            FFRoute(
-              name: 'ConfirmAbsher',
-              path: 'confirmAbsher',
-              builder: (context, params) => ConfirmAbsherWidget(),
-            ),
-            FFRoute(
-              name: 'PersonalEmploymentDetails',
-              path: 'personalEmploymentDetails',
-              builder: (context, params) => PersonalEmploymentDetailsWidget(),
             ),
             FFRoute(
               name: 'Chat',
@@ -345,16 +288,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 orderId: params.getParam('orderId', ParamType.String),
               ),
             ),
-
-            FFRoute(
-              name: 'depositeRecipt',
-              path: 'depositeRecipt',
-              builder: (context, params) => DepositeReciptWidget(
-                depositeRecpit:
-                    params.getParam('depositeRecpit', ParamType.String),
-                propertyName: params.getParam('propertyName', ParamType.String),
-              ),
-            )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
       ],

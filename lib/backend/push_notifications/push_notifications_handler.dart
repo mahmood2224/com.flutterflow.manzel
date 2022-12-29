@@ -81,16 +81,13 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
 final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
   'Login': (data) async => LoginWidget(),
   'OnboardingView': (data) async => OnboardingViewWidget(),
-  'ConfirmOTP': (data) async => ConfirmOTPWidget(),
   'Profile': (data) async => NavBarPage(initialPage: 'Profile'),
   'AddingInformation': (data) async => AddingInformationWidget(),
-  'TermsConditions': (data) async => TermsConditionsWidget(),
   'EditPersonallInfo': (data) async => EditPersonallInfoWidget(
         screenName: getParameter(data, 'screenName'),
       ),
   'EditMobileNumber': (data) async => EditMobileNumberWidget(),
   'ConfirmNewNumberOTP': (data) async => ConfirmNewNumberOTPWidget(),
-  'HelpAndSupport': (data) async => HelpAndSupportWidget(),
   'Notifications': (data) async => NotificationsWidget(),
   'Offers': (data) async => hasMatchingParameters(data, {'propertyId'})
       ? OffersWidget(
@@ -130,36 +127,20 @@ final pageBuilderMap = <String, Future<Widget> Function(Map<String, dynamic>)>{
         cityName: getParameter(data, 'cityName'),
         propertiesAvailable: getParameter(data, 'propertiesAvailable'),
       ),
-  'ReservationConfirmation': (data) async => ReservationConfirmationWidget(
-        propertyId: getParameter(data, 'propertyId'),
-      ),
   'Confirmation': (data) async => ConfirmationWidget(
         propertyId: getParameter(data, 'propertyId'),
         paymentMethod: getParameter(data, 'paymentMethod'),
         orderId: getParameter(data, 'orderId'),
         transactionId: getParameter(data, 'transactionId'),
       ),
-  'bankDetails': (data) async => BankDetailsWidget(
-        bankId: getParameter(data, 'bankId'),
-        propertyId: getParameter(data, 'propertyId'),
-      ),
   'OrderDetails': (data) async => OrderDetailsWidget(
         propertId: getParameter(data, 'propertId'),
       ),
-  'AddCardDetails': (data) async => AddCardDetailsWidget(),
-  'KYC': (data) async => KycWidget(),
-  'AbsherVerification': (data) async => AbsherVerificationWidget(),
-  'ConfirmAbsher': (data) async => ConfirmAbsherWidget(),
-  'PersonalEmploymentDetails': (data) async =>
-      PersonalEmploymentDetailsWidget(),
   'Chat': (data) async => ChatWidget(
         bankJson: getParameter(data, 'bankJson'),
       ),
   'BookingDetails': (data) async => BookingDetailsWidget(
         orderId: getParameter(data, 'orderId'),
-      ),
-  'depositeRecipt': (data) async => DepositeReciptWidget(
-        depositeRecpit: getParameter(data, 'depositeRecpit'),
       ),
 };
 
