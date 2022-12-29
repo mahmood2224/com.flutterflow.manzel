@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
-import 'package:manzel/multi_video_player/flick_auto_hide_child.dart';
 import 'package:provider/provider.dart';
 import './multi_manager/flick_multi_manager.dart';
 
@@ -35,8 +34,6 @@ class _FeedPlayerPortraitControlsState extends State<FeedPlayerPortraitControls>
               child: Container(
                 height: 50,
                 width: 50,
-                // constraints:
-                // BoxConstraints(minWidth: 50, maxWidth: 50),
                 decoration: BoxDecoration(
                   color:
                       Colors.black.withOpacity(1.0),
@@ -46,8 +43,6 @@ class _FeedPlayerPortraitControlsState extends State<FeedPlayerPortraitControls>
                   Icons.play_arrow_rounded,
                   color:
                       Colors.white.withOpacity(1.0),
-                     // :
-                    //Colors.white.withOpacity(0.0),
                   size: 40,
                 ),
               ),

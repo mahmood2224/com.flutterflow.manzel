@@ -66,18 +66,6 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    // Positioned(
-                    //   right: 5,
-                    //   top: 10,
-                    //   child: Container(
-                    //     width: 20,
-                    //     height: 20,
-                    //     child: CircularProgressIndicator(
-                    //       backgroundColor: Colors.white,
-                    //       strokeWidth: 4,
-                    //     ),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),

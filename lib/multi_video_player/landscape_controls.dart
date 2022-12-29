@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:manzel/multi_video_player/data_manager.dart';
-import 'package:manzel/multi_video_player/flick_auto_hide_child.dart';
 import 'package:provider/provider.dart';
 
 class AnimationPlayerLandscapeControls extends StatelessWidget {
