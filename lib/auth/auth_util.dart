@@ -1,14 +1,9 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:manzel/backend/api_requests/api_calls.dart';
-import '../flutter_flow/flutter_flow_util.dart';
-
 import '../backend/backend.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'firebase_user_provider.dart';
-
 export 'anonymous_auth.dart';
 export 'apple_auth.dart';
 export 'email_auth.dart';
@@ -141,10 +136,6 @@ Future resendOtpFromFirebse({
       // If you've implemented auto-verification, navigate to home page or
       // onboarding page here manually. Uncomment the lines below and replace
       // DestinationPage() with the desired widget.
-      // await Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (_) => DestinationPage()),
-      // );
     },
     verificationFailed: (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
