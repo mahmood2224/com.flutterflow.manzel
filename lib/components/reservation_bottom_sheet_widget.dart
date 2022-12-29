@@ -16,7 +16,6 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ReservationBottomSheetWidget extends StatefulWidget {
   const ReservationBottomSheetWidget({
@@ -61,7 +60,7 @@ class _ReservationBottomSheetWidgetState
               lastName: "",
               metaData: null),
           paymentItems: <PaymentItem>[],
-          // // List of taxes
+           // List of taxes
           taxes: [],
           // List of shippnig
           shippings: [],
@@ -107,7 +106,6 @@ class _ReservationBottomSheetWidgetState
     if (!mounted) return;
 
     setState(() {
-      //   tapSDKResult = {};
     });
   }
 
@@ -120,12 +118,6 @@ class _ReservationBottomSheetWidgetState
     print('>>>> ${tapSDKResult!['sdk_result']}');
     switch (tapSDKResult!['sdk_result']) {
       case "SUCCESS":
-      // sdkStatus = "SUCCESS";
-      // handleSDKResult();
-      // context.pushNamed(
-      //   'Confirmation',
-      //   queryParams: query
-      // );
       logFirebaseEvent('purchase');
         transactionApiResponse = await AddTransactionCall.call(
           amountPaid: widget.reservationCost.toString(),
@@ -191,8 +183,6 @@ class _ReservationBottomSheetWidgetState
           authorazationToken: FFAppState().authToken,
           version: FFAppState().apiVersion
         );
-        // if (((transactionApiResponse?.statusCode ?? 200)) ==
-        //     200) {
         Navigator.pop(context,true);
         logFirebaseEvent('Button_Navigate-To');
         context.goNamed(
@@ -210,7 +200,6 @@ class _ReservationBottomSheetWidgetState
           }.withoutNulls,
         );
         entry!.remove();
-   // }
           break;
         case "SDK_ERROR":
           print('sdk error............');
@@ -218,9 +207,6 @@ class _ReservationBottomSheetWidgetState
           print(tapSDKResult!['sdk_error_message']);
           print(tapSDKResult!['sdk_error_description']);
           print('sdk error............');
-          // sdkErrorCode = tapSDKResult['sdk_error_code'].toString();
-          // sdkErrorMessage = tapSDKResult['sdk_error_message'];
-          // sdkErrorDescription = tapSDKResult['sdk_error_description'];
           Navigator.pop(context,true);
           logFirebaseEvent('Button_Show-Snack-Bar');
           ScaffoldMessenger.of(context).showSnackBar(
@@ -241,7 +227,6 @@ class _ReservationBottomSheetWidgetState
           break;
 
         case "NOT_IMPLEMENTED":
-        //  sdkStatus = "NOT_IMPLEMENTED";
           Navigator.pop(context);
           logFirebaseEvent('Button_Show-Snack-Bar');
           ScaffoldMessenger.of(context).showSnackBar(
@@ -636,7 +621,6 @@ class _ReservationBottomSheetWidgetState
                   limit: 2,
                 ),
                 builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
                   if (!snapshot.hasData) {
                     return Center(
                       child: SizedBox(

@@ -1,6 +1,5 @@
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:flutter/services.dart';
-
 import '../auth/auth_util.dart';
 import '../auth/firebase_user_provider.dart';
 import '../backend/backend.dart';
@@ -8,10 +7,7 @@ import '../common_alert_dialog/common_alert_dialog.dart';
 import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HelpAndSupportBottomSheetWidget extends StatefulWidget {
   const HelpAndSupportBottomSheetWidget({Key? key}) : super(key: key);
@@ -117,7 +113,6 @@ class _HelpAndSupportBottomSheetWidgetState
                               await Clipboard.setData(
                                       ClipboardData(text: "Support@manzel.app"))
                                   .then((_) {
-                               // Navigator.pop(context);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content: Text(FFAppState().locale ==
@@ -125,7 +120,6 @@ class _HelpAndSupportBottomSheetWidgetState
                                             ? 'Copied to your clipboard !'
                                             : 'نسخ إلى الحافظة الخاصة بك')));
                               });
-                              // copied successfully
                             },
                             child: Text(
                               FFLocalizations.of(context).getText(
