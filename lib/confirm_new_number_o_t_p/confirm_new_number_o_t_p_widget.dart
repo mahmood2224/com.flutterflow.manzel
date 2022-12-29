@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:manzel/backend/api_requests/api_calls.dart';
 import 'package:manzel/backend/backend.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
@@ -13,14 +12,9 @@ import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:pinput/pinput.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart' as material;
-
 import '../notification_handler/firebase_cloud_messaging.dart';
 
 class ConfirmNewNumberOTPWidget extends StatefulWidget {
@@ -42,7 +36,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
   int _otpResendTimes = 3;
   bool? isFromUpdate;
   final ValueNotifier<bool> _showResendOtp = ValueNotifier(false);
-  String _phoneAuthVerificationCode = '';
   ValueNotifier<String> _showOtpError = ValueNotifier('');
   final scaffoldKey = GlobalKey<ScaffoldState>();
   OverlayEntry? entry;
@@ -70,7 +63,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
           unAuthorizedUser(context,mounted);
         }
         veriKey = OtpCalls.generateKey(generateOtpResponse.jsonBody);
-        // setState(() {});
       }
     }
   }
@@ -126,9 +118,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
             }else{
               context.goNamed('Login');
             }
-
-
-           // context.pop();
           },
         ),
         actions: [],
@@ -319,8 +308,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                       'AddingInformation', mounted);
                                                 } else {
                                                   context.go('/');
-                                                  // context.goNamedAuth(
-                                                  //     'HomeScreen', mounted);
                                                 }
                                               }  else {
                                                    await showDialog(
@@ -361,8 +348,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                           }
                                         });
                                       }
-                                      // context.goNamedAuth(
-                                      //     'HomeScreen', mounted);
                                     } on FirebaseAuthException catch (e) {
                                       switch (e.code) {
                                         case "invalid-custom-token":
@@ -380,7 +365,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                   } else if (verifyOtpResponse.statusCode ==
                                       403) {
                                     unAuthorizedUser(context,mounted);
-                                    // context.goNamedAuth('Login', mounted);
                                   }
                                   else{
                                     if (userCredential == null) {
@@ -390,11 +374,6 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     }
                                   }
                                   entry?.remove();
-                                  // if (userCredential == null) {
-                                  //   _showOtpError.value =
-                                  //       "You entered OTP incorrect";
-                                  //   return;
-                                  // }
                                 }
                               },
                               autofocus: true,
