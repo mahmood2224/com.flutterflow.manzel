@@ -8,26 +8,17 @@ import '../auth/firebase_user_provider.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
-import '../components/no_result_widget.dart';
-import 'package:manzel/app_state.dart' as globalVar;
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_video_player.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
-import 'package:visibility_detector/visibility_detector.dart';
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:app_settings/app_settings.dart';
-
-import '../flutter_flow/flutter_flow_widgets.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   const HomeScreenWidget({
@@ -51,34 +42,17 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   Completer<ApiCallResponse>? _apiRequestCompleter;
   PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  int _currentItem = 0;
-  var tapped_index;
   Map<String, bool> favourites = {};
   ValueNotifier<bool> bookMarkTapped = ValueNotifier<bool>(false);
   bool isPaused = false;
   bool? autoplayVal;
   List<VideoPlayerController> homeScreenPlayers = [];
   ValueNotifier<bool> isMuted = ValueNotifier<bool>(true);
-
-  //ValueNotifier<bool> isPaused = ValueNotifier<bool>(false);
-
-  //FlickMultiManager flickMultiManager;
-  Set<VideoPlayerController>? videoControllerSet;
   ApiCallResponse? apiData;
-
-  VideoPlayerController? _currentController;
-  int currentPropertyindex = 0;
   String? res;
-  Map<String, VideoPlayerController> videocontrollerMap = {};
   ScrollController controller = ScrollController();
-
   static const _pageSize = 6;
-
-  // final PagingController<int, dynamic> _pagingController =
-  //     PagingController(firstPageKey: 0);
-
   bool? isInternetAvailable;
-
   late FlickMultiManager flickMultiManager;
   List propertyListData=[];
   int pageNumber=1;
@@ -91,12 +65,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   @override
   void initState() {
     super.initState();
-    // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('view_item_list');
       logFirebaseEvent('HOME_SCREEN_PAGE_HomeScreen_ON_PAGE_LOAD');
       logFirebaseEvent('HomeScreen_Set-App-Language');
-     // setAppLanguage(context, await FFAppState().locale);
       await Future.delayed(const Duration(milliseconds: 0), () {
         if(mounted)
         setAppLanguage(context, FFAppState().locale);
@@ -142,12 +114,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   watchRouteChange() {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (mounted && !GoRouter.of(context).location.contains("fav")) {
-        // Here you check for some changes in your route that indicate you are no longer on the page you have pushed before
-        // do something
         favourites = FavouriteList.instance.favourite;
-        // if (mounted) {
-        //   setState(() {});
-        // }
         GoRouter.of(context)
             .removeListener(watchRouteChange); // remove listener
       }
@@ -173,9 +140,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     try {
       bool isInternetAvailable = await isInternetConnected();
       if (isInternetAvailable) {
-        // if (loggedIn&&pageNumber==1) {
-        //    callBookmarkListApi();
-        // }
         if(pageNumber==1)
           isVideoListLoaded= false;
         final apiResponse = await PropertiesCall.call(
@@ -196,14 +160,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         if (isLastPage) {
           propertyListData.addAll(listData);
           setState((){});
-         // _pagingController.appendLastPage(newItems);
         } else {
-          // 3.1 Use this for offset based pagination
-          // final nextPageKey = pageKey + newItems.length;
-          // 3.2 Use this for page based pagination
           propertyListData.addAll(listData);
           setState((){});
-        //  _pagingController.appendPage(newItems, nextPageKey);
         }
       } else {
         showDialog(
@@ -216,7 +175,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         );
       }
     } catch (error) {
-      //_pagingController.error = error;
     }
   }
 
@@ -288,7 +246,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                         .where('is_read', isEqualTo: 0),
                               ),
                               builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {
                                   return Container(
                                     child: Icon(
@@ -584,7 +541,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         GoRouter.of(context).addListener(() {
                           watchRouteChange();
                         });
-                        //         }
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -619,13 +575,12 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                           propertyListData[index],
                                           r'''$.attributes.video_manifest_uri''',
                                         ),
-                                        flickMultiManager: flickMultiManager,//flickMultiManager,
+                                        flickMultiManager: flickMultiManager,
                                         image: getJsonField(
                                           propertyListData[index],
                                           r'''$.attributes.video_poster_image''',
                                         ),
                                       ),
-                                      //),
                                     ),
                                   ),
 
@@ -742,10 +697,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       );
                                     },
                                   ),
-
-
-
-                                ///************************ bookmark icon button on video player*******************************
                                 ValueListenableBuilder(
                                     valueListenable:bookMarkTapped,
                                     builder: (context,value,child) {
@@ -856,67 +807,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                       );
                                     }
                                 ),
-
-                                // Align(
-                                //   alignment: AlignmentDirectional(1, -0.95),
-                                //   child: Padding(
-                                //       padding: EdgeInsetsDirectional.fromSTEB(
-                                //           0, 12, 15, 0),
-                                //       child: InkWell(
-                                //           onTap: () async {
-                                //             propertyListData[index]['isBookmarked']=!propertyListData[index]['isBookmarked'];
-                                //             setState((){});
-                                //             // bookMarkTapped.value = true;
-                                //             logFirebaseEvent('add_to_wishlist');
-                                //             logFirebaseEvent('HOME_SCREEN_Container_jprwonvd_ON_TAP');
-                                //             if (loggedIn){
-                                //               final bookmarkApiResponse = await BookmarkPropertyCall.call(userId: currentUserUid,
-                                //                   authorazationToken: FFAppState().authToken,
-                                //                   propertyId: valueOrDefault<String>(getJsonField(propertyListData[index], r'''$.id''',).toString(), '0',),
-                                //                   version: FFAppState().apiVersion);
-                                //               if ((bookmarkApiResponse.statusCode) == 200) {
-                                //                 if (propertyListData[index]['isBookmarked']){
-                                //                   favourites.remove(propertyListData[index]["id"].toString());
-                                //                   propertyListData[index]["isBookmarked"] = false;
-                                //                   setState((){});
-                                //                   //    propertyListData[index]["isBookmarked"] = false;
-                                //                   //  setState((){});
-                                //                   //  bookMarkTapped.value = false;
-                                //                 }else{
-                                //                   favourites[propertyListData[index]['id'].toString()] = true;
-                                //                   propertyListData[index]["isBookmarked"] = true;
-                                //                   setState((){});
-                                //                   // bookMarkTapped.value = true;
-                                //                 }
-                                //
-                                //               }
-                                //             }else{
-                                //               context
-                                //                   .pushNamed('Login');
-                                //             }
-                                //           },
-                                //           child: Container(
-                                //             width: 50,
-                                //             height: 50,
-                                //             decoration: BoxDecoration(
-                                //               color:  propertyListData[index][
-                                //               "isBookmarked"]
-                                //                   ? Color(0x4DFF0000)
-                                //                   : Color(0x4D000000),
-                                //               shape: BoxShape.circle,
-                                //             ),
-                                //             child: Icon(
-                                //               Manzel.favourite,
-                                //               color: Colors.white,
-                                //               size: 20,
-                                //             ),
-                                //           ))
-                                //   ),
-                                // ),
-
-
-
-
                                 Align(
                                   alignment: AlignmentDirectional(-0.9, 1),
                                   child: Padding(
@@ -1160,7 +1050,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                     ),
                                   ],
                                 ),
-                                // Generated code for this Row Widget...
                                 Builder(
                                   builder: (context) {
                                     final banks = getJsonField(
@@ -1356,30 +1245,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         ],
                       ),
                     ),
-                    //),
-                    //  },
 
-                    // );
-                    //  },
-                  );
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                          height: 400,
-                          margin: EdgeInsets.all(2),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child:
-                            FlickMultiPlayer(
-                              url: propertyListData[index]['attributes']['video_manifest_uri'],
-                              flickMultiManager: flickMultiManager,
-                              image:  '',
-                            ),
-                          )),
-                      Text('Testing Video Playes', style: TextStyle(fontSize: 20),)
-                    ],
                   );
                 },
               ),
