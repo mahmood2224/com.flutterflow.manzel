@@ -46,6 +46,10 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
       final initialParameterData = message.data;
       final pageBuilder = pageBuilderMap[initialPageName];
       if (pageBuilder != null) {
+        await Future.delayed(const Duration(milliseconds: 0), () {
+          if(mounted)
+            setAppLanguage(context, FFAppState().locale);
+        });
         final page = await pageBuilder(initialParameterData);
         if(Navigator.canPop(context)){
           Navigator.pop(context);
