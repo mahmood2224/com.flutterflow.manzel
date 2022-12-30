@@ -2,7 +2,6 @@ import 'package:manzel/common_alert_dialog/common_alert_dialog.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/components/something_went_wrong_widget.dart';
 import 'package:manzel/flutter_flow/custom_functions.dart';
-
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/cancel_reserve_bottom_sheet_widget.dart';
@@ -15,7 +14,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BookingDetailsWidget extends StatefulWidget {
   const BookingDetailsWidget({
@@ -1393,44 +1391,6 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                     color: Colors.black,
                                     size: 12,
                                   ),
-                                  // Padding(
-                                  //   padding: EdgeInsetsDirectional.fromSTEB(
-                                  //       0, 3, 0, 0),
-                                  //   child: Text(
-                                  //     valueOrDefault<String>(
-                                  //       getJsonField(
-                                  //         columnOrderDetailsResponse.jsonBody,
-                                  //         r'''$.result.property_data.property_city''',
-                                  //       ).toString(),
-                                  //       'null',
-                                  //     ),
-                                  //     style: FlutterFlowTheme.of(context)
-                                  //         .bodyText1
-                                  //         .override(
-                                  //       fontFamily: 'AvenirArabic',
-                                  //       fontSize: 12,
-                                  //       fontWeight: FontWeight.w300,
-                                  //       useGoogleFonts: false,
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  // Padding(
-                                  //   padding: EdgeInsetsDirectional.fromSTEB(
-                                  //       0, 3, 0, 0),
-                                  //   child: Text(
-                                  //     FFLocalizations.of(context).getText(
-                                  //       'sfe2y1t7' /* ,  */,
-                                  //     ),
-                                  //     style: FlutterFlowTheme.of(context)
-                                  //         .bodyText1
-                                  //         .override(
-                                  //       fontFamily: 'AvenirArabic',
-                                  //       fontSize: 12,
-                                  //       fontWeight: FontWeight.w300,
-                                  //       useGoogleFonts: false,
-                                  //     ),
-                                  //   ),
-                                  // ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         3, 3, 0, 0),
