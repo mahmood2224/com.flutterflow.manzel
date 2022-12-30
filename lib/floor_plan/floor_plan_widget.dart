@@ -1,6 +1,5 @@
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/components/something_went_wrong_widget.dart';
-
 import '../backend/api_requests/api_calls.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
 import '../flutter_flow/custom_functions.dart';
@@ -9,8 +8,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
 
 class FloorPlanWidget extends StatefulWidget {
   const FloorPlanWidget({
@@ -106,7 +103,6 @@ class _FloorPlanWidgetState extends State<FloorPlanWidget> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Builder(
             builder: (context) {
-              // Customize what your widget looks like when it's loading.
               if (isLoading) {
                 return Center(
                   child: SizedBox(
