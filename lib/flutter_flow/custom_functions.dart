@@ -1653,3 +1653,12 @@ String paymentDescription(
   }
 }
 
+String formatNumberWithoutZero(String? phoneNumber){
+  if(phoneNumber!=null&&phoneNumber.isNotEmpty){
+    if(phoneNumber.startsWith('0'))
+      return phoneNumber.substring(1);
+    return phoneNumber;
+  }
+  return '123456789';
+}
+
