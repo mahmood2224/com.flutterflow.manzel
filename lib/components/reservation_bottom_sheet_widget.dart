@@ -53,8 +53,8 @@ class _ReservationBottomSheetWidgetState
           customer: Customer(
               customerId: "", // customer id is important to retrieve cards saved for this customer
               email: currentUserDocument?.email ?? '',
-              isdNumber: "",
-              number:currentUserDocument?.phoneNumber ?? '123456789' ,
+              isdNumber: "+966",
+              number: formatNumberWithoutZero(currentUserDocument?.phoneNumber),//currentUserDocument?.phoneNumber ?? '123456789' ,
               firstName: currentUserDocument?.name ?? '',
               middleName: "",
               lastName: "",
