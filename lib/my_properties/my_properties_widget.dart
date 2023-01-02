@@ -1314,6 +1314,11 @@ class _MyPropertiesWidgetState extends State<MyPropertiesWidget> {
                                                                                         bookedPropertiesItem,
                                                                                         r'''$.order_id''',
                                                                                       ),
+                                                                                      propertyName:
+                                                                                      getJsonField(
+                                                                                        bookedPropertiesItem,
+                                                                                        r'''$.property_name''',
+                                                                                      ),
                                                                                     ),
                                                                                   ),
                                                                                 );

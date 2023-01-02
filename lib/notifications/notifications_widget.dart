@@ -1,3 +1,4 @@
+import 'package:eraser/eraser.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
@@ -527,6 +528,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                       isRead: 1,
                     ));
                   });
+                  Eraser.resetBadgeCountButKeepNotificationsInCenter();
                 },
                 child: Text(
                   FFLocalizations.of(context).getText(

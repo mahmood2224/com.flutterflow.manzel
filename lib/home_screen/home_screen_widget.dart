@@ -50,7 +50,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   ApiCallResponse? apiData;
   String? res;
   ScrollController controller = ScrollController();
-  static const _pageSize = 6;
+  static const _pageSize = 20;
   bool? isInternetAvailable;
   late FlickMultiManager flickMultiManager;
   List propertyListData=[];

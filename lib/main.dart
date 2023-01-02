@@ -37,7 +37,7 @@ void main() async {
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   }, (error, stackTrace) {
       SentryAnalytics().captureException(error, stackTrace);
-      FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
+     // FirebaseCrashlytics.instance.recordError(error, stackTrace,fatal: true);
   });
   WidgetsFlutterBinding.ensureInitialized();
   Eraser.resetBadgeCountButKeepNotificationsInCenter();
@@ -101,7 +101,7 @@ class _MyAppState extends State<MyApp> {
       () => _appStateNotifier.stopShowingSplashImage(),
     );
     handleDynamicLinks();
-    _initializeFlutterFire();
+  //  _initializeFlutterFire();
   }
 
   @override
