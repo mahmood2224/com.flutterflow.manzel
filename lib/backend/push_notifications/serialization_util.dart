@@ -1,11 +1,7 @@
 import 'dart:convert';
-
 import 'package:built_value/built_value.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../../backend/backend.dart';
-import '../../flutter_flow/lat_lng.dart';
 import '../../flutter_flow/place.dart';
 
 /// SERIALIZATION HELPERS
@@ -63,7 +59,7 @@ String serializeParameterData(Map<String, dynamic> parameterData) => jsonEncode(
 
 /// DESERIALIZATION HELPERS
 
-DateTimeRange dateTimeRangeFromString(String dateTimeRangeStr) {
+DateTimeRange? dateTimeRangeFromString(String dateTimeRangeStr) {
   final pieces = dateTimeRangeStr.split('|');
   if (pieces.length != 2) {
     return null;
@@ -74,7 +70,7 @@ DateTimeRange dateTimeRangeFromString(String dateTimeRangeStr) {
   );
 }
 
-LatLng latLngFromString(String latLngStr) {
+LatLng? latLngFromString(String latLngStr) {
   final pieces = latLngStr.split(',');
   if (pieces.length != 2) {
     return null;
@@ -109,7 +105,7 @@ FFPlace placeFromString(String placeStr) {
   );
 }
 
-T getParameter<T>(Map<String, dynamic> data, String paramName) {
+T? getParameter<T>(Map<String, dynamic> data, String paramName) {
   try {
     if (!data.containsKey(paramName)) {
       return null;
@@ -139,10 +135,10 @@ T getParameter<T>(Map<String, dynamic> data, String paramName) {
   }
 }
 
-Future<T> getDocumentParameter<T>(
+Future<T?> getDocumentParameter<T>(
     Map<String, dynamic> data, String paramName, Serializer<T> serializer) {
   if (!data.containsKey(paramName)) {
-    return null;
+    return Future.value(null);
   }
   return FirebaseFirestore.instance
       .doc(data[paramName])

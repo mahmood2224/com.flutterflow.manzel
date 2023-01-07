@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -62,5 +61,5 @@ Future<UserCredential> appleSignIn() async {
   return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
 }
 
-Future<User> signInWithApple(BuildContext context) =>
+Future<User?> signInWithApple(BuildContext context) =>
     signInOrCreateAccount(context, appleSignIn);
