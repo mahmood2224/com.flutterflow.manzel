@@ -482,8 +482,10 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 ],
               ),
             ),
+            SizedBox(height: 24,),
             isVideoListLoaded? Expanded(
               child: ListView.separated(
+                padding: EdgeInsets.zero,
                 controller: controller,
                 separatorBuilder: (context, int) => Container(
                   height: 0,
