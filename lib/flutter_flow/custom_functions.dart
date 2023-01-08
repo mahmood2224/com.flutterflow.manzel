@@ -1535,7 +1535,7 @@ String paymentDescription(
     String? locale,
     ) {
   if(locale=='en'){
-    return '$paymentDes property purchased'??'';
+    return '$paymentDes property purchased';
   }else{
       return '$paymentDes شراء الممتلكات ';
   }

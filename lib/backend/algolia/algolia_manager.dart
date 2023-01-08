@@ -33,6 +33,7 @@ class FFAlgoliaManager {
   static Map<AlgoliaQueryParams, List<AlgoliaObjectSnapshot>> _algoliaCache =
       {};
 
+
   Future<List<AlgoliaObjectSnapshot>> algoliaQuery({
     required String index,
     String? term,
