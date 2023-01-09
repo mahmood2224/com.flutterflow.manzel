@@ -464,7 +464,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                         elevation: 1,
                                       ),
                                       chipSpacing: 8,
-                                      multiselect: true,
+                                      multiselect: false,
                                       initialized:
                                           propertyTypeListValues != null,
                                       alignment: WrapAlignment.center,
