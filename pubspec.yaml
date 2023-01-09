@@ -27,7 +27,7 @@ script:
 
 
   build:
-    apk_dev: "flutter build apk --release --flavor dev --target lip/main.dart"
+    apk_dev: "flutter build apk --release --flavor dev --target lib/main.dart"
     apk_production: "flutter build apk --release --flavor prod --target lip/main.dart"
 
 environment:
