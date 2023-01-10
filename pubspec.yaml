@@ -24,6 +24,7 @@ script:
   gen: "flutter pub run build_runner --delete-conflicting-outputs"
   gen_watch: "flutter pub run build_runner watch --delete-conflicting-outputs"
   dev: "dart devtools"
+  translate : "dart run lib/shared/utils/translation_helper.dart"
 
 
   build:
@@ -140,6 +141,7 @@ dependencies:
   firebase_crashlytics: ^2.9.0
   in_app_review: ^2.0.4
   app_settings: 4.1.8
+  easy_localization: ^3.0.1
 
 
 
@@ -182,6 +184,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/fonts/
+    - assets/lang/
     - assets/images/
     - assets/videos/
     - assets/audios/
