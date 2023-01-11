@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:manzel/landing_page/landing_page.dart';
 import 'package:manzel/splash_view/splash_view_widget.dart';
 import '../flutter_flow_theme.dart';
 import '../../auth/firebase_user_provider.dart';
@@ -99,6 +100,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'OnboardingView',
               path: 'onboardingView',
               builder: (context, params) => OnboardingViewWidget(),
+            ),
+            FFRoute(
+              name: 'landingPage',
+              path: 'landingPage',
+              builder: (context, params) => LandingPage(),
             ),
             FFRoute(
               name: 'Profile',

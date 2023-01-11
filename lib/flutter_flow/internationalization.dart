@@ -77,6 +77,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'terms and conditions',
       'ar': 'الأحكام والشروط',
     },
+    'ar_lang': {
+      'en': 'العربية',
+      'ar': 'العربية',
+    },
+    'en_lang': {
+      'en': 'English',
+      'ar': 'English',
+    },
     '5ard5tmn': {
       'en': ' & ',
       'ar': ' و ',

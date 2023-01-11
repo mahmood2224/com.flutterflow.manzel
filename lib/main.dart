@@ -88,7 +88,7 @@ class _MyAppState extends State<MyApp> {
     _router = createRouter(_appStateNotifier);
     Future.delayed(Duration(seconds: 5), (){
       if(FFAppState().isInitailLaunch) {
-        _router.goNamed('OnboardingView');
+        _router.goNamed('landingPage');
       }
       else
       {
