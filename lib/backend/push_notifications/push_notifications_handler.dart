@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:manzel/splash_view/splash_view_widget.dart';
+
 import 'serialization_util.dart';
 import '../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';

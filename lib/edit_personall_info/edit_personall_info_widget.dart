@@ -225,7 +225,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   labelStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontFamily: 'Poppins',
                                         color: Colors.black,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w300,
@@ -237,7 +237,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontFamily: 'Poppins',
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w500,
@@ -251,7 +251,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'Poppins',
                                       color: Colors.black,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
@@ -279,7 +279,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 'pleaseEnterValidName' /* Please enter a valid Phone num... */,
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'Poppins',
                                 color: Colors.red,
                                 fontWeight: FontWeight.w300,
                                 useGoogleFonts: false,
@@ -325,7 +325,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'Poppins',
                                       color: Colors.black,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w300,
@@ -337,7 +337,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'Poppins',
                                       color: Colors.black,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
@@ -351,7 +351,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'Poppins',
                                     color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -378,7 +378,7 @@ class _EditPersonallInfoWidgetState extends State<EditPersonallInfoWidget> {
                                 'pleaseEnterValidEmail' /* Please enter a valid Email... */,
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'Poppins',
                                 color: Colors.red,
                                 fontWeight: FontWeight.w300,
                                 useGoogleFonts: false,

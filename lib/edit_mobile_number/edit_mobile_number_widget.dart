@@ -103,7 +103,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                         '095f9xno' /* Edit mobile number */,
                       ),
                       style: FlutterFlowTheme.of(context).title1.override(
-                            fontFamily: 'Sofia Pro By Khuzaimah',
+                            fontFamily: 'Poppins',
                             fontSize: 25,
                             fontWeight: FontWeight.w800,
                             useGoogleFonts: false,
@@ -123,7 +123,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                           '4eszxwjq' /* We'll send a verification code... */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'Poppins',
                               fontSize: 15,
                               fontWeight: FontWeight.w300,
                               useGoogleFonts: false,
@@ -190,7 +190,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 labelStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'Poppins',
                                       color: Colors.black,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w300,
@@ -199,7 +199,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                                 hintStyle: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
-                                      fontFamily: 'Sofia Pro By Khuzaimah',
+                                      fontFamily: 'Poppins',
                                       color: Colors.black,
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
@@ -228,7 +228,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'Poppins',
                                     color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -254,7 +254,7 @@ class _EditMobileNumberWidgetState extends State<EditMobileNumberWidget> {
                           child: Text(
                             warningMessage,
                             style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'Poppins',
                               color: Colors.red,
                               fontWeight: FontWeight.w300,
                               useGoogleFonts: false,

@@ -1,6 +1,7 @@
 // Export pages
 export 'login/login_widget.dart' show LoginWidget;
 export 'onboarding_view/onboarding_view_widget.dart' show OnboardingViewWidget;
+export 'splash_view/splash_view_widget.dart' show SplashViewWidget;
 export 'profile/profile_widget.dart' show ProfileWidget;
 export 'adding_information/adding_information_widget.dart'
     show AddingInformationWidget;

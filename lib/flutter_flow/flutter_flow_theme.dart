@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:manzel/flutter_flow/flutter_flow_util.dart';
 
 abstract class FlutterFlowTheme {
   static FlutterFlowTheme of(BuildContext context) {
     return LightModeTheme();
   }
-
   late Color primaryColor;
   late Color secondaryColor;
   late Color primaryOrange;
@@ -54,7 +54,7 @@ abstract class FlutterFlowTheme {
 }
 
 class LightModeTheme extends FlutterFlowTheme {
-  late Color primaryColor = const Color(0xFF374797);
+  late Color primaryColor = const Color(0xFF3020E0);
   late Color secondaryColor = const Color(0xFF39D2C0);
   late Color primaryOrange = const Color(0xFFF3922C);
   late Color alternate = const Color(0xFFFF5963);
@@ -102,54 +102,55 @@ abstract class Typography {
 
 class ThemeTypography extends Typography {
   ThemeTypography(this.theme);
+  static String fontFamily = FFLocalizations.languages().contains("en") ? "Poppins" : "ExpoArabic";
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'AvenirArabic';
+  String get title1Family => fontFamily;
   TextStyle get title1 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: Colors.black,
         fontWeight: FontWeight.w600,
         fontSize: 24,
       );
-  String get title2Family => 'AvenirArabic';
+  String get title2Family => fontFamily;
   TextStyle get title2 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 22,
       );
-  String get title3Family => 'AvenirArabic';
+  String get title3Family => fontFamily;
   TextStyle get title3 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: Colors.white,
         fontWeight: FontWeight.w600,
         fontSize: 20,
       );
-  String get subtitle1Family => 'AvenirArabic';
+  String get subtitle1Family => fontFamily;
   TextStyle get subtitle1 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: Colors.white,
         fontWeight: FontWeight.w600,
         fontSize: 18,
       );
-  String get subtitle2Family => 'AvenirArabic';
+  String get subtitle2Family => fontFamily;
   TextStyle get subtitle2 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16,
       );
-  String get bodyText1Family => 'AvenirArabic';
+  String get bodyText1Family => fontFamily;
   TextStyle get bodyText1 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: '',
         color: Colors.black,
         fontWeight: FontWeight.w300,
         fontSize: 14,
       );
-  String get bodyText2Family => 'AvenirArabic';
+  String get bodyText2Family => fontFamily;
   TextStyle get bodyText2 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14,
