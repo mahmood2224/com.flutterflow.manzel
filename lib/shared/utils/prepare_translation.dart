@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 const String directory = "H:/work/flutter_projects/manzel" ;
 main(){
-
+  _prepareFileToChanges(file: File('$directory/lib/login/login_widget.dart'));
 }
 
 void _searchAndPrepare({Directory? dir }){
@@ -18,7 +18,12 @@ void _searchAndPrepare({Directory? dir }){
     }
   }
 }
-
+///'FFLocalizations.of\(context\).getText\([a-zA-Z0-9, \/*\'|\n]+\)[,;]'
 _prepareFileToChanges({required File file}){
+  String content = file.readAsStringSync();
+  String subContent = file.readAsLinesSync().join('').replaceAll(' ', '');
+  RegExp regExp = new RegExp(r"FFLocalizations.of\([context]+\).getText\([a-zA-Z0-9', /*]+\)[,;]",multiLine: true ,caseSensitive: true);
+  Iterable<RegExpMatch> matches = regExp.allMatches(subContent);
+  int size = matches.length ;
 
 }

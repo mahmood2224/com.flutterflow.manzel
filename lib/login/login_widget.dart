@@ -381,8 +381,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       ),
                       Text(
                         FFLocalizations.of(context).getText(
-                          '5ard5tmn' /*  &  */,
-                        ),
+                          '5ard5tmn' /*  &  */,),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'AvenirArabic',
                               color: Colors.black,
