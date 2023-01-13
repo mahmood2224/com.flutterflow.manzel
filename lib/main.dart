@@ -144,6 +144,7 @@ class _MyAppState extends State<MyApp> {
       ],
       theme: ThemeData(
         brightness: Brightness.light,
+        scaffoldBackgroundColor: Colors.white
       ),
       themeMode: _themeMode,
       routeInformationParser: _router.routeInformationParser,

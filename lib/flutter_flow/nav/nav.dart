@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:manzel/auth_flow/login/ui/login.dart';
+import 'package:manzel/auth_flow/otp/ui/otp.dart';
 import '../flutter_flow_theme.dart';
 import '../../auth/firebase_user_provider.dart';
 import '../../backend/push_notifications/push_notifications_handler.dart'
@@ -88,7 +90,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Login',
               path: 'login',
-              builder: (context, params) => LoginWidget(),
+              builder: (context, params) => LoginScreen(),
+            ),
+            FFRoute(
+              name: 'OTP',
+              path: 'otp',
+              builder: (context, params) => OtpScreen(),
             ),
             FFRoute(
               name: 'OnboardingView',

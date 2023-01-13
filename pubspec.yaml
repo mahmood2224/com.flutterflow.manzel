@@ -140,6 +140,7 @@ dependencies:
   firebase_crashlytics: ^2.9.0
   in_app_review: ^2.0.4
   app_settings: 4.1.8
+  pin_code_fields: ^7.4.0
 
 
 
