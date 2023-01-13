@@ -30,7 +30,6 @@ class OnBoardingWidget extends StatelessWidget {
             style: FlutterFlowTheme.of(context)
                 .title1
                 .override(
-              fontFamily: 'Sofia Pro By Khuzaimah',
               color: Colors.black,
               fontWeight: FontWeight.w800,
               useGoogleFonts: false,
