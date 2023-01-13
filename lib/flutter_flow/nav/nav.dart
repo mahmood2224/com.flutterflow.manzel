@@ -87,9 +87,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               }
               else return appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch? NavBarPage() : OnboardingViewWidget();},
           routes: [
+            //TODO remove this after finishing new one
             FFRoute(
               name: 'Login',
               path: 'login',
+              builder: (context, params) => LoginWidget(),
+            ),
+            FFRoute(
+              name: 'LoginNew',
+              path: 'loginNew',
               builder: (context, params) => LoginScreen(),
             ),
             FFRoute(
