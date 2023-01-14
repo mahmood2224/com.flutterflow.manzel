@@ -95,7 +95,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Login',
               path: 'login',
-              builder: (context, params) => LoginScreen(),
+              builder: (context, params) => LoginWidget(),
             ),
 
             /// this auth new pages with Different UI
