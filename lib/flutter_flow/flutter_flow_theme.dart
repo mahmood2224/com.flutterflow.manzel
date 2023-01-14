@@ -15,6 +15,7 @@ abstract class FlutterFlowTheme {
   late Color primaryBackground;
   late Color secondaryBackground;
   late Color primaryText;
+  late Color textViewBackground;
   late Color secondaryText;
   late Color primaryRed;
   late Color primaryGreen;
@@ -49,11 +50,14 @@ abstract class FlutterFlowTheme {
   TextStyle get bodyText1 => typography.bodyText1;
   String get bodyText2Family => typography.bodyText2Family;
   TextStyle get bodyText2 => typography.bodyText2;
+  TextStyle get title3Black => typography.title3Black;
+  TextStyle get labelText => typography.labelText;
 
   Typography get typography => ThemeTypography(this);
 }
 
 class LightModeTheme extends FlutterFlowTheme {
+  // late Color primaryColor = const Color(0xFF374797); //old primary color if we need it on the future
   late Color primaryColor = const Color(0xFF3020E0);
   late Color secondaryColor = const Color(0xFF39D2C0);
   late Color primaryOrange = const Color(0xFFF3922C);
@@ -66,6 +70,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color primaryGreen = const Color(0xFF4FB26D);
   late Color secondaryGreen = const Color(0xFF4FB26D);
   late Color primaryYellow = const Color(0xFFFFD03E);
+  late Color textViewBackground = const Color(0xFFFAFAFA);
   late Color secondaryRed = const Color(0xFFEA5343);
 
   late Color primaryBtnText = Color(0xFFFFFFFF);
@@ -98,6 +103,8 @@ abstract class Typography {
   TextStyle get bodyText1;
   String get bodyText2Family;
   TextStyle get bodyText2;
+  TextStyle get labelText;
+  TextStyle get title3Black;
 }
 
 class ThemeTypography extends Typography {
@@ -155,7 +162,22 @@ class ThemeTypography extends Typography {
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
+
+  TextStyle get labelText =>  TextStyle(
+    fontFamily: fontFamily,
+    color: Colors.black38,
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+  );
+
+  TextStyle get title3Black => TextStyle(
+    fontFamily: fontFamily,
+    color: Colors.black,
+    fontWeight: FontWeight.w300,
+    fontSize: 15,
+  );
 }
+
 
 extension TextStyleHelper on TextStyle {
   TextStyle override({

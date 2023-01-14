@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:manzel/auth_flow/login_widget.dart';
+
 import 'package:manzel/splash_view/splash_view_widget.dart';
 
 import 'serialization_util.dart';
