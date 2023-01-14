@@ -1,3 +1,4 @@
+import 'package:manzel/shared/di_main_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/lat_lng.dart';
 import 'dart:convert';
@@ -35,6 +36,7 @@ class FFAppState {
     _locale = await prefs.getString('ff_locale') ?? _locale;
     _authToken = prefs.getString('ff_authToken') ?? _authToken;
     _apiVersion = prefs.getString('ff__apiVersion') ?? _apiVersion;
+     configureDependencies();
   }
 
   late SharedPreferences prefs;
