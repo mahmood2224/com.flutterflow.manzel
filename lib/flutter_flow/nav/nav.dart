@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:manzel/auth_flow/choose_verification/ui/choose_vreification.dart';
+import 'package:manzel/auth_flow/complete_profile/ui/complete_profile.dart';
+import 'package:manzel/auth_flow/congrats/ui/congrats.dart';
 import 'package:manzel/auth_flow/login/ui/login.dart';
 import 'package:manzel/auth_flow/otp/ui/otp.dart';
 import '../flutter_flow_theme.dart';
@@ -91,18 +94,36 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Login',
               path: 'login',
-              builder: (context, params) => LoginWidget(),
+              builder: (context, params) => LoginScreen(),
             ),
+
+            /// this auth new pages with Different UI
             FFRoute(
               name: 'LoginNew',
               path: 'loginNew',
               builder: (context, params) => LoginScreen(),
             ),
             FFRoute(
+              name: 'choose_otp',
+              path: 'choose_otp',
+              builder: (context, params) => ChooseVreificationScreen(),
+            ),
+            FFRoute(
               name: 'OTP',
               path: 'otp',
               builder: (context, params) => OtpScreen(),
             ),
+            FFRoute(
+              name: 'complete_profile',
+              path: 'complete_profile',
+              builder: (context, params) => CompleteProfileScreen(),
+            ),
+            FFRoute(
+              name: 'congrats_screen',
+              path: 'congrats_screen',
+              builder: (context, params) => CongratsScreen(),
+            ),
+
             FFRoute(
               name: 'OnboardingView',
               path: 'onboardingView',

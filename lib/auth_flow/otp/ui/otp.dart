@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:manzel/flutter_flow/flutter_flow_theme.dart';
+import 'package:manzel/flutter_flow/flutter_flow_util.dart';
 import 'package:manzel/shared/styles/sizes.dart';
 import 'package:manzel/shared/ui/components/app_bar.dart';
 import 'package:manzel/shared/ui/components/custom_button.dart';
+import 'package:manzel/shared/utils/directions.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 //TODO apply translation
@@ -63,7 +65,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 height: getHeight(context, ratio: 0.05),
               ),
               Directionality(
-                textDirection: TextDirection.ltr,
+                textDirection: getTextDirectionLTR(),
                 child: PinCodeTextField(
                   length: 6,
                   obscureText: false,
@@ -115,7 +117,9 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
               CustomButton(
                 text : "Get Started",
-                onPressed: (){},
+                onPressed: (){
+                  context.goNamed("complete_profile");
+                },
               )
             ],
           ),

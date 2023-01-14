@@ -31,7 +31,7 @@ script:
     apk_production: "flutter build apk --release --flavor prod --target lip/main.dart"
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:

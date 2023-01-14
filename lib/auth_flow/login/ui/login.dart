@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // validationKey: _formKey,
                 onPressed: (){
                   //TODO run the API here
-                  context.goNamed("otp");
+                  context.goNamed("choose_otp");
                 },
               )
             ],
