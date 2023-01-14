@@ -1492,7 +1492,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'Poppins',
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryColor,
@@ -1531,7 +1531,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                         .bodyText1
                                                         .override(
                                                           fontFamily:
-                                                              'Sofia Pro By Khuzaimah',
+                                                              'Poppins',
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryColor,
@@ -1569,7 +1569,7 @@ class _BookingDetailsWidgetState extends State<BookingDetailsWidget> {
                                                     .bodyText1
                                                     .override(
                                                       fontFamily:
-                                                          'Sofia Pro By Khuzaimah',
+                                                          'Poppins',
                                                       color: FlutterFlowTheme.of(
                                                               context)
                                                           .primaryColor,

@@ -1428,7 +1428,7 @@ void unAuthorizedUser(context,mounted) async {
           'unAuthorizedUser' /* You are logged - in*/,
         ),
         style: TextStyle(
-          fontFamily: 'Sofia Pro By Khuzaimah',
+          fontFamily: 'Poppins',
           color: Colors.white,
           fontWeight: FontWeight.w600,
           fontSize: 18,

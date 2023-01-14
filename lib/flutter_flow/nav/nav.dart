@@ -5,6 +5,8 @@ import 'package:manzel/auth_flow/complete_profile/ui/complete_profile.dart';
 import 'package:manzel/auth_flow/congrats/ui/congrats.dart';
 import 'package:manzel/auth_flow/login/ui/login.dart';
 import 'package:manzel/auth_flow/otp/ui/otp.dart';
+import 'package:manzel/landing_page/landing_page.dart';
+import 'package:manzel/splash_view/splash_view_widget.dart';
 import '../flutter_flow_theme.dart';
 import '../../auth/firebase_user_provider.dart';
 import '../../backend/push_notifications/push_notifications_handler.dart'
@@ -79,16 +81,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         if(FFAppState().isInitailLaunch) {
           return  OnboardingViewWidget();
         }
-        else return appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch? NavBarPage() : OnboardingViewWidget();},
+        else return appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch? NavBarPage() : OnboardingViewWidget();
+        },
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _){
-              if(FFAppState().isInitailLaunch) {
-              return  OnboardingViewWidget();
-              }
-              else return appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch? NavBarPage() : OnboardingViewWidget();},
+             return SplashViewWidget(context ,appStateNotifier : appStateNotifier);
+              },
           routes: [
             //TODO remove this after finishing new one
             FFRoute(
@@ -102,6 +103,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'LoginNew',
               path: 'loginNew',
               builder: (context, params) => LoginScreen(),
+            ),
+            FFRoute(
+              name: 'splash',
+              path: 'splash',
+              builder: (context, params) => SplashViewWidget(context ,appStateNotifier : appStateNotifier),
             ),
             FFRoute(
               name: 'choose_otp',
@@ -128,6 +134,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'OnboardingView',
               path: 'onboardingView',
               builder: (context, params) => OnboardingViewWidget(),
+            ),
+            FFRoute(
+              name: 'landingPage',
+              path: 'landingPage',
+              builder: (context, params) => LandingPage(),
             ),
             FFRoute(
               name: 'Profile',

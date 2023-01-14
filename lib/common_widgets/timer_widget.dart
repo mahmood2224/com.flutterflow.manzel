@@ -57,7 +57,7 @@ class _TimerWidgetState extends State<TimerWidget> {
           'ResendTimer' /* Confirm your mobile number */,
         ),
         style: TextStyle(
-            fontFamily: 'Sofia Pro By Khuzaimah',
+            fontFamily: 'Poppins',
             fontSize: 16,
             color: Colors.black,
             fontWeight: FontWeight.w300),
@@ -65,7 +65,7 @@ class _TimerWidgetState extends State<TimerWidget> {
           TextSpan(
             text: '${minutes.toString()}:${seconds.toString()}',
             style: TextStyle(
-              fontFamily: 'Sofia Pro By Khuzaimah',
+              fontFamily: 'Poppins',
               fontSize: 16,
               fontWeight: FontWeight.w700,
             ),

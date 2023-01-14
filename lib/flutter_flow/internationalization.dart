@@ -77,6 +77,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'terms and conditions',
       'ar': 'الأحكام والشروط',
     },
+    'ar_lang': {
+      'en': 'العربية',
+      'ar': 'العربية',
+    },
+    'en_lang': {
+      'en': 'English',
+      'ar': 'English',
+    },
     '5ard5tmn': {
       'en': ' & ',
       'ar': ' و ',
@@ -96,13 +104,29 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // OnboardingView
   {
-    '0rkg3m44': {
-      'en': 'The perfect choice for \nyour future home',
-      'ar': 'الخيار الأمثل لمنزلك المستقبلي',
+    'on_boarding_1_text_title': {
+      'en': 'How are we ?',
+      'ar': 'كيف نكون نحن ',
     },
-    'bl6z0bqv': {
-      'en': 'The dream home',
-      'ar': 'الخيار الأمثل لمنزلك المستقبلي',
+    'on_boarding_1_text_body': {
+      'en': 'The Manzel platform allows you to own real estate easily and in easy ',
+      'ar': ' تتيح لك منصة المنزل امتلاك العقارات بسهولة ويسر',
+    },
+    'on_boarding_2_text_title': {
+      'en': 'Solve you’re problem',
+      'ar': 'نحن نعمل علي حل المشاكل التي تواجهك',
+    },
+    'on_boarding_2_text_body': {
+      'en': 'give you a period to book the property to ensure that you own it and not miss it',
+      'ar': 'يمنحك فترة لحجز العقار للتأكد من ملكيتك له وعدم تفويته',
+    },
+     'on_boarding_3_text_title': {
+      'en': 'Usefulness of the solution',
+      'ar': 'فائدة الحل',
+    },
+    'on_boarding_3_text_body': {
+      'en': 'Owning the property easily and in easy installments',
+      'ar': 'تملك العقار بسهولة وبأقساط ميسرة',
     },
     't9rvb8ym': {
       'en': 'The dream become true',
@@ -112,9 +136,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Get Started ',
       'ar': 'البدء',
     },
-    'ua0lzucz': {
-      'en': 'Login',
-      'ar': 'تسجيل الدخول',
+    'continue': {
+      'en': 'Continue ',
+      'ar': 'أكمل',
+    },
+    'skip': {
+      'en': 'Skip',
+      'ar': 'تخطي',
     },
     '1poahrm7': {
       'en': 'Home',

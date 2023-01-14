@@ -1,3 +1,5 @@
+import 'package:manzel/onboarding_view/onboarding_widget.dart';
+
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -42,171 +44,89 @@ class _OnboardingViewWidgetState extends State<OnboardingViewWidget> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.8,
-              child: Stack(
+              height: MediaQuery.of(context).size.height * 0.62,
+              child: PageView(
+                controller: pageViewController ??=
+                    PageController(initialPage: 0),
+                scrollDirection: Axis.horizontal,
                 children: [
-                  PageView(
-                    controller: pageViewController ??=
-                        PageController(initialPage: 0),
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(0),
-                            child: Image.asset(
-                              'assets/images/onboardingImageCompressed.png',
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * 0.64,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                '0rkg3m44' /* The perfect choice for 
-your f... */
-                                ,
-                              ),
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w800,
-                                    useGoogleFonts: false,
-                                    lineHeight: 1.12,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(0),
-                            child: Image.asset(
-                              'assets/images/onboardingImageCompressed.png',
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * 0.64,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                'bl6z0bqv' /* The dream home */,
-                              ),
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w800,
-                                    useGoogleFonts: false,
-                                    lineHeight: 1.12,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(0),
-                            child: Image.asset(
-                              'assets/images/onboardingImageCompressed.png',
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * 0.64,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 28, 0, 0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                't9rvb8ym' /* The dream become true */,
-                              ),
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
-                                    color: Colors.black,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w800,
-                                    useGoogleFonts: false,
-                                    lineHeight: 1.12,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  OnBoardingWidget(FFLocalizations.of(context).getText(
+                    'on_boarding_1_text_title',
                   ),
-                  Align(
-                    alignment: AlignmentDirectional(0, 1),
-                    child: SmoothPageIndicator(
-                      controller: pageViewController ??=
-                          PageController(initialPage: 0),
-                      count: 3,
-                      axisDirection: Axis.horizontal,
-                      onDotClicked: (i) {
-                        pageViewController!.animateToPage(
-                          i,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.ease,
-                        );
-                      },
-                      effect: SlideEffect(
-                        spacing: 20,
-                        radius: 16,
-                        dotWidth: 6,
-                        dotHeight: 6,
-                        dotColor: Color(0xFFDCDCDC),
-                        activeDotColor: Colors.black,
-                        paintStyle: PaintingStyle.fill,
+                      FFLocalizations.of(context).getText(
+                        'on_boarding_1_text_body',
                       ),
-                    ),
+                      'assets/images/onboarding_3.png'),
+                  OnBoardingWidget(FFLocalizations.of(context).getText(
+                    'on_boarding_2_text_title' /* The dream home */,
                   ),
+                      FFLocalizations.of(context).getText(
+                        'on_boarding_2_text_body',
+                      ), 'assets/images/onboarding_4.png'),
+                  OnBoardingWidget(FFLocalizations.of(context).getText(
+                    'on_boarding_3_text_title' /* The dream home */,
+                  ),
+                      FFLocalizations.of(context).getText(
+                        'on_boarding_3_text_body',
+                      ), 'assets/images/onboarding_5.png')
                 ],
               ),
             ),
+            const SizedBox(height: 30,),
+            SmoothPageIndicator(
+              controller: pageViewController ??=
+                  PageController(initialPage: 0),
+              count: 3,
+              axisDirection: Axis.horizontal,
+              onDotClicked: (i) {
+                pageViewController!.animateToPage(
+                  i,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.ease,
+                );
+              },
+              effect: SlideEffect(
+                spacing: 20,
+                radius: 16,
+                dotWidth: 12,
+                dotHeight: 12,
+                dotColor: Colors.black,
+                activeDotColor: FlutterFlowTheme.of(context)
+                    .primaryColor,
+                paintStyle: PaintingStyle.stroke,
+              ),
+            ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 27, 16, 18),
+              padding: EdgeInsetsDirectional.fromSTEB(16, 50, 16, 18),
               child: FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('tutorial_complete');
-                  logFirebaseEvent('ONBOARDING_VIEW_PAGE_getStarted_ON_TAP');
-                  // GoTohome
-                  logFirebaseEvent('getStarted_GoTohome');
+                  if(pageViewController?.page == 2){
+                    logFirebaseEvent('tutorial_complete');
+                    logFirebaseEvent('ONBOARDING_VIEW_PAGE_getStarted_ON_TAP');
+                    // GoTohome
+                    logFirebaseEvent('getStarted_GoTohome');
 
-                  context.goNamed('HomeScreen');
+                    context.goNamed('HomeScreen');
 
-                  logFirebaseEvent('getStarted_Update-Local-State');
-                  setState(() => FFAppState().isInitailLaunch = false);
+                    logFirebaseEvent('getStarted_Update-Local-State');
+                    setState(() => FFAppState().isInitailLaunch = false);
+
+                  }else {
+                    pageViewController!.animateToPage(
+                      pageViewController!.offset.toInt()+1,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.ease,
+                    );
+                  }
                 },
                 text: FFLocalizations.of(context).getText(
-                  'bgkoinqg' /* Get Started  */,
+                  'continue' /* Get Started  */,
                 ),
                 options: FFButtonOptions(
                   width: double.infinity,
                   height: 56,
                   color: FlutterFlowTheme.of(context).primaryColor,
                   textStyle: FlutterFlowTheme.of(context).subtitle2.override(
-                        fontFamily: 'Sofia Pro By Khuzaimah',
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.w800,
@@ -234,10 +154,9 @@ your f... */
               },
               child: Text(
                 FFLocalizations.of(context).getText(
-                  'ua0lzucz' /* Login */,
+                  'skip' ,
                 ),
                 style: FlutterFlowTheme.of(context).bodyText1.override(
-                      fontFamily: 'Sofia Pro By Khuzaimah',
                       color: Colors.black,
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
