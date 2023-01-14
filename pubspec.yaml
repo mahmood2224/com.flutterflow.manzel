@@ -17,12 +17,12 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 version: 1.0.8+1
 
-script:
+scripts:
   start : "flutter run -t lib/main_development.dart --flavor dev"
   run: 'rps get & rps gen'
   get: 'flutter pub get'
-  gen: "flutter pub run build_runner --delete-conflicting-outputs"
-  gen_watch: "flutter pub run build_runner watch --delete-conflicting-outputs"
+  gen: "flutter pub run build_runner build  --delete-conflicting-outputs"
+  gen_watch: "flutter pub run build_runner build watch --delete-conflicting-outputs"
   dev: "dart devtools"
 
 
@@ -39,8 +39,12 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   path: ^1.7.0
+  flutter_bloc: ^8.0.1
+  bloc: ^8.0.3
   algolia: 1.1.1
   auto_size_text: 3.0.0
+  get_it: ^7.2.0
+  injectable: ^2.1.0
   badges: 2.0.2
   built_collection: 5.1.1
   built_value: 8.4.0
@@ -154,9 +158,11 @@ dependency_overrides:
   provider: 6.0.0
 
 dev_dependencies:
-  build_runner: 2.2.0
+  build_runner:
   built_value_generator: 8.4.0
   flutter_launcher_icons: 0.9.3
+  injectable_generator:
+
 
   flutter_test:
     sdk: flutter
