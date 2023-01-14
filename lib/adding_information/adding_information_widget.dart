@@ -84,7 +84,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           '3zqs9v1q' /* Add your information */,
                         ),
                         style: FlutterFlowTheme.of(context).title1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'Poppins',
                               color: Colors.black,
                               fontSize: 25,
                               fontWeight: FontWeight.w800,
@@ -134,7 +134,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                           .bodyText1
                                           .override(
                                             fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                                'Poppins',
                                             color: Colors.black,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w300,
@@ -148,7 +148,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                           .bodyText1
                                           .override(
                                             fontFamily:
-                                                'Sofia Pro By Khuzaimah',
+                                                'Poppins',
                                             color: Colors.black,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500,
@@ -162,7 +162,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
-                                          fontFamily: 'Sofia Pro By Khuzaimah',
+                                          fontFamily: 'Poppins',
                                           color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
@@ -193,7 +193,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                                 'pleaseEnterValidName' /* Please enter a valid Phone num... */,
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1.override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'Poppins',
                                 color: Colors.red,
                                 fontWeight: FontWeight.w300,
                                 useGoogleFonts: false,
@@ -213,7 +213,7 @@ class _AddingInformationWidgetState extends State<AddingInformationWidget> {
                           'dr5dq8mr' /* By clicking continue, you agre... */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Sofia Pro By Khuzaimah',
+                              fontFamily: 'Poppins',
                               color: Colors.black,
                               fontWeight: FontWeight.w300,
                               useGoogleFonts: false,

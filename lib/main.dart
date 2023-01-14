@@ -86,6 +86,19 @@ class _MyAppState extends State<MyApp> {
 
     _appStateNotifier = AppStateNotifier();
     _router = createRouter(_appStateNotifier);
+    Future.delayed(Duration(seconds: 5), (){
+      if(FFAppState().isInitailLaunch) {
+        _router.goNamed('landingPage');
+      }
+      else
+      {
+        _appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch?
+        _router.goNamed('HomeScreen')
+            :  _router.goNamed('OnboardingView');
+      }
+
+
+    });
     userStream = manzelFirebaseUserStream()
       ..listen((user) => _appStateNotifier.update(user));
     Future.delayed(const Duration(milliseconds: 100), () {
@@ -96,10 +109,7 @@ class _MyAppState extends State<MyApp> {
         print('SignOut called');
       }
     });
-    Future.delayed(
-      Duration(seconds: 1),
-      () => _appStateNotifier.stopShowingSplashImage(),
-    );
+
     handleDynamicLinks();
   //  _initializeFlutterFire();
   }

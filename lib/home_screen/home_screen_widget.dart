@@ -1099,7 +1099,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .title3
                                       .override(
-                                    fontFamily: 'Sofia Pro By Khuzaimah',
+                                    fontFamily: 'Poppins',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryColor,
                                     fontSize: 11,

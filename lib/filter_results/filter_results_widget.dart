@@ -1079,7 +1079,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                       .title3
                                                       .override(
                                                     fontFamily:
-                                                    'Sofia Pro By Khuzaimah',
+                                                    'Poppins',
                                                     color:
                                                     FlutterFlowTheme.of(
                                                         context)
@@ -1145,7 +1145,7 @@ class _FilterResultsWidgetState extends State<FilterResultsWidget> {
                                                           .bodyText1
                                                           .override(
                                                         fontFamily:
-                                                        'Sofia Pro By Khuzaimah',
+                                                        'Poppins',
                                                         color: FlutterFlowTheme.of(
                                                             context)
                                                             .primaryColor,

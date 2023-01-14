@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:manzel/landing_page/landing_page.dart';
+import 'package:manzel/splash_view/splash_view_widget.dart';
 import '../flutter_flow_theme.dart';
 import '../../auth/firebase_user_provider.dart';
 import '../../backend/push_notifications/push_notifications_handler.dart'
@@ -74,16 +76,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         if(FFAppState().isInitailLaunch) {
           return  OnboardingViewWidget();
         }
-        else return appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch? NavBarPage() : OnboardingViewWidget();},
+        else return appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch? NavBarPage() : OnboardingViewWidget();
+        },
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _){
-              if(FFAppState().isInitailLaunch) {
-              return  OnboardingViewWidget();
-              }
-              else return appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch? NavBarPage() : OnboardingViewWidget();},
+             return SplashViewWidget(context ,appStateNotifier : appStateNotifier);
+              },
           routes: [
             FFRoute(
               name: 'Login',
@@ -91,9 +92,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => LoginWidget(),
             ),
             FFRoute(
+              name: 'splash',
+              path: 'splash',
+              builder: (context, params) => SplashViewWidget(context ,appStateNotifier : appStateNotifier),
+            ),
+            FFRoute(
               name: 'OnboardingView',
               path: 'onboardingView',
               builder: (context, params) => OnboardingViewWidget(),
+            ),
+            FFRoute(
+              name: 'landingPage',
+              path: 'landingPage',
+              builder: (context, params) => LandingPage(),
             ),
             FFRoute(
               name: 'Profile',

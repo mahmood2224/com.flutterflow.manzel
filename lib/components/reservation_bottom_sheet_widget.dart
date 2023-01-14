@@ -214,7 +214,7 @@ class _ReservationBottomSheetWidgetState
                 content: Text(
                   'Payment Failed',
                   style: TextStyle(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'Poppins',
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
                     fontSize: 18,
@@ -234,7 +234,7 @@ class _ReservationBottomSheetWidgetState
                 content: Text(
                   'Payment Failed',
                   style: TextStyle(
-                    fontFamily: 'Sofia Pro By Khuzaimah',
+                    fontFamily: 'Poppins',
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
                     fontSize: 18,
