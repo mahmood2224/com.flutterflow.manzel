@@ -145,6 +145,7 @@ dependencies:
   in_app_review: ^2.0.4
   app_settings: 4.1.8
   pin_code_fields: ^7.4.0
+  another_flushbar: ^1.10.24
 
 
 

@@ -8,8 +8,10 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:manzel/flutter_flow/sentry_analytics.dart';
+import 'package:manzel/shared/services/network_handler/network_handle_cubit.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -50,12 +52,20 @@ void main() async {
 
   FFAppState().initializePersistedState(); // Initialize FFAppState
   runApp(
-      DefaultAssetBundle(
-        bundle: SentryAssetBundle(),
-        child: MyApp(),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider<NetworkHandlerCubit>(
+              create: (context) => NetworkHandlerCubit()
+          )
+        ],
+        child: DefaultAssetBundle(
+          bundle: SentryAssetBundle(),
+          child: MyApp(),
+        ),
       ),
   );
 }
+GoRouter? router;
 
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
@@ -73,7 +83,6 @@ class _MyAppState extends State<MyApp> {
   late Stream<ManzelFirebaseUser> userStream;
 
   late AppStateNotifier _appStateNotifier;
-  late GoRouter _router;
   final update_result = [];
 
   final authUserSub = authenticatedUserStream.listen((_) {});
@@ -85,16 +94,16 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     _appStateNotifier = AppStateNotifier();
-    _router = createRouter(_appStateNotifier);
+    router = createRouter(_appStateNotifier);
     Future.delayed(Duration(seconds: 5), (){
       if(FFAppState().isInitailLaunch) {
-        _router.goNamed('landingPage');
+        router?.goNamed('landingPage');
       }
       else
       {
         _appStateNotifier.loggedIn  || !FFAppState().isInitailLaunch?
-        _router.goNamed('HomeScreen')
-            :  _router.goNamed('OnboardingView');
+        router?.goNamed('HomeScreen')
+            :  router?.goNamed('OnboardingView');
       }
 
 
@@ -103,7 +112,7 @@ class _MyAppState extends State<MyApp> {
       ..listen((user) => _appStateNotifier.update(user));
     Future.delayed(const Duration(milliseconds: 100), () {
       if(FFAppState().isInitailLaunch && loggedIn) {
-        GoRouter.of(_router.routerDelegate.navigatorKey.currentContext!)
+        GoRouter.of(router!.routerDelegate.navigatorKey.currentContext!)
             .prepareAuthEvent();
         signOut();
         print('SignOut called');
@@ -157,8 +166,8 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: Colors.white
       ),
       themeMode: _themeMode,
-      routeInformationParser: _router.routeInformationParser,
-      routerDelegate: _router.routerDelegate,
+      routeInformationParser: router!.routeInformationParser,
+      routerDelegate: router!.routerDelegate,
     );
   }
 
@@ -177,7 +186,7 @@ class _MyAppState extends State<MyApp> {
     if (deeplinkUri != null) {
       Map<String, dynamic> params = deeplinkUri.queryParameters;
       if (params.isNotEmpty) {
-        BuildContext? ctx = _router.routerDelegate.navigatorKey.currentContext;
+        BuildContext? ctx = router!.routerDelegate.navigatorKey.currentContext;
         ctx?.pushNamed(
           'PropertyDetails',
           queryParams: {
