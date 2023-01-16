@@ -4,6 +4,7 @@ import 'package:go_sell_sdk_flutter/go_sell_sdk_flutter.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
 import 'package:manzel/edit_personall_info/edit_personall_info_widget.dart';
 import 'package:manzel/enviorment/env_variables.dart';
+import 'package:manzel/helper/asset_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import '../auth/auth_util.dart';
@@ -3072,18 +3073,29 @@ class _PropertyDetailsWidgetState extends State<PropertyDetailsWidget> with Widg
                                                                           borderRadius:
                                                                               BorderRadius.circular(8),
                                                                           child:
-                                                                              Image.network(
+                                                                          getJsonField(
+                                                                            propertyImagesItem,
+                                                                            r'''$.attributes.formats.medium.url''',
+                                                                          )!=null
+                                                                              ? Image.network(
                                                                             getJsonField(
                                                                               propertyImagesItem,
                                                                               r'''$.attributes.formats.medium.url''',
                                                                             ),
                                                                             width:
-                                                                                147,
+                                                                            147,
                                                                             height:
-                                                                                117,
+                                                                            117,
                                                                             fit:
-                                                                                BoxFit.cover,
-                                                                          ),
+                                                                            BoxFit.cover,
+                                                                          ):
+                                                                          Image.asset(assetsImages+"place_holder.jpeg",
+                                                                            width:
+                                                                            147,
+                                                                            height:
+                                                                            117,
+                                                                            fit:
+                                                                            BoxFit.cover,),
                                                                         ),
                                                                       ),
                                                                     );
