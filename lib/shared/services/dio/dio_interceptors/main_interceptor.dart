@@ -1,19 +1,34 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:manzel/enviorment/env_variables.dart';
+import 'package:manzel/shared/services/dio/helpers_methods.dart';
 
-class MainInterceptor extends Interceptor{
-
+class MainInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     //TODO we should add the token to request header here
+    ///adding base authintcation
+    String basicAuth = 'Basic ' +
+        base64.encode(utf8.encode(
+            '${EnvVariables.instance.basicAuthUserName}:${EnvVariables.instance.basicAuthPassword}'));
+    options.headers['authorization'] = basicAuth;
+    debugPrintPreRequest(
+        url: options.uri, data: options.data, headers: options.headers);
+    return super.onRequest(options, handler);
   }
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    // TODO we should handle request base errors here like un-authinticated code and so on
+    print(
+        'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+    return super.onError(err, handler);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    /// if we need to do any thing to the response after getting it
+    print(
+        'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path} => DATA : ${response.data}');
+    return super.onResponse(response, handler);
   }
 }

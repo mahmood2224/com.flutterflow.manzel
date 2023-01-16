@@ -54,7 +54,10 @@ abstract class BaseCubit<T extends BaseState> extends Cubit<T>{
       ));
      options.onSuccess(result.data);
     }on DioError catch(error){
-      options.onError(MainResponseError(error.message , error: error));
+      String message = error.response?.data != null ? error.response?.data['error'] : error.message ;
+      options.onError(MainResponseError(message , error: error.response?.data));
+    }catch(error){
+      options.onError(MainResponseError("there is server error please try again later"));
     }
   }
 
@@ -65,7 +68,12 @@ abstract class BaseCubit<T extends BaseState> extends Cubit<T>{
       ));
       options.onSuccess(result.data);
     }on DioError catch(error){
-      options.onError(MainResponseError(error.message , error: error));
+      String message = error.response?.data != null ? error.response?.data['error'] : error.message ;
+      options.onError(MainResponseError(message , error: error.response?.data));
+    }catch(error){
+      options.onError(MainResponseError("there is server error please try again later"));
     }
   }
+
+
 }

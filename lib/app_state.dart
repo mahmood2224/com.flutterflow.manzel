@@ -1,4 +1,5 @@
 import 'package:manzel/shared/di_main_module.dart';
+import 'package:manzel/shared/services/network_handler/network_handle_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/lat_lng.dart';
 import 'dart:convert';
@@ -21,7 +22,6 @@ class FavouriteList {
 
 class FFAppState {
   static final FFAppState _instance = FFAppState._internal();
-
   factory FFAppState() {
     return _instance;
   }
@@ -37,6 +37,8 @@ class FFAppState {
     _authToken = prefs.getString('ff_authToken') ?? _authToken;
     _apiVersion = prefs.getString('ff__apiVersion') ?? _apiVersion;
      configureDependencies();
+     final _networkHandler = getIt.get<NetworkHandlerCubit>();
+     await _networkHandler.init();
   }
 
   late SharedPreferences prefs;

@@ -10,6 +10,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:manzel/auth_flow/auth_cubit/auth_cubit.dart';
 import 'package:manzel/flutter_flow/sentry_analytics.dart';
 import 'package:manzel/shared/services/network_handler/network_handle_cubit.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -56,6 +57,9 @@ void main() async {
         providers: [
           BlocProvider<NetworkHandlerCubit>(
               create: (context) => NetworkHandlerCubit()
+          ),
+          BlocProvider<AuthCubit>(
+              create: (context) => AuthCubit()
           )
         ],
         child: DefaultAssetBundle(
