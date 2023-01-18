@@ -7,6 +7,7 @@ import 'package:manzel/shared/data/base_cubit/base_state.dart';
 import 'package:manzel/shared/data/enums/methods__enum.dart';
 import 'package:manzel/shared/data/errors/base_error.dart';
 import 'package:manzel/shared/di_main_module.dart';
+import 'package:manzel/shared/services/dio/helpers_methods.dart';
 import 'package:manzel/shared/services/network_handler/network_handle_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:manzel/shared/services/network_handler/state.dart';
@@ -52,7 +53,11 @@ abstract class BaseCubit<T extends BaseState> extends Cubit<T>{
      final result = await dio.get(options.endPoint , queryParameters: options.query ,options: Options(
           headers: options.headers
       ));
-     options.onSuccess(result.data);
+     if(isValidResponse(result.statusCode??0)) {
+       options.onSuccess(result.data);
+     }else{
+       options.onError(MainResponseError(result.data['error'] , error: result));
+     }
     }on DioError catch(error){
       String message = error.response?.data != null ? error.response?.data['error'] : error.message ;
       options.onError(MainResponseError(message , error: error.response?.data));
@@ -66,7 +71,11 @@ abstract class BaseCubit<T extends BaseState> extends Cubit<T>{
       final result = await dio.post(options.endPoint , queryParameters: options.query ,data: options.body,options: Options(
           headers: options.headers
       ));
-      options.onSuccess(result.data);
+      if(isValidResponse(result.statusCode??0)) {
+        options.onSuccess(result.data);
+      }else{
+        options.onError(MainResponseError(result.data['error'] , error: result));
+      }
     }on DioError catch(error){
       String message = error.response?.data != null ? error.response?.data['error'] : error.message ;
       options.onError(MainResponseError(message , error: error.response?.data));

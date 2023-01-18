@@ -5,8 +5,8 @@ class AuthValidator{
     if(number?.isEmpty??true)
       return "Please add your number";
 
-    if((number?.length??0) > 8)
-      return "Please enter a valid number less than 8 numbers";
+    if((number?.length??0) < 8)
+      return "Please enter a valid number more than 8 numbers";
 
     if(!number!.startsWith("05"))
       return "Please enter a valid number begin with 05";

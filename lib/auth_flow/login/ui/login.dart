@@ -121,10 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: getHeight(context, ratio: 0.04),
                 ),
-                BlocConsumer<AuthCubit, AuthState>(
-                  listener: (context, state) {
-                    print("from listener $state");
-                  },
+                BlocBuilder<AuthCubit, AuthState>(
                   builder: (context, state) {
                     return CustomButton(
                       text: "Continue",
@@ -133,9 +130,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         //TODO run the API here
                         // context.goNamed("choose_otp");
-                        _cubit.login(AuthSendModel(
-                          phoneNumber: _phone.text
-                        ));
+                        _cubit.dataModel.phoneNumber = _phone.text ;
+                        _cubit.login();
                       },
                     );
                   },
