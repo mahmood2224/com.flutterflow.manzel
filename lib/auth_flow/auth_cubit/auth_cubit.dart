@@ -39,7 +39,10 @@ class AuthCubit extends BaseCubit<AuthState> {
         body: dataModel.toJsonVerifyCode(),
         onSuccess: (jsonResult){
           final verifyResponse = VerifyOtpResponse.fromJson(jsonResult);
-          AuthService().notifySignIn(token: verifyResponse.tokenKey ,onSuccess: (){
+          showAlertMessage(context, message: verifyResponse.message??"" ,backgroundColor: Colors.green);
+          emit(AuthStateInit());
+
+          AuthService().notifySignIn(phoneNumber: dataModel.phoneNumber! ,token: verifyResponse.tokenKey ,onSuccess: (){
             emit(AuthStateSuccess());
             showAlertMessage(context, message: verifyResponse.message??"" ,backgroundColor: Colors.green);
 
