@@ -38,7 +38,7 @@ class _OtpTimerWidgetState extends State<OtpTimerWidget> {
         onTap: (){
           _cubit.generateOtp();
         },
-        child: Text("Resend Code" ,style: FlutterFlowTheme.of(context).title3.copyWith(color: Colors.blue ,decoration: TextDecoration.underline),)): Text.rich(
+        child: Text("Resend Code" ,style: FlutterFlowTheme.of(context).title3.copyWith(color: FlutterFlowTheme.of(context).primaryColor ,decoration: TextDecoration.underline ,fontSize: 14),)): Text.rich(
       TextSpan(text: "Resend code in ", children: [
         TextSpan(
             text: "$seconds",

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:manzel/auth/auth_util.dart';
+import 'package:manzel/auth_flow/data/firestore/firestore_auth_Service.dart';
 import 'package:manzel/backend/backend.dart';
 import 'package:manzel/backend/firebase_analytics/analytics.dart';
 import 'package:manzel/enviorment/env_variables.dart';
@@ -46,13 +47,13 @@ class AuthService {
     });
   }
 
-  notifySignIn({String? token, required Function() onSuccess}) async {
+  notifySignIn({required String phoneNumber ,String? token, required Function() onSuccess}) async {
     if (token != null) {
-      _user = (await _firebaseAuth.signInWithCustomToken(token)).user;
-      if (_user != null) {
-        maybeCreateUser(_user!);
-        _handleAuth(onSuccess);
-      }
+      // _user = (await _firebaseAuth.signInWithCustomToken(token)).user;
+      final authFireStore = FireStoreAuthService();
+      final isFirstTime = await authFireStore.checkIsFirstTimeUser(phoneNumber);
+      final user = await authFireStore.getUserData(phoneNumber);
+
     }
 
     if (_firebaseAuth.currentUser != null) {
@@ -62,39 +63,4 @@ class AuthService {
     }
   }
 
-  _handleAuth(Function() onSuccess) {
-    BuildContext context = router!.navigator!.context;
-    final loginDate = DateTime.now();
-    Future.delayed(const Duration(milliseconds: 200), () async {
-      if (currentUserDocument!.status!.isEmpty ||
-          currentUserDocument!.status!.toLowerCase() == 'active') {
-        logFirebaseEvent('login');
-        final userUpdateData = await createUserRecordData(
-            status: 'Active',
-            language: FFLocalizations.of(context).languageCode,
-            lastLogin: loginDate,
-            deviceToken:
-                await FirebaseMessagingUtils.getPushNotificationToken(),
-            isDeleted: 0);
-        if (currentUserDocument!.status!.isEmpty) {
-          logFirebaseEvent('sign_up');
-          userUpdateData.addAll({'created_time': loginDate});
-          userUpdateData.addAll({'last_login': loginDate});
-        }
-
-        await currentUserReference?.update(userUpdateData);
-
-        if (currentUserDisplayName.isEmpty &&
-            currentUserDocument!.name!.isEmpty) {
-          final _sendbird = await SendbirdSdk(
-              appId: "${EnvVariables.instance.sendbirdAppId}");
-          final _ = await _sendbird.connect(currentUserUid);
-
-          onSuccess();
-        }
-      } else {
-        //TODO handle this case too
-      }
-    });
-  }
 }

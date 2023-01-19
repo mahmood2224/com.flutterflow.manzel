@@ -40,9 +40,10 @@ class FFAppState {
     //TODO remove this for here to other clean startup service
      configureDependencies();
      AuthService().init();
-
      final _networkHandler = getIt.get<NetworkHandlerCubit>();
      await _networkHandler.init();
+
+
   }
 
   late SharedPreferences prefs;
