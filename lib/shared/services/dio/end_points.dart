@@ -1,5 +1,6 @@
 enum EndPoints {
-  generateOtp("/generateOtp");
+  generateOtp("/generateOtp"),
+  verifyOtp("/verifyOtp");
 
   final String value ;
   const EndPoints(this.value);

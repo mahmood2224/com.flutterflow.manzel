@@ -1,4 +1,5 @@
 import 'package:manzel/auth_flow/auth_cubit/auth_cubit.dart';
+import 'package:manzel/auth_flow/data/models/GenerateOtpResponse.dart';
 import 'package:manzel/shared/data/base_cubit/base_state.dart';
 
 abstract class AuthState extends BaseState {}

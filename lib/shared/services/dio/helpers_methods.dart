@@ -9,7 +9,7 @@ bool isValidResponse(int statusCode , {int responseStatus = 1}) {
 }
 
 void handleUnAuthorized( { required int statusCode})async{
-  if(statusCode >= 400 && statusCode <= 403) {
+  if(statusCode >= 401 && statusCode <= 403) {
     // showAlertMessage(context, message: "Please_login_again".tr() , backgroundColor: Colors.red);
     // di.get<StreamingSharedPreferences>().clear();
     // navigateTo(context, LoginNumberScreen() ,removeAll: true);

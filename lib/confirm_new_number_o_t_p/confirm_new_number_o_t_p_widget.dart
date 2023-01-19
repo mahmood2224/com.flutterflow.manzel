@@ -306,6 +306,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                                       .connect(currentUserUid);
                                                   context.goNamedAuth(
                                                       'AddingInformation', mounted);
+
                                                 } else {
                                                   context.go('/');
                                                 }
