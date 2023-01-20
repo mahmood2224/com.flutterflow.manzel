@@ -91,6 +91,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             buttonSize: 60,
             icon: Icon(
               Manzel.back_icon,
+              
               color: Colors.black,
               size: 15,
             ),

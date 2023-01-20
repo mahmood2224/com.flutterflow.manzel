@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:manzel/flutter_flow/flutter_flow_util.dart';
 
 abstract class FlutterFlowTheme {
   static FlutterFlowTheme of(BuildContext context) {
     return LightModeTheme();
   }
-
   late Color primaryColor;
   late Color secondaryColor;
   late Color primaryOrange;
@@ -15,6 +15,7 @@ abstract class FlutterFlowTheme {
   late Color primaryBackground;
   late Color secondaryBackground;
   late Color primaryText;
+  late Color textViewBackground;
   late Color secondaryText;
   late Color primaryRed;
   late Color primaryGreen;
@@ -49,12 +50,15 @@ abstract class FlutterFlowTheme {
   TextStyle get bodyText1 => typography.bodyText1;
   String get bodyText2Family => typography.bodyText2Family;
   TextStyle get bodyText2 => typography.bodyText2;
+  TextStyle get title3Black => typography.title3Black;
+  TextStyle get labelText => typography.labelText;
 
   Typography get typography => ThemeTypography(this);
 }
 
 class LightModeTheme extends FlutterFlowTheme {
-  late Color primaryColor = const Color(0xFF374797);
+  // late Color primaryColor = const Color(0xFF374797); //old primary color if we need it on the future
+  late Color primaryColor = const Color(0xFF3020E0);
   late Color secondaryColor = const Color(0xFF39D2C0);
   late Color primaryOrange = const Color(0xFFF3922C);
   late Color alternate = const Color(0xFFFF5963);
@@ -66,6 +70,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color primaryGreen = const Color(0xFF4FB26D);
   late Color secondaryGreen = const Color(0xFF4FB26D);
   late Color primaryYellow = const Color(0xFFFFD03E);
+  late Color textViewBackground = const Color(0xFFFAFAFA);
   late Color secondaryRed = const Color(0xFFEA5343);
 
   late Color primaryBtnText = Color(0xFFFFFFFF);
@@ -98,63 +103,81 @@ abstract class Typography {
   TextStyle get bodyText1;
   String get bodyText2Family;
   TextStyle get bodyText2;
+  TextStyle get labelText;
+  TextStyle get title3Black;
 }
 
 class ThemeTypography extends Typography {
   ThemeTypography(this.theme);
+  static String fontFamily = FFLocalizations.languages().contains("en") ? "Poppins" : "ExpoArabic";
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'AvenirArabic';
+  String get title1Family => fontFamily;
   TextStyle get title1 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: Colors.black,
         fontWeight: FontWeight.w600,
         fontSize: 24,
       );
-  String get title2Family => 'AvenirArabic';
+  String get title2Family => fontFamily;
   TextStyle get title2 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 22,
       );
-  String get title3Family => 'AvenirArabic';
+  String get title3Family => fontFamily;
   TextStyle get title3 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: Colors.white,
         fontWeight: FontWeight.w600,
         fontSize: 20,
       );
-  String get subtitle1Family => 'AvenirArabic';
+  String get subtitle1Family => fontFamily;
   TextStyle get subtitle1 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: Colors.white,
         fontWeight: FontWeight.w600,
         fontSize: 18,
       );
-  String get subtitle2Family => 'AvenirArabic';
+  String get subtitle2Family => fontFamily;
   TextStyle get subtitle2 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16,
       );
-  String get bodyText1Family => 'AvenirArabic';
+  String get bodyText1Family => fontFamily;
   TextStyle get bodyText1 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: '',
         color: Colors.black,
         fontWeight: FontWeight.w300,
         fontSize: 14,
       );
-  String get bodyText2Family => 'AvenirArabic';
+  String get bodyText2Family => fontFamily;
   TextStyle get bodyText2 => TextStyle(
-        fontFamily: 'AvenirArabic',
+        fontFamily: fontFamily,
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
+
+  TextStyle get labelText =>  TextStyle(
+    fontFamily: fontFamily,
+    color: Colors.black38,
+    fontWeight: FontWeight.w400,
+    fontSize: 12,
+  );
+
+  TextStyle get title3Black => TextStyle(
+    fontFamily: fontFamily,
+    color: Colors.black,
+    fontWeight: FontWeight.w300,
+    fontSize: 15,
+  );
 }
+
 
 extension TextStyleHelper on TextStyle {
   TextStyle override({

@@ -142,7 +142,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                           'nzqyszrd' /* Confirm your mobile number */,
                         ),
                         style: FlutterFlowTheme.of(context).title1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'Poppins',
                           fontSize: 25,
                           fontWeight: FontWeight.w800,
                           useGoogleFonts: false,
@@ -161,7 +161,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                           '0qmluaen' /* We've sent you a 6 digital cod... */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'Poppins',
                           fontSize: 16,
                           fontWeight: FontWeight.w300,
                           useGoogleFonts: false,
@@ -183,7 +183,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
-                                fontFamily: 'Sofia Pro By Khuzaimah',
+                                fontFamily: 'Poppins',
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
                                 useGoogleFonts: false,
@@ -407,7 +407,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.w300,
                                     fontStyle: FontStyle.normal,
-                                    fontFamily: 'Sofia Pro By Khuzaimah'),
+                                    fontFamily: 'Poppins'),
                               ),
                               preFilledWidget: Container(
                                 height: 12,
@@ -431,7 +431,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                     return Text(
                       "$value",
                       style: TextStyle(
-                          fontFamily: 'Sofia Pro By Khuzaimah',
+                          fontFamily: 'Poppins',
                           fontWeight: FontWeight.w300,
                           fontSize: 16,
                           color: Color(0xffdc5d5c)),
@@ -467,7 +467,7 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                                     ),
                                     style: TextStyle(
                                         decoration: TextDecoration.underline,
-                                        fontFamily: 'Sofia Pro By Khuzaimah',
+                                        fontFamily: 'Poppins',
                                         fontSize: 16,
                                         fontWeight: FontWeight.w700),
                                   ),
