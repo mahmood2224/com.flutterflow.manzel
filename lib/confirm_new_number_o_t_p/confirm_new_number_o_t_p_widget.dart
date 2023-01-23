@@ -137,15 +137,17 @@ class _ConfirmNewNumberOTPWidgetState extends State<ConfirmNewNumberOTPWidget> {
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(
-                        FFLocalizations.of(context).getText(
-                          'nzqyszrd' /* Confirm your mobile number */,
-                        ),
-                        style: FlutterFlowTheme.of(context).title1.override(
-                          fontFamily: 'Poppins',
-                          fontSize: 25,
-                          fontWeight: FontWeight.w800,
-                          useGoogleFonts: false,
+                      Flexible(
+                        child: Text(
+                          FFLocalizations.of(context).getText(
+                            'nzqyszrd' /* Confirm your mobile number */,
+                          ),
+                          style: FlutterFlowTheme.of(context).title1.override(
+                            fontFamily: 'Poppins',
+                            fontSize: 25,
+                            fontWeight: FontWeight.w800,
+                            useGoogleFonts: false,
+                          ),
                         ),
                       ),
                     ],

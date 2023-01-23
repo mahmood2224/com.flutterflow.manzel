@@ -1,5 +1,6 @@
 import 'package:eraser/eraser.dart';
 import 'package:manzel/common_widgets/manzel_icons.dart';
+import 'package:manzel/notifications/widget/green_point_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../common_alert_dialog/common_alert_dialog.dart';
@@ -67,10 +68,9 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
             'nm3bcvix' /* Notifications */,
           ),
           style: FlutterFlowTheme.of(context).title2.override(
-            fontFamily: 'AvenirArabic',
             color: Colors.black,
             fontSize: 20,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.normal,
             useGoogleFonts: false,
           ),
         ),
@@ -324,30 +324,40 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                                                             10,
                                                                             0),
                                                                 child:
-                                                                    Container(
+                                                                    Stack(
+                                                                      children: [
+                                                                        Container(
                                                                   width: 35,
                                                                   height: 35,
                                                                   decoration:
-                                                                      BoxDecoration(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    shape: BoxShape
-                                                                        .circle,
-                                                                    border:
-                                                                        Border
-                                                                            .all(
-                                                                      color: Color(
-                                                                          0xFF8C8C8C),
-                                                                    ),
+                                                                          BoxDecoration(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        shape: BoxShape
+                                                                            .circle,
+                                                                        border:
+                                                                            Border
+                                                                                .all(
+                                                                          color: Color(
+                                                                              0xFF8C8C8C),
+                                                                        ),
                                                                   ),
                                                                   child: Icon(
-                                                                    Manzel
-                                                                        .notification,
-                                                                    color: Colors
-                                                                        .black,
-                                                                    size: 20,
+                                                                        Manzel
+                                                                            .notification,
+                                                                        color: Colors
+                                                                            .black,
+                                                                        size: 20,
                                                                   ),
                                                                 ),
+                                                                        Positioned(
+                                                                            bottom: 0,
+                                                                            right:0,
+                                                                            child:notificationsListNotificationsRecord?.isRead == 0 ?  GreenPointWidget()
+                                                                        :SizedBox()
+                                                                        )
+                                                                      ],
+                                                                    ),
                                                               ),
                                                               Expanded(
                                                                 child: Column(
@@ -530,16 +540,19 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                   });
                   Eraser.resetBadgeCountButKeepNotificationsInCenter();
                 },
-                child: Text(
-                  FFLocalizations.of(context).getText(
-                    'markAll' /* Mark All */,
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                    fontFamily: 'AvenirArabic',
-                    color: FlutterFlowTheme.of(context).primaryColor,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                    useGoogleFonts: false,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Text(
+                    FFLocalizations.of(context).getText(
+                      'markAll' /* Mark All */,
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                      fontFamily: 'AvenirArabic',
+                      color: Color(0xff29388F),
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                      useGoogleFonts: false,
+                    ),
                   ),
                 ),
               ):SizedBox(),
