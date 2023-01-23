@@ -195,7 +195,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                     textAlign: TextAlign.center,
                     maxLines: 1,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'AvenirArabic',
                           fontSize: 17,
                           fontWeight: FontWeight.w800,
                           useGoogleFonts: false,
@@ -209,7 +208,6 @@ class _FilterWidgetState extends State<FilterWidget> {
             'hy8565b9' /* Filter */,
           ),
           style: FlutterFlowTheme.of(context).bodyText1.override(
-                fontFamily: 'AvenirArabic',
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
                 useGoogleFonts: false,
