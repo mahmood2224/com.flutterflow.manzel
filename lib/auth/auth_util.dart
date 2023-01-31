@@ -5,9 +5,7 @@ import '../backend/backend.dart';
 import 'package:stream_transform/stream_transform.dart';
 import 'firebase_user_provider.dart';
 export 'anonymous_auth.dart';
-export 'apple_auth.dart';
 export 'email_auth.dart';
-export 'google_auth.dart';
 export 'jwt_token_auth.dart';
 
 /// Tries to sign in or create an account using Firebase Auth.
